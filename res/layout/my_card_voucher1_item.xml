@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   >
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+        
+      <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            >
+    <LinearLayout 
+        android:layout_weight="4"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:id="@+id/my_card_voucher_item_linear1"
+        android:layout_alignParentLeft="true"
+        android:orientation="vertical"
+        android:background="@drawable/coupon_leftbg"
+       >
+       <TextView 
+                 android:layout_marginTop="15dp"
+                 android:layout_marginLeft="20dp"
+                 android:id="@+id/my_card_voucher_item_regist"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:gravity="center_vertical"
+                 android:text="注册赠送"
+                 android:textSize="18dp"/>
+        <TextView 
+                 android:id="@+id/my_card_voucher_item_money"
+                 android:layout_marginLeft="20dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:gravity="center_vertical"
+                 android:text="￥20.00"
+                 android:textSize="18dp"
+                 android:textColor="#ffee0000"/>
+         <TextView android:id="@+id/my_card_voucher_item_buy"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:gravity="center_vertical"
+                 android:layout_marginLeft="20dp"
+                 android:text="注册赠送"
+                 android:textSize="18dp"/>
+         
+        </LinearLayout>
+
+     <LinearLayout 
+         android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:id="@+id/my_card_voucher_item_linear2"
+        android:layout_toRightOf="@id/my_card_voucher_item_linear1"
+        android:layout_marginLeft="1dp"
+        android:orientation="vertical"
+        android:background="@drawable/coupon_rightbg"
+       >
+       <TextView 
+                 android:layout_marginLeft="20dp"
+                 android:layout_marginTop="15dp"
+                 android:id="@+id/my_card_voucher_item_usetime"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:gravity="center_vertical"
+                 android:text="使用期限"
+                 android:textSize="18dp"/>
+        <TextView 
+                 android:id="@+id/my_card_voucher_item_starttime"
+                 android:layout_marginLeft="20dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:gravity="center_vertical"
+                 android:text="2011-10-1"
+                 android:textSize="12dp"
+                 />
+         <TextView android:id="@+id/my_card_voucher_item_endtime"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:gravity="center_vertical"
+                 android:layout_marginLeft="20dp"
+                 android:text="2012-10-1"
+                 android:textSize="12dp"/>
+           <TextView android:id="@+id/my_card_voucher_item_startuse"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:gravity="center_vertical"
+                 android:layout_marginLeft="20dp"
+                 android:text="立即使用"
+                 android:textSize="12dp"
+                 android:textColor="#ffee0000"/>
+         </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

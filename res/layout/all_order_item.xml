@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+   
+   
+  >
+
+            <ImageView 
+                      android:layout_centerVertical="true"
+                	  android:id="@+id/all_order_item_image"  
+                	  
+                	  android:background="@drawable/product_image_bg"
+                	  android:layout_width="wrap_content"
+                	  android:layout_height="wrap_content"
+                	  android:padding="20dp"
+					  android:src="@drawable/comment_head"
+               		/>
+            <TextView android:layout_toRightOf="@id/all_order_item_image"
+                	  android:id="@+id/all_order_item_text"
+                	  android:layout_width="wrap_content"
+                	  android:layout_height="wrap_content"
+                	  android:ellipsize="end"
+            	      android:lines="2"
+            	      android:layout_marginLeft="8dp"
+            	      android:layout_marginTop="8dp"
+                      android:text="如丝缎般细致轻盈的质地，能与肌肤合而为一亮泽效果的微量色素粉末，不仅能修饰脸部的细小瑕疵更能增添肌肤透明的完美光泽，容易推匀的舒适质感，赋予平滑、透亮、无瑕的天使容颜无比的舒适感提供肌肤无比的润泽舒适感受，维生素F、E、B5能保护肌肤抵抗外界伤害以及预防肌肤老化"
+                	  android:textSize="18sp"
+                	  />
+             
+              <TextView 
+                      android:layout_marginLeft="8dp"
+                      android:id="@+id/all_order_item_sum"
+                	  android:layout_width="wrap_content"
+                	  android:layout_height="wrap_content"
+                	  android:layout_toRightOf="@id/all_order_item_image"
+  					  android:layout_below="@id/all_order_item_text"
+                  	  android:text="￥160.00"
+                	  android:textSize="15sp"
+                	  android:textColor="#ed217c"
+                	  />
+               <TextView android:id="@+id/all_order_item_count"
+                	  android:layout_width="wrap_content"
+                	  android:layout_height="wrap_content"
+                	  android:layout_marginLeft="12sp"
+                	  android:layout_toRightOf="@id/all_order_item_sum"
+  					  android:layout_below="@id/all_order_item_text"
+                  	  android:text="数量：x1"
+                	  android:textSize="15sp"
+                	  android:textColor="#ed217c"
+                	
+                	  />
+           
+        
+</RelativeLayout>

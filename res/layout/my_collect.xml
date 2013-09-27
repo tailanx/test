@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg" >
+<!-- 
+    <RelativeLayout
+        android:id="@+id/my_collect_relative1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/topbg" >
+
+        <Button
+            android:id="@+id/my_collect_button1"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/back1"
+            android:onClick="doClick"
+            android:textColor="#ffeeeeee" />
+
+        <TextView
+            android:id="@+id/my_collect_textview1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:onClick="doClick"
+            android:text="我的收藏"
+            android:textColor="#ffeeeeee"
+            android:textSize="24dp" />
+    </RelativeLayout>
+ -->
+    <ScrollView
+        android:id="@+id/my_collect_scrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         >
+
+        <LinearLayout
+            android:id="@+id/wmy_collect_scrollView_linearlayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ListView
+                android:id="@+id/my_collect_listview"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerHorizontal="true"
+                android:divider="@drawable/filter_line" >
+            </ListView>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

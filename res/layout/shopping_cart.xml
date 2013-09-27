@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg" >
+
+    
+    <LinearLayout
+        android:id="@+id/shopping_cart_sum"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shopping_cart_top"
+        android:background="@drawable/total_bg"
+        android:orientation="horizontal" >
+
+        <CheckBox
+            android:id="@+id/shopping_cart_checkbox"
+            style="@style/CustomCheckboxTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="12dp"
+            android:text="总计:"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/shopping_cart_sum_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="2dp"
+            android:text="￥1470.00"
+            android:textColor="#ed217c"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:text="数量："
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/shopping_cart_sum_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="2dp"
+            android:text="3"
+            android:textColor="#ed217c"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/shopping_cart_scrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shopping_cart_sum" >
+
+        <LinearLayout
+            android:id="@+id/shopping_cart_scrollView_linearlayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/shopping_cart_relative2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" >
+
+                <ListView
+                    android:id="@+id/shopping_cart_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+                </ListView>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

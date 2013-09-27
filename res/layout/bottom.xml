@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" 
+    android:background="@drawable/downbg">
+    <TextView android:layout_width="wrap_content"
+        	  android:layout_height="wrap_content"
+        	  android:gravity="center"
+        	  android:layout_weight="1.0"
+        	  android:text="首页"
+        	  android:textSize="12dp"
+        	  android:id="@+id/bottom_textview1"
+        	  android:layout_gravity="center_vertical"
+        	  android:textColor="#ffeeeeee"
+        	  android:ellipsize="end"
+   			 android:singleLine="true"
+        	  />
+     <TextView android:layout_width="wrap_content"
+        	  android:layout_height="wrap_content"
+        	  android:layout_weight="1.0"
+        	  android:text="逛.发现"
+        	  android:gravity="center"
+        	  android:textSize="12dp"
+        	  android:id="@+id/bottom_textview1"
+        	  android:layout_gravity="center_vertical"
+        	  android:textColor="#ffeeeeee"/>
+      <TextView android:layout_width="wrap_content"
+        	  android:layout_height="wrap_content"
+        	  android:layout_weight="1.0"
+        	  android:text="搜索"
+        	  android:textSize="12dp"
+        	  android:gravity="center"
+        	  android:id="@+id/bottom_textview1"
+        	  android:layout_gravity="center_vertical"
+        	  android:textColor="#ffeeeeee"/>
+       <TextView android:layout_width="wrap_content"
+        	  android:layout_height="wrap_content"
+        	  android:layout_weight="1.0"
+        	  android:text="购物车"
+        	  android:textSize="12dp"
+        	  android:id="@+id/bottom_textview1"
+        	  android:layout_gravity="center_vertical"
+        	  android:gravity="center" 
+        	  android:textColor="#ffeeeeee"/>
+        <TextView android:layout_width="wrap_content"
+        	  android:layout_height="wrap_content"
+        	  android:layout_weight="1.0"
+        	  android:text="我的商城"
+        	  android:textSize="12dp"
+        	  android:gravity="center"
+        	  android:id="@+id/my_shopping"
+        	  android:layout_gravity="center_vertical"
+        	  android:textColor="#ffeeeeee"/>
+        
+
+</LinearLayout>

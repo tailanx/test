@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical" >
+
+
+    <ScrollView
+        android:id="@+id/my_mall_regist_scrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/my_mall_regist_linearlayout1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/registration_bg"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/account_bg"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/my_mall_regist_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/account_icon"
+                        android:drawablePadding="4dp"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:text="账号"
+                        android:textSize="16sp" 
+                        android:textColor="#b4b4b4"/>
+
+                    <EditText
+                        android:id="@+id/my_mall_regist_edittext_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@null"
+                        android:ellipsize="middle"
+                        android:singleLine="true"
+                        android:text="          " />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal" >
+
+                    <EditText
+                        android:id="@+id/my_mall_regist_obtain"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/forgot_password"
+                        android:drawableLeft="@drawable/verification"
+                        android:drawablePadding="8dp"
+                        android:gravity="center_vertical"
+                        android:hint="输入短信验证码"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textSize="15dp" />
+
+                    <ImageView
+                        android:id="@+id/my_mall_regist_password_validation_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="12dp"
+                        android:layout_toRightOf="@id/my_mall_regist_obtain"
+                        android:singleLine="true"
+                        android:src="@drawable/obtain_verification"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/account_bg"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:drawableLeft="@drawable/password_icon"
+                        android:drawablePadding="8dp"
+                        android:padding="8dp"
+                        android:text="密码"
+                        android:textSize="16sp" 
+                        android:textColor="#b4b4b4"/>
+
+                    <EditText
+                        android:id="@+id/my_mall_regist_password"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@null"
+                        android:singleLine="true"
+                        android:text="               "
+                        android:inputType="numberPassword" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/account_bg"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:drawableLeft="@drawable/password_icon"
+                        android:drawablePadding="8dp"
+                        android:padding="8dp"
+                        android:text="确认密码"
+                        android:textSize="16sp"
+                        android:textColor="#b4b4b4" />
+
+                    <EditText
+                        android:id="@+id/my_mall_regist_confirm_password"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@null"
+                        android:singleLine="true"
+                        android:text="            " 
+                        android:inputType="numberPassword"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp" >
+
+                <CheckBox
+                    android:id="@+id/my_mall_regist_checkbox"
+                    style="@style/CustomCheckboxTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="注册即视为同意"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/my_mall_regist_checkbox"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@id/my_mall_regist_checkbox"
+                    android:linksClickable="true"
+                    android:text="《服务条款》"
+                    android:textColor="#ffee0000"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:id="@+id/find_password_confirm_button"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/login_background"
+                    android:text="立即注册"
+                    android:textColor="#FFeeeeee"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

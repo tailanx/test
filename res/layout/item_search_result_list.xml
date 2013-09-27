@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:paddingBottom="5dp"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/search_result_small_img_layout"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/product_image_bg" >
+
+        <ImageView
+            android:id="@+id/search_result_small_image"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:adjustViewBounds="true"
+            android:maxHeight="110dp"
+            android:scaleType="centerCrop" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/search_result_small_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/search_result_arrow" />
+
+    <TextView
+        android:id="@+id/search_result_small_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_toLeftOf="@+id/search_result_small_arrow"
+        android:layout_toRightOf="@+id/search_result_small_img_layout"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="妍诗美保湿蚕丝面膜25g*5/盒 保湿补水滋润美白淡斑"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/search_result_small_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search_result_small_title"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@+id/search_result_small_arrow"
+        android:layout_toRightOf="@+id/search_result_small_img_layout"
+        android:text="78.00"
+        android:textColor="@color/price_color"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/search_result_small_sell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search_result_small_price"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/search_result_small_img_layout"
+        android:text="已售："
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/search_result_small_sell_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/search_result_small_sell"
+        android:layout_below="@+id/search_result_small_price"
+        android:layout_toRightOf="@+id/search_result_small_sell"
+        android:text="5496"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/search_result_small_emulate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/search_result_small_sell"
+        android:layout_below="@+id/search_result_small_price"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/search_result_small_sell_num"
+        android:text="评价："
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/search_result_small_em_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/search_result_small_sell"
+        android:layout_below="@+id/search_result_small_price"
+        android:layout_toRightOf="@+id/search_result_small_emulate"
+        android:text="5496"
+        android:textSize="14sp" />
+
+</RelativeLayout>
