@@ -12,31 +12,38 @@
             android:layout_marginTop="25dp"
             android:background="@drawable/commentbg_up"
             >
-            <TextView android:id="@+id/user_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="85dp"
-                android:text="费大爷"
-                android:textSize="18sp"
-                android:layout_centerVertical="true"
-                />
             <TextView android:id="@+id/user_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/user_name"
-                android:layout_marginLeft="15dp"
+                android:layout_marginRight="18dp"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:textSize="18sp"
                 android:text="VIP 5"
                 />
+            <TextView android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="85dp"
+                android:layout_toLegtOf="@+id/user_level"
+                android:text="费大爷"
+                android:textSize="18sp"
+                android:layout_centerVertical="true"
+                />
         </RelativeLayout>
+        <LinearLayout android:id="@+id/user_icon_bg"
+            android:layout_width="57dp"
+            android:layout_height="57dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/user_head_bg"
+            >
+            
         <ImageView android:id="@+id/user_icon"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:layout_margin="10dp"
             android:src="@drawable/user_head"
-            android:background="@drawable/user_head_bg"
             />
+        </LinearLayout>
         	<TextView android:id="@+id/emulate_text"
         	    android:layout_below="@+id/emulate_user_layout"
         	    android:layout_width="match_parent"
