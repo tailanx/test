@@ -11,8 +11,10 @@ import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.yidejia.app.mall.GoodsInfoActivity;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
+import com.yidejia.app.mall.datamanage.FavoriteDataManage;
 import com.yidejia.app.mall.fragment.CartActivity;
 import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.model.Cart;
@@ -41,8 +43,10 @@ import android.widget.Toast;
 public class GoodsView {
 	private View view;
 	private int width;
-	private int cart_num = 0;
+	private int cart_num = 0;//购物车内商品个数
 	private Activity activity;
+	
+	private String productId;//本商品id
 	
 	public GoodsView(Activity activity, View view, int width){
 		this.view = view;
@@ -52,11 +56,16 @@ public class GoodsView {
 		Log.i("width", this.width+"");
 	}
 	
+	/**
+	 * 商品信息页
+	 * @param info
+	 */
 	public void initGoodsView(ProductBaseInfo info){
 		if(info == null) return;
 		final Cart cart = new Cart();
 		cart.setSalledAmmount(1);
-		cart.setUId(info.getUId());
+		productId = info.getUId();
+		cart.setUId(productId);
 		cart.setImgUrl(info.getImgUrl());
 		//商品名称
 		TextView base_info_content_text = (TextView) view.findViewById(R.id.base_info_content_text);
@@ -69,7 +78,7 @@ public class GoodsView {
 		try {
 			float priceNum = Float.parseFloat(priceString);
 			cart.setPrice(priceNum);
-			price.setText(priceString);
+			price.setText(priceString + "元");
 		} catch (Exception e) {
 			// TODO: handle exception
 			Toast.makeText(activity, "价格出错，请联系我们的客服进行修改！", Toast.LENGTH_SHORT).show();
@@ -99,22 +108,27 @@ public class GoodsView {
 		addBaseImage(view, bannerArray);
 		recommendArray = info.getRecommendArray();
 		addMatchImage(view, recommendArray);
-		
-		final Button shopping_cart_button = (Button) view.findViewById(R.id.shopping_cart_button);
-		shopping_cart_button.setVisibility(View.GONE);
+		//购物车个数
+		shopping_cart_button = (Button) view.findViewById(R.id.shopping_cart_button);
+		CartsDataManage cartsDataManage = new CartsDataManage();
+		cart_num = cartsDataManage.getCartAmount();
+		if(cart_num == 0){
+			shopping_cart_button.setVisibility(View.GONE);
+		} else {
+			setCartNum();
+		}
+		//加入购物车按钮点击事件
 		add_to_cart.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				shopping_cart_button.setVisibility(view.VISIBLE);
-				cart_num++;
-				shopping_cart_button.setText(""+cart_num);
+				setCartNum();
 				CartsDataManage manage = new CartsDataManage();
 				manage.addCart(cart);
 			}
 		});
-		
+		//立即购买按钮
 		buy_now.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -126,20 +140,37 @@ public class GoodsView {
 				activity.startActivity(intent);
 			}
 		});
-		
-		RelativeLayout shopping_cart_in_goodsinfo = (RelativeLayout) view.findViewById(R.id.shopping_cart_in_goodsinfo);
+		//购物车按钮
+		RelativeLayout shopping_cart_in_goodsinfo = (RelativeLayout) view
+				.findViewById(R.id.shopping_cart_in_goodsinfo);
 		shopping_cart_in_goodsinfo.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(activity, CartActivity.class);
-//				Bundle bundle = new Bundle();
-//				intent.putExtras(bundle);
+				// Bundle bundle = new Bundle();
+				// intent.putExtras(bundle);
 				activity.startActivity(intent);
 			}
 		});
+		
+		//加入收藏按钮
+		add_favorites = (ImageView) view.findViewById(R.id.add_favorites);
+		add_favorites.setOnClickListener(addFavoriteListener);
 	}
+	
+	
+	private ImageView add_favorites;//加入收藏的按钮
+	
+	//跳转购物车的按钮
+	private Button shopping_cart_button;
+	private void setCartNum(){
+		shopping_cart_button.setVisibility(view.VISIBLE);
+		cart_num++;
+		shopping_cart_button.setText(""+cart_num);
+	}
+	
 	
 	private LinearLayout baseInfoImageLayout;
 	private LinearLayout matchGoodsImageLayout;
@@ -230,6 +261,7 @@ public class GoodsView {
 		}
 	}
 	
+
 	static final List<String> displayedImages = Collections.synchronizedList(new LinkedList<String>());
 	private static class AnimateFirstDisplayListener extends SimpleImageLoadingListener {
 
@@ -260,5 +292,49 @@ public class GoodsView {
 			.build();
 	}
 	
+	
+	private boolean flag = false;
+	/**
+	 * 加入收藏按钮
+	 */
+	private OnClickListener addFavoriteListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			FavoriteDataManage manage = new FavoriteDataManage(activity);
+			MyApplication myApplication = new MyApplication();
+			String userId = myApplication.getUserId();
+			if (!"".equals(userId)) {
+				
+				boolean isSuccess = manage.addFavourite(userId, productId);
+				if (isSuccess) {
+					Toast.makeText(activity, "加入收藏成功!", Toast.LENGTH_SHORT)
+					.show();
+				} else {
+					Toast.makeText(activity, "抱歉！加入收藏失败。",
+							Toast.LENGTH_SHORT).show();
+				}
+			} else {
+				//收藏到本地
+			}
+			
+			//改变图片
+			flag = !flag;
+			changeFravoriteBg();
+		}
+	};
+	/**
+	 * 改变收藏的图片
+	 */
+	private void changeFravoriteBg(){
+		//改变图片
+		if(flag){
+			add_favorites.setImageResource(R.drawable.add_favorites2);
+		} else{
+			add_favorites.setImageResource(R.drawable.add_favorites1);
+		}
+			
+	}
 	
 }

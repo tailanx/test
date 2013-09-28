@@ -34,7 +34,10 @@ public class FavoriteDataManage {
 	private Context context ;
 	private String TAG = FavoriteDataManage.class.getName();
 	private UnicodeToString unicode;
-	
+	/**
+	 * {@link FavoriteDataManage}
+	 * @param context
+	 */
 	public FavoriteDataManage(Context context){
 		this.context = context;
 		unicode = new UnicodeToString();
@@ -75,7 +78,7 @@ public class FavoriteDataManage {
 	 * @param productId 商品id
 	 * @return 成功与否
 	 */
-	public boolean addFavourite(int userId, int productId){
+	public boolean addFavourite(String userId, String productId){
 		boolean isSuccess = false;
 		TaskSave taskSave = new TaskSave(userId, productId);
 		try {
@@ -126,7 +129,7 @@ public class FavoriteDataManage {
 	}
 	
 	private class TaskDelete extends AsyncTask<Void, Void, Boolean>{
-//		int userId;
+		int userId;
 		int productId;
 		public TaskDelete(int productId){//int userId,
 //			this.userId = userId;
@@ -208,11 +211,11 @@ public class FavoriteDataManage {
 	}
 	
 	private class TaskSave extends AsyncTask<Void, Void, Boolean>{
-//		private int userId;
-		private int productId;
+		private String userId;
+		private String productId;
 		
-		public TaskSave(int userId, int productId){
-//			this.userId = userId;
+		public TaskSave(String userId, String productId){
+			this.userId = userId;
 			this.productId = productId;
 		}
 		

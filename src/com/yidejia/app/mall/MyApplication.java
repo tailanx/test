@@ -32,7 +32,7 @@ public class MyApplication extends Application{
 		return isLogin;
 	}
 	
-	private String userId;
+	private String userId = "";
 	public void setUserId(String userId){
 		this.userId = userId;
 	}
