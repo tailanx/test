@@ -183,8 +183,8 @@ public class AddressDataManage {
 				JSONArray responseArray = new JSONArray(responseString);
 				int length = responseArray.length();
 				JSONObject addressItem ;
-				Addresses addresses = new Addresses();
 				for (int i = 0; i < length; i++) {
+					Addresses addresses = new Addresses();
 					addressItem = responseArray.getJSONObject(i);
 					String recipient_id = addressItem.getString("recipient_id");
 					addresses.setAddressId(recipient_id);
