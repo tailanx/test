@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/topbg"
+    android:orientation="horizontal" >
+    <!-- 
+    <Button android:id="@+id/actionbar_left"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/actionbar_selector"
+        />
+        android:background="@drawable/actionbar_selector"
+         -->
+  <ImageView android:id="@+id/actionbar_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="3dp"
+        android:src="@drawable/compose_top"
+        android:padding="6dp"
+        android:clickable="true"
+        android:background="#00000000"
+        />
+    <TextView android:id="@+id/actionbar_title"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="common title"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        />
+     <Button
+        android:id="@+id/actionbar_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+	
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:background="@drawable/edit"
+        android:text="去结算"
+        android:textColor="#ffeeeeee"
+        android:textSize="16sp" />
+
+</RelativeLayout>

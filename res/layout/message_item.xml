@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+ >
+<RelativeLayout 
+    android:id="@+id/message_item_relateview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/msg_topbg"
+    >
+           <TextView
+                    
+               		 android:layout_centerVertical="true"
+ 					 android:id="@+id/message_item_textview1"              
+               		 android:layout_width="wrap_content"
+               		 android:layout_height="40dp"
+               		 android:text="会员特权!!!"
+               		 android:shadowColor="#00f"
+               		 android:textSize="20dp"
+               		 android:padding="8dp"
+               		 android:singleLine="true"
+               		 android:ellipsize="end"
+               		 />
+           <TextView  
+               		 android:layout_alignBaseline="@id/message_item_textview1"
+               		 android:id="@+id/message_textview2"    
+                	 android:layout_alignParentRight="true"
+                	 android:layout_width="wrap_content"
+               		 android:layout_height="wrap_content"
+               		 android:text="11cvc"
+               		 android:layout_marginRight="8dp"
+               		 android:textSize="18dp"/>
+    </RelativeLayout>
+          
+            
+
+    <ScrollView
+        android:id="@+id/message_scrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       
+         	android:layout_below="@id/message_item_relateview"
+            android:background="@drawable/msg_downbg"
+         >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+>
+           <TextView
+					 
+               		 android:layout_marginLeft="4dp"
+               		 android:layout_marginRight="4dp"
+               		 android:padding="8dp"
+               		 android:id="@+id/message_textview4"     
+               		 android:layout_width="wrap_content"
+               		 android:layout_height="wrap_content"
+               		 android:text="如容易推匀的舒适质感，赋予平滑、透亮、无瑕的天使容颜无比的舒适感提供肌肤无比的润泽舒适感受，维生素F、E、B5能保护肌肤抵抗外界伤害以及预防肌肤老化"
+               		 android:textSize="18dp"
+               		 />
+        </LinearLayout>
+    </ScrollView>
+           
+
+</RelativeLayout>

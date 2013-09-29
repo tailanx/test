@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:background="@drawable/product_image_bg2"
+              >
+    <ImageView android:id="@+id/search_result_lg_image"
+               android:src="@drawable/product_photo"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_centerHorizontal="true"
+               />
+    <TextView android:id="@+id/search_result_lg_title"
+              android:layout_height="wrap_content"
+              android:layout_width="wrap_content"
+              android:text="YS06 胶原蛋白粉"
+              android:ellipsize="end"
+              android:maxLines="1"
+              android:layout_below="@+id/search_result_lg_image"
+              android:textSize="16sp"
+              />
+    <TextView android:id="@+id/search_result_lg_sell"
+              android:layout_height="wrap_content"
+              android:layout_width="wrap_content"
+              android:layout_below="@+id/search_result_lg_title"
+              android:text="已售："/>
+    <TextView android:id="@+id/search_result_lg_sell_num"
+              android:layout_height="wrap_content"
+              android:layout_width="wrap_content"
+              android:layout_toRightOf="@+id/search_result_lg_sell"
+              android:layout_below="@+id/search_result_lg_title"
+              android:text="1280"
+              />
+    <TextView android:id="@+id/search_result_lg_price"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignRight="@+id/search_result_lg_image"
+              android:text="$468.00"
+              android:textColor="@color/price_color"
+              android:textSize="18sp"
+              android:layout_below="@+id/search_result_lg_title"
+              />
+</RelativeLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/topbg"
+    android:orientation="vertical"
+    android:tag="3dp" >
+
+    <EditText
+        android:id="@+id/search_title_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/search_bg"
+        android:drawableLeft="@drawable/top_search_icon"
+        android:ellipsize="end"
+        android:hint="   搜索..."
+        android:padding="15dp"
+        android:singleLine="true" />
+
+</LinearLayout>

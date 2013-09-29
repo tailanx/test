@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="51dp"
+    android:orientation="horizontal" >
+
+    <RelativeLayout
+        android:id="@+id/down_home_layout"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@drawable/down_hover1"
+        android:clickable="true"
+        android:focusable="true" >
+
+        <ImageView
+            android:id="@+id/down_home_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:clickable="false"
+            
+            android:src="@drawable/home_hover" />
+
+        <TextView
+            android:id="@+id/down_home_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/down_home_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:text="@string/down_home_text"
+            android:textColor="#b4b4b4"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/down_guang_layout"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@drawable/downbg"
+        android:clickable="true"
+        android:focusable="true" >
+
+        <ImageView
+            android:id="@+id/down_guang_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/down_guang_normal"
+            android:clickable="false"
+             />
+
+        <TextView
+            android:id="@+id/down_guang_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/down_guang_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:text="@string/down_guang_text"
+            android:textColor="#b4b4b4"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/down_search_layout"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@drawable/downbg"
+        android:clickable="true"
+        android:focusable="true" >
+
+        <ImageView
+            android:id="@+id/down_search_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/down_search_normal"
+            android:clickable="false"
+            />
+
+        <TextView
+            android:id="@+id/down_search_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/down_search_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:text="@string/down_search_text"
+            android:textColor="#b4b4b4"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/down_shopping_layout"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@drawable/downbg"
+        android:clickable="true"
+        android:focusable="true" >
+<!-- android:background="@drawable/frist_my_mall_realution" -->
+        <ImageView
+            android:id="@+id/down_shopping_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/down_shopping_normal"
+            android:clickable="false"
+             />
+
+        <TextView
+            android:id="@+id/down_shopping_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/down_shopping_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:text="@string/down_shopping_text"
+            android:textColor="#b4b4b4"
+            android:textSize="12sp" />
+<!-- 
+        <com.yidejia.app.mall.widget.YLImageButton
+            android:id="@+id/down_shopping_cart"
+            android:layout_width="26dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/shop_message" />
+             -->
+        <Button
+            android:id="@+id/down_shopping_cart"
+            android:layout_width="26dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:textSize="12sp"
+            android:text="12"
+            android:textColor="@color/white"
+            android:background="@drawable/shop_message" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/down_my_layout"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@drawable/downbg"
+        android:clickable="true"
+        android:focusable="true" >
+
+        <ImageView
+            android:id="@+id/down_my_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/down_my_normal"
+            android:clickable="false"
+             />
+
+        <TextView
+            android:id="@+id/down_my_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/down_my_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:text="@string/down_my_text"
+            android:textColor="#b4b4b4"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+</LinearLayout>

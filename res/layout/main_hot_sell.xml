@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:id="@+id/hot_sell_parent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        
+        android:shadowDx="0"
+        android:shadowDy="2"
+        android:shadowRadius="0.1"
+        android:shadowColor="@color/shadowColor"
+        android:padding="1dp" >
+
+        <RelativeLayout
+            android:id="@+id/main_hot_sell_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/hotsell_bg_top" >
+
+            <TextView
+                android:id="@+id/main_hot_sell_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:drawableLeft="@drawable/hot_mall_left_icon"
+                android:gravity="center|left"
+                android:paddingLeft="10dp"
+                android:textSize="16sp"
+                android:text="   商城热卖" />
+
+            <TextView
+                android:id="@+id/main_hot_sell_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/main_hot_sell_text"
+                android:textSize="16sp"
+                android:text="Hot Sell"
+                android:textColor="#ed217c" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/main_hot_sell_down"
+            android:baselineAligned="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/main_hot_sell_top"
+            
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:id="@+id/main_hot_sell_left_info"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/hotsell_bg1"
+                android:layout_weight="302" >
+			
+                <TextView
+                    android:id="@+id/main_hot_sell_goods_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center_horizontal"
+                    android:text="时间轴套餐"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/main_hot_sell_goods_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/main_hot_sell_goods_title"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="$468.00"
+                    android:textColor="@color/price_color"
+                    android:maxEms="7"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/main_hot_sell_left_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/main_hot_sell_goods_details"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:src="@drawable/hotsellimage" />
+                <RelativeLayout android:id="@+id/main_hot_sell_left"
+			    android:layout_width="match_parent"
+			    android:layout_height="match_parent"
+			    android:focusable="true"
+			    android:clickable="true"
+			    android:background="@drawable/hot_sell_left_selector"
+			    ></RelativeLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/main_hot_sell_right_info"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="324"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:id="@+id/main_hot_sell_right_top_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/hotsell_bg2"
+                    android:layout_weight="1" >
+
+                    <ImageView
+                        android:id="@+id/main_hot_sell_right_top_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="2dp"
+                        android:src="@drawable/hot_sell_right_top_image" />
+
+                    <TextView
+                        android:id="@+id/main_hot_sell_right_top_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_toLeftOf="@+id/main_hot_sell_right_top_image"
+                        android:text="水漾保湿蚕丝面膜"
+                        android:maxEms="5"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/main_hot_sell_right_top_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/main_hot_sell_right_top_title"
+                        android:layout_below="@id/main_hot_sell_right_top_title"
+                        android:layout_marginTop="5dp"
+                        android:layout_toLeftOf="@id/main_hot_sell_right_top_image"
+                        android:text="$78.00"
+                        android:textColor="@color/price_color"
+                        android:textSize="14sp" />
+                    <RelativeLayout android:id="@+id/main_hot_sell_right_top"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:background="@drawable/hot_sell_right_top_selector"
+                        ></RelativeLayout>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/main_hot_sell_right_down_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/hotsell_bg3"
+                    android:layout_weight="1" >
+
+                    <ImageView
+                        android:id="@+id/main_hot_sell_right_down_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="2dp"
+                        android:src="@drawable/hot_sell_right_top_image" />
+
+                    <TextView
+                        android:id="@+id/main_hot_sell_right_down_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_toLeftOf="@+id/main_hot_sell_right_down_image"
+                        android:text="水漾保湿蚕丝面膜"
+                        android:maxEms="5"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/main_hot_sell_right_down_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/main_hot_sell_right_down_title"
+                        android:layout_below="@id/main_hot_sell_right_down_title"
+                        android:layout_marginTop="5dp"
+                        android:layout_toLeftOf="@id/main_hot_sell_right_down_image"
+                        android:text="$78.00"
+                        android:textColor="@color/price_color"
+                        android:textSize="14sp" />
+                    <RelativeLayout android:id="@+id/main_hot_sell_right_down"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:background="@drawable/hot_sell_right_down_selector"
+                        ></RelativeLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+<!-- acymer -->
+    <RelativeLayout
+        android:id="@+id/acymei_parent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hot_sell_parent_layout"
+        android:layout_marginTop="10dp"
+        android:padding="1dp" >
+        <RelativeLayout
+            android:id="@+id/main_acymei_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/hotsell_bg_top" >
+
+            <TextView
+                android:id="@+id/main_acymei_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:drawableLeft="@drawable/hot_mall_left_icon"
+                android:gravity="center|left"
+                android:paddingLeft="10dp"
+                android:textSize="16sp"
+                android:text="   美容护肤" />
+
+            <TextView
+                android:id="@+id/main_acymei_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/main_acymei_text"
+                android:textSize="16sp"
+                android:text="ACYMER"
+                android:textColor="#ed217c" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/main_acymei_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/main_acymei_top"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:id="@+id/main_acymei_left_info"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/hotsell_bg1"
+                android:layout_weight="302" >
+
+                <TextView
+                    android:id="@+id/main_acymei_goods_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="时间轴套餐"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/main_acymei_goods_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/main_acymei_goods_title"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="$468.00"
+                    android:textColor="@color/price_color"
+                    android:maxEms="7"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/main_acymei_left_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/main_acymei_goods_details"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/hotsellimage" />
+                <RelativeLayout android:id="@+id/main_acymei_left"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:background="@drawable/hot_sell_left_selector"
+                        ></RelativeLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/main_acymei_right_info"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="324"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:id="@+id/main_acymei_right_top_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/hotsell_bg2"
+                    android:layout_weight="1" >
+
+                    <ImageView
+                        android:id="@+id/main_acymei_right_top_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="2dp"
+                        android:src="@drawable/hot_sell_right_top_image" />
+
+                    <TextView
+                        android:id="@+id/main_acymei_right_top_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_toLeftOf="@+id/main_acymei_right_top_image"
+                        android:text="水漾保湿蚕丝面膜"
+                        android:maxEms="5"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/main_acymei_right_top_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/main_acymei_right_top_title"
+                        android:layout_below="@id/main_acymei_right_top_title"
+                        android:layout_marginTop="5dp"
+                        android:layout_toLeftOf="@id/main_acymei_right_top_image"
+                        android:text="$78.00"
+                        android:textColor="@color/price_color"
+                        android:textSize="14sp" />
+                    <RelativeLayout android:id="@+id/main_acymei_right_top"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:background="@drawable/hot_sell_right_top_selector"
+                        ></RelativeLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/main_acymei_right_down_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/hotsell_bg3"
+                    android:layout_weight="1" >
+                    <ImageView
+                        android:id="@+id/main_acymei_right_down_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="2dp"
+                        android:src="@drawable/hot_sell_right_top_image" />
+
+                    <TextView
+                        android:id="@+id/main_acymei_right_down_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:text="水漾保湿蚕丝面膜"
+                        android:layout_toLeftOf="@+id/main_acymei_right_down_image"
+                        android:maxEms="5"
+                        android:textSize="16sp" />
+
+
+                    <TextView
+                        android:id="@+id/main_acymei_right_down_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/main_acymei_right_down_title"
+                        android:layout_marginTop="10dp"
+                        android:layout_alignLeft="@+id/main_acymei_right_down_title"
+                        android:text="$78.00"
+                        android:textColor="@color/price_color"
+                        android:textSize="14sp" />
+
+					<RelativeLayout android:id="@+id/main_acymei_right_down"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:background="@drawable/hot_sell_right_down_selector"
+                        ></RelativeLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/inerbty_parent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/acymei_parent_layout"
+        android:layout_marginTop="10dp"
+        android:padding="1dp" >
+        <RelativeLayout
+        android:id="@+id/main_inerbty_top_ad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/hotsell_bg_top" >
+
+        <TextView
+            android:id="@+id/main_inerbty_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@drawable/hot_mall_left_icon"
+            android:gravity="center|left"
+            android:paddingLeft="10dp"
+            android:text="   内调养护"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/main_inerbty_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/main_inerbty_text"
+            android:text="INERBTY"
+            android:textColor="#ed217c"
+            android:textSize="16sp" />
+    </RelativeLayout>
+    <!-- top -->
+
+    <LinearLayout android:id="@+id/main_inerbty_top"
+        android:layout_below="@+id/main_inerbty_top_ad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/yy_bg1" >
+
+            <ImageView
+                android:id="@+id/main_inerbty_top_left_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="2dp"
+                android:src="@drawable/hot_sell_right_top_image" />
+
+            <TextView
+                android:id="@+id/main_inerbty_top_left_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_toLeftOf="@+id/main_inerbty_top_left_image"
+                android:gravity="center|left"
+                android:text="胶原蛋白粉"
+                android:layout_alignParentLeft="true"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/main_inerbty_top_left_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/main_inerbty_top_left_name"
+                android:layout_below="@+id/main_inerbty_top_left_name"
+                android:layout_toLeftOf="@+id/main_inerbty_top_left_image"
+                android:text="$468.00"
+                android:textColor="@color/price_color" />
+
+            <RelativeLayout
+                android:id="@+id/main_inerbty_top_left"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/inerbty_top_left_selector" >
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/yy_bg2" >
+
+            <ImageView
+                android:id="@+id/main_inerbty_top_right_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="2dp"
+                android:src="@drawable/hot_sell_right_top_image" />
+
+            <TextView
+                android:id="@+id/main_inerbty_top_right_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/main_inerbty_top_right_image"
+                android:gravity="center|left"
+                android:text="胶原蛋白粉"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/main_inerbty_top_right_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/main_inerbty_top_right_name"
+                android:layout_below="@+id/main_inerbty_top_right_name"
+                android:layout_toLeftOf="@+id/main_inerbty_top_right_image"
+                android:text="$468.00"
+                android:textColor="@color/price_color" />
+
+            <RelativeLayout
+                android:id="@+id/main_inerbty_top_right"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/inerbty_top_right_selector" >
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+    <!-- mid -->
+
+    <LinearLayout
+        android:id="@+id/main_inerbty_mid"
+        android:layout_below="@+id/main_inerbty_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/yy_bg1" >
+
+            <ImageView
+                android:id="@+id/main_inerbty_mid_left_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="2dp"
+                android:src="@drawable/hot_sell_right_top_image" />
+
+            <TextView
+                android:id="@+id/main_inerbty_mid_left_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/main_inerbty_mid_left_image"
+                android:gravity="center|left"
+                android:text="胶原蛋白粉"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/main_inerbty_mid_left_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/main_inerbty_mid_left_name"
+                android:layout_below="@+id/main_inerbty_mid_left_name"
+                android:layout_toLeftOf="@+id/main_inerbty_mid_left_image"
+                android:text="$468.00"
+                android:textColor="@color/price_color" />
+
+            <RelativeLayout
+                android:id="@+id/main_inerbty_mid_left"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/inerbty_top_left_selector" >
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/yy_bg2" >
+
+            <ImageView
+                android:id="@+id/main_inerbty_mid_right_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="2dp"
+                android:src="@drawable/hot_sell_right_top_image" />
+
+            <TextView
+                android:id="@+id/main_inerbty_mid_right_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/main_inerbty_mid_right_image"
+                android:gravity="center|left"
+                android:text="胶原蛋白粉"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/main_inerbty_mid_right_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/main_inerbty_mid_right_name"
+                android:layout_below="@+id/main_inerbty_mid_right_name"
+                android:layout_toLeftOf="@+id/main_inerbty_mid_right_image"
+                android:text="$468.00"
+                android:textColor="@color/price_color" />
+
+            <RelativeLayout
+                android:id="@+id/main_inerbty_mid_right"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/inerbty_top_right_selector" >
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+    <!-- down -->
+
+    <LinearLayout
+        android:id="@+id/main_inerbty_down"
+        android:layout_below="@+id/main_inerbty_mid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/yy_downbg_left" >
+
+            <ImageView
+                android:id="@+id/main_inerbty_down_left_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="2dp"
+                android:src="@drawable/hot_sell_right_top_image" />
+
+            <TextView
+                android:id="@+id/main_inerbty_down_left_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/main_inerbty_down_left_image"
+                android:gravity="center|left"
+                android:text="胶原蛋白粉"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/main_inerbty_down_left_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/main_inerbty_down_left_name"
+                android:layout_below="@+id/main_inerbty_down_left_name"
+                android:layout_toLeftOf="@+id/main_inerbty_down_left_image"
+                android:text="$468.00"
+                android:textColor="@color/price_color" />
+
+            <RelativeLayout
+                android:id="@+id/main_inerbty_down_left"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/inerbty_down_left_selector" >
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/yy_downbg_right" >
+
+            <ImageView
+                android:id="@+id/main_inerbty_down_right_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="2dp"
+                android:src="@drawable/hot_sell_right_top_image" />
+
+            <TextView
+                android:id="@+id/main_inerbty_down_right_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/main_inerbty_down_right_image"
+                android:gravity="center|left"
+                android:text="胶原蛋白粉"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/main_inerbty_down_right_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/main_inerbty_down_right_name"
+                android:layout_below="@+id/main_inerbty_down_right_name"
+                android:layout_toLeftOf="@+id/main_inerbty_down_right_image"
+                android:text="$468.00"
+                android:textColor="@color/price_color" />
+
+            <RelativeLayout
+                android:id="@+id/main_inerbty_down_right"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/inerbty_down_right_selector" >
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+        
+    </RelativeLayout>
+
+</RelativeLayout>

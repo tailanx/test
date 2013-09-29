@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:id="@+id/goods_tabhost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal" >
+        <TextView android:id="@+id/goods_reviews"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="商品评价"
+            android:background="@drawable/product_details_bg"
+            />
+        <TextView android:id="@+id/goods_basic_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="基本信息"
+            android:background="@drawable/product_details_selected"
+            />
+        <TextView android:id="@+id/goods_details"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="商品详情"
+            android:background="@drawable/product_details_bg"
+            />
+    </LinearLayout>
+    
+    <android.support.v4.view.ViewPager
+        android:id="@+id/goods_viewpager"
+        android:layout_below="@id/goods_tabhost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    
+</RelativeLayout>

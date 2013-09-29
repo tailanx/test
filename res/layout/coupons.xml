@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+     >
+            <ScrollView
+    	
+        android:id="@+id/coupons_scrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        
+        >
+
+        <LinearLayout
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            
+            android:id="@+id/coupons_scrollView_linearlayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           
+            android:orientation="vertical"
+           
+            >
+          <RelativeLayout 
+              android:id="@+id/coupons_relative2"
+             
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              
+              android:background="@drawable/integration_upbg">
+              <TextView 
+                  android:id="@+id/coupons_text"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="您当前的积分："
+                  android:textSize="18sp"
+                  android:paddingLeft="15dp"
+                  android:paddingTop="30dp"
+                  />
+              <TextView android:layout_toRightOf="@id/coupons_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="200"
+                        android:textSize="35sp"
+                        android:textColor="#ed217c"
+                        android:paddingTop="20dp"
+                        
+                        android:layout_marginLeft="40dp"/>
+
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentBottom="true"
+                  android:layout_centerHorizontal="true"
+                  android:text="积分获取及使用常见问题"
+                  android:paddingBottom="8dp"
+                  android:textSize="18sp" />
+          </RelativeLayout>
+              <LinearLayout 
+                  android:layout_below="@id/coupons_relative2"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:background="@drawable/integration_downbg"
+                  android:orientation="vertical">
+              <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="VIP等级体系："
+                        android:textSize="14sp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="4dp"
+                        />
+              <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="4dp"
+                        android:text="1.为初次成交客户，累积消费金额在1000元内，客户每购买100元商品，获得2个现金积分；"
+                        android:textSize="12sp"
+                  />
+               <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="2dp"
+                        android:text="2.累计消费金额达1000-2000元范围类，客户购买100元产品，获得3个陷阱积分。"
+                        android:textSize="12sp"
+                  />
+                <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="2dp"
+                        android:text="3.累计消费金额达2000-5000元范围类，客户购买100元产品，获得5个陷阱积分。"
+                        android:textSize="12sp"
+                  />
+                 <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="2dp"
+                        android:text="4.累计消费金额达5000-10000元范围类，客户购买100元产品，获得10个陷阱积分。"
+                        android:textSize="12sp"
+                  /> 
+                  <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="2dp"
+                        android:text="5.累计消费金额达1万元以上，客户购买100元产品，获得10个现金积分，购买妍诗美产品累计消费金额越高，VIP等级就会越高，所获得现金积分就越高。"
+                        android:textSize="12sp"
+                  />
+                   <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="一个现金分析折合1元人民币，现金积分会根据客户的VIP升级级别进行设置"
+                        android:textSize="12sp"
+                  />
+              </LinearLayout>
+                 </LinearLayout>
+    </ScrollView>
+              
+          </RelativeLayout>

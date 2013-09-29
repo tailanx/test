@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main2_main2_top"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:background="@drawable/topbg" >
+
+    <ImageView
+        android:id="@+id/person_shopping_button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:onClick="doClick"
+        android:src="@drawable/edit_background"
+        android:clickable="true"
+        android:textColor="#FFeeeeee" />
+
+    <TextView
+        android:id="@+id/already_complete_textview1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="我的商城"
+        android:textColor="#ffeeeeee"
+        android:textSize="24dp" />
+
+</RelativeLayout>
