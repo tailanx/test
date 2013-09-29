@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.util.CartUtil;
 

@@ -49,12 +49,13 @@ public class WaitPayUtil {
 			try {
 				orderDataManage = new OrderDataManage(context);
 				ArrayList<Order> mList = orderDataManage.getOrderArray(514492+"", "", "", "“—«© ’", 0+"", 5+"");
-				Log.i("info", mList.size()+"mList");
+//				Log.i("info", mList.size()+"mList");
 				for(int i=0;i<mList.size();i++){
 					setupShow();
-					Log.i("info", view+"+view");
+//					Log.i("info", view+"+view");
 					Order mOrder = mList.get(i);
 					titleTextView.setText(mOrder.getStatus());
+					Log.i("info", mOrder.getStatus());
 					numberTextView.setText(mOrder.getOrderCode());
 					
 					WaitPayOrderDetail waitPayOrderDetail = new WaitPayOrderDetail(context, mOrder, mLayout);
