@@ -65,7 +65,7 @@
                   android:text="乔丹"
                   android:textSize="14sp"/>
         <TextView 
-        android:id="@+id/address_management_item_textview4"
+        android:id="@+id/address_management_item_textview6"
         android:layout_below="@id/address_management_item_address2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
