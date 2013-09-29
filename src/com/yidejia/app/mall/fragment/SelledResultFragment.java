@@ -3,7 +3,10 @@ package com.yidejia.app.mall.fragment;
 import java.util.ArrayList;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.SelledResultListAdapter;
@@ -40,10 +43,21 @@ public class SelledResultFragment extends SherlockFragment {
 	private String TAG = "SelledResultFragment";
 	
 	private ListView selledListView;
+	private SelledResultListAdapter searchListAdapter;
 	private LinearLayout searchResultLayout;
 	private PullToRefreshListView mPullToRefreshListView;
+	private PullToRefreshScrollView mPullToRefreshScrollView;
 	
+	private SearchDataManage manage;
 	private ArrayList<SearchItem> searchItemsArray;
+	
+	private int fromIndex = 0;//开始
+	private int amount = 10;//个数
+	private String name;//名称
+	private String fun;//功效
+	private String price;//价格区间
+	private String brand;//品牌
+	private String order;//排序
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -52,14 +66,14 @@ public class SelledResultFragment extends SherlockFragment {
 		Bundle bundle = getArguments();
 		isShowWithList = (bundle != null)? bundle.getBoolean("isShowWithList"):defaultInt;
 		Bundle searchBundle = bundle.getBundle("bundle");
-		String name = searchBundle.getString("name");
-		String fun = searchBundle.getString("fun");
-		String price = searchBundle.getString("price");
-		String brand = searchBundle.getString("brand");
-		String order = searchBundle.getString("order");
+		name = searchBundle.getString("name");
+		fun = searchBundle.getString("fun");
+		price = searchBundle.getString("price");
+		brand = searchBundle.getString("brand");
+		order = searchBundle.getString("order");
 //		getSherlockActivity().getSupportActionBar().setCustomView(R.layout.actionbar_search);
-		SearchDataManage manage = new SearchDataManage(getSherlockActivity());
-		searchItemsArray = manage.getSearchArray(name, fun, brand, price, order, "0", "10");
+		manage = new SearchDataManage(getSherlockActivity());
+		searchItemsArray = manage.getSearchArray(name, fun, brand, price, order, ""+fromIndex, ""+amount);
 	}
 
 	
@@ -78,6 +92,7 @@ public class SelledResultFragment extends SherlockFragment {
 		} else {
 			view = inflater.inflate(R.layout.activity_search_image_layout, container, false);
 			searchResultLayout = (LinearLayout) view.findViewById(R.id.search_result_layout);
+			mPullToRefreshScrollView = (PullToRefreshScrollView) view.findViewById(R.id.pull_refresh_scrollview);
 			initWithImageView(view);
 		}
 		return view;
@@ -85,7 +100,7 @@ public class SelledResultFragment extends SherlockFragment {
 
 	private void initWithListView(View view){
 //		selledListView.setVisibility(View.VISIBLE);
-		SelledResultListAdapter searchListAdapter = new SelledResultListAdapter(getActivity(), searchItemsArray);
+		searchListAdapter = new SelledResultListAdapter(getActivity(), searchItemsArray);
 		selledListView.setAdapter(searchListAdapter);
 		selledListView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -98,7 +113,7 @@ public class SelledResultFragment extends SherlockFragment {
 				startActivity(intent);
 			}
 		});
-		
+		mPullToRefreshListView.setOnRefreshListener(listviewRefreshListener);
 	}
 	
 	private void initWithImageView(View view){
@@ -121,6 +136,18 @@ public class SelledResultFragment extends SherlockFragment {
 			searchResultLayout.addView(child);
 		}
 	}
+	
+	private OnRefreshListener<ListView> listviewRefreshListener = new OnRefreshListener<ListView>() {
+
+		@Override
+		public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+			// TODO Auto-generated method stub
+			fromIndex += amount;
+			searchItemsArray = manage.getSearchArray(name, fun, brand, price, order, ""+fromIndex, ""+amount);
+			searchListAdapter.notifyDataSetChanged();
+			mPullToRefreshListView.onRefreshComplete();
+		}
+	};
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {

@@ -115,7 +115,7 @@ public class GoodsView {
 		if(cart_num == 0){
 			shopping_cart_button.setVisibility(View.GONE);
 		} else {
-			setCartNum();
+			setCartNum(cart_num);
 		}
 		//加入购物车按钮点击事件
 		add_to_cart.setOnClickListener(new OnClickListener() {
@@ -123,7 +123,8 @@ public class GoodsView {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				setCartNum();
+				cart_num++;
+				setCartNum(cart_num);
 				CartsDataManage manage = new CartsDataManage();
 				manage.addCart(cart);
 			}
@@ -165,9 +166,8 @@ public class GoodsView {
 	
 	//跳转购物车的按钮
 	private Button shopping_cart_button;
-	private void setCartNum(){
+	private void setCartNum(int crat_num){
 		shopping_cart_button.setVisibility(view.VISIBLE);
-		cart_num++;
 		shopping_cart_button.setText(""+cart_num);
 	}
 	

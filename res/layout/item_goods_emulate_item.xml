@@ -25,6 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="85dp"
+                android:layout_alignParentLeft="true"
                 android:layout_toLeftOf="@+id/user_level"
                 android:text="费大爷"
                 android:textSize="18sp"

@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.fragment.CartActivity;
 import com.yidejia.app.mall.fragment.GuangFragment;
 import com.yidejia.app.mall.fragment.MainPageFragment;
@@ -46,11 +47,12 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 	private RelativeLayout downSearchLayout;
 	private RelativeLayout downShoppingLayout;
 	private RelativeLayout downMyLayout;
-	private ImageView down_home_imageView;
-	private ImageView down_guang_imageView;
-	private ImageView down_search_imageView;
-	private ImageView down_shopping_imageView;
-	private ImageView down_my_imageView;
+	private ImageView down_home_imageView;//首页按钮图片
+	private ImageView down_guang_imageView;//逛按钮图片
+	private ImageView down_search_imageView;//搜索按钮图片
+	private ImageView down_shopping_imageView; //购物车按钮图片
+	private ImageView down_my_imageView; //我的商城按钮图片
+	private Button down_shopping_cart;//购物车个数按钮
 	
 //	private TextView down_home_TextView;
 //	private TextView down_guang_TextView;
@@ -75,12 +77,12 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		if(savedBundleState == null){
 			initView();
 		}
+		MAINACTIVITY = this;
 		initNavView();
 		if (ConnectionDetector.isConnectingToInternet(this)) {
 			ImageUrl imageUrl = new ImageUrl();
 			imageUrl.getImageUrl();
 		}
-		MAINACTIVITY = this;
 	}
 /**
  * 初始化底部导航栏
@@ -95,8 +97,8 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 //		down_home_imageView.setImageBitmap(bmp);
 //		down_home_imageView.setImageResource(R.drawable.home_hover);//或者这样
 		
-		cartImage = (Button) findViewById(R.id.down_shopping_cart);
-		cartImage.setText("12");
+//		cartImage = (Button) findViewById(R.id.down_shopping_cart);
+//		cartImage.setText("12");
 //		cartImage.setTextX(18f);
 //		cartImage.setTextY(18f);
 //		cartImage.setTextColorResources(R.color.white);
@@ -122,6 +124,16 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		downSearchLayout.setOnClickListener(new NavOnclick(2));
 		downShoppingLayout.setOnClickListener(new NavOnclick(3));
 		downMyLayout.setOnClickListener(new NavOnclick(4));
+		
+		down_shopping_cart = (Button) findViewById(R.id.down_shopping_cart);
+		CartsDataManage cartsDataManage = new CartsDataManage();
+		int cartAcount = cartsDataManage.getCartAmount();
+		if(cartAcount == 0){
+			down_shopping_cart.setVisibility(View.GONE);
+		} else{
+			down_shopping_cart.setVisibility(View.VISIBLE);
+			down_shopping_cart.setText("" + cartAcount);
+		}
 	}
 	
 	private void initView(){
