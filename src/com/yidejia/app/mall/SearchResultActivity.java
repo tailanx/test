@@ -46,7 +46,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 //			searchResults = manage.getSearchArray("", fun, "", "", "", "0", "1");
 //			if(searchResults.size() != 0){
 //			}
-			title = bundle.getString("fun");
+			title = bundle.getString("title");
 			setTitle(title);
 //			bundle.putString("order", "sells");
 		}
@@ -117,6 +117,16 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				showMenu();
+			}
+		});
+		
+		ImageView actionbar_left = (ImageView) findViewById(R.id.actionbar_left);
+		actionbar_left.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				SearchResultActivity.this.finish();
 			}
 		});
 		
