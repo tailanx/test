@@ -236,7 +236,7 @@ public class GoodsView {
 			bannerImageView.setLayoutParams(lp_base);
 			imageLoader.displayImage(bannerArray.get(i).getImgUrl(), bannerImageView, options,
 					animateFirstListener);
-			matchGoodsImageLayout.setPadding(10, 0, 10, 0);
+			matchGoodsImageLayout.setPadding(80, 0, 80, 0);
 //			imageViewLayout.setPadding(10, 0, 10, 0);
 			bannerImageView.setPadding(10, 0, 10, 0);
 			final int index = i;
