@@ -24,6 +24,7 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ScrollView;
 
 public class SelledResultFragment extends SherlockFragment {
 	
@@ -88,17 +89,19 @@ public class SelledResultFragment extends SherlockFragment {
 			mPullToRefreshListView = (PullToRefreshListView) view.findViewById(R.id.pull_refresh_list);
 //			selledListView = (ListView) view.findViewById(R.id.search_result_list);
 			selledListView = mPullToRefreshListView.getRefreshableView();
-			initWithListView(view);
+			initWithListView();
 		} else {
 			view = inflater.inflate(R.layout.activity_search_image_layout, container, false);
 			searchResultLayout = (LinearLayout) view.findViewById(R.id.search_result_layout);
 			mPullToRefreshScrollView = (PullToRefreshScrollView) view.findViewById(R.id.pull_refresh_scrollview);
-			initWithImageView(view);
+			mPullToRefreshScrollView.setOnRefreshListener(scrollviewRefreshListener);
+//			mPullToRefreshScrollView.onRefreshComplete();
+			initWithImageView();
 		}
 		return view;
 	}
 
-	private void initWithListView(View view){
+	private void initWithListView(){
 //		selledListView.setVisibility(View.VISIBLE);
 		searchListAdapter = new SelledResultListAdapter(getActivity(), searchItemsArray);
 		selledListView.setAdapter(searchListAdapter);
@@ -114,9 +117,10 @@ public class SelledResultFragment extends SherlockFragment {
 			}
 		});
 		mPullToRefreshListView.setOnRefreshListener(listviewRefreshListener);
+//		mPullToRefreshListView.onRefreshComplete();
 	}
 	
-	private void initWithImageView(View view){
+	private void initWithImageView(){
 //		selledListView.setVisibility(View.GONE);
 		int count = searchItemsArray.size();
 		SRViewWithImage srViewWithImage = null;
@@ -134,6 +138,7 @@ public class SelledResultFragment extends SherlockFragment {
 				i++;
 			}
 			searchResultLayout.addView(child);
+			
 		}
 	}
 	
@@ -144,8 +149,21 @@ public class SelledResultFragment extends SherlockFragment {
 			// TODO Auto-generated method stub
 			fromIndex += amount;
 			searchItemsArray = manage.getSearchArray(name, fun, brand, price, order, ""+fromIndex, ""+amount);
-			searchListAdapter.notifyDataSetChanged();
 			mPullToRefreshListView.onRefreshComplete();
+			searchListAdapter.notifyDataSetChanged();
+		}
+	};
+	
+	private OnRefreshListener<ScrollView> scrollviewRefreshListener = new OnRefreshListener<ScrollView>() {
+
+		@Override
+		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+			// TODO Auto-generated method stub
+			fromIndex += amount;
+			searchItemsArray.clear();
+			searchItemsArray = manage.getSearchArray(name, fun, brand, price, order, ""+fromIndex, ""+amount);
+			initWithImageView();
+			mPullToRefreshScrollView.onRefreshComplete();
 		}
 	};
 
@@ -163,4 +181,15 @@ public class SelledResultFragment extends SherlockFragment {
 		super.onStart();
 		Log.d(TAG, "TestFragment-----onStart");
 	}
+
+
+	@Override
+	public void onDetach() {
+		// TODO Auto-generated method stub
+		super.onDetach();
+		manage = null;
+		searchItemsArray = null;
+	}
+	
+	
 }
