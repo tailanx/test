@@ -55,23 +55,26 @@ public class CartsDataManage {
 		boolean flag = false;
 		String id = details.getUId();
 		int amount = getGoodsCount(id);
+		Log.i(TAG, "this goods "+ id +" has :"+amount);
 		Editor editor = sp.edit();
+		int addCartAmount = amount + details.getAmount();
 		if(amount != 0){
-			mdfCartAmount(id, amount + details.getAmount());
+			mdfCartAmount(id, addCartAmount);
 		}
 		try {
 			JSONStringer stringer = new JSONStringer(); 
-			String cartValues = details.getAmount()+":#"+stringer.object()//.key("goods_id").value(details.getUId())
+			String cartValues = addCartAmount + ":#"+stringer.object()//.key("goods_id").value(details.getUId())
 					//.key("amount").value(details.getAmount())
 					.key("name").value(details.getProductText())
 					.key("price").value(details.getPrice())
 					.key("img_url").value(details.getImgUrl()).endObject().toString();
+			Log.i(TAG, cartValues);
 			editor.putString(id, cartValues);
 			editor.commit();
 			flag = true;
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
-			Log.e(TAG, "delCart Json err");
+			Log.e(TAG, "addCart Json err");
 			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -226,6 +229,7 @@ public class CartsDataManage {
 			Log.e(TAG, "get cart array err ");
 			e.printStackTrace();
 		}
+		Log.i(TAG, ""+amount);
 		return amount;
 	}
 	
