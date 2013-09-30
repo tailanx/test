@@ -47,7 +47,7 @@ public class AddressDataManage {
 	 *@param defaultAddress 是否为默认地址
 	 *@return: 返回addressId;
 	 */
-	public int addAddress(String userId, String name, String province, String city, String area, String address, String phone, boolean defaultAddress){
+	public int addAddress(int userId, String name, String province, String city, String area, String address, String phone, boolean defaultAddress){
 		int addressId = -1;
 		boolean isSuccess = false;
 		TaskSave taskSave = new TaskSave(userId, name, province, city, area, address, phone, defaultAddress);
@@ -63,7 +63,9 @@ public class AddressDataManage {
 			e.printStackTrace();
 		}
 		
-		if(!isSuccess){
+		if(!isSuccess && !isSaveSuccess){
+			Toast.makeText(context, isSuccessString, Toast.LENGTH_SHORT).show();
+		} else if(!isSuccess){
 			Toast.makeText(context, "网络不给力！", Toast.LENGTH_SHORT).show();
 		} else {
 			return recipient_id;
@@ -84,7 +86,7 @@ public class AddressDataManage {
 	 *@param recipientId 更新地址id
 	 *@return: 是否更新成功
 	 */
-	public boolean updateAddress(String userId, String name, String province, String city, String area, String address, String phone, boolean defaultAddress, int recipientId){
+	public boolean updateAddress(int userId, String name, String province, String city, String area, String address, String phone, boolean defaultAddress, int recipientId){
 		boolean isSuccess = false;
 		this.recipient_id = recipientId;
 		TaskSave taskSave = new TaskSave(userId, name, province, city, area, address, phone, defaultAddress);
@@ -100,7 +102,9 @@ public class AddressDataManage {
 			Log.e(TAG, "updateAddress() ExecutionException");
 		}
 		
-		if(!isSuccess){
+		if(!isSuccess && !isSaveSuccess){
+			Toast.makeText(context, isSuccessString, Toast.LENGTH_SHORT).show();
+		} else if(!isSuccess){
 			Toast.makeText(context, "网络不给力！", Toast.LENGTH_SHORT).show();
 		}
 		
@@ -142,7 +146,7 @@ public class AddressDataManage {
 	 * @param acount 获取个数
 	 * @return
 	 */
-	public ArrayList<Addresses> getAddressesArray(String userId, int fromIndex, int acount){
+	public ArrayList<Addresses> getAddressesArray(int userId, int fromIndex, int acount){
 		
 		TaskGetList taskGetList = new TaskGetList("customer_id="+userId, String.valueOf(fromIndex), String.valueOf(acount), "", "", "%2A");
 		boolean state = false ;
@@ -183,8 +187,8 @@ public class AddressDataManage {
 				JSONArray responseArray = new JSONArray(responseString);
 				int length = responseArray.length();
 				JSONObject addressItem ;
-				Addresses addresses = new Addresses();
 				for (int i = 0; i < length; i++) {
+					Addresses addresses = new Addresses();
 					addressItem = responseArray.getJSONObject(i);
 					String recipient_id = addressItem.getString("recipient_id");
 					addresses.setAddressId(recipient_id);
@@ -323,7 +327,7 @@ public class AddressDataManage {
 	}
 	
 	private class TaskSave extends AsyncTask<Void, Void, Boolean>{
-		private String userId;
+		private int userId;
 		private String name;
 		private String province;
 		private String city;
@@ -332,8 +336,8 @@ public class AddressDataManage {
 		private String phone; 
 		private boolean defaultAddress;
 		
-		public TaskSave(String userId2, String name, String province, String city, String area, String address, String phone, boolean defaultAddress){
-			this.userId = userId2;
+		public TaskSave(int userId, String name, String province, String city, String area, String address, String phone, boolean defaultAddress){
+			this.userId = userId;
 			this.name = name;
 			this.province = province;
 			this.city = city;
@@ -431,9 +435,16 @@ public class AddressDataManage {
 				String response = httpResultObject.getString("response");
 				JSONObject responseJsonObject = new JSONObject(response);
 				String temp = responseJsonObject.getString("@p_recipient_id");
-				Log.i("info", temp+"  +temp");
 				recipient_id = Integer.parseInt(temp);
-				return true;
+				isSuccessString = responseJsonObject.getString("@p_result");
+				if("success成功".equals(unicode.revert(isSuccessString))){
+					isSaveSuccess = true;
+					return true;
+				}
+				else {
+					isSaveSuccess = false;
+					return false;
+				}
 			} else return false;
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -447,5 +458,17 @@ public class AddressDataManage {
 		}
 	}
 	
+	private boolean isSaveSuccess = true;
+	
+	private String isSuccessString = "";
+	public String getReason(){
+		return isSuccessString;
+	}
+	/**
+	 * 返回地址的id
+	 */
+	public int getAddressId(){
+		return recipient_id;
+	}
 	
 }

@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.fragment.CartActivity;
 import com.yidejia.app.mall.fragment.GuangFragment;
 import com.yidejia.app.mall.fragment.MainPageFragment;
@@ -29,6 +31,7 @@ import com.yidejia.app.mall.fragment.SearchFragment;
 import com.yidejia.app.mall.fragment.ShoppingCartFragment;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.ImageUrl;
+import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.widget.YLImageButton;
 /**
  * 用于五大导航
@@ -51,6 +54,8 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 	private ImageView down_search_imageView;
 	private ImageView down_shopping_imageView;
 	private ImageView down_my_imageView;
+	private CartsDataManage cartsDataManage;
+	private int cart;
 	
 //	private TextView down_home_TextView;
 //	private TextView down_guang_TextView;
@@ -75,6 +80,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		if(savedBundleState == null){
 			initView();
 		}
+		
 		initNavView();
 		if (ConnectionDetector.isConnectingToInternet(this)) {
 			ImageUrl imageUrl = new ImageUrl();
@@ -94,9 +100,10 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 //		bmp = BitmapFactory.decodeResource(res, R.drawable.home_hover);
 //		down_home_imageView.setImageBitmap(bmp);
 //		down_home_imageView.setImageResource(R.drawable.home_hover);//或者这样
-		
-		cartImage = (Button) findViewById(R.id.down_shopping_cart);
-		cartImage.setText("12");
+//		cartsDataManage = new CartsDataManage();
+//		cart = cartsDataManage.getCartAmount();
+		cartImage = (Button) findViewById(R.id.down_shopping_cart1);
+		cartImage.setText(10+"");
 //		cartImage.setTextX(18f);
 //		cartImage.setTextY(18f);
 //		cartImage.setTextColorResources(R.color.white);
@@ -214,14 +221,26 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 //					down_shopping_TextView.setTextColor(Color.WHITE);
 					break;
 				case 4:
-					newFragment = new MyMallFragment();
-					setNavBackground();
+					boolean isLogin = ((MyApplication)getApplication()).getIsLogin();
+					Log.i("info", isLogin+"");
+					if(isLogin){
+						newFragment = new MyMallActivity();
+						setNavBackground();
+//						downMyLayout.setPressed(true);
+						downMyLayout.setBackgroundResource(R.drawable.down_hover1);
+//						down_my_imageView.setPressed(true);
+						down_my_imageView.setImageResource(R.drawable.down_my_hover);
+					}else{
+						newFragment = new LoginActivity();
+//					newFragment = new MyMallFragment();
+//					setNavBackground();
 //					downMyLayout.setPressed(true);
-					downMyLayout.setBackgroundResource(R.drawable.down_hover1);
+//					downMyLayout.setBackgroundResource(R.drawable.down_hover1);
 //					down_my_imageView.setPressed(true);
-					down_my_imageView.setImageResource(R.drawable.down_my_hover);
+//					down_my_imageView.setImageResource(R.drawable.down_my_hover);
 //					down_my_TextView.setTextColor(Color.WHITE);
 					break;
+					}
 				default:
 					break;
 				}
@@ -274,8 +293,8 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 //			down_my_imageView.setPressed(false);
 //			down_my_TextView.setTextColor(Color.rgb(180, 180, 180));
 			down_my_imageView.setImageResource(R.drawable.down_my_normal);
-
 		}
+		
 	}
 
 	private void setActionBarConfig() {

@@ -52,9 +52,10 @@ public class WaitPayUtil {
 				Log.i("info", mList.size()+"mList");
 				for(int i=0;i<mList.size();i++){
 					setupShow();
-					Log.i("info", view+"+view");
+//					Log.i("info", view+"+view");
 					Order mOrder = mList.get(i);
 					titleTextView.setText(mOrder.getStatus());
+					Log.i("info", mOrder.getStatus());
 					numberTextView.setText(mOrder.getOrderCode());
 					
 					WaitPayOrderDetail waitPayOrderDetail = new WaitPayOrderDetail(context, mOrder, mLayout);

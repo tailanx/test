@@ -60,18 +60,18 @@ public class AllOrderUtil {
 		try {
 			orderDataManage = new OrderDataManage(context);
 			ArrayList<Order> mList = orderDataManage.getOrderArray(514492+"", "", "", "录入", 0+"", 5+"");
-//			Log.i("info", mList.size()+"mList");
+			Log.i("info", mList.size()+"mList");
 			for(int i=0;i<mList.size();i++){
 				setupShow();
-//				Log.i("info", view+"+view");
+
 				Order mOrder = mList.get(i);
 				titleTextView.setText(mOrder.getStatus());
 				numberTextView.setText(mOrder.getOrderCode());
-//				sumPrice.setText(100+"");
+
 				AllOrderDetail allOrderDetail = new AllOrderDetail(context, mOrder, mLayout);
 				allOrderDetail.addView();//加载商品
 				for(int j=0;j<allOrderDetail.map.size();j++){
-//				Log.i("info", mLinearLayoutLayout+"+mlayout");
+
 				sumPrice.setText(allOrderDetail.map.get("price")+"");
 				countTextView.setText(allOrderDetail.map.get("count").intValue()+"");
 				}

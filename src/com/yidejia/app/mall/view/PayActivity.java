@@ -179,7 +179,7 @@ public class PayActivity extends SherlockActivity {
 	 * ³õÊ¼»¯¿Ø¼þ
 	 */
 	private void addAddress(){
-		ArrayList<Addresses> mList = addressDataManage.getAddressesArray(68298+"", 0, 10);
+		ArrayList<Addresses> mList = addressDataManage.getAddressesArray(68298, 0, 10);
 		Addresses addresses = mList.remove(0);
 		userName.setText(addresses.getName());
 		phoneName.setText(addresses.getPhone());

@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager.OnActivityResultListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,28 +59,28 @@ public class AddressUtil {
 	}
 
 	private void setupShow() {
-//		view = LayoutInflater.from(context).inflate(
-//				R.layout.address_management_item, null);
-//		edit = (ImageView) view
-//				.findViewById(R.id.address_management_item_relative1_textview2);
-//
-//		delete = (ImageView) view
-//				.findViewById(R.id.address_management_item_relative1_textview1);
-//
-//		areaTextView = (TextView) view
-//				.findViewById(R.id.address_management_item_address1);
-//		addressTextView = (TextView) view
-//				.findViewById(R.id.address_management_item_address2);
-//		nameTextView = (TextView) view
-//				.findViewById(R.id.address_management_item_textview3);
-//		numberTextView = (TextView) view
-//				.findViewById(R.id.address_management_item_textview4);
-//		deleteImageView = (ImageView) view
-//				.findViewById(R.id.address_management_item_relative1_textview1);
-//		editImageView = (ImageView) view
-//				.findViewById(R.id.address_management_item_relative1_textview2);
-//		checkBox = (CheckBox) view
-//				.findViewById(R.id.address_management_item_relative1_checkBox1);
+		view = LayoutInflater.from(context).inflate(
+				R.layout.address_management_item, null);
+		edit = (ImageView) view
+				.findViewById(R.id.address_management_item_relative1_textview2);
+
+		delete = (ImageView) view
+				.findViewById(R.id.address_management_item_relative1_textview1);
+
+		areaTextView = (TextView) view
+				.findViewById(R.id.address_management_item_address1);
+		addressTextView = (TextView) view
+				.findViewById(R.id.address_management_item_address2);
+		nameTextView = (TextView) view
+				.findViewById(R.id.address_management_item_textview3);
+		numberTextView = (TextView) view
+				.findViewById(R.id.address_management_item_textview6);
+		deleteImageView = (ImageView) view
+				.findViewById(R.id.address_management_item_relative1_textview1);
+		editImageView = (ImageView) view
+				.findViewById(R.id.address_management_item_relative1_textview2);
+		checkBox = (CheckBox) view
+				.findViewById(R.id.address_management_item_relative1_checkBox1);
 
 	}
 
@@ -94,15 +95,96 @@ public class AddressUtil {
 			dataManage = new AddressDataManage(context);
 			Bundle bundle = data.getExtras();
 			if (bundle != null) {
-				Addresses addresses = (Addresses) bundle
+				final Addresses addresses = (Addresses) bundle
 						.getSerializable("newaddress");
 				// Log.i("info", addresses.getName().toString());
 				setupShow();
 				nameTextView.setText(addresses.getName());
 				addressTextView.setText(addresses.getAddress());
-				numberTextView.setText(addresses.getPhone());
+				numberTextView.setText(addresses.getHandset());
+				
 				areaTextView.setText(addresses.getProvice()
 						+     addresses.getCity()+    addresses.getArea());
+				
+				deleteImageView.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View arg0) {
+						dataManage.deleteAddress(68298,
+								Integer.parseInt(addresses.getAddressId()));
+
+					}
+				});
+				checkBox.setChecked(false);
+//				
+				editImageView.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View arg0) {
+						Intent intent = new Intent(context,
+								EditNewAddressActivity.class);
+						Bundle bundle = new Bundle();
+						bundle.putSerializable("editaddress", addresses);
+						intent.putExtras(bundle);
+						((Activity) context).startActivityForResult(intent,
+								DefinalDate.requestcode);// 发送Intent,并设置请求码
+						
+					}
+				});
+			}
+			// 添加view
+			this.linearLayout.addView(view);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Toast.makeText(context, "网络不给力！", Toast.LENGTH_SHORT).show();
+		}
+
+	}
+/**
+ * 更新地址
+ * @param data
+ */
+	
+	public void updateAddresses(Intent data) {
+		try {
+//			dataManage = new AddressDataManage(context);
+			Bundle bundle = data.getExtras();
+			if (bundle != null) {
+				final Addresses addresses = (Addresses) bundle
+						.getSerializable("newaddress");
+				 Log.i("info", addresses.getName().toString());
+				setupShow();
+				nameTextView.setText(addresses.getName());
+				addressTextView.setText(addresses.getAddress());
+				numberTextView.setText(addresses.getHandset());
+				
+				areaTextView.setText(addresses.getProvice()
+						+     addresses.getCity()+ addresses.getArea());
+				
+				deleteImageView.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						boolean isDele = dataManage.deleteAddress(68298,
+								Integer.parseInt(addresses.getAddressId()));
+						
+					}
+				});
+				checkBox.setChecked(false);
+//				
+				editImageView.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View arg0) {
+						Intent intent = new Intent(context,
+								EditNewAddressActivity.class);
+						Bundle bundle = new Bundle();
+						bundle.putSerializable("editaddress", addresses);
+						intent.putExtras(bundle);
+						((Activity) context).startActivityForResult(intent,
+								DefinalDate.requestcode);// 发送Intent,并设置请求码
+
+					}
+				});
 			}
 			// 添加view
 			this.linearLayout.addView(view);
@@ -120,14 +202,14 @@ public class AddressUtil {
 	public void AllAddresses() {
 		try {
 			dataManage = new AddressDataManage(context);
-			addressesArray = dataManage.getAddressesArray(68298 + "", 0, 15);
+			addressesArray = dataManage.getAddressesArray(68298, 0, 20);
 			for (int i = 0; i < addressesArray.size(); i++) {
+				final Addresses addresses = addressesArray.get(i);
 				StringBuffer sb = new StringBuffer();
 //				Log.i("info", addressesArray.size() + "+addressArray.size()");
-				final Addresses addresses = addressesArray.get(i);
-				view = LayoutInflater.from(context).inflate(
+				 view = LayoutInflater.from(context).inflate(
 						R.layout.address_management_item, null);
-				edit = (ImageView) view
+				 edit = (ImageView) view
 						.findViewById(R.id.address_management_item_relative1_textview2);
 
 				delete = (ImageView) view
@@ -139,24 +221,25 @@ public class AddressUtil {
 						.findViewById(R.id.address_management_item_address2);
 				nameTextView = (TextView) view
 						.findViewById(R.id.address_management_item_textview3);
-				numberTextView = (TextView) view
-						.findViewById(R.id.address_management_item_textview4);
-				deleteImageView = (ImageView) view
+				 numberTextView = (TextView) view
+						.findViewById(R.id.address_management_item_textview6);
+				 deleteImageView = (ImageView) view
 						.findViewById(R.id.address_management_item_relative1_textview1);
-				editImageView = (ImageView) view
+				 editImageView = (ImageView) view
 						.findViewById(R.id.address_management_item_relative1_textview2);
-				checkBox = (CheckBox) view
+				 checkBox = (CheckBox) view
 						.findViewById(R.id.address_management_item_relative1_checkBox1);
+				
 				sb.append(addresses.getProvice());
 				sb.append(addresses.getCity());
 				sb.append(addresses.getArea());
 //				Log.i("info", sb.toString()+"addresses.getArea()");
-
+//				Log.i("info", addresses.getPhone()+"addresses.getPhone()");
 				areaTextView.setText(sb.toString());
 				addressTextView.setText(addresses.getAddress());
 				nameTextView.setText(addresses.getName());
-				numberTextView.setText(addresses.getPhone());
-				
+				numberTextView.setText(addresses.getHandset());
+//				
 				deleteImageView.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View arg0) {
@@ -166,7 +249,7 @@ public class AddressUtil {
 					}
 				});
 				checkBox.setChecked(false);
-				
+//				
 				editImageView.setOnClickListener(new OnClickListener() {
 
 					@Override

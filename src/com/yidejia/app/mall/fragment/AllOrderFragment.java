@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.R.integer;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -68,6 +69,7 @@ public class AllOrderFragment extends SherlockFragment {
 		View view= inflater.inflate(R.layout.all_order_item_main, null);//获取视图对象
 		LinearLayout relativeLayout = (LinearLayout)view.findViewById(R.id.all_order_item_main_scrollView_linearlayout1);//获取布局
 		AllOrderUtil allOrderUtil = new AllOrderUtil(getSherlockActivity(), relativeLayout);
+//		Log.i("info", allOrderUtil+"");
 		allOrderUtil.loadView();
 //		setupShow(view);
 //		getData();

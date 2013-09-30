@@ -1,6 +1,7 @@
 package com.yidejia.app.mall.initview;
 
 import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -45,6 +46,7 @@ import android.widget.Toast;
 public class GoodsView {
 	private View view;
 	private int width;
+	private CartsDataManage manage;
 	private int cart_num = 0;
 	private Activity activity;
 
@@ -59,6 +61,8 @@ public class GoodsView {
 	public void initGoodsView(ProductBaseInfo info) {
 		if (info == null)
 			return;
+		manage = new CartsDataManage();
+		cart_num = manage.getCartAmount();
 		final Cart cart = new Cart();
 		cart.setSalledAmmount(1);
 		cart.setUId(info.getUId());
@@ -116,7 +120,8 @@ public class GoodsView {
 		final Button shopping_cart_button = (Button) view
 				.findViewById(R.id.shopping_cart_button);
 
-		shopping_cart_button.setVisibility(View.GONE);
+		final CartsDataManage manage = new CartsDataManage();
+		shopping_cart_button.setText(manage.getCartAmount()+"");
 		shopping_cart_button.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -134,8 +139,8 @@ public class GoodsView {
 				shopping_cart_button.setVisibility(view.VISIBLE);
 				cart_num++;
 				shopping_cart_button.setText("" + cart_num);
-				CartsDataManage manage = new CartsDataManage();
-				manage.addCart(cart);
+				boolean istrue =  manage.addCart(cart);
+				Log.i("info", istrue+"   cart");
 			}
 		});
 

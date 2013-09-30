@@ -130,9 +130,9 @@
             android:text="@string/down_shopping_text"
             android:textColor="#b4b4b4"
             android:textSize="12sp" />
-<!-- 
+ <!--   
         <com.yidejia.app.mall.widget.YLImageButton
-            android:id="@+id/down_shopping_cart"
+            android:id="@+id/down_shopping_cart1"
             android:layout_width="26dp"
             android:layout_height="16dp"
             android:layout_marginTop="4dp"
@@ -140,19 +140,18 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:background="@drawable/shop_message" />
-             -->
+     -->  
         <Button
-            android:id="@+id/down_shopping_cart"
+            android:id="@+id/down_shopping_cart1"
             android:layout_width="26dp"
             android:layout_height="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginRight="4dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:textSize="12sp"
-            android:text="12"
+            android:text="0"
             android:textColor="@color/white"
             android:background="@drawable/shop_message" />
+            
     </RelativeLayout>
 
     <RelativeLayout

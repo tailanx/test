@@ -3,6 +3,7 @@ package com.yidejia.app.mall.view;
 import java.util.ArrayList;
 
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -112,18 +113,28 @@ public class AddressActivity extends SherlockActivity {
 	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if(requestCode == DefinalDate.requestcode && resultCode == DefinalDate.responcode ){
-			try {
-				layout.invalidate();
-				new AddressUtil(AddressActivity.this, layout).addAddresses(data);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				Toast.makeText(AddressActivity.this, "网络不给力！", Toast.LENGTH_SHORT).show();
-			}
-			   
-			   
-			}
+		try {
+			if(requestCode == DefinalDate.requestcode && resultCode == DefinalDate.responcode){
+				try {
+					new AddressUtil(AddressActivity.this, layout).addAddresses(data);
+					layout.invalidate();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					Toast.makeText(AddressActivity.this, "您的输入有问题", Toast.LENGTH_SHORT).show();
+				}
+				   
+				   
+				}else if(requestCode == DefinalDate.requestcode && resultCode == DefinalDate.responcode1){
+					new AddressUtil(AddressActivity.this, layout).updateAddresses(data);
+					layout.invalidate();
+				}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Toast.makeText(AddressActivity.this, "网络不给力！", Toast.LENGTH_SHORT).show();
+
+		}
 	}
 
 

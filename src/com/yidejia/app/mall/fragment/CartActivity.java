@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.UserCommentDataManage;
 import com.yidejia.app.mall.model.UserComment;
 import com.yidejia.app.mall.util.CartUtil;
@@ -46,7 +47,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	private TextView priceTextView2;// ¼Û¸ñ
 	private View person;
 	private View person2;
-	private UserCommentDataManage dataManage;
+	private CartsDataManage dataManage;
 	private Button shoppingCartTopay;
 	private ArrayList<UserComment> mlist;
 	private CartUtil cartUtil;
@@ -174,7 +175,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 	
-			dataManage = new UserCommentDataManage(getSherlockActivity());
+			dataManage = new CartsDataManage();
 			View view = inflater.inflate(R.layout.shopping_cart, container, false);
 			// TODO Auto-generated method stub
 

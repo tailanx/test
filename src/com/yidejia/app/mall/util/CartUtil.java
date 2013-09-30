@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -27,6 +28,7 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.UserComment;
+import com.yidejia.app.mall.view.GoCartActivity;
 
 public class CartUtil{
 	private Context context;
@@ -84,6 +86,7 @@ public class CartUtil{
 				Log.i("info", userList.size()+"  +userList");
 //			checkmMap = new HashMap<String, Boolean>();
 				mBox.setChecked(true);
+				
 				final HashMap<String, Float> map = new HashMap<String, Float>();
 				View view = LayoutInflater.from(context).inflate(
 						R.layout.shopping_cart_item, null);
@@ -109,7 +112,7 @@ public class CartUtil{
 				final TextView number = (TextView) view
 						.findViewById(R.id.shopping_cart_item_edit_number);// 输入的个数
 
-				Cart cart = userList.get(i);
+				final Cart cart = userList.get(i);
 				String path = cart.getImgUrl();
 				Bitmap bm = BitmapFactory.decodeFile(path);
 				if (bm != null) {
@@ -124,6 +127,13 @@ public class CartUtil{
 					public void onClick(View v) {
 						
 						Intent intent = new Intent(context,GoodsInfoActivity.class);
+						
+						Bundle bundle = new Bundle();
+						bundle.putString("goodsId", cart.getUId());
+						intent.putExtras(bundle);
+						context.startActivity(intent);
+						
+						
 						context.startActivity(intent);
 					}
 				});

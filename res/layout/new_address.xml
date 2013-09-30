@@ -108,7 +108,7 @@
                     android:layout_width="60sp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:background="@null"
+                    
                     android:text="省"
                     android:textSize="15sp" />
 
@@ -117,7 +117,7 @@
                     android:layout_width="60sp"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/province"
-                    android:background="@null"
+                    
                     android:text="市"
                     android:layout_marginLeft="15dp"
                     android:textSize="15sp" />
@@ -127,7 +127,7 @@
                     android:layout_width="60sp"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/city"
-                    android:background="@null"
+                    
                     android:text="区"
                     android:layout_marginLeft="15dp"
                     android:textSize="15sp" />
@@ -155,6 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@null"
+                android:textSize="13sp"
                 android:singleLine="true" />
         </TableRow>
     </TableLayout>
