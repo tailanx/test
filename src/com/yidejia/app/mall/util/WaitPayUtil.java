@@ -49,7 +49,7 @@ public class WaitPayUtil {
 			try {
 				orderDataManage = new OrderDataManage(context);
 				ArrayList<Order> mList = orderDataManage.getOrderArray(514492+"", "", "", "“—«© ’", 0+"", 5+"");
-//				Log.i("info", mList.size()+"mList");
+				Log.i("info", mList.size()+"mList");
 				for(int i=0;i<mList.size();i++){
 					setupShow();
 //					Log.i("info", view+"+view");

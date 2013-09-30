@@ -28,6 +28,7 @@
             android:orientation="vertical"
            
             >
+            <!--
    <RelativeLayout
     android:id="@+id/wait_pay_order_produce"
     android:layout_width="fill_parent"
@@ -142,7 +143,7 @@
     	          android:textSize="15sp" />
 
     	  </RelativeLayout>
-          
+            -->
         </LinearLayout>
   </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
     

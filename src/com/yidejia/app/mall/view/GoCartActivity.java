@@ -1,22 +1,23 @@
 package com.yidejia.app.mall.view;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.yidejia.app.mall.GoodsInfoActivity;
+import com.actionbarsherlock.app.SherlockActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.util.CartUtil;
 
 
-public class GoCartActivity extends Activity implements OnClickListener {
+public class GoCartActivity extends SherlockActivity implements OnClickListener {
 	private TextView sumTextView;// 总的钱数
 	private TextView counTextView;// 总的数量
 	private CheckBox mBox;//选择框
@@ -28,6 +29,9 @@ public class GoCartActivity extends Activity implements OnClickListener {
 		try {
 			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
+			requestWindowFeature(Window.FEATURE_NO_TITLE);  
+		    getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN); 
+
 			setContentView(R.layout.go_cart);
 			mbutton  = (Button) findViewById(R.id.go_cart_go_pay);
 			mbutton.setOnClickListener(this);

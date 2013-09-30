@@ -110,7 +110,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="25dp"
             android:layout_toLeftOf="@id/shopping_cart_item_add"
             android:layout_toRightOf="@id/shopping_cart_item_subtract"
             android:background="@null"

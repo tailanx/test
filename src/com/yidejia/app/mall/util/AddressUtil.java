@@ -159,14 +159,14 @@ public class AddressUtil {
 				numberTextView.setText(addresses.getHandset());
 				
 				areaTextView.setText(addresses.getProvice()
-						+     addresses.getCity()+    addresses.getArea());
+						+     addresses.getCity()+ addresses.getArea());
 				
 				deleteImageView.setOnClickListener(new OnClickListener() {
 					@Override
-					public void onClick(View arg0) {
-						dataManage.deleteAddress(68298,
+					public void onClick(View v) {
+						boolean isDele = dataManage.deleteAddress(68298,
 								Integer.parseInt(addresses.getAddressId()));
-
+						
 					}
 				});
 				checkBox.setChecked(false);

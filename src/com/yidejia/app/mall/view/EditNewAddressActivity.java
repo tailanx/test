@@ -382,7 +382,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 						
 					addresses.setAddressId(new AddressDataManage(EditNewAddressActivity.this).getAddressId()+"");
 					
-					 Log.i("info", isUpdate+"addressId");
+//					 Log.i("info", isUpdate+"addressId");
 
 					if (!isUpdate) {
 						Toast.makeText(EditNewAddressActivity.this, "您的输入有问题",

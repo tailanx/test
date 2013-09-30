@@ -1,4 +1,4 @@
-package com.yidejia.app.mall;
+  package com.yidejia.app.mall;
 
 import android.content.Intent;
 import android.os.Bundle;
