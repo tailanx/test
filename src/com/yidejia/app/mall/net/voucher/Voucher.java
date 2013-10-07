@@ -76,10 +76,10 @@ public class Voucher {
 	/**
 	 * 
 	 * @param id
-	 * @return http address
+	 * @return http response string
 	 * @throws IOException
 	 */
-	public String getAddress(String id) throws IOException{
+	public String getResponse(String id) throws IOException{
 		getHttpAddress(id);
 		HttpPostConn conn = new HttpPostConn(urlString, keys, values);
 		result = conn.getJsonResult();
