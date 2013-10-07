@@ -55,7 +55,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 	private ImageView down_shopping_imageView;
 	private ImageView down_my_imageView;
 	private CartsDataManage cartsDataManage;
-	private int cart;
+	private int number;
 	
 //	private TextView down_home_TextView;
 //	private TextView down_guang_TextView;
@@ -80,13 +80,13 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		if(savedBundleState == null){
 			initView();
 		}
+		MAINACTIVITY = this;
 		
 		initNavView();
 		if (ConnectionDetector.isConnectingToInternet(this)) {
 			ImageUrl imageUrl = new ImageUrl();
 			imageUrl.getImageUrl();
 		}
-		MAINACTIVITY = this;
 	}
 /**
  * 初始化底部导航栏
@@ -101,9 +101,10 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 //		down_home_imageView.setImageBitmap(bmp);
 //		down_home_imageView.setImageResource(R.drawable.home_hover);//或者这样
 //		cartsDataManage = new CartsDataManage();
-//		cart = cartsDataManage.getCartAmount();
+		cartsDataManage = new CartsDataManage();
+		number = cartsDataManage.getCartAmount();
 		cartImage = (Button) findViewById(R.id.down_shopping_cart1);
-		cartImage.setText(10+"");
+		cartImage.setText(number+"");
 //		cartImage.setTextX(18f);
 //		cartImage.setTextY(18f);
 //		cartImage.setTextColorResources(R.color.white);

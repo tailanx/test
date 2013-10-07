@@ -134,7 +134,7 @@ public class CartUtil{
 						context.startActivity(intent);
 						
 						
-						context.startActivity(intent);
+//						context.startActivity(intent);
 					}
 				});
 				

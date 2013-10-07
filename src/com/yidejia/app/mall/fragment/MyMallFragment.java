@@ -75,7 +75,7 @@ public class MyMallFragment extends SherlockFragment implements OnClickListener 
 		// 实例化组件
 		imageView = (ImageView) getSherlockActivity().findViewById(R.id.person_shopping_button1);
 //		mTextView = (TextView) getSherlockActivity().findViewById(R.id.my_shopping);// 我的商城
-		//
+
 		
 		ylImageButton = (YLImageButton) view.findViewById(R.id.main2_main2_linearlayout2_textview2);
 		ylImageButton.setText("1");

@@ -85,12 +85,7 @@
                 android:layout_marginRight="8dp"
                 android:orientation="vertical" >
 
-                <ListView
-                    android:id="@+id/shopping_cart_listview"
-                    
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-                </ListView>
+     
         
         </LinearLayout>
 </ScrollView>

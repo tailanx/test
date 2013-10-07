@@ -120,17 +120,9 @@ public class GoodsView {
 		final Button shopping_cart_button = (Button) view
 				.findViewById(R.id.shopping_cart_button);
 
-		final CartsDataManage manage = new CartsDataManage();
+		 manage = new CartsDataManage();
 		shopping_cart_button.setText(manage.getCartAmount()+"");
-		shopping_cart_button.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				builder.show();
-				
-			}
-		});
-		
+		Log.i("info",manage.getCartAmount()+"   manage");
 		add_to_cart.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -140,7 +132,7 @@ public class GoodsView {
 				cart_num++;
 				shopping_cart_button.setText("" + cart_num);
 				boolean istrue =  manage.addCart(cart);
-				Log.i("info", istrue+"   cart");
+				Log.i("info", istrue+"   cart_num");
 			}
 		});
 
@@ -153,6 +145,7 @@ public class GoodsView {
 				Bundle bundle = new Bundle();
 				intent.putExtras(bundle);
 				activity.startActivity(intent);
+				activity.finish();
 			}
 		});
 
@@ -162,11 +155,13 @@ public class GoodsView {
 
 			@Override
 			public void onClick(View v) {
+				builder.show();
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(activity, GoCartActivity.class);
+//				Intent intent = new Intent(activity, GoCartActivity.class);
 				// Bundle bundle = new Bundle();
 				// intent.putExtras(bundle);
-				activity.startActivity(intent);
+//				activity.startActivity(intent);
+//				activity.finish();
 			}
 		});
 	}
@@ -262,6 +257,7 @@ public class GoodsView {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
+					
 					Intent intent = new Intent(activity,
 							GoodsInfoActivity.class);
 					Bundle bundle = new Bundle();
@@ -319,6 +315,7 @@ public class GoodsView {
 								// TODO Auto-generated method stub
 								Intent intent = new Intent(activity,GoCartActivity.class);
 								activity.startActivity(intent);
+								activity.finish();
 							}
 						}).setNegativeButton("‘Ÿπ‰π‰", null).create();
 		options = new DisplayImageOptions.Builder()

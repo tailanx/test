@@ -175,8 +175,8 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 	
-			dataManage = new CartsDataManage();
-			View view = inflater.inflate(R.layout.shopping_cart, container, false);
+		View view = inflater.inflate(R.layout.shopping_cart, container, false);
+//			dataManage = new CartsDataManage();
 			// TODO Auto-generated method stub
 
 			mBox = (CheckBox) view.findViewById(R.id.shopping_cart_checkbox);// Ñ¡Ôñ¿ò

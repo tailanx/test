@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,15 +55,7 @@ public class AllOrderDetail {
 		 view = inflater.inflate(R.layout.all_order_item_produce, null);
 		head = (ImageView) view.findViewById(R.id.all_order_item_image);
 		detail = (TextView) view.findViewById(R.id.all_order_item_text);
-		detail.setOnClickListener(new OnClickListener() {//添加点击事件
-			
-			@Override
-			public void onClick(View v) {
-				
-				Intent intent = new Intent(context,GoodsInfoActivity.class);
-				context.startActivity(intent);
-			}
-		});
+		
 		price = (TextView) view.findViewById(R.id.all_order_item_sum_detail);
 		count = (TextView) view.findViewById(R.id.all_order_item_count_detail);
 		
@@ -72,11 +65,24 @@ public class AllOrderDetail {
 		try {
 			map  = new HashMap<String, Float>();
 			ArrayList<Cart> mArrayList = order.getCartsArray();
+//			Log.i("info", mArrayList.size()+"");
 			for (int i = 0; i < mArrayList.size(); i++) {
+				final Cart cart = mArrayList.get(i);
 				setupShow();
-				Cart cart = mArrayList.get(i);
 				String urlString = cart.getImgUrl();
 				Bitmap bm = BitmapFactory.decodeFile(urlString);
+				detail.setOnClickListener(new OnClickListener() {//添加点击事件
+					
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(context,GoodsInfoActivity.class);
+						
+						Bundle bundle = new Bundle();
+						bundle.putString("goodsId", cart.getUId());
+						intent.putExtras(bundle);
+						context.startActivity(intent);
+					}
+				});
 				if(bm!=null){
 					head.setImageBitmap(bm);
 				}else{
@@ -92,7 +98,8 @@ public class AllOrderDetail {
 			}
 			map.put("price", sumPrice);
 			map.put("count", (float)sumCount);
-			Log.i("info", sumCount+"   sumprice");
+			
+//			Log.i("info", sumCount+"   sumprice");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -95,7 +95,7 @@ public class ProductDataManage{  //implements CallBack
 					String responseString = object.getString("response");
 					Log.i(TAG, responseString);
 					analysisProductJson(responseString);
-					Thread.sleep(3000);
+//					Thread.sleep(3000);
 					return true;
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
