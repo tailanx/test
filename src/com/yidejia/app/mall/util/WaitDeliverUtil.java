@@ -2,17 +2,21 @@ package com.yidejia.app.mall.util;
 
 import java.util.ArrayList;
 
-import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.datamanage.OrderDataManage;
-import com.yidejia.app.mall.model.Order;
-
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.datamanage.OrderDataManage;
+import com.yidejia.app.mall.model.Order;
+import com.yidejia.app.mall.view.ExchangeActivity;
 
 public class WaitDeliverUtil {
 	private Context context;
@@ -25,6 +29,8 @@ public class WaitDeliverUtil {
 	private TextView numberTextView;//订单的编号
 	private TextView sumPrice;//订单的总价格
 	private TextView countTextView;//总数目
+	private Button mButton;//催货
+	private Button mButton2;//退换货
 	
 	private OrderDataManage orderDataManage ;//用来获取订单数据
 	
@@ -34,7 +40,22 @@ public class WaitDeliverUtil {
 		this.mLinearLayout = layout;
 	}
 	public void setupShow(){
+		
 		view = mInflater.inflate(R.layout.wait_deliver_item_main_item,null);
+		
+		mButton = (Button) view.findViewById(R.id.wait_deliver_item_payment);
+		
+		mButton2 = (Button) view.findViewById(R.id.wait_deliver_item_exchange);
+		
+		mButton2.setOnClickListener(new OnClickListener() {
+			   
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(context, ExchangeActivity.class);
+				context.startActivity(intent);
+				
+			}
+		});
 		mLayout = (LinearLayout) view.findViewById(R.id.wait_deliver_relative2);
 		titleTextView = (TextView)view.findViewById(R.id.wait_deliver_item_detail);
 		numberTextView = (TextView)view.findViewById(R.id.wait_deliver_item_textview2_nubmer);
@@ -65,6 +86,7 @@ public class WaitDeliverUtil {
 					sumPrice.setText(waitDeliverDetail.map.get("price")+"");
 					countTextView.setText(waitDeliverDetail.map.get("count").intValue()+"");
 					}
+					
 					mLinearLayout.addView(view);
 					Log.i("info", mLinearLayout+"+mlayout");
 				}

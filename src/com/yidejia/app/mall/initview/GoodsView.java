@@ -1,7 +1,6 @@
 package com.yidejia.app.mall.initview;
 
 import java.util.ArrayList;
-
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,6 +18,7 @@ import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.MainProduct;
 import com.yidejia.app.mall.model.ProductBaseInfo;
+import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.GoCartActivity;
 import com.yidejia.app.mall.view.PayActivity;
 
@@ -124,13 +124,16 @@ public class GoodsView {
 		shopping_cart_button.setText(manage.getCartAmount()+"");
 		Log.i("info",manage.getCartAmount()+"   manage");
 		add_to_cart.setOnClickListener(new OnClickListener() {
-
+			//加入购物车
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				shopping_cart_button.setVisibility(view.VISIBLE);
 				cart_num++;
 				shopping_cart_button.setText("" + cart_num);
+				Intent  intent = new Intent(Consts.UPDATE_CHANGE);
+				activity.sendBroadcast(intent);
+				
 				boolean istrue =  manage.addCart(cart);
 				Log.i("info", istrue+"   cart_num");
 			}

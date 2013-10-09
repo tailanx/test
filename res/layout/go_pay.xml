@@ -563,18 +563,11 @@
               	
               		>
     
-           <ListView 
-     
-	    android:id="@+id/go_pay_listview"
-		
-	    android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		
-	    ></ListView>
+         
            
     	 </LinearLayout>
     	 <ScrollView
-    	
+    	   
     	android:layout_marginTop="8dp"
         android:id="@+id/go_pay_pinglun_scrollView"
         android:layout_width="fill_parent"

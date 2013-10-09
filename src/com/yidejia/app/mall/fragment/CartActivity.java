@@ -1,35 +1,36 @@
 package com.yidejia.app.mall.fragment;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
 
-import android.R.integer;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.DropBoxManager.Entry;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
-import com.yidejia.app.mall.datamanage.UserCommentDataManage;
 import com.yidejia.app.mall.model.UserComment;
 import com.yidejia.app.mall.util.CartUtil;
+import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.PayActivity;
 
 public class CartActivity extends SherlockFragment implements OnClickListener {
@@ -52,6 +53,14 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	private ArrayList<UserComment> mlist;
 	private CartUtil cartUtil;
 	private CheckBox mBox;
+	private final int MENU1  = 0x111;
+	private final int MENU2  = 0x112;
+	private final int MENU3  = 0x113;
+	private LinearLayout layout;
+	private View view;
+	private CartsDataManage dataManage2;
+//	private InnerReceiver receiver;
+	
 
 	// private void doClick(View v) {
 	// switch (v.getId()) {
@@ -175,7 +184,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 	
-		View view = inflater.inflate(R.layout.shopping_cart, container, false);
+		view = inflater.inflate(R.layout.shopping_cart, container, false);
 //			dataManage = new CartsDataManage();
 			// TODO Auto-generated method stub
 
@@ -187,14 +196,26 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 			counTextView = (TextView) view
 					.findViewById(R.id.shopping_cart_sum_number);// 总的数量
 
-			LinearLayout layout = (LinearLayout) view
+			 layout = (LinearLayout) view
 					.findViewById(R.id.shopping_cart_relative2);
+			
+//			registerForContextMenu(layout);
 
 			getSherlockActivity().getSupportActionBar().setCustomView(
 					R.layout.actionbar_cart);
 			cartUtil = new CartUtil(getSherlockActivity(), layout, counTextView,
 					sumTextView,mBox);
+			
 			cartUtil.AllComment();
+			
+//			receiver = new InnerReceiver();
+//			IntentFilter filter = new IntentFilter();
+//			filter.addAction(Consts.UPDATE_CHANGE);
+//			getActivity().registerReceiver(receiver, filter);
+
+	
+			
+			
 			// List<HashMap<String, Integer>> mlist = cartUtil.list;
 			// for(int i = 0;i<mlist.size();i++){
 			// HashMap<String, Integer> map = mlist.get(i);
@@ -233,14 +254,14 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 			//
 			// detail.setOnClickListener(new OnClickListener() {
 			//
-			// @Override
-			// public void onClick(View arg0) {
-			// // TODO Auto-generated method stub
-			// Intent intent = new Intent(getSherlockActivity(),
-			// OrderDetailActivity.class);
-			// startActivity(intent);
-			// }
-			// });
+//			 @Override
+//			 public void onClick(View arg0) {
+//			 // TODO Auto-generated method stub
+//			 Intent intent = new Intent(getSherlockActivity(),
+//			 OrderDetailActivity.class);
+//			 startActivity(intent);
+//			 }
+//			 });
 			// subtract = (ImageView) person
 			// .findViewById(R.id.shopping_cart_item_subtract);// 减
 			// number = (TextView) person
@@ -309,11 +330,76 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 		
 
 	}
+	
+	
+//	@Override
+//	public void onCreateContextMenu(ContextMenu menu, View v,
+//			ContextMenuInfo menuInfo) {
+//		menu.add(0, MENU1, 0, "删除");
+//		menu.add(0, MENU2, 0, "查看商品详情");
+//		menu.add(0, MENU3, 0, "收藏");
+//		menu.setGroupCheckable(0, true, true);
+//		menu.setHeaderIcon(android.R.drawable.menu_frame);
+//		menu.setHeaderTitle("购物车操作");
+//		super.onCreateContextMenu(menu, v, menuInfo);
+//	}
+
+//	@Override
+//	public void onDestroy() {
+//		getActivity().unregisterReceiver(receiver);
+//		
+//		super.onDestroy();
+//	}
+
 
 	@Override
 	public void onClick(View arg0) {
 		// TODO Auto-generated method stub
 
 	}
-
+//	//接收广播
+//	private class InnerReceiver extends BroadcastReceiver{
+//
+//		@Override
+//		public void onReceive(Context context, Intent intent) {
+//			// TODO Auto-generated method stub
+//			String action = intent.getAction();
+//			if(Consts.UPDATE_CHANGE.equals(action)){
+//				
+////				Log.i("info", "nihao ");
+////				cartUtil = new CartUtil(getSherlockActivity(), layout, counTextView,
+////						sumTextView,mBox);
+////			
+////				cartUtil.AllComment();
+//			}
+//		}
+		
+//	}
+//	@Override
+//	public boolean onContextItemSelected(MenuItem item) {
+//		
+//		 switch (item.getItemId()) {
+//		 
+//		case MENU1://点击删除
+//			
+//			dataManage2 = new CartsDataManage();
+////			boolean isture = dataManage2.delCart(info.id+"");
+////			Log.i("info", isture+"   isture");
+//			break;
+//
+//		case MENU2://查看商品详情
+//			Intent intent = new Intent(getSherlockActivity(),GoodsInfoActivity.class);
+//			Bundle bundle = new Bundle();
+////			bundle.putSerializable("goodsId", info.id);
+//			intent.putExtras(bundle);
+//			getSherlockActivity().startActivity(intent);
+//			break;
+//		case MENU3://收藏
+//			Toast.makeText(getSherlockActivity(), "收藏成功", Toast.LENGTH_LONG).show();
+//			break;
+//		}
+//		
+//		
+//		return super.onContextItemSelected(item);
+//	}
 }

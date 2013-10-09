@@ -7,6 +7,7 @@
     <color name="hot_sell_text">#ffff0000</color>
     <color name="price_color">#ed217c</color>
     <color name="search_result_top">#702c91</color>
+    <color name="white_white">#b4b4b4</color>
 
     <drawable name="white">#ffffff</drawable>
     <drawable name="green">#009900</drawable>

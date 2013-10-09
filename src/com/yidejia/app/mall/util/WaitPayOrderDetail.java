@@ -72,6 +72,7 @@ public class WaitPayOrderDetail {
 		try {
 			map  = new HashMap<String, Float>();
 			ArrayList<Cart> mArrayList = order.getCartsArray();
+//			Log.i("info", mArrayList.size()+"   mArrayList");
 			for (int i = 0; i < mArrayList.size(); i++) {
 				setupShow();
 				Cart cart = mArrayList.get(i);
@@ -92,7 +93,7 @@ public class WaitPayOrderDetail {
 			}
 			map.put("price", sumPrice);
 			map.put("count", (float)sumCount);
-			Log.i("info", sumCount+"   sumprice");
+//			Log.i("info", sumCount+"   sumprice");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
