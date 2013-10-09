@@ -65,7 +65,7 @@ public class SearchDataUtil {
 	
 	private String getHttpAddress(String name, String fun, String brand, String price, String order1, String offset1, String limit1){
 		StringBuffer result = new StringBuffer();
-		result.append("http://192.168.1.254:802/?");
+//		result.append("http://192.168.1.254:802/?");
 		setKeysAndValues(name, fun, brand, price, order1, offset1, limit1);//"", "0", "1", "", "", "%2A"
 		result.append(HttpAddressParam.getHttpAddress(keys, values));
 		Log.i(TAG, result.toString());
