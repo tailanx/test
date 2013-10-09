@@ -25,9 +25,9 @@ public class HttpGetConn {
 //	public HttpGetConn(){
 //		
 //	}
-	
+	private String urlHost = "http://192.168.1.254:802/?";
 	public HttpGetConn(String urlString){
-		this.urlString = urlString;
+		this.urlString = urlHost + urlString;
 	}
 	
 	public String getJsonResult() throws IOException {
@@ -46,14 +46,14 @@ public class HttpGetConn {
 			HttpResponse httpResponse = httpClient.execute(httpRequst);
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				result = EntityUtils.toString(httpResponse.getEntity());
-//				Log.i(TAG, result);
+				Log.i(TAG, "返回码:"+httpResponse.getStatusLine().getStatusCode());
 //				count = 0;
 			} else if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_REQUEST_TIMEOUT ){
-				Log.i(TAG, "连接超时");
+				Log.i(TAG, "连接超时："+httpResponse.getStatusLine().getStatusCode());
 //				Toast.makeText(, text, duration)
 				return result;
 			} else {//连接失败
-				Log.i(TAG, "接收数据失败");
+				Log.i(TAG, "接收数据失败："+httpResponse.getStatusLine().getStatusCode());
 				return result;
 			}
 		} catch(ClientProtocolException e){

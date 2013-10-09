@@ -66,7 +66,7 @@ public class GetOrderList {
 	
 	private String getHttpAddress(String user_id, String code, String date, String status, String offset1, String limit1){
 		StringBuffer result = new StringBuffer();
-		result.append("http://192.168.1.254:802/?");
+//		result.append("http://192.168.1.254:802/?");
 		setKeysAndValues(user_id, code, date, status, offset1, limit1);//"", "0", "1", "", "", "%2A"
 		result.append(HttpAddressParam.getHttpAddress(keys, values));
 		Log.i(TAG, result.toString());
