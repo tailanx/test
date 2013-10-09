@@ -47,6 +47,8 @@ public class GoodsView {
 	private Activity activity;
 	
 	private String productId;//本商品id
+	private String userid;//本用户id
+	private boolean isLogin;//用户是否登录
 	
 	public GoodsView(Activity activity, View view, int width){
 		this.view = view;
@@ -54,6 +56,9 @@ public class GoodsView {
 		this.activity = activity; 
 		initDisplayImageOption();
 		Log.i("width", this.width+"");
+		MyApplication myApplication = new MyApplication();
+		userid = myApplication.getUserId();
+		isLogin = myApplication.getIsLogin();
 	}
 	
 	/**
@@ -126,7 +131,8 @@ public class GoodsView {
 				cart_num++;
 				setCartNum(cart_num);
 				CartsDataManage manage = new CartsDataManage();
-				manage.addCart(cart);
+				boolean state = manage.addCart(cart);
+				Log.i(GoodsView.class.getName(), "is add success?"+state);
 			}
 		});
 		//立即购买按钮
@@ -159,7 +165,19 @@ public class GoodsView {
 		//加入收藏按钮
 		add_favorites = (ImageView) view.findViewById(R.id.add_favorites);
 		add_favorites.setOnClickListener(addFavoriteListener);
+		//检查是否收藏并且设置收藏按钮的图片
+		FavoriteDataManage favoriteManage = new FavoriteDataManage(activity);
+		if(isLogin && !"".equals(userid)){
+			if(favoriteManage.checkExists(userid, productId)){
+				add_favorites.setBackgroundResource(R.drawable.add_favorites2);
+			} else {
+				add_favorites.setBackgroundResource(R.drawable.add_favorites1);
+			}
+		} else {
+			add_favorites.setBackgroundResource(R.drawable.add_favorites1);
+		}
 	}
+	
 	
 	
 	private ImageView add_favorites;//加入收藏的按钮
@@ -303,25 +321,36 @@ public class GoodsView {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			FavoriteDataManage manage = new FavoriteDataManage(activity);
-			MyApplication myApplication = new MyApplication();
-			String userId = myApplication.getUserId();
-			if (!"".equals(userId)) {
-				
-				boolean isSuccess = manage.addFavourite(userId, productId);
-				if (isSuccess) {
-					Toast.makeText(activity, "加入收藏成功!", Toast.LENGTH_SHORT)
-					.show();
+			if (isLogin && !"".equals(userid)) {
+				//登录状态下
+				if (!manage.checkExists(userid, productId)) {
+					//未收藏，现在添加收藏
+					if (manage.addFavourite(userid, productId)) {
+						//收藏成功
+//						Toast.makeText(activity, "加入收藏成功!", Toast.LENGTH_SHORT)
+//								.show();
+						add_favorites.setBackgroundResource(R.drawable.add_favorites2);
+					} else {
+//						Toast.makeText(activity, "抱歉！加入收藏失败。",
+//								Toast.LENGTH_SHORT).show();
+						add_favorites.setBackgroundResource(R.drawable.add_favorites1);
+					}
 				} else {
-					Toast.makeText(activity, "抱歉！加入收藏失败。",
-							Toast.LENGTH_SHORT).show();
+					//已收藏，现在删除收藏
+					if(manage.deleteFavourite(userid, productId)){
+						//删除成功
+						add_favorites.setBackgroundResource(R.drawable.add_favorites1);
+					} else {
+						//删除失败
+						add_favorites.setBackgroundResource(R.drawable.add_favorites2);
+					}
 				}
 			} else {
-				//收藏到本地
+				//未登录状态下，收藏到本地
+				//改变图片
+				flag = !flag;
+				changeFravoriteBg();
 			}
-			
-			//改变图片
-			flag = !flag;
-			changeFravoriteBg();
 		}
 	};
 	/**
