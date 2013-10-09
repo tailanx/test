@@ -63,7 +63,7 @@ public class CheckExistsFavorite {
 	
 	private String getHttpAddress(String userid, String goodsid){
 		StringBuffer result = new StringBuffer();
-		result.append("http://192.168.1.254:802/?");
+//		result.append("http://192.168.1.254:802/?");
 		setKeysAndValues(userid, goodsid);
 		result.append(HttpAddressParam.getHttpAddress(keys, values));
 		Log.i(TAG, result.toString());
@@ -83,8 +83,9 @@ public class CheckExistsFavorite {
 	 * @throws IOException
 	 */
 	public String httpResponse(String userid, String goodsid) throws IOException{
-//		getHttpAddress(userid, goodsid);
-		HttpGetConn conn = new HttpGetConn(getHttpAddress(userid, goodsid));
+		getHttpAddress(userid, goodsid);
+//		HttpGetConn conn = new HttpGetConn(getHttpAddress(userid, goodsid));
+		HttpPostConn conn = new HttpPostConn(urlString, keys, values);
 		result = conn.getJsonResult();
 		return result;
 	}

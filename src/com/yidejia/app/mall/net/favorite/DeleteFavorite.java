@@ -4,12 +4,9 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.http.conn.ConnectTimeoutException;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpPostConn;
@@ -20,8 +17,8 @@ import com.yidejia.app.mall.util.Md5;
  *
  */
 public class DeleteFavorite {
-	private String[] keys = new String[6];
-	private String[] values = new String[6];
+	private String[] keys = new String[7];
+	private String[] values = new String[7];
 	private String TAG = "DeleteFavorite";
 	private Context context;
 	private Map<String, String> httpAddressMap = new ConcurrentHashMap<String, String>();
@@ -30,24 +27,25 @@ public class DeleteFavorite {
 		this.context = context;
 	}
 	
-	private void setKeysAndValues(String id){
+	private void setKeysAndValues(String userid, String goodsid){
 		keys[0] = "api";
-		String api = "product.favoliten.delete";
+		String api = "product.favoliten.deleteByUg";
 		values[0] = api;
-		keys[1] = "id";
-		values[1] = id;
+		keys[1] = "userid";
+		values[1] = userid;
+		keys[2] = "goods_id";
+		values[2] = goodsid;
 		
-		
-		keys[2] = "key";
-		values[2] = "fw_mobile";
-		keys[3] = "format";
-		values[3] = "array";
-		keys[4] = "ts";
+		keys[3] = "key";
+		values[3] = "fw_mobile";
+		keys[4] = "format";
+		values[4] = "array";
+		keys[5] = "ts";
 		long time = System.currentTimeMillis();
 		String ts = String.valueOf(time/1000);
-		values[4] = ts;
+		values[5] = ts;
 		
-		keys[5] = "sign";
+		keys[6] = "sign";
 		StringBuffer strTemp = new StringBuffer();
 		strTemp.append("ChunTianfw_mobile123456");
 		strTemp.append(api);
@@ -56,13 +54,13 @@ public class DeleteFavorite {
 		String result = md.getMD5Str(strTemp.toString());
 		md = null;
         strTemp = null;
-		values[5] = result;
+		values[6] = result;
 	}
 	
-	private String getHttpAddress(String id){
+	private String getHttpAddress(String userid, String goodsid){
 		StringBuffer result = new StringBuffer();
 //		result.append("http://192.168.1.254:802/?");
-		setKeysAndValues(id);
+		setKeysAndValues(userid, goodsid);
 		result.append(HttpAddressParam.getHttpAddress(keys, values));
 		Log.i(TAG, result.toString());
 		for (int j = 0; j < keys.length; j++) {
@@ -79,8 +77,8 @@ public class DeleteFavorite {
 	 * @return
 	 * @throws IOException
 	 */
-	public String deleteFavorite(String id) throws IOException{
-		getHttpAddress(id);
+	public String deleteFavorite(String userid, String goodsid) throws IOException{
+		getHttpAddress(userid, goodsid);
 		HttpPostConn conn = new HttpPostConn(urlString, keys, values);
 		result = conn.getJsonResult();
 		return result;
