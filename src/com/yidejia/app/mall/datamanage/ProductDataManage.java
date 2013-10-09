@@ -95,7 +95,7 @@ public class ProductDataManage{  //implements CallBack
 					String responseString = object.getString("response");
 					Log.i(TAG, responseString);
 					analysisProductJson(responseString);
-					Thread.sleep(3000);
+//					Thread.sleep(3000);
 					return true;
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -177,41 +177,56 @@ public class ProductDataManage{  //implements CallBack
 	 * @param picString
 	 * @throws JSONException 
 	 */
-	private void analysisRecmJson(String picString, ArrayList<MainProduct> picList) throws JSONException{
-		JSONArray responseArray = new JSONArray(picString);
-		MainProduct baseProduct;
-		JSONObject itemObject;
-		int length = responseArray.length();
-		for (int i = 0; i < length; i++) {
-			baseProduct = new MainProduct();
-			itemObject = responseArray.getJSONObject(i);
-			String goodsId = itemObject.getString("goods_id");
-			baseProduct.setUId(goodsId);
-			String imgUrlTemp = itemObject.getString("imgname");
-			String imgUrl = ImageUrl.IMAGEURL + imgUrlTemp;
-			baseProduct.setImgUrl(imgUrl);
-			baseProduct.setPrice(itemObject.getString("price"));
-			baseProduct.setTitle(itemObject.getString("goods_name"));
-			picList.add(baseProduct);
+	private void analysisRecmJson(String picString, ArrayList<MainProduct> picList){
+		JSONArray responseArray;
+		try {
+			responseArray = new JSONArray(picString);
+			MainProduct baseProduct;
+			JSONObject itemObject;
+			int length = responseArray.length();
+			for (int i = 0; i < length; i++) {
+				baseProduct = new MainProduct();
+				itemObject = responseArray.getJSONObject(i);
+				String goodsId = itemObject.getString("goods_id");
+				baseProduct.setUId(goodsId);
+				String imgUrlTemp = itemObject.getString("imgname");
+				String imgUrl = ImageUrl.IMAGEURL + imgUrlTemp;
+				baseProduct.setImgUrl(imgUrl);
+				baseProduct.setPrice(itemObject.getString("price"));
+				baseProduct.setTitle(itemObject.getString("goods_name"));
+				picList.add(baseProduct);
+				Log.i(TAG, picList.getClass().getName());
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			Log.e(TAG, "analysis RecmJson json err");
+			e.printStackTrace();
 		}
-		Log.i(TAG, picList.getClass().getName());
 	}
 	
-	private String analysisPicJson(String picString, ArrayList<BaseProduct> picList) throws JSONException{
-		JSONObject responseArray = new JSONObject(picString);
-		String imageUrlString = responseArray.getString("imgname");
-		Log.i(TAG, imageUrlString);
-		BaseProduct baseProduct;
-		int length = responseArray.length();
-		for (int i = 0; i < length - 1; i++) {
-			baseProduct = new BaseProduct();
-			String itemsString = responseArray.getString(String.valueOf(i));
-			JSONObject itemObject = new JSONObject(itemsString);
-			String id = itemObject.getString("goods_id");
-			baseProduct.setUId(id);
-			String imgUrlTemp = ImageUrl.IMAGEURL + itemObject.getString("imgname");
-			baseProduct.setImgUrl(imgUrlTemp);
-			picList.add(baseProduct);
+	private String analysisPicJson(String picString, ArrayList<BaseProduct> picList) {
+		String imageUrlString = "";
+		JSONObject responseArray;
+		try {
+			responseArray = new JSONObject(picString);
+			imageUrlString = responseArray.getString("imgname");
+			Log.i(TAG, imageUrlString);
+			BaseProduct baseProduct;
+			int length = responseArray.length();
+			for (int i = 0; i < length - 1; i++) {
+				baseProduct = new BaseProduct();
+				String itemsString = responseArray.getString(String.valueOf(i));
+				JSONObject itemObject = new JSONObject(itemsString);
+				String id = itemObject.getString("goods_id");
+				baseProduct.setUId(id);
+				String imgUrlTemp = ImageUrl.IMAGEURL + itemObject.getString("imgname");
+				baseProduct.setImgUrl(imgUrlTemp);
+				picList.add(baseProduct);
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			Log.e(TAG, "analysis Pic json err");
+			e.printStackTrace();
 		}
 		return imageUrlString;
 	}

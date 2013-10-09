@@ -15,7 +15,7 @@
 	    android:layout_height="wrap_content"
 	    android:layout_centerHorizontal="true"
 	    android:background="@drawable/login_background"
-	    android:text="确         定"
+	    android:text="删除搜索历史"
 	    android:textColor="#eeeeee"
 	    android:layout_marginLeft="8dp"
 	    android:layout_marginTop="20dp"

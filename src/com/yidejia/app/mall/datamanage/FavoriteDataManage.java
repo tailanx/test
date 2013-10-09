@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.yidejia.app.mall.model.SearchItem;
 import com.yidejia.app.mall.net.ImageUrl;
+import com.yidejia.app.mall.net.favorite.CheckExistsFavorite;
 import com.yidejia.app.mall.net.favorite.DeleteFavorite;
 import com.yidejia.app.mall.net.favorite.GetFavoriteList;
 import com.yidejia.app.mall.net.favorite.SaveFavorite;
@@ -34,7 +35,10 @@ public class FavoriteDataManage {
 	private Context context ;
 	private String TAG = FavoriteDataManage.class.getName();
 	private UnicodeToString unicode;
-	
+	/**
+	 * {@link FavoriteDataManage}
+	 * @param context
+	 */
 	public FavoriteDataManage(Context context){
 		this.context = context;
 		unicode = new UnicodeToString();
@@ -48,7 +52,7 @@ public class FavoriteDataManage {
 	 * @param acount 获取个数
 	 * @return 返回被收藏列表，具体请看搜索模块的{@link SearchItem}
 	 */
-	public ArrayList<SearchItem> getFavouriteArray(int userId, int fromIndex, int acount){
+	public ArrayList<SearchItem> getFavouriteArray(String userId, int fromIndex, int acount){
 		TaskGetList taskGetList = new TaskGetList("userid="+userId, String.valueOf(fromIndex), String.valueOf(acount), "", "", "%2A");
 		boolean state = false ;
 		try {
@@ -75,7 +79,7 @@ public class FavoriteDataManage {
 	 * @param productId 商品id
 	 * @return 成功与否
 	 */
-	public boolean addFavourite(int userId, int productId){
+	public boolean addFavourite(String userId, String productId){
 		boolean isSuccess = false;
 		TaskSave taskSave = new TaskSave(userId, productId);
 		try {
@@ -104,9 +108,9 @@ public class FavoriteDataManage {
 	 * @param productId 商品id
 	 * @return 成功与否
 	 */
-	public boolean deleteFavourite(int userId, int productId){
+	public boolean deleteFavourite(String userId, String productId){
 		boolean isSuccess = false;
-		TaskDelete taskDelete = new TaskDelete(productId);
+		TaskDelete taskDelete = new TaskDelete(userId, productId);
 		try {
 			isSuccess = taskDelete.execute().get();
 		} catch (InterruptedException e) {
@@ -126,10 +130,10 @@ public class FavoriteDataManage {
 	}
 	
 	private class TaskDelete extends AsyncTask<Void, Void, Boolean>{
-//		int userId;
-		int productId;
-		public TaskDelete(int productId){//int userId,
-//			this.userId = userId;
+		String userId;
+		String productId;
+		public TaskDelete(String userId, String productId){
+			this.userId = userId;
 			this.productId = productId;
 		}
 		
@@ -137,9 +141,9 @@ public class FavoriteDataManage {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage("正在查询");
-			bar.show();
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage("正在查询");
+//			bar.show();
 		}
 		
 		@Override
@@ -147,7 +151,7 @@ public class FavoriteDataManage {
 			// TODO Auto-generated method stub
 			DeleteFavorite deleteFavorite = new DeleteFavorite(context);
 			try {
-				String httpResultString = deleteFavorite.deleteFavorite(String.valueOf(productId));///String.valueOf(userId), 
+				String httpResultString = deleteFavorite.deleteFavorite(userId, String.valueOf(productId));///String.valueOf(userId), 
 				
 				return analysicDeleteJson(httpResultString);
 			} catch (IOException e) {
@@ -167,11 +171,11 @@ public class FavoriteDataManage {
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			bar.dismiss();
+//			bar.dismiss();
 //			if(result)
 //				Toast.makeText(context, "成功", Toast.LENGTH_SHORT).show();
 		}
-		private ProgressDialog bar = new ProgressDialog(context);
+//		private ProgressDialog bar = new ProgressDialog(context);
 	}
 	
 	/**
@@ -208,11 +212,11 @@ public class FavoriteDataManage {
 	}
 	
 	private class TaskSave extends AsyncTask<Void, Void, Boolean>{
-//		private int userId;
-		private int productId;
+		private String userId;
+		private String productId;
 		
-		public TaskSave(int userId, int productId){
-//			this.userId = userId;
+		public TaskSave(String userId, String productId){
+			this.userId = userId;
 			this.productId = productId;
 		}
 		
@@ -220,9 +224,9 @@ public class FavoriteDataManage {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage("正在查询");
-			bar.show();
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage("正在查询");
+//			bar.show();
 		}
 		
 		@Override
@@ -230,7 +234,7 @@ public class FavoriteDataManage {
 			// TODO Auto-generated method stub
 			SaveFavorite saveFavorite = new SaveFavorite(context);
 			try {
-				String httpResultString = saveFavorite.saveFavorite(String.valueOf(productId));
+				String httpResultString = saveFavorite.saveFavorite(String.valueOf(userId), String.valueOf(productId));
 				
 				return analysicSaveJson(httpResultString);
 			} catch (IOException e) {
@@ -249,7 +253,7 @@ public class FavoriteDataManage {
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			bar.dismiss();
+//			bar.dismiss();
 //			if(result)
 //				Toast.makeText(context, "成功", Toast.LENGTH_SHORT).show();
 		}
@@ -273,6 +277,7 @@ public class FavoriteDataManage {
 		try {
 			httpResultObject = new JSONObject(resultJson);
 			int code = httpResultObject.getInt("code");
+			Log.i(TAG, "save code :" + code);
 			if (code == 1){
 //				favoriteId = httpResultObject.getInt("response");
 //				JSONObject responseJsonObject = new JSONObject(response);
@@ -407,5 +412,65 @@ public class FavoriteDataManage {
 			e.printStackTrace();
 		}
 		return favoriteArray;
+	}
+	/**
+	 * 检查客户是否收藏了某商品
+	 * @param userid
+	 * @param goodsid
+	 * @return true ? false
+	 */
+	public boolean checkExists(String userid, String goodsid){
+		boolean isExists = false;
+		try {
+			isExists = (new TaskCheck(userid, goodsid)).execute().get();
+			Log.i(TAG, "is exists?"+ isExists);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			Log.e(TAG, "check favorite exists interrupted ex");
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			Log.e(TAG, "check favorite exists ExecutionException ex");
+			e.printStackTrace();
+		}
+		return isExists;
+	}
+	
+	private class TaskCheck extends AsyncTask<Void, Void, Boolean>{
+		
+		private String userid;
+		private String goodsid;
+		
+		public TaskCheck(String userid, String goodsid){
+			this.userid = userid;
+			this.goodsid = goodsid;
+		}
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			CheckExistsFavorite check = new CheckExistsFavorite(context);
+			try {
+				String httpResponse = check.httpResponse(userid, goodsid);
+				Log.i(TAG, httpResponse);
+				JSONObject httpResponseoObject = new JSONObject(httpResponse);
+				int code = httpResponseoObject.getInt("code");
+				Log.i(TAG, "check exists code" + code);
+				if(code == 1) return true;
+				else {
+					return false;
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				Log.e(TAG, "check favorite exists task io ex");
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO: handle exception
+				Log.e(TAG, "check favorite exists task ex");
+				e.printStackTrace();
+			}
+			return false;
+		}
+		
 	}
 }

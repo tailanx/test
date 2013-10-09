@@ -63,7 +63,9 @@ public class AddressDataManage {
 			e.printStackTrace();
 		}
 		
-		if(!isSuccess){
+		if(!isSuccess && !isSaveSuccess){
+			Toast.makeText(context, isSuccessString, Toast.LENGTH_SHORT).show();
+		} else if(!isSuccess){
 			Toast.makeText(context, "网络不给力！", Toast.LENGTH_SHORT).show();
 		} else {
 			return recipient_id;
@@ -100,7 +102,9 @@ public class AddressDataManage {
 			Log.e(TAG, "updateAddress() ExecutionException");
 		}
 		
-		if(!isSuccess){
+		if(!isSuccess && !isSaveSuccess){
+			Toast.makeText(context, isSuccessString, Toast.LENGTH_SHORT).show();
+		} else if(!isSuccess){
 			Toast.makeText(context, "网络不给力！", Toast.LENGTH_SHORT).show();
 		}
 		
@@ -183,8 +187,8 @@ public class AddressDataManage {
 				JSONArray responseArray = new JSONArray(responseString);
 				int length = responseArray.length();
 				JSONObject addressItem ;
-				Addresses addresses = new Addresses();
 				for (int i = 0; i < length; i++) {
+					Addresses addresses = new Addresses();
 					addressItem = responseArray.getJSONObject(i);
 					String recipient_id = addressItem.getString("recipient_id");
 					addresses.setAddressId(recipient_id);
@@ -432,7 +436,15 @@ public class AddressDataManage {
 				JSONObject responseJsonObject = new JSONObject(response);
 				String temp = responseJsonObject.getString("@p_recipient_id");
 				recipient_id = Integer.parseInt(temp);
-				return true;
+				isSuccessString = responseJsonObject.getString("@p_result");
+				if("success成功".equals(unicode.revert(isSuccessString))){
+					isSaveSuccess = true;
+					return true;
+				}
+				else {
+					isSaveSuccess = false;
+					return false;
+				}
 			} else return false;
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -446,5 +458,11 @@ public class AddressDataManage {
 		}
 	}
 	
+	private boolean isSaveSuccess = true;
+	
+	private String isSuccessString = "";
+	public String getReason(){
+		return isSuccessString;
+	}
 	
 }

@@ -35,7 +35,7 @@ public class HotSellView {
 		TextView main_hot_sell_goods_title = (TextView) view.findViewById(R.id.main_hot_sell_goods_title);
 		main_hot_sell_goods_title.setText(hotsellProduct.getTitle());
 		TextView main_hot_sell_goods_details = (TextView) view.findViewById(R.id.main_hot_sell_goods_details);
-		main_hot_sell_goods_details.setText(hotsellProduct.getPrice());
+		main_hot_sell_goods_details.setText(hotsellProduct.getPrice()+"元");
 		ImageView main_hot_sell_left_image = (ImageView) view.findViewById(R.id.main_hot_sell_left_image);
 		String imageUrl = hotsellProduct.getImgUrl();
 		//添加图片
@@ -47,7 +47,7 @@ public class HotSellView {
 		TextView main_hot_sell_right_top_title = (TextView) view.findViewById(R.id.main_hot_sell_right_top_title);
 		main_hot_sell_right_top_title.setText(hotsellProduct.getTitle());
 		TextView main_hot_sell_right_top_price = (TextView) view.findViewById(R.id.main_hot_sell_right_top_price);
-		main_hot_sell_right_top_price.setText(hotsellProduct.getPrice());
+		main_hot_sell_right_top_price.setText(hotsellProduct.getPrice()+"元");
 		ImageView main_hot_sell_right_top_image = (ImageView) view.findViewById(R.id.main_hot_sell_right_top_image);
 		imageUrl = hotsellProduct.getImgUrl();
 		//添加图片
@@ -59,7 +59,7 @@ public class HotSellView {
 		TextView main_hot_sell_right_down_title = (TextView) view.findViewById(R.id.main_hot_sell_right_down_title);
 		main_hot_sell_right_down_title.setText(hotsellProduct.getTitle());
 		TextView main_hot_sell_right_down_price = (TextView) view.findViewById(R.id.main_hot_sell_right_down_price);
-		main_hot_sell_right_down_price.setText(hotsellProduct.getPrice());
+		main_hot_sell_right_down_price.setText(hotsellProduct.getPrice()+"元");
 		ImageView main_hot_sell_right_down_image = (ImageView) view.findViewById(R.id.main_hot_sell_right_down_image);
 		imageUrl = hotsellProduct.getImgUrl();
 		//添加图片
@@ -75,7 +75,7 @@ public class HotSellView {
 		main_acymei_goods_title.setText(acymerProduct.getTitle());
 		Log.i("MainPage+acymer", acymerProduct.getTitle());
 		TextView main_acymei_goods_details = (TextView) view.findViewById(R.id.main_acymei_goods_details);
-		main_acymei_goods_details.setText(acymerProduct.getPrice());
+		main_acymei_goods_details.setText(acymerProduct.getPrice()+"元");
 		ImageView main_acymei_left_image = (ImageView) view.findViewById(R.id.main_acymei_left_image);
 		String imageUrl = acymerProduct.getImgUrl();
 		//添加图片
@@ -87,7 +87,7 @@ public class HotSellView {
 		TextView main_acymei_right_top_title = (TextView) view.findViewById(R.id.main_acymei_right_top_title);
 		main_acymei_right_top_title.setText(acymerProduct.getTitle());
 		TextView main_acymei_right_top_price = (TextView) view.findViewById(R.id.main_acymei_right_top_price);
-		main_acymei_right_top_price.setText(acymerProduct.getPrice());
+		main_acymei_right_top_price.setText(acymerProduct.getPrice()+"元");
 		ImageView main_acymei_right_top_image = (ImageView) view.findViewById(R.id.main_acymei_right_top_image);
 		imageUrl = acymerProduct.getImgUrl();
 		//添加图片
@@ -99,7 +99,7 @@ public class HotSellView {
 		TextView main_acymei_right_down_title = (TextView) view.findViewById(R.id.main_acymei_right_down_title);
 		main_acymei_right_down_title.setText(acymerProduct.getTitle());
 		TextView main_acymei_right_down_price = (TextView) view.findViewById(R.id.main_acymei_right_down_price);
-		main_acymei_right_down_price.setText(acymerProduct.getPrice());
+		main_acymei_right_down_price.setText(acymerProduct.getPrice()+"元");
 		ImageView main_acymei_right_down_image = (ImageView) view.findViewById(R.id.main_acymei_right_down_image);
 		imageUrl = acymerProduct.getImgUrl();
 		//添加图片
@@ -115,7 +115,7 @@ public class HotSellView {
 		main_inerbty_top_left_name.setText(inerbtyProduct.getTitle());
 		Log.i("MainPage+inerbty", inerbtyProduct.getTitle());
 		TextView main_inerbty_top_left_price = (TextView) view.findViewById(R.id.main_inerbty_top_left_price);
-		main_inerbty_top_left_price.setText(inerbtyProduct.getPrice());
+		main_inerbty_top_left_price.setText(inerbtyProduct.getPrice()+"元");
 		ImageView main_inerbty_top_left_image = (ImageView) view.findViewById(R.id.main_inerbty_top_left_image);
 		String imageUrl = inerbtyProduct.getImgUrl();
 		//添加图片
@@ -127,7 +127,7 @@ public class HotSellView {
 		TextView main_inerbty_top_right_name = (TextView) view.findViewById(R.id.main_inerbty_top_right_name);
 		main_inerbty_top_right_name.setText(inerbtyProduct.getTitle());
 		TextView main_inerbty_top_right_price = (TextView) view.findViewById(R.id.main_inerbty_top_right_price);
-		main_inerbty_top_right_price.setText(inerbtyProduct.getPrice());
+		main_inerbty_top_right_price.setText(inerbtyProduct.getPrice()+"元");
 		ImageView main_inerbty_top_right_image = (ImageView) view.findViewById(R.id.main_inerbty_top_right_image);
 		imageUrl = inerbtyProduct.getImgUrl();
 		//添加图片
@@ -139,7 +139,7 @@ public class HotSellView {
 		TextView main_inerbty_mid_left_name = (TextView) view.findViewById(R.id.main_inerbty_mid_left_name);
 		main_inerbty_mid_left_name.setText(inerbtyProduct.getTitle());
 		TextView main_inerbty_mid_left_price = (TextView) view.findViewById(R.id.main_inerbty_mid_left_price);
-		main_inerbty_mid_left_price.setText(inerbtyProduct.getPrice());
+		main_inerbty_mid_left_price.setText(inerbtyProduct.getPrice()+"元");
 		ImageView main_inerbty_mid_left_image = (ImageView) view.findViewById(R.id.main_inerbty_mid_left_image);
 		imageUrl = inerbtyProduct.getImgUrl();
 		//添加图片
@@ -152,7 +152,7 @@ public class HotSellView {
 		main_inerbty_mid_right_name.setText(inerbtyProduct.getTitle());
 		Log.i("MainPage+inerbty", inerbtyProduct.getTitle());
 		TextView main_inerbty_mid_right_price = (TextView) view.findViewById(R.id.main_inerbty_mid_right_price);
-		main_inerbty_mid_right_price.setText(inerbtyProduct.getPrice());
+		main_inerbty_mid_right_price.setText(inerbtyProduct.getPrice()+"元");
 		ImageView main_inerbty_mid_right_image = (ImageView) view.findViewById(R.id.main_inerbty_mid_right_image);
 		imageUrl = inerbtyProduct.getImgUrl();
 		//添加图片
@@ -164,7 +164,7 @@ public class HotSellView {
 		TextView main_inerbty_down_left_name = (TextView) view.findViewById(R.id.main_inerbty_down_left_name);
 		main_inerbty_down_left_name.setText(inerbtyProduct.getTitle());
 		TextView main_inerbty_down_left_price = (TextView) view.findViewById(R.id.main_inerbty_down_left_price);
-		main_inerbty_down_left_price.setText(inerbtyProduct.getPrice());
+		main_inerbty_down_left_price.setText(inerbtyProduct.getPrice()+"元");
 		ImageView main_inerbty_down_left_image = (ImageView) view.findViewById(R.id.main_inerbty_down_left_image);
 		imageUrl = inerbtyProduct.getImgUrl();
 		//添加图片
@@ -176,7 +176,7 @@ public class HotSellView {
 		TextView main_inerbty_down_right_name = (TextView) view.findViewById(R.id.main_inerbty_down_right_name);
 		main_inerbty_down_right_name.setText(inerbtyProduct.getTitle());
 		TextView main_inerbty_down_right_price = (TextView) view.findViewById(R.id.main_inerbty_down_right_price);
-		main_inerbty_down_right_price.setText(inerbtyProduct.getPrice());
+		main_inerbty_down_right_price.setText(inerbtyProduct.getPrice()+"元");
 		ImageView main_inerbty_down_right_image = (ImageView) view.findViewById(R.id.main_inerbty_down_right_image);
 		imageUrl = inerbtyProduct.getImgUrl();
 		//添加图片

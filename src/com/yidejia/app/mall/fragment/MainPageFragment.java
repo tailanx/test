@@ -467,7 +467,7 @@ public class MainPageFragment extends SherlockFragment {
         	}
         }
     }
-    private int pageIndex = 0;
+//    private int pageIndex = 0;
 
     /** 
      * 滑动页面更改事件监听器
@@ -490,7 +490,7 @@ public class MainPageFragment extends SherlockFragment {
 //            mSlideLayout.setPageIndex(index);
 //            SlideImageAdapter slideImageAdapter = new SlideImageAdapter();
 //            slideImageAdapter.setPageIndex(index);
-            pageIndex = index;
+//            pageIndex = index;
             int length = mImageCircleViews.length;
             mImageCircleViews[index%length].setBackgroundResource(R.drawable.dot1);
             for (int i = 0; i < length; i++) {

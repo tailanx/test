@@ -46,7 +46,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 //			searchResults = manage.getSearchArray("", fun, "", "", "", "0", "1");
 //			if(searchResults.size() != 0){
 //			}
-			title = bundle.getString("fun");
+			title = bundle.getString("title");
 			setTitle(title);
 //			bundle.putString("order", "sells");
 		}
@@ -120,6 +120,16 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 			}
 		});
 		
+		ImageView actionbar_left = (ImageView) findViewById(R.id.actionbar_left);
+		actionbar_left.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				SearchResultActivity.this.finish();
+			}
+		});
+		
 		titleTextView = (TextView) findViewById(R.id.actionbar_title);
 	}
 	
@@ -145,7 +155,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 	private void setSlidingMenuConfig(){
 		// customize the SlidingMenu
 		SlidingMenu sm = getSlidingMenu();
-		sm.setShadowWidthRes(R.dimen.shadow_width);
+		sm.setShadowWidthRes(R.dimen.shadow_width);//设置侧滑的阴影宽度
 		sm.setShadowDrawable(R.drawable.shadow);
 		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
 		sm.setAboveOffset(R.dimen.above_offset);

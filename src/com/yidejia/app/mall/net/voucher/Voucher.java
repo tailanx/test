@@ -61,7 +61,7 @@ public class Voucher {
 	
 	private String getHttpAddress(String id){
 		StringBuffer result = new StringBuffer();
-		result.append("http://192.168.1.254:802/?");
+//		result.append("http://192.168.1.254:802/?");
 		setKeysAndValues(id);
 		result.append(HttpAddressParam.getHttpAddress(keys, values));
 		Log.i(TAG, result.toString());
@@ -76,10 +76,10 @@ public class Voucher {
 	/**
 	 * 
 	 * @param id
-	 * @return http address
+	 * @return http response string
 	 * @throws IOException
 	 */
-	public String getAddress(String id) throws IOException{
+	public String getResponse(String id) throws IOException{
 		getHttpAddress(id);
 		HttpPostConn conn = new HttpPostConn(urlString, keys, values);
 		result = conn.getJsonResult();
