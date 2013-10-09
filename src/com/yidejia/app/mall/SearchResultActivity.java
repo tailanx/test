@@ -155,7 +155,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 	private void setSlidingMenuConfig(){
 		// customize the SlidingMenu
 		SlidingMenu sm = getSlidingMenu();
-		sm.setShadowWidthRes(R.dimen.shadow_width);
+		sm.setShadowWidthRes(R.dimen.shadow_width);//设置侧滑的阴影宽度
 		sm.setShadowDrawable(R.drawable.shadow);
 		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
 		sm.setAboveOffset(R.dimen.above_offset);

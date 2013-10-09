@@ -23,7 +23,7 @@ public class MyApplication extends Application{
 		ImageLoader.getInstance().init(config);
 	}
 	
-	private boolean isLogin;
+	private boolean isLogin = true;
 	public void setIsLogin(boolean isLogin){
 		this.isLogin = isLogin;
 	}
@@ -32,12 +32,22 @@ public class MyApplication extends Application{
 		return isLogin;
 	}
 	
-	private String userId = "";
+	private String userId = "514492";
 	public void setUserId(String userId){
 		this.userId = userId;
 	}
 	
 	public String getUserId(){
 		return this.userId;
+	}
+	//搜索历史记录个数
+	private int schHstryAmount = 0;
+	
+	public int getSchHstryAmount(){
+		return schHstryAmount;
+	}
+	
+	public void setSchHstryAmount(int schHstryAmount){
+		this.schHstryAmount = schHstryAmount;
 	}
 }
