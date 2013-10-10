@@ -103,11 +103,12 @@ public class WaitPayOrderDetail {
 			ArrayList<Cart> mArrayList = order.getCartsArray();
 //			Log.i("info", mArrayList.size()+"   mArrayList");
 			for (int i = 0; i < mArrayList.size(); i++) {
-				 View view = inflater.inflate(R.layout.wait_deliver_item_produce, null);
-					RelativeLayout layout =  (RelativeLayout) view.findViewById(R.id.wait_pay_relative);
-					 ImageView head = (ImageView) view.findViewById(R.id.wait_deliver_item_image);
-					 TextView detail = (TextView) view.findViewById(R.id.wait_deliver_item_text);
-					 layout.setOnClickListener(new OnClickListener() {//添加点击事件
+				 View view = inflater.inflate(R.layout.wait_pay_item_produce, null);
+//					RelativeLayout layout =  (RelativeLayout) view.findViewById(R.id.wait_pay_relative);
+					 ImageView head = (ImageView) view.findViewById(R.id.wait_order_item_image);
+					 TextView detail = (TextView) view.findViewById(R.id.wait_order_item_text);
+					 RelativeLayout mlayout = (RelativeLayout) view.findViewById(R.id.wait_pay_relative1);
+					 mlayout.setOnClickListener(new OnClickListener() {//添加点击事件
 						
 						@Override
 						public void onClick(View v) {
@@ -116,8 +117,8 @@ public class WaitPayOrderDetail {
 							context.startActivity(intent);
 						}
 					});
-					TextView price = (TextView) view.findViewById(R.id.wait_deliver_item_sum_price);
-					TextView count = (TextView) view.findViewById(R.id.wait_deliver_item_count_detail);
+					TextView price = (TextView) view.findViewById(R.id.wait_order_item_sum_price);
+					TextView count = (TextView) view.findViewById(R.id.wait_order_item_count_detail);
 				Cart cart = mArrayList.get(i);
 				String urlString = cart.getImgUrl();
 				imageLoader.displayImage(urlString, head, options,

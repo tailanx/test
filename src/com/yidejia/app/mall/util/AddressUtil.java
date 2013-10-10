@@ -52,7 +52,6 @@ public class AddressUtil {
 	 */
 	public AddressUtil(Context context, LinearLayout linearLayout) {
 		this.context = context;
-		this.view = view;
 		this.linearLayout = linearLayout;
 		this.dataManage = dataManage;
 		this.inflater = LayoutInflater.from(context);
@@ -166,7 +165,7 @@ public class AddressUtil {
 					public void onClick(View v) {
 						boolean isDele = dataManage.deleteAddress(68298,
 								Integer.parseInt(addresses.getAddressId()));
-						
+						Log.i("info", isDele+"");
 					}
 				});
 				checkBox.setChecked(false);
@@ -209,11 +208,11 @@ public class AddressUtil {
 //				Log.i("info", addressesArray.size() + "+addressArray.size()");
 				 view = LayoutInflater.from(context).inflate(
 						R.layout.address_management_item, null);
-				 edit = (ImageView) view
-						.findViewById(R.id.address_management_item_relative1_textview2);
+//				 edit = (ImageView) view
+//						.findViewById(R.id.address_management_item_relative1_textview2);
 
-				delete = (ImageView) view
-						.findViewById(R.id.address_management_item_relative1_textview1);
+//				delete = (ImageView) view
+//						.findViewById(R.id.address_management_item_relative1_textview1);
 
 				areaTextView = (TextView) view
 						.findViewById(R.id.address_management_item_address1);
