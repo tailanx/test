@@ -24,11 +24,11 @@
         android:id="@+id/search_result_small_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center|left"
         android:layout_toLeftOf="@+id/search_result_small_arrow"
         android:layout_toRightOf="@+id/search_result_small_image"
-        android:layout_gravity="center|left"
-        android:gravity="center|left"
         android:ellipsize="end"
+        android:gravity="center|left"
         android:maxLines="2"
         android:text="妍诗美保湿蚕丝面膜25g*5/盒 保湿补水滋润美白淡斑"
         android:textSize="16sp" />

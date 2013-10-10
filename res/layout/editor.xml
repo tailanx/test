@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg" >
-<!-- 
+
+    <!--
     <RelativeLayout
         android:id="@+id/editor_relative1"
         android:layout_width="match_parent"
@@ -34,12 +35,12 @@
             android:textSize="24dp" />
     </RelativeLayout>
     android:layout_below="@id/editor_relative1"
- -->
+    -->
+
     <ScrollView
         android:id="@+id/edit_scrollView"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-         >
+        android:layout_height="wrap_content" >
 
         <LinearLayout
             android:id="@+id/edit_scrollView_linearlayout1"
@@ -54,7 +55,7 @@
                 android:id="@+id/editor_linearLayout1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-               android:background="@drawable/layout_selector1">
+                android:background="@drawable/layout_selector1" >
 
                 <TextView
                     android:id="@+id/editor_help"
@@ -65,7 +66,7 @@
                     android:text="帮助"
                     android:textSize="24dp" />
 
-                  <ImageView
+                <ImageView
                     android:id="@+id/main2_main2_linearlayout1_imageview2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -76,7 +77,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                 android:id="@+id/editor_linearLayout2"
+                android:id="@+id/editor_linearLayout2"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/layout_selector2" >
@@ -90,7 +91,7 @@
                     android:text="意见反馈"
                     android:textSize="24dp" />
 
-             <ImageView
+                <ImageView
                     android:id="@+id/main2_main2_linearlayout1_imageview2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -101,7 +102,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                 android:id="@+id/editor_linearLayout3"
+                android:id="@+id/editor_linearLayout3"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/layout_selector3" >
@@ -115,7 +116,7 @@
                     android:text="清空缓存"
                     android:textSize="24dp" />
 
-                 <ImageView
+                <ImageView
                     android:id="@+id/main2_main2_linearlayout1_imageview2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -141,7 +142,7 @@
                     android:text="关于伊的家商城"
                     android:textSize="24dp" />
 
-                 <ImageView
+                <ImageView
                     android:id="@+id/main2_main2_linearlayout1_imageview2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -152,10 +153,10 @@
             </RelativeLayout>
 
             <RelativeLayout
-                 android:id="@+id/editor_linearLayout5"
+                android:id="@+id/editor_linearLayout5"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-               android:background="@drawable/layout_selector2" >
+                android:background="@drawable/layout_selector2" >
 
                 <TextView
                     android:id="@+id/editor_hotline"
@@ -166,7 +167,7 @@
                     android:text="客服热线"
                     android:textSize="24dp" />
 
-               <ImageView
+                <ImageView
                     android:id="@+id/main2_main2_linearlayout1_imageview2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -175,12 +176,13 @@
                     android:padding="15dp"
                     android:src="@drawable/arrow" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/editor_linearLayout6"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-               android:background="@drawable/layout_selector2" >
+                android:background="@drawable/layout_selector2" >
 
                 <TextView
                     android:id="@+id/editor_recommended"
@@ -191,7 +193,7 @@
                     android:text="应用推荐"
                     android:textSize="24dp" />
 
-            <ImageView
+                <ImageView
                     android:id="@+id/main2_main2_linearlayout1_imageview2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

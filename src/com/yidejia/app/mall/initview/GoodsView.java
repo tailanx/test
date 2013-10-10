@@ -20,6 +20,8 @@ import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.MainProduct;
 import com.yidejia.app.mall.model.ProductBaseInfo;
+import com.yidejia.app.mall.util.Consts;
+import com.yidejia.app.mall.view.GoCartActivity;
 import com.yidejia.app.mall.view.PayActivity;
 
 import android.app.Activity;
@@ -43,6 +45,7 @@ import android.widget.Toast;
 public class GoodsView {
 	private View view;
 	private int width;
+	private CartsDataManage manage;
 	private int cart_num = 0;//购物车内商品个数
 	private Activity activity;
 	
@@ -67,6 +70,8 @@ public class GoodsView {
 	 */
 	public void initGoodsView(ProductBaseInfo info){
 		if(info == null) return;
+		manage = new CartsDataManage();
+		cart_num = manage.getCartAmount();
 		final Cart cart = new Cart();
 		cart.setSalledAmmount(1);
 		productId = info.getUId();
@@ -115,8 +120,8 @@ public class GoodsView {
 		addMatchImage(view, recommendArray);
 		//购物车个数
 		shopping_cart_button = (Button) view.findViewById(R.id.shopping_cart_button);
-		CartsDataManage cartsDataManage = new CartsDataManage();
-		cart_num = cartsDataManage.getCartAmount();
+//		CartsDataManage cartsDataManage = new CartsDataManage();
+		cart_num = manage.getCartAmount();
 		if(cart_num == 0){
 			shopping_cart_button.setVisibility(View.GONE);
 		} else {
@@ -130,9 +135,10 @@ public class GoodsView {
 				// TODO Auto-generated method stub
 				cart_num++;
 				setCartNum(cart_num);
-				CartsDataManage manage = new CartsDataManage();
-				boolean state = manage.addCart(cart);
-				Log.i(GoodsView.class.getName(), "is add success?"+state);
+				Intent  intent = new Intent(Consts.UPDATE_CHANGE);
+				activity.sendBroadcast(intent);
+				boolean istrue =  manage.addCart(cart);
+				Log.i("info", istrue+"   cart_num");
 			}
 		});
 		//立即购买按钮
@@ -145,6 +151,7 @@ public class GoodsView {
 				Bundle bundle = new Bundle();
 				intent.putExtras(bundle);
 				activity.startActivity(intent);
+				activity.finish();
 			}
 		});
 		//购物车按钮
@@ -155,7 +162,7 @@ public class GoodsView {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(activity, CartActivity.class);
+				Intent intent = new Intent(activity, GoCartActivity.class);
 				// Bundle bundle = new Bundle();
 				// intent.putExtras(bundle);
 				activity.startActivity(intent);

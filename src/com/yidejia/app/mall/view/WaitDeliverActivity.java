@@ -44,21 +44,21 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 	    private int position_three;
 	    private Resources resources;
 
-	    public void doClick(View v){
-	    	Intent intent = new Intent();
-			switch (v.getId()) {
-//			case R.id.wait_deliver_button1:
-//				Intent intent = new Intent(WaitDeliverActivity.this,MyMallActivity.class);
-//				startActivity(intent);
-//				//结束当前Activity；
-//				WaitDeliverActivity.this.finish();
+//	    public void doClick(View v){
+//	    	Intent intent = new Intent();
+//			switch (v.getId()) {
+////			case R.id.wait_deliver_button1:
+////				Intent intent = new Intent(WaitDeliverActivity.this,MyMallActivity.class);
+////				startActivity(intent);
+////				//结束当前Activity；
+////				WaitDeliverActivity.this.finish();
+////				break;
+//			case R.id.wait_deliver_item_exchange://退换货
+//				intent.setClass(this, ReturnActivity.class);
 //				break;
-			case R.id.wait_deliver_item_exchange://退换货
-				intent.setClass(this, ReturnActivity.class);
-				break;
-			}
-			startActivity(intent);
-		}
+//			}
+//			startActivity(intent);
+//		}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

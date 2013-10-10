@@ -32,7 +32,17 @@
         android:layout_below="@id/all_order_item_text"
         android:layout_marginLeft="8dp"
         android:layout_toRightOf="@id/all_order_item_image"
-        android:text="￥160.00"
+        android:text="￥"
+        android:textColor="#ed217c"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/all_order_item_sum_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/all_order_item_text"
+        android:layout_toRightOf="@id/all_order_item_sum"
+        android:text="160.0"
         android:textColor="#ed217c"
         android:textSize="15sp" />
 
@@ -42,8 +52,18 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/all_order_item_text"
         android:layout_marginLeft="12sp"
-        android:layout_toRightOf="@id/all_order_item_sum"
-        android:text="数量：x1"
+        android:layout_toRightOf="@id/all_order_item_sum_detail"
+        android:text="数量："
+        android:textColor="#ed217c"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/all_order_item_count_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/all_order_item_text"
+        android:layout_toRightOf="@id/all_order_item_count"
+        android:text="x1"
         android:textColor="#ed217c"
         android:textSize="15sp" />
 

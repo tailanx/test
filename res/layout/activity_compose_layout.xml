@@ -2,17 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    <ExpandableListView android:id="@+id/compose_exlist"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         ></ExpandableListView>
-	<RelativeLayout 
-         android:id="@+id/down_parent_layout"
-         android:layout_alignParentBottom="true"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:background="@drawable/main_downbg"
-         android:orientation="horizontal">
-         <include layout="@layout/main_down"/>
-     </RelativeLayout>
+
+    <ExpandableListView
+        android:id="@+id/compose_exlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ExpandableListView>
+
+    <RelativeLayout
+        android:id="@+id/down_parent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/main_downbg"
+        android:orientation="horizontal" >
+
+        <include layout="@layout/main_down" />
+    </RelativeLayout>
+
 </RelativeLayout>

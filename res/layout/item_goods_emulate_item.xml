@@ -1,62 +1,65 @@
-<?xml version="1.0" encoding="utf-8"?>   
- <RelativeLayout android:id="@+id/item_goods_emulate" 
-     xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_goods_emulate"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp" >
+
+    <RelativeLayout
+        android:id="@+id/emulate_user_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-     	android:layout_margin="3dp"
-        >
-        
-        <RelativeLayout android:id="@+id/emulate_user_layout"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="25dp"
-            android:background="@drawable/commentbg_up"
-            >
-            <TextView android:id="@+id/user_level"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="18dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:textSize="18sp"
-                android:text="VIP 5"
-                />
-            <TextView android:id="@+id/user_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="85dp"
-                android:layout_alignParentLeft="true"
-                android:layout_toLeftOf="@+id/user_level"
-                android:text="费大爷"
-                android:textSize="18sp"
-                android:layout_centerVertical="true"
-                />
-        </RelativeLayout>
-        <LinearLayout android:id="@+id/user_icon_bg"
-            android:layout_width="57dp"
-            android:layout_height="57dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/user_head_bg"
-            >
-            
-        <ImageView android:id="@+id/user_icon"
+        android:layout_height="40dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/commentbg_up" >
+
+        <TextView
+            android:id="@+id/user_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="18dp"
+            android:text="VIP 5"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="85dp"
+            android:layout_toLeftOf="@+id/user_level"
+            android:text="费大爷"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/user_icon_bg"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/user_head_bg" >
+
+        <ImageView
+            android:id="@+id/user_icon"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:src="@drawable/user_head"
-            />
-        </LinearLayout>
-        	<TextView android:id="@+id/emulate_text"
-        	    android:layout_below="@+id/emulate_user_layout"
-        	    android:layout_width="match_parent"
-        	    android:layout_height="wrap_content"
-        	    android:background="@drawable/commentbg_middle"
-        	    android:paddingLeft="10dp"
-        	    android:paddingTop="6dp"
-        	    android:paddingRight="10dp"
-        	    android:textSize="14sp"
-        	    android:text="产品评论主要显示用户对使用产品的评价信息，具体为卡片展示形式，显示用户头像、用户昵称、客户等级、评价内容、评分星级以及评论时间日期。"
-        	    />
-        	<!-- 
+            android:src="@drawable/user_head" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/emulate_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/emulate_user_layout"
+        android:background="@drawable/commentbg_middle"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="6dp"
+        android:text="产品评论主要显示用户对使用产品的评价信息，具体为卡片展示形式，显示用户头像、用户昵称、客户等级、评价内容、评分星级以及评论时间日期。"
+        android:textSize="14sp" />
+    <!--
         <ScrollView android:layout_below="@+id/emulate_user_layout"
             android:id="@+id/emulate_text_layout"
             android:layout_width="match_parent"
@@ -64,42 +67,47 @@
             <！这里原来是上面的textview >
             android:background="@drawable/commentbg_middle">
         </ScrollView>
-         -->
-        <RelativeLayout 
-            android:id="@+id/emulate_down"
-            android:layout_below="@+id/emulate_text"
-            android:layout_width="match_parent"
+    -->
+
+    <RelativeLayout
+        android:id="@+id/emulate_down"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/emulate_text"
+        android:background="@drawable/commentbg_down"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/emulate_grade"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/commentbg_down"
-            android:orientation="horizontal"
-            >
-            <TextView android:id="@+id/emulate_grade"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="评分"
-                android:layout_marginLeft="10dp"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center|left"
-                />
-            <LinearLayout android:id="@+id/emulate_grade_star"
-                android:layout_toRightOf="@+id/emulate_grade"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center|left"
-                android:layout_marginLeft="15dp"
-                android:orientation="horizontal"
-                ></LinearLayout>
-            <TextView android:id="@+id/emulate_user_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|right"
-                android:layout_marginRight="10dp"
-                android:gravity="right"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:text="2013-8-31"/>
-        </RelativeLayout>
+            android:layout_centerVertical="true"
+            android:layout_gravity="center|left"
+            android:layout_marginLeft="10dp"
+            android:text="评分"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/emulate_grade_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center|left"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/emulate_grade"
+            android:orientation="horizontal" >
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/emulate_user_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center|right"
+            android:layout_marginRight="10dp"
+            android:gravity="right"
+            android:text="2013-8-31" />
     </RelativeLayout>
 
+</RelativeLayout>

@@ -2,10 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-	
-    >
-    <!-- 
+    android:orientation="vertical" >
+
+    <!--
     <com.handmark.pulltorefresh.library.PullToRefreshScrollView
         xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/all_order_item_main_refresh_scrollview11"
@@ -16,119 +15,115 @@
         android:scrollbars="none"
         ptr:ptrAnimationStyle="flip"
         ptr:ptrMode="pullDownFromTop" >
-         -->
-        <LinearLayout 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" 
-	
-    >
-    <RelativeLayout 
-    android:background="@drawable/order_statusbg_top2"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <TextView 
-        android:paddingLeft="8dp"
-        android:id="@+id/address_management_item_address1"
-       
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="广东省广州市番禺区"
-        android:textSize="18sp"
-        />
-    <TextView 
-        android:id="@+id/address_management_item_address2"
-        android:paddingLeft="8dp"
-         android:layout_below="@id/address_management_item_address1"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:text="番禺大道北555号天安科技园总部中心大厦二号楼1903"
-        android:textSize="18sp"
-        />
-    	<TextView 
-                  android:id="@+id/address_name"
-    	   		  android:layout_below="@id/address_management_item_address2"
-    	          android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-    	          android:gravity="bottom"
-                  android:drawableLeft="@drawable/addressee_headicon"
-                  android:text="收货人："
-                  android:textSize="14sp"
-                  android:paddingLeft="8dp"
-                  />
-    	<TextView 
-    	          android:id="@+id/address_management_item_textview3"
-    	          android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_toRightOf="@id/address_name"
-                  android:layout_alignBaseline="@id/address_name"
-                  android:text="乔丹"
-                  android:textSize="14sp"/>
-        <TextView 
-        android:id="@+id/address_management_item_textview4"
-        android:layout_below="@id/address_management_item_address2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="186000000"
-        android:drawableLeft="@drawable/phone_iocn"
-        android:layout_alignParentRight="true"
-		android:gravity="bottom"
-        android:textSize="14sp"
-        android:layout_marginRight="8dp"
-        />
- 
+    -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/order_statusbg_top2" >
+
+            <TextView
+                android:id="@+id/address_management_item_address1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
+                android:text="广东省广州市番禺区"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/address_management_item_address2"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_below="@id/address_management_item_address1"
+                android:paddingLeft="8dp"
+                android:text="番禺大道北555号天安科技园总部中心大厦二号楼1903"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/address_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/address_management_item_address2"
+                android:drawableLeft="@drawable/addressee_headicon"
+                android:gravity="bottom"
+                android:paddingLeft="8dp"
+                android:text="收货人："
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/address_management_item_textview3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/address_name"
+                android:layout_toRightOf="@id/address_name"
+                android:text="乔丹"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/address_management_item_textview6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/address_management_item_address2"
+                android:layout_marginRight="8dp"
+                android:drawableLeft="@drawable/phone_iocn"
+                android:gravity="bottom"
+                android:text="186000000"
+                android:textSize="14sp" />
         </RelativeLayout>
-        <RelativeLayout 
-            android:layout_marginTop="1dp"
-            android:background="@drawable/order_statusbg_down"
+
+        <RelativeLayout
             android:id="@+id/address_management_item_relative1"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            >
-          
+            android:layout_marginTop="1dp"
+            android:background="@drawable/order_statusbg_down" >
 
-        <CheckBox
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="8dp"
-           	style="@style/CustomCheckboxTheme"
-            android:id="@+id/address_management_item_relative1_checkBox1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            
-             />
-        <ImageView 
-            android:id="@+id/address_management_item_relative1_textview1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/delete"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:layout_centerVertical="true"/>
-         <ImageView 
-            android:id="@+id/address_management_item_relative1_textview2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/address_edit"
-           	android:clickable="true"
-           	android:focusable="true"
-            android:layout_marginRight="10dp"
-           	android:layout_toLeftOf="@id/address_management_item_relative1_textview1"
-            android:layout_centerVertical="true"/>
+            <CheckBox
+                android:id="@+id/address_management_item_relative1_checkBox1"
+                style="@style/CustomCheckboxTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp" />
 
-         <TextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_centerVertical="true"
-             android:layout_marginLeft="5dp"
-             android:layout_toRightOf="@+id/address_management_item_relative1_checkBox1"
-             android:text="设为默认"
-             android:textSize="15sp" />
+            <ImageView
+                android:id="@+id/address_management_item_relative1_textview1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/delete" />
 
+            <ImageView
+                android:id="@+id/address_management_item_relative1_textview2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/address_management_item_relative1_textview1"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/address_edit" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/address_management_item_relative1_checkBox1"
+                android:text="设为默认"
+                android:textSize="15sp" />
         </RelativeLayout>
-        </LinearLayout>
-        <!-- 
-</com.handmark.pulltorefresh.library.PullToRefreshScrollView>
- -->
+    </LinearLayout>
+<!-- </com.handmark.pulltorefresh.library.PullToRefreshScrollView> -->
+
 </LinearLayout>

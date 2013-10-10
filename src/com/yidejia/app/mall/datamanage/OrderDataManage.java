@@ -226,7 +226,7 @@ public class OrderDataManage {
 	 * @param ship_entity_name
 	 *            配送中心
 	 * @param goods_qty_scr
-	 *            购买的字符串，格式“商品id,数量,是否积分兑换;”，如“11,5n”
+	 *            购买的字符串，格式“商品id,数量,是否积分兑换;”，如“11,5n;”
 	 * @param comments
 	 *            订单备注信息
 	 * @return boolean 提交订单成功与否

@@ -1,73 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
-    
+
     <string-array name="reason">
         <item>定货差错、重复定货  </item>
         <item>其他及不可控退货  </item>
         <item>新店首配、新品首配  </item>
         <item>邮报商品不适销 </item>
         <item>季节品落季  </item>
-        </string-array>
-        
+    </string-array>
     <string-array name="province">
-		<item>-省份-</item>
-		<item>河北省</item>
-		<item>山西省</item>
-		<item>北京市</item>
-		<item>北京市</item>
-		<item>北京市</item>
-		<item>北京市</item>
-		<item>北京市</item>
-		<item>北京市</item>
-		<item>北京市</item>
-		<item>北京市</item>
-		<item>北京市</item>
-		<item>北京市</item>
-		<item>北京市</item>
-		<item>北京市</item>
-		<item>北京市</item>
-		<item>北京市</item>
-		</string-array>
-		<string-array name="hb">
-		<item>-城市-</item>
-		<item>承德市</item>
-		<item>邯郸市</item>
-		<item>廊坊市</item>
-		</string-array>
-	<string-array name="bj">
-		<item>-城市-</item>
-		<item>海淀区</item>
-		<item>朝阳区</item>
-		<item>崇文区</item>
-		</string-array>
-	<string-array name="shx">
-		<item>-城市-</item>
-		<item>大同市</item>
-		<item>临汾市</item>
-		</string-array>
-  <string-array name="citydefault">
-		<item>-城市-</item>
-		<item>台湾</item>
-		<item>日本</item>
-		</string-array>
-<string-array name="option">
-		<item>功能意见</item>
-		<item>界面意见</item>
-		<item>新的需求</item>
-		<item>操纵意见</item>
-		<item>流量意见</item>
-		<item>其他</item>
-		</string-array>
-		
-<string-array name="check">
-		<item>功能意见</item>
-		<item>界面意见</item>
-		<item>新的需求</item>
-		<item>操纵意见</item>
-		<item>流量意见</item>
-		<item>其他</item>
-		</string-array>
-		
-		
-		</resources>
+        <item>-省份-</item>
+        <item>河北省</item>
+        <item>山西省</item>
+        <item>北京市</item>
+        <item>北京市</item>
+        <item>北京市</item>
+        <item>北京市</item>
+        <item>北京市</item>
+        <item>北京市</item>
+        <item>北京市</item>
+        <item>北京市</item>
+        <item>北京市</item>
+        <item>北京市</item>
+        <item>北京市</item>
+        <item>北京市</item>
+        <item>北京市</item>
+        <item>北京市</item>
+    </string-array>
+    <string-array name="hb">
+        <item>-城市-</item>
+        <item>承德市</item>
+        <item>邯郸市</item>
+        <item>廊坊市</item>
+    </string-array>
+    <string-array name="bj">
+        <item>-城市-</item>
+        <item>海淀区</item>
+        <item>朝阳区</item>
+        <item>崇文区</item>
+    </string-array>
+    <string-array name="shx">
+        <item>-城市-</item>
+        <item>大同市</item>
+        <item>临汾市</item>
+    </string-array>
+    <string-array name="citydefault">
+        <item>-城市-</item>
+        <item>台湾</item>
+        <item>日本</item>
+    </string-array>
+    <string-array name="option">
+        <item>功能意见</item>
+        <item>界面意见</item>
+        <item>新的需求</item>
+        <item>操纵意见</item>
+        <item>流量意见</item>
+        <item>其他</item>
+    </string-array>
+    <string-array name="check">
+        <item>功能意见</item>
+        <item>界面意见</item>
+        <item>新的需求</item>
+        <item>操纵意见</item>
+        <item>流量意见</item>
+        <item>其他</item>
+    </string-array>
+
+</resources>

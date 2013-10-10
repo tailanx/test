@@ -21,12 +21,22 @@
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/go_pay_show_pay_money"
+            android:id="@+id/go_pay_show_pay_money_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/go_pay_sum_money"
             android:layout_toRightOf="@+id/go_pay_sum_money"
-            android:text="￥14400.00"
+            android:text="￥"
+            android:textColor="#ed217c"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/go_pay_show_pay_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/go_pay_sum_money"
+            android:layout_toRightOf="@+id/go_pay_show_pay_money_price"
+            android:text="14400.00"
             android:textColor="#ed217c"
             android:textSize="15sp" />
 
@@ -114,6 +124,7 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/go_pay_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/delivery_address_down"
@@ -175,6 +186,7 @@
                 </LinearLayout>
 
                 <CheckBox
+                    android:id="@+id/zhifubao_checkbox"
                     style="@style/CustomCheckboxTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -218,6 +230,7 @@
                 </LinearLayout>
 
                 <CheckBox
+                    android:id="@+id/zhufubaowangye_checkbox"
                     style="@style/CustomCheckboxTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -261,6 +274,7 @@
                 </LinearLayout>
 
                 <CheckBox
+                    android:id="@+id/yinlian_checkbox"
                     style="@style/CustomCheckboxTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -304,6 +318,7 @@
                 </LinearLayout>
 
                 <CheckBox
+                    android:id="@+id/caifutong_checkbox"
                     style="@style/CustomCheckboxTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -343,7 +358,7 @@
                     android:layout_marginLeft="6dp"
                     android:layout_toRightOf="@id/go_pay_addresss"
                     android:text="广州配送中心"
-                    android:textSize="13dp" />
+                    android:textSize="20dp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -387,13 +402,24 @@
                     android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/go_pay_general_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@id/go_pay_pay_money"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_toRightOf="@id/go_pay_pay_money"
-                    android:text="10元"
+                    android:text=""
+                    android:textColor="#ed217c"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/go_pay_pay_money"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/go_pay_general_price"
+                    android:text="元"
                     android:textColor="#ed217c"
                     android:textSize="13sp" />
 
@@ -430,13 +456,24 @@
                     android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/go_pay_ems_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@id/go_pay_payEMS_money"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_toRightOf="@id/go_pay_payEMS_money"
-                    android:text="18元"
+                    android:text=""
+                    android:textColor="#ed217c"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/go_pay_payEMS_money"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/go_pay_ems_price"
+                    android:text="元"
                     android:textColor="#ed217c"
                     android:textSize="13sp" />
 
@@ -449,7 +486,7 @@
                     android:textSize="8sp" />
 
                 <CheckBox
-                    android:id="@+id/go_pay_check"
+                    android:id="@+id/go_pay_ems"
                     style="@style/CustomCheckboxTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -509,12 +546,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
-
-                <ListView
-                    android:id="@+id/go_pay_listview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
-                </ListView>
             </LinearLayout>
 
             <ScrollView

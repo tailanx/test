@@ -48,7 +48,7 @@ public class AllOrderActivity extends SherlockFragmentActivity  {
 	    private int position_three;
 	    private Resources resources;
 		private PullToRefreshScrollView mPullToRefreshScrollView;
-	
+
 		
 	    
 	    public void doClick(View v){

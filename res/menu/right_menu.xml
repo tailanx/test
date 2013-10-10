@@ -2,9 +2,9 @@
 
     <item
         android:id="@+id/right_menu"
+        android:icon="@drawable/right_icon"
         android:orderInCategory="100"
         android:showAsAction="always"
-        android:icon="@drawable/right_icon"
         android:title="right_menu"/>
 
 </menu>

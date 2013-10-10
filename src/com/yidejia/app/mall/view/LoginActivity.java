@@ -1,7 +1,12 @@
 package com.yidejia.app.mall.view;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,7 +17,10 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.yidejia.app.mall.MainActivity;
 import com.yidejia.app.mall.MainFragmentActivity;
+import com.yidejia.app.mall.MyApplication;
+import com.yidejia.app.mall.MyMallActivity;
 import com.yidejia.app.mall.R;
 
 public class LoginActivity extends SherlockFragment implements OnClickListener{
@@ -22,6 +30,9 @@ public class LoginActivity extends SherlockFragment implements OnClickListener{
 	private EditText stringName;
 	private EditText stringPassword;
 
+	
+	private MyMallActivity newFragment;
+	
 	private void doClick(View v){
 		switch (v.getId()) {
 		case R.id.login_edit://返回
@@ -70,7 +81,6 @@ public class LoginActivity extends SherlockFragment implements OnClickListener{
 //		setContentView(R.layout.my_mall_login);
 //		setupShow();
 //	}
-	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -94,9 +104,18 @@ public class LoginActivity extends SherlockFragment implements OnClickListener{
 		if(pwd==null||"".equals(pwd)){
 			Toast.makeText(getSherlockActivity(), "请输入用户名或者密码",Toast.LENGTH_LONG).show();
 		}
-		if(name.equals("aaa")&&pwd.equals("111")){
-//			Intent intent = new Intent(getSherlockActivity(),MyMallFragment.class);
-//			LoginActivity.this.startActivity(intent);
+		if(name.equals("aaa")&&pwd.equals("111")){   //登录成功
+			newFragment = new MyMallActivity();
+			((MyApplication)getSherlockActivity().getApplication()).setIsLogin(true);
+//			Log.i("info", myApplication.getIsLogin()+"");
+//			myApplication.setIsLogin(true);
+//			Log.i("info", myApplication.getIsLogin()+"");
+		FragmentTransaction ft = getFragmentManager().beginTransaction();
+	    ft.replace(R.id.main_fragment, newFragment).commit();
+//			Message ms = new Message();
+//			ms.what = 000;
+//			myApplication.getHandler().sendMessage(ms);
+		
 		}
  		}
 		

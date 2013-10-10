@@ -3,133 +3,139 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-     <ScrollView
 
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-
-        
-        >
+        android:layout_height="wrap_content" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-           
-            android:orientation="vertical"
-           
-            >
-             <TextView 
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="艾蒂妲帮助"
-        android:layout_gravity="center"
-        android:textSize="20sp"/>
-              <TextView 
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="一，注册流程"
-        android:textSize="20sp"/>
-              <TextView 
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="您只要通过 艾蒂妲商城注册开户，即可成为艾蒂妲商城会员进入 艾蒂妲商城网站后，点击页面右上方的“注册”，将弹出注册窗口，在相应提示处输入您的手机号码（ 艾蒂妲商城会自动默认登录账号等同于手机号码）、密码（密码设置不要过于简单）、确认密码、邮箱等信息，点击“获取手机验证码”获取验证信息，填入手机验证码，勾选用户服务协议后，点击“注册”即可。"
-        android:textSize="15sp"/>
-               <TextView 
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="二、商品评价"
-        android:textSize="20sp"/>
-               <TextView 
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="发布商品评价："
-        android:textSize="18sp"/>
-               <TextView 
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="为了保证评价的真实有效性，所以您只能对您购买的商品进行评价。“购买的商品”是指：您在艾蒂妲商城下单并支付成功，且在签收后7日后无退换货的商品，同一件商品只能评价一次，您可以对我们的配送、客户服务方面进行评价。 
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:text="艾蒂妲帮助"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:text="一，注册流程"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:text="您只要通过 艾蒂妲商城注册开户，即可成为艾蒂妲商城会员进入 艾蒂妲商城网站后，点击页面右上方的“注册”，将弹出注册窗口，在相应提示处输入您的手机号码（ 艾蒂妲商城会自动默认登录账号等同于手机号码）、密码（密码设置不要过于简单）、确认密码、邮箱等信息，点击“获取手机验证码”获取验证信息，填入手机验证码，勾选用户服务协议后，点击“注册”即可。"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:text="二、商品评价"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:text="发布商品评价："
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:text="为了保证评价的真实有效性，所以您只能对您购买的商品进行评价。“购买的商品”是指：您在艾蒂妲商城下单并支付成功，且在签收后7日后无退换货的商品，同一件商品只能评价一次，您可以对我们的配送、客户服务方面进行评价。 
         "
-        android:textSize="15sp"/>
-               <TextView 
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="等待评价审核： "
-        android:textSize="18sp"/>
-                 <TextView 
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="为了确保您的评价中没有违反国家相关规定的言辞出现，我们采用了人工审核的方式，包含以下内容的评价不予审核通过：  "
-        android:textSize="15sp"/>
-                 <TextView 
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1、含有反党、反社会、支持邪教的评价内容  "
-        android:textSize="15sp"/>
-                 <TextView 
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2、与商品无关的评价内容
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:text="等待评价审核： "
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:text="为了确保您的评价中没有违反国家相关规定的言辞出现，我们采用了人工审核的方式，包含以下内容的评价不予审核通过：  "
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:text="1、含有反党、反社会、支持邪教的评价内容  "
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:text="2、与商品无关的评价内容
   "
-        android:textSize="15sp"/>
-                 
-                            <TextView 
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="3、对商品和厂家进行无理谩骂和攻击的评价内容
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:text="3、对商品和厂家进行无理谩骂和攻击的评价内容
   "
-        android:textSize="15sp"/>
-                                              <TextView 
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="4、重复发表的灌水评价
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:text="4、重复发表的灌水评价
   "
-        android:textSize="15sp"/>
-                                                                <TextView 
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="5、评价中包含广告信息
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:text="5、评价中包含广告信息
   "
-        android:textSize="15sp"/>
-                            
-      </LinearLayout>
+                android:textSize="15sp" />
+        </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

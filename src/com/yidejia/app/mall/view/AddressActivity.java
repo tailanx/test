@@ -2,6 +2,8 @@ package com.yidejia.app.mall.view;
 
 import java.util.ArrayList;
 
+
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,66 +35,25 @@ public class AddressActivity extends SherlockActivity {
 	private String TAG = "AddressDataManage";//log
 	private ImageView deleteImageView;//删除
 	private ImageView editImageView;//编辑
-	private  CheckBox checkBox;//单选框
+	private CheckBox checkBox;//单选框
 	private LinearLayout layout;
+	private View view;
 	
 	private void setupShow(){
 		
 		try {
 			layout = (LinearLayout) findViewById(R.id.address_management_relative2);
 
-//			View person = getLayoutInflater().inflate(R.layout.address_management_item, null);
-//			areaTextView = (TextView) person.findViewById(R.id.address_management_item_address1);
-//			addressTextView = (TextView) person.findViewById(R.id.address_management_item_address2);
-//			nameTextView = (TextView) person.findViewById(R.id.address_management_item_textview3);
-//			numberTextView = (TextView) person.findViewById(R.id.address_management_item_textview4);
-//			deleteImageView = (ImageView)person.findViewById(R.id.address_management_item_relative1_textview1);
-//			editImageView = (ImageView)person.findViewById(R.id.address_management_item_relative1_textview2);
-//			checkBox = (CheckBox)person.findViewById(R.id.address_management_item_relative1_checkBox1);
-//			
-//			
-//			StringBuffer sb = new StringBuffer();
-//			if(addressesArray!=null)
-//			for(int i=0;i<addressesArray.size();i++){
-//				Addresses addresses = addressesArray.get(i);
-//				sb.append(addresses.getProvice());
-//				sb.append(addresses.getCity());
-//				sb.append(addresses.getArea());
-//				areaTextView.setText(sb.toString());
-//				addressTextView.setText(addresses.getAddress());
-//				nameTextView.setText(addresses.getName());
-//				numberTextView.setText(addresses.getPhone());
-//				
-//				deleteImageView.setOnClickListener(new OnClickListener() {
-//					
-//					@Override
-//					public void onClick(View arg0) {
-//						mangerAddressDataManage.deleteAddress(654321, 0);
-//					}
-//				});
-//				
-//				editImageView.setOnClickListener(new OnClickListener() {
-//					
-//					@Override
-//					public void onClick(View arg0) {
-//							Intent intent = new Intent(AddressActivity.this,EditNewAddressActivity.class);
-//							Bundle  bundle = new Bundle();
-//							String area = areaTextView.getText().toString();
-//							String name = nameTextView.getText().toString();
-//							String phone = numberTextView.getText().toString();
-//							String address = addressTextView.getTag().toString();
-//						    bundle.putString("area", area);
-//						    bundle.putString("name", name);
-//						    bundle.putString("phone", phone);
-//						    bundle.putString("address", address);
-//						    intent.putExtras(bundle);//放入bundle对象
-//						    
-//					}
-//				});
-//			}
-//			
-//			layout.addView(person);
-			new AddressUtil(AddressActivity.this,layout,mangerAddressDataManage).AllAddresses();
+
+//			deleteImageView = (ImageView)view.findViewById(R.id.address_management_item_relative1_textview1);
+//			editImageView = (ImageView)view.findViewById(R.id.address_management_item_relative1_textview2);
+//			checkBox = (CheckBox)view.findViewById(R.id.address_management_item_relative1_checkBox1);
+			
+//			deleteImageView.setOnClickListener(this);
+				
+			
+
+//			new AddressUtil(AddressActivity.this,layout).AllAddresses();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -106,10 +67,11 @@ public class AddressActivity extends SherlockActivity {
 		setActionbar();
 		//这里父布局要用scrollview
 		setContentView(R.layout.address_management);
-		mangerAddressDataManage = new AddressDataManage(this);
-	    addressesArray = mangerAddressDataManage.getAddressesArray(654321, 0, 10);
+//		mangerAddressDataManage = new AddressDataManage(this);
+//	    addressesArray = mangerAddressDataManage.getAddressesArray(654321, 0, 10);
+//	    addView = getLayoutInflater().inflate(R.layout.address_management_item, null);
 		setupShow();
-		
+		new AddressUtil(AddressActivity.this,layout).AllAddresses();
 		
 		
 	}
@@ -142,8 +104,7 @@ public class AddressActivity extends SherlockActivity {
 				// TODO Auto-generated method stub
 				Intent intent2 = new Intent(AddressActivity.this,NewAddressActivity.class);
 				startActivityForResult(intent2,DefinalDate.requestcode);//发送Intent,并设置请求码
-//				//结束当前Activity；
-//				AddressActivity.this.finish();
+
 			}
 		});
 		
@@ -152,34 +113,29 @@ public class AddressActivity extends SherlockActivity {
 	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if(requestCode == DefinalDate.requestcode && resultCode == DefinalDate.responcode ){
-			try {
-//				LinearLayout layout = (LinearLayout) findViewById(R.id.address_management_relative2);
+		try {
+			if(requestCode == DefinalDate.requestcode && resultCode == DefinalDate.responcode){
+				try {
+					new AddressUtil(AddressActivity.this, layout).addAddresses(data);
+					layout.invalidate();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					Toast.makeText(AddressActivity.this, "您的输入有问题", Toast.LENGTH_SHORT).show();
+				}
+				   
+				   
+				}else if(requestCode == DefinalDate.requestcode && resultCode == DefinalDate.responcode1){
+					new AddressUtil(AddressActivity.this, layout).updateAddresses(data);
+					layout.invalidate();
+				}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Toast.makeText(AddressActivity.this, "网络不给力！", Toast.LENGTH_SHORT).show();
 
-//				View person = getLayoutInflater().inflate(R.layout.address_management_item, null);
-//				areaTextView = (TextView) person.findViewById(R.id.address_management_item_address1);
-//				addressTextView = (TextView) person.findViewById(R.id.address_management_item_address2);
-//				nameTextView = (TextView) person.findViewById(R.id.address_management_item_textview3);
-//				numberTextView = (TextView) person.findViewById(R.id.address_management_item_textview4);
-//				//获取返回的数据
-//				Bundle bundle = data.getExtras();
-//				Addresses addresses = (Addresses) bundle.getSerializable("newaddress");
-//				Log.i("info", addresses.getName().toString());
-//				nameTextView.setText(addresses.getName());
-//				addressTextView.setText(addresses.getAddress());
-//				numberTextView.setText(addresses.getPhone());
-//				areaTextView.setText(addresses.getProvice()+addresses.getCity());
-//				layout.addView(person);
-				new AddressUtil(AddressActivity.this, layout,mangerAddressDataManage).addAddresses(data);
-				layout.invalidate();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				Toast.makeText(AddressActivity.this, "网络不给力！", Toast.LENGTH_SHORT).show();
-			}
-			   
-			   
-			}
+		}
 	}
-	
+
+
 }

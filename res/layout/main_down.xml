@@ -21,7 +21,6 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="2dp"
             android:clickable="false"
-            
             android:src="@drawable/home_hover" />
 
         <TextView
@@ -32,7 +31,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="0dp"
             android:text="@string/down_home_text"
-            android:textColor="#b4b4b4"
+            android:textColor="#ffffff"
             android:textSize="12sp" />
     </RelativeLayout>
 
@@ -53,8 +52,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="2dp"
             android:background="@drawable/down_guang_normal"
-            android:clickable="false"
-             />
+            android:clickable="false" />
 
         <TextView
             android:id="@+id/down_guang_text"
@@ -85,8 +83,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="2dp"
             android:background="@drawable/down_search_normal"
-            android:clickable="false"
-            />
+            android:clickable="false" />
 
         <TextView
             android:id="@+id/down_search_text"
@@ -109,7 +106,9 @@
         android:background="@drawable/downbg"
         android:clickable="true"
         android:focusable="true" >
-<!-- android:background="@drawable/frist_my_mall_realution" -->
+
+        <!-- android:background="@drawable/frist_my_mall_realution" -->
+
         <ImageView
             android:id="@+id/down_shopping_icon"
             android:layout_width="wrap_content"
@@ -117,8 +116,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="2dp"
             android:background="@drawable/down_shopping_normal"
-            android:clickable="false"
-             />
+            android:clickable="false" />
 
         <TextView
             android:id="@+id/down_shopping_text"
@@ -130,7 +128,7 @@
             android:text="@string/down_shopping_text"
             android:textColor="#b4b4b4"
             android:textSize="12sp" />
-<!-- 
+        <!--
         <com.yidejia.app.mall.widget.YLImageButton
             android:id="@+id/down_shopping_cart"
             android:layout_width="26dp"
@@ -140,19 +138,20 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:background="@drawable/shop_message" />
-             -->
+        -->
+
         <Button
             android:id="@+id/down_shopping_cart"
             android:layout_width="26dp"
             android:layout_height="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginRight="4dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:textSize="12sp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/shop_message"
             android:text="12"
             android:textColor="@color/white"
-            android:background="@drawable/shop_message" />
+            android:textSize="12sp" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -172,8 +171,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="2dp"
             android:background="@drawable/down_my_normal"
-            android:clickable="false"
-             />
+            android:clickable="false" />
 
         <TextView
             android:id="@+id/down_my_text"

@@ -8,6 +8,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import android.app.Application;
 
 public class MyApplication extends Application{
+	
 	@Override
 	public void onCreate() {
 		// TODO Auto-generated method stub
@@ -23,7 +24,7 @@ public class MyApplication extends Application{
 		ImageLoader.getInstance().init(config);
 	}
 	
-	private boolean isLogin = true;
+	private boolean isLogin;
 	public void setIsLogin(boolean isLogin){
 		this.isLogin = isLogin;
 	}
@@ -32,7 +33,7 @@ public class MyApplication extends Application{
 		return isLogin;
 	}
 	
-	private String userId = "514492";
+	private String userId;
 	public void setUserId(String userId){
 		this.userId = userId;
 	}
@@ -40,14 +41,15 @@ public class MyApplication extends Application{
 	public String getUserId(){
 		return this.userId;
 	}
-	//搜索历史记录个数
-	private int schHstryAmount = 0;
 	
-	public int getSchHstryAmount(){
+	// 搜索历史记录个数
+	private int schHstryAmount = 0;
+
+	public int getSchHstryAmount() {
 		return schHstryAmount;
 	}
-	
-	public void setSchHstryAmount(int schHstryAmount){
+
+	public void setSchHstryAmount(int schHstryAmount) {
 		this.schHstryAmount = schHstryAmount;
 	}
 }

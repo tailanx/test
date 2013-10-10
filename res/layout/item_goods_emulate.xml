@@ -8,11 +8,11 @@
     <com.handmark.pulltorefresh.library.PullToRefreshScrollView
         xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/item_goods_scrollView"
-        android:descendantFocusability="afterDescendants"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" 
+        android:layout_height="fill_parent"
+        android:descendantFocusability="afterDescendants"
         ptr:ptrAnimationStyle="flip"
-    	ptr:ptrMode="pullUpFromBottom">
+        ptr:ptrMode="pullUpFromBottom" >
 
         <LinearLayout
             android:id="@+id/item_goods_scrollView_linearlayout1"

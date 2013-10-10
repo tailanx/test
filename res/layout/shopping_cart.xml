@@ -3,7 +3,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg" >
 
-    
     <LinearLayout
         android:id="@+id/shopping_cart_sum"
         android:layout_width="fill_parent"
@@ -23,12 +22,22 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/shopping_cart_sum_money_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="2dp"
+            android:text="￥"
+            android:textColor="#ed217c"
+            android:textSize="14sp" />
+
+        <TextView
             android:id="@+id/shopping_cart_sum_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="2dp"
-            android:text="￥1470.00"
+            android:text="0.0"
             android:textColor="#ed217c"
             android:textSize="14sp" />
 
@@ -46,35 +55,27 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="2dp"
-            android:text="3"
+            android:text="0"
             android:textColor="#ed217c"
             android:textSize="16sp" />
     </LinearLayout>
 
     <ScrollView
-        android:id="@+id/shopping_cart_scrollView"
+        android:id="@+id/order_detail_scrollView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/shopping_cart_sum" >
+        android:layout_below="@id/shopping_cart_sum"
+        android:layout_marginBottom="5dp" >
 
         <LinearLayout
-            android:id="@+id/shopping_cart_scrollView_linearlayout1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/shopping_cart_relative2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/shopping_cart_sum"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="12dp"
             android:orientation="vertical" >
-
-            <RelativeLayout
-                android:id="@+id/shopping_cart_relative2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp" >
-
-                <ListView
-                    android:id="@+id/shopping_cart_listview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
-                </ListView>
-            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 

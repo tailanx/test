@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-<!-- 
+
+    <!--
     <RelativeLayout
         android:id="@+id/new_address_relative1"
         android:layout_width="match_parent"
@@ -22,33 +23,8 @@
             android:layout_marginLeft="10dp"
             android:background="@drawable/back1"
             android:onClick="doClick" />
+    -->
 
-        <TextView
-            android:id="@+id/new_address_textview1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:onClick="doClick"
-            android:text="新增收货地址"
-            android:textColor="#ffeeeeee"
-            android:textSize="24dp" />
-
-        <Button
-            android:id="@+id/new_address_button2"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/filter"
-            android:onClick="doClick"
-            android:text="完成"
-            android:textColor="#ffeeeeee" />
-    </RelativeLayout>
- -->
     <TableLayout
         android:id="@+id/new_address_tablelayout1"
         android:layout_width="match_parent"
@@ -77,9 +53,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:background="@null" 
-                android:singleLine="true"
-                android:maxLength="5"/>
+                android:background="@null"
+                android:maxLength="5"
+                android:singleLine="true" />
         </TableRow>
 
         <TableRow
@@ -91,8 +67,8 @@
                 android:id="@+id/new_address_item_textview2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
                 android:gravity="left"
                 android:text="手机号码："
                 android:textSize="15sp" />
@@ -102,10 +78,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-              
-                android:background="@null" 
-                android:singleLine="true"
-                android:phoneNumber="true"/>
+                android:background="@null"
+                android:phoneNumber="true"
+                android:singleLine="true" />
         </TableRow>
 
         <TableRow
@@ -117,33 +92,43 @@
                 android:id="@+id/new_address_item_textview3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="8dp"
                 android:gravity="left"
                 android:text="所在地区："
-                android:layout_gravity="center_vertical"
                 android:textSize="15sp" />
 
-          <RelativeLayout
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:layout_gravity="center_vertical"
-				>
-     	<Spinner
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:id="@+id/province"
-				android:background="@null"
-				
-				android:layout_centerVertical="true"
-				
-				/>
-		<Spinner
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_toRightOf="@id/province"
-				android:id="@+id/city"
-				android:background="@null"/>
-</RelativeLayout>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical" >
+
+                <Spinner
+                    android:id="@+id/province"
+                    android:layout_width="60sp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="省"
+                    android:textSize="15sp" />
+
+                <Spinner
+                    android:id="@+id/city"
+                    android:layout_width="60sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@id/province"
+                    android:text="市"
+                    android:textSize="15sp" />
+
+                <Spinner
+                    android:id="@+id/district"
+                    android:layout_width="60sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@id/city"
+                    android:text="区"
+                    android:textSize="15sp" />
+            </RelativeLayout>
         </TableRow>
 
         <TableRow
@@ -155,9 +140,9 @@
                 android:id="@+id/new_address_item_textview2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="8dp"
                 android:gravity="left"
-                android:layout_gravity="center_vertical"
                 android:text="详细地址："
                 android:textSize="15sp" />
 
@@ -165,9 +150,10 @@
                 android:id="@+id/new_address_item_edittext3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@null" 
                 android:layout_gravity="center_vertical"
-                android:singleLine="true"/>
+                android:background="@null"
+                android:singleLine="true"
+                android:textSize="13sp" />
         </TableRow>
     </TableLayout>
 

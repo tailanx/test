@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.view.AddressActivity;
 import com.yidejia.app.mall.view.AllOrderActivity;
 import com.yidejia.app.mall.view.AlreadyComActivity;
@@ -41,12 +42,14 @@ public class MyMallFragment extends SherlockFragment implements OnClickListener 
 	private RelativeLayout mMyCollect;
 	private RelativeLayout mAddressManagement;
 	private RelativeLayout mLayout11;
+	
 //	private TextView mTextView;
 	
 	private YLImageButton ylImageButton;
 
 	public void setupView(View view) {
 		// // //实例化组件
+	
 		personMessage = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout20);// 个人中心
 		personMessage.setOnClickListener(this);
 		mExchange = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout10);// 退换货
@@ -72,7 +75,7 @@ public class MyMallFragment extends SherlockFragment implements OnClickListener 
 		// 实例化组件
 		imageView = (ImageView) getSherlockActivity().findViewById(R.id.person_shopping_button1);
 //		mTextView = (TextView) getSherlockActivity().findViewById(R.id.my_shopping);// 我的商城
-		//
+
 		
 		ylImageButton = (YLImageButton) view.findViewById(R.id.main2_main2_linearlayout2_textview2);
 		ylImageButton.setText("1");

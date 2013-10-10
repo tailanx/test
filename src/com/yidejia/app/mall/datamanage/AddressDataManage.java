@@ -464,5 +464,11 @@ public class AddressDataManage {
 	public String getReason(){
 		return isSuccessString;
 	}
+	/**
+	 * ·µ»ØµØÖ·µÄid
+	 */
+	public int getAddressId(){
+		return recipient_id;
+	}
 	
 }

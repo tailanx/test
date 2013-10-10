@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:background="@drawable/topbg"
     android:orientation="horizontal" >
-    <!-- 
+
+    <!--
     <Button android:id="@+id/actionbar_left"
         android:layout_centerVertical="true"
         android:layout_width="wrap_content"
@@ -13,34 +14,37 @@
         android:background="@drawable/actionbar_selector"
         />
         android:background="@drawable/actionbar_selector"
-         -->
-    <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/actionbar_left"
-        android:layout_centerVertical="true"
+    -->
+
+    <com.yidejia.app.mall.widget.YLImageButton
+        android:id="@+id/actionbar_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"
         android:layout_marginBottom="6dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="6dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/filter"
         android:background="#00000000"
-        />
-    <TextView android:id="@+id/actionbar_title"
+        android:scaleType="centerInside"
+        android:src="@drawable/filter" />
+
+    <TextView
+        android:id="@+id/actionbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="common title"
-        android:textSize="20sp"
         android:textColor="@color/white"
-        />
-    <Button android:id="@+id/actionbar_right"
-        android:layout_alignParentRight="true"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/actionbar_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:background="@drawable/actionbar_filter_selector"
-        android:text="sss"
-        />
+        android:text="sss" />
 
 </RelativeLayout>

@@ -3,16 +3,17 @@
     android:id="@+id/main_parent_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    <RelativeLayout 
-         android:id="@+id/down_parent_layout"
-         android:layout_alignParentBottom="true"
-         android:layout_width="match_parent"
-         android:layout_height="52dp"
-        
-         android:orientation="horizontal">
-         <include layout="@layout/main_down"/>
-     </RelativeLayout>
-     <!-- 
+
+    <RelativeLayout
+        android:id="@+id/down_parent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <include layout="@layout/main_down" />
+    </RelativeLayout>
+    <!--
      <android.support.v4.view.ViewPager
          android:id="@+id/main_act_pager"
             android:layout_width="match_parent"
@@ -20,14 +21,14 @@
             android:layout_above="@+id/down_parent_layout"
             android:layout_alignParentTop="true"
          ></android.support.v4.view.ViewPager>
-	 -->
+    -->
 
-	 <FrameLayout
-	     android:id="@+id/main_fragment"
-	     android:layout_width="match_parent"
-	     android:layout_height="match_parent"
-	     android:layout_above="@+id/down_parent_layout"
-	     android:layout_alignParentTop="true" >
-	 </FrameLayout>
+    <FrameLayout
+        android:id="@+id/main_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/down_parent_layout"
+        android:layout_alignParentTop="true" >
+    </FrameLayout>
 
 </RelativeLayout>
