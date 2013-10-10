@@ -156,7 +156,7 @@
                 android:layout_gravity="center_vertical"
                 android:background="@null"
                 android:textSize="13sp"
-                android:singleLine="true" />
+                android:lines="2" />
         </TableRow>
     </TableLayout>
 
