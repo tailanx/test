@@ -15,14 +15,13 @@
         android:layout_alignParentLeft="true"
         />
         android:layout_below="@id/main2_main2_top"
-        -->
+    -->
 
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/main2_main2_bottom"
-        
         android:scrollbars="none" >
 
         <LinearLayout
@@ -42,10 +41,9 @@
                     android:id="@+id/person_shopping_image_person"
                     android:layout_width="110dp"
                     android:layout_height="110dp"
-                    android:layout_marginTop="40dp"
                     android:layout_marginLeft="12dp"
+                    android:layout_marginTop="40dp"
                     android:background="@drawable/user_head_bg"
-                    
                     android:padding="8dp"
                     android:src="@drawable/user_head" />
 
@@ -90,40 +88,36 @@
                     android:text="15"
                     android:textColor="#FFeeeeee"
                     android:textSize="14dp" />
-                <RelativeLayout 
+
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/person_shopping_image_person"
-                    android:layout_marginLeft="15dp"
                     android:layout_above="@id/integration"
                     android:layout_marginBottom="6dp"
-                    
-                    >
-
-                <TextView
-                    android:id="@+id/person_shopping_person_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    
-                    style="@style/StyleBarTitle"
-                    
-                    android:shadowRadius="6.0"
-                    android:text="Ethanisme"
-                    android:textColor="#FFeeeeee"
-                    android:textSize="20dp" />
-
-                <TextView
-                     style="@style/StyleBarTitle"
-               
-                    android:id="@+id/person_shopping_person_vip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_marginLeft="15dp"
-                    android:layout_toRightOf="@id/person_shopping_person_name"
-                    android:text="VIP5"
-                    android:textColor="#FFeeeeee"
-                    android:textSize="21dp" />
+                    android:layout_toRightOf="@id/person_shopping_image_person" >
+
+                    <TextView
+                        android:id="@+id/person_shopping_person_name"
+                        style="@style/StyleBarTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:shadowRadius="6.0"
+                        android:text="Ethanisme"
+                        android:textColor="#FFeeeeee"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/person_shopping_person_vip"
+                        style="@style/StyleBarTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toRightOf="@id/person_shopping_person_name"
+                        android:text="VIP5"
+                        android:textColor="#FFeeeeee"
+                        android:textSize="21dp" />
                 </RelativeLayout>
             </RelativeLayout>
 
@@ -165,9 +159,9 @@
                     android:layout_centerVertical="true"
                     android:padding="15dp"
                     android:src="@drawable/arrow" />
-               
 
-     <!--            <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview1"
+                <!--
+                     <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview1"
                          android:background="@drawable/message_bg"
                           android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -176,7 +170,7 @@
                     android:layout_toLeftOf="@id/main2_main2_linearlayout1_imageview2"
                     
                          />
-                         -->
+                -->
             </RelativeLayout>
 
             <RelativeLayout
@@ -215,8 +209,7 @@
                     android:layout_centerVertical="true"
                     android:padding="15dp"
                     android:src="@drawable/arrow" />
-                <!-- 
-
+                <!--
                 <TextView
                     android:id="@+id/main2_main2_linearlayout2_textview2"
                     android:layout_width="wrap_content"
@@ -230,16 +223,16 @@
                     android:textColor="#FFeeeeee"
                     android:textSize="20dp"
                     android:visibility="visible" />
-                     -->
-                     <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview2"
-                         android:background="@drawable/message_bg"
-                          android:layout_width="wrap_content"
+                -->
+
+                <com.yidejia.app.mall.widget.YLImageButton
+                    android:id="@+id/main2_main2_linearlayout2_textview2"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@id/main2_main2_linearlayout2_imageview2"
-                    
-                         />
+                    android:background="@drawable/message_bg" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -279,7 +272,8 @@
                     android:padding="15dp"
                     android:src="@drawable/arrow" />
 
-   <!--           <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview3"
+                <!--
+                  <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview3"
                          android:background="@drawable/message_bg"
                           android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -288,7 +282,8 @@
                     android:layout_toLeftOf="@id/main2_main2_linearlayout6_imageview2"
                     
                          />
-                         -->  --> 
+                -->
+  --> 
             </RelativeLayout>
 
             <RelativeLayout
@@ -330,7 +325,8 @@
                     android:padding="15dp"
                     android:src="@drawable/arrow" />
 
-      <!--        <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview4"
+                <!--
+                  <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview4"
                          android:background="@drawable/message_bg"
                           android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -339,7 +335,7 @@
                     android:layout_toLeftOf="@id/main2_main2_linearlayout4_imageview2"
                     
                          />
-                          --> 
+                -->
             </RelativeLayout>
 
             <RelativeLayout
@@ -379,7 +375,8 @@
                     android:padding="15dp"
                     android:src="@drawable/arrow" />
 
-      <!--       <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview5"
+                <!--
+                 <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview5"
                          android:background="@drawable/message_bg"
                           android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -388,7 +385,7 @@
                     android:layout_toLeftOf="@id/main2_main2_linearlayout3_imageview2"
                     
                          />
-                --> 
+                -->
             </RelativeLayout>
 
             <RelativeLayout
@@ -430,7 +427,8 @@
                     android:layout_centerVertical="true"
                     android:padding="15dp"
                     android:src="@drawable/arrow" />
-<!--   <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview6"
+                <!--
+       <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview6"
                          android:background="@drawable/message_bg"
                           android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -438,7 +436,8 @@
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@id/main2_main2_linearlayout5_imageview2"
                     
-                         />-->
+                         />
+                -->
             </RelativeLayout>
 
             <RelativeLayout
@@ -478,7 +477,8 @@
                     android:padding="15dp"
                     android:src="@drawable/arrow" />
 
-          <!--       <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview7"
+                <!--
+                     <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview7"
                          android:background="@drawable/message_bg"
                           android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -486,7 +486,8 @@
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@id/main2_main2_linearlayout7_imageview2"
                     
-                         />-->
+                         />
+                -->
             </RelativeLayout>
 
             <RelativeLayout
@@ -530,15 +531,14 @@
                     android:padding="15dp"
                     android:src="@drawable/arrow" />
 
- <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview8"
-                         android:background="@drawable/message_bg"
-                          android:layout_width="wrap_content"
+                <com.yidejia.app.mall.widget.YLImageButton
+                    android:id="@+id/main2_main2_linearlayout2_textview8"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@id/main2_main2_linearlayout8_imageview2"
-                    
-                         />
+                    android:background="@drawable/message_bg" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -578,7 +578,8 @@
                     android:padding="15dp"
                     android:src="@drawable/arrow" />
 
-     <!--    <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview9"
+                <!--
+             <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview9"
                          android:background="@drawable/message_bg"
                           android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -586,7 +587,8 @@
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@id/main2_main2_linearlayout9_imageview2"
                     
-                         />  --> 
+                         />
+                -->
             </RelativeLayout>
 
             <RelativeLayout
@@ -628,7 +630,8 @@
                     android:padding="15dp"
                     android:src="@drawable/arrow" />
 
-          <!--      <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview10"
+                <!--
+                    <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview10"
                          android:background="@drawable/message_bg"
                           android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -636,7 +639,8 @@
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@id/main2_main2_linearlayout10_imageview2"
                     
-                         />-->
+                         />
+                -->
             </RelativeLayout>
 
             <RelativeLayout
@@ -676,7 +680,8 @@
                     android:padding="15dp"
                     android:src="@drawable/arrow" />
 
-    <!--         <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview11"
+                <!--
+                 <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview11"
                          android:background="@drawable/message_bg"
                           android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -684,7 +689,8 @@
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@id/main2_main2_linearlayout11_imageview2"
                     
-                         /> -->
+                         />
+                -->
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

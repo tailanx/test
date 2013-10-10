@@ -66,7 +66,7 @@ public class GetExpressList {
 	
 	private String getHttpAddress(String where, String offset, String limit, String group, String order, String fields){
 		StringBuffer result = new StringBuffer();
-		result.append("http://192.168.1.254:802/?");
+//		result.append("http://192.168.1.254:802/?");
 		setKeysAndValues(where, offset, limit, group, order, fields);//"", "0", "1", "", "", "%2A"
 		result.append(HttpAddressParam.getHttpAddress(keys, values));
 		Log.i(TAG, result.toString());

@@ -45,7 +45,7 @@ public class BrandDataUtil {
 	
 	private String getHttpAddress(){
 		StringBuffer result = new StringBuffer();
-		result.append("http://192.168.1.254:802/?");
+//		result.append("http://192.168.1.254:802/?");
 		setKeysAndValues();
 		result.append(HttpAddressParam.getHttpAddress(keys, values));
 		Log.i(TAG, result.toString());

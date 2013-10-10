@@ -1,105 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
-              android:layout_width="match_parent"
-              android:baselineAligned="false"
-              android:layout_height="wrap_content">
-<RelativeLayout android:id="@+id/search_result_lg_layout_left"
-    		  android:padding="2dp"
-              android:orientation="vertical"
-              android:layout_width="0dp"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:background="@drawable/product_image_bg2"
-              >
-    <ImageView android:id="@+id/search_result_lg_image_left"
-               android:src="@drawable/product_photo"
-               android:layout_width="match_parent"
-               android:layout_height="160dp"
-               android:layout_centerHorizontal="true"
-               />
-    <TextView android:id="@+id/search_result_lg_title_left"
-              android:layout_height="wrap_content"
-              android:layout_width="wrap_content"
-              android:text="YS06 胶原蛋白粉"
-              android:ellipsize="end"
-              android:maxLines="1"
-              android:layout_marginLeft="5dp"
-              android:layout_alignLeft="@+id/search_result_lg_image_left"
-              android:layout_below="@+id/search_result_lg_image_left"
-              android:textSize="16sp"
-              />
-    <TextView android:id="@+id/search_result_lg_sell_left"
-              android:layout_height="wrap_content"
-              android:layout_width="wrap_content"
-              android:layout_alignLeft="@+id/search_result_lg_title_left"
-              android:layout_below="@+id/search_result_lg_title_left"
-              android:text="已售："/>
-    <TextView android:id="@+id/search_result_lg_sell_num_left"
-              android:layout_height="wrap_content"
-              android:layout_width="wrap_content"
-              android:layout_toRightOf="@+id/search_result_lg_sell_left"
-              android:layout_below="@+id/search_result_lg_title_left"
-              android:text="1280"
-              />
-    <TextView android:id="@+id/search_result_lg_price_left"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_alignRight="@+id/search_result_lg_image_left"
-              android:layout_marginRight="5dp"
-              android:text="$468.00"
-              android:textColor="@color/price_color"
-              android:textSize="18sp"
-              android:layout_below="@+id/search_result_lg_title_left"
-              />
-</RelativeLayout>
-<RelativeLayout android:id="@+id/search_result_lg_layout_right"
-    		  android:padding="2dp"
-              android:orientation="vertical"
-              android:layout_width="0dp"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:background="@drawable/product_image_bg2"
-              >
-    <ImageView android:id="@+id/search_result_lg_image_right"
-               android:src="@drawable/product_photo"
-               android:layout_width="match_parent"
-               android:layout_height="160dp"
-               android:layout_centerHorizontal="true"
-               />
-    <TextView android:id="@+id/search_result_lg_title_right"
-              android:layout_height="wrap_content"
-              android:layout_width="wrap_content"
-              android:text="YS06 胶原蛋白粉"
-              android:ellipsize="end"
-              android:maxLines="1"
-              android:layout_marginLeft="5dp"
-              android:layout_alignLeft="@+id/search_result_lg_image_right"
-              android:layout_below="@+id/search_result_lg_image_right"
-              android:textSize="16sp"
-              />
-    <TextView android:id="@+id/search_result_lg_sell_right"
-              android:layout_height="wrap_content"
-              android:layout_width="wrap_content"
-              android:layout_alignLeft="@+id/search_result_lg_title_right"
-              android:layout_below="@+id/search_result_lg_title_right"
-              android:text="已售："/>
-    <TextView android:id="@+id/search_result_lg_sell_num_right"
-              android:layout_height="wrap_content"
-              android:layout_width="wrap_content"
-              android:layout_toRightOf="@+id/search_result_lg_sell_right"
-              android:layout_below="@+id/search_result_lg_title_right"
-              android:text="1280"
-              />
-    <TextView android:id="@+id/search_result_lg_price_right"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_alignRight="@+id/search_result_lg_image_right"
-              android:text="$468.00"
-              android:layout_marginRight="5dp"
-              android:textColor="@color/price_color"
-              android:textSize="18sp"
-              android:layout_below="@+id/search_result_lg_title_right"
-              />
-</RelativeLayout>
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:orientation="horizontal" >
+
+    <RelativeLayout
+        android:id="@+id/search_result_lg_layout_left"
+        android:layout_width="0dp"
+        android:layout_height="210dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_weight="1"
+        android:background="@drawable/product_image_bg2"
+        android:orientation="vertical"
+        android:padding="2dp" >
+
+        <ImageView
+            android:id="@+id/search_result_lg_image_left"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:src="@drawable/product_photo" />
+
+        <TextView
+            android:id="@+id/search_result_lg_title_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/search_result_lg_image_left"
+            android:layout_below="@+id/search_result_lg_image_left"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="YS06 胶原蛋白粉"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/search_result_lg_sell_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/search_result_lg_title_left"
+            android:layout_below="@+id/search_result_lg_title_left"
+            android:text="已售：" />
+
+        <TextView
+            android:id="@+id/search_result_lg_sell_num_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/search_result_lg_title_left"
+            android:layout_toRightOf="@+id/search_result_lg_sell_left"
+            android:text="1280" />
+
+        <TextView
+            android:id="@+id/search_result_lg_price_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/search_result_lg_image_left"
+            android:layout_below="@+id/search_result_lg_title_left"
+            android:text="$468.00"
+            android:textColor="@color/price_color"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/search_result_lg_layout_right"
+        android:layout_width="0dp"
+        android:layout_height="210dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_weight="1"
+        android:background="@drawable/product_image_bg2"
+        android:orientation="vertical"
+        android:padding="2dp" >
+
+        <ImageView
+            android:id="@+id/search_result_lg_image_right"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:src="@drawable/product_photo" />
+
+        <TextView
+            android:id="@+id/search_result_lg_title_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/search_result_lg_image_right"
+            android:layout_below="@+id/search_result_lg_image_right"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="YS06 胶原蛋白粉"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/search_result_lg_sell_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/search_result_lg_title_right"
+            android:layout_below="@+id/search_result_lg_title_right"
+            android:text="已售：" />
+
+        <TextView
+            android:id="@+id/search_result_lg_sell_num_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/search_result_lg_title_right"
+            android:layout_toRightOf="@+id/search_result_lg_sell_right"
+            android:text="1280" />
+
+        <TextView
+            android:id="@+id/search_result_lg_price_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/search_result_lg_image_right"
+            android:layout_below="@+id/search_result_lg_title_right"
+            android:text="$468.00"
+            android:textColor="@color/price_color"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
 </LinearLayout>

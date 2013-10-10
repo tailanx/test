@@ -63,7 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="$76.0"
+                    android:text="76.0元"
                     android:textColor="@color/price_color"
                     android:textSize="20sp" />
                 <!--
@@ -76,13 +76,13 @@
                 />
                 -->
 
-                <TextView
+                <ImageView
                     android:id="@+id/add_favorites"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:drawableLeft="@drawable/add_favorites2"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:src="@drawable/add_favorites1" />
                 <!--  -->
             </RelativeLayout>
 
@@ -260,10 +260,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:descendantFocusability="afterDescendants"
-        android:clickable="true"
         android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp" >
+        android:layout_marginRight="10dp"
+        android:clickable="true"
+        android:descendantFocusability="afterDescendants" >
 
         <ImageView
             android:id="@+id/shopping_cart_image"
@@ -284,5 +284,6 @@
             android:textColor="@color/white"
             android:textSize="10sp" />
     </RelativeLayout>
-<!--  -->
+    <!--  -->
+
 </RelativeLayout>

@@ -13,14 +13,11 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
-        android:src="@drawable/back"
-        android:padding="6dp"
+        android:background="#00000000"
         android:clickable="true"
         android:onClick="doClick"
-        android:background="#00000000"
-        />
-
-
+        android:padding="6dp"
+        android:src="@drawable/back" />
 
     <TextView
         android:id="@+id/wait_pay_order_textview1"

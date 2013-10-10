@@ -82,9 +82,7 @@ public class SaveUserAddress {
 		result.append(HttpAddressParam.getHttpAddress(keys, values));
 		Log.i(TAG, result.toString());
 		for (int j = 0; j < keys.length; j++) {
-
 			httpAddressMap.put(keys[j], values[j]);
-			Log.i("info", httpAddressMap.size()+"");
 		}
 		return result.toString();
 	}

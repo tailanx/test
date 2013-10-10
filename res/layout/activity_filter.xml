@@ -4,44 +4,48 @@
     android:layout_height="match_parent"
     android:background="@drawable/filter_bg"
     android:orientation="vertical" >
-    <RelativeLayout 
+
+    <RelativeLayout
+        android:id="@+id/filter_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/filter_bar"
-        android:background="@drawable/filter_topbg"
-        >
-        <Button 
+        android:background="@drawable/filter_topbg" >
+
+        <Button
             android:id="@+id/filter_complete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/complete"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:text="完成"
-            />
-        <Button android:id="@+id/filter_clear_conditions"
-            android:background="@drawable/clear_conditions"
+            android:background="@drawable/complete"
+            android:text="完成" />
+
+        <Button
+            android:id="@+id/filter_clear_conditions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/filter_complete"
             android:layout_marginRight="10dp"
-            android:text="清除条件"
-            />
+            android:layout_toLeftOf="@+id/filter_complete"
+            android:background="@drawable/clear_conditions"
+            android:text="清除条件" />
     </RelativeLayout>
-    <ExpandableListView android:id="@+id/filter_listview"
+
+    <ExpandableListView
+        android:id="@+id/filter_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/filter_bar"
-        android:divider="@drawable/filter_line"
         android:cacheColorHint="#00000000"
-        android:dividerHeight="1dp"
-        ></ExpandableListView>
-    <ImageView android:layout_below="@+id/filter_listview"
+        android:divider="@drawable/filter_line"
+        android:dividerHeight="1dp" >
+    </ExpandableListView>
+
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:src="@drawable/filter_line"
-        />
+        android:layout_below="@+id/filter_listview"
+        android:src="@drawable/filter_line" />
 
 </RelativeLayout>

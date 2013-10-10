@@ -88,6 +88,7 @@ public class SearchFragment extends SherlockFragment {
 				bundle.putString("name", "");
 				bundle.putString("price", "");
 				bundle.putString("brand", "");
+				bundle.putString("title", functions.get(arg2).getFunName());
 				intent.putExtras(bundle);
 //				intent.putExtra("bundle", arg2);
 				startActivity(intent);

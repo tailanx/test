@@ -51,7 +51,7 @@ public class EffectDataUtil {
 	
 	private String getHttpAddress(String where, String offset, String limit, String fields){
 		StringBuffer result = new StringBuffer();
-		result.append("http://192.168.1.254:802/?");
+//		result.append("http://192.168.1.254:802/?");
 		setKeysAndValues(where, offset, limit, fields);
 		result.append(HttpAddressParam.getHttpAddress(keys, values));
 		Log.i(TAG, result.toString());

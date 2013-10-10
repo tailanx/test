@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#ffffff"
-    android:paddingBottom="5dp"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:paddingBottom="5dp" >
 
     <RelativeLayout
         android:id="@+id/search_result_small_img_layout"

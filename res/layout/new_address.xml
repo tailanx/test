@@ -23,6 +23,7 @@
             android:layout_marginLeft="10dp"
             android:background="@drawable/back1"
             android:onClick="doClick" />
+<<<<<<< HEAD
 -->
 
     <TableLayout
@@ -156,7 +157,7 @@
                 android:layout_gravity="center_vertical"
                 android:background="@null"
                 android:textSize="13sp"
-                android:lines="2" />
+                android:lines="3" />
         </TableRow>
     </TableLayout>
 

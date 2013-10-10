@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MyMallFragment" >
-<!-- 
+
+    <!--
     <RelativeLayout
         android:id="@+id/return_exchange_relative1"
         android:layout_width="match_parent"
@@ -36,12 +37,12 @@
             android:textSize="24dp" />
     </RelativeLayout>
     android:layout_below="@id/return_exchange_relative1"
- -->
+    -->
+
     <ScrollView
         android:id="@+id/return_exchange_scrollView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-         >
+        android:layout_height="wrap_content" >
 
         <LinearLayout
             android:id="@+id/return_exchange_scrollView_linearlayout1"

@@ -50,7 +50,7 @@ public class MyCollectActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setActionbar();
 		dataManage = new FavoriteDataManage(this);
-		mList = dataManage.getFavouriteArray(Integer.parseInt(((MyApplication)getApplication()).getUserId())
+		mList = dataManage.getFavouriteArray(((MyApplication)getApplication()).getUserId()
 , 0, 10);
 //		Log.i("info", mList.size()+"");
 		if(mList.size()<=0){

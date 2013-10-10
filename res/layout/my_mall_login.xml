@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         />
-         -->
-<!-- 
+    -->
+    <!--
     <RelativeLayout
         android:id="@+id/my_mall_login_top"
         android:layout_width="match_parent"
@@ -46,13 +46,13 @@
     </RelativeLayout>
     
     android:layout_below="@id/my_mall_login_top" 
- -->
+    -->
+
     <ScrollView
         android:id="@+id/my_mall_login_scrollView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/main2_main2_bottom"
-        >
+        android:layout_above="@+id/main2_main2_bottom" >
 
         <LinearLayout
             android:id="@+id/person_main2_main2_linearlayout1"
@@ -65,24 +65,22 @@
             android:orientation="vertical" >
 
             <TableLayout
-                
-                        android:layout_marginTop="15dp"
                 android:id="@+id/my_mall_login_background"
                 android:layout_width="fill_parent"
                 android:layout_height="250dp"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/registration_bg"
                 android:padding="8dp"
                 android:stretchColumns="1" >
 
-                <TableRow android:background="@drawable/account_bg" 
-                    
-                        android:layout_marginTop="15dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp">
+                <TableRow
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/account_bg" >
 
                     <TextView
-                       
                         android:id="@+id/my_mall_login_account"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -91,8 +89,8 @@
                         android:drawablePadding="8dp"
                         android:padding="8dp"
                         android:text="账号"
-                        android:textSize="20sp"
-                        android:textColor="#b4b4b4" />
+                        android:textColor="#b4b4b4"
+                        android:textSize="20sp" />
 
                     <EditText
                         android:id="@+id/my_mall_login__edittext_account"
@@ -103,15 +101,13 @@
                         android:singleLine="true" />
                 </TableRow>
 
-                <TableRow android:background="@drawable/account_bg" 
-                    
-                        android:layout_marginTop="15dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        >
+                <TableRow
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/account_bg" >
 
                     <TextView
-                        
                         android:id="@+id/my_mall_login_password"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -120,9 +116,8 @@
                         android:drawablePadding="8dp"
                         android:padding="8dp"
                         android:text="密码"
-                        android:textSize="20sp" 
                         android:textColor="#b4b4b4"
-                       />
+                        android:textSize="20sp" />
 
                     <EditText
                         android:id="@+id/my_mall_login__edittext_password"
@@ -130,18 +125,16 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:background="@null"
-                        android:singleLine="true"
-                         android:inputType="numberPassword" />
+                        android:inputType="numberPassword"
+                        android:singleLine="true" />
                 </TableRow>
 
                 <TableRow
-                        android:layout_marginTop="15dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        >
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="15dp" >
 
                     <TextView
-                      
                         android:id="@+id/my_mall_login_account"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -149,15 +142,15 @@
                         android:drawablePadding="8dp"
                         android:padding="8dp"
                         android:text="保持登录状态"
-                        android:textSize="16sp" 
-                        android:textColor="#b4b4b4"/>
+                        android:textColor="#b4b4b4"
+                        android:textSize="16sp" />
 
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="默认选中"
-                        android:textSize="15sp"
-                        android:textColor="#b4b4b4" />
+                        android:textColor="#b4b4b4"
+                        android:textSize="15sp" />
                 </TableRow>
             </TableLayout>
 
@@ -172,11 +165,10 @@
                 android:textSize="18sp" />
 
             <RelativeLayout
-                android:layout_marginTop="10dp"
                 android:id="@+id/my_mall_login_retrieve_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-               
+                android:layout_marginTop="10dp"
                 android:background="@drawable/forgot_password" >
 
                 <TextView
@@ -185,8 +177,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="25dp"
                     android:text="找回密码"
-                    android:textSize="18sp"
-                     android:textColor="#b4b4b4" />
+                    android:textColor="#b4b4b4"
+                    android:textSize="18sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -198,11 +190,10 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_marginTop="10dp"
                 android:id="@+id/my_mall_login_retrieve_regist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-              
+                android:layout_marginTop="10dp"
                 android:background="@drawable/forgot_password"
                 android:clickable="true"
                 android:focusable="true" >
@@ -213,8 +204,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="25dp"
                     android:text="快速注册"
-                    android:textSize="18sp"
-                     android:textColor="#b4b4b4" />
+                    android:textColor="#b4b4b4"
+                    android:textSize="18sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"

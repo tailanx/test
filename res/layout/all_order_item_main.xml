@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res/com.yidejia.mall"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-  >
-<com.handmark.pulltorefresh.library.PullToRefreshScrollView
+    android:layout_height="wrap_content" >
+
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
         xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/all_order_item_main_refresh_scrollview11"
         android:layout_width="wrap_content"
@@ -17,17 +17,14 @@
 
         <LinearLayout
             android:id="@+id/all_order_item_main_scrollView_linearlayout1"
-            android:layout_marginTop="12dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-           
-            android:orientation="vertical"
-           
-            >
-            <!-- 
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical" >
+
+            <!--
    <RelativeLayout
     android:id="@+id/all_order_item_main_produce"
     android:layout_width="fill_parent"
@@ -173,11 +170,8 @@
     	          android:textSize="15sp" />
 
     	  </RelativeLayout>
-          
-           -->
+            -->
         </LinearLayout>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 
-</com.handmark.pulltorefresh.library.PullToRefreshScrollView>
-         
-        
 </RelativeLayout>

@@ -3,310 +3,307 @@
     android:id="@+id/main_function_layout"
     android:layout_width="match_parent"
     android:layout_height="184dp"
-    
     android:padding="2dp" >
-	<LinearLayout 
-	    android:id="@+id/function_layout_top"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="horizontal"
-	    android:paddingLeft="2dp"
-	    android:paddingRight="2dp"
-	    >
-	    <RelativeLayout 
-	        android:layout_width="0dp"
-	        android:layout_height="90dp"
-	        android:layout_weight="1"
-	        android:orientation="vertical"
-	        android:background="@drawable/myorders"
-	        >
-	         
-	        <ImageView android:id="@+id/main_my_order_icon"
-	            android:layout_width="55dp"
-	            android:layout_height="55dp"
-	            android:src="@drawable/main_my_order"
-	            android:layout_marginTop="8dp"
-	            android:layout_centerHorizontal="true"
-	            />
 
+    <LinearLayout
+        android:id="@+id/function_layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp" >
 
-	          <!--  
-	            android:drawableTop="@drawable/main_my_order"
-	           -->
-	        <TextView android:id="@+id/main_my_order_text"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_below="@+id/main_my_order_icon"
-	            android:text="@string/main_order_text"
-	            android:layout_centerHorizontal="true"
-	            android:layout_marginTop="2dp"
-	            android:gravity="center"
-	            />
-	        <RelativeLayout
-	            android:id="@+id/function_my_order"
-	            android:layout_width="match_parent"
-	            android:layout_height="match_parent"
-	            android:clickable="true"
-	            android:background="@drawable/function_myorders_selector" >
-	        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            android:layout_weight="1"
+            android:background="@drawable/myorders"
+            android:orientation="vertical" >
 
-	    </RelativeLayout>
-	    <RelativeLayout 
-	        android:layout_width="0dp"
-	        android:layout_height="90dp"
-	        android:layout_weight="1"
-	        android:background="@drawable/myfavorites"
-	        android:orientation="vertical"
-	        >
-	         
-	        <ImageView android:id="@+id/main_my_favorite_icon"
-	            android:layout_width="55dp"
-	            android:layout_height="55dp"
-	            android:src="@drawable/main_my_favorite"
-	            android:layout_marginTop="8dp"
-	            android:layout_centerHorizontal="true"
-	            />
-	        <!--
-	            android:drawableTop="@drawable/main_my_favorite"
-	             -->
-	        <TextView android:id="@+id/main_my_favorite_text"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:text="@string/main_favorite_text"
-	            android:layout_below="@+id/main_my_favorite_icon"
-	            android:layout_centerHorizontal="true"
-	            android:layout_marginTop="2dp"
-	            android:gravity="center"
-	            />
-	        <RelativeLayout
-	            android:id="@+id/function_my_favorite"
-	            android:layout_width="match_parent"
-	            android:layout_height="match_parent"
-	            android:clickable="true"
-	            android:background="@drawable/function_myfavorites_selector" >
-	        </RelativeLayout>
-	    </RelativeLayout>
-	    <RelativeLayout 
-	        android:layout_width="0dp"
-	        android:layout_height="90dp"
-	        android:layout_weight="1"
-	        android:orientation="vertical"
-	        android:background="@drawable/events_pavilion"
-	        >
-	       
-	        <ImageView android:id="@+id/main_event_icon"
-	            android:layout_width="55dp"
-	            android:layout_height="55dp"
-	            android:src="@drawable/main_sport"
-	            android:layout_marginTop="8dp"
-	            android:layout_centerHorizontal="true"
-	            />
-	         <!-- 
-	            android:drawableTop="@drawable/main_sport"
-	         -->
-	        <TextView android:id="@+id/main_event_text"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:text="@string/main_event_text"
-	            android:layout_below="@+id/main_event_icon"
-	            android:layout_centerHorizontal="true"
-	            android:layout_marginTop="2dp"
-	            android:gravity="center"
-	            />
-	        <RelativeLayout
-	            android:id="@+id/function_event"
-	            android:layout_width="match_parent"
-	            android:layout_height="match_parent"
-	            android:clickable="true"
-	            android:background="@drawable/function_events_selector" >
-	        </RelativeLayout>
-	    </RelativeLayout>
-	    <RelativeLayout 
-	        android:layout_width="0dp"
-	        android:layout_height="90dp"
-	        android:layout_weight="1"
-	        android:background="@drawable/member_buy"
-	        android:orientation="vertical"
-	        >
-	         
-	        <ImageView android:id="@+id/main_vip_icon"
-	            android:layout_width="55dp"
-	            android:layout_height="55dp"
-	            android:src="@drawable/main_vip"
-	            android:layout_marginTop="8dp"
-	            android:layout_centerHorizontal="true"
-	            />
-	        <!--
-	            android:drawableTop="@drawable/main_vip"
-	         -->
-	        <TextView android:id="@+id/main_vip_text"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:text="@string/main_vip_text"
-	            android:layout_below="@+id/main_vip_icon"
-	            android:layout_centerHorizontal="true"
-	            android:layout_marginTop="2dp"
-	            android:gravity="center"
-	            />
-	        <RelativeLayout
-	            android:id="@+id/function_member"
-	            android:layout_width="match_parent"
-	            android:layout_height="match_parent"
-	            android:clickable="true"
-	            android:background="@drawable/function_member_selector" >
-	        </RelativeLayout>
-	    </RelativeLayout>
-	</LinearLayout>
-	<LinearLayout 
-	    android:id="@+id/function_layout_bottom"
-	    android:layout_below="@+id/function_layout_top"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_marginTop="0dp"
-	    android:orientation="horizontal"
-	    android:paddingRight="2dp"
-	    android:paddingLeft="2dp"
-	    >
-	    <RelativeLayout 
-	        android:layout_width="0dp"
-	        android:layout_height="90dp"
-	        android:layout_weight="1"
-	        android:background="@drawable/history"
-	        android:orientation="vertical"
-	        >
-	        
-	        <ImageView android:id="@+id/main_history_icon"
-	            android:layout_width="55dp"
-	            android:layout_height="55dp"
-	            android:src="@drawable/main_history"
-	            android:layout_marginTop="8dp"
-	            android:layout_centerHorizontal="true"
-	            />
-	        <!-- 
-	            android:drawableTop="@drawable/main_history"
-	         -->
-	        <TextView android:id="@+id/main_history_text"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:text="@string/main_history_text"
-	            android:layout_below="@+id/main_history_icon"
-	            android:layout_centerHorizontal="true"
-	            android:layout_marginTop="2dp"
-	            android:gravity="center"
-	            />
-	        <RelativeLayout
-	            android:id="@+id/function_history"
-	            android:layout_width="match_parent"
-	            android:layout_height="match_parent"
-	            android:clickable="true"
-	            android:background="@drawable/function_history_selector" >
-	        </RelativeLayout>
-	    </RelativeLayout>
-	    <RelativeLayout 
-	        android:layout_width="0dp"
-	        android:layout_height="90dp"
-	        android:layout_weight="1"
-	        android:orientation="vertical"
-	        android:background="@drawable/coupon"
-	        >
-	         
-	        <ImageView android:id="@+id/main_voucher_icon"
-	            android:layout_width="55dp"
-	            android:layout_height="55dp"
-	            android:src="@drawable/main_voucher"
-	            android:layout_marginTop="8dp"
-	            android:layout_centerHorizontal="true"
-	            
-	            />
-	        <!--
-	            android:drawableTop="@drawable/main_voucher"
-	         -->
-	        <TextView android:id="@+id/main_voucher_text"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:text="@string/main_voucher_text"
-	            android:layout_below="@+id/main_voucher_icon"
-	            android:layout_centerHorizontal="true"
-	            android:layout_marginTop="2dp"
-	            android:gravity="center"
-	            />
-	         <RelativeLayout
-	            android:id="@+id/function_coupon"
-	            android:layout_width="match_parent"
-	            android:layout_height="match_parent"
-	            android:clickable="true"
-	            android:background="@drawable/function_coupon_selector" >
-	        </RelativeLayout>
-	    </RelativeLayout>
-	    <RelativeLayout 
-	        android:layout_width="0dp"
-	        android:layout_height="90dp"
-	        android:layout_weight="1"
-	        android:background="@drawable/skin_test"
-	        android:orientation="vertical"
-	        >
-	         
-	        <ImageView android:id="@+id/main_skin_test_icon"
-	            android:layout_width="55dp"
-	            android:layout_height="55dp"
-	            android:src="@drawable/main_skin_test"
-	            android:layout_marginTop="8dp"
-	            android:layout_centerHorizontal="true"
-	            />
-	        <!--
-	            android:drawableTop="@drawable/main_skin_test"
-	         -->
-	        <TextView android:id="@+id/main_skin_test_text"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:text="@string/main_skin_test_text"
-	            android:layout_below="@+id/main_skin_test_icon"
-	            android:layout_centerHorizontal="true"
-	            android:layout_marginTop="2dp"
-	            android:gravity="center"
-	            />
-	        <RelativeLayout
-	            android:id="@+id/function_skin"
-	            android:layout_width="match_parent"
-	            android:layout_height="match_parent"
-	            android:clickable="true"
-	            android:background="@drawable/function_skin_selector" >
-	        </RelativeLayout>
-	    </RelativeLayout>
-	    <RelativeLayout 
-	        android:layout_width="0dp"
-	        android:layout_height="90dp"
-	        android:layout_weight="1"
-	        android:background="@drawable/message_center"
-	        android:orientation="vertical"
-	        >
-	        <ImageView android:id="@+id/main_message_center_icon"
-	            android:layout_width="55dp"
-	            android:layout_height="55dp"
-	            android:src="@drawable/main_message_center"
-	            android:layout_marginTop="8dp"
-	            android:layout_centerHorizontal="true"
-	            />
-	        <!-- 
-	            android:drawableTop="@drawable/main_message_center"
-	         -->
-	        <TextView android:id="@+id/main_message_center_text"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:text="@string/main_message_center_text"
-	            android:layout_below="@+id/main_message_center_icon"
-	            android:layout_centerHorizontal="true"
-	            android:layout_marginTop="2dp"
-	            android:gravity="center"
-	            />
-	            
-	        <RelativeLayout
-	            android:id="@+id/function_message"
-	            android:layout_width="match_parent"
-	            android:layout_height="match_parent"
-	            android:clickable="true"
-	            android:background="@drawable/function_message_selector" >
-	        </RelativeLayout>
-	    </RelativeLayout>
-	</LinearLayout>
+            <ImageView
+                android:id="@+id/main_my_order_icon"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/main_my_order" />
+
+<!-- 	            android:drawableTop="@drawable/main_my_order" -->
+
+            <TextView
+                android:id="@+id/main_my_order_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/main_my_order_icon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:text="@string/main_order_text" />
+
+            <RelativeLayout
+                android:id="@+id/function_my_order"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/function_myorders_selector"
+                android:clickable="true" >
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            android:layout_weight="1"
+            android:background="@drawable/myfavorites"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/main_my_favorite_icon"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/main_my_favorite" />
+<!-- 	            android:drawableTop="@drawable/main_my_favorite" -->
+
+            <TextView
+                android:id="@+id/main_my_favorite_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/main_my_favorite_icon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:text="@string/main_favorite_text" />
+
+            <RelativeLayout
+                android:id="@+id/function_my_favorite"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/function_myfavorites_selector"
+                android:clickable="true" >
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            android:layout_weight="1"
+            android:background="@drawable/events_pavilion"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/main_event_icon"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/main_sport" />
+<!-- 	            android:drawableTop="@drawable/main_sport" -->
+
+            <TextView
+                android:id="@+id/main_event_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/main_event_icon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:text="@string/main_event_text" />
+
+            <RelativeLayout
+                android:id="@+id/function_event"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/function_events_selector"
+                android:clickable="true" >
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            android:layout_weight="1"
+            android:background="@drawable/member_buy"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/main_vip_icon"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/main_vip" />
+<!-- 	            android:drawableTop="@drawable/main_vip" -->
+
+            <TextView
+                android:id="@+id/main_vip_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/main_vip_icon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:text="@string/main_vip_text" />
+
+            <RelativeLayout
+                android:id="@+id/function_member"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/function_member_selector"
+                android:clickable="true" >
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/function_layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/function_layout_top"
+        android:layout_marginTop="0dp"
+        android:orientation="horizontal"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            android:layout_weight="1"
+            android:background="@drawable/history"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/main_history_icon"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/main_history" />
+<!-- 	            android:drawableTop="@drawable/main_history" -->
+
+            <TextView
+                android:id="@+id/main_history_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/main_history_icon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:text="@string/main_history_text" />
+
+            <RelativeLayout
+                android:id="@+id/function_history"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/function_history_selector"
+                android:clickable="true" >
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            android:layout_weight="1"
+            android:background="@drawable/coupon"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/main_voucher_icon"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/main_voucher" />
+<!-- 	            android:drawableTop="@drawable/main_voucher" -->
+
+            <TextView
+                android:id="@+id/main_voucher_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/main_voucher_icon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:text="@string/main_voucher_text" />
+
+            <RelativeLayout
+                android:id="@+id/function_coupon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/function_coupon_selector"
+                android:clickable="true" >
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            android:layout_weight="1"
+            android:background="@drawable/skin_test"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/main_skin_test_icon"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/main_skin_test" />
+<!-- 	            android:drawableTop="@drawable/main_skin_test" -->
+
+            <TextView
+                android:id="@+id/main_skin_test_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/main_skin_test_icon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:text="@string/main_skin_test_text" />
+
+            <RelativeLayout
+                android:id="@+id/function_skin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/function_skin_selector"
+                android:clickable="true" >
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            android:layout_weight="1"
+            android:background="@drawable/message_center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/main_message_center_icon"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/main_message_center" />
+<!-- 	            android:drawableTop="@drawable/main_message_center" -->
+
+            <TextView
+                android:id="@+id/main_message_center_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/main_message_center_icon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:text="@string/main_message_center_text" />
+
+            <RelativeLayout
+                android:id="@+id/function_message"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/function_message_selector"
+                android:clickable="true" >
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
 </RelativeLayout>

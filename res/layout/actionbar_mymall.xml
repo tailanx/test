@@ -13,9 +13,9 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
+        android:clickable="true"
         android:onClick="doClick"
         android:src="@drawable/edit_background"
-        android:clickable="true"
         android:textColor="#FFeeeeee" />
 
     <TextView

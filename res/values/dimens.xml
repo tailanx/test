@@ -7,8 +7,9 @@
     <dimen name="shadow_width">0dp</dimen>
     <dimen name="slidingmenu_offset">50dp</dimen>
     <dimen name="above_offset">0dp</dimen>
+
     <integer name="num_cols">1</integer>
-    
+
     <dimen name="base_info_image">150dp</dimen>
     <dimen name="base_info_match">90dp</dimen>
 

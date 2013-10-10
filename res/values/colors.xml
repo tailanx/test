@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name="dark">#b4b4b4</color>
+
+    <color name="dark">#b4b4b4</color>
     <color name="white">#ffffff</color>
     <color name="search_bar">#000000</color>
     <color name="shadowColor">#000000</color>
@@ -14,8 +15,6 @@
     <drawable name="gray">#30000000</drawable>
     <drawable name="lucency">#00000000</drawable>
     <drawable name="lucency_bg">#30000000</drawable>
-    
-    
     <drawable name="dark_gray">#8F8F8F</drawable>
     <drawable name="light_gray">#EEEEEE</drawable>
     <drawable name="white">#FFFFFF</drawable>

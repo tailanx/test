@@ -284,3 +284,5 @@ public class PayActivity extends SherlockActivity {
 	}
 
 }
+
+

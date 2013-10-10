@@ -56,7 +56,7 @@ public class CommentUtil {
 	 * 显示全部的数据
 	 */
 
-	public void AllComment(String goodsId) {
+	public void AllComment(String goodsId, int fromIndex, int amount) {
 		if (ConnectionDetector.isConnectingToInternet(context)) {
 			dataManage = new UserCommentDataManage(context);
 			if("".equals(goodsId) || goodsId == null) {
@@ -64,7 +64,7 @@ public class CommentUtil {
 				return;
 			}
 			ArrayList<UserComment> userList = dataManage.getUserCommentsArray(
-					goodsId, 0, 10, false);
+					goodsId, fromIndex, amount, false);
 			for (int i = 0; i < userList.size(); i++) {
 				setupShow();// 实例化控件
 				UserComment userComment = userList.get(i);

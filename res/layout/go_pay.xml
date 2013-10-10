@@ -1,602 +1,577 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
-     >
-   
-    
- 
-           <RelativeLayout android:layout_alignParentBottom="true"
-	     android:layout_width="fill_parent"
-	     				 android:id="@+id/go_pay_bottom"
-    	     			 android:layout_marginTop="8dp"
-    	     			 android:layout_height="wrap_content"
-    	     			 android:background="@drawable/tab_bg3"
-    	     			 >
-    	     <TextView   
-    	                 android:layout_width="wrap_content"
-    	                 android:id="@+id/go_pay_sum_money"
-    	                 android:layout_height="wrap_content"
-    	                 android:layout_marginTop="15dp"
-    	                 android:text="应付总额："
-    	                 android:textSize="15sp"
-    	                 android:layout_marginLeft="20dp"
-    	                 />
-    	      <TextView  android:layout_toRightOf="@+id/go_pay_sum_money"
-    	                 android:layout_width="wrap_content"
-    	                 android:id="@+id/go_pay_show_pay_money_price"
-    	                 android:layout_height="wrap_content"
-    	                 android:layout_alignBaseline="@id/go_pay_sum_money"
-    	                 android:text="￥"
-    	                 android:textSize="15sp"
-    	               	 
-    	                 android:textColor="#ed217c"
-    	                 />
-    	      <TextView  android:layout_toRightOf="@+id/go_pay_show_pay_money_price"
-    	                 android:layout_width="wrap_content"
-    	                 android:id="@+id/go_pay_show_pay_money"
-    	                 android:layout_height="wrap_content"
-    	                 android:layout_alignBaseline="@id/go_pay_sum_money"
-    	                 android:text="14400.00"
-    	                 android:textSize="15sp"
-    	               	 
-    	                 android:textColor="#ed217c"
-    	                 />
-    	        <TextView  
-    	                 android:layout_below="@id/go_pay_sum_money"
-    	                 android:layout_width="wrap_content"
-    	                 
-    	                 android:layout_height="wrap_content"
-    	                 
-    	                 android:text="(包含快递费用)"
-    	                 android:textSize="10sp"
-    	               	 android:layout_alignLeft="@id/go_pay_sum_money"
-    	                 />
-    	        <Button 
-    	            	
-    	                 android:layout_width="wrap_content"
-    	                 android:layout_height="wrap_content"
-    	                 android:text="提交订单"
-    	                 android:textColor="#eeeeee"
-    	                 android:layout_centerVertical="true"
-    	                 android:layout_alignParentRight="true"
-    	                 android:layout_marginRight="8dp"
-    	                 android:background="@drawable/submit_order"/>
-    	        
-    	 </RelativeLayout>
-    	 
-   
+    android:background="@drawable/bg" >
+
+    <RelativeLayout
+        android:id="@+id/go_pay_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/tab_bg3" >
+
+        <TextView
+            android:id="@+id/go_pay_sum_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:text="应付总额："
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/go_pay_show_pay_money_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/go_pay_sum_money"
+            android:layout_toRightOf="@+id/go_pay_sum_money"
+            android:text="￥"
+            android:textColor="#ed217c"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/go_pay_show_pay_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/go_pay_sum_money"
+            android:layout_toRightOf="@+id/go_pay_show_pay_money_price"
+            android:text="14400.00"
+            android:textColor="#ed217c"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/go_pay_sum_money"
+            android:layout_below="@id/go_pay_sum_money"
+            android:text="(包含快递费用)"
+            android:textSize="10sp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/submit_order"
+            android:text="提交订单"
+            android:textColor="#eeeeee" />
+    </RelativeLayout>
+
     <ScrollView
-    	android:layout_above="@id/go_pay_bottom"
         android:id="@+id/go_pay_scrollView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        >
+        android:layout_above="@id/go_pay_bottom" >
 
         <LinearLayout
-           
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
             android:id="@+id/wgo_pay_crollView_linearlayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-           
-            android:orientation="vertical"
-           
-            >
-            
-              <LinearLayout 
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical" >
 
-    android:id="@+id/linearLayout_focus" 
+            <LinearLayout
+                android:id="@+id/linearLayout_focus"
+                android:layout_width="0px"
+                android:layout_height="0px"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal" />
 
-    android:focusable="true" 
-
-    android:focusableInTouchMode="true" 
-
-    android:layout_width="0px" 
-
-    android:layout_height="0px"
-    android:orientation="horizontal"/> 
-            
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/new_delivery_address_up"
-                 >
-                 
-             <TextView 
-                 android:id="@+id/go_pay_consignee"
-                 android:layout_centerVertical="true"
-                 android:gravity="center_vertical"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="收货人："
-                 android:textSize="16dp"
-                 android:layout_marginLeft="8dp"
-                 android:drawablePadding="4dp"
-                 android:drawableLeft="@drawable/addressee_headicon"/>
-             <TextView 
-                 android:id="@+id/go_pay_name"
-                 android:layout_marginLeft="8dp"
-                 android:layout_toRightOf="@id/go_pay_consignee"
-                 android:layout_centerVertical="true"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="乔丹"
-                 android:textSize="16dp"
-                 />
-              <TextView 
-                 android:id="@+id/go_pay_number"
-                 android:layout_alignParentRight="true"
-                 android:layout_centerVertical="true"
-                 android:gravity="center_vertical"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="18685241320"
-                 android:textSize="16dp"
-                 android:layout_marginRight="8dp"
-                 android:drawablePadding="4dp"
-                 android:drawableLeft="@drawable/phone_iocn"/>
-                 </RelativeLayout>
-         
-            <TextView 
-                android:id="@+id/go_pay_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="收货地址：有人肯定会对于android中放置图片的地到好奇下的dr是他会d图片放在drawabl辨率的图片"
-                android:textSize="15sp"
-                android:background="@drawable/delivery_address_down"
-                android:padding="10dp"
-                />
-            <LinearLayout 
-                android:layout_marginTop="8dp"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/new_menubg_up">
-                <TextView android:layout_width="wrap_content"
-                    	  android:layout_height="wrap_content"
-                    	  android:text="支付方式:"
-                    	  android:textSize="15sp"
-                    	  android:drawableLeft="@drawable/payment_icon"
-                    	  android:layout_marginLeft="10dp"
-                    	  android:drawablePadding="8dp"
-                    	  android:gravity="center_vertical"
-                    	  android:layout_gravity="center_vertical"/>
-                 
-            </LinearLayout>
-        
-            <RelativeLayout 
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/new_menubg_middle">
-                <ImageView android:id="@+id/go_pay_zhifubao_image"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:src="@drawable/alipay_app"
-                           android:layout_centerVertical="true"
-                           android:layout_marginLeft="15dp"/>
-                <LinearLayout 
-                    android:layout_toRightOf="@id/go_pay_zhifubao_image"
-                    android:layout_marginLeft="28dp"
+                android:background="@drawable/new_delivery_address_up" >
+
+                <TextView
+                    android:id="@+id/go_pay_consignee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:orientation="vertical">
-               
-                 <TextView 
-                          android:layout_width="wrap_content"
-                    	  android:id="@+id/go_pay_zhifubao"
-                    	  android:layout_height="wrap_content"
-                    	  android:text="支付宝客户端"
-                    	  android:textSize="13sp"
-                    	 />
-                 <TextView
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          
-                         
-                          android:text="需安装支付宝手机钱包客户端"
-                          android:textSize="10sp"
-                         
-                          />
-                 </LinearLayout>
-                 <CheckBox 
-                     	  android:id="@+id/zhifubao_checkbox"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          style="@style/CustomCheckboxTheme"
-                          android:layout_alignParentRight="true"
-                          android:layout_centerVertical="true"
-                         />
+                    android:layout_marginLeft="8dp"
+                    android:drawableLeft="@drawable/addressee_headicon"
+                    android:drawablePadding="4dp"
+                    android:gravity="center_vertical"
+                    android:text="收货人："
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/go_pay_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@id/go_pay_consignee"
+                    android:text="乔丹"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/go_pay_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:drawableLeft="@drawable/phone_iocn"
+                    android:drawablePadding="4dp"
+                    android:gravity="center_vertical"
+                    android:text="18685241320"
+                    android:textSize="16dp" />
             </RelativeLayout>
-           
-            <RelativeLayout 
+
+            <TextView
+                android:id="@+id/go_pay_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/delivery_address_down"
+                android:padding="10dp"
+                android:text="收货地址：有人肯定会对于android中放置图片的地到好奇下的dr是他会d图片放在drawabl辨率的图片"
+                android:textSize="15sp" />
+
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/new_menubg_middle">
-                      <ImageView android:id="@+id/go_pay_zhifubao_wangyezhifu"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:src="@drawable/alipay"
-                           android:layout_centerVertical="true"
-                           android:layout_marginLeft="10dp"/>
-                      <LinearLayout 
-                           android:layout_toRightOf="@id/go_pay_zhifubao_wangyezhifu"
-                           android:layout_marginLeft="15dp"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:layout_centerVertical="true"
-                           android:orientation="vertical">
-                 <TextView 
-                          android:layout_width="wrap_content"
-                    	  android:id="@+id/go_pay_zhifubaowangye"
-                    	  android:layout_height="wrap_content"
-                    	  android:text="支付宝网页支付"
-                    	  android:textSize="13sp"
-                    	  
-                    	  
-                    	  />
-                 <TextView
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                           
-                          android:text="可银行卡支付"
-                          android:textSize="10sp"
-                         
-                          />
-                 </LinearLayout>
-                 <CheckBox 
-                     	  android:id="@+id/zhufubaowangye_checkbox"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          style="@style/CustomCheckboxTheme"
-                          android:layout_alignParentRight="true"
-                          android:layout_centerVertical="true"
-                         />
-            </RelativeLayout>
-            
-              <RelativeLayout 
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/new_menubg_middle">
-                      <ImageView android:id="@+id/go_pay_zhifubao_yinlian"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:src="@drawable/unionpay"
-                           android:layout_centerVertical="true"
-                           android:layout_marginLeft="10dp"/>
-                      <LinearLayout 
-                           android:layout_toRightOf="@id/go_pay_zhifubao_yinlian"
-                           android:layout_marginLeft="15dp"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:layout_centerVertical="true"
-                           android:orientation="vertical">
-                 <TextView 
-                          android:layout_width="wrap_content"
-                    	  android:id="@+id/go_pay_yinlianzhifu"
-                    	  android:layout_height="wrap_content"
-                    	  android:text="银联支付"
-                    	  android:textSize="13sp"
-                    	  
-                    	  
-                    	  />
-                 <TextView
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                           
-                          android:text="可银联卡支付"
-                          android:textSize="10sp"
-                         
-                          />
-                 </LinearLayout>
-                 <CheckBox 
-                          android:id="@+id/yinlian_checkbox"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          style="@style/CustomCheckboxTheme"
-                          android:layout_alignParentRight="true"
-                          android:layout_centerVertical="true"
-                         />
-            </RelativeLayout>
-           
-           
-            <RelativeLayout 
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/commentbg_down">
-                 <ImageView android:id="@+id/go_pay_zhifubao_caifutong"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:src="@drawable/tenpay"
-                           android:layout_centerVertical="true"
-                           android:layout_marginLeft="10dp"/>
-                  <LinearLayout 
-                           android:layout_toRightOf="@id/go_pay_zhifubao_caifutong"
-                           android:layout_marginLeft="15dp"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:layout_centerVertical="true"
-                           android:orientation="vertical">
-                 
-                 <TextView 
-                          android:layout_width="wrap_content"
-                    	  android:id="@+id/go_pay_zhifubaowangye"
-                    	  android:layout_height="wrap_content"
-                    	  android:text="财付通支付"
-                    	  android:textSize="13sp"
-                    	  
-                    	 />
-                 <TextView
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                           
-                          android:text="可银行卡支付"
-                          android:textSize="10sp"
-                          
-                          />
-                 </LinearLayout>
-                 <CheckBox 
-                     	  android:id="@+id/caifutong_checkbox"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          style="@style/CustomCheckboxTheme"
-                          android:layout_alignParentRight="true"
-                          android:layout_centerVertical="true"
-                          />
-            </RelativeLayout>
-             <RelativeLayout 
-                      android:layout_marginTop="8dp"
-                      android:layout_width="fill_parent"
-                      android:layout_height="wrap_content"
-                      android:background="@drawable/forgot_password">
-                 	 <ImageView android:layout_width="wrap_content"
-                 	            android:id="@+id/go_pay_image_fahuo"
-                 	            android:layout_height="wrap_content"
-                 	            android:src="@drawable/ship_location_icon"
-                 	            android:layout_centerVertical="true"
-                 	            android:layout_marginLeft="8dp"/>
-                 	 <TextView  android:layout_width="wrap_content"
-                 	            android:id="@+id/go_pay_addresss"
-                 	            android:layout_height="wrap_content"
-                 	            android:text="发货地点："
-                 	            android:textSize="15sp"
-                 	            android:layout_centerVertical="true"
-                 	            android:layout_marginLeft="8dp"
-                 	            android:layout_toRightOf="@+id/go_pay_image_fahuo"/>
-                 	 <TextView                   	     
-                 	            android:id="@+id/go_pay_peisong"
-                 	     		android:layout_width="wrap_content"
-                 	            android:layout_height="wrap_content"
-                 	            android:text="广州配送中心"
-                 	            android:textSize="20dp"
-                 	            android:layout_toRightOf="@id/go_pay_addresss"
-                 	            android:layout_centerVertical="true"
-                 	            android:layout_marginLeft="6dp"
-                 				/>
-                 	 <ImageView
-                 	            android:layout_centerVertical="true"
-                 	            android:layout_width="wrap_content"
-                 	            android:layout_height="wrap_content"
-                 	            android:layout_alignParentRight="true"
-                 	            android:layout_marginRight="22dp"
-                 	            android:src="@drawable/arrow"/>
-                 
-             </RelativeLayout>
-             
+                android:layout_marginTop="8dp"
+                android:background="@drawable/new_menubg_up" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:drawableLeft="@drawable/payment_icon"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    android:text="支付方式:"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
             <RelativeLayout
-                 android:layout_marginTop="8dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/new_menubg_up"
-                 >
-              <TextView   android:layout_width="wrap_content"
-                    	  android:layout_height="wrap_content"
-                    	  android:text="快递方式："
-                    	  
-                    	  android:textSize="15sp"
-                    	 
-                    	  android:drawableLeft="@drawable/express_icon"
-                    	  android:gravity="center_vertical"
-                    	  android:layout_marginLeft="10dp"
-                    	  android:drawablePadding="8dp"
-                    	  android:layout_centerVertical="true"/>
-              </RelativeLayout>
-            
-              <RelativeLayout 
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:background="@drawable/new_menubg_middle"
-                  >
-                  <TextView 
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:text="普通配送"
-                          android:textSize="13sp"
-                          android:layout_marginTop="10dp"
-                          android:layout_marginLeft="10dp"
-                          android:id="@+id/go_pay_pay_money"/>
-                  <TextView 
-                          android:id="@+id/go_pay_general_price"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:text=""
-                          android:textColor="#ed217c"
-                          android:textSize="13sp"
-                          android:layout_marginTop="10dp"
-                          android:layout_marginLeft="10dp"
-                          android:layout_alignBottom="@id/go_pay_pay_money"
-                          android:layout_toRightOf="@id/go_pay_pay_money"/>
-                   <TextView 
-                        
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:text="元"
-                          android:textColor="#ed217c"
-                          android:textSize="13sp"
-                          android:layout_marginTop="10dp"
-                         
-                          android:layout_alignBottom="@id/go_pay_pay_money"
-                          android:layout_toRightOf="@id/go_pay_general_price"/>
-                  <TextView 
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:textSize="8sp"
-                        
-                          android:text="系统将根据您的收货地址自动匹配快递公司进行配送，顺丰除外"
-                          android:layout_below="@id/go_pay_pay_money"
-                          android:layout_alignLeft="@id/go_pay_pay_money"/>
-                  <CheckBox 
-                          android:id="@+id/go_pay_check"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          style="@style/CustomCheckboxTheme"
-                          android:layout_alignParentRight="true"
-                          android:layout_centerVertical="true"
-                          android:layout_marginRight="10dp"
-                          android:checked="true"
-                         />
-              </RelativeLayout>
-           
-              <RelativeLayout 
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:background="@drawable/commentbg_down"
-                  >
-                  <TextView 
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:text="EMS配送"
-                          android:textSize="13sp"
-                          android:layout_marginTop="10dp"
-                          android:layout_marginLeft="10dp"
-                          android:id="@+id/go_pay_payEMS_money"/>
-                  <TextView 
-                          android:id="@+id/go_pay_ems_price"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:text=""
-                          android:textColor="#ed217c"
-                          android:textSize="13sp"
-                          android:layout_marginTop="10dp"
-                          android:layout_marginLeft="10dp"
-                          android:layout_alignBottom="@id/go_pay_payEMS_money"
-                          android:layout_toRightOf="@id/go_pay_payEMS_money"/>
-                   <TextView 
-                        
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:text="元"
-                          android:textColor="#ed217c"
-                          android:textSize="13sp"
-                          android:layout_marginTop="10dp"
-                         
-                          android:layout_alignBottom="@id/go_pay_payEMS_money"
-                          android:layout_toRightOf="@id/go_pay_ems_price"/>
-                  <TextView 
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:textSize="8sp"
-                        
-                          android:text="偏远地区请选择EMS配送 如：到镇，村胡地址’"
-                          android:layout_below="@id/go_pay_payEMS_money"
-                          android:layout_alignLeft="@id/go_pay_payEMS_money"/>
-                  <CheckBox 
-                          android:id="@+id/go_pay_ems"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          style="@style/CustomCheckboxTheme"
-                          android:layout_alignParentRight="true"
-                          android:layout_centerVertical="true"
-                          android:layout_marginRight="10dp"/>
-              </RelativeLayout>
-              
-              <RelativeLayout 
-                      android:id="@+id/go_shopping_use_evalution"
-                      android:layout_marginTop="8dp"
-                      android:layout_width="fill_parent"
-                      android:layout_height="wrap_content"
-                      android:background="@drawable/forgot_password">
-                 	 <ImageView android:layout_width="wrap_content"
-                 	            android:id="@+id/go_pay_image_fahuo"
-                 	            android:layout_height="wrap_content"
-                 	            android:src="@drawable/preferential_icon"
-                 	            android:layout_centerVertical="true"
-                 	            android:layout_marginLeft="8dp"/>
-                 	 <TextView  android:layout_width="wrap_content"
-                 	            android:id="@+id/go_pay_addresss"
-                 	            android:layout_height="wrap_content"
-                 	            android:text="使用优惠折扣"
-                 	            android:textSize="15sp"
-                 	            android:layout_centerVertical="true"
-                 	            android:layout_marginLeft="8dp"
-                 	            android:layout_toRightOf="@+id/go_pay_image_fahuo"/>
-                 	 
-                 	
-                 	 <ImageView
-                 	            android:layout_centerVertical="true"
-                 	            android:layout_width="wrap_content"
-                 	            android:layout_height="wrap_content"
-                 	            android:layout_alignParentRight="true"
-                 	            android:layout_marginRight="22dp"
-                 	            android:src="@drawable/arrow"/>
-                 
-             </RelativeLayout>
-            <TextView 
-                      android:layout_width="fill_parent"
-                      android:paddingLeft="10dp"
-                      android:layout_height="wrap_content"
-                      android:layout_marginTop="8dp"
-                      android:text="购物清单"
-                      android:textSize="15sp"
-                      android:drawableLeft="@drawable/shopping_list_icon"
-                     
-                      android:drawablePadding="8dp"
-                      android:gravity="center_vertical"
-                      android:background="@drawable/new_menubg_up"/>
+                android:background="@drawable/new_menubg_middle" >
 
-              <LinearLayout 
-					android:id="@+id/go_pay_relative2"
-             		android:orientation="vertical"
-              		android:layout_width="wrap_content"
-              		android:layout_height="wrap_content"
-              	
-              		>
-    
-         
-           
-    	 </LinearLayout>
-    	 <ScrollView
-    	   
-    	android:layout_marginTop="8dp"
-        android:id="@+id/go_pay_pinglun_scrollView"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-      	android:background="@drawable/forgot_password"
-        
-        >
+                <ImageView
+                    android:id="@+id/go_pay_zhifubao_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/alipay_app" />
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-           
-            >
-    	 <EditText 
-    	     android:padding="10dp"
-    	     android:editable="true"
-    	     android:id="@+id/go_pay_leave_message"
-    	     android:layout_width="fill_parent"
-    	     android:layout_height="wrap_content"
-    	     android:background="@null"
-    	     android:hint="订单留言.........                                                                                                                                                  "
-    	     android:textSize="15sp"
-    	     />
-    	      </LinearLayout>
-    </ScrollView>
-    	
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="28dp"
+                    android:layout_toRightOf="@id/go_pay_zhifubao_image"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/go_pay_zhifubao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="支付宝客户端"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="需安装支付宝手机钱包客户端"
+                        android:textSize="10sp" />
                 </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/zhifubao_checkbox"
+                    style="@style/CustomCheckboxTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/new_menubg_middle" >
+
+                <ImageView
+                    android:id="@+id/go_pay_zhifubao_wangyezhifu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/alipay" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@id/go_pay_zhifubao_wangyezhifu"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/go_pay_zhifubaowangye"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="支付宝网页支付"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="可银行卡支付"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/zhufubaowangye_checkbox"
+                    style="@style/CustomCheckboxTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/new_menubg_middle" >
+
+                <ImageView
+                    android:id="@+id/go_pay_zhifubao_yinlian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/unionpay" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@id/go_pay_zhifubao_yinlian"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/go_pay_yinlianzhifu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="银联支付"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="可银联卡支付"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/yinlian_checkbox"
+                    style="@style/CustomCheckboxTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/commentbg_down" >
+
+                <ImageView
+                    android:id="@+id/go_pay_zhifubao_caifutong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/tenpay" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@id/go_pay_zhifubao_caifutong"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/go_pay_zhifubaowangye"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="财付通支付"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="可银行卡支付"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/caifutong_checkbox"
+                    style="@style/CustomCheckboxTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/forgot_password" >
+
+                <ImageView
+                    android:id="@+id/go_pay_image_fahuo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/ship_location_icon" />
+
+                <TextView
+                    android:id="@+id/go_pay_addresss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/go_pay_image_fahuo"
+                    android:text="发货地点："
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/go_pay_peisong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="6dp"
+                    android:layout_toRightOf="@id/go_pay_addresss"
+                    android:text="广州配送中心"
+                    android:textSize="20dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="22dp"
+                    android:src="@drawable/arrow" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/new_menubg_up" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:drawableLeft="@drawable/express_icon"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    android:text="快递方式："
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/new_menubg_middle" >
+
+                <TextView
+                    android:id="@+id/go_pay_pay_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="普通配送"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/go_pay_general_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/go_pay_pay_money"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/go_pay_pay_money"
+                    android:text=""
+                    android:textColor="#ed217c"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/go_pay_pay_money"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/go_pay_general_price"
+                    android:text="元"
+                    android:textColor="#ed217c"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/go_pay_pay_money"
+                    android:layout_below="@id/go_pay_pay_money"
+                    android:text="系统将根据您的收货地址自动匹配快递公司进行配送，顺丰除外"
+                    android:textSize="8sp" />
+
+                <CheckBox
+                    android:id="@+id/go_pay_check"
+                    style="@style/CustomCheckboxTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:checked="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/commentbg_down" >
+
+                <TextView
+                    android:id="@+id/go_pay_payEMS_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="EMS配送"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/go_pay_ems_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/go_pay_payEMS_money"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/go_pay_payEMS_money"
+                    android:text=""
+                    android:textColor="#ed217c"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/go_pay_payEMS_money"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/go_pay_ems_price"
+                    android:text="元"
+                    android:textColor="#ed217c"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/go_pay_payEMS_money"
+                    android:layout_below="@id/go_pay_payEMS_money"
+                    android:text="偏远地区请选择EMS配送 如：到镇，村胡地址’"
+                    android:textSize="8sp" />
+
+                <CheckBox
+                    android:id="@+id/go_pay_ems"
+                    style="@style/CustomCheckboxTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/go_shopping_use_evalution"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/forgot_password" >
+
+                <ImageView
+                    android:id="@+id/go_pay_image_fahuo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/preferential_icon" />
+
+                <TextView
+                    android:id="@+id/go_pay_addresss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/go_pay_image_fahuo"
+                    android:text="使用优惠折扣"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="22dp"
+                    android:src="@drawable/arrow" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/new_menubg_up"
+                android:drawableLeft="@drawable/shopping_list_icon"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="购物清单"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:id="@+id/go_pay_relative2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+            <ScrollView
+                android:id="@+id/go_pay_pinglun_scrollView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/forgot_password" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+
+                    <EditText
+                        android:id="@+id/go_pay_leave_message"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:editable="true"
+                        android:hint="订单留言.........                                                                                                                                                  "
+                        android:padding="10dp"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
     </ScrollView>
-	
-            
-          </RelativeLayout>
+
+</RelativeLayout>

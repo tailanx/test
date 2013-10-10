@@ -6,11 +6,12 @@
     android:layout_height="wrap_content" >
 
     <!-- <android.support.v4.view.ViewPager -->
+
     <com.yidejia.app.mall.widget.YLViewPager
         android:id="@+id/image_slide_page"
-        android:background="@drawable/banner_bg"
         android:layout_width="match_parent"
         android:layout_height="180dip"
+        android:background="@drawable/banner_bg"
         android:focusable="true" />
 
     <RelativeLayout
@@ -19,9 +20,9 @@
         android:layout_width="match_parent"
         android:layout_height="15dip"
         android:layout_gravity="bottom"
-        android:gravity="center"
-         >
-	 <!--
+        android:gravity="center" >
+
+        <!--
         <RelativeLayout
             android:id="@+id/layout_bar_image"
             android:layout_width="match_parent"
@@ -45,23 +46,21 @@
                 android:gravity="center_vertical"
                 android:textColor="@android:color/black"
                 android:textSize="12dip" />
-                -->
-            
+        -->
 
-            <LinearLayout
-                android:id="@+id/layout_circle_images"
-                android:layout_width="wrap_content"
-                android:layout_height="15dip"
-                
-                android:gravity="center_horizontal"
-                android:layout_gravity="bottom"
-                android:orientation="horizontal" />
-             <!--
+        <LinearLayout
+            android:id="@+id/layout_circle_images"
+            android:layout_width="wrap_content"
+            android:layout_height="15dip"
+            android:layout_gravity="bottom"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" />
+        <!--
              android:layout_alignParentBottom="true"
                 android:layout_marginRight="10dip"
                 android:layout_marginTop="10dip"
         </RelativeLayout>
-         -->
+        -->
     </RelativeLayout>
 
 </FrameLayout>
