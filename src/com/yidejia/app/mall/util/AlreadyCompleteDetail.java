@@ -1,7 +1,11 @@
 package com.yidejia.app.mall.util;
 
 import java.util.ArrayList;
+
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,9 +17,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
+import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.OrderDataManage;
@@ -28,12 +38,12 @@ public class AlreadyCompleteDetail {
 	private LayoutInflater inflater;
 	private OrderDataManage orderDataManage;// 获取订单详情的数据
 	private Order order;// 订单
-	private TextView detail;//商品的详情
-	private TextView price;//商品的价格
-	private TextView count;//商品的数量
-	private ImageView head;//头像
+//	private TextView detail;//商品的详情
+//	private TextView price;//商品的价格
+//	private TextView count;//商品的数量
+//	private ImageView head;//头像
 	private LinearLayout layout;
-	private View view;
+//	private View view;
 
 	private float sumPrice = 0;//总的价格
 	private  int sumCount=0;//总的数量
@@ -45,43 +55,91 @@ public class AlreadyCompleteDetail {
 		this.inflater = LayoutInflater.from(context);
 		this.order = order;
 		this.layout = layout;
+		initDisplayImageOption();
 	}
 
 	/**
 	 * 实例化控件
 	 */
-	public void setupShow() {
-		 view = inflater.inflate(R.layout.already_complete_item_produce, null);
-		head = (ImageView) view.findViewById(R.id.already_complete_item_produce_image);
-		detail = (TextView) view.findViewById(R.id.already_complete_item_produce_text);
-		detail.setOnClickListener(new OnClickListener() {//添加点击事件
-			
-			@Override
-			public void onClick(View v) {
-				
-				Intent intent = new Intent(context,GoodsInfoActivity.class);
-				context.startActivity(intent);
+//	public void setupShow() {
+//		View view = inflater.inflate(R.layout.already_complete_item_produce, null);
+//		RelativeLayout mLayout = (RelativeLayout) view.findViewById(R.id.already_complete_relative);
+//		ImageView head = (ImageView) view.findViewById(R.id.already_complete_item_produce_image);
+//		TextView detail = (TextView) view.findViewById(R.id.already_complete_item_produce_text);
+//		mLayout.setOnClickListener(new OnClickListener() {//添加点击事件
+//			
+//			@Override
+//			public void onClick(View v) {
+//				
+//				Intent intent = new Intent(context,GoodsInfoActivity.class);
+//				context.startActivity(intent);
+//			}
+//		});
+//		TextView price = (TextView) view.findViewById(R.id.already_complete_item_produce_sum_detail);
+//		TextView count = (TextView) view.findViewById(R.id.already_complete_item_produce_count_detail);
+//		
+//	}
+	static final List<String> displayedImages = Collections
+			.synchronizedList(new LinkedList<String>());
+
+	private static class AnimateFirstDisplayListener extends
+			SimpleImageLoadingListener {
+
+		@Override
+		public void onLoadingComplete(String imageUri, View view,
+				Bitmap loadedImage) {
+			if (loadedImage != null) {
+				ImageView imageView = (ImageView) view;
+				boolean firstDisplay = !displayedImages.contains(imageUri);
+				if (firstDisplay) {
+					FadeInBitmapDisplayer.animate(imageView, 500);
+					displayedImages.add(imageUri);
+				}
 			}
-		});
-		price = (TextView) view.findViewById(R.id.already_complete_item_produce_sum_detail);
-		count = (TextView) view.findViewById(R.id.already_complete_item_produce_count_detail);
-		
+		}
 	}
 
+	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+	private DisplayImageOptions options;
+	protected ImageLoader imageLoader = ImageLoader.getInstance();// 加载图片
+
+	private void initDisplayImageOption() {
+		options = new DisplayImageOptions.Builder()
+				.showStubImage(R.drawable.hot_sell_right_top_image)
+				.showImageOnFail(R.drawable.hot_sell_right_top_image)
+				.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+				.cacheInMemory(true).cacheOnDisc(true).build();
+	}
 	public void addView() {
 		try {
 			map  = new HashMap<String, Float>();
 			ArrayList<Cart> mArrayList = order.getCartsArray();
 			for (int i = 0; i < mArrayList.size(); i++) {
-				setupShow();
+				View view = inflater.inflate(R.layout.already_complete_item_produce, null);
+				RelativeLayout mLayout = (RelativeLayout) view.findViewById(R.id.already_complete_relative);
+				ImageView head = (ImageView) view.findViewById(R.id.already_complete_item_produce_image);
+				TextView detail = (TextView) view.findViewById(R.id.already_complete_item_produce_text);
+				mLayout.setOnClickListener(new OnClickListener() {//添加点击事件
+					
+					@Override
+					public void onClick(View v) {
+						
+						Intent intent = new Intent(context,GoodsInfoActivity.class);
+						context.startActivity(intent);
+					}
+				});
+				TextView price = (TextView) view.findViewById(R.id.already_complete_item_produce_sum_detail);
+				TextView count = (TextView) view.findViewById(R.id.already_complete_item_produce_count_detail);
 				Cart cart = mArrayList.get(i);
 				String urlString = cart.getImgUrl();
-				Bitmap bm = BitmapFactory.decodeFile(urlString);
-				if(bm!=null){
-					head.setImageBitmap(bm);
-				}else{
-					head.setImageResource(R.drawable.ic_launcher);
-				}
+				imageLoader.displayImage(urlString, head, options,
+						animateFirstListener);
+//				Bitmap bm = BitmapFactory.decodeFile(urlString);
+//				if(bm!=null){
+//					head.setImageBitmap(bm);
+//				}else{
+//					head.setImageResource(R.drawable.ic_launcher);
+//				}
 				detail.setText(cart.getProductText());
 				price.setText(cart.getPrice()+"");
 				count.setText(cart.getAmount()+"");

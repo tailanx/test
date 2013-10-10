@@ -1,7 +1,10 @@
 package com.yidejia.app.mall.util;
 
 import java.util.ArrayList;
+
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import android.app.AlertDialog;
@@ -30,11 +33,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
+import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.UserComment;
+
 import com.yidejia.app.mall.view.GoCartActivity;
 
 public class CartUtil {
@@ -117,9 +126,38 @@ public class CartUtil {
 		this.mTextView = mTextView;
 		this.sumTextView = sumTextView;
 		this.mBox = box;
-
+		initDisplayImageOption();
 	}
+	static final List<String> displayedImages = Collections
+			.synchronizedList(new LinkedList<String>());
 
+	private static class AnimateFirstDisplayListener extends
+			SimpleImageLoadingListener {
+
+		@Override
+		public void onLoadingComplete(String imageUri, View view,
+				Bitmap loadedImage) {
+			if (loadedImage != null) {
+				ImageView imageView = (ImageView) view;
+				boolean firstDisplay = !displayedImages.contains(imageUri);
+				if (firstDisplay) {
+					FadeInBitmapDisplayer.animate(imageView, 500);
+					displayedImages.add(imageUri);
+				}
+			}
+		}
+	}
+	private void initDisplayImageOption() {
+		options = new DisplayImageOptions.Builder()
+				.showStubImage(R.drawable.hot_sell_right_top_image)
+				.showImageOnFail(R.drawable.hot_sell_right_top_image)
+				.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+				.cacheInMemory(true).cacheOnDisc(true).build();
+	}
+	
+	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+	private DisplayImageOptions options;
+	protected ImageLoader imageLoader = ImageLoader.getInstance();// 加载图片
 	/**
 	 * 显示全部的数据
 	 */
@@ -176,15 +214,16 @@ public class CartUtil {
 				
 				mTextView.setText(a+"");
 				sumTextView.setText(b+"");
-				
 				String path = cart.getImgUrl();
-				Bitmap bm = BitmapFactory.decodeFile(path);
-				if (bm != null) {
-					headImageView.setImageBitmap(bm);
-				} else {
-					headImageView.setImageResource(R.drawable.ic_launcher);
-				}
-				
+				imageLoader.displayImage(path, headImageView, options,
+						animateFirstListener);
+//				Bitmap bm = BitmapFactory.decodeFile(path);
+//				if (bm != null) {
+//					headImageView.setImageBitmap(bm);
+//				} else {
+//					headImageView.setImageResource(R.drawable.ic_launcher);
+//				}
+//				
 				detailTextView.setText(cart.getProductText());// 商品的介绍
 				layout.setOnClickListener(new OnClickListener() {
 
@@ -459,6 +498,12 @@ public class CartUtil {
 								checkBox.setChecked(true);
 
 							}
+						}else{
+							
+							for (int i = 0; i < mList.size(); i++) {
+								CheckBox checkBox = (CheckBox) mList.get(i);
+								checkBox.setChecked(false);
+						}
 						}
 
 					}
