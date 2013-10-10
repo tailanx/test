@@ -135,7 +135,9 @@ public class GoodsView {
 				activity.sendBroadcast(intent);
 				
 				boolean istrue =  manage.addCart(cart);
-				Log.i("info", istrue+"   cart_num");
+				if(istrue){
+					builder.show();
+				}
 			}
 		});
 
@@ -158,7 +160,7 @@ public class GoodsView {
 
 			@Override
 			public void onClick(View v) {
-				builder.show();
+//				builder.show();
 				// TODO Auto-generated method stub
 //				Intent intent = new Intent(activity, GoCartActivity.class);
 				// Bundle bundle = new Bundle();
