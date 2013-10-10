@@ -33,7 +33,7 @@ public class MyApplication extends Application{
 		return isLogin;
 	}
 	
-	private String userId;
+	private String userId = 235669 +"";
 	public void setUserId(String userId){
 		this.userId = userId;
 	}
