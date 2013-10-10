@@ -321,6 +321,8 @@ public class GoodsView {
 								activity.finish();
 							}
 						}).setNegativeButton("‘Ÿπ‰π‰", null).create();
+		 
+		 
 		options = new DisplayImageOptions.Builder()
 				.showStubImage(R.drawable.hot_sell_right_top_image)
 				.showImageOnFail(R.drawable.hot_sell_right_top_image)
