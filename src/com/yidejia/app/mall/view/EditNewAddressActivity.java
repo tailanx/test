@@ -39,7 +39,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 	// private Spinner city;
 	private EditText nameTextView;// 收货人姓名
 	private EditText numberTextView;// 收货人电话
-	private EditText areaTextView;// 收货人电话
+	private EditText areaTextView;// 收货人地址
 	private Spinner spinner1 = null;
 	private Spinner spinner2 = null;
 	private Spinner spinner3 = null;
