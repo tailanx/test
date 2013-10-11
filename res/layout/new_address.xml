@@ -22,7 +22,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:background="@drawable/back1"
-            android:onClick="doClick" />
+            android:onClick="doClick" />
     -->
 
     <TableLayout
