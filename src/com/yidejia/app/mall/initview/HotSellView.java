@@ -39,8 +39,8 @@ public class HotSellView {
 		ImageView main_hot_sell_left_image = (ImageView) view.findViewById(R.id.main_hot_sell_left_image);
 		String imageUrl = hotsellProduct.getImgUrl();
 		//ÃÌº”Õº∆¨
-//		imageLoader.displayImage(imageUrl, main_hot_sell_left_image, options,
-//				animateFirstListener);
+		imageLoader.displayImage(imageUrl, main_hot_sell_left_image, options,
+				animateFirstListener);
 		
 		//hot sell ”“…œ
 		hotsellProduct = hotsellArray.get(1);
@@ -51,8 +51,8 @@ public class HotSellView {
 		ImageView main_hot_sell_right_top_image = (ImageView) view.findViewById(R.id.main_hot_sell_right_top_image);
 		imageUrl = hotsellProduct.getImgUrl();
 		//ÃÌº”Õº∆¨
-//		imageLoader.displayImage(imageUrl, main_hot_sell_right_top_image, options,
-//				animateFirstListener);
+		imageLoader.displayImage(imageUrl, main_hot_sell_right_top_image, options,
+				animateFirstListener);
 		
 		//hot sell ”“œ¬
 		hotsellProduct = hotsellArray.get(2);
@@ -63,8 +63,8 @@ public class HotSellView {
 		ImageView main_hot_sell_right_down_image = (ImageView) view.findViewById(R.id.main_hot_sell_right_down_image);
 		imageUrl = hotsellProduct.getImgUrl();
 		//ÃÌº”Õº∆¨
-//		imageLoader.displayImage(imageUrl, main_hot_sell_right_down_image, options,
-//				animateFirstListener);
+		imageLoader.displayImage(imageUrl, main_hot_sell_right_down_image, options,
+				animateFirstListener);
 	}
 	
 	public void initAcymerView(ArrayList<MainProduct> acymerArray){
@@ -79,8 +79,8 @@ public class HotSellView {
 		ImageView main_acymei_left_image = (ImageView) view.findViewById(R.id.main_acymei_left_image);
 		String imageUrl = acymerProduct.getImgUrl();
 		//ÃÌº”Õº∆¨
-//		imageLoader.displayImage(imageUrl, main_acymei_left_image, options,
-//				animateFirstListener);
+		imageLoader.displayImage(imageUrl, main_acymei_left_image, options,
+				animateFirstListener);
 		
 		//acymer ”“…œ
 		acymerProduct = acymerArray.get(1);
@@ -91,8 +91,8 @@ public class HotSellView {
 		ImageView main_acymei_right_top_image = (ImageView) view.findViewById(R.id.main_acymei_right_top_image);
 		imageUrl = acymerProduct.getImgUrl();
 		//ÃÌº”Õº∆¨
-//		imageLoader.displayImage(imageUrl, main_acymei_right_top_image, options,
-//				animateFirstListener);
+		imageLoader.displayImage(imageUrl, main_acymei_right_top_image, options,
+				animateFirstListener);
 		
 		//acymer ”“œ¬
 		acymerProduct = acymerArray.get(2);
@@ -103,8 +103,8 @@ public class HotSellView {
 		ImageView main_acymei_right_down_image = (ImageView) view.findViewById(R.id.main_acymei_right_down_image);
 		imageUrl = acymerProduct.getImgUrl();
 		//ÃÌº”Õº∆¨
-//		imageLoader.displayImage(imageUrl, main_acymei_right_down_image, options,
-//				animateFirstListener);
+		imageLoader.displayImage(imageUrl, main_acymei_right_down_image, options,
+				animateFirstListener);
 	}
 	
 	public void initInerbtyView(ArrayList<MainProduct> inerbtyArray){
@@ -119,8 +119,8 @@ public class HotSellView {
 		ImageView main_inerbty_top_left_image = (ImageView) view.findViewById(R.id.main_inerbty_top_left_image);
 		String imageUrl = inerbtyProduct.getImgUrl();
 		//ÃÌº”Õº∆¨
-//		imageLoader.displayImage(imageUrl, main_inerbty_top_left_image, options,
-//				animateFirstListener);
+		imageLoader.displayImage(imageUrl, main_inerbty_top_left_image, options,
+				animateFirstListener);
 		
 		//inerbty ”“…œ
 		inerbtyProduct = inerbtyArray.get(1);
@@ -131,8 +131,8 @@ public class HotSellView {
 		ImageView main_inerbty_top_right_image = (ImageView) view.findViewById(R.id.main_inerbty_top_right_image);
 		imageUrl = inerbtyProduct.getImgUrl();
 		//ÃÌº”Õº∆¨
-//		imageLoader.displayImage(imageUrl, main_inerbty_top_right_image, options,
-//				animateFirstListener);
+		imageLoader.displayImage(imageUrl, main_inerbty_top_right_image, options,
+				animateFirstListener);
 		
 		//inerbty ◊Û÷–
 		inerbtyProduct = inerbtyArray.get(2);
@@ -143,8 +143,8 @@ public class HotSellView {
 		ImageView main_inerbty_mid_left_image = (ImageView) view.findViewById(R.id.main_inerbty_mid_left_image);
 		imageUrl = inerbtyProduct.getImgUrl();
 		//ÃÌº”Õº∆¨
-//		imageLoader.displayImage(imageUrl, main_inerbty_mid_left_image, options,
-//				animateFirstListener);
+		imageLoader.displayImage(imageUrl, main_inerbty_mid_left_image, options,
+				animateFirstListener);
 		
 		//inerbty ”“÷–
 		inerbtyProduct = inerbtyArray.get(3);
@@ -156,8 +156,8 @@ public class HotSellView {
 		ImageView main_inerbty_mid_right_image = (ImageView) view.findViewById(R.id.main_inerbty_mid_right_image);
 		imageUrl = inerbtyProduct.getImgUrl();
 		//ÃÌº”Õº∆¨
-//		imageLoader.displayImage(imageUrl, main_inerbty_mid_right_image, options,
-//				animateFirstListener);
+		imageLoader.displayImage(imageUrl, main_inerbty_mid_right_image, options,
+				animateFirstListener);
 		
 		//inerbty ◊Ûœ¬
 		inerbtyProduct = inerbtyArray.get(4);
@@ -168,8 +168,8 @@ public class HotSellView {
 		ImageView main_inerbty_down_left_image = (ImageView) view.findViewById(R.id.main_inerbty_down_left_image);
 		imageUrl = inerbtyProduct.getImgUrl();
 		//ÃÌº”Õº∆¨
-//		imageLoader.displayImage(imageUrl, main_inerbty_down_left_image, options,
-//				animateFirstListener);
+		imageLoader.displayImage(imageUrl, main_inerbty_down_left_image, options,
+				animateFirstListener);
 		
 		//inerbty ”“œ¬
 		inerbtyProduct = inerbtyArray.get(5);
@@ -180,8 +180,8 @@ public class HotSellView {
 		ImageView main_inerbty_down_right_image = (ImageView) view.findViewById(R.id.main_inerbty_down_right_image);
 		imageUrl = inerbtyProduct.getImgUrl();
 		//ÃÌº”Õº∆¨
-//		imageLoader.displayImage(imageUrl, main_inerbty_down_right_image, options,
-//				animateFirstListener);
+		imageLoader.displayImage(imageUrl, main_inerbty_down_right_image, options,
+				animateFirstListener);
 	}
 	
 	static final List<String> displayedImages = Collections.synchronizedList(new LinkedList<String>());

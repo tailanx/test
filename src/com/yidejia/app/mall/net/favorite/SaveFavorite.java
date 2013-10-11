@@ -50,7 +50,8 @@ public class SaveFavorite {
 		
 		keys[6] = "sign";
 		StringBuffer strTemp = new StringBuffer();
-		strTemp.append("ChunTianfw_mobile123456");
+//		strTemp.append("ChunTianfw_mobile123456");
+		strTemp.append("ChunTianfw_mobile@SDF!TD#DF#*CB$GER@");
 		strTemp.append(api);
 		strTemp.append(ts);
 		Md5 md = new Md5();
@@ -83,7 +84,7 @@ public class SaveFavorite {
 	 */
 	public String saveFavorite(String userid, String goodsid) throws IOException{
 		getHttpAddress(userid, goodsid);
-		HttpPostConn conn = new HttpPostConn(urlString, keys, values);
+		HttpPostConn conn = new HttpPostConn(keys, values);
 		result = conn.getJsonResult();
 		return result;
 	}

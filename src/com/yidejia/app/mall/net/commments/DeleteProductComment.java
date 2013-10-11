@@ -39,6 +39,7 @@ public class DeleteProductComment {
 		
 		
 		keys[2] = "key";
+//		values[2] = "fw_test";
 		values[2] = "fw_mobile";
 		keys[3] = "format";
 		values[3] = "array";
@@ -49,7 +50,8 @@ public class DeleteProductComment {
 		
 		keys[5] = "sign";
 		StringBuffer strTemp = new StringBuffer();
-		strTemp.append("ChunTianfw_mobile123456");
+//		strTemp.append("ChunTianfw_mobile123456");
+		strTemp.append("ChunTianfw_mobile@SDF!TD#DF#*CB$GER@");
 		strTemp.append(api);
 		strTemp.append(ts);
 		Md5 md = new Md5();
@@ -81,7 +83,7 @@ public class DeleteProductComment {
 	 */
 	public String deleteComment(String id) throws IOException{
 		getHttpAddress(id);
-		HttpPostConn conn = new HttpPostConn(urlString, keys, values);
+		HttpPostConn conn = new HttpPostConn(keys, values);
 		result = conn.getJsonResult();
 		return result;
 	}

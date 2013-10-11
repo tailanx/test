@@ -28,6 +28,7 @@ public class EffectDataUtil {
 		values[4] = fields;
 		
 		keys[5] = "key";
+//		values[5] = "fw_test";
 		values[5] = "fw_mobile";
 		keys[6] = "format";
 		values[6] = "array";
@@ -39,7 +40,8 @@ public class EffectDataUtil {
 		
 		keys[8] = "sign";
 		StringBuffer strTemp = new StringBuffer();
-		strTemp.append("ChunTianfw_mobile123456");
+//		strTemp.append("ChunTianfw_mobile123456");
+		strTemp.append("ChunTianfw_mobile@SDF!TD#DF#*CB$GER@");
 		strTemp.append(api);
 		strTemp.append(ts);
 		Md5 md = new Md5();

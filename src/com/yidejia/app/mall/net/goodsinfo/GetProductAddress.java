@@ -32,6 +32,7 @@ public class GetProductAddress {
 		values[1] = id;
 		keys[2] = "key";
 		values[2] = "fw_mobile";
+//		values[2] = "fw_test";
 		keys[3] = "format";
 		values[3] = "array";
 		keys[4] = "ts";
@@ -41,7 +42,8 @@ public class GetProductAddress {
 		
 		keys[5] = "sign";
 		StringBuffer strTemp = new StringBuffer();
-		strTemp.append("ChunTianfw_mobile123456");
+//		strTemp.append("ChunTianfw_mobile123456");
+		strTemp.append("ChunTianfw_mobile@SDF!TD#DF#*CB$GER@");
 		strTemp.append(api);
 		strTemp.append(ts);
 		Md5 md = new Md5();

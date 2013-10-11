@@ -22,7 +22,8 @@ import org.apache.http.util.EntityUtils;
 import android.util.Log;
 
 public class HttpPostConn {
-	private String urlString;
+	private String urlString = "http://fw1.atido.net/";
+//	private String urlString = "http://192.168.1.254:802/";
 	private String TAG = "HttpGetConn";
 	private int TIME_OUT_DELAY = 10000;
 	
@@ -31,8 +32,8 @@ public class HttpPostConn {
 //	private int count = 0;
 	
 	
-	public HttpPostConn(String urlString, String[]keys, String[] values){
-		this.urlString = urlString;
+	public HttpPostConn(String[]keys, String[] values){
+//		this.urlString = urlString;
 		this.keys = keys;
 		this.values = values;
 	}

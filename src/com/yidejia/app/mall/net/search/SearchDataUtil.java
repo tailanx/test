@@ -43,6 +43,7 @@ public class SearchDataUtil {
 		keys[7] = "limit1";
 		values[7] = limit1;
 		keys[8] = "key";
+//		values[8] = "fw_test";
 		values[8] = "fw_mobile";
 		keys[9] = "format";
 		values[9] = "array";
@@ -53,7 +54,8 @@ public class SearchDataUtil {
 		
 		keys[11] = "sign";
 		StringBuffer strTemp = new StringBuffer();
-		strTemp.append("ChunTianfw_mobile123456");
+//		strTemp.append("ChunTianfw_mobile123456");
+		strTemp.append("ChunTianfw_mobile@SDF!TD#DF#*CB$GER@");
 		strTemp.append(api);
 		strTemp.append(ts);
 		Md5 md = new Md5();

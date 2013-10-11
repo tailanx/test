@@ -44,6 +44,7 @@ public class DeleteUserAddress {
 		values[2] = aid;
 		
 		keys[3] = "key";
+//		values[3] = "fw_test";
 		values[3] = "fw_mobile";
 		keys[4] = "format";
 		values[4] = "array";
@@ -54,7 +55,8 @@ public class DeleteUserAddress {
 		
 		keys[6] = "sign";
 		StringBuffer strTemp = new StringBuffer();
-		strTemp.append("ChunTianfw_mobile123456");
+//		strTemp.append("ChunTianfw_mobile123456");
+		strTemp.append("ChunTianfw_mobile@SDF!TD#DF#*CB$GER@");
 		strTemp.append(api);
 		strTemp.append(ts);
 		Md5 md = new Md5();
@@ -88,7 +90,7 @@ public class DeleteUserAddress {
 	private String urlString = "http://192.168.1.254:802/";
 	public String deleteAddress(String cid, String aid) throws IOException{
 		getHttpAddress(cid, aid);
-		HttpPostConn conn = new HttpPostConn(urlString, keys, values);
+		HttpPostConn conn = new HttpPostConn(keys, values);
 		result = conn.getJsonResult();
 		return result;
 	}

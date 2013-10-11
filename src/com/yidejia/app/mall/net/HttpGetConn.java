@@ -25,7 +25,8 @@ public class HttpGetConn {
 //	public HttpGetConn(){
 //		
 //	}
-	private String urlHost = "http://192.168.1.254:802/?";
+	private String urlHost = "http://fw1.atido.net/?";
+//	private String urlHost = "http://192.168.1.254:802/?";
 	public HttpGetConn(String urlString){
 		this.urlString = urlHost + urlString;
 	}
@@ -47,6 +48,7 @@ public class HttpGetConn {
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				result = EntityUtils.toString(httpResponse.getEntity());
 				Log.i(TAG, "返回码:"+httpResponse.getStatusLine().getStatusCode());
+				Log.i(TAG, "返回信息:"+result);
 //				count = 0;
 			} else if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_REQUEST_TIMEOUT ){
 				Log.i(TAG, "连接超时："+httpResponse.getStatusLine().getStatusCode());

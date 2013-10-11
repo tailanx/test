@@ -54,6 +54,7 @@ public class SaveUserAddress {
 		
 		keys[9] = "key";
 		values[9] = "fw_mobile";
+//		values[9] = "fw_test";
 		keys[10] = "format";
 		values[10] = "array";
 		keys[11] = "ts";
@@ -63,7 +64,8 @@ public class SaveUserAddress {
 		
 		keys[12] = "sign";
 		StringBuffer strTemp = new StringBuffer();
-		strTemp.append("ChunTianfw_mobile123456");
+//		strTemp.append("ChunTianfw_mobile123456");
+		strTemp.append("ChunTianfw_mobile@SDF!TD#DF#*CB$GER@");
 		strTemp.append(api);
 		strTemp.append(ts);
 		Md5 md = new Md5();
@@ -106,7 +108,7 @@ public class SaveUserAddress {
 			String city, String district, String address, String recipient_id) throws IOException{
 		getHttpAddress(customer_id, customer_name, handset, province,
 				 city, district, address, recipient_id);
-		HttpPostConn conn = new HttpPostConn(urlString, keys, values);
+		HttpPostConn conn = new HttpPostConn(keys, values);
 		result = conn.getJsonResult();
 		return result;
 	}
