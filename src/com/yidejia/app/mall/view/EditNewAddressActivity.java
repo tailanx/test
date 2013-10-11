@@ -51,56 +51,8 @@ public class EditNewAddressActivity extends SherlockActivity {
 	private boolean isDefauteUpdate;
 	private String id;
 
-	private void setupShow() {
-
-		// //添加条目被选中监听器
-		// province.setOnItemSelectedListener(new
-		// AdapterView.OnItemSelectedListener() {
-		//
-		// @Override
-		// public void onItemSelected(AdapterView<?> parent, View view,int
-		// position, long id) {
-		// //parent既是province对象
-		// Spinner spinner = (Spinner)parent;
-		// String pro = (String)spinner.getItemAtPosition(position);
-		//
-		// //(处理省的市的显示)
-		// //将默认值与ArrayAdapter连接(从资源数组文件中获取数据)
-		// ArrayAdapter<CharSequence> cityAdapter =
-		// ArrayAdapter.createFromResource
-		// (EditNewAddressActivity.this, R.array.citydefault,
-		// android.R.layout.simple_spinner_item);
-		//
-		// //new ArrayAdapter<CharSequence>
-		// // (MainActivity.this,android.R.layout.simple_spinner_item, cities);
-		// //获取所在省含有哪些市(从资源数组文件中获取数据)
-		// if(pro.equals("河北省")){
-		//
-		// cityAdapter = ArrayAdapter.createFromResource
-		// (EditNewAddressActivity.this, R.array.hb,
-		// android.R.layout.simple_spinner_item);
-		// }else if(pro.equals("北京市")){
-		//
-		// cityAdapter = ArrayAdapter.createFromResource
-		// (EditNewAddressActivity.this, R.array.bj,
-		// android.R.layout.simple_spinner_item);
-		// }else if(pro.equals("山西省")){
-		//
-		// cityAdapter = ArrayAdapter.createFromResource
-		// (EditNewAddressActivity.this, R.array.shx,
-		// android.R.layout.simple_spinner_item);
-		// }
-		// //绑定数据到Spinner(City)上
-		// city.setAdapter(cityAdapter);
-		// }
-		//
-		// @Override
-		// public void onNothingSelected(AdapterView<?> parent) {
-		//
-		// }
-		//
-		// });
-	}
+	
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +74,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 		nameTextView = (EditText) findViewById(R.id.new_address_item_edittext1);
 		numberTextView = (EditText) findViewById(R.id.new_address_item_edittext2);
 		areaTextView = (EditText) findViewById(R.id.new_address_item_edittext3);
-
+		
 		spinner1.setPrompt("省");
 		spinner2.setPrompt("城市");
 		spinner3.setPrompt("地区");
