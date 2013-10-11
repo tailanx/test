@@ -2,30 +2,25 @@ package com.yidejia.app.mall.fragment;
 
 import java.util.ArrayList;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.yidejia.app.mall.GoodsInfoActivity;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
@@ -33,8 +28,6 @@ import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.UserComment;
 import com.yidejia.app.mall.util.CartUtil;
-import com.yidejia.app.mall.util.Consts;
-import com.yidejia.app.mall.view.GoCartActivity;
 import com.yidejia.app.mall.view.NewAddressActivity;
 import com.yidejia.app.mall.view.PayActivity;
 
@@ -65,6 +58,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	private View view;
 	private CartsDataManage dataManage2;
 	private AddressDataManage addressManage;// 地址管理
+	private PullToRefreshScrollView mPullToRefreshScrollView;// 刷新界面
 
 	// private InnerReceiver receiver;
 
@@ -212,7 +206,17 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 				sumTextView, mBox);
 
 		cartUtil.AllComment();
-
+		mPullToRefreshScrollView = (PullToRefreshScrollView) view
+				.findViewById(R.id.shopping_cart_item_goods_scrollView);
+		String label = "上次更新于"
+				+ DateUtils.formatDateTime(getSherlockActivity(),
+						System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
+								| DateUtils.FORMAT_ABBREV_ALL
+								| DateUtils.FORMAT_SHOW_DATE);
+		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
+				label);
+		mPullToRefreshScrollView.onRefreshComplete();
+		mPullToRefreshScrollView.setOnRefreshListener(listener);
 		// receiver = new InnerReceiver();
 		// IntentFilter filter = new IntentFilter();
 		// filter.addAction(Consts.UPDATE_CHANGE);
@@ -345,6 +349,27 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 		return view;
 
 	}
+private  int fromIndex = 0;
+private int amontIndex = 10 ;
+	// 刷新添加事件
+	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
+
+		@Override
+		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+			// TODO Auto-generated method stub
+
+			String label = "上次更新于"
+					+ DateUtils.formatDateTime(getSherlockActivity(),
+							System.currentTimeMillis(),
+							DateUtils.FORMAT_SHOW_DATE
+									| DateUtils.FORMAT_SHOW_TIME
+									| DateUtils.FORMAT_ABBREV_ALL);
+
+			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+			fromIndex += amontIndex;
+			mPullToRefreshScrollView.onRefreshComplete();
+		}
+	};
 
 	// @Override
 	// public void onCreateContextMenu(ContextMenu menu, View v,
@@ -386,7 +411,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 			Intent intent = new Intent(getSherlockActivity(),
 					NewAddressActivity.class);
 			getSherlockActivity().startActivity(intent);
-			
+
 			// Log.i("info", "nihao");
 
 		} else {
@@ -396,4 +421,3 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 
 	}
 }
-
