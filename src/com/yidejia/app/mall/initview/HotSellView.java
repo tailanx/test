@@ -31,6 +31,7 @@ public class HotSellView {
 	public void initHotSellView(ArrayList<MainProduct> hotsellArray){
 		MainProduct hotsellProduct;
 		//hot sell ×ó±ß
+		Log.i("info", hotsellArray.size()+"");
 		hotsellProduct = hotsellArray.get(0);
 		TextView main_hot_sell_goods_title = (TextView) view.findViewById(R.id.main_hot_sell_goods_title);
 		main_hot_sell_goods_title.setText(hotsellProduct.getTitle());
