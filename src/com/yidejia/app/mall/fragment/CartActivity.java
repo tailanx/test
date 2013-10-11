@@ -371,53 +371,6 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 
 	}
 
-	// //接收广播
-	// private class InnerReceiver extends BroadcastReceiver{
-	//
-	// @Override
-	// public void onReceive(Context context, Intent intent) {
-	// // TODO Auto-generated method stub
-	// String action = intent.getAction();
-	// if(Consts.UPDATE_CHANGE.equals(action)){
-	//
-	// // Log.i("info", "nihao ");
-	// // cartUtil = new CartUtil(getSherlockActivity(), layout, counTextView,
-	// // sumTextView,mBox);
-	// //
-	// // cartUtil.AllComment();
-	// }
-	// }
-
-	// }
-	// @Override
-	// public boolean onContextItemSelected(MenuItem item) {
-	//
-	// switch (item.getItemId()) {
-	//
-	// case MENU1://点击删除
-	//
-	// dataManage2 = new CartsDataManage();
-	// // boolean isture = dataManage2.delCart(info.id+"");
-	// // Log.i("info", isture+"   isture");
-	// break;
-	//
-	// case MENU2://查看商品详情
-	// Intent intent = new
-	// Intent(getSherlockActivity(),GoodsInfoActivity.class);
-	// Bundle bundle = new Bundle();
-	// // bundle.putSerializable("goodsId", info.id);
-	// intent.putExtras(bundle);
-	// getSherlockActivity().startActivity(intent);
-	// break;
-	// case MENU3://收藏
-	// Toast.makeText(getSherlockActivity(), "收藏成功", Toast.LENGTH_LONG).show();
-	// break;
-	// }
-	//
-	//
-	// return super.onContextItemSelected(item);
-	// }
-
 	Addresses address = null;
 
 	/**
