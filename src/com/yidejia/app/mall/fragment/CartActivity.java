@@ -57,7 +57,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	private LinearLayout layout;
 	private View view;
 	private CartsDataManage dataManage2;
-	private AddressDataManage addressManage;// 地址管理
+//	private AddressDataManage addressManage;// 地址管理
 	private PullToRefreshScrollView mPullToRefreshScrollView;// 刷新界面
 
 	// private InnerReceiver receiver;
@@ -183,7 +183,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		addressManage = new AddressDataManage(getSherlockActivity());
+//		addressManage = new AddressDataManage(getSherlockActivity());
 		view = inflater.inflate(R.layout.shopping_cart, container, false);
 		// dataManage = new CartsDataManage();
 		// TODO Auto-generated method stub
@@ -322,26 +322,22 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				getAddresses();
+//				getAddresses();
 				Intent intent = new Intent(getSherlockActivity(),
 						PayActivity.class);
 				Bundle bundle = new Bundle();
 				float sum = Float.parseFloat(sumTextView.getText().toString());
-				if (address == null) {
-					Toast.makeText(getSherlockActivity(), "您还未填写收货人地址",
-							Toast.LENGTH_LONG).show();
-
-				} else {
+				
 					if (sum > 0) {
 						bundle.putString("price", sum + "");
-						bundle.putSerializable("address", address);
+//						bundle.putSerializable("address", address);
 						intent.putExtras(bundle);
 						getSherlockActivity().startActivity(intent);
 					} else {
 						Toast.makeText(getSherlockActivity(), "你还未购买任何商品",
 								Toast.LENGTH_LONG).show();
 
-					}
+					
 				}
 			}
 		});
@@ -398,26 +394,26 @@ private int amontIndex = 10 ;
 
 	Addresses address = null;
 
-	/**
-	 * 判断是否用户已经有保存好的地址
-	 */
-	private void getAddresses() {
-
-		String userId = ((MyApplication) getSherlockActivity().getApplication())
-				.getUserId();
-		ArrayList<Addresses> mAddresses = addressManage.getAddressesArray(
-				Integer.parseInt(userId), 0, 5);
-		if (mAddresses.size() == 0) {
-			Intent intent = new Intent(getSherlockActivity(),
-					NewAddressActivity.class);
-			getSherlockActivity().startActivity(intent);
-
-			// Log.i("info", "nihao");
-
-		} else {
-			address = mAddresses.remove(0);
-			// Log.i("info", address + "address");
-		}
-
-	}
+//	/**
+//	 * 判断是否用户已经有保存好的地址
+//	 */
+//	private void getAddresses() {
+//
+//		String userId = ((MyApplication) getSherlockActivity().getApplication())
+//				.getUserId();
+//		ArrayList<Addresses> mAddresses = addressManage.getAddressesArray(
+//				Integer.parseInt(userId), 0, 5);
+//		if (mAddresses.size() == 0) {
+//			Intent intent = new Intent(getSherlockActivity(),
+//					NewAddressActivity.class);
+//			getSherlockActivity().startActivity(intent);
+//
+//			// Log.i("info", "nihao");
+//
+//		} else {
+//			address = mAddresses.remove(0);
+//			// Log.i("info", address + "address");
+//		}
+//
+//	}
 }

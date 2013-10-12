@@ -19,6 +19,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.initview.HotSellView;
 import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.model.MainProduct;
+import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.homepage.GetHomePage;
 import com.yidejia.app.mall.util.UnicodeToString;
 /**
@@ -258,7 +259,7 @@ public class MainPageDataManage {
 			baseProduct.setUId(goodsId);
 			String imgUrl = itemObject.getString("img_name");
 			Log.i(TAG, imgUrl);
-			baseProduct.setImgUrl(imgUrl);
+			baseProduct.setImgUrl(ImageUrl.IMAGEURL+imgUrl);
 			bannerArray.add(baseProduct);
 		}
 	}
@@ -274,7 +275,7 @@ public class MainPageDataManage {
 			String goodsId = itemObject.getString("goods_id");
 			baseProduct.setUId(goodsId);
 			String imgUrl = itemObject.getString("img_name");
-			baseProduct.setImgUrl(imgUrl);
+			baseProduct.setImgUrl(ImageUrl.IMAGEURL+imgUrl);
 			String title = itemObject.getString("name");
 			baseProduct.setTitle(unicode.revert(title));
 			Log.i(TAG, title);

@@ -69,7 +69,7 @@ public class MyApplication extends Application{
 		ImageLoader.getInstance().init(config);
 	}
 	
-	private boolean isLogin;
+	private boolean isLogin = true;
 	public void setIsLogin(boolean isLogin){
 		this.isLogin = isLogin;
 	}

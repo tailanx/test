@@ -46,6 +46,7 @@ public class GetUserAddressList {
 		values[6] = fields;
 		
 		keys[7] = "key";
+//		values[7] = "fw_test";
 		values[7] = "fw_mobile";
 		keys[8] = "format";
 		values[8] = "array";
@@ -56,7 +57,8 @@ public class GetUserAddressList {
 		
 		keys[10] = "sign";
 		StringBuffer strTemp = new StringBuffer();
-		strTemp.append("ChunTianfw_mobile123456");
+//		strTemp.append("ChunTianfw_mobile123456");
+		strTemp.append("ChunTianfw_mobile@SDF!TD#DF#*CB$GER@");
 		strTemp.append(api);
 		strTemp.append(ts);
 		Md5 md = new Md5();

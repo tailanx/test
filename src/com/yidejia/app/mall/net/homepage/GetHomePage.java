@@ -34,6 +34,7 @@ public class GetHomePage {
 		keys[1] = "is_web";
 		values[1] = "n";
 		keys[2] = "key";
+//		values[2] = "fw_test";
 		values[2] = "fw_mobile";
 		keys[3] = "format";
 		values[3] = "array";
@@ -44,7 +45,8 @@ public class GetHomePage {
 		
 		keys[5] = "sign";
 		StringBuffer strTemp = new StringBuffer();
-		strTemp.append("ChunTianfw_mobile123456");
+//		strTemp.append("ChunTianfw_mobile123456");
+		strTemp.append("ChunTianfw_mobile@SDF!TD#DF#*CB$GER@");
 		strTemp.append(api);
 		strTemp.append(ts);
 		Md5 md = new Md5();

@@ -41,6 +41,7 @@ public class CheckExistsFavorite {
 		values[2] = goodsid;
 		
 		keys[3] = "key";
+//		values[3] = "fw_test";
 		values[3] = "fw_mobile";
 		keys[4] = "format";
 		values[4] = "array";
@@ -51,7 +52,8 @@ public class CheckExistsFavorite {
 		
 		keys[6] = "sign";
 		StringBuffer strTemp = new StringBuffer();
-		strTemp.append("ChunTianfw_mobile123456");
+//		strTemp.append("ChunTianfw_mobile123456");
+		strTemp.append("ChunTianfw_mobile@SDF!TD#DF#*CB$GER@");
 		strTemp.append(api);
 		strTemp.append(ts);
 		Md5 md = new Md5();
@@ -85,7 +87,7 @@ public class CheckExistsFavorite {
 	public String httpResponse(String userid, String goodsid) throws IOException{
 		getHttpAddress(userid, goodsid);
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress(userid, goodsid));
-		HttpPostConn conn = new HttpPostConn(urlString, keys, values);
+		HttpPostConn conn = new HttpPostConn(keys, values);
 		result = conn.getJsonResult();
 		return result;
 	}

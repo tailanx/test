@@ -55,6 +55,7 @@ public class SaveOrder {
 		values[10] = comments;
 		
 		keys[11] = "key";
+//		values[11] = "fw_test";
 		values[11] = "fw_mobile";
 		keys[12] = "format";
 		values[12] = "array";
@@ -65,7 +66,8 @@ public class SaveOrder {
 		
 		keys[14] = "sign";
 		StringBuffer strTemp = new StringBuffer();
-		strTemp.append("ChunTianfw_mobile123456");
+//		strTemp.append("ChunTianfw_mobile123456");
+		strTemp.append("ChunTianfw_mobile@SDF!TD#DF#*CB$GER@");
 		strTemp.append(api);
 		strTemp.append(ts);
 		Md5 md = new Md5();

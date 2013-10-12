@@ -206,9 +206,9 @@ public class AddressDataManage {
 					addresses.setArea(unicode.revert(area));
 					String maddress = addressItem.getString("address");
 					addresses.setAddress(unicode.revert(maddress));
-					String isDefault = addressItem.getString("is_default");
-					boolean isDef = isDefault.equals("y") ? true : false;
-					addresses.setDefaultAddress(isDef);
+//					String isDefault = addressItem.getString("is_default");
+//					boolean isDef = isDefault.equals("y") ? true : false;
+//					addresses.setDefaultAddress(isDef);
 					addressesArray.add(addresses);
 				}
 			}

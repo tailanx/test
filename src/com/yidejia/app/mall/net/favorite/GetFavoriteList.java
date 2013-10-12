@@ -43,8 +43,9 @@ public class GetFavoriteList {
 		values[5] = order;
 		keys[6] = "fields";
 		values[6] = fields;
-		keys[7] = "key";
+//		keys[7] = "key";
 		values[7] = "fw_mobile";
+		values[7] = "fw_test";
 		keys[8] = "format";
 		values[8] = "array";
 		keys[9] = "ts";
@@ -54,7 +55,8 @@ public class GetFavoriteList {
 		
 		keys[10] = "sign";
 		StringBuffer strTemp = new StringBuffer();
-		strTemp.append("ChunTianfw_mobile123456");
+//		strTemp.append("ChunTianfw_mobile123456");
+		strTemp.append("ChunTianfw_mobile@SDF!TD#DF#*CB$GER@");
 		strTemp.append(api);
 		strTemp.append(ts);
 		Md5 md = new Md5();

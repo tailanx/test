@@ -30,6 +30,7 @@ public class PayOutOrder {
 		
 		
 		keys[3] = "key";
+//		values[3] = "fw_test";
 		values[3] = "fw_mobile";
 		keys[4] = "format";
 		values[4] = "array";
@@ -40,7 +41,8 @@ public class PayOutOrder {
 		
 		keys[6] = "sign";
 		StringBuffer strTemp = new StringBuffer();
-		strTemp.append("ChunTianfw_mobile123456");
+//		strTemp.append("ChunTianfw_mobile123456");
+		strTemp.append("ChunTianfw_mobile@SDF!TD#DF#*CB$GER@");
 		strTemp.append(api);
 		strTemp.append(ts);
 		Md5 md = new Md5();
