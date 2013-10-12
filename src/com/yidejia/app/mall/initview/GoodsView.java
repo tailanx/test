@@ -368,14 +368,17 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.FavoriteDataManage;
+import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.MainProduct;
 import com.yidejia.app.mall.model.ProductBaseInfo;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.GoCartActivity;
+import com.yidejia.app.mall.view.NewAddressActivity;
 import com.yidejia.app.mall.view.PayActivity;
 
 public class GoodsView {
@@ -389,6 +392,7 @@ public class GoodsView {
 	private String userid;// 本用户id
 	private boolean isLogin;// 用户是否登录
 	private AlertDialog builder;
+	private AddressDataManage addressManage;//地址
 
 	public GoodsView(Activity activity, View view, int width) {
 		this.view = view;
@@ -399,6 +403,8 @@ public class GoodsView {
 		MyApplication myApplication = new MyApplication();
 		userid = myApplication.getUserId();
 		isLogin = myApplication.getIsLogin();
+		addressManage = new AddressDataManage(activity);
+		getAddresses();
 	}
 
 	/**
@@ -423,7 +429,7 @@ public class GoodsView {
 		base_info_content_text.setText(name);
 		cart.setProductText(name);
 		// 价格
-		TextView price = (TextView) view.findViewById(R.id.price);
+		final TextView price = (TextView) view.findViewById(R.id.price);
 		String priceString = info.getPrice();
 		try {
 			float priceNum = Float.parseFloat(priceString);
@@ -498,11 +504,28 @@ public class GoodsView {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(activity, PayActivity.class);
-				Bundle bundle = new Bundle();
-				intent.putExtras(bundle);
-				activity.startActivity(intent);
-				activity.finish();
+				getAddresses();
+				Intent intent = new Intent(activity,
+						PayActivity.class);
+				float sum = Float.parseFloat(price.getText()
+						.toString().substring(0, price.getText()
+						.toString().lastIndexOf("元")));
+				if (address == null) {
+					Toast.makeText(activity, "您还未填写收货人地址",
+							Toast.LENGTH_LONG).show();
+				} else {
+					if (sum > 0) {
+						Bundle bundle = new Bundle();
+						bundle.putSerializable("address", address);
+						bundle.putString("price", sum + "");
+						intent.putExtras(bundle);
+						activity.startActivity(intent);
+						activity.finish();
+					} else {
+						Toast.makeText(activity, "你还未购买任何商品",
+								Toast.LENGTH_LONG).show();
+					}
+				}
 			}
 		});
 		// 购物车按钮
@@ -765,5 +788,26 @@ public class GoodsView {
 		}
 
 	}
+	//加载地址
+	Addresses address = null;
+	private void getAddresses() {
+
+		String userId = ((MyApplication)activity.getApplication()).getUserId();
+		ArrayList<Addresses> mAddresses = addressManage.getAddressesArray(
+				Integer.parseInt(userId), 0, 5);
+		if (mAddresses.size() == 0) {
+			Intent intent = new Intent(activity,
+					NewAddressActivity.class);
+			activity.startActivity(intent);
+			activity.finish();
+			// Log.i("info", "nihao");
+
+		} else {
+			address = mAddresses.remove(0);
+			// Log.i("info", address + "address");
+		}
+
+	}
+
 
 }
