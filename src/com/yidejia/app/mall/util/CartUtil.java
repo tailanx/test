@@ -410,7 +410,7 @@ public class CartUtil {
 					public void onClick(View v) {
 					
 						int sum = Integer.parseInt(number.getText().toString());
-						if (sum <= 0) {
+						if (sum <= 1) {
 							Toast.makeText(context, "已经是最小的数值了",
 									Toast.LENGTH_LONG).show();
 						} else {
