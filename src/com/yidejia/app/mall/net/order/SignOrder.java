@@ -10,18 +10,18 @@ import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.util.Md5;
 /**
- * 修改支付状态
+ * 取消订单
  * @author long bin
  *
  */
-public class PayOutOrder {
+public class SignOrder {
 	private String[] keys = new String[7];
 	private String[] values = new String[7];
-	private String TAG = PayOutOrder.class.getName();
+	private String TAG = SignOrder.class.getName();
 	
 	/**
 	 * 
-	 * 只有返回 “success付款成功” 才算提交订单成功。
+	 * 只有返回 “success取消成功” 才算提交订单成功。
 	 * @param customer_id 客户id
 	 * @param code 订单号
 	 */
@@ -70,14 +70,14 @@ public class PayOutOrder {
 	private String result = "";
 	/**
 	 * 
-	 * 只有返回 “success付款成功” 才算提交订单成功。
+	 * 只有返回 “success签收成功” 才算提交订单成功。
 	 * @param customer_id 客户id
 	 * @param code 订单号
 	 */
-	public String getHttpResponseString(String customer_id, String code)throws IOException{
+	public String getHttpResponseString(String customer_id, String code, String token)throws IOException{
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress(customer_id, code));
 //		result = conn.getJsonResult();
-		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4PayOut(customer_id, code));
+		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4SignOrder(customer_id, code, token));
 		result = conn.getHttpResponse();
 		return result;
 	}
