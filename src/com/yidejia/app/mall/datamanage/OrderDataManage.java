@@ -342,7 +342,12 @@ public class OrderDataManage {
 	public String getOrderCode(){
 		return orderCode;
 	}
-	
+	/**
+	 * ÐÞ¸Ä¶©µ¥Ö§¸¶×´Ì¬
+	 * @param customer_id
+	 * @param code
+	 * @return
+	 */
 	public boolean changeOrder(String customer_id, String code) {
 		TaskChange taskChange = new TaskChange(customer_id, code);
 		boolean state = false;
