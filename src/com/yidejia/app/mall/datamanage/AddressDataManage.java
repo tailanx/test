@@ -119,7 +119,7 @@ public class AddressDataManage {
 	 *@param addressId 地址id
 	 *@return: 是否删除成功
 	 */
-	public boolean deleteAddress(int userId, int addressId){
+	public boolean deleteAddress(String userId, String addressId){
 		boolean isSuccess = false;
 //		String resultJson = deleteAddressJson(userId, addressId);
 		TaskDelete taskDelete = new TaskDelete(userId, addressId);
@@ -149,7 +149,7 @@ public class AddressDataManage {
 	 * @param acount 获取个数
 	 * @return
 	 */
-	public ArrayList<Addresses> getAddressesArray(int userId, int fromIndex, int acount){
+	public ArrayList<Addresses> getAddressesArray(String userId, int fromIndex, int acount){
 		
 		TaskGetList taskGetList = new TaskGetList("customer_id="+userId, String.valueOf(fromIndex), String.valueOf(acount), "", "", "%2A");
 		boolean state = false ;
@@ -312,9 +312,9 @@ public class AddressDataManage {
 	
 	
 	private class TaskDelete extends AsyncTask<Void, Void, Boolean>{
-		int userId;
-		int addressId;
-		public TaskDelete(int userId, int addressId){
+		String userId;
+		String addressId;
+		public TaskDelete(String userId, String addressId){
 			this.userId = userId;
 			this.addressId = addressId;
 		}
