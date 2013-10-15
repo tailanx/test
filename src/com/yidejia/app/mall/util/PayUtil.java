@@ -41,6 +41,19 @@ public class PayUtil {
 	private LinearLayout mLayout;// 外层的布局
 
 	private CartsDataManage dataManage;// 用来获取订单数据
+	private Cart cart;
+	public PayUtil(Context context, LinearLayout mLayout,Cart cart) {
+		this.cart = cart;
+		this.context = context;
+		this.inflater = LayoutInflater.from(context);
+		this.mLinearLayoutLayout = mLayout;
+		options = new DisplayImageOptions.Builder()
+				.showStubImage(R.drawable.hot_sell_right_top_image)
+				.showImageOnFail(R.drawable.hot_sell_right_top_image)
+				.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+				.cacheInMemory(true).cacheOnDisc(true).build();
+	
+	}
 
 	public PayUtil(Context context, LinearLayout mLayout) {
 		this.context = context;
@@ -154,5 +167,33 @@ public class PayUtil {
 		}
 
 	}
+	public void cartLoadView() {
+		try {
+		
+				view = inflater.inflate(R.layout.go_pay_item, null);
+				TextView titleTextView = (TextView) view
+						.findViewById(R.id.go_pay_item_text);// 文字描述
+				ImageView headImage = (ImageView) view
+						.findViewById(R.id.go_pay_item_image);// 头像
+				TextView sumPrice = (TextView) view
+						.findViewById(R.id.go_pay_item_sum_detail);// 价格
+				TextView countTextView = (TextView) view
+						.findViewById(R.id.go_pay_item_count_detail);// 商品数目
+				sumPrice.setText(cart.getPrice()+"");
+				countTextView.setText(cart.getAmount()+"");
+				titleTextView.setText(cart.getProductText());
+				String head = cart.getImgUrl();
+				imageLoader.displayImage(head, headImage, options,
+						animateFirstListener);
+				
+				mLinearLayoutLayout.addView(view);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Toast.makeText(context, "网络不给力！", Toast.LENGTH_SHORT).show();
 
+		}
+
+	}
 }
