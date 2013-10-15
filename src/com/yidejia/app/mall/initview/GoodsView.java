@@ -1,4 +1,3 @@
-
 package com.yidejia.app.mall.initview;
 
 import java.util.ArrayList;
@@ -33,10 +32,8 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.FavoriteDataManage;
-import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.MainProduct;
@@ -44,7 +41,6 @@ import com.yidejia.app.mall.model.ProductBaseInfo;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.GoCartActivity;
 import com.yidejia.app.mall.view.LoginActivity;
-import com.yidejia.app.mall.view.NewAddressActivity;
 import com.yidejia.app.mall.view.PayActivity;
 
 public class GoodsView {
@@ -57,8 +53,7 @@ public class GoodsView {
 	private String productId;// 本商品id
 	private String userid;// 本用户id
 	private boolean isLogin;// 用户是否登录
-//	private AlertDialog builder;
-	private AddressDataManage addressManage;//地址
+	private AlertDialog builder;
 
 	public GoodsView(Activity activity, View view, int width) {
 		this.view = view;
@@ -69,8 +64,6 @@ public class GoodsView {
 		MyApplication myApplication = new MyApplication();
 		userid = myApplication.getUserId();
 		isLogin = myApplication.getIsLogin();
-		addressManage = new AddressDataManage(activity);
-//		getAddresses();
 	}
 
 	/**
@@ -95,8 +88,8 @@ public class GoodsView {
 		base_info_content_text.setText(name);
 		cart.setProductText(name);
 		// 价格
-		final TextView price = (TextView) view.findViewById(R.id.price);
-		String priceString = info.getPrice();
+		TextView price = (TextView) view.findViewById(R.id.price);
+		final String priceString = info.getPrice();
 		try {
 			float priceNum = Float.parseFloat(priceString);
 			cart.setPrice(priceNum);
@@ -157,7 +150,11 @@ public class GoodsView {
 				setCartNum(cart_num);
 				Intent intent = new Intent(Consts.UPDATE_CHANGE);
 				activity.sendBroadcast(intent);
+				if(cart.getPrice()>0){
 				boolean istrue = manage.addCart(cart);
+				}else{
+					Toast.makeText(activity, "这是赠品，不能够购买", Toast.LENGTH_LONG).show();
+				}
 				// Log.i("info", istrue+"   cart_num");
 //				if (istrue) {
 //					builder.show();
@@ -170,21 +167,18 @@ public class GoodsView {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-//				getAddresses();
-				Intent intent = new Intent(activity,PayActivity.class);
-				float sum = Float.parseFloat(price.getText()
-						.toString().substring(0, price.getText()
-						.toString().lastIndexOf("元")));
-				
-					
-						Bundle bundle = new Bundle();
-						bundle.putSerializable("Cart", cart);
-						bundle.putString("price", sum + "");
-						intent.putExtras(bundle);
-						activity.startActivity(intent);
-						
-					
-				
+				Intent intent = new Intent(activity, PayActivity.class);
+				try{
+					float sum = Float.parseFloat(priceString);
+					if(sum <= 0) return;//价格出错
+					Bundle bundle = new Bundle();
+					bundle.putString("price", priceString);
+					intent.putExtras(bundle);
+					activity.startActivity(intent);
+					activity.finish();
+				} catch (NumberFormatException e){
+					//价格出错
+				}
 			}
 		});
 		// 购物车按钮
@@ -199,7 +193,7 @@ public class GoodsView {
 				// Bundle bundle = new Bundle();
 				// intent.putExtras(bundle);
 				activity.startActivity(intent);
-				
+				activity.finish();
 			}
 		});
 
@@ -210,12 +204,14 @@ public class GoodsView {
 		FavoriteDataManage favoriteManage = new FavoriteDataManage(activity);
 		if (isLogin && !"".equals(userid)) {
 			if (favoriteManage.checkExists(userid, productId)) {
-				add_favorites.setBackgroundResource(R.drawable.add_favorites2);
+				add_favorites.setImageResource(R.drawable.add_favorites2);
+//				Toast.makeText(activity, "yes", Toast.LENGTH_LONG).show();
 			} else {
-				add_favorites.setBackgroundResource(R.drawable.add_favorites1);
+				add_favorites.setImageResource(R.drawable.add_favorites1);
+//				Toast.makeText(activity, "no", Toast.LENGTH_LONG).show();
 			}
 		} else {
-			add_favorites.setBackgroundResource(R.drawable.add_favorites1);
+			add_favorites.setImageResource(R.drawable.add_favorites1);
 		}
 	}
 
@@ -400,44 +396,42 @@ public class GoodsView {
 			if(!isLogin){
 				Intent intent = new Intent(activity,LoginActivity.class);
 				activity.startActivity(intent);
-			}else if(isLogin && !"".equals(userid)) {
+				}
+			else if (isLogin && !"".equals(userid)) {
 				// 登录状态下
 				if (!manage.checkExists(userid, productId)) {
 					// 未收藏，现在添加收藏
 					if (manage.addFavourite(userid, productId)) {
 						// 收藏成功
-						// Toast.makeText(activity, "加入收藏成功!",
-						// Toast.LENGTH_SHORT)
-						// .show();
+						 Toast.makeText(activity, "加入收藏成功!",
+						 Toast.LENGTH_SHORT)
+						 .show();
 						add_favorites
-								.setBackgroundResource(R.drawable.add_favorites2);
+								.setImageResource(R.drawable.add_favorites2);
 					} else {
-						// Toast.makeText(activity, "抱歉！加入收藏失败。",
-						// Toast.LENGTH_SHORT).show();
+						 Toast.makeText(activity, "抱歉！加入收藏失败。",
+						 Toast.LENGTH_SHORT).show();
 						add_favorites
-								.setBackgroundResource(R.drawable.add_favorites1);
+								.setImageResource(R.drawable.add_favorites1);
 					}
 				} else {
 					// 已收藏，现在删除收藏
 					if (manage.deleteFavourite(userid, productId)) {
 						// 删除成功
 						add_favorites
-								.setBackgroundResource(R.drawable.add_favorites1);
+								.setImageResource(R.drawable.add_favorites1);
 					} else {
 						// 删除失败
 						add_favorites
-								.setBackgroundResource(R.drawable.add_favorites2);
+								.setImageResource(R.drawable.add_favorites2);
 					}
 				}
-			 
-			 
+			} else {
+				// 未登录状态下，收藏到本地
+				// 改变图片
+				flag = !flag;
+				changeFravoriteBg();
 			}
-//			else {
-//				// 未登录状态下，收藏到本地
-//				// 改变图片
-//				flag = !flag;
-//				changeFravoriteBg();
-//			}
 		}
 	};
 
@@ -454,27 +448,4 @@ public class GoodsView {
 
 	}
 
-	//加载地址
-//	Addresses address = null;
-//	private void getAddresses() {
-//
-//		String userId = ((MyApplication)activity.getApplication()).getUserId();
-//		ArrayList<Addresses> mAddresses = addressManage.getAddressesArray(
-//				Integer.parseInt(userId), 0, 5);
-//		if (mAddresses.size() == 0) {
-//			Intent intent = new Intent(activity,
-//					NewAddressActivity.class);
-//			activity.startActivity(intent);
-//			activity.finish();
-//			// Log.i("info", "nihao");
-//
-//		} else {
-//			address = mAddresses.remove(0);
-//			// Log.i("info", address + "address");
-//		}
-//
-//	}
-
-
 }
-

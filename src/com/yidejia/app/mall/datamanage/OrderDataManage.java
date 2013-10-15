@@ -17,9 +17,11 @@ import android.widget.Toast;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.net.ImageUrl;
+import com.yidejia.app.mall.net.order.CancelOrder;
 import com.yidejia.app.mall.net.order.GetOrderList;
 import com.yidejia.app.mall.net.order.PayOutOrder;
 import com.yidejia.app.mall.net.order.SaveOrder;
+import com.yidejia.app.mall.net.order.SignOrder;
 import com.yidejia.app.mall.util.UnicodeToString;
 
 /**
@@ -74,6 +76,8 @@ public class OrderDataManage {
 			// TODO Auto-generated catch block
 			Log.e(TAG, "TaskGetList() ExecutionException");
 			e.printStackTrace();
+		} catch(Exception e){
+			
 		}
 		if (!state) {
 			Toast.makeText(context, "网络不给力！", Toast.LENGTH_SHORT).show();
@@ -249,6 +253,8 @@ public class OrderDataManage {
 			// TODO Auto-generated catch block
 			Log.e(TAG, "Tasksave() ExecutionException");
 			e.printStackTrace();
+		} catch(Exception e){
+			
 		}
 		if (!state) {
 			Toast.makeText(context, "网络不给力！", Toast.LENGTH_SHORT).show();
@@ -342,7 +348,12 @@ public class OrderDataManage {
 	public String getOrderCode(){
 		return orderCode;
 	}
-	
+	/**
+	 * 修改订单支付状态
+	 * @param customer_id
+	 * @param code
+	 * @return
+	 */
 	public boolean changeOrder(String customer_id, String code) {
 		TaskChange taskChange = new TaskChange(customer_id, code);
 		boolean state = false;
@@ -356,6 +367,8 @@ public class OrderDataManage {
 			// TODO Auto-generated catch block
 			Log.e(TAG, "TaskGetList() ExecutionException");
 			e.printStackTrace();
+		} catch(Exception e){
+			
 		}
 		if (!state) {
 			Toast.makeText(context, "网络不给力！", Toast.LENGTH_SHORT).show();
@@ -399,11 +412,11 @@ public class OrderDataManage {
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				Log.e(TAG, "save order task io ex");
+				Log.e(TAG, "payout order task io ex");
 				e.printStackTrace();
 			} catch (Exception e) {
 				// TODO: handle exception
-				Log.e(TAG, "save order task other ex");
+				Log.e(TAG, "payout order task other ex");
 				e.printStackTrace();
 			}
 			return false;
@@ -417,5 +430,178 @@ public class OrderDataManage {
 			bar.dismiss();
 		}
 	}
+	
+	/**
+	 * 取消订单
+	 * @param customer_id
+	 * @param code
+	 * @param token
+	 * @return
+	 */
+	public boolean cancelOrder(String customer_id, String code, String token) {
+		TaskCancel taskCancel = new TaskCancel(customer_id, code, token);
+		boolean state = false;
+		try {
+			state = taskCancel.execute().get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			Log.e(TAG, "TaskGetList() InterruptedException");
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			Log.e(TAG, "TaskGetList() ExecutionException");
+			e.printStackTrace();
+		} catch(Exception e){
+			
+		}
+		if (!state) {
+			Toast.makeText(context, "网络不给力！", Toast.LENGTH_SHORT).show();
+		}
+		return state;
+	}
+	
+	private class TaskCancel extends AsyncTask<Void, Void, Boolean>{
+		private String customer_id;
+		private String code;
+		private String token;
+		public TaskCancel(String customer_id, String code, String token){
+			this.customer_id = customer_id;
+			this.code = code;
+			this.token = token;
+		}
+		
+		private ProgressDialog bar = new ProgressDialog(context);
+		
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			bar.setMessage("正在查询");
+			bar.show();
+		}
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			CancelOrder cancelOrder = new CancelOrder();
+			try {
+				String httpResponse = cancelOrder.getHttpResponseString(customer_id, code, token);
+				JSONObject jsonObject = new JSONObject(httpResponse);
+				int responseCode = jsonObject.getInt("code");
+				if(responseCode == 1){
+					String response = jsonObject.getString("response");
+					JSONObject responseObject = new JSONObject(response);
+					String result = responseObject.getString("@p_result");
+					if(unicode.revert(result).equals("success取消成功")){
+						return true;
+					}
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				Log.e(TAG, "cancel order task io ex");
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO: handle exception
+				Log.e(TAG, "cancel order task other ex");
+				e.printStackTrace();
+			}
+			return false;
+		}
+		
+		
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			bar.dismiss();
+		}
+	}
+	
+	/**
+	 * 签收订单
+	 * @param customer_id
+	 * @param code
+	 * @param token
+	 * @return
+	 */
+	public boolean signOrder(String customer_id, String code, String token) {
+		TaskSign taskSign = new TaskSign(customer_id, code, token);
+		boolean state = false;
+		try {
+			state = taskSign.execute().get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			Log.e(TAG, "TaskGetList() InterruptedException");
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			Log.e(TAG, "TaskGetList() ExecutionException");
+			e.printStackTrace();
+		} catch(Exception e){
+			
+		}
+		if (!state) {
+			Toast.makeText(context, "网络不给力！", Toast.LENGTH_SHORT).show();
+		}
+		return state;
+	}
+	
+	private class TaskSign extends AsyncTask<Void, Void, Boolean>{
+		private String customer_id;
+		private String code;
+		private String token;
+		public TaskSign(String customer_id, String code, String token){
+			this.customer_id = customer_id;
+			this.code = code;
+			this.token = token;
+		}
+		
+		private ProgressDialog bar = new ProgressDialog(context);
+		
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			bar.setMessage("正在查询");
+			bar.show();
+		}
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			SignOrder signOrder = new SignOrder();
+			try {
+				String httpResponse = signOrder.getHttpResponseString(customer_id, code, token);
+				JSONObject jsonObject = new JSONObject(httpResponse);
+				int responseCode = jsonObject.getInt("code");
+				if(responseCode == 1){
+					String response = jsonObject.getString("response");
+					JSONObject responseObject = new JSONObject(response);
+					String result = responseObject.getString("@p_result");
+					if(unicode.revert(result).equals("success取消成功")){
+						return true;
+					}
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				Log.e(TAG, "cancel order task io ex");
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO: handle exception
+				Log.e(TAG, "cancel order task other ex");
+				e.printStackTrace();
+			}
+			return false;
+		}
+		
+		
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			bar.dismiss();
+		}
+	}
+
 
 }

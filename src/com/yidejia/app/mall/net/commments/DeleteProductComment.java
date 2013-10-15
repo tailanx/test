@@ -11,6 +11,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.util.Md5;
@@ -82,9 +83,11 @@ public class DeleteProductComment {
 	 * @throws IOException
 	 */
 	public String deleteComment(String id) throws IOException{
-		getHttpAddress(id);
-		HttpPostConn conn = new HttpPostConn(keys, values);
-		result = conn.getJsonResult();
+//		getHttpAddress(id);
+//		HttpPostConn conn = new HttpPostConn(keys, values);
+//		result = conn.getJsonResult();
+		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4DelComment(id));
+		result = conn.getHttpResponse();
 		return result;
 	}
 	

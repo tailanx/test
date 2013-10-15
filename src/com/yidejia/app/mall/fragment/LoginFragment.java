@@ -1,3 +1,4 @@
+
 package com.yidejia.app.mall.fragment;
 
 import android.app.Fragment;
@@ -149,3 +150,4 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 //		titleTextView.setText("µÇÂ¼");
 //	}
 //}
+

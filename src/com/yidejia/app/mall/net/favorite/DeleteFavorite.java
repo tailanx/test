@@ -5,9 +5,11 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 
+
 import android.content.Context;
 import android.util.Log;
 
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.util.Md5;
@@ -84,6 +86,11 @@ public class DeleteFavorite {
 		HttpPostConn conn = new HttpPostConn(keys, values);
 		result = conn.getJsonResult();
 		return result;
+	}
+	
+	public String deleteFavorite(String userid, String goodsid, String token) throws IOException{
+		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4DelFav(userid, goodsid, token));
+		return result = conn.getHttpResponse();
 	}
 	
 //	public String deleteFavoriteJson(){

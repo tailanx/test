@@ -1,3 +1,4 @@
+
 package com.yidejia.app.mall.model;
 
 import java.io.Serializable;

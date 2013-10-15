@@ -13,11 +13,15 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+
+import com.yidejia.app.mall.jni.JNICallBack;
 
 import android.util.Log;
 
@@ -71,4 +75,59 @@ public class HttpPostConn {
 		
 		return result;
 	}
+	
+	/**
+	 * ------------------ JNI 的方式 ---------------------------
+	 */
+	
+	private String param;//post 参数
+	public HttpPostConn(String param){
+		this.param = param;
+	}
+	/**
+	 * jni方式获取post方法的返回数据
+	 * @return
+	 */
+	public String getHttpResponse() throws IOException{
+		if(param == null || "".equals(param)){
+			return null;
+		}
+		String result = "";
+		try {
+			byte[] paramArrayOfByte = param.getBytes();
+			ByteArrayEntity arrayEntity = new ByteArrayEntity(paramArrayOfByte); 
+//			arrayEntity.setContentType("application/octet-stream"); 
+			
+			String url = JNICallBack.HTTPURL;
+			HttpPost httpPost = new HttpPost(url); 
+			Log.i(TAG, "url is :---"+url);
+//			httpPost.setEntity(arrayEntity); 
+			StringEntity stringEntity = new StringEntity(param);
+			stringEntity.setContentType("application/x-www-form-urlencoded");
+			httpPost.setEntity(stringEntity);
+			HttpClient client = new DefaultHttpClient(); 
+			
+			client.getParams().setIntParameter(
+					HttpConnectionParams.SO_TIMEOUT, TIME_OUT_DELAY); // 读取超时设置
+			client.getParams().setIntParameter(
+					HttpConnectionParams.CONNECTION_TIMEOUT, TIME_OUT_DELAY);// 连接超时
+			HttpResponse httpResponse = client.execute(httpPost);
+			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+				result = EntityUtils.toString(httpResponse.getEntity(), HTTP.UTF_8);
+//				Log.i(TAG, result);
+//				count = 0;
+			} else if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_REQUEST_TIMEOUT ){
+				Log.i(TAG, "连接超时");
+				return result;
+			} else {//连接失败
+				Log.i(TAG, "接收数据失败"+httpResponse.getStatusLine().getStatusCode());
+				return result;
+			}
+		} catch (ClientProtocolException e) {
+			// TODO: handle exception
+		}
+		
+		return result;
+	}
+	
 }

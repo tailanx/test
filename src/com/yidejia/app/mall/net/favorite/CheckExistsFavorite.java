@@ -11,6 +11,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.net.HttpPostConn;
@@ -85,10 +86,15 @@ public class CheckExistsFavorite {
 	 * @throws IOException
 	 */
 	public String httpResponse(String userid, String goodsid) throws IOException{
-		getHttpAddress(userid, goodsid);
+//		getHttpAddress(userid, goodsid);
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress(userid, goodsid));
-		HttpPostConn conn = new HttpPostConn(keys, values);
-		result = conn.getJsonResult();
+//		HttpPostConn conn = new HttpPostConn(keys, values);
+//		result = conn.getJsonResult();
+		String param = JNICallBack.getHttp4CheckFav(userid, goodsid);
+		Log.i(TAG, param.toString());
+		HttpPostConn conn = new HttpPostConn(param);
+		result = conn.getHttpResponse();
+		Log.i(TAG, result.toString());
 		return result;
 	}
 	

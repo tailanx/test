@@ -69,7 +69,7 @@ public class MyApplication extends Application{
 		ImageLoader.getInstance().init(config);
 	}
 	
-	private boolean isLogin = true;
+	private boolean isLogin;
 	public void setIsLogin(boolean isLogin){
 		this.isLogin = isLogin;
 	}
@@ -78,7 +78,7 @@ public class MyApplication extends Application{
 		return isLogin;
 	}
 	
-	private String userId = 235669 +"";
+	private String userId;
 	public void setUserId(String userId){
 		this.userId = userId;
 	}
@@ -96,5 +96,15 @@ public class MyApplication extends Application{
 
 	public void setSchHstryAmount(int schHstryAmount) {
 		this.schHstryAmount = schHstryAmount;
+	}
+	
+	private String token;//µÇÂ¼ºó·µ»ØµÄtoken
+	
+	public void setToken(String token){
+		this.token = token;
+	}
+	
+	public String getToken(){
+		return token;
 	}
 }

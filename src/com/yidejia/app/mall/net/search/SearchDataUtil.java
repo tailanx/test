@@ -3,9 +3,11 @@ package com.yidejia.app.mall.net.search;
 import java.io.IOException;
 
 
+
 import android.content.Context;
 import android.util.Log;
 
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.util.Md5;
@@ -88,7 +90,8 @@ public class SearchDataUtil {
 	 * @throws IOException
 	 */
 	public String getHttpResponseString(String name, String fun, String brand, String price, String order1, String offset1, String limit1)throws IOException{
-		HttpGetConn conn = new HttpGetConn(getHttpAddress(name, fun, brand, price, order1, offset1, limit1));
+//		HttpGetConn conn = new HttpGetConn(getHttpAddress(name, fun, brand, price, order1, offset1, limit1));
+		HttpGetConn conn = new HttpGetConn(JNICallBack.getHttp4GetSearch(name, fun, brand, price, order1, offset1, limit1), true);
 		result = conn.getJsonResult();
 		return result;
 	}

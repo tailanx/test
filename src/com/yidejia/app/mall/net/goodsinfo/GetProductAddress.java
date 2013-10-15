@@ -3,14 +3,16 @@ package com.yidejia.app.mall.net.goodsinfo;
 import java.io.IOException;
 
 
+
 import android.content.Context;
 import android.util.Log;
 
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.util.Md5;
 /**
- * 获取首页
+ * 获取商品信息
  * @author long bin
  *
  */
@@ -64,7 +66,8 @@ public class GetProductAddress {
 	
 	private String result = "";
 	public String getProductJsonString(String id)throws IOException{
-		HttpGetConn conn = new HttpGetConn(getHttpAddress(id));
+//		HttpGetConn conn = new HttpGetConn(getHttpAddress(id));
+		HttpGetConn conn = new HttpGetConn(JNICallBack.getHttp4GetGoods(id), true);
 		result = conn.getJsonResult();
 		return result;
 	}

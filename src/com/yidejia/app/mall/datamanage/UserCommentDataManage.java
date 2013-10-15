@@ -57,6 +57,9 @@ public class UserCommentDataManage {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Log.e(TAG, "TaskGetList() ExecutionException");
+		} catch (Exception e){
+			Log.e(TAG, "other ex");
+			e.printStackTrace();
 		}
 		if(!state){
 			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();

@@ -11,6 +11,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.util.Md5;
@@ -110,6 +111,30 @@ public class SaveUserAddress {
 				 city, district, address, recipient_id);
 		HttpPostConn conn = new HttpPostConn(keys, values);
 		result = conn.getJsonResult();
+		return result;
+	}
+	/** 
+	 * jni 方式提交地址
+	 * @param customer_id
+	 * @param customer_name
+	 * @param handset
+	 * @param province
+	 * @param city
+	 * @param district
+	 * @param address
+	 * @param recipient_id
+	 * @param token
+	 * @return
+	 * @throws IOException
+	 */
+	public String saveAddress(String customer_id, String customer_name,
+			String handset, String province, String city, String district,
+			String address, String recipient_id, String token)
+			throws IOException {
+		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4SaveAddress(
+				customer_id, customer_name, handset, province, city, district,
+				address, recipient_id, token));
+		result = conn.getHttpResponse();
 		return result;
 	}
 //	public String saveAddressJson(){

@@ -9,6 +9,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.util.Md5;
@@ -76,10 +77,19 @@ public class GetOrderList {
 	}
 	
 	private String result = "";
-	public String getListJsonString(String user_id, String code, String date, String status, String offset1, String limit1)throws IOException{
-		HttpGetConn conn = new HttpGetConn(getHttpAddress(user_id, code, date, status, offset1, limit1));
+
+	public String getListJsonString(String user_id, String code, String date,
+			String status, String offset1, String limit1) throws IOException {
+		HttpGetConn conn = new HttpGetConn(getHttpAddress(user_id, code, date,
+				status, offset1, limit1));
 		result = conn.getJsonResult();
 		return result;
+	}
+	
+	public String getHttpResponse(String user_id, String code, String date, String status
+			, String offset1, String limit1, String token) throws IOException{
+		HttpGetConn conn = new HttpGetConn(JNICallBack.getHttp4GetOrder(user_id, code, date, status, offset1, limit1, token),true);
+		return result = conn.getJsonResult();
 	}
 //	public String getFavoriteListJson(){
 //		AsyncHttpClient client = new AsyncHttpClient();

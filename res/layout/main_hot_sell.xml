@@ -290,6 +290,7 @@
                     android:layout_below="@+id/main_acymei_goods_details"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="15dp"
                     android:src="@drawable/hotsellimage" />
 
                 <RelativeLayout
@@ -474,9 +475,10 @@
                     android:layout_alignParentLeft="true"
                     android:layout_gravity="center|left"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:layout_toLeftOf="@+id/main_inerbty_top_left_image"
                     android:gravity="center|left"
+                    android:minEms="5"
                     android:text="胶原蛋白粉"
                     android:textSize="16sp" />
 
@@ -522,10 +524,11 @@
                     android:layout_alignParentLeft="true"
                     android:layout_gravity="center|left"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:layout_toLeftOf="@+id/main_inerbty_top_right_image"
                     android:gravity="center|left"
                     android:text="胶原蛋白粉"
+                    android:minEms="5"
                     android:textSize="16sp" />
 
                 <TextView
@@ -578,10 +581,11 @@
                     android:layout_alignParentLeft="true"
                     android:layout_gravity="center|left"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:layout_toLeftOf="@+id/main_inerbty_mid_left_image"
                     android:gravity="center|left"
                     android:text="胶原蛋白粉"
+                    android:minEms="5"
                     android:textSize="16sp" />
 
                 <TextView
@@ -626,10 +630,11 @@
                     android:layout_alignParentLeft="true"
                     android:layout_gravity="center|left"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:layout_toLeftOf="@+id/main_inerbty_mid_right_image"
                     android:gravity="center|left"
                     android:text="胶原蛋白粉"
+                    android:minEms="5"
                     android:textSize="16sp" />
 
                 <TextView
@@ -682,10 +687,11 @@
                     android:layout_alignParentLeft="true"
                     android:layout_gravity="center|left"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:layout_toLeftOf="@+id/main_inerbty_down_left_image"
                     android:gravity="center|left"
                     android:text="胶原蛋白粉"
+                    android:minEms="5"
                     android:textSize="16sp" />
 
                 <TextView
@@ -730,10 +736,11 @@
                     android:layout_alignParentLeft="true"
                     android:layout_gravity="center|left"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:layout_toLeftOf="@+id/main_inerbty_down_right_image"
                     android:gravity="center|left"
                     android:text="胶原蛋白粉"
+                    android:minEms="5"
                     android:textSize="16sp" />
 
                 <TextView

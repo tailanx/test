@@ -4,10 +4,16 @@ import java.io.IOException;
 
 import android.util.Log;
 
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
+import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.util.Md5;
-
+/**
+ * ÐÞ¸ÄÖ§¸¶×´Ì¬
+ * @author long bin
+ *
+ */
 public class PayOutOrder {
 	private String[] keys = new String[7];
 	private String[] values = new String[7];
@@ -69,8 +75,10 @@ public class PayOutOrder {
 	 * @param code ¶©µ¥ºÅ
 	 */
 	public String getHttpResponseString(String customer_id, String code)throws IOException{
-		HttpGetConn conn = new HttpGetConn(getHttpAddress(customer_id, code));
-		result = conn.getJsonResult();
+//		HttpGetConn conn = new HttpGetConn(getHttpAddress(customer_id, code));
+//		result = conn.getJsonResult();
+		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4PayOut(customer_id, code));
+		result = conn.getHttpResponse();
 		return result;
 	}
 }

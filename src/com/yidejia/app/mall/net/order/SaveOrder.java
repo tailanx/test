@@ -4,8 +4,10 @@ import java.io.IOException;
 
 import android.util.Log;
 
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
+import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.util.Md5;
 
 public class SaveOrder {
@@ -103,11 +105,26 @@ public class SaveOrder {
 	 * @param goods_qty_scr 购买的字符串，格式“商品id,数量,是否积分兑换;”，如“11,5n”
 	 * @param comments 订单备注信息
 	 */
-	public String getListJsonString(String customer_id, String ticket_id, String recipient_id, String pingou_id, String goods_ascore, String ship_fee
-			, String ship_type, String ship_entity_name, String goods_qty_scr, String comments)throws IOException{
-		HttpGetConn conn = new HttpGetConn(getHttpAddress(customer_id, ticket_id, recipient_id, pingou_id, goods_ascore, ship_fee
-				, ship_type, ship_entity_name, goods_qty_scr, comments));
+	public String getListJsonString(String customer_id, String ticket_id,
+			String recipient_id, String pingou_id, String goods_ascore,
+			String ship_fee, String ship_type, String ship_entity_name,
+			String goods_qty_scr, String comments) throws IOException {
+		HttpGetConn conn = new HttpGetConn(getHttpAddress(customer_id,
+				ticket_id, recipient_id, pingou_id, goods_ascore, ship_fee,
+				ship_type, ship_entity_name, goods_qty_scr, comments));
 		result = conn.getJsonResult();
 		return result;
+	}
+	
+	public String getHttpResponse(String customer_id, String ticket_id,
+			String recipient_id, String pingou_id, String goods_ascore,
+			String ship_fee, String ship_type, String ship_entity_name,
+			String goods_qty_scr, String comments, String token)
+			throws IOException {
+		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4SaveOrder(
+				customer_id, ticket_id, recipient_id, pingou_id, goods_ascore,
+				ship_fee, ship_type, ship_entity_name, goods_qty_scr, comments,
+				token));
+		return result = conn.getHttpResponse();
 	}
 }

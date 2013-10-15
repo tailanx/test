@@ -60,8 +60,19 @@ public class HttpGetConn {
 			}
 		} catch(ClientProtocolException e){
 			Log.i(TAG, "http协议出错" + e.getMessage().toString());
+			
 		} 
 		
 		return result;
 	}
+	/**
+	 * jni方式获取数据， isTrue为不需要用到的参数
+	 * @param urlString
+	 * @param isTrue 
+	 */
+	public HttpGetConn(String urlString, boolean isTrue){
+		this.urlString = urlString;
+	}
+	
+	
 }

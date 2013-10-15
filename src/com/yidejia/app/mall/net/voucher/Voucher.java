@@ -11,6 +11,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.util.Md5;
@@ -86,6 +87,11 @@ public class Voucher {
 		HttpPostConn conn = new HttpPostConn(keys, values);
 		result = conn.getJsonResult();
 		return result;
+	}
+	
+	public String getHttpResponse(String id, String token) throws IOException{
+		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4GetVoucher(id, token));
+		return result = conn.getHttpResponse();
 	}
 //	public String getVoucherJson(){
 //		AsyncHttpClient client = new AsyncHttpClient();

@@ -9,6 +9,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.util.Md5;
@@ -20,7 +21,7 @@ import com.yidejia.app.mall.util.Md5;
 public class GetHomePage {
 	private String[] keys = new String[6];
 	private String[] values = new String[6];
-	private String TAG = "GetFavoriteList";
+	private String TAG = "GetHomePage";
 	private Context context;
 	
 	public GetHomePage(Context context){
@@ -67,7 +68,8 @@ public class GetHomePage {
 	
 	private String result = "";
 	public String getHomePageJsonString()throws IOException{
-		HttpGetConn conn = new HttpGetConn(getHttpAddress());
+//		HttpGetConn conn = new HttpGetConn(getHttpAddress());
+		HttpGetConn conn = new HttpGetConn(JNICallBack.getHttp4GetHome(), true);
 		result = conn.getJsonResult();
 		return result;
 	}
