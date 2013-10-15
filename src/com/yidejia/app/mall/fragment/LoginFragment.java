@@ -23,6 +23,7 @@ import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.MyMallActivity;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.datamanage.UserDatamanage;
 import com.yidejia.app.mall.view.FindPwActivity;
 import com.yidejia.app.mall.view.RegistActivity;
 
@@ -32,6 +33,7 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 	private Button mLogin;
 	private EditText stringName;
 	private EditText stringPassword;
+	private UserDatamanage userManage;
 
 	
 	private MyMallActivity newFragment;
@@ -50,7 +52,7 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.my_mall_login, container, false);
 		getSherlockActivity().getSupportActionBar().setCustomView(R.layout.login_top);
-		
+		userManage = new UserDatamanage(getSherlockActivity());
 		findPwd = (RelativeLayout)view.findViewById(R.id.my_mall_login_retrieve_password);
 		//设置监听
 		findPwd.setOnClickListener(this);
@@ -101,16 +103,17 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 		case R.id.my_mall_login_button://登录
 		String name = stringName.getText().toString();
 		String pwd = stringPassword.getText().toString();
-		if(name==null||"".equals(name)){
-			Toast.makeText(getSherlockActivity(), "请输入用户名或者密码",Toast.LENGTH_LONG).show();
-		}
-		if(pwd==null||"".equals(pwd)){
-			Toast.makeText(getSherlockActivity(), "请输入用户名或者密码",Toast.LENGTH_LONG).show();
-		}
-		if(name.equals("aaa")&&pwd.equals("111")){   //登录成功
-			newFragment = new MyMallActivity();
-			((MyApplication)getSherlockActivity().getApplication()).setIsLogin(true);
-//			Log.i("info", myApplication.getIsLogin()+"");
+		
+//		if(name==null||"".equals(name)){
+//			Toast.makeText(getSherlockActivity(), "请输入用户名或者密码",Toast.LENGTH_LONG).show();
+//		}
+//		if(pwd==null||"".equals(pwd)){
+//			Toast.makeText(getSherlockActivity(), "请输入用户名或者密码",Toast.LENGTH_LONG).show();
+//		}
+//		if(name.equals("aaa")&&pwd.equals("111")){   //登录成功
+//			newFragment = new MyMallActivity();
+//			((MyApplication)getSherlockActivity().getApplication()).setIsLogin(true);
+////			Log.i("info", myApplication.getIsLogin()+"");
 //			myApplication.setIsLogin(true);
 //			Log.i("info", myApplication.getIsLogin()+"");
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -119,7 +122,7 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 //			ms.what = 000;
 //			myApplication.getHandler().sendMessage(ms);
 		
-		}
+//		}
  		}
 		
 	}

@@ -49,7 +49,8 @@ public class PayActivity extends SherlockActivity {
 	private TextView sumPrice;// 总的价格
 	private Handler mHandler;// 创建handler对象
 	private MyApplication myApplication;
-//	private Myreceiver receiver;
+
+	// private Myreceiver receiver;
 	// private Addresses addresses;
 
 	/**
@@ -172,68 +173,68 @@ public class PayActivity extends SherlockActivity {
 		}
 
 	}
-		@Override
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		try {
 			super.onCreate(savedInstanceState);
 			// TODO Auto-generated method stub
 			myApplication = (MyApplication) getApplication();
-//			receiver = new Myreceiver();
-//			IntentFilter filter = new IntentFilter();
-//			filter.addAction(Consts.BUY_NEW);
-//			registerReceiver(receiver, filter);
+			// receiver = new Myreceiver();
+			// IntentFilter filter = new IntentFilter();
+			// filter.addAction(Consts.BUY_NEW);
+			// registerReceiver(receiver, filter);
 			// 付款之前先判断用户是否登陆
 			if (!myApplication.getIsLogin()) {
 				Toast.makeText(this, "你还未登陆，请先登陆", Toast.LENGTH_LONG).show();
-				Intent intent = new Intent(this,LoginActivity.class);
+				Intent intent = new Intent(this, LoginActivity.class);
 				startActivity(intent);
 				this.finish();
 			} else {
 				Intent intent = getIntent();
 				final String sum = intent.getStringExtra("price");
-				Cart cart= (Cart) intent.getSerializableExtra("Cart");
-				if(cart==null){
-				
-				setActionbar();
-				setContentView(R.layout.go_pay);
-				LinearLayout layout = (LinearLayout) findViewById(R.id.go_pay_relative2);
-				PayUtil pay = new PayUtil(PayActivity.this, layout);
-				pay.loadView();
-				setupShow();
-				addAddress();
+				Cart cart = (Cart) intent.getSerializableExtra("Cart");
+				if (cart == null) {
 
-				if (Double.parseDouble(sum) > 299.0) {
-					sumPrice.setText(sum);
-				} else {
-					sumPrice.setText(Double.parseDouble(sum)
-							+ Double.parseDouble((general.isChecked() ? generalPrice
-									.getText().toString() : emsPrice.getText()
-									.toString())) + "");
-				}
-				mHandler = new Handler() {
-					@Override
-					public void handleMessage(Message msg) {
-						switch (msg.what) {
-						case Consts.GENERAL:
-							sumPrice.setText(Double.parseDouble(sum)
-									+ Double.parseDouble(generalPrice.getText()
-											.toString()) + "");
-							break;
-						case Consts.EMS:
-							sumPrice.setText(Double.parseDouble(sum)
-									+ Double.parseDouble(emsPrice.getText()
-											.toString()) + "");
-							break;
-						}
-						super.handleMessage(msg);
-					}
-				};
-			}
-				else{
 					setActionbar();
 					setContentView(R.layout.go_pay);
 					LinearLayout layout = (LinearLayout) findViewById(R.id.go_pay_relative2);
-					PayUtil pay = new PayUtil(PayActivity.this, layout,cart);
+					PayUtil pay = new PayUtil(PayActivity.this, layout);
+					pay.loadView();
+					setupShow();
+					addAddress();
+
+					if (Double.parseDouble(sum) > 299.0) {
+						sumPrice.setText(sum);
+					} else {
+						sumPrice.setText(Double.parseDouble(sum)
+								+ Double.parseDouble((general.isChecked() ? generalPrice
+										.getText().toString() : emsPrice
+										.getText().toString())) + "");
+					}
+					mHandler = new Handler() {
+						@Override
+						public void handleMessage(Message msg) {
+							switch (msg.what) {
+							case Consts.GENERAL:
+								sumPrice.setText(Double.parseDouble(sum)
+										+ Double.parseDouble(generalPrice
+												.getText().toString()) + "");
+								break;
+							case Consts.EMS:
+								sumPrice.setText(Double.parseDouble(sum)
+										+ Double.parseDouble(emsPrice.getText()
+												.toString()) + "");
+								break;
+							}
+							super.handleMessage(msg);
+						}
+					};
+				} else {
+					setActionbar();
+					setContentView(R.layout.go_pay);
+					LinearLayout layout = (LinearLayout) findViewById(R.id.go_pay_relative2);
+					PayUtil pay = new PayUtil(PayActivity.this, layout, cart);
 					pay.cartLoadView();
 					setupShow();
 					addAddress();
@@ -243,8 +244,8 @@ public class PayActivity extends SherlockActivity {
 					} else {
 						sumPrice.setText(Double.parseDouble(sum)
 								+ Double.parseDouble((general.isChecked() ? generalPrice
-										.getText().toString() : emsPrice.getText()
-										.toString())) + "");
+										.getText().toString() : emsPrice
+										.getText().toString())) + "");
 					}
 					mHandler = new Handler() {
 						@Override
@@ -252,8 +253,8 @@ public class PayActivity extends SherlockActivity {
 							switch (msg.what) {
 							case Consts.GENERAL:
 								sumPrice.setText(Double.parseDouble(sum)
-										+ Double.parseDouble(generalPrice.getText()
-												.toString()) + "");
+										+ Double.parseDouble(generalPrice
+												.getText().toString()) + "");
 								break;
 							case Consts.EMS:
 								sumPrice.setText(Double.parseDouble(sum)
@@ -275,12 +276,12 @@ public class PayActivity extends SherlockActivity {
 
 	}
 
-//		@Override
-//		protected void onDestroy() {
-//			// TODO Auto-generated method stub
-//			super.onDestroy();
-////			unregisterReceiver(receiver);	
-//		}
+	// @Override
+	// protected void onDestroy() {
+	// // TODO Auto-generated method stub
+	// super.onDestroy();
+	// // unregisterReceiver(receiver);
+	// }
 	/**
 	 * UI控件的顶部
 	 */
@@ -314,24 +315,32 @@ public class PayActivity extends SherlockActivity {
 		try {
 			ArrayList<Addresses> mList = addressDataManage.getAddressesArray(
 					Integer.parseInt(myApplication.getUserId()), 0, 10);
-			Addresses addresses = mList.remove(0);
+			Log.i("info", mList.size() + " mlist");
+			if (mList.size() == 0) {
+				Intent intent = new Intent(PayActivity.this,
+						NewAddressActivity.class);
+				PayActivity.this.startActivity(intent);
+			} else {
+				Addresses addresses = mList.remove(0);
 
-			userName.setText(addresses.getName());
-			phoneName.setText(addresses.getPhone());
-			StringBuffer sb = new StringBuffer();
-			sb.append(addresses.getProvice());
-			sb.append(addresses.getCity());
-			sb.append(addresses.getArea());
-			sb.append(addresses.getAddress());
-			address.setText(sb.toString());
+				userName.setText(addresses.getName());
+				phoneName.setText(addresses.getPhone());
+				StringBuffer sb = new StringBuffer();
+				sb.append(addresses.getProvice());
+				sb.append(addresses.getCity());
+				sb.append(addresses.getArea());
+				sb.append(addresses.getAddress());
+				address.setText(sb.toString());
 
-			Express express = expressDataManage.getExpressesExpenses(
-					addresses.getProvice(), "n").get(0);
-			peiSong.setText(expressDataManage
-					.getDistributionsList(0 + "", 10 + "").get(0).getDisName());
-			generalPrice.setText(express.getExpress());
-			emsPrice.setText(express.getEms());
-			Log.i("info", addresses.getName());
+				Express express = expressDataManage.getExpressesExpenses(
+						addresses.getProvice(), "n").get(0);
+				peiSong.setText(expressDataManage
+						.getDistributionsList(0 + "", 10 + "").get(0)
+						.getDisName());
+				generalPrice.setText(express.getExpress());
+				emsPrice.setText(express.getEms());
+				Log.i("info", addresses.getName());
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -339,17 +348,17 @@ public class PayActivity extends SherlockActivity {
 					.show();
 		}
 	}
-	
-//	private class Myreceiver extends BroadcastReceiver {
-//
-//		@Override
-//		public void onReceive(Context context, Intent intent) {
-//		String action = intent.getAction();
-//		if(Consts.BUY_NEW.equals(action)){
-//			
-//		}
-//			
-//		}
-//		
-//	}
+
+	// private class Myreceiver extends BroadcastReceiver {
+	//
+	// @Override
+	// public void onReceive(Context context, Intent intent) {
+	// String action = intent.getAction();
+	// if(Consts.BUY_NEW.equals(action)){
+	//
+	// }
+	//
+	// }
+	//
+	// }
 }

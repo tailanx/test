@@ -89,18 +89,15 @@ public class GoCartActivity extends SherlockActivity {// implements
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					getAddresses();
+//					getAddresses();
 					Intent intent = new Intent(GoCartActivity.this,
 							PayActivity.class);
 					float sum = Float.parseFloat(sumTextView.getText()
 							.toString());
-					if (address == null) {
-						Toast.makeText(GoCartActivity.this, "您还未填写收货人地址",
-								Toast.LENGTH_LONG).show();
-					} else {
+					 
 						if (sum > 0) {
 							Bundle bundle = new Bundle();
-							bundle.putSerializable("address", address);
+							
 							bundle.putString("price", sum + "");
 							intent.putExtras(bundle);
 							GoCartActivity.this.startActivity(intent);
@@ -109,7 +106,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 									Toast.LENGTH_LONG).show();
 						}
 					}
-				}
+				
 			});
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -174,26 +171,26 @@ public class GoCartActivity extends SherlockActivity {// implements
 	 * 
 	 * @return返回一个地址
 	 */
-	Addresses address = null;
-
-	private void getAddresses() {
-
-		String userId = ((MyApplication) getApplication()).getUserId();
-		ArrayList<Addresses> mAddresses = addressManage.getAddressesArray(
-				Integer.parseInt(userId), 0, 5);
-		if (mAddresses.size() == 0) {
-			Intent intent = new Intent(GoCartActivity.this,
-					NewAddressActivity.class);
-			GoCartActivity.this.startActivity(intent);
-			GoCartActivity.this.finish();
-			// Log.i("info", "nihao");
-
-		} else {
-			address = mAddresses.remove(0);
-			// Log.i("info", address + "address");
-		}
-
-	}
+//	Addresses address = null;
+//
+//	private void getAddresses() {
+//
+//		String userId = ((MyApplication) getApplication()).getUserId();
+//		ArrayList<Addresses> mAddresses = addressManage.getAddressesArray(
+//				Integer.parseInt(userId), 0, 5);
+//		if (mAddresses.size() == 0) {
+//			Intent intent = new Intent(GoCartActivity.this,
+//					NewAddressActivity.class);
+//			GoCartActivity.this.startActivity(intent);
+//			GoCartActivity.this.finish();
+//			// Log.i("info", "nihao");
+//
+//		} else {
+//			address = mAddresses.remove(0);
+//			// Log.i("info", address + "address");
+//		}
+//
+//	}
 
 }
 
