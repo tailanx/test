@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -35,6 +35,9 @@ public class GoCartActivity extends SherlockActivity {// implements
 	private CartUtil cartUtil;
 	private AddressDataManage addressManage;// 地址管理数据
 	private PullToRefreshScrollView mPullToRefreshScrollView;// 界面刷新
+	private ImageView mImageView;//返回
+	private TextView mTextView;//title
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +65,25 @@ public class GoCartActivity extends SherlockActivity {// implements
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		GoCartActivity.this.getSupportActionBar().setCustomView(
-				R.layout.actionbar_cart);
+				R.layout.actionbar_common);
 		cartUtil = new CartUtil(GoCartActivity.this, layout, counTextView,
 				sumTextView, mBox);
 		cartUtil.AllComment();
-		mbutton = (Button) findViewById(R.id.shopping_cart_go_pay);
+		mbutton = (Button) findViewById(R.id.actionbar_right);
+		mTextView = (TextView) findViewById(R.id.actionbar_title);
+		mImageView = (ImageView) findViewById(R.id.actionbar_left);
+		mTextView.setText("购物车");
+		
 
 		try {
+			mImageView.setOnClickListener(new OnClickListener( ) {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					GoCartActivity.this.finish();
+				}
+			});
 			mbutton.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -181,5 +196,6 @@ public class GoCartActivity extends SherlockActivity {// implements
 	}
 
 }
+
 
 

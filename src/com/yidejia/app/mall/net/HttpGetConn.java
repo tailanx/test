@@ -60,6 +60,7 @@ public class HttpGetConn {
 			}
 		} catch(ClientProtocolException e){
 			Log.i(TAG, "httpÐ­Òé³ö´í" + e.getMessage().toString());
+			
 		} 
 		
 		return result;

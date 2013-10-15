@@ -1,7 +1,9 @@
+
 package com.yidejia.app.mall.fragment;
 
 import java.util.ArrayList;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
@@ -48,6 +50,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	private View person2;
 	private CartsDataManage dataManage;
 	private Button shoppingCartTopay;
+	private ImageView mImageView;//返回
 	private ArrayList<UserComment> mlist;
 	private CartUtil cartUtil;
 	private CheckBox mBox;
@@ -59,6 +62,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	private CartsDataManage dataManage2;
 //	private AddressDataManage addressManage;// 地址管理
 	private PullToRefreshScrollView mPullToRefreshScrollView;// 刷新界面
+	private Fragment mFragment;
 
 	// private InnerReceiver receiver;
 
@@ -341,6 +345,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 				}
 			}
 		});
+		
 		//
 		return view;
 

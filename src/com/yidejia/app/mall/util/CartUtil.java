@@ -1,3 +1,4 @@
+
 package com.yidejia.app.mall.util;
 
 import java.util.ArrayList;
@@ -410,7 +411,7 @@ public class CartUtil {
 					public void onClick(View v) {
 					
 						int sum = Integer.parseInt(number.getText().toString());
-						if (sum <= 0) {
+						if (sum <= 1) {
 							Toast.makeText(context, "已经是最小的数值了",
 									Toast.LENGTH_LONG).show();
 						} else {
@@ -482,14 +483,11 @@ public class CartUtil {
 				map.put("price",
 						Float.parseFloat(priceTextView.getText().toString()));
 				list.add(map);
-				// 设置监听
-				mBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
+				mBox.setOnClickListener(new OnClickListener() {
+					
 					@Override
-					public void onCheckedChanged(CompoundButton buttonView,
-							boolean isChecked) {
-						if (isChecked) {
-							Log.i("info", mBox.isChecked() + "");
+					public void onClick(View v) {
+						if(mBox.isChecked()){
 							Message msg = new Message();
 							msg.what = 124;
 							handler.sendMessage(msg);
@@ -499,15 +497,40 @@ public class CartUtil {
 								Log.i("info", checkBox.isChecked() + "+j");
 							}
 						}else{
-//							
+							for (int i = 0; i < mList.size(); i++) {
+								CheckBox checkBox = (CheckBox) mList.get(i);
+								checkBox.setChecked(false);
+						}
+						
+					}
+						}
+				});
+				// 设置监听
+//				mBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+//
+//					@Override
+//					public void onCheckedChanged(CompoundButton buttonView,
+//							boolean isChecked) {
+//						if (isChecked) {
+//							Log.i("info", mBox.isChecked() + "");
+//							Message msg = new Message();
+//							msg.what = 124;
+//							handler.sendMessage(msg);
 //							for (int i = 0; i < mList.size(); i++) {
 //								CheckBox checkBox = (CheckBox) mList.get(i);
-//								checkBox.setChecked(false);
+//								checkBox.setChecked(true);
+//								Log.i("info", checkBox.isChecked() + "+j");
+//							}
+//						}else{
+////							
+////							for (int i = 0; i < mList.size(); i++) {
+////								CheckBox checkBox = (CheckBox) mList.get(i);
+////								checkBox.setChecked(false);
+////						}
 //						}
-						}
-
-					}
-				});
+//
+//					}
+//				});
 				linearLayout.addView(view);
 				
 			}

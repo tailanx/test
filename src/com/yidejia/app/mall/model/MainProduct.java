@@ -1,10 +1,14 @@
+
 package com.yidejia.app.mall.model;
+
+import java.io.Serializable;
+
 /**
  * 首页接口，包括商品id，图片链接，商品标题，子标题，价格
  * @author long bin
  *
  */
-public class MainProduct {
+public class MainProduct implements Serializable{
 	private String uId;            //商品ID （可以通过这个ID索引到商品详情）
     private String imgUrl;      //图片链接
     private String title;       //商品标题 如：椒盐蛋白

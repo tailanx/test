@@ -1,11 +1,14 @@
+
 package com.yidejia.app.mall.model;
+
+import java.io.Serializable;
 
 /**
  * 购物车信息，包括 商品Id，购买数量，商品描述，价格，商品小图链接地址
  * @author long bin
  *
  */
-public class Cart {
+public class Cart implements Serializable{
 	private String uId;                //商品Id
 	private int amount;             //购买数量
 	private String productText;     //商品描述（《＝256字节）

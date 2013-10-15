@@ -40,6 +40,7 @@ import com.yidejia.app.mall.model.MainProduct;
 import com.yidejia.app.mall.model.ProductBaseInfo;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.GoCartActivity;
+import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.view.PayActivity;
 
 public class GoodsView {
@@ -149,7 +150,11 @@ public class GoodsView {
 				setCartNum(cart_num);
 				Intent intent = new Intent(Consts.UPDATE_CHANGE);
 				activity.sendBroadcast(intent);
+				if(cart.getPrice()>0){
 				boolean istrue = manage.addCart(cart);
+				}else{
+					Toast.makeText(activity, "这是赠品，不能够购买", Toast.LENGTH_LONG).show();
+				}
 				// Log.i("info", istrue+"   cart_num");
 //				if (istrue) {
 //					builder.show();
@@ -388,7 +393,11 @@ public class GoodsView {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			FavoriteDataManage manage = new FavoriteDataManage(activity);
-			if (isLogin && !"".equals(userid)) {
+			if(!isLogin){
+				Intent intent = new Intent(activity,LoginActivity.class);
+				activity.startActivity(intent);
+				}
+			else if (isLogin && !"".equals(userid)) {
 				// 登录状态下
 				if (!manage.checkExists(userid, productId)) {
 					// 未收藏，现在添加收藏
