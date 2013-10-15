@@ -658,7 +658,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetFree(JNIEnv* env,
 }
 
 /**
- * 检查收藏是否存在 ,参数 String userid, String goodsid
+ * 检查收藏是否存在 ,参数 String userid, String goodsid, post
  */
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CheckFav(JNIEnv* env,
 		jobject thiz, jstring userid, jstring goodsid){
@@ -891,7 +891,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveFav(JNIEnv* env,
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//获取商品信息, 参数 String id， 方法post
+//获取商品信息, 参数 String id， 方法get
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetGoods(JNIEnv* env,
 		jobject thiz, jstring id){
 	const char *chcid = (*env)->GetStringUTFChars(env, id, NULL);
@@ -901,6 +901,8 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetGoods(JNIEnv* env,
 	urlString[0] = 0;
 
 	const char *api = "?api=product.mallgood.getCollect";
+
+	addString(urlString, url);
 	addString(urlString, api);
 
 	addString(urlString, "&id=");
@@ -1560,7 +1562,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetVoucher(JNIEnv* env
 
 	const char *api="api=user.info.get";
 
-	addString(urlString, url);
+//	addString(urlString, url);
 	addString(urlString, api);
 
 	addString(urlString, "&id=");
@@ -1616,7 +1618,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4Login(JNIEnv* env,
 
 	const char *api="api=user.passport.login";
 
-	addString(urlString, url);
+//	addString(urlString, url);
 	addString(urlString, api);
 
 	addString(urlString, "&username=");
@@ -1676,7 +1678,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4Register(JNIEnv* env,
 
 	const char *api="api=user.passport.register";
 
-	addString(urlString, url);
+//	addString(urlString, url);
 	addString(urlString, api);
 
 	addString(urlString, "&username=");
@@ -1738,7 +1740,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SetDefAddr(JNIEnv* env
 
 	const char *api="api=ucenter.address.setDefault";
 
-	addString(urlString, url);
+//	addString(urlString, url);
 	addString(urlString, api);
 
 	addString(urlString, "&cid=");
