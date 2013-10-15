@@ -67,7 +67,7 @@
 
         <LinearLayout
             android:id="@+id/wgo_pay_crollView_linearlayout1"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
@@ -83,7 +83,7 @@
                 android:orientation="horizontal" />
 
             <RelativeLayout
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/new_delivery_address_up" >
 
@@ -151,7 +151,7 @@
             </LinearLayout>
 
             <RelativeLayout
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/new_menubg_middle" >
 
@@ -191,11 +191,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="4dp" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/new_menubg_middle" >
 
@@ -235,11 +236,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="4dp" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/new_menubg_middle" >
 
@@ -279,11 +281,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true" />
+                    android:layout_centerVertical="true" 
+                    android:layout_marginRight="4dp"/>
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/commentbg_down" >
 
@@ -323,11 +326,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true" />
+                    android:layout_centerVertical="true" 
+                    android:layout_marginRight="4dp"/>
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/forgot_password" >
@@ -365,12 +369,12 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="22dp"
+                    android:paddingRight="20dp"
                     android:src="@drawable/arrow" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/new_menubg_up" >
@@ -498,7 +502,7 @@
 
             <RelativeLayout
                 android:id="@+id/go_shopping_use_evalution"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/forgot_password" >
@@ -526,7 +530,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="22dp"
+                   	android:paddingRight="20dp"
                     android:src="@drawable/arrow" />
             </RelativeLayout>
 
@@ -568,10 +572,13 @@
                         android:editable="true"
                         android:hint="订单留言.........                                                                                                                                                  "
                         android:padding="10dp"
+                        android:scrollbars="horizontal"
                         android:textSize="15sp" />
+
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>
     </ScrollView>
 
 </RelativeLayout>
+

@@ -29,6 +29,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.fragment.CartActivity;
 import com.yidejia.app.mall.fragment.GuangFragment;
+import com.yidejia.app.mall.fragment.LoginFragment;
 import com.yidejia.app.mall.fragment.MainPageFragment;
 import com.yidejia.app.mall.fragment.MyMallFragment;
 import com.yidejia.app.mall.fragment.SearchFragment;
@@ -282,7 +283,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 								.setImageResource(R.drawable.down_my_hover);
 						break;
 					} else {
-						newFragment = new LoginActivity();
+						newFragment = new LoginFragment();
 						setNavBackground();
 						// downMyLayout.setPressed(true);
 						downMyLayout

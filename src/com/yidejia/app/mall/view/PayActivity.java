@@ -2,10 +2,14 @@ package com.yidejia.app.mall.view;
 
 import java.util.ArrayList;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,11 +23,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.yidejia.app.mall.view.LoginActivity;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.datamanage.ExpressDataManage;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.Express;
+import com.yidejia.app.mall.net.address.GetUserAddressList;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.PayUtil;
 
@@ -44,7 +51,9 @@ public class PayActivity extends SherlockActivity {
 	private CheckBox caifutongCheckBox;// 财付通支付
 	private TextView sumPrice;// 总的价格
 	private Handler mHandler;// 创建handler对象
-	private Addresses addresses;//传过来的地址
+	private MyApplication myApplication;
+
+	// private Addresses addresses;
 
 	/**
 	 * 实例化控件
@@ -166,63 +175,69 @@ public class PayActivity extends SherlockActivity {
 		}
 
 	}
-
-	@Override
+		@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		try {
-			// TODO Auto-generated method stub
-			Intent intent = getIntent();
-			final String sum = intent.getStringExtra("price");
-			addresses = (Addresses) intent.getSerializableExtra("address");
-//			if (sum == null) {
-//				Toast.makeText(PayActivity.this, "您还未购买商品", Toast.LENGTH_LONG)
-//						.show();
-//			}
 			super.onCreate(savedInstanceState);
-			setActionbar();
-			setContentView(R.layout.go_pay);
-			LinearLayout layout = (LinearLayout) findViewById(R.id.go_pay_relative2);
-			PayUtil pay = new PayUtil(PayActivity.this, layout);
-			pay.loadView();
-			// View person = getLayoutInflater().inflate(R.layout.go_pay_item,
-			// null);
-			// layout.addView(person);
-			setupShow();
-			addAddress();
-
-			if (Double.parseDouble(sum) > 2990.0) {
-				sumPrice.setText(sum);
+			// TODO Auto-generated method stub
+			myApplication = (MyApplication) getApplication();
+			// 付款之前先判断用户是否登陆
+			if (!myApplication.getIsLogin()) {
+				Toast.makeText(this, "你还未登陆，请先登陆", Toast.LENGTH_LONG).show();
+				Intent intent = new Intent(this,LoginActivity.class);
+				startActivity(intent);
+				this.finish();
 			} else {
-				sumPrice.setText(Double.parseDouble(sum)
-						+ Double.parseDouble((general.isChecked() ? generalPrice
-								.getText().toString() : emsPrice.getText()
-								.toString())) + "");
-			}
-			mHandler = new Handler() {
-				@Override
-				public void handleMessage(Message msg) {
-					switch (msg.what) {
-					case Consts.GENERAL:
-						sumPrice.setText(Double.parseDouble(sum)
-								+ Double.parseDouble(generalPrice.getText()
-										.toString()) + "");
-						break;
-					case Consts.EMS:
-						sumPrice.setText(Double.parseDouble(sum)
-								+ Double.parseDouble(emsPrice.getText()
-										.toString()) + "");
-						break;
-					}
-					super.handleMessage(msg);
+				Intent intent = getIntent();
+				final String sum = intent.getStringExtra("price");
+				// addresses = (Addresses)
+				// intent.getSerializableExtra("address");
+				if (sum == null) {
+					Toast.makeText(PayActivity.this, "您还未购买商品",
+							Toast.LENGTH_LONG).show();
 				}
-			};
+				setActionbar();
+				setContentView(R.layout.go_pay);
+				LinearLayout layout = (LinearLayout) findViewById(R.id.go_pay_relative2);
+				PayUtil pay = new PayUtil(PayActivity.this, layout);
+				pay.loadView();
+				setupShow();
+				addAddress();
+
+				if (Double.parseDouble(sum) > 2990.0) {
+					sumPrice.setText(sum);
+				} else {
+					sumPrice.setText(Double.parseDouble(sum)
+							+ Double.parseDouble((general.isChecked() ? generalPrice
+									.getText().toString() : emsPrice.getText()
+									.toString())) + "");
+				}
+				mHandler = new Handler() {
+					@Override
+					public void handleMessage(Message msg) {
+						switch (msg.what) {
+						case Consts.GENERAL:
+							sumPrice.setText(Double.parseDouble(sum)
+									+ Double.parseDouble(generalPrice.getText()
+											.toString()) + "");
+							break;
+						case Consts.EMS:
+							sumPrice.setText(Double.parseDouble(sum)
+									+ Double.parseDouble(emsPrice.getText()
+											.toString()) + "");
+							break;
+						}
+						super.handleMessage(msg);
+					}
+				};
+			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Toast.makeText(PayActivity.this, "网络不给力！", Toast.LENGTH_SHORT)
 					.show();
 		}
-		// Log.i("info", sum);
+
 	}
 
 	/**
@@ -256,9 +271,10 @@ public class PayActivity extends SherlockActivity {
 	 */
 	private void addAddress() {
 		try {
-//			ArrayList<Addresses> mList = addressDataManage.getAddressesArray(
-//					68298, 0, 10);
-//			Addresses addresses = mList.remove(0);
+			ArrayList<Addresses> mList = addressDataManage.getAddressesArray(
+					Integer.parseInt(myApplication.getUserId()), 0, 10);
+			Addresses addresses = mList.remove(0);
+
 			userName.setText(addresses.getName());
 			phoneName.setText(addresses.getPhone());
 			StringBuffer sb = new StringBuffer();
@@ -284,5 +300,3 @@ public class PayActivity extends SherlockActivity {
 	}
 
 }
-
-
