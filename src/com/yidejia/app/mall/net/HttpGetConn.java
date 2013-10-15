@@ -64,4 +64,14 @@ public class HttpGetConn {
 		
 		return result;
 	}
+	/**
+	 * jni方式获取数据， isTrue为不需要用到的参数
+	 * @param urlString
+	 * @param isTrue 
+	 */
+	public HttpGetConn(String urlString, boolean isTrue){
+		this.urlString = urlString;
+	}
+	
+	
 }

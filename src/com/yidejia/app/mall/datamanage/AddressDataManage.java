@@ -18,6 +18,7 @@ import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.net.address.DeleteUserAddress;
 import com.yidejia.app.mall.net.address.GetUserAddressList;
 import com.yidejia.app.mall.net.address.SaveUserAddress;
+import com.yidejia.app.mall.net.address.SetDefAddr;
 import com.yidejia.app.mall.util.UnicodeToString;
 
 public class AddressDataManage {
@@ -167,6 +168,36 @@ public class AddressDataManage {
 		}
 		
 		return addressesArray;
+	}
+	/**
+	 * 设置默认地址
+	 * @param cid
+	 * @param aid
+	 * @param token
+	 * @return
+	 */
+	public boolean setDefaultAddress(String cid, String aid, String token){
+		boolean isSuccess = false;
+//		String resultJson = deleteAddressJson(userId, addressId);
+		TaskSetDef taskDelete = new TaskSetDef(cid, aid, token);
+		try {
+			isSuccess = taskDelete.execute().get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			Log.e(TAG, "TaskDelete() InterruptedException");
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			Log.e(TAG, "TaskDelete() ExecutionException");
+			e.printStackTrace();
+		}
+		
+		if(!isSuccess){
+			Toast.makeText(context, "网络不给力！", Toast.LENGTH_SHORT).show();
+		}
+		
+//		isSuccess = !isSuccess;
+		return isSuccess;
 	}
 	
 //	private String result = "";
@@ -389,6 +420,57 @@ public class AddressDataManage {
 		private ProgressDialog bar = new ProgressDialog(context);
 	}
 	
+	private class TaskSetDef extends AsyncTask<Void, Void, Boolean>{
+		private String cid;
+		private String aid;
+		private String token;
+		public TaskSetDef(String cid, String aid, String token){
+			this.cid = cid;
+			this.aid = aid;
+			this.token = token;
+		}
+		
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			bar.setMessage("正在查询");
+			bar.show();
+		}
+		
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+//			DeleteUserAddress deleteAddress = new DeleteUserAddress(context);
+			SetDefAddr setDefAddr = new SetDefAddr();
+			try {
+				String httpResultString = setDefAddr.getHttpResponse(cid, aid, token);
+				
+				return analysicSetDefJson(httpResultString);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Log.e(TAG, "task delete ioex");
+				return false;
+			} catch (Exception e) {
+				// TODO: handle exception
+				Log.e(TAG, "task delete other ex");
+				return false;
+			}
+		}
+		
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			bar.dismiss();
+//			if(result)
+//				Toast.makeText(context, "成功", Toast.LENGTH_SHORT).show();
+		}
+		private ProgressDialog bar = new ProgressDialog(context);
+	}
+	
 	/**
 	 * 解析删除数据
 	 * @param resultJson http 返回的数据
@@ -398,6 +480,29 @@ public class AddressDataManage {
 		if ("".equals(resultJson))
 			return false;
 
+		JSONObject httpResultObject;
+		try {
+			httpResultObject = new JSONObject(resultJson);
+			int code = httpResultObject.getInt("code");
+			if (code == 1)
+				return true;
+			else return false;
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.e(TAG, "delete address analysis json jsonexception error");
+			return false;
+		} catch (Exception e) {
+			// TODO: handle exception
+			Log.e(TAG, "delete address analysis json exception error");
+			return false;
+		}
+	}
+	
+	private boolean analysicSetDefJson(String resultJson) {
+		if ("".equals(resultJson) || resultJson == null)
+			return false;
+		
 		JSONObject httpResultObject;
 		try {
 			httpResultObject = new JSONObject(resultJson);

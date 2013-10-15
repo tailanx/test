@@ -11,6 +11,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.util.Md5;
@@ -93,6 +94,18 @@ public class DeleteUserAddress {
 		HttpPostConn conn = new HttpPostConn(keys, values);
 		result = conn.getJsonResult();
 		return result;
+	}
+	/**
+	 * jni·½Ê½É¾³ýµØÖ·
+	 * @param cid
+	 * @param aid
+	 * @param token
+	 * @return
+	 * @throws IOException
+	 */
+	public String deleteAddress(String cid, String aid, String token) throws IOException{
+		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4DelAddress(cid, aid, token));
+		return result = conn.getHttpResponse();
 	}
 	
 //	public String deleteAddressJson(){

@@ -528,12 +528,14 @@ public class GoodsView {
 		FavoriteDataManage favoriteManage = new FavoriteDataManage(activity);
 		if (isLogin && !"".equals(userid)) {
 			if (favoriteManage.checkExists(userid, productId)) {
-				add_favorites.setBackgroundResource(R.drawable.add_favorites2);
+				add_favorites.setImageResource(R.drawable.add_favorites2);
+//				Toast.makeText(activity, "yes", Toast.LENGTH_LONG).show();
 			} else {
-				add_favorites.setBackgroundResource(R.drawable.add_favorites1);
+				add_favorites.setImageResource(R.drawable.add_favorites1);
+//				Toast.makeText(activity, "no", Toast.LENGTH_LONG).show();
 			}
 		} else {
-			add_favorites.setBackgroundResource(R.drawable.add_favorites1);
+			add_favorites.setImageResource(R.drawable.add_favorites1);
 		}
 	}
 
@@ -721,27 +723,27 @@ public class GoodsView {
 					// 未收藏，现在添加收藏
 					if (manage.addFavourite(userid, productId)) {
 						// 收藏成功
-						// Toast.makeText(activity, "加入收藏成功!",
-						// Toast.LENGTH_SHORT)
-						// .show();
+						 Toast.makeText(activity, "加入收藏成功!",
+						 Toast.LENGTH_SHORT)
+						 .show();
 						add_favorites
-								.setBackgroundResource(R.drawable.add_favorites2);
+								.setImageResource(R.drawable.add_favorites2);
 					} else {
-						// Toast.makeText(activity, "抱歉！加入收藏失败。",
-						// Toast.LENGTH_SHORT).show();
+						 Toast.makeText(activity, "抱歉！加入收藏失败。",
+						 Toast.LENGTH_SHORT).show();
 						add_favorites
-								.setBackgroundResource(R.drawable.add_favorites1);
+								.setImageResource(R.drawable.add_favorites1);
 					}
 				} else {
 					// 已收藏，现在删除收藏
 					if (manage.deleteFavourite(userid, productId)) {
 						// 删除成功
 						add_favorites
-								.setBackgroundResource(R.drawable.add_favorites1);
+								.setImageResource(R.drawable.add_favorites1);
 					} else {
 						// 删除失败
 						add_favorites
-								.setBackgroundResource(R.drawable.add_favorites2);
+								.setImageResource(R.drawable.add_favorites2);
 					}
 				}
 			} else {

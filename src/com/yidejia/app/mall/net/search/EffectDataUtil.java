@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import android.util.Log;
 
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.util.Md5;
@@ -62,6 +63,13 @@ public class EffectDataUtil {
 	
 	public String getHttpResponseString(String where, String offset, String limit, String fields) throws IOException{
 		HttpGetConn httpGetConn = new HttpGetConn(getHttpAddress(where, offset, limit, fields));
+//		HttpGetConn httpGetConn = new HttpGetConn(JNICallBack.getHttp4GetEffect(where, offset, limit, group, order, fields), true);
+		return httpGetConn.getJsonResult();
+	}
+	
+	public String getHttpResponseString(String where, String offset, String limit, String group, String order, String fields) throws IOException{
+//		HttpGetConn httpGetConn = new HttpGetConn(getHttpAddress(where, offset, limit, fields));
+		HttpGetConn httpGetConn = new HttpGetConn(JNICallBack.getHttp4GetEffect(where, offset, limit, group, order, fields), true);
 		return httpGetConn.getJsonResult();
 	}
 }

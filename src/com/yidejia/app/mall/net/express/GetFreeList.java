@@ -9,11 +9,12 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.util.Md5;
 /**
- * 获取配送中心
+ * 获取免邮列表
  * @author long bin
  *
  */
@@ -76,8 +77,12 @@ public class GetFreeList {
 	}
 	
 	private String result = "";
-	public String getListJsonString(String where, String offset, String limit, String group, String order, String fields)throws IOException{
-		HttpGetConn conn = new HttpGetConn(getHttpAddress(where, offset, limit, group, order, fields));
+
+	public String getListJsonString(String where, String offset, String limit,
+			String group, String order, String fields) throws IOException {
+//		HttpGetConn conn = new HttpGetConn(getHttpAddress(where, offset, limit,
+//				group, order, fields));
+		HttpGetConn conn = new HttpGetConn(JNICallBack.getHttp4GetFree(where, offset, limit, group, order, fields), true);
 		result = conn.getJsonResult();
 		return result;
 	}

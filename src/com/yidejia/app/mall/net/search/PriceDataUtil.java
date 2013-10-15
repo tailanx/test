@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import android.util.Log;
 
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.util.Md5;
@@ -55,7 +56,8 @@ public class PriceDataUtil {
 	}
 	
 	public String getHttpResponseString() throws IOException{
-		HttpGetConn httpGetConn = new HttpGetConn(getHttpAddress());
+//		HttpGetConn httpGetConn = new HttpGetConn(getHttpAddress());
+		HttpGetConn httpGetConn = new HttpGetConn(JNICallBack.getHttp4GetPrice(), true);
 		return httpGetConn.getJsonResult();
 	}
 }

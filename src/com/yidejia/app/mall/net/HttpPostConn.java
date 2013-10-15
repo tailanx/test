@@ -85,7 +85,7 @@ public class HttpPostConn {
 		this.param = param;
 	}
 	/**
-	 * 获取post方法的返回数据
+	 * jni方式获取post方法的返回数据
 	 * @return
 	 */
 	public String getHttpResponse() throws IOException{

@@ -11,6 +11,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.util.Md5;
@@ -81,10 +82,12 @@ public class SaveProductComment {
 	 * @return httpµÿ÷∑
 	 * @throws IOException
 	 */
-	public String saveAddress(String id) throws IOException{
-		getHttpAddress(id);
-		HttpPostConn conn = new HttpPostConn(keys, values);
-		result = conn.getJsonResult();
+	public String saveComment(String id) throws IOException{
+//		getHttpAddress(id);
+//		HttpPostConn conn = new HttpPostConn(keys, values);
+//		result = conn.getJsonResult();
+		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4SaveComment(id));
+		result = conn.getHttpResponse();
 		return result;
 	}
 //	public String saveCommentJson(){
