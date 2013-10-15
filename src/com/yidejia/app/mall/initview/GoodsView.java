@@ -171,23 +171,19 @@ public class GoodsView {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 //				getAddresses();
-				Intent intent = new Intent(activity,
-						PayActivity.class);
+				Intent intent = new Intent(activity,PayActivity.class);
 				float sum = Float.parseFloat(price.getText()
 						.toString().substring(0, price.getText()
 						.toString().lastIndexOf("元")));
 				
-					if (sum > 0) {
+					
 						Bundle bundle = new Bundle();
-						
+						bundle.putSerializable("Cart", cart);
 						bundle.putString("price", sum + "");
 						intent.putExtras(bundle);
 						activity.startActivity(intent);
-						activity.finish();
-					} else {
-						Toast.makeText(activity, "你还未购买任何商品",
-								Toast.LENGTH_LONG).show();
-					}
+						
+					
 				
 			}
 		});
@@ -457,6 +453,7 @@ public class GoodsView {
 		}
 
 	}
+
 	//加载地址
 //	Addresses address = null;
 //	private void getAddresses() {
