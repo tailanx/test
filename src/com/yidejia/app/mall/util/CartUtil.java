@@ -482,14 +482,11 @@ public class CartUtil {
 				map.put("price",
 						Float.parseFloat(priceTextView.getText().toString()));
 				list.add(map);
-				// …Ë÷√º‡Ã˝
-				mBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
+				mBox.setOnClickListener(new OnClickListener() {
+					
 					@Override
-					public void onCheckedChanged(CompoundButton buttonView,
-							boolean isChecked) {
-						if (isChecked) {
-							Log.i("info", mBox.isChecked() + "");
+					public void onClick(View v) {
+						if(mBox.isChecked()){
 							Message msg = new Message();
 							msg.what = 124;
 							handler.sendMessage(msg);
@@ -499,15 +496,40 @@ public class CartUtil {
 								Log.i("info", checkBox.isChecked() + "+j");
 							}
 						}else{
-//							
+							for (int i = 0; i < mList.size(); i++) {
+								CheckBox checkBox = (CheckBox) mList.get(i);
+								checkBox.setChecked(false);
+						}
+						
+					}
+						}
+				});
+				// …Ë÷√º‡Ã˝
+//				mBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+//
+//					@Override
+//					public void onCheckedChanged(CompoundButton buttonView,
+//							boolean isChecked) {
+//						if (isChecked) {
+//							Log.i("info", mBox.isChecked() + "");
+//							Message msg = new Message();
+//							msg.what = 124;
+//							handler.sendMessage(msg);
 //							for (int i = 0; i < mList.size(); i++) {
 //								CheckBox checkBox = (CheckBox) mList.get(i);
-//								checkBox.setChecked(false);
+//								checkBox.setChecked(true);
+//								Log.i("info", checkBox.isChecked() + "+j");
+//							}
+//						}else{
+////							
+////							for (int i = 0; i < mList.size(); i++) {
+////								CheckBox checkBox = (CheckBox) mList.get(i);
+////								checkBox.setChecked(false);
+////						}
 //						}
-						}
-
-					}
-				});
+//
+//					}
+//				});
 				linearLayout.addView(view);
 				
 			}
