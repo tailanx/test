@@ -77,7 +77,7 @@
         android:layout_below="@id/shopping_cart_item_money"
         android:layout_marginBottom="10dp"
         android:layout_toLeftOf="@id/shopping_cart_item_right"
-        android:layout_toRightOf="@id/shopping_cart_item__imageview1" >
+         >
 
         <ImageView
             android:id="@+id/imageView1"
@@ -91,18 +91,16 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="2dp"
+            
             android:src="@drawable/reduction" />
 
-        <ImageView
+         <ImageView
             android:id="@+id/shopping_cart_item_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="2dp"
             android:layout_alignRight="@+id/imageView1"
+           
             android:src="@drawable/addition" />
-
         <TextView
             android:id="@+id/shopping_cart_item_edit_number"
             android:layout_width="wrap_content"
@@ -111,12 +109,11 @@
             android:gravity="center"
             android:layout_toLeftOf="@id/shopping_cart_item_add"
             android:layout_toRightOf="@id/shopping_cart_item_subtract"
-            android:background="@null"
-            android:enabled="true"
-            android:includeFontPadding="true"
-            android:inputType="number"
-            android:maxLength="4"
-            android:text="0" />
+            
+            android:text="1" />
+
+       
+
     </RelativeLayout>
 
 </RelativeLayout>
