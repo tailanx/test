@@ -56,7 +56,7 @@ public class NewAddressActivity extends SherlockActivity {
 	private EditText nameTextView;// 收货人姓名
 	private EditText numberTextView;// 收货人电话
 	private EditText areaTextView;// 收货人详细地址
-	public  static int addressId;
+	public  static String addressId;
 	// private List<MyListItem> list1;
 	// private List<MyListItem> list2;
 	// private List<MyListItem> list3;
@@ -477,10 +477,10 @@ public class NewAddressActivity extends SherlockActivity {
 								addresses.setPhone(numberTextView.getText()
 										.toString());
 								
-								 addressId=dataManage.addAddress(68298, nameTextView.getText().toString(), province.trim(), city.trim(), district.trim(), areaTextView.getText().toString().trim(), numberTextView.getText().toString(), true);
+								 addressId=dataManage.addAddress(68298+"", nameTextView.getText().toString(), province.trim(), city.trim(), district.trim(), areaTextView.getText().toString().trim(), numberTextView.getText().toString(), true);
 //								Log.i("info", addressId+"addressId");
 							
-								 if(addressId == 0){
+								 if("".equals(addressId)){
 										Toast.makeText(NewAddressActivity.this, "您的输入有问题", Toast.LENGTH_SHORT).show();
 
 								 }else{

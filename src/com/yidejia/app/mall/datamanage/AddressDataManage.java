@@ -46,10 +46,10 @@ public class AddressDataManage {
 	 *@param address 详细地址
 	 *@param phone 电话
 	 *@param defaultAddress 是否为默认地址
-	 *@return: 返回addressId;
+	 *@return: 返回addressId;可能为""
 	 */
-	public int addAddress(int userId, String name, String province, String city, String area, String address, String phone, boolean defaultAddress){
-		int addressId = -1;
+	public String addAddress(String userId, String name, String province, String city, String area, String address, String phone, boolean defaultAddress){
+		String addressId = "";
 		boolean isSuccess = false;
 		TaskSave taskSave = new TaskSave(userId, name, province, city, area, address, phone, defaultAddress);
 		try {
@@ -62,6 +62,8 @@ public class AddressDataManage {
 			// TODO Auto-generated catch block
 			Log.e(TAG, "addAddress() ExecutionException");
 			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		
 		if(!isSuccess && !isSaveSuccess){
@@ -87,7 +89,7 @@ public class AddressDataManage {
 	 *@param recipientId 更新地址id
 	 *@return: 是否更新成功
 	 */
-	public boolean updateAddress(int userId, String name, String province, String city, String area, String address, String phone, boolean defaultAddress, int recipientId){
+	public boolean updateAddress(String userId, String name, String province, String city, String area, String address, String phone, boolean defaultAddress, String recipientId){
 		boolean isSuccess = false;
 		this.recipient_id = recipientId;
 		TaskSave taskSave = new TaskSave(userId, name, province, city, area, address, phone, defaultAddress);
@@ -358,7 +360,7 @@ public class AddressDataManage {
 	}
 	
 	private class TaskSave extends AsyncTask<Void, Void, Boolean>{
-		private int userId;
+		private String userId;
 		private String name;
 		private String province;
 		private String city;
@@ -367,7 +369,7 @@ public class AddressDataManage {
 		private String phone; 
 		private boolean defaultAddress;
 		
-		public TaskSave(int userId, String name, String province, String city, String area, String address, String phone, boolean defaultAddress){
+		public TaskSave(String userId, String name, String province, String city, String area, String address, String phone, boolean defaultAddress){
 			this.userId = userId;
 			this.name = name;
 			this.province = province;
@@ -522,7 +524,7 @@ public class AddressDataManage {
 		}
 	}
 	
-	private int recipient_id = 0;
+	private String recipient_id = "";
 	/**
 	 * 解析添加或修改地址数据
 	 * @param resultJson http返回的数据
@@ -540,7 +542,8 @@ public class AddressDataManage {
 				String response = httpResultObject.getString("response");
 				JSONObject responseJsonObject = new JSONObject(response);
 				String temp = responseJsonObject.getString("@p_recipient_id");
-				recipient_id = Integer.parseInt(temp);
+//				recipient_id = Integer.parseInt(temp);
+				recipient_id = temp;
 				isSuccessString = responseJsonObject.getString("@p_result");
 				if("success成功".equals(unicode.revert(isSuccessString))){
 					isSaveSuccess = true;
@@ -572,7 +575,7 @@ public class AddressDataManage {
 	/**
 	 * 返回地址的id
 	 */
-	public int getAddressId(){
+	public String getAddressId(){
 		return recipient_id;
 	}
 	

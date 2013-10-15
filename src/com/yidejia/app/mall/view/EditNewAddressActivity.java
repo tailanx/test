@@ -324,13 +324,13 @@ public class EditNewAddressActivity extends SherlockActivity {
 					addresses.setAddress(areaTextView.getText().toString());
 					addresses.setHandset(numberTextView.getText().toString());
 
-					isUpdate = dataManage.updateAddress(68298,
+					isUpdate = dataManage.updateAddress(68298+"",
 							nameTextView.getText().toString(), province.trim(),
 							city.trim(), district.trim(), areaTextView
 									.getText().toString().trim(),
 							numberTextView.getText().toString(),
 							isDefauteUpdate,
-							Integer.parseInt(id));
+							id);
 						
 					addresses.setAddressId(new AddressDataManage(EditNewAddressActivity.this).getAddressId()+"");
 					
