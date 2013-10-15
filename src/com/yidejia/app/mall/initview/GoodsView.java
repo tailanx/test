@@ -43,6 +43,7 @@ import com.yidejia.app.mall.model.MainProduct;
 import com.yidejia.app.mall.model.ProductBaseInfo;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.GoCartActivity;
+import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.view.NewAddressActivity;
 import com.yidejia.app.mall.view.PayActivity;
 
@@ -202,7 +203,7 @@ public class GoodsView {
 				// Bundle bundle = new Bundle();
 				// intent.putExtras(bundle);
 				activity.startActivity(intent);
-				activity.finish();
+				
 			}
 		});
 
@@ -400,7 +401,10 @@ public class GoodsView {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			FavoriteDataManage manage = new FavoriteDataManage(activity);
-			if (isLogin && !"".equals(userid)) {
+			if(!isLogin){
+				Intent intent = new Intent(activity,LoginActivity.class);
+				activity.startActivity(intent);
+			}else if(isLogin && !"".equals(userid)) {
 				// 登录状态下
 				if (!manage.checkExists(userid, productId)) {
 					// 未收藏，现在添加收藏
@@ -429,12 +433,15 @@ public class GoodsView {
 								.setBackgroundResource(R.drawable.add_favorites2);
 					}
 				}
-			} else {
-				// 未登录状态下，收藏到本地
-				// 改变图片
-				flag = !flag;
-				changeFravoriteBg();
+			 
+			 
 			}
+//			else {
+//				// 未登录状态下，收藏到本地
+//				// 改变图片
+//				flag = !flag;
+//				changeFravoriteBg();
+//			}
 		}
 	};
 
