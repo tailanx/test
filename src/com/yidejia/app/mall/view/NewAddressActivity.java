@@ -26,6 +26,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.yidejia.app.mall.DBManager;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.MyAdapter;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
@@ -477,7 +478,7 @@ public class NewAddressActivity extends SherlockActivity {
 								addresses.setPhone(numberTextView.getText()
 										.toString());
 								
-								 addressId=dataManage.addAddress(68298+"", nameTextView.getText().toString(), province.trim(), city.trim(), district.trim(), areaTextView.getText().toString().trim(), numberTextView.getText().toString(), true);
+								 addressId=dataManage.addAddress(new MyApplication().getUserId(), nameTextView.getText().toString(), province.trim(), city.trim(), district.trim(), areaTextView.getText().toString().trim(), numberTextView.getText().toString(), true);
 //								Log.i("info", addressId+"addressId");
 							
 								 if("".equals(addressId)){

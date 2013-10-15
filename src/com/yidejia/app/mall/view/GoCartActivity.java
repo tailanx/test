@@ -170,17 +170,17 @@ public class GoCartActivity extends SherlockActivity {// implements
 	//
 	// }
 	//
-	/**
-	 * 
-	 * @return返回一个地址
-	 */
 	Addresses address = null;
 
+	/**
+	 * 
+	 * @return 返回一个地址
+	 */
 	private void getAddresses() {
 
 		String userId = ((MyApplication) getApplication()).getUserId();
 		ArrayList<Addresses> mAddresses = addressManage.getAddressesArray(
-				Integer.parseInt(userId), 0, 5);
+				userId, 0, 5);
 		if (mAddresses.size() == 0) {
 			Intent intent = new Intent(GoCartActivity.this,
 					NewAddressActivity.class);

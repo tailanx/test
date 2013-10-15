@@ -21,6 +21,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.yidejia.app.mall.DBManager;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.MyAdapter;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
@@ -324,7 +325,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 					addresses.setAddress(areaTextView.getText().toString());
 					addresses.setHandset(numberTextView.getText().toString());
 
-					isUpdate = dataManage.updateAddress(68298+"",
+					isUpdate = dataManage.updateAddress(new MyApplication().getUserId(),
 							nameTextView.getText().toString(), province.trim(),
 							city.trim(), district.trim(), areaTextView
 									.getText().toString().trim(),
