@@ -59,7 +59,7 @@ public class PayActivity extends SherlockActivity {
 	public void setupShow() {
 		try {
 			expressDataManage = new ExpressDataManage(this);
-			addressDataManage = new AddressDataManage(this);
+			
 			sumPrice = (TextView) findViewById(R.id.go_pay_show_pay_money);
 			userName = (TextView) findViewById(R.id.go_pay_name);
 			phoneName = (TextView) findViewById(R.id.go_pay_number);
@@ -180,6 +180,7 @@ public class PayActivity extends SherlockActivity {
 			super.onCreate(savedInstanceState);
 			// TODO Auto-generated method stub
 			myApplication = (MyApplication) getApplication();
+			addressDataManage = new AddressDataManage(this);
 			// receiver = new Myreceiver();
 			// IntentFilter filter = new IntentFilter();
 			// filter.addAction(Consts.BUY_NEW);
@@ -196,13 +197,13 @@ public class PayActivity extends SherlockActivity {
 				Cart cart = (Cart) intent.getSerializableExtra("Cart");
 				if (cart == null) {
 
-					setActionbar();
 					setContentView(R.layout.go_pay);
+					setupShow();
+					addAddress();
+					setActionbar();
 					LinearLayout layout = (LinearLayout) findViewById(R.id.go_pay_relative2);
 					PayUtil pay = new PayUtil(PayActivity.this, layout);
 					pay.loadView();
-					setupShow();
-					addAddress();
 
 					if (Double.parseDouble(sum) > 299.0) {
 						sumPrice.setText(sum);
@@ -321,6 +322,7 @@ public class PayActivity extends SherlockActivity {
 				Intent intent = new Intent(PayActivity.this,
 						NewAddressActivity.class);
 				PayActivity.this.startActivity(intent);
+				
 			} else {
 				Addresses addresses = mList.remove(0);
 
