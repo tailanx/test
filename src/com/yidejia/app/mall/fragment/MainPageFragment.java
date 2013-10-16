@@ -92,13 +92,7 @@ public class MainPageFragment extends SherlockFragment {
 		default:
 			break;
 		}
-		MainPageDataManage manage = new MainPageDataManage(getSherlockActivity(), null);
-		manage.getMainPageData();
-		bannerArray = manage.getBannerArray();
-		acymerArray = manage.getAcymerArray();
-		inerbtyArray = manage.getInerbtyArray();
-		hotsellArray = manage.getHotSellArray();
-		ggTitleArray = manage.getGGTitle();
+		
 		return view;
 	}
 	
@@ -327,6 +321,13 @@ public class MainPageFragment extends SherlockFragment {
 		super.onActivityCreated(savedInstanceState);
 		Log.d(TAG, "TestFragment-----onActivityCreated");
 //		intentToView(view);
+		MainPageDataManage manage = new MainPageDataManage(getSherlockActivity(), null);
+		manage.getMainPageData();
+		bannerArray = manage.getBannerArray();
+		acymerArray = manage.getAcymerArray();
+		inerbtyArray = manage.getInerbtyArray();
+		hotsellArray = manage.getHotSellArray();
+		ggTitleArray = manage.getGGTitle();
 		
 		createView(view, inflater);
 		HotSellView hotSellView = new HotSellView(view);

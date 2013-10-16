@@ -49,7 +49,6 @@ import com.yidejia.app.mall.widget.YLImageButton;
 public class MainFragmentActivity extends SherlockFragmentActivity {
 
 //	private ViewPager main_act_pager;
-	private Fragment newFragment;
 	private ArrayList<Fragment> fragmentsList;
 	private int currentIndex = 0;//当前导航所在页面
 	private RelativeLayout downHomeLayout;
@@ -172,11 +171,16 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 //			down_shopping_cart.setText("" + cartAcount);
 //		}
 	}
-	
+	private Fragment mainFragment = MainPageFragment.newInstance(0);
+	private Fragment guangFragment = new GuangFragment();
+	private Fragment searchFragment = SearchFragment.newInstance(2);
+	private Fragment cartFragment = new CartActivity();
+	private Fragment myFragment = new MyMallActivity();
+	private Fragment loginFragment = new LoginFragment();
 	private void initView(){
-		Fragment mainPageFragment = MainPageFragment.newInstance(0);
+//		mainFragment = MainPageFragment.newInstance(0);
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.main_fragment, mainPageFragment).commit();//.addToBackStack(fragmentTag[0])
+        ft.add(R.id.main_fragment, mainFragment).commit();//.addToBackStack(fragmentTag[0])
 	}
 	/**
 	 * 这里不是fragment+ viewpager 实现，不用add fragment进来
@@ -225,7 +229,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 //				main_act_pager.setCurrentItem(id);
 				switch (id) {
 				case 0:
-					newFragment = MainPageFragment.newInstance(0);
+//					newFragment = MainPageFragment.newInstance(0);
 					setNavBackground();
 //					downHomeLayout.setPressed(true);
 					down_home_textview.setTextColor(res.getColor(R.color.white));
@@ -236,7 +240,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 					break;
 				case 1:
 //					newFragment = MainPageFragment.newInstance(1);
-					newFragment = new GuangFragment();
+//					newFragment = new GuangFragment();
 					setNavBackground();
 //					downGuangLayout.setPressed(true);
 					down_guang_textview.setTextColor(res.getColor(R.color.white));
@@ -246,7 +250,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 //					down_guang_TextView.setTextColor(Color.WHITE);
 					break;
 				case 2:
-					newFragment = SearchFragment.newInstance(2);
+//					newFragment = SearchFragment.newInstance(2);
 					setNavBackground();
 //					downSearchLayout.setPressed(true);
 					down_search_textview.setTextColor(res.getColor(R.color.white));
@@ -257,7 +261,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 					break;
 				case 3:
 //					newFragment = ShoppingCartFragment.newInstance(3);
-					newFragment = new CartActivity();
+//					newFragment = new CartActivity();
 					setNavBackground();
 //					downShoppingLayout.setPressed(true);
 					down_shopping_textview.setTextColor(res.getColor(R.color.white));
@@ -267,13 +271,13 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 //					down_shopping_TextView.setTextColor(Color.WHITE);
 					break;
 				case 4:
-					boolean isLogin = ((MyApplication) getApplication())
+					isLogin = ((MyApplication) getApplication())
 							.getIsLogin();
 
 					Log.i("info", isLogin + "");
 					down_my_textview.setTextColor(res.getColor(R.color.white));
 					if (isLogin) {
-						newFragment = new MyMallActivity();
+//						newFragment = new MyMallActivity();
 						setNavBackground();
 						// downMyLayout.setPressed(true);
 						downMyLayout
@@ -283,7 +287,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 								.setImageResource(R.drawable.down_my_hover);
 						break;
 					} else {
-						newFragment = new LoginFragment();
+//						newFragment = new LoginFragment();
 						setNavBackground();
 						// downMyLayout.setPressed(true);
 						downMyLayout
@@ -297,12 +301,45 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 				default:
 					break;
 				}
+				//用于切换时保存fragment
 				FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		        ft.replace(R.id.main_fragment, newFragment).commit();//.addToBackStack(fragmentTag[id])
+				if(getCurrFragment(id).isAdded())
+					ft.hide(getCurrFragment(currentIndex)).show(getCurrFragment(id)).commit();
+				else ft.hide(getCurrFragment(currentIndex)).add(R.id.main_fragment, getCurrFragment(id)).commit();//.addToBackStack(fragmentTag[id])
+//				currFragment = newFragment;
 			}
 			currentIndex = id;
 		}
 
+	}
+	
+	private boolean isLogin;
+	//获取当前的fragment, 用于切换时保存fragment
+	private Fragment getCurrFragment(int index){
+		Fragment fragment = null;
+		switch (index) {
+		case 0:
+			fragment = mainFragment;
+			break;
+		case 1:
+			fragment = guangFragment;
+			break;
+		case 2:
+			fragment = searchFragment;
+			break;
+		case 3:
+			fragment = cartFragment;
+			break;
+		case 4:
+			if(!isLogin)
+				fragment = loginFragment;
+			else fragment = myFragment;
+			break;
+
+		default:
+			break;
+		}
+		return fragment;
 	}
 	
 	private String[] fragmentTag = {"main", "guang", "search", "cart", "my"};
@@ -395,4 +432,6 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		}
 
 	}
+
+	
 }
