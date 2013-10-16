@@ -145,12 +145,19 @@ public class MainPageFragment extends SherlockFragment {
 			MainPageDataManage manage = new MainPageDataManage(getSherlockActivity(), mPullToRefreshScrollView);
 			
 			manage.getMainPageData();
+			bannerArray.clear();
+			acymerArray.clear();
+			inerbtyArray.clear();
+			hotsellArray.clear();
+			ggTitleArray.clear();
+			
 			bannerArray = manage.getBannerArray();
 			acymerArray = manage.getAcymerArray();
 			inerbtyArray = manage.getInerbtyArray();
 			hotsellArray = manage.getHotSellArray();
 			ggTitleArray = manage.getGGTitle();
-			HotSellView hotSellView = new HotSellView(view);
+			
+			HotSellView hotSellView = new HotSellView(view, getSherlockActivity());
 			hotSellView.initHotSellView(hotsellArray);
 			hotSellView.initAcymerView(acymerArray);
 			hotSellView.initInerbtyView(inerbtyArray);
@@ -330,7 +337,7 @@ public class MainPageFragment extends SherlockFragment {
 		ggTitleArray = manage.getGGTitle();
 		
 		createView(view, inflater);
-		HotSellView hotSellView = new HotSellView(view);
+		HotSellView hotSellView = new HotSellView(view, getSherlockActivity());
 		hotSellView.initHotSellView(hotsellArray);
 		hotSellView.initAcymerView(acymerArray);
 		hotSellView.initInerbtyView(inerbtyArray);

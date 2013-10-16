@@ -107,4 +107,39 @@ public class MyApplication extends Application{
 	public String getToken(){
 		return token;
 	}
+	
+	private String userHeadImg;//用户头像地址
+	public void setUserHeadImg(String img){
+		this.userHeadImg = img;
+	}
+	
+	public String getUserHeadImg(){
+		return userHeadImg;
+	}
+	private String password;//密码，应该是md5值
+	private String nick;//昵称
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+	
+	public String getNick() {
+		return nick;
+	}
+	
+	private String vip;//vip等级
+	public void setVip(String vip){
+		this.vip = vip;
+	}
+	public String getVip(){
+		return vip;
+	}
 }

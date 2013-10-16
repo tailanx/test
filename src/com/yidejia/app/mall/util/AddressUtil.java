@@ -110,8 +110,8 @@ public class AddressUtil {
 				deleteImageView.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View arg0) {
-						dataManage.deleteAddress(new MyApplication().getUserId(),
-								addresses.getAddressId());
+						dataManage.deleteAddress(((MyApplication)context.getApplicationContext()).getUserId(),
+								addresses.getAddressId(), ((MyApplication)context.getApplicationContext()).getToken());
 
 					}
 				});
@@ -167,8 +167,8 @@ public class AddressUtil {
 				deleteImageView.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						boolean isDele = dataManage.deleteAddress(new MyApplication().getUserId(),
-								addresses.getAddressId());
+						boolean isDele = dataManage.deleteAddress(((MyApplication)context.getApplicationContext()).getUserId(),
+								addresses.getAddressId(), ((MyApplication)context.getApplicationContext()).getToken());
 //						Log.i("info", isDele + "");
 					}
 				});
@@ -205,7 +205,7 @@ public class AddressUtil {
 	public void AllAddresses() {
 		try {
 			dataManage = new AddressDataManage(context);
-			addressesArray = dataManage.getAddressesArray(new MyApplication().getUserId(), 0, 20);
+			addressesArray = dataManage.getAddressesArray(((MyApplication)context.getApplicationContext()).getUserId(), 0, 20);
 			for (int i = 0; i < addressesArray.size(); i++) {
 				final Addresses addresses = addressesArray.get(i);
 				StringBuffer sb = new StringBuffer();
@@ -252,8 +252,8 @@ public class AddressUtil {
 				deleteImageView.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View arg0) {
-						boolean isDele = dataManage.deleteAddress(new MyApplication().getUserId(),
-								addresses.getAddressId());
+						boolean isDele = dataManage.deleteAddress(((MyApplication)context.getApplicationContext()).getUserId(),
+								addresses.getAddressId(), ((MyApplication)context.getApplicationContext()).getToken());
 						Log.i("info", isDele + "   isDele");
 						linearLayout.removeView(layout1);
 					}

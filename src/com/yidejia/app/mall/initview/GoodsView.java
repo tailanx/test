@@ -54,6 +54,7 @@ public class GoodsView {
 	private String userid;// 本用户id
 	private boolean isLogin;// 用户是否登录
 	private AlertDialog builder;
+	private MyApplication myApplication;
 
 	public GoodsView(Activity activity, View view, int width) {
 		this.view = view;
@@ -61,7 +62,7 @@ public class GoodsView {
 		this.activity = activity;
 		initDisplayImageOption();
 		Log.i("width", this.width + "");
-		MyApplication myApplication = new MyApplication();
+		myApplication = (MyApplication)activity.getApplication();
 		userid = myApplication.getUserId();
 		isLogin = myApplication.getIsLogin();
 	}
@@ -420,7 +421,7 @@ public class GoodsView {
 				// 登录状态下
 				if (!manage.checkExists(userid, productId)) {
 					// 未收藏，现在添加收藏
-					if (manage.addFavourite(userid, productId)) {
+					if (manage.addFavourite(userid, productId, myApplication.getToken())) {
 						// 收藏成功
 						 Toast.makeText(activity, "加入收藏成功!",
 						 Toast.LENGTH_SHORT)
@@ -435,7 +436,7 @@ public class GoodsView {
 					}
 				} else {
 					// 已收藏，现在删除收藏
-					if (manage.deleteFavourite(userid, productId)) {
+					if (manage.deleteFavourite(userid, productId, myApplication.getToken())) {
 						// 删除成功
 						add_favorites
 								.setImageResource(R.drawable.add_favorites1);

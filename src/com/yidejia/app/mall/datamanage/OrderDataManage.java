@@ -60,16 +60,17 @@ public class OrderDataManage {
 	 *            订单开始
 	 * @param limit
 	 *            订单个数
+	 * @param token
 	 * @return orders 订单列表
 	 */
 	public ArrayList<Order> getOrderArray(String userId, String code,
-			String the_day, String status, String offset, String limit) {
+			String the_day, String status, String offset, String limit, String token) {
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
 			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
 			return orders;
 		}
 		TaskGetList taskGetList = new TaskGetList(userId, code, the_day,
-				status, offset, limit);
+				status, offset, limit, token);
 		boolean state = false;
 		try {
 			state = taskGetList.execute().get();
@@ -97,15 +98,16 @@ public class OrderDataManage {
 		private String status;
 		private String offset;
 		private String limit;
-
+		private String token;
 		public TaskGetList(String userId, String code, String the_day,
-				String status, String offset, String limit) {
+				String status, String offset, String limit, String token) {
 			this.userId = userId;
 			this.offset = offset;
 			this.limit = limit;
 			this.code = code;
 			this.the_day = the_day;
 			this.status = status;
+			this.token = token;
 		}
 
 		@Override
@@ -122,8 +124,8 @@ public class OrderDataManage {
 			// TODO Auto-generated method stub
 			GetOrderList getList = new GetOrderList(context);
 			try {
-				String httpResultString = getList.getListJsonString(userId,
-						code, the_day, status, offset, limit);
+				String httpResultString = getList.getHttpResponse(userId,
+						code, the_day, status, offset, limit, token);
 				analysisGetListJson(httpResultString);
 				return true;
 			} catch (IOException e) {
@@ -238,19 +240,20 @@ public class OrderDataManage {
 	 *            购买的字符串，格式“商品id,数量,是否积分兑换;”，如“11,5n;”
 	 * @param comments
 	 *            订单备注信息
+	 * @param token
 	 * @return boolean 提交订单成功与否
 	 */
 	public boolean saveOrder(String customer_id, String ticket_id,
 			String recipient_id, String pingou_id, String goods_ascore,
 			String ship_fee, String ship_type, String ship_entity_name,
-			String goods_qty_scr, String comments) {
+			String goods_qty_scr, String comments, String token) {
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
 			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
 			return false;
 		}
 		TaskSave taskSave = new TaskSave(customer_id, ticket_id, recipient_id,
 				pingou_id, goods_ascore, ship_fee, ship_type, ship_entity_name,
-				goods_qty_scr, comments);
+				goods_qty_scr, comments, token);
 		boolean state = false;
 		try {
 			state = taskSave.execute().get();
@@ -282,11 +285,11 @@ public class OrderDataManage {
 		private String ship_entity_name;
 		private String goods_qty_scr;
 		private String comments;
-
+		private String token;
 		public TaskSave(String customer_id, String ticket_id,
 				String recipient_id, String pingou_id, String goods_ascore,
 				String ship_fee, String ship_type, String ship_entity_name,
-				String goods_qty_scr, String comments) {
+				String goods_qty_scr, String comments, String token) {
 			this.customer_id = customer_id;
 			this.ticket_id = ticket_id;
 			this.recipient_id = recipient_id;
@@ -297,6 +300,7 @@ public class OrderDataManage {
 			this.ship_entity_name = ship_entity_name;
 			this.goods_qty_scr = goods_qty_scr;
 			this.comments = comments;
+			this.token = token;
 		}
 
 		private ProgressDialog bar = new ProgressDialog(context);
@@ -315,9 +319,9 @@ public class OrderDataManage {
 			// TODO Auto-generated method stub
 			SaveOrder saveOrderList = new SaveOrder();
 			try {
-				String httpResponse = saveOrderList.getListJsonString(customer_id, ticket_id,
+				String httpResponse = saveOrderList.getHttpResponse(customer_id, ticket_id,
 						recipient_id, pingou_id, goods_ascore, ship_fee, ship_type,
-						ship_entity_name, goods_qty_scr, comments);
+						ship_entity_name, goods_qty_scr, comments, token);
 				JSONObject jsonObject = new JSONObject(httpResponse);
 				int code = jsonObject.getInt("code");
 				if(code == 1){

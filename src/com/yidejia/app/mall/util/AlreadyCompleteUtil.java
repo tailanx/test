@@ -46,35 +46,42 @@ public class AlreadyCompleteUtil {
 	/**
 	 * 加载视图
 	 */
-		public void loadView(){
-			try {
-				orderDataManage = new OrderDataManage(context);
-				ArrayList<Order> mList = orderDataManage.getOrderArray(new MyApplication().getUserId(), "", "", "已签收", 0+"", 5+"");
-				Log.i("info", mList.size()+"mList");
-				for(int i=0;i<mList.size();i++){
-					setupShow();
-					Log.i("info", view+"+view");
-					Order mOrder = mList.get(i);
-					titleTextView.setText(mOrder.getStatus());
-					numberTextView.setText(mOrder.getOrderCode());
-					
-					AlreadyCompleteDetail alreadyCompleteDetail = new AlreadyCompleteDetail(context, mOrder, mLayout);
-					alreadyCompleteDetail.addView();//加载商品
-					for(int j=0;j<alreadyCompleteDetail.map.size();j++){
-//					Log.i("info", mLinearLayoutLayout+"+mlayout");
-					sumPrice.setText(alreadyCompleteDetail.map.get("price")+"");
-					countTextView.setText(alreadyCompleteDetail.map.get("count").intValue()+"");
-					}
-//					sumPrice.setText(100+"");
-//					countTextView.setText(1+"");
-					mLinearLayout.addView(view);
-					Log.i("info", mLinearLayout+"+mlayout");
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				Toast.makeText(context, "网络不给力！", Toast.LENGTH_SHORT).show();
+	public void loadView() {
+		try {
+			orderDataManage = new OrderDataManage(context);
+			ArrayList<Order> mList = orderDataManage.getOrderArray(
+					((MyApplication) context.getApplicationContext())
+							.getUserId(), "", "", "已签收", 0 + "", 5 + "",
+					((MyApplication) context.getApplicationContext())
+							.getToken());
+			Log.i("info", mList.size() + "mList");
+			for (int i = 0; i < mList.size(); i++) {
+				setupShow();
+				Log.i("info", view + "+view");
+				Order mOrder = mList.get(i);
+				titleTextView.setText(mOrder.getStatus());
+				numberTextView.setText(mOrder.getOrderCode());
 
+				AlreadyCompleteDetail alreadyCompleteDetail = new AlreadyCompleteDetail(
+						context, mOrder, mLayout);
+				alreadyCompleteDetail.addView();// 加载商品
+				for (int j = 0; j < alreadyCompleteDetail.map.size(); j++) {
+					// Log.i("info", mLinearLayoutLayout+"+mlayout");
+					sumPrice.setText(alreadyCompleteDetail.map.get("price")
+							+ "");
+					countTextView.setText(alreadyCompleteDetail.map
+							.get("count").intValue() + "");
+				}
+				// sumPrice.setText(100+"");
+				// countTextView.setText(1+"");
+				mLinearLayout.addView(view);
+				Log.i("info", mLinearLayout + "+mlayout");
 			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Toast.makeText(context, "网络不给力！", Toast.LENGTH_SHORT).show();
+
 		}
+	}
 }
