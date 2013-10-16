@@ -42,6 +42,7 @@ public class AddressUtil {
 	ArrayList<Addresses> addressesArray;
 	private ImageView delete;// É¾³ý
 	private ImageView edit;// ±à¼­
+	private MyApplication myApplication;
 
 	public AddressUtil() {
 
@@ -57,6 +58,7 @@ public class AddressUtil {
 		this.linearLayout = linearLayout;
 		this.dataManage = dataManage;
 		this.inflater = LayoutInflater.from(context);
+		myApplication = (MyApplication) context.getApplicationContext();
 	}
 
 	private void setupShow() {
@@ -205,7 +207,7 @@ public class AddressUtil {
 	public void AllAddresses() {
 		try {
 			dataManage = new AddressDataManage(context);
-			addressesArray = dataManage.getAddressesArray(new MyApplication().getUserId(), 0, 20);
+			addressesArray = dataManage.getAddressesArray(myApplication.getUserId(), 0, 10);
 			for (int i = 0; i < addressesArray.size(); i++) {
 				final Addresses addresses = addressesArray.get(i);
 				StringBuffer sb = new StringBuffer();
