@@ -53,8 +53,10 @@
                         android:layout_gravity="center_vertical"
                         android:background="@null"
                         android:ellipsize="middle"
+                        android:hint="请输入手机号码"
+                        android:inputType="phone"
                         android:singleLine="true"
-                        android:text="          " />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -90,7 +92,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
@@ -115,13 +117,14 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:background="@null"
-                        android:inputType="numberPassword"
+                        android:hint="数字，或字符的长度至少为6个"
+                        android:inputType="textPassword"
                         android:singleLine="true"
-                        />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
@@ -146,9 +149,10 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:background="@null"
-                        android:inputType="numberPassword"
-                        android:singleLine="true"
-                        />
+                        android:textSize="12sp"
+                        android:hint="请输入相同的密码"
+                        android:inputType="textPassword"
+                        android:singleLine="true" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -175,17 +179,17 @@
                     android:linksClickable="true"
                     android:text="《服务条款》"
                     android:textColor="#ffee0000"
-                    android:textSize="15sp" />
+                    android:textSize="12sp" />
             </RelativeLayout>
 
             <LinearLayout
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
                 <Button
                     android:id="@+id/find_password_confirm_button"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
