@@ -314,7 +314,8 @@ public class PayActivity extends SherlockActivity {
 	private void addAddress() {
 		try {
 			ArrayList<Addresses> mList = addressDataManage.getAddressesArray(
-					Integer.parseInt(myApplication.getUserId()), 0, 10);
+
+					myApplication.getUserId(), 0, 10);
 			Log.i("info", mList.size() + " mlist");
 			if (mList.size() == 0) {
 				Intent intent = new Intent(PayActivity.this,
@@ -322,6 +323,7 @@ public class PayActivity extends SherlockActivity {
 				PayActivity.this.startActivity(intent);
 			} else {
 				Addresses addresses = mList.remove(0);
+
 
 				userName.setText(addresses.getName());
 				phoneName.setText(addresses.getPhone());
@@ -349,16 +351,4 @@ public class PayActivity extends SherlockActivity {
 		}
 	}
 
-	// private class Myreceiver extends BroadcastReceiver {
-	//
-	// @Override
-	// public void onReceive(Context context, Intent intent) {
-	// String action = intent.getAction();
-	// if(Consts.BUY_NEW.equals(action)){
-	//
-	// }
-	//
-	// }
-	//
-	// }
 }

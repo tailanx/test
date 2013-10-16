@@ -2,6 +2,7 @@ package com.yidejia.app.mall.util;
 
 import java.util.ArrayList;
 
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.model.Order;
@@ -48,7 +49,7 @@ public class AlreadyCompleteUtil {
 		public void loadView(){
 			try {
 				orderDataManage = new OrderDataManage(context);
-				ArrayList<Order> mList = orderDataManage.getOrderArray(514492+"", "", "", "已签收", 0+"", 5+"");
+				ArrayList<Order> mList = orderDataManage.getOrderArray(new MyApplication().getUserId(), "", "", "已签收", 0+"", 5+"");
 				Log.i("info", mList.size()+"mList");
 				for(int i=0;i<mList.size();i++){
 					setupShow();

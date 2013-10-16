@@ -24,12 +24,8 @@ public class Voucher {
 	private String[] keys = new String[6];
 	private String[] values = new String[6];
 	private String TAG = "Voucher";
-	private Context context;
 	private Map<String, String> httpAddressMap = new ConcurrentHashMap<String, String>();
 	
-	public Voucher(Context context){
-		this.context = context;
-	}
 	
 	private void setKeysAndValues(String id){
 		keys[0] = "api";

@@ -76,9 +76,9 @@ public class UserDatamanage {
 					JSONObject jsonObject = new JSONObject(httpResponse);
 					code = jsonObject.getInt("code");
 					String response = jsonObject.getString("response");
-					JSONObject responseObject = new JSONObject(response);
 					if(code == 1000){
 						MyApplication myApplication = new MyApplication();
+						JSONObject responseObject = new JSONObject(response);
 						String token = responseObject.getString("token");
 						myApplication.setToken(token);
 						return true;
@@ -87,7 +87,7 @@ public class UserDatamanage {
 //						throw new UserLoginEx(message);
 						isSuccess = false;
 					} else{
-						message = responseObject.getString("msg");
+						message = jsonObject.getString("msg");
 						isSuccess = false;
 					}
 				} catch (JSONException e) {
@@ -145,15 +145,15 @@ public class UserDatamanage {
 					int code;
 					JSONObject jsonObject = new JSONObject(httpResponse);
 					code = jsonObject.getInt("code");
-					String response = jsonObject.getString("response");
-					JSONObject responseObject = new JSONObject(response);
+//					String response = jsonObject.getString("response");
+//					JSONObject responseObject = new JSONObject(response);
 					if(code == 1003){
 //						MyApplication myApplication = new MyApplication();
 //						String token = responseObject.getString("token");
 //						myApplication.setToken(token);
 						return true;
 					} else{
-						message = responseObject.getString("msg");
+						message = jsonObject.getString("msg");
 						isSuccess = false;
 					}
 				} catch (JSONException e) {

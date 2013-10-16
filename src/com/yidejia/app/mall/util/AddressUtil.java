@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.model.Addresses;
@@ -109,8 +110,8 @@ public class AddressUtil {
 				deleteImageView.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View arg0) {
-						dataManage.deleteAddress(68298,
-								Integer.parseInt(addresses.getAddressId()));
+						dataManage.deleteAddress(new MyApplication().getUserId(),
+								addresses.getAddressId());
 
 					}
 				});
@@ -166,8 +167,8 @@ public class AddressUtil {
 				deleteImageView.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						boolean isDele = dataManage.deleteAddress(68298,
-								Integer.parseInt(addresses.getAddressId()));
+						boolean isDele = dataManage.deleteAddress(new MyApplication().getUserId(),
+								addresses.getAddressId());
 //						Log.i("info", isDele + "");
 					}
 				});
@@ -204,7 +205,7 @@ public class AddressUtil {
 	public void AllAddresses() {
 		try {
 			dataManage = new AddressDataManage(context);
-			addressesArray = dataManage.getAddressesArray(68298, 0, 20);
+			addressesArray = dataManage.getAddressesArray(new MyApplication().getUserId(), 0, 20);
 			for (int i = 0; i < addressesArray.size(); i++) {
 				final Addresses addresses = addressesArray.get(i);
 				StringBuffer sb = new StringBuffer();
@@ -251,8 +252,8 @@ public class AddressUtil {
 				deleteImageView.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View arg0) {
-						boolean isDele = dataManage.deleteAddress(68298,
-								Integer.parseInt(addresses.getAddressId()));
+						boolean isDele = dataManage.deleteAddress(new MyApplication().getUserId(),
+								addresses.getAddressId());
 						Log.i("info", isDele + "   isDele");
 						linearLayout.removeView(layout1);
 					}

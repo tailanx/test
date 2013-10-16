@@ -89,15 +89,15 @@ public class GoCartActivity extends SherlockActivity {// implements
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-//					getAddresses();
+					
 					Intent intent = new Intent(GoCartActivity.this,
 							PayActivity.class);
 					float sum = Float.parseFloat(sumTextView.getText()
 							.toString());
-					 
+					
 						if (sum > 0) {
 							Bundle bundle = new Bundle();
-							
+						
 							bundle.putString("price", sum + "");
 							intent.putExtras(bundle);
 							GoCartActivity.this.startActivity(intent);
@@ -167,17 +167,17 @@ public class GoCartActivity extends SherlockActivity {// implements
 	//
 	// }
 	//
-	/**
-	 * 
-	 * @return返回一个地址
-	 */
 //	Addresses address = null;
-//
+
+//	/**
+//	 * 
+//	 * @return 返回一个地址
+//	 */
 //	private void getAddresses() {
 //
 //		String userId = ((MyApplication) getApplication()).getUserId();
 //		ArrayList<Addresses> mAddresses = addressManage.getAddressesArray(
-//				Integer.parseInt(userId), 0, 5);
+//				userId, 0, 5);
 //		if (mAddresses.size() == 0) {
 //			Intent intent = new Intent(GoCartActivity.this,
 //					NewAddressActivity.class);

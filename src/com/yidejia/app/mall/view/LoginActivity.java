@@ -1,3 +1,4 @@
+
 package com.yidejia.app.mall.view;
 
 import android.content.Intent;
