@@ -28,7 +28,7 @@ import android.util.Log;
 public class HttpPostConn {
 	private String urlString = "http://fw1.atido.net/";
 //	private String urlString = "http://192.168.1.254:802/";
-	private String TAG = "HttpGetConn";
+	private String TAG = "HttpPostConn";
 	private int TIME_OUT_DELAY = 10000;
 	
 	private String[] keys;
@@ -94,13 +94,13 @@ public class HttpPostConn {
 		}
 		String result = "";
 		try {
-			byte[] paramArrayOfByte = param.getBytes();
-			ByteArrayEntity arrayEntity = new ByteArrayEntity(paramArrayOfByte); 
+//			byte[] paramArrayOfByte = param.getBytes();
+//			ByteArrayEntity arrayEntity = new ByteArrayEntity(paramArrayOfByte); 
 //			arrayEntity.setContentType("application/octet-stream"); 
 			
 			String url = JNICallBack.HTTPURL;
 			HttpPost httpPost = new HttpPost(url); 
-			Log.i(TAG, "url is :---"+url);
+			Log.i(TAG, "url is :---"+url+"?"+param);
 //			httpPost.setEntity(arrayEntity); 
 			StringEntity stringEntity = new StringEntity(param);
 			stringEntity.setContentType("application/x-www-form-urlencoded");
@@ -114,7 +114,7 @@ public class HttpPostConn {
 			HttpResponse httpResponse = client.execute(httpPost);
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				result = EntityUtils.toString(httpResponse.getEntity(), HTTP.UTF_8);
-//				Log.i(TAG, result);
+				Log.i(TAG, result);
 //				count = 0;
 			} else if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_REQUEST_TIMEOUT ){
 				Log.i(TAG, "Á¬½Ó³¬Ê±");

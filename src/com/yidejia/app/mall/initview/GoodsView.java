@@ -72,146 +72,152 @@ public class GoodsView {
 	 * @param info
 	 */
 	public void initGoodsView(ProductBaseInfo info) {
-		if (info == null)
-			return;
-		manage = new CartsDataManage();
-		cart_num = manage.getCartAmount();
-		final Cart cart = new Cart();
-		cart.setSalledAmmount(1);
-		productId = info.getUId();
-		cart.setUId(productId);
-		cart.setImgUrl(info.getImgUrl());
-		// 商品名称
-		TextView base_info_content_text = (TextView) view
-				.findViewById(R.id.base_info_content_text);
-		String name = info.getName();
-		base_info_content_text.setText(name);
-		cart.setProductText(name);
-		// 价格
-		TextView price = (TextView) view.findViewById(R.id.price);
-		final String priceString = info.getPrice();
 		try {
-			float priceNum = Float.parseFloat(priceString);
-			cart.setPrice(priceNum);
-			price.setText(priceString + "元");
-		} catch (Exception e) {
-			// TODO: handle exception
-			Toast.makeText(activity, "价格出错，请联系我们的客服进行修改！", Toast.LENGTH_SHORT)
-					.show();
-			price.setText("");
-		}
-		ImageView buy_now = (ImageView) view.findViewById(R.id.buy_now);
-		ImageView add_to_cart = (ImageView) view.findViewById(R.id.add_to_cart);
-		// 销售额
-		TextView selled_num_text = (TextView) view
-				.findViewById(R.id.selled_num_text);
-		selled_num_text.setText(info.getSalledAmmount());
-		// 评论数
-		TextView emulate_num_text = (TextView) view
-				.findViewById(R.id.emulate_num_text);
-		emulate_num_text.setText(info.getCommentAmount());
-		// 晒单数
-		TextView show_num_text = (TextView) view
-				.findViewById(R.id.show_num_text);
-		show_num_text.setText(info.getShowListAmount());
-		// 品牌
-		TextView brand_name_text = (TextView) view
-				.findViewById(R.id.brand_name_text);
-		brand_name_text.setText(info.getBrands());
-		// 商品编号
-		TextView product_id_num_text = (TextView) view
-				.findViewById(R.id.product_id_num_text);
-		product_id_num_text.setText(info.getProductNumber());
-		// 规格
-		TextView standard_content_text = (TextView) view
-				.findViewById(R.id.standard_content_text);
-		standard_content_text.setText(info.getProductSpecifications());
-		bannerArray = info.getBannerArray();
-		addBaseImage(view, bannerArray);
-		recommendArray = info.getRecommendArray();
-		addMatchImage(view, recommendArray);
-		// 购物车个数
-		shopping_cart_button = (Button) view
-				.findViewById(R.id.shopping_cart_button);
-		// CartsDataManage cartsDataManage = new CartsDataManage();
-		cart_num = manage.getCartAmount();
-		if (cart_num == 0) {
-			shopping_cart_button.setVisibility(View.GONE);
-		} else {
-			setCartNum(cart_num);
-		}
-		// 加入购物车按钮点击事件
-		add_to_cart.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				cart_num++;
+			if (info == null)
+				return;
+			manage = new CartsDataManage();
+			cart_num = manage.getCartAmount();
+			final Cart cart = new Cart();
+			cart.setSalledAmmount(1);
+			productId = info.getUId();
+			cart.setUId(productId);
+			cart.setImgUrl(info.getImgUrl());
+			// 商品名称
+			TextView base_info_content_text = (TextView) view
+					.findViewById(R.id.base_info_content_text);
+			String name = info.getName();
+			base_info_content_text.setText(name);
+			cart.setProductText(name);
+			// 价格
+			TextView price = (TextView) view.findViewById(R.id.price);
+			final String priceString = info.getPrice();
+			try {
+				float priceNum = Float.parseFloat(priceString);
+				cart.setPrice(priceNum);
+				price.setText(priceString + "元");
+			} catch (Exception e) {
+				// TODO: handle exception
+				Toast.makeText(activity, "价格出错，请联系我们的客服进行修改！", Toast.LENGTH_SHORT)
+						.show();
+				price.setText("");
+			}
+			ImageView buy_now = (ImageView) view.findViewById(R.id.buy_now);
+			ImageView add_to_cart = (ImageView) view.findViewById(R.id.add_to_cart);
+			// 销售额
+			TextView selled_num_text = (TextView) view
+					.findViewById(R.id.selled_num_text);
+			selled_num_text.setText(info.getSalledAmmount());
+			// 评论数
+			TextView emulate_num_text = (TextView) view
+					.findViewById(R.id.emulate_num_text);
+			emulate_num_text.setText(info.getCommentAmount());
+			// 晒单数
+			TextView show_num_text = (TextView) view
+					.findViewById(R.id.show_num_text);
+			show_num_text.setText(info.getShowListAmount());
+			// 品牌
+			TextView brand_name_text = (TextView) view
+					.findViewById(R.id.brand_name_text);
+			brand_name_text.setText(info.getBrands());
+			// 商品编号
+			TextView product_id_num_text = (TextView) view
+					.findViewById(R.id.product_id_num_text);
+			product_id_num_text.setText(info.getProductNumber());
+			// 规格
+			TextView standard_content_text = (TextView) view
+					.findViewById(R.id.standard_content_text);
+			standard_content_text.setText(info.getProductSpecifications());
+			bannerArray = info.getBannerArray();
+			addBaseImage(view, bannerArray);
+			recommendArray = info.getRecommendArray();
+			addMatchImage(view, recommendArray);
+			// 购物车个数
+			shopping_cart_button = (Button) view
+					.findViewById(R.id.shopping_cart_button);
+			// CartsDataManage cartsDataManage = new CartsDataManage();
+			cart_num = manage.getCartAmount();
+			if (cart_num == 0) {
+				shopping_cart_button.setVisibility(View.GONE);
+			} else {
 				setCartNum(cart_num);
-				Intent intent = new Intent(Consts.UPDATE_CHANGE);
-				activity.sendBroadcast(intent);
-				if(cart.getPrice()>0){
-				boolean istrue = manage.addCart(cart);
-				}else{
-					Toast.makeText(activity, "这是赠品，不能够购买", Toast.LENGTH_LONG).show();
-				}
-				// Log.i("info", istrue+"   cart_num");
+			}
+			// 加入购物车按钮点击事件
+			add_to_cart.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					cart_num++;
+					setCartNum(cart_num);
+					Intent intent = new Intent(Consts.UPDATE_CHANGE);
+					activity.sendBroadcast(intent);
+					if(cart.getPrice()>0){
+					boolean istrue = manage.addCart(cart);
+					}else{
+						Toast.makeText(activity, "这是赠品，不能够购买", Toast.LENGTH_LONG).show();
+					}
+					// Log.i("info", istrue+"   cart_num");
 //				if (istrue) {
 //					builder.show();
 //				}
-			}
-		});
-		// 立即购买按钮
-		buy_now.setOnClickListener(new OnClickListener() {
+				}
+			});
+			// 立即购买按钮
+			buy_now.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(activity, PayActivity.class);
-				try{
-					float sum = Float.parseFloat(priceString);
-					if(sum <= 0) return;//价格出错
-					Bundle bundle = new Bundle();
-					bundle.putString("price", priceString);
-					intent.putExtras(bundle);
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Intent intent = new Intent(activity, PayActivity.class);
+					try{
+						float sum = Float.parseFloat(priceString);
+						if(sum <= 0) return;//价格出错
+						Bundle bundle = new Bundle();
+						bundle.putString("price", priceString);
+						intent.putExtras(bundle);
+						activity.startActivity(intent);
+						activity.finish();
+					} catch (NumberFormatException e){
+						//价格出错
+					}
+				}
+			});
+			// 购物车按钮
+			RelativeLayout shopping_cart_in_goodsinfo = (RelativeLayout) view
+					.findViewById(R.id.shopping_cart_in_goodsinfo);
+			shopping_cart_in_goodsinfo.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Intent intent = new Intent(activity, GoCartActivity.class);
+					// Bundle bundle = new Bundle();
+					// intent.putExtras(bundle);
 					activity.startActivity(intent);
 					activity.finish();
-				} catch (NumberFormatException e){
-					//价格出错
 				}
-			}
-		});
-		// 购物车按钮
-		RelativeLayout shopping_cart_in_goodsinfo = (RelativeLayout) view
-				.findViewById(R.id.shopping_cart_in_goodsinfo);
-		shopping_cart_in_goodsinfo.setOnClickListener(new OnClickListener() {
+			});
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(activity, GoCartActivity.class);
-				// Bundle bundle = new Bundle();
-				// intent.putExtras(bundle);
-				activity.startActivity(intent);
-				activity.finish();
-			}
-		});
-
-		// 加入收藏按钮
-		add_favorites = (ImageView) view.findViewById(R.id.add_favorites);
-		add_favorites.setOnClickListener(addFavoriteListener);
-		// 检查是否收藏并且设置收藏按钮的图片
-		FavoriteDataManage favoriteManage = new FavoriteDataManage(activity);
-		if (isLogin && !"".equals(userid)) {
-			if (favoriteManage.checkExists(userid, productId)) {
-				add_favorites.setImageResource(R.drawable.add_favorites2);
+			// 加入收藏按钮
+			add_favorites = (ImageView) view.findViewById(R.id.add_favorites);
+			add_favorites.setOnClickListener(addFavoriteListener);
+			// 检查是否收藏并且设置收藏按钮的图片
+			FavoriteDataManage favoriteManage = new FavoriteDataManage(activity);
+			if (isLogin && !"".equals(userid)) {
+				if (favoriteManage.checkExists(userid, productId)) {
+					add_favorites.setImageResource(R.drawable.add_favorites2);
 //				Toast.makeText(activity, "yes", Toast.LENGTH_LONG).show();
+				} else {
+					add_favorites.setImageResource(R.drawable.add_favorites1);
+//				Toast.makeText(activity, "no", Toast.LENGTH_LONG).show();
+				}
 			} else {
 				add_favorites.setImageResource(R.drawable.add_favorites1);
-//				Toast.makeText(activity, "no", Toast.LENGTH_LONG).show();
 			}
-		} else {
-			add_favorites.setImageResource(R.drawable.add_favorites1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Toast.makeText(activity,"网络不给力", Toast.LENGTH_LONG);
 		}
 	}
 
@@ -231,107 +237,119 @@ public class GoodsView {
 	private ArrayList<MainProduct> recommendArray;
 
 	private void addBaseImage(View view, ArrayList<BaseProduct> bannerArray) {
-		baseInfoImageLayout = (LinearLayout) view
-				.findViewById(R.id.base_info_image_linear_layout);
+		try {
+			baseInfoImageLayout = (LinearLayout) view
+					.findViewById(R.id.base_info_image_linear_layout);
 
-		int lenght = bannerArray.size();
-		// child.setId(BASE_IMAGE_ID);
-		// Log.e(TAG, TAG+child.getId());
-		// Log.e(TAG, TAG+baseInfoImageLayout.getId());
-		Resources r = activity.getResources();
-		float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150,
-				r.getDisplayMetrics());
-		for (int i = 0; i < lenght; i++) {
-			// ImageView matchchild = (ImageView)
-			// getSherlockActivity().getLayoutInflater().inflate(R.layout.item_base_image,
-			// null);
-			// ImageView child = (ImageView)
-			// getSherlockActivity().getLayoutInflater().inflate(R.layout.item_base_image,
-			// null);
-			// ImageView child = new ImageView();
-			// ImageView matchchild = new ImageView(getSherlockActivity());
-			// int base_px =
-			// getResources().getDimensionPixelSize(R.dimen.base_info_image);
+			int lenght = bannerArray.size();
+			// child.setId(BASE_IMAGE_ID);
+			// Log.e(TAG, TAG+child.getId());
+			// Log.e(TAG, TAG+baseInfoImageLayout.getId());
+			Resources r = activity.getResources();
+			float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150,
+					r.getDisplayMetrics());
+			for (int i = 0; i < lenght; i++) {
+				// ImageView matchchild = (ImageView)
+				// getSherlockActivity().getLayoutInflater().inflate(R.layout.item_base_image,
+				// null);
+				// ImageView child = (ImageView)
+				// getSherlockActivity().getLayoutInflater().inflate(R.layout.item_base_image,
+				// null);
+				// ImageView child = new ImageView();
+				// ImageView matchchild = new ImageView(getSherlockActivity());
+				// int base_px =
+				// getResources().getDimensionPixelSize(R.dimen.base_info_image);
 
-			// int imageDimen = (int)
-			// getResources().getDimension(R.dimen.base_info_image);
-			// lp_base.setMargins(imageDimen, imageDimen, imageDimen,
-			// imageDimen);
-			// LinearLayout.LayoutParams lp_match = new
-			// LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
-			// LayoutParams.MATCH_PARENT, 1);
-			// int matchDimen = (int)
-			// getResources().getDimension(R.dimen.base_info_match);
-			// lp_match.setMargins(matchDimen, matchDimen, matchDimen,
-			// matchDimen);
-			// child.setLayoutParams(lp_base);
-			// child.setImageResource(R.drawable.product_photo1);
-			// matchchild.setLayoutParams(lp_match);
-			// matchchild.setImageResource(R.drawable.product_photo2);
-			// baseInfoImageLayout.addView(child, lp_base);//
-			// matchGoodsImageLayout.addView(matchchild, lp_match);//
-			LinearLayout.LayoutParams lp_base = new LinearLayout.LayoutParams(
-					(new Float(px)).intValue(), LayoutParams.WRAP_CONTENT);
-			// View imageViewLayout = LayoutInflater.from(view.getContext())
-			// .inflate(R.layout.goods_banner_imageview, null);
-			// ImageView bannerImageView = (ImageView) imageViewLayout
-			// .findViewById(R.id.banner_imageview);
-			ImageView bannerImageView = new ImageView(activity);
-			bannerImageView.setLayoutParams(lp_base);
-			imageLoader.displayImage(bannerArray.get(i).getImgUrl(),
-					bannerImageView, options, animateFirstListener);
-			baseInfoImageLayout.setPadding(10, 0, 10, 0);
-			// imageViewLayout.setPadding(10, 0, 10, 0);
-			bannerImageView.setPadding(10, 0, 10, 0);
-			baseInfoImageLayout.addView(bannerImageView, lp_base);
+				// int imageDimen = (int)
+				// getResources().getDimension(R.dimen.base_info_image);
+				// lp_base.setMargins(imageDimen, imageDimen, imageDimen,
+				// imageDimen);
+				// LinearLayout.LayoutParams lp_match = new
+				// LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
+				// LayoutParams.MATCH_PARENT, 1);
+				// int matchDimen = (int)
+				// getResources().getDimension(R.dimen.base_info_match);
+				// lp_match.setMargins(matchDimen, matchDimen, matchDimen,
+				// matchDimen);
+				// child.setLayoutParams(lp_base);
+				// child.setImageResource(R.drawable.product_photo1);
+				// matchchild.setLayoutParams(lp_match);
+				// matchchild.setImageResource(R.drawable.product_photo2);
+				// baseInfoImageLayout.addView(child, lp_base);//
+				// matchGoodsImageLayout.addView(matchchild, lp_match);//
+				LinearLayout.LayoutParams lp_base = new LinearLayout.LayoutParams(
+						(new Float(px)).intValue(), LayoutParams.WRAP_CONTENT);
+				// View imageViewLayout = LayoutInflater.from(view.getContext())
+				// .inflate(R.layout.goods_banner_imageview, null);
+				// ImageView bannerImageView = (ImageView) imageViewLayout
+				// .findViewById(R.id.banner_imageview);
+				ImageView bannerImageView = new ImageView(activity);
+				bannerImageView.setLayoutParams(lp_base);
+				imageLoader.displayImage(bannerArray.get(i).getImgUrl(),
+						bannerImageView, options, animateFirstListener);
+				baseInfoImageLayout.setPadding(10, 0, 10, 0);
+				// imageViewLayout.setPadding(10, 0, 10, 0);
+				bannerImageView.setPadding(10, 0, 10, 0);
+				baseInfoImageLayout.addView(bannerImageView, lp_base);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Toast.makeText(activity, "网络不给力", Toast.LENGTH_LONG).show();
 		}
 	}
 
 	private void addMatchImage(View view,
 			final ArrayList<MainProduct> bannerArray) {
-		matchGoodsImageLayout = (LinearLayout) view
-				.findViewById(R.id.match_goods_image);
-		int lenght = bannerArray.size();
-		Resources r = activity.getResources();
-		float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 90,
-				r.getDisplayMetrics());
-		for (int i = 0; i < lenght; i++) {
-			LinearLayout.LayoutParams lp_base = new LinearLayout.LayoutParams(
-					(new Float(px)).intValue(), LayoutParams.WRAP_CONTENT);
-			// View imageViewLayout =
-			// LayoutInflater.from(view.getContext()).inflate(R.layout.goods_banner_imageview,
-			// null);
-			// ImageView bannerImageView = (ImageView)
-			// imageViewLayout.findViewById(R.id.banner_imageview);
-			ImageView bannerImageView = new ImageView(activity);
-			bannerImageView.setLayoutParams(lp_base);
-			imageLoader.displayImage(bannerArray.get(i).getImgUrl(),
-					bannerImageView, options, animateFirstListener);
-			matchGoodsImageLayout.setPadding(80, 0, 80, 0);
-			// imageViewLayout.setPadding(10, 0, 10, 0);
-			bannerImageView.setPadding(10, 0, 10, 0);
-			final int index = i;
-			bannerImageView.setOnClickListener(new OnClickListener() {
+		try {
+			matchGoodsImageLayout = (LinearLayout) view
+					.findViewById(R.id.match_goods_image);
+			int lenght = bannerArray.size();
+			Resources r = activity.getResources();
+			float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 90,
+					r.getDisplayMetrics());
+			for (int i = 0; i < lenght; i++) {
+				LinearLayout.LayoutParams lp_base = new LinearLayout.LayoutParams(
+						(new Float(px)).intValue(), LayoutParams.WRAP_CONTENT);
+				// View imageViewLayout =
+				// LayoutInflater.from(view.getContext()).inflate(R.layout.goods_banner_imageview,
+				// null);
+				// ImageView bannerImageView = (ImageView)
+				// imageViewLayout.findViewById(R.id.banner_imageview);
+				ImageView bannerImageView = new ImageView(activity);
+				bannerImageView.setLayoutParams(lp_base);
+				imageLoader.displayImage(bannerArray.get(i).getImgUrl(),
+						bannerImageView, options, animateFirstListener);
+				matchGoodsImageLayout.setPadding(80, 0, 80, 0);
+				// imageViewLayout.setPadding(10, 0, 10, 0);
+				bannerImageView.setPadding(10, 0, 10, 0);
+				final int index = i;
+				bannerImageView.setOnClickListener(new OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					Intent intent = new Intent(activity,
-							GoodsInfoActivity.class);
-					Bundle bundle = new Bundle();
-					bundle.putString("goodsId", bannerArray.get(index).getUId());
-					intent.putExtras(bundle);
-					activity.startActivity(intent);
-					activity.finish();
-				}
-			});
-			// TextView nameTextView = (TextView)
-			// imageViewLayout.findViewById(R.id.banner_name);
-			// nameTextView.setText(bannerArray.get(i).getTitle());
-			// TextView priceTextView = (TextView)
-			// imageViewLayout.findViewById(R.id.banner_price);
-			// priceTextView.setText(bannerArray.get(i).getPrice());
-			matchGoodsImageLayout.addView(bannerImageView, lp_base);
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						Intent intent = new Intent(activity,
+								GoodsInfoActivity.class);
+						Bundle bundle = new Bundle();
+						bundle.putString("goodsId", bannerArray.get(index).getUId());
+						intent.putExtras(bundle);
+						activity.startActivity(intent);
+						activity.finish();
+					}
+				});
+				// TextView nameTextView = (TextView)
+				// imageViewLayout.findViewById(R.id.banner_name);
+				// nameTextView.setText(bannerArray.get(i).getTitle());
+				// TextView priceTextView = (TextView)
+				// imageViewLayout.findViewById(R.id.banner_price);
+				// priceTextView.setText(bannerArray.get(i).getPrice());
+				matchGoodsImageLayout.addView(bannerImageView, lp_base);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Toast.makeText(activity, "网络不给力", Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -395,6 +413,7 @@ public class GoodsView {
 			FavoriteDataManage manage = new FavoriteDataManage(activity);
 			if(!isLogin){
 				Intent intent = new Intent(activity,LoginActivity.class);
+				Toast.makeText(activity, "用户未登陆,请先登陆", Toast.LENGTH_LONG).show();
 				activity.startActivity(intent);
 				}
 			else if (isLogin && !"".equals(userid)) {

@@ -1,21 +1,36 @@
 package com.yidejia.app.mall.view;
 
-import com.actionbarsherlock.app.SherlockActivity;
-import com.yidejia.app.mall.R;
-
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.actionbarsherlock.app.SherlockActivity;
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.ctrl.IpAddress;
+import com.yidejia.app.mall.datamanage.UserDatamanage;
 
 public class RegistActivity extends SherlockActivity  {
 	public Button mback;//返回
+	private UserDatamanage userManage;
+	private EditText mZhanghao;
+	private EditText mPws;
+	private EditText mEditText;
+	private EditText mEditText2;
+	private Button mButton;
+	
+	private String account;
+	private String pwd;
+	private String confirmPwd;
+	private String obtain;
+	
+	private IpAddress ip;
+
 //	public void doClick(View v){
 //		Intent  intent = new Intent();
 //		switch (v.getId()) {
@@ -26,15 +41,49 @@ public class RegistActivity extends SherlockActivity  {
 //		startActivity(intent);
 //		this.finish();
 //	}
+	private void setupShow(){
+		mZhanghao = (EditText) findViewById(R.id.my_mall_regist_edittext_account);
+		mPws = (EditText) findViewById(R.id.my_mall_regist_password);
+		mEditText = (EditText) findViewById(R.id.my_mall_regist_confirm_password);
+		mEditText2 = (EditText) findViewById(R.id.my_mall_regist_obtain);
+		mButton = (Button) findViewById(R.id.find_password_confirm_button);
+		
+		account = mZhanghao.getText().toString();
+		pwd= mPws.getText().toString();
+		confirmPwd = mEditText.getText().toString();
+		obtain = mEditText2.getText().toString();
+	}
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	// TODO Auto-generated method stub
-    	super.onCreate(savedInstanceState);
+    	try {
+			super.onCreate(savedInstanceState);
 //    	this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-    	setActionbar();
-		
-    	setContentView(R.layout.my_mall_regist);
+			setActionbar();
+			userManage = new UserDatamanage(RegistActivity.this);
+			ip = new IpAddress();
+			setContentView(R.layout.my_mall_regist);
+			setupShow();
+			mButton.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					if(obtain.isEmpty()){
+						Toast.makeText(RegistActivity.this, "请输入短息验证码",Toast.LENGTH_LONG).show();
+					}else{
+						boolean isSucess = userManage.register(account, pwd, confirmPwd, ip.getIpAddress());
+					Log.i("info", isSucess + "");
+					}
+				}
+			});
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Toast.makeText(RegistActivity.this, "网络不给力", Toast.LENGTH_LONG).show();
+		}
     }
     
     private void setActionbar(){

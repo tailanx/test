@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
@@ -22,11 +23,13 @@ import com.yidejia.app.mall.model.MainProduct;
 
 public class HotSellView {
 	private View view;
+	private SherlockFragmentActivity sherlockFragmentActivity;
 //	private ArrayList<MainProduct> hotsellArray;
-	public HotSellView(View view){
+	public HotSellView(View view, SherlockFragmentActivity sherlockFragmentActivity){
 		this.view = view;
 //		this.hotsellArray = hotsellArray;
 		initDisplayImageOption();
+		this.sherlockFragmentActivity = sherlockFragmentActivity;
 	}
 	
 	public void initHotSellView(ArrayList<MainProduct> hotsellArray){
@@ -70,48 +73,55 @@ public class HotSellView {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Toast.makeText(sherlockFragmentActivity, "网络不给力", Toast.LENGTH_LONG);
 			
 		}
 	}
 	
 	public void initAcymerView(ArrayList<MainProduct> acymerArray){
-		MainProduct acymerProduct;
-		//acymer 左边
-		acymerProduct = acymerArray.get(0);
-		TextView main_acymei_goods_title = (TextView) view.findViewById(R.id.main_acymei_goods_title);
-		main_acymei_goods_title.setText(acymerProduct.getTitle());
-		Log.i("MainPage+acymer", acymerProduct.getTitle());
-		TextView main_acymei_goods_details = (TextView) view.findViewById(R.id.main_acymei_goods_details);
-		main_acymei_goods_details.setText(acymerProduct.getPrice()+"元");
-		ImageView main_acymei_left_image = (ImageView) view.findViewById(R.id.main_acymei_left_image);
-		String imageUrl = acymerProduct.getImgUrl();
-		//添加图片
-		imageLoader.displayImage(imageUrl, main_acymei_left_image, options,
-				animateFirstListener);
-		
-		//acymer 右上
-		acymerProduct = acymerArray.get(1);
-		TextView main_acymei_right_top_title = (TextView) view.findViewById(R.id.main_acymei_right_top_title);
-		main_acymei_right_top_title.setText(acymerProduct.getTitle());
-		TextView main_acymei_right_top_price = (TextView) view.findViewById(R.id.main_acymei_right_top_price);
-		main_acymei_right_top_price.setText(acymerProduct.getPrice()+"元");
-		ImageView main_acymei_right_top_image = (ImageView) view.findViewById(R.id.main_acymei_right_top_image);
-		imageUrl = acymerProduct.getImgUrl();
-		//添加图片
-		imageLoader.displayImage(imageUrl, main_acymei_right_top_image, options,
-				animateFirstListener);
-		
-		//acymer 右下
-		acymerProduct = acymerArray.get(2);
-		TextView main_acymei_right_down_title = (TextView) view.findViewById(R.id.main_acymei_right_down_title);
-		main_acymei_right_down_title.setText(acymerProduct.getTitle());
-		TextView main_acymei_right_down_price = (TextView) view.findViewById(R.id.main_acymei_right_down_price);
-		main_acymei_right_down_price.setText(acymerProduct.getPrice()+"元");
-		ImageView main_acymei_right_down_image = (ImageView) view.findViewById(R.id.main_acymei_right_down_image);
-		imageUrl = acymerProduct.getImgUrl();
-		//添加图片
-		imageLoader.displayImage(imageUrl, main_acymei_right_down_image, options,
-				animateFirstListener);
+		try {
+			MainProduct acymerProduct;
+			//acymer 左边
+			acymerProduct = acymerArray.get(0);
+			TextView main_acymei_goods_title = (TextView) view.findViewById(R.id.main_acymei_goods_title);
+			main_acymei_goods_title.setText(acymerProduct.getTitle());
+			Log.i("MainPage+acymer", acymerProduct.getTitle());
+			TextView main_acymei_goods_details = (TextView) view.findViewById(R.id.main_acymei_goods_details);
+			main_acymei_goods_details.setText(acymerProduct.getPrice()+"元");
+			ImageView main_acymei_left_image = (ImageView) view.findViewById(R.id.main_acymei_left_image);
+			String imageUrl = acymerProduct.getImgUrl();
+			//添加图片
+			imageLoader.displayImage(imageUrl, main_acymei_left_image, options,
+					animateFirstListener);
+			
+			//acymer 右上
+			acymerProduct = acymerArray.get(1);
+			TextView main_acymei_right_top_title = (TextView) view.findViewById(R.id.main_acymei_right_top_title);
+			main_acymei_right_top_title.setText(acymerProduct.getTitle());
+			TextView main_acymei_right_top_price = (TextView) view.findViewById(R.id.main_acymei_right_top_price);
+			main_acymei_right_top_price.setText(acymerProduct.getPrice()+"元");
+			ImageView main_acymei_right_top_image = (ImageView) view.findViewById(R.id.main_acymei_right_top_image);
+			imageUrl = acymerProduct.getImgUrl();
+			//添加图片
+			imageLoader.displayImage(imageUrl, main_acymei_right_top_image, options,
+					animateFirstListener);
+			
+			//acymer 右下
+			acymerProduct = acymerArray.get(2);
+			TextView main_acymei_right_down_title = (TextView) view.findViewById(R.id.main_acymei_right_down_title);
+			main_acymei_right_down_title.setText(acymerProduct.getTitle());
+			TextView main_acymei_right_down_price = (TextView) view.findViewById(R.id.main_acymei_right_down_price);
+			main_acymei_right_down_price.setText(acymerProduct.getPrice()+"元");
+			ImageView main_acymei_right_down_image = (ImageView) view.findViewById(R.id.main_acymei_right_down_image);
+			imageUrl = acymerProduct.getImgUrl();
+			//添加图片
+			imageLoader.displayImage(imageUrl, main_acymei_right_down_image, options,
+					animateFirstListener);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Toast.makeText(sherlockFragmentActivity, "网络不给力", Toast.LENGTH_LONG);
+		}
 	}
 	
 	public void initInerbtyView(ArrayList<MainProduct> inerbtyArray){
@@ -191,8 +201,9 @@ public class HotSellView {
 			imageLoader.displayImage(imageUrl, main_inerbty_down_right_image, options,
 					animateFirstListener);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch 
 			e.printStackTrace();
+			Toast.makeText(sherlockFragmentActivity, "网络不给力", Toast.LENGTH_LONG);
 		}
 	}
 	
