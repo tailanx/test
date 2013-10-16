@@ -1,5 +1,7 @@
 package com.yidejia.app.mall.jni;
 
+import android.R.string;
+
 /**
  * jni数据接口
  * @author long bin
@@ -108,4 +110,16 @@ public class JNICallBack {
 	
 	//设置默认地址
 	public static native String getHttp4SetDefAddr(String cid, String aid, String token);
+	
+	//获取免费送和积分换购列表
+	public static native String getHttp4GetVerify(String goods, String userid);
+	
+	//获取用户积分，收藏，消息， 订单数量
+	public static native String getHttp4GetCount(String userId, String token);
+	
+	//获取消息中心用户消息列表
+	public static native String getHttp4GetMessage(String userId, String token, String offset1, String limit1);
+	
+	//标记消息未已读状态
+	public static native String getHttp4ChangeRead(String userId, String msgId, String token);
 }
