@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Order;
+import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.order.CancelOrder;
 import com.yidejia.app.mall.net.order.GetOrderList;
@@ -63,6 +64,10 @@ public class OrderDataManage {
 	 */
 	public ArrayList<Order> getOrderArray(String userId, String code,
 			String the_day, String status, String offset, String limit) {
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return orders;
+		}
 		TaskGetList taskGetList = new TaskGetList(userId, code, the_day,
 				status, offset, limit);
 		boolean state = false;
@@ -239,6 +244,10 @@ public class OrderDataManage {
 			String recipient_id, String pingou_id, String goods_ascore,
 			String ship_fee, String ship_type, String ship_entity_name,
 			String goods_qty_scr, String comments) {
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return false;
+		}
 		TaskSave taskSave = new TaskSave(customer_id, ticket_id, recipient_id,
 				pingou_id, goods_ascore, ship_fee, ship_type, ship_entity_name,
 				goods_qty_scr, comments);
@@ -355,6 +364,10 @@ public class OrderDataManage {
 	 * @return
 	 */
 	public boolean changeOrder(String customer_id, String code) {
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return false;
+		}
 		TaskChange taskChange = new TaskChange(customer_id, code);
 		boolean state = false;
 		try {
@@ -439,6 +452,10 @@ public class OrderDataManage {
 	 * @return
 	 */
 	public boolean cancelOrder(String customer_id, String code, String token) {
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return false;
+		}
 		TaskCancel taskCancel = new TaskCancel(customer_id, code, token);
 		boolean state = false;
 		try {
@@ -525,6 +542,10 @@ public class OrderDataManage {
 	 * @return
 	 */
 	public boolean signOrder(String customer_id, String code, String token) {
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return false;
+		}
 		TaskSign taskSign = new TaskSign(customer_id, code, token);
 		boolean state = false;
 		try {

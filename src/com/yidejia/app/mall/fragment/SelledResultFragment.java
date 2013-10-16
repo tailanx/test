@@ -16,6 +16,7 @@ import com.yidejia.app.mall.model.SearchItem;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -89,6 +90,7 @@ public class SelledResultFragment extends SherlockFragment {
 			mPullToRefreshListView = (PullToRefreshListView) view.findViewById(R.id.pull_refresh_list);
 //			selledListView = (ListView) view.findViewById(R.id.search_result_list);
 			selledListView = mPullToRefreshListView.getRefreshableView();
+			mPullToRefreshListView.setOnRefreshListener(listviewRefreshListener);
 			initWithListView();
 		} else {
 			view = inflater.inflate(R.layout.activity_search_image_layout, container, false);
@@ -116,7 +118,6 @@ public class SelledResultFragment extends SherlockFragment {
 				startActivity(intent);
 			}
 		});
-		mPullToRefreshListView.setOnRefreshListener(listviewRefreshListener);
 //		mPullToRefreshListView.onRefreshComplete();
 	}
 	
@@ -147,10 +148,17 @@ public class SelledResultFragment extends SherlockFragment {
 		@Override
 		public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 			// TODO Auto-generated method stub
+			String label = "上次更新于"	+ DateUtils.formatDateTime(
+					getSherlockActivity().getApplicationContext(),
+					System.currentTimeMillis(),
+					DateUtils.FORMAT_SHOW_TIME
+						| DateUtils.FORMAT_SHOW_DATE
+						| DateUtils.FORMAT_ABBREV_ALL);
+			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 			fromIndex += amount;
 			searchItemsArray = manage.getSearchArray(name, fun, brand, price, order, ""+fromIndex, ""+amount);
-			mPullToRefreshListView.onRefreshComplete();
 			searchListAdapter.notifyDataSetChanged();
+			mPullToRefreshListView.onRefreshComplete();
 		}
 	};
 	

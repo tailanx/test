@@ -82,11 +82,13 @@ public class SaveProductComment {
 	 * @return httpµÿ÷∑
 	 * @throws IOException
 	 */
-	public String saveComment(String id) throws IOException{
+	public String saveComment(String goods_id, String user_id,
+			String user_name, String title, String experience,
+			String commentDate) throws IOException {
 //		getHttpAddress(id);
 //		HttpPostConn conn = new HttpPostConn(keys, values);
 //		result = conn.getJsonResult();
-		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4SaveComment(id));
+		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4SaveComment(goods_id, user_id, user_name, title, experience, commentDate));
 		result = conn.getHttpResponse();
 		return result;
 	}

@@ -7,11 +7,12 @@
 extern "C" {
 #endif
 
-static const char *url = "http://fw1.atido.net/";
+static const char *url = "http://192.168.1.254:802/";
+//static const char *url = "http://fw1.atido.net/";
 
 const char *pHead = "&key=fw_mobile&format=array&ts=";
-const char *strTemp = "ChunTianfw_mobile@SDF!TD#DF#*CB$GER@";
-
+//const char *strTemp = "ChunTianfw_mobile@SDF!TD#DF#*CB$GER@";
+const char *strTemp = "ChunTianfw_mobile123456";
 
 #define LEN 1024
 
@@ -396,11 +397,19 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetComment(JNIEnv* env
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//保存用户评论, 参数id， 方法post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveComment(JNIEnv* env,
-		jobject thiz, jstring id){
+//保存用户评论, 参数String goods_id,
+//String user_id, String user_name, String title, String experience,
+//String commentDate， 方法post
+jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveComment(
+		JNIEnv* env, jobject thiz, jstring goods_id, jstring user_id,
+		jstring user_name, jstring title, jstring experience, jstring commentDate) {
 
-	const char *chcid = (*env)->GetStringUTFChars(env, id, NULL);
+	const char *chgoods_id = (*env)->GetStringUTFChars(env, goods_id, NULL);
+	const char *chuser_id = (*env)->GetStringUTFChars(env, user_id, NULL);
+	const char *chuser_name = (*env)->GetStringUTFChars(env, user_name, NULL);
+	const char *chtitle = (*env)->GetStringUTFChars(env, title, NULL);
+	const char *chex = (*env)->GetStringUTFChars(env, experience, NULL);
+	const char *chdate = (*env)->GetStringUTFChars(env, commentDate, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
@@ -411,9 +420,18 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveComment(JNIEnv* en
 	addString(urlString, url);
 	addString(urlString, api);
 
-	addString(urlString, "&id=");
-	addString(urlString, chcid);
-
+	addString(urlString, "&goods_id=");
+	addString(urlString, chgoods_id);
+	addString(urlString, "&user_id=");
+	addString(urlString, chuser_id);
+	addString(urlString, "&user_name=");
+	addString(urlString, chuser_name);
+	addString(urlString, "&title=");
+	addString(urlString, chtitle);
+	addString(urlString, "&experience=");
+	addString(urlString, chex);
+	addString(urlString, "&commentDate=");
+	addString(urlString, chdate);
 
 	addString(urlString, pHead);
 
@@ -955,7 +973,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetHome(JNIEnv* env,
 	addString(urlString, url);
 	addString(urlString, api);
 
-	addString(urlString, "&is_web=n");
+//	addString(urlString, "&is_web=n");
 
 	addString(urlString, pHead);
 
@@ -1064,10 +1082,10 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetOrder(JNIEnv* env,
 
 //修改支付状态, 参数 String customer_id , code, token, 方法post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4PayOut(JNIEnv* env,
-		jobject thiz, jstring customer_id, jstring code, jstring token){
+		jobject thiz, jstring customer_id, jstring code){
 	const char *chcid = (*env)->GetStringUTFChars(env, customer_id, NULL);
 	const char *chgid = (*env)->GetStringUTFChars(env, code, NULL);
-	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+//	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN], urlString[LEN];
 	encrypt[0] = 0;
@@ -1082,9 +1100,9 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4PayOut(JNIEnv* env,
 
 	addString(urlString, "&code=");
 	addString(urlString, chgid);
-
-	addString(urlString, "&token=");
-	addString(urlString, chtoken);
+//
+//	addString(urlString, "&token=");
+//	addString(urlString, chtoken);
 
 	addString(urlString, pHead);
 

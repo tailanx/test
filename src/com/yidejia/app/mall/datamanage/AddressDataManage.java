@@ -15,6 +15,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.model.Addresses;
+import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.address.DeleteUserAddress;
 import com.yidejia.app.mall.net.address.GetUserAddressList;
 import com.yidejia.app.mall.net.address.SaveUserAddress;
@@ -50,6 +51,10 @@ public class AddressDataManage {
 	 */
 	public String addAddress(String userId, String name, String province, String city, String area, String address, String phone, boolean defaultAddress){
 		String addressId = "";
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return addressId;
+		}
 		boolean isSuccess = false;
 		TaskSave taskSave = new TaskSave(userId, name, province, city, area, address, phone, defaultAddress);
 		try {
@@ -91,6 +96,10 @@ public class AddressDataManage {
 	 */
 	public boolean updateAddress(String userId, String name, String province, String city, String area, String address, String phone, boolean defaultAddress, String recipientId){
 		boolean isSuccess = false;
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return isSuccess;
+		}
 		this.recipient_id = recipientId;
 		TaskSave taskSave = new TaskSave(userId, name, province, city, area, address, phone, defaultAddress);
 		try {
@@ -121,6 +130,10 @@ public class AddressDataManage {
 	 */
 	public boolean deleteAddress(String userId, String addressId){
 		boolean isSuccess = false;
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return isSuccess;
+		}
 //		String resultJson = deleteAddressJson(userId, addressId);
 		TaskDelete taskDelete = new TaskDelete(userId, addressId);
 		try {
@@ -150,7 +163,10 @@ public class AddressDataManage {
 	 * @return
 	 */
 	public ArrayList<Addresses> getAddressesArray(String userId, int fromIndex, int acount){
-		
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return addressesArray;
+		}
 		TaskGetList taskGetList = new TaskGetList("customer_id="+userId, String.valueOf(fromIndex), String.valueOf(acount), "", "", "%2A");
 		boolean state = false ;
 		try {
@@ -180,6 +196,10 @@ public class AddressDataManage {
 	 */
 	public boolean setDefaultAddress(String cid, String aid, String token){
 		boolean isSuccess = false;
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return isSuccess;
+		}
 //		String resultJson = deleteAddressJson(userId, addressId);
 		TaskSetDef taskDelete = new TaskSetDef(cid, aid, token);
 		try {

@@ -15,6 +15,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.model.SearchItem;
+import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.favorite.CheckExistsFavorite;
 import com.yidejia.app.mall.net.favorite.DeleteFavorite;
@@ -53,6 +54,10 @@ public class FavoriteDataManage {
 	 * @return 返回被收藏列表，具体请看搜索模块的{@link SearchItem}
 	 */
 	public ArrayList<SearchItem> getFavouriteArray(String userId, int fromIndex, int acount){
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return favoriteArray;
+		}
 		TaskGetList taskGetList = new TaskGetList("userid="+userId, String.valueOf(fromIndex), String.valueOf(acount), "", "", "%2A");
 		boolean state = false ;
 		try {
@@ -81,6 +86,10 @@ public class FavoriteDataManage {
 	 */
 	public boolean addFavourite(String userId, String productId){
 		boolean isSuccess = false;
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return false;
+		}
 		TaskSave taskSave = new TaskSave(userId, productId);
 		try {
 			isSuccess = taskSave.execute().get();
@@ -110,6 +119,10 @@ public class FavoriteDataManage {
 	 */
 	public boolean deleteFavourite(String userId, String productId){
 		boolean isSuccess = false;
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return isSuccess;
+		}
 		TaskDelete taskDelete = new TaskDelete(userId, productId);
 		try {
 			isSuccess = taskDelete.execute().get();
@@ -421,6 +434,10 @@ public class FavoriteDataManage {
 	 */
 	public boolean checkExists(String userid, String goodsid){
 		boolean isExists = false;
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+//			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return isExists;
+		}
 		try {
 			isExists = (new TaskCheck(userid, goodsid)).execute().get();
 			Log.i(TAG, "is exists?"+ isExists);

@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.yidejia.app.mall.MyApplication;
+import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.user.Login;
 import com.yidejia.app.mall.net.user.Register;
 
@@ -44,6 +45,10 @@ public class UserDatamanage {
 		this.ip = ip;
 		
 		boolean state = false;
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return state;
+		}
 		TaskLogin taskLogin = new TaskLogin();
 		try {
 			state = taskLogin.execute().get();
@@ -76,9 +81,9 @@ public class UserDatamanage {
 					JSONObject jsonObject = new JSONObject(httpResponse);
 					code = jsonObject.getInt("code");
 					String response = jsonObject.getString("response");
-					JSONObject responseObject = new JSONObject(response);
 					if(code == 1000){
 						MyApplication myApplication = new MyApplication();
+						JSONObject responseObject = new JSONObject(response);
 						String token = responseObject.getString("token");
 						myApplication.setToken(token);
 						return true;
@@ -87,7 +92,7 @@ public class UserDatamanage {
 //						throw new UserLoginEx(message);
 						isSuccess = false;
 					} else{
-						message = responseObject.getString("msg");
+						message = jsonObject.getString("msg");
 						isSuccess = false;
 					}
 				} catch (JSONException e) {
@@ -114,6 +119,10 @@ public class UserDatamanage {
 		this.ip = ip;
 		
 		boolean state = false;
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return state;
+		}
 		TaskRegister taskRegister = new TaskRegister();
 		try {
 			state = taskRegister.execute().get();
@@ -145,15 +154,14 @@ public class UserDatamanage {
 					int code;
 					JSONObject jsonObject = new JSONObject(httpResponse);
 					code = jsonObject.getInt("code");
-					String response = jsonObject.getString("response");
-					JSONObject responseObject = new JSONObject(response);
+//					String response = jsonObject.getString("response");
 					if(code == 1003){
 //						MyApplication myApplication = new MyApplication();
 //						String token = responseObject.getString("token");
 //						myApplication.setToken(token);
 						return true;
 					} else{
-						message = responseObject.getString("msg");
+						message = jsonObject.getString("msg");
 						isSuccess = false;
 					}
 				} catch (JSONException e) {

@@ -34,8 +34,10 @@ public class JNICallBack {
 	//获取商品评论
 	public static native String getHttp4GetComment(String where, String offset, String limit, String group, String order, String fields);
 	
-	//保存商品评论
-	public static native String getHttp4SaveComment(String id);
+	// 保存商品评论
+	public static native String getHttp4SaveComment(String goods_id,
+			String user_id, String user_name, String title, String experience,
+			String commentDate);
 	
 	//获取配送中心
 	public static native String getHttp4GetDistribute(String where, String offset, String limit, String group, String order, String fields);

@@ -15,6 +15,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.model.UserComment;
+import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.commments.GetProductCommentList;
 import com.yidejia.app.mall.util.UnicodeToString;
 
@@ -44,6 +45,10 @@ public class UserCommentDataManage {
 	 */
 	public ArrayList<UserComment> getUserCommentsArray(String id, int fromIndex, int amount, boolean isUser){
 		String idTemp = isUser? "user_id=":"goods_id=";
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return userComments;
+		}
 		TaskGetList taskGetList = new TaskGetList(idTemp+id, String.valueOf(fromIndex), String.valueOf(amount), "", "", "%2A");
 		boolean state = false ;
 		try {
@@ -69,14 +74,21 @@ public class UserCommentDataManage {
 	
 	/**
 	 * 提交评论
+	 * @param goodsid 产品Id
 	 * @param userId 客户Id
-	 * @param uId 产品Id
+	 * @param username 客户名称
 	 * @param text 评论内容
 	 * @param value 评分
+	 * @param date 评论时间
 	 * @return 成功与否
 	 */
-	public boolean commitComment(int userId, int uId, String text, int value){
+	public boolean commitComment(String goodsid, String userId, String username ,String text, int value, String date){
 		boolean isSuccess = false;
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return isSuccess;
+		}
+		
 		return isSuccess;
 	}
 	
@@ -100,9 +112,9 @@ public class UserCommentDataManage {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage("正在查询");
-			bar.show();
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage("正在查询");
+//			bar.show();
 		}
 		
 		@Override
@@ -129,11 +141,11 @@ public class UserCommentDataManage {
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			bar.dismiss();
+//			bar.dismiss();
 //			if(result)
 //				Toast.makeText(context, "成功", Toast.LENGTH_SHORT).show();
 		}
-		private ProgressDialog bar = new ProgressDialog(context);
+//		private ProgressDialog bar = new ProgressDialog(context);
 	}
 	
 	/**
@@ -187,5 +199,16 @@ public class UserCommentDataManage {
 			e.printStackTrace();
 		}
 		return userComments;
+	}
+	
+	private class TaskSave extends AsyncTask<Void, Void, Boolean>{
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			
+			return null;
+		}
+		
 	}
 }

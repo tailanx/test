@@ -14,6 +14,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.model.PriceLevel;
+import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.search.PriceDataUtil;
 
 /**
@@ -35,6 +36,10 @@ public class PriceDataManage {
 	 * @return pricesArray 价格列表
 	 */
 	public ArrayList<PriceLevel> getPriceArray(){
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return pricesArray;
+		}
 		TaskPrice taskPrice = new TaskPrice();
 		boolean state = false;
 		try {

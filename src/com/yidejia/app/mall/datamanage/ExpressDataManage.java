@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.yidejia.app.mall.model.Express;
 import com.yidejia.app.mall.model.FreePost;
+import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.express.GetDistributionList;
 import com.yidejia.app.mall.net.express.GetExpressList;
 import com.yidejia.app.mall.net.express.GetFreeList;
@@ -47,6 +48,10 @@ public class ExpressDataManage {
 	 * @return 
 	 */
 	public ArrayList<Express> getExpressesExpenses(String province, String isDefault){
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+//			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return expresses;
+		}
 		StringBuffer where = new StringBuffer();
 		where.append("province%3D%27");
 		where.append(province);
@@ -160,6 +165,10 @@ public class ExpressDataManage {
 	 * @return
 	 */
 	public ArrayList<Express> getDistributionsList(String fromIndex, String amount){
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+//			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return distributions;
+		}
 		TaskDis taskDis = new TaskDis("", fromIndex, amount, "", "", "%2A");
 		boolean state = false ;
 		try {
@@ -266,6 +275,10 @@ public class ExpressDataManage {
 	 * @return
 	 */
 	public ArrayList<FreePost> getFreePostList(String fromIndex, String amount){
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return freePosts;
+		}
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd+HH:mm:ss");
 		Date curDate = new Date(System.currentTimeMillis());
 		String dateStr = format.format(curDate);

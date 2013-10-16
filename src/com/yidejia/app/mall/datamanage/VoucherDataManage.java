@@ -6,6 +6,7 @@ import java.util.concurrent.ExecutionException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.voucher.Voucher;
 
 import android.content.Context;
@@ -40,6 +41,10 @@ public class VoucherDataManage {
 		this.id = userid;
 		this.token = token;
 		
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return voucherNum;
+		}
 		boolean state = false;
 		
 		TaskVoucher taskVoucher = new TaskVoucher();

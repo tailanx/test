@@ -15,6 +15,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.model.Function;
+import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.search.EffectDataUtil;
 import com.yidejia.app.mall.util.UnicodeToString;
 
@@ -39,6 +40,10 @@ public class FunctionDataManage {
 	 * @return functionsArray 功效列表
 	 */
 	public ArrayList<Function> getFunArray(){
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return functionsArray;
+		}
 		TaskFun taskFun = new TaskFun("flag%3D%27y%27", "0", "20", "%2A");
 		boolean state = false;
 		try {

@@ -2,6 +2,7 @@ package com.yidejia.app.mall.util;
 
 import java.util.ArrayList;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -58,7 +59,18 @@ public class CommentUtil {
 
 	public void AllComment(String goodsId, int fromIndex, int amount) {
 		if (ConnectionDetector.isConnectingToInternet(context)) {
+			ProgressDialog bar = new ProgressDialog(context);
+			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			bar.setMessage("正在查询");
+			bar.show();
+//			try {
+//				Thread.sleep(3000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 			dataManage = new UserCommentDataManage(context);
+			bar.dismiss();
 			if("".equals(goodsId) || goodsId == null) {
 				Toast.makeText(context, "网络不给力！", Toast.LENGTH_SHORT).show();
 				return;

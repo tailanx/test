@@ -19,6 +19,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.initview.HotSellView;
 import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.model.MainProduct;
+import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.homepage.GetHomePage;
 import com.yidejia.app.mall.util.UnicodeToString;
@@ -68,6 +69,10 @@ public class MainPageDataManage {
 	 * 
 	 */
 	public void getMainPageData(){
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return;
+		}
 		TaskMainPage taskMainPage = new TaskMainPage();
 		boolean state = false ;
 		try {

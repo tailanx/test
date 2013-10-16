@@ -8,13 +8,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.ProgressDialog;
+//import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.model.SearchItem;
+import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.search.SearchDataUtil;
 import com.yidejia.app.mall.util.UnicodeToString;
@@ -48,6 +49,10 @@ public class SearchDataManage {
 	 * @return 搜索结构
 	 */
 	public ArrayList<SearchItem> getSearchArray(String name, String fun, String brand, String price,String order, String offset, String limit){
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return searchArray;
+		}
 		TaskSearch taskSearch = new TaskSearch(name, fun, brand, price, order, offset, limit);
 		boolean state = false;
 		try {
@@ -91,14 +96,14 @@ public class SearchDataManage {
 			this.fun = fun;
 		}
 		
-		private ProgressDialog bar = new ProgressDialog(context);
+//		private ProgressDialog bar = new ProgressDialog(context);
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage("正在查询");
-			bar.show();
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage("正在查询");
+//			bar.show();
 		}
 		
 		@Override
@@ -137,7 +142,7 @@ public class SearchDataManage {
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			bar.dismiss();
+//			bar.dismiss();
 		}
 	}
 	

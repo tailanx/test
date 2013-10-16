@@ -12,6 +12,7 @@ import com.yidejia.app.mall.interfacecallback.CallBack;
 import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.model.MainProduct;
 import com.yidejia.app.mall.model.ProductBaseInfo;
+import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.goodsinfo.GetProductAddress;
 import com.yidejia.app.mall.util.UnicodeToString;
@@ -48,6 +49,10 @@ public class ProductDataManage{  //implements CallBack
 	 * @return {@link ProductBaseInfo} 
 	 */
 	public ProductBaseInfo getProductData(String goodsId){
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return productBaseInfo;
+		}
 		TaskProduct taskProduct = new TaskProduct(goodsId);
 		boolean state = false ;
 		try {

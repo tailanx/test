@@ -15,6 +15,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.model.Brand;
+import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.search.BrandDataUtil;
 import com.yidejia.app.mall.util.UnicodeToString;
 
@@ -39,6 +40,10 @@ public class BrandDataManage {
 	 * @return brandsArray 品牌列表
 	 */
 	public ArrayList<Brand> getBrandArray(){
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+//			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			return brandsArray;
+		}
 		TaskBrand taskBrand = new TaskBrand();
 		boolean state = false;
 		try {
