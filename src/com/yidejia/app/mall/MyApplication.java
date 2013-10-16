@@ -142,4 +142,5 @@ public class MyApplication extends Application{
 	public String getVip(){
 		return vip;
 	}
+
 }

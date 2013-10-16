@@ -36,7 +36,8 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 	private EditText stringPassword;
 	private UserDatamanage userManage;
 	private IpAddress ipAddress;
-
+	private MyMallActivity fragment;
+	private MyApplication myApplication;
 	
 	private MyMallActivity newFragment;
 	
@@ -55,6 +56,7 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 		View view = inflater.inflate(R.layout.my_mall_login, container, false);
 		getSherlockActivity().getSupportActionBar().setCustomView(R.layout.login_top);
 		userManage = new UserDatamanage(getSherlockActivity());
+		myApplication = (MyApplication)getSherlockActivity().getApplication();
 		ipAddress = new IpAddress();
 		findPwd = (RelativeLayout)view.findViewById(R.id.my_mall_login_retrieve_password);
 		//设置监听
@@ -107,10 +109,16 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 		String name = stringName.getText().toString();
 		String pwd = stringPassword.getText().toString();
 		boolean isSucess = userManage.userLogin(name, pwd,ipAddress.getIpAddress());
+		
 		Log.i("info", isSucess +"isSucess");
 		if(isSucess){
+			myApplication.setIsLogin(true);
+			
+			fragment = new  MyMallActivity();
+			
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
-			ft.replace(R.id.main_fragment, newFragment).commit();
+			
+			ft.replace(R.id.main_fragment, fragment).commit();
 //		if(name==null||"".equals(name)){
 //			Toast.makeText(getSherlockActivity(), "请输入用户名或者密码",Toast.LENGTH_LONG).show();
 //		}

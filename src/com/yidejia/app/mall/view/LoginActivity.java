@@ -18,6 +18,7 @@ import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.MyMallActivity;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.ctrl.IpAddress;
 import com.yidejia.app.mall.datamanage.UserDatamanage;
 
 public class LoginActivity extends SherlockActivity implements OnClickListener{
@@ -30,6 +31,8 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 	
 	private MyMallActivity newFragment;
 	private UserDatamanage userManage;//登陆的接口
+	private IpAddress ip;
+	private MyApplication myApplication;
 	
 //	private void doClick(View v){
 //		switch (v.getId()) {
@@ -73,10 +76,11 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 //		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		
+		setContentView(R.layout.my_mall_login);
+		ip = new IpAddress();
 		setActionbar();
 		userManage = new UserDatamanage(LoginActivity.this);
-		setContentView(R.layout.my_mall_login);
+		myApplication = (MyApplication) getApplication();
 		findPwd = (RelativeLayout)findViewById(R.id.my_mall_login_retrieve_password);
 		//设置监听
 		findPwd.setOnClickListener(this);
@@ -106,10 +110,13 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 		case R.id.my_mall_login_button://登录
 		String name = stringName.getText().toString();
 		String pwd = stringPassword.getText().toString();
-		boolean isSucess = userManage.userLogin(name, pwd, null);
+		boolean isSucess = userManage.userLogin(name, pwd, ip.getIpAddress());
 		Log.i("info",isSucess +"   isSucess");
 		if(isSucess){
-//		if(name==null||"".equals(name)){
+			myApplication.setIsLogin(true);
+			Log.i("info", myApplication.getToken()+"      myApplication.getToken()");
+			this.finish();
+			//		if(name==null||"".equals(name)){
 //			Toast.makeText(this, "请输入用户名或者密码",Toast.LENGTH_LONG).show();
 //		}
 //		if(pwd==null||"".equals(pwd)){
@@ -118,7 +125,7 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 //		if(name.equals("aaa")&&pwd.equals("111")){   //登录成功
 //			newFragment = new MyMallActivity();
 //			this.finish();
-			((MyApplication) getApplication()).setIsLogin(true);
+//			((MyApplication) getApplication()).setIsLogin(true);
 //			Log.i("info", myApplication.getIsLogin()+"");
 //			myApplication.setIsLogin(true);
 //			Log.i("info", myApplication.getIsLogin()+"");

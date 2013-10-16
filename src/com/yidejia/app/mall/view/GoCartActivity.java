@@ -34,7 +34,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 	private Button mbutton;// 去结算
 	private CartUtil cartUtil;
 	private AddressDataManage addressManage;// 地址管理数据
-	private PullToRefreshScrollView mPullToRefreshScrollView;// 界面刷新
+//	private PullToRefreshScrollView mPullToRefreshScrollView;// 界面刷新
 	private ImageView mImageView;//返回
 	private TextView mTextView;//title
 	
@@ -51,14 +51,14 @@ public class GoCartActivity extends SherlockActivity {// implements
 
 		counTextView = (TextView) findViewById(R.id.shopping_cart_sum_number);// 总的数量
 
-		mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.shopping_cart_item_goods_scrollView);
-		String label = "上次更新于"
-				+ DateUtils.formatDateTime(GoCartActivity.this,
-						System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
-								| DateUtils.FORMAT_SHOW_DATE
-								| DateUtils.FORMAT_SHOW_TIME);
-		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-		mPullToRefreshScrollView.setOnRefreshListener(listener);
+//		mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.shopping_cart_item_goods_scrollView);
+//		String label = "上次更新于"
+//				+ DateUtils.formatDateTime(GoCartActivity.this,
+//						System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
+//								| DateUtils.FORMAT_SHOW_DATE
+//								| DateUtils.FORMAT_SHOW_TIME);
+//		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+//		mPullToRefreshScrollView.setOnRefreshListener(listener);
 		
 		LinearLayout layout = (LinearLayout) findViewById(R.id.shopping_cart_relative2);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -117,16 +117,16 @@ public class GoCartActivity extends SherlockActivity {// implements
 		//
 		//
 	}
-	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
-
-		@Override
-		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-			// TODO Auto-generated method stub
-			String label = "上次更新于" + DateUtils.formatDateTime(GoCartActivity.this, System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL|DateUtils.FORMAT_SHOW_DATE|DateUtils.FORMAT_SHOW_TIME);
-			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-			mPullToRefreshScrollView.onRefreshComplete();
-		}
-	};
+//	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
+//
+//		@Override
+//		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+//			// TODO Auto-generated method stub
+//			String label = "上次更新于" + DateUtils.formatDateTime(GoCartActivity.this, System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL|DateUtils.FORMAT_SHOW_DATE|DateUtils.FORMAT_SHOW_TIME);
+//			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+//			mPullToRefreshScrollView.onRefreshComplete();
+//		}
+//	};
 	// try {
 	// TODO Auto-generated method stub
 	// requestWindowFeature(Window.FEATURE_NO_TITLE);

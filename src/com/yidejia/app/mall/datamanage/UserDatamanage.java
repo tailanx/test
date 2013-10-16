@@ -29,10 +29,8 @@ public class UserDatamanage {
 	private boolean isSuccess = true;
 	
 	private Context context;
-	private MyApplication myApplication;
 	public UserDatamanage(Context context){
 		this.context = context;
-		myApplication = (MyApplication)context.getApplicationContext();
 	}
 	/**
 	 * µÇÂ¼
@@ -84,7 +82,7 @@ public class UserDatamanage {
 					code = jsonObject.getInt("code");
 					String response = jsonObject.getString("response");
 					if(code == 1000){
-						
+						MyApplication myApplication = (MyApplication) context.getApplicationContext();
 						JSONObject responseObject = new JSONObject(response);
 						String customer_id = responseObject.getString("customer_id");
 						myApplication.setUserId(customer_id);
@@ -165,7 +163,7 @@ public class UserDatamanage {
 					code = jsonObject.getInt("code");
 //					String response = jsonObject.getString("response");
 					if(code == 1003){
-//						MyApplication myApplication = new MyApplication();
+//						MyApplication myApplication = conte;
 //						String token = responseObject.getString("token");
 //						myApplication.setToken(token);
 						return true;

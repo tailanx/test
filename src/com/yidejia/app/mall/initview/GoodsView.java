@@ -174,10 +174,11 @@ public class GoodsView {
 						float sum = Float.parseFloat(priceString);
 						if(sum <= 0) return;//价格出错
 						Bundle bundle = new Bundle();
+						bundle.putSerializable("Cart", cart);
 						bundle.putString("price", priceString);
 						intent.putExtras(bundle);
 						activity.startActivity(intent);
-						activity.finish();
+//						activity.finish();
 					} catch (NumberFormatException e){
 						//价格出错
 					}
@@ -195,7 +196,7 @@ public class GoodsView {
 					// Bundle bundle = new Bundle();
 					// intent.putExtras(bundle);
 					activity.startActivity(intent);
-					activity.finish();
+//					activity.finish();
 				}
 			});
 
