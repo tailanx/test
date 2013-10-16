@@ -25,7 +25,7 @@ public class HotSellView {
 	private View view;
 	private SherlockFragmentActivity sherlockFragmentActivity;
 //	private ArrayList<MainProduct> hotsellArray;
-	public HotSellView(View view, SherlockFragmentActivity sherlockFragmentActivity){
+	public HotSellView(View view,SherlockFragmentActivity sherlockFragmentActivity){
 		this.view = view;
 //		this.hotsellArray = hotsellArray;
 		initDisplayImageOption();
