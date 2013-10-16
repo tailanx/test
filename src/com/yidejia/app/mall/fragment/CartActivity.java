@@ -210,17 +210,17 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 				sumTextView, mBox);
 
 		cartUtil.AllComment();
-		mPullToRefreshScrollView = (PullToRefreshScrollView) view
-				.findViewById(R.id.shopping_cart_item_goods_scrollView);
-		String label = "上次更新于"
-				+ DateUtils.formatDateTime(getSherlockActivity(),
-						System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
-								| DateUtils.FORMAT_ABBREV_ALL
-								| DateUtils.FORMAT_SHOW_DATE);
-		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
-				label);
-		mPullToRefreshScrollView.onRefreshComplete();
-		mPullToRefreshScrollView.setOnRefreshListener(listener);
+//		mPullToRefreshScrollView = (PullToRefreshScrollView) view
+//				.findViewById(R.id.shopping_cart_item_goods_scrollView);
+//		String label = "上次更新于"
+//				+ DateUtils.formatDateTime(getSherlockActivity(),
+//						System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
+//								| DateUtils.FORMAT_ABBREV_ALL
+//								| DateUtils.FORMAT_SHOW_DATE);
+//		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
+//				label);
+//		mPullToRefreshScrollView.onRefreshComplete();
+//		mPullToRefreshScrollView.setOnRefreshListener(listener);
 		// receiver = new InnerReceiver();
 		// IntentFilter filter = new IntentFilter();
 		// filter.addAction(Consts.UPDATE_CHANGE);
@@ -352,25 +352,25 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	}
 private  int fromIndex = 0;
 private int amontIndex = 10 ;
-	// 刷新添加事件
-	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
-
-		@Override
-		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-			// TODO Auto-generated method stub
-
-			String label = "上次更新于"
-					+ DateUtils.formatDateTime(getSherlockActivity(),
-							System.currentTimeMillis(),
-							DateUtils.FORMAT_SHOW_DATE
-									| DateUtils.FORMAT_SHOW_TIME
-									| DateUtils.FORMAT_ABBREV_ALL);
-
-			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-			fromIndex += amontIndex;
-			mPullToRefreshScrollView.onRefreshComplete();
-		}
-	};
+//	// 刷新添加事件
+//	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
+//
+//		@Override
+//		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+//			// TODO Auto-generated method stub
+//
+//			String label = "上次更新于"
+//					+ DateUtils.formatDateTime(getSherlockActivity(),
+//							System.currentTimeMillis(),
+//							DateUtils.FORMAT_SHOW_DATE
+//									| DateUtils.FORMAT_SHOW_TIME
+//									| DateUtils.FORMAT_ABBREV_ALL);
+//
+//			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+//			fromIndex += amontIndex;
+//			mPullToRefreshScrollView.onRefreshComplete();
+//		}
+//	};
 
 	// @Override
 	// public void onCreateContextMenu(ContextMenu menu, View v,
