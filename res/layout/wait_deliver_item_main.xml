@@ -5,14 +5,14 @@
 
     <com.handmark.pulltorefresh.library.PullToRefreshScrollView
         xmlns:ptr="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/all_order_item_main_refresh_scrollview11"
+        android:id="@+id/wait_deliver_order_item_main_refresh_scrollview11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/main_bg"
         android:descendantFocusability="afterDescendants"
         android:scrollbars="none"
         ptr:ptrAnimationStyle="flip"
-        ptr:ptrMode="pullDownFromTop" >
+        ptr:ptrMode="both" >
 
         <LinearLayout
             android:id="@+id/wait_deliver_order_scrollView_linearlayout1"
