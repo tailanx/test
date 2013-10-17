@@ -61,10 +61,10 @@ public class AllOrderUtil {
 /**
  * 加载视图
  */
-	public void loadView(){
+	public void loadView(int fromIndex,int amount){
 		try {
 			orderDataManage = new OrderDataManage(context);
-			ArrayList<Order> mList = orderDataManage.getOrderArray(new MyApplication().getUserId(), "", "", "录入", 0+"","");
+			ArrayList<Order> mList = orderDataManage.getOrderArray(new MyApplication().getUserId(), "", "", "录入", fromIndex+"",amount+"");
 //			Log.i("info", mList.size()+"mList");
 			for(int i=0;i<mList.size();i++){
 				view = inflater.inflate(R.layout.all_order_item_item, null);
