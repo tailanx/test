@@ -24,6 +24,7 @@ public class AllOrderUtil {
 	private Context context;
 	private	LayoutInflater inflater;
 	private View view;
+	private MyApplication myApplication;
 	
 //	private TextView titleTextView;//订单的状态
 //	private TextView numberTextView;//订单的编号
@@ -38,6 +39,7 @@ public class AllOrderUtil {
 		this.context = context;
 		this.inflater = LayoutInflater.from(context);
 		this.mLinearLayoutLayout = mLayout;
+		myApplication  = (MyApplication) context.getApplicationContext();
 	}
 //	/**
 //	 * 实例化对象
@@ -64,7 +66,7 @@ public class AllOrderUtil {
 	public void loadView(int fromIndex,int amount){
 		try {
 			orderDataManage = new OrderDataManage(context);
-			ArrayList<Order> mList = orderDataManage.getOrderArray(new MyApplication().getUserId(), "", "", "录入", fromIndex+"",amount+"",new MyApplication().getToken());
+			ArrayList<Order> mList = orderDataManage.getOrderArray(myApplication.getUserId(), "", "", "录入", fromIndex+"",amount+"",myApplication.getToken());
 //			Log.i("info", mList.size()+"mList");
 			for(int i=0;i<mList.size();i++){
 				view = inflater.inflate(R.layout.all_order_item_item, null);

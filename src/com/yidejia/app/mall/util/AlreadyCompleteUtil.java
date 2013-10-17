@@ -21,6 +21,7 @@ public class AlreadyCompleteUtil {
 	private LinearLayout mLinearLayout;//外层加载用的
 	private LinearLayout mLayout;//用来传参用的
 	private View view;
+	private MyApplication myApplication;
 	
 	private TextView titleTextView;//订单的状态
 	private TextView numberTextView;//订单的编号
@@ -33,6 +34,7 @@ public class AlreadyCompleteUtil {
 		this.context = context;
 		this.mInflater = LayoutInflater.from(context);
 		this.mLinearLayout = layout;
+		myApplication = (MyApplication) context.getApplicationContext();
 	}
 	public void setupShow(){
 		view = mInflater.inflate(R.layout.already_complete_item_main_item,null);
@@ -49,7 +51,7 @@ public class AlreadyCompleteUtil {
 		public void loadView(int fromIndex, int amount){
 			try {
 				orderDataManage = new OrderDataManage(context);
-				ArrayList<Order> mList = orderDataManage.getOrderArray(new MyApplication().getUserId(), "", "", "已签收", fromIndex+"", amount+"",new MyApplication().getToken());
+				ArrayList<Order> mList = orderDataManage.getOrderArray(myApplication.getUserId(), "", "", "已签收", fromIndex+"", amount+"",myApplication.getToken());
 				Log.i("info", mList.size()+"mList");
 				for(int i=0;i<mList.size();i++){
 					setupShow();
