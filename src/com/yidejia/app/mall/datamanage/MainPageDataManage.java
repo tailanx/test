@@ -82,10 +82,12 @@ public class MainPageDataManage {
 			e.printStackTrace();
 			
 			Log.e(TAG, "TaskMainPage() InterruptedException");
+			Toast.makeText(context, "网络不给力！", Toast.LENGTH_SHORT).show();
 		} catch (ExecutionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Log.e(TAG, "TaskMainPage() ExecutionException");
+			Toast.makeText(context, "网络不给力！", Toast.LENGTH_SHORT).show();
 		}
 		if(!state){
 			Toast.makeText(context, "网络不给力！", Toast.LENGTH_SHORT).show();
