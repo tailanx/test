@@ -46,6 +46,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainPageFragment extends SherlockFragment {
 	
@@ -133,29 +134,35 @@ public class MainPageFragment extends SherlockFragment {
 
 		@Override
 		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-			// TODO Auto-generated method stub
-			String label = "上次更新于"	+ DateUtils.formatDateTime(
-					getSherlockActivity().getApplicationContext(),
-					System.currentTimeMillis(),
-					DateUtils.FORMAT_SHOW_TIME
-						| DateUtils.FORMAT_SHOW_DATE
-						| DateUtils.FORMAT_ABBREV_ALL);
-			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+			try {
+				// TODO Auto-generated method stub
+				String label = "上次更新于"	+ DateUtils.formatDateTime(
+						getSherlockActivity().getApplicationContext(),
+						System.currentTimeMillis(),
+						DateUtils.FORMAT_SHOW_TIME
+							| DateUtils.FORMAT_SHOW_DATE
+							| DateUtils.FORMAT_ABBREV_ALL);
+				refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 //			mPullToRefreshScrollView.setRefreshing();
-			MainPageDataManage manage = new MainPageDataManage(getSherlockActivity(), mPullToRefreshScrollView);
-			
-			manage.getMainPageData();
-			bannerArray = manage.getBannerArray();
-			acymerArray = manage.getAcymerArray();
-			inerbtyArray = manage.getInerbtyArray();
-			hotsellArray = manage.getHotSellArray();
-			ggTitleArray = manage.getGGTitle();
-			HotSellView hotSellView = new HotSellView(view,getSherlockActivity());
-			hotSellView.initHotSellView(hotsellArray);
-			hotSellView.initAcymerView(acymerArray);
-			hotSellView.initInerbtyView(inerbtyArray);
-			main_mall_notice_content.setText(ggTitleArray.get(0));
+				MainPageDataManage manage = new MainPageDataManage(getSherlockActivity(), mPullToRefreshScrollView);
+				
+				manage.getMainPageData();
+				bannerArray = manage.getBannerArray();
+				acymerArray = manage.getAcymerArray();
+				inerbtyArray = manage.getInerbtyArray();
+				hotsellArray = manage.getHotSellArray();
+				ggTitleArray = manage.getGGTitle();
+				HotSellView hotSellView = new HotSellView(view,getSherlockActivity());
+				hotSellView.initHotSellView(hotsellArray);
+				hotSellView.initAcymerView(acymerArray);
+				hotSellView.initInerbtyView(inerbtyArray);
+				main_mall_notice_content.setText(ggTitleArray.get(0));
 //			mPullToRefreshScrollView.onRefreshComplete();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Toast.makeText(getSherlockActivity(), "网络不给力！", Toast.LENGTH_SHORT).show();
+			}
 		}
 		
 		
@@ -166,44 +173,50 @@ public class MainPageFragment extends SherlockFragment {
 	 * @param view
 	 */
 	private void intentToView(View view){
-		//hot sell 左边
-		RelativeLayout hotsellLeft = (RelativeLayout)view.findViewById(R.id.main_hot_sell_left);
-		hotsellLeft.setOnClickListener(new MainGoodsOnclick(hotsellArray.get(0).getUId()));
-		//hot sell 右上
-		RelativeLayout hotsellRightTop = (RelativeLayout)view.findViewById(R.id.main_hot_sell_right_top);
-		hotsellRightTop.setOnClickListener(new MainGoodsOnclick(hotsellArray.get(1).getUId()));
-		//hot sell 右下
-		RelativeLayout hotsellRightDown = (RelativeLayout)view.findViewById(R.id.main_hot_sell_right_down);
-		hotsellRightDown.setOnClickListener(new MainGoodsOnclick(hotsellArray.get(2).getUId()));
-		
-		// acymer 左边
-		RelativeLayout acymeiLeft = (RelativeLayout)view.findViewById(R.id.main_acymei_left);
-		acymeiLeft.setOnClickListener(new MainGoodsOnclick(acymerArray.get(0).getUId()));
-		// acymer 右上
-		RelativeLayout acymeiRightTop = (RelativeLayout)view.findViewById(R.id.main_acymei_right_top);
-		acymeiRightTop.setOnClickListener(new MainGoodsOnclick(acymerArray.get(1).getUId()));
-		// acymer 右下
-		RelativeLayout acymeiRightDown = (RelativeLayout)view.findViewById(R.id.main_acymei_right_down);
-		acymeiRightDown.setOnClickListener(new MainGoodsOnclick(acymerArray.get(2).getUId()));
-		
-		// inerbty 左上
-		RelativeLayout inerbtyTopLeft = (RelativeLayout)view.findViewById(R.id.main_inerbty_top_left);
-		inerbtyTopLeft.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(0).getUId()));
-		// inerbty 右上
-		RelativeLayout inerbtyTopRight = (RelativeLayout)view.findViewById(R.id.main_inerbty_top_right);
-		inerbtyTopRight.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(1).getUId()));
-		// inerbty 左中
-		RelativeLayout nerbtyMidLeft = (RelativeLayout)view.findViewById(R.id.main_inerbty_mid_left);
-		nerbtyMidLeft.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(2).getUId()));
-		// inerbty 右中
-		RelativeLayout inerbtyMidRight = (RelativeLayout)view.findViewById(R.id.main_inerbty_mid_right);
-		inerbtyMidRight.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(3).getUId()));
-		// inerbty 左下
-		RelativeLayout inerbtyDownLeft = (RelativeLayout)view.findViewById(R.id.main_inerbty_down_left);
-		inerbtyDownLeft.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(4).getUId()));
-		// inerbty 右下
-		RelativeLayout inerbtyDownRight = (RelativeLayout)view.findViewById(R.id.main_inerbty_down_right);
-		inerbtyDownRight.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(5).getUId()));
+		try {
+			//hot sell 左边
+			RelativeLayout hotsellLeft = (RelativeLayout)view.findViewById(R.id.main_hot_sell_left);
+			hotsellLeft.setOnClickListener(new MainGoodsOnclick(hotsellArray.get(0).getUId()));
+			//hot sell 右上
+			RelativeLayout hotsellRightTop = (RelativeLayout)view.findViewById(R.id.main_hot_sell_right_top);
+			hotsellRightTop.setOnClickListener(new MainGoodsOnclick(hotsellArray.get(1).getUId()));
+			//hot sell 右下
+			RelativeLayout hotsellRightDown = (RelativeLayout)view.findViewById(R.id.main_hot_sell_right_down);
+			hotsellRightDown.setOnClickListener(new MainGoodsOnclick(hotsellArray.get(2).getUId()));
+			
+			// acymer 左边
+			RelativeLayout acymeiLeft = (RelativeLayout)view.findViewById(R.id.main_acymei_left);
+			acymeiLeft.setOnClickListener(new MainGoodsOnclick(acymerArray.get(0).getUId()));
+			// acymer 右上
+			RelativeLayout acymeiRightTop = (RelativeLayout)view.findViewById(R.id.main_acymei_right_top);
+			acymeiRightTop.setOnClickListener(new MainGoodsOnclick(acymerArray.get(1).getUId()));
+			// acymer 右下
+			RelativeLayout acymeiRightDown = (RelativeLayout)view.findViewById(R.id.main_acymei_right_down);
+			acymeiRightDown.setOnClickListener(new MainGoodsOnclick(acymerArray.get(2).getUId()));
+			
+			// inerbty 左上
+			RelativeLayout inerbtyTopLeft = (RelativeLayout)view.findViewById(R.id.main_inerbty_top_left);
+			inerbtyTopLeft.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(0).getUId()));
+			// inerbty 右上
+			RelativeLayout inerbtyTopRight = (RelativeLayout)view.findViewById(R.id.main_inerbty_top_right);
+			inerbtyTopRight.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(1).getUId()));
+			// inerbty 左中
+			RelativeLayout nerbtyMidLeft = (RelativeLayout)view.findViewById(R.id.main_inerbty_mid_left);
+			nerbtyMidLeft.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(2).getUId()));
+			// inerbty 右中
+			RelativeLayout inerbtyMidRight = (RelativeLayout)view.findViewById(R.id.main_inerbty_mid_right);
+			inerbtyMidRight.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(3).getUId()));
+			// inerbty 左下
+			RelativeLayout inerbtyDownLeft = (RelativeLayout)view.findViewById(R.id.main_inerbty_down_left);
+			inerbtyDownLeft.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(4).getUId()));
+			// inerbty 右下
+			RelativeLayout inerbtyDownRight = (RelativeLayout)view.findViewById(R.id.main_inerbty_down_right);
+			inerbtyDownRight.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(5).getUId()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Toast.makeText(getSherlockActivity(), "网络不给力！", Toast.LENGTH_SHORT).show();
+		}
 	}
 	/**
 	 * 首页hotsell,acymer,inerbty商品点击事件
@@ -318,24 +331,30 @@ public class MainPageFragment extends SherlockFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		super.onActivityCreated(savedInstanceState);
-		Log.d(TAG, "TestFragment-----onActivityCreated");
+		try {
+			super.onActivityCreated(savedInstanceState);
+			Log.d(TAG, "TestFragment-----onActivityCreated");
 //		intentToView(view);
-		MainPageDataManage manage = new MainPageDataManage(getSherlockActivity(), null);
-		manage.getMainPageData();
-		bannerArray = manage.getBannerArray();
-		acymerArray = manage.getAcymerArray();
-		inerbtyArray = manage.getInerbtyArray();
-		hotsellArray = manage.getHotSellArray();
-		ggTitleArray = manage.getGGTitle();
-		
-		createView(view, inflater);
-		HotSellView hotSellView = new HotSellView(view,getSherlockActivity());
-		hotSellView.initHotSellView(hotsellArray);
-		hotSellView.initAcymerView(acymerArray);
-		hotSellView.initInerbtyView(inerbtyArray);
-		intentToView(view);
-		main_mall_notice_content.setText(ggTitleArray.get(0));
+			MainPageDataManage manage = new MainPageDataManage(getSherlockActivity(), null);
+			manage.getMainPageData();
+			bannerArray = manage.getBannerArray();
+			acymerArray = manage.getAcymerArray();
+			inerbtyArray = manage.getInerbtyArray();
+			hotsellArray = manage.getHotSellArray();
+			ggTitleArray = manage.getGGTitle();
+			
+			createView(view, inflater);
+			HotSellView hotSellView = new HotSellView(view,getSherlockActivity());
+			hotSellView.initHotSellView(hotsellArray);
+			hotSellView.initAcymerView(acymerArray);
+			hotSellView.initInerbtyView(inerbtyArray);
+			intentToView(view);
+			main_mall_notice_content.setText(ggTitleArray.get(0));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Toast.makeText(getSherlockActivity(), "网络不给力！", Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	@Override
