@@ -478,8 +478,25 @@ public class NewAddressActivity extends SherlockActivity {
 								addresses.setPhone(numberTextView.getText()
 										.toString());
 								
-								 addressId=dataManage.addAddress(new MyApplication().getUserId(), nameTextView.getText().toString(), province.trim(), city.trim(), district.trim(), areaTextView.getText().toString().trim(), numberTextView.getText().toString(), true);
-//								Log.i("info", addressId+"addressId");
+								addressId = dataManage
+										.addAddress(
+												((MyApplication) NewAddressActivity.this
+														.getApplication())
+														.getUserId(),
+												nameTextView.getText()
+														.toString(),
+												province.trim(),
+												city.trim(),
+												district.trim(),
+												areaTextView.getText()
+														.toString().trim(),
+												numberTextView.getText()
+														.toString(),
+												true,
+												((MyApplication) NewAddressActivity.this
+														.getApplication())
+														.getToken());
+								//	Log.i("info", addressId+"addressId");
 							
 								 if("".equals(addressId)){
 										Toast.makeText(NewAddressActivity.this, "您的输入有问题", Toast.LENGTH_SHORT).show();

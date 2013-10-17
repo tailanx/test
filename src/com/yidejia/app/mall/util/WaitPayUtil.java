@@ -64,7 +64,7 @@ public class WaitPayUtil {
 		try {
 			orderDataManage = new OrderDataManage(context);
 			ArrayList<Order> mList = orderDataManage.getOrderArray(new MyApplication().getUserId(),
-					"", "", "已签收", fromIndex +"", amount + "");
+					"", "", "已签收", fromIndex +"", amount + "",new MyApplication().getToken());
 			Log.i("info", mList.size() + "mList");
 			for (int i = 0; i < mList.size(); i++) {
 				setupShow();
@@ -114,3 +114,4 @@ public class WaitPayUtil {
 		}
 	}
 }
+

@@ -30,6 +30,8 @@ public class UserCommentDataManage {
 	private UnicodeToString unicode;
 	private String TAG = UserCommentDataManage.class.getName();
 	
+	private boolean isNoMore = false;//判断是否还有更多数据,true为没有更多了
+	
 	public UserCommentDataManage(Context context){
 		this.context = context;
 		unicode = new UnicodeToString();
@@ -53,6 +55,11 @@ public class UserCommentDataManage {
 		boolean state = false ;
 		try {
 			state = taskGetList.execute().get();
+			if(isNoMore){
+				Toast.makeText(context, "没有更多了!", Toast.LENGTH_SHORT).show();
+				isNoMore = false;
+				state = true;
+			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -193,6 +200,8 @@ public class UserCommentDataManage {
 					comments.setRate(rate);
 					userComments.add(comments);
 				}
+			} else if(code == -1){
+				isNoMore = true;
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

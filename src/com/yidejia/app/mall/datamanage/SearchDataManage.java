@@ -8,12 +8,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 //import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.exception.NullSearchResultEx;
 import com.yidejia.app.mall.model.SearchItem;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.ImageUrl;
@@ -31,6 +33,9 @@ public class SearchDataManage {
 	private String TAG = SearchDataManage.class.getName();
 	private UnicodeToString unicode;
 	
+	private boolean isNoMore = false;//判断是否还有更多数据,true为没有更多了
+	private boolean isHasResult = false;//判断是否有搜索结果
+	
 	public SearchDataManage(Context context){
 		this.context = context;
 		unicode = new UnicodeToString();
@@ -47,16 +52,26 @@ public class SearchDataManage {
 	 * @param offset 开始项
 	 * @param limit 结束项
 	 * @return 搜索结构
+	 * @throws NullSearchResultEx
 	 */
-	public ArrayList<SearchItem> getSearchArray(String name, String fun, String brand, String price,String order, String offset, String limit){
-		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+	public ArrayList<SearchItem> getSearchArray(String name, String fun,
+			String brand, String price, String order, String offset,
+			String limit) throws NullSearchResultEx{
+		if (!ConnectionDetector.isConnectingToInternet(context)) {
+		Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
 			return searchArray;
 		}
 		TaskSearch taskSearch = new TaskSearch(name, fun, brand, price, order, offset, limit);
 		boolean state = false;
 		try {
 			state = taskSearch.execute().get();
+			if(isHasResult && isNoMore){
+				Toast.makeText(context, "没有更多了!", Toast.LENGTH_SHORT).show();
+				isNoMore = false;
+				state = true;
+			} else if(!isHasResult){
+				throw new NullSearchResultEx("无搜索结果");
+			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			Log.e(TAG, "task search InterruptedException ");
@@ -115,11 +130,14 @@ public class SearchDataManage {
 				JSONObject jsonObject = new JSONObject(httpResponseString);
 				int code = jsonObject.getInt("code");
 				if(code == 1){
+					isHasResult = true;
 					String responseString = jsonObject.getString("response");
 					analysisJson(responseString);
 					return true;
 				} else if (code == -1){
 					//搜索失败
+					isNoMore = true;
+					return true;
 				} else {
 					return false;
 				}
@@ -135,7 +153,6 @@ public class SearchDataManage {
 				e.printStackTrace();
 				return false;
 			}
-			return false;
 		}
 		
 		@Override

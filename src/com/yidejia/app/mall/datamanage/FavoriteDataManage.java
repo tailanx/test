@@ -36,6 +36,8 @@ public class FavoriteDataManage {
 	private Context context ;
 	private String TAG = FavoriteDataManage.class.getName();
 	private UnicodeToString unicode;
+	
+	private boolean isNoMore = false;//判断是否还有更多数据,true为没有更多了
 	/**
 	 * {@link FavoriteDataManage}
 	 * @param context
@@ -62,6 +64,11 @@ public class FavoriteDataManage {
 		boolean state = false ;
 		try {
 			state = taskGetList.execute().get();
+			if(isNoMore){
+				Toast.makeText(context, "没有更多了!", Toast.LENGTH_SHORT).show();
+				isNoMore = false;
+				state = true;
+			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -82,15 +89,16 @@ public class FavoriteDataManage {
 	 * 添加收藏商品
 	 * @param userId 客户id
 	 * @param productId 商品id
+	 * @param token
 	 * @return 成功与否
 	 */
-	public boolean addFavourite(String userId, String productId){
+	public boolean addFavourite(String userId, String productId, String token){
 		boolean isSuccess = false;
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
 			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
 			return false;
 		}
-		TaskSave taskSave = new TaskSave(userId, productId);
+		TaskSave taskSave = new TaskSave(userId, productId, token);
 		try {
 			isSuccess = taskSave.execute().get();
 		} catch (InterruptedException e) {
@@ -115,15 +123,16 @@ public class FavoriteDataManage {
 	 * 删除收藏商品
 	 * @param userId 客户id
 	 * @param productId 商品id
+	 * @param token
 	 * @return 成功与否
 	 */
-	public boolean deleteFavourite(String userId, String productId){
+	public boolean deleteFavourite(String userId, String productId, String token){
 		boolean isSuccess = false;
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
 			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
 			return isSuccess;
 		}
-		TaskDelete taskDelete = new TaskDelete(userId, productId);
+		TaskDelete taskDelete = new TaskDelete(userId, productId, token);
 		try {
 			isSuccess = taskDelete.execute().get();
 		} catch (InterruptedException e) {
@@ -143,11 +152,13 @@ public class FavoriteDataManage {
 	}
 	
 	private class TaskDelete extends AsyncTask<Void, Void, Boolean>{
-		String userId;
-		String productId;
-		public TaskDelete(String userId, String productId){
+		private String userId;
+		private String productId;
+		private String token;
+		public TaskDelete(String userId, String productId, String token){
 			this.userId = userId;
 			this.productId = productId;
+			this.token = token;
 		}
 		
 		@Override
@@ -164,7 +175,7 @@ public class FavoriteDataManage {
 			// TODO Auto-generated method stub
 			DeleteFavorite deleteFavorite = new DeleteFavorite(context);
 			try {
-				String httpResultString = deleteFavorite.deleteFavorite(userId, String.valueOf(productId));///String.valueOf(userId), 
+				String httpResultString = deleteFavorite.deleteFavorite(userId, String.valueOf(productId), token);///String.valueOf(userId), 
 				
 				return analysicDeleteJson(httpResultString);
 			} catch (IOException e) {
@@ -227,10 +238,11 @@ public class FavoriteDataManage {
 	private class TaskSave extends AsyncTask<Void, Void, Boolean>{
 		private String userId;
 		private String productId;
-		
-		public TaskSave(String userId, String productId){
+		private String token;
+		public TaskSave(String userId, String productId, String token){
 			this.userId = userId;
 			this.productId = productId;
+			this.token = token;
 		}
 		
 		@Override
@@ -247,7 +259,7 @@ public class FavoriteDataManage {
 			// TODO Auto-generated method stub
 			SaveFavorite saveFavorite = new SaveFavorite(context);
 			try {
-				String httpResultString = saveFavorite.saveFavorite(String.valueOf(userId), String.valueOf(productId));
+				String httpResultString = saveFavorite.saveFavorite(String.valueOf(userId), String.valueOf(productId), token);
 				
 				return analysicSaveJson(httpResultString);
 			} catch (IOException e) {
@@ -414,6 +426,8 @@ public class FavoriteDataManage {
 					favoriteArray.add(searchItem);
 //					Log.e(TAG, "???");
 				}
+			} else if(code == -1){
+				isNoMore = true;
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

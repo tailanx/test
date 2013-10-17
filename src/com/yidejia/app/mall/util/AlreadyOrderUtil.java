@@ -49,7 +49,7 @@ public class AlreadyOrderUtil {
 		public void loadView(int fromIndex,int amount){
 			try {
 				orderDataManage = new OrderDataManage(context);
-				ArrayList<Order> mList = orderDataManage.getOrderArray(new MyApplication().getUserId(), "", "", "已签收",fromIndex+"", amount+"");
+				ArrayList<Order> mList = orderDataManage.getOrderArray(new MyApplication().getUserId(), "", "", "已签收",fromIndex+"", amount+"",new MyApplication().getToken());
 				Log.i("info", mList.size()+"mList");
 				for(int i=0;i<mList.size();i++){
 					setupShow();
@@ -78,3 +78,4 @@ public class AlreadyOrderUtil {
 			}
 		}
 }
+

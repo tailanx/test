@@ -1801,9 +1801,237 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SetDefAddr(JNIEnv* env
 	return (*env)->NewStringUTF(env, urlString);
 }
 
+//获取免费送和积分换购列表 参数：goods, userid ,post
+jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetVerify(JNIEnv* env,
+		jobject thiz, jstring goods, jstring userid){//, jstring token
+
+	const char *chgoods = (*env)->GetStringUTFChars(env, goods, NULL);
+	const char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
+//	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+//	memset(encrypt, 0, LEN * sizeof(char));
+
+	const char *api="api=active.verify.getList";
+
+//	addString(urlString, url);
+	addString(urlString, api);
+
+	addString(urlString, "&goods=");
+	addString(urlString, chgoods);
+
+	addString(urlString, "&user_id=");
+	addString(urlString, chuid);
+
+//	addString(urlString, "&token=");
+//	addString(urlString, chtoken);
+
+	addString(urlString, pHead);
+
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
+
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "active.verify.getList");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
+
+//获取用户积分，收藏，消息， 订单数量, 参数 userid, token,方法get
+jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetCount(JNIEnv* env,
+		jobject thiz, jstring userId, jstring token){
+
+	const char *chname = (*env)->GetStringUTFChars(env, userId, NULL);
+	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+	const char *api="?api=user.info.getCount";
+
+	addString(urlString, url);
+	addString(urlString, api);
+
+	addString(urlString, "&user_id=");
+	addString(urlString, chname);
+
+	addString(urlString, "&token=");
+	addString(urlString, chtoken);
+
+	addString(urlString, pHead);
 
 
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
 
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "user.info.getCount");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
+
+//获取消息中心用户消息列表, 参数 userid, token, offset1,limit1,方法get
+jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetMessage(JNIEnv* env,
+		jobject thiz, jstring userId, jstring token, jstring offset1, jstring limit1){
+
+	const char *chname = (*env)->GetStringUTFChars(env, userId, NULL);
+	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	const char *choffset1 = (*env)->GetStringUTFChars(env, offset1, NULL);
+	const char *chlimit1 = (*env)->GetStringUTFChars(env, limit1, NULL);
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+	const char *api="?api=ucenter.message.getByUserId";
+
+	addString(urlString, url);
+	addString(urlString, api);
+
+	addString(urlString, "&user_id=");
+	addString(urlString, chname);
+
+	addString(urlString, "&token=");
+	addString(urlString, chtoken);
+	addString(urlString, "&offset1=");
+	addString(urlString, choffset1);
+	addString(urlString, "&limit1=");
+	addString(urlString, chlimit1);
+
+	addString(urlString, pHead);
+
+
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
+
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "ucenter.message.getByUserId");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
+
+//标记消息未已读状态 参数：pid, userid ,post
+jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ChangeRead(JNIEnv* env,
+		jobject thiz, jstring userid, jstring pid, jstring token){//
+
+	const char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
+	const char *chpid = (*env)->GetStringUTFChars(env, pid, NULL);
+	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+//	memset(encrypt, 0, LEN * sizeof(char));
+
+	const char *api="api=ucenter.message.changeRead";
+
+//	addString(urlString, url);
+	addString(urlString, api);
+
+	addString(urlString, "&user_id=");
+	addString(urlString, chuid);
+
+	addString(urlString, "&pid=");
+	addString(urlString, chpid);
+
+	addString(urlString, "&token=");
+	addString(urlString, chtoken);
+
+	addString(urlString, pHead);
+
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
+
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "ucenter.message.changeRead");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
 
 #ifdef __cplusplus
 }

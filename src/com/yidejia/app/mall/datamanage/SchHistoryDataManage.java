@@ -37,7 +37,8 @@ public class SchHistoryDataManage {
 	public SchHistoryDataManage(){
 		sp = MainFragmentActivity.MAINACTIVITY.getSharedPreferences("History", Activity.MODE_APPEND );
 		historyArray = new ArrayList<String>();
-		myApplication = new MyApplication();
+		myApplication = (MyApplication)MainFragmentActivity.MAINACTIVITY.getApplication();
+//		myApplication = new MyApplication();
 //		schHstryAmount = myApplication.getSchHstryAmount();
 		schHstryAmount = getHistoryAmount();
 		Log.i(TAG, "amount" + schHstryAmount);

@@ -5,38 +5,38 @@ package com.yidejia.app.mall.model;
  *
  */
 public class Specials {
-	private int uId;            //商品Id
+	private String uId;            //商品Id
 	private String brief;       //商品描述
-	private float price;        //所需价格
-	private float scores;       //所需积分
+	private String price;        //所需价格
+	private String scores;       //所需积分
 	private String imgUrl;      //图片地址
 	
 	/**
 	 * 
 	 * @param uId 设置商品Id
 	 */
-	public void setUId(int uId){
+	public void setUId(String uId){
 		this.uId = uId;
 	}
 	/**
 	 * 
 	 * @return uId 返回商品Id
 	 */
-	public int getUId(){
+	public String getUId(){
 		return uId;
 	}
 	/**
 	 * 
 	 * @param price 所需价格
 	 */
-	public void setPrice(float price){
+	public void setPrice(String price){
 		this.price = price;
 	}
 	/**
 	 * 
 	 * @return price 所需价格
 	 */
-	public float getPrice(){
+	public String getPrice(){
 		return price;
 	}
 	/**
@@ -71,14 +71,14 @@ public class Specials {
 	 * 
 	 * @param scores 所需积分
 	 */
-	public void setScores(float scores){
+	public void setScores(String scores){
 		this.scores = scores;
 	}
 	/**
 	 * 
 	 * @return scores 所需积分
 	 */
-	public float getScores(){
+	public String getScores(){
 		return scores;
 	}
 }

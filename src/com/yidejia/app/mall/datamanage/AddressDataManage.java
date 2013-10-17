@@ -27,6 +27,9 @@ public class AddressDataManage {
 	private ArrayList<Addresses> addressesArray;
 	private Context context;
 	private String TAG = "AddressDataManage";
+	
+	private boolean isNoMore = false;//判断是否还有更多数据,true为没有更多了
+	
 //	private int defaultUserId = 68298;
 //	private int fromIndex = 0;
 //	private int acount = 10;
@@ -46,17 +49,18 @@ public class AddressDataManage {
 	 *@param area 区
 	 *@param address 详细地址
 	 *@param phone 电话
+	 *@param token token
 	 *@param defaultAddress 是否为默认地址
 	 *@return: 返回addressId;可能为""
 	 */
-	public String addAddress(String userId, String name, String province, String city, String area, String address, String phone, boolean defaultAddress){
+	public String addAddress(String userId, String name, String province, String city, String area, String address, String phone, boolean defaultAddress, String token){
 		String addressId = "";
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
 			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
 			return addressId;
 		}
 		boolean isSuccess = false;
-		TaskSave taskSave = new TaskSave(userId, name, province, city, area, address, phone, defaultAddress);
+		TaskSave taskSave = new TaskSave(userId, name, province, city, area, address, phone, defaultAddress, token);
 		try {
 			isSuccess = taskSave.execute().get();
 		} catch (InterruptedException e) {
@@ -90,18 +94,21 @@ public class AddressDataManage {
 	 *@param area 区
 	 *@param address 地址
 	 *@param phone 电话
+	 *@param token
 	 *@param defaultAddress 是否为默认地址
 	 *@param recipientId 更新地址id
 	 *@return: 是否更新成功
 	 */
-	public boolean updateAddress(String userId, String name, String province, String city, String area, String address, String phone, boolean defaultAddress, String recipientId){
-		boolean isSuccess = false;
+	public boolean updateAddress(String userId, String name, String province,
+			String city, String area, String address, String phone, boolean defaultAddress, String recipientId,
+			String token) {
+	boolean isSuccess = false;
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
 			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
 			return isSuccess;
 		}
 		this.recipient_id = recipientId;
-		TaskSave taskSave = new TaskSave(userId, name, province, city, area, address, phone, defaultAddress);
+		TaskSave taskSave = new TaskSave(userId, name, province, city, area, address, phone, defaultAddress, token);
 		try {
 			isSuccess = taskSave.execute().get();
 		} catch (InterruptedException e) {
@@ -126,16 +133,17 @@ public class AddressDataManage {
 	/**删除收货地址
 	 * @param userId 客户id
 	 *@param addressId 地址id
+	 *@param token
 	 *@return: 是否删除成功
 	 */
-	public boolean deleteAddress(String userId, String addressId){
+	public boolean deleteAddress(String userId, String addressId, String token){
 		boolean isSuccess = false;
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
 			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
 			return isSuccess;
 		}
 //		String resultJson = deleteAddressJson(userId, addressId);
-		TaskDelete taskDelete = new TaskDelete(userId, addressId);
+		TaskDelete taskDelete = new TaskDelete(userId, addressId, token);
 		try {
 			isSuccess = taskDelete.execute().get();
 		} catch (InterruptedException e) {
@@ -171,6 +179,11 @@ public class AddressDataManage {
 		boolean state = false ;
 		try {
 			state = taskGetList.execute().get();
+			if(isNoMore){
+				Toast.makeText(context, "没有更多了!", Toast.LENGTH_SHORT).show();
+				isNoMore = false;
+				state = true;
+			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -264,6 +277,8 @@ public class AddressDataManage {
 					addresses.setDefaultAddress(isDef);
 					addressesArray.add(addresses);
 				}
+			} else if(code == -1){
+				isNoMore = true;
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -334,9 +349,11 @@ public class AddressDataManage {
 	private class TaskDelete extends AsyncTask<Void, Void, Boolean>{
 		String userId;
 		String addressId;
-		public TaskDelete(String userId, String addressId){
+		String token;
+		public TaskDelete(String userId, String addressId, String token){
 			this.userId = userId;
 			this.addressId = addressId;
+			this.token = token;
 		}
 		
 		@Override
@@ -353,7 +370,7 @@ public class AddressDataManage {
 			// TODO Auto-generated method stub
 			DeleteUserAddress deleteAddress = new DeleteUserAddress(context);
 			try {
-				String httpResultString = deleteAddress.deleteAddress(String.valueOf(userId), String.valueOf(addressId));
+				String httpResultString = deleteAddress.deleteAddress(String.valueOf(userId), String.valueOf(addressId), token);
 				
 				return analysicDeleteJson(httpResultString);
 			} catch (IOException e) {
@@ -387,9 +404,10 @@ public class AddressDataManage {
 		private String area;
 		private String address;
 		private String phone; 
+		private String token;
 		private boolean defaultAddress;
 		
-		public TaskSave(String userId, String name, String province, String city, String area, String address, String phone, boolean defaultAddress){
+		public TaskSave(String userId, String name, String province, String city, String area, String address, String phone, boolean defaultAddress, String token){
 			this.userId = userId;
 			this.name = name;
 			this.province = province;
@@ -397,6 +415,7 @@ public class AddressDataManage {
 			this.area = area;
 			this.address = address;
 			this.phone = phone;
+			this.token = token;
 			this.defaultAddress = defaultAddress;
 		}
 		
@@ -415,7 +434,7 @@ public class AddressDataManage {
 			// TODO Auto-generated method stub
 			SaveUserAddress saveUserAddress = new SaveUserAddress(context);
 			try {
-				String httpResultString = saveUserAddress.saveAddress(String.valueOf(userId), name, phone, province, city, area, address, String.valueOf(recipient_id));
+				String httpResultString = saveUserAddress.saveAddress(String.valueOf(userId), name, phone, province, city, area, address, String.valueOf(recipient_id), token);
 				
 				return analysicSaveJson(httpResultString);
 			} catch (IOException e) {
@@ -573,7 +592,9 @@ public class AddressDataManage {
 					isSaveSuccess = false;
 					return false;
 				}
-			} else return false;
+			} else {
+				return false;
+			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
