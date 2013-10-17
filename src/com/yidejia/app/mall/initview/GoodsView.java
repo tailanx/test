@@ -159,6 +159,9 @@ public class GoodsView {
 					activity.sendBroadcast(intent);
 					if(cart.getPrice()>0){
 					boolean istrue = manage.addCart(cart);
+						if(istrue){
+							Toast.makeText(activity, "已经成功添加到购物车", Toast.LENGTH_SHORT).show();
+						}
 					}else{
 						Toast.makeText(activity, "这是赠品，不能够购买", Toast.LENGTH_LONG).show();
 					}
