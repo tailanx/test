@@ -27,6 +27,9 @@ public class AddressDataManage {
 	private ArrayList<Addresses> addressesArray;
 	private Context context;
 	private String TAG = "AddressDataManage";
+	
+	private boolean isNoMore = false;//判断是否还有更多数据,true为没有更多了
+	
 //	private int defaultUserId = 68298;
 //	private int fromIndex = 0;
 //	private int acount = 10;
@@ -130,6 +133,7 @@ public class AddressDataManage {
 	/**删除收货地址
 	 * @param userId 客户id
 	 *@param addressId 地址id
+	 *@param token
 	 *@return: 是否删除成功
 	 */
 	public boolean deleteAddress(String userId, String addressId, String token){
@@ -175,6 +179,11 @@ public class AddressDataManage {
 		boolean state = false ;
 		try {
 			state = taskGetList.execute().get();
+			if(isNoMore){
+				Toast.makeText(context, "没有更多了!", Toast.LENGTH_SHORT).show();
+				isNoMore = false;
+				state = true;
+			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -268,6 +277,8 @@ public class AddressDataManage {
 					addresses.setDefaultAddress(isDef);
 					addressesArray.add(addresses);
 				}
+			} else if(code == -1){
+				isNoMore = true;
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -581,7 +592,9 @@ public class AddressDataManage {
 					isSaveSuccess = false;
 					return false;
 				}
-			} else return false;
+			} else {
+				return false;
+			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

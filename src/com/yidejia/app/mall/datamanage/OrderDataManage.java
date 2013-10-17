@@ -37,6 +37,8 @@ public class OrderDataManage {
 	private Context context;
 	private String TAG = OrderDataManage.class.getName();
 	private UnicodeToString unicode;
+	
+	private boolean isNoMore = false;//判断是否还有更多数据,true为没有更多了
 
 	public OrderDataManage(Context context) {
 		this.context = context;
@@ -74,6 +76,11 @@ public class OrderDataManage {
 		boolean state = false;
 		try {
 			state = taskGetList.execute().get();
+			if(isNoMore){
+				Toast.makeText(context, "没有更多了!", Toast.LENGTH_SHORT).show();
+				isNoMore = false;
+				state = true;
+			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			Log.e(TAG, "TaskGetList() InterruptedException");
@@ -187,6 +194,8 @@ public class OrderDataManage {
 				itemOrder.setCartsArray(analysisCart(lines));
 				orders.add(itemOrder);
 			}
+		} else if(code == -1){
+			isNoMore = true;
 		}
 		return orders;
 	}

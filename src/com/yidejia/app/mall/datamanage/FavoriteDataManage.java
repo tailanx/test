@@ -36,6 +36,8 @@ public class FavoriteDataManage {
 	private Context context ;
 	private String TAG = FavoriteDataManage.class.getName();
 	private UnicodeToString unicode;
+	
+	private boolean isNoMore = false;//判断是否还有更多数据,true为没有更多了
 	/**
 	 * {@link FavoriteDataManage}
 	 * @param context
@@ -62,6 +64,11 @@ public class FavoriteDataManage {
 		boolean state = false ;
 		try {
 			state = taskGetList.execute().get();
+			if(isNoMore){
+				Toast.makeText(context, "没有更多了!", Toast.LENGTH_SHORT).show();
+				isNoMore = false;
+				state = true;
+			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -419,6 +426,8 @@ public class FavoriteDataManage {
 					favoriteArray.add(searchItem);
 //					Log.e(TAG, "???");
 				}
+			} else if(code == -1){
+				isNoMore = true;
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

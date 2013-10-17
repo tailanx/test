@@ -22,6 +22,8 @@ public class MessageDataManage {
 	private Context context;
 	private ArrayList<MsgCenter> msgArrays;
 	
+	private boolean isNoMore = false;//判断是否还有更多数据,true为没有更多了
+	
 	public MessageDataManage(Context context){
 		this.context = context;
 		msgArrays = new ArrayList<MsgCenter>();
@@ -52,6 +54,11 @@ public class MessageDataManage {
 		boolean state = false;
 		try {
 			state = taskMsg.execute().get();
+			if(isNoMore){
+				Toast.makeText(context, "没有更多了!", Toast.LENGTH_SHORT).show();
+				isNoMore = false;
+				state = true;
+			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -80,6 +87,9 @@ public class MessageDataManage {
 						String response = httpObject.getString("response");
 						analysis(response);
 						return true;
+					} else if(code == -1){
+						isNoMore = true;
+						return false;
 					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
