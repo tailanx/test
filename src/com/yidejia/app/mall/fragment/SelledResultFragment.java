@@ -11,6 +11,7 @@ import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.SelledResultListAdapter;
 import com.yidejia.app.mall.datamanage.SearchDataManage;
+import com.yidejia.app.mall.exception.NullSearchResultEx;
 import com.yidejia.app.mall.initview.SRViewWithImage;
 import com.yidejia.app.mall.model.SearchItem;
 
@@ -61,6 +62,8 @@ public class SelledResultFragment extends SherlockFragment {
 	private String brand;//品牌
 	private String order;//排序
 	
+	private boolean isHasResult = true;//搜索是否有结果
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -75,7 +78,14 @@ public class SelledResultFragment extends SherlockFragment {
 		order = searchBundle.getString("order");
 //		getSherlockActivity().getSupportActionBar().setCustomView(R.layout.actionbar_search);
 		manage = new SearchDataManage(getSherlockActivity());
-		searchItemsArray = manage.getSearchArray(name, fun, brand, price, order, ""+fromIndex, ""+amount);
+		try {
+			searchItemsArray = manage.getSearchArray(name, fun, brand, price, order, ""+fromIndex, ""+amount);
+			isHasResult = true;
+		} catch (NullSearchResultEx e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			isHasResult = false;
+		}
 	}
 
 	
@@ -156,7 +166,14 @@ public class SelledResultFragment extends SherlockFragment {
 						| DateUtils.FORMAT_ABBREV_ALL);
 			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 			fromIndex += amount;
-			searchItemsArray = manage.getSearchArray(name, fun, brand, price, order, ""+fromIndex, ""+amount);
+			try {
+				searchItemsArray = manage.getSearchArray(name, fun, brand, price, order, ""+fromIndex, ""+amount);
+				isHasResult = true;
+			} catch (NullSearchResultEx e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				isHasResult = false;
+			}
 			searchListAdapter.notifyDataSetChanged();
 			mPullToRefreshListView.onRefreshComplete();
 		}
@@ -169,7 +186,14 @@ public class SelledResultFragment extends SherlockFragment {
 			// TODO Auto-generated method stub
 			fromIndex += amount;
 			searchItemsArray.clear();
-			searchItemsArray = manage.getSearchArray(name, fun, brand, price, order, ""+fromIndex, ""+amount);
+			try {
+				searchItemsArray = manage.getSearchArray(name, fun, brand, price, order, ""+fromIndex, ""+amount);
+				isHasResult = true;
+			} catch (NullSearchResultEx e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				isHasResult = false;
+			}
 			initWithImageView();
 			mPullToRefreshScrollView.onRefreshComplete();
 		}
