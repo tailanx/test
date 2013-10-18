@@ -2,16 +2,20 @@ package com.yidejia.app.mall.datamanage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.yidejia.app.mall.model.Preferential;
 import com.yidejia.app.mall.model.Specials;
+import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.voucher.Verify;
 
 /**
@@ -23,21 +27,58 @@ public class PreferentialDataManage {
 //	private Preferential preferential; 
 	private ArrayList<Specials> freeProductArray;        //免费送商品
 	private ArrayList<Specials> scoresProductArray;      //积分换购商品
+	private ArrayList<Specials> activeProductArray; 	//活动活够商品
 	private Context context;
 	
+	private boolean isNoMore = false;//判断是否还有更多数据,true为没有更多了
+	private ProgressDialog bar;
+	/**
+	 * {@link #getPreferential(String, String)}
+	 * <p>
+	 * ArrayList"Specials" freeProductArray = getFreeGoods();
+	 * <p> arraylist"specials" scoresProductArray = getScoreGoods();
+	 */
 	public PreferentialDataManage(Context context){
 		this.context = context;
 //		preferential = new Preferential();
 		freeProductArray = new ArrayList<Specials>();
 		scoresProductArray = new ArrayList<Specials>();
+		activeProductArray = new ArrayList<Specials>();
+		bar = new ProgressDialog(context);
 	}
 	/**
 	 * 根据客户已提交的购物车获取优惠产品
-	 * @param goods 购物车上的商品串， 必须， 格式"4,5n;"或"6,11n;"
+	 * @param goods 购物车上的商品串[id+逗号+数量+是否为积分换购+分号]， 必须， 格式"4,5n;"或"6,11n;2,3n;"
 	 * @param userId 客户Id；
 	 * @return  返回免费送，积分换购商品
 	 */
 	public void getPreferential(String goods, String userId){
+		boolean state = false;
+		TaskVerify taskVerify = new TaskVerify();
+		try {
+			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			bar.setMessage("正在查询");
+			bar.show();
+			state = taskVerify.execute().get();
+			bar.dismiss();
+			if(isNoMore){
+				Toast.makeText(context, "没有更多了!", Toast.LENGTH_SHORT).show();
+				isNoMore = false;
+				state = true;
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		if(!state){
+			Toast.makeText(context, "网络不给力！", Toast.LENGTH_SHORT).show();
+		}
 		return ;
 	}
 	/**
@@ -112,6 +153,8 @@ public class PreferentialDataManage {
 					if(code == 1){
 						String response = httpJsonObject.getString("response");
 						analysis(response);
+					} else if(code == -1){
+						isNoMore = true;
 					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -126,24 +169,48 @@ public class PreferentialDataManage {
 		
 	}
 	
-	private void analysis(String response) throws JSONException{
-		JSONArray resArray = new JSONArray(response);
-		for (int i = 0; i < resArray.length(); i++) {
-			JSONObject itemObject = resArray.getJSONObject(i);
-			String goods_list = itemObject.getString("goods_list");
-			JSONArray goodsArray = new JSONArray(goods_list);
-			Specials specials;
-			JSONObject listObject;
-			for (int j = 0; j < goodsArray.length(); j++) {
-				specials = new Specials();
-				listObject = goodsArray.getJSONObject(j);
-				specials.setUId(listObject.getString("goods_id"));
-				specials.setImgUrl(listObject.getString("imgname"));
-				specials.setPrice(listObject.getString("price"));
-				specials.setScores(listObject.getString("score_price"));
-				specials.setBrief(listObject.getString("desc"));
-				//还没有完成
+	private void analysis(String response){
+		JSONArray resArray;
+		try {
+			resArray = new JSONArray(response);
+			for (int i = 0; i < resArray.length(); i++) {
+				JSONObject itemObject = resArray.getJSONObject(i);
+				String activeId = itemObject.getString("id");
+				String goods_list = itemObject.getString("goods_list");
+				JSONArray goodsArray = new JSONArray(goods_list);
+				Specials specials;
+				JSONObject listObject;
+				for (int j = 0; j < goodsArray.length(); j++) {
+					specials = new Specials();
+					listObject = goodsArray.getJSONObject(j);
+					specials.setUId(listObject.getString("goods_id"));
+					specials.setImgUrl(ImageUrl.IMAGEURL + listObject.getString("imgname"));
+					specials.setPrice(listObject.getString("price"));
+					specials.setScores(listObject.getString("score_price"));
+					specials.setBrief(listObject.getString("desc"));
+					//还没有完成
+					if("2".equals(activeId)){
+						freeProductArray.add(specials);
+					} else if("3".equals(activeId)){
+						scoresProductArray.add(specials);
+					}
+				}
 			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+	}
+	/**
+	 * 获取免费送商品
+	 */
+	public ArrayList<Specials> getFreeGoods(){
+		return freeProductArray;
+	}
+	/**
+	 * 获取积分换购商品
+	 */
+	public ArrayList<Specials> getScoreGoods(){
+		return scoresProductArray;
 	}
 }
