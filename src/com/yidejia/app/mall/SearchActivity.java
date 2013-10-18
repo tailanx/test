@@ -61,11 +61,15 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 		
 		searchHistoryList = (ListView) findViewById(R.id.search_history_list);
 		clearHistoryBtn = (Button) findViewById(R.id.search_history_btn);
+		if(historyArrayList.size()==0){
+			clearHistoryBtn.setVisibility(View.GONE);
+		}
 //		SearchListAdapter searchListAdapter = new SearchListAdapter(SearchActivity.this);
 		searchHistoryList.setAdapter(adapter);
 //		autoCompleteTextView.setAdapter(adapter);
 		
 		autoCompleteTextView.setThreshold(1);
+		
 		int width = getWindowManager().getDefaultDisplay().getWidth();
 		int height = getWindowManager().getDefaultDisplay().getHeight();
 		autoCompleteTextView.setDropDownHeight(height);
@@ -79,7 +83,10 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 				// TODO Auto-generated method stub
 				if(keyCode == KeyEvent.KEYCODE_ENTER){
 					String name = autoCompleteTextView.getText().toString();
-					if(name.trim() == null || "".equals(name.trim())) return false;
+					if(name.trim() == null || "".equals(name.trim())){
+					Toast.makeText(SearchActivity.this, "搜索内容部能为空", Toast.LENGTH_SHORT).show();
+					return false;
+					}
 					//未包含该记录，添加
 					if(!historyArrayList.contains(name)){
 						boolean state = historyDataManage.addHistory(name);
@@ -124,6 +131,7 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 				// TODO Auto-generated method stub
 				historyDataManage.cleanHistory();
 				adapter.notifyDataSetChanged();
+				v.invalidate();
 			}
 		});
 		
@@ -191,11 +199,20 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
+		
 		autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.searchActivity_autoComplete);
 		adapter = new ArrayAdapter<String>(this, //定义匹配源的adapter
                 android.R.layout.simple_dropdown_item_1line, historyArrayList);
 //		searchTextView.setAdapter(adapter);
 		searchBtn = (Button) findViewById(R.id.search_btn);
+		searchBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+			finish();
+				
+			}
+		});
 	}
 	
 	private ArrayAdapter<String> adapter;

@@ -16,6 +16,7 @@
         android:hint="@string/searchHint"
         android:maxLines="1"
         android:paddingLeft="10dp"
+        android:editable="false"
         android:textColor="@color/search_bar" />
 
 </RelativeLayout>
