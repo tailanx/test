@@ -219,7 +219,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveAddress(JNIEnv* en
 
 	const char *api="api=ucenter.address.save";
 
-	addString(urlString, url);
+//	addString(urlString, url);
 	addString(urlString, api);
 
 	addString(urlString, "&customer_id=");
@@ -417,7 +417,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveComment(
 
 	const char *api="api=product.comments.save";
 
-	addString(urlString, url);
+//	addString(urlString, url);
 	addString(urlString, api);
 
 	addString(urlString, "&goods_id=");
@@ -676,12 +676,13 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetFree(JNIEnv* env,
 }
 
 /**
- * 检查收藏是否存在 ,参数 String userid, String goodsid, post
+ * 检查收藏是否存在 ,参数 String userid, String goodsid, string token, post
  */
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CheckFav(JNIEnv* env,
-		jobject thiz, jstring userid, jstring goodsid){
+		jobject thiz, jstring userid, jstring goodsid, jstring token){
 	const char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
 	const char *chgid = (*env)->GetStringUTFChars(env, goodsid, NULL);
+	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN], urlString[LEN];
 	encrypt[0] = 0;
@@ -697,6 +698,8 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CheckFav(JNIEnv* env,
 	addString(urlString, "&goods_id=");
 	addString(urlString, chgid);
 
+	addString(urlString, "&token=");
+	addString(urlString, chtoken);
 
 	addString(urlString, pHead);
 

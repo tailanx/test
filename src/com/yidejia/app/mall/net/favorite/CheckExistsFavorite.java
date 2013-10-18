@@ -85,12 +85,12 @@ public class CheckExistsFavorite {
 	 * @return http response string
 	 * @throws IOException
 	 */
-	public String httpResponse(String userid, String goodsid) throws IOException{
+	public String httpResponse(String userid, String goodsid, String token) throws IOException{
 //		getHttpAddress(userid, goodsid);
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress(userid, goodsid));
 //		HttpPostConn conn = new HttpPostConn(keys, values);
 //		result = conn.getJsonResult();
-		String param = JNICallBack.getHttp4CheckFav(userid, goodsid);
+		String param = JNICallBack.getHttp4CheckFav(userid, goodsid, token);
 		Log.i(TAG, param.toString());
 		HttpPostConn conn = new HttpPostConn(param);
 		result = conn.getHttpResponse();

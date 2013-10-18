@@ -51,7 +51,7 @@ public class JNICallBack {
 	public static native String getHttp4GetFree(String where, String offset, String limit, String group, String order, String fields);
 	
 	//检查收藏是否存在
-	public static native String getHttp4CheckFav(String userid, String goodsid);
+	public static native String getHttp4CheckFav(String userid, String goodsid, String token);
 	
 	//删除收藏
 	public static native String getHttp4DelFav(String userid, String goodsid, String token);

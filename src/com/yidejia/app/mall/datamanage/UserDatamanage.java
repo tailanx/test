@@ -91,10 +91,9 @@ public class UserDatamanage {
 						myApplication.setVip(responseObject.getString("customer_grade"));
 						myApplication.setNick(responseObject.getString("customer_nick"));
 						String imgUrl = responseObject.getString("avatar_path");
-						myApplication.setUserHeadImg(ImageUrl.IMAGEURL +imgUrl);
+						myApplication.setUserHeadImg(ImageUrl.IMAGEURL + imgUrl);
 						String token = responseObject.getString("token");
 						myApplication.setToken(token);
-						message = "登陆成功";
 						return true;
 					} if(code == 1001 || code ==1002){
 						message = "用户不存在或密码错误";

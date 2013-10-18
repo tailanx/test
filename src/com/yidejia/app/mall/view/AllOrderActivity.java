@@ -135,6 +135,7 @@ public class AllOrderActivity extends SherlockFragmentActivity  {
 		     
 		     mPager.setAdapter(new AllOrderFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
 		     mPager.setCurrentItem(0);
+		     mPager.setOffscreenPageLimit(2);
 		     mPager.setOnPageChangeListener(new MyOnPageChangeListener());
 				
 		     
@@ -184,7 +185,7 @@ public class AllOrderActivity extends SherlockFragmentActivity  {
 		                    mYear.setTextColor(Color.parseColor("#ed217c"));
 		                } 
 		                mWeek.setPressed(true);
-		                mWeek.setTextColor(Color.parseColor("#000000"));
+		                mWeek.setTextColor(Color.parseColor("#702c91"));
 		                mWeek.setBackgroundResource(R.drawable.product_details_selected);
 		                break;
 		            case 1:
@@ -201,7 +202,7 @@ public class AllOrderActivity extends SherlockFragmentActivity  {
 		                } 
 		                mMonth.setPressed(true);
 		                mMonth.setBackgroundResource(R.drawable.product_details_selected);
-		                mMonth.setTextColor(Color.parseColor("#000000"));
+		                mMonth.setTextColor(Color.parseColor("#702c91"));
 		                break;
 		            case 2:
 		                if (currIndex == 0) {
@@ -217,7 +218,7 @@ public class AllOrderActivity extends SherlockFragmentActivity  {
 		                } 
 		                mYear.setPressed(true);
 		                
-		                mYear.setTextColor(Color.parseColor("#000000"));
+		                mYear.setTextColor(Color.parseColor("#702c91"));
 		                mYear.setBackgroundResource(R.drawable.product_details_selected);
 		                break;
 		           
