@@ -148,6 +148,7 @@ public class GoodsView {
 				setCartNum(cart_num);
 			}
 			// 加入购物车按钮点击事件
+			if(cart.getPrice()>0){
 			add_to_cart.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -157,20 +158,20 @@ public class GoodsView {
 					setCartNum(cart_num);
 					Intent intent = new Intent(Consts.UPDATE_CHANGE);
 					activity.sendBroadcast(intent);
-					if(cart.getPrice()>0){
 					boolean istrue = manage.addCart(cart);
 						if(istrue){
 							Toast.makeText(activity, "已经成功添加到购物车", Toast.LENGTH_SHORT).show();
 						}
-					}else{
-						Toast.makeText(activity, "这是赠品，不能够购买", Toast.LENGTH_LONG).show();
 					}
 					// Log.i("info", istrue+"   cart_num");
 //				if (istrue) {
 //					builder.show();
 //				}
-				}
+				
 			});
+		}else{
+			Toast.makeText(activity, "这是赠品，不能够购买", Toast.LENGTH_LONG).show();
+		}
 			// 立即购买按钮
 			buy_now.setOnClickListener(new OnClickListener() {
 
