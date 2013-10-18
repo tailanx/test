@@ -11,7 +11,7 @@ import android.util.Log;
 
 
 public class ImageUrl {
-	public static String IMAGEURL;
+	public static String IMAGEURL = "";
 	private static String TAG = ImageUrl.class.getName();
 	
 	public String getImageUrl(){
