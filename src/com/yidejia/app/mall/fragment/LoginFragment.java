@@ -26,6 +26,7 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.IpAddress;
 import com.yidejia.app.mall.datamanage.UserDatamanage;
 import com.yidejia.app.mall.view.FindPwActivity;
+import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.view.RegistActivity;
 
 public class LoginFragment extends SherlockFragment implements OnClickListener{
@@ -110,12 +111,11 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 		String pwd = stringPassword.getText().toString();
 		boolean isSucess = userManage.userLogin(name, pwd,ipAddress.getIpAddress());
 		
-		Log.i("info", isSucess +"isSucess");
+//		Log.i("info", isSucess +"isSucess");
 		if(isSucess){
 			myApplication.setIsLogin(true);
 			
 			fragment = new  MyMallActivity();
-			
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
 			
 			ft.replace(R.id.main_fragment, fragment).commit();
