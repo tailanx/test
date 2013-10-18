@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.datamanage.ExpressDataManage;
+import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Express;
@@ -47,9 +49,10 @@ public class PayActivity extends SherlockActivity {
 	private CheckBox yinlianCheckBox;// 银联支付
 	private CheckBox caifutongCheckBox;// 财付通支付
 	private TextView sumPrice;// 总的价格
+	private Button saveOrderBtn;//提交订单
 	private Handler mHandler;// 创建handler对象
 	private MyApplication myApplication;
-
+	
 	// private Myreceiver receiver;
 	// private Addresses addresses;
 
@@ -61,6 +64,7 @@ public class PayActivity extends SherlockActivity {
 			expressDataManage = new ExpressDataManage(this);
 			
 			sumPrice = (TextView) findViewById(R.id.go_pay_show_pay_money);
+			saveOrderBtn = (Button) findViewById(R.id.save_order_btn);
 			userName = (TextView) findViewById(R.id.go_pay_name);
 			phoneName = (TextView) findViewById(R.id.go_pay_number);
 			address = (TextView) findViewById(R.id.go_pay_address);
@@ -274,7 +278,11 @@ public class PayActivity extends SherlockActivity {
 			Toast.makeText(PayActivity.this, "网络不给力！", Toast.LENGTH_SHORT)
 					.show();
 		}
-
+		
+		OrderDataManage orderDataManage = new OrderDataManage(this);
+		orderDataManage.saveOrder(myApplication.getUserId(), "0", "109940", "", "0", "10", "快递", "广州配送", "2,5n;", "", myApplication.getToken());
+		String orderCode = orderDataManage.getOrderCode();
+		Log.e("OrderCode", orderCode);
 	}
 
 	// @Override
