@@ -111,10 +111,11 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 		String name = stringName.getText().toString();
 		String pwd = stringPassword.getText().toString();
 		boolean isSucess = userManage.userLogin(name, pwd, ip.getIpAddress());
-		Log.i("info",isSucess +"   isSucess");
+//		Log.i("info",isSucess +"   isSucess");
 		if(isSucess){
 			myApplication.setIsLogin(true);
-			Log.i("info", myApplication.getToken()+"      myApplication.getToken()");
+			
+//			Log.i("info", myApplication.getToken()+"      myApplication.getToken()");
 			this.finish();
 			//		if(name==null||"".equals(name)){
 //			Toast.makeText(this, "请输入用户名或者密码",Toast.LENGTH_LONG).show();
