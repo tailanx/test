@@ -94,7 +94,10 @@ public class SelledResultFragment extends SherlockFragment {
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		View view = null;
-		
+		if(!isHasResult){
+			view = inflater.inflate(R.layout.search_empty, container, false);
+			return view;
+		}
 		if(isShowWithList){
 			view = inflater.inflate(R.layout.activity_search_result_list_layout, container, false);
 			mPullToRefreshListView = (PullToRefreshListView) view.findViewById(R.id.pull_refresh_list);
@@ -173,9 +176,13 @@ public class SelledResultFragment extends SherlockFragment {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				isHasResult = false;
+				if(!isHasResult){
+					mPullToRefreshListView.onRefreshComplete();
+				}
 			}
-			searchListAdapter.notifyDataSetChanged();
 			mPullToRefreshListView.onRefreshComplete();
+			Log.e(TAG, "on refreshcomplete");
+//			searchListAdapter.notifyDataSetChanged();
 		}
 	};
 	
