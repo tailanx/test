@@ -118,6 +118,7 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 	     
 	     mPager.setAdapter(new WaitDeliverFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
 	     mPager.setCurrentItem(0);
+	     mPager.setOffscreenPageLimit(2);
 	     mPager.setOnPageChangeListener(new MyOnPageChangeListener());
 			
 	     
@@ -168,7 +169,7 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 	                } 
 	                mWeek.setPressed(true);
 	                mWeek.setBackgroundResource(R.drawable.produce_textview_selector);
-	                mWeek.setTextColor(Color.parseColor("#000000"));
+	                mWeek.setTextColor(Color.parseColor("#702c91"));
 	                break;
 	            case 1:
 	                if (currIndex == 0) {
@@ -184,7 +185,7 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 	                } 
 	                mMonth.setPressed(true);
 	                mMonth.setBackgroundResource(R.drawable.product_details_selected);
-	                mMonth.setTextColor(Color.parseColor("#000000"));
+	                mMonth.setTextColor(Color.parseColor("#702c91"));
 	                break;
 	            case 2:
 	                if (currIndex == 0) {
@@ -200,7 +201,7 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 	                } 
 	                mYear.setPressed(true);
 	                mYear.setBackgroundResource(R.drawable.product_details_selected);
-	                mYear.setTextColor(Color.parseColor("#000000"));
+	                mYear.setTextColor(Color.parseColor("#702c91"));
 	                break;
 	           
 	            }
