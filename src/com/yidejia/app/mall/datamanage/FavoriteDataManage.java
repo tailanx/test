@@ -395,8 +395,9 @@ public class FavoriteDataManage {
 				JSONArray responseArray = new JSONArray(responseString);
 				int length = responseArray.length();
 				JSONObject infoItem ;
-				SearchItem searchItem = new SearchItem();
+				SearchItem searchItem;
 				for (int i = 0; i < length; i++) {
+					searchItem = new SearchItem();
 					infoItem = responseArray.getJSONObject(i);
 					String favoriteId = infoItem.getString("id");
 					searchItem.setFavoriteId(favoriteId);
@@ -446,14 +447,14 @@ public class FavoriteDataManage {
 	 * @param goodsid
 	 * @return true ? false
 	 */
-	public boolean checkExists(String userid, String goodsid){
+	public boolean checkExists(String userid, String goodsid, String token){
 		boolean isExists = false;
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
 //			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
 			return isExists;
 		}
 		try {
-			isExists = (new TaskCheck(userid, goodsid)).execute().get();
+			isExists = (new TaskCheck(userid, goodsid, token)).execute().get();
 			Log.i(TAG, "is exists?"+ isExists);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -471,10 +472,11 @@ public class FavoriteDataManage {
 		
 		private String userid;
 		private String goodsid;
-		
-		public TaskCheck(String userid, String goodsid){
+		private String token;
+		public TaskCheck(String userid, String goodsid, String token){
 			this.userid = userid;
 			this.goodsid = goodsid;
+			this.token = token;
 		}
 
 		@Override
@@ -482,7 +484,7 @@ public class FavoriteDataManage {
 			// TODO Auto-generated method stub
 			CheckExistsFavorite check = new CheckExistsFavorite(context);
 			try {
-				String httpResponse = check.httpResponse(userid, goodsid);
+				String httpResponse = check.httpResponse(userid, goodsid, token);
 				Log.i(TAG, httpResponse);
 				JSONObject httpResponseoObject = new JSONObject(httpResponse);
 				int code = httpResponseoObject.getInt("code");

@@ -206,7 +206,7 @@ public class GoodsView {
 			// 检查是否收藏并且设置收藏按钮的图片
 			FavoriteDataManage favoriteManage = new FavoriteDataManage(activity);
 			if (isLogin && !"".equals(userid)) {
-				if (favoriteManage.checkExists(userid, productId)) {
+				if (favoriteManage.checkExists(userid, productId, myApplication.getToken())) {
 					add_favorites.setImageResource(R.drawable.add_favorites2);
 //				Toast.makeText(activity, "yes", Toast.LENGTH_LONG).show();
 				} else {
@@ -420,7 +420,7 @@ public class GoodsView {
 				}
 			else if (isLogin && !"".equals(userid)) {
 				// 登录状态下
-				if (!manage.checkExists(userid, productId)) {
+				if (!manage.checkExists(userid, productId, myApplication.getToken())) {
 					// 未收藏，现在添加收藏
 					if (manage.addFavourite(userid, productId, myApplication.getToken())) {
 						// 收藏成功
