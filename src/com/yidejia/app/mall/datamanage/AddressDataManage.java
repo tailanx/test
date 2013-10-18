@@ -563,7 +563,7 @@ public class AddressDataManage {
 		}
 	}
 	
-	private String recipient_id = "";
+	private String recipient_id = "0";
 	/**
 	 * 解析添加或修改地址数据
 	 * @param resultJson http返回的数据
