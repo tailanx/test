@@ -13,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.yidejia.app.mall.adapter.BaseFragmentPagerAdapter;
@@ -23,6 +24,7 @@ import com.yidejia.app.mall.fragment.GoodsDetailFragment;
 import com.yidejia.app.mall.interfacecallback.CallBack;
 import com.yidejia.app.mall.model.ProductBaseInfo;
 import com.yidejia.app.mall.net.ConnectionDetector;
+import com.yidejia.app.mall.view.GoCartActivity;
 /**
  * 商品基本信息类
  * @author long bin
@@ -113,31 +115,38 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements OnCli
 //		 cartButotn =  (Button)findViewById(R.id.shopping_cart_button);//购物车
 //		 number = Integer.parseInt(cartButotn.getText().toString());//获取购物车上的数据
 		 
-		 LayoutInflater mInflater = getLayoutInflater();
-	     View activityView = mInflater.inflate(R.layout.item_goods_base_info, null);
-	     ImageView cartAdd = (ImageView)activityView.findViewById(R.id.add_to_cart);//加入购物车
-		 cartAdd.setOnClickListener(this);
-			
-	     
-	     
-	     
-		goodsViewPager = (ViewPager) findViewById(R.id.goods_viewpager);
-		fragmentsList = new ArrayList<Fragment>();
+		 try {
+			LayoutInflater mInflater = getLayoutInflater();
+			 View activityView = mInflater.inflate(R.layout.item_goods_base_info, null);
+			 ImageView cartAdd = (ImageView)activityView.findViewById(R.id.add_to_cart);//加入购物车
+			 cartAdd.setOnClickListener(this);
+				
+			 
+			 
+			 
+			goodsViewPager = (ViewPager) findViewById(R.id.goods_viewpager);
+			fragmentsList = new ArrayList<Fragment>();
 //		Fragment emulate = BaseInfoFragment.newInstance("0");
-		Fragment emulate = CommentFragment.newInstance(goodsId);
-		Fragment baseInfo = BaseInfoFragment.newInstance(info);
+			Fragment emulate = CommentFragment.newInstance(goodsId);
+			Fragment baseInfo = BaseInfoFragment.newInstance(info);
 //		Fragment last = BaseInfoFragment.newInstance("2");
-		Fragment last = GoodsDetailFragment.newInstance(info.getProductDetailUrl());
-		
-		
-		fragmentsList.add(emulate);
-		fragmentsList.add(baseInfo);
-		fragmentsList.add(last);
-		
-		goodsViewPager.setAdapter(new BaseFragmentPagerAdapter(getSupportFragmentManager(), fragmentsList));
-		goodsViewPager.setCurrentItem(currIndex);
-		goodsViewPager.setOnPageChangeListener(new GoodsPagerChangeListener());
-		goodsViewPager.setOffscreenPageLimit(2);
+			Fragment last = GoodsDetailFragment.newInstance(info.getProductDetailUrl());
+			
+			
+			fragmentsList.add(emulate);
+			fragmentsList.add(baseInfo);
+			fragmentsList.add(last);
+			
+			goodsViewPager.setAdapter(new BaseFragmentPagerAdapter(getSupportFragmentManager(), fragmentsList));
+			goodsViewPager.setCurrentItem(currIndex);
+			goodsViewPager.setOnPageChangeListener(new GoodsPagerChangeListener());
+			goodsViewPager.setOffscreenPageLimit(2);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Toast.makeText(GoodsInfoActivity.this, "网络不给力！", Toast.LENGTH_SHORT)
+			.show();
+		}
 //		goodsViewPager.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
 	}
 	
