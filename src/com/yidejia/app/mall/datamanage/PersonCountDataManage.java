@@ -11,6 +11,7 @@ import com.yidejia.app.mall.net.user.GetCount;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -77,6 +78,7 @@ public class PersonCountDataManage {
 						scores = resObject.getString("scores");
 						order = resObject.getString("order");
 						favoliten = resObject.getString("favoliten");
+//						Log.i("info", favoliten +"  fa");
 						msg = resObject.getString("msg");
 						return true;
 					}

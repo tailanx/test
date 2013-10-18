@@ -74,7 +74,7 @@ public class EditorActivity extends SherlockActivity {
 					.setPositiveButton("È·¶¨",new android.content.DialogInterface.OnClickListener(){
 						
 						public void onClick(DialogInterface arg0, int arg1) {
-							EditorActivity.this.finish();
+							System.exit(0);
 							
 						}
 

@@ -23,6 +23,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.yidejia.app.mall.datamanage.PersonCountDataManage;
 import com.yidejia.app.mall.view.AddressActivity;
 import com.yidejia.app.mall.view.AllOrderActivity;
 import com.yidejia.app.mall.view.AlreadyComActivity;
@@ -63,13 +64,14 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 	// private YLImageButton mButton9;
 	// private YLImageButton mButton10;
 	// private YLImageButton mButton11;
-	private TextView favorites;
-	private TextView integration;
-	private TextView message;
+	private TextView favorites;// 收藏
+	private TextView integration;// 积分
+	private TextView message;// 消息
 	private ImageView head;// 头像
 	private TextView nick;// 昵称
 	private TextView vip;
 	private MyApplication myApplication;
+	private PersonCountDataManage personCountDataManage;
 
 	// private TextView mTextView;
 
@@ -131,23 +133,13 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 		imageView = (ImageView) getSherlockActivity().findViewById(
 				R.id.person_shopping_button1);
 		favorites = (TextView) view.findViewById(R.id.favorites);
+
 		favorites.setOnClickListener(this);
 		message = (TextView) view.findViewById(R.id.message);
 		message.setOnClickListener(this);
 		integration = (TextView) view.findViewById(R.id.integration);
 		integration.setOnClickListener(this);
 
-		imageView.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				Intent intent = new Intent(getSherlockActivity(),
-						EditorActivity.class);
-				startActivity(intent);
-
-
-			}
-		});
 	}
 
 	// @Override
@@ -259,28 +251,47 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		myApplication = (MyApplication) getSherlockActivity().getApplication();
+
+		personCountDataManage = new PersonCountDataManage(getSherlockActivity());
+
+		Log.i("info", personCountDataManage + "        personCountDataManage");
 		View view = inflater.inflate(R.layout.person_shopping_mall1, container,
 				false);
 		setupView(view);
 		initDisplayImageOption();
-		getSherlockActivity().getSupportActionBar().setCustomView(
-				R.layout.actionbar_mymall);
+		// getSherlockActivity().getSupportActionBar().setCustomView(
+		// R.layout.actionbar_mymall);
 
-		favorites = (TextView) view.findViewById(R.id.favorites);
-		favorites.setOnClickListener(this);
-		message = (TextView) view.findViewById(R.id.message);
-		message.setOnClickListener(this);
-		integration = (TextView) view.findViewById(R.id.integration);
-		integration.setOnClickListener(this);
+		String faString = personCountDataManage.getFavoliten();
+		// Log.i("info", faString+"     faString");
+		if (faString == null || "".equals(faString)) {
+			favorites.setText(0 + "");
+		} else {
+			favorites.setText(faString);
+		}
+
+		String msString = personCountDataManage.getMsg();
+		if (msString == null || "".equals(msString)) {
+			message.setText(0 + "");
+		} else {
+			message.setText(msString);
+		}
+
+		String inString = personCountDataManage.getScores();
+		if (inString == null || "".equals(inString)) {
+			integration.setText(0 + "");
+		} else {
+			integration.setText(inString);
+		}
 		imageLoader.displayImage(myApplication.getUserHeadImg(), head, options,
 				animateFirstListener);
 
 		String name = myApplication.getNick();
 		if (name == null || "".equals(name)) {
 			nick.setText(myApplication.getUserId());
-//			Log.i("info", myApplication.getUserId() + "   name");
+			Log.i("info", myApplication.getUserId() + "   name");
 		} else {
-			nick.setText(name+"liu");
+			nick.setText(name + "liu");
 		}
 
 		String vip1 = myApplication.getVip();
@@ -363,7 +374,7 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 			public void onClick(View arg0) {
 				Intent intent = new Intent(getSherlockActivity(),
 						EditorActivity.class);
-				startActivity(intent);
+				getSherlockActivity().startActivity(intent);
 
 				// getSherlockActivity().finish();
 
@@ -494,10 +505,12 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 			startActivity(intent14);
 			break;
 		case R.id.person_shopping_person_name:// 昵称
-			Toast.makeText(getSherlockActivity(), "", Toast.LENGTH_LONG).show();
+			// Toast.makeText(getSherlockActivity(), "",
+			// Toast.LENGTH_LONG).show();
 			break;
 		case R.id.person_shopping_image_person:// 头像
-			Toast.makeText(getSherlockActivity(), "", Toast.LENGTH_LONG).show();
+			// Toast.makeText(getSherlockActivity(), "",
+			// Toast.LENGTH_LONG).show();
 			break;
 		}
 	}

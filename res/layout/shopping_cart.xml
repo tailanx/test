@@ -1,7 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg" >
+    android:background="@drawable/bg"
+     >
 
     <LinearLayout
         android:id="@+id/shopping_cart_sum"
@@ -60,17 +62,18 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-     <ScrollView
+     <com.handmark.pulltorefresh.library.PullToRefreshScrollView
        
          android:id="@+id/shopping_cart_item_goods_scrollView"
-         android:layout_width="fill_parent"
+         android:layout_width="wrap_content"
          android:layout_height="fill_parent"
          android:layout_below="@id/shopping_cart_sum"
          >
 
         <LinearLayout
+            
             android:id="@+id/shopping_cart_relative2"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_below="@id/shopping_cart_sum"
             android:layout_marginLeft="8dp"
@@ -78,6 +81,6 @@
             android:layout_marginTop="12dp"
             android:orientation="vertical" >
         </LinearLayout>
-   </ScrollView>
+   </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 
 </RelativeLayout>

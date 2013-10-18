@@ -21,6 +21,7 @@ public class AlreadyOrderUtil {
 	private LinearLayout mLinearLayout;//外层加载用的
 	private LinearLayout mLayout;//用来传参用的
 	private View view;
+	private MyApplication myApplication;
 	
 	private TextView titleTextView;//订单的状态
 	private TextView numberTextView;//订单的编号
@@ -33,6 +34,7 @@ public class AlreadyOrderUtil {
 		this.context = context;
 		this.mInflater = LayoutInflater.from(context);
 		this.mLinearLayout = layout;
+		myApplication = (MyApplication) context.getApplicationContext();
 	}
 	public void setupShow(){
 		view = mInflater.inflate(R.layout.already_oreder_item_main_item,null);
@@ -46,41 +48,36 @@ public class AlreadyOrderUtil {
 	/**
 	 * 加载视图
 	 */
-	public void loadView() {
-		try {
-			orderDataManage = new OrderDataManage(context);
-			ArrayList<Order> mList = orderDataManage.getOrderArray(
-					((MyApplication) context.getApplicationContext())
-							.getUserId(), "", "", "已签收", 0 + "", 5 + "",
-					((MyApplication) context.getApplicationContext())
-							.getToken());
-			Log.i("info", mList.size() + "mList");
-			for (int i = 0; i < mList.size(); i++) {
-				setupShow();
-				Log.i("info", view + "+view");
-				Order mOrder = mList.get(i);
-				titleTextView.setText(mOrder.getStatus());
-				numberTextView.setText(mOrder.getOrderCode());
-
-				AllOrderDetail allOrderDetail = new AllOrderDetail(context,
-						mOrder, mLayout);
-				allOrderDetail.addView();// 加载商品
-				for (int j = 0; j < allOrderDetail.map.size(); j++) {
-					// Log.i("info", mLinearLayoutLayout+"+mlayout");
-					sumPrice.setText(allOrderDetail.map.get("price") + "");
-					countTextView.setText(allOrderDetail.map.get("count")
-							.intValue() + "");
+		public void loadView(int fromIndex,int amount){
+			try {
+				orderDataManage = new OrderDataManage(context);
+				ArrayList<Order> mList = orderDataManage.getOrderArray(myApplication.getUserId(), "", "", "已签收",fromIndex+"", amount+"",myApplication.getToken());
+				Log.i("info", mList.size()+"mList");
+				for(int i=0;i<mList.size();i++){
+					setupShow();
+					Log.i("info", view+"+view");
+					Order mOrder = mList.get(i);
+					titleTextView.setText(mOrder.getStatus());
+					numberTextView.setText(mOrder.getOrderCode());
+					
+					AllOrderDetail allOrderDetail = new AllOrderDetail(context, mOrder, mLayout);
+					allOrderDetail.addView();//加载商品
+					for(int j=0;j<allOrderDetail.map.size();j++){
+//					Log.i("info", mLinearLayoutLayout+"+mlayout");
+					sumPrice.setText(allOrderDetail.map.get("price")+"");
+					countTextView.setText(allOrderDetail.map.get("count").intValue()+"");
+					}
+//					sumPrice.setText(100+"");
+//					countTextView.setText(1+"");
+					mLinearLayout.addView(view);
+					Log.i("info", mLinearLayout+"+mlayout");
 				}
-				// sumPrice.setText(100+"");
-				// countTextView.setText(1+"");
-				mLinearLayout.addView(view);
-				Log.i("info", mLinearLayout + "+mlayout");
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Toast.makeText(context, "网络不给力！", Toast.LENGTH_SHORT).show();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Toast.makeText(context, "网络不给力！", Toast.LENGTH_SHORT).show();
 
+			}
 		}
-	}
 }
+

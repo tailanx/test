@@ -119,11 +119,16 @@ public class GoodsView {
 			// 品牌
 			TextView brand_name_text = (TextView) view
 					.findViewById(R.id.brand_name_text);
+			
 			brand_name_text.setText(info.getBrands());
 			// 商品编号
 			TextView product_id_num_text = (TextView) view
 					.findViewById(R.id.product_id_num_text);
+			if(info.getProductNumber()==null||"".equals(info.getProductNumber())){
+				product_id_num_text.setText("暂无");
+			}else{
 			product_id_num_text.setText(info.getProductNumber());
+			}
 			// 规格
 			TextView standard_content_text = (TextView) view
 					.findViewById(R.id.standard_content_text);
@@ -143,6 +148,7 @@ public class GoodsView {
 				setCartNum(cart_num);
 			}
 			// 加入购物车按钮点击事件
+			if(cart.getPrice()>0){
 			add_to_cart.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -152,17 +158,20 @@ public class GoodsView {
 					setCartNum(cart_num);
 					Intent intent = new Intent(Consts.UPDATE_CHANGE);
 					activity.sendBroadcast(intent);
-					if(cart.getPrice()>0){
 					boolean istrue = manage.addCart(cart);
-					}else{
-						Toast.makeText(activity, "这是赠品，不能够购买", Toast.LENGTH_LONG).show();
+						if(istrue){
+							Toast.makeText(activity, "已经成功添加到购物车", Toast.LENGTH_SHORT).show();
+						}
 					}
 					// Log.i("info", istrue+"   cart_num");
 //				if (istrue) {
 //					builder.show();
 //				}
-				}
+				
 			});
+		}else{
+			Toast.makeText(activity, "这是赠品，不能够购买", Toast.LENGTH_LONG).show();
+		}
 			// 立即购买按钮
 			buy_now.setOnClickListener(new OnClickListener() {
 
@@ -380,22 +389,20 @@ public class GoodsView {
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
 	private void initDisplayImageOption() {
-//		builder = new AlertDialog.Builder(activity)
-//				.setTitle("添加成功")
-//				.setMessage("商品以成功加入购物车")
-//				.setPositiveButton("去购物车",
-//						new android.content.DialogInterface.OnClickListener() {
-//
-//							@Override
-//							public void onClick(DialogInterface dialog,
-//									int which) {
-//								// TODO Auto-generated method stub
-//								Intent intent = new Intent(activity,
-//										GoCartActivity.class);
-//								activity.startActivity(intent);
-//								activity.finish();
-//							}
-//						}).setNegativeButton("再逛逛", null).create();
+		builder = new AlertDialog.Builder(activity)
+				.setTitle("登陆")
+				.setMessage("是否去登陆")
+				.setPositiveButton("去登陆",
+						new android.content.DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// TODO Auto-generated method stub
+								Intent intent = new Intent(activity,LoginActivity.class);
+								activity.startActivity(intent);
+							}
+						}).setNegativeButton("忽略", null).create();
 		options = new DisplayImageOptions.Builder()
 				.showStubImage(R.drawable.hot_sell_right_top_image)
 				.showImageOnFail(R.drawable.hot_sell_right_top_image)
@@ -414,9 +421,8 @@ public class GoodsView {
 			// TODO Auto-generated method stub
 			FavoriteDataManage manage = new FavoriteDataManage(activity);
 			if(!isLogin){
-				Intent intent = new Intent(activity,LoginActivity.class);
-				Toast.makeText(activity, "用户未登陆,请先登陆", Toast.LENGTH_LONG).show();
-				activity.startActivity(intent);
+				builder.show();
+				
 				}
 			else if (isLogin && !"".equals(userid)) {
 				// 登录状态下
