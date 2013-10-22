@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -50,10 +51,12 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 			setTitle(title);
 //			bundle.putString("order", "sells");
 		}
+		setContentView(R.layout.activity_search_result_info_layout);
 		setSlidingMenuConfig();
 		setRightFilterMenu(savedInstanceState);
-		setContentView(R.layout.activity_search_result_info_layout);
+		Log.e("SearchResultActivity", "begin initView");
 		initView();
+		Log.e("SearchResultActivity", "finish initView");
 //		ListView resultList = (ListView) findViewById(R.id.search_listview);
 //		resultList.setAdapter(new SearchResultListAdapter(SearchResultActivity.this));
 		
@@ -67,7 +70,9 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 		showWithImage = (ImageView) findViewById(R.id.search_with_image);
 		showWithList = (ImageView) findViewById(R.id.search_with_list);
 		
+		Log.e("SearchResultActivity", "begin setFragment");
 		setFragment(0, isShowWithList);
+		Log.e("SearchResultActivity", "finish setFragment");
 		
 		selledTextView.setOnClickListener(new AddFragmentListener(0));
 		priceLayout.setOnClickListener(new AddFragmentListener(1));
@@ -98,6 +103,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 		newFragment = SelledResultFragment.newInstance(newBundle, isShowWithList);
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.search_result_fragment, newFragment).commit();
+        newBundle = null;
 	}
 	
 	private TextView titleTextView;
@@ -110,7 +116,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 		
 		Button rightBtn = (Button) findViewById(R.id.actionbar_right);
 //		rightBtn.setBackgroundResource(resid);
-		rightBtn.setText("É¸Ñ¡");
+		rightBtn.setText(getResources().getString(R.string.filter));
 		rightBtn.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -155,7 +161,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 	private void setSlidingMenuConfig(){
 		// customize the SlidingMenu
 		SlidingMenu sm = getSlidingMenu();
-		sm.setShadowWidthRes(R.dimen.shadow_width);//ÉèÖÃ²à»¬µÄÒõÓ°¿í¶È
+		sm.setShadowWidthRes(R.dimen.shadow_width);//è®¾ç½®ä¾§æ»‘çš„é˜´å½±å®½åº¦
 		sm.setShadowDrawable(R.drawable.shadow);
 		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
 		sm.setAboveOffset(R.dimen.above_offset);
@@ -182,7 +188,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			switch (clickIndex) {
-			case 0: //¿¼ÂÇsettag
+			case 0: //è€ƒè™‘settag
 				if(clickIndex != lastIndex)
 					setTabBackground(lastIndex);
 				lastIndex = 0;
@@ -192,7 +198,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 //				priceClickCount = 0;
 				isDesc = false;
 				break;
-			case 1: //¿¼ÂÇsettag
+			case 1: //è€ƒè™‘settag
 				if(clickIndex != lastIndex){
 					isDesc = true;
 					setTabBackground(lastIndex);
@@ -211,7 +217,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 				priceLayout.setBackgroundResource(R.drawable.product_details_selected);
 				setFragment(1, isShowWithList);
 				break;
-			case 2: //¿¼ÂÇsettag
+			case 2: //è€ƒè™‘settag
 				if(clickIndex != lastIndex)
 					setTabBackground(lastIndex);
 				lastIndex = 2;

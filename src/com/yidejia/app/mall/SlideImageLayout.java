@@ -68,12 +68,12 @@ public class SlideImageLayout {
         Log.i(TAG, "bw:"+bmpWidth+":bh:"+bmpHeight);
 //        Log.i(TAG, "iw:"+imagewidth+":ih:"+imageheight);
         
-     // ´´½¨²Ù×÷Í¼Æ¬ÓÃµÄmatrix¶ÔÏó
+     // åˆ›å»ºæ“ä½œå›¾ç‰‡ç”¨çš„matrixå¯¹è±¡
         Matrix matrix = new Matrix();
         matrix.reset();
-        // Ëõ·ÅÍ¼Æ¬¶¯×÷
+        // ç¼©æ”¾å›¾ç‰‡åŠ¨ä½œ
         matrix.postScale(scaleWidth, scaleHeight);
-     // ´´½¨ĞÂµÄÍ¼Æ¬
+     // åˆ›å»ºæ–°çš„å›¾ç‰‡
         Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0,
         bmpWidth, bmpHeight, matrix, true);
         /* */
@@ -131,7 +131,7 @@ public class SlideImageLayout {
     public class ImageOnClickListener implements OnClickListener{
     	@Override
     	public void onClick(View v) {
-//    		Toast.makeText(mContext, "ÎÒµã»÷ÁËµÚ"+"["+pageIndex+"]¼¸¸ö", Toast.LENGTH_SHORT).show();
+//    		Toast.makeText(mContext, "ï¿½Òµï¿½ï¿½ï¿½Ëµï¿½"+"["+pageIndex+"]ï¿½ï¿½ï¿½ï¿½", Toast.LENGTH_SHORT).show();
 //    		Intent intent = HufuActivity.newInstance(mActivity, 0, idString, urlString, titleString);
 //    		mActivity.startActivity(intent);
     	}
