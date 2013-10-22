@@ -13,13 +13,10 @@ public class ComposeExListAdapter extends BaseExpandableListAdapter {
 
 	private Context mContext;
 	
-	private String[] composeGroup = new String[]{
-		"åûÊ«ÃÀ","åûÉÅÃÀ"	
-	};
+	private String[] composeGroup = new String[] { "å¦è¯—ç¾", "å¦è†³ç¾" };
 	private String[][] composeChild = new String[][] {
-            { "ÑÛ²¿»¤Àí", "»î¼¡¿¹Ë¥", "ÃÀ°×µ­°ß", "±£ÊªËøË®", "¿ØÓÍ¿¹¶»", "ÌØ±ğ»¤Àí", "ÖÜÆÚ»¤Àí" },
-            { "sdf", "454", "yiu", "fga", "dsfa", "dsfa" }
-    };
+			{ "çœ¼éƒ¨æŠ¤ç†", "æ´»è‚ŒæŠ—è¡°", "ç¾ç™½æ·¡æ–‘", "ä¿æ¹¿é”æ°´", "æ§æ²¹æŠ—ç—˜", "ç‰¹åˆ«æŠ¤ç†", "å‘¨æœŸæŠ¤ç†" },
+			{ "sdf", "454", "yiu", "fga", "dsfa", "dsfa" } };
 	
 	public ComposeExListAdapter(Context context){
 		this.mContext = context;

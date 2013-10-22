@@ -40,7 +40,7 @@ public class FavoriteAdapter extends BaseAdapter {
 	}
 
 	/**
-	 * ¹¹Ôì·½·¨
+	 * æ„é€ æ–¹æ³•
 	 * 
 	 * @param context
 	 * @param mlist
@@ -52,7 +52,7 @@ public class FavoriteAdapter extends BaseAdapter {
 	}
 
 	/**
-	 * ¸üĞÂÊÓÍ¼
+	 * æ›´æ–°è§†å›¾
 	 * 
 	 * @param mList
 	 */
@@ -79,7 +79,7 @@ public class FavoriteAdapter extends BaseAdapter {
 		return Long.parseLong(mArrayList.get(arg0).getUId());
 	}
 
-	protected ImageLoader imageLoader = ImageLoader.getInstance();// ¼ÓÔØÍ¼Æ¬
+	protected ImageLoader imageLoader = ImageLoader.getInstance();// åŠ è½½å›¾ç‰‡
 	private DisplayImageOptions options;
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
@@ -103,7 +103,7 @@ public class FavoriteAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		// »ñÈ¡Êı¾İ
+		// è·å–æ•°æ®
 		SearchItem searchItem = mArrayList.get(id);
 		holder.content.setText(searchItem.getName());
 		holder.price.setText(searchItem.getPrice());
@@ -191,7 +191,7 @@ public class FavoriteAdapter extends BaseAdapter {
 //			this.mArrayList = new ArrayList<SearchItem>();
 //	}
 //	/**
-//	 * ¹¹Ôì·½·¨
+//	 * ï¿½ï¿½ï¿½ì·½ï¿½ï¿½
 //	 * @param context
 //	 * @param mlist
 //	 */
@@ -200,7 +200,7 @@ public class FavoriteAdapter extends BaseAdapter {
 //		inflater = LayoutInflater.from(context);
 //	}
 //	/**
-//	 * ¸üĞÂÊÓÍ¼
+//	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 //	 * @param mList
 //	 */
 //	public void changeDate(ArrayList<SearchItem> mList){
@@ -240,7 +240,7 @@ public class FavoriteAdapter extends BaseAdapter {
 //		}else{
 //			holder = (ViewHolder) convertView.getTag();
 //		}
-//		//»ñÈ¡Êı¾İ
+//		//ï¿½ï¿½È¡ï¿½ï¿½ï¿½
 //		SearchItem searchItem = mArrayList.get(id);
 //		holder.content.setText(searchItem.getName());
 //		holder.price.setText(searchItem.getPrice());
