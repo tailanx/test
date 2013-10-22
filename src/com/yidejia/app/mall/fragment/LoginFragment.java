@@ -1,4 +1,3 @@
-
 package com.yidejia.app.mall.fragment;
 
 import android.app.Fragment;
@@ -30,8 +29,8 @@ import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.view.RegistActivity;
 
 public class LoginFragment extends SherlockFragment implements OnClickListener{
-	private RelativeLayout findPwd;//ÕÒ»ØÃÜÂë
-	private RelativeLayout rapidRegist;//¿ìËÙ×¢²á
+	private RelativeLayout findPwd;//æ‰¾å›å¯†ç 
+	private RelativeLayout rapidRegist;//å¿«é€Ÿæ³¨å†Œ
 	private Button mLogin;
 	private EditText stringName;
 	private EditText stringPassword;
@@ -44,7 +43,7 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 	
 	private void doClick(View v){
 		switch (v.getId()) {
-		case R.id.login_edit://·µ»Ø
+		case R.id.login_edit://è¿”å›
 			Intent intent = new Intent(getSherlockActivity(),MainFragmentActivity.class);
 			startActivity(intent);
 			
@@ -60,7 +59,7 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 		myApplication = (MyApplication)getSherlockActivity().getApplication();
 		ipAddress = new IpAddress();
 		findPwd = (RelativeLayout)view.findViewById(R.id.my_mall_login_retrieve_password);
-		//ÉèÖÃ¼àÌı
+		//è®¾ç½®ç›‘å¬
 		findPwd.setOnClickListener(this);
 		rapidRegist = (RelativeLayout)view.findViewById(R.id.my_mall_login_retrieve_regist);
 		rapidRegist.setOnClickListener(this);
@@ -95,18 +94,18 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.my_mall_login_retrieve_password://ÕÒ»ØÃÜÂë
+		case R.id.my_mall_login_retrieve_password://æ‰¾å›å¯†ç 
 			Intent intent1 = new Intent(getSherlockActivity(), FindPwActivity.class);
 			getSherlockActivity().startActivity(intent1);
 			
 			break;
 
-		case R.id.my_mall_login_retrieve_regist://¿ìËÙ×¢²á
+		case R.id.my_mall_login_retrieve_regist://å¿«é€Ÿæ³¨å†Œ
 			Intent registIntent = new Intent(getSherlockActivity(), RegistActivity.class);
 			getSherlockActivity().startActivity(registIntent);
 		
 			break;
-		case R.id.my_mall_login_button://µÇÂ¼
+		case R.id.my_mall_login_button://ç™»å½•
 		String name = stringName.getText().toString();
 		String pwd = stringPassword.getText().toString();
 		boolean isSucess = userManage.userLogin(name, pwd,ipAddress.getIpAddress());
@@ -120,12 +119,12 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 			
 			ft.replace(R.id.main_fragment, fragment).commit();
 //		if(name==null||"".equals(name)){
-//			Toast.makeText(getSherlockActivity(), "ÇëÊäÈëÓÃ»§Ãû»òÕßÃÜÂë",Toast.LENGTH_LONG).show();
+//			Toast.makeText(getSherlockActivity(), "è¯·è¾“å…¥ç”¨æˆ·åæˆ–è€…å¯†ç ",Toast.LENGTH_LONG).show();
 //		}
 //		if(pwd==null||"".equals(pwd)){
-//			Toast.makeText(getSherlockActivity(), "ÇëÊäÈëÓÃ»§Ãû»òÕßÃÜÂë",Toast.LENGTH_LONG).show();
+//			Toast.makeText(getSherlockActivity(), "è¯·è¾“å…¥ç”¨æˆ·åæˆ–è€…å¯†ç ",Toast.LENGTH_LONG).show();
 //		}
-//		if(name.equals("aaa")&&pwd.equals("111")){   //µÇÂ¼³É¹¦
+//		if(name.equals("aaa")&&pwd.equals("111")){   //ç™»å½•æˆåŠŸ
 //			newFragment = new MyMallActivity();
 //			((MyApplication)getSherlockActivity().getApplication()).setIsLogin(true);
 ////			Log.i("info", myApplication.getIsLogin()+"");
@@ -163,8 +162,6 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 //		});
 //		
 //		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
-//		titleTextView.setText("µÇÂ¼");
+//		titleTextView.setText("ç™»å½•");
 //	}
 //}
-
-

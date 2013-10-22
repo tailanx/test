@@ -21,18 +21,18 @@ import com.yidejia.app.mall.util.AllOrderUtil;
 import com.yidejia.app.mall.view.OrderDetailActivity;
 
 public class FreeGivingFragment extends SherlockFragment {
-//	private TextView titleTextView;//¶©µ¥µÄ×´Ì¬
-//	private TextView numberTextView;//¶©µ¥µÄ±àºÅ
-//	private TextView sumPrice;//¶©µ¥µÄ×Ü¼Û¸ñ
-//	private TextView countTextView;//¶©µ¥µÄ×ÜÊıÄ¿
-//	private LinearLayout mLayout;//Íâ²ãµÄ²¼¾Ö
+//	private TextView titleTextView;//è®¢å•çš„çŠ¶æ€
+//	private TextView numberTextView;//è®¢å•çš„ç¼–å·
+//	private TextView sumPrice;//è®¢å•çš„æ€»ä»·æ ¼
+//	private TextView countTextView;//è®¢å•çš„æ€»æ•°ç›®
+//	private LinearLayout mLayout;//å¤–å±‚çš„å¸ƒå±€
 //	private View view;
-//	private OrderDataManage orderDataManage ;//ÓÃÀ´»ñÈ¡¶©µ¥Êı¾İ
+//	private OrderDataManage orderDataManage ;//ç”¨æ¥è·å–è®¢å•æ•°æ®
 	
 	private String hello;
 	private String defaultHello = "default hello";
 	/**
-	 * ÊµÀı»¯¶ÔÏó
+	 * å®ä¾‹åŒ–å¯¹è±¡
 	 * @param view
 	 */
 	private void setupShow(View view){
@@ -45,7 +45,7 @@ public class FreeGivingFragment extends SherlockFragment {
 	}
 
 
-	//Í¨¹ıµ¥ÀıÄ£Ê½£¬¹¹½¨¶ÔÏó
+	//é€šè¿‡å•ä¾‹æ¨¡å¼ï¼Œæ„å»ºå¯¹è±¡
 	public static FreeGivingFragment newInstance(String s){
 		FreeGivingFragment waitFragment = new FreeGivingFragment();
 		Bundle bundle = new Bundle();
@@ -57,7 +57,7 @@ public class FreeGivingFragment extends SherlockFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		//»ñÈ¡´æ´¢µÄ²ÎÊı
+		//è·å–å­˜å‚¨çš„å‚æ•°
 		Bundle args = getArguments();
 		hello = args!=null?args.getString("hello"):defaultHello;
 		
@@ -66,16 +66,16 @@ public class FreeGivingFragment extends SherlockFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		View view= inflater.inflate(R.layout.free_giving, null);//»ñÈ¡ÊÓÍ¼¶ÔÏó
-		LinearLayout relativeLayout = (LinearLayout)view.findViewById(R.id.shopping_cart_relative2);//»ñÈ¡²¼¾Ö
+		View view= inflater.inflate(R.layout.free_giving, null);//è·å–è§†å›¾å¯¹è±¡
+		LinearLayout relativeLayout = (LinearLayout)view.findViewById(R.id.shopping_cart_relative2);//è·å–å¸ƒå±€
 //		AllOrderUtil allOrderUtil = new AllOrderUtil(getSherlockActivity(), relativeLayout);
 //		Log.i("info", allOrderUtil+"");
 //		allOrderUtil.loadView();
 //		setupShow(view);
 //		getData();
 				
-//		View produce = inflater.inflate(R.layout.all_order_item_produce, null);//²úÆ·ÏêÏ¸
-//		View produce1 = inflater.inflate(R.layout.all_order_item_produce, null);//²úÆ·ÏêÏ¸
+//		View produce = inflater.inflate(R.layout.all_order_item_produce, null);//äº§å“è¯¦ç»†
+//		View produce1 = inflater.inflate(R.layout.all_order_item_produce, null);//äº§å“è¯¦ç»†
 //		
 //		relativeLayout.addView(produce);
 //		relativeLayout.addView(produce1);
@@ -89,7 +89,7 @@ public class FreeGivingFragment extends SherlockFragment {
 //				startActivity(intent);
 //			}
 //		});
-//		//Ìí¼Ó¼àÌı
+//		//æ·»åŠ ç›‘å¬
 //		produce.setOnClickListener(new OnClickListener() {
 //			
 //			@Override
@@ -108,7 +108,7 @@ public class FreeGivingFragment extends SherlockFragment {
 		super.onDestroy();
 	}
 //	/**
-//	 * ÓÃÀ´Õ¹Ê¾Êı¾İµÄ
+//	 * ç”¨æ¥å±•ç¤ºæ•°æ®çš„
 //	 */
 //	private void getData(){
 //		ArrayList<Order> mList = orderDataManage.getOrderArray(514492+"", "", "", "", 0+"", 10+"");

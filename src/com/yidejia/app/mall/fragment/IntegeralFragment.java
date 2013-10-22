@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 public class IntegeralFragment extends Fragment {
 	private String hello;
 	private String defaultHello = "default hello";
-	//Í¨¹ıµ¥ÀıÄ£Ê½£¬¹¹½¨¶ÔÏó
+	//é€šè¿‡å•ä¾‹æ¨¡å¼ï¼Œæ„å»ºå¯¹è±¡
 	public static IntegeralFragment newInstance(String s){
 		IntegeralFragment waitFragment = new IntegeralFragment();
 		Bundle bundle = new Bundle();
@@ -26,7 +26,7 @@ public class IntegeralFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		//»ñÈ¡´æ´¢µÄ²ÎÊı
+		//è·å–å­˜å‚¨çš„å‚æ•°
 		Bundle args = getArguments();
 		hello = args!=null?args.getString("hello"):defaultHello;
 		
@@ -34,8 +34,8 @@ public class IntegeralFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View viewCoupons = inflater.inflate(R.layout.my_card_voucher1_item, null);//ÓÅ»İÈ¯ÊÓÍ¼
-		View viewIntegeral =inflater.inflate(R.layout.coupons, null);//»ı·ÖÊÓÍ¼
+		View viewCoupons = inflater.inflate(R.layout.my_card_voucher1_item, null);//ä¼˜æƒ åˆ¸è§†å›¾
+		View viewIntegeral =inflater.inflate(R.layout.coupons, null);//ç§¯åˆ†è§†å›¾
 		if(hello.equals("jifenquan"))
 			return viewCoupons;
 		else 

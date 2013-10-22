@@ -37,7 +37,7 @@ public class SelledResultFragment extends SherlockFragment {
 		bundle.putBoolean("isShowWithList", title);
 		bundle.putBundle("bundle", searchBundle);
 		fragment.setArguments(bundle);
-		
+		bundle = null;
 		return fragment;
 	}
 	
@@ -54,15 +54,15 @@ public class SelledResultFragment extends SherlockFragment {
 	private SearchDataManage manage;
 	private ArrayList<SearchItem> searchItemsArray;
 	
-	private int fromIndex = 0;//¿ªÊ¼
-	private int amount = 10;//¸öÊı
-	private String name;//Ãû³Æ
-	private String fun;//¹¦Ğ§
-	private String price;//¼Û¸ñÇø¼ä
-	private String brand;//Æ·ÅÆ
-	private String order;//ÅÅĞò
+	private int fromIndex = 0;//å¼€å§‹
+	private int amount = 10;//ä¸ªæ•°
+	private String name;//åç§°
+	private String fun;//åŠŸæ•ˆ
+	private String price;//ä»·æ ¼åŒºé—´
+	private String brand;//å“ç‰Œ
+	private String order;//æ’åº
 	
-	private boolean isHasResult = true;//ËÑË÷ÊÇ·ñÓĞ½á¹û
+	private boolean isHasResult = true;//æœç´¢æ˜¯å¦æœ‰ç»“æœ
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -77,13 +77,19 @@ public class SelledResultFragment extends SherlockFragment {
 		brand = searchBundle.getString("brand");
 		order = searchBundle.getString("order");
 //		getSherlockActivity().getSupportActionBar().setCustomView(R.layout.actionbar_search);
-		manage = new SearchDataManage(getSherlockActivity());
+		Log.e(TAG, "new search");
+		manage = new SearchDataManage(getSherlockActivity().getApplicationContext());
+		Log.e(TAG, "before search");
 		try {
 			searchItemsArray = manage.getSearchArray(name, fun, brand, price, order, ""+fromIndex, ""+amount);
+			Log.e(TAG, "after search");
 			isHasResult = true;
 		} catch (NullSearchResultEx e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			isHasResult = false;
+		} catch (Exception e) {
+			// TODO: handle exception
 			isHasResult = false;
 		}
 	}
@@ -161,7 +167,7 @@ public class SelledResultFragment extends SherlockFragment {
 		@Override
 		public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 			// TODO Auto-generated method stub
-			String label = "ÉÏ´Î¸üĞÂÓÚ"	+ DateUtils.formatDateTime(
+			String label = getResources().getString(R.string.update_time) + DateUtils.formatDateTime(
 					getSherlockActivity().getApplicationContext(),
 					System.currentTimeMillis(),
 					DateUtils.FORMAT_SHOW_TIME
@@ -191,6 +197,13 @@ public class SelledResultFragment extends SherlockFragment {
 		@Override
 		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
 			// TODO Auto-generated method stub
+			String label = getResources().getString(R.string.update_time) + DateUtils.formatDateTime(
+					getSherlockActivity().getApplicationContext(),
+					System.currentTimeMillis(),
+					DateUtils.FORMAT_SHOW_TIME
+						| DateUtils.FORMAT_SHOW_DATE
+						| DateUtils.FORMAT_ABBREV_ALL);
+			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 			fromIndex += amount;
 			searchItemsArray.clear();
 			try {

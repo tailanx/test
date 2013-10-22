@@ -21,7 +21,7 @@ import com.yidejia.app.mall.view.OrderDetailActivity;
 public class WaitPayFragment extends SherlockFragment {
 	private String hello;
 	private String defaultHello = "default hello";
-	private PullToRefreshScrollView mPullToRefreshScrollView;// Ë¢ĞÂ
+	private PullToRefreshScrollView mPullToRefreshScrollView;// åˆ·æ–°
 	private LinearLayout relativeLayout;
 	private int fromIndex = 0;
 	private int amount = 10;
@@ -32,7 +32,7 @@ public class WaitPayFragment extends SherlockFragment {
 		waitPayUtil.loadView(fromIndex, amount);
 	}
 
-	// Í¨¹ıµ¥ÀıÄ£Ê½£¬¹¹½¨¶ÔÏó
+	// é€šè¿‡å•ä¾‹æ¨¡å¼ï¼Œæ„å»ºå¯¹è±¡
 	public static WaitPayFragment newInstance(String s) {
 		WaitPayFragment waitFragment = new WaitPayFragment();
 		Bundle bundle = new Bundle();
@@ -42,11 +42,11 @@ public class WaitPayFragment extends SherlockFragment {
 	}
 
 	private OnRefreshListener2<ScrollView> listener = new OnRefreshListener2<ScrollView>() {
-		// ÏÂÀ­Ë¢ĞÂ
+		// ä¸‹æ‹‰åˆ·æ–°
 		@Override
 		public void onPullDownToRefresh(
 				PullToRefreshBase<ScrollView> refreshView) {
-			String label = "ÉÏ´Î¸üĞÂÓÚ"
+			String label = getResources().getString(R.string.update_time)
 					+ DateUtils.formatDateTime(getSherlockActivity(),
 							System.currentTimeMillis(),
 							DateUtils.FORMAT_ABBREV_ALL
@@ -58,11 +58,11 @@ public class WaitPayFragment extends SherlockFragment {
 			mPullToRefreshScrollView.onRefreshComplete();
 		}
 		
-		// ÉÏÀ­¼ÓÔØ
+		// ä¸Šæ‹‰åŠ è½½
 		@Override
 		public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
 			// TODO Auto-generated method stub
-			String label = "ÉÏ´Î¸üĞÂÓÚ"
+			String label = getResources().getString(R.string.update_time)
 					+ DateUtils.formatDateTime(getSherlockActivity(),
 							System.currentTimeMillis(),
 							DateUtils.FORMAT_ABBREV_ALL
@@ -80,7 +80,7 @@ public class WaitPayFragment extends SherlockFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		// »ñÈ¡´æ´¢µÄ²ÎÊı
+		// è·å–å­˜å‚¨çš„å‚æ•°
 		Bundle args = getArguments();
 		hello = args != null ? args.getString("hello") : defaultHello;
 	}
@@ -88,13 +88,13 @@ public class WaitPayFragment extends SherlockFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.wait_pay_item_main, null);// »ñÈ¡ÊÓÍ¼¶ÔÏó
+		View view = inflater.inflate(R.layout.wait_pay_item_main, null);// è·å–è§†å›¾å¯¹è±¡
 		mPullToRefreshScrollView = (PullToRefreshScrollView) view
 				.findViewById(R.id.wait_pay_order_item_main_refresh_scrollview11);
 		relativeLayout = (LinearLayout) view
-				.findViewById(R.id.wait_pay_order_scrollView_linearlayout1);// »ñÈ¡²¼¾Ö
+				.findViewById(R.id.wait_pay_order_scrollView_linearlayout1);// è·å–å¸ƒå±€
 		mPullToRefreshScrollView.setOnRefreshListener(listener);
-		String label = "ÉÏ´Î¸üĞÂÓÚ"
+		String label = getResources().getString(R.string.update_time)
 				+ DateUtils.formatDateTime(getSherlockActivity(),
 						System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
 								| DateUtils.FORMAT_SHOW_DATE
@@ -102,9 +102,9 @@ public class WaitPayFragment extends SherlockFragment {
 		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
 				label);
 		// View produce = inflater.inflate(R.layout.all_order_item_produce,
-		// null);//²úÆ·ÏêÏ¸
+		// null);//äº§å“è¯¦ç»†
 		// View produce1 = inflater.inflate(R.layout.all_order_item_produce,
-		// null);//²úÆ·ÏêÏ¸
+		// null);//äº§å“è¯¦ç»†
 		//
 		// relativeLayout.addView(produce);
 		// relativeLayout.addView(produce1);
@@ -118,7 +118,7 @@ public class WaitPayFragment extends SherlockFragment {
 		// startActivity(intent);
 		// }
 		// });
-		// //Ìí¼Ó¼àÌı
+		// //æ·»åŠ ç›‘å¬
 		// produce.setOnClickListener(new OnClickListener() {
 		//
 		// @Override

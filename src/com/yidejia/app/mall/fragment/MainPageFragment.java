@@ -99,7 +99,7 @@ public class MainPageFragment extends SherlockFragment {
 	
 	
 	/**
-	 * activityÆô¶¯Ê±µ÷ÓÃÕâ¸ö·½·¨ÏÔÊ¾½çÃæ
+	 * activityå¯åŠ¨æ—¶è°ƒç”¨è¿™ä¸ªæ–¹æ³•æ˜¾ç¤ºç•Œé¢
 	 * @param view
 	 * @param inflater
 	 */
@@ -114,9 +114,9 @@ public class MainPageFragment extends SherlockFragment {
 		mPullToRefreshScrollView = (PullToRefreshScrollView) view.findViewById(R.id.main_pull_refresh_scrollview);
 		mPullToRefreshScrollView.setScrollingWhileRefreshingEnabled(true);
 		mPullToRefreshScrollView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
-		mPullToRefreshScrollView.setVerticalScrollBarEnabled(false); //½ûÓÃ´¹Ö±¹ö¶¯
-		mPullToRefreshScrollView.setHorizontalScrollBarEnabled(false); //½ûÓÃË®Æ½¹ö¶¯
-		String label = "ÉÏ´Î¸üĞÂÓÚ"	+ DateUtils.formatDateTime(
+		mPullToRefreshScrollView.setVerticalScrollBarEnabled(false); //ç¦ç”¨å‚ç›´æ»šåŠ¨
+		mPullToRefreshScrollView.setHorizontalScrollBarEnabled(false); //ç¦ç”¨æ°´å¹³æ»šåŠ¨
+		String label = getResources().getString(R.string.update_time)	+ DateUtils.formatDateTime(
 				getSherlockActivity().getApplicationContext(),
 				System.currentTimeMillis(),
 				DateUtils.FORMAT_SHOW_TIME
@@ -136,7 +136,7 @@ public class MainPageFragment extends SherlockFragment {
 		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
 			try {
 				// TODO Auto-generated method stub
-				String label = "ÉÏ´Î¸üĞÂÓÚ"	+ DateUtils.formatDateTime(
+				String label = getResources().getString(R.string.update_time)	+ DateUtils.formatDateTime(
 						getSherlockActivity().getApplicationContext(),
 						System.currentTimeMillis(),
 						DateUtils.FORMAT_SHOW_TIME
@@ -161,7 +161,7 @@ public class MainPageFragment extends SherlockFragment {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				Toast.makeText(getSherlockActivity(), "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getSherlockActivity(), getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 			}
 		}
 		
@@ -169,57 +169,57 @@ public class MainPageFragment extends SherlockFragment {
 	};
 	
 	/**
-	 * »ñÈ¡Ê×Ò³ÉÌÆ·hotsell,acymer,inerbty²¼¾ÖµÄ¿Ø¼şºÍÌø×ª
+	 * è·å–é¦–é¡µå•†å“hotsell,acymer,inerbtyå¸ƒå±€çš„æ§ä»¶å’Œè·³è½¬
 	 * @param view
 	 */
 	private void intentToView(View view){
 		try {
-			//hot sell ×ó±ß
+			//hot sell å·¦è¾¹
 			RelativeLayout hotsellLeft = (RelativeLayout)view.findViewById(R.id.main_hot_sell_left);
 			hotsellLeft.setOnClickListener(new MainGoodsOnclick(hotsellArray.get(0).getUId()));
-			//hot sell ÓÒÉÏ
+			//hot sell å³ä¸Š
 			RelativeLayout hotsellRightTop = (RelativeLayout)view.findViewById(R.id.main_hot_sell_right_top);
 			hotsellRightTop.setOnClickListener(new MainGoodsOnclick(hotsellArray.get(1).getUId()));
-			//hot sell ÓÒÏÂ
+			//hot sell å³ä¸‹
 			RelativeLayout hotsellRightDown = (RelativeLayout)view.findViewById(R.id.main_hot_sell_right_down);
 			hotsellRightDown.setOnClickListener(new MainGoodsOnclick(hotsellArray.get(2).getUId()));
 			
-			// acymer ×ó±ß
+			// acymer å·¦è¾¹
 			RelativeLayout acymeiLeft = (RelativeLayout)view.findViewById(R.id.main_acymei_left);
 			acymeiLeft.setOnClickListener(new MainGoodsOnclick(acymerArray.get(0).getUId()));
-			// acymer ÓÒÉÏ
+			// acymer å³ä¸Š
 			RelativeLayout acymeiRightTop = (RelativeLayout)view.findViewById(R.id.main_acymei_right_top);
 			acymeiRightTop.setOnClickListener(new MainGoodsOnclick(acymerArray.get(1).getUId()));
-			// acymer ÓÒÏÂ
+			// acymer å³ä¸‹
 			RelativeLayout acymeiRightDown = (RelativeLayout)view.findViewById(R.id.main_acymei_right_down);
 			acymeiRightDown.setOnClickListener(new MainGoodsOnclick(acymerArray.get(2).getUId()));
 			
-			// inerbty ×óÉÏ
+			// inerbty å·¦ä¸Š
 			RelativeLayout inerbtyTopLeft = (RelativeLayout)view.findViewById(R.id.main_inerbty_top_left);
 			inerbtyTopLeft.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(0).getUId()));
-			// inerbty ÓÒÉÏ
+			// inerbty å³ä¸Š
 			RelativeLayout inerbtyTopRight = (RelativeLayout)view.findViewById(R.id.main_inerbty_top_right);
 			inerbtyTopRight.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(1).getUId()));
-			// inerbty ×óÖĞ
+			// inerbty å·¦ä¸­
 			RelativeLayout nerbtyMidLeft = (RelativeLayout)view.findViewById(R.id.main_inerbty_mid_left);
 			nerbtyMidLeft.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(2).getUId()));
-			// inerbty ÓÒÖĞ
+			// inerbty å³ä¸­
 			RelativeLayout inerbtyMidRight = (RelativeLayout)view.findViewById(R.id.main_inerbty_mid_right);
 			inerbtyMidRight.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(3).getUId()));
-			// inerbty ×óÏÂ
+			// inerbty å·¦ä¸‹
 			RelativeLayout inerbtyDownLeft = (RelativeLayout)view.findViewById(R.id.main_inerbty_down_left);
 			inerbtyDownLeft.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(4).getUId()));
-			// inerbty ÓÒÏÂ
+			// inerbty å³ä¸‹
 			RelativeLayout inerbtyDownRight = (RelativeLayout)view.findViewById(R.id.main_inerbty_down_right);
 			inerbtyDownRight.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(5).getUId()));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(getSherlockActivity(), "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getSherlockActivity(), getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 	}
 	/**
-	 * Ê×Ò³hotsell,acymer,inerbtyÉÌÆ·µã»÷ÊÂ¼ş
+	 * é¦–é¡µhotsell,acymer,inerbtyå•†å“ç‚¹å‡»äº‹ä»¶
 	 * @author long bin
 	 *
 	 */
@@ -243,11 +243,11 @@ public class MainPageFragment extends SherlockFragment {
 	}
 
 	/**
-	 * ¿ì½İ¹¦ÄÜÄÇ¿éÌøµ½ÏàÓ¦½çÃæ
+	 * å¿«æ·åŠŸèƒ½é‚£å—è·³åˆ°ç›¸åº”ç•Œé¢
 	 * @param child
 	 */
 	private void functionIntent(View child){
-		RelativeLayout myOrder = (RelativeLayout) child.findViewById(R.id.function_my_order);//¶©µ¥
+		RelativeLayout myOrder = (RelativeLayout) child.findViewById(R.id.function_my_order);//è®¢å•
 		myOrder.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -257,7 +257,7 @@ public class MainPageFragment extends SherlockFragment {
 			}
 		});
 		
-		RelativeLayout myCollect = (RelativeLayout) child.findViewById(R.id.function_my_favorite);//ÊÕ²Ø
+		RelativeLayout myCollect = (RelativeLayout) child.findViewById(R.id.function_my_favorite);//æ”¶è—
 		myCollect.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -266,7 +266,7 @@ public class MainPageFragment extends SherlockFragment {
 				getSherlockActivity().startActivity(intentOrder);
 			}
 		});
-		RelativeLayout myEvent = (RelativeLayout) child.findViewById(R.id.function_event);//»î¶¯¹İ
+		RelativeLayout myEvent = (RelativeLayout) child.findViewById(R.id.function_event);//æ´»åŠ¨é¦†
 		myEvent.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -275,7 +275,7 @@ public class MainPageFragment extends SherlockFragment {
 				getSherlockActivity().startActivity(intentOrder);
 			}
 		});
-		RelativeLayout myMember = (RelativeLayout) child.findViewById(R.id.function_member);//»áÔ±¹º
+		RelativeLayout myMember = (RelativeLayout) child.findViewById(R.id.function_member);//ä¼šå‘˜è´­
 		myMember.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -284,7 +284,7 @@ public class MainPageFragment extends SherlockFragment {
 				getSherlockActivity().startActivity(intentOrder);
 			}
 		});
-		RelativeLayout myHistory = (RelativeLayout) child.findViewById(R.id.function_history);//ä¯ÀÀÀúÊ·
+		RelativeLayout myHistory = (RelativeLayout) child.findViewById(R.id.function_history);//æµè§ˆå†å²
 		myHistory.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -293,7 +293,7 @@ public class MainPageFragment extends SherlockFragment {
 				getSherlockActivity().startActivity(intentOrder);
 			}
 		});
-		RelativeLayout myCoupon = (RelativeLayout) child.findViewById(R.id.function_coupon);//»ı·Ö¿¨È¯
+		RelativeLayout myCoupon = (RelativeLayout) child.findViewById(R.id.function_coupon);//ç§¯åˆ†å¡åˆ¸
 		myCoupon.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -302,7 +302,7 @@ public class MainPageFragment extends SherlockFragment {
 				getSherlockActivity().startActivity(intentOrder);
 			}
 		});
-		RelativeLayout mySkin = (RelativeLayout) child.findViewById(R.id.function_skin);//¼¡·ô²âÊÔ
+		RelativeLayout mySkin = (RelativeLayout) child.findViewById(R.id.function_skin);//è‚Œè‚¤æµ‹è¯•
 		mySkin.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -311,7 +311,7 @@ public class MainPageFragment extends SherlockFragment {
 				getSherlockActivity().startActivity(intentOrder);
 			}
 		});
-		RelativeLayout myMessage = (RelativeLayout) child.findViewById(R.id.function_message);//ÏûÏ¢ÖĞĞÄ
+		RelativeLayout myMessage = (RelativeLayout) child.findViewById(R.id.function_message);//æ¶ˆæ¯ä¸­å¿ƒ
 		myMessage.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -353,7 +353,7 @@ public class MainPageFragment extends SherlockFragment {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(getSherlockActivity(), "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getSherlockActivity(), getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -373,7 +373,7 @@ public class MainPageFragment extends SherlockFragment {
 	private int length = 0;
 	/**
 	 * 
-	 * @return Ê×Ò³ÂÖ²¥µÄ¿Ø¼ş
+	 * @return é¦–é¡µè½®æ’­çš„æ§ä»¶
 	 */
 	private ViewGroup getMainListFirstItem() {
 		length = bannerArray.size();
@@ -401,7 +401,7 @@ public class MainPageFragment extends SherlockFragment {
 					mImageCircleViews[i], 9, 9));
 		}
 
-		// ÉèÖÃViewPager
+		// è®¾ç½®ViewPager
 		mViewPager.setAdapter(new SlideImageAdapter(bannerArray));
 		mViewPager.setOnPageChangeListener(new ImagePageChangeListener());
 		mViewPager.setCurrentItem(0);
@@ -409,7 +409,7 @@ public class MainPageFragment extends SherlockFragment {
 		return mMainView;
 	}
 	/** 
-	 * »¬¶¯Í¼Æ¬Êı¾İÊÊÅäÆ÷
+	 * æ»‘åŠ¨å›¾ç‰‡æ•°æ®é€‚é…å™¨
 	 */
     private class SlideImageAdapter extends PagerAdapter {
     	private LayoutInflater inflater;
@@ -478,7 +478,7 @@ public class MainPageFragment extends SherlockFragment {
         	}
         	@Override
         	public void onClick(View v) {
-//        		Toast.makeText(getActivity(), "ÎÒµã»÷ÁËµÚ"+"["+pageIndex%length+"]¼¸¸ö", Toast.LENGTH_SHORT).show();
+//        		Toast.makeText(getActivity(), "æˆ‘ç‚¹å‡»äº†ç¬¬"+"["+pageIndex%length+"]å‡ ä¸ª", Toast.LENGTH_SHORT).show();
         		Intent intent = new Intent(getSherlockActivity(), GoodsInfoActivity.class);
         		Bundle bundle = new Bundle();
         		bundle.putString("goodsId", bannerArray.get(index).getUId());
@@ -490,7 +490,7 @@ public class MainPageFragment extends SherlockFragment {
 //    private int pageIndex = 0;
 
     /** 
-     * »¬¶¯Ò³Ãæ¸ü¸ÄÊÂ¼ş¼àÌıÆ÷
+     * æ»‘åŠ¨é¡µé¢æ›´æ”¹äº‹ä»¶ç›‘å¬å™¨
      */
     private class ImagePageChangeListener implements OnPageChangeListener {
         @Override
