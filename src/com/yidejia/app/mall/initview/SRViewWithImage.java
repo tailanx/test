@@ -47,7 +47,7 @@ public class SRViewWithImage {
 	}
 	
 	/**
-	 * 偶数个商品
+	 * 脜录脢媒赂枚脡脤脝路
 	 * @param leftItem
 	 * @param rightItem
 	 */
@@ -85,7 +85,7 @@ public class SRViewWithImage {
 	}
 	
 	/**
-	 * 奇数个商品
+	 * 脝忙脢媒赂枚脡脤脝路
 	 * @param item
 	 */
 	public void initView(final SearchItem item){
