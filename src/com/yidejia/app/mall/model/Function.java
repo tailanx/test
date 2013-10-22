@@ -1,13 +1,13 @@
 package com.yidejia.app.mall.model;
 /**
- * ÉÌÆ·¹¦Ğ§£¬°üÀ¨ id£¬Ãû³Æ
+ * å•†å“åŠŸæ•ˆï¼ŒåŒ…æ‹¬ idï¼Œåç§°
  * @author long bin
  *
  */
 public class Function {
-	private String funId;            //ÉÌÆ·¹¦Ğ§Id 
-    private String funName;   //¹¦Ğ§Ãû³Æ
-    private String desc; 	//ÃèÊö
+	private String funId;            //å•†å“åŠŸæ•ˆId 
+    private String funName;   //åŠŸæ•ˆåç§°
+    private String desc; 	//æè¿°
     
     public String getFunName(){
     	return funName;
@@ -33,6 +33,6 @@ public class Function {
     	this.desc = desc;
     }
     
-    // »ñÈ¡¹¦Ğ§ÁĞ±í
+    // è·å–åŠŸæ•ˆåˆ—è¡¨
 //    vector<S_Fun> GetFunArray();
 }

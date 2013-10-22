@@ -4,13 +4,13 @@ package com.yidejia.app.mall.model;
 import java.io.Serializable;
 
 /**
- * ÉÌÆ·»ù±¾ĞÅÏ¢£¬°üÀ¨ id£¬Í¼Æ¬Á´½Ó
+ * å•†å“åŸºæœ¬ä¿¡æ¯ï¼ŒåŒ…æ‹¬ idï¼Œå›¾ç‰‡é“¾æ¥
  * @author long bin
  *
  */
 public class BaseProduct implements Serializable {
-	private String uId;            //ÉÌÆ·ID £¨¿ÉÒÔÍ¨¹ıÕâ¸öIDË÷Òıµ½ÉÌÆ·ÏêÇé£©
-    private String imgUrl;      //Í¼Æ¬Á´½Ó
+	private String uId;            //å•†å“ID ï¼ˆå¯ä»¥é€šè¿‡è¿™ä¸ªIDç´¢å¼•åˆ°å•†å“è¯¦æƒ…ï¼‰
+    private String imgUrl;      //å›¾ç‰‡é“¾æ¥
     
     public String getImgUrl(){
     	return imgUrl;

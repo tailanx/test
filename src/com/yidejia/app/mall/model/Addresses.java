@@ -9,15 +9,17 @@ import java.io.Serializable;
  */
 public class Addresses  implements Serializable{
 	
-	private String addressId;          //µØÖ·id
-	private String name;            //ÊÕ»õÈËĞÕÃû
-	private String province;        //Ê¡·İ
-	private String city;	//³ÇÊĞ
-	private String area;	//Çø
-	private String address; //ÏêÏ¸µØÖ·
-	private String phone;	//µç»°
-	private String handset;	//ÊÖ»ú
-	private boolean defaultAddress;  //Ä¬ÈÏµØÖ·
+	private String addressId;          //åœ°å€id
+	private String name;            //æ”¶è´§äººå§“å
+	private String province;        //çœä»½
+	private String city;	//åŸå¸‚
+	private String area;	//åŒº
+	private String address; //è¯¦ç»†åœ°å€
+	private String phone;	//ç”µè¯
+	private String handset;	//æ‰‹æœº
+	private boolean defaultAddress;  //é»˜è®¤åœ°å€
+	
+	private String recipient_id;//æ”¶ä»¶äººid
 	
 	public void setAddressId(String addressId){
 		this.addressId = addressId;
@@ -89,5 +91,12 @@ public class Addresses  implements Serializable{
 	
 	public void setHandset(String handset){
 		this.handset = handset;
+	}
+	
+	public void setRecipientId(String recipient_id){
+		this.recipient_id = recipient_id;
+	}
+	public String getRecipientId(){
+		return recipient_id;
 	}
 }

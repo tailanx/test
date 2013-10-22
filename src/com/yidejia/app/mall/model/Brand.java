@@ -1,14 +1,14 @@
 package com.yidejia.app.mall.model;
 /**
- * Æ·ÅÆ»ù±¾ĞÅÏ¢£¬°üÀ¨ id£¬Ãû³Æ
+ * å“ç‰ŒåŸºæœ¬ä¿¡æ¯ï¼ŒåŒ…æ‹¬ idï¼Œåç§°
  * @author long bin
  *
  */
 public class Brand {
-	private int brandId;            //Æ·ÅÆID £¨¿ÉÒÔÍ¨¹ıÕâ¸öIDË÷Òıµ½ÉÌÆ·ÏêÇé£©Êµ¼ÊÉÏºÃÏñÃ»ÓĞÕâ¸öid
-    private String brandName;   //Æ·ÅÆÃû³Æ
+	private int brandId;            //å“ç‰ŒID ï¼ˆå¯ä»¥é€šè¿‡è¿™ä¸ªIDç´¢å¼•åˆ°å•†å“è¯¦æƒ…ï¼‰å®é™…ä¸Šå¥½åƒæ²¡æœ‰è¿™ä¸ªid
+    private String brandName;   //å“ç‰Œåç§°
     
-    private String desc; 	// ÃèÊö
+    private String desc; 	// æè¿°
     
     public String getBrandName(){
     	return brandName;
@@ -35,6 +35,6 @@ public class Brand {
     }
     
     
-    // »ñÈ¡Æ·ÅÆÁĞ±í
+    // ï¿½ï¿½È¡Æ·ï¿½ï¿½ï¿½Ğ±ï¿½
 //    vector<S_Brand> GetBrandArray();
 }

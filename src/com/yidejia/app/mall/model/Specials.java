@@ -1,82 +1,82 @@
 package com.yidejia.app.mall.model;
 /**
- * ����ͣ����ֻ�����Ʒ.������ƷId����Ʒ����������۸�������֣�ͼƬ��ַ
+ * 免费送，积分换购商品.包括商品Id，商品描述，所需价格，所需积分，图片地址
  * @author long bin
  *
  */
 public class Specials {
-	private String uId;            //��ƷId
-	private String brief;       //��Ʒ����
-	private String price;        //����۸�
-	private String scores;       //�������
-	private String imgUrl;      //ͼƬ��ַ
+	private String uId;            //商品Id
+	private String brief;       //商品描述
+	private String price;        //所需价格
+	private String scores;       //所需积分
+	private String imgUrl;      //图片地址
 	
 	/**
 	 * 
-	 * @param uId ������ƷId
+	 * @param uId 设置商品Id
 	 */
 	public void setUId(String uId){
 		this.uId = uId;
 	}
 	/**
 	 * 
-	 * @return uId ������ƷId
+	 * @return uId 返回商品Id
 	 */
 	public String getUId(){
 		return uId;
 	}
 	/**
 	 * 
-	 * @param price ����۸�
+	 * @param price 所需价格
 	 */
 	public void setPrice(String price){
 		this.price = price;
 	}
 	/**
 	 * 
-	 * @return price ����۸�
+	 * @return price 所需价格
 	 */
 	public String getPrice(){
 		return price;
 	}
 	/**
 	 * 
-	 * @return imgUrl ͼƬ��ַ
+	 * @return imgUrl 图片地址
 	 */
 	public String getImgUrl(){
     	return imgUrl;
     }
 	/**
 	 * 
-	 * @param imgUrl ͼƬ��ַ
+	 * @param imgUrl 图片地址
 	 */
 	public void setImgUrl(String imgUrl){
     	this.imgUrl = imgUrl;
     }
 	/**
 	 * 
-	 * @param brief ��Ʒ��Ҫ����
+	 * @param brief 商品概要描述
 	 */
 	public void setBrief(String brief){
 		this.brief = brief;
 	}
 	/**
 	 * 
-	 * @return brief ��Ʒ��Ҫ����
+	 * @return brief 商品概要描述
 	 */
 	public String getBrief(){
 		return brief;
 	}
 	/**
 	 * 
-	 * @param scores �������
+	 * @param scores 所需积分
 	 */
 	public void setScores(String scores){
 		this.scores = scores;
 	}
 	/**
 	 * 
-	 * @return scores �������
+	 * @return scores 所需积分
 	 */
 	public String getScores(){
 		return scores;

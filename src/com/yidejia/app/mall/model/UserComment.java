@@ -1,12 +1,12 @@
 package com.yidejia.app.mall.model;
 /**
- * ÓÃ»§ÆÀÂÛĞÅÏ¢,°üÀ¨id,êÇ³Æ£¬vipµÈ¼¶£¬¿Í»§Ğ¡Í·ÏñÁ´½ÓµØÖ·£¬¿Í»§ÆÀÂÛ£¬
- * Õâ¸ö¿Í»§¹ºÂò²úÆ·µÄ¾ßÌå£¬¿Í»§ÆÀ·Ö£¬ÆÀÂÛÊ±¼ä
+ * ç”¨æˆ·è¯„è®ºä¿¡æ¯,åŒ…æ‹¬id,æ˜µç§°ï¼Œvipç­‰çº§ï¼Œå®¢æˆ·å°å¤´åƒé“¾æ¥åœ°å€ï¼Œå®¢æˆ·è¯„è®ºï¼Œ
+ * è¿™ä¸ªå®¢æˆ·è´­ä¹°äº§å“çš„å…·ä½“ï¼Œå®¢æˆ·è¯„åˆ†ï¼Œè¯„è®ºæ—¶é—´
  * @author long bin
  *
  */
 public class UserComment {
-	private String userId;                     //¿Í»§ID £¨Î´À´¿ÉÒÔµã»÷ÓÃ»§Í·Ïñ£¬Ìø×ªµ½²é¿´¿Í»§Ïà¹ØĞÅÏ¢£©
+	private String userId;                     //å®¢æˆ·ID ï¼ˆæœªæ¥å¯ä»¥ç‚¹å‡»ç”¨æˆ·å¤´åƒï¼Œè·³è½¬åˆ°æŸ¥çœ‹å®¢æˆ·ç›¸å…³ä¿¡æ¯ï¼‰
 	public void setUserId(String usetId){
 		this.userId = usetId;
 	}
@@ -27,119 +27,119 @@ public class UserComment {
 	}
 	/**
 	 * 
-	 * @return vipLevel vipµÈ¼¶
+	 * @return vipLevel vipç­‰çº§
 	 */
 	public String getVipLevel(){
 		return vipLevel;
 	}
-	private String userPictureUrl;          //¿Í»§Ğ¡Í·ÏñÁ´½ÓµØÖ·
+	private String userPictureUrl;          //å®¢æˆ·å°å¤´åƒé“¾æ¥åœ°å€
 	/**
 	 * 
-	 * @param userPictureUrl ¿Í»§Ğ¡Í·ÏñÁ´½ÓµØÖ·
+	 * @param userPictureUrl å®¢æˆ·å°å¤´åƒé“¾æ¥åœ°å€
 	 */
 	public void setUserPictureUrl(String userPictureUrl){
 		this.userPictureUrl = userPictureUrl;
 	}
 	/**
 	 * 
-	 * @return userPictureUrl ¿Í»§Ğ¡Í·ÏñÁ´½ÓµØÖ·
+	 * @return userPictureUrl å®¢æˆ·å°å¤´åƒé“¾æ¥åœ°å€
 	 */
 	public String getUserPictureUrl(){
 		return userPictureUrl;
 	}
-	private String userCommentText;         //¿Í»§ÆÀÂÛ £¨¡¶£½1024×Ö½Ú£¿£©
+	private String userCommentText;         //å®¢æˆ·è¯„è®º ï¼ˆã€Šï¼1024å­—èŠ‚ï¼Ÿï¼‰
 	/**
 	 * 
-	 * @param userCommentText ¿Í»§ÆÀÂÛ
+	 * @param userCommentText å®¢æˆ·è¯„è®º
 	 */
 	public void setUserCommentText(String userCommentText){
 		this.userCommentText = userCommentText;
 	}
 	/**
 	 * 
-	 * @return userCommentText ¿Í»§ÆÀÂÛ
+	 * @return userCommentText å®¢æˆ·è¯„è®º
 	 */
 	public String getUserCommentText(){
 		return userCommentText;
 	}
 	
-	private String productBaseDetail;       //Õâ¸ö¿Í»§¹ºÂò²úÆ·µÄ¾ßÌå£¨·ÇÒÂÎïÀà£¬ÊÇ·ñÓĞÑÕÉ«£¬´óĞ¡Ö®·Ö£¿£©
+	private String productBaseDetail;       //è¿™ä¸ªå®¢æˆ·è´­ä¹°äº§å“çš„å…·ä½“ï¼ˆéè¡£ç‰©ç±»ï¼Œæ˜¯å¦æœ‰é¢œè‰²ï¼Œå¤§å°ä¹‹åˆ†ï¼Ÿï¼‰
 	/**
 	 * 
-	 * @param productBaseDetail Õâ¸ö¿Í»§¹ºÂò²úÆ·µÄ¾ßÌå
+	 * @param productBaseDetail è¿™ä¸ªå®¢æˆ·è´­ä¹°äº§å“çš„å…·ä½“
 	 */
 	public void setProductBaseDetail(String productBaseDetail){
 		this.productBaseDetail = productBaseDetail;
 	}
 	/**
 	 * 
-	 * @return productBaseDetail Õâ¸ö¿Í»§¹ºÂò²úÆ·µÄ¾ßÌå
+	 * @return productBaseDetail è¿™ä¸ªå®¢æˆ·è´­ä¹°äº§å“çš„å…·ä½“
 	 */
 	public String getProductBaseDetail(){
 		return productBaseDetail;
 	}
-	private int rate;                       //¿Í»§ÆÀ·Ö
+	private int rate;                       //å®¢æˆ·è¯„åˆ†
 	/**
 	 * 
-	 * @param rate ¿Í»§ÆÀ·Ö
+	 * @param rate å®¢æˆ·è¯„åˆ†
 	 */
 	public void setRate(int rate){
 		this.rate = rate;
 	}
 	/**
 	 * 
-	 * @return rate ¿Í»§ÆÀ·Ö
+	 * @return rate å®¢æˆ·è¯„åˆ†
 	 */
 	public int getRate(){
 		return rate;
 	}
-	private String commentTime;             //ÆÀÂÛÊ±¼ä
+	private String commentTime;             //è¯„è®ºæ—¶é—´
 	/**
 	 * 
-	 * @param commentTime ÆÀÂÛÊ±¼ä
+	 * @param commentTime è¯„è®ºæ—¶é—´
 	 */
 	public void setCommentTime(String commentTime){
 		this.commentTime = commentTime;
 	}
 	/**
 	 * 
-	 * @return commentTime ÆÀÂÛÊ±¼ä
+	 * @return commentTime è¯„è®ºæ—¶é—´
 	 */
 	public String getCommentTime(){
 		return commentTime;
 	}
 	
-	private String goodsId;//ÉÌÆ·id
+	private String goodsId;//å•†å“id
 	public void setGoodsId(String goodsId){
 		this.goodsId = goodsId;
 	}
 	/**
 	 * 
-	 * @return goods id ÉÌÆ·id
+	 * @return goods id å•†å“id
 	 */
 	public String getGoodsId(){
 		return goodsId;
 	}
 	
-	private String title;//ÆÀÂÛ±êÌâ
+	private String title;//è¯„è®ºæ ‡é¢˜
 	public void setTitle(String title){
 		this.title = title;
 	}
 	/**
 	 * 
-	 * @return title ÆÀÂÛ±êÌâ
+	 * @return title è¯„è®ºæ ‡é¢˜
 	 */
 	public String getTitle(){
 		return title;
 	}
 	
-	private String id;//ÆÀÂÛid
+	private String id;//è¯„è®ºid
 	public void setId(String id){
 		this.id = id;
 	}
 	/**
 	 * 
-	 * @return id ÆÀÂÛµÄÖ÷¼üid
+	 * @return id è¯„è®ºçš„ä¸»é”®id
 	 */
 	public String getId(){
 		return id;

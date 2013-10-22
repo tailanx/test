@@ -1,10 +1,10 @@
 package com.yidejia.app.mall.model;
 
 public class UserCount {
-	private String scores;//»ı·Ö
-	private String order;//¶©µ¥
-	private String favoliten;//ÊÕ²Ø
-	private String msg;//ÏûÏ¢Êı
+	private String scores;//ç§¯åˆ†
+	private String order;//è®¢å•
+	private String favoliten;//æ”¶è—
+	private String msg;//æ¶ˆæ¯æ•°
 	
 	public void setScores(String scores){
 		this.scores = scores;
