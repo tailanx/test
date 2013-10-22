@@ -1,68 +1,101 @@
 package com.yidejia.app.mall.model;
+
 /**
- * ¿ìµİ,ÅäËÍÖĞĞÄ
+ * å¿«é€’,é…é€ä¸­å¿ƒ
+ * 
  * @author long bin
- *
+ * 
  */
 public class Express {
-	private String ems; //ems¿ìµİ
-	private String express; //¿ìµİ
-	private String disName;//ÅäËÍÖĞĞÄ
-	private String disDesc;//ÅäËÍÖĞĞÄ½éÉÜ
+	private String ems; // emså¿«é€’
+	private String express; // å¿«é€’
+	private String disName;// é…é€ä¸­å¿ƒ
+	private String disDesc;// é…é€ä¸­å¿ƒä»‹ç»
+
 	/**
 	 * 
-	 * @param ems ems¼Û¸ñ
+	 * @param ems
+	 *            emsä»·æ ¼
 	 */
-	public void setEms(String ems){
+	public void setEms(String ems) {
 		this.ems = ems;
 	}
+
 	/**
 	 * 
-	 * @return ems¼Û¸ñ
+	 * @return emsä»·æ ¼
 	 */
-	public String getEms(){
+	public String getEms() {
 		return ems;
 	}
+
 	/**
 	 * 
-	 * @param express ¿ìµİ·ÑÓÃ
+	 * @param express
+	 *            å¿«é€’è´¹ç”¨
 	 */
-	public void setExpress(String express){
+	public void setExpress(String express) {
 		this.express = express;
 	}
+
 	/**
 	 * 
-	 * @return ¿ìµİ·ÑÓÃ
+	 * @return å¿«é€’è´¹ç”¨
 	 */
-	public String getExpress(){
+	public String getExpress() {
 		return express;
 	}
+
 	/**
 	 * 
-	 * @param disName ÅäËÍÖĞĞÄ
+	 * @param disName
+	 *            é…é€ä¸­å¿ƒ
 	 */
-	public void setDisName(String disName ){
+	public void setDisName(String disName) {
 		this.disName = disName;
 	}
+
 	/**
 	 * 
-	 * @return ÅäËÍÖĞĞÄ
+	 * @return é…é€ä¸­å¿ƒ
 	 */
-	public String getDisName(){
+	public String getDisName() {
 		return disName;
 	}
-	/**
-	 *  
-	 * @param disDesc ÅäËÍÖĞĞÄ½éÉÜ
-	 */
-	public void setDisDesc(String disDesc){
-		this.disDesc = disDesc;
-	}
+
 	/**
 	 * 
-	 * @return ÅäËÍÖĞĞÄ½éÉÜ
+	 * @param disDesc
+	 *            é…é€ä¸­å¿ƒä»‹ç»
 	 */
-	public String getDisDesc(){
+	public void setDisDesc(String disDesc) {
+		this.disDesc = disDesc;
+	}
+
+	/**
+	 * 
+	 * @return é…é€ä¸­å¿ƒä»‹ç»
+	 */
+	public String getDisDesc() {
 		return disDesc;
+	}
+
+	private boolean isDefault;// æ˜¯å¦ä¸ºé»˜è®¤
+	private String pre_id;// é…é€ä¸­å¿ƒid
+
+	public String getPreId() {
+		return pre_id;
+	}
+
+	public void setPreId(String pre_id) {
+		this.pre_id = pre_id;
+	}
+
+	public void setIsDefault(boolean isDefault) {
+		this.isDefault = isDefault;
+	}
+
+	public boolean getIsDefault() {
+		return isDefault;
 	}
 }
