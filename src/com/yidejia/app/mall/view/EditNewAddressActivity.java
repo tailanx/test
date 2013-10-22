@@ -38,9 +38,9 @@ public class EditNewAddressActivity extends SherlockActivity {
 	private TextView textView;
 	// private Spinner province;
 	// private Spinner city;
-	private EditText nameTextView;// ÊÕ»õÈËĞÕÃû
-	private EditText numberTextView;// ÊÕ»õÈËµç»°
-	private EditText areaTextView;// ÊÕ»õÈËµØÖ·
+	private EditText nameTextView;// æ”¶è´§äººå§“å
+	private EditText numberTextView;// æ”¶è´§äººç”µè¯
+	private EditText areaTextView;// æ”¶è´§äººåœ°å€
 	private Spinner spinner1 = null;
 	private Spinner spinner2 = null;
 	private Spinner spinner3 = null;
@@ -66,7 +66,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 
 		setActionbar();
 		setContentView(R.layout.new_address);
-		// String[] provinces = new String[]{"-Ê¡·İ-","ºÓ±±Ê¡","É½Î÷Ê¡","±±¾©"};
+		// String[] provinces = new String[]{"-çœä»½-","æ²³åŒ—çœ","å±±è¥¿çœ","åŒ—äº¬"};
 		spinner1 = (Spinner) findViewById(R.id.province);
 		spinner2 = (Spinner) findViewById(R.id.city);
 		spinner3 = (Spinner) findViewById(R.id.district);
@@ -76,11 +76,11 @@ public class EditNewAddressActivity extends SherlockActivity {
 		numberTextView = (EditText) findViewById(R.id.new_address_item_edittext2);
 		areaTextView = (EditText) findViewById(R.id.new_address_item_edittext3);
 		
-		spinner1.setPrompt("Ê¡");
-		spinner2.setPrompt("³ÇÊĞ");
-		spinner3.setPrompt("µØÇø");
+		spinner1.setPrompt("çœ");
+		spinner2.setPrompt("åŸå¸‚");
+		spinner3.setPrompt("åœ°åŒº");
 
-		// »ñÈ¡bundle¶ÔÏó
+		// è·å–bundleå¯¹è±¡
 		Bundle bundle = this.getIntent().getExtras();
 		Addresses addresses = (Addresses) bundle.get("editaddress");
 		String name = addresses.getName();
@@ -90,7 +90,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 		// String provice = addresses.getProvice();
 		// String city = addresses.getCity();
 		// String area = addresses.getArea();
-		String dString = addresses.getAddress();// ÏêÏ¸µØÖ·
+		String dString = addresses.getAddress();// è¯¦ç»†åœ°å€
 
 		nameTextView.setText(name);
 		numberTextView.setText(phone);
@@ -294,12 +294,12 @@ public class EditNewAddressActivity extends SherlockActivity {
 				// Intent intent = new
 				// Intent(AddressActivity.this,MyMallActivity.class);
 				// startActivity(intent);
-				// ½áÊøµ±Ç°Activity£»
+				// ç»“æŸå½“å‰Activityï¼›
 				EditNewAddressActivity.this.finish();
 			}
 		});
 		Button rightButton = (Button) findViewById(R.id.actionbar_right);
-		rightButton.setText("Íê³É");
+		rightButton.setText("å®Œæˆ");
 		rightButton.setOnClickListener(new android.view.View.OnClickListener() {
 
 			@Override
@@ -309,7 +309,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 						|| numberTextView.getText().toString() == null
 						|| "".equals(numberTextView.getText().toString())) {
 					Toast.makeText(EditNewAddressActivity.this,
-							"ÊÕ»õÈËĞÕÃû,µç»°²»ÄÜÎª¿Õ ", Toast.LENGTH_SHORT).show();
+							"æ”¶è´§äººå§“å,ç”µè¯ä¸èƒ½ä¸ºç©º ", Toast.LENGTH_SHORT).show();
 				} else {
 					
 					Addresses addresses = new Addresses();
@@ -338,22 +338,22 @@ public class EditNewAddressActivity extends SherlockActivity {
 //					 Log.i("info", isUpdate+"addressId");
 
 					if (!isUpdate) {
-						Toast.makeText(EditNewAddressActivity.this, "ÄúµÄÊäÈëÓĞÎÊÌâ",
+						Toast.makeText(EditNewAddressActivity.this, "æ‚¨çš„è¾“å…¥æœ‰é—®é¢˜",
 								Toast.LENGTH_SHORT).show();
 
 					} else {
 						// addresses.setAddressId(addressId+"");
 
-						// ½«Êı¾İ°ó¶¨µ½SpinnerÊÓÍ¼ÉÏ
+						// å°†æ•°æ®ç»‘å®šåˆ°Spinnerè§†å›¾ä¸Š
 						Intent intent = getIntent();
-						// »ñÈ¡bundle¶ÔÏó
+						// è·å–bundleå¯¹è±¡
 						Bundle bundle = new Bundle();
 						bundle.putSerializable("newaddress", addresses);
-						intent.putExtras(bundle);// ·ÅÖÃbundle¶ÔÏó
+						intent.putExtras(bundle);// æ”¾ç½®bundleå¯¹è±¡
 						EditNewAddressActivity.this.setResult(
 								DefinalDate.responcode1, intent);
 						EditNewAddressActivity.this.finish();
-						// Toast.makeText(NewAddressActivity.this, "±à¼­³É¹¦",
+						// Toast.makeText(NewAddressActivity.this, "ç¼–è¾‘æˆåŠŸ",
 						// } Toast.LENGTH_LONG).show();
 					}
 				}
@@ -361,6 +361,6 @@ public class EditNewAddressActivity extends SherlockActivity {
 		});
 
 		TextView titleTextView = (TextView) findViewById(R.id.actionbar_title);
-		titleTextView.setText("±à¼­ÊÕ»õµØÖ·");
+		titleTextView.setText("ç¼–è¾‘æ”¶è´§åœ°å€");
 	}
 }

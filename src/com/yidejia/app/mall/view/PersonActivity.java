@@ -37,7 +37,7 @@ public class PersonActivity extends SherlockActivity {
 	
 //		mListView = (ListView) findViewById(R.id.lv_group_list_list);
 //		mListView.setAdapter(myAdapter);
-		Log.i("info", "你好");
+		Log.i("info", "你好"); 
 	}
 //	//添加响应事件
 //	public void doClick(View v){

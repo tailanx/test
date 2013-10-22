@@ -16,7 +16,7 @@ import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.util.Md5;
 /**
- * 删除商品评论
+ * 鍒犻櫎鍟嗗搧璇勮
  * @author long bin
  *
  */
@@ -126,7 +126,7 @@ public class DeleteProductComment {
 //				// TODO Auto-generated method stub
 //				super.onStart();
 //				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//				bar.setMessage("正在查询");
+//				bar.setMessage("姝ｅ湪鏌ヨ");
 //				bar.show();
 //			}
 //			

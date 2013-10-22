@@ -10,7 +10,7 @@ import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.util.Md5;
 /**
- * È¡Ïû¶©µ¥
+ * å–æ¶ˆè®¢å•
  * @author long bin
  *
  */
@@ -21,9 +21,9 @@ public class SignOrder {
 	
 	/**
 	 * 
-	 * Ö»ÓĞ·µ»Ø ¡°successÈ¡Ïû³É¹¦¡± ²ÅËãÌá½»¶©µ¥³É¹¦¡£
-	 * @param customer_id ¿Í»§id
-	 * @param code ¶©µ¥ºÅ
+	 * åªæœ‰è¿”å› â€œsuccesså–æ¶ˆæˆåŠŸâ€ æ‰ç®—æäº¤è®¢å•æˆåŠŸã€‚
+	 * @param customer_id å®¢æˆ·id
+	 * @param code è®¢å•å·
 	 */
 	private void setKeysAndValues(String customer_id, String code){
 		keys[0] = "api";
@@ -70,9 +70,9 @@ public class SignOrder {
 	private String result = "";
 	/**
 	 * 
-	 * Ö»ÓĞ·µ»Ø ¡°successÇ©ÊÕ³É¹¦¡± ²ÅËãÌá½»¶©µ¥³É¹¦¡£
-	 * @param customer_id ¿Í»§id
-	 * @param code ¶©µ¥ºÅ
+	 * åªæœ‰è¿”å› â€œsuccessç­¾æ”¶æˆåŠŸâ€ æ‰ç®—æäº¤è®¢å•æˆåŠŸã€‚
+	 * @param customer_id å®¢æˆ·id
+	 * @param code è®¢å•å·
 	 */
 	public String getHttpResponseString(String customer_id, String code, String token)throws IOException{
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress(customer_id, code));

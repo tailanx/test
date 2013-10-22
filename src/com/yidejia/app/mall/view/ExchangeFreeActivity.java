@@ -64,7 +64,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 		ImageView back = (ImageView) findViewById(R.id.actionbar_left);
 		Button confirm = (Button)findViewById(R.id.actionbar_right);
 		TextView  titleTextView = (TextView) findViewById(R.id.actionbar_title);
-		titleTextView.setText("ÉÌÆ·ÔùËÍ»»¹º");
+		titleTextView.setText("å•†å“èµ é€æ¢è´­");
 		
 		back.setOnClickListener(new OnClickListener() {
 			
@@ -78,7 +78,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(ExchangeFreeActivity.this,PayActivity.class);
+				Intent intent = new Intent(ExchangeFreeActivity.this,CstmPayActivity.class);
 				ExchangeFreeActivity.this.startActivity(intent);
 				
 			}
@@ -115,12 +115,12 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 
 	
 	private void InitWidth() {
-		ivBottomLine = (ImageView) findViewById(R.id.iv_bottom_line);//»¬¶¯
+		ivBottomLine = (ImageView) findViewById(R.id.iv_bottom_line);//æ»‘åŠ¨
         bottomLineWidth = ivBottomLine.getLayoutParams().width;
         DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);//»ñÈ¡µ±Ç°ÆÁÄ»µÄÊôĞÔ
-        int screenW = dm.widthPixels;//ÆÁÄ»µÄ¿í
-        offset = (int) ((screenW / 3 - bottomLineWidth)/2);//ÆğÊ¼Î»ÖÃ
+        getWindowManager().getDefaultDisplay().getMetrics(dm);//è·å–å½“å‰å±å¹•çš„å±æ€§
+        int screenW = dm.widthPixels;//å±å¹•çš„å®½
+        offset = (int) ((screenW / 3 - bottomLineWidth)/2);//èµ·å§‹ä½ç½®
 
         position_one = (int) (screenW / 3);
         position_two = position_one * 2;
@@ -144,15 +144,15 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 	        public void onPageSelected(int arg0) {
 	            Animation animation = null;
 	            switch (arg0) {
-	            case 0://¼ÙÈçÊÇµÚÒ»¸ö±»Ñ¡ÖĞ£¬Ìí¼ÓÊÂ¼ş
-	                if (currIndex == 1) {//µ±Ç°ÊÇµÚ¶ş¸ö
+	            case 0://å‡å¦‚æ˜¯ç¬¬ä¸€ä¸ªè¢«é€‰ä¸­ï¼Œæ·»åŠ äº‹ä»¶
+	                if (currIndex == 1) {//å½“å‰æ˜¯ç¬¬äºŒä¸ª
 	                	mIntegeral.setPressed(false);
 	                    animation = new TranslateAnimation(position_one, 0, 0, 0);
 	                    mIntegeral.setTextColor(Color.parseColor("#ed217c"));
 	                } 
 	                mCoupons.setPressed(true);
 	                mCoupons.setBackgroundResource(R.drawable.produce_textview_selector);
-	                mCoupons.setTextColor(Color.parseColor("#000000"));
+	                mCoupons.setTextColor(Color.parseColor("#702c91"));
 	                break;
 	            case 1:
 	                if (currIndex == 0) {
@@ -163,7 +163,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 	                } 
 	                mIntegeral.setPressed(true);
 	                mIntegeral.setBackgroundResource(R.drawable.produce_textview_selector);
-	                mIntegeral.setTextColor(Color.parseColor("#000000"));
+	                mIntegeral.setTextColor(Color.parseColor("#702c91"));
 	                break;
 	           
 	            }

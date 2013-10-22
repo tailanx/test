@@ -14,7 +14,7 @@ import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.util.Md5;
 /**
- * »ñÈ¡ÅäËÍ·ÑÓÃ
+ * è·å–é…é€è´¹ç”¨
  * @author long bin
  *
  */
@@ -120,7 +120,7 @@ public class GetExpressList {
 //				// TODO Auto-generated method stub
 //				super.onStart();
 //				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//				bar.setMessage("ÕıÔÚ²éÑ¯");
+//				bar.setMessage("æ­£åœ¨æŸ¥è¯¢");
 //				bar.show();
 //			}
 //			

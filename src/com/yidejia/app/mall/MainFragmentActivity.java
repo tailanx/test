@@ -44,25 +44,25 @@ import com.yidejia.app.mall.widget.YLImageButton;
 
 
 /**
- * ÓÃÓÚÎå´óµ¼º½
- * @author Áú±ò
+ * ç”¨äºŽäº”å¤§å¯¼èˆª
+ * @author long bin
  *
  */
 public class MainFragmentActivity extends SherlockFragmentActivity {
 
 //	private ViewPager main_act_pager;
 	private ArrayList<Fragment> fragmentsList;
-	private int currentIndex = 0;//µ±Ç°µ¼º½ËùÔÚÒ³Ãæ
+	private int currentIndex = 0;//å½“å‰å¯¼èˆªæ‰€åœ¨é¡µé¢
 	private RelativeLayout downHomeLayout;
 	private RelativeLayout downGuangLayout;
 	private RelativeLayout downSearchLayout;
 	private RelativeLayout downShoppingLayout;
 	private RelativeLayout downMyLayout;
-	private ImageView down_home_imageView;//Ê×Ò³°´Å¥Í¼Æ¬
-	private ImageView down_guang_imageView;//¹ä°´Å¥Í¼Æ¬
-	private ImageView down_search_imageView;//ËÑË÷°´Å¥Í¼Æ¬
-	private ImageView down_shopping_imageView; //¹ºÎï³µ°´Å¥Í¼Æ¬
-	private ImageView down_my_imageView; //ÎÒµÄÉÌ³Ç°´Å¥Í¼Æ¬
+	private ImageView down_home_imageView;//é¦–é¡µæŒ‰é’®å›¾ç‰‡
+	private ImageView down_guang_imageView;//é€›æŒ‰é’®å›¾ç‰‡
+	private ImageView down_search_imageView;//æœç´¢æŒ‰é’®å›¾ç‰‡
+	private ImageView down_shopping_imageView; //è´­ç‰©è½¦æŒ‰é’®å›¾ç‰‡
+	private ImageView down_my_imageView; //æˆ‘çš„å•†åŸŽæŒ‰é’®å›¾ç‰‡
 	
 	private CartsDataManage cartsDataManage;
 	private TextView down_home_textview;
@@ -73,7 +73,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 	private int number;
 	private InnerReceiver receiver;
 	
-//	private Button down_shopping_cart;//¹ºÎï³µ¸öÊý°´Å¥
+//	private Button down_shopping_cart;//è´­ç‰©è½¦ä¸ªæ•°æŒ‰é’®
 	
 //	private TextView down_home_TextView;
 //	private TextView down_guang_TextView;
@@ -117,17 +117,17 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 	}
 	
 /**
- * ³õÊ¼»¯µ×²¿µ¼º½À¸
+ * åˆå§‹åŒ–åº•éƒ¨å¯¼èˆªæ 
  */
 	private void initNavView() {
-		//¸Ä±äµ×²¿Ê×Ò³±³¾°£¬ÓÐ°´ÏÂÈ¥µÄÐ§¹ûµÄ±³¾°
+		//æ”¹å˜åº•éƒ¨é¦–é¡µèƒŒæ™¯ï¼Œæœ‰æŒ‰ä¸‹åŽ»çš„æ•ˆæžœçš„èƒŒæ™¯
 		downHomeLayout = (RelativeLayout) findViewById(R.id.down_home_layout);
 //		downHomeLayout.setBackgroundResource(R.drawable.down_hover);
 		down_home_imageView = (ImageView) findViewById(R.id.down_home_icon);
 		res = getResources();
 //		bmp = BitmapFactory.decodeResource(res, R.drawable.home_hover);
 //		down_home_imageView.setImageBitmap(bmp);
-//		down_home_imageView.setImageResource(R.drawable.home_hover);//»òÕßÕâÑù
+//		down_home_imageView.setImageResource(R.drawable.home_hover);//æˆ–è€…è¿™æ ·
 		
 		// cartsDataManage = new CartsDataManage();
 		cartsDataManage = new CartsDataManage();
@@ -185,7 +185,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
         ft.add(R.id.main_fragment, mainFragment).commit();//.addToBackStack(fragmentTag[0])
 	}
 	/**
-	 * ÕâÀï²»ÊÇfragment+ viewpager ÊµÏÖ£¬²»ÓÃadd fragment½øÀ´
+	 * è¿™é‡Œä¸æ˜¯fragment+ viewpager å®žçŽ°ï¼Œä¸ç”¨add fragmentè¿›æ¥
 	 */
 	private void addView(){
 //		main_act_pager = (ViewPager) findViewById(R.id.main_act_pager);
@@ -303,11 +303,12 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 				default:
 					break;
 				}
-				//ÓÃÓÚÇÐ»»Ê±±£´æfragment
+				//ç”¨äºŽåˆ‡æ¢æ—¶ä¿å­˜fragment
 				FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-				if(getCurrFragment(id).isAdded())
-					ft.hide(getCurrFragment(currentIndex)).show(getCurrFragment(id)).commit();
-				else ft.hide(getCurrFragment(currentIndex)).add(R.id.main_fragment, getCurrFragment(id)).commit();//.addToBackStack(fragmentTag[id])
+//				if(getCurrFragment(id).isAdded())
+//					ft.hide(getCurrFragment(currentIndex)).show(getCurrFragment(id)).commit();
+//				else ft.hide(getCurrFragment(currentIndex)).add(R.id.main_fragment, getCurrFragment(id)).commit();//.addToBackStack(fragmentTag[id])
+				ft.replace(R.id.main_fragment, getCurrFragment(id)).commit();
 //				currFragment = newFragment;
 			}
 			currentIndex = id;
@@ -316,7 +317,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 	}
 	
 	private boolean isLogin;
-	//»ñÈ¡µ±Ç°µÄfragment, ÓÃÓÚÇÐ»»Ê±±£´æfragment
+	//èŽ·å–å½“å‰çš„fragment, ç”¨äºŽåˆ‡æ¢æ—¶ä¿å­˜fragment
 	private Fragment getCurrFragment(int index){
 		Fragment fragment = null;
 		switch (index) {
@@ -435,14 +436,14 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 
 	}
 
-	//Ë«»÷·µ»Ø¼üÍË³ö³ÌÐò
+	//åŒå‡»è¿”å›žé”®é€€å‡ºç¨‹åº
     private long exitTime = 0;
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
 		if(keyCode == KeyEvent.KEYCODE_BACK ){   
 	        if((System.currentTimeMillis()-exitTime) > 2000){  
-	            Toast.makeText(getApplicationContext(), "ÔÙ°´Ò»´ÎÍË³ö³ÌÐò", Toast.LENGTH_SHORT).show();                                
+	            Toast.makeText(getApplicationContext(), "ï¿½Ù°ï¿½Ò»ï¿½ï¿½ï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½", Toast.LENGTH_SHORT).show();                                
 	            exitTime = System.currentTimeMillis();   
 	        } else {
 	            finish();

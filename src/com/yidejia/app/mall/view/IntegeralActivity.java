@@ -48,7 +48,7 @@ public class IntegeralActivity extends SherlockFragmentActivity {
 //			case R.id.my_card_voucher_button1:
 //				Intent intent = new Intent(IntegeralActivity.this,MyMallActivity.class);
 //				startActivity(intent);
-//				//½áÊøµ±Ç°Activity£»
+//				//ç»“æŸå½“å‰Activityï¼›
 //				IntegeralActivity.this.finish();
 //				break;
 
@@ -78,7 +78,7 @@ public class IntegeralActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
 		ImageView back = (ImageView) findViewById(R.id.compose_back);
 		TextView  titleTextView = (TextView) findViewById(R.id.compose_title);
-		titleTextView.setText("»ı·Ö¿¨È¯");
+		titleTextView.setText("ç§¯åˆ†å¡åˆ¸");
 		
 		back.setOnClickListener(new OnClickListener() {
 			
@@ -119,12 +119,12 @@ public class IntegeralActivity extends SherlockFragmentActivity {
 
 	
 	private void InitWidth() {
-		ivBottomLine = (ImageView) findViewById(R.id.iv_bottom_line);//»¬¶¯
+		ivBottomLine = (ImageView) findViewById(R.id.iv_bottom_line);//æ»‘åŠ¨
         bottomLineWidth = ivBottomLine.getLayoutParams().width;
         DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);//»ñÈ¡µ±Ç°ÆÁÄ»µÄÊôĞÔ
-        int screenW = dm.widthPixels;//ÆÁÄ»µÄ¿í
-        offset = (int) ((screenW / 3 - bottomLineWidth)/2);//ÆğÊ¼Î»ÖÃ
+        getWindowManager().getDefaultDisplay().getMetrics(dm);//è·å–å½“å‰å±å¹•çš„å±æ€§
+        int screenW = dm.widthPixels;//å±å¹•çš„å®½
+        offset = (int) ((screenW / 3 - bottomLineWidth)/2);//èµ·å§‹ä½ç½®
 
         position_one = (int) (screenW / 3);
         position_two = position_one * 2;
@@ -148,8 +148,8 @@ public class IntegeralActivity extends SherlockFragmentActivity {
 	        public void onPageSelected(int arg0) {
 	            Animation animation = null;
 	            switch (arg0) {
-	            case 0://¼ÙÈçÊÇµÚÒ»¸ö±»Ñ¡ÖĞ£¬Ìí¼ÓÊÂ¼ş
-	                if (currIndex == 1) {//µ±Ç°ÊÇµÚ¶ş¸ö
+	            case 0://å‡å¦‚æ˜¯ç¬¬ä¸€ä¸ªè¢«é€‰ä¸­ï¼Œæ·»åŠ äº‹ä»¶
+	                if (currIndex == 1) {//å½“å‰æ˜¯ç¬¬äºŒä¸ª
 	                	mIntegeral.setPressed(false);
 	                    animation = new TranslateAnimation(position_one, 0, 0, 0);
 	                    mIntegeral.setTextColor(Color.parseColor("#ed217c"));

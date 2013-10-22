@@ -46,15 +46,15 @@ public class AlreadyComActivity extends SherlockFragmentActivity {
 //	    public void doClick(View v){
 //			Intent intent = new Intent(AlreadyComActivity.this,MyMallActivity.class);
 //			switch (v.getId()) {
-////			case R.id.already_complete_button1://·µ»Ø
+////			case R.id.already_complete_button1://è¿”å›
 ////				intent.setClass(this, MyMallActivity.class);
 ////				break;
-//			case R.id.already_complete_item_main_item_comment://ÆÀ¼Û
+//			case R.id.already_complete_item_main_item_comment://è¯„ä»·
 //				intent.setClass(this, PersonEvaluationActivity.class);
 //				break;
 //			}
 //			startActivity(intent);
-//			//½áÊøµ±Ç°Activity£»
+//			//ç»“æŸå½“å‰Activityï¼›
 //			finish();
 //		}
 	@Override
@@ -81,7 +81,7 @@ public class AlreadyComActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
 		ImageView backImageView = (ImageView) findViewById(R.id.compose_back); 
 		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
-		titleTextView.setText("ÒÑÍê³É¶©µ¥");
+		titleTextView.setText(getResources().getString(R.string.complete_order));
 		backImageView.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -107,9 +107,9 @@ public class AlreadyComActivity extends SherlockFragmentActivity {
 		 LayoutInflater mInflater = getLayoutInflater();
 	   
 	     
-	     Fragment weekfragment = AlreadyComFragment.newInstance("½üÒ»ÖÜ");
-	     Fragment monthFragment = AlreadyComFragment.newInstance("½üÒ»ÔÂ");
-	     Fragment yearFragment=AlreadyComFragment.newInstance("½üÒ»Äê");
+	     Fragment weekfragment = AlreadyComFragment.newInstance(getResources().getString(R.string.order_time_week));
+	     Fragment monthFragment = AlreadyComFragment.newInstance(getResources().getString(R.string.order_time_month));
+	     Fragment yearFragment=AlreadyComFragment.newInstance(getResources().getString(R.string.order_time_year));
 	     
 	     fragmentsList.add(yearFragment);
 	     fragmentsList.add(monthFragment);
@@ -125,12 +125,12 @@ public class AlreadyComActivity extends SherlockFragmentActivity {
 
 	
 	private void InitWidth() {
-		ivBottomLine = (ImageView) findViewById(R.id.iv_bottom_line);//»¬¶¯
+		ivBottomLine = (ImageView) findViewById(R.id.iv_bottom_line);//æ»‘åŠ¨
         bottomLineWidth = ivBottomLine.getLayoutParams().width;
         DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);//»ñÈ¡µ±Ç°ÆÁÄ»µÄÊôĞÔ
-        int screenW = dm.widthPixels;//ÆÁÄ»µÄ¿í
-        offset = (int) ((screenW / 3 - bottomLineWidth)/2);//ÆğÊ¼Î»ÖÃ
+        getWindowManager().getDefaultDisplay().getMetrics(dm);//è·å–å½“å‰å±å¹•çš„å±æ€§
+        int screenW = dm.widthPixels;//å±å¹•çš„å®½
+        offset = (int) ((screenW / 3 - bottomLineWidth)/2);//èµ·å§‹ä½ç½®
 
         position_one = (int) (screenW / 3);
         position_two = position_one * 2;
@@ -154,8 +154,8 @@ public class AlreadyComActivity extends SherlockFragmentActivity {
 	        public void onPageSelected(int arg0) {
 	            Animation animation = null;
 	            switch (arg0) {
-	            case 0://¼ÙÈçÊÇµÚÒ»¸ö±»Ñ¡ÖĞ£¬Ìí¼ÓÊÂ¼ş
-	                if (currIndex == 1) {//µ±Ç°ÊÇµÚ¶ş¸ö
+	            case 0://å‡å¦‚æ˜¯ç¬¬ä¸€ä¸ªè¢«é€‰ä¸­ï¼Œæ·»åŠ äº‹ä»¶
+	                if (currIndex == 1) {//å½“å‰æ˜¯ç¬¬äºŒä¸ª
 	                	mMonth.setPressed(false);
 	                    animation = new TranslateAnimation(position_one, 0, 0, 0);
 	                    mMonth.setBackgroundResource(R.drawable.product_details_bg);

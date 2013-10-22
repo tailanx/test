@@ -28,14 +28,14 @@ import com.yidejia.app.mall.util.CartUtil;
 public class GoCartActivity extends SherlockActivity {// implements
 														// OnClickListener
 
-	private TextView sumTextView;// ×ÜµÄÇ®Êı
-	private TextView counTextView;// ×ÜµÄÊıÁ¿
-	private CheckBox mBox;// Ñ¡Ôñ¿ò
-	private Button mbutton;// È¥½áËã
+	private TextView sumTextView;// æ€»çš„é’±æ•°
+	private TextView counTextView;// æ€»çš„æ•°é‡
+	private CheckBox mBox;// é€‰æ‹©æ¡†
+	private Button mbutton;// å»ç»“ç®—
 	private CartUtil cartUtil;
-	private AddressDataManage addressManage;// µØÖ·¹ÜÀíÊı¾İ
-//	private PullToRefreshScrollView mPullToRefreshScrollView;// ½çÃæË¢ĞÂ
-	private ImageView mImageView;//·µ»Ø
+	private AddressDataManage addressManage;// åœ°å€ç®¡ç†æ•°æ®
+//	private PullToRefreshScrollView mPullToRefreshScrollView;// ç•Œé¢åˆ·æ–°
+	private ImageView mImageView;//è¿”å›
 	private TextView mTextView;//title
 	
 
@@ -45,14 +45,14 @@ public class GoCartActivity extends SherlockActivity {// implements
 		setContentView(R.layout.shopping_cart);
 		addressManage = new AddressDataManage(GoCartActivity.this);
 
-		mBox = (CheckBox) findViewById(R.id.shopping_cart_checkbox);// Ñ¡Ôñ¿ò
+		mBox = (CheckBox) findViewById(R.id.shopping_cart_checkbox);// é€‰æ‹©æ¡†
 
-		sumTextView = (TextView) findViewById(R.id.shopping_cart_sum_money);// ×ÜµÄÇ®Êı
+		sumTextView = (TextView) findViewById(R.id.shopping_cart_sum_money);// æ€»çš„é’±æ•°
 
-		counTextView = (TextView) findViewById(R.id.shopping_cart_sum_number);// ×ÜµÄÊıÁ¿
+		counTextView = (TextView) findViewById(R.id.shopping_cart_sum_number);// æ€»çš„æ•°é‡
 
 //		mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.shopping_cart_item_goods_scrollView);
-//		String label = "ÉÏ´Î¸üĞÂÓÚ"
+//		String label = "ï¿½Ï´Î¸ï¿½ï¿½ï¿½ï¿½ï¿½"
 //				+ DateUtils.formatDateTime(GoCartActivity.this,
 //						System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
 //								| DateUtils.FORMAT_SHOW_DATE
@@ -72,7 +72,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 		mbutton = (Button) findViewById(R.id.actionbar_right);
 		mTextView = (TextView) findViewById(R.id.actionbar_title);
 		mImageView = (ImageView) findViewById(R.id.actionbar_left);
-		mTextView.setText("¹ºÎï³µ");
+		mTextView.setText("è´­ç‰©è½¦");
 		
 
 		try {
@@ -91,7 +91,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 					// TODO Auto-generated method stub
 					
 					Intent intent = new Intent(GoCartActivity.this,
-							PayActivity.class);
+							CstmPayActivity.class);
 					float sum = Float.parseFloat(sumTextView.getText()
 							.toString());
 					
@@ -102,7 +102,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 							intent.putExtras(bundle);
 							GoCartActivity.this.startActivity(intent);
 						} else {
-							Toast.makeText(GoCartActivity.this, "Äã»¹Î´¹ºÂòÈÎºÎÉÌÆ·",
+							Toast.makeText(GoCartActivity.this, "ä½ è¿˜æœªè´­ä¹°ä»»ä½•å•†å“",
 									Toast.LENGTH_LONG).show();
 						}
 					}
@@ -111,7 +111,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(GoCartActivity.this, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT)
+			Toast.makeText(GoCartActivity.this, getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT)
 					.show();
 		}
 		//
@@ -122,7 +122,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 //		@Override
 //		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
 //			// TODO Auto-generated method stub
-//			String label = "ÉÏ´Î¸üĞÂÓÚ" + DateUtils.formatDateTime(GoCartActivity.this, System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL|DateUtils.FORMAT_SHOW_DATE|DateUtils.FORMAT_SHOW_TIME);
+//			String label = "ï¿½Ï´Î¸ï¿½ï¿½ï¿½ï¿½ï¿½" + DateUtils.formatDateTime(GoCartActivity.this, System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL|DateUtils.FORMAT_SHOW_DATE|DateUtils.FORMAT_SHOW_TIME);
 //			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 //			mPullToRefreshScrollView.onRefreshComplete();
 //		}
@@ -135,13 +135,13 @@ public class GoCartActivity extends SherlockActivity {// implements
 	// mbutton = (Button) findViewById(R.id.go_cart_go_pay);
 	// mbutton.setOnClickListener(this);
 	//
-	// mBox = (CheckBox) findViewById(R.id.go_cart_checkbox);// Ñ¡Ôñ¿ò
+	// mBox = (CheckBox) findViewById(R.id.go_cart_checkbox);// Ñ¡ï¿½ï¿½ï¿½
 	//
 	// sumTextView = (TextView)findViewById(R.id.shopping_cart_sum_money);//
-	// ×ÜµÄÇ®Êı
+	// ï¿½Üµï¿½Ç®ï¿½ï¿½
 	//
 	// counTextView = (TextView)findViewById(R.id.shopping_cart_sum_number);//
-	// ×ÜµÄÊıÁ¿
+	// ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½
 	//
 	// LinearLayout layout = (LinearLayout)
 	// findViewById(R.id.go_cart_relative1);
@@ -150,7 +150,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 	// } catch (Exception e) {
 	// // TODO Auto-generated catch block
 	// e.printStackTrace();
-	// Toast.makeText(GoCartActivity.this, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+	// Toast.makeText(GoCartActivity.this, "ï¿½ï¿½ï¿½ç²»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", Toast.LENGTH_SHORT).show();
 	//
 	// }
 	//
@@ -171,7 +171,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 
 //	/**
 //	 * 
-//	 * @return ·µ»ØÒ»¸öµØÖ·
+//	 * @return ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ö·
 //	 */
 //	private void getAddresses() {
 //

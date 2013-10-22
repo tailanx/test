@@ -43,35 +43,35 @@ public class EditorActivity extends SherlockActivity {
 
 		 Builder builder = new Builder(this);
 		 dialogClear = builder
-					.setTitle("ÌáÊ¾")
-					.setMessage("ÄúÈ·ÈÏÇå³ı»º´æÍ¼Æ¬Âğ£¿")
-					.setPositiveButton("È·¶¨",new android.content.DialogInterface.OnClickListener() {
+					.setTitle("æç¤º")
+					.setMessage("æ‚¨ç¡®è®¤æ¸…é™¤ç¼“å­˜å›¾ç‰‡å—ï¼Ÿ")
+					.setPositiveButton("ç¡®å®š",new android.content.DialogInterface.OnClickListener() {
 						
 						@Override
 						public void onClick(DialogInterface arg0, int arg1) {
-							Toast.makeText(EditorActivity.this, "Çå³ı³É¹¦", Toast.LENGTH_LONG).show();
+							Toast.makeText(EditorActivity.this, "æ¸…é™¤æˆåŠŸ", Toast.LENGTH_LONG).show();
 							
 						}
 					})
-					.setNegativeButton("È¡Ïû", null)
+					.setNegativeButton("å–æ¶ˆ", null)
 					.create();
 		 dialogHelp = builder
-				.setTitle("°¬µÙæ§·şÎñÌõ¿î")
+				.setTitle("è‰¾è’‚å¦²æœåŠ¡æ¡æ¬¾")
 				.setIcon(android.R.drawable.menu_frame)
 				.setView(mLayout1)
-				.setPositiveButton("È·¶¨", null).create();
+				.setPositiveButton("ç¡®å®š", null).create();
 		 dialogAbout = builder
-					.setTitle("¹ØÓÚ")
+					.setTitle("å…³äº")
 					.setIcon(R.drawable.ic_launcher)
 					.setView(mLayout2)
-					.setPositiveButton("È·¶¨", null).create();
+					.setPositiveButton("ç¡®å®š", null).create();
 		 dialogphone = builder
-					.setTitle("°¬µÙæ§")
+					.setTitle("è‰¾è’‚å¦²")
 					.setIcon(android.R.drawable.divider_horizontal_dim_dark)
 					.setView(mLayout3)
-					.setPositiveButton("È·¶¨", null).create();
+					.setPositiveButton("ç¡®å®š", null).create();
 		 exit = builder
-					.setPositiveButton("È·¶¨",new android.content.DialogInterface.OnClickListener(){
+					.setPositiveButton("ç¡®å®š",new android.content.DialogInterface.OnClickListener(){
 						
 						public void onClick(DialogInterface arg0, int arg1) {
 							System.exit(0);
@@ -81,7 +81,7 @@ public class EditorActivity extends SherlockActivity {
 					
 						
 					})
-					.setNegativeButton("È¡Ïû", null)
+					.setNegativeButton("å–æ¶ˆ", null)
 					.create()
 					;
 		   	
@@ -196,7 +196,7 @@ public class EditorActivity extends SherlockActivity {
 		});
 		
 		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
-		titleTextView.setText("ÉèÖÃ");
+		titleTextView.setText("è®¾ç½®");
 		
 	}
 	

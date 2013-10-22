@@ -26,11 +26,11 @@ public class MyCollectActivity extends SherlockActivity {
 	private ArrayList<SearchItem> mList;
 //	private View mycollectView;
 //	private LinearLayout layout;
-//	private ImageView headImage;//头像
-//	private TextView content;//内容
-//	private TextView price;//价格
-//	private TextView sellCount;//卖出的总数
-//	private TextView compment;//评论
+//	private ImageView headImage;//澶村儚
+//	private TextView content;//鍐呭
+//	private TextView price;//浠锋牸
+//	private TextView sellCount;//鍗栧嚭鐨勬�绘暟
+//	private TextView compment;//璇勮
 	private void setupShow(){
 		mListView = (ListView) findViewById(R.id.my_collect_listview);
 		fAdapter = new FavoriteAdapter(this, mList);
@@ -81,15 +81,15 @@ public class MyCollectActivity extends SherlockActivity {
 		});
 		
 		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
-		titleTextView.setText("我的收藏");
+		titleTextView.setText("鎴戠殑鏀惰棌");
 	}
 	
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
-		menu.add("详情");
-		menu.add("删除");
-		menu.add("取消");
+		menu.add("璇︽儏");
+		menu.add("鍒犻櫎");
+		menu.add("鍙栨秷");
 	}
 }

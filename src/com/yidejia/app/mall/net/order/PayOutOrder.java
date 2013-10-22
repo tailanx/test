@@ -10,7 +10,7 @@ import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.util.Md5;
 /**
- * ĞŞ¸ÄÖ§¸¶×´Ì¬
+ * ä¿®æ”¹æ”¯ä»˜çŠ¶æ€
  * @author long bin
  *
  */
@@ -21,9 +21,9 @@ public class PayOutOrder {
 	
 	/**
 	 * 
-	 * Ö»ÓĞ·µ»Ø ¡°success¸¶¿î³É¹¦¡± ²ÅËãÌá½»¶©µ¥³É¹¦¡£
-	 * @param customer_id ¿Í»§id
-	 * @param code ¶©µ¥ºÅ
+	 * åªæœ‰è¿”å› â€œsuccessä»˜æ¬¾æˆåŠŸâ€ æ‰ç®—æäº¤è®¢å•æˆåŠŸã€‚
+	 * @param customer_id å®¢æˆ·id
+	 * @param code è®¢å•å·
 	 */
 	private void setKeysAndValues(String customer_id, String code){
 		keys[0] = "api";
@@ -70,9 +70,9 @@ public class PayOutOrder {
 	private String result = "";
 	/**
 	 * 
-	 * Ö»ÓĞ·µ»Ø ¡°success¸¶¿î³É¹¦¡± ²ÅËãÌá½»¶©µ¥³É¹¦¡£
-	 * @param customer_id ¿Í»§id
-	 * @param code ¶©µ¥ºÅ
+	 * åªæœ‰è¿”å› â€œsuccessä»˜æ¬¾æˆåŠŸâ€ æ‰ç®—æäº¤è®¢å•æˆåŠŸã€‚
+	 * @param customer_id å®¢æˆ·id
+	 * @param code è®¢å•å·
 	 */
 	public String getHttpResponseString(String customer_id, String code)throws IOException{
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress(customer_id, code));

@@ -42,7 +42,7 @@ public class MyApplication extends Application{
 		return this.userId;
 	}
 	
-	// ËÑË÷ÀúÊ·¼ÇÂ¼¸öÊı
+	// æœç´¢å†å²è®°å½•ä¸ªæ•°
 	private int schHstryAmount = 0;
 
 	public int getSchHstryAmount() {
@@ -53,7 +53,7 @@ public class MyApplication extends Application{
 		this.schHstryAmount = schHstryAmount;
 	}
 	
-	private String token;//µÇÂ¼ºó·µ»ØµÄtoken
+	private String token;//ç™»å½•åè¿”å›çš„token
 	
 	public void setToken(String token){
 		this.token = token;
@@ -63,7 +63,7 @@ public class MyApplication extends Application{
 		return token;
 	}
 	
-	private String userHeadImg;//ÓÃ»§Í·ÏñµØÖ·
+	private String userHeadImg;//ç”¨æˆ·å¤´åƒåœ°å€
 	public void setUserHeadImg(String img){
 		this.userHeadImg = img;
 	}
@@ -71,8 +71,8 @@ public class MyApplication extends Application{
 	public String getUserHeadImg(){
 		return userHeadImg;
 	}
-	private String password;//ÃÜÂë£¬Ó¦¸ÃÊÇmd5Öµ
-	private String nick;//êÇ³Æ
+	private String password;//å¯†ç ï¼Œåº”è¯¥æ˜¯md5å€¼
+	private String nick;//æ˜µç§°
 	
 	public void setPassword(String password) {
 		this.password = password;
@@ -90,7 +90,7 @@ public class MyApplication extends Application{
 		return nick;
 	}
 	
-	private String vip;//vipµÈ¼¶
+	private String vip;//vipç­‰çº§
 	public void setVip(String vip){
 		this.vip = vip;
 	}

@@ -18,14 +18,14 @@ public class EvaluationActivity extends SherlockActivity {
 		public void doClick(View v){
 			Intent intent = new Intent();
 			switch (v.getId()) {
-//			case R.id.evaluation_button://·µ»Ø
+//			case R.id.evaluation_button://è¿”å›
 //				intent.setClass(this, MyMallActivity.class);
 //				break;
-			case R.id.evaluation_item_evaluation://ÆÀ¼Û
+			case R.id.evaluation_item_evaluation://è¯„ä»·
 				intent.setClass(this, PersonEvaluationActivity.class);
 			}
 			startActivity(intent);
-			//½áÊøµ±Ç°Activity£»
+			//ç»“æŸå½“å‰Activityï¼›
 			EvaluationActivity.this.finish();
 	}
 	
@@ -46,11 +46,11 @@ public class EvaluationActivity extends SherlockActivity {
 //		TextView textView4 = (TextView) person.findViewById(R.id.ecaluation_item_textview6);
 //		TextView textView5 = (TextView) person.findViewById(R.id.ecaluation_item_textview7);
 //		
-//		textView1.setText("ÉúÉúÊÀÊÀssada°¡´óÊå °¡ìªìªÈö´ó¶àÊı¶¼ÊÇÈö¶¼ÊÇµ­µ­µÄµ­µ­µÄµ­µ­µÄµ­µ­adasdadasdsadsadasdsadsadsssssssssssssssss");
-//		textView2.setText("£¤160.00");
-//		textView3.setText("Êı   Á¿£ºx1");
-//		textView3.setText("¶©µ¥½ğ¶î£º£¤160.00");
-//		textView3.setText("Êı    Á¿£ºx1");
+//		textView1.setText("ç”Ÿç”Ÿä¸–ä¸–ssadaå•Šå¤§å” å•Šé£’é£’æ’’å¤§å¤šæ•°éƒ½æ˜¯æ’’éƒ½æ˜¯æ·¡æ·¡çš„æ·¡æ·¡çš„æ·¡æ·¡çš„æ·¡æ·¡adasdadasdsadsadasdsadsadsssssssssssssssss");
+//		textView2.setText("ï¿¥160.00");
+//		textView3.setText("æ•°   é‡ï¼šx1");
+//		textView3.setText("è®¢å•é‡‘é¢ï¼šï¿¥160.00");
+//		textView3.setText("æ•°    é‡ï¼šx1");
 		layout.addView(person);
 	}
 	
@@ -64,7 +64,7 @@ public class EvaluationActivity extends SherlockActivity {
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
 //		startActionMode(new AnActionModeOfEpicProportions(ComposeActivity.this));
-		ImageView button = (ImageView) findViewById(R.id.compose_back);//·µ»Ø
+		ImageView button = (ImageView) findViewById(R.id.compose_back);//è¿”å›
 		button.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -76,6 +76,6 @@ public class EvaluationActivity extends SherlockActivity {
 		});
 		
 		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
-		titleTextView.setText("ÆÀ¼ÛÉ¹µ¥");
+		titleTextView.setText("è¯„ä»·æ™’å•");
 	}
 }

@@ -24,13 +24,13 @@ public class CheckActivity extends SherlockActivity {
 		case R.id.address_management_button1:
 			Intent intent = new Intent(AddressActivity.this,MyMallActivity.class);
 			startActivity(intent);
-			//½áÊøµ±Ç°Activity£»
+			//ç»“æŸå½“å‰Activityï¼›
 			AddressActivity.this.finish();
 			break;
 		case R.id.address_management_button2:
 			Intent intent2 = new Intent(AddressActivity.this,NewAddressActivity.class);
 			startActivity(intent2);
-			//½áÊøµ±Ç°Activity£»
+			//ç»“æŸå½“å‰Activityï¼›
 			AddressActivity.this.finish();
 			break;
 		}
@@ -40,7 +40,7 @@ public class CheckActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setActionbar();
-		//ÕâÀï¸¸²¼¾ÖÒªÓÃscrollview
+		//è¿™é‡Œçˆ¶å¸ƒå±€è¦ç”¨scrollview
 		setContentView(R.layout.check_logistics);
 		
 
@@ -66,12 +66,12 @@ public class CheckActivity extends SherlockActivity {
 //				Toast.makeText(ComposeActivity.this, "button", Toast.LENGTH_SHORT).show();
 //				Intent intent = new Intent(AddressActivity.this,MyMallActivity.class);
 //				startActivity(intent);
-				//½áÊøµ±Ç°Activity£»
+				//ç»“æŸå½“å‰Activityï¼›
 				CheckActivity.this.finish();
 			}
 		});
 		
 		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
-		titleTextView.setText("²é¿´ÎïÁ÷");
+		titleTextView.setText(getResources().getString(R.string.check_logistics));
 	}
 }
