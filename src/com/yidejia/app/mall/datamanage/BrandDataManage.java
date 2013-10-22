@@ -8,19 +8,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.Brand;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.search.BrandDataUtil;
 import com.yidejia.app.mall.util.UnicodeToString;
 
 /**
- * »ñÈ¡Æ·ÅÆÁĞ±í
+ * è·å–å“ç‰Œåˆ—è¡¨
  * @author long bin
  *
  */
@@ -37,11 +37,11 @@ public class BrandDataManage {
 	}
 	/**
 	 * 
-	 * @return brandsArray Æ·ÅÆÁĞ±í
+	 * @return brandsArray å“ç‰Œåˆ—è¡¨
 	 */
 	public ArrayList<Brand> getBrandArray(){
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-//			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+//			Toast.makeText(context, "ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½Ó£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½", Toast.LENGTH_LONG).show();
 			return brandsArray;
 		}
 		TaskBrand taskBrand = new TaskBrand();
@@ -49,7 +49,7 @@ public class BrandDataManage {
 		try {
 			state = taskBrand.execute().get();
 			if("".equals(httpResponseString)){
-				Toast.makeText(context, "Á¬½Ó³¬Ê±", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, context.getResources().getString(R.string.time_out), Toast.LENGTH_SHORT).show();
 				state = true;
 			}
 		} catch (InterruptedException e) {
@@ -65,7 +65,7 @@ public class BrandDataManage {
 			e.printStackTrace();
 		} 
 		if(!state){
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		return brandsArray;
 	}
@@ -78,7 +78,7 @@ public class BrandDataManage {
 			// TODO Auto-generated method stub
 //			super.onPreExecute();
 //			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//			bar.setMessage("ÕıÔÚ²éÑ¯");
+//			bar.setMessage("ï¿½ï¿½ï¿½Ú²ï¿½Ñ¯");
 //			bar.show();
 		}
 		
@@ -96,7 +96,7 @@ public class BrandDataManage {
 						return true;
 					}
 				} else{
-					httpResponseString = "Á¬½Ó³¬Ê±";
+					httpResponseString = context.getResources().getString(R.string.time_out);
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

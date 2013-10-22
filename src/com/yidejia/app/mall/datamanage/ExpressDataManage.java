@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.Express;
 import com.yidejia.app.mall.model.FreePost;
 import com.yidejia.app.mall.net.ConnectionDetector;
@@ -42,14 +43,14 @@ public class ExpressDataManage {
 //	private Express express;
 	private ArrayList<Express> expresses;
 	/**
-	 * ¿ìµİ·ÑÓÃ
+	 * å¿«é€’è´¹ç”¨
 	 * @param province 
-	 * @param isDefault
+	 * @param isDefault y or n
 	 * @return 
 	 */
 	public ArrayList<Express> getExpressesExpenses(String province, String isDefault){
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-//			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+//			Toast.makeText(context, "ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½Ó£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½", Toast.LENGTH_LONG).show();
 			return expresses;
 		}
 		StringBuffer where = new StringBuffer();
@@ -58,7 +59,7 @@ public class ExpressDataManage {
 		where.append("%27+and+is_default%3D%27");
 		where.append(isDefault);
 		where.append("%27");
-		TaskExpress taskExpress = new TaskExpress(where.toString(), "0", "10", "", "", "%2A");
+		TaskExpress taskExpress = new TaskExpress(where.toString(), "0", "20", "", "", "%2A");
 		boolean state = false ;
 		try {
 			state = taskExpress.execute().get();
@@ -72,7 +73,7 @@ public class ExpressDataManage {
 			e.printStackTrace();
 		}
 		if(!state){
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		return expresses;
 	}
@@ -101,7 +102,7 @@ public class ExpressDataManage {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage("ÕıÔÚ²éÑ¯");
+			bar.setMessage(context.getResources().getString(R.string.searching));
 			bar.show();
 		}
 
@@ -140,7 +141,7 @@ public class ExpressDataManage {
 			super.onPostExecute(result);
 			bar.dismiss();
 //			if(result)
-//				Toast.makeText(context, "³É¹¦", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context, "ï¿½É¹ï¿½", Toast.LENGTH_SHORT).show();
 		}
 	}
 	
@@ -153,23 +154,26 @@ public class ExpressDataManage {
 			responseObject = responseArray.getJSONObject(i);
 			express.setEms(responseObject.getString("ems"));
 			express.setExpress(responseObject.getString("express"));
+			express.setPreId(responseObject.getString("pre_id"));
+			express.setIsDefault("y".equals(responseObject.getString("is_default")));
 			expresses.add(express);
 		}
 	}
 	
-	private ArrayList<Express> distributions;//ÅäËÍÖĞĞÄ
+	private ArrayList<Express> distributions;// é…é€ä¸­å¿ƒ
 	/**
-	 * ÅäËÍÖĞĞÄ
+	 * é…é€ä¸­å¿ƒ
+	 * @param id æ ¹æ®åœ°å€idè·å–é…é€ä¸­å¿ƒ
 	 * @param fromIndex 
 	 * @param amount
 	 * @return
 	 */
-	public ArrayList<Express> getDistributionsList(String fromIndex, String amount){
+	public ArrayList<Express> getDistributionsList(String id, String fromIndex, String amount){
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-//			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+//			Toast.makeText(context, "ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½Ó£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½", Toast.LENGTH_LONG).show();
 			return distributions;
 		}
-		TaskDis taskDis = new TaskDis("", fromIndex, amount, "", "", "%2A");
+		TaskDis taskDis = new TaskDis("id="+id, fromIndex, amount, "", "", "%2A");
 		boolean state = false ;
 		try {
 			state = taskDis.execute().get();
@@ -183,7 +187,7 @@ public class ExpressDataManage {
 			e.printStackTrace();
 		}
 		if(!state){
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		return distributions;
 	}
@@ -212,7 +216,7 @@ public class ExpressDataManage {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage("ÕıÔÚ²éÑ¯");
+			bar.setMessage(context.getResources().getString(R.string.searching));
 			bar.show();
 		}
 
@@ -251,7 +255,7 @@ public class ExpressDataManage {
 			super.onPostExecute(result);
 			bar.dismiss();
 //			if(result)
-//				Toast.makeText(context, "³É¹¦", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context, "ï¿½É¹ï¿½", Toast.LENGTH_SHORT).show();
 		}
 	}
 	
@@ -264,19 +268,20 @@ public class ExpressDataManage {
 			responseObject = responseArray.getJSONObject(i);
 			express.setDisName(unicode.revert(responseObject.getString("name")));
 			express.setDisDesc(unicode.revert(responseObject.getString("desc")));
-			distributions.add(express);
+			if("y".equals(responseObject.get("flag")))
+				distributions.add(express);
 		}
 	}
-	private ArrayList<FreePost> freePosts;//ÅäËÍÖĞĞÄ
+	private ArrayList<FreePost> freePosts;//å…é‚®
 	/**
-	 * ÃâÓÊĞÅÏ¢
+	 * å…é‚®ä¿¡æ¯
 	 * @param fromIndex 
 	 * @param amount
 	 * @return
 	 */
 	public ArrayList<FreePost> getFreePostList(String fromIndex, String amount){
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return freePosts;
 		}
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd+HH:mm:ss");
@@ -297,7 +302,7 @@ public class ExpressDataManage {
 			e.printStackTrace();
 		}
 		if(!state){
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		return freePosts;
 	}
@@ -326,7 +331,7 @@ public class ExpressDataManage {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage("ÕıÔÚ²éÑ¯");
+			bar.setMessage(context.getResources().getString(R.string.searching));
 			bar.show();
 		}
 		
@@ -365,7 +370,7 @@ public class ExpressDataManage {
 			super.onPostExecute(result);
 			bar.dismiss();
 //			if(result)
-//				Toast.makeText(context, "³É¹¦", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context, "ï¿½É¹ï¿½", Toast.LENGTH_SHORT).show();
 		}
 	}
 	

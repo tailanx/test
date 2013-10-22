@@ -14,6 +14,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.net.ConnectionDetector;
@@ -26,7 +27,7 @@ import com.yidejia.app.mall.net.order.SignOrder;
 import com.yidejia.app.mall.util.UnicodeToString;
 
 /**
- * »ñÈ¡¶©µ¥ÁĞ±íÊı¾İ£¬Ìá½»¶©µ¥£¬ĞŞ¸Ä¶©µ¥Ö§¸¶×´Ì¬
+ * è·å–è®¢å•åˆ—è¡¨æ•°æ®ï¼Œæäº¤è®¢å•ï¼Œä¿®æ”¹è®¢å•æ”¯ä»˜çŠ¶æ€
  * 
  * @author long bin
  * 
@@ -38,8 +39,8 @@ public class OrderDataManage {
 	private String TAG = OrderDataManage.class.getName();
 	private UnicodeToString unicode;
 	
-	private boolean isNoMore = false;//ÅĞ¶ÏÊÇ·ñ»¹ÓĞ¸ü¶àÊı¾İ,trueÎªÃ»ÓĞ¸ü¶àÁË
-
+	private boolean isNoMore = false;///åˆ¤æ–­æ˜¯å¦è¿˜æœ‰æ›´å¤šæ•°æ®,trueä¸ºæ²¡æœ‰æ›´å¤šäº†
+	
 	public OrderDataManage(Context context) {
 		this.context = context;
 		orders = new ArrayList<Order>();
@@ -48,27 +49,27 @@ public class OrderDataManage {
 	}
 
 	/**
-	 * »ñÈ¡¶©µ¥ÁĞ±í
+	 * è·å–è®¢å•åˆ—è¡¨
 	 * 
-	 * @param userId Èç"514492"
-	 *            ¿Í»§Id
+	 * @param userId å¦‚"514492"
+	 *            å®¢æˆ·Id
 	 * @param code
-	 *            ¶©µ¥±àºÅ,Ö§³ÖÄ£ºı²éÕÒ,ÈçÎª¿Õ£¬ÓÃ""
+	 *            è®¢å•ç¼–å·,æ”¯æŒæ¨¡ç³ŠæŸ¥æ‰¾,å¦‚ä¸ºç©ºï¼Œç”¨""
 	 * @param the_day ""
-	 *            1.½üÒ»ÖÜ£» 2.½üÒ»ÔÂ£» 3.½üÒ»Äê
-	 * @param status "Â¼Èë"£¬¡°ÒÑÇ©ÊÕ¡±£¬¡°ÒÑÈ¡Ïû¡±£¬¡°ÒÑ¸¶¿î¡±£¬¡°ÒÑ·¢»õ¡±
-	 *            °üÀ¨£¨Â¼Èë£¨´ı¸¶¿î£©£¬ÒÑ¸¶¿î£¨´ı·¢»õ£©£¬ÒÑ·¢»õºÍÒÑÍê³É£¬£¬µÈÓÚ¿ÕÊ±£¬¾ÍÊÇ¡°È«²¿¶©µ¥¡°µÄÒâË¼£©£»
+	 *            1.è¿‘ä¸€å‘¨ï¼› 2.è¿‘ä¸€æœˆï¼› 3.è¿‘ä¸€å¹´
+	 * @param status "å½•å…¥"ï¼Œâ€œå·²ç­¾æ”¶â€ï¼Œâ€œå·²å–æ¶ˆâ€ï¼Œâ€œå·²ä»˜æ¬¾â€ï¼Œâ€œå·²å‘è´§â€
+	 *            åŒ…æ‹¬ï¼ˆå½•å…¥ï¼ˆå¾…ä»˜æ¬¾ï¼‰ï¼Œå·²ä»˜æ¬¾ï¼ˆå¾…å‘è´§ï¼‰ï¼Œå·²å‘è´§å’Œå·²å®Œæˆï¼Œï¼Œç­‰äºç©ºæ—¶ï¼Œå°±æ˜¯â€œå…¨éƒ¨è®¢å•â€œçš„æ„æ€ï¼‰ï¼›
 	 * @param offset
-	 *            ¶©µ¥¿ªÊ¼
+	 *            è®¢å•å¼€å§‹
 	 * @param limit
-	 *            ¶©µ¥¸öÊı
+	 *            è®¢å•ä¸ªæ•°
 	 * @param token
-	 * @return orders ¶©µ¥ÁĞ±í
+	 * @return orders è®¢å•åˆ—è¡¨
 	 */
 	public ArrayList<Order> getOrderArray(String userId, String code,
 			String the_day, String status, String offset, String limit, String token) {
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return orders;
 		}
 		TaskGetList taskGetList = new TaskGetList(userId, code, the_day,
@@ -77,7 +78,7 @@ public class OrderDataManage {
 		try {
 			state = taskGetList.execute().get();
 			if(isNoMore){
-				Toast.makeText(context, "Ã»ÓĞ¸ü¶àÁË!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, context.getResources().getString(R.string.nomore), Toast.LENGTH_SHORT).show();
 				isNoMore = false;
 				state = true;
 			}
@@ -93,7 +94,7 @@ public class OrderDataManage {
 			
 		}
 		if (!state) {
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		return orders;
 	}
@@ -122,7 +123,7 @@ public class OrderDataManage {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage("ÕıÔÚ²éÑ¯");
+			bar.setMessage(context.getResources().getString(R.string.searching));
 			bar.show();
 		}
 
@@ -142,7 +143,7 @@ public class OrderDataManage {
 				return false;
 			} catch (NumberFormatException e) {
 				// TODO: handle exception
-				// Toast.makeText(context, "Êı¾İÓĞÎó", Toast.LENGTH_SHORT).show();
+				// Toast.makeText(context, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", Toast.LENGTH_SHORT).show();
 				return true;
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -157,7 +158,7 @@ public class OrderDataManage {
 			super.onPostExecute(result);
 			bar.dismiss();
 			// if(result)
-			// Toast.makeText(context, "³É¹¦", Toast.LENGTH_SHORT).show();
+			// Toast.makeText(context, "ï¿½É¹ï¿½", Toast.LENGTH_SHORT).show();
 		}
 
 		private ProgressDialog bar = new ProgressDialog(context);
@@ -227,37 +228,37 @@ public class OrderDataManage {
 
 	/**
 	 * 
-	 * ·µ»ØÌá½»¶©µ¥³É¹¦Óë·ñ,boolean
+	 * è¿”å›æäº¤è®¢å•æˆåŠŸä¸å¦,boolean
 	 * 
 	 * @param customer_id
-	 *            ¿Í»§id
+	 *            å®¢æˆ·id
 	 * @param ticket_id
-	 *            ÓÅ»İÈ¯id£¬0±íÊ¾Ã»ÓÃÓÅ»İÈ¯
+	 *            ä¼˜æƒ åˆ¸idï¼Œ0è¡¨ç¤ºæ²¡ç”¨ä¼˜æƒ åˆ¸
 	 * @param recipient_id
-	 *            ÊÕ¼şÈËid
+	 *            æ”¶ä»¶äººid
 	 * @param pingou_id
-	 *            Æ´¹ºÉÌÆ·µÄid
+	 *            æ‹¼è´­å•†å“çš„id
 	 * @param goods_ascore
-	 *            ¿Í»§Ö§¸¶µÄ»ı·Ö
+	 *            å®¢æˆ·æ”¯ä»˜çš„ç§¯åˆ†
 	 * @param ship_fee
-	 *            ÔË·Ñ
+	 *            è¿è´¹
 	 * @param ship_type
-	 *            EMS»ò¿ìµİ
+	 *            EMSæˆ–å¿«é€’
 	 * @param ship_entity_name
-	 *            ÅäËÍÖĞĞÄ
+	 *            é…é€ä¸­å¿ƒ
 	 * @param goods_qty_scr
-	 *            ¹ºÂòµÄ×Ö·û´®£¬¸ñÊ½¡°ÉÌÆ·id,ÊıÁ¿,ÊÇ·ñ»ı·Ö¶Ò»»;¡±£¬Èç¡°11,5n;¡±
+	 *            è´­ä¹°çš„å­—ç¬¦ä¸²ï¼Œæ ¼å¼â€œå•†å“id,æ•°é‡,æ˜¯å¦ç§¯åˆ†å…‘æ¢;â€ï¼Œå¦‚â€œ11,5n;â€
 	 * @param comments
-	 *            ¶©µ¥±¸×¢ĞÅÏ¢
+	 *            è®¢å•å¤‡æ³¨ä¿¡æ¯
 	 * @param token
-	 * @return boolean Ìá½»¶©µ¥³É¹¦Óë·ñ
+	 * @return boolean æäº¤è®¢å•æˆåŠŸä¸å¦
 	 */
 	public boolean saveOrder(String customer_id, String ticket_id,
 			String recipient_id, String pingou_id, String goods_ascore,
 			String ship_fee, String ship_type, String ship_entity_name,
 			String goods_qty_scr, String comments, String token) {
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return false;
 		}
 		TaskSave taskSave = new TaskSave(customer_id, ticket_id, recipient_id,
@@ -278,7 +279,7 @@ public class OrderDataManage {
 			
 		}
 		if (!state) {
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		return state;
 	}
@@ -319,7 +320,7 @@ public class OrderDataManage {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage("ÕıÔÚ²éÑ¯");
+			bar.setMessage(context.getResources().getString(R.string.searching));
 			bar.show();
 		}
 
@@ -337,7 +338,7 @@ public class OrderDataManage {
 					String response = jsonObject.getString("response");
 					JSONObject responseObject = new JSONObject(response);
 					String result = responseObject.getString("@p_result");
-					if(unicode.revert(result).equals("successÂ¼Èë³É¹¦")){
+					if(unicode.revert(result).equals(context.getResources().getString(R.string.success_save_order))){
 						orderCode = responseObject.getString("@p_order_code");
 						return true;
 					}
@@ -362,23 +363,23 @@ public class OrderDataManage {
 		}
 	}
 	
-	private String orderCode = "";//Ìá½»¶©µ¥³É¹¦ºó·µ»ØµÄ¶©µ¥ºÅ
+	private String orderCode = "";//æäº¤è®¢å•æˆåŠŸåè¿”å›çš„è®¢å•å·
 	/**
 	 * 
-	 * @return orderCode Ìá½»¶©µ¥³É¹¦ºó·µ»ØµÄ¶©µ¥ºÅ
+	 * @return orderCode æäº¤è®¢å•æˆåŠŸåè¿”å›çš„è®¢å•å·
 	 */
 	public String getOrderCode(){
 		return orderCode;
 	}
 	/**
-	 * ĞŞ¸Ä¶©µ¥Ö§¸¶×´Ì¬
+	 * ä¿®æ”¹è®¢å•æ”¯ä»˜çŠ¶æ€
 	 * @param customer_id
 	 * @param code
 	 * @return
 	 */
 	public boolean changeOrder(String customer_id, String code) {
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return false;
 		}
 		TaskChange taskChange = new TaskChange(customer_id, code);
@@ -397,7 +398,7 @@ public class OrderDataManage {
 			
 		}
 		if (!state) {
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		return state;
 	}
@@ -417,7 +418,7 @@ public class OrderDataManage {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage("ÕıÔÚ²éÑ¯");
+			bar.setMessage(context.getResources().getString(R.string.searching));
 			bar.show();
 		}
 		@Override
@@ -432,7 +433,7 @@ public class OrderDataManage {
 					String response = jsonObject.getString("response");
 					JSONObject responseObject = new JSONObject(response);
 					String result = responseObject.getString("@p_result");
-					if(unicode.revert(result).equals("success¸¶¿î³É¹¦")){
+					if(unicode.revert(result).equals(context.getResources().getString(R.string.success_pay_order))){
 						return true;
 					}
 				}
@@ -458,7 +459,7 @@ public class OrderDataManage {
 	}
 	
 	/**
-	 * È¡Ïû¶©µ¥
+	 * È¡ï¿½ï¿½
 	 * @param customer_id
 	 * @param code
 	 * @param token
@@ -466,7 +467,7 @@ public class OrderDataManage {
 	 */
 	public boolean cancelOrder(String customer_id, String code, String token) {
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return false;
 		}
 		TaskCancel taskCancel = new TaskCancel(customer_id, code, token);
@@ -475,17 +476,17 @@ public class OrderDataManage {
 			state = taskCancel.execute().get();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-			Log.e(TAG, "TaskGetList() InterruptedException");
+			Log.e(TAG, "Task cancel InterruptedException");
 			e.printStackTrace();
 		} catch (ExecutionException e) {
 			// TODO Auto-generated catch block
-			Log.e(TAG, "TaskGetList() ExecutionException");
+			Log.e(TAG, "Task cancel ExecutionException");
 			e.printStackTrace();
 		} catch(Exception e){
 			
 		}
 		if (!state) {
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		return state;
 	}
@@ -507,7 +508,7 @@ public class OrderDataManage {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage("ÕıÔÚ²éÑ¯");
+			bar.setMessage(context.getResources().getString(R.string.searching));
 			bar.show();
 		}
 		@Override
@@ -522,7 +523,7 @@ public class OrderDataManage {
 					String response = jsonObject.getString("response");
 					JSONObject responseObject = new JSONObject(response);
 					String result = responseObject.getString("@p_result");
-					if(unicode.revert(result).equals("successÈ¡Ïû³É¹¦")){
+					if(unicode.revert(result).equals(context.getResources().getString(R.string.success_cancel_order))){
 						return true;
 					}
 				}
@@ -548,7 +549,7 @@ public class OrderDataManage {
 	}
 	
 	/**
-	 * Ç©ÊÕ¶©µ¥
+	 * Ç©ï¿½Õ¶ï¿½ï¿½ï¿½
 	 * @param customer_id
 	 * @param code
 	 * @param token
@@ -556,7 +557,7 @@ public class OrderDataManage {
 	 */
 	public boolean signOrder(String customer_id, String code, String token) {
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return false;
 		}
 		TaskSign taskSign = new TaskSign(customer_id, code, token);
@@ -565,17 +566,17 @@ public class OrderDataManage {
 			state = taskSign.execute().get();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-			Log.e(TAG, "TaskGetList() InterruptedException");
+			Log.e(TAG, "Tasksign InterruptedException");
 			e.printStackTrace();
 		} catch (ExecutionException e) {
 			// TODO Auto-generated catch block
-			Log.e(TAG, "TaskGetList() ExecutionException");
+			Log.e(TAG, "Task sign ExecutionException");
 			e.printStackTrace();
 		} catch(Exception e){
 			
 		}
 		if (!state) {
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		return state;
 	}
@@ -597,7 +598,7 @@ public class OrderDataManage {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage("ÕıÔÚ²éÑ¯");
+			bar.setMessage(context.getResources().getString(R.string.searching));
 			bar.show();
 		}
 		@Override
@@ -612,17 +613,17 @@ public class OrderDataManage {
 					String response = jsonObject.getString("response");
 					JSONObject responseObject = new JSONObject(response);
 					String result = responseObject.getString("@p_result");
-					if(unicode.revert(result).equals("successÈ¡Ïû³É¹¦")){
+					if(unicode.revert(result).equals(context.getResources().getString(R.string.success_sign_order))){
 						return true;
 					}
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				Log.e(TAG, "cancel order task io ex");
+				Log.e(TAG, "sign order task io ex");
 				e.printStackTrace();
 			} catch (Exception e) {
 				// TODO: handle exception
-				Log.e(TAG, "cancel order task other ex");
+				Log.e(TAG, "sign order task other ex");
 				e.printStackTrace();
 			}
 			return false;

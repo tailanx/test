@@ -13,15 +13,15 @@ import android.util.Log;
 import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
 /**
- * ËÑË÷ÀúÊ·Ä£¿é
+ * æœç´¢å†å²æ¨¡å—
  * <p>
- *  Ìí¼Óµ½ËÑË÷ÀúÊ·{@link #addHistory(String)}
+ *  æ·»åŠ åˆ°æœç´¢å†å²{@link #addHistory(String)}
  * <p>
- *  »ñÈ¡ËÑË÷ÀúÊ·Êı¾İÁĞ±í{@link #getHistorysArray()}
+ *  è·å–æœç´¢å†å²æ•°æ®åˆ—è¡¨{@link #getHistorysArray()}
  * <p>
- *  Çå¿ÕËÑË÷ÀúÊ·{@link #cleanHistory()}
+ *  æ¸…ç©ºæœç´¢å†å²{@link #cleanHistory()}
  * <p>
- *  »ñÈ¡ËÑË÷ÀúÊ·Êı¾İ×ÜÊı{@link #getHistoryAmount()}
+ *  è·å–æœç´¢å†å²æ•°æ®æ€»æ•°{@link #getHistoryAmount()}
  * @author long bin
  *
  */
@@ -45,9 +45,9 @@ public class SchHistoryDataManage {
 	}
 	
 	/**
-	 * Ìí¼Óµ½ËÑË÷ÀúÊ·
-	 * @param details ËÑË÷¼ÇÂ¼×Ö·û´®
-	 * @return boolean ·µ»Ø"true" : ³É¹¦ "false" : Ê§°Ü
+	 * æ·»åŠ åˆ°æœç´¢å†å²
+	 * @param details æœç´¢è®°å½•å­—ç¬¦ä¸²
+	 * @return boolean è¿”å›"true" : æˆåŠŸ "false" : å¤±è´¥
 	 */
 	public boolean addHistory(String details) {
 		boolean flag = false;
@@ -67,8 +67,8 @@ public class SchHistoryDataManage {
 		return flag;
 	}
 	/**
-	 * »ñÈ¡ËÑË÷ÀúÊ·Êı¾İÁĞ±í
-	 * @return historyArray ËÑË÷ÀúÊ·Êı¾İÁĞ±í
+	 * è·å–æœç´¢å†å²æ•°æ®åˆ—è¡¨
+	 * @return historyArray æœç´¢å†å²æ•°æ®åˆ—è¡¨
 	 */
 	public ArrayList<String> getHistorysArray(){
 		try {
@@ -90,8 +90,8 @@ public class SchHistoryDataManage {
 		return historyArray;
 	}
 	/**
-	 * Çå¿ÕËÑË÷ÀúÊ·
-	 * @return boolean ³É¹¦Óë·ñ ¡£·µ»Ø"true" : ³É¹¦ "false" : Ê§°Ü
+	 * æ¸…ç©ºæœç´¢å†å²
+	 * @return boolean æˆåŠŸä¸å¦ ã€‚è¿”å›"true" : æˆåŠŸ "false" : å¤±è´¥
 	 */
 	public boolean cleanHistory(){
 		try {
@@ -105,8 +105,8 @@ public class SchHistoryDataManage {
 		return false;
 	}
 	/**
-	 * »ñÈ¡ËÑË÷ÀúÊ·Êı¾İ×ÜÊı
-	 * @return amount ËÑË÷ÀúÊ·Êı¾İ×ÜÊı
+	 * è·å–æœç´¢å†å²æ•°æ®æ€»æ•°
+	 * @return amount æœç´¢å†å²æ•°æ®æ€»æ•°
 	 */
 	public int getHistoryAmount(){
 		int amount = 0 ;

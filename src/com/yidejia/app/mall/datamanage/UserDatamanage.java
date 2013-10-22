@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.yidejia.app.mall.MyApplication;
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.user.Login;
@@ -34,7 +35,7 @@ public class UserDatamanage {
 		this.context = context;
 	}
 	/**
-	 * 登录
+	 * 鐧诲綍
 	 * @param username
 	 * @param password
 	 * @param ip
@@ -47,7 +48,7 @@ public class UserDatamanage {
 		
 		boolean state = false;
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return state;
 		}
 		TaskLogin taskLogin = new TaskLogin();
@@ -96,7 +97,7 @@ public class UserDatamanage {
 						myApplication.setToken(token);
 						return true;
 					} if(code == 1001 || code ==1002){
-						message = "用户不存在或密码错误";
+						message = context.getResources().getString(R.string.login_error);
 //						throw new UserLoginEx(message);
 						isSuccess = false;
 					} else{
@@ -128,7 +129,7 @@ public class UserDatamanage {
 		
 		boolean state = false;
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return state;
 		}
 		TaskRegister taskRegister = new TaskRegister();

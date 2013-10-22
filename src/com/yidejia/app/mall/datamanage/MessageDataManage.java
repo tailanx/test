@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.MsgCenter;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.user.ChangeRead;
@@ -22,7 +23,7 @@ public class MessageDataManage {
 	private Context context;
 	private ArrayList<MsgCenter> msgArrays;
 	
-	private boolean isNoMore = false;//ÅĞ¶ÏÊÇ·ñ»¹ÓĞ¸ü¶àÊı¾İ,trueÎªÃ»ÓĞ¸ü¶àÁË
+	private boolean isNoMore = false;//åˆ¤æ–­æ˜¯å¦è¿˜æœ‰æ›´å¤šæ•°æ®,trueä¸ºæ²¡æœ‰æ›´å¤šäº†
 	
 	public MessageDataManage(Context context){
 		this.context = context;
@@ -34,7 +35,7 @@ public class MessageDataManage {
 	private String offset;
 	private String limit;
 	/**
-	 * »ñÈ¡ÏûÏ¢ÖĞĞÄÊı¾İ
+	 * è·å–æ¶ˆæ¯ä¸­å¿ƒæ•°æ®
 	 * @param userid
 	 * @param token
 	 * @param offset
@@ -47,7 +48,7 @@ public class MessageDataManage {
 		this.offset = offset;
 		this.limit = limit;
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return false;
 		}
 		TaskMsg taskMsg = new TaskMsg();
@@ -55,7 +56,7 @@ public class MessageDataManage {
 		try {
 			state = taskMsg.execute().get();
 			if(isNoMore){
-				Toast.makeText(context, "Ã»ÓĞ¸ü¶àÁË!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, context.getResources().getString(R.string.nomore), Toast.LENGTH_SHORT).show();
 				isNoMore = false;
 				state = true;
 			}
@@ -135,7 +136,7 @@ public class MessageDataManage {
 	}
 
 	/**
-	 * ¸Ä±äÊÇ·ñÎªÒÑ¶Á
+	 * æ”¹å˜æ˜¯å¦ä¸ºå·²è¯»
 	 * @param userId
 	 * @param msgId
 	 * @param token
@@ -143,7 +144,7 @@ public class MessageDataManage {
 	 */
 	public boolean changeReadState(String userId, String msgId, String token){
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return false;
 		} 
 		boolean state = false;

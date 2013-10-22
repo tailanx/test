@@ -14,13 +14,14 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.UserComment;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.commments.GetProductCommentList;
 import com.yidejia.app.mall.util.UnicodeToString;
 
 /**
- * »ñÈ¡ÓÃ»§ÆÀÂÛ
+ * è·å–ç”¨æˆ·è¯„è®º
  * @author long bin
  *
  */
@@ -30,7 +31,7 @@ public class UserCommentDataManage {
 	private UnicodeToString unicode;
 	private String TAG = UserCommentDataManage.class.getName();
 	
-	private boolean isNoMore = false;//ÅĞ¶ÏÊÇ·ñ»¹ÓĞ¸ü¶àÊı¾İ,trueÎªÃ»ÓĞ¸ü¶àÁË
+	private boolean isNoMore = false;//åˆ¤æ–­æ˜¯å¦è¿˜æœ‰æ›´å¤šæ•°æ®,trueä¸ºæ²¡æœ‰æ›´å¤šäº†
 	
 	public UserCommentDataManage(Context context){
 		this.context = context;
@@ -38,17 +39,17 @@ public class UserCommentDataManage {
 		userComments = new ArrayList<UserComment>();
 	}
 	/**
-	 * µ¹Ğğ»ñÈ¡¿Í»§ÆÀÂÛÁĞ±í
-	 * @param id ¿Í»§Id »òÕß ÉÌÆ·id
-	 * @param fromIndex ÆğÊ¼Î»ÖÃ
-	 * @param amount ¸öÊı
-	 * @param isUser ÊÇ·ñÎª¿Í»§id»¹ÊÇÉÌÆ·id
-	 * @return Ê±¼äµ¹ĞğµÄ¿Í»§ÆÀÂÛÁĞ±í
+	 * å€’å™è·å–å®¢æˆ·è¯„è®ºåˆ—è¡¨
+	 * @param id å®¢æˆ·Id æˆ–è€… å•†å“id
+	 * @param fromIndex èµ·å§‹ä½ç½®
+	 * @param amount ä¸ªæ•°
+	 * @param isUser æ˜¯å¦ä¸ºå®¢æˆ·idè¿˜æ˜¯å•†å“id
+	 * @return æ—¶é—´å€’å™çš„å®¢æˆ·è¯„è®ºåˆ—è¡¨
 	 */
 	public ArrayList<UserComment> getUserCommentsArray(String id, int fromIndex, int amount, boolean isUser){
 		String idTemp = isUser? "user_id=":"goods_id=";
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return userComments;
 		}
 		TaskGetList taskGetList = new TaskGetList(idTemp+id, String.valueOf(fromIndex), String.valueOf(amount), "", "", "%2A");
@@ -56,7 +57,7 @@ public class UserCommentDataManage {
 		try {
 			state = taskGetList.execute().get();
 			if(isNoMore){
-				Toast.makeText(context, "Ã»ÓĞ¸ü¶àÁË!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, context.getResources().getString(R.string.nomore), Toast.LENGTH_SHORT).show();
 				isNoMore = false;
 				state = true;
 			}
@@ -74,25 +75,25 @@ public class UserCommentDataManage {
 			e.printStackTrace();
 		}
 		if(!state){
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		return userComments;
 	}
 	
 	/**
-	 * Ìá½»ÆÀÂÛ
-	 * @param goodsid ²úÆ·Id
-	 * @param userId ¿Í»§Id
-	 * @param username ¿Í»§Ãû³Æ
-	 * @param text ÆÀÂÛÄÚÈİ
-	 * @param value ÆÀ·Ö
-	 * @param date ÆÀÂÛÊ±¼ä
-	 * @return ³É¹¦Óë·ñ
+	 * æäº¤è¯„è®º
+	 * @param goodsid äº§å“Id
+	 * @param userId å®¢æˆ·Id
+	 * @param username å®¢æˆ·åç§°
+	 * @param text è¯„è®ºå†…å®¹
+	 * @param value è¯„åˆ†
+	 * @param date è¯„è®ºæ—¶é—´
+	 * @return æˆåŠŸä¸å¦
 	 */
 	public boolean commitComment(String goodsid, String userId, String username ,String text, int value, String date){
 		boolean isSuccess = false;
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return isSuccess;
 		}
 		
@@ -120,7 +121,7 @@ public class UserCommentDataManage {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 //			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//			bar.setMessage("ÕıÔÚ²éÑ¯");
+//			bar.setMessage("æ­£åœ¨æŸ¥è¯¢");
 //			bar.show();
 		}
 		
@@ -150,13 +151,13 @@ public class UserCommentDataManage {
 			super.onPostExecute(result);
 //			bar.dismiss();
 //			if(result)
-//				Toast.makeText(context, "³É¹¦", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context, "æˆåŠŸ", Toast.LENGTH_SHORT).show();
 		}
 //		private ProgressDialog bar = new ProgressDialog(context);
 	}
 	
 	/**
-	 * ½âÎöËùÓĞµØÖ·Êı¾İ
+	 * è§£ææ‰€æœ‰åœ°å€æ•°æ®
 	 * @param httpResultString
 	 * @return
 	 */

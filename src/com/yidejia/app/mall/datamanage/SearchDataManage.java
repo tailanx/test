@@ -9,12 +9,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+
 //import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.exception.NullSearchResultEx;
 import com.yidejia.app.mall.model.SearchItem;
 import com.yidejia.app.mall.net.ConnectionDetector;
@@ -23,7 +25,7 @@ import com.yidejia.app.mall.net.search.SearchDataUtil;
 import com.yidejia.app.mall.util.UnicodeToString;
 
 /**
- * »ñÈ¡ËÑË÷ÉÌÆ·Êı¾İ
+ * è·å–æœç´¢å•†å“æ•°æ®
  * @author long bin
  *
  */
@@ -33,8 +35,8 @@ public class SearchDataManage {
 	private String TAG = SearchDataManage.class.getName();
 	private UnicodeToString unicode;
 	
-	private boolean isNoMore = false;//ÅĞ¶ÏÊÇ·ñ»¹ÓĞ¸ü¶àÊı¾İ,trueÎªÃ»ÓĞ¸ü¶àÁË
-	private boolean isHasResult = false;//ÅĞ¶ÏÊÇ·ñÓĞËÑË÷½á¹û
+	private boolean isNoMore = false;//åˆ¤æ–­æ˜¯å¦è¿˜æœ‰æ›´å¤šæ•°æ®,trueä¸ºæ²¡æœ‰æ›´å¤šäº†
+	private boolean isHasResult = false;//åˆ¤æ–­æ˜¯å¦æœ‰æœç´¢ç»“æœ
 	
 	public SearchDataManage(Context context){
 		this.context = context;
@@ -43,34 +45,36 @@ public class SearchDataManage {
 	}
 	
 	/**
-	 * ËÑË÷ÉÌÆ·
-	 * @param name Ãû³Æ£¬Ö§³ÖÄ£ºı²éÕÒ
-	 * @param fun ¹¦Ğ§
-	 * @param brand Æ·ÅÆ
-	 * @param price ¼Û¸ñÇø¼ä
-	 * @param order ÅÅĞò
-	 * @param offset ¿ªÊ¼Ïî
-	 * @param limit ½áÊøÏî
-	 * @return ËÑË÷½á¹¹
+	 * æœç´¢å•†å“
+	 * @param name åç§°ï¼Œæ”¯æŒæ¨¡ç³ŠæŸ¥æ‰¾
+	 * @param fun åŠŸæ•ˆ
+	 * @param brand å“ç‰Œ
+	 * @param price ä»·æ ¼åŒºé—´
+	 * @param order æ’åº
+	 * @param offset å¼€å§‹é¡¹
+	 * @param limit ç»“æŸé¡¹
+	 * @return æœç´¢ç»“æ„
 	 * @throws NullSearchResultEx
 	 */
 	public ArrayList<SearchItem> getSearchArray(String name, String fun,
 			String brand, String price, String order, String offset,
 			String limit) throws NullSearchResultEx{
 		if (!ConnectionDetector.isConnectingToInternet(context)) {
-		Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return searchArray;
 		}
 		TaskSearch taskSearch = new TaskSearch(name, fun, brand, price, order, offset, limit);
 		boolean state = false;
 		try {
+			Log.e(TAG, "before task");
 			state = taskSearch.execute().get();
+			Log.e(TAG, "after task");
 			if(isHasResult && isNoMore){
-				Toast.makeText(context, "Ã»ÓĞ¸ü¶àÁË!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, context.getResources().getString(R.string.nomore), Toast.LENGTH_SHORT).show();
 				isNoMore = false;
 				state = true;
 			} else if(!isHasResult){
-				throw new NullSearchResultEx("ÎŞËÑË÷½á¹û");
+				throw new NullSearchResultEx(context.getResources().getString(R.string.no_search_result));
 			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -86,7 +90,7 @@ public class SearchDataManage {
 			e.printStackTrace();
 		} 
 		if(!state){
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		} 
 		return searchArray;
 	}
@@ -112,21 +116,24 @@ public class SearchDataManage {
 		}
 		
 //		private ProgressDialog bar = new ProgressDialog(context);
-		@Override
-		protected void onPreExecute() {
-			// TODO Auto-generated method stub
-			super.onPreExecute();
-//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//			bar.setMessage("ÕıÔÚ²éÑ¯");
-//			bar.show();
-		}
+//		@Override
+//		protected void onPreExecute() {
+//			// TODO Auto-generated method stub
+//			super.onPreExecute();
+////			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+////			bar.setMessage("ï¿½ï¿½ï¿½Ú²ï¿½Ñ¯");
+////			bar.show();
+//		}
 		
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-			SearchDataUtil searchDataUtil = new SearchDataUtil(context);
+			Log.e(TAG, "doing task");
+			SearchDataUtil searchDataUtil = new SearchDataUtil();//context
 			try {
+				Log.e(TAG, "before http");
 				String httpResponseString = searchDataUtil.getHttpResponseString(name, fun, brand, price, order, offset, limit);
+				Log.e(TAG, httpResponseString);
 				JSONObject jsonObject = new JSONObject(httpResponseString);
 				int code = jsonObject.getInt("code");
 				if(code == 1){
@@ -135,7 +142,7 @@ public class SearchDataManage {
 					analysisJson(responseString);
 					return true;
 				} else if (code == -1){
-					//ËÑË÷Ê§°Ü
+					//ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½
 					isNoMore = true;
 					return true;
 				} else {
@@ -155,17 +162,17 @@ public class SearchDataManage {
 			}
 		}
 		
-		@Override
-		protected void onPostExecute(Boolean result) {
-			// TODO Auto-generated method stub
-			super.onPostExecute(result);
-//			bar.dismiss();
-		}
+//		@Override
+//		protected void onPostExecute(Boolean result) {
+//			// TODO Auto-generated method stub
+//			super.onPostExecute(result);
+////			bar.dismiss();
+//		}
 	}
 	
 	
 	/**
-	 * ½âÎöËÑË÷½á¹û
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param jsonString
 	 * @throws JSONException
 	 */

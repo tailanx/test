@@ -14,13 +14,14 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.Function;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.search.EffectDataUtil;
 import com.yidejia.app.mall.util.UnicodeToString;
 
 /**
- * 获取功效列表
+ * 鑾峰彇鍔熸晥鍒楄〃
  * @author long bin
  *
  */
@@ -37,11 +38,11 @@ public class FunctionDataManage {
 	}
 	/**
 	 * 
-	 * @return functionsArray 功效列表
+	 * @return functionsArray 鍔熸晥鍒楄〃
 	 */
 	public ArrayList<Function> getFunArray(){
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return functionsArray;
 		}
 		TaskFun taskFun = new TaskFun("flag%3D%27y%27", "0", "20", "%2A");
@@ -49,7 +50,7 @@ public class FunctionDataManage {
 		try {
 			state = taskFun.execute().get();
 			if("".equals(httpResponseString)){
-				Toast.makeText(context, "连接超时", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, context.getResources().getString(R.string.nomore), Toast.LENGTH_SHORT).show();
 				state = true;
 			}
 		} catch (InterruptedException e) {
@@ -65,7 +66,7 @@ public class FunctionDataManage {
 			e.printStackTrace();
 		} 
 		if(!state){
-			Toast.makeText(context, "网络不给力", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		return functionsArray;
 	}
@@ -89,7 +90,7 @@ public class FunctionDataManage {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 //			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//			bar.setMessage("正在查询");
+//			bar.setMessage("锟斤拷锟节诧拷询");
 //			bar.show();
 		}
 		
@@ -107,7 +108,7 @@ public class FunctionDataManage {
 						return true;
 					}
 				} else{
-					httpResponseString = "连接超时";
+					httpResponseString = context.getResources().getString(R.string.time_out);
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

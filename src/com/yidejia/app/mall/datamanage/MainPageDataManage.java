@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.initview.HotSellView;
 import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.model.MainProduct;
@@ -24,15 +25,15 @@ import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.homepage.GetHomePage;
 import com.yidejia.app.mall.util.UnicodeToString;
 /**
- * NativeÊ×Ò³½Ó¿Ú £¬ ÊµÀı»¯ºóÏÈµ÷ÓÃ{@link #getMainPageData()}
+ * Nativeé¦–é¡µæ¥å£ ï¼Œ å®ä¾‹åŒ–åå…ˆè°ƒç”¨{@link #getMainPageData()}
  * @author long bin
  * 
  */
 public class MainPageDataManage {
-	private ArrayList<BaseProduct> bannerArray; //ÂÖ²¥ÉÌÆ· £¨¸öÊı²»¹Ì¶¨£¬<=6£©
-	private ArrayList<MainProduct> hotSellArray; //ÈÈÂôÉÌÆ· £¨¸öÊıÔİ¶¨3¸ö£©
-	private ArrayList<MainProduct> acymerArray;    //ÃÀÈİ»¤·ô  £¨¸öÊıÔİ¶¨3¸ö£©
-	private ArrayList<MainProduct> inerbtyArray;   //ÄÚµ÷Ñø»¤  £¨¸öÊıÔİ¶¨6¸ö£©
+	private ArrayList<BaseProduct> bannerArray; //è½®æ’­å•†å“ ï¼ˆä¸ªæ•°ä¸å›ºå®šï¼Œ<=6ï¼‰
+	private ArrayList<MainProduct> hotSellArray; //çƒ­å–å•†å“ ï¼ˆä¸ªæ•°æš‚å®š3ä¸ªï¼‰
+	private ArrayList<MainProduct> acymerArray;    //ç¾å®¹æŠ¤è‚¤  ï¼ˆä¸ªæ•°æš‚å®š3ä¸ªï¼‰
+	private ArrayList<MainProduct> inerbtyArray;    //å†…è°ƒå…»æŠ¤  ï¼ˆä¸ªæ•°æš‚å®š6ä¸ªï¼‰
 	private Context context;
 	private String TAG = MainPageDataManage.class.getName();
 	private UnicodeToString unicode;
@@ -42,7 +43,7 @@ public class MainPageDataManage {
 	private boolean isHasPTR = false;
 	
 	/**
-	 * NativeÊ×Ò³½Ó¿Ú £¬ ÊµÀı»¯ºóÏÈµ÷ÓÃ{@link #getMainPageData()}
+	 * Nativeé¦–é¡µæ¥å£ ï¼Œ å®ä¾‹åŒ–åå…ˆè°ƒç”¨{@link #getMainPageData()}
 	 * @author long bin
 	 * 
 	 */
@@ -61,16 +62,16 @@ public class MainPageDataManage {
 //		this.view = view;
 	}
 	/**
-	 * Õâ¸ö·½·¨ÊÇ»ñÈ¡Ê×Ò³ËùÓĞÊı¾İµÄº¯Êı£¬Ö®ºóµ÷ÓÃ
-	 * <p>{@link #getBannerArray()}»ñÈ¡Ê×Ò³ÂÖ²¥ÉÌÆ·Êı¾İ
-	 * <p>{@link #getHotSellArray()}»ñÈ¡Ê×Ò³ÈÈÂôÉÌÆ·Êı¾İ
-	 * <p>{@link #getAcymerArray()}»ñÈ¡Ê×Ò³ÃÀÈİ»¤·ôÉÌÆ·Êı¾İ
-	 * <p>{@link #getInerbtyArray()}»ñÈ¡Ê×Ò³ÄÚµ÷Ñø»¤ÉÌÆ·Êı¾İ
+	 * è¿™ä¸ªæ–¹æ³•æ˜¯è·å–é¦–é¡µæ‰€æœ‰æ•°æ®çš„å‡½æ•°ï¼Œä¹‹åè°ƒç”¨
+	 * <p>{@link #getBannerArray()}è·å–é¦–é¡µè½®æ’­å•†å“æ•°æ®
+	 * <p>{@link #getHotSellArray()}è·å–é¦–é¡µçƒ­å–å•†å“æ•°æ®
+	 * <p>{@link #getAcymerArray()}è·å–é¦–é¡µç¾å®¹æŠ¤è‚¤å•†å“æ•°æ®
+	 * <p>{@link #getInerbtyArray()}è·å–é¦–é¡µå†…è°ƒå…»æŠ¤å•†å“æ•°æ®
 	 * 
 	 */
 	public void getMainPageData(){
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return;
 		}
 		TaskMainPage taskMainPage = new TaskMainPage();
@@ -82,78 +83,78 @@ public class MainPageDataManage {
 			e.printStackTrace();
 			
 			Log.e(TAG, "TaskMainPage() InterruptedException");
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		} catch (ExecutionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Log.e(TAG, "TaskMainPage() ExecutionException");
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		if(!state){
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 	}
 	
 //	/**
-//	 * ÉèÖÃÂÖ²¥ÉÌÆ·ÁĞ±í
-//	 * @param bannerArray ÂÖ²¥ÉÌÆ·ÁĞ±í
+//	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ö²ï¿½ï¿½ï¿½Æ·ï¿½Ğ±ï¿½
+//	 * @param bannerArray ï¿½Ö²ï¿½ï¿½ï¿½Æ·ï¿½Ğ±ï¿½
 //	 */
 //	public void setBannerArray(ArrayList<BaseProduct> bannerArray){
 //		this.bannerArray = bannerArray;
 //	}
 	/**
 	 * 
-	 * @return ÂÖ²¥ÉÌÆ·bannerArray £º°üº¬BaseProduct¶ÔÏóµÄArrayListÀàĞÍ
+	 * @return è½®æ’­å•†å“bannerArray ï¼šåŒ…å«BaseProductå¯¹è±¡çš„ArrayListç±»å‹
 	 */
 	public ArrayList<BaseProduct> getBannerArray(){
 		return bannerArray;
 	}
 	/**
 	 * 
-	 * @return ÈÈÂôÉÌÆ·hotSellArray:°üº¬MainProduct¶ÔÏóµÄArrayListÀàĞÍ
+	 * @return çƒ­å–å•†å“hotSellArray:åŒ…å«MainProductå¯¹è±¡çš„ArrayListç±»å‹
 	 */
 	public ArrayList<MainProduct> getHotSellArray(){
 		
 		return hotSellArray;
 	}
 //	/**
-//	 * ÉèÖÃÈÈÂôÉÌÆ·ÁĞ±í
-//	 * @param hotSellArray ÈÈÂôÉÌÆ·ÁĞ±í:°üº¬MainProduct¶ÔÏóµÄArrayListÀàĞÍ
+//	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½Ğ±ï¿½
+//	 * @param hotSellArray ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½Ğ±ï¿½:ï¿½ï¿½MainProductï¿½ï¿½ï¿½ï¿½ï¿½ArrayListï¿½ï¿½ï¿½ï¿½
 //	 */
 //	public void setHotSellArray(ArrayList<MainProduct> hotSellArray){
 //		this.hotSellArray = hotSellArray;
 //	}
 	/**
 	 * 
-	 * @return acymerArray ÃÀÈİ»¤·ôÉÌÆ·ÁĞ±í:°üº¬MainProduct¶ÔÏóµÄArrayListÀàĞÍ
+	 * @return acymerArray ç¾å®¹æŠ¤è‚¤å•†å“åˆ—è¡¨:åŒ…å«MainProductå¯¹è±¡çš„ArrayListç±»å‹
 	 */
 	public ArrayList<MainProduct> getAcymerArray(){
 		return acymerArray;
 	}
 //	/**
-//	 * ÉèÖÃÃÀÈİ»¤·ôÉÌÆ·ÁĞ±í
-//	 * @param acymerArray ÃÀÈİ»¤·ôÉÌÆ·ÁĞ±í:°üº¬MainProduct¶ÔÏóµÄArrayListÀàĞÍ
+//	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ»ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½Ğ±ï¿½
+//	 * @param acymerArray ï¿½ï¿½ï¿½İ»ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½Ğ±ï¿½:ï¿½ï¿½MainProductï¿½ï¿½ï¿½ï¿½ï¿½ArrayListï¿½ï¿½ï¿½ï¿½
 //	 */
 //	public void setAcymerArray(ArrayList<MainProduct> acymerArray){
 //		this.acymerArray = acymerArray;
 //	}
 	/**
 	 * 
-	 * @return inerbtyArray ÄÚµ÷Ñø»¤ÉÌÆ·ÁĞ±í:°üº¬MainProduct¶ÔÏóµÄArrayListÀàĞÍ
+	 * @return inerbtyArray å†…è°ƒå…»æŠ¤å•†å“åˆ—è¡¨:åŒ…å«MainProductå¯¹è±¡çš„ArrayListç±»å‹
 	 */
 	public ArrayList<MainProduct> getInerbtyArray(){
 		return inerbtyArray;
 	}
 //	/**
-//	 * ÉèÖÃÄÚµ÷Ñø»¤ÉÌÆ·ÁĞ±í
-//	 * @param inerbtyArray ÄÚµ÷Ñø»¤ÉÌÆ·ÁĞ±í:°üº¬MainProduct¶ÔÏóµÄArrayListÀàĞÍ
+//	 * ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½Ğ±ï¿½
+//	 * @param inerbtyArray ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½Ğ±ï¿½:ï¿½ï¿½MainProductï¿½ï¿½ï¿½ï¿½ï¿½ArrayListï¿½ï¿½ï¿½ï¿½
 //	 */
 //	public void setInerbtyArray(ArrayList<MainProduct> inerbtyArray){
 //		this.inerbtyArray = inerbtyArray;
 //	}
 	/**
 	 * 
-	 * @return ÉÌ³Ç¹«¸æ
+	 * @return å•†åŸå…¬å‘Š
 	 */
 	public ArrayList<String> getGGTitle(){
 		return ggTitle;
@@ -168,7 +169,7 @@ public class MainPageDataManage {
 			super.onPreExecute();
 			if (!isHasPTR) {
 				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-				bar.setMessage("ÕıÔÚ²éÑ¯");
+				bar.setMessage(context.getResources().getString(R.string.searching));
 				bar.show();
 			} else {
 				mPullToRefreshScrollView.setRefreshing();
@@ -208,7 +209,7 @@ public class MainPageDataManage {
 //			hotSellView.initAcymerView(acymerArray);
 //			hotSellView.initInerbtyView(inerbtyArray);
 //			if(result)
-//				Toast.makeText(context, "³É¹¦", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context, "ï¿½É¹ï¿½", Toast.LENGTH_SHORT).show();
 			super.onPostExecute(result);
 		}
 		private ProgressDialog bar = new ProgressDialog(context);
@@ -216,7 +217,7 @@ public class MainPageDataManage {
 	}
 	
 	/**
-	 * ½âÎöÊ×Ò³ËùÓĞÊı¾İ
+	 * è§£æé¦–é¡µæ‰€æœ‰æ•°æ®
 	 * @param httpResultString
 	 * @return
 	 */
