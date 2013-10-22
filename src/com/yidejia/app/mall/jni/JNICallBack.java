@@ -1,9 +1,8 @@
 package com.yidejia.app.mall.jni;
 
-import android.R.string;
 
 /**
- * jniÊı¾İ½Ó¿Ú
+ * jniæ•°æ®æ¥å£
  * @author long bin
  *
  */
@@ -14,112 +13,112 @@ public class JNICallBack {
 	
 	public static String HTTPURL = getHttp4PostUrl();
 	
-	//»ñÈ¡host Url
+	//è·å–host Url
 	public static native String getHttp4PostUrl();
 	
-	//Í¼Æ¬µØÖ·
+	//å›¾ç‰‡åœ°å€
 	public static native String getHttp4ImageUrlPrefix();
 	
-	//É¾³ıÓÃ»§ÊÕ»õµØÖ·
+	//åˆ é™¤ç”¨æˆ·æ”¶è´§åœ°å€
 	public static native String getHttp4DelAddress(String cid, String aid, String token);
 	
-	//»ñÈ¡ÓÃ»§ÊÕ»õµØÖ·
+	//è·å–ç”¨æˆ·æ”¶è´§åœ°å€
 	public static native String getHttp4GetAddress(String where, String offset, String limit, String group, String order, String fields);
 	
-	//±£´æÓÃ»§ÊÕ»õµØÖ·
+	//ä¿å­˜ç”¨æˆ·æ”¶è´§åœ°å€
 	public static native String getHttp4SaveAddress(String customer_id, String customer_name, String handset, String province,
 			String city, String district, String address, String recipient_id, String token);
 	
-	//É¾³ıÉÌÆ·ÆÀÂÛ
+	//åˆ é™¤å•†å“è¯„è®º
 	public static native String getHttp4DelComment(String id);
 	
-	//»ñÈ¡ÉÌÆ·ÆÀÂÛ
+	//è·å–å•†å“è¯„è®º
 	public static native String getHttp4GetComment(String where, String offset, String limit, String group, String order, String fields);
 	
-	// ±£´æÉÌÆ·ÆÀÂÛ
+	// ä¿å­˜å•†å“è¯„è®º
 	public static native String getHttp4SaveComment(String goods_id,
 			String user_id, String user_name, String title, String experience,
 			String commentDate);
 	
-	//»ñÈ¡ÅäËÍÖĞĞÄ
+	//è·å–é…é€ä¸­å¿ƒ
 	public static native String getHttp4GetDistribute(String where, String offset, String limit, String group, String order, String fields);
 	
-	//»ñÈ¡ÅäËÍÖĞĞÄ
+	//è·å–é…é€ä¸­å¿ƒ
 	public static native String getHttp4GetExpress(String where, String offset, String limit, String group, String order, String fields);
 	
-	//»ñÈ¡°üÓÊĞÅÏ¢
+	//è·å–åŒ…é‚®ä¿¡æ¯
 	public static native String getHttp4GetFree(String where, String offset, String limit, String group, String order, String fields);
 	
-	//¼ì²éÊÕ²ØÊÇ·ñ´æÔÚ
+	//æ£€æŸ¥æ”¶è—æ˜¯å¦å­˜åœ¨
 	public static native String getHttp4CheckFav(String userid, String goodsid, String token);
 	
-	//É¾³ıÊÕ²Ø
+	//åˆ é™¤æ”¶è—
 	public static native String getHttp4DelFav(String userid, String goodsid, String token);
 	
-	//»ñÈ¡ÊÕ²ØÁĞ±í
+	//è·å–æ”¶è—åˆ—è¡¨
 	public static native String getHttp4GetFav(String where, String offset, String limit, String group, String order, String fields);
 	
-	//±£´æÊÕ²Ø
+	//ä¿å­˜æ”¶è—
 	public static native String getHttp4SaveFav(String userid, String goodsid, String token);
 	
-	//»ñÈ¡ÉÌÆ·ĞÅÏ¢
+	//è·å–å•†å“ä¿¡æ¯
 	public static native String getHttp4GetGoods(String id);
 	
-	//»ñÈ¡Ê×Ò³
+	//è·å–é¦–é¡µ
 	public static native String getHttp4GetHome();
 	
-	//»ñÈ¡¶©µ¥Êı¾İ
+	//è·å–è®¢å•æ•°æ®
 	public static native String getHttp4GetOrder(String user_id, String code, String date, String status, String offset1, String limit1, String token);
 	
-	//ĞŞ¸ÄÖ§¸¶×´Ì¬
+	//ä¿®æ”¹æ”¯ä»˜çŠ¶æ€
 	public static native String getHttp4PayOut(String customer_id, String code);
 	
-	//È¡Ïû¶©µ¥
+	//å–æ¶ˆè®¢å•
 	public static native String getHttp4CancelOrder(String id, String code, String token);
 	
-	//Ç©ÊÕ¶©µ¥
+	//ç­¾æ”¶è®¢å•
 	public static native String getHttp4SignOrder(String id, String code, String token);
 	
-	// µİ½»¶©µ¥
+	// é€’äº¤è®¢å•
 	public static native String getHttp4SaveOrder(String customer_id,
 			String ticket_id, String recipient_id, String pingou_id,
 			String goods_ascore, String ship_fee, String ship_type,
 			String ship_entity_name, String goods_qty_scr, String comments,
 			String token);
 
-	//»ñÈ¡Æ·ÅÆ
+	//è·å–å“ç‰Œ
 	public static native String getHttp4GetBrand();
 	
-	//»ñÈ¡¹¦Ğ§
+	//è·å–åŠŸæ•ˆ
 	public static native String getHttp4GetEffect(String where, String offset, String limit, String group, String order, String fields);
 	
-	//»ñÈ¡ËÑË÷½á¹û
+	//è·å–æœç´¢ç»“æœ
 	public static native String getHttp4GetSearch(String name, String fun, String brand,String price, String order1, String offset1, String limit1);
 	
-	//»ñÈ¡¼Û¸ñÇø¼ä
+	//è·å–ä»·æ ¼åŒºé—´
 	public static native String getHttp4GetPrice();
 	
-	//»ñÈ¡»ı·Ö
+	//è·å–ç§¯åˆ†
 	public static native String getHttp4GetVoucher(String id, String token);
 	
-	//µÇÂ¼
+	//ç™»å½•
 	public static native String getHttp4Login(String username, String password, String login_ip);
 	
-	//×¢²á
+	//æ³¨å†Œ
 	public static native String getHttp4Register(String username, String password, String cps, String ip);
 	
-	//ÉèÖÃÄ¬ÈÏµØÖ·
+	//è®¾ç½®é»˜è®¤åœ°å€
 	public static native String getHttp4SetDefAddr(String cid, String aid, String token);
 	
-	//»ñÈ¡Ãâ·ÑËÍºÍ»ı·Ö»»¹ºÁĞ±í
+	//è·å–å…è´¹é€å’Œç§¯åˆ†æ¢è´­åˆ—è¡¨
 	public static native String getHttp4GetVerify(String goods, String userid);
 	
-	//»ñÈ¡ÓÃ»§»ı·Ö£¬ÊÕ²Ø£¬ÏûÏ¢£¬ ¶©µ¥ÊıÁ¿
+	//è·å–ç”¨æˆ·ç§¯åˆ†ï¼Œæ”¶è—ï¼Œæ¶ˆæ¯ï¼Œ è®¢å•æ•°é‡
 	public static native String getHttp4GetCount(String userId, String token);
 	
-	//»ñÈ¡ÏûÏ¢ÖĞĞÄÓÃ»§ÏûÏ¢ÁĞ±í
+	//è·å–æ¶ˆæ¯ä¸­å¿ƒç”¨æˆ·æ¶ˆæ¯åˆ—è¡¨
 	public static native String getHttp4GetMessage(String userId, String token, String offset1, String limit1);
 	
-	//±ê¼ÇÏûÏ¢Î´ÒÑ¶Á×´Ì¬
+	//æ ‡è®°æ¶ˆæ¯æœªå·²è¯»çŠ¶æ€
 	public static native String getHttp4ChangeRead(String userId, String msgId, String token);
 }
