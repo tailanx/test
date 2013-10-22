@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <memory.h>
+#include <stdio.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -28,7 +29,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4PostUrl(JNIEnv* env,
 		jobject thiz){
 	return (*env)->NewStringUTF(env, url);
 }
-//Í¼Æ¬µØÖ· get
+//Í¼Æ¬ï¿½ï¿½Ö· get
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ImageUrlPrefix(JNIEnv* env,
 		jobject thiz){
 	int i;
@@ -73,7 +74,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ImageUrlPrefix(JNIEnv*
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//É¾³ýÓÃ»§ÊÕ»õµØÖ·, ²ÎÊý String cid , aid, token, ·½·¨post
+//É¾ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Õ»ï¿½ï¿½ï¿½Ö·, ï¿½ï¿½ï¿½ï¿½ String cid , aid, token, ï¿½ï¿½ï¿½ï¿½post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelAddress(JNIEnv* env,
 		jobject thiz, jstring cid, jstring aid, jstring token){
 	const char *chcid = (*env)->GetStringUTFChars(env, cid, NULL);
@@ -89,13 +90,13 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelAddress(JNIEnv* env
 	addString(urlString, api);
 
 	addString(urlString, "&cid=");
-	addString(urlString, chcid);
+	if(chcid != NULL)addString(urlString, chcid);
 
 	addString(urlString, "&aid=");
-	addString(urlString, chaid);
+	if(chaid != NULL)addString(urlString, chaid);
 
 	addString(urlString, "&token=");
-	addString(urlString, chtoken);
+	if(chtoken != NULL)addString(urlString, chtoken);
 
 	addString(urlString, pHead);
 
@@ -128,7 +129,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelAddress(JNIEnv* env
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//»ñÈ¡ÓÃ»§ÊÕ»õµØÖ·, ²ÎÊý where, offset, limit, group, order, fields,·½·¨get
+//ï¿½ï¿½È¡ï¿½Ã»ï¿½ï¿½Õ»ï¿½ï¿½ï¿½Ö·, ï¿½ï¿½ï¿½ï¿½ where, offset, limit, group, order, fields,ï¿½ï¿½ï¿½ï¿½get
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetAddress(JNIEnv* env,
 		jobject thiz, jstring where, jstring offset, jstring limit, jstring group, jstring order, jstring fields){
 
@@ -149,22 +150,23 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetAddress(JNIEnv* env
 	addString(urlString, api);
 
 	addString(urlString, "&where=");
-	addString(urlString, chwhere);
+	if(chwhere != NULL)
+		addString(urlString, chwhere);
 
 	addString(urlString, "&option%5Boffset%5D=");
-	addString(urlString, choffset);
+	if(choffset != NULL)addString(urlString, choffset);
 
 	addString(urlString, "&option%5Blimit%5D=");
-	addString(urlString, chlimit);
+	if(chlimit != NULL)addString(urlString, chlimit);
 
 	addString(urlString, "&option%5Bgroup%5D=");
-	addString(urlString, chgroup);
+	if(chgroup != NULL)addString(urlString, chgroup);
 
 	addString(urlString, "&option%5Border%5D=");
-	addString(urlString, chorder);
+	if(chorder != NULL)addString(urlString, chorder);
 
 	addString(urlString, "&fields=");
-	addString(urlString, chfields);
+	if(chfields != NULL)addString(urlString, chfields);
 
 	addString(urlString, pHead);
 
@@ -198,7 +200,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetAddress(JNIEnv* env
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//±£´æÓÃ»§ÊÕ»õµØÖ·, ²ÎÊýcid, cname, handset, province, city, district, address, rid, token £¬ ·½·¨post
+//ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Õ»ï¿½ï¿½ï¿½Ö·, ï¿½ï¿½ï¿½ï¿½cid, cname, handset, province, city, district, address, rid, token ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveAddress(JNIEnv* env,
 		jobject thiz, jstring customer_id, jstring customer_name, jstring handset, jstring province,
 		jstring city, jstring district, jstring address, jstring recipient_id, jstring token){
@@ -223,31 +225,31 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveAddress(JNIEnv* en
 	addString(urlString, api);
 
 	addString(urlString, "&customer_id=");
-	addString(urlString, chcid);
+	if(chcid != NULL)addString(urlString, chcid);
 
 	addString(urlString, "&customer_name=");
-	addString(urlString, chcname);
+	if(chcname != NULL)addString(urlString, chcname);
 
 	addString(urlString, "&handset=");
-	addString(urlString, chhandset);
+	if(chhandset != NULL)addString(urlString, chhandset);
 
 	addString(urlString, "&province=");
-	addString(urlString, chprovince);
+	if(chprovince != NULL)addString(urlString, chprovince);
 
 	addString(urlString, "&city=");
-	addString(urlString, chcity);
+	if(chcity != NULL)addString(urlString, chcity);
 
 	addString(urlString, "&district=");
-	addString(urlString, chdistrict);
+	if(chdistrict != NULL)addString(urlString, chdistrict);
 
 	addString(urlString, "&address=");
-	addString(urlString, chaddress);
+	if(chaddress != NULL)addString(urlString, chaddress);
 
 	addString(urlString, "&recipient_id=");
-	addString(urlString, chrid);
+	if(chrid != NULL)addString(urlString, chrid);
 
 	addString(urlString, "&token=");
-	addString(urlString, chtoken);
+	if(chtoken != NULL)addString(urlString, chtoken);
 
 	addString(urlString, pHead);
 
@@ -281,7 +283,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveAddress(JNIEnv* en
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//É¾³ýÓÃ»§ÆÀÂÛ, ²ÎÊý String id£¬ ·½·¨post
+//É¾ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ String idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelComment(JNIEnv* env,
 		jobject thiz, jstring id){
 	const char *chcid = (*env)->GetStringUTFChars(env, id, NULL);
@@ -294,7 +296,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelComment(JNIEnv* env
 	addString(urlString, api);
 
 	addString(urlString, "&id=");
-	addString(urlString, chcid);
+	if(chcid != NULL)addString(urlString, chcid);
 
 	addString(urlString, pHead);
 
@@ -327,7 +329,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelComment(JNIEnv* env
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//»ñÈ¡ÓÃ»§ÆÀÂÛ, ²ÎÊý where, offset, limit, group, order, fields,·½·¨get
+//ï¿½ï¿½È¡ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ where, offset, limit, group, order, fields,ï¿½ï¿½ï¿½ï¿½get
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetComment(JNIEnv* env,
 		jobject thiz, jstring where, jstring offset, jstring limit, jstring group, jstring order, jstring fields){
 
@@ -348,22 +350,22 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetComment(JNIEnv* env
 	addString(urlString, api);
 
 	addString(urlString, "&where=");
-	addString(urlString, chwhere);
+	if(chwhere != NULL)addString(urlString, chwhere);
 
 	addString(urlString, "&option%5Boffset%5D=");
-	addString(urlString, choffset);
+	if(choffset != NULL)addString(urlString, choffset);
 
 	addString(urlString, "&option%5Blimit%5D=");
-	addString(urlString, chlimit);
+	if(chlimit != NULL)addString(urlString, chlimit);
 
 	addString(urlString, "&option%5Bgroup%5D=");
-	addString(urlString, chgroup);
+	if(chgroup != NULL)addString(urlString, chgroup);
 
 	addString(urlString, "&option%5Border%5D=");
-	addString(urlString, chorder);
+	if(chorder != NULL)addString(urlString, chorder);
 
 	addString(urlString, "&fields=");
-	addString(urlString, chfields);
+	if(chfields != NULL)addString(urlString, chfields);
 
 	addString(urlString, pHead);
 
@@ -397,9 +399,9 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetComment(JNIEnv* env
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//±£´æÓÃ»§ÆÀÂÛ, ²ÎÊýString goods_id,
+//ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½String goods_id,
 //String user_id, String user_name, String title, String experience,
-//String commentDate£¬ ·½·¨post
+//String commentDateï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveComment(
 		JNIEnv* env, jobject thiz, jstring goods_id, jstring user_id,
 		jstring user_name, jstring title, jstring experience, jstring commentDate) {
@@ -421,17 +423,17 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveComment(
 	addString(urlString, api);
 
 	addString(urlString, "&goods_id=");
-	addString(urlString, chgoods_id);
+	if(chgoods_id != NULL)addString(urlString, chgoods_id);
 	addString(urlString, "&user_id=");
-	addString(urlString, chuser_id);
+	if(chuser_id != NULL)addString(urlString, chuser_id);
 	addString(urlString, "&user_name=");
-	addString(urlString, chuser_name);
+	if(chuser_name != NULL)addString(urlString, chuser_name);
 	addString(urlString, "&title=");
-	addString(urlString, chtitle);
+	if(chtitle != NULL)addString(urlString, chtitle);
 	addString(urlString, "&experience=");
-	addString(urlString, chex);
+	if(chex != NULL)addString(urlString, chex);
 	addString(urlString, "&commentDate=");
-	addString(urlString, chdate);
+	if(chdate != NULL)addString(urlString, chdate);
 
 	addString(urlString, pHead);
 
@@ -465,7 +467,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveComment(
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//»ñÈ¡ÅäËÍÖÐÐÄ, ²ÎÊý where, offset, limit, group, order, fields,·½·¨get
+//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ where, offset, limit, group, order, fields,ï¿½ï¿½ï¿½ï¿½get
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetDistribute(JNIEnv* env,
 		jobject thiz, jstring where, jstring offset, jstring limit, jstring group, jstring order, jstring fields){
 
@@ -486,22 +488,22 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetDistribute(JNIEnv* 
 	addString(urlString, api);
 
 	addString(urlString, "&where=");
-	addString(urlString, chwhere);
+	if(chwhere != NULL)addString(urlString, chwhere);
 
 	addString(urlString, "&option%5Boffset%5D=");
-	addString(urlString, choffset);
+	if(choffset != NULL)addString(urlString, choffset);
 
 	addString(urlString, "&option%5Blimit%5D=");
-	addString(urlString, chlimit);
+	if(chlimit != NULL)addString(urlString, chlimit);
 
 	addString(urlString, "&option%5Bgroup%5D=");
-	addString(urlString, chgroup);
+	if(chgroup != NULL)addString(urlString, chgroup);
 
 	addString(urlString, "&option%5Border%5D=");
-	addString(urlString, chorder);
+	if(chorder != NULL)addString(urlString, chorder);
 
 	addString(urlString, "&fields=");
-	addString(urlString, chfields);
+	if(chfields != NULL)addString(urlString, chfields);
 
 	addString(urlString, pHead);
 
@@ -535,7 +537,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetDistribute(JNIEnv* 
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//»ñÈ¡ÅäËÍ·ÑÓÃ, ²ÎÊý where, offset, limit, group, order, fields,·½·¨get
+//ï¿½ï¿½È¡ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ where, offset, limit, group, order, fields,ï¿½ï¿½ï¿½ï¿½get
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetExpress(JNIEnv* env,
 		jobject thiz, jstring where, jstring offset, jstring limit, jstring group, jstring order, jstring fields){
 
@@ -556,22 +558,22 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetExpress(JNIEnv* env
 	addString(urlString, api);
 
 	addString(urlString, "&where=");
-	addString(urlString, chwhere);
+	if(chwhere != NULL)addString(urlString, chwhere);
 
 	addString(urlString, "&option%5Boffset%5D=");
-	addString(urlString, choffset);
+	if(choffset != NULL)addString(urlString, choffset);
 
 	addString(urlString, "&option%5Blimit%5D=");
-	addString(urlString, chlimit);
+	if(chlimit != NULL)addString(urlString, chlimit);
 
 	addString(urlString, "&option%5Bgroup%5D=");
-	addString(urlString, chgroup);
+	if(chgroup != NULL)addString(urlString, chgroup);
 
 	addString(urlString, "&option%5Border%5D=");
-	addString(urlString, chorder);
+	if(chorder != NULL)addString(urlString, chorder);
 
 	addString(urlString, "&fields=");
-	addString(urlString, chfields);
+	if(chfields != NULL)addString(urlString, chfields);
 
 	addString(urlString, pHead);
 
@@ -605,7 +607,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetExpress(JNIEnv* env
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//»ñÈ¡ÃâÓÊÁÐ±í, ²ÎÊý where, offset, limit, group, order, fields,·½·¨get
+//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½, ï¿½ï¿½ï¿½ï¿½ where, offset, limit, group, order, fields,ï¿½ï¿½ï¿½ï¿½get
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetFree(JNIEnv* env,
 		jobject thiz, jstring where, jstring offset, jstring limit, jstring group, jstring order, jstring fields){
 
@@ -626,22 +628,22 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetFree(JNIEnv* env,
 	addString(urlString, api);
 
 	addString(urlString, "&where=");
-	addString(urlString, chwhere);
+	if(chwhere != NULL)addString(urlString, chwhere);
 
 	addString(urlString, "&option%5Boffset%5D=");
-	addString(urlString, choffset);
+	if(choffset != NULL)addString(urlString, choffset);
 
 	addString(urlString, "&option%5Blimit%5D=");
-	addString(urlString, chlimit);
+	if(chlimit != NULL)addString(urlString, chlimit);
 
 	addString(urlString, "&option%5Bgroup%5D=");
-	addString(urlString, chgroup);
+	if(chgroup != NULL)addString(urlString, chgroup);
 
 	addString(urlString, "&option%5Border%5D=");
-	addString(urlString, chorder);
+	if(chorder != NULL)addString(urlString, chorder);
 
 	addString(urlString, "&fields=");
-	addString(urlString, chfields);
+	if(chfields != NULL)addString(urlString, chfields);
 
 	addString(urlString, pHead);
 
@@ -676,7 +678,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetFree(JNIEnv* env,
 }
 
 /**
- * ¼ì²éÊÕ²ØÊÇ·ñ´æÔÚ ,²ÎÊý String userid, String goodsid, string token, post
+ * ï¿½ï¿½ï¿½ï¿½Õ²ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ ,ï¿½ï¿½ï¿½ï¿½ String userid, String goodsid, string token, post
  */
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CheckFav(JNIEnv* env,
 		jobject thiz, jstring userid, jstring goodsid, jstring token){
@@ -693,13 +695,13 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CheckFav(JNIEnv* env,
 	addString(urlString, api);
 
 	addString(urlString, "&userId=");
-	addString(urlString, chuid);
+	if(chuid != NULL)addString(urlString, chuid);
 
 	addString(urlString, "&goods_id=");
-	addString(urlString, chgid);
+	if(chgid != NULL)addString(urlString, chgid);
 
 	addString(urlString, "&token=");
-	addString(urlString, chtoken);
+	if(chtoken != NULL)addString(urlString, chtoken);
 
 	addString(urlString, pHead);
 
@@ -732,7 +734,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CheckFav(JNIEnv* env,
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//É¾³ýÊÕ²Ø, ²ÎÊý String userid , goodsid, token, ·½·¨post
+//É¾ï¿½ï¿½ï¿½Õ²ï¿½, ï¿½ï¿½ï¿½ï¿½ String userid , goodsid, token, ï¿½ï¿½ï¿½ï¿½post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelFav(JNIEnv* env,
 		jobject thiz, jstring userid, jstring goodsid, jstring token){
 	const char *chcid = (*env)->GetStringUTFChars(env, userid, NULL);
@@ -748,13 +750,13 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelFav(JNIEnv* env,
 	addString(urlString, api);
 
 	addString(urlString, "&userid=");
-	addString(urlString, chcid);
+	if(chcid != NULL)addString(urlString, chcid);
 
 	addString(urlString, "&goods_id=");
-	addString(urlString, chgid);
+	if(chgid != NULL)addString(urlString, chgid);
 
 	addString(urlString, "&token=");
-	addString(urlString, chtoken);
+	if(chtoken != NULL)addString(urlString, chtoken);
 
 	addString(urlString, pHead);
 
@@ -787,7 +789,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelFav(JNIEnv* env,
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//»ñÈ¡ÊÕ²ØÁÐ±í, ²ÎÊý where, offset, limit, group, order, fields,·½·¨get
+//ï¿½ï¿½È¡ï¿½Õ²ï¿½ï¿½Ð±ï¿½, ï¿½ï¿½ï¿½ï¿½ where, offset, limit, group, order, fields,ï¿½ï¿½ï¿½ï¿½get
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetFav(JNIEnv* env,
 		jobject thiz, jstring where, jstring offset, jstring limit, jstring group, jstring order, jstring fields){
 
@@ -808,22 +810,22 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetFav(JNIEnv* env,
 	addString(urlString, api);
 
 	addString(urlString, "&where=");
-	addString(urlString, chwhere);
+	if(chwhere != NULL)addString(urlString, chwhere);
 
 	addString(urlString, "&option%5Boffset%5D=");
-	addString(urlString, choffset);
+	if(choffset != NULL)addString(urlString, choffset);
 
 	addString(urlString, "&option%5Blimit%5D=");
-	addString(urlString, chlimit);
+	if(chlimit != NULL)addString(urlString, chlimit);
 
 	addString(urlString, "&option%5Bgroup%5D=");
-	addString(urlString, chgroup);
+	if(chgroup != NULL)addString(urlString, chgroup);
 
 	addString(urlString, "&option%5Border%5D=");
-	addString(urlString, chorder);
+	if(chorder != NULL)addString(urlString, chorder);
 
 	addString(urlString, "&fields=");
-	addString(urlString, chfields);
+	if(chfields != NULL)addString(urlString, chfields);
 
 	addString(urlString, pHead);
 
@@ -857,7 +859,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetFav(JNIEnv* env,
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//±£´æÊÕ²Ø, ²ÎÊý String userid , goodsid, token, ·½·¨post
+//ï¿½ï¿½ï¿½ï¿½ï¿½Õ²ï¿½, ï¿½ï¿½ï¿½ï¿½ String userid , goodsid, token, ï¿½ï¿½ï¿½ï¿½post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveFav(JNIEnv* env,
 		jobject thiz, jstring userid, jstring goodsid, jstring token){
 	const char *chcid = (*env)->GetStringUTFChars(env, userid, NULL);
@@ -873,13 +875,13 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveFav(JNIEnv* env,
 	addString(urlString, api);
 
 	addString(urlString, "&userid=");
-	addString(urlString, chcid);
+	if(chcid != NULL)addString(urlString, chcid);
 
 	addString(urlString, "&goods_id=");
-	addString(urlString, chgid);
+	if(chgid != NULL)addString(urlString, chgid);
 
 	addString(urlString, "&token=");
-	addString(urlString, chtoken);
+	if(chtoken != NULL)addString(urlString, chtoken);
 
 	addString(urlString, pHead);
 
@@ -912,7 +914,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveFav(JNIEnv* env,
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//»ñÈ¡ÉÌÆ·ÐÅÏ¢, ²ÎÊý String id£¬ ·½·¨get
+//ï¿½ï¿½È¡ï¿½ï¿½Æ·ï¿½ï¿½Ï¢, ï¿½ï¿½ï¿½ï¿½ String idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½get
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetGoods(JNIEnv* env,
 		jobject thiz, jstring id){
 	const char *chcid = (*env)->GetStringUTFChars(env, id, NULL);
@@ -927,7 +929,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetGoods(JNIEnv* env,
 	addString(urlString, api);
 
 	addString(urlString, "&id=");
-	addString(urlString, chcid);
+	if(chcid != NULL)addString(urlString, chcid);
 
 	addString(urlString, pHead);
 
@@ -960,7 +962,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetGoods(JNIEnv* env,
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//»ñÈ¡Ê×Ò³ get
+//ï¿½ï¿½È¡ï¿½ï¿½Ò³ get
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetHome(JNIEnv* env,
 		jobject thiz){
 	int i;
@@ -1008,7 +1010,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetHome(JNIEnv* env,
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//»ñÈ¡¶©µ¥Êý¾Ý, ²ÎÊý user_id, code, date, status, offset1, fields£¬token,·½·¨get
+//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ user_id, code, date, status, offset1, fieldsï¿½ï¿½token,ï¿½ï¿½ï¿½ï¿½get
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetOrder(JNIEnv* env,
 		jobject thiz, jstring user_id, jstring code, jstring date,
 		jstring status, jstring offset1, jstring limit1, jstring token){
@@ -1031,25 +1033,25 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetOrder(JNIEnv* env,
 	addString(urlString, api);
 
 	addString(urlString, "&user_id=");
-	addString(urlString, chuser_id);
+	if(chuser_id != NULL)addString(urlString, chuser_id);
 
 	addString(urlString, "&code=");
-	addString(urlString, chcode);
+	if(chcode != NULL)addString(urlString, chcode);
 
 	addString(urlString, "&date=");
-	addString(urlString, chdate);
+	if(chdate != NULL)addString(urlString, chdate);
 
 	addString(urlString, "&status=");
-	addString(urlString, chstatus);
+	if(chstatus != NULL)addString(urlString, chstatus);
 
 	addString(urlString, "&offset1=");
-	addString(urlString, choffset1);
+	if(choffset1 != NULL)addString(urlString, choffset1);
 
 	addString(urlString, "&limit1=");
-	addString(urlString, chlimit1);
+	if(chlimit1 != NULL)addString(urlString, chlimit1);
 
 	addString(urlString, "&token=");
-	addString(urlString, chtoken);
+	if(chtoken != NULL)addString(urlString, chtoken);
 
 	addString(urlString, pHead);
 
@@ -1083,7 +1085,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetOrder(JNIEnv* env,
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//ÐÞ¸ÄÖ§¸¶×´Ì¬, ²ÎÊý String customer_id , code, token, ·½·¨post
+//ï¿½Þ¸ï¿½Ö§ï¿½ï¿½×´Ì¬, ï¿½ï¿½ï¿½ï¿½ String customer_id , code, token, ï¿½ï¿½ï¿½ï¿½post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4PayOut(JNIEnv* env,
 		jobject thiz, jstring customer_id, jstring code){
 	const char *chcid = (*env)->GetStringUTFChars(env, customer_id, NULL);
@@ -1099,10 +1101,10 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4PayOut(JNIEnv* env,
 	addString(urlString, api);
 
 	addString(urlString, "&customer_id=");
-	addString(urlString, chcid);
+	if(chcid != NULL)addString(urlString, chcid);
 
 	addString(urlString, "&code=");
-	addString(urlString, chgid);
+	if(chgid != NULL)addString(urlString, chgid);
 //
 //	addString(urlString, "&token=");
 //	addString(urlString, chtoken);
@@ -1138,7 +1140,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4PayOut(JNIEnv* env,
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//È¡Ïû¶©µ¥, ²ÎÊý String id , code, token, ·½·¨post
+//È¡ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ String id , code, token, ï¿½ï¿½ï¿½ï¿½post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CancelOrder(JNIEnv* env,
 		jobject thiz, jstring id, jstring code, jstring token){
 	const char *chcid = (*env)->GetStringUTFChars(env, id, NULL);
@@ -1154,13 +1156,13 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CancelOrder(JNIEnv* en
 	addString(urlString, api);
 
 	addString(urlString, "&id=");
-	addString(urlString, chcid);
+	if(chcid != NULL)addString(urlString, chcid);
 
 	addString(urlString, "&code=");
-	addString(urlString, chcode);
+	if(chcode != NULL)addString(urlString, chcode);
 
 	addString(urlString, "&token=");
-	addString(urlString, chtoken);
+	if(chtoken != NULL)addString(urlString, chtoken);
 
 	addString(urlString, pHead);
 
@@ -1193,7 +1195,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CancelOrder(JNIEnv* en
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//Ç©ÊÕ¶©µ¥, ²ÎÊý String id , code, token, ·½·¨post
+//Ç©ï¿½Õ¶ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ String id , code, token, ï¿½ï¿½ï¿½ï¿½post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SignOrder(JNIEnv* env,
 		jobject thiz, jstring id, jstring code, jstring token){
 	const char *chcid = (*env)->GetStringUTFChars(env, id, NULL);
@@ -1209,13 +1211,13 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SignOrder(JNIEnv* env,
 	addString(urlString, api);
 
 	addString(urlString, "&id=");
-	addString(urlString, chcid);
+	if(chcid != NULL)addString(urlString, chcid);
 
 	addString(urlString, "&code=");
-	addString(urlString, chcode);
+	if(chcode != NULL)addString(urlString, chcode);
 
 	addString(urlString, "&token=");
-	addString(urlString, chtoken);
+	if(chtoken != NULL)addString(urlString, chtoken);
 
 	addString(urlString, pHead);
 
@@ -1248,8 +1250,8 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SignOrder(JNIEnv* env,
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//Ìá½»¶©µ¥, ²ÎÊý customer_id , ticket_id,recipient_id,pingou_id, goods_ascore,ship_fee,
-//ship_type , ship_entity_name, goods_qty_scr,comments, token, ·½·¨post
+//ï¿½á½»ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ customer_id , ticket_id,recipient_id,pingou_id, goods_ascore,ship_fee,
+//ship_type , ship_entity_name, goods_qty_scr,comments, token, ï¿½ï¿½ï¿½ï¿½post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveOrder(JNIEnv* env,
 		jobject thiz, jstring customer_id, jstring ticket_id, jstring recipient_id, jstring pingou_id, jstring goods_ascore,
 		jstring ship_fee, jstring ship_type, jstring ship_entity_name, jstring goods_qty_scr, jstring comments, jstring token){
@@ -1274,28 +1276,28 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveOrder(JNIEnv* env,
 	addString(urlString, api);
 
 	addString(urlString, "&customer_id=");
-	addString(urlString, chcustomer_id);
+	if(chcustomer_id != NULL)addString(urlString, chcustomer_id);
 	addString(urlString, "&ticket_id=");
-	addString(urlString, chticket_id);
+	if(chticket_id != NULL)addString(urlString, chticket_id);
 	addString(urlString, "&recipient_id=");
-	addString(urlString, chrecipient_id);
+	if(chrecipient_id != NULL)addString(urlString, chrecipient_id);
 	addString(urlString, "&pingou_id=");
-	addString(urlString, chpingou_id);
+	if(chpingou_id != NULL)addString(urlString, chpingou_id);
 	addString(urlString, "&goods_ascore=");
-	addString(urlString, chgoods_ascore);
+	if(chgoods_ascore != NULL)addString(urlString, chgoods_ascore);
 	addString(urlString, "&ship_fee=");
-	addString(urlString, chship_fee);
+	if(chship_fee != NULL)addString(urlString, chship_fee);
 	addString(urlString, "&ship_type=");
-	addString(urlString, chship_type);
+	if(chship_type != NULL)addString(urlString, chship_type);
 	addString(urlString, "&ship_entity_name=");
-	addString(urlString, chship_entity_name);
+	if(chship_entity_name != NULL)addString(urlString, chship_entity_name);
 	addString(urlString, "&goods_qty_scr=");
-	addString(urlString, chgoods_qty_scr);
+	if(chgoods_qty_scr != NULL)addString(urlString, chgoods_qty_scr);
 	addString(urlString, "&comments=");
-	addString(urlString, chcomments);
+	if(chcomments != NULL)addString(urlString, chcomments);
 
 	addString(urlString, "&token=");
-	addString(urlString, chtoken);
+	if(chtoken != NULL)addString(urlString, chtoken);
 
 	addString(urlString, pHead);
 
@@ -1328,7 +1330,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveOrder(JNIEnv* env,
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//»ñÈ¡Æ·ÅÆ get
+//ï¿½ï¿½È¡Æ·ï¿½ï¿½ get
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetBrand(JNIEnv* env,
 		jobject thiz){
 	int i;
@@ -1376,7 +1378,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetBrand(JNIEnv* env,
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//»ñÈ¡¹¦Ð§ÁÐ±í, ²ÎÊý where, offset, limit, group, order, fields,·½·¨get
+//ï¿½ï¿½È¡ï¿½ï¿½Ð§ï¿½Ð±ï¿½, ï¿½ï¿½ï¿½ï¿½ where, offset, limit, group, order, fields,ï¿½ï¿½ï¿½ï¿½get
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetEffect(JNIEnv* env,
 		jobject thiz, jstring where, jstring offset, jstring limit, jstring group, jstring order, jstring fields){
 
@@ -1397,22 +1399,22 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetEffect(JNIEnv* env,
 	addString(urlString, api);
 
 	addString(urlString, "&where=");
-	addString(urlString, chwhere);
+	if(chwhere != NULL)addString(urlString, chwhere);
 
 	addString(urlString, "&option%5Boffset%5D=");
-	addString(urlString, choffset);
+	if(choffset != NULL)addString(urlString, choffset);
 
 	addString(urlString, "&option%5Blimit%5D=");
-	addString(urlString, chlimit);
+	if(chlimit != NULL)addString(urlString, chlimit);
 
 	addString(urlString, "&option%5Bgroup%5D=");
-	addString(urlString, chgroup);
+	if(chgroup != NULL)addString(urlString, chgroup);
 
 	addString(urlString, "&option%5Border%5D=");
-	addString(urlString, chorder);
+	if(chorder != NULL)addString(urlString, chorder);
 
 	addString(urlString, "&fields=");
-	addString(urlString, chfields);
+	if(chfields != NULL)addString(urlString, chfields);
 
 	addString(urlString, pHead);
 
@@ -1446,7 +1448,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetEffect(JNIEnv* env,
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//»ñÈ¡ËÑË÷½á¹ûÁÐ±í, ²ÎÊý name, fun, brand, price, order1, offset1, limit1,·½·¨get
+//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½, ï¿½ï¿½ï¿½ï¿½ name, fun, brand, price, order1, offset1, limit1,ï¿½ï¿½ï¿½ï¿½get
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetSearch(JNIEnv* env,
 		jobject thiz, jstring name, jstring fun, jstring brand, jstring price, jstring order1, jstring offset1, jstring limit1){
 
@@ -1459,34 +1461,41 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetSearch(JNIEnv* env,
 	const char *chlimit1 = (*env)->GetStringUTFChars(env, limit1, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
+
 	encrypt[0] = 0;
-	urlString[0] = 0;
+//	urlString[0] = 0;
 
 	const char *api="?api=product.mallgood.search";
 
 	addString(urlString, url);
 	addString(urlString, api);
-
 	addString(urlString, "&name=");
-	addString(urlString, chname);
-
+	if(chname != NULL){
+		addString(urlString, chname);
+	}
 	addString(urlString, "&fun=");
-	addString(urlString, chfun);
-
+	if(chfun != NULL){
+		addString(urlString, chfun);
+	}
 	addString(urlString, "&brand=");
-	addString(urlString, chbrand);
-
+	if(chname != NULL){
+		addString(urlString, chbrand);
+	}
 	addString(urlString, "&price=");
-	addString(urlString, chprice);
+	if(chprice != NULL)
+		addString(urlString, chprice);
 
 	addString(urlString, "&order1=");
-	addString(urlString, chorder1);
+	if(chorder1 != NULL)
+		addString(urlString, chorder1);
 
 	addString(urlString, "&offset1=");
-	addString(urlString, choffset1);
+	if(choffset1 != NULL)
+		addString(urlString, choffset1);
 
 	addString(urlString, "&limit1=");
-	addString(urlString, chlimit1);
+	if(chlimit1 != NULL)
+		addString(urlString, chlimit1);
 
 	addString(urlString, pHead);
 
@@ -1516,11 +1525,12 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetSearch(JNIEnv* env,
 	buf[32] = 0;
 
 	addString(urlString, buf);
-
+	int urllen = strlen((char *) urlString);
+	urlString[urllen] = 0;
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//»ñÈ¡¼Û¸ñÇø¼äget
+//ï¿½ï¿½È¡ï¿½Û¸ï¿½ï¿½ï¿½ï¿½get
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetPrice(JNIEnv* env,
 		jobject thiz){
 	int i;
@@ -1568,7 +1578,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetPrice(JNIEnv* env,
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//»ñÈ¡ÓÃ»§»ý·Ö,²ÎÊýid£¬ token£¬ ·½·¨post
+//ï¿½ï¿½È¡ï¿½Ã»ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½ tokenï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetVoucher(JNIEnv* env,
 		jobject thiz, jstring id, jstring token){
 
@@ -1587,10 +1597,10 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetVoucher(JNIEnv* env
 	addString(urlString, api);
 
 	addString(urlString, "&id=");
-	addString(urlString, chid);
+	if(chid != NULL)addString(urlString, chid);
 
 	addString(urlString, "&token=");
-	addString(urlString, chtoken);
+	if(chtoken != NULL)addString(urlString, chtoken);
 
 	addString(urlString, pHead);
 
@@ -1623,7 +1633,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetVoucher(JNIEnv* env
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//µÇÂ¼,²ÎÊýusername, password, ip£¬ ·½·¨post
+//ï¿½ï¿½Â¼,ï¿½ï¿½ï¿½ï¿½username, password, ipï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4Login(JNIEnv* env,
 		jobject thiz, jstring username, jstring password, jstring ip){
 
@@ -1643,13 +1653,13 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4Login(JNIEnv* env,
 	addString(urlString, api);
 
 	addString(urlString, "&username=");
-	addString(urlString, chuser);
+	if(chuser != NULL)addString(urlString, chuser);
 
 	addString(urlString, "&password=");
-	addString(urlString, chpsw);
+	if(chpsw != NULL)addString(urlString, chpsw);
 
 	addString(urlString, "&login_ip=");
-	addString(urlString, chip);
+	if(chip != NULL)addString(urlString, chip);
 
 	addString(urlString, pHead);
 
@@ -1682,7 +1692,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4Login(JNIEnv* env,
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//×¢²á,²ÎÊýusername , password, cps, ip£¬ ·½·¨post
+//×¢ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½username , password, cps, ipï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4Register(JNIEnv* env,
 		jobject thiz, jstring username, jstring password, jstring cps, jstring ip){
 
@@ -1703,16 +1713,16 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4Register(JNIEnv* env,
 	addString(urlString, api);
 
 	addString(urlString, "&username=");
-	addString(urlString, chuser);
+	if(chuser != NULL)addString(urlString, chuser);
 
 	addString(urlString, "&password=");
-	addString(urlString, chpsw);
+	if(chpsw != NULL)addString(urlString, chpsw);
 
 	addString(urlString, "&cps=");
-	addString(urlString, chcps);
+	if(chcps != NULL)addString(urlString, chcps);
 
 	addString(urlString, "&ip=");
-	addString(urlString, chip);
+	if(chip != NULL)addString(urlString, chip);
 
 	addString(urlString, pHead);
 
@@ -1745,7 +1755,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4Register(JNIEnv* env,
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//ÉèÖÃÄ¬ÈÏµØÖ·,²ÎÊýcid, aid£¬ token£¬ ·½·¨post
+//ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½Ïµï¿½Ö·,ï¿½ï¿½ï¿½ï¿½cid, aidï¿½ï¿½ tokenï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SetDefAddr(JNIEnv* env,
 		jobject thiz, jstring cid, jstring aid, jstring token){
 
@@ -1765,13 +1775,13 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SetDefAddr(JNIEnv* env
 	addString(urlString, api);
 
 	addString(urlString, "&cid=");
-	addString(urlString, chcid);
+	if(chcid != NULL)addString(urlString, chcid);
 
 	addString(urlString, "&aid=");
-	addString(urlString, chaid);
+	if(chaid != NULL)addString(urlString, chaid);
 
 	addString(urlString, "&token=");
-	addString(urlString, chtoken);
+	if(chaid != NULL)addString(urlString, chtoken);
 
 	addString(urlString, pHead);
 
@@ -1804,7 +1814,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SetDefAddr(JNIEnv* env
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//»ñÈ¡Ãâ·ÑËÍºÍ»ý·Ö»»¹ºÁÐ±í ²ÎÊý£ºgoods, userid ,post
+//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ÍºÍ»ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½goods, userid ,post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetVerify(JNIEnv* env,
 		jobject thiz, jstring goods, jstring userid){//, jstring token
 
@@ -1824,10 +1834,10 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetVerify(JNIEnv* env,
 	addString(urlString, api);
 
 	addString(urlString, "&goods=");
-	addString(urlString, chgoods);
+	if(chgoods != NULL)addString(urlString, chgoods);
 
 	addString(urlString, "&user_id=");
-	addString(urlString, chuid);
+	if(chuid != NULL)addString(urlString, chuid);
 
 //	addString(urlString, "&token=");
 //	addString(urlString, chtoken);
@@ -1863,7 +1873,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetVerify(JNIEnv* env,
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//»ñÈ¡ÓÃ»§»ý·Ö£¬ÊÕ²Ø£¬ÏûÏ¢£¬ ¶©µ¥ÊýÁ¿, ²ÎÊý userid, token,·½·¨get
+//ï¿½ï¿½È¡ï¿½Ã»ï¿½ï¿½ï¿½Ö£ï¿½ï¿½Õ²Ø£ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ userid, token,ï¿½ï¿½ï¿½ï¿½get
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetCount(JNIEnv* env,
 		jobject thiz, jstring userId, jstring token){
 
@@ -1880,10 +1890,10 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetCount(JNIEnv* env,
 	addString(urlString, api);
 
 	addString(urlString, "&user_id=");
-	addString(urlString, chname);
+	if(chname != NULL)addString(urlString, chname);
 
 	addString(urlString, "&token=");
-	addString(urlString, chtoken);
+	if(chtoken != NULL)addString(urlString, chtoken);
 
 	addString(urlString, pHead);
 
@@ -1917,7 +1927,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetCount(JNIEnv* env,
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//»ñÈ¡ÏûÏ¢ÖÐÐÄÓÃ»§ÏûÏ¢ÁÐ±í, ²ÎÊý userid, token, offset1,limit1,·½·¨get
+//ï¿½ï¿½È¡ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ï¢ï¿½Ð±ï¿½, ï¿½ï¿½ï¿½ï¿½ userid, token, offset1,limit1,ï¿½ï¿½ï¿½ï¿½get
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetMessage(JNIEnv* env,
 		jobject thiz, jstring userId, jstring token, jstring offset1, jstring limit1){
 
@@ -1936,14 +1946,14 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetMessage(JNIEnv* env
 	addString(urlString, api);
 
 	addString(urlString, "&user_id=");
-	addString(urlString, chname);
+	if(chname != NULL)addString(urlString, chname);
 
 	addString(urlString, "&token=");
-	addString(urlString, chtoken);
+	if(chtoken != NULL)addString(urlString, chtoken);
 	addString(urlString, "&offset1=");
-	addString(urlString, choffset1);
+	if(choffset1 != NULL)addString(urlString, choffset1);
 	addString(urlString, "&limit1=");
-	addString(urlString, chlimit1);
+	if(chlimit1 != NULL)addString(urlString, chlimit1);
 
 	addString(urlString, pHead);
 
@@ -1977,7 +1987,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetMessage(JNIEnv* env
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//±ê¼ÇÏûÏ¢Î´ÒÑ¶Á×´Ì¬ ²ÎÊý£ºpid, userid ,post
+//ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢Î´ï¿½Ñ¶ï¿½×´Ì¬ ï¿½ï¿½ï¿½ï¿½pid, userid ,post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ChangeRead(JNIEnv* env,
 		jobject thiz, jstring userid, jstring pid, jstring token){//
 
@@ -1997,13 +2007,13 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ChangeRead(JNIEnv* env
 	addString(urlString, api);
 
 	addString(urlString, "&user_id=");
-	addString(urlString, chuid);
+	if(chuid != NULL)addString(urlString, chuid);
 
 	addString(urlString, "&pid=");
-	addString(urlString, chpid);
+	if(chpid != NULL)addString(urlString, chpid);
 
 	addString(urlString, "&token=");
-	addString(urlString, chtoken);
+	if(chtoken != NULL)addString(urlString, chtoken);
 
 	addString(urlString, pHead);
 
