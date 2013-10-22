@@ -71,10 +71,10 @@ public class BaseInfoFragment extends SherlockFragment {
 			break;
 		case 1:
 			view = inflater.inflate(R.layout.item_goods_base_info, container, false);
-//			View parentView =  inflater.inflate(R.layout.activity_goods_info_layout, null);//»ñÈ¡¹ºÎï³µ
+//			View parentView =  inflater.inflate(R.layout.activity_goods_info_layout, null);//è·å–è´­ç‰©è½¦
 //			final Button cartButotn =(Button) parentView.findViewById(R.id.shopping_cart_button);
 //			number = Integer.parseInt(cartButotn.getText().toString());
-			ImageView buyNow = (ImageView)view.findViewById(R.id.buy_now);//Á¢¼´¹ºÂò
+			ImageView buyNow = (ImageView)view.findViewById(R.id.buy_now);//ç«‹å³è´­ä¹°
 			buyNow.setOnClickListener(new OnClickListener() {
 				
 				@Override
@@ -83,7 +83,7 @@ public class BaseInfoFragment extends SherlockFragment {
 					
 				}
 			});
-//			ImageView addCart = (ImageView)view.findViewById(R.id.add_to_cart);//¼ÓÈë¹ºÎï³µ
+//			ImageView addCart = (ImageView)view.findViewById(R.id.add_to_cart);//åŠ å…¥è´­ç‰©è½¦
 //			addCart.setOnClickListener(new OnClickListener() {
 //				
 //				@Override
@@ -138,7 +138,7 @@ public class BaseInfoFragment extends SherlockFragment {
 	}
 
 	private int getDeviceWidth() {
-		DisplayMetrics dm = new DisplayMetrics();// »ñµÃÆÁÄ»·Ö±æÂÊ
+		DisplayMetrics dm = new DisplayMetrics();// è·å¾—å±å¹•åˆ†è¾¨ç‡
 		getSherlockActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
 		return dm.widthPixels;
 	} 
