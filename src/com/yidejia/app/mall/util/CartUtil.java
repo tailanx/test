@@ -62,7 +62,6 @@ public class CartUtil {
 
 	private String items[] = { "删除", "查看商品详情", "收藏" };
 
-	
 	private TextView number;
 
 //	private void setupShow() {

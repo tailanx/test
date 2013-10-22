@@ -3,15 +3,15 @@ package com.yidejia.app.mall.util;
 public class UnicodeToString {
 	
 	/**
-	 * ½«unicode×Ö·û´®×ª»»³ÉÆÕÍ¨String×Ö·û´®
+	 * ï¿½ï¿½unicodeï¿½Ö·ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨Stringï¿½Ö·ï¿½
 	 * 
 	 * @param str
-	 *            ´ı×ª×Ö·û´®
-	 * @return ÆÕÍ¨×Ö·û´®
+	 *            ï¿½ï¿½×ªï¿½Ö·ï¿½
+	 * @return ï¿½ï¿½Í¨ï¿½Ö·ï¿½
 	 */
 	public String revert(String str) {
 		str = (str == null ? "" : str);
-		if (str.indexOf("\\u") == -1)// Èç¹û²»ÊÇunicodeÂëÔòÔ­Ñù·µ»Ø
+		if (str.indexOf("\\u") == -1)// ï¿½ï¿½ï¿½ï¿½ï¿½unicodeï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½
 			return str;
 
 		StringBuffer sb = new StringBuffer(1000);
@@ -53,5 +53,37 @@ public class UnicodeToString {
 			i = i + 6;
 		}
 		return sb.toString();
+	}
+	
+	/**
+	 * å°†å­—ç¬¦ä¸²è½¬æˆunicode
+	 * 
+	 * @param str
+	 *            å¾…è½¬å­—ç¬¦ä¸²
+	 * @return unicodeå­—ç¬¦ä¸²
+	 */
+	public String convert(String str) {
+		str = (str == null ? "" : str);
+		String tmp;
+		StringBuffer sb = new StringBuffer(1000);
+		char c;
+		int i, j;
+		sb.setLength(0);
+		for (i = 0; i < str.length(); i++) {
+			c = str.charAt(i);
+			sb.append("\\u");
+			j = (c >>> 8); // å–å‡ºé«˜8ä½
+			tmp = Integer.toHexString(j);
+			if (tmp.length() == 1)
+				sb.append("0");
+			sb.append(tmp);
+			j = (c & 0xFF); // å–å‡ºä½8ä½
+			tmp = Integer.toHexString(j);
+			if (tmp.length() == 1)
+				sb.append("0");
+			sb.append(tmp);
+
+		}
+		return (new String(sb));
 	}
 }

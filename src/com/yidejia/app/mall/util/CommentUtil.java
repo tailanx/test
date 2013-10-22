@@ -33,7 +33,7 @@ public class CommentUtil {
 	private UserCommentDataManage dataManage;
 
 	/**
-	 * 
+	 *  
 	 */
 	public CommentUtil() {
 

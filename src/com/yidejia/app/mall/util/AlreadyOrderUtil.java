@@ -18,17 +18,17 @@ import android.widget.Toast;
 public class AlreadyOrderUtil {
 	private Context context;
 	private LayoutInflater mInflater;
-	private LinearLayout mLinearLayout;//Íâ²ã¼ÓÔØÓÃµÄ
-	private LinearLayout mLayout;//ÓÃÀ´´«²ÎÓÃµÄ
+	private LinearLayout mLinearLayout;//å¤–å±‚åŠ è½½ç”¨çš„
+	private LinearLayout mLayout;//ç”¨æ¥ä¼ å‚ç”¨çš„
 	private View view;
 	private MyApplication myApplication;
 	
-	private TextView titleTextView;//¶©µ¥µÄ×´Ì¬
-	private TextView numberTextView;//¶©µ¥µÄ±àºÅ
-	private TextView sumPrice;//¶©µ¥µÄ×Ü¼Û¸ñ
-	private TextView countTextView;//×ÜÊıÄ¿
+	private TextView titleTextView;//è®¢å•çš„çŠ¶æ€
+	private TextView numberTextView;//è®¢å•çš„ç¼–å·
+	private TextView sumPrice;//è®¢å•çš„æ€»ä»·æ ¼
+	private TextView countTextView;//æ€»æ•°ç›®
 	
-	private OrderDataManage orderDataManage ;//ÓÃÀ´»ñÈ¡¶©µ¥Êı¾İ
+	private OrderDataManage orderDataManage ;//ç”¨æ¥è·å–è®¢å•æ•°æ®
 	
 	public AlreadyOrderUtil(Context context,LinearLayout layout){
 		this.context = context;
@@ -46,12 +46,12 @@ public class AlreadyOrderUtil {
 		
 	}
 	/**
-	 * ¼ÓÔØÊÓÍ¼
+	 * åŠ è½½è§†å›¾
 	 */
 		public void loadView(int fromIndex,int amount){
 			try {
 				orderDataManage = new OrderDataManage(context);
-				ArrayList<Order> mList = orderDataManage.getOrderArray(myApplication.getUserId(), "", "", "ÒÑÇ©ÊÕ",fromIndex+"", amount+"",myApplication.getToken());
+				ArrayList<Order> mList = orderDataManage.getOrderArray(myApplication.getUserId(), "", "", "å·²ç­¾æ”¶",fromIndex+"", amount+"",myApplication.getToken());
 				Log.i("info", mList.size()+"mList");
 				for(int i=0;i<mList.size();i++){
 					setupShow();
@@ -61,7 +61,7 @@ public class AlreadyOrderUtil {
 					numberTextView.setText(mOrder.getOrderCode());
 					
 					AllOrderDetail allOrderDetail = new AllOrderDetail(context, mOrder, mLayout);
-					allOrderDetail.addView();//¼ÓÔØÉÌÆ·
+					allOrderDetail.addView();//åŠ è½½å•†å“
 					for(int j=0;j<allOrderDetail.map.size();j++){
 //					Log.i("info", mLinearLayoutLayout+"+mlayout");
 					sumPrice.setText(allOrderDetail.map.get("price")+"");
@@ -75,7 +75,7 @@ public class AlreadyOrderUtil {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 
 			}
 		}

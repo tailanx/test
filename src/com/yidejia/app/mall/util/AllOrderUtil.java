@@ -18,7 +18,7 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.model.Order;
-import com.yidejia.app.mall.view.PayActivity;
+import com.yidejia.app.mall.view.CstmPayActivity;
 
 public class AllOrderUtil {
 	private Context context;
@@ -26,14 +26,14 @@ public class AllOrderUtil {
 	private View view;
 	private MyApplication myApplication;
 	
-//	private TextView titleTextView;//¶©µ¥µÄ×´Ì¬
-//	private TextView numberTextView;//¶©µ¥µÄ±àºÅ
-//	private TextView sumPrice;//¶©µ¥µÄ×Ü¼Û¸ñ
-//	private TextView countTextView;//¶©µ¥µÄ×ÜÊýÄ¿
-	private LinearLayout mLinearLayoutLayout;//Íâ²ãµÄ²¼¾Ö
-	private LinearLayout mLayout;//Íâ²ãµÄ²¼¾Ö
+//	private TextView titleTextView;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
+//	private TextView numberTextView;//ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½
+//	private TextView sumPrice;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü¼Û¸ï¿½
+//	private TextView countTextView;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
+	private LinearLayout mLinearLayoutLayout;//ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½
+	private LinearLayout mLayout;//ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½
 
-	private OrderDataManage orderDataManage ;//ÓÃÀ´»ñÈ¡¶©µ¥Êý¾Ý
+	private OrderDataManage orderDataManage ;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	public AllOrderUtil(Context context,LinearLayout mLayout){
 		this.context = context;
@@ -42,7 +42,7 @@ public class AllOrderUtil {
 		myApplication  = (MyApplication) context.getApplicationContext();
 	}
 //	/**
-//	 * ÊµÀý»¯¶ÔÏó
+//	 * Êµï¿½ï¿½ï¿½ï¿½ï¿½
 //	 */
 //	private void setupShow(){
 //		try {
@@ -56,17 +56,17 @@ public class AllOrderUtil {
 //		} catch (Exception e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
-//			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+//			Toast.makeText(context, "ï¿½ï¿½ï¿½ç²»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", Toast.LENGTH_SHORT).show();
 //
 //		}
 //	}
 /**
- * ¼ÓÔØÊÓÍ¼
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
  */
 	public void loadView(int fromIndex,int amount){
 		try {
 			orderDataManage = new OrderDataManage(context);
-			ArrayList<Order> mList = orderDataManage.getOrderArray(myApplication.getUserId(), "", "", "Â¼Èë", fromIndex+"",amount+"",myApplication.getToken());
+			ArrayList<Order> mList = orderDataManage.getOrderArray(myApplication.getUserId(), "", "", "Â¼ï¿½ï¿½", fromIndex+"",amount+"",myApplication.getToken());
 //			Log.i("info", mList.size()+"mList");
 			for(int i=0;i<mList.size();i++){
 				view = inflater.inflate(R.layout.all_order_item_item, null);
@@ -83,7 +83,7 @@ public class AllOrderUtil {
 				numberTextView.setText(mOrder.getOrderCode());
 
 				final AllOrderDetail allOrderDetail = new AllOrderDetail(context, mOrder, mLayout);
-				allOrderDetail.addView();//¼ÓÔØÉÌÆ·
+				allOrderDetail.addView();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
 				for(int j=0;j<allOrderDetail.map.size();j++){
 
 				sumPrice.setText(allOrderDetail.map.get("price")+"");
@@ -97,7 +97,7 @@ public class AllOrderUtil {
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
-						Intent intent = new Intent(context,PayActivity.class);
+						Intent intent = new Intent(context,CstmPayActivity.class);
 						Bundle mBundle = new Bundle();
 						mBundle.putString("price", allOrderDetail.map.get("price")+"");
 						intent.putExtras(mBundle);
@@ -109,7 +109,7 @@ public class AllOrderUtil {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 
 		}
 	}

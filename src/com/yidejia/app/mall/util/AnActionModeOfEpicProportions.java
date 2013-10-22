@@ -13,7 +13,7 @@ public class AnActionModeOfEpicProportions implements ActionMode.Callback {
 	private Context mContext;
 	
 	public AnActionModeOfEpicProportions(Context mContext){
-		this.mContext = mContext;
+		this.mContext = mContext; 
 	}
 	
 	@Override
