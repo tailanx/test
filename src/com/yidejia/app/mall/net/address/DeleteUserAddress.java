@@ -16,7 +16,7 @@ import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.util.Md5;
 /**
- * É¾³ıÊÕ¼şÈË
+ * åˆ é™¤æ”¶ä»¶äºº
  * @author long bin
  *
  */
@@ -31,9 +31,9 @@ public class DeleteUserAddress {
 		this.context = context;
 	}
 	/**
-	 * ¸ù¾İcid ºÍ aid É¾³ıÊÕ¼şÈËµØÖ·
-	 * @param cid ¿Í»§id
-	 * @param aid ÊÕ¼şÈËid
+	 * æ ¹æ®cid å’Œ aid åˆ é™¤æ”¶ä»¶äººåœ°å€
+	 * @param cid å®¢æˆ·id
+	 * @param aid æ”¶ä»¶äººid
 	 */
 	private void setKeysAndValues(String cid, String aid){
 		keys[0] = "api";
@@ -67,9 +67,9 @@ public class DeleteUserAddress {
 		values[6] = result;
 	}
 	/**
-	 * ¸ù¾İcid ºÍ aid É¾³ıÊÕ¼şÈËµØÖ·
-	 * @param cid ¿Í»§id
-	 * @param aid ÊÕ¼şÈËid
+	 * æ ¹æ®cid å’Œ aid åˆ é™¤æ”¶ä»¶äººåœ°å€
+	 * @param cid å®¢æˆ·id
+	 * @param aid æ”¶ä»¶äººid
 	 */
 	public String getHttpAddress(String cid, String aid){
 		StringBuffer result = new StringBuffer();
@@ -96,7 +96,7 @@ public class DeleteUserAddress {
 		return result;
 	}
 	/**
-	 * jni·½Ê½É¾³ıµØÖ·
+	 * jniæ–¹å¼åˆ é™¤åœ°å€
 	 * @param cid
 	 * @param aid
 	 * @param token
@@ -142,7 +142,7 @@ public class DeleteUserAddress {
 //				// TODO Auto-generated method stub
 //				super.onStart();
 //				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//				bar.setMessage("ÕıÔÚ²éÑ¯");
+//				bar.setMessage("æ­£åœ¨æŸ¥è¯¢");
 //				bar.show();
 //			}
 //			

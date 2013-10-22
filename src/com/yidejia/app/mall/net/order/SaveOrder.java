@@ -17,17 +17,17 @@ public class SaveOrder {
 	
 	/**
 	 * 
-	 * Ö»ÓÐ·µ»Ø ¡°successÂ¼Èë³É¹¦¡± ²ÅËãÌá½»¶©µ¥³É¹¦¡£
-	 * @param customer_id ¿Í»§id
-	 * @param ticket_id ÓÅ»ÝÈ¯id£¬0±íÊ¾Ã»ÓÃÓÅ»ÝÈ¯
-	 * @param recipient_id ÊÕ¼þÈËid
-	 * @param pingou_id Æ´¹ºÉÌÆ·µÄid
-	 * @param goods_ascore ¿Í»§Ö§¸¶µÄ»ý·Ö
-	 * @param ship_fee ÔË·Ñ
-	 * @param ship_type EMS»ò¿ìµÝ
-	 * @param ship_entity_name ÅäËÍÖÐÐÄ
-	 * @param goods_qty_scr ¹ºÂòµÄ×Ö·û´®£¬¸ñÊ½¡°ÉÌÆ·id,ÊýÁ¿,ÊÇ·ñ»ý·Ö¶Ò»»;¡±£¬Èç¡°11,5n¡±
-	 * @param comments ¶©µ¥±¸×¢ÐÅÏ¢
+	 * Ö»ï¿½Ð·ï¿½ï¿½ï¿½ ï¿½ï¿½successÂ¼ï¿½ï¿½É¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½á½»ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½
+	 * @param customer_id ï¿½Í»ï¿½id
+	 * @param ticket_id ï¿½Å»ï¿½È¯idï¿½ï¿½0ï¿½ï¿½Ê¾Ã»ï¿½ï¿½ï¿½Å»ï¿½È¯
+	 * @param recipient_id ï¿½Õ¼ï¿½ï¿½ï¿½id
+	 * @param pingou_id Æ´ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½id
+	 * @param goods_ascore ï¿½Í»ï¿½Ö§ï¿½ï¿½ï¿½Ä»ï¿½ï¿½
+	 * @param ship_fee ï¿½Ë·ï¿½
+	 * @param ship_type EMSï¿½ï¿½ï¿½ï¿½
+	 * @param ship_entity_name ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param goods_qty_scr ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½Æ·id,ï¿½ï¿½ï¿½ï¿½,ï¿½Ç·ï¿½ï¿½Ö¶Ò»ï¿½;ï¿½ï¿½ï¿½ï¿½ï¿½ç¡°11,5nï¿½ï¿½
+	 * @param comments ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½Ï¢
 	 */
 	private void setKeysAndValues(String customer_id, String ticket_id, String recipient_id, String pingou_id, String goods_ascore, String ship_fee
 			, String ship_type, String ship_entity_name, String goods_qty_scr, String comments){
@@ -93,17 +93,17 @@ public class SaveOrder {
 	private String result = "";
 	/**
 	 * 
-	 * Ö»ÓÐ·µ»Ø ¡°successÂ¼Èë³É¹¦¡± ²ÅËãÌá½»¶©µ¥³É¹¦¡£
-	 * @param customer_id ¿Í»§id
-	 * @param ticket_id ÓÅ»ÝÈ¯id£¬0±íÊ¾Ã»ÓÃÓÅ»ÝÈ¯
-	 * @param recipient_id ÊÕ¼þÈËid
-	 * @param pingou_id Æ´¹ºÉÌÆ·µÄid
-	 * @param goods_ascore ¿Í»§Ö§¸¶µÄ»ý·Ö
-	 * @param ship_fee ÔË·Ñ
-	 * @param ship_type EMS»ò¿ìµÝ
-	 * @param ship_entity_name ÅäËÍÖÐÐÄ
-	 * @param goods_qty_scr ¹ºÂòµÄ×Ö·û´®£¬¸ñÊ½¡°ÉÌÆ·id,ÊýÁ¿,ÊÇ·ñ»ý·Ö¶Ò»»;¡±£¬Èç¡°11,5n¡±
-	 * @param comments ¶©µ¥±¸×¢ÐÅÏ¢
+	 * Ö»ï¿½Ð·ï¿½ï¿½ï¿½ ï¿½ï¿½successÂ¼ï¿½ï¿½É¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½á½»ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½
+	 * @param customer_id ï¿½Í»ï¿½id
+	 * @param ticket_id ï¿½Å»ï¿½È¯idï¿½ï¿½0ï¿½ï¿½Ê¾Ã»ï¿½ï¿½ï¿½Å»ï¿½È¯
+	 * @param recipient_id ï¿½Õ¼ï¿½ï¿½ï¿½id
+	 * @param pingou_id Æ´ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½id
+	 * @param goods_ascore ï¿½Í»ï¿½Ö§ï¿½ï¿½ï¿½Ä»ï¿½ï¿½
+	 * @param ship_fee ï¿½Ë·ï¿½
+	 * @param ship_type EMSï¿½ï¿½ï¿½ï¿½
+	 * @param ship_entity_name ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param goods_qty_scr ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½Æ·id,ï¿½ï¿½ï¿½ï¿½,ï¿½Ç·ï¿½ï¿½Ö¶Ò»ï¿½;ï¿½ï¿½ï¿½ï¿½ï¿½ç¡°11,5nï¿½ï¿½
+	 * @param comments ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½Ï¢
 	 */
 	public String getListJsonString(String customer_id, String ticket_id,
 			String recipient_id, String pingou_id, String goods_ascore,
@@ -121,10 +121,14 @@ public class SaveOrder {
 			String ship_fee, String ship_type, String ship_entity_name,
 			String goods_qty_scr, String comments, String token)
 			throws IOException {
-		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4SaveOrder(
+		String url = JNICallBack.getHttp4SaveOrder(
 				customer_id, ticket_id, recipient_id, pingou_id, goods_ascore,
-				ship_fee, ship_type, ship_entity_name, goods_qty_scr, comments,
-				token));
+				ship_fee, new String(ship_type.getBytes("UTF-8"),"UTF-8"), new String(ship_entity_name.getBytes("UTF-8"),"UTF-8"), goods_qty_scr, new String(comments.getBytes("UTF-8"),"UTF-8"),
+				token);
+		
+		HttpPostConn conn = new HttpPostConn(url);
+//		HttpGetConn conn = new HttpGetConn(url, true);
 		return result = conn.getHttpResponse();
+//		return conn.getJsonResult();
 	}
 }

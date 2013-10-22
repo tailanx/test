@@ -68,14 +68,14 @@ public class ImageUrl {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 //			if(result)
-//				Toast.makeText(context, "³É¹¦", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context, "æˆåŠŸ", Toast.LENGTH_SHORT).show();
 		}
 	}
 	
 //	private String urlString;
 	/**
-	 * ½âÎöÍ¼Æ¬UrlÊı¾İ
-	 * @param resultJson http·µ»ØµÄÊı¾İ
+	 * è§£æå›¾ç‰‡Urlæ•°æ®
+	 * @param resultJson httpè¿”å›çš„æ•°æ®
 	 * @return
 	 */
 	private boolean analysisJson(String resultJson) {

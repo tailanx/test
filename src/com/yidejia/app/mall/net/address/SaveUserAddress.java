@@ -16,13 +16,13 @@ import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.util.Md5;
 /**
- * ±£´æ£¨ÐÂ½¨¸üÐÂ£©ÊÕ¼þÈËÐÅÏ¢
+ * ï¿½ï¿½ï¿½æ£¨ï¿½Â½ï¿½ï¿½ï¿½ï¿½Â£ï¿½ï¿½Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
  * @author long bin
  *
  */
 public class SaveUserAddress {
-	private String[] keys = new String[13];
-	private String[] values = new String[13];
+	private String[] keys = new String[14];
+	private String[] values = new String[14];
 	private String TAG = "SaveUserAddress";
 	private Context context;
 	private Map<String, String> httpAddressMap = new ConcurrentHashMap<String, String>();
@@ -32,7 +32,7 @@ public class SaveUserAddress {
 	}
 	
 	private void setKeysAndValues(String customer_id, String customer_name, String handset, String province,
-			String city, String district, String address, String recipient_id){
+			String city, String district, String address, String recipient_id, String token){
 		keys[0] = "api";
 		String api = "ucenter.address.save";
 		values[0] = api;
@@ -52,36 +52,38 @@ public class SaveUserAddress {
 		values[7] = address;
 		keys[8] = "recipient_id";
 		values[8] = recipient_id;
+		keys[9] = "token";
+		values[9] = token;
 		
-		keys[9] = "key";
-		values[9] = "fw_mobile";
+		keys[10] = "key";
+		values[10] = "fw_mobile";
 //		values[9] = "fw_test";
-		keys[10] = "format";
-		values[10] = "array";
-		keys[11] = "ts";
+		keys[11] = "format";
+		values[11] = "array";
+		keys[12] = "ts";
 		long time = System.currentTimeMillis();
 		String ts = String.valueOf(time/1000);
-		values[11] = ts;
+		values[12] = ts;
 		
-		keys[12] = "sign";
+		keys[13] = "sign";
 		StringBuffer strTemp = new StringBuffer();
-//		strTemp.append("ChunTianfw_mobile123456");
-		strTemp.append("ChunTianfw_mobile@SDF!TD#DF#*CB$GER@");
+		strTemp.append("ChunTianfw_mobile123456");
+//		strTemp.append("ChunTianfw_mobile@SDF!TD#DF#*CB$GER@");
 		strTemp.append(api);
 		strTemp.append(ts);
 		Md5 md = new Md5();
 		String result = md.getMD5Str(strTemp.toString());
 		md = null;
         strTemp = null;
-		values[12] = result;
+		values[13] = result;
 	}
 	
 	private String getHttpAddress(String customer_id, String customer_name, String handset, String province,
-			String city, String district, String address, String recipient_id){
+			String city, String district, String address, String recipient_id, String token){
 		StringBuffer result = new StringBuffer();
 //		result.append("http://192.168.1.254:802/?");
 		setKeysAndValues(customer_id, customer_name, handset, province,
-				 city, district, address, recipient_id);
+				 city, district, address, recipient_id, token);
 		result.append(HttpAddressParam.getHttpAddress(keys, values));
 		Log.i(TAG, result.toString());
 		for (int j = 0; j < keys.length; j++) {
@@ -108,13 +110,13 @@ public class SaveUserAddress {
 	public String saveAddress(String customer_id, String customer_name, String handset, String province,
 			String city, String district, String address, String recipient_id) throws IOException{
 		getHttpAddress(customer_id, customer_name, handset, province,
-				 city, district, address, recipient_id);
+				 city, district, address, recipient_id, "");
 		HttpPostConn conn = new HttpPostConn(keys, values);
 		result = conn.getJsonResult();
 		return result;
 	}
 	/** 
-	 * jni ·½Ê½Ìá½»µØÖ·
+	 * jni ï¿½ï¿½Ê½ï¿½á½»ï¿½ï¿½Ö·
 	 * @param customer_id
 	 * @param customer_name
 	 * @param handset
@@ -132,9 +134,17 @@ public class SaveUserAddress {
 			String address, String recipient_id, String token)
 			throws IOException {
 		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4SaveAddress(
-				customer_id, customer_name, handset, province, city, district,
-				address, recipient_id, token));
+				customer_id, new String(customer_name.getBytes("UTF-8"),
+						"UTF-8"), handset,
+				new String(province.getBytes("UTF-8"), "UTF-8"), new String(
+						city.getBytes("UTF-8"), "UTF-8"),
+				new String(district.getBytes("UTF-8"), "UTF-8"),	new String(address.getBytes("UTF-8"),"UTF-8"), recipient_id, token));
 		result = conn.getHttpResponse();
+//		String param = getHttpAddress(customer_id, customer_name, handset, province,
+//				 city, district, address, recipient_id, token);
+//		HttpPostConn conn = new HttpPostConn(param);
+//		result = conn.getHttpResponse();
+//		Log.e(TAG, result);
 		return result;
 	}
 //	public String saveAddressJson(){
@@ -172,7 +182,7 @@ public class SaveUserAddress {
 //				// TODO Auto-generated method stub
 //				super.onStart();
 //				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//				bar.setMessage("ÕýÔÚ²éÑ¯");
+//				bar.setMessage("ï¿½ï¿½ï¿½Ú²ï¿½Ñ¯");
 //				bar.show();
 //			}
 //			

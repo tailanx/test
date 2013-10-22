@@ -12,7 +12,7 @@ import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.util.Md5;
 /**
- * »ñÈ¡ËÑË÷½á¹ûÁÐ±í
+ * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
  * @author long bin
  *
  */
@@ -20,10 +20,10 @@ public class SearchDataUtil {
 	private String[] keys = new String[12];
 	private String[] values = new String[12];
 	private String TAG = SearchDataUtil.class.getName();
-	private Context context;
+//	private Context context;
 	
-	public SearchDataUtil(Context context){
-		this.context = context;
+	public SearchDataUtil(){//Context context
+//		this.context = context;
 	}
 	
 	private void setKeysAndValues(String name, String fun, String brand,String price, String order1, String offset1, String limit1){
@@ -79,19 +79,21 @@ public class SearchDataUtil {
 	private String result = "";
 	/**
 	 * 
-	 * @param name ËÑË÷ÉÌÆ·µÄÃû³Æ£¬Ö§³ÖÄ£ºý²éÕÒ
-	 * @param fun ¹¦Ð§
-	 * @param brand Æ·ÅÆ
-	 * @param price ¼Û¸ñ
-	 * @param order1 ÅÅÐò
-	 * @param offset1 ¿ªÊ¼Ïî
-	 * @param limit1 ½áÊøÏî
+	 * @param name ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½Æ£ï¿½Ö§ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param fun ï¿½ï¿½Ð§
+	 * @param brand Æ·ï¿½ï¿½
+	 * @param price ï¿½Û¸ï¿½
+	 * @param order1 ï¿½ï¿½ï¿½ï¿½
+	 * @param offset1 ï¿½ï¿½Ê¼ï¿½ï¿½
+	 * @param limit1 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 * @throws IOException
 	 */
 	public String getHttpResponseString(String name, String fun, String brand, String price, String order1, String offset1, String limit1)throws IOException{
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress(name, fun, brand, price, order1, offset1, limit1));
-		HttpGetConn conn = new HttpGetConn(JNICallBack.getHttp4GetSearch(name, fun, brand, price, order1, offset1, limit1), true);
+		String url = JNICallBack.getHttp4GetSearch(name, fun, brand, price, order1, offset1, limit1);
+		Log.e(TAG, "before conn"+url);
+		HttpGetConn conn = new HttpGetConn(url, true);
 		result = conn.getJsonResult();
 		return result;
 	}
@@ -127,7 +129,7 @@ public class SearchDataUtil {
 //				// TODO Auto-generated method stub
 //				super.onStart();
 //				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//				bar.setMessage("ÕýÔÚ²éÑ¯");
+//				bar.setMessage("ï¿½ï¿½ï¿½Ú²ï¿½Ñ¯");
 //				bar.show();
 //			}
 //			
