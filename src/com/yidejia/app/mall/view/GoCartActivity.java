@@ -28,38 +28,40 @@ import com.yidejia.app.mall.util.CartUtil;
 public class GoCartActivity extends SherlockActivity {// implements
 														// OnClickListener
 
-	private TextView sumTextView;// 总的钱数
-	private TextView counTextView;// 总的数量
-	private CheckBox mBox;// 选择框
-	private Button mbutton;// 去结算
+	private TextView sumTextView;// �ܵ�Ǯ��
+	private TextView counTextView;// �ܵ�����
+	private CheckBox mBox;// ѡ���
+	private Button mbutton;// ȥ����
 	private CartUtil cartUtil;
-	private AddressDataManage addressManage;// 地址管理数据
-//	private PullToRefreshScrollView mPullToRefreshScrollView;// 界面刷新
-	private ImageView mImageView;//返回
-	private TextView mTextView;//title
-	
+	private AddressDataManage addressManage;// ��ַ�������
+	private PullToRefreshScrollView mPullToRefreshScrollView;// ����ˢ��
+	private ImageView mImageView;// ����
+	private TextView mTextView;// title
+	private MyApplication myApplication;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.shopping_cart);
+		myApplication = (MyApplication) getApplication();
 		addressManage = new AddressDataManage(GoCartActivity.this);
 
-		mBox = (CheckBox) findViewById(R.id.shopping_cart_checkbox);// 选择框
+		mBox = (CheckBox) findViewById(R.id.shopping_cart_checkbox);// ѡ���
 
-		sumTextView = (TextView) findViewById(R.id.shopping_cart_sum_money);// 总的钱数
+		sumTextView = (TextView) findViewById(R.id.shopping_cart_sum_money);// �ܵ�Ǯ��
 
-		counTextView = (TextView) findViewById(R.id.shopping_cart_sum_number);// 总的数量
+		counTextView = (TextView) findViewById(R.id.shopping_cart_sum_number);// �ܵ�����
 
-//		mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.shopping_cart_item_goods_scrollView);
-//		String label = "�ϴθ�����"
-//				+ DateUtils.formatDateTime(GoCartActivity.this,
-//						System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
-//								| DateUtils.FORMAT_SHOW_DATE
-//								| DateUtils.FORMAT_SHOW_TIME);
-//		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-//		mPullToRefreshScrollView.setOnRefreshListener(listener);
-		
+		mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.shopping_cart_item_goods_scrollView);
+		String label = "�ϴθ�����"
+				+ DateUtils.formatDateTime(GoCartActivity.this,
+						System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
+								| DateUtils.FORMAT_SHOW_DATE
+								| DateUtils.FORMAT_SHOW_TIME);
+		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
+				label);
+		mPullToRefreshScrollView.setOnRefreshListener(listener);
+
 		LinearLayout layout = (LinearLayout) findViewById(R.id.shopping_cart_relative2);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -72,12 +74,11 @@ public class GoCartActivity extends SherlockActivity {// implements
 		mbutton = (Button) findViewById(R.id.actionbar_right);
 		mTextView = (TextView) findViewById(R.id.actionbar_title);
 		mImageView = (ImageView) findViewById(R.id.actionbar_left);
-		mTextView.setText("购物车");
-		
+		mTextView.setText("���ﳵ");
 
 		try {
-			mImageView.setOnClickListener(new OnClickListener( ) {
-				
+			mImageView.setOnClickListener(new OnClickListener() {
+
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
@@ -89,44 +90,58 @@ public class GoCartActivity extends SherlockActivity {// implements
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					
+					if (!((MyApplication) GoCartActivity.this.getApplication())
+							.getIsLogin()) {
+						Toast.makeText(GoCartActivity.this, "�㻹δ��½�����ȵ�½",
+								Toast.LENGTH_LONG).show();
+						Intent intent = new Intent(GoCartActivity.this,
+								LoginActivity.class);
+						startActivity(intent);
+						return;
+					}
 					Intent intent = new Intent(GoCartActivity.this,
 							CstmPayActivity.class);
 					float sum = Float.parseFloat(sumTextView.getText()
 							.toString());
-					
-						if (sum > 0) {
-							Bundle bundle = new Bundle();
-						
-							bundle.putString("price", sum + "");
-							intent.putExtras(bundle);
-							GoCartActivity.this.startActivity(intent);
-						} else {
-							Toast.makeText(GoCartActivity.this, "你还未购买任何商品",
-									Toast.LENGTH_LONG).show();
-						}
+
+					if (sum > 0) {
+						Bundle bundle = new Bundle();
+
+						bundle.putString("price", sum + "");
+						intent.putExtras(bundle);
+						GoCartActivity.this.startActivity(intent);
+					} else {
+						Toast.makeText(GoCartActivity.this, "�㻹δ�����κ���Ʒ",
+								Toast.LENGTH_LONG).show();
 					}
-				
+				}
+//
 			});
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(GoCartActivity.this, getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT)
+			Toast.makeText(GoCartActivity.this, "���粻������", Toast.LENGTH_SHORT)
 					.show();
 		}
 		//
 		//
 	}
-//	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
-//
-//		@Override
-//		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-//			// TODO Auto-generated method stub
-//			String label = "�ϴθ�����" + DateUtils.formatDateTime(GoCartActivity.this, System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL|DateUtils.FORMAT_SHOW_DATE|DateUtils.FORMAT_SHOW_TIME);
-//			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-//			mPullToRefreshScrollView.onRefreshComplete();
-//		}
-//	};
+
+	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
+
+		@Override
+		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+			// TODO Auto-generated method stub
+			String label = "�ϴθ�����"
+					+ DateUtils.formatDateTime(GoCartActivity.this,
+							System.currentTimeMillis(),
+							DateUtils.FORMAT_ABBREV_ALL
+									| DateUtils.FORMAT_SHOW_DATE
+									| DateUtils.FORMAT_SHOW_TIME);
+			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+			mPullToRefreshScrollView.onRefreshComplete();
+		}
+	};
 	// try {
 	// TODO Auto-generated method stub
 	// requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -167,32 +182,29 @@ public class GoCartActivity extends SherlockActivity {// implements
 	//
 	// }
 	//
-//	Addresses address = null;
+	// Addresses address = null;
 
-//	/**
-//	 * 
-//	 * @return ����һ����ַ
-//	 */
-//	private void getAddresses() {
-//
-//		String userId = ((MyApplication) getApplication()).getUserId();
-//		ArrayList<Addresses> mAddresses = addressManage.getAddressesArray(
-//				userId, 0, 5);
-//		if (mAddresses.size() == 0) {
-//			Intent intent = new Intent(GoCartActivity.this,
-//					NewAddressActivity.class);
-//			GoCartActivity.this.startActivity(intent);
-//			GoCartActivity.this.finish();
-//			// Log.i("info", "nihao");
-//
-//		} else {
-//			address = mAddresses.remove(0);
-//			// Log.i("info", address + "address");
-//		}
-//
-//	}
+	// /**
+	// *
+	// * @return ����һ����ַ
+	// */
+	// private void getAddresses() {
+	//
+	// String userId = ((MyApplication) getApplication()).getUserId();
+	// ArrayList<Addresses> mAddresses = addressManage.getAddressesArray(
+	// userId, 0, 5);
+	// if (mAddresses.size() == 0) {
+	// Intent intent = new Intent(GoCartActivity.this,
+	// NewAddressActivity.class);
+	// GoCartActivity.this.startActivity(intent);
+	// GoCartActivity.this.finish();
+	// // Log.i("info", "nihao");
+	//
+	// } else {
+	// address = mAddresses.remove(0);
+	// // Log.i("info", address + "address");
+	// }
+	//
+	// }
 
 }
-
-
-

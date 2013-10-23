@@ -5,15 +5,21 @@
 
     <ScrollView
         android:id="@+id/order_detail_scrollView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginBottom="5dp" >
 
         <LinearLayout
-            android:id="@+id/shopping_cart_relative2"
-            android:layout_width="wrap_content"
+            android:id="@+id/free_shopping_cart_relative2"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >
+
+            <ListView
+                android:id="@+id/free_giving_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+            </ListView>
         </LinearLayout>
     </ScrollView>
 

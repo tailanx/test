@@ -41,7 +41,7 @@ public class SearchFragment extends SherlockFragment {
 	private String TAG = "SearchFragment";
 	
 	private ListView searchListView;
-	private EditText searchEditText;
+	private EditText searchEditText;//ËÑË÷¿ò
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

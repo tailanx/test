@@ -17,7 +17,7 @@
             android:layout_weight="1.0"
             android:background="@drawable/product_details_selected"
             android:gravity="center"
-            android:text="免费怎么送"
+            android:text="免费赠送"
             android:textColor="#000000" />
 
         <TextView
@@ -35,7 +35,7 @@
         android:id="@+id/pay_free_relative_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/pay_free_voucher_linearlayout1" >
+        android:layout_below="@+id/pay_free_linearlayout1" >
 
         <ImageView
             android:id="@+id/iv_bottom_line"
@@ -46,7 +46,7 @@
     </RelativeLayout>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/vPager"
+        android:id="@+id/avPager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/pay_free_relative_line"

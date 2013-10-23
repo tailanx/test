@@ -52,23 +52,24 @@ public class CartUtil {
 	private Context context;
 	private LayoutInflater inflater;
 	private LinearLayout linearLayout;
-	public static List<HashMap<String, Float>> list;// ¼üÊÇÊýÄ¿£¬ÖµÊÇ¼Û¸ñ
-	private TextView mTextView;// ´«¹ýÀ´µÄÊýÄ¿
-	private TextView sumTextView;// ×ÜµÄÇ®Êý
+	public static List<HashMap<String, Float>> list;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½Öµï¿½Ç¼Û¸ï¿½
+	private TextView mTextView;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
+	private TextView sumTextView;// ï¿½Üµï¿½Ç®ï¿½ï¿½
 	private CheckBox mBox;
 	private CartsDataManage dataManage;
 	private List<Object> mList;
 //	private InnerReceiver receiver;
 
-	private String items[] = { "É¾³ý", "²é¿´ÉÌÆ·ÏêÇé", "ÊÕ²Ø" };
+	private String items[] = { "É¾ï¿½ï¿½", "ï¿½é¿´ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½", "ï¿½Õ²ï¿½" };
 
+	
 	private TextView number;
 
 //	private void setupShow() {
 //		Builder builder = new Builder(context);
 //		dialog = builder
 //				.setIcon(android.R.drawable.alert_dark_frame)
-//				.setTitle("¹ºÎï³µ²Ù×÷")
+//				.setTitle("ï¿½ï¿½ï¿½ï³µï¿½ï¿½ï¿½ï¿½")
 //				.setSingleChoiceItems(items, 0,
 //						new android.content.DialogInterface.OnClickListener() {
 //
@@ -95,7 +96,7 @@ public class CartUtil {
 //									dialog.dismiss();
 //									break;
 //								case 2:
-//									Toast.makeText(context, "ÊÕ²Ø³É¹¦",
+//									Toast.makeText(context, "ï¿½Õ²Ø³É¹ï¿½",
 //											Toast.LENGTH_LONG).show();
 //									dialog.dismiss();
 //									break;
@@ -163,9 +164,9 @@ public class CartUtil {
 	
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	private DisplayImageOptions options;
-	protected ImageLoader imageLoader = ImageLoader.getInstance();// ¼ÓÔØÍ¼Æ¬
+	protected ImageLoader imageLoader = ImageLoader.getInstance();// ï¿½ï¿½ï¿½ï¿½Í¼Æ¬
 	/**
-	 * ÏÔÊ¾È«²¿µÄÊý¾Ý
+	 * ï¿½ï¿½Ê¾È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 
 	public void AllComment() {
@@ -187,7 +188,7 @@ public class CartUtil {
 				
 				final Cart cart = userList.get(i);
 				mBox.setChecked(true);
-
+				Log.i("mBox", mBox.isChecked() + "    mBox");
 				final HashMap<String, Float> map = new HashMap<String, Float>();
 				 final View view = LayoutInflater.from(context).inflate(
 						R.layout.shopping_cart_item, null);
@@ -208,12 +209,12 @@ public class CartUtil {
 				checkBox.setChecked(true);
 
 				final ImageView subtract = (ImageView) view
-						.findViewById(R.id.shopping_cart_item_subtract);// ¼õ
+						.findViewById(R.id.shopping_cart_item_subtract);// ï¿½ï¿½
 				final ImageView addImageView = (ImageView) view
-						.findViewById(R.id.shopping_cart_item_add);// ¼Ó
+						.findViewById(R.id.shopping_cart_item_add);// ï¿½ï¿½
 
 				final TextView number = (TextView) view
-						.findViewById(R.id.shopping_cart_item_edit_number);// ÊäÈëµÄ¸öÊý
+						.findViewById(R.id.shopping_cart_item_edit_number);// ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½
 				number.setText(cart.getAmount()+"");
 				a += cart.getAmount();
 				b += cart.getPrice()*cart.getAmount();
@@ -230,7 +231,7 @@ public class CartUtil {
 //					headImageView.setImageResource(R.drawable.ic_launcher);
 //				}
 //				
-				detailTextView.setText(cart.getProductText());// ÉÌÆ·µÄ½éÉÜ
+				detailTextView.setText(cart.getProductText());// ï¿½ï¿½Æ·ï¿½Ä½ï¿½ï¿½ï¿½
 				layout.setOnClickListener(new OnClickListener() {
 
 					@Override
@@ -248,7 +249,7 @@ public class CartUtil {
 					}
 				});
 
-				// ÉèÖÃ×Ó¿Ø¼þÓÅÏÈ»ñÈ¡½¹µã£¬ÏêÏ¸¿´setDescendantFocusability
+				// ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿Ø¼ï¿½ï¿½ï¿½ï¿½È»ï¿½È¡ï¿½ï¿½ï¿½ã£¬ï¿½ï¿½Ï¸ï¿½ï¿½setDescendantFocusability
 				layout.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
 				priceTextView.setText(cart.getPrice() + "");
 
@@ -370,7 +371,7 @@ public class CartUtil {
 				Builder builder = new Builder(context);
 				final AlertDialog dialog = builder
 						.setIcon(android.R.drawable.alert_dark_frame)
-						.setTitle("¹ºÎï³µ²Ù×÷")
+						.setTitle("ï¿½ï¿½ï¿½ï³µï¿½ï¿½ï¿½ï¿½")
 						.setSingleChoiceItems(items, 0,
 								new android.content.DialogInterface.OnClickListener() {
 
@@ -402,7 +403,7 @@ public class CartUtil {
 											dialog.dismiss();
 											break;
 										case 2:
-											Toast.makeText(context, "ÊÕ²Ø³É¹¦",
+											Toast.makeText(context, "ï¿½Õ²Ø³É¹ï¿½",
 													Toast.LENGTH_LONG).show();
 											dialog.dismiss();
 											break;
@@ -417,13 +418,13 @@ public class CartUtil {
 					
 						int sum = Integer.parseInt(number.getText().toString());
 						if (sum <= 1) {
-							Toast.makeText(context, "ÒÑ¾­ÊÇ×îÐ¡µÄÊýÖµÁË",
+							Toast.makeText(context, "ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½",
 									Toast.LENGTH_LONG).show();
 						} else {
 							sum--;
 							number.setText(sum + "");
-							mTextView.setText(Integer.parseInt(number.getText()
-									.toString()) + "");
+//							mTextView.setText(Integer.parseInt(number.getText()
+//									.toString()) + "");
 						}
 					
 						Message ms = new Message();
@@ -439,7 +440,7 @@ public class CartUtil {
 						// TODO Auto-generated method stub
 						int sum = Integer.parseInt(number.getText().toString());
 						if (sum >= 9999) {
-							Toast.makeText(context, "ÄúÏëÒª¹ºÂò¸ü¶àµÄ²úÆ·£¬ÇëÓë¿Í·þÁªÏµ",
+							Toast.makeText(context, "ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½Ïµ",
 									Toast.LENGTH_LONG).show();
 						} else {
 							sum++;
@@ -487,6 +488,7 @@ public class CartUtil {
 						(float) Integer.parseInt(number.getText().toString()));
 				map.put("price",
 						Float.parseFloat(priceTextView.getText().toString()));
+				map.put("produce", Float.parseFloat(cart.getUId()));
 				list.add(map);
 				mBox.setOnClickListener(new OnClickListener() {
 					
@@ -510,7 +512,7 @@ public class CartUtil {
 					}
 						}
 				});
-				// ÉèÖÃ¼àÌý
+				// ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½
 //				mBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 //
 //					@Override
@@ -542,7 +544,7 @@ public class CartUtil {
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_SHORT).show();
 
 		}
 

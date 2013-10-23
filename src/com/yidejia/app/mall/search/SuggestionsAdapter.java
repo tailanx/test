@@ -28,4 +28,5 @@ public class SuggestionsAdapter extends CursorAdapter {
         final int textIndex = cursor.getColumnIndex(SearchManager.SUGGEST_COLUMN_TEXT_1);
         tv.setText(cursor.getString(textIndex));
     }
+    
 }

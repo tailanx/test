@@ -2,6 +2,7 @@ package com.yidejia.app.mall.view;
 
 import java.util.ArrayList;
 
+
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -10,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -87,14 +89,13 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 	}
 
 	private void InitTextView(){
-		mCoupons = (TextView)findViewById(R.id.my_card_voucher_Coupons);
-		mIntegeral = (TextView)findViewById(R.id.my_card_voucher_mIntegeral);
-		
+		mCoupons = (TextView)findViewById(R.id.pay_free_voucher_Coupons);
+		mIntegeral = (TextView)findViewById(R.id.pay_free_voucher_mIntegeral);
 		mCoupons.setOnClickListener(new MyOnClickListener(1));
 		mIntegeral.setOnClickListener(new MyOnClickListener(2));
 	}
 	private void InitViewPager(){
-		 mPager = (ViewPager) findViewById(R.id.vPager);
+		 mPager = (ViewPager) findViewById(R.id.avPager);
 		 fragmentsList = new ArrayList<Fragment>();
 		 LayoutInflater mInflater = getLayoutInflater();
 	    

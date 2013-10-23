@@ -198,4 +198,8 @@ public class MessageDataManage {
 			return false;
 		}
 	}
+	public ArrayList<MsgCenter> getMsg(){
+		return msgArrays;
+	}
+
 }

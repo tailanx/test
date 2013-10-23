@@ -101,6 +101,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:background="@null"
+                           android:paddingRight="180dp"
                         android:singleLine="true" />
                 </TableRow>
 
@@ -120,6 +121,7 @@
                         android:padding="8dp"
                         android:text="密码"
                         android:textColor="#b4b4b4"
+                        
                         android:textSize="20sp" />
 
                     <EditText
@@ -129,6 +131,8 @@
                         android:layout_gravity="center_vertical"
                         android:background="@null"
                         android:inputType="textPassword"
+                     
+                      android:paddingRight="180dp"
                         android:singleLine="true" />
                 </TableRow>
 

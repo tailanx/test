@@ -192,6 +192,14 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
                 android.R.layout.simple_dropdown_item_1line, historyArrayList);
 //		searchTextView.setAdapter(adapter);
 		searchBtn = (Button) findViewById(R.id.search_btn);
+		searchBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+			finish();
+				
+			}
+		});
 	}
 	
 	private ArrayAdapter<String> adapter;
