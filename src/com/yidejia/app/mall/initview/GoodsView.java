@@ -227,7 +227,7 @@ public class GoodsView {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(activity, activity.getResources().getString(R.string.bad_network), Toast.LENGTH_LONG);
+			Toast.makeText(activity, activity.getResources().getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 		}
 	}
 
