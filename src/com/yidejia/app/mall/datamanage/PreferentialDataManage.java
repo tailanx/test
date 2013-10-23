@@ -56,7 +56,7 @@ public class PreferentialDataManage {
 		boolean state = false;
 		TaskVerify taskVerify = new TaskVerify();
 		try {
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);  
 			bar.setMessage("ÕýÔÚ²éÑ¯");
 			bar.show();
 			state = taskVerify.execute().get();
