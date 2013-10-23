@@ -16,21 +16,21 @@ import android.util.Log;
 import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.model.Cart;
 /**
- * ¹ºÎï³µÄ£¿é
+ * è´­ç‰©è½¦æ¨¡å—
  * <p>
- *  Ìí¼Óµ½¹ºÎï³µ{@link #addCart( Cart)}
+ *  æ·»åŠ åˆ°è´­ç‰©è½¦{@link #addCart( Cart)}
  * <p>
- *  É¾³ıµ¥¸ö¹ºÎï³µÉÌÆ·{@link #delCart( String)}
+ *  åˆ é™¤å•ä¸ªè´­ç‰©è½¦å•†å“{@link #delCart( String)}
  * <p>
- *  ĞŞ¸Ä¹ºÎï³µÉÌÆ·ÊıÁ¿{@link #mdfCartAmount( String, int)}
+ *  ä¿®æ”¹è´­ç‰©è½¦å•†å“æ•°é‡{@link #mdfCartAmount( String, int)}
  * <p>
- *  »ñÈ¡¹ºÎï³µÁĞ±í{@link #getCartsArray()}
+ *  è·å–è´­ç‰©è½¦åˆ—è¡¨{@link #getCartsArray()}
  * <p>
- *  Çå¿Õ¹ºÎï³µÁĞ±í{@link #cleanCart()}
+ *  æ¸…ç©ºè´­ç‰©è½¦åˆ—è¡¨{@link #cleanCart()}
  * <p>
- *  ¸ù¾İÉÌÆ·id»ñÈ¡¸ÃÉÌÆ·ÔÚ¹ºÎï³µµÄÊıÁ¿{@link #getGoodsCount(String)}
+ *  æ ¹æ®å•†å“idè·å–è¯¥å•†å“åœ¨è´­ç‰©è½¦çš„æ•°é‡{@link #getGoodsCount(String)}
  *  <p>
- *  »ñÈ¡¹ºÎï³µÄÚÉÌÆ·×ÜÊı{@link #getCartAmount()}
+ *  è·å–è´­ç‰©è½¦å†…å•†å“æ€»æ•°{@link #getCartAmount()}
  * @author long bin
  *
  */
@@ -47,9 +47,9 @@ public class CartsDataManage {
 	}
 	
 	/**
-	 * Ìí¼Óµ½¹ºÎï³µ ,Èç¹û¸ÃÉÌÆ·ÒÑ´æÔÚ¹ºÎï³µ£¬Ôò×·¼ÓÉÌÆ·ÊıÁ¿
-	 * @param details ÉÌÆ·ÏêÇéÊı¾İ
-	 * @return boolean ·µ»Ø"true" : ³É¹¦ "false" : Ê§°Ü
+	 * æ·»åŠ åˆ°è´­ç‰©è½¦ ,å¦‚æœè¯¥å•†å“å·²å­˜åœ¨è´­ç‰©è½¦ï¼Œåˆ™è¿½åŠ å•†å“æ•°é‡
+	 * @param details å•†å“è¯¦æƒ…æ•°æ®
+	 * @return boolean è¿”å›"true" : æˆåŠŸ "false" : å¤±è´¥
 	 */
 	public boolean addCart(Cart details) {
 		boolean flag = false;
@@ -84,9 +84,9 @@ public class CartsDataManage {
 		return flag;
 	}
 	/**
-	 * É¾³ıµ¥¸ö¹ºÎï³µÉÌÆ·
-	 * @param uId ²úÆ·Id
-	 * @return boolean ·µ»Ø"true" : ³É¹¦ "false" : Ê§°Ü
+	 * åˆ é™¤å•ä¸ªè´­ç‰©è½¦å•†å“
+	 * @param uId äº§å“Id
+	 * @return boolean è¿”å›"true" : æˆåŠŸ "false" : å¤±è´¥
 	 */
 	public boolean delCart(String uId){
 		boolean flag = false;
@@ -103,10 +103,10 @@ public class CartsDataManage {
 		return flag;
 	}
 	/**
-	 * ĞŞ¸Ä¹ºÎï³µµ¥¸ö²úÆ·¹ºÂòÊıÁ¿
-	 * @param uId ²úÆ·Id
-	 * @param amount ¹ºÂòÊıÁ¿
-	 * @return boolean ·µ»Ø"true" : ³É¹¦     "false" : Ê§°Ü
+	 * ä¿®æ”¹è´­ç‰©è½¦å•ä¸ªäº§å“è´­ä¹°æ•°é‡
+	 * @param uId äº§å“Id
+	 * @param amount è´­ä¹°æ•°é‡
+	 * @return boolean è¿”å›"true" : æˆåŠŸ     "false" : å¤±è´¥
 	 */
 	public boolean mdfCartAmount(String uId, int amount){
 		boolean flag = false;
@@ -126,8 +126,8 @@ public class CartsDataManage {
 		return flag;
 	}
 	/**
-	 * »ñÈ¡¹ºÎï³µÁĞ±í
-	 * @return cartsArray ¹ºÎï³µ²úÆ·ÁĞ±í
+	 * è·å–è´­ç‰©è½¦åˆ—è¡¨
+	 * @return cartsArray è´­ç‰©è½¦äº§å“åˆ—è¡¨
 	 */
 	public ArrayList<Cart> getCartsArray(){
 		try {
@@ -168,8 +168,8 @@ public class CartsDataManage {
 		return cartsArray;
 	}
 	/**
-	 * Çå¿Õ¹ºÎï³µ
-	 * @return boolean ³É¹¦Óë·ñ ¡£·µ»Ø"true" : ³É¹¦ "false" : Ê§°Ü
+	 * æ¸…ç©ºè´­ç‰©è½¦
+	 * @return boolean æˆåŠŸä¸å¦ ã€‚è¿”å›"true" : æˆåŠŸ "false" : å¤±è´¥
 	 */
 	public boolean cleanCart(){
 		try {
@@ -183,9 +183,9 @@ public class CartsDataManage {
 		return false;
 	}
 	/**
-	 * ¸ù¾İÉÌÆ·id»ñÈ¡¸ÃÉÌÆ·ÔÚ¹ºÎï³µµÄÊıÁ¿
-	 * @param uId ÉÌÆ·id
-	 * @return count ÉÌÆ·ÊıÁ¿
+	 * æ ¹æ®å•†å“idè·å–è¯¥å•†å“åœ¨è´­ç‰©è½¦çš„æ•°é‡
+	 * @param uId å•†å“id
+	 * @return count å•†å“æ•°é‡
 	 */
 	public int getGoodsCount(String uId){
 		String cartDetails = sp.getString(uId, "0:#");
@@ -200,8 +200,8 @@ public class CartsDataManage {
 		return 0;
 	}
 	/**
-	 * »ñÈ¡¹ºÎï³µÄÚÉÌÆ·×ÜÊı
-	 * @return amount ÉÌÆ·×ÜÊı
+	 * è·å–è´­ç‰©è½¦å†…å•†å“æ€»æ•°
+	 * @return amount 
 	 */
 	public int getCartAmount(){
 		int amount = 0 ;

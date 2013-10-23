@@ -16,7 +16,7 @@ import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.util.Md5;
 /**
- * 保存（新建更新）商品评论
+ * 淇濆瓨锛堟柊寤烘洿鏂帮級鍟嗗搧璇勮
  * @author long bin
  *
  */
@@ -79,7 +79,7 @@ public class SaveProductComment {
 	/**
 	 * 
 	 * @param id
-	 * @return http地址
+	 * @return http鍦板潃
 	 * @throws IOException
 	 */
 	public String saveComment(String goods_id, String user_id,
@@ -127,7 +127,7 @@ public class SaveProductComment {
 //				// TODO Auto-generated method stub
 //				super.onStart();
 //				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//				bar.setMessage("正在查询");
+//				bar.setMessage("姝ｅ湪鏌ヨ");
 //				bar.show();
 //			}
 //			

@@ -51,12 +51,12 @@ public class NewAddressActivity extends SherlockActivity {
 	public static int postion1;
 	public static int postion2;
 	public static int postion3;
-	// private Spinner province;//ÊÕ»õÈËµØÖ·Ê¡
-	// private Spinner city;//ÊÕ»õÈËµØÖ·ÊĞ
-	// private Spinner district;//ÊÕ»õÈËµØÖ·Çø
-	private EditText nameTextView;// ÊÕ»õÈËĞÕÃû
-	private EditText numberTextView;// ÊÕ»õÈËµç»°
-	private EditText areaTextView;// ÊÕ»õÈËÏêÏ¸µØÖ·
+	// private Spinner province;//ï¿½Õ»ï¿½ï¿½Ëµï¿½Ö·Ê¡
+	// private Spinner city;//ï¿½Õ»ï¿½ï¿½Ëµï¿½Ö·ï¿½ï¿½
+	// private Spinner district;//ï¿½Õ»ï¿½ï¿½Ëµï¿½Ö·ï¿½ï¿½
+	private EditText nameTextView;// ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private EditText numberTextView;// ï¿½Õ»ï¿½ï¿½Ëµç»°
+	private EditText areaTextView;// ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½Ö·
 	public  static String addressId;
 	// private List<MyListItem> list1;
 	// private List<MyListItem> list2;
@@ -70,43 +70,43 @@ public class NewAddressActivity extends SherlockActivity {
 
 	// private void setupShow(){
 	//
-	// //Ìí¼ÓÌõÄ¿±»Ñ¡ÖĞ¼àÌıÆ÷
+	// //ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½Ñ¡ï¿½Ğ¼ï¿½ï¿½ï¿½ï¿½ï¿½
 	// province.setOnItemSelectedListener(new
 	// AdapterView.OnItemSelectedListener() {
 	//
 	// @Override
 	// public void onItemSelected(AdapterView<?> parent, View view,int position,
 	// long id) {
-	// //parent¼ÈÊÇprovince¶ÔÏó
+	// //parentï¿½ï¿½ï¿½ï¿½provinceï¿½ï¿½ï¿½ï¿½
 	// Spinner spinner = (Spinner)parent;
 	// String pro = (String)spinner.getItemAtPosition(position);
 	//
-	// //(´¦ÀíÊ¡µÄÊĞµÄÏÔÊ¾)
-	// //½«Ä¬ÈÏÖµÓëArrayAdapterÁ¬½Ó(´Ó×ÊÔ´Êı×éÎÄ¼şÖĞ»ñÈ¡Êı¾İ)
+	// //(ï¿½ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ğµï¿½ï¿½ï¿½Ê¾)
+	// //ï¿½ï¿½Ä¬ï¿½ï¿½Öµï¿½ï¿½ArrayAdapterï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ğ»ï¿½È¡ï¿½ï¿½ï¿½)
 	// ArrayAdapter<CharSequence> cityAdapter = ArrayAdapter.createFromResource
 	// (NewAddressActivity.this, R.array.citydefault,
 	// android.R.layout.simple_spinner_item);
 	//
 	// //new ArrayAdapter<CharSequence>
 	// // (MainActivity.this,android.R.layout.simple_spinner_item, cities);
-	// //»ñÈ¡ËùÔÚÊ¡º¬ÓĞÄÄĞ©ÊĞ(´Ó×ÊÔ´Êı×éÎÄ¼şÖĞ»ñÈ¡Êı¾İ)
-	// if(pro.equals("ºÓ±±Ê¡")){
+	// //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ©ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ğ»ï¿½È¡ï¿½ï¿½ï¿½)
+	// if(pro.equals("ï¿½Ó±ï¿½Ê¡")){
 	//
 	// cityAdapter = ArrayAdapter.createFromResource
 	// (NewAddressActivity.this, R.array.hb,
 	// android.R.layout.simple_spinner_item);
-	// }else if(pro.equals("±±¾©ÊĞ")){
+	// }else if(pro.equals("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")){
 	//
 	// cityAdapter = ArrayAdapter.createFromResource
 	// (NewAddressActivity.this, R.array.bj,
 	// android.R.layout.simple_spinner_item);
-	// }else if(pro.equals("É½Î÷Ê¡")){
+	// }else if(pro.equals("É½ï¿½ï¿½Ê¡")){
 	//
 	// cityAdapter = ArrayAdapter.createFromResource
 	// (NewAddressActivity.this, R.array.shx,
 	// android.R.layout.simple_spinner_item);
 	// }
-	// //°ó¶¨Êı¾İµ½Spinner(City)ÉÏ
+	// //ï¿½ï¿½ï¿½ï¿½İµï¿½Spinner(City)ï¿½ï¿½
 	// city.setAdapter(cityAdapter);
 	// }
 	//
@@ -121,7 +121,7 @@ public class NewAddressActivity extends SherlockActivity {
 	// private void setupShow() {
 	//
 	// builder1 = new Builder(this)
-	// .setTitle("Ñ¡ÔñÊ¡·İ")
+	// .setTitle("Ñ¡ï¿½ï¿½Ê¡ï¿½ï¿½")
 	// .setAdapter(myAdapter1, new OnClickListener() {
 	//
 	// @Override
@@ -153,7 +153,7 @@ public class NewAddressActivity extends SherlockActivity {
 	// // }
 	// // }).create();
 	//
-	// builder2 = new Builder(this).setTitle("Ñ¡ÔñµØÇø")
+	// builder2 = new Builder(this).setTitle("Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½")
 	// .setAdapter(myAdapter2, new OnClickListener() {
 	//
 	// @Override
@@ -169,7 +169,7 @@ public class NewAddressActivity extends SherlockActivity {
 	// initSpinner3(pcode);
 	// }
 	// }).create();
-	// builder3 = new Builder(this).setTitle("Ñ¡ÔñµØÇø")
+	// builder3 = new Builder(this).setTitle("Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½")
 	//
 	// .setSingleChoiceItems(myAdapter3, 0, new OnClickListener() {
 	//
@@ -179,7 +179,7 @@ public class NewAddressActivity extends SherlockActivity {
 	// dialog.dismiss();
 	// // Log.i("info", list1.size()+"spinner");
 	// spinner3.setText(list3.get(which).getName());
-	// Toast.makeText(NewAddressActivity.this, "Ê¡ÊĞÇø",
+	// Toast.makeText(NewAddressActivity.this, "Ê¡ï¿½ï¿½ï¿½ï¿½",
 	// Toast.LENGTH_LONG).show();
 	// }
 	// }).create();
@@ -197,9 +197,9 @@ public class NewAddressActivity extends SherlockActivity {
 		spinner2 = (Spinner) findViewById(R.id.city);
 		spinner3 = (Spinner) findViewById(R.id.district);
 
-		spinner1.setPrompt("Ê¡");
-		spinner2.setPrompt("³ÇÊĞ");
-		spinner3.setPrompt("µØÇø");
+		spinner1.setPrompt("çœ");
+		spinner2.setPrompt("åŸå¸‚");
+		spinner3.setPrompt("åœ°åŒº");
 		
 		dataManage = new AddressDataManage(this);
 		initSpinner1();
@@ -239,7 +239,7 @@ public class NewAddressActivity extends SherlockActivity {
 		// ArrayAdapter<CharSequence> adapter =
 		// ArrayAdapter.createFromResource(this, R.array.province,
 		// android.R.layout.simple_spinner_item);
-		// //ÉèÖÃÏÂÀ­ÁĞ±íµÄ·ç¸ñ
+		// //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ±ï¿½Ä·ï¿½ï¿½
 		// adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// setupShow();
 		// province.setAdapter(adapter);
@@ -365,7 +365,7 @@ public class NewAddressActivity extends SherlockActivity {
 				int position, long id) {
 			province = ((MyListItem) adapterView.getItemAtPosition(position))
 					.getName();
-//			if(province.endsWith("ÊĞ")){
+//			if(province.endsWith("ï¿½ï¿½")){
 //				Log.i("info", false+);
 //			}
 			String pcode = ((MyListItem) adapterView
@@ -442,14 +442,14 @@ public class NewAddressActivity extends SherlockActivity {
 				// Intent intent = new
 				// Intent(AddressActivity.this,MyMallActivity.class);
 				// startActivity(intent);
-				// ½áÊøµ±Ç°Activity£»
+				// ï¿½ï¿½ï¿½ï¿½Ç°Activityï¿½ï¿½
 				NewAddressActivity.this.finish();
 			}
 		});
 		try {
 //			AddressDataManage dataManage = new AddressDataManage(NewAddressActivity.this);
 			Button rightButton = (Button) findViewById(R.id.actionbar_right);
-			rightButton.setText("Íê³É");
+			rightButton.setText("å®Œæˆ");
 			rightButton
 					.setOnClickListener(new android.view.View.OnClickListener() {
 						
@@ -459,7 +459,7 @@ public class NewAddressActivity extends SherlockActivity {
 									|| "".equals(nameTextView.getText()
 											.toString())||numberTextView.getText().toString()==null||"".equals(numberTextView.getText().toString())) {
 								Toast.makeText(NewAddressActivity.this,
-										"ÊÕ»õÈËĞÕÃû,µç»°²»ÄÜÎª¿Õ ", Toast.LENGTH_SHORT).show();
+										"æ”¶è´§äººå§“å,ç”µè¯ä¸èƒ½ä¸ºç©º ", Toast.LENGTH_SHORT).show();
 							} else {
 								
 								Addresses addresses = new Addresses();
@@ -499,21 +499,21 @@ public class NewAddressActivity extends SherlockActivity {
 								//	Log.i("info", addressId+"addressId");
 							
 								 if("".equals(addressId)){
-										Toast.makeText(NewAddressActivity.this, "ÄúµÄÊäÈëÓĞÎÊÌâ", Toast.LENGTH_SHORT).show();
+										Toast.makeText(NewAddressActivity.this, "æ‚¨çš„è¾“å…¥æœ‰é—®é¢˜", Toast.LENGTH_SHORT).show();
 
 								 }else{
 //								addresses.setAddressId(addressId+"");
 								
-								// ½«Êı¾İ°ó¶¨µ½SpinnerÊÓÍ¼ÉÏ
+								// ï¿½ï¿½ï¿½ï¿½İ°ó¶¨µï¿½Spinnerï¿½ï¿½Í¼ï¿½ï¿½
 								Intent intent = getIntent();
-								// »ñÈ¡bundle¶ÔÏó
+								// ï¿½ï¿½È¡bundleï¿½ï¿½ï¿½ï¿½
 								Bundle bundle = new Bundle();
 								bundle.putSerializable("newaddress", addresses);
-								intent.putExtras(bundle);// ·ÅÖÃbundle¶ÔÏó
+								intent.putExtras(bundle);// ï¿½ï¿½ï¿½ï¿½bundleï¿½ï¿½ï¿½ï¿½
 								NewAddressActivity.this.setResult(
 										DefinalDate.responcode, intent);
 								NewAddressActivity.this.finish();
-//								Toast.makeText(NewAddressActivity.this, "±à¼­³É¹¦",
+//								Toast.makeText(NewAddressActivity.this, "ï¿½à¼­ï¿½É¹ï¿½",
 //									}	Toast.LENGTH_LONG).show();
 								 }
 								 }
@@ -521,11 +521,11 @@ public class NewAddressActivity extends SherlockActivity {
 					});
 
 			TextView titleTextView = (TextView) findViewById(R.id.actionbar_title);
-			titleTextView.setText("ĞÂÔöÊÕ»õµØÖ·");
+			titleTextView.setText("æ–°å¢æ”¶è´§åœ°å€");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(NewAddressActivity.this, "ÍøÂç²»¸øÁ¦£¡",
+			Toast.makeText(NewAddressActivity.this, "ç½‘ç»œä¸ç»™åŠ›ï¼",
 					Toast.LENGTH_SHORT).show();
 		}
 	}

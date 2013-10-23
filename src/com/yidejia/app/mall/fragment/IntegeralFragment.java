@@ -17,9 +17,9 @@ public class IntegeralFragment extends Fragment {
 	private String hello;
 	private String defaultHello = "default hello";
 	private TextView jiFen;
-	private VoucherDataManage voucherDataManage;//»ı·Ö
+	private VoucherDataManage voucherDataManage;//ç§¯åˆ†
 	private MyApplication myApplication;
-	//Í¨¹ıµ¥ÀıÄ£Ê½£¬¹¹½¨¶ÔÏó
+	//é€šè¿‡å•ä¾‹æ¨¡å¼ï¼Œæ„å»ºå¯¹è±¡
 	public static IntegeralFragment newInstance(String s){
 		IntegeralFragment waitFragment = new IntegeralFragment();
 		Bundle bundle = new Bundle();
@@ -31,7 +31,7 @@ public class IntegeralFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		//»ñÈ¡´æ´¢µÄ²ÎÊı
+		//è·å–å­˜å‚¨çš„å‚æ•°
 		Bundle args = getArguments();
 		hello = args!=null?args.getString("hello"):defaultHello;
 		
@@ -41,8 +41,8 @@ public class IntegeralFragment extends Fragment {
 			Bundle savedInstanceState) {
 		voucherDataManage = new VoucherDataManage(getActivity());
 		myApplication = (MyApplication) getActivity().getApplication();
-		View viewCoupons = inflater.inflate(R.layout.my_card_voucher1_item, null);//ÓÅ»İÈ¯ÊÓÍ¼
-		View viewIntegeral =inflater.inflate(R.layout.coupons, null);//»ı·ÖÊÓÍ¼
+		View viewCoupons = inflater.inflate(R.layout.my_card_voucher1_item, null);//ä¼˜æƒ åˆ¸è§†å›¾
+		View viewIntegeral =inflater.inflate(R.layout.coupons, null);//ç§¯åˆ†è§†å›¾
 		jiFen = (TextView) viewIntegeral.findViewById(R.id.jiefen);
 		jiFen.setText(voucherDataManage.getUserVoucher(myApplication.getUserId(), myApplication.getToken()));
 		if(hello.equals("jifenquan"))

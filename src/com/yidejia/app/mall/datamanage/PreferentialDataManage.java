@@ -10,27 +10,30 @@ import org.json.JSONObject;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.Preferential;
 import com.yidejia.app.mall.model.Specials;
 import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.voucher.Verify;
 
 /**
- * »ñÈ¡Ãâ·ÑËÍ£¬»ı·Ö»»¹ºÉÌÆ·²Ù×÷
+ * è·å–å…è´¹é€ï¼Œç§¯åˆ†æ¢è´­å•†å“æ“ä½œ
  * @author long bin
  *
  */
 public class PreferentialDataManage {
 //	private Preferential preferential; 
-	private ArrayList<Specials> freeProductArray;        //Ãâ·ÑËÍÉÌÆ·
-	private ArrayList<Specials> scoresProductArray;      //»ı·Ö»»¹ºÉÌÆ·
-	private ArrayList<Specials> activeProductArray; 	//»î¶¯»î¹»ÉÌÆ·
+	private ArrayList<Specials> freeProductArray;        //å…è´¹é€å•†å“
+	private ArrayList<Specials> scoresProductArray;      //ç§¯åˆ†æ¢è´­å•†å“
+	private ArrayList<Specials> activeProductArray; 	//æ´»åŠ¨æ´»å¤Ÿå•†å“
 	private Context context;
+	private Resources res;
 	
-	private boolean isNoMore = false;//ÅĞ¶ÏÊÇ·ñ»¹ÓĞ¸ü¶àÊı¾İ,trueÎªÃ»ÓĞ¸ü¶àÁË
+	private boolean isNoMore = false;//åˆ¤æ–­æ˜¯å¦è¿˜æœ‰æ›´å¤šæ•°æ®,trueä¸ºæ²¡æœ‰æ›´å¤šäº†
 	private ProgressDialog bar;
 	/**
 	 * {@link #getPreferential(String, String)}
@@ -45,24 +48,25 @@ public class PreferentialDataManage {
 		scoresProductArray = new ArrayList<Specials>();
 		activeProductArray = new ArrayList<Specials>();
 		bar = new ProgressDialog(context);
+		res = context.getResources();
 	}
 	/**
-	 * ¸ù¾İ¿Í»§ÒÑÌá½»µÄ¹ºÎï³µ»ñÈ¡ÓÅ»İ²úÆ·
-	 * @param goods ¹ºÎï³µÉÏµÄÉÌÆ·´®[id+¶ººÅ+ÊıÁ¿+ÊÇ·ñÎª»ı·Ö»»¹º+·ÖºÅ]£¬ ±ØĞë£¬ ¸ñÊ½"4,5n;"»ò"6,11n;2,3n;"
-	 * @param userId ¿Í»§Id£»
-	 * @return  ·µ»ØÃâ·ÑËÍ£¬»ı·Ö»»¹ºÉÌÆ·
+	 * æ ¹æ®å®¢æˆ·å·²æäº¤çš„è´­ç‰©è½¦è·å–ä¼˜æƒ äº§å“
+	 * @param goods è´­ç‰©è½¦ä¸Šçš„å•†å“ä¸²[id+é€—å·+æ•°é‡+æ˜¯å¦ä¸ºç§¯åˆ†æ¢è´­+åˆ†å·]ï¼Œ å¿…é¡»ï¼Œ æ ¼å¼"4,5n;"æˆ–"6,11n;2,3n;"
+	 * @param userId å®¢æˆ·Idï¼›
+	 * @return  è¿”å›å…è´¹é€ï¼Œç§¯åˆ†æ¢è´­å•†å“
 	 */
 	public void getPreferential(String goods, String userId){
 		boolean state = false;
 		TaskVerify taskVerify = new TaskVerify();
 		try {
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);  
-			bar.setMessage("ÕıÔÚ²éÑ¯");
+			bar.setMessage(res.getString(R.string.searching));
 			bar.show();
 			state = taskVerify.execute().get();
 			bar.dismiss();
 			if(isNoMore){
-				Toast.makeText(context, "Ã»ÓĞ¸ü¶àÁË!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, res.getString(R.string.nomore), Toast.LENGTH_SHORT).show();
 				isNoMore = false;
 				state = true;
 			}
@@ -77,59 +81,59 @@ public class PreferentialDataManage {
 			e.printStackTrace();
 		}
 		if(!state){
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, res.getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		return ;
 	}
 	/**
-	 * ¸ù¾İ¿Í»§ÒÑÌá½»µÄ¹ºÎï³µ»ñÈ¡ÓÅ»İ²úÆ·
-	 * @param userId ¿Í»§Id£»
-	 * @param cards JSONÊı¾İ£¨{[uId, amount], [uId, amount]...} )
-	 * @return ·µ»ØÃâ·ÑËÍ£¬»ı·Ö»»¹ºÉÌÆ·
+	 * æ ¹æ®å®¢æˆ·å·²æäº¤çš„è´­ç‰©è½¦è·å–ä¼˜æƒ äº§å“
+	 * @param userId å®¢æˆ·Idï¼›
+	 * @param cards JSONæ•°æ®ï¼ˆ{[uId, amount], [uId, amount]...} )
+	 * @return è¿”å›å…è´¹é€ï¼Œç§¯åˆ†æ¢è´­å•†å“
 	 */
 	public void getPreferential(int userId, String cards){
 		return ;
 	}
 	/**
-	 * ¿Í»§Ìí¼ÓÃâ·ÑËÍÉÌÆ·
-	 * @param userId ¿Í»§id
-	 * @return true:³É¹¦£¬false:Ê§°Ü
+	 * å®¢æˆ·æ·»åŠ å…è´¹é€å•†å“
+	 * @param userId å®¢æˆ·id
+	 * @return true:æˆåŠŸï¼Œfalse:å¤±è´¥
 	 */
 	public boolean addFreePruduct(int userId){
 		boolean result = true;
 		return result;
 	}
 	/**
-	 * ¿Í»§É¾³ıÃâ·ÑËÍÉÌÆ·
-	 * @param userId ¿Í»§id
-	 * @return true:³É¹¦£¬false:Ê§°Ü
+	 * å®¢æˆ·åˆ é™¤å…è´¹é€å•†å“
+	 * @param userId å®¢æˆ·id
+	 * @return true:æˆåŠŸï¼Œfalse:å¤±è´¥
 	 */
 	public boolean deleteFreePruduct(int userId){
 		boolean result = true;
 		return result;
 	}
 	/**
-	 * ¿Í»§Ìí¼Ó»ı·Ö»»¹ºÉÌÆ·
-	 * @param userId ¿Í»§id
-	 * @return true:³É¹¦£¬false:Ê§°Ü
+	 * å®¢æˆ·æ·»åŠ ç§¯åˆ†æ¢è´­å•†å“
+	 * @param userId å®¢æˆ·id
+	 * @return true:æˆåŠŸï¼Œfalse:å¤±è´¥
 	 */
 	public boolean addScoresPruduct(int userId){
 		boolean result = true;
 		return result;
 	}
 	/**
-	 * ¿Í»§É¾³ı»ı·Ö»»¹ºÉÌÆ·
-	 * @param userId ¿Í»§id
-	 * @return true:³É¹¦£¬false:Ê§°Ü
+	 * å®¢æˆ·åˆ é™¤ç§¯åˆ†æ¢è´­å•†å“
+	 * @param userId å®¢æˆ·id
+	 * @return true:æˆåŠŸï¼Œfalse:å¤±è´¥
 	 */
 	public boolean deleteScoresPruduct(int userId){
 		boolean result = true;
 		return result;
 	}
 	/**
-	 * Ìá½»¿Í»§¶©µ¥
-	 * @param userId ¿Í»§id
-	 * @return true:³É¹¦£¬false:Ê§°Ü
+	 * æäº¤å®¢æˆ·è®¢å•
+	 * @param userId å®¢æˆ·id
+	 * @return true:æˆåŠŸï¼Œfalse:å¤±è´¥
 	 */
 	public boolean commitOrder(int userId){
 		boolean result = true;
@@ -188,7 +192,7 @@ public class PreferentialDataManage {
 					specials.setPrice(listObject.getString("price"));
 					specials.setScores(listObject.getString("score_price"));
 					specials.setBrief(listObject.getString("desc"));
-					//»¹Ã»ÓĞÍê³É
+					//è¿˜æ²¡æœ‰å®Œæˆ
 					if("2".equals(activeId)){
 						freeProductArray.add(specials);
 					} else if("3".equals(activeId)){
@@ -202,13 +206,13 @@ public class PreferentialDataManage {
 		}
 	}
 	/**
-	 * »ñÈ¡Ãâ·ÑËÍÉÌÆ·
+	 * è·å–å…è´¹é€å•†å“
 	 */
 	public ArrayList<Specials> getFreeGoods(){
 		return freeProductArray;
 	}
 	/**
-	 * »ñÈ¡»ı·Ö»»¹ºÉÌÆ·
+	 * è·å–ç§¯åˆ†æ¢è´­å•†å“
 	 */
 	public ArrayList<Specials> getScoreGoods(){
 		return scoresProductArray;

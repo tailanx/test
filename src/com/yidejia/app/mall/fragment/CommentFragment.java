@@ -22,7 +22,7 @@ public class CommentFragment extends SherlockFragment  {
 	private String defaultHello = "";
 	private View produceView;
 	private LinearLayout linearLayout;
-	private UserCommentDataManage dataManage;//ÆÀÂÛÊı¾İÒµÎñ
+	private UserCommentDataManage dataManage;//è¯„è®ºæ•°æ®ä¸šåŠ¡
 	private PullToRefreshScrollView mPullToRefreshScrollView;
 	
 	public static CommentFragment newInstance(String goodsId){
@@ -37,7 +37,7 @@ public class CommentFragment extends SherlockFragment  {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		//»ñÈ¡´æ´¢µÄ²ÎÊı
+		//è·å–å­˜å‚¨çš„å‚æ•°
 		Bundle args = getArguments();
 		goodsId = args!=null?args.getString("goodsId"):defaultHello;
 		
@@ -52,7 +52,7 @@ public class CommentFragment extends SherlockFragment  {
 //		produceView = inflater.inflate(R.layout.item_goods_emulate_item, null);
 //		dataManage = new UserCommentDataManage(getSherlockActivity());
 		mPullToRefreshScrollView.setOnRefreshListener(listener);
-		String label = "ÉÏ´Î¸üĞÂÓÚ"	+ DateUtils.formatDateTime(
+		String label = getResources().getString(R.string.update_time)	+ DateUtils.formatDateTime(
 				getSherlockActivity().getApplicationContext(),
 				System.currentTimeMillis(),
 				DateUtils.FORMAT_SHOW_TIME
@@ -74,7 +74,7 @@ public class CommentFragment extends SherlockFragment  {
 		@Override
 		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
 			// TODO Auto-generated method stub
-			String label = "ÉÏ´Î¸üĞÂÓÚ"	+ DateUtils.formatDateTime(
+			String label = getResources().getString(R.string.update_time)	+ DateUtils.formatDateTime(
 					getSherlockActivity().getApplicationContext(),
 					System.currentTimeMillis(),
 					DateUtils.FORMAT_SHOW_TIME

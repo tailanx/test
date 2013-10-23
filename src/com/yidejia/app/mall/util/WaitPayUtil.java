@@ -18,22 +18,22 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.model.Order;
-import com.yidejia.app.mall.view.PayActivity;
+import com.yidejia.app.mall.view.CstmPayActivity;
 
 public class WaitPayUtil {
 	private Context context;
 	private LayoutInflater mInflater;
-	private LinearLayout mLinearLayout;// Íâ²ã¼ÓÔØÓÃµÄ
-	private LinearLayout mLayout;// ÓÃÀ´´«²ÎÓÃµÄ
+	private LinearLayout mLinearLayout;// å¤–å±‚åŠ è½½ç”¨çš„
+	private LinearLayout mLayout;// ç”¨æ¥ä¼ å‚ç”¨çš„
 	private View view;
 	private MyApplication myApplication;
 
-	private TextView titleTextView;// ¶©µ¥µÄ×´Ì¬
-	private TextView numberTextView;// ¶©µ¥µÄ±àºÅ
-	private TextView sumPrice;// ¶©µ¥µÄ×Ü¼Û¸ñ
-	private TextView countTextView;// ×ÜÊıÄ¿
+	private TextView titleTextView;// è®¢å•çš„çŠ¶æ€
+	private TextView numberTextView;// è®¢å•çš„ç¼–å·
+	private TextView sumPrice;// è®¢å•çš„æ€»ä»·æ ¼
+	private TextView countTextView;// æ€»æ•°ç›®
 
-	private OrderDataManage orderDataManage;// ÓÃÀ´»ñÈ¡¶©µ¥Êı¾İ
+	private OrderDataManage orderDataManage;// ç”¨æ¥è·å–è®¢å•æ•°æ®
 	private Button mButton;
 
 	public WaitPayUtil(Context context, LinearLayout layout) {
@@ -60,13 +60,13 @@ public class WaitPayUtil {
 	}
 
 	/**
-	 * ¼ÓÔØÊÓÍ¼
+	 * åŠ è½½è§†å›¾
 	 */
 	public void loadView(int fromIndex,int amount) {
 		try {
 			orderDataManage = new OrderDataManage(context);
 			ArrayList<Order> mList = orderDataManage.getOrderArray(myApplication.getUserId(),
-					"", "", "ÒÑÇ©ÊÕ", fromIndex +"", amount + "",myApplication.getToken());
+					"", "", "å·²ç­¾æ”¶", fromIndex +"", amount + "",myApplication.getToken());
 			Log.i("info", mList.size() + "mList");
 			for (int i = 0; i < mList.size(); i++) {
 				setupShow();
@@ -82,7 +82,7 @@ public class WaitPayUtil {
 
 				final WaitPayOrderDetail waitPayOrderDetail = new WaitPayOrderDetail(
 						context, mOrder, mLayout);
-				waitPayOrderDetail.addView();// ¼ÓÔØÉÌÆ·
+				waitPayOrderDetail.addView();// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
 				for (int j = 0; j < waitPayOrderDetail.map.size(); j++) {
 
 					// Log.i("info", mLinearLayoutLayout+"+mlayout");
@@ -98,7 +98,7 @@ public class WaitPayUtil {
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
-						Intent intent = new Intent(context,PayActivity.class);
+						Intent intent = new Intent(context,CstmPayActivity.class);
 						Bundle mBundle = new Bundle();
 						mBundle.putString("price", waitPayOrderDetail.map.get("price")+"");
 						intent.putExtras(mBundle);
@@ -111,7 +111,7 @@ public class WaitPayUtil {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 
 		}
 	}

@@ -14,6 +14,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.SearchItem;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.ImageUrl;
@@ -24,9 +25,9 @@ import com.yidejia.app.mall.net.favorite.SaveFavorite;
 import com.yidejia.app.mall.util.UnicodeToString;
 
 /**
- * »ñÈ¡ÊÕ²ØÁĞ±í  
+ * è·å–æ”¶è—åˆ—è¡¨  
  * <p>
- * ·½·¨£¨º¯Êı£©ÓĞ{@link #getFavouriteArray(int userId)} , {@link #addFavourite(int userId, int productId)} ,{@link #deleteFavourite(int userId, int productId)}
+ * æ–¹æ³•ï¼ˆå‡½æ•°ï¼‰æœ‰{@link #getFavouriteArray()} , {@link #addFavourite(int userId, int productId)} ,{@link #deleteFavourite(int userId, int productId)}
  * <p>
  * @author long bin
  *
@@ -37,7 +38,7 @@ public class FavoriteDataManage {
 	private String TAG = FavoriteDataManage.class.getName();
 	private UnicodeToString unicode;
 	
-	private boolean isNoMore = false;//ÅĞ¶ÏÊÇ·ñ»¹ÓĞ¸ü¶àÊı¾İ,trueÎªÃ»ÓĞ¸ü¶àÁË
+	private boolean isNoMore = false;//åˆ¤æ–­æ˜¯å¦è¿˜æœ‰æ›´å¤šæ•°æ®,trueä¸ºæ²¡æœ‰æ›´å¤šäº†
 	/**
 	 * {@link FavoriteDataManage}
 	 * @param context
@@ -49,15 +50,15 @@ public class FavoriteDataManage {
 	}
 	
 	/**
-	 * »ñÈ¡¿Í»§ÊÕ²Ø¼ĞÖĞÉÌÆ·
-	 * @param userId ¿Í»§id
-	 * @param fromIndex µÚ¼¸¸öµØÖ·¿ªÊ¼»ñÈ¡Êı¾İ
-	 * @param acount »ñÈ¡¸öÊı
-	 * @return ·µ»Ø±»ÊÕ²ØÁĞ±í£¬¾ßÌåÇë¿´ËÑË÷Ä£¿éµÄ{@link SearchItem}
+	 *è·å–å®¢æˆ·æ”¶è—å¤¹ä¸­å•†å“
+	 * @param userId å®¢æˆ·id
+	 * @param fromIndex ç¬¬å‡ ä¸ªåœ°å€å¼€å§‹è·å–æ•°æ®
+	 * @param acount è·å–ä¸ªæ•°
+	 * @return è¿”å›è¢«æ”¶è—åˆ—è¡¨ï¼Œå…·ä½“è¯·çœ‹æœç´¢æ¨¡å—çš„{@link SearchItem}
 	 */
 	public ArrayList<SearchItem> getFavouriteArray(String userId, int fromIndex, int acount){
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return favoriteArray;
 		}
 		TaskGetList taskGetList = new TaskGetList("userid="+userId, String.valueOf(fromIndex), String.valueOf(acount), "", "", "%2A");
@@ -65,7 +66,7 @@ public class FavoriteDataManage {
 		try {
 			state = taskGetList.execute().get();
 			if(isNoMore){
-				Toast.makeText(context, "Ã»ÓĞ¸ü¶àÁË!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, context.getResources().getString(R.string.nomore), Toast.LENGTH_SHORT).show();
 				isNoMore = false;
 				state = true;
 			}
@@ -80,22 +81,22 @@ public class FavoriteDataManage {
 			Log.e(TAG, "TaskGetList() ExecutionException");
 		}
 		if(!state){
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		return favoriteArray;
 	}
 	
 	/**
-	 * Ìí¼ÓÊÕ²ØÉÌÆ·
-	 * @param userId ¿Í»§id
-	 * @param productId ÉÌÆ·id
+	 * æ·»åŠ æ”¶è—å•†å“
+	 * @param userId å®¢æˆ·id
+	 * @param productId å•†å“id
 	 * @param token
-	 * @return ³É¹¦Óë·ñ
+	 * @return æˆåŠŸä¸å¦
 	 */
 	public boolean addFavourite(String userId, String productId, String token){
 		boolean isSuccess = false;
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return false;
 		}
 		TaskSave taskSave = new TaskSave(userId, productId, token);
@@ -112,7 +113,7 @@ public class FavoriteDataManage {
 		}
 		
 		if(!isSuccess){
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		} else {
 			return true;
 		}
@@ -120,16 +121,16 @@ public class FavoriteDataManage {
 	}
 	
 	/**
-	 * É¾³ıÊÕ²ØÉÌÆ·
-	 * @param userId ¿Í»§id
-	 * @param productId ÉÌÆ·id
+	 * åˆ é™¤æ”¶è—å•†å“
+	 * @param userId å®¢æˆ·id
+	 * @param productId å•†å“id
 	 * @param token
-	 * @return ³É¹¦Óë·ñ
+	 * @return æˆåŠŸä¸å¦
 	 */
 	public boolean deleteFavourite(String userId, String productId, String token){
 		boolean isSuccess = false;
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return isSuccess;
 		}
 		TaskDelete taskDelete = new TaskDelete(userId, productId, token);
@@ -146,7 +147,7 @@ public class FavoriteDataManage {
 		}
 		
 		if(!isSuccess){
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		return isSuccess;
 	}
@@ -166,7 +167,7 @@ public class FavoriteDataManage {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 //			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//			bar.setMessage("ÕıÔÚ²éÑ¯");
+//			bar.setMessage("ï¿½ï¿½ï¿½Ú²ï¿½Ñ¯");
 //			bar.show();
 		}
 		
@@ -197,14 +198,14 @@ public class FavoriteDataManage {
 			super.onPostExecute(result);
 //			bar.dismiss();
 //			if(result)
-//				Toast.makeText(context, "³É¹¦", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context, "ï¿½É¹ï¿½", Toast.LENGTH_SHORT).show();
 		}
 //		private ProgressDialog bar = new ProgressDialog(context);
 	}
 	
 	/**
-	 * ½âÎöÉ¾³ıÊÕ²ØÊı¾İ
-	 * @param resultJson http ·µ»ØµÄÊı¾İ
+	 * è§£ææ·»åŠ æ”¶è—æ•°æ®
+	 * @param resultJson httpè¿”å›çš„æ•°æ®
 	 * @return
 	 */
 	private boolean analysicDeleteJson(String resultJson) {
@@ -250,7 +251,7 @@ public class FavoriteDataManage {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 //			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//			bar.setMessage("ÕıÔÚ²éÑ¯");
+//			bar.setMessage("ï¿½ï¿½ï¿½Ú²ï¿½Ñ¯");
 //			bar.show();
 		}
 		
@@ -280,7 +281,7 @@ public class FavoriteDataManage {
 			super.onPostExecute(result);
 //			bar.dismiss();
 //			if(result)
-//				Toast.makeText(context, "³É¹¦", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context, "ï¿½É¹ï¿½", Toast.LENGTH_SHORT).show();
 		}
 		private ProgressDialog bar = new ProgressDialog(context);
 	}
@@ -290,8 +291,8 @@ public class FavoriteDataManage {
 		return favoriteId;
 	}
 	/**
-	 * ½âÎöÌí¼ÓÊÕ²ØÊı¾İ
-	 * @param resultJson http·µ»ØµÄÊı¾İ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ²ï¿½ï¿½ï¿½ï¿½
+	 * @param resultJson httpï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	private boolean analysicSaveJson(String resultJson) {
@@ -346,7 +347,7 @@ public class FavoriteDataManage {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage("ÕıÔÚ²éÑ¯");
+			bar.setMessage(context.getResources().getString(R.string.searching));
 			bar.show();
 		}
 		
@@ -376,11 +377,11 @@ public class FavoriteDataManage {
 			super.onPostExecute(result);
 			bar.dismiss();
 //			if(result)
-//				Toast.makeText(context, "³É¹¦", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context, "ï¿½É¹ï¿½", Toast.LENGTH_SHORT).show();
 		}
 	}
 	/**
-	 * ½âÎöËùÓĞÊÕ²ØÊı¾İ
+	 * è§£ææ‰€æœ‰æ”¶è—æ•°æ®
 	 * @param httpResultString
 	 * @return
 	 */
@@ -442,7 +443,7 @@ public class FavoriteDataManage {
 		return favoriteArray;
 	}
 	/**
-	 * ¼ì²é¿Í»§ÊÇ·ñÊÕ²ØÁËÄ³ÉÌÆ·
+	 * æ£€æŸ¥å®¢æˆ·æ˜¯å¦æ”¶è—äº†æŸå•†å“
 	 * @param userid
 	 * @param goodsid
 	 * @return true ? false
@@ -450,7 +451,7 @@ public class FavoriteDataManage {
 	public boolean checkExists(String userid, String goodsid, String token){
 		boolean isExists = false;
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-//			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+//			Toast.makeText(context, "ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½Ó£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½", Toast.LENGTH_LONG).show();
 			return isExists;
 		}
 		try {

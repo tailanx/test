@@ -3,37 +3,37 @@ package com.yidejia.app.mall.model;
 import java.util.ArrayList;
 
 /**
- * ¶©µ¥ÓÅ»İ£¬°üÀ¨Ãâ·ÑËÍÉÌÆ·£¬»ı·Ö»»¹ºÉÌÆ·
+ * è®¢å•ä¼˜æƒ ï¼ŒåŒ…æ‹¬å…è´¹é€å•†å“ï¼Œç§¯åˆ†æ¢è´­å•†å“
  * @author long bin
  * 
  */
 public class Preferential {
-	private ArrayList<Specials> freeProductArray;        //Ãâ·ÑËÍÉÌÆ·
-	private ArrayList<Specials> scoresProductArray;      //»ı·Ö»»¹ºÉÌÆ·
+	private ArrayList<Specials> freeProductArray;        //å…è´¹é€å•†å“
+	private ArrayList<Specials> scoresProductArray;      //ç§¯åˆ†æ¢è´­å•†å“
 	/**
 	 * 
-	 * @param freeProductArray ArrayList<{@link Specials}>Ãâ·ÑËÍÉÌÆ·
+	 * @param freeProductArray ArrayList<{@link Specials}>å…è´¹é€å•†å“
 	 */
 	public void setFreeProductArray(ArrayList<Specials> freeProductArray){
 		this.freeProductArray = freeProductArray;
 	}
 	/**
 	 * 
-	 * @return freeProductArray ArrayList<{@link Specials}>Ãâ·ÑËÍÉÌÆ·
+	 * @return freeProductArray ArrayList<{@link Specials}>å…è´¹é€å•†å“
 	 */
 	public ArrayList<Specials> getFreeProductArray(){
 		return freeProductArray;
 	}
 	/**
 	 * 
-	 * @param scoresProductArray ArrayList<{@link Specials}>»ı·Ö»»¹ºÉÌÆ·
+	 * @param scoresProductArray ArrayList<{@link Specials}>ç§¯åˆ†æ¢è´­å•†å“
 	 */
 	public void setScoresProductArray(ArrayList<Specials> scoresProductArray){
 		this.scoresProductArray = scoresProductArray;
 	}
 	/**
 	 * 
-	 * @return scoresProductArray ArrayList<{@link Specials}>»ı·Ö»»¹ºÉÌÆ·
+	 * @return scoresProductArray ArrayList<{@link Specials}>ç§¯åˆ†æ¢è´­å•†å“
 	 */
 	public ArrayList<Specials> getScoresProductArray(){
 		return scoresProductArray;

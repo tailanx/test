@@ -74,7 +74,7 @@ public class SelledResultListAdapter extends BaseAdapter {
 		
 		SearchItem item = searchItems.get(position);
 		search_result_small_title.setText(item.getName());
-		search_result_small_price.setText(item.getPrice()+"Ԫ");
+		search_result_small_price.setText(item.getPrice()+mContext.getResources().getString(R.string.unit));
 		search_result_small_em_num.setText(item.getCommentAmount());
 		search_result_small_sell_num.setText(item.getSelledAmount());
 		imageLoader.displayImage(item.getImgUrl(), search_result_small_image, options,

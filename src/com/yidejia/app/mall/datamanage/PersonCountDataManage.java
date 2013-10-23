@@ -6,31 +6,35 @@ import java.util.concurrent.ExecutionException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.user.GetCount;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
 /**
- * ¸öÈËÖĞĞÄêÇ³ÆÏÂÃæµÄ¼¸¸öÊı¾İ
+ * ä¸ªäººä¸­å¿ƒæ˜µç§°ä¸‹é¢çš„å‡ ä¸ªæ•°æ®
  * @author long bin
  *
  */
 public class PersonCountDataManage {
 	
 	private Context context;
+	private Resources res;
 	
 	public PersonCountDataManage(Context context){
 		this.context = context;
+		res = context.getResources();
 	}
 	
 	private String userid;
 	private String token;
 	/**
-	 * »ñÈ¡ÏûÏ¢ÖĞĞÄÊı¾İ
+	 * è·å–æ¶ˆæ¯ä¸­å¿ƒæ•°æ®
 	 * @param userid
 	 * @param token
 	 * @return
@@ -39,7 +43,7 @@ public class PersonCountDataManage {
 		this.userid = userid;
 		this.token = token;
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, res.getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return false;
 		}
 		TaskCount taskCount = new TaskCount();
@@ -96,10 +100,10 @@ public class PersonCountDataManage {
 		
 	}
 	
-	private String scores = "";//»ı·Ö
-	private String order = "";//¶©µ¥
-	private String favoliten = "";//ÊÕ²Ø
-	private String msg = "";//ÏûÏ¢Êı
+	private String scores = "";//ç§¯åˆ†
+	private String order = "";//è®¢å•
+	private String favoliten = "";//æ”¶è—
+	private String msg = "";//æ¶ˆæ¯æ•°
 	
 	public String getScores(){
 		return scores;

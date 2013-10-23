@@ -14,6 +14,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.address.DeleteUserAddress;
@@ -28,7 +29,7 @@ public class AddressDataManage {
 	private Context context;
 	private String TAG = "AddressDataManage";
 	
-	private boolean isNoMore = false;//ÅĞ¶ÏÊÇ·ñ»¹ÓĞ¸ü¶àÊı¾İ,trueÎªÃ»ÓĞ¸ü¶àÁË
+	private boolean isNoMore = false;//åˆ¤æ–­æ˜¯å¦è¿˜æœ‰æ›´å¤šæ•°æ®,trueä¸ºæ²¡æœ‰æ›´å¤šäº†
 	
 //	private int defaultUserId = 68298;
 //	private int fromIndex = 0;
@@ -41,22 +42,22 @@ public class AddressDataManage {
 		addressesArray = new ArrayList<Addresses>();
 	}
 	
-	/**Ìí¼ÓÊÕ»õµØÖ·
-	 *@param userId ÓÃ»§id
-	 *@param name ÓÃ»§Ãû³Æ
-	 *@param province Ê¡·İ
-	 *@param city ³ÇÊĞ
-	 *@param area Çø
-	 *@param address ÏêÏ¸µØÖ·
-	 *@param phone µç»°
+	/**æ·»åŠ æ”¶è´§åœ°å€
+	 *@param userId ç”¨æˆ·id
+	 *@param name ç”¨æˆ·åç§°
+	 *@param province çœä»½
+	 *@param city åŸå¸‚
+	 *@param area åœ°åŒº
+	 *@param address è¯¦ç»†åœ°å€
+	 *@param phone æ‰‹æœº
 	 *@param token token
-	 *@param defaultAddress ÊÇ·ñÎªÄ¬ÈÏµØÖ·
-	 *@return: ·µ»ØaddressId;¿ÉÄÜÎª""
+	 *@param defaultAddress æ˜¯å¦ä¸ºé»˜è®¤åœ°å€
+	 *@return: è¿”å›addressId;å¯èƒ½ä¸º""
 	 */
 	public String addAddress(String userId, String name, String province, String city, String area, String address, String phone, boolean defaultAddress, String token){
 		String addressId = "";
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return addressId;
 		}
 		boolean isSuccess = false;
@@ -78,7 +79,7 @@ public class AddressDataManage {
 		if(!isSuccess && !isSaveSuccess){
 			Toast.makeText(context, isSuccessString, Toast.LENGTH_SHORT).show();
 		} else if(!isSuccess){
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		} else {
 			return recipient_id;
 		}
@@ -86,25 +87,25 @@ public class AddressDataManage {
 		return addressId;
 	}
 	
-	/**¸üĞÂÊÕ»õµØÖ·
-	 *@param userId ÓÃ»§id
-	 *@param name ÓÃ»§Ãû³Æ
-	 *@param province Ê¡·İ
-	 *@param city ³ÇÊĞ
-	 *@param area Çø
-	 *@param address µØÖ·
-	 *@param phone µç»°
+	/**æ›´æ–°æ”¶è´§åœ°å€
+	 *@param userId ç”¨æˆ·id
+	 *@param name ç”¨æˆ·åç§°
+	 *@param province çœä»½
+	 *@param city åŸå¸‚
+	 *@param area åœ°åŒº
+	 *@param address è¯¦ç»†åœ°å€
+	 *@param phone æ‰‹æœº
 	 *@param token
-	 *@param defaultAddress ÊÇ·ñÎªÄ¬ÈÏµØÖ·
-	 *@param recipientId ¸üĞÂµØÖ·id
-	 *@return: ÊÇ·ñ¸üĞÂ³É¹¦
+	 *@param defaultAddress æ˜¯å¦ä¸ºé»˜è®¤åœ°å€
+	 *@param recipientId éœ€è¦æ›´æ–°åœ°å€çš„id
+	 *@return: æ˜¯å¦æ›´æ–°æˆåŠŸ
 	 */
 	public boolean updateAddress(String userId, String name, String province,
 			String city, String area, String address, String phone, boolean defaultAddress, String recipientId,
 			String token) {
 	boolean isSuccess = false;
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return isSuccess;
 		}
 		this.recipient_id = recipientId;
@@ -124,22 +125,22 @@ public class AddressDataManage {
 		if(!isSuccess && !isSaveSuccess){
 			Toast.makeText(context, isSuccessString, Toast.LENGTH_SHORT).show();
 		} else if(!isSuccess){
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		
 		return isSuccess;
 	}
 	
-	/**É¾³ıÊÕ»õµØÖ·
-	 * @param userId ¿Í»§id
-	 *@param addressId µØÖ·id
+	/**åˆ é™¤æ”¶è´§åœ°å€
+	 * @param userId å®¢æˆ·id
+	 *@param addressId åœ°å€id
 	 *@param token
-	 *@return: ÊÇ·ñÉ¾³ı³É¹¦
+	 *@return: æ˜¯å¦åˆ é™¤æˆåŠŸ
 	 */
 	public boolean deleteAddress(String userId, String addressId, String token){
 		boolean isSuccess = false;
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return isSuccess;
 		}
 //		String resultJson = deleteAddressJson(userId, addressId);
@@ -157,22 +158,22 @@ public class AddressDataManage {
 		}
 		
 		if(!isSuccess){
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		
 //		isSuccess = !isSuccess;
 		return isSuccess;
 	}
 	/**
-	 * ¸ù¾İÓÃ»§id»ñÈ¡ËùÓĞµØÖ·
-	 * @param userId ÓÃ»§id
-	 * @param fromIndex µÚ¼¸¸öµØÖ·¿ªÊ¼»ñÈ¡Êı¾İ
-	 * @param acount »ñÈ¡¸öÊı
+	 * æ ¹æ®ç”¨æˆ·idè·å–æ‰€æœ‰åœ°å€
+	 * @param userId ç”¨æˆ·id
+	 * @param fromIndex ç¬¬å‡ ä¸ªåœ°å€å¼€å§‹è·å–æ•°æ®
+	 * @param acount è·å–ä¸ªæ•°
 	 * @return
 	 */
 	public ArrayList<Addresses> getAddressesArray(String userId, int fromIndex, int acount){
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return addressesArray;
 		}
 		TaskGetList taskGetList = new TaskGetList("customer_id="+userId, String.valueOf(fromIndex), String.valueOf(acount), "", "", "%2A");
@@ -180,7 +181,7 @@ public class AddressDataManage {
 		try {
 			state = taskGetList.execute().get();
 			if(isNoMore){
-				Toast.makeText(context, "Ã»ÓĞ¸ü¶àÁË!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, context.getResources().getString(R.string.nomore), Toast.LENGTH_SHORT).show();
 				isNoMore = false;
 				state = true;
 			}
@@ -195,13 +196,13 @@ public class AddressDataManage {
 			Log.e(TAG, "TaskGetList() ExecutionException");
 		}
 		if(!state){
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		
 		return addressesArray;
 	}
 	/**
-	 * ÉèÖÃÄ¬ÈÏµØÖ·
+	 * è®¾ç½®é»˜è®¤åœ°å€
 	 * @param cid
 	 * @param aid
 	 * @param token
@@ -210,7 +211,7 @@ public class AddressDataManage {
 	public boolean setDefaultAddress(String cid, String aid, String token){
 		boolean isSuccess = false;
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "ÍøÂçÎ´Á¬½Ó£¬Çë¼ì²éÄúµÄÍøÂçÁ¬½Ó×´Ì¬£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return isSuccess;
 		}
 //		String resultJson = deleteAddressJson(userId, addressId);
@@ -228,7 +229,7 @@ public class AddressDataManage {
 		}
 		
 		if(!isSuccess){
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		
 //		isSuccess = !isSuccess;
@@ -238,7 +239,7 @@ public class AddressDataManage {
 //	private String result = "";
 	
 	/**
-	 * ½âÎöËùÓĞµØÖ·Êı¾İ
+	 * è§£ææ‰€æœ‰åœ°å€æ•°æ®
 	 * @param httpResultString
 	 * @return
 	 */
@@ -309,7 +310,7 @@ public class AddressDataManage {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage("ÕıÔÚ²éÑ¯");
+			bar.setMessage(context.getResources().getString(R.string.searching));
 			bar.show();
 		}
 		
@@ -340,7 +341,7 @@ public class AddressDataManage {
 			super.onPostExecute(result);
 			bar.dismiss();
 //			if(result)
-//				Toast.makeText(context, "³É¹¦", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context, "ï¿½É¹ï¿½", Toast.LENGTH_SHORT).show();
 		}
 		private ProgressDialog bar = new ProgressDialog(context);
 	}
@@ -361,7 +362,7 @@ public class AddressDataManage {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage("ÕıÔÚ²éÑ¯");
+			bar.setMessage(context.getResources().getString(R.string.searching));
 			bar.show();
 		}
 		
@@ -391,7 +392,7 @@ public class AddressDataManage {
 			super.onPostExecute(result);
 			bar.dismiss();
 //			if(result)
-//				Toast.makeText(context, "³É¹¦", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context, "ï¿½É¹ï¿½", Toast.LENGTH_SHORT).show();
 		}
 		private ProgressDialog bar = new ProgressDialog(context);
 	}
@@ -424,7 +425,7 @@ public class AddressDataManage {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage("ÕıÔÚ²éÑ¯");
+			bar.setMessage(context.getResources().getString(R.string.searching));
 			bar.show();
 			if(defaultAddress);
 		}
@@ -456,7 +457,7 @@ public class AddressDataManage {
 			super.onPostExecute(result);
 			bar.dismiss();
 //			if(result)
-//				Toast.makeText(context, "³É¹¦", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context, "ï¿½É¹ï¿½", Toast.LENGTH_SHORT).show();
 		}
 		private ProgressDialog bar = new ProgressDialog(context);
 	}
@@ -476,7 +477,7 @@ public class AddressDataManage {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage("ÕıÔÚ²éÑ¯");
+			bar.setMessage(context.getResources().getString(R.string.searching));
 			bar.show();
 		}
 		
@@ -507,14 +508,14 @@ public class AddressDataManage {
 			super.onPostExecute(result);
 			bar.dismiss();
 //			if(result)
-//				Toast.makeText(context, "³É¹¦", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context, "ï¿½É¹ï¿½", Toast.LENGTH_SHORT).show();
 		}
 		private ProgressDialog bar = new ProgressDialog(context);
 	}
 	
 	/**
-	 * ½âÎöÉ¾³ıÊı¾İ
-	 * @param resultJson http ·µ»ØµÄÊı¾İ
+	 * è§£æåˆ é™¤æ•°æ®
+	 * @param resultJson http è¿”å›çš„æ•°æ®
 	 * @return
 	 */
 	private boolean analysicDeleteJson(String resultJson) {
@@ -565,8 +566,8 @@ public class AddressDataManage {
 	
 	private String recipient_id = "0";
 	/**
-	 * ½âÎöÌí¼Ó»òĞŞ¸ÄµØÖ·Êı¾İ
-	 * @param resultJson http·µ»ØµÄÊı¾İ
+	 * è§£ææ·»åŠ æˆ–ä¿®æ”¹åœ°å€æ•°æ®
+	 * @param resultJson httpè¿”å›çš„æ•°æ®
 	 * @return
 	 */
 	private boolean analysicSaveJson(String resultJson) {
@@ -584,7 +585,7 @@ public class AddressDataManage {
 //				recipient_id = Integer.parseInt(temp);
 				recipient_id = temp;
 				isSuccessString = responseJsonObject.getString("@p_result");
-				if("success³É¹¦".equals(unicode.revert(isSuccessString))){
+				if(context.getResources().getString(R.string.success_del).equals(unicode.revert(isSuccessString))){
 					isSaveSuccess = true;
 					return true;
 				}
@@ -614,7 +615,7 @@ public class AddressDataManage {
 		return isSuccessString;
 	}
 	/**
-	 * ·µ»ØµØÖ·µÄid
+	 * è¿”å›åœ°å€çš„id
 	 */
 	public String getAddressId(){
 		return recipient_id;

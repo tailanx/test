@@ -27,7 +27,8 @@ D:/Mall/Mall//obj/local/armeabi/objs/Mall/Mall.o: \
  D:/ANDROID/ndk/android-ndk-r9/platforms/android-8/arch-arm/usr/include/sys/time.h \
  D:/ANDROID/ndk/android-ndk-r9/platforms/android-8/arch-arm/usr/include/linux/time.h \
  D:/ANDROID/ndk/android-ndk-r9/platforms/android-8/arch-arm/usr/include/asm/siginfo.h \
- D:/ANDROID/ndk/android-ndk-r9/platforms/android-8/arch-arm/usr/include/asm-generic/siginfo.h
+ D:/ANDROID/ndk/android-ndk-r9/platforms/android-8/arch-arm/usr/include/asm-generic/siginfo.h \
+ D:/ANDROID/ndk/android-ndk-r9/platforms/android-8/arch-arm/usr/include/stdio.h
 
 D:/ANDROID/ndk/android-ndk-r9/platforms/android-8/arch-arm/usr/include/jni.h:
 
@@ -84,3 +85,5 @@ D:/ANDROID/ndk/android-ndk-r9/platforms/android-8/arch-arm/usr/include/linux/tim
 D:/ANDROID/ndk/android-ndk-r9/platforms/android-8/arch-arm/usr/include/asm/siginfo.h:
 
 D:/ANDROID/ndk/android-ndk-r9/platforms/android-8/arch-arm/usr/include/asm-generic/siginfo.h:
+
+D:/ANDROID/ndk/android-ndk-r9/platforms/android-8/arch-arm/usr/include/stdio.h:

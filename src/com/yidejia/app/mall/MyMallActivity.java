@@ -64,11 +64,11 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 	// private YLImageButton mButton9;
 	// private YLImageButton mButton10;
 	// private YLImageButton mButton11;
-	private TextView favorites;// ÊÕ²Ø
-	private TextView integration;// »ı·Ö
-	private TextView message;// ÏûÏ¢
-	private ImageView head;// Í·Ïñ
-	private TextView nick;// êÇ³Æ
+	private TextView favorites;// æ”¶è—
+	private TextView integration;// ç§¯åˆ†
+	private TextView message;// æ¶ˆæ¯
+	private ImageView head;// å¤´åƒ
+	private TextView nick;// æ˜µç§°
 	private TextView vip;
 	private MyApplication myApplication;
 	private PersonCountDataManage personCountDataManage;
@@ -76,7 +76,7 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 	// private TextView mTextView;
 
 	public void setupView(View view) {
-		// // //ÊµÀı»¯×é¼ş
+		// // //å®ä¾‹åŒ–ç»„ä»¶
 		head = (ImageView) view.findViewById(R.id.person_shopping_image_person);
 		head.setOnClickListener(this);
 		nick = (TextView) view.findViewById(R.id.person_shopping_person_name);
@@ -84,37 +84,37 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 		// nick.setOnClickListener(this);
 		vip = (TextView) view.findViewById(R.id.person_shopping_person_vip);
 		personMessage = (RelativeLayout) view
-				.findViewById(R.id.main2_main2_linearlayout20);// ¸öÈËÖĞĞÄ
+				.findViewById(R.id.main2_main2_linearlayout20);// ä¸ªäººä¸­å¿ƒ
 		personMessage.setOnClickListener(this);
 		mExchange = (RelativeLayout) view
-				.findViewById(R.id.main2_main2_linearlayout10);// ÍË»»»õ
+				.findViewById(R.id.main2_main2_linearlayout10);// é€€æ¢è´§
 		mExchange.setOnClickListener(this);
 		mAllOrder = (RelativeLayout) view
-				.findViewById(R.id.main2_main2_linearlayout1);// È«²¿¶©µ¥
+				.findViewById(R.id.main2_main2_linearlayout1);// å…¨éƒ¨è®¢å•
 		mAllOrder.setOnClickListener(this);
 		mWaitPay = (RelativeLayout) view
-				.findViewById(R.id.main2_main2_linearlayout2);// ´ı¸¶¿ì¶©µ¥
+				.findViewById(R.id.main2_main2_linearlayout2);// å¾…ä»˜å¿«è®¢å•
 		mWaitPay.setOnClickListener(this);
 		mwaitDeliver = (RelativeLayout) view
-				.findViewById(R.id.main2_main2_linearlayout6);// ´ı·¢»õ¶©µ¥
+				.findViewById(R.id.main2_main2_linearlayout6);// å¾…å‘è´§è®¢å•
 		mwaitDeliver.setOnClickListener(this);
 		mAlreadyOrder = (RelativeLayout) view
-				.findViewById(R.id.main2_main2_linearlayout4);// ÒÑ·¢»õ¶©µ¥
+				.findViewById(R.id.main2_main2_linearlayout4);// å·²å‘è´§è®¢å•
 		mAlreadyOrder.setOnClickListener(this);
 		mAlreadyCom = (RelativeLayout) view
-				.findViewById(R.id.main2_main2_linearlayout3);// "ÒÑÍê³É¶©µ¥"
+				.findViewById(R.id.main2_main2_linearlayout3);// "å·²å®Œæˆè®¢å•"
 		mAlreadyCom.setOnClickListener(this);
 		mCardVoucher = (RelativeLayout) view
-				.findViewById(R.id.main2_main2_linearlayout5);// »ı·Ö¿¨È¯
+				.findViewById(R.id.main2_main2_linearlayout5);// ç§¯åˆ†å¡åˆ¸
 		mCardVoucher.setOnClickListener(this);
 		mMyCollect = (RelativeLayout) view
-				.findViewById(R.id.main2_main2_linearlayout7);// ÎÒµÄÊÕ²Ø
+				.findViewById(R.id.main2_main2_linearlayout7);// æˆ‘çš„æ”¶è—
 		mMyCollect.setOnClickListener(this);
 		mAddressManagement = (RelativeLayout) view
-				.findViewById(R.id.main2_main2_linearlayout9);// ÊÕ»õµØÖ·¹ÜÀí
+				.findViewById(R.id.main2_main2_linearlayout9);// æ”¶è´§åœ°å€ç®¡ç†
 		mAddressManagement.setOnClickListener(this);
 		mLayout11 = (RelativeLayout) view
-				.findViewById(R.id.main2_main2_linearlayout11);// ÆÀ¼ÛÉ¹µ¥
+				.findViewById(R.id.main2_main2_linearlayout11);// è¯„ä»·æ™’å•
 		mLayout11.setOnClickListener(this);
 
 		getSherlockActivity().getSupportActionBar().setDisplayHomeAsUpEnabled(
@@ -127,7 +127,7 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 				false);
 		getSherlockActivity().getSupportActionBar().setDisplayUseLogoEnabled(
 				false);
-		// ÊµÀı»¯×é¼ş
+		// å®ä¾‹åŒ–ç»„ä»¶
 		getSherlockActivity().getSupportActionBar().setCustomView(
 				R.layout.actionbar_mymall);
 		imageView = (ImageView) getSherlockActivity().findViewById(
@@ -236,7 +236,7 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	private DisplayImageOptions options;
-	protected ImageLoader imageLoader = ImageLoader.getInstance();// ¼ÓÔØÍ¼Æ¬
+	protected ImageLoader imageLoader = ImageLoader.getInstance();// åŠ è½½å›¾ç‰‡
 
 	private void initDisplayImageOption() {
 		options = new DisplayImageOptions.Builder()
@@ -291,7 +291,7 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 			nick.setText(myApplication.getUserId());
 			Log.i("info", myApplication.getUserId() + "   name");
 		} else {
-			nick.setText(name + "liu");
+			nick.setText(name);
 		}
 
 		String vip1 = myApplication.getVip();
@@ -422,93 +422,93 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 		// startActivity(intent);
 		// MainActivity.this.finish();
 		// break;
-		case R.id.main2_main2_linearlayout20:// µã»÷¸öÈËÖĞĞÄ
+		case R.id.main2_main2_linearlayout20:// ç‚¹å‡»ä¸ªäººä¸­å¿ƒ
 			Intent intent1 = new Intent(getSherlockActivity(),
 					PersonActivity.class);
 			startActivity(intent1);
 			// getSherlockActivity().finish();
 			break;
 
-		case R.id.main2_main2_linearlayout10:// µã»÷ÍË»»»õ
+		case R.id.main2_main2_linearlayout10:// ç‚¹å‡»é€€æ¢è´§
 			Intent intent2 = new Intent(getSherlockActivity(),
 					ExchangeActivity.class);
 			startActivity(intent2);
 			// getSherlockActivity().finish();
 			break;
-		case R.id.main2_main2_linearlayout1:// µã»÷È«²¿¶©µ¥
+		case R.id.main2_main2_linearlayout1:// ç‚¹å‡»å…¨éƒ¨è®¢å•
 			Intent intent3 = new Intent(getSherlockActivity(),
 					AllOrderActivity.class);
 			startActivity(intent3);
 			// getSherlockActivity().finish();
 			break;
-		case R.id.main2_main2_linearlayout2:// ´ı¸¶¿î¶©µ¥
+		case R.id.main2_main2_linearlayout2:// å¾…ä»˜æ¬¾è®¢å•
 			Intent intent4 = new Intent(getSherlockActivity(),
 					WaitPayActivity.class);
 			startActivity(intent4);
 			// getSherlockActivity().finish();
 			break;
-		case R.id.main2_main2_linearlayout6:// ´ı·¢»õ¶©µ¥
+		case R.id.main2_main2_linearlayout6:// å¾…å‘è´§è®¢å•
 			Intent intent5 = new Intent(getSherlockActivity(),
 					WaitDeliverActivity.class);
 			startActivity(intent5);
 			// getSherlockActivity().finish();
 			break;
-		case R.id.main2_main2_linearlayout4:// ÒÑ·¢»õ¶©µ¥
+		case R.id.main2_main2_linearlayout4:// å·²å‘è´§è®¢å•
 			Intent intent6 = new Intent(getSherlockActivity(),
 					AlreadyOrderActivity.class);
 			startActivity(intent6);
 			// getSherlockActivity().finish();
 			break;
-		case R.id.main2_main2_linearlayout3:// ÒÑÍê³É¶©µ¥
+		case R.id.main2_main2_linearlayout3:// å·²å®Œæˆè®¢å•
 			Intent intent7 = new Intent(getSherlockActivity(),
 					AlreadyComActivity.class);
 			startActivity(intent7);
 			// getSherlockActivity().finish();
 			break;
-		case R.id.main2_main2_linearlayout5:// »ı·Ö¿¨È¯
+		case R.id.main2_main2_linearlayout5:// ç§¯åˆ†å¡åˆ¸
 			Intent intent8 = new Intent(getSherlockActivity(),
 					IntegeralActivity.class);
 			startActivity(intent8);
 			// getSherlockActivity().finish();
 			break;
-		case R.id.main2_main2_linearlayout7:// ÎÒµÄÊÕ²Ø
+		case R.id.main2_main2_linearlayout7:// æˆ‘çš„æ”¶è—
 			Intent intent9 = new Intent(getSherlockActivity(),
 					MyCollectActivity.class);
 			startActivity(intent9);
 			// getSherlockActivity().finish();
 			break;
-		case R.id.main2_main2_linearlayout9:// ÊÕ»õµØÖ·¹ÜÀí
+		case R.id.main2_main2_linearlayout9:// æ”¶è´§åœ°å€ç®¡ç†
 			Intent intent10 = new Intent(getSherlockActivity(),
 					AddressActivity.class);
 			startActivity(intent10);
 			// getSherlockActivity().finish();
 			break;
-		case R.id.main2_main2_linearlayout11:// ÆÀ¼ÛÉ¹µ¥
+		case R.id.main2_main2_linearlayout11:// è¯„ä»·æ™’å•
 			Intent intent11 = new Intent(getSherlockActivity(),
 					EvaluationActivity.class);
 			startActivity(intent11);
 			// getSherlockActivity().finish();
 			break;
-		case R.id.favorites:// ÊÕ²Ø
+		case R.id.favorites:// æ”¶è—
 			Intent intent12 = new Intent(getSherlockActivity(),
 					MyCollectActivity.class);
 			startActivity(intent12);
 			break;
-		case R.id.message:// ÊÕ²Ø
+		case R.id.message:// æ”¶è—
 			Intent intent13 = new Intent(getSherlockActivity(),
 					PersonActivity.class);
 			startActivity(intent13);
 			break;
-		case R.id.integration:// ÊÕ²Ø
+		case R.id.integration:// æ”¶è—
 			Intent intent14 = new Intent(getSherlockActivity(),
 					IntegeralActivity.class);
 			startActivity(intent14);
 			break;
-		case R.id.person_shopping_person_name:// êÇ³Æ
+		case R.id.person_shopping_person_name:// æ˜µç§°
 			// Toast.makeText(getSherlockActivity(), "",
 			// Toast.LENGTH_LONG).show();
 			break;
-		case R.id.person_shopping_image_person:// Í·Ïñ
+		case R.id.person_shopping_image_person:// å¤´åƒ
 			// Toast.makeText(getSherlockActivity(), "",
 			// Toast.LENGTH_LONG).show();
 			break;

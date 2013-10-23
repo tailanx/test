@@ -15,13 +15,13 @@ import com.yidejia.app.mall.datamanage.PreferentialDataManage;
 import com.yidejia.app.mall.fragment.FreeGivingAdapter.ViewHolder;
 
 public class FreeGivingFragment extends SherlockFragment {
-//	private TextView titleTextView;//¶©µ¥µÄ×´Ì¬
-//	private TextView numberTextView;//¶©µ¥µÄ±àºÅ
-//	private TextView sumPrice;//¶©µ¥µÄ×Ü¼Û¸ñ
-//	private TextView countTextView;//¶©µ¥µÄ×ÜÊıÄ¿
-//	private LinearLayout mLayout;//Íâ²ãµÄ²¼¾Ö
+//	private TextView titleTextView;//è®¢å•çš„çŠ¶æ€
+//	private TextView numberTextView;//è®¢å•çš„ç¼–å·
+//	private TextView sumPrice;//è®¢å•çš„æ€»ä»·æ ¼
+//	private TextView countTextView;//è®¢å•çš„æ€»æ•°ç›®
+//	private LinearLayout mLayout;//å¤–å±‚çš„å¸ƒå±€
 //	private View view;
-//	private OrderDataManage orderDataManage ;//ÓÃÀ´»ñÈ¡¶©µ¥Êı¾İ
+//	private OrderDataManage orderDataManage ;//ç”¨æ¥è·å–è®¢å•æ•°æ®
 	
 	private String hello;
 	private String defaultHello = "default hello";
@@ -29,7 +29,7 @@ public class FreeGivingFragment extends SherlockFragment {
 	private FreeGivingAdapter adapter ;
 	private PreferentialDataManage preferentialDataManage;
 	/**
-	 * ÊµÀı»¯¶ÔÏó
+	 * å®ä¾‹åŒ–å¯¹è±¡
 	 * @param view
 	 */
 	private void setupShow(View view){
@@ -42,7 +42,7 @@ public class FreeGivingFragment extends SherlockFragment {
 	}
 
 
-	//Í¨¹ıµ¥ÀıÄ£Ê½£¬¹¹½¨¶ÔÏó
+	//é€šè¿‡å•ä¾‹æ¨¡å¼ï¼Œæ„å»ºå¯¹è±¡
 	public static FreeGivingFragment newInstance(String s){
 		FreeGivingFragment waitFragment = new FreeGivingFragment();
 		Bundle bundle = new Bundle();
@@ -54,7 +54,7 @@ public class FreeGivingFragment extends SherlockFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		//»ñÈ¡´æ´¢µÄ²ÎÊı
+		//è·å–å­˜å‚¨çš„å‚æ•°
 		Bundle args = getArguments();
 		hello = args!=null?args.getString("hello"):defaultHello;
 		
@@ -63,8 +63,8 @@ public class FreeGivingFragment extends SherlockFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		preferentialDataManage = new PreferentialDataManage(getSherlockActivity());
-		View view= inflater.inflate(R.layout.free_giving, null);//»ñÈ¡ÊÓÍ¼¶ÔÏó
-		LinearLayout relativeLayout = (LinearLayout)view.findViewById(R.id.free_shopping_cart_relative2);//»ñÈ¡²¼¾Ö
+		View view= inflater.inflate(R.layout.free_giving, null);//è·å–è§†å›¾å¯¹è±¡
+		LinearLayout relativeLayout = (LinearLayout)view.findViewById(R.id.free_shopping_cart_relative2);//è·å–å¸ƒå±€
 		listView = (ListView) view.findViewById(R.id.free_giving_listview);
 		adapter = new FreeGivingAdapter(getSherlockActivity(), preferentialDataManage.getFreeGoods());
 		listView.setAdapter(adapter);
@@ -75,8 +75,8 @@ public class FreeGivingFragment extends SherlockFragment {
 //		setupShow(view);
 //		getData();
 				
-//		View produce = inflater.inflate(R.layout.all_order_item_produce, null);//²úÆ·ÏêÏ¸
-//		View produce1 = inflater.inflate(R.layout.all_order_item_produce, null);//²úÆ·ÏêÏ¸
+//		View produce = inflater.inflate(R.layout.all_order_item_produce, null);//äº§å“è¯¦ç»†
+//		View produce1 = inflater.inflate(R.layout.all_order_item_produce, null);//äº§å“è¯¦ç»†
 //		
 //		relativeLayout.addView(produce);
 //		relativeLayout.addView(produce1);
@@ -90,7 +90,7 @@ public class FreeGivingFragment extends SherlockFragment {
 //				startActivity(intent);
 //			}
 //		});
-//		//Ìí¼Ó¼àÌı
+//		//æ·»åŠ ç›‘å¬
 //		produce.setOnClickListener(new OnClickListener() {
 //			
 //			@Override
@@ -108,9 +108,9 @@ public class FreeGivingFragment extends SherlockFragment {
     @Override  
     public void onItemClick(AdapterView<?> parent, View view, int position,  
             long id) {  
-        //// È¡µÃViewHolder¶ÔÏó£¬ÕâÑù¾ÍÊ¡È¥ÁËÍ¨¹ı²ã²ãµÄfindViewByIdÈ¥ÊµÀı»¯ÎÒÃÇĞèÒªµÄcbÊµÀıµÄ²½Öè    
+        //// å–å¾—ViewHolderå¯¹è±¡ï¼Œè¿™æ ·å°±çœå»äº†é€šè¿‡å±‚å±‚çš„findViewByIdå»å®ä¾‹åŒ–æˆ‘ä»¬éœ€è¦çš„cbå®ä¾‹çš„æ­¥éª¤    
         ViewHolder viewHolder=(ViewHolder)view.getTag();                          
-        viewHolder.cb.toggle();// °ÑCheckBoxµÄÑ¡ÖĞ×´Ì¬¸ÄÎªµ±Ç°×´Ì¬µÄ·´,gridviewÈ·±£ÊÇµ¥Ò»Ñ¡ÖĞ  
+        viewHolder.cb.toggle();// æŠŠCheckBoxçš„é€‰ä¸­çŠ¶æ€æ”¹ä¸ºå½“å‰çŠ¶æ€çš„å,gridviewç¡®ä¿æ˜¯å•ä¸€é€‰ä¸­  
     }  
 };  
 	@Override
@@ -119,7 +119,7 @@ public class FreeGivingFragment extends SherlockFragment {
 		super.onDestroy();
 	}
 //	/**
-//	 * ÓÃÀ´Õ¹Ê¾Êı¾İµÄ
+//	 * ç”¨æ¥å±•ç¤ºæ•°æ®çš„
 //	 */
 //	private void getData(){
 //		ArrayList<Order> mList = orderDataManage.getOrderArray(514492+"", "", "", "", 0+"", 10+"");

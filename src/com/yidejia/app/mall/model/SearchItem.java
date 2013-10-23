@@ -1,134 +1,134 @@
 package com.yidejia.app.mall.model;
 /**
- * ËÑË÷Ä£¿éĞèÇóºÍ½Ó¿Ú 
+ * æœç´¢æ¨¡å—éœ€æ±‚å’Œæ¥å£ 
  * <p>
- * ²ÎÊı£ºuId, price, selledAmount, commentAmount, brief, imgUrl, name , favoriteId
+ * å‚æ•°ï¼šuId, price, selledAmount, commentAmount, brief, imgUrl, name , favoriteId
  * <p>
  * @author long bin
  *
  */
 public class SearchItem {
-	private String uId;                //ÉÌÆ·Id
-	private String name; 			//ÉÌÆ·Ãû³Æ
-	private String price;            //¼Û¸ñ
-	private String selledAmount;       //ÒÑÊÛÊıÁ¿
-	private String commentAmount;      //ÆÀÂÛÊıÁ¿
-	private String brief;           //ÉÌÆ·¸ÅÒªÃèÊö £¨¡¶£½256×Ö½Ú£©
-	private String imgUrl;          //Ğ¡Í¼Æ¬Á´½ÓµØÖ·
-	private String favoriteId;		//ÊÕ²Øid £¬ÓÃÓÚÊÕ²Ø£¬ÉÌÆ·ÄÇ¿é¿ÉºöÂÔÕâ¸öÊôĞÔ
-	private String the_code;   		//ÉÌÆ·±àºÅ
-	private String module;			//ÉÌÆ·¹¦Ğ§
-	private String brand;			//Æ·ÅÆ
-	private String spec;			//¹æ¸ñ
-	private String desc;			//ÃèÊö
+	private String uId;                //å•†å“Id
+	private String name; 			//å•†å“åç§°
+	private String price;            //ä»·æ ¼
+	private String selledAmount;       //å·²å”®æ•°é‡
+	private String commentAmount;      //è¯„è®ºæ•°é‡
+	private String brief;           //å•†å“æ¦‚è¦æè¿° ï¼ˆã€Šï¼256å­—èŠ‚ï¼‰
+	private String imgUrl;          //å°å›¾ç‰‡é“¾æ¥åœ°å€
+	private String favoriteId;		//æ”¶è—id ï¼Œç”¨äºæ”¶è—ï¼Œå•†å“é‚£å—å¯å¿½ç•¥è¿™ä¸ªå±æ€§
+	private String the_code;   		//å•†å“ç¼–å·
+	private String module;			//å•†å“åŠŸæ•ˆ
+	private String brand;			//å“ç‰Œ
+	private String spec;			//è§„æ ¼
+	private String desc;			//æè¿°
 	
 	
 	/**
 	 * 
-	 * @param uId ÉèÖÃproduct id
+	 * @param uId è®¾ç½®product id
 	 */
 	public void setUId(String uId){
 		this.uId = uId;
 	}
 	/**
 	 * 
-	 * @return uId ·µ»Øproduct id
+	 * @return uId è¿”å›product id
 	 */
 	public String getUId(){
 		return uId;
 	}
 	/**
 	 * 
-	 * @param brief ÉÌÆ·¸ÅÒªÃèÊö£¨¡¶£½256×Ö½Ú£©
+	 * @param brief å•†å“æ¦‚è¦æè¿°ï¼ˆã€Šï¼256å­—èŠ‚ï¼‰
 	 */
 	public void setBrief(String brief){
 		this.brief = brief;
 	}
 	/**
 	 * 
-	 * @return brief ÉÌÆ·¸ÅÒªÃèÊö£¨¡¶£½256×Ö½Ú£©
+	 * @return brief å•†å“æ¦‚è¦æè¿°ï¼ˆã€Šï¼256å­—èŠ‚ï¼‰
 	 */
 	public String getBrief(){
 		return brief;
 	}
 	/**
 	 * 
-	 * @param price ¼Û¸ñ
+	 * @param price ä»·æ ¼
 	 */
 	public void setPrice(String price){
 		this.price = price;
 	}
 	/**
 	 * 
-	 * @return price ¼Û¸ñ
+	 * @return price ä»·æ ¼
 	 */
 	public String getPrice(){
 		return price;
 	}
 	/**
 	 * 
-	 * @param salledAmount ÒÑÏúÊÛÊıÁ¿
+	 * @param salledAmount å·²é”€å”®æ•°é‡
 	 */
 	public void setSelledAmount(String selledAmount){
 		this.selledAmount = selledAmount;
 	}
 	/**
 	 * 
-	 * @return  salledAmount ÒÑÏúÊÛÊıÁ¿
+	 * @return  salledAmount å·²é”€å”®æ•°é‡
 	 */
 	public String getSelledAmount(){
 		return selledAmount;
 	}
 	/**
 	 * 
-	 * @param commentAmmount ÆÀÂÛÊıÁ¿
+	 * @param commentAmmount è¯„è®ºæ•°é‡
 	 */
 	public void setCommentAmount(String commentAmount){
 		this.commentAmount = commentAmount;
 	}
 	/**
-	 * @return commentAmmount ÆÀÂÛÊıÁ¿
+	 * @return commentAmmount è¯„è®ºæ•°é‡
 	 */
 	public String getCommentAmount(){
 		return commentAmount;
 	}
 	/**
 	 * 
-	 * @return imgUrl Ğ¡Í¼Æ¬Á´½ÓµØÖ·
+	 * @return imgUrl å°å›¾ç‰‡é“¾æ¥åœ°å€
 	 */
 	public String getImgUrl(){
     	return imgUrl;
     }
 	/**
 	 * 
-	 * @param imgUrl Ğ¡Í¼Æ¬Á´½ÓµØÖ·
+	 * @param imgUrl å°å›¾ç‰‡é“¾æ¥åœ°å€
 	 */
 	public void setImgUrl(String imgUrl){
     	this.imgUrl = imgUrl;
     }
 	/**
-	 * ÉÌÆ·Ãû³Æ
+	 * å•†å“åç§°
 	 * @param name
 	 */
 	public void setName(String name){
 		this.name = name;
 	}
 	/**
-	 * ÉÌÆ·Ãû³Æ
+	 * å•†å“åç§°
 	 * @return
 	 */
 	public String getName(){
 		return name;
 	}
 	/**
-	 * ÊÕ²Øid £¬ÓÃÓÚÊÕ²Ø£¬ÉÌÆ·ÄÇ¿é¿ÉºöÂÔÕâ¸öÊôĞÔ
+	 * æ”¶è—id ï¼Œç”¨äºæ”¶è—ï¼Œå•†å“é‚£å—å¯å¿½ç•¥è¿™ä¸ªå±æ€§
 	 * @param favoriteId
 	 */
 	public void setFavoriteId(String favoriteId){
 		this.favoriteId = favoriteId;
 	}
 	/**
-	 * ÊÕ²Øid £¬ÓÃÓÚÊÕ²Ø£¬ÉÌÆ·ÄÇ¿é¿ÉºöÂÔÕâ¸öÊôĞÔ
+	 * æ”¶è—id ï¼Œç”¨äºæ”¶è—ï¼Œå•†å“é‚£å—å¯å¿½ç•¥è¿™ä¸ªå±æ€§
 	 * @return favoriteId
 	 */
 	public String getFavoriteId(){
@@ -139,70 +139,70 @@ public class SearchItem {
 	
 	/**
 	 * 
-	 * @param the_code ÉÌÆ·±àºÅ
+	 * @param the_code å•†å“ç¼–å·
 	 */
 	public void setTheCode(String the_code){
 		this.the_code = the_code;
 	}
 	/**
 	 * 
-	 * @return ÉÌÆ·±àºÅ
+	 * @return å•†å“ç¼–å·
 	 */
 	public String getTheCode(){
 		return the_code;
 	}
 	/**
 	 * 
-	 * @param module ÉÌÆ·¹¦Ğ§
+	 * @param module å•†å“åŠŸæ•ˆ
 	 */
 	public void setModule(String module){
 		this.module = module;
 	}
 	/**
 	 * 
-	 * @return ÉÌÆ·¹¦Ğ§
+	 * @return å•†å“åŠŸæ•ˆ
 	 */
 	public String getModule(){
 		return module;
 	}
 	/**
 	 * 
-	 * @param brand Æ·ÅÆ
+	 * @param brand å“ç‰Œ
 	 */
 	public void setBrand(String brand){
 		this.brand = brand;
 	}
 	/**
 	 * 
-	 * @return Æ·ÅÆ
+	 * @return å“ç‰Œ
 	 */
 	public String getBrand(){
 		return brand;
 	}
 	/**
 	 * 
-	 * @param spec ¹æ¸ñ
+	 * @param spec è§„æ ¼
 	 */
 	public void setSpec(String spec){
 		this.spec = spec;
 	}
 	/**
 	 * 
-	 * @return ¹æ¸ñ
+	 * @return è§„æ ¼
 	 */
 	public String getSpec(){
 		return spec;
 	}
 	/**
 	 * 
-	 * @param desc ÃèÊö
+	 * @param desc æè¿°
 	 */
 	public void setDesc(String desc){
 		this.desc = desc;
 	}
 	/**
 	 * 
-	 * @return ÃèÊö
+	 * @return æè¿°
 	 */
 	public String getDesc(){
 		return desc;

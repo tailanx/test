@@ -93,7 +93,7 @@ public class AlreadyOrderActivity extends SherlockFragmentActivity {
 		});
 		
 		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
-		titleTextView.setText("已发货订单");
+		titleTextView.setText(getResources().getString(R.string.deliver_order));
 	}
 
 
@@ -112,9 +112,9 @@ public class AlreadyOrderActivity extends SherlockFragmentActivity {
 		 LayoutInflater mInflater = getLayoutInflater();
 	  
 	     
-	     Fragment weekfragment = AlreadyOrderFragment.newInstance("近一周");
-	     Fragment monthFragment = AlreadyOrderFragment.newInstance("近一月");
-	     Fragment yearFragment=AlreadyOrderFragment.newInstance("近一年");
+	     Fragment weekfragment = AlreadyOrderFragment.newInstance(getResources().getString(R.string.order_time_week));
+	     Fragment monthFragment = AlreadyOrderFragment.newInstance(getResources().getString(R.string.order_time_month));
+	     Fragment yearFragment=AlreadyOrderFragment.newInstance(getResources().getString(R.string.order_time_year));
 	     
 	     fragmentsList.add(yearFragment);
 	     fragmentsList.add(monthFragment);

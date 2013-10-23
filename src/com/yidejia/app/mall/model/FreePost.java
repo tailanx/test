@@ -1,16 +1,16 @@
 package com.yidejia.app.mall.model;
 /**
- * ÃâÓÊĞÅÏ¢
+ * å…é‚®ä¿¡æ¯
  * @author long bin 
  *
  */
 public class FreePost {
 	private String id;
-	private String name;//Ãû³Æ
-	private String startDate;//¿ªÊ¼Ê±¼ä
-	private String endDate;//½áÊøÊ±¼ä
-	private String max;//ÃâÓÊ½çÏŞ
-	private String desc;//ÃèÊö
+	private String name;//åç§°
+	private String startDate;//å¼€å§‹æ—¶é—´
+	private String endDate;//ç»“æŸæ—¶é—´
+	private String max;//å…é‚®ç•Œé™
+	private String desc;//æè¿°
 	
 	public void setId(String id){
 		this.id = id;
@@ -21,70 +21,70 @@ public class FreePost {
 	}
 	/**
 	 * 
-	 * @param name Ãû³Æ
+	 * @param name åç§°
 	 */
 	public void setName(String name){
 		this.name = name;
 	}
 	/**
 	 * 
-	 * @return Ãû³Æ
+	 * @return åç§°
 	 */
 	public String getName(){
 		return name;
 	}
 	/**
 	 * 
-	 * @param startDate ¿ªÊ¼Ê±¼ä
+	 * @param startDate å¼€å§‹æ—¶é—´
 	 */
 	public void setStartDate(String startDate){
 		this.startDate = startDate;
 	}
 	/**
 	 * 
-	 * @return ¿ªÊ¼Ê±¼ä
+	 * @return å¼€å§‹æ—¶é—´
 	 */
 	public String getStartDate(){
 		return startDate;
 	}
 	/**
 	 * 
-	 * @param endDate ½áÊøÊ±¼ä
+	 * @param endDate ç»“æŸæ—¶é—´
 	 */
 	public void setEndDate(String endDate){
 		this.endDate = endDate;
 	}
 	/**
 	 * 
-	 * @return ½áÊøÊ±¼ä
+	 * @return ç»“æŸæ—¶é—´
 	 */
 	public String getEndDate(){
 		return endDate;
 	}
 	/**
 	 * 
-	 * @param max ÃâÓÊ½çÏŞ
+	 * @param max å…é‚®ç•Œé™
 	 */
 	public void setMax(String max){
 		this.max = max;
 	}
 	/**
 	 * 
-	 * @return ÃâÓÊ½çÏŞ
+	 * @return å…é‚®ç•Œé™
 	 */
 	public String getMax(){
 		return max;
 	}
 	/**
 	 * 
-	 * @param desc ÃèÊö
+	 * @param desc æè¿°
 	 */
 	public void setDesc(String desc){
 		this.desc = desc;
 	}
 	/**
 	 * 
-	 * @return ÃèÊö
+	 * @return æè¿°
 	 */
 	public String getDesc(){
 		return desc;

@@ -22,21 +22,21 @@ import com.yidejia.app.mall.ctrl.IpAddress;
 import com.yidejia.app.mall.datamanage.UserDatamanage;
 
 public class LoginActivity extends SherlockActivity implements OnClickListener{
-	private RelativeLayout findPwd;//ÕÒ»ØÃÜÂë
-	private RelativeLayout rapidRegist;//¿ìËÙ×¢²á
+	private RelativeLayout findPwd;//æ‰¾å›å¯†ç 
+	private RelativeLayout rapidRegist;//å¿«é€Ÿæ³¨å†Œ
 	private Button mLogin;
 	private EditText stringName;
 	private EditText stringPassword;
 
 	
 	private MyMallActivity newFragment;
-	private UserDatamanage userManage;//µÇÂ½µÄ½Ó¿Ú
+	private UserDatamanage userManage;//ç™»é™†çš„æ¥å£
 	private IpAddress ip;
 	private MyApplication myApplication;
 	
 //	private void doClick(View v){
 //		switch (v.getId()) {
-//		case R.id.login_edit://·µ»Ø
+//		case R.id.login_edit://è¿”å›
 //			Intent intent = new Intent(this,MainFragmentActivity.class);
 //			startActivity(intent);
 //			
@@ -50,7 +50,7 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 //		getSherlockActivity().getSupportActionBar().setCustomView(R.layout.login_top);
 //		
 //		findPwd = (RelativeLayout)view.findViewById(R.id.my_mall_login_retrieve_password);
-//		//ÉèÖÃ¼àÌı
+//		//è®¾ç½®ç›‘å¬
 //		findPwd.setOnClickListener(this);
 //		rapidRegist = (RelativeLayout)view.findViewById(R.id.my_mall_login_retrieve_regist);
 //		rapidRegist.setOnClickListener(this);
@@ -82,7 +82,7 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 		userManage = new UserDatamanage(LoginActivity.this);
 		myApplication = (MyApplication) getApplication();
 		findPwd = (RelativeLayout)findViewById(R.id.my_mall_login_retrieve_password);
-		//ÉèÖÃ¼àÌı
+		//è®¾ç½®ç›‘å¬
 		findPwd.setOnClickListener(this);
 		rapidRegist = (RelativeLayout)findViewById(R.id.my_mall_login_retrieve_regist);
 		rapidRegist.setOnClickListener(this);
@@ -96,18 +96,18 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 	public void onClick(View v) {
 		switch (v.getId()) {
 
-		case R.id.my_mall_login_retrieve_password://ÕÒ»ØÃÜÂë
+		case R.id.my_mall_login_retrieve_password://æ‰¾å›å¯†ç 
 			Intent intent1 = new Intent(this, FindPwActivity.class);
 			LoginActivity.this.startActivity(intent1);
 			
 			break;
 
-		case R.id.my_mall_login_retrieve_regist://¿ìËÙ×¢²á
+		case R.id.my_mall_login_retrieve_regist://å¿«é€Ÿæ³¨å†Œ
 			Intent registIntent = new Intent(this, RegistActivity.class);
 			LoginActivity.this.startActivity(registIntent);
 		
 			break;
-		case R.id.my_mall_login_button://µÇÂ¼
+		case R.id.my_mall_login_button://ç™»å½•
 		String name = stringName.getText().toString();
 		String pwd = stringPassword.getText().toString();
 		boolean isSucess = userManage.userLogin(name, pwd, ip.getIpAddress());
@@ -118,12 +118,12 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 //			Log.i("info", myApplication.getToken()+"      myApplication.getToken()");
 			this.finish();
 			//		if(name==null||"".equals(name)){
-//			Toast.makeText(this, "ÇëÊäÈëÓÃ»§Ãû»òÕßÃÜÂë",Toast.LENGTH_LONG).show();
+//			Toast.makeText(this, "è¯·è¾“å…¥ç”¨æˆ·åæˆ–è€…å¯†ç ",Toast.LENGTH_LONG).show();
 //		}
 //		if(pwd==null||"".equals(pwd)){
-//			Toast.makeText(this, "ÇëÊäÈëÓÃ»§Ãû»òÕßÃÜÂë",Toast.LENGTH_LONG).show();
+//			Toast.makeText(this, "è¯·è¾“å…¥ç”¨æˆ·åæˆ–è€…å¯†ç ",Toast.LENGTH_LONG).show();
 //		}
-//		if(name.equals("aaa")&&pwd.equals("111")){   //µÇÂ¼³É¹¦
+//		if(name.equals("aaa")&&pwd.equals("111")){   //ç™»å½•æˆåŠŸ
 //			newFragment = new MyMallActivity();
 //			this.finish();
 //			((MyApplication) getApplication()).setIsLogin(true);
@@ -137,7 +137,7 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 //			myApplication.getHandler().sendMessage(ms);
 		
 		}else{
-			Toast.makeText(LoginActivity.this, "ÍøÂç²¿¸øÁ¦", Toast.LENGTH_LONG).show();
+			Toast.makeText(LoginActivity.this, "ç½‘ç»œéƒ¨ç»™åŠ›", Toast.LENGTH_LONG).show();
 		}
  		}
 		
@@ -167,6 +167,6 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 		});
 		
 		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
-		titleTextView.setText("µÇÂ¼");
+		titleTextView.setText("ç™»å½•");
 	}
 }

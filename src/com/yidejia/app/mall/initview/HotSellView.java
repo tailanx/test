@@ -35,45 +35,47 @@ public class HotSellView {
 	public void initHotSellView(ArrayList<MainProduct> hotsellArray){
 		try {
 			MainProduct hotsellProduct;
-			//hot sell ×ó±ß
+			//hot sell ï¿½ï¿½ï¿½
 			hotsellProduct = hotsellArray.get(0);
 			TextView main_hot_sell_goods_title = (TextView) view.findViewById(R.id.main_hot_sell_goods_title);
 			main_hot_sell_goods_title.setText(hotsellProduct.getTitle());
 			TextView main_hot_sell_goods_details = (TextView) view.findViewById(R.id.main_hot_sell_goods_details);
-			main_hot_sell_goods_details.setText(hotsellProduct.getPrice()+"Ôª");
+			main_hot_sell_goods_details.setText(hotsellProduct.getPrice()+sherlockFragmentActivity.getResources().getString(R.string.unit));
 			ImageView main_hot_sell_left_image = (ImageView) view.findViewById(R.id.main_hot_sell_left_image);
 			String imageUrl = hotsellProduct.getImgUrl();
-			//Ìí¼ÓÍ¼Æ¬
+			//ï¿½ï¿½ï¿½Í¼Æ¬
 			imageLoader.displayImage(imageUrl, main_hot_sell_left_image, options,
 					animateFirstListener);
 			
-			//hot sell ÓÒÉÏ
+			//hot sell ï¿½ï¿½ï¿½ï¿½
 			hotsellProduct = hotsellArray.get(1);
 			TextView main_hot_sell_right_top_title = (TextView) view.findViewById(R.id.main_hot_sell_right_top_title);
 			main_hot_sell_right_top_title.setText(hotsellProduct.getTitle());
 			TextView main_hot_sell_right_top_price = (TextView) view.findViewById(R.id.main_hot_sell_right_top_price);
-			main_hot_sell_right_top_price.setText(hotsellProduct.getPrice()+"Ôª");
+			main_hot_sell_right_top_price.setText(hotsellProduct.getPrice()+sherlockFragmentActivity.getResources().getString(R.string.unit));
 			ImageView main_hot_sell_right_top_image = (ImageView) view.findViewById(R.id.main_hot_sell_right_top_image);
 			imageUrl = hotsellProduct.getImgUrl();
-			//Ìí¼ÓÍ¼Æ¬
+			//ï¿½ï¿½ï¿½Í¼Æ¬
 			imageLoader.displayImage(imageUrl, main_hot_sell_right_top_image, options,
 					animateFirstListener);
 			
-			//hot sell ÓÒÏÂ
+			//hot sell ï¿½ï¿½ï¿½ï¿½
 			hotsellProduct = hotsellArray.get(2);
 			TextView main_hot_sell_right_down_title = (TextView) view.findViewById(R.id.main_hot_sell_right_down_title);
 			main_hot_sell_right_down_title.setText(hotsellProduct.getTitle());
 			TextView main_hot_sell_right_down_price = (TextView) view.findViewById(R.id.main_hot_sell_right_down_price);
-			main_hot_sell_right_down_price.setText(hotsellProduct.getPrice()+"Ôª");
+			main_hot_sell_right_down_price.setText(hotsellProduct.getPrice()+sherlockFragmentActivity.getResources().getString(R.string.unit));
 			ImageView main_hot_sell_right_down_image = (ImageView) view.findViewById(R.id.main_hot_sell_right_down_image);
 			imageUrl = hotsellProduct.getImgUrl();
-			//Ìí¼ÓÍ¼Æ¬
+			//ï¿½ï¿½ï¿½Í¼Æ¬
 			imageLoader.displayImage(imageUrl, main_hot_sell_right_down_image, options,
 					animateFirstListener);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(sherlockFragmentActivity, "ÍøÂç²»¸øÁ¦", Toast.LENGTH_LONG);
+			Toast.makeText(sherlockFragmentActivity, sherlockFragmentActivity
+					.getResources().getString(R.string.bad_network),
+					Toast.LENGTH_LONG).show();;
 			
 		}
 	}
@@ -81,129 +83,135 @@ public class HotSellView {
 	public void initAcymerView(ArrayList<MainProduct> acymerArray){
 		try {
 			MainProduct acymerProduct;
-			//acymer ×ó±ß
+			//acymer ï¿½ï¿½ï¿½
 			acymerProduct = acymerArray.get(0);
 			TextView main_acymei_goods_title = (TextView) view.findViewById(R.id.main_acymei_goods_title);
 			main_acymei_goods_title.setText(acymerProduct.getTitle());
 			Log.i("MainPage+acymer", acymerProduct.getTitle());
 			TextView main_acymei_goods_details = (TextView) view.findViewById(R.id.main_acymei_goods_details);
-			main_acymei_goods_details.setText(acymerProduct.getPrice()+"Ôª");
+			main_acymei_goods_details.setText(acymerProduct.getPrice()+sherlockFragmentActivity.getResources().getString(R.string.unit));
 			ImageView main_acymei_left_image = (ImageView) view.findViewById(R.id.main_acymei_left_image);
 			String imageUrl = acymerProduct.getImgUrl();
-			//Ìí¼ÓÍ¼Æ¬
+			//ï¿½ï¿½ï¿½Í¼Æ¬
 			imageLoader.displayImage(imageUrl, main_acymei_left_image, options,
 					animateFirstListener);
 			
-			//acymer ÓÒÉÏ
+			//acymer ï¿½ï¿½ï¿½ï¿½
 			acymerProduct = acymerArray.get(1);
 			TextView main_acymei_right_top_title = (TextView) view.findViewById(R.id.main_acymei_right_top_title);
 			main_acymei_right_top_title.setText(acymerProduct.getTitle());
 			TextView main_acymei_right_top_price = (TextView) view.findViewById(R.id.main_acymei_right_top_price);
-			main_acymei_right_top_price.setText(acymerProduct.getPrice()+"Ôª");
+			main_acymei_right_top_price.setText(acymerProduct.getPrice()+sherlockFragmentActivity.getResources().getString(R.string.unit));
 			ImageView main_acymei_right_top_image = (ImageView) view.findViewById(R.id.main_acymei_right_top_image);
 			imageUrl = acymerProduct.getImgUrl();
-			//Ìí¼ÓÍ¼Æ¬
+			//ï¿½ï¿½ï¿½Í¼Æ¬
 			imageLoader.displayImage(imageUrl, main_acymei_right_top_image, options,
 					animateFirstListener);
 			
-			//acymer ÓÒÏÂ
+			//acymer ï¿½ï¿½ï¿½ï¿½
 			acymerProduct = acymerArray.get(2);
 			TextView main_acymei_right_down_title = (TextView) view.findViewById(R.id.main_acymei_right_down_title);
 			main_acymei_right_down_title.setText(acymerProduct.getTitle());
 			TextView main_acymei_right_down_price = (TextView) view.findViewById(R.id.main_acymei_right_down_price);
-			main_acymei_right_down_price.setText(acymerProduct.getPrice()+"Ôª");
+			main_acymei_right_down_price.setText(acymerProduct.getPrice()+sherlockFragmentActivity.getResources().getString(R.string.unit));
 			ImageView main_acymei_right_down_image = (ImageView) view.findViewById(R.id.main_acymei_right_down_image);
 			imageUrl = acymerProduct.getImgUrl();
-			//Ìí¼ÓÍ¼Æ¬
+			//ï¿½ï¿½ï¿½Í¼Æ¬
 			imageLoader.displayImage(imageUrl, main_acymei_right_down_image, options,
 					animateFirstListener);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(sherlockFragmentActivity, "ÍøÂç²»¸øÁ¦", Toast.LENGTH_LONG);
+			Toast.makeText(
+					sherlockFragmentActivity,
+					sherlockFragmentActivity.getResources().getString(
+							R.string.bad_network), Toast.LENGTH_LONG).show();
+			;
 		}
 	}
 	
 	public void initInerbtyView(ArrayList<MainProduct> inerbtyArray){
 		try {
 			MainProduct inerbtyProduct;
-			//inerbty ×óÉÏ
+			//inerbty ï¿½ï¿½ï¿½ï¿½
 			inerbtyProduct = inerbtyArray.get(0);
 			TextView main_inerbty_top_left_name = (TextView) view.findViewById(R.id.main_inerbty_top_left_name);
 			main_inerbty_top_left_name.setText(inerbtyProduct.getTitle());
 			Log.i("MainPage+inerbty", inerbtyProduct.getTitle());
 			TextView main_inerbty_top_left_price = (TextView) view.findViewById(R.id.main_inerbty_top_left_price);
-			main_inerbty_top_left_price.setText(inerbtyProduct.getPrice()+"Ôª");
+			main_inerbty_top_left_price.setText(inerbtyProduct.getPrice()+sherlockFragmentActivity.getResources().getString(R.string.unit));
 			ImageView main_inerbty_top_left_image = (ImageView) view.findViewById(R.id.main_inerbty_top_left_image);
 			String imageUrl = inerbtyProduct.getImgUrl();
-			//Ìí¼ÓÍ¼Æ¬
+			//ï¿½ï¿½ï¿½Í¼Æ¬
 			imageLoader.displayImage(imageUrl, main_inerbty_top_left_image, options,
 					animateFirstListener);
 			
-			//inerbty ÓÒÉÏ
+			//inerbty ï¿½ï¿½ï¿½ï¿½
 			inerbtyProduct = inerbtyArray.get(1);
 			TextView main_inerbty_top_right_name = (TextView) view.findViewById(R.id.main_inerbty_top_right_name);
 			main_inerbty_top_right_name.setText(inerbtyProduct.getTitle());
 			TextView main_inerbty_top_right_price = (TextView) view.findViewById(R.id.main_inerbty_top_right_price);
-			main_inerbty_top_right_price.setText(inerbtyProduct.getPrice()+"Ôª");
+			main_inerbty_top_right_price.setText(inerbtyProduct.getPrice()+sherlockFragmentActivity.getResources().getString(R.string.unit));
 			ImageView main_inerbty_top_right_image = (ImageView) view.findViewById(R.id.main_inerbty_top_right_image);
 			imageUrl = inerbtyProduct.getImgUrl();
-			//Ìí¼ÓÍ¼Æ¬
+			//ï¿½ï¿½ï¿½Í¼Æ¬
 			imageLoader.displayImage(imageUrl, main_inerbty_top_right_image, options,
 					animateFirstListener);
 			
-			//inerbty ×óÖÐ
+			//inerbty ï¿½ï¿½ï¿½ï¿½
 			inerbtyProduct = inerbtyArray.get(2);
 			TextView main_inerbty_mid_left_name = (TextView) view.findViewById(R.id.main_inerbty_mid_left_name);
 			main_inerbty_mid_left_name.setText(inerbtyProduct.getTitle());
 			TextView main_inerbty_mid_left_price = (TextView) view.findViewById(R.id.main_inerbty_mid_left_price);
-			main_inerbty_mid_left_price.setText(inerbtyProduct.getPrice()+"Ôª");
+			main_inerbty_mid_left_price.setText(inerbtyProduct.getPrice()+sherlockFragmentActivity.getResources().getString(R.string.unit));
 			ImageView main_inerbty_mid_left_image = (ImageView) view.findViewById(R.id.main_inerbty_mid_left_image);
 			imageUrl = inerbtyProduct.getImgUrl();
-			//Ìí¼ÓÍ¼Æ¬
+			//ï¿½ï¿½ï¿½Í¼Æ¬
 			imageLoader.displayImage(imageUrl, main_inerbty_mid_left_image, options,
 					animateFirstListener);
 			
-			//inerbty ÓÒÖÐ
+			//inerbty ï¿½ï¿½ï¿½ï¿½
 			inerbtyProduct = inerbtyArray.get(3);
 			TextView main_inerbty_mid_right_name = (TextView) view.findViewById(R.id.main_inerbty_mid_right_name);
 			main_inerbty_mid_right_name.setText(inerbtyProduct.getTitle());
 			Log.i("MainPage+inerbty", inerbtyProduct.getTitle());
 			TextView main_inerbty_mid_right_price = (TextView) view.findViewById(R.id.main_inerbty_mid_right_price);
-			main_inerbty_mid_right_price.setText(inerbtyProduct.getPrice()+"Ôª");
+			main_inerbty_mid_right_price.setText(inerbtyProduct.getPrice()+sherlockFragmentActivity.getResources().getString(R.string.unit));
 			ImageView main_inerbty_mid_right_image = (ImageView) view.findViewById(R.id.main_inerbty_mid_right_image);
 			imageUrl = inerbtyProduct.getImgUrl();
-			//Ìí¼ÓÍ¼Æ¬
+			//ï¿½ï¿½ï¿½Í¼Æ¬
 			imageLoader.displayImage(imageUrl, main_inerbty_mid_right_image, options,
 					animateFirstListener);
 			
-			//inerbty ×óÏÂ
+			//inerbty ï¿½ï¿½ï¿½ï¿½
 			inerbtyProduct = inerbtyArray.get(4);
 			TextView main_inerbty_down_left_name = (TextView) view.findViewById(R.id.main_inerbty_down_left_name);
 			main_inerbty_down_left_name.setText(inerbtyProduct.getTitle());
 			TextView main_inerbty_down_left_price = (TextView) view.findViewById(R.id.main_inerbty_down_left_price);
-			main_inerbty_down_left_price.setText(inerbtyProduct.getPrice()+"Ôª");
+			main_inerbty_down_left_price.setText(inerbtyProduct.getPrice()+sherlockFragmentActivity.getResources().getString(R.string.unit));
 			ImageView main_inerbty_down_left_image = (ImageView) view.findViewById(R.id.main_inerbty_down_left_image);
 			imageUrl = inerbtyProduct.getImgUrl();
-			//Ìí¼ÓÍ¼Æ¬
+			//ï¿½ï¿½ï¿½Í¼Æ¬
 			imageLoader.displayImage(imageUrl, main_inerbty_down_left_image, options,
 					animateFirstListener);
 			
-			//inerbty ÓÒÏÂ
+			//inerbty ï¿½ï¿½ï¿½ï¿½
 			inerbtyProduct = inerbtyArray.get(5);
 			TextView main_inerbty_down_right_name = (TextView) view.findViewById(R.id.main_inerbty_down_right_name);
 			main_inerbty_down_right_name.setText(inerbtyProduct.getTitle());
 			TextView main_inerbty_down_right_price = (TextView) view.findViewById(R.id.main_inerbty_down_right_price);
-			main_inerbty_down_right_price.setText(inerbtyProduct.getPrice()+"Ôª");
+			main_inerbty_down_right_price.setText(inerbtyProduct.getPrice()+sherlockFragmentActivity.getResources().getString(R.string.unit));
 			ImageView main_inerbty_down_right_image = (ImageView) view.findViewById(R.id.main_inerbty_down_right_image);
 			imageUrl = inerbtyProduct.getImgUrl();
-			//Ìí¼ÓÍ¼Æ¬
+			//ï¿½ï¿½ï¿½Í¼Æ¬
 			imageLoader.displayImage(imageUrl, main_inerbty_down_right_image, options,
 					animateFirstListener);
 		} catch (Exception e) {
 			// TODO Auto-generated catch 
 			e.printStackTrace();
-			Toast.makeText(sherlockFragmentActivity, "ÍøÂç²»¸øÁ¦", Toast.LENGTH_LONG);
+			Toast.makeText(sherlockFragmentActivity, sherlockFragmentActivity
+					.getResources().getString(R.string.bad_network),
+					Toast.LENGTH_LONG).show();;
 		}
 	}
 	

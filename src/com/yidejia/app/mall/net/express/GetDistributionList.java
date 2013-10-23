@@ -14,7 +14,7 @@ import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.util.Md5;
 /**
- * »ñÈ¡ÅäËÍÖĞĞÄ
+ * è·å–é…é€ä¸­å¿ƒ
  * @author long bin
  *
  */
@@ -115,7 +115,7 @@ public class GetDistributionList {
 //				// TODO Auto-generated method stub
 //				super.onStart();
 //				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//				bar.setMessage("ÕıÔÚ²éÑ¯");
+//				bar.setMessage("æ­£åœ¨æŸ¥è¯¢");
 //				bar.show();
 //			}
 //			

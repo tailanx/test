@@ -48,33 +48,33 @@ public class MyMallFragment extends SherlockFragment implements OnClickListener 
 	private YLImageButton ylImageButton;
 
 	public void setupView(View view) {
-		// // //ÊµÀı»¯×é¼ş
+		// // //å®ä¾‹åŒ–ç»„ä»¶
 	
-		personMessage = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout20);// ¸öÈËÖĞĞÄ
+		personMessage = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout20);// ä¸ªäººä¸­å¿ƒ
 		personMessage.setOnClickListener(this);
-		mExchange = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout10);// ÍË»»»õ
+		mExchange = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout10);// é€€æ¢è´§
 		mExchange.setOnClickListener(this);
-		mAllOrder = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout1);// È«²¿¶©µ¥
+		mAllOrder = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout1);// å…¨éƒ¨è®¢å•
 		mAllOrder.setOnClickListener(this);
-		mWaitPay = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout2);// ´ı¸¶¿ì¶©µ¥
+		mWaitPay = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout2);// å¾…ä»˜å¿«è®¢å•
 		mWaitPay.setOnClickListener(this);
-		mwaitDeliver = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout6);// ´ı·¢»õ¶©µ¥
+		mwaitDeliver = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout6);// å¾…å‘è´§è®¢å•
 		mwaitDeliver.setOnClickListener(this);
-		mAlreadyOrder = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout4);// ÒÑ·¢»õ¶©µ¥
+		mAlreadyOrder = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout4);// å·²å‘è´§è®¢å•
 		mAlreadyOrder.setOnClickListener(this);
-		mAlreadyCom = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout3);// "ÒÑÍê³É¶©µ¥"
+		mAlreadyCom = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout3);// "å·²å®Œæˆè®¢å•"
 		mAlreadyCom.setOnClickListener(this);
-		mCardVoucher = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout5);// »ı·Ö¿¨È¯
+		mCardVoucher = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout5);// ç§¯åˆ†å¡åˆ¸
 		mCardVoucher.setOnClickListener(this);
-		mMyCollect = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout7);// ÎÒµÄÊÕ²Ø
+		mMyCollect = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout7);// æˆ‘çš„æ”¶è—
 		mMyCollect.setOnClickListener(this);
-		mAddressManagement = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout9);// ÊÕ»õµØÖ·¹ÜÀí
+		mAddressManagement = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout9);// æ”¶è´§åœ°å€ç®¡ç†
 		mAddressManagement.setOnClickListener(this);
-		mLayout11 = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout11);// ÆÀ¼ÛÉ¹µ¥
+		mLayout11 = (RelativeLayout) view.findViewById(R.id.main2_main2_linearlayout11);// è¯„ä»·æ™’å•
 		mLayout11.setOnClickListener(this);
-		// ÊµÀı»¯×é¼ş
+		// å®ä¾‹åŒ–ç»„ä»¶
 		imageView = (ImageView) getSherlockActivity().findViewById(R.id.person_shopping_button1);
-//		mTextView = (TextView) getSherlockActivity().findViewById(R.id.my_shopping);// ÎÒµÄÉÌ³Ç
+//		mTextView = (TextView) getSherlockActivity().findViewById(R.id.my_shopping);// æˆ‘çš„å•†åŸ
 
 		
 		ylImageButton = (YLImageButton) view.findViewById(R.id.main2_main2_linearlayout2_textview2);
@@ -85,15 +85,15 @@ public class MyMallFragment extends SherlockFragment implements OnClickListener 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// Log.i("info", "ÄãºÃ");
+		// Log.i("info", "ä½ å¥½");
 		super.onCreate(savedInstanceState);
 //		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //		setContentView(R.layout.person_shopping_mall1);
 //		setupView();
-		// Log.i("info", "ÄãºÃ");
-		// //µã»÷Ìø×ªµ½¸öÈËÖĞĞÄ
+		// Log.i("info", "ä½ å¥½");
+		// //ç‚¹å‡»è·³è½¬åˆ°ä¸ªäººä¸­å¿ƒ
 //		imageView.setOnClickListener(new OnClickListener() {
 //
 //			@Override
@@ -117,7 +117,7 @@ public class MyMallFragment extends SherlockFragment implements OnClickListener 
 //				getSherlockActivity().finish();
 //			}
 //		});
-		// //Ìí¼ÓÏìÓ¦ÊÂ¼ş
+		// //æ·»åŠ å“åº”äº‹ä»¶
 		// mImageView1.setOnClickListener(new OnClickListener() {
 		//
 		// @Override
@@ -125,7 +125,7 @@ public class MyMallFragment extends SherlockFragment implements OnClickListener 
 		// // TODO Auto-generated method stub
 		// Intent intent = new Intent(MainActivity.this,PersonActivity.class);
 		// startActivity(intent);
-		// //// Log.i("info", "ÄãºÃ");
+		// //// Log.i("info", "ä½ å¥½");
 		// MainActivity.this.finish();
 		// }
 		// });
@@ -136,7 +136,7 @@ public class MyMallFragment extends SherlockFragment implements OnClickListener 
 		//
 		// Intent intent = new Intent(MainActivity.this,ExchangeActivity.class);
 		// startActivity(intent);
-		// //// Log.i("info", "ÄãºÃ");
+		// //// Log.i("info", "ä½ å¥½");
 		// MainActivity.this.finish();
 		// }
 		// });
@@ -184,68 +184,68 @@ public class MyMallFragment extends SherlockFragment implements OnClickListener 
 		// startActivity(intent);
 		// MainActivity.this.finish();
 		// break;
-		case R.id.main2_main2_linearlayout20:// µã»÷¸öÈËÖĞĞÄ
+		case R.id.main2_main2_linearlayout20:// ç‚¹å‡»ä¸ªäººä¸­å¿ƒ
 			Intent intent1 = new Intent(getSherlockActivity(),
 					PersonActivity.class);
 			startActivity(intent1);
 //			getSherlockActivity().finish();
 			break;
 
-		case R.id.main2_main2_linearlayout10:// µã»÷ÍË»»»õ
+		case R.id.main2_main2_linearlayout10:// ç‚¹å‡»é€€æ¢è´§
 			Intent intent2 = new Intent(getSherlockActivity(),
 					ExchangeActivity.class);
 			startActivity(intent2);
 //			getSherlockActivity().finish();
 			break;
-		case R.id.main2_main2_linearlayout1:// µã»÷È«²¿¶©µ¥
+		case R.id.main2_main2_linearlayout1:// ç‚¹å‡»å…¨éƒ¨è®¢å•
 			Intent intent3 = new Intent(getSherlockActivity(),
 					AllOrderActivity.class);
 			startActivity(intent3);
 //			getSherlockActivity().finish();
 			break;
-		case R.id.main2_main2_linearlayout2:// ´ı¸¶¿î¶©µ¥
+		case R.id.main2_main2_linearlayout2:// å¾…ä»˜æ¬¾è®¢å•
 			Intent intent4 = new Intent(getSherlockActivity(),
 					WaitPayActivity.class);
 			startActivity(intent4);
 //			getSherlockActivity().finish();
 			break;
-		case R.id.main2_main2_linearlayout6:// ´ı·¢»õ¶©µ¥
+		case R.id.main2_main2_linearlayout6:// å¾…å‘è´§è®¢å•
 			Intent intent5 = new Intent(getSherlockActivity(),
 					WaitDeliverActivity.class);
 			startActivity(intent5);
 //			getSherlockActivity().finish();
 			break;
-		case R.id.main2_main2_linearlayout4:// ÒÑ·¢»õ¶©µ¥
+		case R.id.main2_main2_linearlayout4:// å·²å‘è´§è®¢å•
 			Intent intent6 = new Intent(getSherlockActivity(),
 					AlreadyOrderActivity.class);
 			startActivity(intent6);
 //			getSherlockActivity().finish();
 			break;
-		case R.id.main2_main2_linearlayout3:// ÒÑÍê³É¶©µ¥
+		case R.id.main2_main2_linearlayout3:// å·²å®Œæˆè®¢å•
 			Intent intent7 = new Intent(getSherlockActivity(),
 					AlreadyComActivity.class);
 			startActivity(intent7);
 //			getSherlockActivity().finish();
 			break;
-		case R.id.main2_main2_linearlayout5:// »ı·Ö¿¨È¯
+		case R.id.main2_main2_linearlayout5:// ç§¯åˆ†å¡åˆ¸
 			Intent intent8 = new Intent(getSherlockActivity(),
 					IntegeralActivity.class);
 			startActivity(intent8);
 //			getSherlockActivity().finish();
 			break;
-		case R.id.main2_main2_linearlayout7:// ÎÒµÄÊÕ²Ø
+		case R.id.main2_main2_linearlayout7:// æˆ‘çš„æ”¶è—
 			Intent intent9 = new Intent(getSherlockActivity(),
 					MyCollectActivity.class);
 			startActivity(intent9);
 //			getSherlockActivity().finish();
 			break;
-		case R.id.main2_main2_linearlayout9:// ÊÕ»õµØÖ·¹ÜÀí
+		case R.id.main2_main2_linearlayout9:// æ”¶è´§åœ°å€ç®¡ç†
 			Intent intent10 = new Intent(getSherlockActivity(),
 					AddressActivity.class);
 			startActivity(intent10);
 //			getSherlockActivity().finish();
 			break;
-		case R.id.main2_main2_linearlayout11:// ÆÀ¼ÛÉ¹µ¥
+		case R.id.main2_main2_linearlayout11:// è¯„ä»·æ™’å•
 			Intent intent11 = new Intent(getSherlockActivity(),
 					EvaluationActivity.class);
 			startActivity(intent11);

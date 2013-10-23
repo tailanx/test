@@ -60,6 +60,6 @@ public class FindPwActivity extends SherlockActivity {
 		});
 		
 		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
-		titleTextView.setText("ÕÒ»ØÃÜÂë");
+		titleTextView.setText("æ‰¾å›å¯†ç ");
 	}
 }

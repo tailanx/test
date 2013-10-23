@@ -12,10 +12,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.util.EntityUtils;
 
-import com.yidejia.app.mall.WelcomeActivity;
 
 import android.util.Log;
-import android.widget.Toast;
 
 public class HttpGetConn {
 	private String urlString;
@@ -41,32 +39,32 @@ public class HttpGetConn {
 		try {
 			HttpClient httpClient = new DefaultHttpClient();
 			httpClient.getParams().setIntParameter(
-                    HttpConnectionParams.SO_TIMEOUT, TIME_OUT_DELAY); // ¶ÁÈ¡³¬Ê±ÉèÖÃ
+                    HttpConnectionParams.SO_TIMEOUT, TIME_OUT_DELAY); // è¯»å–è¶…æ—¶è®¾ç½®
 			httpClient.getParams().setIntParameter(
-                    HttpConnectionParams.CONNECTION_TIMEOUT, TIME_OUT_DELAY);// Á¬½Ó³¬Ê±
+                    HttpConnectionParams.CONNECTION_TIMEOUT, TIME_OUT_DELAY);// è¿æ¥è¶…æ—¶
 			HttpResponse httpResponse = httpClient.execute(httpRequst);
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				result = EntityUtils.toString(httpResponse.getEntity());
-				Log.i(TAG, "·µ»ØÂë:"+httpResponse.getStatusLine().getStatusCode());
-				Log.i(TAG, "·µ»ØĞÅÏ¢:"+result);
+				Log.i(TAG, "è¿”å›ç :"+httpResponse.getStatusLine().getStatusCode());
+				Log.i(TAG, "è¿”å›ä¿¡æ¯:"+result);
 //				count = 0;
 			} else if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_REQUEST_TIMEOUT ){
-				Log.i(TAG, "Á¬½Ó³¬Ê±£º"+httpResponse.getStatusLine().getStatusCode());
+				Log.i(TAG, "è¿æ¥è¶…æ—¶ï¼š"+httpResponse.getStatusLine().getStatusCode());
 //				Toast.makeText(, text, duration)
 				return result;
-			} else {//Á¬½ÓÊ§°Ü
-				Log.i(TAG, "½ÓÊÕÊı¾İÊ§°Ü£º"+httpResponse.getStatusLine().getStatusCode());
+			} else {//è¿æ¥å¤±è´¥
+				Log.i(TAG, "æ¥æ”¶æ•°æ®å¤±è´¥ï¼š"+httpResponse.getStatusLine().getStatusCode());
 				return result;
 			}
 		} catch(ClientProtocolException e){
-			Log.i(TAG, "httpĞ­Òé³ö´í" + e.getMessage().toString());
+			Log.i(TAG, "httpåè®®å‡ºé”™" + e.getMessage().toString());
 			
 		} 
 		
 		return result;
 	}
 	/**
-	 * jni·½Ê½»ñÈ¡Êı¾İ£¬ isTrueÎª²»ĞèÒªÓÃµ½µÄ²ÎÊı
+	 * jniæ–¹å¼è·å–æ•°æ®ï¼Œ isTrueä¸ºä¸éœ€è¦ç”¨åˆ°çš„å‚æ•°
 	 * @param urlString
 	 * @param isTrue 
 	 */

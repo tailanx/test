@@ -41,18 +41,18 @@ import com.yidejia.app.mall.model.ProductBaseInfo;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.GoCartActivity;
 import com.yidejia.app.mall.view.LoginActivity;
-import com.yidejia.app.mall.view.PayActivity;
+import com.yidejia.app.mall.view.CstmPayActivity;
 
 public class GoodsView {
 	private View view;
 	private int width;
 	private CartsDataManage manage;
-	private int cart_num = 0;// ¹ºÎï³µÄÚÉÌÆ·¸öÊı
+	private int cart_num = 0;// è´­ç‰©è½¦å†…å•†å“ä¸ªæ•°
 	private Activity activity;
 
-	private String productId;// ±¾ÉÌÆ·id
-	private String userid;// ±¾ÓÃ»§id
-	private boolean isLogin;// ÓÃ»§ÊÇ·ñµÇÂ¼
+	private String productId;// æœ¬å•†å“id
+	private String userid;// æœ¬ç”¨æˆ·id
+	private boolean isLogin;// ç”¨æˆ·æ˜¯å¦ç™»å½•
 	private AlertDialog builder;
 	private MyApplication myApplication;
 
@@ -68,7 +68,7 @@ public class GoodsView {
 	}
 
 	/**
-	 * ÉÌÆ·ĞÅÏ¢Ò³
+	 * å•†å“ä¿¡æ¯é¡µ
 	 * 
 	 * @param info
 	 */
@@ -83,53 +83,52 @@ public class GoodsView {
 			productId = info.getUId();
 			cart.setUId(productId);
 			cart.setImgUrl(info.getImgUrl());
-			// ÉÌÆ·Ãû³Æ
+			// å•†å“åç§°
 			TextView base_info_content_text = (TextView) view
 					.findViewById(R.id.base_info_content_text);
 			String name = info.getName();
 			base_info_content_text.setText(name);
 			cart.setProductText(name);
-			// ¼Û¸ñ
+			// ä»·æ ¼
 			TextView price = (TextView) view.findViewById(R.id.price);
 			final String priceString = info.getPrice();
 			try {
 				float priceNum = Float.parseFloat(priceString);
 				cart.setPrice(priceNum);
-				price.setText(priceString + "Ôª");
+				price.setText(priceString + activity.getResources().getString(R.string.unit));
 			} catch (Exception e) {
 				// TODO: handle exception
-				Toast.makeText(activity, "¼Û¸ñ³ö´í£¬ÇëÁªÏµÎÒÃÇµÄ¿Í·ş½øĞĞĞŞ¸Ä£¡", Toast.LENGTH_SHORT)
+				Toast.makeText(activity, activity.getResources().getString(R.string.price_error), Toast.LENGTH_SHORT)
 						.show();
 				price.setText("");
 			}
 			ImageView buy_now = (ImageView) view.findViewById(R.id.buy_now);
 			ImageView add_to_cart = (ImageView) view.findViewById(R.id.add_to_cart);
-			// ÏúÊÛ¶î
+			// é”€å”®é¢
 			TextView selled_num_text = (TextView) view
 					.findViewById(R.id.selled_num_text);
 			selled_num_text.setText(info.getSalledAmmount());
-			// ÆÀÂÛÊı
+			// è¯„è®ºæ•°
 			TextView emulate_num_text = (TextView) view
 					.findViewById(R.id.emulate_num_text);
 			emulate_num_text.setText(info.getCommentAmount());
-			// É¹µ¥Êı
+			// æ™’å•æ•°
 			TextView show_num_text = (TextView) view
 					.findViewById(R.id.show_num_text);
 			show_num_text.setText(info.getShowListAmount());
-			// Æ·ÅÆ
+			// å“ç‰Œ
 			TextView brand_name_text = (TextView) view
 					.findViewById(R.id.brand_name_text);
-			
 			brand_name_text.setText(info.getBrands());
-			// ÉÌÆ·±àºÅ
+			// å•†å“ç¼–å·
 			TextView product_id_num_text = (TextView) view
 					.findViewById(R.id.product_id_num_text);
 			if(info.getProductNumber()==null||"".equals(info.getProductNumber())){
-				product_id_num_text.setText("ÔİÎŞ");
+				product_id_num_text.setText(activity.getResources().getString(R.string.none_code));
 			}else{
-			product_id_num_text.setText(info.getProductNumber());
+				product_id_num_text.setText(info.getProductNumber());
 			}
-			// ¹æ¸ñ
+			// è§„æ ¼
 			TextView standard_content_text = (TextView) view
 					.findViewById(R.id.standard_content_text);
 			standard_content_text.setText(info.getProductSpecifications());
@@ -137,7 +136,7 @@ public class GoodsView {
 			addBaseImage(view, bannerArray);
 			recommendArray = info.getRecommendArray();
 			addMatchImage(view, recommendArray);
-			// ¹ºÎï³µ¸öÊı
+			// è´­ç‰©è½¦ä¸ªæ•°
 			shopping_cart_button = (Button) view
 					.findViewById(R.id.shopping_cart_button);
 			// CartsDataManage cartsDataManage = new CartsDataManage();
@@ -147,7 +146,7 @@ public class GoodsView {
 			} else {
 				setCartNum(cart_num);
 			}
-			// ¼ÓÈë¹ºÎï³µ°´Å¥µã»÷ÊÂ¼ş
+			// åŠ å…¥è´­ç‰©è½¦æŒ‰é’®ç‚¹å‡»äº‹ä»¶
 			if(cart.getPrice()>0){
 			add_to_cart.setOnClickListener(new OnClickListener() {
 
@@ -160,7 +159,7 @@ public class GoodsView {
 					activity.sendBroadcast(intent);
 					boolean istrue = manage.addCart(cart);
 						if(istrue){
-							Toast.makeText(activity, "ÒÑ¾­³É¹¦Ìí¼Óµ½¹ºÎï³µ", Toast.LENGTH_SHORT).show();
+							Toast.makeText(activity, activity.getResources().getString(R.string.add_cart_scs), Toast.LENGTH_SHORT).show();
 						}
 					}
 					// Log.i("info", istrue+"   cart_num");
@@ -170,18 +169,18 @@ public class GoodsView {
 				
 			});
 		}else{
-			Toast.makeText(activity, "ÕâÊÇÔùÆ·£¬²»ÄÜ¹»¹ºÂò", Toast.LENGTH_LONG).show();
+			Toast.makeText(activity, "è¿™æ˜¯èµ å“ï¼Œä¸èƒ½å¤Ÿè´­ä¹°", Toast.LENGTH_LONG).show();
 		}
-			// Á¢¼´¹ºÂò°´Å¥
+			// ç«‹å³è´­ä¹°æŒ‰é’®
 			buy_now.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					Intent intent = new Intent(activity, PayActivity.class);
+					Intent intent = new Intent(activity, CstmPayActivity.class);
 					try{
 						float sum = Float.parseFloat(priceString);
-						if(sum <= 0) return;//¼Û¸ñ³ö´í
+						if(sum <= 0) return;////ä»·æ ¼å‡ºé”™
 						Bundle bundle = new Bundle();
 						bundle.putSerializable("Cart", cart);
 						bundle.putString("price", priceString);
@@ -189,11 +188,11 @@ public class GoodsView {
 						activity.startActivity(intent);
 //						activity.finish();
 					} catch (NumberFormatException e){
-						//¼Û¸ñ³ö´í
+						//ä»·æ ¼å‡ºé”™
 					}
 				}
 			});
-			// ¹ºÎï³µ°´Å¥
+			// è´­ç‰©è½¦æŒ‰é’®
 			RelativeLayout shopping_cart_in_goodsinfo = (RelativeLayout) view
 					.findViewById(R.id.shopping_cart_in_goodsinfo);
 			shopping_cart_in_goodsinfo.setOnClickListener(new OnClickListener() {
@@ -209,10 +208,10 @@ public class GoodsView {
 				}
 			});
 
-			// ¼ÓÈëÊÕ²Ø°´Å¥
+			// åŠ å…¥æ”¶è—æŒ‰é’®
 			add_favorites = (ImageView) view.findViewById(R.id.add_favorites);
 			add_favorites.setOnClickListener(addFavoriteListener);
-			// ¼ì²éÊÇ·ñÊÕ²Ø²¢ÇÒÉèÖÃÊÕ²Ø°´Å¥µÄÍ¼Æ¬
+			// æ£€æŸ¥æ˜¯å¦æ”¶è—å¹¶ä¸”è®¾ç½®æ”¶è—æŒ‰é’®çš„å›¾ç‰‡
 			FavoriteDataManage favoriteManage = new FavoriteDataManage(activity);
 			if (isLogin && !"".equals(userid)) {
 				if (favoriteManage.checkExists(userid, productId, myApplication.getToken())) {
@@ -228,13 +227,13 @@ public class GoodsView {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(activity,"ÍøÂç²»¸øÁ¦", Toast.LENGTH_LONG);
+			Toast.makeText(activity, activity.getResources().getString(R.string.bad_network), Toast.LENGTH_LONG);
 		}
 	}
 
-	private ImageView add_favorites;// ¼ÓÈëÊÕ²ØµÄ°´Å¥
+	private ImageView add_favorites;// åŠ å…¥æ”¶è—çš„æŒ‰é’®
 
-	// Ìø×ª¹ºÎï³µµÄ°´Å¥
+	// è·³è½¬è´­ç‰©è½¦çš„æŒ‰é’®
 	private Button shopping_cart_button;
 
 	private void setCartNum(int crat_num) {
@@ -306,7 +305,7 @@ public class GoodsView {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(activity, "ÍøÂç²»¸øÁ¦", Toast.LENGTH_LONG).show();
+			Toast.makeText(activity, activity.getResources().getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -360,7 +359,7 @@ public class GoodsView {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(activity, "ÍøÂç²»¸øÁ¦", Toast.LENGTH_LONG).show();
+			Toast.makeText(activity, activity.getResources().getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -390,19 +389,21 @@ public class GoodsView {
 
 	private void initDisplayImageOption() {
 		builder = new AlertDialog.Builder(activity)
-				.setTitle("µÇÂ½")
-				.setMessage("ÊÇ·ñÈ¥µÇÂ½")
-				.setPositiveButton("È¥µÇÂ½",
-						new android.content.DialogInterface.OnClickListener() {
+		.setTitle(activity.getResources().getString(R.string.add_cart_scs_title))
+		.setMessage(activity.getResources().getString(R.string.add_cart_scs))
+		.setPositiveButton(activity.getResources().getString(R.string.go2cart),
+				new android.content.DialogInterface.OnClickListener() {
 
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								// TODO Auto-generated method stub
-								Intent intent = new Intent(activity,LoginActivity.class);
-								activity.startActivity(intent);
-							}
-						}).setNegativeButton("ºöÂÔ", null).create();
+					@Override
+					public void onClick(DialogInterface dialog,
+							int which) {
+						// TODO Auto-generated method stub
+						Intent intent = new Intent(activity,
+								GoCartActivity.class);
+						activity.startActivity(intent);
+						activity.finish();
+					}
+				}).setNegativeButton(activity.getResources().getString(R.string.guang_again), null).create();
 		options = new DisplayImageOptions.Builder()
 				.showStubImage(R.drawable.hot_sell_right_top_image)
 				.showImageOnFail(R.drawable.hot_sell_right_top_image)
@@ -412,7 +413,7 @@ public class GoodsView {
 
 	private boolean flag = false;
 	/**
-	 * ¼ÓÈëÊÕ²Ø°´Å¥
+	 *  åŠ å…¥æ”¶è—æŒ‰é’®
 	 */
 	private OnClickListener addFavoriteListener = new OnClickListener() {
 
@@ -425,37 +426,37 @@ public class GoodsView {
 				
 				}
 			else if (isLogin && !"".equals(userid)) {
-				// µÇÂ¼×´Ì¬ÏÂ
+				// ç™»å½•çŠ¶æ€ä¸‹
 				if (!manage.checkExists(userid, productId, myApplication.getToken())) {
-					// Î´ÊÕ²Ø£¬ÏÖÔÚÌí¼ÓÊÕ²Ø
+					// æœªæ”¶è—ï¼Œç°åœ¨æ·»åŠ æ”¶è—
 					if (manage.addFavourite(userid, productId, myApplication.getToken())) {
-						// ÊÕ²Ø³É¹¦
-						 Toast.makeText(activity, "¼ÓÈëÊÕ²Ø³É¹¦!",
+						// æ”¶è—æˆåŠŸ
+						 Toast.makeText(activity, activity.getResources().getString(R.string.add_fav_scs),
 						 Toast.LENGTH_SHORT)
 						 .show();
 						add_favorites
 								.setImageResource(R.drawable.add_favorites2);
 					} else {
-						 Toast.makeText(activity, "±§Ç¸£¡¼ÓÈëÊÕ²ØÊ§°Ü¡£",
+						 Toast.makeText(activity, activity.getResources().getString(R.string.add_fav_fail),
 						 Toast.LENGTH_SHORT).show();
 						add_favorites
 								.setImageResource(R.drawable.add_favorites1);
 					}
 				} else {
-					// ÒÑÊÕ²Ø£¬ÏÖÔÚÉ¾³ıÊÕ²Ø
+					// å·²æ”¶è—ï¼Œç°åœ¨åˆ é™¤æ”¶è—
 					if (manage.deleteFavourite(userid, productId, myApplication.getToken())) {
-						// É¾³ı³É¹¦
+						// åˆ é™¤æˆåŠŸ
 						add_favorites
 								.setImageResource(R.drawable.add_favorites1);
 					} else {
-						// É¾³ıÊ§°Ü
+						// åˆ é™¤å¤±è´¥
 						add_favorites
 								.setImageResource(R.drawable.add_favorites2);
 					}
 				}
 			} else {
-				// Î´µÇÂ¼×´Ì¬ÏÂ£¬ÊÕ²Øµ½±¾µØ
-				// ¸Ä±äÍ¼Æ¬
+				// æœªç™»å½•çŠ¶æ€ä¸‹ï¼Œæ”¶è—åˆ°æœ¬åœ°
+				// æ”¹å˜å›¾ç‰‡
 				flag = !flag;
 				changeFravoriteBg();
 			}
@@ -463,10 +464,10 @@ public class GoodsView {
 	};
 
 	/**
-	 * ¸Ä±äÊÕ²ØµÄÍ¼Æ¬
+	 * æ”¹å˜æ”¶è—çš„å›¾ç‰‡
 	 */
 	private void changeFravoriteBg() {
-		// ¸Ä±äÍ¼Æ¬
+		// æ”¹å˜å›¾ç‰‡
 		if (flag) {
 			add_favorites.setImageResource(R.drawable.add_favorites2);
 		} else {

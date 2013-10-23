@@ -18,21 +18,21 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.util.AllOrderUtil;
 
 public class AllOrderFragment extends SherlockFragment {
-	// private TextView titleTextView;//¶©µ¥µÄ×´Ì¬
-	// private TextView numberTextView;//¶©µ¥µÄ±àºÅ
-	// private TextView sumPrice;//¶©µ¥µÄ×Ü¼Û¸ñ
-	// private TextView countTextView;//¶©µ¥µÄ×ÜÊıÄ¿
-	// private LinearLayout mLayout;//Íâ²ãµÄ²¼¾Ö
+	// private TextView titleTextView;//è®¢å•çš„çŠ¶æ€
+	// private TextView numberTextView;//è®¢å•çš„ç¼–å·
+	// private TextView sumPrice;//è®¢å•çš„æ€»ä»·æ ¼
+	// private TextView countTextView;//è®¢å•çš„æ€»æ•°ç›®
+	// private LinearLayout mLayout;//å¤–å±‚çš„å¸ƒå±€
 	// private View view;
-	// private OrderDataManage orderDataManage ;//ÓÃÀ´»ñÈ¡¶©µ¥Êı¾İ
+	// private OrderDataManage orderDataManage ;//ç”¨æ¥è·å–è®¢å•æ•°æ®
 
 	private String hello;
 	private String defaultHello = "default hello";
-	private PullToRefreshScrollView mPullToRefreshScrollView;// Ë¢ĞÂ
+	private PullToRefreshScrollView mPullToRefreshScrollView;// åˆ·æ–°
 	private LinearLayout relativeLayout;
 
 	/**
-	 * ÊµÀı»¯¶ÔÏó
+	 * å®ä¾‹åŒ–å¯¹è±¡
 	 * 
 	 * @param view
 	 */
@@ -54,7 +54,7 @@ public class AllOrderFragment extends SherlockFragment {
 		// (TextView)view.findViewById(R.id.all_order_item_main_item_textview7);
 	}
 
-	// Í¨¹ıµ¥ÀıÄ£Ê½£¬¹¹½¨¶ÔÏó
+	// é€šè¿‡å•ä¾‹æ¨¡å¼ï¼Œæ„å»ºå¯¹è±¡
 	public static AllOrderFragment newInstance(String s) {
 		AllOrderFragment waitFragment = new AllOrderFragment();
 		Bundle bundle = new Bundle();
@@ -67,7 +67,7 @@ public class AllOrderFragment extends SherlockFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		// »ñÈ¡´æ´¢µÄ²ÎÊı
+		// è·å–å­˜å‚¨çš„å‚æ•°
 		Bundle args = getArguments();
 		hello = args != null ? args.getString("hello") : defaultHello;
 		
@@ -77,10 +77,10 @@ public class AllOrderFragment extends SherlockFragment {
 	private int fromIndex = 0;
 	private int amount = 10;
 	private OnRefreshListener2<ScrollView> listener = new OnRefreshListener2<ScrollView>() {
-		// ÏÂÀ­Ë¢ĞÂ
+		// ä¸‹æ‹‰åˆ·æ–°
 		@Override
 		public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-			String label = "ÉÏ´Î¸üĞÂÓÚ"
+			String label = getResources().getString(R.string.update_time)
 					+ DateUtils.formatDateTime(getSherlockActivity(),
 							System.currentTimeMillis(),
 							DateUtils.FORMAT_ABBREV_ALL
@@ -93,11 +93,11 @@ public class AllOrderFragment extends SherlockFragment {
 
 		}
 
-		// ÉÏÀ­¼ÓÔØ
+		// ä¸Šæ‹‰åŠ è½½
 		@Override
 		public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
 			// TODO Auto-generated method stub
-			String label = "ÉÏ´Î¸üĞÂÓÚ"
+			String label = getResources().getString(R.string.update_time)
 					+ DateUtils.formatDateTime(getSherlockActivity(),
 							System.currentTimeMillis(),
 							DateUtils.FORMAT_ABBREV_ALL
@@ -115,14 +115,14 @@ public class AllOrderFragment extends SherlockFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.all_order_item_main, null);// »ñÈ¡ÊÓÍ¼¶ÔÏó
+		View view = inflater.inflate(R.layout.all_order_item_main, null);// è·å–è§†å›¾å¯¹è±¡
 		mPullToRefreshScrollView = (PullToRefreshScrollView) view
 				.findViewById(R.id.all_order_item_main_refresh_scrollview11);
 		relativeLayout = (LinearLayout) view
-				.findViewById(R.id.all_order_item_main_scrollView_linearlayout1);// »ñÈ¡²¼¾Ö
+				.findViewById(R.id.all_order_item_main_scrollView_linearlayout1);// è·å–å¸ƒå±€
 
 		mPullToRefreshScrollView.setOnRefreshListener(listener);
-		String label = "ÉÏ´Î¸üĞÂÓÚ"
+		String label = getResources().getString(R.string.update_time)
 				+ DateUtils.formatDateTime(getSherlockActivity(),
 						System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
 								| DateUtils.FORMAT_SHOW_DATE
@@ -133,9 +133,9 @@ public class AllOrderFragment extends SherlockFragment {
 		// getData();
 
 		// View produce = inflater.inflate(R.layout.all_order_item_produce,
-		// null);//²úÆ·ÏêÏ¸
+		// null);//äº§å“è¯¦ç»†
 		// View produce1 = inflater.inflate(R.layout.all_order_item_produce,
-		// null);//²úÆ·ÏêÏ¸
+		// null);//äº§å“è¯¦ç»†
 		//
 		// relativeLayout.addView(produce);
 		// relativeLayout.addView(produce1);
@@ -150,7 +150,7 @@ public class AllOrderFragment extends SherlockFragment {
 		// startActivity(intent);
 		// }
 		// });
-		// //Ìí¼Ó¼àÌı
+		// //æ·»åŠ ç›‘å¬
 		// produce.setOnClickListener(new OnClickListener() {
 		//
 		// @Override
@@ -170,7 +170,7 @@ public class AllOrderFragment extends SherlockFragment {
 		super.onDestroy();
 	}
 	// /**
-	// * ÓÃÀ´Õ¹Ê¾Êı¾İµÄ
+	// * ç”¨æ¥å±•ç¤ºæ•°æ®çš„
 	// */
 	// private void getData(){
 	// ArrayList<Order> mList = orderDataManage.getOrderArray(514492+"", "", "",

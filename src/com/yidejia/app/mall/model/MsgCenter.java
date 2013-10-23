@@ -1,13 +1,14 @@
 package com.yidejia.app.mall.model;
 
 public class MsgCenter {
-	private String msgid;//ÏûÏ¢id
-	private String uid;//ÓÃ»§id
+	private String msgid;//æ¶ˆæ¯id
+	private String uid;//ç”¨æˆ·id
 	private String pid;//
-	private String msg;//ÏûÏ¢ÄÚÈİ
-	private String title;//ÏûÏ¢±êÌâ
-	private String isread;//ÊÇ·ñÒÑ¶Á
-	private String url;//¸ÄÏûÏ¢ÄÚÈİµÄurl
+	private String msg;//æ¶ˆæ¯å†…å®¹
+	private String title;//æ¶ˆæ¯æ ‡é¢˜
+	private String isread;//æ˜¯å¦å·²è¯»
+	private String url;//æ”¹æ¶ˆæ¯å†…å®¹çš„url
+	private String time;//å‘é€æ—¶é—´
 	
 	public void setMsgid(String msgid){
 		this.msgid = msgid;
@@ -56,5 +57,12 @@ public class MsgCenter {
 	}
 	public String getIsread(){
 		return isread;
+	}
+	
+	public void setTime(String time){
+		this.time = time;
+	}
+	public String getTime(){
+		return time;
 	}
 }

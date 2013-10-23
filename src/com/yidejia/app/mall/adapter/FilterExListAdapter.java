@@ -26,14 +26,12 @@ public class FilterExListAdapter extends BaseExpandableListAdapter {
 	private ArrayList<Integer> clickChildState = new ArrayList<Integer>();
 	private String TAG = "FilterExListAdapter";
 	
-	private String[] filterGroup = new String[]{
-		"Æ·ÅÆ£ºÈ«²¿","¹¦Ğ§£ºÈ«²¿¹¦Ğ§","¼Û¸ñ£º0-¡Ş"	
-	};
+	private String[] filterGroup = new String[] { "å“ç‰Œï¼šå…¨éƒ¨", "åŠŸæ•ˆï¼šå…¨éƒ¨åŠŸæ•ˆ", "ä»·æ ¼ï¼š0-âˆ" };
 	private String[][] filterChild = new String[][] {
-			{ "È«²¿","åûÊ«ÃÀ","åûÉÅÃÀ"},
-            { "È«²¿","ÑÛ²¿»¤Àí", "»î¼¡¿¹Ë¥", "ÃÀ°×µ­°ß", "±£ÊªËøË®", "¿ØÓÍ¿¹¶»", "ÌØ±ğ»¤Àí", "ÖÜÆÚ»¤Àí" },
-            { "È«²¿", "0-100Ôª", "100-200Ôª", "200-400Ôª", "400-800Ôª", "800-1000Ôª", "1000ÒÔÉÏ" }
-    };
+			{ "å…¨éƒ¨", "å¦è¯—ç¾", "å¦è†³ç¾" },
+			{ "å…¨éƒ¨", "çœ¼éƒ¨æŠ¤ç†", "æ´»è‚ŒæŠ—è¡°", "ç¾ç™½æ·¡æ–‘", "ä¿æ¹¿é”æ°´", "æ§æ²¹æŠ—ç—˜", "ç‰¹åˆ«æŠ¤ç†", "å‘¨æœŸæŠ¤ç†" },
+			{ "å…¨éƒ¨", "0-100å…ƒ", "100-200å…ƒ", "200-400å…ƒ", "400-800å…ƒ", "800-1000å…ƒ",
+					"1000ä»¥ä¸Š" } };
 	
 	private HashMap<Integer, ArrayList<String>> filterHashMap = new HashMap<Integer, ArrayList<String>>();
 	
@@ -151,7 +149,7 @@ public class FilterExListAdapter extends BaseExpandableListAdapter {
 			return;
 		}
 		ArrayList<String> brandStrings = new ArrayList<String>();
-		brandStrings.add("È«²¿");
+		brandStrings.add(mContext.getResources().getString(R.string.filter_all));
 		for (int i = 0; i < brandsArray.size(); i++) {
 			brandStrings.add(brandsArray.get(i).getBrandName());
 		}
@@ -164,7 +162,7 @@ public class FilterExListAdapter extends BaseExpandableListAdapter {
 			return;
 		}
 		ArrayList<String> funStrings = new ArrayList<String>();
-		funStrings.add("È«²¿");
+		funStrings.add(mContext.getResources().getString(R.string.filter_all));
 		for (int i = 0; i < funsArray.size(); i++) {
 			funStrings.add(funsArray.get(i).getFunName());
 		}
@@ -177,11 +175,11 @@ public class FilterExListAdapter extends BaseExpandableListAdapter {
 			return;
 		}
 		ArrayList<String> priceStrings = new ArrayList<String>();
-		priceStrings.add("È«²¿");
+		priceStrings.add(mContext.getResources().getString(R.string.filter_all));
 		for (int i = 0; i < pricesArray.size(); i++) {
 			StringBuffer temp = new StringBuffer();
 			temp.append(pricesArray.get(i).getMinPrice() + "-");
-			temp.append(pricesArray.get(i).getMaxPrice() + "Ôª");
+			temp.append(pricesArray.get(i).getMaxPrice() + mContext.getResources().getString(R.string.unit));
 			priceStrings.add(temp.toString());
 		}
 		filterHashMap.put(2, priceStrings);

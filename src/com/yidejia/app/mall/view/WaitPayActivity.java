@@ -46,18 +46,18 @@ public class WaitPayActivity extends SherlockFragmentActivity {
 	    public void doClick(View v){
 			Intent intent = new Intent();
 			switch (v.getId()) {
-//			case R.id.wait_pay_order_button1://·µ»Ø
+//			case R.id.wait_pay_order_button1://ï¿½ï¿½ï¿½ï¿½
 //				intent.setClass(this,MyMallActivity.class);
 //				break;
-			case R.id.wait_pay_order_item_payment://¸¶¿î
-				intent.setClass(this, PayActivity.class);
+			case R.id.wait_pay_order_item_payment://ï¿½ï¿½ï¿½ï¿½
+				intent.setClass(this, CstmPayActivity.class);
 				startActivity(intent);
 				break;
-			case R.id.wait_pay_order_item_cancal://È¡Ïû
+			case R.id.wait_pay_order_item_cancal://È¡ï¿½ï¿½
 //				intent.setClass(this,MyMallActivity.class);
 				break;
 			}
-				//½áÊøµ±Ç°Activity£»
+				//ï¿½ï¿½ï¿½ï¿½Ç°Activityï¿½ï¿½
 				WaitPayActivity.this.finish();
 
 		}
@@ -86,7 +86,7 @@ public class WaitPayActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
 		ImageView back = (ImageView) findViewById(R.id.compose_back);
 		TextView  titleTextView = (TextView) findViewById(R.id.compose_title);
-		titleTextView.setText("´ı¸¶¿î¶©µ¥");
+		titleTextView.setText("å¾…ä»˜æ¬¾è®¢å•");
 		
 		back.setOnClickListener(new OnClickListener() {
 			
@@ -111,9 +111,9 @@ public class WaitPayActivity extends SherlockFragmentActivity {
 		 fragmentsList = new ArrayList<Fragment>();
 		 LayoutInflater mInflater = getLayoutInflater();
 	     
-	     Fragment weekfragment = WaitPayFragment.newInstance("½üÒ»ÖÜ");
-	     Fragment monthFragment = WaitPayFragment.newInstance("½üÒ»ÔÂ");
-	     Fragment yearFragment=WaitPayFragment.newInstance("½üÒ»Äê");
+		 Fragment weekfragment = WaitPayFragment.newInstance("è¿‘ä¸€å‘¨");
+	     Fragment monthFragment = WaitPayFragment.newInstance("è¿‘ä¸€æœˆ");
+	     Fragment yearFragment=WaitPayFragment.newInstance("è¿‘ä¸€å¹´");
 	     
 	     fragmentsList.add(yearFragment);
 	     fragmentsList.add(monthFragment);
@@ -129,16 +129,16 @@ public class WaitPayActivity extends SherlockFragmentActivity {
 
 	
 	private void InitWidth() {
-		ivBottomLine = (ImageView) findViewById(R.id.iv_bottom_line);//»¬¶¯
+		ivBottomLine = (ImageView) findViewById(R.id.iv_bottom_line);//ï¿½ï¿½ï¿½ï¿½
         bottomLineWidth = ivBottomLine.getLayoutParams().width;
         DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);//»ñÈ¡µ±Ç°ÆÁÄ»µÄÊôĞÔ
-        int screenW = dm.widthPixels;//ÆÁÄ»µÄ¿í
-        offset = (int) ((screenW / 3 - bottomLineWidth)/2);//ÆğÊ¼Î»ÖÃ
+        getWindowManager().getDefaultDisplay().getMetrics(dm);//ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        int screenW = dm.widthPixels;//ï¿½ï¿½Ä»ï¿½Ä¿ï¿½
+        offset = (int) ((screenW / 3 - bottomLineWidth)/2);//ï¿½ï¿½Ê¼Î»ï¿½ï¿½
 
         position_one = (int) (screenW / 3);
         position_two = position_one * 2;
-        
+         
     }
 	  public class MyOnClickListener implements View.OnClickListener {
 	        private int index = 0;
@@ -158,8 +158,8 @@ public class WaitPayActivity extends SherlockFragmentActivity {
 	        public void onPageSelected(int arg0) {
 	            Animation animation = null;
 	            switch (arg0) {
-	            case 0://¼ÙÈçÊÇµÚÒ»¸ö±»Ñ¡ÖĞ£¬Ìí¼ÓÊÂ¼ş
-	                if (currIndex == 1) {//µ±Ç°ÊÇµÚ¶ş¸ö
+	            case 0://ï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½Ğ£ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
+	                if (currIndex == 1) {//ï¿½ï¿½Ç°ï¿½ÇµÚ¶ï¿½ï¿½ï¿½
 	                    animation = new TranslateAnimation(position_one, 0, 0, 0);
 	                    mMonth.setPressed(false);
 	                    mMonth.setBackgroundResource(R.drawable.product_details_bg);

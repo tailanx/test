@@ -2,6 +2,7 @@ package com.yidejia.app.mall.net;
 
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +12,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -54,38 +53,38 @@ public class HttpPostConn {
 		try {
 			HttpClient httpClient = new DefaultHttpClient();
 			httpClient.getParams().setIntParameter(
-                    HttpConnectionParams.SO_TIMEOUT, TIME_OUT_DELAY); // 读取超时设置
+                    HttpConnectionParams.SO_TIMEOUT, TIME_OUT_DELAY); // 锟斤拷取锟斤拷时锟斤拷锟斤拷
 			httpClient.getParams().setIntParameter(
-                    HttpConnectionParams.CONNECTION_TIMEOUT, TIME_OUT_DELAY);// 连接超时
+                    HttpConnectionParams.CONNECTION_TIMEOUT, TIME_OUT_DELAY);// 锟斤拷锟接筹拷时
 			HttpResponse httpResponse = httpClient.execute(httpRequst);
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				result = EntityUtils.toString(httpResponse.getEntity(), HTTP.UTF_8);
 //				Log.i(TAG, result);
 //				count = 0;
 			} else if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_REQUEST_TIMEOUT ){
-				Log.i(TAG, "连接超时");
+				Log.i(TAG, "time out");
 				return result;
-			} else {//连接失败
-				Log.i(TAG, "接收数据失败");
+			} else {//锟斤拷锟斤拷失锟斤拷
+				Log.i(TAG, "time out");
 				return result;
 			}
 		} catch(ClientProtocolException e){
-			Log.i(TAG, "http协议出错" + e.getMessage().toString());
+			Log.i(TAG, "http鍗忚鍑洪敊 " + e.getMessage().toString());
 		} 
 		
 		return result;
 	}
 	
 	/**
-	 * ------------------ JNI 的方式 ---------------------------
+	 * ------------------ jni 鏂瑰紡鑾峰彇鏁版嵁---------------------------
 	 */
 	
-	private String param;//post 参数
+	private String param;//post param
 	public HttpPostConn(String param){
 		this.param = param;
 	}
 	/**
-	 * jni方式获取post方法的返回数据
+	 * jni post request 
 	 * @return
 	 */
 	public String getHttpResponse() throws IOException{
@@ -100,27 +99,30 @@ public class HttpPostConn {
 			
 			String url = JNICallBack.HTTPURL;
 			HttpPost httpPost = new HttpPost(url); 
-			Log.i(TAG, "url is :---"+url+"?"+param);
+			Log.i(TAG, url+"?"+param);
 //			httpPost.setEntity(arrayEntity); 
-			StringEntity stringEntity = new StringEntity(param);
-			stringEntity.setContentType("application/x-www-form-urlencoded");
+			String utf8param = URLDecoder.decode(new String(param.getBytes("UTF-8")), "UTF-8");
+			Log.e(TAG, utf8param);
+			StringEntity stringEntity = new StringEntity(utf8param, HTTP.UTF_8);
+			stringEntity.setContentType("application/x-www-form-urlencoded;charset=UTF-8");
 			httpPost.setEntity(stringEntity);
+			
 			HttpClient client = new DefaultHttpClient(); 
 			
 			client.getParams().setIntParameter(
-					HttpConnectionParams.SO_TIMEOUT, TIME_OUT_DELAY); // 读取超时设置
+					HttpConnectionParams.SO_TIMEOUT, TIME_OUT_DELAY); // 锟斤拷取锟斤拷时锟斤拷锟斤拷
 			client.getParams().setIntParameter(
-					HttpConnectionParams.CONNECTION_TIMEOUT, TIME_OUT_DELAY);// 连接超时
+					HttpConnectionParams.CONNECTION_TIMEOUT, TIME_OUT_DELAY);// 锟斤拷锟接筹拷时
 			HttpResponse httpResponse = client.execute(httpPost);
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				result = EntityUtils.toString(httpResponse.getEntity(), HTTP.UTF_8);
 				Log.i(TAG, result);
 //				count = 0;
 			} else if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_REQUEST_TIMEOUT ){
-				Log.i(TAG, "连接超时");
+				Log.i(TAG, "time out");
 				return result;
-			} else {//连接失败
-				Log.i(TAG, "接收数据失败"+httpResponse.getStatusLine().getStatusCode());
+			} else {//锟斤拷锟斤拷失锟斤拷
+				Log.i(TAG, "return code:"+httpResponse.getStatusLine().getStatusCode());
 				return result;
 			}
 		} catch (ClientProtocolException e) {

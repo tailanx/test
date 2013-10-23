@@ -64,7 +64,7 @@ public class PersonEvaluationActivity extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent2 = new Intent(PersonEvaluationActivity.this, PayActivity.class);
+				Intent intent2 = new Intent(PersonEvaluationActivity.this, CstmPayActivity.class);
 				startActivity(intent2);
 				//½áÊøµ±Ç°Activity£»
 				PersonEvaluationActivity.this.finish();

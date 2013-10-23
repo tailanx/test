@@ -2,6 +2,12 @@ package com.yidejia.app.mall.view;
 
 import java.util.ArrayList;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
+
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,7 +17,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.AlteredCharSequence;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,48 +24,67 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.unionpay.UPPayAssistEx;
+import com.unionpay.uppay.PayActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+//import com.yidejia.app.mall.UserPayActivity;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.datamanage.ExpressDataManage;
 import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Express;
+import com.yidejia.app.mall.model.FreePost;
 import com.yidejia.app.mall.util.Consts;
+import com.yidejia.app.mall.util.Http;
+import com.yidejia.app.mall.util.MessageUtil;
 import com.yidejia.app.mall.util.PayUtil;
 
-public class PayActivity extends SherlockActivity {
-	private TextView userName;// ÓÃ»§Ãû
-	private TextView phoneName;// µç»°ºÅÂë
-	private TextView address;// ÊÕ»õµØÖ·
-	private TextView peiSong;// ÅäËÍµØÖ·
-	private CheckBox general;// ÆÕÍ¨ÅäËÍ
-	private CheckBox emsBox;// emsÅäËÍ
-	private TextView generalPrice;// ÆÕÍ¨ÅäËÍ¼Û¸ñ
-	private TextView emsPrice;// emsÅäËÍ¼Û¸ñ
+public class CstmPayActivity extends SherlockActivity {
+	private TextView userName;// ç”¨æˆ·å
+	private TextView phoneName;// ç”µè¯å·ç 
+	private TextView address;// æ”¶è´§åœ°å€
+	private TextView peiSong;// é…é€åœ°å€
+	private CheckBox general;// æ™®é€šé…é€
+	private CheckBox emsBox;// emsé…é€
+	private TextView generalPrice;// æ™®é€šé…é€ä»·æ ¼
+	private TextView emsPrice;// emsé…é€ä»·æ ¼
 	private AddressDataManage addressDataManage;
-	private ExpressDataManage expressDataManage;// ÅäËÍÖĞĞÄ
-	private CheckBox zhifubaoCheckBox;// Ö§¸¶±¦
-	private CheckBox zhifubaowangyeCheckBox;// Ö§¸¶±¦ÍøÒ³Ö§¸¶
-	private CheckBox yinlianCheckBox;// ÒøÁªÖ§¸¶
-	private CheckBox caifutongCheckBox;// ²Æ¸¶Í¨Ö§¸¶
-	private TextView sumPrice;// ×ÜµÄ¼Û¸ñ
-	private Button saveOrderBtn;//Ìá½»¶©µ¥
-	private Handler mHandler;// ´´½¨handler¶ÔÏó
+	private ExpressDataManage expressDataManage;// é…é€ä¸­å¿ƒ
+	private CheckBox zhifubaoCheckBox;// æ”¯ä»˜å®
+	private CheckBox zhifubaowangyeCheckBox;// æ”¯ä»˜å®ç½‘é¡µæ”¯ä»˜
+	private CheckBox yinlianCheckBox;// é“¶è”æ”¯ä»˜
+	private CheckBox caifutongCheckBox;// è´¢ä»˜é€šæ”¯ä»˜
+	private TextView sumPrice;// æ€»çš„ä»·æ ¼
+	private Button saveOrderBtn;//æäº¤è®¢å•
+	private Handler mHandler;// åˆ›å»ºhandlerå¯¹è±¡
 	private MyApplication myApplication;
+	private EditText comment;//è¯„è®º
+	
 	
 	// private Myreceiver receiver;
 	// private Addresses addresses;
+	private String peiSongCenter = "";////é…é€ä¸­å¿ƒ
+	private String recipientId = "";//æ”¶é›†äººid
+	private String expressNum = "";//å¿«é€’è´¹ç”¨
+	private String postMethod = "EMS";//å¿«é€’æ–¹å¼
+	private String goods;//å•†å“ä¸²
+	
+	
+	private static final String SERVER_URL = "http://202.104.148.76/splugin/interface";
+	private static final String TRADE_COMMAND = "1001";
+	private final String TAG = getClass().getName();
 
 	/**
-	 * ÊµÀı»¯¿Ø¼ş
+	 * å®ä¾‹åŒ–æ§ä»¶
 	 */
 	public void setupShow() {
 		try {
@@ -76,12 +100,14 @@ public class PayActivity extends SherlockActivity {
 			emsBox = (CheckBox) findViewById(R.id.go_pay_ems);
 			generalPrice = (TextView) findViewById(R.id.go_pay_general_price);
 			emsPrice = (TextView) findViewById(R.id.go_pay_ems_price);
+			comment = (EditText) findViewById(R.id.go_pay_leave_message);
 
 			zhifubaoCheckBox = (CheckBox) findViewById(R.id.zhifubao_checkbox);
 			zhifubaowangyeCheckBox = (CheckBox) findViewById(R.id.zhufubaowangye_checkbox);
 			yinlianCheckBox = (CheckBox) findViewById(R.id.yinlian_checkbox);
 			caifutongCheckBox = (CheckBox) findViewById(R.id.caifutong_checkbox);
-
+			
+			//å¿«é€’
 			general.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 				@Override
@@ -98,6 +124,7 @@ public class PayActivity extends SherlockActivity {
 
 				}
 			});
+			//ems
 			emsBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 				@Override
@@ -172,48 +199,33 @@ public class PayActivity extends SherlockActivity {
 							}
 						}
 					});
-			builder = new AlertDialog.Builder(PayActivity.this)
-			.setTitle("µÇÂ½")
-			.setMessage("ÊÇ·ñÈ¥µÇÂ½")
-			.setPositiveButton("È¥µÇÂ½",
-					new android.content.DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog,
-								int which) {
-							// TODO Auto-generated method stub
-							Intent intent = new Intent(PayActivity.this,LoginActivity.class);
-							PayActivity.this.startActivity(intent);
-						}
-					}).setNegativeButton("ºöÂÔ", null).create();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(PayActivity.this, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT)
+			Toast.makeText(CstmPayActivity.this, getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT)
 					.show();
 		}
 
 	}
-	private AlertDialog builder ;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		try {
 			super.onCreate(savedInstanceState);
 			// TODO Auto-generated method stub
 			myApplication = (MyApplication) getApplication();
-			addressDataManage = new AddressDataManage(this);
 			// receiver = new Myreceiver();
 			// IntentFilter filter = new IntentFilter();
 			// filter.addAction(Consts.BUY_NEW);
 			// registerReceiver(receiver, filter);
-			// ¸¶¿îÖ®Ç°ÏÈÅĞ¶ÏÓÃ»§ÊÇ·ñµÇÂ½
-//			if (!myApplication.getIsLogin()) {
-////				Toast.makeText(this, "Äã»¹Î´µÇÂ½£¬ÇëÏÈµÇÂ½", Toast.LENGTH_LONG).show();
-////				Intent intent = new Intent(this, LoginActivity.class);
-////				startActivity(intent);
-////				this.finish();
-//			} else {
-				
+			// ä»˜æ¬¾ä¹‹å‰å…ˆåˆ¤æ–­ç”¨æˆ·æ˜¯å¦ç™»é™†
+			if (!myApplication.getIsLogin()) {
+				Toast.makeText(this, getResources().getString(R.string.please_login), Toast.LENGTH_LONG).show();
+				Intent intent = new Intent(this, LoginActivity.class);
+				startActivity(intent);
+				this.finish();
+			} else {
+				addressDataManage = new AddressDataManage(this);
 				Intent intent = getIntent();
 				final String sum = intent.getStringExtra("price");
 				Cart cart = (Cart) intent.getSerializableExtra("Cart");
@@ -224,11 +236,16 @@ public class PayActivity extends SherlockActivity {
 					addAddress();
 					setActionbar();
 					LinearLayout layout = (LinearLayout) findViewById(R.id.go_pay_relative2);
-					PayUtil pay = new PayUtil(PayActivity.this, layout);
-					pay.loadView();
-
-					if (Double.parseDouble(sum) > 299.0) {
+					PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
+					goods = pay.loadView();
+					//è·å–å…é‚®ç•Œé™
+					ExpressDataManage expressDataManage = new ExpressDataManage(CstmPayActivity.this);
+					ArrayList<FreePost> freePosts = expressDataManage.getFreePostList("0", "20");
+					float fP = Float.MAX_VALUE;
+					if(freePosts.size() != 0) fP = Float.parseFloat(freePosts.get(0).getMax());
+					if (Float.parseFloat(sum) > fP) {
 						sumPrice.setText(sum);
+						expressNum = "0";
 					} else {
 						sumPrice.setText(Double.parseDouble(sum)
 								+ Double.parseDouble((general.isChecked() ? generalPrice
@@ -240,14 +257,16 @@ public class PayActivity extends SherlockActivity {
 						public void handleMessage(Message msg) {
 							switch (msg.what) {
 							case Consts.GENERAL:
+								expressNum = generalPrice.getText().toString();
 								sumPrice.setText(Double.parseDouble(sum)
-										+ Double.parseDouble(generalPrice
-												.getText().toString()) + "");
+										+ Double.parseDouble(expressNum) + "");
+								postMethod = getResources().getString(R.string.ship_post);//å¿«é€’æ–¹å¼
 								break;
 							case Consts.EMS:
+								expressNum = emsPrice.getText().toString();
 								sumPrice.setText(Double.parseDouble(sum)
-										+ Double.parseDouble(emsPrice.getText()
-												.toString()) + "");
+										+ Double.parseDouble(expressNum) + "");
+								postMethod = "EMS";
 								break;
 							}
 							super.handleMessage(msg);
@@ -257,12 +276,17 @@ public class PayActivity extends SherlockActivity {
 					setActionbar();
 					setContentView(R.layout.go_pay);
 					LinearLayout layout = (LinearLayout) findViewById(R.id.go_pay_relative2);
-					PayUtil pay = new PayUtil(PayActivity.this, layout, cart);
-					pay.cartLoadView();
+					PayUtil pay = new PayUtil(CstmPayActivity.this, layout, cart);
+					goods = pay.cartLoadView();
 					setupShow();
 					addAddress();
-
-					if (Double.parseDouble(sum) > 299.0) {
+					//è·å–å…é‚®ç•Œé™
+					ExpressDataManage expressDataManage = new ExpressDataManage(CstmPayActivity.this);
+					ArrayList<FreePost> freePosts = expressDataManage.getFreePostList("0", "20");
+					float fP = Float.MAX_VALUE;
+					if(freePosts.size() != 0) fP = Float.parseFloat(freePosts.get(0).getMax());
+					
+					if (Float.parseFloat(sum) > fP) {
 						sumPrice.setText(sum);
 					} else {
 						sumPrice.setText(Double.parseDouble(sum)
@@ -275,32 +299,80 @@ public class PayActivity extends SherlockActivity {
 						public void handleMessage(Message msg) {
 							switch (msg.what) {
 							case Consts.GENERAL:
+								expressNum = generalPrice.getText().toString();
 								sumPrice.setText(Double.parseDouble(sum)
-										+ Double.parseDouble(generalPrice
-												.getText().toString()) + "");
+										+ Double.parseDouble(expressNum) + "");
+								postMethod = getResources().getString(R.string.ship_post);//å¿«é€’æ–¹å¼
 								break;
 							case Consts.EMS:
+								expressNum = emsPrice.getText()
+										.toString();
 								sumPrice.setText(Double.parseDouble(sum)
-										+ Double.parseDouble(emsPrice.getText()
-												.toString()) + "");
+										+ Double.parseDouble(expressNum) + "");
+								postMethod = "EMS";
 								break;
 							}
 							super.handleMessage(msg);
 						}
 					};
 				}
-//			}
+				
+				saveOrderBtn.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						
+						OrderDataManage orderDataManage = new OrderDataManage(CstmPayActivity.this);
+						orderDataManage.saveOrder(myApplication.getUserId(),
+								"0", recipientId, "", "0", expressNum,
+								"EMS", peiSongCenter, goods, "",
+								myApplication.getToken());
+						String orderCode = orderDataManage.getOrderCode();
+						Log.e("OrderCode", orderCode);
+//						Intent userpayintent = new Intent(CstmPayActivity.this, UserPayActivity.class);
+//						Bundle bundle = new Bundle();
+//						bundle.putString("name", "hello");
+//						bundle.putString("amount", "100");
+//						userpayintent.putExtras(bundle);
+//						startActivity(userpayintent);
+//						CstmPayActivity.this.finish();
+						
+						//æµ‹è¯•æäº¤è®¢å•
+//						FutureTask<Map<String, String>> task = new FutureTask<Map<String, String>>(call);
+//						Thread th = new Thread(task);
+//						th.start();
+//						Map<String, String> resp;
+//						try {
+//							resp = task.get();
+//							Log.d(TAG, "task status: " + task.isDone());
+//							
+//							if (null != resp && null != resp.get("code") && "0000".equals(resp.get("code"))) {
+//								String tn = resp.get("tn");
+//								UPPayAssistEx.startPayByJAR(CstmPayActivity.this,
+//										PayActivity.class, null, null, tn, "01");
+//								
+//							} else {
+////								UPPayAssistEx.startPayByJAR(CstmPayActivity.this,
+////										PayActivity.class, null, null, "121364646464646", "01");
+//							}
+//						} catch (InterruptedException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						} catch (ExecutionException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
+					}
+				});
+			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(PayActivity.this, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT)
+			Toast.makeText(CstmPayActivity.this, getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT)
 					.show();
 		}
 		
-		OrderDataManage orderDataManage = new OrderDataManage(this);
-		orderDataManage.saveOrder(myApplication.getUserId(), "0", "109940", "", "0", "10", "¿ìµİ", "¹ãÖİÅäËÍ", "2,5n;", "", myApplication.getToken());
-		String orderCode = orderDataManage.getOrderCode();
-		Log.e("OrderCode", orderCode);
 	}
 
 	// @Override
@@ -310,7 +382,7 @@ public class PayActivity extends SherlockActivity {
 	// // unregisterReceiver(receiver);
 	// }
 	/**
-	 * UI¿Ø¼şµÄ¶¥²¿
+	 * UIæ§ä»¶çš„é¡¶éƒ¨
 	 */
 	private void setActionbar() {
 		try {
@@ -324,19 +396,19 @@ public class PayActivity extends SherlockActivity {
 			button.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					PayActivity.this.finish();
+					CstmPayActivity.this.finish();
 				}
 			});
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(PayActivity.this, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT)
+			Toast.makeText(CstmPayActivity.this, getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT)
 					.show();
 		}
 	}
 
 	/**
-	 * ³õÊ¼»¯¿Ø¼ş
+	 * åˆå§‹åŒ–æ§ä»¶
 	 */
 	private void addAddress() {
 		try {
@@ -345,28 +417,37 @@ public class PayActivity extends SherlockActivity {
 					myApplication.getUserId(), 0, 10);
 			Log.i("info", mList.size() + " mlist");
 			if (mList.size() == 0) {
-				Intent intent = new Intent(PayActivity.this,
+				Intent intent = new Intent(CstmPayActivity.this,
 						NewAddressActivity.class);
-				PayActivity.this.startActivity(intent);
+				CstmPayActivity.this.startActivity(intent);
 				
 			} else {
-				Addresses addresses = mList.remove(0);
-
-
+				Addresses addresses = mList.get(0);
+				//è·å–é»˜è®¤åœ°å€
+				int size = mList.size();
+				for (int i = 0; i < size; i++) {
+					boolean isDefault = mList.get(i).getDefaultAddress();
+					if(isDefault){
+						addresses = mList.get(i);
+						break;
+					}
+				}
 				userName.setText(addresses.getName());
-				phoneName.setText(addresses.getPhone());
+				phoneName.setText(addresses.getHandset());//ï¿½Ş¸ï¿½Îªï¿½Ö»ï¿½
 				StringBuffer sb = new StringBuffer();
 				sb.append(addresses.getProvice());
 				sb.append(addresses.getCity());
 				sb.append(addresses.getArea());
 				sb.append(addresses.getAddress());
 				address.setText(sb.toString());
+				recipientId = addresses.getAddressId();
 
 				Express express = expressDataManage.getExpressesExpenses(
-						addresses.getProvice(), "n").get(0);
-				peiSong.setText(expressDataManage
-						.getDistributionsList(0 + "", 10 + "").get(0)
-						.getDisName());
+						addresses.getProvice(), "y").get(0);
+				peiSongCenter = expressDataManage
+						.getDistributionsList(express.getPreId(), 0 + "", 10 + "").get(0)
+						.getDisName(); //è·å–é…é€ä¸­å¿ƒ
+				peiSong.setText(peiSongCenter);
 				generalPrice.setText(express.getExpress());
 				emsPrice.setText(express.getEms());
 				Log.i("info", addresses.getName());
@@ -374,9 +455,74 @@ public class PayActivity extends SherlockActivity {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(PayActivity.this, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT)
+			Toast.makeText(CstmPayActivity.this, getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT)
 					.show();
 		}
 	}
 
+	
+	
+	private Callable<Map<String, String>> call = new Callable<Map<String, String>>() {
+
+		@Override
+		public Map<String, String> call() throws Exception {
+			
+			Map<String, String> params = new HashMap<String, String>();
+			params.put("orderDesc", "hello");
+			params.put("orderAmt", "1000");
+			String data = MessageUtil.assemblyParams(params);
+			String content = "command=" + TRADE_COMMAND + "&data=" + data;
+			String msg = Http.post(SERVER_URL, content);
+			Log.d(TAG, "http return: " + msg);
+			if (null != msg) {
+				Map<String, String> resp = MessageUtil.resolveParams(msg);
+				return resp;
+			}
+			
+			return null;
+		}
+	};
+
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+//		super.onActivityResult(requestCode, resultCode, data);
+		/************************************************* 
+         * 
+         *  æ­¥éª¤3ï¼šå¤„ç†é“¶è”æ‰‹æœºæ”¯ä»˜æ§ä»¶è¿”å›çš„æ”¯ä»˜ç»“æœ 
+         *  
+         ************************************************/
+        if (data == null) {
+            return;
+        }
+
+        String msg = "";
+        /*
+         * æ”¯ä»˜æ§ä»¶è¿”å›å­—ç¬¦ä¸²:successã€failã€cancel
+         *      åˆ†åˆ«ä»£è¡¨æ”¯ä»˜æˆåŠŸï¼Œæ”¯ä»˜å¤±è´¥ï¼Œæ”¯ä»˜å–æ¶ˆ
+         */
+        String str = data.getExtras().getString("pay_result");
+        if (str.equalsIgnoreCase("success")) {
+            msg = "æ”¯ä»˜æˆåŠŸï¼";
+        } else if (str.equalsIgnoreCase("fail")) {
+            msg = "æ”¯ä»˜å¤±è´¥ï¼";
+        } else if (str.equalsIgnoreCase("cancel")) {
+            msg = "ç”¨æˆ·å–æ¶ˆäº†æ”¯ä»˜";
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("æ”¯ä»˜ç»“æœé€šçŸ¥");
+        builder.setMessage(msg);
+        builder.setInverseBackgroundForced(true);
+        //builder.setCustomTitle();
+        builder.setNegativeButton("ç¡®å®š", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+	}
+	
 }

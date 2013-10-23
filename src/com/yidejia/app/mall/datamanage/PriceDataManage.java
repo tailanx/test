@@ -7,37 +7,40 @@ import java.util.concurrent.ExecutionException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.PriceLevel;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.search.PriceDataUtil;
 
 /**
- * 获取价格列表
+ * 鑾峰彇浠锋牸鍒楄〃
  * @author long bin
  *
  */
 public class PriceDataManage {
 	private ArrayList<PriceLevel> pricesArray;
 	private Context context;
+	private Resources res;
 	private String TAG = PriceDataManage.class.getName();
 	
 	public PriceDataManage(Context context){
 		this.context = context;
+		res = context.getResources();
 		pricesArray = new ArrayList<PriceLevel>();
 	}
 	/**
 	 * 
-	 * @return pricesArray 价格列表
+	 * @return pricesArray 浠锋牸鍒楄〃
 	 */
 	public ArrayList<PriceLevel> getPriceArray(){
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, res.getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return pricesArray;
 		}
 		TaskPrice taskPrice = new TaskPrice();
@@ -45,7 +48,7 @@ public class PriceDataManage {
 		try {
 			state = taskPrice.execute().get();
 			if("".equals(httpResponseString)){
-				Toast.makeText(context, "连接超时", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, res.getString(R.string.time_out), Toast.LENGTH_SHORT).show();
 				state = true;
 			}
 		} catch (InterruptedException e) {
@@ -61,7 +64,7 @@ public class PriceDataManage {
 			e.printStackTrace();
 		} 
 		if(!state){
-			Toast.makeText(context, "网络不给力", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, res.getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		return pricesArray;
 	}
@@ -74,7 +77,7 @@ public class PriceDataManage {
 			// TODO Auto-generated method stub
 //			super.onPreExecute();
 //			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//			bar.setMessage("正在查询");
+//			bar.setMessage("锟斤拷锟节诧拷询");
 //			bar.show();
 		}
 		
@@ -92,7 +95,7 @@ public class PriceDataManage {
 						return true;
 					}
 				} else{
-					httpResponseString = "连接超时";
+					httpResponseString = res.getString(R.string.time_out);
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.interfacecallback.CallBack;
 import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.model.MainProduct;
@@ -23,7 +24,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 /**
- * 获取商品数据
+ * 鑾峰彇鍟嗗搧鏁版嵁
  * @author long bin
  *
  */
@@ -33,8 +34,8 @@ public class ProductDataManage{  //implements CallBack
 	private UnicodeToString unicode;
 	
 	private ProductBaseInfo productBaseInfo;
-	private ArrayList<BaseProduct> bannerArray;			//轮播商品
-	private ArrayList<MainProduct> recommendArray;    //推荐搭配 
+	private ArrayList<BaseProduct> bannerArray;			//杞挱鍟嗗搧
+	private ArrayList<MainProduct> recommendArray;    ///鎺ㄨ崘鎼厤 
 	
 	public ProductDataManage(Context context){
 		this.context = context;
@@ -44,13 +45,13 @@ public class ProductDataManage{  //implements CallBack
 		recommendArray = new ArrayList<MainProduct>();
 	}
 	/**
-	 * 根据商品id获得商品数据
+	 * 鏍规嵁鍟嗗搧id鑾峰緱鍟嗗搧鏁版嵁
 	 * @param goodsId
 	 * @return {@link ProductBaseInfo} 
 	 */
 	public ProductBaseInfo getProductData(String goodsId){
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return productBaseInfo;
 		}
 		TaskProduct taskProduct = new TaskProduct(goodsId);
@@ -67,7 +68,7 @@ public class ProductDataManage{  //implements CallBack
 			e.printStackTrace();
 		}
 		if(!state){
-			Toast.makeText(context, "网络不给力！", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		return productBaseInfo;
 	}
@@ -85,7 +86,7 @@ public class ProductDataManage{  //implements CallBack
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage("正在查询");
+			bar.setMessage(context.getResources().getString(R.string.searching));
 			bar.show();
 		}
 		
@@ -129,7 +130,7 @@ public class ProductDataManage{  //implements CallBack
 	}
 	
 	/**
-	 * 解析商品的json数据
+	 * 瑙ｆ瀽鍟嗗搧鐨刯son鏁版嵁
 	 * @param jsonString
 	 * @throws JSONException
 	 */
@@ -178,7 +179,7 @@ public class ProductDataManage{  //implements CallBack
 		productBaseInfo.setRecommendArray(recommendArray);
 	}
 	/**
-	 * 解析商品轮播图片
+	 * 瑙ｆ瀽鍟嗗搧杞挱鍥剧墖
 	 * @param picString
 	 * @throws JSONException 
 	 */

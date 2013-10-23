@@ -43,7 +43,6 @@
 			setActionbar();
 			//这里父布局要用scrollview
 			setContentView(R.layout.opinion);
-			
 
 		}
 		

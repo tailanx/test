@@ -6,6 +6,7 @@ import java.util.concurrent.ExecutionException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.voucher.Voucher;
 
@@ -15,7 +16,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 /**
- * 获取用户积分
+ * 鑾峰彇鐢ㄦ埛绉垎
  * @author long bin
  *
  */
@@ -33,8 +34,8 @@ public class VoucherDataManage {
 	}
 	
 	/**
-	 * 获取用户积分
-	 * @param userid 用户id
+	 * 鑾峰彇鐢ㄦ埛绉垎
+	 * @param userid 鐢ㄦ埛id
 	 * @return
 	 */
 	public String getUserVoucher(String userid, String token){
@@ -42,7 +43,7 @@ public class VoucherDataManage {
 		this.token = token;
 		
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, "网络未连接，请检查您的网络连接状态！", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return voucherNum;
 		}
 		boolean state = false;
@@ -61,7 +62,7 @@ public class VoucherDataManage {
 			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO: handle exception
-			Toast.makeText(context, "网络不给力!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		if(!state){
 			

@@ -13,7 +13,7 @@ public class SearchResultListAdapter extends BaseAdapter {
 
 	private Context mContext;
 	private LayoutInflater mLayoutInflater;
-	private String[] listContent = new String[] { "眼部护理", "活肌抗衰", "美白淡斑", "保湿锁水", "控油抗痘", "特别护理", "周期护理", "营养美容" };
+	private String[] listContent = new String[] { "鐪奸儴鎶ょ悊", "娲昏倢鎶楄“", "缇庣櫧娣℃枒", "淇濇箍閿佹按", "鎺ф补鎶楃棙", "鐗瑰埆鎶ょ悊", "鍛ㄦ湡鎶ょ悊", "钀ュ吇缇庡" };
 	
 	public SearchResultListAdapter(Context mContext){
 		this.mContext = mContext;

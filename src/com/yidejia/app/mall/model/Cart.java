@@ -1,94 +1,93 @@
-
 package com.yidejia.app.mall.model;
 
 import java.io.Serializable;
 
 /**
- * ¹ºÎï³µĞÅÏ¢£¬°üÀ¨ ÉÌÆ·Id£¬¹ºÂòÊıÁ¿£¬ÉÌÆ·ÃèÊö£¬¼Û¸ñ£¬ÉÌÆ·Ğ¡Í¼Á´½ÓµØÖ·
+ * è´­ç‰©è½¦ä¿¡æ¯ï¼ŒåŒ…æ‹¬ å•†å“Idï¼Œè´­ä¹°æ•°é‡ï¼Œå•†å“æè¿°ï¼Œä»·æ ¼ï¼Œå•†å“å°å›¾é“¾æ¥åœ°å€
  * @author long bin
  *
  */
 public class Cart implements Serializable{
-	private String uId;                //ÉÌÆ·Id
-	private int amount;             //¹ºÂòÊıÁ¿
-	private String productText;     //ÉÌÆ·ÃèÊö£¨¡¶£½256×Ö½Ú£©
-	private float price;            //¼Û¸ñ
-	private String imgUrl;          //ÉÌÆ·Ğ¡Í¼Á´½ÓµØÖ·
+	private String uId;                //å•†å“Id
+	private int amount;             //è´­ä¹°æ•°é‡
+	private String productText;     //å•†å“æè¿°ï¼ˆã€Šï¼256å­—èŠ‚ï¼‰
+	private float price;            //ä»·æ ¼
+	private String imgUrl;          //å•†å“å°å›¾é“¾æ¥åœ°å€
 	/**
 	 * 
-	 * @param uId ÉèÖÃproduct id
+	 * @param uId è®¾ç½®product id
 	 */
 	public void setUId(String uId){
 		this.uId = uId;
 	}
 	/**
 	 * 
-	 * @return uId ·µ»Øproduct id
+	 * @return uId è¿”å›product id
 	 */
 	public String getUId(){
 		return uId;
 	}
 	/**
 	 * 
-	 * @param price ¼Û¸ñ
+	 * @param price ä»·æ ¼
 	 */
 	public void setPrice(float price){
 		this.price = price;
 	}
 	/**
 	 * 
-	 * @return price ¼Û¸ñ
+	 * @return price ä»·æ ¼
 	 */
 	public float getPrice(){
 		return price;
 	}
 	/**
 	 * 
-	 * @param amount ¹ºÂòÊıÁ¿
+	 * @param amount è´­ä¹°æ•°é‡
 	 */
 	public void setSalledAmmount(int amount){
 		this.amount = amount;
 	}
 	/**
 	 * 
-	 * @return  Amount ¹ºÂòÊıÁ¿
+	 * @return  Amount è´­ä¹°æ•°é‡
 	 */
 	public int getAmount(){
 		return amount;
 	}
 	/**
 	 * 
-	 * @return imgUrl Ğ¡Í¼Æ¬Á´½ÓµØÖ·
+	 * @return imgUrl å°å›¾ç‰‡é“¾æ¥åœ°å€
 	 */
 	public String getImgUrl(){
     	return imgUrl;
     }
 	/**
 	 * 
-	 * @param imgUrl Ğ¡Í¼Æ¬Á´½ÓµØÖ·
+	 * @param imgUrl å°å›¾ç‰‡é“¾æ¥åœ°å€
 	 */
 	public void setImgUrl(String imgUrl){
     	this.imgUrl = imgUrl;
     }
 	/**
 	 * 
-	 * @param productText ÉÌÆ·ÃèÊö
+	 * @param productText å•†å“æè¿°
 	 */
 	public void setProductText(String productText){
 		this.productText = productText;
 	}
 	/**
 	 * 
-	 * @return productText ÉÌÆ·ÃèÊö
+	 * @return productText å•†å“æè¿°
 	 */
 	public String getProductText(){
 		return productText;
 	}
 	
 	
-	/*Ìí¼Óµ½¹ºÎï³µ
-	 userId:    ¿Í»§Id
-	 return:    ¹ºÎï³µ²úÆ·ÁĞ±í
+	/*æ·»åŠ åˆ°è´­ç‰©è½¦
+	 userId:    å®¢æˆ·Id
+	 return:    è´­ç‰©è½¦äº§å“åˆ—è¡¨
 	 */
 //	vector<S_Cart> GetCartsArray(int userId);
 	

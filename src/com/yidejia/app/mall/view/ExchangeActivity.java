@@ -90,7 +90,7 @@ public class ExchangeActivity extends SherlockFragmentActivity implements OnClic
 		});
 		
 		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
-		titleTextView.setText("ÕÀªªªı");
+		titleTextView.setText("ÈÄÄÊç¢Ë¥ß");
 	}
 
 }

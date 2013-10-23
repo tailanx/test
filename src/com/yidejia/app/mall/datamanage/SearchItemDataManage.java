@@ -18,7 +18,7 @@ import com.yidejia.app.mall.net.search.GetSearchList;
 import com.yidejia.app.mall.util.UnicodeToString;
 
 /**
- * 获取搜索商品数据
+ * 鑾峰彇鎼滅储鍟嗗搧鏁版嵁
  * @author long bin
  *
  */
@@ -71,7 +71,7 @@ public class SearchItemDataManage {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage("正在查询");
+			bar.setMessage("姝ｅ湪鏌ヨ");
 			bar.show();
 		}
 		
@@ -88,7 +88,7 @@ public class SearchItemDataManage {
 					analysisJson(responseString);
 					return true;
 				} else if (code == -1){
-					//搜索失败
+					//鎼滅储澶辫触
 				} else {
 					return false;
 				}
@@ -117,7 +117,7 @@ public class SearchItemDataManage {
 	
 	
 	/**
-	 * 解析搜索结果
+	 * 瑙ｆ瀽鎼滅储缁撴灉
 	 * @param jsonString
 	 * @throws JSONException
 	 */

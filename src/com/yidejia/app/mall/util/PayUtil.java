@@ -30,17 +30,17 @@ import com.yidejia.app.mall.datamanage.CartsDataManage;
 
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Order;
-import com.yidejia.app.mall.view.PayActivity;
+import com.yidejia.app.mall.view.CstmPayActivity;
 
 public class PayUtil {
 	private Context context;
 	private LayoutInflater inflater;
 	private View view;
 
-	private LinearLayout mLinearLayoutLayout;// Íâ²ãµÄ²¼¾Ö
-	private LinearLayout mLayout;// Íâ²ãµÄ²¼¾Ö
+	private LinearLayout mLinearLayoutLayout;// ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½
+	private LinearLayout mLayout;// ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½
 
-	private CartsDataManage dataManage;// ÓÃÀ´»ñÈ¡¶©µ¥Êý¾Ý
+	private CartsDataManage dataManage;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private Cart cart;
 	public PayUtil(Context context, LinearLayout mLayout,Cart cart) {
 		this.cart = cart;
@@ -87,13 +87,14 @@ public class PayUtil {
 	}
 
 	/**
-	 * ¼ÓÔØÊÓÍ¼
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 	 */
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	private DisplayImageOptions options;
-	protected ImageLoader imageLoader = ImageLoader.getInstance();// ¼ÓÔØÍ¼Æ¬
+	protected ImageLoader imageLoader = ImageLoader.getInstance();// ï¿½ï¿½ï¿½ï¿½Í¼Æ¬
 
-	public void loadView() {
+	public String loadView() {
+		StringBuffer goods = new StringBuffer();
 		try {
 			dataManage = new CartsDataManage();
 			ArrayList<Cart> mList = dataManage.getCartsArray();
@@ -107,15 +108,15 @@ public class PayUtil {
 				// LinearLayout mLayout = (LinearLayout)
 				// view.findViewById(R.id.all_order_item_main_relative2);
 				TextView titleTextView = (TextView) view
-						.findViewById(R.id.go_pay_item_text);// ÎÄ×ÖÃèÊö
+						.findViewById(R.id.go_pay_item_text);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				ImageView headImage = (ImageView) view
-						.findViewById(R.id.go_pay_item_image);// Í·Ïñ
+						.findViewById(R.id.go_pay_item_image);// Í·ï¿½ï¿½
 				TextView sumPrice = (TextView) view
-						.findViewById(R.id.go_pay_item_sum_detail);// ¼Û¸ñ
+						.findViewById(R.id.go_pay_item_sum_detail);// ï¿½Û¸ï¿½
 				// TextView sumPrice =
 				// (TextView)view.findViewById(R.id.all_order_item_main_sum_money_deatil);
 				TextView countTextView = (TextView) view
-						.findViewById(R.id.go_pay_item_count_detail);// ÉÌÆ·ÊýÄ¿
+						.findViewById(R.id.go_pay_item_count_detail);// ï¿½ï¿½Æ·ï¿½ï¿½Ä¿
 
 				// Order mOrder = mList.get(i);
 				titleTextView.setText(cart.getProductText());
@@ -130,12 +131,14 @@ public class PayUtil {
 				// headImage.setImageResource(R.drawable.ic_launcher);
 				// }
 				sumPrice.setText(cart.getPrice() + "");
-				countTextView.setText(cart.getAmount() + "");
+				String amount = cart.getAmount() + "";
+				countTextView.setText(amount);
+				goods.append(cart.getUId()+","+amount+"n;");
 				// numberTextView.setText(mOrder.getOrderCode());
 				//
 				// final AllOrderDetail allOrderDetail = new
 				// AllOrderDetail(context, mOrder, mLayout);
-				// allOrderDetail.addView();//¼ÓÔØÉÌÆ·
+				// allOrderDetail.addView();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
 				// for(int j=0;j<allOrderDetail.map.size();j++){
 				//
 				// sumPrice.setText(allOrderDetail.map.get("price")+"");
@@ -162,23 +165,24 @@ public class PayUtil {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 
 		}
-
+		return goods.toString();
 	}
-	public void cartLoadView() {
+	public String cartLoadView() {
+		StringBuffer goods = new StringBuffer();
 		try {
 		
 				view = inflater.inflate(R.layout.go_pay_item, null);
 				TextView titleTextView = (TextView) view
-						.findViewById(R.id.go_pay_item_text);// ÎÄ×ÖÃèÊö
+						.findViewById(R.id.go_pay_item_text);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				ImageView headImage = (ImageView) view
-						.findViewById(R.id.go_pay_item_image);// Í·Ïñ
+						.findViewById(R.id.go_pay_item_image);// Í·ï¿½ï¿½
 				TextView sumPrice = (TextView) view
-						.findViewById(R.id.go_pay_item_sum_detail);// ¼Û¸ñ
+						.findViewById(R.id.go_pay_item_sum_detail);// ï¿½Û¸ï¿½
 				TextView countTextView = (TextView) view
-						.findViewById(R.id.go_pay_item_count_detail);// ÉÌÆ·ÊýÄ¿
+						.findViewById(R.id.go_pay_item_count_detail);// ï¿½ï¿½Æ·ï¿½ï¿½Ä¿
 				sumPrice.setText(cart.getPrice()+"");
 				countTextView.setText(cart.getAmount()+"");
 				titleTextView.setText(cart.getProductText());
@@ -187,14 +191,14 @@ public class PayUtil {
 						animateFirstListener);
 				
 				mLinearLayoutLayout.addView(view);
-			
+				goods.append(cart.getUId()+","+cart.getAmount()+"n;");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 
 		}
-
+		return goods.toString();
 	}
 }
 

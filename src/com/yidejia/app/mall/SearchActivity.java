@@ -2,14 +2,9 @@ package com.yidejia.app.mall;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
-import android.app.ListActivity;
 import android.app.SearchManager;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.MatrixCursor;
 import android.os.Bundle;
-import android.provider.BaseColumns;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -20,18 +15,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.widget.SearchView;
-import com.yidejia.app.mall.adapter.SearchListAdapter;
 import com.yidejia.app.mall.datamanage.SchHistoryDataManage;
 import com.yidejia.app.mall.search.SuggestionsAdapter;
 
@@ -39,8 +26,8 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 	
 	
 	private SuggestionsAdapter mSuggestionsAdapter;
-	private static final String[] COLUMNS = { BaseColumns._ID,
-			SearchManager.SUGGEST_COLUMN_TEXT_1, };
+//	private static final String[] COLUMNS = { BaseColumns._ID,
+//			SearchManager.SUGGEST_COLUMN_TEXT_1, };
 	private ListView searchHistoryList;
 	private Button clearHistoryBtn;
 	private Button searchBtn;
@@ -84,10 +71,10 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 				if(keyCode == KeyEvent.KEYCODE_ENTER){
 					String name = autoCompleteTextView.getText().toString();
 					if(name.trim() == null || "".equals(name.trim())){
-					Toast.makeText(SearchActivity.this, "ËÑË÷ÄÚÈİ²¿ÄÜÎª¿Õ", Toast.LENGTH_SHORT).show();
+					Toast.makeText(SearchActivity.this, "æœç´¢å†…å®¹ä¸èƒ½ä¸ºç©º", Toast.LENGTH_SHORT).show();
 					return false;
 					}
-					//Î´°üº¬¸Ã¼ÇÂ¼£¬Ìí¼Ó
+					//æœªåŒ…å«è¯¥è®°å½•ï¼Œæ·»åŠ 
 					if(!historyArrayList.contains(name)){
 						boolean state = historyDataManage.addHistory(name);
 						Log.i("SchHistory", "state:"+state);
@@ -144,6 +131,9 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 		Bundle bundle = new Bundle();
 		bundle.putString("name", name);
 		bundle.putString("title", name);
+		bundle.putString("price", "");
+		bundle.putString("brand", "");
+		bundle.putString("fun", "");
 		intent.putExtras(bundle);
 		startActivity(intent);
 		SearchActivity.this.finish();
@@ -201,7 +191,12 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		
 		autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.searchActivity_autoComplete);
-		adapter = new ArrayAdapter<String>(this, //¶¨ÒåÆ¥ÅäÔ´µÄadapter
+		adapter = new ArrayAdapter<String>(this, //å®šä¹‰åŒ¹é…æºçš„adapter
+                android.R.layout.simple_dropdown_item_1line, historyArrayList);
+//		searchTextView.setAdapter(adapter);
+		searchBtn = (Button) findViewById(R.id.search_btn);
+		autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.searchActivity_autoComplete);
+		adapter = new ArrayAdapter<String>(this, //å®šä¹‰åŒ¹é…æºçš„adapter
                 android.R.layout.simple_dropdown_item_1line, historyArrayList);
 //		searchTextView.setAdapter(adapter);
 		searchBtn = (Button) findViewById(R.id.search_btn);
@@ -216,6 +211,6 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 	}
 	
 	private ArrayAdapter<String> adapter;
-	static final String[] COUNTRIES = new String[] {  //ÕâÀïÓÃÒ»¸ö×Ö·û´®Êı×éÀ´µ±Êı¾İÆ¥ÅäÔ´
+	static final String[] COUNTRIES = new String[] {  //è¿™é‡Œç”¨ä¸€ä¸ªå­—ç¬¦ä¸²æ•°ç»„æ¥å½“æ•°æ®åŒ¹é…æº
 	     "Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra"};
 }

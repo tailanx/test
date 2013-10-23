@@ -16,7 +16,7 @@ import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import com.yidejia.app.mall.adapter.ComposeExListAdapter;
 import com.yidejia.app.mall.adapter.SearchListAdapter;
 /**
- * Õâ¸öÀàÊÇ·ÖÀàµÄÀà£¬ÏÖÔÚÓÃ²»µ½ÁË
+ * è¿™ä¸ªç±»æ˜¯åˆ†ç±»çš„ç±»ï¼Œç°åœ¨ç”¨ä¸åˆ°äº†
  * @author long bin 
  *
  */
@@ -26,7 +26,7 @@ public class ComposeActivity extends SherlockActivity{
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
 		super.onCreateOptionsMenu(menu);
-//		menu.add(Menu.NONE, 0, Menu.NONE, "Ê×Ò³")
+//		menu.add(Menu.NONE, 0, Menu.NONE, "ï¿½ï¿½Ò³")
 //		.setIcon(R.drawable.home_normal)
 //		.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 //			
@@ -40,16 +40,16 @@ public class ComposeActivity extends SherlockActivity{
 //			}
 //		})
 //		.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-//		menu.add(Menu.NONE, 1, Menu.NONE, "·¢ÏÖ¡¤¹ä")
+//		menu.add(Menu.NONE, 1, Menu.NONE, "ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½")
 //		.setIcon(R.drawable.down_guang_normal)
 //		.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-//		menu.add(Menu.NONE, 2, Menu.NONE, "ËÑË÷")
+//		menu.add(Menu.NONE, 2, Menu.NONE, "ï¿½ï¿½ï¿½ï¿½")
 //		.setIcon(R.drawable.down_search_normal)
 //		.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-//		menu.add(Menu.NONE, 3, Menu.NONE, "¹ºÎï³µ")
+//		menu.add(Menu.NONE, 3, Menu.NONE, "ï¿½ï¿½ï¿½ï³µ")
 //		.setIcon(R.drawable.down_shopping_normal)
 //		.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-//		menu.add(Menu.NONE, 4, Menu.NONE, "ÎÒµÄÉÌ³Ç")
+//		menu.add(Menu.NONE, 4, Menu.NONE, "ï¿½Òµï¿½ï¿½Ì³ï¿½")
 //		.setIcon(R.drawable.down_my_normal)
 //		.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 //		getSupportMenuInflater().inflate(R.menu.down_menu, menu);
@@ -97,7 +97,7 @@ public class ComposeActivity extends SherlockActivity{
 		mExpandableListView = (ExpandableListView) findViewById(R.id.compose_exlist);
 		adapter = new ComposeExListAdapter(ComposeActivity.this);
 		mExpandableListView.setAdapter(adapter);
-		mExpandableListView.setGroupIndicator(null);//³ıÈ¥×Ô´øµÄ¼ıÍ·
+		mExpandableListView.setGroupIndicator(null);//ï¿½ï¿½È¥ï¿½Ô´ï¿½Ä¼ï¿½Í·
 	}
 	
 	

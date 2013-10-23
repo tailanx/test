@@ -1,14 +1,14 @@
 package com.yidejia.app.mall.model;
 /**
- * ¼Û¸ñÇø¼ä
+ * ä»·æ ¼åŒºé—´
  * @author long bin
  *
  */
 public class PriceLevel {
 	
-	private String priceId;        // ¼Û¸ñÇø¼äId
-	private String min;          // Çø¼ä×îĞ¡Öµ
-	private String max;          // ¼Û¸ñÇø¼ä×î´óÖµ
+	private String priceId;        // ä»·æ ¼åŒºé—´Id
+	private String min;          // åŒºé—´æœ€å°å€¼
+	private String max;          // ä»·æ ¼åŒºé—´æœ€å¤§å€¼
 	 
 	public void setPriceId(String priceId){
 		this.priceId = priceId;
@@ -31,6 +31,6 @@ public class PriceLevel {
 	public String getMaxPrice(){
 		return max;
 	}
-	// »ñÈ¡¼Û¸ñÇø¼äÁĞ±í
+	// è·å–ä»·æ ¼åŒºé—´åˆ—è¡¨
 //	 vector<S_PriceLevel> GetPriceLevelArray();
 }

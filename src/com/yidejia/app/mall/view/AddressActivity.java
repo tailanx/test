@@ -27,15 +27,15 @@ public class AddressActivity extends SherlockActivity {
 
 	private AddressDataManage mangerAddressDataManage;
 	
-	private TextView areaTextView;//µØÇøµØÖ·
-	private TextView addressTextView;//¾ßÌåµØÖ·
-	private TextView nameTextView;//ÊÕ»õÈËĞÕÃû
-	private TextView numberTextView;//ÊÕ»õÈËµç»°
-	private ArrayList<Addresses> addressesArray;//ÊÕ»õÈËµØÖ·À¸
+	private TextView areaTextView;//åœ°åŒºåœ°å€
+	private TextView addressTextView;//å…·ä½“åœ°å€
+	private TextView nameTextView;//æ”¶è´§äººå§“å
+	private TextView numberTextView;//æ”¶è´§äººç”µè¯
+	private ArrayList<Addresses> addressesArray;//æ”¶è´§äººåœ°å€æ 
 	private String TAG = "AddressDataManage";//log
-	private ImageView deleteImageView;//É¾³ı
-	private ImageView editImageView;//±à¼­
-	private CheckBox checkBox;//µ¥Ñ¡¿ò
+	private ImageView deleteImageView;//åˆ é™¤
+	private ImageView editImageView;//ç¼–è¾‘
+	private CheckBox checkBox;//å•é€‰æ¡†
 	private LinearLayout layout;
 	private View view;
 	
@@ -65,7 +65,7 @@ public class AddressActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);	
 		setActionbar();
-		//ÕâÀï¸¸²¼¾ÖÒªÓÃscrollview
+		//ï¿½ï¿½ï¿½ï¸¸ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½scrollview
 		setContentView(R.layout.address_management);
 //		mangerAddressDataManage = new AddressDataManage(this);
 //	    addressesArray = mangerAddressDataManage.getAddressesArray(654321, 0, 10);
@@ -96,20 +96,21 @@ public class AddressActivity extends SherlockActivity {
 			}
 		});
 		Button rightButton = (Button) findViewById(R.id.actionbar_right);
-		rightButton.setText("ĞÂÔö");
+		rightButton.setText(getResources().getString(R.string.new_address));
 		rightButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent intent2 = new Intent(AddressActivity.this,NewAddressActivity.class);
-				startActivityForResult(intent2,DefinalDate.requestcode);//·¢ËÍIntent,²¢ÉèÖÃÇëÇóÂë
+				startActivityForResult(intent2,DefinalDate.requestcode);//å‘é€Intent,å¹¶è®¾ç½®è¯·æ±‚ç 
 
 			}
 		});
 		
 		TextView titleTextView = (TextView) findViewById(R.id.actionbar_title);
-		titleTextView.setText("ÊÕ»õµØÖ·¹ÜÀí");
+		titleTextView.setText(getResources().getString(R.string.manage_address));
+		Log.e(TAG, titleTextView.getText().toString());
 	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -121,7 +122,7 @@ public class AddressActivity extends SherlockActivity {
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-					Toast.makeText(AddressActivity.this, "ÄúµÄÊäÈëÓĞÎÊÌâ", Toast.LENGTH_SHORT).show();
+					Toast.makeText(AddressActivity.this, getResources().getString(R.string.wrong_input), Toast.LENGTH_SHORT).show();
 				}
 				   
 				   
@@ -132,7 +133,7 @@ public class AddressActivity extends SherlockActivity {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(AddressActivity.this, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(AddressActivity.this, getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 
 		}
 	}

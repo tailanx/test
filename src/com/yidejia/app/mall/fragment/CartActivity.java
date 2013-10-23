@@ -1,6 +1,7 @@
 package com.yidejia.app.mall.fragment;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -41,26 +42,26 @@ import com.yidejia.app.mall.view.ExchangeFreeActivity;
 import com.yidejia.app.mall.view.GoCartActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.view.NewAddressActivity;
-import com.yidejia.app.mall.view.PayActivity;
+//import com.yidejia.app.mall.view.PayActivity;
 
 public class CartActivity extends SherlockFragment implements OnClickListener {
-	private ImageView subtract;// ¼õ
+	private ImageView subtract;// å‡
 	private TextView number;
 	private ImageView addImageView;
 
-	private ImageView subtract2;// ¼õ
+	private ImageView subtract2;// å‡
 	private TextView number2;
 	private ImageView addImageView2;
 	private int sumString;
-	private TextView sumTextView;// ×ÜµÄÇ®Êı
-	private TextView counTextView;// ×ÜµÄÊıÁ¿
-	private TextView priceTextView1;// ¼Û¸ñ
-	private TextView priceTextView2;// ¼Û¸ñ
+	private TextView sumTextView;// æ€»çš„é’±æ•°
+	private TextView counTextView;// æ€»çš„æ•°é‡
+	private TextView priceTextView1;// ä»·æ ¼
+	private TextView priceTextView2;// ä»·æ ¼
 	private View person;
 	private View person2;
 	private CartsDataManage dataManage;
 	private Button shoppingCartTopay;
-	private ImageView mImageView;// ·µ»Ø
+	private ImageView mImageView;// è¿”å›
 	private ArrayList<UserComment> mlist;
 	private CartUtil cartUtil;
 	private CheckBox mBox;
@@ -70,8 +71,8 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	private LinearLayout layout;
 	private View view;
 	private CartsDataManage dataManage2;
-	// private AddressDataManage addressManage;// µØÖ·¹ÜÀí
-	private PullToRefreshScrollView mPullToRefreshScrollView;// Ë¢ĞÂ½çÃæ
+	// private AddressDataManage addressManage;// åœ°å€ç®¡ç†
+	private PullToRefreshScrollView mPullToRefreshScrollView;// åˆ·æ–°ç•Œé¢
 	private Fragment mFragment;
 	private MyApplication myApplication;
 	private PreferentialDataManage preferentialDataManage;
@@ -83,7 +84,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 
 	// private void doClick(View v) {
 	// switch (v.getId()) {
-	// case R.id.shopping_cart_go_pay:// È¥½áËã
+	// case R.id.shopping_cart_go_pay:// å»ç»“ç®—
 	// Intent intent = new Intent(getSherlockActivity(),
 	// GoodsInfoActivity.class);
 	// getSherlockActivity().startActivity(intent);
@@ -97,9 +98,9 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	// if(v==person){
 	// int sum = Integer.parseInt(number.getText().toString());
 	// switch (v.getId()) {
-	// case R.id.shopping_cart_item_subtract:// µã»÷¼õºÅÊ±Ìí¼ÓµÄÊÂ¼ş
+	// case R.id.shopping_cart_item_subtract:// ç‚¹å‡»å‡å·æ—¶æ·»åŠ çš„äº‹ä»¶
 	// if (sum <= 0) {
-	// Toast.makeText(getSherlockActivity(), "ÒÑ¾­ÊÇ×îĞ¡µÄÊıÖµÁË",
+	// Toast.makeText(getSherlockActivity(), "å·²ç»æ˜¯æœ€å°çš„æ•°å€¼äº†",
 	// Toast.LENGTH_LONG).show();
 	// } else {
 	// sum--;
@@ -121,9 +122,9 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	// }
 	// break;
 	//
-	// case R.id.shopping_cart_item_add:// µã»÷¼ÓºÅÊ±Ìí¼ÓµÄÊÂ¼ş
+	// case R.id.shopping_cart_item_add:// ç‚¹å‡»åŠ å·æ—¶æ·»åŠ çš„äº‹ä»¶
 	// if (sum >= 9999) {
-	// Toast.makeText(getSherlockActivity(), "ÄúÏëÒª¹ºÂò¸ü¶àµÄ²úÆ·£¬ÇëÓë¿Í·şÁªÏµ",
+	// Toast.makeText(getSherlockActivity(), "æ‚¨æƒ³è¦è´­ä¹°æ›´å¤šçš„äº§å“ï¼Œè¯·ä¸å®¢æœè”ç³»",
 	// Toast.LENGTH_LONG).show();
 	// } else {
 	// sum++;
@@ -148,9 +149,9 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	// }else if(v.equals(person2)) {
 	// int sum = Integer.parseInt(number2.getText().toString());
 	// switch (v.getId()) {
-	// case R.id.shopping_cart_item_subtract:// µã»÷¼õºÅÊ±Ìí¼ÓµÄÊÂ¼ş
+	// case R.id.shopping_cart_item_subtract:// ç‚¹å‡»å‡å·æ—¶æ·»åŠ çš„äº‹ä»¶
 	// if (sum <= 0) {
-	// Toast.makeText(getSherlockActivity(), "ÒÑ¾­ÊÇ×îĞ¡µÄÊıÖµÁË",
+	// Toast.makeText(getSherlockActivity(), "å·²ç»æ˜¯æœ€å°çš„æ•°å€¼äº†",
 	// Toast.LENGTH_LONG).show();
 	// } else {
 	// sum--;
@@ -172,9 +173,9 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	// }
 	// break;
 	//
-	// case R.id.shopping_cart_item_add:// µã»÷¼ÓºÅÊ±Ìí¼ÓµÄÊÂ¼ş
+	// case R.id.shopping_cart_item_add:// ç‚¹å‡»åŠ å·æ—¶æ·»åŠ çš„äº‹ä»¶
 	// if (sum >= 9999) {
-	// Toast.makeText(getSherlockActivity(), "ÄúÏëÒª¹ºÂò¸ü¶àµÄ²úÆ·£¬ÇëÓë¿Í·şÁªÏµ",
+	// Toast.makeText(getSherlockActivity(), "æ‚¨æƒ³è¦è´­ä¹°æ›´å¤šçš„äº§å“ï¼Œè¯·ä¸å®¢æœè”ç³»",
 	// Toast.LENGTH_LONG).show();
 	// } else {
 	// sum++;
@@ -218,13 +219,13 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 		// getSherlockActivity().registerReceiver(receiver, filter);
 		// // registerForContextMenu(layout);
 
-		mBox = (CheckBox) view.findViewById(R.id.shopping_cart_checkbox);// Ñ¡Ôñ¿ò
+		mBox = (CheckBox) view.findViewById(R.id.shopping_cart_checkbox);// é€‰æ‹©æ¡†
 
 		sumTextView = (TextView) view
-				.findViewById(R.id.shopping_cart_sum_money);// ×ÜµÄÇ®Êı
+				.findViewById(R.id.shopping_cart_sum_money);// æ€»çš„é’±æ•°
 
 		counTextView = (TextView) view
-				.findViewById(R.id.shopping_cart_sum_number);// ×ÜµÄÊıÁ¿
+				.findViewById(R.id.shopping_cart_sum_number);// æ€»çš„æ•°é‡
 
 		layout = (LinearLayout) view.findViewById(R.id.shopping_cart_relative2);
 
@@ -237,7 +238,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 
 		mPullToRefreshScrollView = (PullToRefreshScrollView) view
 				.findViewById(R.id.shopping_cart_item_goods_scrollView);
-		String label = "ÉÏ´Î¸üĞÂÓÚ"
+		String label = "ä¸Šæ¬¡æ›´æ–°äº"
 				+ DateUtils.formatDateTime(getSherlockActivity(),
 						System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
 								| DateUtils.FORMAT_ABBREV_ALL
@@ -247,7 +248,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 		mPullToRefreshScrollView.onRefreshComplete();
 		mPullToRefreshScrollView.setOnRefreshListener(listener);
 
-		// ½áËã
+		// ç»“ç®—
 		shoppingCartTopay = (Button) getSherlockActivity().findViewById(
 				R.id.shopping_cart_go_pay);
 		shoppingCartTopay.setOnClickListener(new OnClickListener() {
@@ -257,7 +258,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 				// TODO Auto-generated method stub
 				// getAddresses();
 				if (!myApplication.getIsLogin()) {
-					Toast.makeText(getSherlockActivity(), "Äã»¹Î´µÇÂ½£¬ÇëÏÈµÇÂ½",
+					Toast.makeText(getSherlockActivity(), "ä½ è¿˜æœªç™»é™†ï¼Œè¯·å…ˆç™»é™†",
 							Toast.LENGTH_LONG).show();
 					Intent intent = new Intent(getSherlockActivity(),
 							LoginActivity.class);
@@ -281,7 +282,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 							intent.putExtras(bundle);
 							getSherlockActivity().startActivity(intent);
 						} else {
-							Toast.makeText(getSherlockActivity(), "Äã»¹Î´¹ºÂòÈÎºÎÉÌÆ·",
+							Toast.makeText(getSherlockActivity(), "ä½ è¿˜æœªè´­ä¹°ä»»ä½•å•†å“",
 									Toast.LENGTH_LONG).show();
 
 						}
@@ -304,14 +305,14 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 
 	private int fromIndex = 0;
 	private int amontIndex = 10;
-	// Ë¢ĞÂÌí¼ÓÊÂ¼ş
+	// åˆ·æ–°æ·»åŠ äº‹ä»¶
 	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
 
 		@Override
 		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
 			// TODO Auto-generated method stub
 
-			String label = "ÉÏ´Î¸üĞÂÓÚ"
+			String label = "ä¸Šæ¬¡æ›´æ–°äº"
 					+ DateUtils.formatDateTime(getSherlockActivity(),
 							System.currentTimeMillis(),
 							DateUtils.FORMAT_SHOW_DATE
@@ -327,12 +328,12 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	// @Override
 	// public void onCreateContextMenu(ContextMenu menu, View v,
 	// ContextMenuInfo menuInfo) {
-	// menu.add(0, MENU1, 0, "É¾³ı");
-	// menu.add(0, MENU2, 0, "²é¿´ÉÌÆ·ÏêÇé");
-	// menu.add(0, MENU3, 0, "ÊÕ²Ø");
+	// menu.add(0, MENU1, 0, "åˆ é™¤");
+	// menu.add(0, MENU2, 0, "æŸ¥çœ‹å•†å“è¯¦æƒ…");
+	// menu.add(0, MENU3, 0, "æ”¶è—");
 	// menu.setGroupCheckable(0, true, true);
 	// menu.setHeaderIcon(android.R.drawable.menu_frame);
-	// menu.setHeaderTitle("¹ºÎï³µ²Ù×÷");
+	// menu.setHeaderTitle("è´­ç‰©è½¦æ“ä½œ");
 	// super.onCreateContextMenu(menu, v, menuInfo);
 	// }
 
@@ -364,7 +365,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 		super.onSaveInstanceState(outState);
 	}
 	// /**
-	// * ÅĞ¶ÏÊÇ·ñÓÃ»§ÒÑ¾­ÓĞ±£´æºÃµÄµØÖ·
+	// * åˆ¤æ–­æ˜¯å¦ç”¨æˆ·å·²ç»æœ‰ä¿å­˜å¥½çš„åœ°å€
 	// */
 	// private void getAddresses() {
 	//

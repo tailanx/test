@@ -3,86 +3,86 @@ package com.yidejia.app.mall.model;
 import java.util.ArrayList;
 
 /**
- * ¶©µ¥Ä£¿é£¬°üÀ¨¶©µ¥ºÅ£¬¶©µ¥×´Ì¬£¨ÒÑ¸¶¿î£¬´ıÈ·ÈÏµÈ£©£¬¶©µ¥ÄÚÉÌÆ·£¨{@link Cart} Çë²Î¿¼¹ºÎï³µÄ£¿é£©,¶©µ¥×Ü¶î,¶©µ¥ÉÌÆ·×ÜÊıÁ¿
+ * è®¢å•æ¨¡å—ï¼ŒåŒ…æ‹¬è®¢å•å·ï¼Œè®¢å•çŠ¶æ€ï¼ˆå·²ä»˜æ¬¾ï¼Œå¾…ç¡®è®¤ç­‰ï¼‰ï¼Œè®¢å•å†…å•†å“ï¼ˆ{@link Cart} è¯·å‚è€ƒè´­ç‰©è½¦æ¨¡å—ï¼‰,è®¢å•æ€»é¢,è®¢å•å•†å“æ€»æ•°é‡
  * @author long bin
  *
  */
 public class Order {
-	private String orderId ; //¶©µ¥id
-	private String orderCode;           //¶©µ¥ºÅ
-	private String status;              //¶©µ¥×´Ì¬£¨ÒÑ¸¶¿î£¬´ıÈ·ÈÏµÈ£©
-    private ArrayList<Cart> cartsArray;  //¶©µ¥ÄÚÉÌÆ·£¨S_Cart Çë²Î¿¼¹ºÎï³µÄ£¿é£©
-    private float orderSummary;         //¶©µ¥×Ü¶î
-    private int orderAmount;            //¶©µ¥ÉÌÆ·×ÜÊıÁ¿
-    private String ship_fee;	//¿ìµİ·Ñ
-    private String core;//»ı·Ö
-    private String date;// Ê±¼ä
+	private String orderId ; //è®¢å•id
+	private String orderCode;           //è®¢å•å·
+	private String status;              //è®¢å•çŠ¶æ€ï¼ˆå·²ä»˜æ¬¾ï¼Œå¾…ç¡®è®¤ç­‰ï¼‰
+    private ArrayList<Cart> cartsArray;  //è®¢å•å†…å•†å“ï¼ˆS_Cart è¯·å‚è€ƒè´­ç‰©è½¦æ¨¡å—ï¼‰
+    private float orderSummary;         //è®¢å•æ€»é¢
+    private int orderAmount;            //è®¢å•å•†å“æ€»æ•°é‡
+    private String ship_fee;	//å¿«é€’è´¹
+    private String core;//ç§¯åˆ†
+    private String date;// æ—¶é—´
     /**
-     * ¶©µ¥ºÅ
-     * @param orderCode ¶©µ¥ºÅ
+     * è®¢å•å·
+     * @param orderCode è®¢å•å·
      */
     public void setOrderCode(String orderCode){
     	this.orderCode = orderCode;
     }
     /**
      * 
-     * @return orderCode ¶©µ¥ºÅ
+     * @return orderCode è®¢å•å·
      */
     public String getOrderCode(){
     	return orderCode;
     }
     /**
-     * ¶©µ¥×´Ì¬£¨ÒÑ¸¶¿î£¬´ıÈ·ÈÏµÈ£©
-     * @param starus ¶©µ¥×´Ì¬£¨ÒÑ¸¶¿î£¬´ıÈ·ÈÏµÈ£©
+     * è®¢å•çŠ¶æ€ï¼ˆå·²ä»˜æ¬¾ï¼Œå¾…ç¡®è®¤ç­‰ï¼‰
+     * @param starus è®¢å•çŠ¶æ€ï¼ˆå·²ä»˜æ¬¾ï¼Œå¾…ç¡®è®¤ç­‰ï¼‰
      */
     public void setStatus(String starus){
     	this.status = starus;
     }
     /**
      * 
-     * @return status ¶©µ¥×´Ì¬£¨ÒÑ¸¶¿î£¬´ıÈ·ÈÏµÈ£©
+     * @return status è®¢å•çŠ¶æ€ï¼ˆå·²ä»˜æ¬¾ï¼Œå¾…ç¡®è®¤ç­‰ï¼‰
      */
     public String getStatus(){
     	return status;
     }
     /**
      * 
-     * @param cartsArray ArrayList<{@link Cart}> ¶©µ¥ÄÚÉÌÆ·£¨Cart Çë²Î¿¼¹ºÎï³µÄ£¿é£©
+     * @param cartsArray ArrayList<{@link Cart}> è®¢å•å†…å•†å“ï¼ˆCart è¯·å‚è€ƒè´­ç‰©è½¦æ¨¡å—ï¼‰
      */
     public void setCartsArray(ArrayList<Cart> cartsArray){
     	this.cartsArray = cartsArray;
     }
     /**
      * 
-     * @return cartsArray ArrayList<{@link Cart}> ¶©µ¥ÄÚÉÌÆ·£¨Cart Çë²Î¿¼¹ºÎï³µÄ£¿é£©
+     * @return cartsArray ArrayList<{@link Cart}> è®¢å•å†…å•†å“ï¼ˆCart è¯·å‚è€ƒè´­ç‰©è½¦æ¨¡å—ï¼‰
      */
     public ArrayList<Cart> getCartsArray(){
     	return cartsArray;
     }
     /**
      * 
-     * @param orderSummary ¶©µ¥×Ü¶î
+     * @param orderSummary è®¢å•æ€»é¢
      */
     public void setOrderSummary(float orderSummary){
     	this.orderSummary = orderSummary;
     }
     /**
      * 
-     * @return orderSummary ¶©µ¥×Ü¶î
+     * @return orderSummary è®¢å•æ€»é¢
      */
     public float getOrderSummary(){
     	return orderSummary;
     }
     /**
      * 
-     * @param orderAmount ¶©µ¥ÊıÁ¿
+     * @param orderAmount è®¢å•æ•°é‡
      */
     public void setOrderAmount(int orderAmount){
     	this.orderAmount = orderAmount;
     }
     /**
      * 
-     * @return orderAmount ¶©µ¥ÊıÁ¿
+     * @return orderAmount è®¢å•æ•°é‡
      */
     public int getOrderAmount(){
     	return orderAmount;
@@ -121,14 +121,14 @@ public class Order {
     }
     
     
-    /*»ñÈ¡¶©µ¥ÁĞ±í
+    /*è·å–è®¢å•åˆ—è¡¨
 
-    userId: ¿Í»§Id
-     the_day:  1.½üÒ»ÖÜ£»   2.½üÒ»ÔÂ£»  3.½üÒ»Äê
-     status:  °üÀ¨£¨Â¼Èë£¨´ı¸¶¿î£©£¬ÒÑ¸¶¿î£¨´ı·¢»õ£©£¬ÒÑ·¢»õºÍÒÑÍê³É£¬£¬µÈÓÚ¿ÕÊ±£¬¾ÍÊÇ¡°È«²¿¶©µ¥¡°µÄÒâË¼£©£»
+    userId: å®¢æˆ·Id
+     the_day:  1.è¿‘ä¸€å‘¨ï¼›   2.è¿‘ä¸€æœˆï¼›  3.è¿‘ä¸€å¹´
+     status:  åŒ…æ‹¬ï¼ˆå½•å…¥ï¼ˆå¾…ä»˜æ¬¾ï¼‰ï¼Œå·²ä»˜æ¬¾ï¼ˆå¾…å‘è´§ï¼‰ï¼Œå·²å‘è´§å’Œå·²å®Œæˆï¼Œï¼Œç­‰äºç©ºæ—¶ï¼Œå°±æ˜¯â€œå…¨éƒ¨è®¢å•â€œçš„æ„æ€ï¼‰ï¼›
      
-     return: ¶©µ¥ÁĞ±í
-     eg.:  http://u.atido.com/XXX/?the_date=1&status£½Â¼Èë
+     return: è®¢å•åˆ—è¡¨
+     eg.:  http://u.atido.com/XXX/?the_date=1&statusï¼å½•å…¥
      */
-//    vector<S_Order> GetOrderArray(int userId£¬int the_day, const char* status);
+//    vector<S_Order> GetOrderArray(int userIdï¼Œint the_day, const char* status);
 }

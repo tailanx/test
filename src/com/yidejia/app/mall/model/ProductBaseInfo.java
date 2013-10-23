@@ -3,51 +3,51 @@ package com.yidejia.app.mall.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 /**
- * ÉÌÆ·ÏêÇéÒ³µÄ»ù±¾ĞÅÏ¢ , ²ÎÊı uid,bannerArray,name,salledAmount,price,commentAmount
+ * å•†å“è¯¦æƒ…é¡µçš„åŸºæœ¬ä¿¡æ¯ , å‚æ•° uid,bannerArray,name,salledAmount,price,commentAmount
  * ,showListAmount,brands,bannerArray,productSpecifications,productNumber,recommendArray
  * @author long bin
  *
  */
 public class ProductBaseInfo implements Serializable{
 	private String uId;                            //product id
-	private String name;						//ÉÌÆ·Ãû³Æ
-	private String brief;                       //ÉÌÆ·¸ÅÒªÃèÊö£¨<£½256×Ö½Ú£©
-	private String price;                        //¼Û¸ñ
-	private String salledAmount;                  //ÒÑÏúÊÛÊıÁ¿
-	private String showListAmount;                //É¹µ¥ÊıÁ¿
-	private String commentAmount;                 //ÆÀÂÛÊıÁ¿
-	private String productDetailUrl;            //ÉÌÆ·ÏêÇéÒ³ÃæÁ´½Ó
-	private ArrayList<MainProduct> recommendArray;    //ÍÆ¼ö´îÅä £¨<£½10£¿£©
-	private String productSpecifications;       //¹æ¸ñ
-	private String productNumber;               //ÉÌÆ·±àºÅ
-	private String brands;                      //Æ·ÅÆ
-	private ArrayList<BaseProduct> bannerArray;  //ÂÖ²¥ÉÌÆ·£¨¸öÊı²»¹Ì¶¨£¬<=5?)
-	private String imgUrl; // Ğ¡Í¼µØÖ·
+	private String name;						//å•†å“åç§°
+	private String brief;                       //å•†å“æ¦‚è¦æè¿°ï¼ˆ<ï¼256å­—èŠ‚ï¼‰
+	private String price;                        //ä»·æ ¼
+	private String salledAmount;                  //å·²é”€å”®æ•°é‡
+	private String showListAmount;                //æ™’å•æ•°é‡
+	private String commentAmount;                 //è¯„è®ºæ•°é‡
+	private String productDetailUrl;            //å•†å“è¯¦æƒ…é¡µé¢é“¾æ¥
+	private ArrayList<MainProduct> recommendArray;    //æ¨èæ­é… ï¼ˆ<ï¼10ï¼Ÿï¼‰
+	private String productSpecifications;       //è§„æ ¼
+	private String productNumber;               //å•†å“ç¼–å·
+	private String brands;                      //å“ç‰Œ
+	private ArrayList<BaseProduct> bannerArray;  //è½®æ’­å•†å“ï¼ˆä¸ªæ•°ä¸å›ºå®šï¼Œ<=5?)
+	private String imgUrl; // å°å›¾åœ°å€
 	
 	/**
 	 * 
-	 * @param uId ÉèÖÃproduct id
+	 * @param uId è®¾ç½®product id
 	 */
 	public void setUId(String uId){
 		this.uId = uId;
 	}
 	/**
 	 * 
-	 * @return uId ·µ»Øproduct id
+	 * @return uId è¿”å›product id
 	 */
 	public String getUId(){
 		return uId;
 	}
 	/**
 	 * 
-	 * @param name ÉÌÆ·Ãû³Æ
+	 * @param name å•†å“åç§°
 	 */
 	public void setName(String name){
 		this.name = name;
 	}
 	/**
 	 * 
-	 * @return ÉÌÆ·Ãû³Æ
+	 * @return å•†å“åç§°
 	 */
 	public String getName(){
 		return name;
@@ -55,14 +55,14 @@ public class ProductBaseInfo implements Serializable{
 	
 	/**
 	 * 
-	 * @param bannerArray ÉèÖÃ ÂÖ²¥ÉÌÆ·£¨¸öÊı²»¹Ì¶¨£¬<=5?)
+	 * @param bannerArray è®¾ç½® è½®æ’­å•†å“ï¼ˆä¸ªæ•°ä¸å›ºå®šï¼Œ<=5?)
 	 */
 	public void setBannerArray(ArrayList<BaseProduct> bannerArray){
 		this.bannerArray = bannerArray;
 	}
 	/**
 	 * 
-	 * @return bannerArray ÂÖ²¥ÉÌÆ·
+	 * @return bannerArray è½®æ’­å•†å“
 	 */
 	public ArrayList<BaseProduct> getBannerArray(){
 		return bannerArray;
@@ -70,42 +70,42 @@ public class ProductBaseInfo implements Serializable{
 	
 	/**
 	 * 
-	 * @param brief ÉÌÆ·¸ÅÒªÃèÊö£¨¡¶£½256×Ö½Ú£©
+	 * @param brief å•†å“æ¦‚è¦æè¿°ï¼ˆã€Šï¼256å­—èŠ‚ï¼‰
 	 */
 	public void setBrief(String brief){
 		this.brief = brief;
 	}
 	/**
 	 * 
-	 * @return brief ÉÌÆ·¸ÅÒªÃèÊö£¨¡¶£½256×Ö½Ú£©
+	 * @return brief å•†å“æ¦‚è¦æè¿°ï¼ˆã€Šï¼256å­—èŠ‚ï¼‰
 	 */
 	public String getBrief(){
 		return brief;
 	}
 	/**
 	 * 
-	 * @param price ¼Û¸ñ
+	 * @param price ä»·æ ¼
 	 */
 	public void setPrice(String price){
 		this.price = price;
 	}
 	/**
 	 * 
-	 * @return price ¼Û¸ñ
+	 * @return price ä»·æ ¼
 	 */
 	public String getPrice(){
 		return price;
 	}
 	/**
 	 * 
-	 * @param salledAmount ÒÑÏúÊÛÊıÁ¿
+	 * @param salledAmount å·²é”€å”®æ•°é‡
 	 */
 	public void setSalledAmount(String salledAmount){
 		this.salledAmount = salledAmount;
 	}
 	/**
 	 * 
-	 * @return  salledAmmount ÒÑÏúÊÛÊıÁ¿
+	 * @return  salledAmmount å·²é”€å”®æ•°é‡
 	 */
 	public String getSalledAmmount(){
 		return salledAmount;
@@ -113,13 +113,13 @@ public class ProductBaseInfo implements Serializable{
 	
 	/**
 	 * 
-	 * @param commentAmount ÆÀÂÛÊıÁ¿
+	 * @param commentAmount è¯„è®ºæ•°é‡
 	 */
 	public void setCommentAmount(String commentAmount){
 		this.commentAmount = commentAmount;
 	}
 	/**
-	 * @return commentAmount ÆÀÂÛÊıÁ¿
+	 * @return commentAmount è¯„è®ºæ•°é‡
 	 */
 	public String getCommentAmount(){
 		return commentAmount;
@@ -127,98 +127,98 @@ public class ProductBaseInfo implements Serializable{
 	
 	/**
 	 * 
-	 * @param showListAmount É¹µ¥ÊıÁ¿
+	 * @param showListAmount æ™’å•æ•°é‡
 	 */
 	public void setShowListAmount(String showListAmount){
 		this.showListAmount = showListAmount;
 	}
 	/**
 	 * 
-	 * @return showListAmmount É¹µ¥ÊıÁ¿
+	 * @return showListAmmount æ™’å•æ•°é‡
 	 */
 	public String getShowListAmount(){
 		return showListAmount;
 	}
 	/**
 	 * 
-	 * @param brands Æ·ÅÆ
+	 * @param brands å“ç‰Œ
 	 */
 	public void setBrands(String brands){
 		this.brands = brands;
 	}
 	/**
 	 * 
-	 * @return brands Æ·ÅÆ
+	 * @return brands å“ç‰Œ
 	 */
 	public String getBrands(){
 		return brands;
 	}
 	/**
 	 * 
-	 * @param productNumber ÉÌÆ·±àºÅ
+	 * @param productNumber å•†å“ç¼–å·
 	 */
 	public void setProductNumber(String productNumber){
 		this.productNumber = productNumber;
 	}
 	/**
 	 * 
-	 * @return productNumber ÉÌÆ·±àºÅ
+	 * @return productNumber å•†å“ç¼–å·
 	 */
 	public String getProductNumber(){
 		return productNumber;
 	}
 	/**
 	 * 
-	 * @param productSpecifications ¹æ¸ñ
+	 * @param productSpecifications è§„æ ¼
 	 */
 	public void setProductSpecifications(String productSpecifications){
 		this.productSpecifications = productSpecifications;
 	}
 	/**
 	 * 
-	 * @return productSpecifications ¹æ¸ñ
+	 * @return productSpecifications è§„æ ¼
 	 */
 	public String getProductSpecifications(){
 		return productSpecifications;
 	}
 	/**
 	 * 
-	 * @param recommendArray ÍÆ¼ö´îÅä
+	 * @param recommendArray æ¨èæ­é…
 	 */
 	public void setRecommendArray(ArrayList<MainProduct> recommendArray){
 		this.recommendArray = recommendArray;
 	}
 	/**
 	 * 
-	 * @return recommendArray ÍÆ¼ö´îÅä
+	 * @return recommendArray æ¨èæ­é…
 	 */
 	public ArrayList<MainProduct> getRecommendArray(){
 		return recommendArray;
 	}
 	/**
 	 * 
-	 * @param productDetailUrl ÉÌÆ·ÏêÇéÒ³ÃæÁ´½Ó
+	 * @param productDetailUrl å•†å“è¯¦æƒ…é¡µé¢é“¾æ¥
 	 */
 	public void setProductDetailUrl(String productDetailUrl){
 		this.productDetailUrl = productDetailUrl;
 	}
 	/**
 	 * 
-	 * @return productDetailUrl ÉÌÆ·ÏêÇéÒ³ÃæÁ´½Ó
+	 * @return productDetailUrl å•†å“è¯¦æƒ…é¡µé¢é“¾æ¥
 	 */
 	public String getProductDetailUrl(){
 		return productDetailUrl;
 	}
 	/**
 	 * 
-	 * @param imgUrl Ğ¡Í¼µØÖ·
+	 * @param imgUrl å°å›¾åœ°å€
 	 */
 	public void setImgUrl(String imgUrl){
 		this.imgUrl = imgUrl;
 	}
 	/**
 	 * 
-	 * @return Ğ¡Í¼µØÖ·
+	 * @return å°å›¾åœ°å€
 	 */
 	public String getImgUrl(){
 		return imgUrl;

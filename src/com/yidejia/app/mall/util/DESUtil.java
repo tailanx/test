@@ -12,7 +12,7 @@ import android.util.Base64;
 
 public class DESUtil {
 	
-	Key key ;  
+	Key key;  
 	   
     public DESUtil() {  
    

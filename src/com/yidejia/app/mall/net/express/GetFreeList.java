@@ -14,7 +14,7 @@ import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.util.Md5;
 /**
- * 获取免邮列表
+ * 鑾峰彇鍏嶉偖鍒楄〃
  * @author long bin
  *
  */
@@ -118,7 +118,7 @@ public class GetFreeList {
 //				// TODO Auto-generated method stub
 //				super.onStart();
 //				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//				bar.setMessage("正在查询");
+//				bar.setMessage("姝ｅ湪鏌ヨ");
 //				bar.show();
 //			}
 //			

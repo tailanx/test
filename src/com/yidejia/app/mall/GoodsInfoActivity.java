@@ -21,20 +21,18 @@ import com.yidejia.app.mall.datamanage.ProductDataManage;
 import com.yidejia.app.mall.fragment.BaseInfoFragment;
 import com.yidejia.app.mall.fragment.CommentFragment;
 import com.yidejia.app.mall.fragment.GoodsDetailFragment;
-import com.yidejia.app.mall.interfacecallback.CallBack;
 import com.yidejia.app.mall.model.ProductBaseInfo;
 import com.yidejia.app.mall.net.ConnectionDetector;
-import com.yidejia.app.mall.view.GoCartActivity;
 /**
- * ÉÌÆ·»ù±¾ĞÅÏ¢Àà
+ * å•†å“åŸºæœ¬ä¿¡æ¯ç±»
  * @author long bin
  *
  */
 public class GoodsInfoActivity extends SherlockFragmentActivity implements OnClickListener {
 
-	private TextView goodsBasicInfo;//»ù±¾ĞÅÏ¢
-	private TextView goodsDetails;// ÏêÇé
-	private TextView goodsReviews;// ÆÀÂÛ
+	private TextView goodsBasicInfo;//åŸºæœ¬ä¿¡æ¯
+	private TextView goodsDetails;// è¯¦æƒ…
+	private TextView goodsReviews;// è¯„è®º
 	private ViewPager goodsViewPager;
 	private ArrayList<Fragment> fragmentsList;
 	private int currIndex = 1;
@@ -80,8 +78,8 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements OnCli
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		titleTextView = (TextView)findViewById(R.id.compose_title);
-//		titleTextView.setText("ÉÌÆ·Õ¹Ê¾") ;
-		setTitle("ÉÌÆ·Õ¹Ê¾");
+//		titleTextView.setText("å•†å“å±•ç¤º") ;
+		setTitle("å•†å“å±•ç¤º");
 		ImageView leftImageView = (ImageView) findViewById(R.id.compose_back);
 		
 		leftImageView.setOnClickListener(new OnClickListener() {
@@ -112,13 +110,13 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements OnCli
 	}
 	
 	private void initViewPager(){
-//		 cartButotn =  (Button)findViewById(R.id.shopping_cart_button);//¹ºÎï³µ
-//		 number = Integer.parseInt(cartButotn.getText().toString());//»ñÈ¡¹ºÎï³µÉÏµÄÊı¾İ
+//		 cartButotn =  (Button)findViewById(R.id.shopping_cart_button);//è´­ç‰©è½¦
+//		 number = Integer.parseInt(cartButotn.getText().toString());//è·å–è´­ç‰©è½¦ä¸Šçš„æ•°æ®
 		 
 		 try {
 			LayoutInflater mInflater = getLayoutInflater();
 			 View activityView = mInflater.inflate(R.layout.item_goods_base_info, null);
-			 ImageView cartAdd = (ImageView)activityView.findViewById(R.id.add_to_cart);//¼ÓÈë¹ºÎï³µ
+			 ImageView cartAdd = (ImageView)activityView.findViewById(R.id.add_to_cart);//åŠ å…¥è´­ç‰©è½¦
 			 cartAdd.setOnClickListener(this);
 				
 			 
@@ -144,7 +142,7 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements OnCli
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(GoodsInfoActivity.this, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT)
+			Toast.makeText(GoodsInfoActivity.this, GoodsInfoActivity.this.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT)
 			.show();
 		}
 //		goodsViewPager.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
