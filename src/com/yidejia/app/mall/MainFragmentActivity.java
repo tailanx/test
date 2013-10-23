@@ -305,10 +305,10 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 				}
 				//用于切换时保存fragment
 				FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//				if(getCurrFragment(id).isAdded())
-//					ft.hide(getCurrFragment(currentIndex)).show(getCurrFragment(id)).commit();
-//				else ft.hide(getCurrFragment(currentIndex)).add(R.id.main_fragment, getCurrFragment(id)).commit();//.addToBackStack(fragmentTag[id])
-				ft.replace(R.id.main_fragment, getCurrFragment(id)).commit();
+				if(getCurrFragment(id).isAdded())
+					ft.hide(getCurrFragment(currentIndex)).show(getCurrFragment(id)).commit();
+				else ft.hide(getCurrFragment(currentIndex)).add(R.id.main_fragment, getCurrFragment(id)).commit();//.addToBackStack(fragmentTag[id])
+//				ft.replace(R.id.main_fragment, getCurrFragment(id)).commit();
 //				currFragment = newFragment;
 			}
 			currentIndex = id;
@@ -443,7 +443,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		// TODO Auto-generated method stub
 		if(keyCode == KeyEvent.KEYCODE_BACK ){   
 	        if((System.currentTimeMillis()-exitTime) > 2000){  
-	            Toast.makeText(getApplicationContext(), "�ٰ�һ���˳�����", Toast.LENGTH_SHORT).show();                                
+	            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();                                
 	            exitTime = System.currentTimeMillis();   
 	        } else {
 	            finish();
