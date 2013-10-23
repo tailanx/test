@@ -73,7 +73,7 @@ public class MainPageFragment extends SherlockFragment {
 		super.onCreate(savedInstanceState);
 		Bundle bundle = getArguments();
 		main = (bundle != null)? bundle.getInt("main"):defaultInt;
-		getSherlockActivity().getSupportActionBar().setCustomView(R.layout.actionbar_main_home_title);
+//		getSherlockActivity().getSupportActionBar().setCustomView(R.layout.actionbar_main_home_title);
 	}
 
 	private View view;

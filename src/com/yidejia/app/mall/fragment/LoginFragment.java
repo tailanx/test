@@ -54,7 +54,7 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.my_mall_login, container, false);
-		getSherlockActivity().getSupportActionBar().setCustomView(R.layout.login_top);
+//		getSherlockActivity().getSupportActionBar().setCustomView(R.layout.login_top);
 		userManage = new UserDatamanage(getSherlockActivity());
 		myApplication = (MyApplication)getSherlockActivity().getApplication();
 		ipAddress = new IpAddress();
