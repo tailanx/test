@@ -27,7 +27,7 @@
     <string name="service">a</string>
     <string name="tip">退货原因</string>
     
-	<string name="bad_network">网络不给力</string>
+	<string name="bad_network">网络不给力!</string>
 	<string name="filter">筛选</string>
 	<string name="filter_all">全部</string>
 	<string name="unit">元</string>
@@ -58,6 +58,8 @@
 	<string name="all_order">全部订单</string>
 	<string name="complete_order">已完成订单</string>
 	<string name="deliver_order">已发货订单</string>
+	<string name="wait_deliver">待发货订单</string>
+	<string name="wait_pay">待付款订单</string>
 	<string name="order_time_week">近一周</string>
 	<string name="order_time_month">近一月</string>
 	<string name="order_time_year">近一年</string>
