@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -92,8 +93,9 @@ public class GoodsView {
 			// 价格
 			TextView price = (TextView) view.findViewById(R.id.price);
 			final String priceString = info.getPrice();
+			float priceNum = 0.0f;
 			try {
-				float priceNum = Float.parseFloat(priceString);
+				priceNum = Float.parseFloat(priceString);
 				cart.setPrice(priceNum);
 				price.setText(priceString + activity.getResources().getString(R.string.unit));
 			} catch (Exception e) {
@@ -132,10 +134,20 @@ public class GoodsView {
 			TextView standard_content_text = (TextView) view
 					.findViewById(R.id.standard_content_text);
 			standard_content_text.setText(info.getProductSpecifications());
+			//推荐购物view group
+			matchGoodsImageLayout = (LinearLayout) view
+					.findViewById(R.id.match_goods_image);
 			bannerArray = info.getBannerArray();
 			addBaseImage(view, bannerArray);
 			recommendArray = info.getRecommendArray();
-			addMatchImage(view, recommendArray);
+			if(recommendArray.isEmpty()){
+				//推荐搭配不可见
+				matchGoodsImageLayout.setVisibility(ViewGroup.GONE);
+				TextView match_goods_tip = (TextView) view.findViewById(R.id.match_goods);
+				match_goods_tip.setVisibility(View.GONE);
+			} else{
+				addMatchImage(view, recommendArray);
+			}
 			// 购物车个数
 			shopping_cart_button = (Button) view
 					.findViewById(R.id.shopping_cart_button);
@@ -147,30 +159,39 @@ public class GoodsView {
 				setCartNum(cart_num);
 			}
 			// 加入购物车按钮点击事件
-			if(cart.getPrice()>0){
-			add_to_cart.setOnClickListener(new OnClickListener() {
+			if (priceNum > 0) {
+				add_to_cart.setOnClickListener(new OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					cart_num++;
-					setCartNum(cart_num);
-					Intent intent = new Intent(Consts.UPDATE_CHANGE);
-					activity.sendBroadcast(intent);
-					boolean istrue = manage.addCart(cart);
-						if(istrue){
-							Toast.makeText(activity, activity.getResources().getString(R.string.add_cart_scs), Toast.LENGTH_SHORT).show();
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						cart_num++;
+						setCartNum(cart_num);
+						Intent intent = new Intent(Consts.UPDATE_CHANGE);
+						activity.sendBroadcast(intent);
+						boolean istrue = manage.addCart(cart);
+						if (istrue) {
+							Toast.makeText(
+									activity,
+									activity.getResources().getString(
+											R.string.add_cart_scs),
+									Toast.LENGTH_SHORT).show();
 						}
 					}
 					// Log.i("info", istrue+"   cart_num");
-//				if (istrue) {
-//					builder.show();
-//				}
-				
-			});
-		}else{
-			Toast.makeText(activity, "这是赠品，不能够购买", Toast.LENGTH_LONG).show();
-		}
+					// if (istrue) {
+					// builder.show();
+					// }
+
+				});
+			} else {
+				Toast.makeText(activity, "这是赠品，不能够购买", Toast.LENGTH_LONG)
+						.show();
+				add_to_cart.setImageResource(R.drawable.add_to_cart_hover);
+				add_to_cart.setClickable(false);
+				buy_now.setImageResource(R.drawable.buy_now_hover);
+				buy_now.setClickable(false);
+			}
 			// 立即购买按钮
 			buy_now.setOnClickListener(new OnClickListener() {
 
@@ -312,8 +333,6 @@ public class GoodsView {
 	private void addMatchImage(View view,
 			final ArrayList<MainProduct> bannerArray) {
 		try {
-			matchGoodsImageLayout = (LinearLayout) view
-					.findViewById(R.id.match_goods_image);
 			int lenght = bannerArray.size();
 			Resources r = activity.getResources();
 			float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 90,
