@@ -34,15 +34,16 @@ public class GoCartActivity extends SherlockActivity {// implements
 	private Button mbutton;// 去结算
 	private CartUtil cartUtil;
 	private AddressDataManage addressManage;// 地址管理数据
-//	private PullToRefreshScrollView mPullToRefreshScrollView;// 界面刷新
-	private ImageView mImageView;//返回
-	private TextView mTextView;//title
-	
+	private PullToRefreshScrollView mPullToRefreshScrollView;// 界面刷新
+	private ImageView mImageView;// 返回
+	private TextView mTextView;// title
+	private MyApplication myApplication;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.shopping_cart);
+		myApplication = (MyApplication) getApplication();
 		addressManage = new AddressDataManage(GoCartActivity.this);
 
 		mBox = (CheckBox) findViewById(R.id.shopping_cart_checkbox);// 选择框
@@ -51,15 +52,16 @@ public class GoCartActivity extends SherlockActivity {// implements
 
 		counTextView = (TextView) findViewById(R.id.shopping_cart_sum_number);// 总的数量
 
-//		mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.shopping_cart_item_goods_scrollView);
-//		String label = "上次更新于"
-//				+ DateUtils.formatDateTime(GoCartActivity.this,
-//						System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
-//								| DateUtils.FORMAT_SHOW_DATE
-//								| DateUtils.FORMAT_SHOW_TIME);
-//		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-//		mPullToRefreshScrollView.setOnRefreshListener(listener);
-		
+		mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.shopping_cart_item_goods_scrollView);
+		String label = "上次更新于"
+				+ DateUtils.formatDateTime(GoCartActivity.this,
+						System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
+								| DateUtils.FORMAT_SHOW_DATE
+								| DateUtils.FORMAT_SHOW_TIME);
+		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
+				label);
+		mPullToRefreshScrollView.setOnRefreshListener(listener);
+
 		LinearLayout layout = (LinearLayout) findViewById(R.id.shopping_cart_relative2);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -73,11 +75,10 @@ public class GoCartActivity extends SherlockActivity {// implements
 		mTextView = (TextView) findViewById(R.id.actionbar_title);
 		mImageView = (ImageView) findViewById(R.id.actionbar_left);
 		mTextView.setText("购物车");
-		
 
 		try {
-			mImageView.setOnClickListener(new OnClickListener( ) {
-				
+			mImageView.setOnClickListener(new OnClickListener() {
+
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
@@ -89,24 +90,32 @@ public class GoCartActivity extends SherlockActivity {// implements
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					
+					if (!((MyApplication) GoCartActivity.this.getApplication())
+							.getIsLogin()) {
+						Toast.makeText(GoCartActivity.this, "你还未登陆，请先登陆",
+								Toast.LENGTH_LONG).show();
+						Intent intent = new Intent(GoCartActivity.this,
+								LoginActivity.class);
+						startActivity(intent);
+						return;
+					}
 					Intent intent = new Intent(GoCartActivity.this,
 							PayActivity.class);
 					float sum = Float.parseFloat(sumTextView.getText()
 							.toString());
-					
-						if (sum > 0) {
-							Bundle bundle = new Bundle();
-						
-							bundle.putString("price", sum + "");
-							intent.putExtras(bundle);
-							GoCartActivity.this.startActivity(intent);
-						} else {
-							Toast.makeText(GoCartActivity.this, "你还未购买任何商品",
-									Toast.LENGTH_LONG).show();
-						}
+
+					if (sum > 0) {
+						Bundle bundle = new Bundle();
+
+						bundle.putString("price", sum + "");
+						intent.putExtras(bundle);
+						GoCartActivity.this.startActivity(intent);
+					} else {
+						Toast.makeText(GoCartActivity.this, "你还未购买任何商品",
+								Toast.LENGTH_LONG).show();
 					}
-				
+				}
+//
 			});
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -117,16 +126,22 @@ public class GoCartActivity extends SherlockActivity {// implements
 		//
 		//
 	}
-//	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
-//
-//		@Override
-//		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-//			// TODO Auto-generated method stub
-//			String label = "上次更新于" + DateUtils.formatDateTime(GoCartActivity.this, System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL|DateUtils.FORMAT_SHOW_DATE|DateUtils.FORMAT_SHOW_TIME);
-//			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-//			mPullToRefreshScrollView.onRefreshComplete();
-//		}
-//	};
+
+	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
+
+		@Override
+		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+			// TODO Auto-generated method stub
+			String label = "上次更新于"
+					+ DateUtils.formatDateTime(GoCartActivity.this,
+							System.currentTimeMillis(),
+							DateUtils.FORMAT_ABBREV_ALL
+									| DateUtils.FORMAT_SHOW_DATE
+									| DateUtils.FORMAT_SHOW_TIME);
+			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+			mPullToRefreshScrollView.onRefreshComplete();
+		}
+	};
 	// try {
 	// TODO Auto-generated method stub
 	// requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -167,32 +182,29 @@ public class GoCartActivity extends SherlockActivity {// implements
 	//
 	// }
 	//
-//	Addresses address = null;
+	// Addresses address = null;
 
-//	/**
-//	 * 
-//	 * @return 返回一个地址
-//	 */
-//	private void getAddresses() {
-//
-//		String userId = ((MyApplication) getApplication()).getUserId();
-//		ArrayList<Addresses> mAddresses = addressManage.getAddressesArray(
-//				userId, 0, 5);
-//		if (mAddresses.size() == 0) {
-//			Intent intent = new Intent(GoCartActivity.this,
-//					NewAddressActivity.class);
-//			GoCartActivity.this.startActivity(intent);
-//			GoCartActivity.this.finish();
-//			// Log.i("info", "nihao");
-//
-//		} else {
-//			address = mAddresses.remove(0);
-//			// Log.i("info", address + "address");
-//		}
-//
-//	}
+	// /**
+	// *
+	// * @return 返回一个地址
+	// */
+	// private void getAddresses() {
+	//
+	// String userId = ((MyApplication) getApplication()).getUserId();
+	// ArrayList<Addresses> mAddresses = addressManage.getAddressesArray(
+	// userId, 0, 5);
+	// if (mAddresses.size() == 0) {
+	// Intent intent = new Intent(GoCartActivity.this,
+	// NewAddressActivity.class);
+	// GoCartActivity.this.startActivity(intent);
+	// GoCartActivity.this.finish();
+	// // Log.i("info", "nihao");
+	//
+	// } else {
+	// address = mAddresses.remove(0);
+	// // Log.i("info", address + "address");
+	// }
+	//
+	// }
 
 }
-
-
-

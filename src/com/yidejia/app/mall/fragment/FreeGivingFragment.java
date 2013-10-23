@@ -1,24 +1,18 @@
 package com.yidejia.app.mall.fragment;
 
-import java.util.ArrayList;
-
-import android.R.integer;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.datamanage.OrderDataManage;
-import com.yidejia.app.mall.model.Order;
-import com.yidejia.app.mall.util.AllOrderUtil;
-import com.yidejia.app.mall.view.OrderDetailActivity;
+import com.yidejia.app.mall.datamanage.PreferentialDataManage;
+import com.yidejia.app.mall.fragment.FreeGivingAdapter.ViewHolder;
 
 public class FreeGivingFragment extends SherlockFragment {
 //	private TextView titleTextView;//订单的状态
@@ -31,6 +25,9 @@ public class FreeGivingFragment extends SherlockFragment {
 	
 	private String hello;
 	private String defaultHello = "default hello";
+	private ListView listView;
+	private FreeGivingAdapter adapter ;
+	private PreferentialDataManage preferentialDataManage;
 	/**
 	 * 实例化对象
 	 * @param view
@@ -65,9 +62,13 @@ public class FreeGivingFragment extends SherlockFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		
+		preferentialDataManage = new PreferentialDataManage(getSherlockActivity());
 		View view= inflater.inflate(R.layout.free_giving, null);//获取视图对象
-		LinearLayout relativeLayout = (LinearLayout)view.findViewById(R.id.shopping_cart_relative2);//获取布局
+		LinearLayout relativeLayout = (LinearLayout)view.findViewById(R.id.free_shopping_cart_relative2);//获取布局
+		listView = (ListView) view.findViewById(R.id.free_giving_listview);
+		adapter = new FreeGivingAdapter(getSherlockActivity(), preferentialDataManage.getFreeGoods());
+		listView.setAdapter(adapter);
+        listView.setOnItemClickListener(listItemClickListener);  
 //		AllOrderUtil allOrderUtil = new AllOrderUtil(getSherlockActivity(), relativeLayout);
 //		Log.i("info", allOrderUtil+"");
 //		allOrderUtil.loadView();
@@ -102,6 +103,16 @@ public class FreeGivingFragment extends SherlockFragment {
 		return view;
 	}
 
+	OnItemClickListener listItemClickListener = new OnItemClickListener() {  
+	  
+    @Override  
+    public void onItemClick(AdapterView<?> parent, View view, int position,  
+            long id) {  
+        //// 取得ViewHolder对象，这样就省去了通过层层的findViewById去实例化我们需要的cb实例的步骤    
+        ViewHolder viewHolder=(ViewHolder)view.getTag();                          
+        viewHolder.cb.toggle();// 把CheckBox的选中状态改为当前状态的反,gridview确保是单一选中  
+    }  
+};  
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub

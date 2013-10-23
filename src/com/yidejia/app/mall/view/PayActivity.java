@@ -2,13 +2,16 @@ package com.yidejia.app.mall.view;
 
 import java.util.ArrayList;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.AlteredCharSequence;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -169,6 +172,20 @@ public class PayActivity extends SherlockActivity {
 							}
 						}
 					});
+			builder = new AlertDialog.Builder(PayActivity.this)
+			.setTitle("µÇÂ½")
+			.setMessage("ÊÇ·ñÈ¥µÇÂ½")
+			.setPositiveButton("È¥µÇÂ½",
+					new android.content.DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog,
+								int which) {
+							// TODO Auto-generated method stub
+							Intent intent = new Intent(PayActivity.this,LoginActivity.class);
+							PayActivity.this.startActivity(intent);
+						}
+					}).setNegativeButton("ºöÂÔ", null).create();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -177,7 +194,7 @@ public class PayActivity extends SherlockActivity {
 		}
 
 	}
-
+	private AlertDialog builder ;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		try {
@@ -190,12 +207,13 @@ public class PayActivity extends SherlockActivity {
 			// filter.addAction(Consts.BUY_NEW);
 			// registerReceiver(receiver, filter);
 			// ¸¶¿îÖ®Ç°ÏÈÅÐ¶ÏÓÃ»§ÊÇ·ñµÇÂ½
-			if (!myApplication.getIsLogin()) {
-				Toast.makeText(this, "Äã»¹Î´µÇÂ½£¬ÇëÏÈµÇÂ½", Toast.LENGTH_LONG).show();
-				Intent intent = new Intent(this, LoginActivity.class);
-				startActivity(intent);
-				this.finish();
-			} else {
+//			if (!myApplication.getIsLogin()) {
+////				Toast.makeText(this, "Äã»¹Î´µÇÂ½£¬ÇëÏÈµÇÂ½", Toast.LENGTH_LONG).show();
+////				Intent intent = new Intent(this, LoginActivity.class);
+////				startActivity(intent);
+////				this.finish();
+//			} else {
+				
 				Intent intent = getIntent();
 				final String sum = intent.getStringExtra("price");
 				Cart cart = (Cart) intent.getSerializableExtra("Cart");
@@ -271,7 +289,7 @@ public class PayActivity extends SherlockActivity {
 						}
 					};
 				}
-			}
+//			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

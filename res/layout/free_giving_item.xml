@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:focusable="false"
         android:layout_marginLeft="12dp" />
 
     <ImageView
@@ -17,10 +18,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="-10sp"
         android:layout_toRightOf="@id/free_giving_item_checkbox"
         android:background="@drawable/product_image_bg"
-        android:padding="20dp"
+        android:padding="10dp"
         android:src="@drawable/comment_head" />
 
     <TextView

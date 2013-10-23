@@ -2,23 +2,20 @@ package com.yidejia.app.mall.fragment;
 
 import java.util.ArrayList;
 
-import android.R.integer;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.datamanage.OrderDataManage;
-import com.yidejia.app.mall.model.Order;
-import com.yidejia.app.mall.util.AllOrderUtil;
-import com.yidejia.app.mall.view.OrderDetailActivity;
+import com.yidejia.app.mall.datamanage.PreferentialDataManage;
+import com.yidejia.app.mall.fragment.ExchangeAdapter.ViewHolder;
+import com.yidejia.app.mall.model.Specials;
 
 public class ExchangeFragment extends SherlockFragment {
 //	private TextView titleTextView;//订单的状态
@@ -31,17 +28,15 @@ public class ExchangeFragment extends SherlockFragment {
 	
 	private String hello;
 	private String defaultHello = "default hello";
+	private ListView listview;
+	private PreferentialDataManage dataManage ;
+	private ExchangeAdapter adapter;
 	/**
 	 * 实例化对象
 	 * @param view
 	 */
 	private void setupShow(View view){
-//			 	mLayout = (LinearLayout) view.findViewById(R.id.all_order_item_main_scrollView_linearlayout1);
-//				orderDataManage = new OrderDataManage(getSherlockActivity());
-//				titleTextView = (TextView)view.findViewById(R.id.all_order_item_main_item_detail);
-//				numberTextView = (TextView)view.findViewById(R.id.all_order_item_main_item_number);
-//				sumPrice = (TextView)view.findViewById(R.id.all_order_item_main_sum_money_deatil);
-//				countTextView = (TextView)view.findViewById(R.id.all_order_item_main_item_textview7);
+
 	}
 
 
@@ -65,9 +60,13 @@ public class ExchangeFragment extends SherlockFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		
-		View view= inflater.inflate(R.layout.free_giving, null);//获取视图对象
-		LinearLayout relativeLayout = (LinearLayout)view.findViewById(R.id.shopping_cart_relative2);//获取布局
+		dataManage  = new PreferentialDataManage(getSherlockActivity());
+		View view= inflater.inflate(R.layout.exchange_produce, null);//获取视图对象
+		listview = (ListView) view.findViewById(R.id.exchange_shopping_listview);
+		ArrayList<Specials> mArrayList = dataManage.getScoreGoods();
+		adapter = new ExchangeAdapter(mArrayList, getActivity());
+		listview.setAdapter(adapter);
+		//		LinearLayout relativeLayout = (LinearLayout)view.findViewById(R.id.shopping_cart_relative2);//获取布局
 
 //		AllOrderUtil allOrderUtil = new AllOrderUtil(getSherlockActivity(), relativeLayout);
 //		Log.i("info", allOrderUtil+"");
@@ -98,11 +97,22 @@ public class ExchangeFragment extends SherlockFragment {
 //				Intent intent = new Intent(getSherlockActivity(),OrderDetailActivity.class);
 //				
 //				startActivity(intent);
+		listview.setOnItemClickListener(listItemClickListener);  
 //			}
 //		});
 		return view;
 	}
+    OnItemClickListener listItemClickListener=new OnItemClickListener() {  
 
+        @Override  
+        public void onItemClick(AdapterView<?> parent, View view, int position,  
+                long id) {  
+            //// 取得ViewHolder对象，这样就省去了通过层层的findViewById去实例化我们需要的cb实例的步骤    
+            ViewHolder viewHolder=(ViewHolder)view.getTag();                          
+            viewHolder.cb.toggle();// 把CheckBox的选中状态改为当前状态的反,gridview确保是单一选中  
+           ExchangeAdapter.getIsSelected().put(position, viewHolder.cb.isChecked());//将CheckBox的选中状况记录下来 </span>  
+        }  
+    };
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub

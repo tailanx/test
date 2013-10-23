@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,6 +45,8 @@ public class AddressUtil {
 	private ImageView delete;// É¾³ý
 	private ImageView edit;// ±à¼­
 
+	private MyApplication myApplication ;
+
 	public AddressUtil() {
 
 	}
@@ -57,6 +61,7 @@ public class AddressUtil {
 		this.linearLayout = linearLayout;
 		this.dataManage = dataManage;
 		this.inflater = LayoutInflater.from(context);
+		myApplication = (MyApplication) context.getApplicationContext();
 	}
 
 	private void setupShow() {
@@ -64,7 +69,6 @@ public class AddressUtil {
 				R.layout.address_management_item, null);
 		edit = (ImageView) view
 				.findViewById(R.id.address_management_item_relative1_textview2);
-
 		delete = (ImageView) view
 				.findViewById(R.id.address_management_item_relative1_textview1);
 
@@ -131,7 +135,17 @@ public class AddressUtil {
 
 					}
 				});
+				checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+					
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+						// TODO Auto-generated method stub
+						boolean isSucess = dataManage.setDefaultAddress(myApplication.getUserId(), addresses.getAddressId(), myApplication.getToken());
+						Log.i("info", isSucess +"");
+					}
+				});
 			}
+			
 			// Ìí¼Óview
 			this.linearLayout.addView(view);
 		} catch (Exception e) {
@@ -188,6 +202,15 @@ public class AddressUtil {
 
 					}
 				});
+			checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					// TODO Auto-generated method stub
+					boolean isSucess = dataManage.setDefaultAddress(myApplication.getUserId(), addresses.getAddressId(), myApplication.getToken());
+					Log.i("info", isSucess +"");
+				}
+			});
 			}
 			// Ìí¼Óview
 			this.linearLayout.addView(view);
@@ -233,7 +256,9 @@ public class AddressUtil {
 						.findViewById(R.id.address_management_item_relative1_textview2);
 				checkBox = (CheckBox) view
 						.findViewById(R.id.address_management_item_relative1_checkBox1);
-
+				boolean isDefault = addresses.getDefaultAddress();
+//				if (isDefault) 
+					checkBox.setChecked(isDefault);
 				sb.append(addresses.getProvice());
 				sb.append(addresses.getCity());
 				sb.append(addresses.getArea());
@@ -274,7 +299,16 @@ public class AddressUtil {
 
 					}
 				});
-
+				
+				checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+					
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+						// TODO Auto-generated method stub
+						boolean isSucess = dataManage.setDefaultAddress(myApplication.getUserId(), addresses.getAddressId(), myApplication.getToken());
+						Log.i("info", isSucess +"");
+					}
+				});
 				linearLayout.addView(view);
 
 			}

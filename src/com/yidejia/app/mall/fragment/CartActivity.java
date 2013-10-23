@@ -1,7 +1,8 @@
-
 package com.yidejia.app.mall.fragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import android.app.Fragment;
 import android.content.BroadcastReceiver;
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,10 +32,14 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
+import com.yidejia.app.mall.datamanage.PreferentialDataManage;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.UserComment;
 import com.yidejia.app.mall.util.CartUtil;
 import com.yidejia.app.mall.util.Consts;
+import com.yidejia.app.mall.view.ExchangeFreeActivity;
+import com.yidejia.app.mall.view.GoCartActivity;
+import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.view.NewAddressActivity;
 import com.yidejia.app.mall.view.PayActivity;
 
@@ -54,7 +60,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	private View person2;
 	private CartsDataManage dataManage;
 	private Button shoppingCartTopay;
-	private ImageView mImageView;//返回
+	private ImageView mImageView;// 返回
 	private ArrayList<UserComment> mlist;
 	private CartUtil cartUtil;
 	private CheckBox mBox;
@@ -64,10 +70,14 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	private LinearLayout layout;
 	private View view;
 	private CartsDataManage dataManage2;
-//	private AddressDataManage addressManage;// 地址管理
+	// private AddressDataManage addressManage;// 地址管理
 	private PullToRefreshScrollView mPullToRefreshScrollView;// 刷新界面
 	private Fragment mFragment;
-	private InnerReceiver receiver;
+	private MyApplication myApplication;
+	private PreferentialDataManage preferentialDataManage;
+	private List<HashMap<String, Float>> mlList = null;
+
+	// private InnerReceiver receiver;
 
 	// private InnerReceiver receiver;
 
@@ -192,10 +202,21 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-//		addressManage = new AddressDataManage(getSherlockActivity());
+		// addressManage = new AddressDataManage(getSherlockActivity());
+		myApplication = (MyApplication) getSherlockActivity()
+				.getApplicationContext();
+		preferentialDataManage = new PreferentialDataManage(
+				getSherlockActivity());
+		Log.i(CartActivity.class.getName(), "CartActivity__onCreateView");
 		view = inflater.inflate(R.layout.shopping_cart, container, false);
+
 		// dataManage = new CartsDataManage();
 		// TODO Auto-generated method stub
+		// receiver = new InnerReceiver();
+		// IntentFilter filter = new IntentFilter();
+		// filter.addAction(Consts.UPDATE_CHANGE);
+		// getSherlockActivity().registerReceiver(receiver, filter);
+		// // registerForContextMenu(layout);
 
 		mBox = (CheckBox) view.findViewById(R.id.shopping_cart_checkbox);// 选择框
 
@@ -207,19 +228,13 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 
 		layout = (LinearLayout) view.findViewById(R.id.shopping_cart_relative2);
 
-		
-		receiver =  new InnerReceiver();
-		IntentFilter filter = new IntentFilter();
-		filter.addAction(Consts.UPDATE_CHANGE);
-		getSherlockActivity().registerReceiver(receiver, filter);
-		// registerForContextMenu(layout);
-
 		getSherlockActivity().getSupportActionBar().setCustomView(
 				R.layout.actionbar_cart);
 		cartUtil = new CartUtil(getSherlockActivity(), layout, counTextView,
 				sumTextView, mBox);
 
 		cartUtil.AllComment();
+
 		mPullToRefreshScrollView = (PullToRefreshScrollView) view
 				.findViewById(R.id.shopping_cart_item_goods_scrollView);
 		String label = "上次更新于"
@@ -231,102 +246,6 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 				label);
 		mPullToRefreshScrollView.onRefreshComplete();
 		mPullToRefreshScrollView.setOnRefreshListener(listener);
-		// receiver = new InnerReceiver();
-		// IntentFilter filter = new IntentFilter();
-		// filter.addAction(Consts.UPDATE_CHANGE);
-		// getActivity().registerReceiver(receiver, filter);
-
-		// List<HashMap<String, Integer>> mlist = cartUtil.list;
-		// for(int i = 0;i<mlist.size();i++){
-		// HashMap<String, Integer> map = mlist.get(i);
-		// int count = map.get("count");
-		// Log.i("info", count+"");
-		//
-		// Set<java.util.Map.Entry<String, Integer>> set = map.entrySet();
-		// for(java.util.Map.Entry<String, Integer> en:set){
-
-		// }
-		// }
-
-		// ListView listView = (ListView)
-		// view.findViewById(R.id.shopping_cart_listview);
-		// dataManage = new UserCommentDataManage(getSherlockActivity());
-		//
-		// mlist = dataManage.getUserCommentsArray(26 + "", 0, 10, false);
-		// CartAdapter adapter = new CartAdapter(getSherlockActivity(),mlist);
-		// listView.setAdapter(adapter);
-		// listView.setOnItemClickListener(new OnItemClickListener() {
-		//
-		// @Override
-		// public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-		// long arg3) {
-		// // TODO Auto-generated method stub
-		//
-		// }
-		// });
-
-		// person = inflater.inflate(R.layout.shopping_cart_item, null);
-		// person2 = inflater.inflate(R.layout.shopping_cart_item, null);
-		//
-		//
-		// TextView detail = (TextView) person
-		// .findViewById(R.id.shopping_cart_item_text);
-		//
-		// detail.setOnClickListener(new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View arg0) {
-		// // TODO Auto-generated method stub
-		// Intent intent = new Intent(getSherlockActivity(),
-		// OrderDetailActivity.class);
-		// startActivity(intent);
-		// }
-		// });
-		// subtract = (ImageView) person
-		// .findViewById(R.id.shopping_cart_item_subtract);// 减
-		// number = (TextView) person
-		// .findViewById(R.id.shopping_cart_item_edit_number);// 输入的个数
-		// number.setText(0 + "");
-		// addImageView = (ImageView) person
-		// .findViewById(R.id.shopping_cart_item_add);// 加
-		// priceTextView1 = (TextView) person
-		// .findViewById(R.id.shopping_cart_item_money);
-		//
-		// addImageView.setOnClickListener(this);
-		// subtract.setOnClickListener(this);
-		//
-		// TextView detail1 = (TextView) person2
-		// .findViewById(R.id.shopping_cart_item_text);
-		//
-		// detail1.setOnClickListener(new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View arg0) {
-		// // TODO Auto-generated method stub
-		// Intent intent = new Intent(getSherlockActivity(),
-		// OrderDetailActivity.class);
-		// startActivity(intent);
-		// }
-		// });
-		//
-		//
-		//
-		//
-		//
-		// subtract2 = (ImageView) person2
-		// .findViewById(R.id.shopping_cart_item_subtract);// 减
-		// number2 = (TextView) person2
-		// .findViewById(R.id.shopping_cart_item_edit_number);// 输入的个数
-		// number2.setText(0 + "");
-		// addImageView2 = (ImageView) person2
-		// .findViewById(R.id.shopping_cart_item_add);// 加
-		// priceTextView2 = (TextView) person2
-		// .findViewById(R.id.shopping_cart_item_money);
-		// addImageView2.setOnClickListener(this);
-		// subtract2.setOnClickListener(this);
-		//
-		// layout.addView(person);
-		// layout.addView(person2);
 
 		// 结算
 		shoppingCartTopay = (Button) getSherlockActivity().findViewById(
@@ -336,38 +255,55 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-//				getAddresses();
-				Intent intent = new Intent(getSherlockActivity(),
-						PayActivity.class);
-				Bundle bundle = new Bundle();
-				float sum = Float.parseFloat(sumTextView.getText().toString());
-				
-					if (sum > 0) {
-						bundle.putString("price", sum + "");
-//						bundle.putSerializable("address", address);
-						intent.putExtras(bundle);
-						getSherlockActivity().startActivity(intent);
-					} else {
-						Toast.makeText(getSherlockActivity(), "你还未购买任何商品",
-								Toast.LENGTH_LONG).show();
-
+				// getAddresses();
+				if (!myApplication.getIsLogin()) {
+					Toast.makeText(getSherlockActivity(), "你还未登陆，请先登陆",
+							Toast.LENGTH_LONG).show();
+					Intent intent = new Intent(getSherlockActivity(),
+							LoginActivity.class);
+					startActivity(intent);
+					return;
+				} else {
 					
+					preferentialDataManage.getPreferential("1337,10n;",myApplication.getUserId());
+					if (preferentialDataManage.getFreeGoods().size() != 0
+							|| preferentialDataManage.getScoreGoods().size() != 0) {
+
+						Intent intent = new Intent(getSherlockActivity(),
+								ExchangeFreeActivity.class);
+
+						Bundle bundle = new Bundle();
+						float sum = Float.parseFloat(sumTextView.getText()
+								.toString());
+
+						if (sum > 0) {
+							bundle.putString("price", sum + "");
+							intent.putExtras(bundle);
+							getSherlockActivity().startActivity(intent);
+						} else {
+							Toast.makeText(getSherlockActivity(), "你还未购买任何商品",
+									Toast.LENGTH_LONG).show();
+
+						}
+					}
 				}
 			}
 		});
-		
+
 		//
 		return view;
 
 	}
+
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-	getSherlockActivity().unregisterReceiver(receiver);
+		// getSherlockActivity().unregisterReceiver(receiver);
 	}
-private  int fromIndex = 0;
-private int amontIndex = 10 ;
+
+	private int fromIndex = 0;
+	private int amontIndex = 10;
 	// 刷新添加事件
 	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
 
@@ -383,7 +319,7 @@ private int amontIndex = 10 ;
 									| DateUtils.FORMAT_ABBREV_ALL);
 
 			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-			fromIndex += amontIndex;
+			// fromIndex += amontIndex;
 			mPullToRefreshScrollView.onRefreshComplete();
 		}
 	};
@@ -415,46 +351,57 @@ private int amontIndex = 10 ;
 
 	Addresses address = null;
 
-//	/**
-//	 * 判断是否用户已经有保存好的地址
-//	 */
-//	private void getAddresses() {
-//
-//		String userId = ((MyApplication) getSherlockActivity().getApplication())
-//				.getUserId();
-//		ArrayList<Addresses> mAddresses = addressManage.getAddressesArray(
-//				Integer.parseInt(userId), 0, 5);
-//		if (mAddresses.size() == 0) {
-//			Intent intent = new Intent(getSherlockActivity(),
-//					NewAddressActivity.class);
-//			getSherlockActivity().startActivity(intent);
-//
-//			// Log.i("info", "nihao");
-//
-//		} else {
-//			address = mAddresses.remove(0);
-//			// Log.i("info", address + "address");
-//		}
-//
-//	}
-	private class InnerReceiver extends BroadcastReceiver {
-
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			// TODO Auto-generated method stub
-			String action = intent.getAction();
-			if (Consts.UPDATE_CHANGE.equals(action)) {
-				layout.removeAllViews();
-				cartUtil = new CartUtil(getSherlockActivity(), layout, counTextView,
-						sumTextView, mBox);
-
-				cartUtil.AllComment();
-//				number = cartsDataManage.getCartAmount();
-//				cartImage.setText(number + "");
-			}
-		}
-
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+	
+		Log.i(CartActivity.class.getName(), "cart on start");
 	}
-	
-	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(outState);
+	}
+	// /**
+	// * 判断是否用户已经有保存好的地址
+	// */
+	// private void getAddresses() {
+	//
+	// String userId = ((MyApplication) getSherlockActivity().getApplication())
+	// .getUserId();
+	// ArrayList<Addresses> mAddresses = addressManage.getAddressesArray(
+	// Integer.parseInt(userId), 0, 5);
+	// if (mAddresses.size() == 0) {
+	// Intent intent = new Intent(getSherlockActivity(),
+	// NewAddressActivity.class);
+	// getSherlockActivity().startActivity(intent);
+	//
+	// // Log.i("info", "nihao");
+	//
+	// } else {
+	// address = mAddresses.remove(0);
+	// // Log.i("info", address + "address");
+	// }
+	//
+	// }
+	// public class InnerReceiver extends BroadcastReceiver {
+	//
+	// @Override
+	// public void onReceive(Context context, Intent intent) {
+	// // TODO Auto-generated method stub
+	// String action = intent.getAction();
+	// if (Consts.UPDATE_CHANGE.equals(action)) {
+	// layout.removeAllViews();
+	// cartUtil = new CartUtil(getSherlockActivity(), layout, counTextView,
+	// sumTextView, mBox);
+	//
+	// cartUtil.AllComment();
+	// // number = cartsDataManage.getCartAmount();
+	// // cartImage.setText(number + "");
+	// }
+	// }
+	//
+	// }
+
 }

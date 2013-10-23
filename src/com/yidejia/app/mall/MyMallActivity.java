@@ -296,7 +296,7 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 
 		String vip1 = myApplication.getVip();
 		if (vip1 == null || "".equals(vip1)) {
-			vip.setText("VIP1");
+			vip.setText("VIP0");
 		} else {
 			vip.setText(vip1);
 		}

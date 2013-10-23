@@ -188,7 +188,7 @@ public class CartUtil {
 				
 				final Cart cart = userList.get(i);
 				mBox.setChecked(true);
-
+				Log.i("mBox", mBox.isChecked() + "    mBox");
 				final HashMap<String, Float> map = new HashMap<String, Float>();
 				 final View view = LayoutInflater.from(context).inflate(
 						R.layout.shopping_cart_item, null);
@@ -423,8 +423,8 @@ public class CartUtil {
 						} else {
 							sum--;
 							number.setText(sum + "");
-							mTextView.setText(Integer.parseInt(number.getText()
-									.toString()) + "");
+//							mTextView.setText(Integer.parseInt(number.getText()
+//									.toString()) + "");
 						}
 					
 						Message ms = new Message();
@@ -488,6 +488,7 @@ public class CartUtil {
 						(float) Integer.parseInt(number.getText().toString()));
 				map.put("price",
 						Float.parseFloat(priceTextView.getText().toString()));
+				map.put("produce", Float.parseFloat(cart.getUId()));
 				list.add(map);
 				mBox.setOnClickListener(new OnClickListener() {
 					
