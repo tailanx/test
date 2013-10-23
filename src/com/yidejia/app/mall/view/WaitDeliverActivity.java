@@ -50,10 +50,10 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 ////			case R.id.wait_deliver_button1:
 ////				Intent intent = new Intent(WaitDeliverActivity.this,MyMallActivity.class);
 ////				startActivity(intent);
-////				//½áÊøµ±Ç°Activity£»
+////				//ï¿½ï¿½ï¿½ï¿½Ç°Activityï¿½ï¿½
 ////				WaitDeliverActivity.this.finish();
 ////				break;
-//			case R.id.wait_deliver_item_exchange://ÍË»»»õ
+//			case R.id.wait_deliver_item_exchange://ï¿½Ë»ï¿½ï¿½ï¿½
 //				intent.setClass(this, ReturnActivity.class);
 //				break;
 //			}
@@ -83,7 +83,7 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
 		ImageView back = (ImageView) findViewById(R.id.compose_back);
 		TextView titleTextView =  (TextView) findViewById(R.id.compose_title);
-		titleTextView.setText("´ý·¢»õ¶©µ¥");
+		titleTextView.setText(getResources().getString(R.string.wait_deliver));
 		back.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -108,9 +108,9 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 		 LayoutInflater mInflater = getLayoutInflater();
 	     View activityView = mInflater.inflate(R.layout.wait_deliver_item_main, null);
 	     
-	     Fragment weekfragment = WaitDeliverFragment.newInstance("½üÒ»ÖÜ");
-	     Fragment monthFragment = WaitDeliverFragment.newInstance("½üÒ»ÔÂ");
-	     Fragment yearFragment=WaitDeliverFragment.newInstance("½üÒ»Äê");
+	     Fragment weekfragment = WaitDeliverFragment.newInstance("ï¿½ï¿½Ò»ï¿½ï¿½");
+	     Fragment monthFragment = WaitDeliverFragment.newInstance("ï¿½ï¿½Ò»ï¿½ï¿½");
+	     Fragment yearFragment=WaitDeliverFragment.newInstance("ï¿½ï¿½Ò»ï¿½ï¿½");
 	     
 	     fragmentsList.add(yearFragment);
 	     fragmentsList.add(monthFragment);
@@ -126,12 +126,12 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 
 	
 	private void InitWidth() {
-		ivBottomLine = (ImageView) findViewById(R.id.iv_bottom_line);//»¬¶¯
+		ivBottomLine = (ImageView) findViewById(R.id.iv_bottom_line);//ï¿½ï¿½ï¿½ï¿½
         bottomLineWidth = ivBottomLine.getLayoutParams().width;
         DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);//»ñÈ¡µ±Ç°ÆÁÄ»µÄÊôÐÔ
-        int screenW = dm.widthPixels;//ÆÁÄ»µÄ¿í
-        offset = (int) ((screenW / 3 - bottomLineWidth)/2);//ÆðÊ¼Î»ÖÃ
+        getWindowManager().getDefaultDisplay().getMetrics(dm);//ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        int screenW = dm.widthPixels;//ï¿½ï¿½Ä»ï¿½Ä¿ï¿½
+        offset = (int) ((screenW / 3 - bottomLineWidth)/2);//ï¿½ï¿½Ê¼Î»ï¿½ï¿½
 
         position_one = (int) (screenW / 3);
         position_two = position_one * 2;
@@ -155,8 +155,8 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 	        public void onPageSelected(int arg0) {
 	            Animation animation = null;
 	            switch (arg0) {
-	            case 0://¼ÙÈçÊÇµÚÒ»¸ö±»Ñ¡ÖÐ£¬Ìí¼ÓÊÂ¼þ
-	                if (currIndex == 1) {//µ±Ç°ÊÇµÚ¶þ¸ö
+	            case 0://ï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
+	                if (currIndex == 1) {//ï¿½ï¿½Ç°ï¿½ÇµÚ¶ï¿½ï¿½ï¿½
 	                    animation = new TranslateAnimation(position_one, 0, 0, 0);
 	                    mMonth.setPressed(false);
 	                    mMonth.setBackgroundResource(R.drawable.product_details_bg);

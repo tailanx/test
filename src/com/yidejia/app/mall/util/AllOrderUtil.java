@@ -66,7 +66,7 @@ public class AllOrderUtil {
 	public void loadView(int fromIndex,int amount){
 		try {
 			orderDataManage = new OrderDataManage(context);
-			ArrayList<Order> mList = orderDataManage.getOrderArray(myApplication.getUserId(), "", "", "¼��", fromIndex+"",amount+"",myApplication.getToken());
+			ArrayList<Order> mList = orderDataManage.getOrderArray(myApplication.getUserId(), "", "", "", fromIndex+"",amount+"",myApplication.getToken());
 //			Log.i("info", mList.size()+"mList");
 			for(int i=0;i<mList.size();i++){
 				view = inflater.inflate(R.layout.all_order_item_item, null);
