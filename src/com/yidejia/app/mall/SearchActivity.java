@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
 import android.widget.AdapterView;
@@ -45,9 +46,12 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 		historyArrayList = historyDataManage.getHistorysArray();
 		Log.i("SchHistory", "size"+historyArrayList.size());
 		setActionBarConfig();
-		
 		searchHistoryList = (ListView) findViewById(R.id.search_history_list);
 		clearHistoryBtn = (Button) findViewById(R.id.search_history_btn);
+		if(historyArrayList.isEmpty()) clearHistoryBtn.setVisibility(ViewGroup.GONE);
+		else {
+			 clearHistoryBtn.setVisibility(ViewGroup.VISIBLE);
+		}
 //		SearchListAdapter searchListAdapter = new SearchListAdapter(SearchActivity.this);
 		searchHistoryList.setAdapter(adapter);
 //		autoCompleteTextView.setAdapter(adapter);
@@ -110,7 +114,9 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				historyDataManage.cleanHistory();
+				historyArrayList.clear();
 				adapter.notifyDataSetChanged();
+				clearHistoryBtn.setVisibility(ViewGroup.GONE);
 			}
 		});
 		
