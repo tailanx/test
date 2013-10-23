@@ -36,6 +36,7 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.UserPayActivity;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
+import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.ExpressDataManage;
 import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.model.Addresses;
@@ -76,7 +77,7 @@ public class CstmPayActivity extends SherlockActivity {
 	private String expressNum = "";//快递费用
 	private String postMethod = "EMS";//快递方式
 	private String goods;//商品串
-	
+	private String orderCode;//订单号
 	
 	private static final String SERVER_URL = "http://202.104.148.76/splugin/interface";
 	private static final String TRADE_COMMAND = "1001";
@@ -327,8 +328,9 @@ public class CstmPayActivity extends SherlockActivity {
 								"0", recipientId, "", "0", expressNum,
 								"EMS", peiSongCenter, goods, "",
 								myApplication.getToken());
-						String orderCode = orderDataManage.getOrderCode();
+						orderCode = orderDataManage.getOrderCode();
 						Log.e("OrderCode", orderCode);
+						if(orderCode == null || "".equals(orderCode))return;
 //						Intent userpayintent = new Intent(CstmPayActivity.this, UserPayActivity.class);
 //						Bundle bundle = new Bundle();
 //						bundle.putString("name", "hello");
@@ -338,30 +340,30 @@ public class CstmPayActivity extends SherlockActivity {
 //						CstmPayActivity.this.finish();
 						
 						//测试提交订单
-//						FutureTask<Map<String, String>> task = new FutureTask<Map<String, String>>(call);
-//						Thread th = new Thread(task);
-//						th.start();
-//						Map<String, String> resp;
-//						try {
-//							resp = task.get();
-//							Log.d(TAG, "task status: " + task.isDone());
-//							
-//							if (null != resp && null != resp.get("code") && "0000".equals(resp.get("code"))) {
-//								String tn = resp.get("tn");
+						FutureTask<Map<String, String>> task = new FutureTask<Map<String, String>>(call);
+						Thread th = new Thread(task);
+						th.start();
+						Map<String, String> resp;
+						try {
+							resp = task.get();
+							Log.d(TAG, "task status: " + task.isDone());
+							
+							if (null != resp && null != resp.get("code") && "0000".equals(resp.get("code"))) {
+								String tn = resp.get("tn");
+								UPPayAssistEx.startPayByJAR(CstmPayActivity.this,
+										PayActivity.class, null, null, tn, "01");
+								
+							} else {
 //								UPPayAssistEx.startPayByJAR(CstmPayActivity.this,
-//										PayActivity.class, null, null, tn, "01");
-//								
-//							} else {
-////								UPPayAssistEx.startPayByJAR(CstmPayActivity.this,
-////										PayActivity.class, null, null, "121364646464646", "01");
-//							}
-//						} catch (InterruptedException e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						} catch (ExecutionException e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						}
+//										PayActivity.class, null, null, "121364646464646", "01");
+							}
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (ExecutionException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				});
 			}
@@ -504,6 +506,12 @@ public class CstmPayActivity extends SherlockActivity {
         String str = data.getExtras().getString("pay_result");
         if (str.equalsIgnoreCase("success")) {
             msg = "支付成功！";
+            CartsDataManage cartsDataManage = new CartsDataManage();
+            cartsDataManage.cleanCart();
+            if(!"".equals(orderCode) && orderCode != null){
+            	OrderDataManage orderDataManage = new OrderDataManage(CstmPayActivity.this);
+            	orderDataManage.changeOrder(myApplication.getUserId(), orderCode);
+            }
         } else if (str.equalsIgnoreCase("fail")) {
             msg = "支付失败！";
         } else if (str.equalsIgnoreCase("cancel")) {
