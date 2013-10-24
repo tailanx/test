@@ -180,7 +180,7 @@ public class PreferentialDataManage {
 			for (int i = 0; i < resArray.length(); i++) {
 				JSONObject itemObject = resArray.getJSONObject(i);
 				String activeId = itemObject.getString("id");
-				String goods_list = itemObject.getString("goods_list");
+				String goods_list = itemObject.getString("good_list");
 				JSONArray goodsArray = new JSONArray(goods_list);
 				Specials specials;
 				JSONObject listObject;
