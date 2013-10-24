@@ -3,7 +3,6 @@ package com.yidejia.app.mall.view;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -18,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 
 public class EditorActivity extends SherlockActivity {
@@ -74,7 +74,15 @@ public class EditorActivity extends SherlockActivity {
 					.setPositiveButton("确定",new android.content.DialogInterface.OnClickListener(){
 						
 						public void onClick(DialogInterface arg0, int arg1) {
-							System.exit(0);
+//							System.exit(0);
+							MyApplication myApplication = (MyApplication)getApplication();
+							myApplication.setIsLogin(false);
+							myApplication.setNick("");
+							myApplication.setPassword("");
+							myApplication.setToken("");
+							myApplication.setUserHeadImg("");
+							myApplication.setUserId("");
+							myApplication.setVip("");
 							
 						}
 
