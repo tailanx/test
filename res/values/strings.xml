@@ -66,4 +66,7 @@
 	<string name="check_logistics">查看物流</string>
 	<string name="ship_post">快递</string>
 	<string name="please_login">你还未登陆，请先登陆!</string>
+	
+	<!-- 订单号 -->
+	<string name="no_token_id">订单号为空或位数不对，请检查输入的订单号！</string>
 </resources>
