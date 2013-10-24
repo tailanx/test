@@ -77,10 +77,11 @@
                 android:padding="8dp"
                 android:stretchColumns="1" >
 
-                <TableRow
+                <TableRow android:id="@+id/login_acount"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="15dp"
+                    android:descendantFocusability="blocksDescendants"
                     android:background="@drawable/account_bg" >
 
                     <TextView
@@ -95,20 +96,23 @@
                         android:textColor="#b4b4b4"
                         android:textSize="20sp" />
 
-                    <EditText
+                    <EditText 
                         android:id="@+id/my_mall_login__edittext_account"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:background="@null"
-                           android:paddingRight="180dp"
+                        android:clickable="false"
+                        android:paddingRight="180dp"
+                        android:hint="伊的家账号"
                         android:singleLine="true" />
                 </TableRow>
 
-                <TableRow
+                <TableRow android:id="@+id/login_psw"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="15dp"
+                    android:descendantFocusability="blocksDescendants"
                     android:background="@drawable/account_bg" >
 
                     <TextView
@@ -121,7 +125,6 @@
                         android:padding="8dp"
                         android:text="密码"
                         android:textColor="#b4b4b4"
-                        
                         android:textSize="20sp" />
 
                     <EditText
@@ -131,8 +134,9 @@
                         android:layout_gravity="center_vertical"
                         android:background="@null"
                         android:inputType="textPassword"
-                     
-                      android:paddingRight="180dp"
+                     	android:clickable="false"
+                      	android:paddingRight="180dp"
+                        android:hint="******"
                         android:singleLine="true" />
                 </TableRow>
 
