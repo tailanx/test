@@ -18,17 +18,17 @@ import android.widget.Toast;
 public class AlreadyCompleteUtil {
 	private Context context;
 	private LayoutInflater mInflater;
-	private LinearLayout mLinearLayout;//Íâ²ã¼ÓÔØÓÃµÄ
-	private LinearLayout mLayout;//ÓÃÀ´´«²ÎÓÃµÄ
+	private LinearLayout mLinearLayout;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½
+	private LinearLayout mLayout;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½
 	private View view;
 	private MyApplication myApplication;
 	
-	private TextView titleTextView;//¶©µ¥µÄ×´Ì¬
-	private TextView numberTextView;//¶©µ¥µÄ±àºÅ
-	private TextView sumPrice;//¶©µ¥µÄ×Ü¼Û¸ñ
-	private TextView countTextView;//×ÜÊýÄ¿
+	private TextView titleTextView;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
+	private TextView numberTextView;//ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½
+	private TextView sumPrice;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü¼Û¸ï¿½
+	private TextView countTextView;//ï¿½ï¿½ï¿½ï¿½Ä¿
 	
-	private OrderDataManage orderDataManage ;//ÓÃÀ´»ñÈ¡¶©µ¥Êý¾Ý
+	private OrderDataManage orderDataManage ;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	public AlreadyCompleteUtil(Context context,LinearLayout layout){
 		this.context = context;
@@ -46,12 +46,12 @@ public class AlreadyCompleteUtil {
 		
 	}
 	/**
-	 * ¼ÓÔØÊÓÍ¼
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 	 */
 		public void loadView(int fromIndex, int amount){
 			try {
 				orderDataManage = new OrderDataManage(context);
-				ArrayList<Order> mList = orderDataManage.getOrderArray(myApplication.getUserId(), "", "", "ÒÑÇ©ÊÕ", fromIndex+"", amount+"",myApplication.getToken());
+				ArrayList<Order> mList = orderDataManage.getOrderArray(myApplication.getUserId(), "", "", "å·²ç­¾æ”¶", fromIndex+"", amount+"",myApplication.getToken());
 				Log.i("info", mList.size()+"mList");
 				for(int i=0;i<mList.size();i++){
 					setupShow();
@@ -61,7 +61,7 @@ public class AlreadyCompleteUtil {
 					numberTextView.setText(mOrder.getOrderCode());
 					
 					AlreadyCompleteDetail alreadyCompleteDetail = new AlreadyCompleteDetail(context, mOrder, mLayout);
-					alreadyCompleteDetail.addView();//¼ÓÔØÉÌÆ·
+					alreadyCompleteDetail.addView();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
 					for(int j=0;j<alreadyCompleteDetail.map.size();j++){
 //					Log.i("info", mLinearLayoutLayout+"+mlayout");
 					sumPrice.setText(alreadyCompleteDetail.map.get("price")+"");

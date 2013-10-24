@@ -133,6 +133,12 @@ public class AlreadyComFragment extends SherlockFragment {
 		// });
 		return view;
 	}
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		setupShow();
+	}
 
 	@Override
 	public void onDestroy() {

@@ -87,7 +87,7 @@ public class AllOrderFragment extends SherlockFragment {
 									| DateUtils.FORMAT_SHOW_DATE
 									| DateUtils.FORMAT_SHOW_TIME);
 			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-
+			fromIndex = 0;//刷新的index要改为0
 			setupShow();
 			mPullToRefreshScrollView.onRefreshComplete();
 
@@ -129,7 +129,7 @@ public class AllOrderFragment extends SherlockFragment {
 								| DateUtils.FORMAT_SHOW_DATE);
 		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 		// Log.i("info", allOrderUtil+"");
-		// setupShow(view);
+//		setupShow();//初始化
 		// getData();
 
 		// View produce = inflater.inflate(R.layout.all_order_item_produce,
@@ -162,6 +162,13 @@ public class AllOrderFragment extends SherlockFragment {
 		// }
 		// });
 		return view;
+	}
+
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		setupShow();
 	}
 
 	@Override

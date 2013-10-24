@@ -1,7 +1,6 @@
 package com.yidejia.app.mall.view;
 
 import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -35,8 +34,9 @@ import com.unionpay.UPPayAssistEx;
 import com.unionpay.uppay.PayActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-//import com.yidejia.app.mall.UserPayActivity;
+
 import com.yidejia.app.mall.datamanage.AddressDataManage;
+import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.ExpressDataManage;
 import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.model.Addresses;
@@ -77,7 +77,7 @@ public class CstmPayActivity extends SherlockActivity {
 	private String expressNum = "";//快递费用
 	private String postMethod = "EMS";//快递方式
 	private String goods;//商品串
-	
+	private String orderCode;//订单号
 	
 	private static final String SERVER_URL = "http://202.104.148.76/splugin/interface";
 	private static final String TRADE_COMMAND = "1001";
@@ -328,17 +328,25 @@ public class CstmPayActivity extends SherlockActivity {
 								"0", recipientId, "", "0", expressNum,
 								"EMS", peiSongCenter, goods, "",
 								myApplication.getToken());
-						String orderCode = orderDataManage.getOrderCode();
+						orderCode = orderDataManage.getOrderCode();
 						Log.e("OrderCode", orderCode);
-//						Intent userpayintent = new Intent(CstmPayActivity.this, UserPayActivity.class);
-//						Bundle bundle = new Bundle();
-//						bundle.putString("name", "hello");
-//						bundle.putString("amount", "100");
-//						userpayintent.putExtras(bundle);
-//						startActivity(userpayintent);
-//						CstmPayActivity.this.finish();
+						if(orderCode == null || "".equals(orderCode))return;
+						Intent userpayintent = new Intent(CstmPayActivity.this, UserPayActivity.class);
+						Bundle bundle = new Bundle();
+						if(yinlianCheckBox.isChecked()){
+							bundle.putInt("mode", 1);
+							bundle.putString("name", "hello");
+							bundle.putString("amount", "1.00");
+						} else if(caifutongCheckBox.isChecked()){
+							bundle.putInt("mode", 0);
+						} else {
+							bundle.putInt("mode", 2);
+						}
+						userpayintent.putExtras(bundle);
+						startActivity(userpayintent);
+						CstmPayActivity.this.finish();
 						
-						//测试提交订单
+//						//测试提交订单
 //						FutureTask<Map<String, String>> task = new FutureTask<Map<String, String>>(call);
 //						Thread th = new Thread(task);
 //						th.start();
@@ -505,6 +513,12 @@ public class CstmPayActivity extends SherlockActivity {
         String str = data.getExtras().getString("pay_result");
         if (str.equalsIgnoreCase("success")) {
             msg = "支付成功！";
+            CartsDataManage cartsDataManage = new CartsDataManage();
+            cartsDataManage.cleanCart();
+            if(!"".equals(orderCode) && orderCode != null){
+            	OrderDataManage orderDataManage = new OrderDataManage(CstmPayActivity.this);
+            	orderDataManage.changeOrder(myApplication.getUserId(), orderCode);
+            }
         } else if (str.equalsIgnoreCase("fail")) {
             msg = "支付失败！";
         } else if (str.equalsIgnoreCase("cancel")) {

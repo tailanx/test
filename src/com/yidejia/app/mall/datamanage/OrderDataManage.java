@@ -204,6 +204,7 @@ public class OrderDataManage {
 	private ArrayList<Cart> cartsArray;
 
 	private ArrayList<Cart> analysisCart(String lines) throws JSONException {
+		ArrayList<Cart> cartsArray = new ArrayList<Cart>();
 		JSONArray jsonArray = new JSONArray(lines);
 		int length = jsonArray.length();
 		Cart cart;

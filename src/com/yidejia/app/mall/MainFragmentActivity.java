@@ -239,6 +239,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 //					down_home_imageView.setPressed(true);
 					down_home_imageView.setImageResource(R.drawable.home_hover);
 //					down_home_TextView.setTextColor(Color.WHITE);//getResources().getColor(R.color.white)
+					getSupportActionBar().setCustomView(R.layout.actionbar_main_home_title);
 					break;
 				case 1:
 //					newFragment = MainPageFragment.newInstance(1);
@@ -260,6 +261,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 //					down_search_imageView.setPressed(true);
 					down_search_imageView.setImageResource(R.drawable.down_search_hover);
 //					down_search_TextView.setTextColor(Color.WHITE);
+					getSupportActionBar().setCustomView(R.layout.actionbar_search);
 					break;
 				case 3:
 //					newFragment = ShoppingCartFragment.newInstance(3);
@@ -271,6 +273,8 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 //					down_shopping_imageView.setPressed(true);
 					down_shopping_imageView.setImageResource(R.drawable.down_shopping_hover);
 //					down_shopping_TextView.setTextColor(Color.WHITE);
+					getSupportActionBar()
+							.setCustomView(R.layout.actionbar_cart);
 					break;
 				case 4:
 					isLogin = ((MyApplication) getApplication())
@@ -287,6 +291,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 						// down_my_imageView.setPressed(true);
 						down_my_imageView
 								.setImageResource(R.drawable.down_my_hover);
+						getSupportActionBar().setCustomView(R.layout.actionbar_mymall);
 						break;
 					} else {
 //						newFragment = new LoginFragment();
@@ -298,6 +303,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 						down_my_imageView
 								.setImageResource(R.drawable.down_my_hover);
 						// down_my_TextView.setTextColor(Color.WHITE);
+						getSupportActionBar().setCustomView(R.layout.login_top);
 						break;
 					}
 				default:
@@ -305,10 +311,10 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 				}
 				//用于切换时保存fragment
 				FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//				if(getCurrFragment(id).isAdded())
-//					ft.hide(getCurrFragment(currentIndex)).show(getCurrFragment(id)).commit();
-//				else ft.hide(getCurrFragment(currentIndex)).add(R.id.main_fragment, getCurrFragment(id)).commit();//.addToBackStack(fragmentTag[id])
-				ft.replace(R.id.main_fragment, getCurrFragment(id)).commit();
+				if(getCurrFragment(id).isAdded())
+					ft.hide(getCurrFragment(currentIndex)).show(getCurrFragment(id)).commit();
+				else ft.hide(getCurrFragment(currentIndex)).add(R.id.main_fragment, getCurrFragment(id)).commit();//.addToBackStack(fragmentTag[id])
+//				ft.replace(R.id.main_fragment, getCurrFragment(id)).commit();
 //				currFragment = newFragment;
 			}
 			currentIndex = id;

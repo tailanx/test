@@ -22,19 +22,19 @@ import com.yidejia.app.mall.view.ExchangeActivity;
 public class WaitDeliverUtil {
 	private Context context;
 	private LayoutInflater mInflater;
-	private LinearLayout mLinearLayout;//Íâ²ã¼ÓÔØÓÃµÄ
-	private LinearLayout mLayout;//ÓÃÀ´´«²ÎÓÃµÄ
+	private LinearLayout mLinearLayout;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½
+	private LinearLayout mLayout;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½
 	private View view;
 	private MyApplication myApplication;
 	
-	private TextView titleTextView;//¶©µ¥µÄ×´Ì¬
-	private TextView numberTextView;//¶©µ¥µÄ±àºÅ
-	private TextView sumPrice;//¶©µ¥µÄ×Ü¼Û¸ñ
-	private TextView countTextView;//×ÜÊýÄ¿
-	private Button mButton;//´ß»õ
-	private Button mButton2;//ÍË»»»õ
+	private TextView titleTextView;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
+	private TextView numberTextView;//ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½
+	private TextView sumPrice;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü¼Û¸ï¿½
+	private TextView countTextView;//ï¿½ï¿½ï¿½ï¿½Ä¿
+	private Button mButton;//ï¿½ß»ï¿½
+	private Button mButton2;//ï¿½Ë»ï¿½ï¿½ï¿½
 	
-	private OrderDataManage orderDataManage ;//ÓÃÀ´»ñÈ¡¶©µ¥Êý¾Ý
+	private OrderDataManage orderDataManage ;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	public WaitDeliverUtil(Context context,LinearLayout layout){
 		this.context = context;
@@ -42,13 +42,13 @@ public class WaitDeliverUtil {
 		this.mLinearLayout = layout;
 		this.myApplication = (MyApplication) context.getApplicationContext();
 	}
-	public void setupShow(){
+	public void setupShow(Order mOrder){
 		
 		view = mInflater.inflate(R.layout.wait_deliver_item_main_item,null);
 		
-		mButton = (Button) view.findViewById(R.id.wait_deliver_item_payment);
+		Button mButton = (Button) view.findViewById(R.id.wait_deliver_item_payment);
 		
-		mButton2 = (Button) view.findViewById(R.id.wait_deliver_item_exchange);
+		Button mButton2 = (Button) view.findViewById(R.id.wait_deliver_item_exchange);
 		
 		mButton2.setOnClickListener(new OnClickListener() {
 			   
@@ -59,46 +59,53 @@ public class WaitDeliverUtil {
 				
 			}
 		});
-		mLayout = (LinearLayout) view.findViewById(R.id.wait_deliver_relative2);
-		titleTextView = (TextView)view.findViewById(R.id.wait_deliver_item_detail);
-		numberTextView = (TextView)view.findViewById(R.id.wait_deliver_item_textview2_nubmer);
-		sumPrice = (TextView)view.findViewById(R.id.wait_deliver_sum_money_detail);
-		countTextView = (TextView)view.findViewById(R.id.wait_deliver_item_textview7_count);
+		LinearLayout mLayout = (LinearLayout) view.findViewById(R.id.wait_deliver_relative2);
+		TextView titleTextView = (TextView)view.findViewById(R.id.wait_deliver_item_detail);
+		TextView numberTextView = (TextView)view.findViewById(R.id.wait_deliver_item_textview2_nubmer);
+		TextView sumPrice = (TextView)view.findViewById(R.id.wait_deliver_sum_money_detail);
+		TextView countTextView = (TextView)view.findViewById(R.id.wait_deliver_item_textview7_count);
 		
+		titleTextView.setText(mOrder.getStatus());
+		numberTextView.setText(mOrder.getOrderCode());
+		// sumPrice.setText(100+"");
+		// countTextView.setText(1+"");
+		final WaitDeliverDetail waitDeliverDetail = new WaitDeliverDetail(
+				context, mOrder, mLayout);
+		waitDeliverDetail.addView();// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
+		for (int j = 0; j < waitDeliverDetail.map.size(); j++) {
+			// Log.i("info", mLinearLayoutLayout+"+mlayout");
+			sumPrice.setText(waitDeliverDetail.map.get("price") + "");
+			countTextView.setText(waitDeliverDetail.map.get("count")
+					.intValue() + "");
+		}
+//		return view;
 	}
 	/**
-	 * ¼ÓÔØÊÓÍ¼
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 	 */
-		public void loadView(int fromIndex,int amount){
-			try {
-				orderDataManage = new OrderDataManage(context);
-				ArrayList<Order> mList = orderDataManage.getOrderArray(myApplication.getUserId(), "", "", "ÒÑÇ©ÊÕ", fromIndex+"", amount+"",myApplication.getToken());
-				Log.i("info", mList.size()+"mList");
-				for(int i=0;i<mList.size();i++){
-					setupShow();
-					Log.i("info", view+"+view");
-					Order mOrder = mList.get(i);
-					titleTextView.setText(mOrder.getStatus());
-					numberTextView.setText(mOrder.getOrderCode());
-//					sumPrice.setText(100+"");
-//					countTextView.setText(1+"");
-					WaitDeliverDetail waitDeliverDetail = new WaitDeliverDetail(context, mOrder, mLayout);
-					waitDeliverDetail.addView();//¼ÓÔØÉÌÆ·
-					for(int j=0;j<waitDeliverDetail.map.size();j++){
-//					Log.i("info", mLinearLayoutLayout+"+mlayout");
-					sumPrice.setText(waitDeliverDetail.map.get("price")+"");
-					countTextView.setText(waitDeliverDetail.map.get("count").intValue()+"");
-					}
-					
-					mLinearLayout.addView(view);
-					Log.i("info", mLinearLayout+"+mlayout");
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
-
+	public void loadView(int fromIndex, int amount) {
+		try {
+			orderDataManage = new OrderDataManage(context);
+			ArrayList<Order> mList = orderDataManage.getOrderArray(
+					myApplication.getUserId(), "", "", "å·²ä»˜æ¬¾", fromIndex + "",
+					amount + "", myApplication.getToken());
+			Log.i("info", mList.size() + "mList");
+			for (int i = 0; i < mList.size(); i++) {
+//				Log.i("info", view + "+view");
+				Order mOrder = mList.get(i);
+//				setupShow(mOrder);
+				setupShow(mOrder);
+				mLinearLayout.addView(view);
+//				Log.i("info", mLinearLayout + "+mlayout");
 			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Toast.makeText(context,
+					context.getResources().getString(R.string.bad_network),
+					Toast.LENGTH_SHORT).show();
+
 		}
+	}
 }
 

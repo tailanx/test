@@ -26,11 +26,11 @@ public class PersonActivity extends SherlockActivity {
 	// private ArrayList<Produce> mArrayList;
 	// MyAdapter myAdapter;
 	// ListView mListView;
-	// private MessageDataManage messaeDataManage;//��Ϣ���ĵ���ݿ�
+	// private MessageDataManage messaeDataManage;//????????????
 	// private MyApplication myApplication;
 	// private
 	// public void setupShow(){
-	// //ʵ��ؼ�
+	// //?????
 	// // go_back = (Button)findViewById(R.id.main1_button);
 	// // mArrayList = (ArrayList<Produce>) ProduceDao.produceList;
 	// // for(int i=0;i<mArrayList.size();i++){
@@ -40,15 +40,15 @@ public class PersonActivity extends SherlockActivity {
 	//
 	// // mListView = (ListView) findViewById(R.id.lv_group_list_list);
 	// // mListView.setAdapter(myAdapter);
-	// Log.i("info", "���");
+	// Log.i("info", "???");
 	// }
-	// //�����Ӧ�¼�
+	// //?????????
 	// public void doClick(View v){
 	// Intent intent = new Intent(this,MyMallActivity.class);
 	// switch (v.getId()) {
-	// case R.id.main1_button://��ⷵ�ذ�ť�¼���Ӧ
+	// case R.id.main1_button://?????????????
 	// startActivity(intent);
-	// //����ǰActivity��
+	// //?????Activity??
 	// this.finish();
 	// break;
 	//
@@ -131,7 +131,7 @@ public class PersonActivity extends SherlockActivity {
 		// layout.addView(person);
 		// setupShow();
 
-		// Log.i("info", "���");
+		// Log.i("info", "???");
 	}
 
 	private void setActionbar() {

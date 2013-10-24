@@ -257,6 +257,7 @@ public class AddressDataManage {
 				for (int i = 0; i < length; i++) {
 					Addresses addresses = new Addresses();
 					addressItem = responseArray.getJSONObject(i);
+					if("n".equals(addressItem.getString("valid_flag"))) continue;
 					String recipient_id = addressItem.getString("recipient_id");
 					addresses.setAddressId(recipient_id);
 					String name = addressItem.getString("customer_name");

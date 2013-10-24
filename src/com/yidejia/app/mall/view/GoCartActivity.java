@@ -92,7 +92,9 @@ public class GoCartActivity extends SherlockActivity {// implements
 					// TODO Auto-generated method stub
 					if (!((MyApplication) GoCartActivity.this.getApplication())
 							.getIsLogin()) {
+
 						Toast.makeText(GoCartActivity.this, getResources().getString(R.string.please_login),
+
 								Toast.LENGTH_LONG).show();
 						Intent intent = new Intent(GoCartActivity.this,
 								LoginActivity.class);
@@ -120,7 +122,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(GoCartActivity.this, getResources().getString(R.string.no_network), Toast.LENGTH_SHORT)
+			Toast.makeText(GoCartActivity.this, getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT)
 					.show();
 		}
 		//

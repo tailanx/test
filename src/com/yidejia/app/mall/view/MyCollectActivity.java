@@ -2,17 +2,22 @@ package com.yidejia.app.mall.view;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.FavoriteAdapter;
@@ -43,7 +48,31 @@ public class MyCollectActivity extends SherlockActivity {
 //		sellCount = (TextView)mycollectView.findViewById(R.id.my_collect_item_sum1);
 //		compment = (TextView)mycollectView.findViewById(R.id.my_collect_item_sum2);
 	
-	
+		mListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				String pid = mList.get(position).getUId();
+				Intent intent = new Intent(MyCollectActivity.this, GoodsInfoActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putString("goodsId", pid);
+				intent.putExtras(bundle);
+				startActivity(intent);
+			}
+		});
+		
+		mListView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				//未完成的删掉收藏
+				return false;
+			}
+		});
 	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

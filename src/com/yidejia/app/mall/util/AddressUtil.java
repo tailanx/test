@@ -32,18 +32,18 @@ public class AddressUtil {
 	private LinearLayout linearLayout;
 	private Context context;
 	private LayoutInflater inflater;
-	private CheckBox checkBox;// ��ѡ��
-	private TextView areaTextView;// �����ַ
-	private TextView addressTextView;// �����ַ
-	private TextView nameTextView;// �ջ�������
-	private TextView numberTextView;// �ջ��˵绰
-	private ImageView deleteImageView;// ɾ��
-	private ImageView editImageView;// �༭
+	private CheckBox checkBox;// ?????
+	private TextView areaTextView;// ??????
+	private TextView addressTextView;// ??????
+	private TextView nameTextView;// ?????????
+	private TextView numberTextView;// ?????��
+	private ImageView deleteImageView;// ???
+	private ImageView editImageView;// ??
 	private AddressDataManage dataManage;
 	private View view;
 	ArrayList<Addresses> addressesArray;
-	private ImageView delete;// ɾ��
-	private ImageView edit;// �༭
+	private ImageView delete;// ???
+	private ImageView edit;// ??
 
 	private MyApplication myApplication ;
 
@@ -90,7 +90,7 @@ public class AddressUtil {
 	}
 
 	/**
-	 * �������һ���µĵ�ַ
+	 * ???????????��???
 	 * 
 	 * @return
 	 */
@@ -150,7 +150,7 @@ public class AddressUtil {
 				});
 			}
 			
-			// ���view
+			// ???view
 			this.linearLayout.addView(view);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -161,7 +161,7 @@ public class AddressUtil {
 	}
 
 	/**
-	 * ���µ�ַ
+	 * ???��??
 	 * 
 	 * @param data
 	 */
@@ -206,7 +206,7 @@ public class AddressUtil {
 						bundle.putSerializable("editaddress", addresses);
 						intent.putExtras(bundle);
 						((Activity) context).startActivityForResult(intent,
-								DefinalDate.requestcode);// ����Intent,������������
+								DefinalDate.requestcode);// ????Intent,????????????
 
 					}
 				});
@@ -221,7 +221,7 @@ public class AddressUtil {
 				}
 			});
 			}
-			// ���view
+			// ???view
 			this.linearLayout.addView(view);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -307,7 +307,7 @@ public class AddressUtil {
 						bundle.putSerializable("editaddress", addresses);
 						intent.putExtras(bundle);
 						((Activity) context).startActivityForResult(intent,
-								DefinalDate.requestcode);// ����Intent,������������
+								DefinalDate.requestcode);// ????Intent,????????????
 
 					}
 				});

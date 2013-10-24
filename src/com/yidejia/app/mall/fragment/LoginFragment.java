@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -54,7 +55,7 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.my_mall_login, container, false);
-		getSherlockActivity().getSupportActionBar().setCustomView(R.layout.login_top);
+//		getSherlockActivity().getSupportActionBar().setCustomView(R.layout.login_top);
 		userManage = new UserDatamanage(getSherlockActivity());
 		myApplication = (MyApplication)getSherlockActivity().getApplication();
 		ipAddress = new IpAddress();
@@ -68,7 +69,33 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 		
 		stringName = (EditText)view.findViewById(R.id.my_mall_login__edittext_account);
 		stringPassword = (EditText)view.findViewById(R.id.my_mall_login__edittext_password);
-		
+		// 优化登录账号密码焦点获取
+		TableRow login_acount = (TableRow) view.findViewById(R.id.login_acount);
+		TableRow login_psw = (TableRow) view.findViewById(R.id.login_psw);
+		login_acount
+				.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
+		login_psw.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
+		login_acount.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				stringName.requestFocus();
+				stringName.setCursorVisible(true);
+				stringPassword.setCursorVisible(false);
+			}
+		});
+
+		login_psw.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				stringPassword.requestFocus();
+				stringPassword.setCursorVisible(true);
+				stringName.setCursorVisible(false);
+			}
+		});
 		return view;
 	}
 

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 
 public class EditorActivity extends SherlockActivity {
