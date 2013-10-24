@@ -3,28 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <!--
-    <RelativeLayout
-        android:id="@+id/new_address_relative1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/topbg" >
-
-        <Button
-            android:id="@+id/new_address_button1"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/back1"
-            android:onClick="doClick" />
-<<<<<<< HEAD
--->
+ 
 
     <TableLayout
         android:id="@+id/new_address_tablelayout1"
@@ -99,36 +78,32 @@
                 android:text="所在地区："
                 android:textSize="15sp" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical" >
 
-                <Spinner
-                    android:id="@+id/province"
-                    android:layout_width="58sp"
+                <com.yidejia.app.mall.address.WheelView
+                    android:id="@+id/country"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="省"
-                    android:textSize="5sp" />
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1" />
 
-                <Spinner
+                <com.yidejia.app.mall.address.WheelView
                     android:id="@+id/city"
-                    android:layout_width="58sp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/province"
-                    android:text="市"
-                    android:textSize="15sp" />
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="1" />
 
-                <Spinner
+                <com.yidejia.app.mall.address.WheelView
                     android:id="@+id/district"
-                    android:layout_width="58sp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/city"
-                    
-                    android:text="区"
-                    android:textSize="15sp" />
-            </RelativeLayout>
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
         </TableRow>
 
         <TableRow
@@ -152,8 +127,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@null"
-                android:textSize="13sp"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textSize="13sp" />
         </TableRow>
     </TableLayout>
 

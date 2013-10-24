@@ -7,7 +7,7 @@
     <com.handmark.pulltorefresh.library.PullToRefreshScrollView
         xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/address_item_main_refresh_scrollview11"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/main_bg"
         android:descendantFocusability="afterDescendants"
@@ -15,21 +15,21 @@
         ptr:ptrAnimationStyle="flip"
         ptr:ptrMode="pullDownFromTop" >
 
-        <LinearLayout
+        	<LinearLayout
             android:id="@+id/address_management_relative2"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
             android:layout_marginTop="4dp"
             android:orientation="vertical" >
-
-            <ListView
+            <ListView 
                 android:id="@+id/address_management_listview"
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_centerHorizontal="true" >
-            </ListView>
+                android:layout_height="wrap_content"
+                
+                ></ListView>
+
         </LinearLayout>
     </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 
