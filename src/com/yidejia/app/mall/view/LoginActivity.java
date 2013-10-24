@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -90,7 +92,32 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 		stringName = (EditText)findViewById(R.id.my_mall_login__edittext_account);
 		stringPassword = (EditText)findViewById(R.id.my_mall_login__edittext_password);
 		mLogin.setOnClickListener(this);
-
+		//优化登录账号密码焦点获取
+		TableRow login_acount = (TableRow) findViewById(R.id.login_acount);
+		TableRow login_psw = (TableRow) findViewById(R.id.login_psw);
+		login_acount.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
+		login_psw.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
+		login_acount.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				stringName.requestFocus();
+				stringName.setCursorVisible(true);
+				stringPassword.setCursorVisible(false);
+			}
+		});
+		
+		login_psw.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				stringPassword.requestFocus();
+				stringPassword.setCursorVisible(true);
+				stringName.setCursorVisible(false);
+			}
+		});
 	}
 	@Override
 	public void onClick(View v) {
