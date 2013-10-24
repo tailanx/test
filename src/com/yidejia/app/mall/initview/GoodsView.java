@@ -440,33 +440,41 @@ public class GoodsView {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			FavoriteDataManage manage = new FavoriteDataManage(activity);
-			if(!isLogin){
+			if (!isLogin) {
 				builder.show();
-				
-				}
-			else if (isLogin && !"".equals(userid)) {
+
+			} else if (isLogin && !"".equals(userid)) {
 				// 登录状态下
-				if (!manage.checkExists(userid, productId, myApplication.getToken())) {
+				if (!manage.checkExists(userid, productId,
+						myApplication.getToken())) {
 					// 未收藏，现在添加收藏
-					if (manage.addFavourite(userid, productId, myApplication.getToken())) {
+					if (manage.addFavourite(userid, productId,
+							myApplication.getToken())) {
 						// 收藏成功
-						 Toast.makeText(activity, activity.getResources().getString(R.string.add_fav_scs),
-						 Toast.LENGTH_SHORT)
-						 .show();
+						Toast.makeText(
+								activity,
+								activity.getResources().getString(
+										R.string.add_fav_scs),
+								Toast.LENGTH_SHORT).show();
 						add_favorites
 								.setImageResource(R.drawable.add_favorites2);
 					} else {
-						 Toast.makeText(activity, activity.getResources().getString(R.string.add_fav_fail),
-						 Toast.LENGTH_SHORT).show();
+						Toast.makeText(
+								activity,
+								activity.getResources().getString(
+										R.string.add_fav_fail),
+								Toast.LENGTH_SHORT).show();
 						add_favorites
 								.setImageResource(R.drawable.add_favorites1);
 					}
 				} else {
 					// 已收藏，现在删除收藏
-					if (manage.deleteFavourite(userid, productId, myApplication.getToken())) {
+					if (manage.deleteFavourite(userid, productId,
+							myApplication.getToken())) {
 						// 删除成功
 						add_favorites
 								.setImageResource(R.drawable.add_favorites1);
+						Toast.makeText(activity, activity.getResources().getString(R.string.del_fav_ok), Toast.LENGTH_LONG).show();
 					} else {
 						// 删除失败
 						add_favorites
@@ -476,8 +484,8 @@ public class GoodsView {
 			} else {
 				// 未登录状态下，收藏到本地
 				// 改变图片
-				flag = !flag;
-				changeFravoriteBg();
+//				flag = !flag;
+//				changeFravoriteBg();
 			}
 		}
 	};
