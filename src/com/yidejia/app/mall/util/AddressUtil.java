@@ -32,18 +32,18 @@ public class AddressUtil {
 	private LinearLayout linearLayout;
 	private Context context;
 	private LayoutInflater inflater;
-	private CheckBox checkBox;// µ¥Ñ¡¿ò
-	private TextView areaTextView;// µØÇøµØÖ·
-	private TextView addressTextView;// ¾ßÌåµØÖ·
-	private TextView nameTextView;// ÊÕ»õÈËÐÕÃû
-	private TextView numberTextView;// ÊÕ»õÈËµç»°
-	private ImageView deleteImageView;// É¾³ý
-	private ImageView editImageView;// ±à¼­
+	private CheckBox checkBox;// ï¿½ï¿½Ñ¡ï¿½ï¿½
+	private TextView areaTextView;// ï¿½ï¿½ï¿½ï¿½ï¿½Ö·
+	private TextView addressTextView;// ï¿½ï¿½ï¿½ï¿½ï¿½Ö·
+	private TextView nameTextView;// ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private TextView numberTextView;// ï¿½Õ»ï¿½ï¿½Ëµç»°
+	private ImageView deleteImageView;// É¾ï¿½ï¿½
+	private ImageView editImageView;// ï¿½à¼­
 	private AddressDataManage dataManage;
 	private View view;
 	ArrayList<Addresses> addressesArray;
-	private ImageView delete;// É¾³ý
-	private ImageView edit;// ±à¼­
+	private ImageView delete;// É¾ï¿½ï¿½
+	private ImageView edit;// ï¿½à¼­
 
 	private MyApplication myApplication ;
 
@@ -65,8 +65,6 @@ public class AddressUtil {
 	}
 
 	private void setupShow() {
-		view = LayoutInflater.from(context).inflate(
-				R.layout.address_management_item, null);
 		edit = (ImageView) view
 				.findViewById(R.id.address_management_item_relative1_textview2);
 		delete = (ImageView) view
@@ -84,13 +82,15 @@ public class AddressUtil {
 				.findViewById(R.id.address_management_item_relative1_textview1);
 		editImageView = (ImageView) view
 				.findViewById(R.id.address_management_item_relative1_textview2);
+		view = LayoutInflater.from(context).inflate(
+				R.layout.address_management_item, null);
 		checkBox = (CheckBox) view
 				.findViewById(R.id.address_management_item_relative1_checkBox1);
 
 	}
 
 	/**
-	 * ÓÃÓÚÌí¼ÓÒ»¸öÐÂµÄµØÖ·
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ÂµÄµï¿½Ö·
 	 * 
 	 * @return
 	 */
@@ -102,8 +102,11 @@ public class AddressUtil {
 			if (bundle != null) {
 				final Addresses addresses = (Addresses) bundle
 						.getSerializable("newaddress");
-				// Log.i("info", addresses.getName().toString());
+				 Log.i("info", addresses.getName().toString()+"   newaddress ");
+				 view = LayoutInflater.from(context).inflate(
+							R.layout.address_management_item, null);
 				setupShow();
+
 				nameTextView.setText(addresses.getName());
 				addressTextView.setText(addresses.getAddress());
 				numberTextView.setText(addresses.getHandset());
@@ -119,7 +122,7 @@ public class AddressUtil {
 
 					}
 				});
-				checkBox.setChecked(false);
+				checkBox.setChecked(addresses.getDefaultAddress());
 				//
 				editImageView.setOnClickListener(new OnClickListener() {
 
@@ -131,7 +134,7 @@ public class AddressUtil {
 						bundle.putSerializable("editaddress", addresses);
 						intent.putExtras(bundle);
 						((Activity) context).startActivityForResult(intent,
-								DefinalDate.requestcode);// ·¢ËÍIntent,²¢ÉèÖÃÇëÇóÂë
+								DefinalDate.requestcode);// 
 
 					}
 				});
@@ -140,13 +143,14 @@ public class AddressUtil {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 						// TODO Auto-generated method stub
+						if(isChecked) return;
 						boolean isSucess = dataManage.setDefaultAddress(myApplication.getUserId(), addresses.getAddressId(), myApplication.getToken());
 						Log.i("info", isSucess +"");
 					}
 				});
 			}
 			
-			// Ìí¼Óview
+			// ï¿½ï¿½ï¿½view
 			this.linearLayout.addView(view);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -157,7 +161,7 @@ public class AddressUtil {
 	}
 
 	/**
-	 * ¸üÐÂµØÖ·
+	 * ï¿½ï¿½ï¿½Âµï¿½Ö·
 	 * 
 	 * @param data
 	 */
@@ -170,7 +174,11 @@ public class AddressUtil {
 				final Addresses addresses = (Addresses) bundle
 						.getSerializable("newaddress");
 				Log.i("info", addresses.getName().toString());
-				setupShow();
+				view = LayoutInflater.from(context).inflate(
+						R.layout.address_management_item, null);
+				CheckBox checkBox = (CheckBox) view
+						.findViewById(R.id.address_management_item_relative1_checkBox1);
+
 				nameTextView.setText(addresses.getName());
 				addressTextView.setText(addresses.getAddress());
 				numberTextView.setText(addresses.getHandset());
@@ -186,7 +194,7 @@ public class AddressUtil {
 //						Log.i("info", isDele + "");
 					}
 				});
-				checkBox.setChecked(false);
+				checkBox.setChecked(addresses.getDefaultAddress());
 				//
 				editImageView.setOnClickListener(new OnClickListener() {
 
@@ -198,7 +206,7 @@ public class AddressUtil {
 						bundle.putSerializable("editaddress", addresses);
 						intent.putExtras(bundle);
 						((Activity) context).startActivityForResult(intent,
-								DefinalDate.requestcode);// ·¢ËÍIntent,²¢ÉèÖÃÇëÇóÂë
+								DefinalDate.requestcode);// ï¿½ï¿½ï¿½ï¿½Intent,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 					}
 				});
@@ -207,12 +215,13 @@ public class AddressUtil {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 					// TODO Auto-generated method stub
+					if(isChecked) return;
 					boolean isSucess = dataManage.setDefaultAddress(myApplication.getUserId(), addresses.getAddressId(), myApplication.getToken());
 					Log.i("info", isSucess +"");
 				}
 			});
 			}
-			// Ìí¼Óview
+			// ï¿½ï¿½ï¿½view
 			this.linearLayout.addView(view);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -236,6 +245,9 @@ public class AddressUtil {
 				// "+addressArray.size()");
 				view = LayoutInflater.from(context).inflate(
 						R.layout.address_management_item, null);
+				CheckBox checkBox = (CheckBox) view
+						.findViewById(R.id.address_management_item_relative1_checkBox1);
+
 				// edit = (ImageView) view
 				// .findViewById(R.id.address_management_item_relative1_textview2);
 
@@ -283,7 +295,7 @@ public class AddressUtil {
 						linearLayout.removeView(layout1);
 					}
 				});
-				checkBox.setChecked(false);
+				checkBox.setChecked(addresses.getDefaultAddress());
 				//
 				editImageView.setOnClickListener(new OnClickListener() {
 
@@ -295,7 +307,7 @@ public class AddressUtil {
 						bundle.putSerializable("editaddress", addresses);
 						intent.putExtras(bundle);
 						((Activity) context).startActivityForResult(intent,
-								DefinalDate.requestcode);// ·¢ËÍIntent,²¢ÉèÖÃÇëÇóÂë
+								DefinalDate.requestcode);// ï¿½ï¿½ï¿½ï¿½Intent,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 					}
 				});
@@ -305,8 +317,10 @@ public class AddressUtil {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 						// TODO Auto-generated method stub
+						if(isChecked) return;
 						boolean isSucess = dataManage.setDefaultAddress(myApplication.getUserId(), addresses.getAddressId(), myApplication.getToken());
 						Log.i("info", isSucess +"");
+						
 					}
 				});
 				linearLayout.addView(view);

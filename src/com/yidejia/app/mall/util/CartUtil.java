@@ -42,8 +42,10 @@ import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.yidejia.app.mall.GoodsInfoActivity;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
+import com.yidejia.app.mall.datamanage.FavoriteDataManage;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.UserComment;
 import com.yidejia.app.mall.view.GoCartActivity;
@@ -58,10 +60,11 @@ public class CartUtil {
 	private CheckBox mBox;
 	private CartsDataManage dataManage;
 	private List<Object> mList;
+	private FavoriteDataManage favoriteDataManage;
+//	private MyApplication myApplication;
 //	private InnerReceiver receiver;
 
-	private String items[] = { "ɾ��", "�鿴��Ʒ����", "�ղ�" };
-
+	private String items[] = {"删除","查看商品详情","收藏"};
 	
 	private TextView number;
 
@@ -123,7 +126,8 @@ public class CartUtil {
 			TextView mTextView, TextView sumTextView, CheckBox box) {// ,View
 																		// view
 		this.inflater = LayoutInflater.from(context); // ,UserCommentDataManage
-
+		favoriteDataManage = new FavoriteDataManage(context);
+//		myApplication = (MyApplication) context.getApplicationContext();
 		this.linearLayout = linearLayout;
 		this.context = context;
 		this.mTextView = mTextView;
@@ -371,7 +375,7 @@ public class CartUtil {
 				Builder builder = new Builder(context);
 				final AlertDialog dialog = builder
 						.setIcon(android.R.drawable.alert_dark_frame)
-						.setTitle("���ﳵ����")
+						.setTitle(context.getResources().getString(R.string.cart_contorl))
 						.setSingleChoiceItems(items, 0,
 								new android.content.DialogInterface.OnClickListener() {
 
@@ -403,7 +407,7 @@ public class CartUtil {
 											dialog.dismiss();
 											break;
 										case 2:
-											Toast.makeText(context, "�ղسɹ�",
+											Toast.makeText(context, context.getResources().getString(R.string.alreay_collect),
 													Toast.LENGTH_LONG).show();
 											dialog.dismiss();
 											break;
