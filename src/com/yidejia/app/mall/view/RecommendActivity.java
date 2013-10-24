@@ -21,7 +21,7 @@ public class RecommendActivity extends SherlockActivity {
 //		case R.id.my_collect_button1:
 //			Intent intent = new Intent(MyCollectActivity.this,MyMallActivity.class);
 //			startActivity(intent);
-//			//½áÊøµ±Ç°Activity£»
+//			//ï¿½ï¿½ï¿½ï¿½Ç°Activityï¿½ï¿½
 //			MyCollectActivity.this.finish();
 //			break;
 //		
@@ -46,12 +46,12 @@ public class RecommendActivity extends SherlockActivity {
 //		TextView textView4 = (TextView) person.findViewById(R.id.wait_pay_order_item_textview6);
 //		TextView textView5 = (TextView) person.findViewById(R.id.wait_pay_order_item_textview7);
 //
-//		textView.setText("¶©µ¥×´Ì¬£ºÒÑÍê³É¶©µ¥£¡");
-//		textView1.setText("ÉúÉúÊÀÊÀss");
-//		textView2.setText("£¤160.00");
-//		textView2.setText("ÊýÁ¿£ºx1");
-//		textView2.setText("¶©µ¥½ð¶î£º£¤160.00");
-//		textView2.setText("ÊýÁ¿£ºx2");
+//		textView.setText("ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¶ï¿½ï¿½ï¿½ï¿½ï¿½");
+//		textView1.setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ss");
+//		textView2.setText("ï¿½ï¿½160.00");
+//		textView2.setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½x1");
+//		textView2.setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î£ºï¿½ï¿½160.00");
+//		textView2.setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½x2");
 		layout.addView(person1);
 		layout.addView(person2);
 		
@@ -79,7 +79,7 @@ public class RecommendActivity extends SherlockActivity {
 		});
 		
 		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
-		titleTextView.setText("Ó¦ÓÃÍÆ¼ö");
+		titleTextView.setText(getResources().getString(R.string.recomend));
 	}
 }
 

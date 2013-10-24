@@ -26,11 +26,11 @@ public class PersonActivity extends SherlockActivity {
 	// private ArrayList<Produce> mArrayList;
 	// MyAdapter myAdapter;
 	// ListView mListView;
-	// private MessageDataManage messaeDataManage;//ÏûÏ¢ÖÐÐÄµÄÊý¾Ý¿â
+	// private MessageDataManage messaeDataManage;//ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½Ý¿ï¿½
 	// private MyApplication myApplication;
 	// private
 	// public void setupShow(){
-	// //ÊµÀý»¯¿Ø¼þ
+	// //Êµï¿½ï¿½Ø¼ï¿½
 	// // go_back = (Button)findViewById(R.id.main1_button);
 	// // mArrayList = (ArrayList<Produce>) ProduceDao.produceList;
 	// // for(int i=0;i<mArrayList.size();i++){
@@ -40,15 +40,15 @@ public class PersonActivity extends SherlockActivity {
 	//
 	// // mListView = (ListView) findViewById(R.id.lv_group_list_list);
 	// // mListView.setAdapter(myAdapter);
-	// Log.i("info", "ÄãºÃ");
+	// Log.i("info", "ï¿½ï¿½ï¿½");
 	// }
-	// //Ìí¼ÓÏìÓ¦ÊÂ¼þ
+	// //ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Â¼ï¿½
 	// public void doClick(View v){
 	// Intent intent = new Intent(this,MyMallActivity.class);
 	// switch (v.getId()) {
-	// case R.id.main1_button://µã½â·µ»Ø°´Å¥ÊÂ¼þÏìÓ¦
+	// case R.id.main1_button://ï¿½ï¿½â·µï¿½Ø°ï¿½Å¥ï¿½Â¼ï¿½ï¿½ï¿½Ó¦
 	// startActivity(intent);
-	// //½áÊøµ±Ç°Activity£»
+	// //ï¿½ï¿½ï¿½ï¿½Ç°Activityï¿½ï¿½
 	// this.finish();
 	// break;
 	//
@@ -68,7 +68,7 @@ public class PersonActivity extends SherlockActivity {
 		@Override
 		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
 			// TODO Auto-generated method stub
-			String label = "ÉÏ´Î¸üÐÂÓÚ"	+ DateUtils.formatDateTime(
+			String label = getResources().getString(R.string.update_time)	+ DateUtils.formatDateTime(
 					PersonActivity.this.getApplicationContext(),
 					System.currentTimeMillis(),
 					DateUtils.FORMAT_SHOW_TIME
@@ -109,7 +109,7 @@ public class PersonActivity extends SherlockActivity {
 	    mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.message_scrollView);
 		
 	    mPullToRefreshScrollView.setOnRefreshListener(listener);
-		String label = "ÉÏ´Î¸üÐÂÓÚ"	+ DateUtils.formatDateTime(
+		String label = getResources().getString(R.string.update_time)	+ DateUtils.formatDateTime(
 				PersonActivity.this.getApplicationContext(),
 				System.currentTimeMillis(),
 				DateUtils.FORMAT_SHOW_TIME
@@ -131,7 +131,7 @@ public class PersonActivity extends SherlockActivity {
 		// layout.addView(person);
 		// setupShow();
 
-		// Log.i("info", "ÄãºÃ");
+		// Log.i("info", "ï¿½ï¿½ï¿½");
 	}
 
 	private void setActionbar() {
@@ -158,6 +158,6 @@ public class PersonActivity extends SherlockActivity {
 		});
 
 		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
-		titleTextView.setText("ÏûÏ¢ÖÐÐÄ");
+		titleTextView.setText(getResources().getString(R.string.person_message));
 	}
 }

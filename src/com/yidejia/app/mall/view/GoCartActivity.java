@@ -53,7 +53,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 		counTextView = (TextView) findViewById(R.id.shopping_cart_sum_number);// �ܵ�����
 
 		mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.shopping_cart_item_goods_scrollView);
-		String label = "�ϴθ�����"
+		String label = getResources().getString(R.string.update_time)
 				+ DateUtils.formatDateTime(GoCartActivity.this,
 						System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
 								| DateUtils.FORMAT_SHOW_DATE
@@ -74,7 +74,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 		mbutton = (Button) findViewById(R.id.actionbar_right);
 		mTextView = (TextView) findViewById(R.id.actionbar_title);
 		mImageView = (ImageView) findViewById(R.id.actionbar_left);
-		mTextView.setText("���ﳵ");
+		mTextView.setText(getResources().getString(R.string.gocart));
 
 		try {
 			mImageView.setOnClickListener(new OnClickListener() {
@@ -92,7 +92,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 					// TODO Auto-generated method stub
 					if (!((MyApplication) GoCartActivity.this.getApplication())
 							.getIsLogin()) {
-						Toast.makeText(GoCartActivity.this, "�㻹δ��½�����ȵ�½",
+						Toast.makeText(GoCartActivity.this, getResources().getString(R.string.please_login),
 								Toast.LENGTH_LONG).show();
 						Intent intent = new Intent(GoCartActivity.this,
 								LoginActivity.class);
@@ -111,7 +111,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 						intent.putExtras(bundle);
 						GoCartActivity.this.startActivity(intent);
 					} else {
-						Toast.makeText(GoCartActivity.this, "�㻹δ�����κ���Ʒ",
+						Toast.makeText(GoCartActivity.this, getResources().getString(R.string.no_buy),
 								Toast.LENGTH_LONG).show();
 					}
 				}
@@ -120,7 +120,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(GoCartActivity.this, "���粻������", Toast.LENGTH_SHORT)
+			Toast.makeText(GoCartActivity.this, getResources().getString(R.string.no_network), Toast.LENGTH_SHORT)
 					.show();
 		}
 		//
@@ -132,7 +132,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 		@Override
 		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
 			// TODO Auto-generated method stub
-			String label = "�ϴθ�����"
+			String label =getResources().getString(R.string.update_time)
 					+ DateUtils.formatDateTime(GoCartActivity.this,
 							System.currentTimeMillis(),
 							DateUtils.FORMAT_ABBREV_ALL

@@ -25,13 +25,13 @@
 			case R.id.address_management_button1:
 				Intent intent = new Intent(AddressActivity.this,MyMallActivity.class);
 				startActivity(intent);
-				//½áÊøµ±Ç°Activity£»
+				//ï¿½ï¿½ï¿½ï¿½Ç°Activityï¿½ï¿½
 				AddressActivity.this.finish();
 				break;
 			case R.id.address_management_button2:
 				Intent intent2 = new Intent(AddressActivity.this,NewAddressActivity.class);
 				startActivity(intent2);
-				//½áÊøµ±Ç°Activity£»
+				//ï¿½ï¿½ï¿½ï¿½Ç°Activityï¿½ï¿½
 				AddressActivity.this.finish();
 				break;
 			}
@@ -41,7 +41,7 @@
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			setActionbar();
-			//ÕâÀï¸¸²¼¾ÖÒªÓÃscrollview
+			//ï¿½ï¿½ï¿½ï¸¸ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½scrollview
 			setContentView(R.layout.opinion);
 
 		}
@@ -58,7 +58,16 @@
 //			startActionMode(new AnActionModeOfEpicProportions(ComposeActivity.this));
 			ImageView leftButton = (ImageView) findViewById(R.id.actionbar_left);
 			Button rightButton = (Button) findViewById(R.id.actionbar_right);
-			rightButton.setText("Ìá½»");
+			rightButton.setText(getResources().getString(R.string.commit));
+			rightButton.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					// TODO Auto-generated method stub
+					Toast.makeText(OptionActivity.this, getResources().getString(R.string.commit_compelte), Toast.LENGTH_SHORT).show();
+					OptionActivity.this.finish();
+				}
+			});
 			leftButton.setOnClickListener(new OnClickListener() {
 				
 				@Override
@@ -67,14 +76,14 @@
 //					Toast.makeText(ComposeActivity.this, "button", Toast.LENGTH_SHORT).show();
 //					Intent intent = new Intent(AddressActivity.this,MyMallActivity.class);
 //					startActivity(intent);
-					//½áÊøµ±Ç°Activity£»
+					//ï¿½ï¿½ï¿½ï¿½Ç°Activityï¿½ï¿½
 					OptionActivity.this.finish();
 				}
 			});
 		
 			
 			TextView titleTextView = (TextView) findViewById(R.id.actionbar_title);
-			titleTextView.setText("Òâ¼û·´À¡");
+			titleTextView.setText(getResources().getString(R.string.option));
 		}
 	}
 
