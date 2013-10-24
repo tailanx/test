@@ -63,43 +63,53 @@ public class AllOrderUtil {
 /**
  * ������ͼ
  */
-	public void loadView(int fromIndex,int amount){
+	public void loadView(int fromIndex, int amount) {
 		try {
 			orderDataManage = new OrderDataManage(context);
-			ArrayList<Order> mList = orderDataManage.getOrderArray(myApplication.getUserId(), "", "", "", fromIndex+"",amount+"",myApplication.getToken());
-//			Log.i("info", mList.size()+"mList");
-			for(int i=0;i<mList.size();i++){
+			ArrayList<Order> mList = orderDataManage.getOrderArray(
+					myApplication.getUserId(), "", "", "", fromIndex + "",
+					amount + "", myApplication.getToken());
+			// Log.i("info", mList.size()+"mList");
+			for (int i = 0; i < mList.size(); i++) {
 				view = inflater.inflate(R.layout.all_order_item_item, null);
-//				Log.i("info", view+"");
-				Button mButton = (Button) view.findViewById(R.id.all_order_item_main_pay);
-				LinearLayout mLayout = (LinearLayout) view.findViewById(R.id.all_order_item_main_relative2);
-				TextView titleTextView = (TextView)view.findViewById(R.id.all_order_item_main_item_detail);
-				TextView numberTextView = (TextView)view.findViewById(R.id.all_order_item_main_item_number);
-				TextView sumPrice = (TextView)view.findViewById(R.id.all_order_item_main_sum_money_deatil);
-				TextView countTextView = (TextView)view.findViewById(R.id.all_order_item_main_item_textview7_detail);
+				// Log.i("info", view+"");
+				Button mButton = (Button) view
+						.findViewById(R.id.all_order_item_main_pay);
+				LinearLayout mLayout = (LinearLayout) view
+						.findViewById(R.id.all_order_item_main_relative2);
+				TextView titleTextView = (TextView) view
+						.findViewById(R.id.all_order_item_main_item_detail);
+				TextView numberTextView = (TextView) view
+						.findViewById(R.id.all_order_item_main_item_number);
+				TextView sumPrice = (TextView) view
+						.findViewById(R.id.all_order_item_main_sum_money_deatil);
+				TextView countTextView = (TextView) view
+						.findViewById(R.id.all_order_item_main_item_textview7_detail);
 
 				Order mOrder = mList.get(i);
 				titleTextView.setText(mOrder.getStatus());
 				numberTextView.setText(mOrder.getOrderCode());
 
-				final AllOrderDetail allOrderDetail = new AllOrderDetail(context, mOrder, mLayout);
-				allOrderDetail.addView();//������Ʒ
-				for(int j=0;j<allOrderDetail.map.size();j++){
+				final AllOrderDetail allOrderDetail = new AllOrderDetail(
+						context, mOrder, mLayout);
+				allOrderDetail.addView();// ������Ʒ
+				for (int j = 0; j < allOrderDetail.map.size(); j++) {
 
-				sumPrice.setText(allOrderDetail.map.get("price")+"");
-				countTextView.setText(allOrderDetail.map.get("count").intValue()+"");
+					sumPrice.setText(allOrderDetail.map.get("price") + "");
+					countTextView.setText(allOrderDetail.map.get("count")
+							.intValue() + "");
 				}
-				
-				
-				
+
 				mButton.setOnClickListener(new OnClickListener() {
-					
+
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
-						Intent intent = new Intent(context,CstmPayActivity.class);
+						Intent intent = new Intent(context,
+								CstmPayActivity.class);
 						Bundle mBundle = new Bundle();
-						mBundle.putString("price", allOrderDetail.map.get("price")+"");
+						mBundle.putString("price",
+								allOrderDetail.map.get("price") + "");
 						intent.putExtras(mBundle);
 						context.startActivity(intent);
 					}
@@ -109,7 +119,9 @@ public class AllOrderUtil {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
+			Toast.makeText(context,
+					context.getResources().getString(R.string.bad_network),
+					Toast.LENGTH_SHORT).show();
 
 		}
 	}
