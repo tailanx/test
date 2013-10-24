@@ -331,39 +331,46 @@ public class CstmPayActivity extends SherlockActivity {
 						orderCode = orderDataManage.getOrderCode();
 						Log.e("OrderCode", orderCode);
 						if(orderCode == null || "".equals(orderCode))return;
-//						Intent userpayintent = new Intent(CstmPayActivity.this, UserPayActivity.class);
-//						Bundle bundle = new Bundle();
-//						bundle.putString("name", "hello");
-//						bundle.putString("amount", "100");
-//						userpayintent.putExtras(bundle);
-//						startActivity(userpayintent);
-//						CstmPayActivity.this.finish();
-						
-						//测试提交订单
-						FutureTask<Map<String, String>> task = new FutureTask<Map<String, String>>(call);
-						Thread th = new Thread(task);
-						th.start();
-						Map<String, String> resp;
-						try {
-							resp = task.get();
-							Log.d(TAG, "task status: " + task.isDone());
-							
-							if (null != resp && null != resp.get("code") && "0000".equals(resp.get("code"))) {
-								String tn = resp.get("tn");
-								UPPayAssistEx.startPayByJAR(CstmPayActivity.this,
-										PayActivity.class, null, null, tn, "01");
-								
-							} else {
-//								UPPayAssistEx.startPayByJAR(CstmPayActivity.this,
-//										PayActivity.class, null, null, "121364646464646", "01");
-							}
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (ExecutionException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+						Intent userpayintent = new Intent(CstmPayActivity.this, UserPayActivity.class);
+						Bundle bundle = new Bundle();
+						if(yinlianCheckBox.isChecked()){
+							bundle.putInt("mode", 1);
+							bundle.putString("name", "hello");
+							bundle.putString("amount", "1.00");
+						} else if(caifutongCheckBox.isChecked()){
+							bundle.putInt("mode", 0);
+						} else {
+							bundle.putInt("mode", 2);
 						}
+						userpayintent.putExtras(bundle);
+						startActivity(userpayintent);
+						CstmPayActivity.this.finish();
+						
+//						//测试提交订单
+//						FutureTask<Map<String, String>> task = new FutureTask<Map<String, String>>(call);
+//						Thread th = new Thread(task);
+//						th.start();
+//						Map<String, String> resp;
+//						try {
+//							resp = task.get();
+//							Log.d(TAG, "task status: " + task.isDone());
+//							
+//							if (null != resp && null != resp.get("code") && "0000".equals(resp.get("code"))) {
+//								String tn = resp.get("tn");
+//								UPPayAssistEx.startPayByJAR(CstmPayActivity.this,
+//										PayActivity.class, null, null, tn, "01");
+//								
+//							} else {
+////								UPPayAssistEx.startPayByJAR(CstmPayActivity.this,
+////										PayActivity.class, null, null, "121364646464646", "01");
+//							}
+//						} catch (InterruptedException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						} catch (ExecutionException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
 					}
 				});
 			}
