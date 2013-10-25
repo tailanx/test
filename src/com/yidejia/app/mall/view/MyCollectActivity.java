@@ -84,9 +84,9 @@ public class MyCollectActivity extends SherlockActivity {
 //		Log.i("info", mList.size()+"");
 		if(mList.size()<=0){
 			setContentView(R.layout.favorite_empty);
-		}else{
-		setContentView(R.layout.my_collect);
-		setupShow();
+		} else {
+			setContentView(R.layout.my_collect);
+			setupShow();
 		}
 	}
 	
