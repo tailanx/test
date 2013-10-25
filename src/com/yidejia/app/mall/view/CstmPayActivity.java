@@ -78,6 +78,8 @@ public class CstmPayActivity extends SherlockActivity {
 	private String postMethod = "EMS";//快递方式
 	private String goods;//商品串
 	private String orderCode;//订单号
+	private String resp_code;// 返回状态码
+	private String tn;//流水号
 	
 	private static final String SERVER_URL = "http://202.104.148.76/splugin/interface";
 	private static final String TRADE_COMMAND = "1001";
@@ -316,27 +318,43 @@ public class CstmPayActivity extends SherlockActivity {
 						}
 					};
 				}
-				
+				//提交订单
 				saveOrderBtn.setOnClickListener(new OnClickListener() {
 					
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
-						
+						if (!yinlianCheckBox.isChecked()
+								&& !zhifubaoCheckBox.isChecked()
+								&& !zhifubaowangyeCheckBox.isChecked()
+								&& !caifutongCheckBox.isChecked()) {
+							Toast.makeText(
+									CstmPayActivity.this,
+									getResources().getString(
+											R.string.select_pay_type),
+									Toast.LENGTH_LONG).show();
+							return;
+						}
 						OrderDataManage orderDataManage = new OrderDataManage(CstmPayActivity.this);
 						orderDataManage.saveOrder(myApplication.getUserId(),
 								"0", recipientId, "", "0", expressNum,
-								"EMS", peiSongCenter, goods, "",
+								postMethod, peiSongCenter, goods, "",
 								myApplication.getToken());
 						orderCode = orderDataManage.getOrderCode();
+						resp_code = orderDataManage.getRespCode();
+						tn = orderDataManage.getTN();
 						Log.e("OrderCode", orderCode);
 						if(orderCode == null || "".equals(orderCode))return;
 						Intent userpayintent = new Intent(CstmPayActivity.this, UserPayActivity.class);
 						Bundle bundle = new Bundle();
 						if(yinlianCheckBox.isChecked()){
 							bundle.putInt("mode", 1);
-							bundle.putString("name", "hello");
-							bundle.putString("amount", "1.00");
+//							bundle.putString("name", "hello");
+//							bundle.putString("amount", "1.00");
+							bundle.putString("code", orderCode);
+							bundle.putString("uid", myApplication.getUserId());
+							bundle.putString("resp_code", resp_code);
+							bundle.putString("tn", tn);
 						} else if(caifutongCheckBox.isChecked()){
 							bundle.putInt("mode", 0);
 						} else {
@@ -459,6 +477,8 @@ public class CstmPayActivity extends SherlockActivity {
 				generalPrice.setText(express.getExpress());
 				emsPrice.setText(express.getEms());
 				Log.i("info", addresses.getName());
+				postMethod = getResources().getString(R.string.ship_post);//初始化快递方式;
+				expressNum = express.getExpress();//初始化费用
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
