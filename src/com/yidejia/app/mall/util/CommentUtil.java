@@ -23,20 +23,20 @@ public class CommentUtil {
 	private LayoutInflater inflater;
 	private LinearLayout linearLayout;
 	private View view;
-	private ImageView userIcon;// ï¿½Ã»ï¿½Í·ï¿½ï¿½
-	private TextView userName;// ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
-	private TextView userLevel;// ï¿½Ã»ï¿½ï¿½È¼ï¿½
-	private TextView userContent;// ï¿½Ã»ï¿½
-	private TextView userGrade;// ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
-	private TextView commentTime;// ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+	private ImageView userIcon;// ÓÃ»§Í·Ïñ
+	private TextView userName;// ÓÃ»§Ãû×Ö
+	private TextView userLevel;// ÓÃ»§µÈ¼¶
+	private TextView userContent;// ÓÃ»§
+	private TextView userGrade;// ÓÃ»§ÆÀ·Ö
+	private TextView commentTime;// ÆÀÂÛÊ±¼ä
 
 	private UserCommentDataManage dataManage;
 
 	/**
-	 *  
+	 *   
 	 */
 	public CommentUtil() {
-		dataManage = new UserCommentDataManage(context);
+
 	}
 
 	/**
@@ -51,11 +51,10 @@ public class CommentUtil {
 		this.context = context;
 		// this.view = view;
 		// this.dataManage = dataManage;
-		dataManage = new UserCommentDataManage(context);
 	}
 
 	/**
-	 * ï¿½ï¿½Ê¾È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * ÏÔÊ¾È«²¿µÄÊý¾Ý
 	 */
 
 	public void AllComment(String goodsId, int fromIndex, int amount) {
@@ -70,18 +69,18 @@ public class CommentUtil {
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();
 //			}
-			
+			dataManage = new UserCommentDataManage(context);
+			bar.dismiss();
 			if("".equals(goodsId) || goodsId == null) {
 				Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 				return;
 			}
 			ArrayList<UserComment> userList = dataManage.getUserCommentsArray(
 					goodsId, fromIndex, amount, false);
-			bar.dismiss();
 			for (int i = 0; i < userList.size(); i++) {
-				setupShow();// Êµï¿½ï¿½Ø¼ï¿½
+				setupShow();// ÊµÀý»¯¿Ø¼þ
 				UserComment userComment = userList.get(i);
-				String path = userComment.getUserPictureUrl();
+//				String path = userComment.getUserPictureUrl();
 //				Bitmap bm = BitmapFactory.decodeFile(path);
 //				if (bm != null) {
 //					userIcon.setImageBitmap(bm);
@@ -100,7 +99,7 @@ public class CommentUtil {
 
 	/**
 	 * 
-	 * Êµï¿½ï¿½Ø¼ï¿½
+	 * ÊµÀý»¯¿Ø¼þ
 	 */
 	private void setupShow() {
 		view = LayoutInflater.from(context).inflate(

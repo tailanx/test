@@ -27,9 +27,9 @@ public class ReturnActivity extends SherlockActivity {
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		getSupportActionBar().setIcon(R.drawable.back);
 		getSupportActionBar().setCustomView(R.layout.actionbar_common);
-		ImageView back = (ImageView) findViewById(R.id.actionbar_left);//返回
-		Button submit = (Button) findViewById(R.id.actionbar_right);//提交
-		submit.setText("提交");
+		ImageView back = (ImageView) findViewById(R.id.actionbar_left);//锟斤拷锟斤拷
+		Button submit = (Button) findViewById(R.id.actionbar_right);//锟结交
+		submit.setText(getResources().getString(R.string.commit));
 		back.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -37,7 +37,7 @@ public class ReturnActivity extends SherlockActivity {
 				ReturnActivity.this.finish();
 			}
 		});
-		TextView title = (TextView) findViewById(R.id.actionbar_title);//标题
-		title.setText("申请退换货");
+		TextView title = (TextView) findViewById(R.id.actionbar_title);//锟斤拷锟斤拷
+		title.setText(getResources().getString(R.string.retrun_produce));
 	}
 }

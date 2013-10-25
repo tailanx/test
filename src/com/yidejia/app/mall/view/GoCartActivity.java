@@ -22,7 +22,10 @@ import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
+import com.yidejia.app.mall.datamanage.CartsDataManage;
+import com.yidejia.app.mall.datamanage.PreferentialDataManage;
 import com.yidejia.app.mall.model.Addresses;
+import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.util.CartUtil;
 
 public class GoCartActivity extends SherlockActivity {// implements
@@ -38,6 +41,8 @@ public class GoCartActivity extends SherlockActivity {// implements
 	private ImageView mImageView;// ����
 	private TextView mTextView;// title
 	private MyApplication myApplication;
+	private CartsDataManage dataManage;
+	private PreferentialDataManage preferentialDataManage ;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +50,8 @@ public class GoCartActivity extends SherlockActivity {// implements
 		setContentView(R.layout.shopping_cart);
 		myApplication = (MyApplication) getApplication();
 		addressManage = new AddressDataManage(GoCartActivity.this);
-
+		preferentialDataManage = new PreferentialDataManage(GoCartActivity.this);
+		dataManage = new CartsDataManage();
 		mBox = (CheckBox) findViewById(R.id.shopping_cart_checkbox);// ѡ���
 
 		sumTextView = (TextView) findViewById(R.id.shopping_cart_sum_money);// �ܵ�Ǯ��
@@ -74,7 +80,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 		mbutton = (Button) findViewById(R.id.actionbar_right);
 		mTextView = (TextView) findViewById(R.id.actionbar_title);
 		mImageView = (ImageView) findViewById(R.id.actionbar_left);
-		mTextView.setText("购物车");
+		mTextView.setText(getResources().getString(R.string.gocart));
 
 		try {
 			mImageView.setOnClickListener(new OnClickListener() {
@@ -92,13 +98,33 @@ public class GoCartActivity extends SherlockActivity {// implements
 					// TODO Auto-generated method stub
 					if (!((MyApplication) GoCartActivity.this.getApplication())
 							.getIsLogin()) {
-						Toast.makeText(GoCartActivity.this, "你还未登陆，请先登陆",
+
+						Toast.makeText(GoCartActivity.this, getResources().getString(R.string.please_login),
+
 								Toast.LENGTH_LONG).show();
 						Intent intent = new Intent(GoCartActivity.this,
 								LoginActivity.class);
 						startActivity(intent);
 						return;
-					}
+					}else {
+						StringBuffer sb = new StringBuffer();
+						ArrayList<Cart> mList = dataManage.getCartsArray();
+						for(int i = 0; i<mList.size();i++){
+							Cart cart = new Cart();
+							sb.append(cart.getUId());
+							sb.append(",");
+							sb.append(cart.getAmount());
+							sb.append("n");
+							sb.append(";");
+						}
+						preferentialDataManage.getPreferential(sb.toString(),myApplication.getUserId());
+						if (preferentialDataManage.getFreeGoods().size() != 0
+								|| preferentialDataManage.getScoreGoods().size() != 0) {
+							Intent intent = new Intent(GoCartActivity.this,
+									ExchangeFreeActivity.class);
+
+						}else{
+					
 					Intent intent = new Intent(GoCartActivity.this,
 							CstmPayActivity.class);
 					float sum = Float.parseFloat(sumTextView.getText()
@@ -111,11 +137,12 @@ public class GoCartActivity extends SherlockActivity {// implements
 						intent.putExtras(bundle);
 						GoCartActivity.this.startActivity(intent);
 					} else {
-						Toast.makeText(GoCartActivity.this, "你还未购买任何商品",
+						Toast.makeText(GoCartActivity.this, getResources().getString(R.string.no_buy),
 								Toast.LENGTH_LONG).show();
 					}
+					}
 				}
-//
+				}
 			});
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -132,7 +159,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 		@Override
 		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
 			// TODO Auto-generated method stub
-			String label = getResources().getString(R.string.update_time)
+			String label =getResources().getString(R.string.update_time)
 					+ DateUtils.formatDateTime(GoCartActivity.this,
 							System.currentTimeMillis(),
 							DateUtils.FORMAT_ABBREV_ALL

@@ -32,18 +32,18 @@ public class AddressUtil {
 	private LinearLayout linearLayout;
 	private Context context;
 	private LayoutInflater inflater;
-	private CheckBox checkBox;// 单选框
-	private TextView areaTextView;// 地区地址
-	private TextView addressTextView;// 具体地址
-	private TextView nameTextView;// 收货人姓名
-	private TextView numberTextView;// 收货人电话
-	private ImageView deleteImageView;// 删除
-	private ImageView editImageView;// 编辑
+	private CheckBox checkBox;// ?????
+	private TextView areaTextView;// ??????
+	private TextView addressTextView;// ??????
+	private TextView nameTextView;// ?????????
+	private TextView numberTextView;// ?????锟斤拷
+	private ImageView deleteImageView;// ???
+	private ImageView editImageView;// ??
 	private AddressDataManage dataManage;
 	private View view;
 	ArrayList<Addresses> addressesArray;
-	private ImageView delete;// 删除
-	private ImageView edit;// 编辑
+	private ImageView delete;// ???
+	private ImageView edit;// ??
 
 	private MyApplication myApplication ;
 
@@ -65,8 +65,6 @@ public class AddressUtil {
 	}
 
 	private void setupShow() {
-		view = LayoutInflater.from(context).inflate(
-				R.layout.address_management_item, null);
 		edit = (ImageView) view
 				.findViewById(R.id.address_management_item_relative1_textview2);
 		delete = (ImageView) view
@@ -84,13 +82,15 @@ public class AddressUtil {
 				.findViewById(R.id.address_management_item_relative1_textview1);
 		editImageView = (ImageView) view
 				.findViewById(R.id.address_management_item_relative1_textview2);
+		view = LayoutInflater.from(context).inflate(
+				R.layout.address_management_item, null);
 		checkBox = (CheckBox) view
 				.findViewById(R.id.address_management_item_relative1_checkBox1);
 
 	}
 
 	/**
-	 * 用于添加一个新的地址
+	 * ???????????锟斤拷???
 	 * 
 	 * @return
 	 */
@@ -102,8 +102,11 @@ public class AddressUtil {
 			if (bundle != null) {
 				final Addresses addresses = (Addresses) bundle
 						.getSerializable("newaddress");
-				// Log.i("info", addresses.getName().toString());
+				 Log.i("info", addresses.getName().toString()+"   newaddress ");
+				 view = LayoutInflater.from(context).inflate(
+							R.layout.address_management_item, null);
 				setupShow();
+
 				nameTextView.setText(addresses.getName());
 				addressTextView.setText(addresses.getAddress());
 				numberTextView.setText(addresses.getHandset());
@@ -119,7 +122,7 @@ public class AddressUtil {
 
 					}
 				});
-				checkBox.setChecked(false);
+				checkBox.setChecked(addresses.getDefaultAddress());
 				//
 				editImageView.setOnClickListener(new OnClickListener() {
 
@@ -131,7 +134,7 @@ public class AddressUtil {
 						bundle.putSerializable("editaddress", addresses);
 						intent.putExtras(bundle);
 						((Activity) context).startActivityForResult(intent,
-								DefinalDate.requestcode);// 发送Intent,并设置请求码
+								DefinalDate.requestcode);// 
 
 					}
 				});
@@ -140,13 +143,14 @@ public class AddressUtil {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 						// TODO Auto-generated method stub
+						if(isChecked) return;
 						boolean isSucess = dataManage.setDefaultAddress(myApplication.getUserId(), addresses.getAddressId(), myApplication.getToken());
 						Log.i("info", isSucess +"");
 					}
 				});
 			}
 			
-			// 添加view
+			// ???view
 			this.linearLayout.addView(view);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -157,7 +161,7 @@ public class AddressUtil {
 	}
 
 	/**
-	 * 更新地址
+	 * ???锟斤拷??
 	 * 
 	 * @param data
 	 */
@@ -170,7 +174,11 @@ public class AddressUtil {
 				final Addresses addresses = (Addresses) bundle
 						.getSerializable("newaddress");
 				Log.i("info", addresses.getName().toString());
-				setupShow();
+				view = LayoutInflater.from(context).inflate(
+						R.layout.address_management_item, null);
+				CheckBox checkBox = (CheckBox) view
+						.findViewById(R.id.address_management_item_relative1_checkBox1);
+
 				nameTextView.setText(addresses.getName());
 				addressTextView.setText(addresses.getAddress());
 				numberTextView.setText(addresses.getHandset());
@@ -186,7 +194,7 @@ public class AddressUtil {
 //						Log.i("info", isDele + "");
 					}
 				});
-				checkBox.setChecked(false);
+				checkBox.setChecked(addresses.getDefaultAddress());
 				//
 				editImageView.setOnClickListener(new OnClickListener() {
 
@@ -198,7 +206,7 @@ public class AddressUtil {
 						bundle.putSerializable("editaddress", addresses);
 						intent.putExtras(bundle);
 						((Activity) context).startActivityForResult(intent,
-								DefinalDate.requestcode);// 发送Intent,并设置请求码
+								DefinalDate.requestcode);// ????Intent,????????????
 
 					}
 				});
@@ -207,12 +215,13 @@ public class AddressUtil {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 					// TODO Auto-generated method stub
+					if(isChecked) return;
 					boolean isSucess = dataManage.setDefaultAddress(myApplication.getUserId(), addresses.getAddressId(), myApplication.getToken());
 					Log.i("info", isSucess +"");
 				}
 			});
 			}
-			// 添加view
+			// ???view
 			this.linearLayout.addView(view);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -236,6 +245,9 @@ public class AddressUtil {
 				// "+addressArray.size()");
 				view = LayoutInflater.from(context).inflate(
 						R.layout.address_management_item, null);
+				CheckBox checkBox = (CheckBox) view
+						.findViewById(R.id.address_management_item_relative1_checkBox1);
+
 				// edit = (ImageView) view
 				// .findViewById(R.id.address_management_item_relative1_textview2);
 
@@ -283,7 +295,7 @@ public class AddressUtil {
 						linearLayout.removeView(layout1);
 					}
 				});
-				checkBox.setChecked(false);
+				checkBox.setChecked(addresses.getDefaultAddress());
 				//
 				editImageView.setOnClickListener(new OnClickListener() {
 
@@ -295,7 +307,7 @@ public class AddressUtil {
 						bundle.putSerializable("editaddress", addresses);
 						intent.putExtras(bundle);
 						((Activity) context).startActivityForResult(intent,
-								DefinalDate.requestcode);// 发送Intent,并设置请求码
+								DefinalDate.requestcode);// ????Intent,????????????
 
 					}
 				});
@@ -305,8 +317,10 @@ public class AddressUtil {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 						// TODO Auto-generated method stub
+						if(isChecked) return;
 						boolean isSucess = dataManage.setDefaultAddress(myApplication.getUserId(), addresses.getAddressId(), myApplication.getToken());
 						Log.i("info", isSucess +"");
+						
 					}
 				});
 				linearLayout.addView(view);

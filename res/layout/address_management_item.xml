@@ -93,6 +93,15 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="8dp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="30dp"
+                android:layout_toRightOf="@+id/address_management_item_relative1_checkBox1"
+                android:text="设为默认"
+                android:textSize="15sp" />
+
             <ImageView
                 android:id="@+id/address_management_item_relative1_textview1"
                 android:layout_width="wrap_content"
@@ -114,17 +123,8 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:src="@drawable/address_edit" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/address_management_item_relative1_checkBox1"
-                android:text="设为默认"
-                android:textSize="15sp" />
         </RelativeLayout>
     </LinearLayout>
-<!-- </com.handmark.pulltorefresh.library.PullToRefreshScrollView> -->
+    <!-- </com.handmark.pulltorefresh.library.PullToRefreshScrollView> -->
 
 </LinearLayout>

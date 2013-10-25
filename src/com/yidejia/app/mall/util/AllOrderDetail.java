@@ -39,19 +39,19 @@ import com.yidejia.app.mall.view.OrderDetailActivity;
 public class AllOrderDetail {
 	private Context context;
 	private LayoutInflater inflater;
-	private OrderDataManage orderDataManage;// »ñÈ¡¶©µ¥ÏêÇéµÄÊý¾Ý
-	private Order order;// ¶©µ¥
-//	private TextView detail;// ÉÌÆ·µÄÏêÇé
-//	private TextView price;// ÉÌÆ·µÄ¼Û¸ñ
-//	private TextView count;// ÉÌÆ·µÄÊýÁ¿
-//	private ImageView head;// Í·Ïñ
+	private OrderDataManage orderDataManage;// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private Order order;// ï¿½ï¿½ï¿½ï¿½
+//	private TextView detail;// ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//	private TextView price;// ï¿½ï¿½Æ·ï¿½Ä¼Û¸ï¿½
+//	private TextView count;// ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//	private ImageView head;// Í·ï¿½ï¿½
 	private LinearLayout layout;
 //	private View view;
 
-	private float sumPrice = 0;// ×ÜµÄ¼Û¸ñ
-	private int sumCount = 0;// ×ÜµÄÊýÁ¿
+	private float sumPrice = 0;// ï¿½ÜµÄ¼Û¸ï¿½
+	private int sumCount = 0;// ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½
 
-	public static HashMap<String, Float> map;// ÓÃÀ´´æ·ÅÊý¾Ý
+	public static HashMap<String, Float> map;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	public AllOrderDetail(Context context, Order order, LinearLayout layout) {// ,TextView
 																				// sumView
@@ -87,7 +87,7 @@ public class AllOrderDetail {
 
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	private DisplayImageOptions options;
-	protected ImageLoader imageLoader = ImageLoader.getInstance();// ¼ÓÔØÍ¼Æ¬
+	protected ImageLoader imageLoader = ImageLoader.getInstance();// ï¿½ï¿½ï¿½ï¿½Í¼Æ¬
 
 	private void initDisplayImageOption() {
 		options = new DisplayImageOptions.Builder()
@@ -121,19 +121,19 @@ public class AllOrderDetail {
 						animateFirstListener);
 				// Bitmap bm = BitmapFactory.decodeFile(urlString);
 
-				relativeLayout.setOnClickListener(new OnClickListener() {// Ìí¼Óµã»÷ÊÂ¼þ
-
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(context,
-								GoodsInfoActivity.class);
-
-						Bundle bundle = new Bundle();
-						bundle.putString("goodsId", cart.getUId());
-						intent.putExtras(bundle);
-						context.startActivity(intent);
-					}
-				});
+//				relativeLayout.setOnClickListener(new OnClickListener() {// ï¿½ï¿½Óµï¿½ï¿½ï¿½Â¼ï¿½
+//
+//					@Override
+//					public void onClick(View v) {
+//						Intent intent = new Intent(context,
+//								OrderDetailActivity.class);
+//
+//						Bundle bundle = new Bundle();
+//						bundle.putString("goodsId", cart.getUId());
+//						intent.putExtras(bundle);
+//						context.startActivity(intent);
+//					}
+//				});
 				// if(bm!=null){
 				// head.setImageBitmap(bm);
 				// }else{
@@ -154,7 +154,7 @@ public class AllOrderDetail {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, "ï¿½ï¿½ï¿½ç²»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", Toast.LENGTH_SHORT).show();
 
 		}
 		// sumTextView.setText(sumPrice+"");
@@ -192,19 +192,19 @@ public class AllOrderDetail {
 //public class AllOrderDetail {
 //	private Context context;
 //	private LayoutInflater inflater;
-//	private OrderDataManage orderDataManage;// »ñÈ¡¶©µ¥ÏêÇéµÄÊý¾Ý
-//	private Order order;// ¶©µ¥
-//	private TextView detail;//ÉÌÆ·µÄÏêÇé
-//	private TextView price;//ÉÌÆ·µÄ¼Û¸ñ
-//	private TextView count;//ÉÌÆ·µÄÊýÁ¿
-//	private ImageView head;//Í·Ïñ
+//	private OrderDataManage orderDataManage;// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//	private Order order;// ï¿½ï¿½ï¿½ï¿½
+//	private TextView detail;//ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//	private TextView price;//ï¿½ï¿½Æ·ï¿½Ä¼Û¸ï¿½
+//	private TextView count;//ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//	private ImageView head;//Í·ï¿½ï¿½
 //	private LinearLayout layout;
 //	private View view;
 //
-//	private float sumPrice = 0;//×ÜµÄ¼Û¸ñ
-//	private  int sumCount=0;//×ÜµÄÊýÁ¿
+//	private float sumPrice = 0;//ï¿½ÜµÄ¼Û¸ï¿½
+//	private  int sumCount=0;//ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½
 //	
-//	public static HashMap<String, Float> map;//ÓÃÀ´´æ·ÅÊý¾Ý
+//	public static HashMap<String, Float> map;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //	public AllOrderDetail(Context context, Order order,LinearLayout layout) {//,TextView sumView
 //		
 //		this.context = context;
@@ -214,7 +214,7 @@ public class AllOrderDetail {
 //	}
 //
 //	/**
-//	 * ÊµÀý»¯¿Ø¼þ
+//	 * Êµï¿½ï¿½Ø¼ï¿½
 //	 */
 //	public void setupShow() {
 //		 view = inflater.inflate(R.layout.all_order_item_produce, null);
@@ -236,7 +236,7 @@ public class AllOrderDetail {
 //				setupShow();
 //				String urlString = cart.getImgUrl();
 //				Bitmap bm = BitmapFactory.decodeFile(urlString);
-//				detail.setOnClickListener(new OnClickListener() {//Ìí¼Óµã»÷ÊÂ¼þ
+//				detail.setOnClickListener(new OnClickListener() {//ï¿½ï¿½Óµï¿½ï¿½ï¿½Â¼ï¿½
 //					
 //					@Override
 //					public void onClick(View v) {
@@ -268,7 +268,7 @@ public class AllOrderDetail {
 //		} catch (Exception e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
-//			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+//			Toast.makeText(context, "ï¿½ï¿½ï¿½ç²»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", Toast.LENGTH_SHORT).show();
 //
 //		}
 ////		sumTextView.setText(sumPrice+"");

@@ -95,6 +95,7 @@ public class UserDatamanage {
 						myApplication.setUserHeadImg(ImageUrl.IMAGEURL + imgUrl);
 						String token = responseObject.getString("token");
 						myApplication.setToken(token);
+						message = context.getResources().getString(R.string.login_success);
 						return true;
 					} if(code == 1001 || code ==1002){
 						message = context.getResources().getString(R.string.login_error);

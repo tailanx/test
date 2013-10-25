@@ -26,11 +26,11 @@ public class PersonActivity extends SherlockActivity {
 	// private ArrayList<Produce> mArrayList;
 	// MyAdapter myAdapter;
 	// ListView mListView;
-	// private MessageDataManage messaeDataManage;//消息中心的数据库
+	// private MessageDataManage messaeDataManage;//????????????
 	// private MyApplication myApplication;
 	// private
 	// public void setupShow(){
-	// //实例化控件
+	// //?????
 	// // go_back = (Button)findViewById(R.id.main1_button);
 	// // mArrayList = (ArrayList<Produce>) ProduceDao.produceList;
 	// // for(int i=0;i<mArrayList.size();i++){
@@ -40,15 +40,15 @@ public class PersonActivity extends SherlockActivity {
 	//
 	// // mListView = (ListView) findViewById(R.id.lv_group_list_list);
 	// // mListView.setAdapter(myAdapter);
-	// Log.i("info", "你好");
+	// Log.i("info", "???");
 	// }
-	// //添加响应事件
+	// //?????????
 	// public void doClick(View v){
 	// Intent intent = new Intent(this,MyMallActivity.class);
 	// switch (v.getId()) {
-	// case R.id.main1_button://点解返回按钮事件响应
+	// case R.id.main1_button://?????????????
 	// startActivity(intent);
-	// //结束当前Activity；
+	// //?????Activity??
 	// this.finish();
 	// break;
 	//
@@ -68,7 +68,7 @@ public class PersonActivity extends SherlockActivity {
 		@Override
 		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
 			// TODO Auto-generated method stub
-			String label = "上次更新于"	+ DateUtils.formatDateTime(
+			String label = getResources().getString(R.string.update_time)	+ DateUtils.formatDateTime(
 					PersonActivity.this.getApplicationContext(),
 					System.currentTimeMillis(),
 					DateUtils.FORMAT_SHOW_TIME
@@ -109,7 +109,7 @@ public class PersonActivity extends SherlockActivity {
 	    mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.message_scrollView);
 		
 	    mPullToRefreshScrollView.setOnRefreshListener(listener);
-		String label = "上次更新于"	+ DateUtils.formatDateTime(
+		String label = getResources().getString(R.string.update_time)	+ DateUtils.formatDateTime(
 				PersonActivity.this.getApplicationContext(),
 				System.currentTimeMillis(),
 				DateUtils.FORMAT_SHOW_TIME
@@ -131,7 +131,7 @@ public class PersonActivity extends SherlockActivity {
 		// layout.addView(person);
 		// setupShow();
 
-		// Log.i("info", "你好");
+		// Log.i("info", "???");
 	}
 
 	private void setActionbar() {
@@ -158,6 +158,6 @@ public class PersonActivity extends SherlockActivity {
 		});
 
 		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
-		titleTextView.setText("消息中心");
+		titleTextView.setText(getResources().getString(R.string.person_message));
 	}
 }

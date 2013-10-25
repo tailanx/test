@@ -18,6 +18,7 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.view.ExchangeActivity;
+import com.yidejia.app.mall.view.PersonEvaluationActivity;
 
 public class WaitDeliverUtil {
 	private Context context;
@@ -44,40 +45,40 @@ public class WaitDeliverUtil {
 	}
 	public void setupShow(Order mOrder){
 		
-		view = mInflater.inflate(R.layout.wait_deliver_item_main_item,null);
-		
-		Button mButton = (Button) view.findViewById(R.id.wait_deliver_item_payment);
-		
-		Button mButton2 = (Button) view.findViewById(R.id.wait_deliver_item_exchange);
-		
-		mButton2.setOnClickListener(new OnClickListener() {
-			   
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(context, ExchangeActivity.class);
-				context.startActivity(intent);
-				
-			}
-		});
-		LinearLayout mLayout = (LinearLayout) view.findViewById(R.id.wait_deliver_relative2);
-		TextView titleTextView = (TextView)view.findViewById(R.id.wait_deliver_item_detail);
-		TextView numberTextView = (TextView)view.findViewById(R.id.wait_deliver_item_textview2_nubmer);
-		TextView sumPrice = (TextView)view.findViewById(R.id.wait_deliver_sum_money_detail);
-		TextView countTextView = (TextView)view.findViewById(R.id.wait_deliver_item_textview7_count);
-		
-		titleTextView.setText(mOrder.getStatus());
-		numberTextView.setText(mOrder.getOrderCode());
-		// sumPrice.setText(100+"");
-		// countTextView.setText(1+"");
-		final WaitDeliverDetail waitDeliverDetail = new WaitDeliverDetail(
-				context, mOrder, mLayout);
-		waitDeliverDetail.addView();// ������Ʒ
-		for (int j = 0; j < waitDeliverDetail.map.size(); j++) {
-			// Log.i("info", mLinearLayoutLayout+"+mlayout");
-			sumPrice.setText(waitDeliverDetail.map.get("price") + "");
-			countTextView.setText(waitDeliverDetail.map.get("count")
-					.intValue() + "");
-		}
+//		view = mInflater.inflate(R.layout.wait_deliver_item_main_item,null);
+//		
+//		Button mButton = (Button) view.findViewById(R.id.wait_deliver_item_payment);
+//		
+//		Button mButton2 = (Button) view.findViewById(R.id.wait_deliver_item_exchange);
+//		
+//		mButton2.setOnClickListener(new OnClickListener() {
+//			   
+//			@Override
+//			public void onClick(View v) {
+//				Intent intent = new Intent(context, ExchangeActivity.class);
+//				context.startActivity(intent);
+//				
+//			}
+//		});
+//		LinearLayout mLayout = (LinearLayout) view.findViewById(R.id.wait_deliver_relative2);
+//		TextView titleTextView = (TextView)view.findViewById(R.id.wait_deliver_item_detail);
+//		TextView numberTextView = (TextView)view.findViewById(R.id.wait_deliver_item_textview2_nubmer);
+//		TextView sumPrice = (TextView)view.findViewById(R.id.wait_deliver_sum_money_detail);
+//		TextView countTextView = (TextView)view.findViewById(R.id.wait_deliver_item_textview7_count);
+//		
+//		titleTextView.setText(mOrder.getStatus());
+//		numberTextView.setText(mOrder.getOrderCode());
+//		// sumPrice.setText(100+"");
+//		// countTextView.setText(1+"");
+//		final WaitDeliverDetail waitDeliverDetail = new WaitDeliverDetail(
+//				context, mOrder, mLayout);
+//		waitDeliverDetail.addView();// ������Ʒ
+//		for (int j = 0; j < waitDeliverDetail.map.size(); j++) {
+//			// Log.i("info", mLinearLayoutLayout+"+mlayout");
+//			sumPrice.setText(waitDeliverDetail.map.get("price") + "");
+//			countTextView.setText(waitDeliverDetail.map.get("count")
+//					.intValue() + "");
+//		}
 //		return view;
 	}
 	/**
@@ -87,14 +88,47 @@ public class WaitDeliverUtil {
 		try {
 			orderDataManage = new OrderDataManage(context);
 			ArrayList<Order> mList = orderDataManage.getOrderArray(
-					myApplication.getUserId(), "", "", "已付款", fromIndex + "",
+					myApplication.getUserId(), "", "", "", fromIndex + "",//代发货
 					amount + "", myApplication.getToken());
 			Log.i("info", mList.size() + "mList");
 			for (int i = 0; i < mList.size(); i++) {
 //				Log.i("info", view + "+view");
 				Order mOrder = mList.get(i);
 //				setupShow(mOrder);
-				setupShow(mOrder);
+				view = mInflater.inflate(R.layout.wait_deliver_item_main_item,null);
+				
+				Button mButton = (Button) view.findViewById(R.id.wait_deliver_item_payment);
+				
+				Button mButton2 = (Button) view.findViewById(R.id.wait_deliver_item_exchange);
+				
+				mButton2.setOnClickListener(new OnClickListener() {
+					   
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(context, PersonEvaluationActivity.class);
+						context.startActivity(intent);
+						
+					}
+				});
+				LinearLayout mLayout = (LinearLayout) view.findViewById(R.id.wait_deliver_relative2);
+				TextView titleTextView = (TextView)view.findViewById(R.id.wait_deliver_item_detail);
+				TextView numberTextView = (TextView)view.findViewById(R.id.wait_deliver_item_textview2_nubmer);
+				TextView sumPrice = (TextView)view.findViewById(R.id.wait_deliver_sum_money_detail);
+				TextView countTextView = (TextView)view.findViewById(R.id.wait_deliver_item_textview7_count);
+				
+				titleTextView.setText(mOrder.getStatus());
+				numberTextView.setText(mOrder.getOrderCode());
+				// sumPrice.setText(100+"");
+				// countTextView.setText(1+"");
+				final WaitDeliverDetail waitDeliverDetail = new WaitDeliverDetail(
+						context, mOrder, mLayout);
+				waitDeliverDetail.addView();// ������Ʒ
+				for (int j = 0; j < waitDeliverDetail.map.size(); j++) {
+					// Log.i("info", mLinearLayoutLayout+"+mlayout");
+					sumPrice.setText(waitDeliverDetail.map.get("price") + "");
+					countTextView.setText(waitDeliverDetail.map.get("count")
+							.intValue() + "");
+				}
 				mLinearLayout.addView(view);
 //				Log.i("info", mLinearLayout + "+mlayout");
 			}

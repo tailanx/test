@@ -15,7 +15,7 @@ public class PersonEvaluationActivity extends SherlockActivity {
 //	public void doClick(View v){
 //		Intent intent = new Intent();
 //		switch (v.getId()) {
-//		case R.id.evaluation_person_edit://·µ»Ø
+//		case R.id.evaluation_person_edit://ï¿½ï¿½ï¿½ï¿½
 //			intent.setClass(this, AlreadyComActivity.class);
 //			break;
 //
@@ -53,12 +53,12 @@ public class PersonEvaluationActivity extends SherlockActivity {
 //				Toast.makeText(ComposeActivity.this, "button", Toast.LENGTH_SHORT).show();
 //				Intent intent = new Intent(AddressActivity.this,MyMallActivity.class);
 //				startActivity(intent);
-				//½áÊøµ±Ç°Activity£»
+				//ï¿½ï¿½ï¿½ï¿½Ç°Activityï¿½ï¿½
 				PersonEvaluationActivity.this.finish();
 			}
 		});
 		Button rightButton = (Button) findViewById(R.id.actionbar_right);
-		rightButton.setText("Ìá½»");
+		rightButton.setText(getResources().getString(R.string.commit));
 		rightButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -66,12 +66,12 @@ public class PersonEvaluationActivity extends SherlockActivity {
 				// TODO Auto-generated method stub
 				Intent intent2 = new Intent(PersonEvaluationActivity.this, CstmPayActivity.class);
 				startActivity(intent2);
-				//½áÊøµ±Ç°Activity£»
+				//ï¿½ï¿½ï¿½ï¿½Ç°Activityï¿½ï¿½
 				PersonEvaluationActivity.this.finish();
 			}
 		});
 		
 		TextView titleTextView = (TextView) findViewById(R.id.actionbar_title);
-		titleTextView.setText("ÆÀ¼Û");
+		titleTextView.setText(getResources().getString(R.string.person_evaluation));
 	}
 }

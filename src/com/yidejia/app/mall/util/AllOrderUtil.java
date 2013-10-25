@@ -19,6 +19,7 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.view.CstmPayActivity;
+import com.yidejia.app.mall.view.OrderDetailActivity;
 
 public class AllOrderUtil {
 	private Context context;
@@ -86,7 +87,7 @@ public class AllOrderUtil {
 				TextView countTextView = (TextView) view
 						.findViewById(R.id.all_order_item_main_item_textview7_detail);
 
-				Order mOrder = mList.get(i);
+				final Order mOrder = mList.get(i);
 				titleTextView.setText(mOrder.getStatus());
 				numberTextView.setText(mOrder.getOrderCode());
 
@@ -114,6 +115,22 @@ public class AllOrderUtil {
 						context.startActivity(intent);
 					}
 				});
+				view.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						Intent intent = new Intent(context,
+								OrderDetailActivity.class);
+
+						Bundle bundle = new Bundle();
+						bundle.putString("OrderCode", mOrder.getOrderCode());
+						bundle.putString("OrderPrice", allOrderDetail.map.get("price") + "");
+						intent.putExtras(bundle);
+						context.startActivity(intent);
+					}
+				});
+//				Log.i("info", mLinearLayoutLayout + "+layout");
 				mLinearLayoutLayout.addView(view);
 			}
 		} catch (Exception e) {

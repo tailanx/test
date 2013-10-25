@@ -18,10 +18,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -110,6 +108,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		receiver = new InnerReceiver();
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Consts.UPDATE_CHANGE);
+		filter.addAction(Consts.BROAD_UPDATE_CHANGE);
 		registerReceiver(receiver, filter);
 	}
 	@Override
@@ -471,7 +470,6 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 			startActivity(intent);
 		}
 	};
-	
 	private class InnerReceiver extends BroadcastReceiver {
 
 		@Override
@@ -479,6 +477,11 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 			// TODO Auto-generated method stub
 			String action = intent.getAction();
 			if (Consts.UPDATE_CHANGE.equals(action)) {
+				cartsDataManage = new CartsDataManage();
+				number = cartsDataManage.getCartAmount();
+				cartImage.setText(number + "");
+			}
+			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
 				cartsDataManage = new CartsDataManage();
 				number = cartsDataManage.getCartAmount();
 				cartImage.setText(number + "");
@@ -494,12 +497,11 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		// TODO Auto-generated method stub
 		if(keyCode == KeyEvent.KEYCODE_BACK ){   
 	        if((System.currentTimeMillis()-exitTime) > 2000){  
-	            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();                                
+	            Toast.makeText(getApplicationContext(), getResources().getString(R.string.exit), Toast.LENGTH_SHORT).show();                                
 	            exitTime = System.currentTimeMillis();   
 	        } else {
 	        	((MyApplication)getApplication()).setUserId("");
 	        	((MyApplication)getApplication()).setToken("");
-	        	
 	            finish();
 //	            System.exit(0);
 	        }

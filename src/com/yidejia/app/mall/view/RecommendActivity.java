@@ -21,7 +21,7 @@ public class RecommendActivity extends SherlockActivity {
 //		case R.id.my_collect_button1:
 //			Intent intent = new Intent(MyCollectActivity.this,MyMallActivity.class);
 //			startActivity(intent);
-//			//结束当前Activity；
+//			//?????Activity??
 //			MyCollectActivity.this.finish();
 //			break;
 //		
@@ -46,12 +46,12 @@ public class RecommendActivity extends SherlockActivity {
 //		TextView textView4 = (TextView) person.findViewById(R.id.wait_pay_order_item_textview6);
 //		TextView textView5 = (TextView) person.findViewById(R.id.wait_pay_order_item_textview7);
 //
-//		textView.setText("订单状态：已完成订单！");
-//		textView1.setText("生生世世ss");
-//		textView2.setText("￥160.00");
-//		textView2.setText("数量：x1");
-//		textView2.setText("订单金额：￥160.00");
-//		textView2.setText("数量：x2");
+//		textView.setText("??????????????????");
+//		textView1.setText("????????ss");
+//		textView2.setText("??160.00");
+//		textView2.setText("??????x1");
+//		textView2.setText("?????????160.00");
+//		textView2.setText("??????x2");
 		layout.addView(person1);
 		layout.addView(person2);
 		
@@ -79,7 +79,7 @@ public class RecommendActivity extends SherlockActivity {
 		});
 		
 		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
-		titleTextView.setText("应用推荐");
+		titleTextView.setText(getResources().getString(R.string.recomend));
 	}
 }
 
