@@ -1,7 +1,6 @@
 package com.yidejia.app.mall.fragment;
 
 import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,19 +28,23 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+import com.unionpay.uppay.PayActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.PreferentialDataManage;
 import com.yidejia.app.mall.model.Addresses;
+import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.UserComment;
 import com.yidejia.app.mall.util.CartUtil;
 import com.yidejia.app.mall.util.Consts;
+import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.view.ExchangeFreeActivity;
 import com.yidejia.app.mall.view.GoCartActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.view.NewAddressActivity;
+
 //import com.yidejia.app.mall.view.PayActivity;
 
 public class CartActivity extends SherlockFragment implements OnClickListener {
@@ -70,7 +73,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	private final int MENU3 = 0x113;
 	private LinearLayout layout;
 	private View view;
-	private CartsDataManage dataManage2;
+//	private CartsDataManage dataManage2;
 	// private AddressDataManage addressManage;// 地址管理
 	private PullToRefreshScrollView mPullToRefreshScrollView;// 刷新界面
 	private Fragment mFragment;
@@ -78,7 +81,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	private PreferentialDataManage preferentialDataManage;
 	private List<HashMap<String, Float>> mlList = null;
 
-	// private InnerReceiver receiver;
+	private InnerReceiver receiver;
 
 	// private InnerReceiver receiver;
 
@@ -211,13 +214,8 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 		Log.i(CartActivity.class.getName(), "CartActivity__onCreateView");
 		view = inflater.inflate(R.layout.shopping_cart, container, false);
 
-		// dataManage = new CartsDataManage();
+		dataManage = new CartsDataManage();
 		// TODO Auto-generated method stub
-		// receiver = new InnerReceiver();
-		// IntentFilter filter = new IntentFilter();
-		// filter.addAction(Consts.UPDATE_CHANGE);
-		// getSherlockActivity().registerReceiver(receiver, filter);
-		// // registerForContextMenu(layout);
 
 		mBox = (CheckBox) view.findViewById(R.id.shopping_cart_checkbox);// 选择框
 
@@ -227,10 +225,16 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 		counTextView = (TextView) view
 				.findViewById(R.id.shopping_cart_sum_number);// 总的数量
 
+		receiver = new InnerReceiver();
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Consts.BROAD_UPDATE_CHANGE);
+		getSherlockActivity().registerReceiver(receiver, filter);
+		// registerForContextMenu(layout);
+
 		layout = (LinearLayout) view.findViewById(R.id.shopping_cart_relative2);
 
-//		getSherlockActivity().getSupportActionBar().setCustomView(
-//				R.layout.actionbar_cart);
+		// getSherlockActivity().getSupportActionBar().setCustomView(
+		// R.layout.actionbar_cart);
 		cartUtil = new CartUtil(getSherlockActivity(), layout, counTextView,
 				sumTextView, mBox);
 
@@ -265,14 +269,26 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 					startActivity(intent);
 					return;
 				} else {
-					
-					preferentialDataManage.getPreferential("1337,10n;",myApplication.getUserId());
+					StringBuffer sb = new StringBuffer();
+					ArrayList<Cart> mList = dataManage.getCartsArray();
+					for (int i = 0; i < mList.size(); i++) {
+						Cart cart = new Cart();
+						sb.append(cart.getUId());
+						sb.append(",");
+						sb.append(cart.getAmount());
+						sb.append("n");
+						sb.append(";");
+					}
+					preferentialDataManage.getPreferential(sb.toString(),
+							myApplication.getUserId());
 					if (preferentialDataManage.getFreeGoods().size() != 0
 							|| preferentialDataManage.getScoreGoods().size() != 0) {
 
 						Intent intent = new Intent(getSherlockActivity(),
 								ExchangeFreeActivity.class);
-
+					} else {
+						Intent intent = new Intent(getSherlockActivity(),
+								CstmPayActivity.class);
 						Bundle bundle = new Bundle();
 						float sum = Float.parseFloat(sumTextView.getText()
 								.toString());
@@ -284,8 +300,8 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 						} else {
 							Toast.makeText(getSherlockActivity(), "你还未购买任何商品",
 									Toast.LENGTH_LONG).show();
-
 						}
+						// }
 					}
 				}
 			}
@@ -300,7 +316,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		// getSherlockActivity().unregisterReceiver(receiver);
+		getSherlockActivity().unregisterReceiver(receiver);
 	}
 
 	private int fromIndex = 0;
@@ -356,14 +372,16 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	public void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-	
+
 		Log.i(CartActivity.class.getName(), "cart on start");
 	}
+
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		// TODO Auto-generated method stub
 		super.onSaveInstanceState(outState);
 	}
+
 	// /**
 	// * 判断是否用户已经有保存好的地址
 	// */
@@ -386,23 +404,22 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	// }
 	//
 	// }
-	// public class InnerReceiver extends BroadcastReceiver {
-	//
-	// @Override
-	// public void onReceive(Context context, Intent intent) {
-	// // TODO Auto-generated method stub
-	// String action = intent.getAction();
-	// if (Consts.UPDATE_CHANGE.equals(action)) {
-	// layout.removeAllViews();
-	// cartUtil = new CartUtil(getSherlockActivity(), layout, counTextView,
-	// sumTextView, mBox);
-	//
-	// cartUtil.AllComment();
-	// // number = cartsDataManage.getCartAmount();
-	// // cartImage.setText(number + "");
-	// }
-	// }
-	//
-	// }
+	public class InnerReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			String action = intent.getAction();
+			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
+//				Log.i("info", action + "action");
+				layout.removeAllViews();
+				 CartUtil cartUtil = new CartUtil(getSherlockActivity(),
+				 layout, counTextView,
+				 sumTextView, mBox);
+				 cartUtil.AllComment();
+			}
+		}
+
+	}
 
 }
