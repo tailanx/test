@@ -88,6 +88,7 @@ public class AllOrderFragment extends SherlockFragment {
 									| DateUtils.FORMAT_SHOW_TIME);
 			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 			fromIndex = 0;//刷新的index要改为0
+			relativeLayout.removeAllViews();//清空数据
 			setupShow();
 			mPullToRefreshScrollView.onRefreshComplete();
 
