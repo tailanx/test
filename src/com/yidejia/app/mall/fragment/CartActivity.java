@@ -1,7 +1,6 @@
 package com.yidejia.app.mall.fragment;
 
 import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,6 +37,7 @@ import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.UserComment;
 import com.yidejia.app.mall.util.CartUtil;
 import com.yidejia.app.mall.util.Consts;
+import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.view.ExchangeFreeActivity;
 import com.yidejia.app.mall.view.GoCartActivity;
 import com.yidejia.app.mall.view.LoginActivity;
@@ -265,28 +265,45 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 					startActivity(intent);
 					return;
 				} else {
-					
-					preferentialDataManage.getPreferential("1337,10n;",myApplication.getUserId());
-					if (preferentialDataManage.getFreeGoods().size() != 0
-							|| preferentialDataManage.getScoreGoods().size() != 0) {
-
-						Intent intent = new Intent(getSherlockActivity(),
-								ExchangeFreeActivity.class);
-
-						Bundle bundle = new Bundle();
-						float sum = Float.parseFloat(sumTextView.getText()
-								.toString());
-
-						if (sum > 0) {
-							bundle.putString("price", sum + "");
-							intent.putExtras(bundle);
-							getSherlockActivity().startActivity(intent);
-						} else {
-							Toast.makeText(getSherlockActivity(), "你还未购买任何商品",
-									Toast.LENGTH_LONG).show();
-
-						}
+					// 测试去结算页面
+					Intent intent = new Intent(getSherlockActivity(),
+							CstmPayActivity.class);
+					float sum = Float.parseFloat(sumTextView.getText()
+							.toString());
+					Bundle bundle = new Bundle();
+					if (sum > 0) {
+						bundle.putString("price", sum + "");
+						// bundle.putSerializable("address", address);
+						intent.putExtras(bundle);
+						getSherlockActivity().startActivity(intent);
+					} else {
+						Toast.makeText(getSherlockActivity(),
+								getResources().getString(R.string.buy_nothing),
+								Toast.LENGTH_LONG).show();
 					}
+					
+					//添加去勾选免费送商品
+//					preferentialDataManage.getPreferential("1337,10n;",myApplication.getUserId());
+//					if (preferentialDataManage.getFreeGoods().size() != 0
+//							|| preferentialDataManage.getScoreGoods().size() != 0) {
+//
+//						Intent intent = new Intent(getSherlockActivity(),
+//								ExchangeFreeActivity.class);
+//
+//						Bundle bundle = new Bundle();
+//						float sum = Float.parseFloat(sumTextView.getText()
+//								.toString());
+//
+//						if (sum > 0) {
+//							bundle.putString("price", sum + "");
+//							intent.putExtras(bundle);
+//							getSherlockActivity().startActivity(intent);
+//						} else {
+//							Toast.makeText(getSherlockActivity(), "你还未购买任何商品",
+//									Toast.LENGTH_LONG).show();
+//
+//						}
+//					}
 				}
 			}
 		});
