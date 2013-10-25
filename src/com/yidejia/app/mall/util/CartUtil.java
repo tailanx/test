@@ -422,7 +422,7 @@ public class CartUtil {
 					
 						int sum = Integer.parseInt(number.getText().toString());
 						if (sum <= 1) {
-							Toast.makeText(context, "�Ѿ�����С����ֵ��",
+							Toast.makeText(context,context.getResources().getString(R.string.mix),
 									Toast.LENGTH_LONG).show();
 						} else {
 							sum--;
@@ -444,7 +444,7 @@ public class CartUtil {
 						// TODO Auto-generated method stub
 						int sum = Integer.parseInt(number.getText().toString());
 						if (sum >= 9999) {
-							Toast.makeText(context, "����Ҫ������Ĳ�Ʒ������ͷ���ϵ",
+							Toast.makeText(context, context.getResources().getString(R.string.price_error),
 									Toast.LENGTH_LONG).show();
 						} else {
 							sum++;
