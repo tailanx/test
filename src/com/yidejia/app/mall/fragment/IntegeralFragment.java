@@ -4,6 +4,7 @@ package com.yidejia.app.mall.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,14 @@ public class IntegeralFragment extends Fragment {
 		View viewCoupons = inflater.inflate(R.layout.my_card_voucher1_item, null);//优惠券视图
 		View viewIntegeral =inflater.inflate(R.layout.coupons, null);//积分视图
 		jiFen = (TextView) viewIntegeral.findViewById(R.id.jiefen);
-		jiFen.setText(voucherDataManage.getUserVoucher(myApplication.getUserId(), myApplication.getToken()));
+		Log.i("info", jiFen+"jifen");
+		String ji = voucherDataManage.getUserVoucher(myApplication.getUserId(), myApplication.getToken());
+		if(ji==null||"".equals(ji)){
+			
+			jiFen.setText(0+"");
+		}else{
+			jiFen.setText(ji);
+		}
 		if(hello.equals("jifenquan"))
 			return viewCoupons;
 		else 
