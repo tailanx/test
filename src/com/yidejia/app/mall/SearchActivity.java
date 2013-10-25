@@ -62,7 +62,7 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 		autoCompleteTextView.setDropDownHeight(height);
 		autoCompleteTextView.setDropDownWidth(width);
 		autoCompleteTextView.setDropDownBackgroundResource(R.drawable.main_bg);
-		autoCompleteTextView.setDropDownAnchor(R.id.search_view_layout);
+//		autoCompleteTextView.setDropDownAnchor(R.id.search_view_layout);
 		autoCompleteTextView.setOnKeyListener(new OnKeyListener() {
 			
 			@Override

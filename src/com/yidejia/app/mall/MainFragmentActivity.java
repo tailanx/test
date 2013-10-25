@@ -18,7 +18,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -240,6 +243,20 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 					down_home_imageView.setImageResource(R.drawable.home_hover);
 //					down_home_TextView.setTextColor(Color.WHITE);//getResources().getColor(R.color.white)
 					getSupportActionBar().setCustomView(R.layout.actionbar_main_home_title);
+					final EditText searchEditText = (EditText) findViewById(R.id.main_home_title_search);
+					searchEditText.setSelected(false);
+					searchEditText.clearFocus();
+					searchEditText.setCursorVisible(false);
+					searchEditText.setOnTouchListener(new OnTouchListener() {
+						
+						@Override
+						public boolean onTouch(View v, MotionEvent event) {
+							// TODO Auto-generated method stub
+							Intent intent = new Intent(MainFragmentActivity.this, SearchActivity.class);
+							startActivity(intent);
+							return false;
+						}
+					});
 					break;
 				case 1:
 //					newFragment = MainPageFragment.newInstance(1);
@@ -262,6 +279,20 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 					down_search_imageView.setImageResource(R.drawable.down_search_hover);
 //					down_search_TextView.setTextColor(Color.WHITE);
 					getSupportActionBar().setCustomView(R.layout.actionbar_search);
+					TextView searchText = (EditText) findViewById(R.id.search_bar_edittext);
+					searchText.setSelected(false);
+					searchText.clearFocus();
+					searchText.setCursorVisible(false);
+					searchText.setOnTouchListener(new OnTouchListener() {
+						
+						@Override
+						public boolean onTouch(View v, MotionEvent event) {
+							// TODO Auto-generated method stub
+							Intent intent = new Intent(MainFragmentActivity.this, SearchActivity.class);
+							startActivity(intent);
+							return false;
+						}
+					});
 					break;
 				case 3:
 //					newFragment = ShoppingCartFragment.newInstance(3);
@@ -423,8 +454,20 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 				ActionBar.NAVIGATION_MODE_STANDARD);
 		// getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		getSupportActionBar().setHomeButtonEnabled(true);
-		final EditText searchEditText = (EditText) findViewById(R.id.main_home_title_search);
+		EditText searchEditText = (EditText) findViewById(R.id.main_home_title_search);
 		searchEditText.setSelected(false);
+		searchEditText.clearFocus();
+		searchEditText.setCursorVisible(false);
+		searchEditText.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(MainFragmentActivity.this, SearchActivity.class);
+				startActivity(intent);
+				return false;
+			}
+		});
 	}
 	
 	private class InnerReceiver extends BroadcastReceiver {
@@ -452,6 +495,9 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 	            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();                                
 	            exitTime = System.currentTimeMillis();   
 	        } else {
+	        	((MyApplication)getApplication()).setUserId("");
+	        	((MyApplication)getApplication()).setToken("");
+	        	
 	            finish();
 //	            System.exit(0);
 	        }

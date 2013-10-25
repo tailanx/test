@@ -23,15 +23,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/main_home_title_logo"
-        android:background="@drawable/search_bg"
+        android:background="@drawable/search_text_bg"
         android:ems="16"
+        android:inputType="none"
+        android:editable="false"
         android:imeOptions="actionSearch"
-        android:paddingLeft="12dp"
+        android:paddingLeft="1dp"
         android:singleLine="true" >
     </EditText>
 
