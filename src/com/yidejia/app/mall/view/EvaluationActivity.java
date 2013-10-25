@@ -76,6 +76,6 @@ public class EvaluationActivity extends SherlockActivity {
 		});
 		
 		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
-		titleTextView.setText("评价晒单");
+		titleTextView.setText(getResources().getString(R.string.evaluation));
 	}
 }

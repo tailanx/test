@@ -108,9 +108,9 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 		 LayoutInflater mInflater = getLayoutInflater();
 	     View activityView = mInflater.inflate(R.layout.wait_deliver_item_main, null);
 	     
-	     Fragment weekfragment = WaitDeliverFragment.newInstance("��һ��");
-	     Fragment monthFragment = WaitDeliverFragment.newInstance("��һ��");
-	     Fragment yearFragment=WaitDeliverFragment.newInstance("��һ��");
+	     Fragment weekfragment = WaitDeliverFragment.newInstance(getResources().getString(R.string.order_time_week));
+	     Fragment monthFragment = WaitDeliverFragment.newInstance(getResources().getString(R.string.order_time_month));
+	     Fragment yearFragment=WaitDeliverFragment.newInstance(getResources().getString(R.string.order_time_year));
 	     
 	     fragmentsList.add(yearFragment);
 	     fragmentsList.add(monthFragment);
