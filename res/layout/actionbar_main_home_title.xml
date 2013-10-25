@@ -5,7 +5,6 @@
     android:layout_gravity="right"
     android:background="@drawable/topbg"
     android:focusable="true"
-    android:focusableInTouchMode="true"
     android:orientation="horizontal" >
 
     <ImageView
@@ -31,6 +30,7 @@
         android:inputType="none"
         android:editable="false"
         android:imeOptions="actionSearch"
+        android:focusable="false"
         android:paddingLeft="1dp"
         android:singleLine="true" >
     </EditText>

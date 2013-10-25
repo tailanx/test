@@ -210,6 +210,11 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 //		main_act_pager.setCurrentItem(currentIndex);
 	}
 	
+	private TextView searchText;
+	private EditText searchEditText;
+	private boolean isSearch = false;
+	private boolean isMainSearch = false;
+	
 	private class NavOnclick implements View.OnClickListener {
 
 		private int id;
@@ -243,20 +248,12 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 					down_home_imageView.setImageResource(R.drawable.home_hover);
 //					down_home_TextView.setTextColor(Color.WHITE);//getResources().getColor(R.color.white)
 					getSupportActionBar().setCustomView(R.layout.actionbar_main_home_title);
-					final EditText searchEditText = (EditText) findViewById(R.id.main_home_title_search);
-					searchEditText.setSelected(false);
+					searchEditText = (EditText) findViewById(R.id.main_home_title_search);
+//					searchEditText.setSelected(false);
 					searchEditText.clearFocus();
 					searchEditText.setCursorVisible(false);
-					searchEditText.setOnTouchListener(new OnTouchListener() {
-						
-						@Override
-						public boolean onTouch(View v, MotionEvent event) {
-							// TODO Auto-generated method stub
-							Intent intent = new Intent(MainFragmentActivity.this, SearchActivity.class);
-							startActivity(intent);
-							return false;
-						}
-					});
+//					searchEditText.setOnTouchListener(go2searchListener);
+					searchEditText.setOnClickListener(go2SearchListener2);
 					break;
 				case 1:
 //					newFragment = MainPageFragment.newInstance(1);
@@ -279,20 +276,12 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 					down_search_imageView.setImageResource(R.drawable.down_search_hover);
 //					down_search_TextView.setTextColor(Color.WHITE);
 					getSupportActionBar().setCustomView(R.layout.actionbar_search);
-					TextView searchText = (EditText) findViewById(R.id.search_bar_edittext);
-					searchText.setSelected(false);
+					searchText = (EditText) findViewById(R.id.search_bar_edittext);
+//					searchText.setSelected(false);
 					searchText.clearFocus();
 					searchText.setCursorVisible(false);
-					searchText.setOnTouchListener(new OnTouchListener() {
-						
-						@Override
-						public boolean onTouch(View v, MotionEvent event) {
-							// TODO Auto-generated method stub
-							Intent intent = new Intent(MainFragmentActivity.this, SearchActivity.class);
-							startActivity(intent);
-							return false;
-						}
-					});
+//					searchText.setOnTouchListener(go2searchListener);
+					searchText.setOnClickListener(go2SearchListener2);
 					break;
 				case 3:
 //					newFragment = ShoppingCartFragment.newInstance(3);
@@ -443,7 +432,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		invalidateOptionsMenu();
+//		invalidateOptionsMenu();
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		// getSupportActionBar().setDisplayOptions(getSupportActionBar().DISPLAY_SHOW_HOME,
@@ -453,22 +442,35 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setNavigationMode(
 				ActionBar.NAVIGATION_MODE_STANDARD);
 		// getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		getSupportActionBar().setHomeButtonEnabled(true);
-		EditText searchEditText = (EditText) findViewById(R.id.main_home_title_search);
-		searchEditText.setSelected(false);
+//		getSupportActionBar().setHomeButtonEnabled(true);
+		searchEditText = (EditText) findViewById(R.id.main_home_title_search);
+//		searchEditText.setSelected(false);
 		searchEditText.clearFocus();
 		searchEditText.setCursorVisible(false);
-		searchEditText.setOnTouchListener(new OnTouchListener() {
-			
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(MainFragmentActivity.this, SearchActivity.class);
-				startActivity(intent);
-				return false;
-			}
-		});
+//		searchEditText.setOnTouchListener(go2searchListener);
+		searchEditText.setOnClickListener(go2SearchListener2);
 	}
+	/*
+	private OnTouchListener go2searchListener = new OnTouchListener() {
+		
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+			// TODO Auto-generated method stub
+			Intent intent = new Intent(MainFragmentActivity.this, SearchActivity.class);
+			startActivity(intent);
+			return true;
+		}
+	};
+	*/
+	private OnClickListener go2SearchListener2 = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			Intent intent = new Intent(MainFragmentActivity.this, SearchActivity.class);
+			startActivity(intent);
+		}
+	};
 	
 	private class InnerReceiver extends BroadcastReceiver {
 
