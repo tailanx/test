@@ -107,6 +107,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		receiver = new InnerReceiver();
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Consts.UPDATE_CHANGE);
+		filter.addAction(Consts.BROAD_UPDATE_CHANGE);
 		registerReceiver(receiver, filter);
 	}
 	@Override
@@ -434,6 +435,11 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 			// TODO Auto-generated method stub
 			String action = intent.getAction();
 			if (Consts.UPDATE_CHANGE.equals(action)) {
+				cartsDataManage = new CartsDataManage();
+				number = cartsDataManage.getCartAmount();
+				cartImage.setText(number + "");
+			}
+			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
 				cartsDataManage = new CartsDataManage();
 				number = cartsDataManage.getCartAmount();
 				cartImage.setText(number + "");
