@@ -111,7 +111,8 @@ public class WaitDeliverFragment extends SherlockFragment {
 									| DateUtils.FORMAT_SHOW_DATE
 									| DateUtils.FORMAT_SHOW_TIME);
 			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-
+			fromIndex = 0;
+			relativeLayout.removeAllViews();//清空数据
 			setupShow();
 			mPullToRefreshScrollView.onRefreshComplete();
 
