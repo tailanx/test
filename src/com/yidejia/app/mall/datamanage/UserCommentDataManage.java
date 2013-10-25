@@ -32,6 +32,7 @@ public class UserCommentDataManage {
 	private String TAG = UserCommentDataManage.class.getName();
 	
 	private boolean isNoMore = false;//判断是否还有更多数据,true为没有更多了
+	private boolean isHasRst = false;//判断是否有结果,true为有结果
 	
 	public UserCommentDataManage(Context context){
 		this.context = context;
@@ -56,10 +57,12 @@ public class UserCommentDataManage {
 		boolean state = false ;
 		try {
 			state = taskGetList.execute().get();
-			if(isNoMore){
+			if(isHasRst && isNoMore){
 				Toast.makeText(context, context.getResources().getString(R.string.nomore), Toast.LENGTH_SHORT).show();
 				isNoMore = false;
 				state = true;
+			} else if(!isHasRst){
+				Toast.makeText(context, context.getResources().getString(R.string.none_comment), Toast.LENGTH_LONG).show();
 			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -168,6 +171,7 @@ public class UserCommentDataManage {
 			int code = httpResultObject.getInt("code");
 			Log.i(TAG, "code"+code);
 			if(code == 1){
+				isHasRst = true;
 				String responseString = httpResultObject.getString("response");
 				JSONArray responseArray = new JSONArray(responseString);
 				int length = responseArray.length();
