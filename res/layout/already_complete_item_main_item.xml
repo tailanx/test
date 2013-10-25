@@ -106,7 +106,6 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:background="@drawable/complete"
-            android:onClick="doClick"
             android:text="评价"
             android:textColor="#eeeeee"
             android:textSize="15sp" />
