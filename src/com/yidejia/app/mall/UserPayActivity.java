@@ -1,5 +1,6 @@
 package com.yidejia.app.mall;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -12,6 +13,7 @@ import org.json.JSONObject;
 import com.tenpay.android.service.TenpayServiceHelper;
 import com.unionpay.UPPayAssistEx;
 import com.unionpay.uppay.PayActivity;
+import com.yidejia.app.mall.net.order.GetOrderCode;
 import com.yidejia.app.mall.util.Http;
 import com.yidejia.app.mall.util.MessageUtil;
 
@@ -19,6 +21,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -29,9 +32,14 @@ public class UserPayActivity extends Activity{
 	private static final String SERVER_URL = "http://202.104.148.76/splugin/interface";
 	private static final String TRADE_COMMAND = "1001";
 	private final String TAG = getClass().getName();
+	
+	private String code;//我们服务器的订单号;
+	private String uid;//客户id;
 	//银联需要接口或数据
 	private String goodsName;//商品描述
 	private String goodsAmt;//价格
+	private String respCode;
+	private String upayTn;
 	//财付通需要接口或数据
 	private String mTokenId;//财付通支付订单号
 	final static int MSG_PAY_RESULT = 1990;//返回接口
@@ -50,14 +58,72 @@ public class UserPayActivity extends Activity{
 		Bundle getBundle = getIntent.getExtras();
 		payMode = getBundle.getInt("mode");
 		if(payMode == 1){//银联支付
-			goodsName = getBundle.getString("name");
-			goodsAmt = getBundle.getString("amount");
-			UPPay();
+//			goodsName = getBundle.getString("name");
+//			goodsAmt = getBundle.getString("amount");
+			respCode = getBundle.getString("resp_code");
+			upayTn = getBundle.getString("tn");
+			code = getBundle.getString("code");
+			uid = getBundle.getString("uid");
+			UnionPayOrder();
+//			UPPay();
+//			new OrderCode().execute();
 		} else if(payMode == 0){//财付通支付
 			TenPay();
 		}
 		
 	}
+	
+//	private class OrderCode extends AsyncTask<Void, Void, Boolean>{
+//
+//		@Override
+//		protected Boolean doInBackground(Void... params) {
+//			// TODO Auto-generated method stub
+//			GetOrderCode getOrderCode = new GetOrderCode(UserPayActivity.this);
+//			try {
+//				String httpresponse = getOrderCode.getTNCode(code, uid);
+//				int httpcode;
+//				try {
+//					JSONObject httpObject = new JSONObject(httpresponse);
+//					httpcode = httpObject.getInt("code");
+//					if(httpcode == 1){
+//						String response = httpObject.getString("response");
+//						try {
+//							JSONObject itemObject = new JSONObject(response);
+//							respCode = itemObject.getString("respCode");
+//							upayTn = itemObject.getString("tn");
+//						} catch (Exception e) {
+//							// TODO: handle exception
+//						}
+//						return true;
+//					}
+//				} catch (JSONException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			return false;
+//		}
+//
+//		@Override
+//		protected void onPostExecute(Boolean result) {
+//			// TODO Auto-generated method stub
+//			super.onPostExecute(result);
+//			if(result){
+//				if (null != respCode && "00".equals(respCode) && null != upayTn) {
+//					
+//					UPPayAssistEx.startPayByJAR(UserPayActivity.this,
+//							PayActivity.class, null, null, upayTn, "01");
+//					
+//				} else {
+//					
+//				}
+//			}
+//		}
+//		
+//	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -98,6 +164,18 @@ public class UserPayActivity extends Activity{
             }
         });
         builder.create().show();
+	}
+	
+	private void UnionPayOrder(){
+		if (null != respCode && "00".equals(respCode) && null != upayTn) {
+			
+			UPPayAssistEx.startPayByJAR(UserPayActivity.this,
+					PayActivity.class, null, null, upayTn, "01");
+			
+		} else {
+			Toast.makeText(UserPayActivity.this, "", Toast.LENGTH_LONG).show();
+			UserPayActivity.this.finish();
+		}
 	}
 	
 	//银联支付的callable
