@@ -341,6 +341,8 @@ public class OrderDataManage {
 					String result = responseObject.getString("@p_result");
 					if(unicode.revert(result).equals(context.getResources().getString(R.string.success_save_order))){
 						orderCode = responseObject.getString("@p_order_code");
+						resp_code = responseObject.getString("@p_resp_code");
+						tn = responseObject.getString("@p_tn");
 						return true;
 					}
 				}
@@ -365,12 +367,28 @@ public class OrderDataManage {
 	}
 	
 	private String orderCode = "";//提交订单成功后返回的订单号
+	private String tn = "";//提交订单成功后返回的订单流水号
+	private String resp_code;//提交订单成功后返回的状态码
 	/**
 	 * 
 	 * @return orderCode 提交订单成功后返回的订单号
 	 */
 	public String getOrderCode(){
 		return orderCode;
+	}
+	/**
+	 * 
+	 * @return 提交订单成功后返回的状态码
+	 */
+	public String getRespCode(){
+		return resp_code;
+	}
+	/**
+	 * 
+	 * @return 提交订单成功后返回的订单流水号
+	 */
+	public String getTN(){
+		return tn;
 	}
 	/**
 	 * 修改订单支付状态
