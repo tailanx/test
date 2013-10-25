@@ -84,7 +84,7 @@ public class JNICallBack {
 			String ticket_id, String recipient_id, String pingou_id,
 			String goods_ascore, String ship_fee, String ship_type,
 			String ship_entity_name, String goods_qty_scr, String comments,
-			String token);
+			String pay_type, String token);
 
 	//获取品牌
 	public static native String getHttp4GetBrand();

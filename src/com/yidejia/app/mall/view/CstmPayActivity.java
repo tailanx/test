@@ -335,31 +335,38 @@ public class CstmPayActivity extends SherlockActivity {
 									Toast.LENGTH_LONG).show();
 							return;
 						}
+						int mode = 1;
+						String pay_type = "";
+						if(yinlianCheckBox.isChecked()){
+							pay_type = "union";
+							mode = 1;
+						} else if(caifutongCheckBox.isChecked()){
+							mode = 0;
+							pay_type = "tenpay";
+						} else {
+						}	
 						OrderDataManage orderDataManage = new OrderDataManage(CstmPayActivity.this);
 						orderDataManage.saveOrder(myApplication.getUserId(),
 								"0", recipientId, "", "0", expressNum,
 								postMethod, peiSongCenter, goods, "",
-								myApplication.getToken());
+								pay_type, myApplication.getToken());
 						orderCode = orderDataManage.getOrderCode();
 						resp_code = orderDataManage.getRespCode();
 						tn = orderDataManage.getTN();
 						Log.e("OrderCode", orderCode);
 						if(orderCode == null || "".equals(orderCode))return;
-						Intent userpayintent = new Intent(CstmPayActivity.this, UserPayActivity.class);
+						Intent userpayintent = new Intent(CstmPayActivity.this,
+								UserPayActivity.class);
 						Bundle bundle = new Bundle();
-						if(yinlianCheckBox.isChecked()){
-							bundle.putInt("mode", 1);
-//							bundle.putString("name", "hello");
-//							bundle.putString("amount", "1.00");
-							bundle.putString("code", orderCode);
-							bundle.putString("uid", myApplication.getUserId());
-							bundle.putString("resp_code", resp_code);
-							bundle.putString("tn", tn);
-						} else if(caifutongCheckBox.isChecked()){
-							bundle.putInt("mode", 0);
-						} else {
-							bundle.putInt("mode", 2);
-						}
+
+						bundle.putInt("mode", mode);
+						// bundle.putString("name", "hello");
+						// bundle.putString("amount", "1.00");
+						bundle.putString("code", orderCode);
+						bundle.putString("uid", myApplication.getUserId());
+						bundle.putString("resp_code", resp_code);
+						bundle.putString("tn", tn);
+
 						userpayintent.putExtras(bundle);
 						startActivity(userpayintent);
 						CstmPayActivity.this.finish();

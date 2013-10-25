@@ -161,6 +161,7 @@ public class UserPayActivity extends Activity{
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
+                UserPayActivity.this.finish();
             }
         });
         builder.create().show();
