@@ -18,6 +18,7 @@ public class ReturnActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setActionbar();
 		setContentView(R.layout.exchange);
+		
 	}
 	private void setActionbar(){
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);

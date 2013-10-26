@@ -37,6 +37,7 @@ public class EvaluationActivity extends SherlockActivity {
 //		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setActionbar();
 		setContentView(R.layout.evaluation);
+		
 		RelativeLayout layout = (RelativeLayout) findViewById(R.id.evaluation_relative2);
 		View person = getLayoutInflater().inflate(R.layout.evaluation_item, null);
 		

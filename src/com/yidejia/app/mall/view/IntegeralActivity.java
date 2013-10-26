@@ -94,8 +94,8 @@ public class IntegeralActivity extends SherlockFragmentActivity {
 		mCoupons = (TextView)findViewById(R.id.my_card_voucher_Coupons);
 		mIntegeral = (TextView)findViewById(R.id.my_card_voucher_mIntegeral);
 		
-		mCoupons.setOnClickListener(new MyOnClickListener(1));
-		mIntegeral.setOnClickListener(new MyOnClickListener(2));
+		mCoupons.setOnClickListener(new MyOnClickListener(0));
+		mIntegeral.setOnClickListener(new MyOnClickListener(1));
 	}
 	private void InitViewPager(){
 		 mPager = (ViewPager) findViewById(R.id.vPager);
@@ -151,12 +151,13 @@ public class IntegeralActivity extends SherlockFragmentActivity {
 	            case 0://假如是第一个被选中，添加事件
 	                if (currIndex == 1) {//当前是第二个
 	                	mIntegeral.setPressed(false);
+	                	mIntegeral.setBackgroundResource(R.drawable.product_details_bg);
 	                    animation = new TranslateAnimation(position_one, 0, 0, 0);
 	                    mIntegeral.setTextColor(Color.parseColor("#ed217c"));
 	                } 
 	                mCoupons.setPressed(true);
-	                mCoupons.setBackgroundResource(R.drawable.produce_textview_selector);
-	                mCoupons.setTextColor(Color.parseColor("#000000"));
+	                mCoupons.setBackgroundResource(R.drawable.product_details_selected);
+	                mCoupons.setTextColor(Color.parseColor("#702c91"));
 	                break;
 	            case 1:
 	                if (currIndex == 0) {
@@ -166,8 +167,8 @@ public class IntegeralActivity extends SherlockFragmentActivity {
 	                    mCoupons.setTextColor(Color.parseColor("#ed217c"));
 	                } 
 	                mIntegeral.setPressed(true);
-	                mIntegeral.setBackgroundResource(R.drawable.produce_textview_selector);
-	                mIntegeral.setTextColor(Color.parseColor("#000000"));
+	                mIntegeral.setBackgroundResource(R.drawable.product_details_selected);
+	                mIntegeral.setTextColor(Color.parseColor("#702c91"));
 	                break;
 	           
 	            }

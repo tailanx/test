@@ -3,6 +3,7 @@ package com.yidejia.app.mall.view;
 import java.util.ArrayList;
 
 
+
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -24,7 +25,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.WaitPayFragmentAdapter;
 import com.yidejia.app.mall.fragment.WaitPayFragment;
@@ -73,6 +76,7 @@ public class WaitPayActivity extends SherlockFragmentActivity {
 		InitWidth();
 		InitTextView();
 		InitViewPager();
+
 		
 	}
 

@@ -35,6 +35,7 @@ public class ExchangeActivity extends SherlockFragmentActivity implements OnClic
 //		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setActionbar();
 		setContentView(R.layout.return_exchange1);
+		
 		LinearLayout person = (LinearLayout) findViewById(R.id.return_exchange_scrollView_linearlayout1);
 		person.setOnClickListener(new OnClickListener() {
 			

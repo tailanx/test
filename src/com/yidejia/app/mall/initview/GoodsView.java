@@ -418,7 +418,7 @@ public class GoodsView {
 							int which) {
 						// TODO Auto-generated method stub
 						Intent intent = new Intent(activity,
-								GoCartActivity.class);
+								LoginActivity.class);
 						activity.startActivity(intent);
 						activity.finish();
 					}

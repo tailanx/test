@@ -94,6 +94,7 @@ public class AddressActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setActionbar();
 		setContentView(R.layout.address_management);
+		
 		listView = (ListView) findViewById(R.id.address_management_listview);
 		layout = (LinearLayout) findViewById(R.id.address_management_relative2);
 		addressDataManage = new AddressDataManage(AddressActivity.this);

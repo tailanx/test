@@ -45,10 +45,10 @@ public class AlreadyOrderActivity extends SherlockFragmentActivity {
 	    public void doClick(View v){
 	    	Intent intent = new Intent();
 			switch (v.getId()){
-			case R.id.already_oreder_item_main_exchange://ÍË»»»õ
+			case R.id.already_oreder_item_main_exchange://ï¿½Ë»ï¿½ï¿½ï¿½
 				intent.setClass(this, ReturnActivity.class);
 				break;
-			case R.id.already_oreder_item_main_search://²é¿´ÎïÁ÷
+			case R.id.already_oreder_item_main_search://ï¿½é¿´ï¿½ï¿½ï¿½ï¿½
 				intent.setClass(this, CheckActivity.class);
 				break;
 
@@ -78,8 +78,8 @@ public class AlreadyOrderActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
 //		startActionMode(new AnActionModeOfEpicProportions(ComposeActivity.this));
-		ImageView button = (ImageView) findViewById(R.id.compose_back);//·µ»Ø
-//		button.setText("·µ»Ø");
+		ImageView button = (ImageView) findViewById(R.id.compose_back);//ï¿½ï¿½ï¿½ï¿½
+//		button.setText("ï¿½ï¿½ï¿½ï¿½");
 //		button.setTextSize(16);
 //		button.setImageResource(R.drawable.filter);
 		button.setOnClickListener(new OnClickListener() {
@@ -130,12 +130,12 @@ public class AlreadyOrderActivity extends SherlockFragmentActivity {
 
 	
 	private void InitWidth() {
-		ivBottomLine = (ImageView) findViewById(R.id.iv_bottom_line);//»¬¶¯
+		ivBottomLine = (ImageView) findViewById(R.id.iv_bottom_line);//ï¿½ï¿½ï¿½ï¿½
         bottomLineWidth = ivBottomLine.getLayoutParams().width;
         DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);//»ñÈ¡µ±Ç°ÆÁÄ»µÄÊôÐÔ
-        int screenW = dm.widthPixels;//ÆÁÄ»µÄ¿í
-        offset = (int) ((screenW / 3 - bottomLineWidth)/2);//ÆðÊ¼Î»ÖÃ
+        getWindowManager().getDefaultDisplay().getMetrics(dm);//ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        int screenW = dm.widthPixels;//ï¿½ï¿½Ä»ï¿½Ä¿ï¿½
+        offset = (int) ((screenW / 3 - bottomLineWidth)/2);//ï¿½ï¿½Ê¼Î»ï¿½ï¿½
 
         position_one = (int) (screenW / 3);
         position_two = position_one * 2;
@@ -159,8 +159,8 @@ public class AlreadyOrderActivity extends SherlockFragmentActivity {
 	        public void onPageSelected(int arg0) {
 	            Animation animation = null;
 	            switch (arg0) {
-	            case 0://¼ÙÈçÊÇµÚÒ»¸ö±»Ñ¡ÖÐ£¬Ìí¼ÓÊÂ¼þ
-	                if (currIndex == 1) {//µ±Ç°ÊÇµÚ¶þ¸ö
+	            case 0://ï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
+	                if (currIndex == 1) {//ï¿½ï¿½Ç°ï¿½ÇµÚ¶ï¿½ï¿½ï¿½
 	                	mMonth.setPressed(false);
 	                	mMonth.setBackgroundResource(R.drawable.product_details_bg);
 	                    animation = new TranslateAnimation(position_one, 0, 0, 0);

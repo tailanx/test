@@ -106,6 +106,7 @@ public class PersonActivity extends SherlockActivity {
 		// myAdapter = new MyAdapter(this,ProduceDao.produceList);
 		setContentView(R.layout.message_center);
 		layout = (LinearLayout) findViewById(R.id.message_scrollView_linearlayout1);
+		setupShow();//
 	    mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.message_scrollView);
 		
 	    mPullToRefreshScrollView.setOnRefreshListener(listener);
@@ -116,7 +117,6 @@ public class PersonActivity extends SherlockActivity {
 					| DateUtils.FORMAT_SHOW_DATE
 					| DateUtils.FORMAT_ABBREV_ALL);
 		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(label);;
-		setupShow();//
 		// View person = getLayoutInflater().inflate(R.layout.message_item,
 		// null);
 		// TextView textView = (TextView)
