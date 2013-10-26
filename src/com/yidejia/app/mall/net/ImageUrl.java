@@ -11,7 +11,7 @@ import android.util.Log;
 
 
 public class ImageUrl {
-	public static String IMAGEURL = "";
+	public static String IMAGEURL = "http://img1.atido.com/";
 	private static String TAG = ImageUrl.class.getName();
 	
 	public String getImageUrl(){
@@ -24,6 +24,9 @@ public class ImageUrl {
 			try {
 				state = taskImageUrl.execute().get();
 				if(state){
+					return IMAGEURL;
+				}else {
+					taskImageUrl.execute().get();
 					return IMAGEURL;
 				}
 			} catch (InterruptedException e) {
