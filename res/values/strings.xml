@@ -96,6 +96,7 @@
     <string name="exchanged">退换货</string>
     <string name="order_detail">订单详情</string>
     <string name="mix">已经是最小值了</string>
+    <string name="waiting4open">此功能尚未开通，请期待</string>
 
 	<!-- 订单号 -->
 	<string name="no_token_id">订单号为空或位数不对，请检查输入的订单号！</string>
