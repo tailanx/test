@@ -84,11 +84,12 @@ public class SearchDataManage {
 			// TODO Auto-generated catch block
 			Log.e(TAG, "task search ExecutionException ");
 			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO: handle exception
-			Log.e(TAG, "task search Exception ");
-			e.printStackTrace();
 		} 
+//		catch (Exception e) {
+//			// TODO: handle exception
+//			Log.e(TAG, "task search Exception ");
+//			e.printStackTrace();
+//		} 
 		if(!state){
 			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		} 
