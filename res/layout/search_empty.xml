@@ -10,7 +10,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginTop="10dp"
         android:background="@drawable/clear_search"
         android:text="去逛一下"
         android:textColor="#eeeeee"
@@ -20,9 +19,9 @@
         android:id="@+id/search_empty_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/guang_button"
+        android:layout_above="@+id/guang_button"
+        android:layout_margin="10dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
         android:text="未搜索到相关内容"
         android:textColor="#b4b4b4"
         android:textSize="15sp" />
@@ -32,8 +31,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/search_empty_textview"
+        android:layout_margin="10dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
         android:src="@drawable/search_icon" />
 
 </RelativeLayout>

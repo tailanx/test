@@ -85,7 +85,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 		Bundle newBundle = (Bundle) bundle.clone();
 		switch (index) {
 		case 0:
-			newBundle.putString("order", "sells");
+			newBundle.putString("order", "sells+desc");
 			break;
 		case 1:
 			String orderString = "";
@@ -94,7 +94,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 			newBundle.putString("order", orderString);
 			break;
 		case 2:
-			newBundle.putString("order", "needs");
+			newBundle.putString("order", "needs+desc");
 			break;
 
 		default:
