@@ -124,6 +124,7 @@ public class MessageDataManage {
 					msgCenter.setMsg(msgObject.getString("msg"));
 					msgCenter.setTitle(msgObject.getString("title"));
 					msgCenter.setUrl(msgObject.getString("url"));
+					msgCenter.setTime(msgObject.getString("starttime"));
 				} catch (JSONException e) {
 					// TODO: handle exception
 				}

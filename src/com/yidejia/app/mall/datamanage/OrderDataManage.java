@@ -257,14 +257,14 @@ public class OrderDataManage {
 	public boolean saveOrder(String customer_id, String ticket_id,
 			String recipient_id, String pingou_id, String goods_ascore,
 			String ship_fee, String ship_type, String ship_entity_name,
-			String goods_qty_scr, String comments, String token) {
+			String goods_qty_scr, String comments, String pay_type, String token) {
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
 			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return false;
 		}
 		TaskSave taskSave = new TaskSave(customer_id, ticket_id, recipient_id,
 				pingou_id, goods_ascore, ship_fee, ship_type, ship_entity_name,
-				goods_qty_scr, comments, token);
+				goods_qty_scr, comments, pay_type, token);
 		boolean state = false;
 		try {
 			state = taskSave.execute().get();
@@ -296,11 +296,12 @@ public class OrderDataManage {
 		private String ship_entity_name;
 		private String goods_qty_scr;
 		private String comments;
+		private String pay_type;
 		private String token;
 		public TaskSave(String customer_id, String ticket_id,
 				String recipient_id, String pingou_id, String goods_ascore,
 				String ship_fee, String ship_type, String ship_entity_name,
-				String goods_qty_scr, String comments, String token) {
+				String goods_qty_scr, String comments, String pay_type, String token) {
 			this.customer_id = customer_id;
 			this.ticket_id = ticket_id;
 			this.recipient_id = recipient_id;
@@ -311,6 +312,7 @@ public class OrderDataManage {
 			this.ship_entity_name = ship_entity_name;
 			this.goods_qty_scr = goods_qty_scr;
 			this.comments = comments;
+			this.pay_type = pay_type;
 			this.token = token;
 		}
 
@@ -332,7 +334,7 @@ public class OrderDataManage {
 			try {
 				String httpResponse = saveOrderList.getHttpResponse(customer_id, ticket_id,
 						recipient_id, pingou_id, goods_ascore, ship_fee, ship_type,
-						ship_entity_name, goods_qty_scr, comments, token);
+						ship_entity_name, goods_qty_scr, comments, pay_type, token);
 				JSONObject jsonObject = new JSONObject(httpResponse);
 				int code = jsonObject.getInt("code");
 				if(code == 1){
@@ -341,6 +343,8 @@ public class OrderDataManage {
 					String result = responseObject.getString("@p_result");
 					if(unicode.revert(result).equals(context.getResources().getString(R.string.success_save_order))){
 						orderCode = responseObject.getString("@p_order_code");
+						resp_code = responseObject.getString("@p_resp_code");
+						tn = responseObject.getString("@p_tn");
 						return true;
 					}
 				}
@@ -365,12 +369,28 @@ public class OrderDataManage {
 	}
 	
 	private String orderCode = "";//提交订单成功后返回的订单号
+	private String tn = "";//提交订单成功后返回的订单流水号
+	private String resp_code;//提交订单成功后返回的状态码
 	/**
 	 * 
 	 * @return orderCode 提交订单成功后返回的订单号
 	 */
 	public String getOrderCode(){
 		return orderCode;
+	}
+	/**
+	 * 
+	 * @return 提交订单成功后返回的状态码
+	 */
+	public String getRespCode(){
+		return resp_code;
+	}
+	/**
+	 * 
+	 * @return 提交订单成功后返回的订单流水号
+	 */
+	public String getTN(){
+		return tn;
 	}
 	/**
 	 * 修改订单支付状态

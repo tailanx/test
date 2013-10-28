@@ -1,6 +1,7 @@
 package com.yidejia.app.mall.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,7 +67,8 @@ public class FreeGivingFragment extends SherlockFragment {
 		View view= inflater.inflate(R.layout.free_giving, null);//获取视图对象
 		LinearLayout relativeLayout = (LinearLayout)view.findViewById(R.id.free_shopping_cart_relative2);//获取布局
 		listView = (ListView) view.findViewById(R.id.free_giving_listview);
-		adapter = new FreeGivingAdapter(getSherlockActivity(), preferentialDataManage.getFreeGoods());
+		Log.i("info", CartActivity.arrayListFree+  "CartActivity.arrayListFree");
+		adapter = new FreeGivingAdapter(getSherlockActivity(),CartActivity.arrayListFree);//preferentialDataManage.getFreeGoods()
 		listView.setAdapter(adapter);
         listView.setOnItemClickListener(listItemClickListener);  
 //		AllOrderUtil allOrderUtil = new AllOrderUtil(getSherlockActivity(), relativeLayout);

@@ -8,12 +8,12 @@
 extern "C" {
 #endif
 
-static const char *url = "http://192.168.1.254:802/";
-//static const char *url = "http://fw1.atido.net/";
+//static const char *url = "http://192.168.1.254:802/";
+static const char *url = "http://fw1.atido.net/";
 
 const char *pHead = "&key=fw_mobile&format=array&ts=";
-//const char *strTemp = "ChunTianfw_mobile@SDF!TD#DF#*CB$GER@";
-const char *strTemp = "ChunTianfw_mobile123456";
+const char *strTemp = "ChunTianfw_mobile@SDF!TD#DF#*CB$GER@";
+//const char *strTemp = "ChunTianfw_mobile123456";
 
 #define LEN 1024
 
@@ -153,7 +153,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetAddress(JNIEnv* env
 	if(chwhere != NULL)
 		addString(urlString, chwhere);
 
-	addString(urlString, "&option%5Boffset%5D=");
+	addString(urlString, "+and+valid_flag%3D%27y%27&option%5Boffset%5D=");
 	if(choffset != NULL)addString(urlString, choffset);
 
 	addString(urlString, "&option%5Blimit%5D=");
@@ -1254,7 +1254,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SignOrder(JNIEnv* env,
 //ship_type , ship_entity_name, goods_qty_scr,comments, token, ����post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveOrder(JNIEnv* env,
 		jobject thiz, jstring customer_id, jstring ticket_id, jstring recipient_id, jstring pingou_id, jstring goods_ascore,
-		jstring ship_fee, jstring ship_type, jstring ship_entity_name, jstring goods_qty_scr, jstring comments, jstring token){
+		jstring ship_fee, jstring ship_type, jstring ship_entity_name, jstring goods_qty_scr, jstring comments, jstring pay_type, jstring token){
 	const char *chcustomer_id = (*env)->GetStringUTFChars(env, customer_id, NULL);
 	const char *chticket_id = (*env)->GetStringUTFChars(env, ticket_id, NULL);
 	const char *chrecipient_id = (*env)->GetStringUTFChars(env, recipient_id, NULL);
@@ -1265,6 +1265,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveOrder(JNIEnv* env,
 	const char *chship_entity_name = (*env)->GetStringUTFChars(env, ship_entity_name, NULL);
 	const char *chgoods_qty_scr = (*env)->GetStringUTFChars(env, goods_qty_scr, NULL);
 	const char *chcomments = (*env)->GetStringUTFChars(env, comments, NULL);
+	const char *chpay_type = (*env)->GetStringUTFChars(env, pay_type, NULL);
 	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN], urlString[LEN];
@@ -1295,7 +1296,8 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveOrder(JNIEnv* env,
 	if(chgoods_qty_scr != NULL)addString(urlString, chgoods_qty_scr);
 	addString(urlString, "&comments=");
 	if(chcomments != NULL)addString(urlString, chcomments);
-
+	addString(urlString, "&pay_type=");
+	if(chpay_type != NULL)addString(urlString, chpay_type);
 	addString(urlString, "&token=");
 	if(chtoken != NULL)addString(urlString, chtoken);
 
@@ -1463,7 +1465,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetSearch(JNIEnv* env,
 	char encrypt[LEN] , urlString[LEN];
 
 	encrypt[0] = 0;
-//	urlString[0] = 0;
+	urlString[0] = 0;
 
 	const char *api="?api=product.mallgood.search";
 

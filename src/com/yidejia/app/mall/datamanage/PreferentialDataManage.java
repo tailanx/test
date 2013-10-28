@@ -12,6 +12,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.R;
@@ -63,6 +64,7 @@ public class PreferentialDataManage {
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);  
 			bar.setMessage(res.getString(R.string.searching));
 			bar.show();
+//			Log.i("info", taskVerify.execute().get()+"    taskVerify");
 			state = taskVerify.execute().get();
 			bar.dismiss();
 			if(isNoMore){
@@ -157,6 +159,7 @@ public class PreferentialDataManage {
 					if(code == 1){
 						String response = httpJsonObject.getString("response");
 						analysis(response);
+						return true;
 					} else if(code == -1){
 						isNoMore = true;
 					}
@@ -168,7 +171,7 @@ public class PreferentialDataManage {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return null;
+			return false;
 		}
 		
 	}

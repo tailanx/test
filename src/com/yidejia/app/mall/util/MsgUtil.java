@@ -5,7 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.text.format.DateFormat;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -36,27 +38,29 @@ public class MsgUtil {
 		this.limit = amount;
 	}
 
-	public void loadView(int offset, int limit) {
-		View view = inflater.inflate(R.layout.message_item, null);
-		TextView title = (TextView) view
-				.findViewById(R.id.message_item_textview1);
-		TextView time = (TextView) view.findViewById(R.id.message_textview2);
-		TextView content = (TextView) view.findViewById(R.id.message_textview4);
+	public void loadView() {
 		boolean isSucess = msgDataManage.getMsgData(myApplication.getUserId(),
 				myApplication.getToken(), offset + "", limit + "");
 		if (isSucess) {
 			ArrayList<MsgCenter> msgCenters = msgDataManage.getMsg();
+			Log.i("info", msgCenters.size()+"       msgCenters.size()");
 			for (int i = 0; i < msgCenters.size(); i++) {
+				View view = inflater.inflate(R.layout.message_item, null);
+				TextView title = (TextView) view
+						.findViewById(R.id.message_item_textview1);
+				TextView time = (TextView) view.findViewById(R.id.message_textview2);
+				TextView content = (TextView) view.findViewById(R.id.message_textview4);
 				MsgCenter msg = msgCenters.get(i);
 				title.setText(msg.getTitle());
 				content.setText(msg.getMsg());
 				time.setText(DateUtils.formatDateTime(context,
-						System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
+						Long.parseLong(msg.getTime()), DateUtils.FORMAT_ABBREV_ALL
 								| DateUtils.FORMAT_SHOW_DATE
 								| DateUtils.FORMAT_SHOW_TIME));
+				mLayout.addView(view);
 			}
 		}
-		mLayout.addView(view);
 	}
+	
 
 }

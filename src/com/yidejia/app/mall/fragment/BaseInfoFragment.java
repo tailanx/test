@@ -1,30 +1,30 @@
 package com.yidejia.app.mall.fragment;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.datamanage.ProductDataManage;
-import com.yidejia.app.mall.initview.GoodsView;
-import com.yidejia.app.mall.model.ProductBaseInfo;
-import com.yidejia.app.mall.util.DPIUtil;
-
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
+
+import com.actionbarsherlock.app.SherlockFragment;
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.datamanage.CartsDataManage;
+import com.yidejia.app.mall.initview.GoodsView;
+import com.yidejia.app.mall.model.ProductBaseInfo;
+import com.yidejia.app.mall.util.Consts;
 
 public class BaseInfoFragment extends SherlockFragment {
 	
-
+	private InnerReceiver receiver;
+	private CartsDataManage dataManage;
 	public static BaseInfoFragment newInstance(ProductBaseInfo info) {
 		BaseInfoFragment baseInfoFragment = new BaseInfoFragment();
 		Bundle bundle = new Bundle();
@@ -57,13 +57,26 @@ public class BaseInfoFragment extends SherlockFragment {
 	}
 
 	private View view;
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		getSherlockActivity().unregisterReceiver(receiver);
+	}
 	
+	private Button mButton;//购物车
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		Log.d(TAG, "TestFragment-----onCreateView");
+		dataManage = new CartsDataManage();
 		view = inflater.inflate(R.layout.item_goods_base_info, container, false);
+		mButton = (Button) view.findViewById(R.id.shopping_cart_button);
+		receiver = new InnerReceiver();
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Consts.UPDATE_CHANGE);
+		getSherlockActivity().registerReceiver(receiver, filter);
 		/*
 		switch (goodsId) {
 		case 0:
@@ -142,5 +155,16 @@ public class BaseInfoFragment extends SherlockFragment {
 		getSherlockActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
 		return dm.widthPixels;
 	} 
-	
+	public class InnerReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			String action = intent.getAction();
+			if (Consts.UPDATE_CHANGE.equals(action)) {
+			mButton.setText(dataManage.getCartAmount()+"");
+			}
+		}
+
+	}
 }

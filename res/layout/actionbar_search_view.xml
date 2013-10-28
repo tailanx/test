@@ -7,43 +7,58 @@
 
     <Button
         android:id="@+id/search_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="56dp"
+        android:layout_height="36dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="6dp"
         android:layout_marginRight="8dip"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="6dp"
         android:background="@drawable/filter"
         android:clickable="true"
-        android:scaleType="centerInside"
-        android:src="@drawable/filter"
-        android:text="@string/searchCancel"
+        
+        android:text="@string/searchLabel"
         android:textColor="#ffffff"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
+    <Button 
+        android:id="@+id/search_back_btn"
+        android:layout_width="56dp"
+        android:layout_height="36dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="3dip"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/back"
+        android:clickable="true"
+         />
 
-    <AutoCompleteTextView
+    <EditText
         android:id="@+id/searchActivity_autoComplete"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="5.0dip"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5.0dp"
         android:layout_toLeftOf="@id/search_btn"
-        android:background="@drawable/search_bg"
-        android:completionThreshold="1"
+        android:layout_toRightOf="@id/search_back_btn"
+        android:background="@drawable/search_text_bg"
         android:drawableLeft="@drawable/top_search_icon"
+        android:drawablePadding="6dp"
         android:focusable="true"
         android:gravity="center_vertical"
         android:hint="@string/searchHint"
         android:imeOptions="actionSearch"
         android:inputType="text"
-        android:paddingLeft="10.0dip"
-        android:paddingRight="35.0dip"
         android:singleLine="true"
         android:textColor="#ff000000"
-        android:textSize="15.0sp" />
+        android:textSize="16.0sp" />
+    
+    <!-- 
+    android:completionThreshold="1"
+     -->
 
 </RelativeLayout>

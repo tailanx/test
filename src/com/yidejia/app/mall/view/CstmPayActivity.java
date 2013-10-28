@@ -34,7 +34,7 @@ import com.unionpay.UPPayAssistEx;
 import com.unionpay.uppay.PayActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-
+import com.yidejia.app.mall.UserPayActivity;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.ExpressDataManage;
@@ -78,6 +78,8 @@ public class CstmPayActivity extends SherlockActivity {
 	private String postMethod = "EMS";//快递方式
 	private String goods;//商品串
 	private String orderCode;//订单号
+	private String resp_code;// 返回状态码
+	private String tn;//流水号
 	
 	private static final String SERVER_URL = "http://202.104.148.76/splugin/interface";
 	private static final String TRADE_COMMAND = "1001";
@@ -317,32 +319,55 @@ public class CstmPayActivity extends SherlockActivity {
 						}
 					};
 				}
-				
+				//提交订单
 				saveOrderBtn.setOnClickListener(new OnClickListener() {
 					
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
-						
+						if (!yinlianCheckBox.isChecked()
+								&& !zhifubaoCheckBox.isChecked()
+								&& !zhifubaowangyeCheckBox.isChecked()
+								&& !caifutongCheckBox.isChecked()) {
+							Toast.makeText(
+									CstmPayActivity.this,
+									getResources().getString(
+											R.string.select_pay_type),
+									Toast.LENGTH_LONG).show();
+							return;
+						}
+						int mode = 1;
+						String pay_type = "";
+						if(yinlianCheckBox.isChecked()){
+							pay_type = "union";
+							mode = 1;
+						} else if(caifutongCheckBox.isChecked()){
+							mode = 0;
+							pay_type = "tenpay";
+						} else {
+						}	
 						OrderDataManage orderDataManage = new OrderDataManage(CstmPayActivity.this);
 						orderDataManage.saveOrder(myApplication.getUserId(),
 								"0", recipientId, "", "0", expressNum,
-								"EMS", peiSongCenter, goods, "",
-								myApplication.getToken());
+								postMethod, peiSongCenter, goods, "",
+								pay_type, myApplication.getToken());
 						orderCode = orderDataManage.getOrderCode();
+						resp_code = orderDataManage.getRespCode();
+						tn = orderDataManage.getTN();
 						Log.e("OrderCode", orderCode);
 						if(orderCode == null || "".equals(orderCode))return;
-						Intent userpayintent = new Intent(CstmPayActivity.this, UserPayActivity.class);
+						Intent userpayintent = new Intent(CstmPayActivity.this,
+								UserPayActivity.class);
 						Bundle bundle = new Bundle();
-						if(yinlianCheckBox.isChecked()){
-							bundle.putInt("mode", 1);
-							bundle.putString("name", "hello");
-							bundle.putString("amount", "1.00");
-						} else if(caifutongCheckBox.isChecked()){
-							bundle.putInt("mode", 0);
-						} else {
-							bundle.putInt("mode", 2);
-						}
+
+						bundle.putInt("mode", mode);
+						// bundle.putString("name", "hello");
+						// bundle.putString("amount", "1.00");
+						bundle.putString("code", orderCode);
+						bundle.putString("uid", myApplication.getUserId());
+						bundle.putString("resp_code", resp_code);
+						bundle.putString("tn", tn);
+
 						userpayintent.putExtras(bundle);
 						startActivity(userpayintent);
 						CstmPayActivity.this.finish();
@@ -460,6 +485,8 @@ public class CstmPayActivity extends SherlockActivity {
 				generalPrice.setText(express.getExpress());
 				emsPrice.setText(express.getEms());
 				Log.i("info", addresses.getName());
+				postMethod = getResources().getString(R.string.ship_post);//初始化快递方式;
+				expressNum = express.getExpress();//初始化费用
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

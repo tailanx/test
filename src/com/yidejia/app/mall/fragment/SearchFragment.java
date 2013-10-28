@@ -41,7 +41,7 @@ public class SearchFragment extends SherlockFragment {
 	private String TAG = "SearchFragment";
 	
 	private ListView searchListView;
-	private EditText searchEditText;//������
+//	private EditText searchEditText;//������
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -68,8 +68,8 @@ public class SearchFragment extends SherlockFragment {
 		}
 //		getSherlockActivity().getSupportActionBar().setCustomView(R.layout.actionbar_search);
 		searchListView = (ListView) view.findViewById(R.id.search_result_list);
-		searchEditText = (EditText) getSherlockActivity().findViewById(R.id.search_bar_edittext);
-		searchEditText.clearFocus();
+//		searchEditText = (EditText) getSherlockActivity().findViewById(R.id.search_bar_edittext);
+//		searchEditText.clearFocus();
 		FunctionDataManage manage = new FunctionDataManage(getSherlockActivity());
 		functions = manage.getFunArray();
 		SearchListAdapter searchListAdapter = new SearchListAdapter(getActivity(), functions);
@@ -84,11 +84,22 @@ public class SearchFragment extends SherlockFragment {
 				Intent intent = new Intent(getActivity(), SearchResultActivity.class);
 				Bundle bundle = new Bundle();
 //				bundle.putString("fun", arg0.getItemAtPosition(arg2).toString());
-				bundle.putString("fun", functions.get(arg2).getFunId());
+				if (!functions.isEmpty()) {
+					bundle.putString("fun", functions.get(arg2).getFunId());
+					bundle.putString("title", functions.get(arg2).getFunName());
+				} else {
+					try {
+						bundle.putString("title", listContent[arg2]);
+						bundle.putString("fun", listIds[arg2]);
+					} catch (Exception e) {
+						// TODO: handle exception
+						bundle.putString("title", "");
+						bundle.putString("fun", "");
+					}
+				}
 				bundle.putString("name", "");
 				bundle.putString("price", "");
 				bundle.putString("brand", "");
-				bundle.putString("title", functions.get(arg2).getFunName());
 				intent.putExtras(bundle);
 //				intent.putExtra("bundle", arg2);
 				startActivity(intent);
@@ -109,6 +120,7 @@ public class SearchFragment extends SherlockFragment {
 //				}
 //			}
 //		});
+		/* 在 mainfragmentActivity里了
 		searchEditText.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -121,6 +133,7 @@ public class SearchFragment extends SherlockFragment {
 				searchEditText.clearFocus();
 			}
 		});
+		*/
 		return view;
 	}
 
@@ -139,4 +152,7 @@ public class SearchFragment extends SherlockFragment {
 		super.onStart();
 		Log.d(TAG, "TestFragment-----onStart");
 	}
+	
+	private String[] listContent = new String[] { "眼部护理", "活肌抗衰", "美白淡斑", "保湿锁水", "控油抗痘", "特别护理", "周期护理", "营养美容" };
+	private String[] listIds = new String[]{"12","13","17","20","22","24","28","27"};
 }
