@@ -167,7 +167,7 @@ public class GoodsView {
 						// TODO Auto-generated method stub
 						cart_num++;
 						setCartNum(cart_num);
-						Intent intent = new Intent(Consts.UPDATE_CHANGE);
+						Intent intent = new Intent(Consts.BROAD_UPDATE_CHANGE);
 						activity.sendBroadcast(intent);
 						boolean istrue = manage.addCart(cart);
 						if (istrue) {
@@ -408,8 +408,8 @@ public class GoodsView {
 
 	private void initDisplayImageOption() {
 		builder = new AlertDialog.Builder(activity)
-		.setTitle(activity.getResources().getString(R.string.add_cart_scs_title))
-		.setMessage(activity.getResources().getString(R.string.add_cart_scs))
+		.setTitle(activity.getResources().getString(R.string.login_title))
+		.setMessage(activity.getResources().getString(R.string.login_acount))
 		.setPositiveButton(activity.getResources().getString(R.string.go2cart),
 				new android.content.DialogInterface.OnClickListener() {
 
@@ -418,7 +418,7 @@ public class GoodsView {
 							int which) {
 						// TODO Auto-generated method stub
 						Intent intent = new Intent(activity,
-								GoCartActivity.class);
+								LoginActivity.class);
 						activity.startActivity(intent);
 						activity.finish();
 					}

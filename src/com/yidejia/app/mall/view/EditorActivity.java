@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
-
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -43,6 +43,7 @@ public class EditorActivity extends SherlockActivity {
 				R.layout.phone_number, null);
 
 		Builder builder = new Builder(this);
+//		dialogAbout.setc
 		dialogClear = builder
 				.setTitle("提示")
 				.setMessage("您确认清除缓存图片吗？")
@@ -98,10 +99,10 @@ public class EditorActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		WindowManager manager = getWindowManager();
-		Display display = manager.getDefaultDisplay();
-		width = display.getWidth();
-		height = display.getHeight() + 300;
+//		WindowManager manager = getWindowManager();
+//		Display display = manager.getDefaultDisplay();
+//		width = display.getWidth();
+//		height = display.getHeight() + 300;
 		setActionbar();
 		setContentView(R.layout.editor);
 		help = (RelativeLayout) findViewById(R.id.editor_linearLayout1);
@@ -140,7 +141,7 @@ public class EditorActivity extends SherlockActivity {
 			public void onClick(View arg0) {
 				dialogHelp.show();
 
-				dialogHelp.getWindow().setLayout(width, height / 2);
+//				dialogHelp.getWindow().setLayout(width, height / 2);
 			}
 
 		});
@@ -158,7 +159,7 @@ public class EditorActivity extends SherlockActivity {
 			@Override
 			public void onClick(View arg0) {
 				dialogAbout.show();
-				dialogHelp.getWindow().setLayout(width, height / 2);
+//				dialogHelp.getWindow().setLayout(width, height / 2);
 			}
 
 		});
@@ -197,7 +198,7 @@ public class EditorActivity extends SherlockActivity {
 				// TODO Auto-generated method stub
 				// Toast.makeText(ComposeActivity.this, "button",
 				// Toast.LENGTH_SHORT).show();
-				EditorActivity.this.finish();
+				
 			}
 		});
 

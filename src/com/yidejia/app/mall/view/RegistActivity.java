@@ -69,6 +69,7 @@ public class RegistActivity extends SherlockActivity {
 			ip = new IpAddress();
 			ipAddress = ip.getIpAddress();
 			setContentView(R.layout.my_mall_regist);
+			
 			setupShow();
 			setActionbar();
 			mButton.setOnClickListener(new OnClickListener() {

@@ -13,7 +13,6 @@ import org.json.JSONObject;
 import com.tenpay.android.service.TenpayServiceHelper;
 import com.unionpay.UPPayAssistEx;
 import com.unionpay.uppay.PayActivity;
-import com.yidejia.app.mall.net.order.GetOrderCode;
 import com.yidejia.app.mall.util.Http;
 import com.yidejia.app.mall.util.MessageUtil;
 

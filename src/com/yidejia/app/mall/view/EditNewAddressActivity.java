@@ -103,6 +103,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 
 		setActionbar();
 		setContentView(R.layout.new_address);
+		
 		// String[] provinces = new String[]{"-省份-","河北省","山西省","北京"};
 		/*
 		 * spinner1 = (Spinner) findViewById(R.id.province); spinner2 =

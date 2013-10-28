@@ -234,6 +234,7 @@ public class CstmPayActivity extends SherlockActivity {
 				if (cart == null) {
 
 					setContentView(R.layout.go_pay);
+					
 					setupShow();
 					addAddress();
 					setActionbar();

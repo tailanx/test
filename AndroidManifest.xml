@@ -37,7 +37,7 @@ android:uiOptions="splitActionBarWhenNarrow"
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
             <meta-data android:name="android.app.searchable"  
-                   android:resource="@xml/main_searchable"/>  
+                   android:resource="@xml/main_searchable"/>  
         -->
         <activity
             android:name="com.yidejia.app.mall.MainActivity"

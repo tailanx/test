@@ -86,6 +86,8 @@
     <string name="recomend">应用推荐</string>
     <string name="evaluation">评价晒单</string>
     <string name="person_evaluation">评价</string>
+    <string name="login_acount">登录账户</string>
+	<string name="login_title">登录</string>
     <string name="regist">注册</string>
     <string name="equal">注册成功</string>
     <string name="obtain">验证码不能为空</string>

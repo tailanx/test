@@ -3,8 +3,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg" >
-
     <!--
+<RelativeLayout 
+    android:id="@+id/editor_relative"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/topbg" >
+
+    <ImageView
+        android:id="@+id/editor_compose_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="#00000000"
+        android:clickable="true"
+        android:padding="6dp"
+        android:src="@drawable/compose_top" />
+
+    <TextView
+        android:id="@+id/editor_compose_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:text="设置"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+</RelativeLayout>
     <RelativeLayout
         android:id="@+id/editor_relative1"
         android:layout_width="match_parent"

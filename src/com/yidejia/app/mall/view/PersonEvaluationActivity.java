@@ -9,7 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.datamanage.UserCommentDataManage;
 
 public class PersonEvaluationActivity extends SherlockActivity {
 //	public void doClick(View v){
@@ -23,10 +25,14 @@ public class PersonEvaluationActivity extends SherlockActivity {
 //		startActivity(intent);
 //		finish();
 //	}
+	private UserCommentDataManage userDataManage;
+	private MyApplication myApplication;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		userDataManage = new UserCommentDataManage(this);
+		myApplication = (MyApplication) getApplication();
 //		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setActionbar();
@@ -64,9 +70,9 @@ public class PersonEvaluationActivity extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent2 = new Intent(PersonEvaluationActivity.this, CstmPayActivity.class);
-				startActivity(intent2);
-				//����ǰActivity��
+//				Intent intent2 = new Intent(PersonEvaluationActivity.this, CstmPayActivity.class);
+//				startActivity(intent2);
+//				userDataManage.commitComment(11+"", myApplication.getUserId(), myApplication.getNick(), , value, date)
 				PersonEvaluationActivity.this.finish();
 			}
 		});

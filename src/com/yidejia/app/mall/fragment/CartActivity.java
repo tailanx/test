@@ -28,22 +28,19 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
-import com.unionpay.uppay.PayActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.PreferentialDataManage;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.Cart;
+import com.yidejia.app.mall.model.Specials;
 import com.yidejia.app.mall.model.UserComment;
 import com.yidejia.app.mall.util.CartUtil;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.view.ExchangeFreeActivity;
-import com.yidejia.app.mall.view.GoCartActivity;
 import com.yidejia.app.mall.view.LoginActivity;
-import com.yidejia.app.mall.view.NewAddressActivity;
 
 //import com.yidejia.app.mall.view.PayActivity;
 
@@ -82,7 +79,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	private List<HashMap<String, Float>> mlList = null;
 
 	private InnerReceiver receiver;
-
+	public static ArrayList<Specials> arrayListFree;
 	// private InnerReceiver receiver;
 
 	// private void doClick(View v) {
@@ -279,30 +276,33 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 						sb.append("n");
 						sb.append(";");
 					}
-					preferentialDataManage.getPreferential(sb.toString(),
+					preferentialDataManage.getPreferential(sb.toString(),     
 							myApplication.getUserId());
 					if (preferentialDataManage.getFreeGoods().size() != 0
 							|| preferentialDataManage.getScoreGoods().size() != 0) {
-
+						arrayListFree = preferentialDataManage.getFreeGoods();
 						Intent intent = new Intent(getSherlockActivity(),
 								ExchangeFreeActivity.class);
-					} else {
-						Intent intent = new Intent(getSherlockActivity(),
+							startActivity(intent);
+//					} else {
+							Log.i("info", CartActivity.arrayListFree+  "CartActivity.arrayListFree");
+
+						Intent intent1 = new Intent(getSherlockActivity(),
 								CstmPayActivity.class);
 						Bundle bundle = new Bundle();
 						float sum = Float.parseFloat(sumTextView.getText()
 								.toString());
-
+						
 						if (sum > 0) {
 							bundle.putString("price", sum + "");
 							intent.putExtras(bundle);
-							getSherlockActivity().startActivity(intent);
+							getSherlockActivity().startActivity(intent1);
 						} else {
 							Toast.makeText(getSherlockActivity(),
 									getResources().getString(R.string.buy_nothing),
 									Toast.LENGTH_LONG).show();
 						}
-						// }
+//						 }
 					}
 				}
 			}

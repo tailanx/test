@@ -116,22 +116,7 @@ public class PersonActivity extends SherlockActivity {
 					| DateUtils.FORMAT_SHOW_DATE
 					| DateUtils.FORMAT_ABBREV_ALL);
 		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(label);;
-		setupShow();//
-		// View person = getLayoutInflater().inflate(R.layout.message_item,
-		// null);
-		// TextView textView = (TextView)
-		// person.findViewById(R.id.person_textview1);
-		// TextView textView1 = (TextView)
-		// person.findViewById(R.id.person_textview3);
-		// TextView textView2 = (TextView)
-		// person.findViewById(R.id.person_textview4);
-		// textView.setText("affas");
-		// textView1.setText("aafas");
-		// textView2.setText("bcxb");
-		// layout.addView(person);
-		// setupShow();
-
-		// Log.i("info", "???");
+		new MsgUtil(PersonActivity.this, layout,fromIndex,amount).loadView();;
 	}
 
 	private void setActionbar() {

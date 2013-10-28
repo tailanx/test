@@ -34,6 +34,7 @@ public class RecommendActivity extends SherlockActivity {
 //		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setActionbar();
 		setContentView(R.layout.recommend);
+		
 		LinearLayout layout = (LinearLayout) findViewById(R.id.recommend_scrollView_linearlayout1);
 		
 

@@ -41,7 +41,7 @@
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			setActionbar();
-			//???¦ñ???????scrollview
+			//???ï¿½ï¿½???????scrollview
 			setContentView(R.layout.opinion);
 
 		}
