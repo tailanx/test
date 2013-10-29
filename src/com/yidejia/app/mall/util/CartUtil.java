@@ -49,6 +49,7 @@ import com.yidejia.app.mall.datamanage.FavoriteDataManage;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.UserComment;
 import com.yidejia.app.mall.view.GoCartActivity;
+import com.yidejia.app.mall.view.LoginActivity;
 
 public class CartUtil {
 	private Context context;
@@ -160,9 +161,9 @@ public class CartUtil {
 	}
 	private void initDisplayImageOption() {
 		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.hot_sell_right_top_image)
-				.showImageOnFail(R.drawable.hot_sell_right_top_image)
-				.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+				.showStubImage(R.drawable.image_bg)
+				.showImageOnFail(R.drawable.image_bg)
+				.showImageForEmptyUri(R.drawable.image_bg)
 				.cacheInMemory(true).cacheOnDisc(true).build();
 	}
 	
@@ -175,13 +176,14 @@ public class CartUtil {
 
 	public void AllComment() {
 
+		ArrayList<Cart> userList;
+		ArrayList<Cart> orderCarts = new  ArrayList<Cart>();
 		try {
 
 			mList = new ArrayList<Object>();
 
 			dataManage = new CartsDataManage();
-
-			ArrayList<Cart> userList = dataManage.getCartsArray();
+			userList = dataManage.getCartsArray();
 
 			list = new ArrayList<HashMap<String, Float>>();
 			int a = 0;
@@ -400,16 +402,84 @@ public class CartUtil {
 											Intent intent = new Intent(context,
 													GoodsInfoActivity.class);
 											Bundle bundle = new Bundle();
-											bundle.putSerializable("goodsId",
+											bundle.putString("goodsId",
 													cart.getUId());
 											intent.putExtras(bundle);
-											context.startActivity(intent);
 											dialog.dismiss();
+											context.startActivity(intent);
 											break;
 										case 2:
-											Toast.makeText(context, context.getResources().getString(R.string.alreay_collect),
-													Toast.LENGTH_LONG).show();
 											dialog.dismiss();
+											MyApplication myApplication = (MyApplication)context.getApplicationContext();
+											if (myApplication.getIsLogin()) {
+												//已经登录
+												FavoriteDataManage manage = new FavoriteDataManage(
+														context);
+												if (!manage.checkExists(myApplication.getUserId(),
+														cart.getUId(),
+														myApplication
+																.getToken())) {
+													// 未收藏，现在添加收藏
+
+													if (manage.addFavourite(
+															myApplication
+																	.getUserId(),
+															cart.getUId(),
+															myApplication
+																	.getToken())) {
+														// 收藏成功
+														Toast.makeText(
+																context,
+																context.getResources()
+																		.getString(
+																				R.string.add_fav_scs),
+																Toast.LENGTH_SHORT)
+																.show();
+													} else {
+														//收藏失败
+														Toast.makeText(
+																context,
+																context.getResources()
+																		.getString(
+																				R.string.add_fav_fail),
+																Toast.LENGTH_SHORT)
+																.show();
+													}
+												} else {
+													//已经收藏了
+													Toast.makeText(
+															context,
+															context.getResources()
+															.getString(
+																	R.string.alreay_collect),
+																	Toast.LENGTH_LONG)
+																	.show();
+												}
+
+											} else {
+												new Builder(context).setTitle("提示").setMessage("你还没登录，现在去登录？").setPositiveButton("确定", new DialogInterface.OnClickListener(){
+
+													@Override
+													public void onClick(
+															DialogInterface dialog,
+															int which) {
+														// TODO Auto-generated method stub
+														Intent loginIntent = new Intent(context, LoginActivity.class);
+														context.startActivity(loginIntent);
+													}
+													
+												}).setNegativeButton(R.string.searchCancel, new DialogInterface.OnClickListener(){
+
+													@Override
+													public void onClick(
+															DialogInterface dialog,
+															int which) {
+														// TODO Auto-generated method stub
+														
+													}
+													
+												}).create().show();
+											}
 											break;
 										}
 
@@ -551,7 +621,6 @@ public class CartUtil {
 			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_SHORT).show();
 
 		}
-
 	}
 //	private class InnerReceiver extends BroadcastReceiver {
 //
