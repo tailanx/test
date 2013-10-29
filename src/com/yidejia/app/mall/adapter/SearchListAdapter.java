@@ -20,25 +20,31 @@ public class SearchListAdapter extends BaseAdapter {
 	private String[] listContent = new String[] { "眼部护理", "活肌抗衰", "美白淡斑", "保湿锁水", "控油抗痘", "特别护理", "周期护理", "营养美容" };
 	private ArrayList<Function> functions;
 	private int length = 0;
+	private boolean isEmpty = false;
 	
 	public SearchListAdapter(Context mContext, ArrayList<Function> functions){
 		this.mContext = mContext;
 //		mLayoutInflater = (LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		this.functions = functions;
+		if(functions.isEmpty()) {
+			isEmpty = true;
+			length = listContent.length;
+			return;
+		}
 		length = functions.size();
 	}
 	
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		if(length == 0) length = listContent.length;
+//		if(!isEmpty) length = listContent.length;
 		return length;
 	}
 	
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		if(length != 0) return functions.get(position).getFunName();
+		if(!isEmpty) return functions.get(position).getFunName();
 		return listContent[position];
 	}
 
@@ -46,7 +52,7 @@ public class SearchListAdapter extends BaseAdapter {
 	public long getItemId(int position) {
 		// TODO Auto-generated method stub
 		try {
-			if(length != 0) return Long.parseLong(functions.get(position).getFunId());
+			if(!isEmpty) return Long.parseLong(functions.get(position).getFunId());
 		} catch (Exception e){
 			
 		}
@@ -60,7 +66,7 @@ public class SearchListAdapter extends BaseAdapter {
 		
 		convertView = (View) LayoutInflater.from(mContext).inflate(R.layout.search_list_item, null);
 		TextView search_list_text = (TextView) convertView.findViewById(R.id.search_list_item_text);
-		if(length == 0)
+		if(isEmpty)
 			search_list_text.setText(listContent[position]);
 		else {
 			search_list_text.setText(functions.get(position).getFunName());
