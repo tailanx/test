@@ -25,7 +25,7 @@
             android:layout_height="140dp"
             android:layout_centerHorizontal="true"
             android:layout_margin="5dp"
-            android:src="@drawable/product_photo" />
+            android:src="@drawable/image_bg" />
 
         <TextView
             android:id="@+id/search_result_lg_title"
