@@ -203,7 +203,10 @@ public class GoodsView {
 						float sum = Float.parseFloat(priceString);
 						if(sum <= 0) return;////价格出错
 						Bundle bundle = new Bundle();
-						bundle.putSerializable("Cart", cart);
+						ArrayList<Cart> carts = new ArrayList<Cart>();
+						carts.add(cart);
+//						bundle.putSerializable("Cart", cart);
+						intent.putExtra("carts", carts);
 						bundle.putString("price", priceString);
 						intent.putExtras(bundle);
 						activity.startActivity(intent);
@@ -424,9 +427,9 @@ public class GoodsView {
 					}
 				}).setNegativeButton(activity.getResources().getString(R.string.guang_again), null).create();
 		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.hot_sell_right_top_image)
-				.showImageOnFail(R.drawable.hot_sell_right_top_image)
-				.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+				.showStubImage(R.drawable.image_bg)
+				.showImageOnFail(R.drawable.image_bg)
+				.showImageForEmptyUri(R.drawable.image_bg)
 				.cacheInMemory(true).cacheOnDisc(true).build();
 	}
 

@@ -2,12 +2,10 @@ package com.yidejia.app.mall.fragment;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,9 +37,9 @@ public class FreeGivingAdapter extends BaseAdapter {
 		this.inflater = LayoutInflater.from(context);
 		this.mList = mList;
 		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.hot_sell_right_top_image)
-				.showImageOnFail(R.drawable.hot_sell_right_top_image)
-				.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+				.showStubImage(R.drawable.image_bg)
+				.showImageOnFail(R.drawable.image_bg)
+				.showImageForEmptyUri(R.drawable.image_bg)
 				.cacheInMemory(true).cacheOnDisc(true).build();
 		// init();
 		// sp = context.getSharedPreferences("CHECK",0);
@@ -50,7 +48,7 @@ public class FreeGivingAdapter extends BaseAdapter {
 	}
 
 	/**
-	 * ÐÞ¸ÄÊý¾ÝÊ±,µ÷ÓÃµÄ·½·¨
+	 * ï¿½Þ¸ï¿½ï¿½ï¿½ï¿½Ê±,ï¿½ï¿½ï¿½ÃµÄ·ï¿½ï¿½ï¿½
 	 * 
 	 * @param mList
 	 */
@@ -96,11 +94,11 @@ public class FreeGivingAdapter extends BaseAdapter {
 	}
 
 	/**
-	 * ¼ÓÔØÊÓÍ¼
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 	 */
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	private DisplayImageOptions options;
-	protected ImageLoader imageLoader = ImageLoader.getInstance();// ¼ÓÔØÍ¼Æ¬
+	protected ImageLoader imageLoader = ImageLoader.getInstance();// ï¿½ï¿½ï¿½ï¿½Í¼Æ¬
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -121,36 +119,36 @@ public class FreeGivingAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		// »ñÈ¡Êý¾Ý
+		// ï¿½ï¿½È¡ï¿½ï¿½ï¿½
 		Specials specials = mList.get(position);
-		// ½«Êý¾ÝÏÔÊ¾ÔÚitemÉÏ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½itemï¿½ï¿½
 		holder.title.setText(specials.getBrief());
 		holder.price.setText(specials.getPrice());
 		imageLoader.displayImage(specials.getImgUrl(), holder.mImageView,
 				options, animateFirstListener);
 
-		holder.cb.setId(position);// ¶ÔcheckboxµÄid½øÐÐÖØÐÂÉèÖÃÎªµ±Ç°µÄposition
+		holder.cb.setId(position);// ï¿½ï¿½checkboxï¿½ï¿½idï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ç°ï¿½ï¿½position
 		holder.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			// °ÑÉÏ´Î±»Ñ¡ÖÐµÄcheckboxÉèÎªfalse
+			// ï¿½ï¿½ï¿½Ï´Î±ï¿½Ñ¡ï¿½Ðµï¿½checkboxï¿½ï¿½Îªfalse
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
-				if (isChecked) {// ÊµÏÖcheckboxµÄµ¥Ñ¡¹¦ÄÜ,Í¬ÑùÊÊÓÃÓÚradiobutton
+				if (isChecked) {// Êµï¿½ï¿½checkboxï¿½Äµï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½,Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½radiobutton
 					if (temp != -1) {
-						// ÕÒµ½ÉÏ´Îµã»÷µÄcheckbox,²¢°ÑËüÉèÖÃÎªfalse,¶ÔÖØÐÂÑ¡ÔñÊ±¿ÉÒÔ½«ÒÔÇ°µÄ¹Øµô
+						// ï¿½Òµï¿½ï¿½Ï´Îµï¿½ï¿½ï¿½ï¿½checkbox,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªfalse,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½Ç°ï¿½Ä¹Øµï¿½
 						CheckBox tempCheckBox = (CheckBox) activity
 								.findViewById(temp);
 						if (tempCheckBox != null)
 							tempCheckBox.setChecked(false);
 					}
-					temp = buttonView.getId();// ±£´æµ±Ç°Ñ¡ÖÐµÄcheckboxµÄidÖµ
+					temp = buttonView.getId();// ï¿½ï¿½ï¿½æµ±Ç°Ñ¡ï¿½Ðµï¿½checkboxï¿½ï¿½idÖµ
 				}
 			}
 
 		});
 		// System.out.println("temp:"+temp);
 		// System.out.println("position:"+position);
-		if (position == temp)// ±È¶ÔpositionºÍµ±Ç°µÄtempÊÇ·ñÒ»ÖÂ
+		if (position == temp)// ï¿½È¶ï¿½positionï¿½Íµï¿½Ç°ï¿½ï¿½tempï¿½Ç·ï¿½Ò»ï¿½ï¿½
 			holder.cb.setChecked(true);
 		else
 			holder.cb.setChecked(false);
@@ -158,9 +156,9 @@ public class FreeGivingAdapter extends BaseAdapter {
 	}
 
 	static class ViewHolder {
-		TextView title;// ÄÚÈÝ
+		TextView title;// ï¿½ï¿½ï¿½ï¿½
 		ImageView mImageView;// Í¼Æ¬
-		TextView price;// ¼Û¸ñ
+		TextView price;// ï¿½Û¸ï¿½
 		CheckBox cb;
 	}
 

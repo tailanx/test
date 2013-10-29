@@ -8,14 +8,11 @@ import java.util.List;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Handler;
-import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,7 +29,7 @@ import com.yidejia.app.mall.model.Specials;
 public class ExchangeAdapter extends BaseAdapter {
 	private Context context;
 	private ArrayList<Specials> mlist;
-	private static HashMap<Integer, Boolean> isSelected;// ÓÃÀ´±£´æÑ¡ÖÐµÄ×´Ì¬
+	private static HashMap<Integer, Boolean> isSelected;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½Ðµï¿½×´Ì¬
 	private LayoutInflater inflater;
 //	private Handler handler;
 
@@ -41,9 +38,9 @@ public class ExchangeAdapter extends BaseAdapter {
 		this.mlist = mList;
 		this.inflater = LayoutInflater.from(context);
 		options = new DisplayImageOptions.Builder()
-		.showStubImage(R.drawable.hot_sell_right_top_image)
-		.showImageOnFail(R.drawable.hot_sell_right_top_image)
-		.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+		.showStubImage(R.drawable.image_bg)
+		.showImageOnFail(R.drawable.image_bg)
+		.showImageForEmptyUri(R.drawable.image_bg)
 		.cacheInMemory(true).cacheOnDisc(true).build();
 		initData();
 	}
@@ -57,7 +54,7 @@ public class ExchangeAdapter extends BaseAdapter {
 	}
 
 	/**
-	 * ³õÊ¼»¯checkboxµÄÑ¡ÖÐ×´Ì¬
+	 * ï¿½ï¿½Ê¼ï¿½ï¿½checkboxï¿½ï¿½Ñ¡ï¿½ï¿½×´Ì¬
 	 */
 	private void initData() {
 		for (int i = 0; i < mlist.size(); i++) {
@@ -104,11 +101,11 @@ public class ExchangeAdapter extends BaseAdapter {
 	}
 
 	/**
-	 * ¼ÓÔØÊÓÍ¼
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 	 */
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	private DisplayImageOptions options;
-	protected ImageLoader imageLoader = ImageLoader.getInstance();// ¼ÓÔØÍ¼Æ¬
+	protected ImageLoader imageLoader = ImageLoader.getInstance();// ï¿½ï¿½ï¿½ï¿½Í¼Æ¬
 
 	ViewHolder holder = null;
 	@Override
@@ -148,7 +145,7 @@ public class ExchangeAdapter extends BaseAdapter {
 				int sum = Integer.parseInt(holder.count.getText().toString());
 				
 				if (sum >= 9999) {
-					Toast.makeText(context, "ÄúÏëÒª¹ºÂò¸ü¶àµÄ²úÆ·£¬ÇëÓë¿Í·þÁªÏµ",
+					Toast.makeText(context, "ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½Ïµ",
 							Toast.LENGTH_LONG).show();
 				} else {
 					sum++;
@@ -169,7 +166,7 @@ public class ExchangeAdapter extends BaseAdapter {
 				// TODO Auto-generated method stub
 				int sum = Integer.parseInt(holder.count.getText().toString());
 				if (sum <= 1) {
-					Toast.makeText(context, "ÒÑ¾­ÊÇ×îÐ¡µÄÊýÖµÁË",
+					Toast.makeText(context, "ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½",
 							Toast.LENGTH_LONG).show();
 				} else {
 					sum--;
