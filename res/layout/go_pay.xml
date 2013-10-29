@@ -37,7 +37,6 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/go_pay_sum_money"
             android:layout_toRightOf="@+id/go_pay_show_pay_money_price"
-            android:text="14400.00"
             android:textColor="#ed217c"
             android:textSize="15sp" />
 
@@ -95,7 +94,7 @@
                     android:drawablePadding="4dp"
                     android:gravity="center_vertical"
                     android:text="收货人："
-                    android:textSize="16dp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/go_pay_name"
@@ -104,7 +103,6 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="8dp"
                     android:layout_toRightOf="@id/go_pay_consignee"
-                    android:text="乔丹"
                     android:textSize="16dp" />
 
                 <TextView
@@ -117,7 +115,6 @@
                     android:drawableLeft="@drawable/phone_iocn"
                     android:drawablePadding="4dp"
                     android:gravity="center_vertical"
-                    android:text="18685241320"
                     android:textSize="16dp" />
             </RelativeLayout>
 
@@ -127,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/delivery_address_down"
                 android:padding="10dp"
-                android:text="收货地址：有人肯定会对于android中放置图片的地到好奇下的dr是他会d图片放在drawabl辨率的图片"
+                android:text="收货地址："
                 android:textSize="15sp" />
 
             <LinearLayout
@@ -359,7 +356,6 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="6dp"
                     android:layout_toRightOf="@id/go_pay_addresss"
-                    android:text="广州配送中心"
                     android:textSize="20dp" />
 
                 <ImageView

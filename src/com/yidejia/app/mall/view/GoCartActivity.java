@@ -58,17 +58,20 @@ public class GoCartActivity extends SherlockActivity {// implements
 
 		counTextView = (TextView) findViewById(R.id.shopping_cart_sum_number);// �ܵ�����
 
-		mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.shopping_cart_item_goods_scrollView);
-		String label = getResources().getString(R.string.update_time)
-				+ DateUtils.formatDateTime(GoCartActivity.this,
-						System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
-								| DateUtils.FORMAT_SHOW_DATE
-								| DateUtils.FORMAT_SHOW_TIME);
-		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
-				label);
-		mPullToRefreshScrollView.setOnRefreshListener(listener);
+//		mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.shopping_cart_item_goods_scrollView);
+//		String label = getResources().getString(R.string.update_time)
+//				+ DateUtils.formatDateTime(GoCartActivity.this,
+//						System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
+//								| DateUtils.FORMAT_SHOW_DATE
+//								| DateUtils.FORMAT_SHOW_TIME);
+//		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
+//				label);
+//		mPullToRefreshScrollView.setOnRefreshListener(listener);
 
-		LinearLayout layout = (LinearLayout) findViewById(R.id.shopping_cart_relative2);
+//		LinearLayout layout = (LinearLayout) findViewById(R.id.shopping_cart_relative2);
+		LinearLayout layout = new LinearLayout(this);
+		layout.setOrientation(LinearLayout.VERTICAL);
+		ScrollView scrollView = (ScrollView) findViewById(R.id.shopping_cart_item_goods_scrollView);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
@@ -152,6 +155,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 		}
 		//
 		//
+		scrollView.addView(layout);
 	}
 
 	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {

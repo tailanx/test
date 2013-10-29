@@ -228,27 +228,29 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 		getSherlockActivity().registerReceiver(receiver, filter);
 		// registerForContextMenu(layout);
 
-		layout = (LinearLayout) view.findViewById(R.id.shopping_cart_relative2);
-
+//		layout = (LinearLayout) view.findViewById(R.id.shopping_cart_relative2);
+		layout = new LinearLayout(getSherlockActivity());
+		layout.setOrientation(LinearLayout.VERTICAL);
 		// getSherlockActivity().getSupportActionBar().setCustomView(
 		// R.layout.actionbar_cart);
 		cartUtil = new CartUtil(getSherlockActivity(), layout, counTextView,
 				sumTextView, mBox);
 
 		cartUtil.AllComment();
-
-		mPullToRefreshScrollView = (PullToRefreshScrollView) view
-				.findViewById(R.id.shopping_cart_item_goods_scrollView);
-		String label = getResources().getString(R.string.update_time)
-				+ DateUtils.formatDateTime(getSherlockActivity(),
-						System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
-								| DateUtils.FORMAT_ABBREV_ALL
-								| DateUtils.FORMAT_SHOW_DATE);
-		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
-				label);
-		mPullToRefreshScrollView.onRefreshComplete();
-		mPullToRefreshScrollView.setOnRefreshListener(listener);
-
+		ScrollView scrollView = (ScrollView) view.findViewById(R.id.shopping_cart_item_goods_scrollView);
+		scrollView.addView(layout);
+//		mPullToRefreshScrollView = (PullToRefreshScrollView) view
+//				.findViewById(R.id.shopping_cart_item_goods_scrollView);
+//		String label = getResources().getString(R.string.update_time)
+//				+ DateUtils.formatDateTime(getSherlockActivity(),
+//						System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
+//								| DateUtils.FORMAT_ABBREV_ALL
+//								| DateUtils.FORMAT_SHOW_DATE);
+//		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
+//				label);
+//		mPullToRefreshScrollView.onRefreshComplete();
+//		mPullToRefreshScrollView.setOnRefreshListener(listener);
+		
 		// 结算
 		shoppingCartTopay = (Button) getSherlockActivity().findViewById(
 				R.id.shopping_cart_go_pay);
@@ -269,7 +271,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 					StringBuffer sb = new StringBuffer();
 					ArrayList<Cart> mList = dataManage.getCartsArray();
 					for (int i = 0; i < mList.size(); i++) {
-						Cart cart = new Cart();
+						Cart cart = mList.get(i);
 						sb.append(cart.getUId());
 						sb.append(",");
 						sb.append(cart.getAmount());
@@ -278,32 +280,35 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 					}
 					preferentialDataManage.getPreferential(sb.toString(),     
 							myApplication.getUserId());
-					if (preferentialDataManage.getFreeGoods().size() != 0
-							|| preferentialDataManage.getScoreGoods().size() != 0) {
-						arrayListFree = preferentialDataManage.getFreeGoods();
-						Intent intent = new Intent(getSherlockActivity(),
-								ExchangeFreeActivity.class);
-							startActivity(intent);
+//					if (preferentialDataManage.getFreeGoods().size() != 0
+//							|| preferentialDataManage.getScoreGoods().size() != 0) {
+//						arrayListFree = preferentialDataManage.getFreeGoods();
+//						Intent intent = new Intent(getSherlockActivity(),
+//								ExchangeFreeActivity.class);
+//						startActivity(intent);
 //					} else {
-							Log.i("info", CartActivity.arrayListFree+  "CartActivity.arrayListFree");
+						// Log.i("info", CartActivity.arrayListFree+
+						// "CartActivity.arrayListFree");
 
 						Intent intent1 = new Intent(getSherlockActivity(),
 								CstmPayActivity.class);
 						Bundle bundle = new Bundle();
 						float sum = Float.parseFloat(sumTextView.getText()
 								.toString());
-						
+						intent1.putExtra("carts", mList);
 						if (sum > 0) {
 							bundle.putString("price", sum + "");
-							intent.putExtras(bundle);
+							intent1.putExtras(bundle);
 							getSherlockActivity().startActivity(intent1);
 						} else {
-							Toast.makeText(getSherlockActivity(),
-									getResources().getString(R.string.buy_nothing),
+							Toast.makeText(
+									getSherlockActivity(),
+									getResources().getString(
+											R.string.buy_nothing),
 									Toast.LENGTH_LONG).show();
 						}
-//						 }
-					}
+						// }
+//					}
 				}
 			}
 		});
