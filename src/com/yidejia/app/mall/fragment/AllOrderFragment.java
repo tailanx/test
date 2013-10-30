@@ -166,10 +166,17 @@ public class AllOrderFragment extends SherlockFragment {
 	}
 
 	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		setupShow();
+	}
+
+	@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		setupShow();
+//		setupShow();
 	}
 
 	@Override
