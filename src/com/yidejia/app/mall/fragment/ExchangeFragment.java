@@ -63,8 +63,7 @@ public class ExchangeFragment extends SherlockFragment {
 		dataManage  = new PreferentialDataManage(getSherlockActivity());
 		View view= inflater.inflate(R.layout.exchange_produce, null);//获取视图对象
 		listview = (ListView) view.findViewById(R.id.exchange_shopping_listview);
-		ArrayList<Specials> mArrayList = dataManage.getScoreGoods();
-		adapter = new ExchangeAdapter(mArrayList, getActivity());
+		adapter = new ExchangeAdapter(CartActivity.arrayListExchange,getActivity());
 		listview.setAdapter(adapter);
 		//		LinearLayout relativeLayout = (LinearLayout)view.findViewById(R.id.shopping_cart_relative2);//获取布局
 
@@ -110,7 +109,7 @@ public class ExchangeFragment extends SherlockFragment {
             //// 取得ViewHolder对象，这样就省去了通过层层的findViewById去实例化我们需要的cb实例的步骤    
             ViewHolder viewHolder=(ViewHolder)view.getTag();                          
             viewHolder.cb.toggle();// 把CheckBox的选中状态改为当前状态的反,gridview确保是单一选中  
-           ExchangeAdapter.getIsSelected().put(position, viewHolder.cb.isChecked());//将CheckBox的选中状况记录下来 </span>  
+           ExchangeAdapter.getIsSelected().put(position, viewHolder.cb.isChecked());//将CheckBox的选中状况记录下来 
         }  
     };
 	@Override

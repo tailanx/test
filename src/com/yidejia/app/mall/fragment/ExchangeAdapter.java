@@ -10,6 +10,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,20 +35,28 @@ import com.yidejia.app.mall.model.Specials;
 public class ExchangeAdapter extends BaseAdapter {
 	private Context context;
 	private ArrayList<Specials> mlist;
-	private static HashMap<Integer, Boolean> isSelected;// 用来保存选中的状态
+	private static HashMap<Integer, Boolean> isSelected;// =状态
+	public static List<HashMap<String, Float>> mlist1;
 	private LayoutInflater inflater;
-//	private Handler handler;
+
+	// private Handler handler;
 
 	public ExchangeAdapter(ArrayList<Specials> mList, Context context) {
 		this.context = context;
 		this.mlist = mList;
 		this.inflater = LayoutInflater.from(context);
 		options = new DisplayImageOptions.Builder()
-		.showStubImage(R.drawable.hot_sell_right_top_image)
-		.showImageOnFail(R.drawable.hot_sell_right_top_image)
-		.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
-		.cacheInMemory(true).cacheOnDisc(true).build();
+				.showStubImage(R.drawable.hot_sell_right_top_image)
+				.showImageOnFail(R.drawable.hot_sell_right_top_image)
+				.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+				.cacheInMemory(true).cacheOnDisc(true).build();
+		isSelected = new HashMap<Integer, Boolean>();
+		mlist1 = new ArrayList<HashMap<String, Float>>();
 		initData();
+	}
+
+	public ExchangeAdapter() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public static HashMap<Integer, Boolean> getIsSelected() {
@@ -57,10 +68,11 @@ public class ExchangeAdapter extends BaseAdapter {
 	}
 
 	/**
-	 * 初始化checkbox的选中状态
+	 * 锟斤拷始锟斤拷checkbox锟斤拷选锟斤拷状态
 	 */
 	private void initData() {
 		for (int i = 0; i < mlist.size(); i++) {
+			Log.i("info", mlist.size() + "size");
 			getIsSelected().put(i, false);
 		}
 	}
@@ -104,16 +116,18 @@ public class ExchangeAdapter extends BaseAdapter {
 	}
 
 	/**
-	 * 加载视图
+	 * 锟斤拷锟斤拷锟斤拷图
 	 */
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	private DisplayImageOptions options;
-	protected ImageLoader imageLoader = ImageLoader.getInstance();// 加载图片
+	protected ImageLoader imageLoader = ImageLoader.getInstance();// 锟斤拷锟斤拷图片
+	int i = 0;
 
-	ViewHolder holder = null;
 	@Override
-	public View getView(int postion, View covertView, ViewGroup arg2) {
+	public View getView(final int postion, View covertView, ViewGroup arg2) {
 		// TODO Auto-generated method stub
+		final HashMap<String, Float> map = new HashMap<String, Float>();
+		final ViewHolder holder;
 		if (covertView == null) {
 			covertView = inflater.inflate(R.layout.exchange_produce_item, null);
 			holder = new ViewHolder();
@@ -135,53 +149,99 @@ public class ExchangeAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) covertView.getTag();
 		}
+		final Handler handler = new Handler() {
+			public void handleMessage(Message msg) {
+				if (msg.what == 113) {
+					map.put("count",
+							Float.parseFloat(holder.count.getText().toString()));
+				}
+				Log.i("info", mlist1.toString() + "    mlist1");
+			};
+		};
 		Specials s = mlist.get(postion);
-		imageLoader.displayImage(s.getImgUrl(), holder.iv, options, animateFirstListener);
+		imageLoader.displayImage(s.getImgUrl(), holder.iv, options,
+				animateFirstListener);
 		holder.tvContent.setText(s.getBrief());
 		holder.tvPrice.setText(s.getPrice());
 		holder.cb.setChecked(getIsSelected().get(postion));
-		
+		holder.count.setText(1 + "");
+
+		holder.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				// TODO Auto-generated method stub
+				if (isChecked) {
+					// Log.i("info", holder.cb.isChecked() + "    mlist1");
+					isSelected.put(postion, true);
+					map.put("isCheck", (float) 0);
+					// map.put("isCheck", (float) 0 );
+				} else {
+					isSelected.put(postion, false);
+					map.put("isCheck", (float) 1);
+					// map.put("isCheck", (float) 1);
+				}
+				Log.i("info", mlist1.toString() + "    mlist1");  
+			}
+		});
 		holder.add.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				int sum = Integer.parseInt(holder.count.getText().toString());
-				
+				// Log.i("info", sum + " sum");
 				if (sum >= 9999) {
-					Toast.makeText(context, "您想要购买更多的产品，请与客服联系",
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(
+							context,
+							context.getResources().getString(
+									R.string.price_error), Toast.LENGTH_LONG)
+							.show();
 				} else {
 					sum++;
 					holder.count.setText(sum + "");
+					// map.put("count",
+					// Float.parseFloat(holder.count.getText().toString()));
 					// mTextView.setText(Integer.parseInt(number.getText()
 					// .toString())+"");
 				}
-//				Message ms = new Message();
-//				ms.what = 123;
-//				handler.sendMessage(ms);
-				
+				Message ms = new Message();
+				ms.what = 113;
+				handler.sendMessage(ms);
+
 			}
 		});
 		holder.subtract.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				int sum = Integer.parseInt(holder.count.getText().toString());
 				if (sum <= 1) {
-					Toast.makeText(context, "已经是最小的数值了",
+					Toast.makeText(context,
+							context.getResources().getString(R.string.mix),
 							Toast.LENGTH_LONG).show();
 				} else {
 					sum--;
 					holder.count.setText(sum + "");
-					
+
+					// map.put("count",
+					// Float.parseFloat(holder.count.getText().toString()));
 				}
-//			
-//				Message ms = new Message();
-//				ms.what = 123;
-//				handler.sendMessage(ms);
+				//
+				Message ms = new Message();
+				ms.what = 113;
+				handler.sendMessage(ms);
 			}
 		});
+		//
+		map.put("price", Float.parseFloat(s.getPrice()));
+		map.put("count", Float.parseFloat(holder.count.getText().toString()));
+		map.put("isCheck", (float) (holder.cb.isChecked() == true ? 0 : 1));
+		Log.i("info", mlist1.toString() + "    mlist1");
+		i++;
+		mlist1.add(map);
+		// Log.i("info", i+"i");
 		return covertView;
 	}
 
@@ -193,6 +253,7 @@ public class ExchangeAdapter extends BaseAdapter {
 		private ImageView subtract;
 		private ImageView add;
 		private TextView count;
+
 	}
 
 }
