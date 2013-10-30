@@ -24,8 +24,9 @@ import com.yidejia.app.mall.view.OrderDetailActivity;
 public class AllOrderUtil {
 	private Context context;
 	private	LayoutInflater inflater;
-	private View view;
+//	private View view;
 	private MyApplication myApplication;
+	
 	
 //	private TextView titleTextView;//������״̬
 //	private TextView numberTextView;//�����ı��
@@ -72,10 +73,13 @@ public class AllOrderUtil {
 					amount + "", myApplication.getToken());
 			// Log.i("info", mList.size()+"mList");
 			for (int i = 0; i < mList.size(); i++) {
-				view = inflater.inflate(R.layout.all_order_item_item, null);
+				
+				final View view = inflater.inflate(R.layout.all_order_item_item, null);
 				// Log.i("info", view+"");
+				Button mCancal = (Button) view.findViewById(R.id.all_order_item_main_cancal);
 				Button mButton = (Button) view
 						.findViewById(R.id.all_order_item_main_pay);
+				final LinearLayout layout1= (LinearLayout) view.findViewById(R.id.all_order_item_main_linerar);
 				LinearLayout mLayout = (LinearLayout) view
 						.findViewById(R.id.all_order_item_main_relative2);
 				TextView titleTextView = (TextView) view
@@ -100,7 +104,16 @@ public class AllOrderUtil {
 					countTextView.setText(allOrderDetail.map.get("count")
 							.intValue() + "");
 				}
-
+				mCancal.setOnClickListener( new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						boolean isSucess = orderDataManage.cancelOrder(myApplication.getUserId(),mOrder.getOrderCode(), myApplication.getToken());
+						Log.i("info", isSucess + "      isSucess");
+						mLinearLayoutLayout.removeView(layout1);
+					}
+				});
 				mButton.setOnClickListener(new OnClickListener() {
 
 					@Override

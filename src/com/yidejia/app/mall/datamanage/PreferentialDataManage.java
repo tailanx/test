@@ -59,6 +59,8 @@ public class PreferentialDataManage {
 	 */
 	public void getPreferential(String goods, String userId){
 		boolean state = false;
+		this.goods = goods;
+		this.userid = userId;
 		TaskVerify taskVerify = new TaskVerify();
 		try {
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);  

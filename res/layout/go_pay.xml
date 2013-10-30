@@ -2,6 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     
+    android:id="@+id/go_pay_relative"
     android:background="@drawable/bg" >
 
     <RelativeLayout
@@ -78,8 +79,15 @@
             android:layout_gravity="top"
             android:gravity="center"
             android:orientation="vertical" >
+	  <RelativeLayout
+                android:id="@+id/go_pay_relativelayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/new_delivery_address_up" >
+            
 
             <RelativeLayout
+                  android:id="@+id/go_pay_relativelayout1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/new_delivery_address_up" >
@@ -119,6 +127,7 @@
             </RelativeLayout>
 
             <TextView
+                android:layout_below="@id/go_pay_relativelayout1"
                 android:id="@+id/go_pay_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -126,7 +135,7 @@
                 android:padding="10dp"
                 android:text="收货地址:"
                 android:textSize="16sp" />
-
+	</RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -481,7 +490,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@id/go_pay_payEMS_money"
                     android:layout_below="@id/go_pay_payEMS_money"
-                    android:text="偏远地区请选择EMS配送 如：到镇，村胡地址’"
+                    android:text="偏远地区请选择EMS配送 如：到镇，村，户地址’"
                     android:textSize="8sp" />
 
                 <CheckBox

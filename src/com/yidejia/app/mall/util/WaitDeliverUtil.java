@@ -19,6 +19,7 @@ import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.view.ExchangeActivity;
 import com.yidejia.app.mall.view.PersonEvaluationActivity;
+import com.yidejia.app.mall.view.ReturnActivity;
 
 public class WaitDeliverUtil {
 	private Context context;
@@ -105,7 +106,7 @@ public class WaitDeliverUtil {
 					   
 					@Override
 					public void onClick(View v) {
-						Intent intent = new Intent(context, PersonEvaluationActivity.class);
+						Intent intent = new Intent(context, ReturnActivity.class);
 						context.startActivity(intent);
 						
 					}

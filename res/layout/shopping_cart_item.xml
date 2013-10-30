@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rela"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/productlist_bg" >
 
     <CheckBox
@@ -82,6 +82,7 @@
             android:id="@+id/imageView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:src="@drawable/quantity_bg"
             android:clickable="false"
              />
@@ -99,7 +100,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignRight="@+id/imageView1"
-            android:layout_centerVertical="true"
             android:src="@drawable/addition" />
         <TextView
             android:id="@+id/shopping_cart_item_edit_number"

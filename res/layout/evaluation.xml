@@ -5,46 +5,43 @@
     android:orientation="vertical" >
 
     <!--
-    <RelativeLayout
-        android:id="@+id/evaluation_relative1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/topbg" >
+<RelativeLayout
+android:id="@+id/evaluation_relative1"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_alignParentLeft="true"
+android:layout_alignParentTop="true"
+android:background="@drawable/topbg" >
 
-        <Button
-            android:id="@+id/evaluation_button"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/back1"
-            android:onClick="doClick" />
+<Button
+android:id="@+id/evaluation_button"
+android:layout_width="60dp"
+android:layout_height="40dp"
+android:layout_alignParentLeft="true"
+android:layout_centerHorizontal="true"
+android:layout_centerVertical="true"
+android:layout_marginLeft="10dp"
+android:background="@drawable/back1"
+android:onClick="doClick" />
 
-        <TextView
-            android:id="@+id/evaluation_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:onClick="doClick"
-            android:text="评价晒单"
-            android:textColor="#ffeeeeee"
-            android:textSize="24dp" />
-    </RelativeLayout>android:layout_below="@id/evaluation_relative1"
+<TextView
+android:id="@+id/evaluation_textview"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_centerHorizontal="true"
+android:layout_centerVertical="true"
+android:onClick="doClick"
+android:text="评价晒单"
+android:textColor="#ffeeeeee"
+android:textSize="24dp" />
+</RelativeLayout>
+android:layout_below="@id/evaluation_relative1"
     -->
 
-  <com.handmark.pulltorefresh.library.PullToRefreshScrollView
-        xmlns:ptr="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/evaluation_scrollView" 
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:descendantFocusability="afterDescendants"
-        ptr:ptrAnimationStyle="flip"
-        ptr:ptrMode="pullUpFromBottom" >
+    <ScrollView
+        android:id="@+id/evaluation_scrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
 
         <LinearLayout
             android:id="@+id/evaluation_scrollView_linearlayout1"
@@ -55,10 +52,65 @@
             android:layout_marginTop="12dp"
             android:orientation="vertical" >
 
-           
+            <RelativeLayout
+                android:id="@+id/evaluation_relative2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/productlist_bg" >
 
-        
+                <ListView
+                    android:id="@+id/evaluation_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+                </ListView>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="75dp"
+                android:background="@drawable/order_statusbg_down" >
+
+                <TextView
+                    android:id="@+id/evaluation_sum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="15dp"
+                    android:text="订单总额："
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/evaluation_sum_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@id/evaluation_sum"
+                    android:text="￥160.00"
+                    android:textColor="#ed217c"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/evaluation_item_evaluation"
+                    android:layout_width="55dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/clear_conditions"
+                    android:onClick="doClick"
+                    android:text="评价"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/evaluation_item_textview7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/evaluation_sum"
+                    android:layout_marginLeft="4dp"
+                    android:text="数量：1"
+                    android:textSize="15sp" />
+            </RelativeLayout>
         </LinearLayout>
-    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+    </ScrollView>
 
 </RelativeLayout>

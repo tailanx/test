@@ -27,7 +27,8 @@ public class EvaluationActivity extends SherlockActivity {
 	private LinearLayout layout;
 	private MyApplication myApplication;
 
-	private PullToRefreshScrollView mPullToRefreshScrollView;
+	private ScrollView mPullToRefreshScrollView;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -36,46 +37,52 @@ public class EvaluationActivity extends SherlockActivity {
 		myApplication = (MyApplication) getApplication();
 		setActionbar();
 		layout = (LinearLayout) findViewById(R.id.evaluation_scrollView_linearlayout1);
-		mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.evaluation_scrollView);
-		mPullToRefreshScrollView.setOnRefreshListener(listener);
-		String label = getResources().getString(R.string.update_time)	+ DateUtils.formatDateTime(
-				EvaluationActivity.this.getApplicationContext(),
-				System.currentTimeMillis(),
-				DateUtils.FORMAT_SHOW_TIME
-					| DateUtils.FORMAT_SHOW_DATE
-					| DateUtils.FORMAT_ABBREV_ALL);
-		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(label);;
-//		setupShow();
-//		View person = getLayoutInflater().inflate(R.layout.evaluation_item, null);
-//		layout.addView(person);
+		mPullToRefreshScrollView = (ScrollView) findViewById(R.id.evaluation_scrollView);
+//		mPullToRefreshScrollView.ScrollView(listener);
+//		String label = getResources().getString(R.string.update_time)
+//				+ DateUtils.formatDateTime(
+//						EvaluationActivity.this.getApplicationContext(),
+//						System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
+//								| DateUtils.FORMAT_SHOW_DATE
+//								| DateUtils.FORMAT_ABBREV_ALL);
+//		ScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
+//				label);
+//		;
+		// setupShow();
+		// View person = getLayoutInflater().inflate(R.layout.evaluation_item,
+		// null);
+		// layout.addView(person);
 		TaskNoEva taskNoEva = new TaskNoEva(EvaluationActivity.this, layout);
 		taskNoEva.getWaitingComment(myApplication.getUserId(), true);
 	}
+
 	private int fromIndex = 0;
 	private int amount = 10;
-	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
+//	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
+//
+//		@Override
+//		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+//			// TODO Auto-generated method stub
+//			String label = getResources().getString(R.string.update_time)
+//					+ DateUtils.formatDateTime(
+//							EvaluationActivity.this.getApplicationContext(),
+//							System.currentTimeMillis(),
+//							DateUtils.FORMAT_SHOW_TIME
+//									| DateUtils.FORMAT_SHOW_DATE
+//									| DateUtils.FORMAT_ABBREV_ALL);
+//			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+//			// fromIndex += amount;
+//			TaskNoEva taskNoEva = new TaskNoEva(EvaluationActivity.this, layout);
+//			taskNoEva.getWaitingComment(myApplication.getUserId(), false);
+//			mPullToRefreshScrollView.onRefreshComplete();
+//		}
+//	};
 
-		@Override
-		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-			// TODO Auto-generated method stub
-			String label = getResources().getString(R.string.update_time)	+ DateUtils.formatDateTime(
-					EvaluationActivity.this.getApplicationContext(),
-					System.currentTimeMillis(),
-					DateUtils.FORMAT_SHOW_TIME
-						| DateUtils.FORMAT_SHOW_DATE
-						| DateUtils.FORMAT_ABBREV_ALL);
-			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-//			fromIndex += amount;
-			TaskNoEva taskNoEva = new TaskNoEva(EvaluationActivity.this, layout);
-			taskNoEva.getWaitingComment(myApplication.getUserId(), false);
-			mPullToRefreshScrollView.onRefreshComplete();
-		}
-		
-	};
-	private void setupShow(){
-		new CommentUtil(EvaluationActivity.this, layout).AllCommentUserId(myApplication.getUserId()
-				, fromIndex, amount);
+	private void setupShow() {
+		new CommentUtil(EvaluationActivity.this, layout).AllCommentUserId(
+				myApplication.getUserId(), fromIndex, amount);
 	}
+
 	private void setActionbar() {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);

@@ -24,8 +24,8 @@ import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.util.DefinalDate;
 
 public class AddressAdapter extends BaseAdapter {
-	public   ArrayList<Addresses> mAddresses;
-	private AddressDataManage dataManage ;
+	public ArrayList<Addresses> mAddresses;
+	private AddressDataManage dataManage;
 	private Activity activity;
 	private LayoutInflater inflater;
 	private MyApplication myApplication;
@@ -40,21 +40,21 @@ public class AddressAdapter extends BaseAdapter {
 
 	}
 
-//	public ArrayList<Addresses> getmAddresses() {
-//		return mAddresses;
-//	}
-//
-//	public void setmAddresses(ArrayList<Addresses> mAddresses) {
-//		if(mAddresses!=null)
-//			this.mAddresses = mAddresses;
-//		else
-//			this.mAddresses = new ArrayList<Addresses>();
-//	}
-//
-//	public void changeDate(ArrayList<Addresses> mAddresses ){
-//		this.setmAddresses(mAddresses);
-//		this.notifyDataSetChanged();
-//	}
+	// public ArrayList<Addresses> getmAddresses() {
+	// return mAddresses;
+	// }
+	//
+	// public void setmAddresses(ArrayList<Addresses> mAddresses) {
+	// if(mAddresses!=null)
+	// this.mAddresses = mAddresses;
+	// else
+	// this.mAddresses = new ArrayList<Addresses>();
+	// }
+	//
+	// public void changeDate(ArrayList<Addresses> mAddresses ){
+	// this.setmAddresses(mAddresses);
+	// this.notifyDataSetChanged();
+	// }
 
 	@Override
 	public int getCount() {
@@ -103,6 +103,12 @@ public class AddressAdapter extends BaseAdapter {
 		}
 
 		final Addresses addresses = mAddresses.get(position);
+		// if(position == 0){
+		// temp = Integer.parseInt(addresses.getAddressId());
+		// Log.i("info", position+"onResume");
+		// holder.cb.setChecked(true);
+		// }
+
 		StringBuffer sb = new StringBuffer();
 		sb.append(addresses.getProvice());
 		sb.append(addresses.getCity());
@@ -112,7 +118,7 @@ public class AddressAdapter extends BaseAdapter {
 		holder.nameTextView.setText(addresses.getName());
 		holder.phoneTextView.setText(addresses.getHandset());
 		holder.editImageView.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
@@ -126,22 +132,33 @@ public class AddressAdapter extends BaseAdapter {
 			}
 		});
 		holder.deteleImageView.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				dataManage.deleteAddress(myApplication.getUserId(), addresses.getAddressId(), myApplication.getToken());
+				dataManage.deleteAddress(myApplication.getUserId(),
+						addresses.getAddressId(), myApplication.getToken());
 				mAddresses.remove(addresses);
 				notifyDataSetChanged();
 			}
-		});
+		});     
+
 		holder.cb.setId(position);// 对checkbox的id进行重新设置为当前的position
+		if (addresses.getDefaultAddress()) {
+			position = temp;
+		}
+		Log.i("info", position+ "isCheck");
+
 		holder.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
 			// 把上次被选中的checkbox设为false
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
+				Log.i("info", temp + "    temp");
 				if (isChecked) {// 实现checkbox的单选功能,同样适用于radiobutton
+					boolean isSuceess = dataManage.setDefaultAddress(
+							myApplication.getUserId(),
+							addresses.getAddressId(), myApplication.getToken());
 					if (temp != -1) {
 						// 找到上次点击的checkbox,并把它设置为false,对重新选择时可以将以前的关掉
 						CheckBox tempCheckBox = (CheckBox) activity
@@ -153,6 +170,7 @@ public class AddressAdapter extends BaseAdapter {
 				}
 			}
 		});
+		
 		// System.out.println("temp:"+temp);
 		// System.out.println("position:"+position);
 		if (position == temp)// 比对position和当前的temp是否一致
@@ -170,7 +188,7 @@ public class AddressAdapter extends BaseAdapter {
 		private TextView phoneTextView;// 收货人电话
 		private ImageView deteleImageView;// 删除
 		private ImageView editImageView;// 编辑
-		CheckBox cb;
+		public CheckBox cb;
 
 	}
 

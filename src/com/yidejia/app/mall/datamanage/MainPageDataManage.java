@@ -283,8 +283,8 @@ public class MainPageDataManage {
 			String goodsId = itemObject.getString("goods_id");
 			baseProduct.setUId(goodsId);
 			String imgUrl;
-			if(i==0 && index != 2)imgUrl = ImageUrl.IMAGEURL + itemObject.getString("img_name") + "!200";
-			else imgUrl = ImageUrl.IMAGEURL + itemObject.getString("img_name") + "!100";
+			if(i==0 && index != 2)imgUrl = ImageUrl.IMAGEURL + itemObject.getString("img_name");
+			else imgUrl = ImageUrl.IMAGEURL + itemObject.getString("img_name");
 			baseProduct.setImgUrl(imgUrl);
 			String title = itemObject.getString("name");
 			baseProduct.setTitle(unicode.revert(title));
