@@ -67,7 +67,7 @@ public class AllOrderUtil {
 	public void loadView(int fromIndex, int amount) {
 		try {
 			orderDataManage = new OrderDataManage(context);
-			ArrayList<Order> mList = orderDataManage.getOrderArray(
+			final ArrayList<Order> mList = orderDataManage.getOrderArray(
 					myApplication.getUserId(), "", "", "", fromIndex + "",
 					amount + "", myApplication.getToken());
 			// Log.i("info", mList.size()+"mList");
@@ -111,11 +111,12 @@ public class AllOrderUtil {
 						Bundle mBundle = new Bundle();
 						mBundle.putString("price",
 								allOrderDetail.map.get("price") + "");
+						intent.putExtra("carts", mOrder.getCartsArray());
 						intent.putExtras(mBundle);
 						context.startActivity(intent);
 					}
 				});
-				view.setOnClickListener(new OnClickListener() {
+				mLayout.setOnClickListener(new OnClickListener() {
 					
 					@Override
 					public void onClick(View v) {
@@ -127,6 +128,7 @@ public class AllOrderUtil {
 						bundle.putString("OrderCode", mOrder.getOrderCode());
 						bundle.putString("OrderPrice", allOrderDetail.map.get("price") + "");
 						intent.putExtras(bundle);
+						intent.putExtra("carts", mOrder.getCartsArray());
 						context.startActivity(intent);
 					}
 				});

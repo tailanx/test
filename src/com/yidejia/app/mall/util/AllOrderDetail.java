@@ -39,19 +39,19 @@ import com.yidejia.app.mall.view.OrderDetailActivity;
 public class AllOrderDetail {
 	private Context context;
 	private LayoutInflater inflater;
-	private OrderDataManage orderDataManage;// ��ȡ������������
-	private Order order;// ����
-//	private TextView detail;// ��Ʒ������
-//	private TextView price;// ��Ʒ�ļ۸�
-//	private TextView count;// ��Ʒ������
-//	private ImageView head;// ͷ��
+	private OrderDataManage orderDataManage;// 锟斤拷取锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
+	private Order order;// 锟斤拷锟斤拷
+//	private TextView detail;// 锟斤拷品锟斤拷锟斤拷锟斤拷
+//	private TextView price;// 锟斤拷品锟侥价革拷
+//	private TextView count;// 锟斤拷品锟斤拷锟斤拷锟斤拷
+//	private ImageView head;// 头锟斤拷
 	private LinearLayout layout;
 //	private View view;
 
-	private float sumPrice = 0;// �ܵļ۸�
-	private int sumCount = 0;// �ܵ�����
+	private float sumPrice = 0;// 锟杰的价革拷
+	private int sumCount = 0;// 锟杰碉拷锟斤拷锟斤拷
 
-	public static HashMap<String, Float> map;// ����������
+	public HashMap<String, Float> map;// 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
 
 	public AllOrderDetail(Context context, Order order, LinearLayout layout) {// ,TextView
 																				// sumView
@@ -87,13 +87,13 @@ public class AllOrderDetail {
 
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	private DisplayImageOptions options;
-	protected ImageLoader imageLoader = ImageLoader.getInstance();// ����ͼƬ
+	protected ImageLoader imageLoader = ImageLoader.getInstance();// 锟斤拷锟斤拷图片
 
 	private void initDisplayImageOption() {
 		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.hot_sell_right_top_image)
-				.showImageOnFail(R.drawable.hot_sell_right_top_image)
-				.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+				.showStubImage(R.drawable.image_bg)
+				.showImageOnFail(R.drawable.image_bg)
+				.showImageForEmptyUri(R.drawable.image_bg)
 				.cacheInMemory(true).cacheOnDisc(true).build();
 	}
 
@@ -104,7 +104,7 @@ public class AllOrderDetail {
 			// Log.i("info", mArrayList.size()+"");
 			for (int i = 0; i < mArrayList.size(); i++) {
 				final Cart cart = mArrayList.get(i);
-			View	view = inflater.inflate(R.layout.all_order_item_produce, null);
+				View view = inflater.inflate(R.layout.all_order_item_produce, null);
 				ImageView head = (ImageView) view
 						.findViewById(R.id.all_order_item_image);
 				TextView detail = (TextView) view
@@ -121,7 +121,7 @@ public class AllOrderDetail {
 						animateFirstListener);
 				// Bitmap bm = BitmapFactory.decodeFile(urlString);
 
-//				relativeLayout.setOnClickListener(new OnClickListener() {// ��ӵ���¼�
+//				relativeLayout.setOnClickListener(new OnClickListener() {// 锟斤拷拥锟斤拷锟铰硷拷
 //
 //					@Override
 //					public void onClick(View v) {
@@ -154,7 +154,7 @@ public class AllOrderDetail {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(context, "���粻������", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, "锟斤拷锟界不锟斤拷锟斤拷锟斤拷", Toast.LENGTH_SHORT).show();
 
 		}
 		// sumTextView.setText(sumPrice+"");
@@ -192,19 +192,19 @@ public class AllOrderDetail {
 //public class AllOrderDetail {
 //	private Context context;
 //	private LayoutInflater inflater;
-//	private OrderDataManage orderDataManage;// ��ȡ������������
-//	private Order order;// ����
-//	private TextView detail;//��Ʒ������
-//	private TextView price;//��Ʒ�ļ۸�
-//	private TextView count;//��Ʒ������
-//	private ImageView head;//ͷ��
+//	private OrderDataManage orderDataManage;// 锟斤拷取锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
+//	private Order order;// 锟斤拷锟斤拷
+//	private TextView detail;//锟斤拷品锟斤拷锟斤拷锟斤拷
+//	private TextView price;//锟斤拷品锟侥价革拷
+//	private TextView count;//锟斤拷品锟斤拷锟斤拷锟斤拷
+//	private ImageView head;//头锟斤拷
 //	private LinearLayout layout;
 //	private View view;
 //
-//	private float sumPrice = 0;//�ܵļ۸�
-//	private  int sumCount=0;//�ܵ�����
+//	private float sumPrice = 0;//锟杰的价革拷
+//	private  int sumCount=0;//锟杰碉拷锟斤拷锟斤拷
 //	
-//	public static HashMap<String, Float> map;//����������
+//	public static HashMap<String, Float> map;//锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
 //	public AllOrderDetail(Context context, Order order,LinearLayout layout) {//,TextView sumView
 //		
 //		this.context = context;
@@ -214,7 +214,7 @@ public class AllOrderDetail {
 //	}
 //
 //	/**
-//	 * ʵ��ؼ�
+//	 * 实锟斤拷丶锟�
 //	 */
 //	public void setupShow() {
 //		 view = inflater.inflate(R.layout.all_order_item_produce, null);
@@ -236,7 +236,7 @@ public class AllOrderDetail {
 //				setupShow();
 //				String urlString = cart.getImgUrl();
 //				Bitmap bm = BitmapFactory.decodeFile(urlString);
-//				detail.setOnClickListener(new OnClickListener() {//��ӵ���¼�
+//				detail.setOnClickListener(new OnClickListener() {//锟斤拷拥锟斤拷锟铰硷拷
 //					
 //					@Override
 //					public void onClick(View v) {
@@ -268,7 +268,7 @@ public class AllOrderDetail {
 //		} catch (Exception e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
-//			Toast.makeText(context, "���粻������", Toast.LENGTH_SHORT).show();
+//			Toast.makeText(context, "锟斤拷锟界不锟斤拷锟斤拷锟斤拷", Toast.LENGTH_SHORT).show();
 //
 //		}
 ////		sumTextView.setText(sumPrice+"");
