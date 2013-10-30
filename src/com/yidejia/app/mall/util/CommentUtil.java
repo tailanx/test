@@ -59,10 +59,10 @@ public class CommentUtil {
 
 	public void AllComment(String goodsId, int fromIndex, int amount) {
 		if (ConnectionDetector.isConnectingToInternet(context)) {
-			ProgressDialog bar = new ProgressDialog(context);
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage(context.getResources().getString(R.string.searching));
-			bar.show();
+//			ProgressDialog bar = new ProgressDialog(context);
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(context.getResources().getString(R.string.searching));
+//			bar.show();
 //			try {
 //				Thread.sleep(3000);
 //			} catch (InterruptedException e) {
@@ -70,7 +70,7 @@ public class CommentUtil {
 //				e.printStackTrace();
 //			}
 			dataManage = new UserCommentDataManage(context);
-			bar.dismiss();
+//			bar.dismiss();
 			if("".equals(goodsId) || goodsId == null) {
 				Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 				return;
@@ -107,10 +107,10 @@ public class CommentUtil {
 
 	public void AllCommentUserId(String goodsId, int fromIndex, int amount) {
 		if (ConnectionDetector.isConnectingToInternet(context)) {
-			ProgressDialog bar = new ProgressDialog(context);
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage(context.getResources().getString(R.string.searching));
-			bar.show();
+//			ProgressDialog bar = new ProgressDialog(context);
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(context.getResources().getString(R.string.searching));
+//			bar.show();
 //			try {
 //				Thread.sleep(3000);
 //			} catch (InterruptedException e) {
@@ -118,7 +118,7 @@ public class CommentUtil {
 //				e.printStackTrace();
 //			}
 			dataManage = new UserCommentDataManage(context);
-			bar.dismiss();
+//			bar.dismiss();
 			if("".equals(goodsId) || goodsId == null) {
 				Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 				return;
