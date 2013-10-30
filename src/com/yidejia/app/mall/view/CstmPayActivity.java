@@ -246,6 +246,7 @@ public class CstmPayActivity extends SherlockActivity {
 				// Cart cart = (Cart) intent.getSerializableExtra("Cart");
 				ArrayList<Cart> carts = (ArrayList<Cart>) intent
 						.getSerializableExtra("carts");
+				Log.i("info", carts +"  carts ");
 				if (!carts.isEmpty()) {
 
 					setContentView(R.layout.go_pay);
