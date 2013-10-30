@@ -102,6 +102,7 @@ public class UserDatamanage {
 //						throw new UserLoginEx(message);
 						isSuccess = false;
 					} else{
+						
 						message = jsonObject.getString("msg");
 						isSuccess = false;
 					}

@@ -544,7 +544,7 @@ public class OrderDataManage {
 					String response = jsonObject.getString("response");
 					JSONObject responseObject = new JSONObject(response);
 					String result = responseObject.getString("@p_result");
-					if(unicode.revert(result).equals(context.getResources().getString(R.string.success_cancel_order))){
+					if(unicode.revert(result).equals(context.getResources().getString(R.string.success_cancel_order1))){
 						return true;
 					}
 				}

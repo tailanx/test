@@ -164,7 +164,7 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 //			myApplication.getHandler().sendMessage(ms);
 		
 		}else{
-			Toast.makeText(LoginActivity.this, "网络部给力", Toast.LENGTH_LONG).show();
+			Toast.makeText(LoginActivity.this, getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 		}
  		}
 		

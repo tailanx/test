@@ -14,12 +14,12 @@
 
     <ImageView
         android:id="@+id/exchange_produce_item__imageview1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@id/exchange_produce_item_checkbox"
         android:background="@drawable/product_image_bg"
-        android:padding="10dp" 
+        android:padding="10dp"
         android:src="@drawable/comment_head" />
 
     <TextView
@@ -57,7 +57,7 @@
         android:text="25.00"
         android:textColor="#ed217c"
         android:textSize="20sp" />
-    
+
     <TextView
         android:id="@+id/exchange_produce_item_money_text"
         android:layout_width="wrap_content"
@@ -83,17 +83,17 @@
         android:id="@+id/exchange_produce_item_relative"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/exchange_produce_item_text"
         android:layout_below="@id/exchange_produce_item_money"
         android:layout_toLeftOf="@id/exchange_produce_item_right"
-        android:layout_toRightOf="@id/exchange_produce_item__imageview1" 
-        android:layout_alignLeft="@id/exchange_produce_item_text">
+        android:layout_toRightOf="@id/exchange_produce_item__imageview1" >
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/imageView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/quantity_bg"
-            android:layout_alignParentLeft="true" />
+            android:layout_centerVertical="true"
+            android:src="@drawable/quantity_bg" />
 
         <ImageView
             android:id="@+id/exchange_produce_item_subtract"
@@ -101,18 +101,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="3px"
-            android:onClick="reduction"
             android:src="@drawable/reduction" />
 
         <ImageView
             android:id="@+id/exchange_produce_item_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@id/imageView1"
-            android:layout_centerVertical="true"
-            android:onClick="add"
-            android:layout_marginRight="3px"
+            android:layout_alignRight="@+id/imageView11"
             android:src="@drawable/addition" />
 
         <TextView
@@ -120,12 +115,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            
             android:layout_toLeftOf="@id/exchange_produce_item_add"
             android:layout_toRightOf="@id/exchange_produce_item_subtract"
             android:gravity="center"
             android:text="1" />
     </RelativeLayout>
-
 
 </RelativeLayout>

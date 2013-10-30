@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:id="@+id/all_order_item_main_linerar" >
 
     <RelativeLayout
         android:id="@+id/all_order_item_main_produce"
@@ -104,7 +105,6 @@
             android:layout_marginRight="8dp"
             android:layout_toLeftOf="@+id/all_order_item_main_pay"
             android:background="@drawable/clear_conditions"
-            android:onClick="doClick"
             android:text="取消"
             android:textSize="15sp" />
 
@@ -116,7 +116,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:background="@drawable/complete"
-            android:onClick="doClick"
+         
             android:text="付款"
             android:textColor="#eeeeee"
             android:textSize="15sp" />

@@ -152,6 +152,7 @@ public class GoodsView {
 			shopping_cart_button = (Button) view
 					.findViewById(R.id.shopping_cart_button);
 			// CartsDataManage cartsDataManage = new CartsDataManage();
+			
 			cart_num = manage.getCartAmount();
 			if (cart_num == 0) {
 				shopping_cart_button.setVisibility(View.GONE);
