@@ -62,8 +62,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 /**
- * ÒÑ¸ÄÎª fragmentÊµÏÖ £¬´ËÀàÓ¦¸ÃÒ²ÓÃ²»µ½ÁË
- * @author Áú±ò
+ * ï¿½Ñ¸ï¿½Îª fragmentÊµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½Ò²ï¿½Ã²ï¿½ï¿½ï¿½ï¿½ï¿½
+ * @author ï¿½ï¿½ï¿½
  *
  */
 public class MainActivity extends SherlockFragmentActivity {//implements ActionBar.TabListener , implements OnGestureListener
@@ -71,9 +71,9 @@ public class MainActivity extends SherlockFragmentActivity {//implements ActionB
 	private PullToRefreshScrollView mPullToRefreshScrollView;
 	protected ListFragment mFrag;
 //	private ViewFlow viewFlow;
-	private static final int[] ids = { R.drawable.banner1, R.drawable.banner2, R.drawable.banner3};
+//	private static final int[] ids = { R.drawable.banner1, R.drawable.banner2, R.drawable.banner3};
 	private ViewFlipper viewFlipper;
-	private GestureDetector detector; //ÊÖÊÆ¼ì²â
+	private GestureDetector detector; //ï¿½ï¿½ï¿½Æ¼ï¿½ï¿½
 	
 	private static final String TAG = "MainActivity";
 	private ImageSwitcher imageSwitcher;
@@ -86,14 +86,14 @@ public class MainActivity extends SherlockFragmentActivity {//implements ActionB
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-//		menu.add(Menu.NONE, 0, Menu.NONE, "Ê×Ò³")
+//		menu.add(Menu.NONE, 0, Menu.NONE, "ï¿½ï¿½Ò³")
 //		.setIcon(R.drawable.home_normal)
 //		
 //		.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-//		menu.add(Menu.NONE, 1, Menu.NONE, "·¢ÏÖ¡¤¹ä")
+//		menu.add(Menu.NONE, 1, Menu.NONE, "ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½")
 //		.setIcon(R.drawable.down_guang_normal)
 //		.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-//		menu.add(Menu.NONE, 2, Menu.NONE, "ËÑË÷")
+//		menu.add(Menu.NONE, 2, Menu.NONE, "ï¿½ï¿½ï¿½ï¿½")
 //		.setIcon(R.drawable.down_search_normal)
 //		.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 //			
@@ -107,10 +107,10 @@ public class MainActivity extends SherlockFragmentActivity {//implements ActionB
 //			}
 //		})
 //		.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-//		menu.add(Menu.NONE, 3, Menu.NONE, "¹ºÎï³µ")
+//		menu.add(Menu.NONE, 3, Menu.NONE, "ï¿½ï¿½ï¿½ï³µ")
 //		.setIcon(R.drawable.down_shopping_normal)
 //		.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-//		menu.add(Menu.NONE, 4, Menu.NONE, "ÎÒµÄÉÌ³Ç")
+//		menu.add(Menu.NONE, 4, Menu.NONE, "ï¿½Òµï¿½ï¿½Ì³ï¿½")
 //		.setIcon(R.drawable.down_my_normal)
 //		.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         return true;
@@ -201,9 +201,9 @@ public class MainActivity extends SherlockFragmentActivity {//implements ActionB
 //		});
 		
 		
-		// ÉèÖÃ×óÓÒ»¬¶¯²Ëµ¥activity
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ëµï¿½activity
 //		setLeftAndRightMenu(savedInstanceState);
-		// ÉèÖÃsliding menu
+		// ï¿½ï¿½ï¿½ï¿½sliding menu
 //		setSlidingMenuConfig();
 		width = getWindowManager().getDefaultDisplay().getWidth();
 		getMainListFirstItem();
@@ -217,12 +217,12 @@ public class MainActivity extends SherlockFragmentActivity {//implements ActionB
 		viewFlipper = (ViewFlipper)findViewById(R.id.viewFlipper);
         detector = new GestureDetector(this);
         
-      //¶¯»­Ð§¹û
+      //ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½
     	leftInAnimation = AnimationUtils.loadAnimation(this, R.anim.left_in);
 		leftOutAnimation = AnimationUtils.loadAnimation(this, R.anim.left_out);
 		rightInAnimation = AnimationUtils.loadAnimation(this, R.anim.right_in);
 		rightOutAnimation = AnimationUtils.loadAnimation(this, R.anim.right_out);
-		//ÍùviewFlipperÌí¼ÓView
+		//ï¿½ï¿½viewFlipperï¿½ï¿½ï¿½View
 		for (int i = 0; i < ids.length; i++) {
 			viewFlipper.addView(getImageView(ids[i]));
 		}
@@ -235,8 +235,8 @@ public class MainActivity extends SherlockFragmentActivity {//implements ActionB
 		CircleFlowIndicator indic = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
 		viewFlow.setFlowIndicator(indic);
 		viewFlow.setTimeSpan(3 * 1000);  
-        viewFlow.setSelection(10 * 7); // ÉèÖÃ³õÊ¼Î»ÖÃ  
-//        viewFlow.startAutoFlowTimer(); // Æô¶¯×Ô¶¯²¥·Å  
+        viewFlow.setSelection(10 * 7); // ï¿½ï¿½ï¿½Ã³ï¿½Ê¼Î»ï¿½ï¿½  
+//        viewFlow.startAutoFlowTimer(); // ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½  
 //        viewFlow.setOnItemClickListener(new OnItemClickListener() {
 //
 //			@Override
@@ -396,7 +396,7 @@ public class MainActivity extends SherlockFragmentActivity {//implements ActionB
 //	    private TextView mSlideTitle;
 	/**
 	 * 
-	 * @return Ê×Ò³ÂÖ²¥µÄ¿Ø¼þ
+	 * @return ï¿½ï¿½Ò³ï¿½Ö²ï¿½ï¿½Ä¿Ø¼ï¿½
 	 */
 	private ViewGroup getMainListFirstItem() {
 //		((PullToRefreshListView) mPullRefreshListView)
@@ -408,24 +408,24 @@ public class MainActivity extends SherlockFragmentActivity {//implements ActionB
 		mViewPager = (ViewPager) mMainView.findViewById(R.id.image_slide_page);
 		mSlideLayout = new SlideImageLayout(MainActivity.this,
 				mMainView.getContext(),width);
-		mSlideLayout.setCircleImageLayout(ids.length);
-		mImageCircleViews = new ImageView[ids.length];
+		mSlideLayout.setCircleImageLayout(3);
+		mImageCircleViews = new ImageView[3];
 		mImageCircleView = (ViewGroup) mMainView
 				.findViewById(R.id.layout_circle_images);
 //		mSlideTitle = (TextView) mMainView.findViewById(R.id.tvSlideTitle);
 		
 		
-		for (int i = 0; i < ids.length; i++) {
+//		for (int i = 0; i < ids.length; i++) {
 			
 			//mainImageData.getBitmaps().get(i)
 //			mImagePageViewList.add(mSlideLayout
 //					.getSlideImageLayout((Bitmap)topAdImage.get(i)));//mainImageData.getBitmaps().get(i)
-			mImageCircleViews[i] = mSlideLayout.getCircleImageLayout(i);
-			mImageCircleView.addView(mSlideLayout.getLinearLayout(
-					mImageCircleViews[i], 9, 9));
-		}
+//			mImageCircleViews[i] = mSlideLayout.getCircleImageLayout(i);
+//			mImageCircleView.addView(mSlideLayout.getLinearLayout(
+//					mImageCircleViews[i], 9, 9));
+//		}
 
-		// ÉèÖÃViewPager
+		// ï¿½ï¿½ï¿½ï¿½ViewPager
 		mViewPager.setAdapter(new SlideImageAdapter());
 		mViewPager.setOnPageChangeListener(new ImagePageChangeListener());
 		mViewPager.setCurrentItem(0);
@@ -454,7 +454,7 @@ public class MainActivity extends SherlockFragmentActivity {//implements ActionB
 	}
 	
 	/** 
-	 * »¬¶¯Í¼Æ¬Êý¾ÝÊÊÅäÆ÷
+	 * ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
     private class SlideImageAdapter extends PagerAdapter {
     	private LayoutInflater inflater;
@@ -466,7 +466,8 @@ public class MainActivity extends SherlockFragmentActivity {//implements ActionB
     		inflater = getLayoutInflater();
     	}
         public int getCount() {
-            return ids.length;//1000;
+//            return ids.length;//1000;
+        	return 3;
         }
 
         public boolean isViewFromObject(View view, Object object) {
@@ -486,7 +487,7 @@ public class MainActivity extends SherlockFragmentActivity {//implements ActionB
 //            ((ViewPager) view).addView(mImagePageViewList.get(position));
             View imageLayout = inflater.inflate(R.layout.item_pager_image, view, false);
 			final ImageView imageView = (ImageView) imageLayout.findViewById(R.id.image);
-			imageView.setBackgroundResource(ids[position%ids.length]);
+//			imageView.setBackgroundResource(ids[position%ids.length]);
 	        imageView.setOnClickListener(new ImageOnClickListener());
 	        ((ViewPager) view).addView(imageLayout, 0);
             return imageLayout;
@@ -512,14 +513,14 @@ public class MainActivity extends SherlockFragmentActivity {//implements ActionB
         public class ImageOnClickListener implements OnClickListener{
         	@Override
         	public void onClick(View v) {
-        		Toast.makeText(MainActivity.this, "ÎÒµã»÷ÁËµÚ"+"["+pageIndex%ids.length+"]¼¸¸ö", Toast.LENGTH_SHORT).show();
+//        		Toast.makeText(MainActivity.this, "ï¿½Òµï¿½ï¿½ï¿½Ëµï¿½"+"["+pageIndex%ids.length+"]ï¿½ï¿½ï¿½ï¿½", Toast.LENGTH_SHORT).show();
         	}
         }
     }
     private int pageIndex = 0;
 
     /** 
-     * »¬¶¯Ò³Ãæ¸ü¸ÄÊÂ¼þ¼àÌýÆ÷
+     * ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     private class ImagePageChangeListener implements OnPageChangeListener {
         @Override
@@ -559,7 +560,7 @@ public class MainActivity extends SherlockFragmentActivity {//implements ActionB
     @Override
     public boolean onTouchEvent(MotionEvent event) {
      
-    	return this.detector.onTouchEvent(event); //touchÊÂ¼þ½»¸øÊÖÊÆ´¦Àí¡£
+    	return this.detector.onTouchEvent(event); //touchï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ´ï¿½ï¿½?
     }
 
 	@Override
@@ -579,12 +580,12 @@ public class MainActivity extends SherlockFragmentActivity {//implements ActionB
 		if(e1.getX()-e2.getX()>50){
 			viewFlipper.setInAnimation(leftInAnimation);
 			viewFlipper.setOutAnimation(leftOutAnimation);
-		    viewFlipper.showNext();//ÏòÓÒ»¬¶¯
+		    viewFlipper.showNext();//ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½
 		    return true;
 		}else if(e1.getX()-e2.getX()<-50){
 			viewFlipper.setInAnimation(rightInAnimation);
 			viewFlipper.setOutAnimation(rightOutAnimation);
-			viewFlipper.showPrevious();//Ïò×ó»¬¶¯
+			viewFlipper.showPrevious();//ï¿½ï¿½ï¿½ó»¬¶ï¿½
 			return true;
 		}
 		return false;
