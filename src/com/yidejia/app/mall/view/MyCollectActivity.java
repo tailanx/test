@@ -29,7 +29,7 @@ public class MyCollectActivity extends SherlockActivity {
 	private FavoriteDataManage dataManage;
 	private ListView mListView;
 	private ArrayList<SearchItem> mList;
-	private int index;//
+	private static int index;//
 	private int fromIndex = 0;
 	private int amount = 10;
 //	private View mycollectView;
@@ -118,22 +118,22 @@ public class MyCollectActivity extends SherlockActivity {
 		titleTextView.setText("我的收藏");
 	}
 	
-	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v,
-			ContextMenuInfo menuInfo) {
-		super.onCreateContextMenu(menu, v, menuInfo);
-		menu.add("详情");
-		menu.add("删除");
-		menu.add("取消");
-	}
+//	@Override
+//	public void onCreateContextMenu(ContextMenu menu, View v,
+//			ContextMenuInfo menuInfo) {
+//		super.onCreateContextMenu(menu, v, menuInfo);
+//		menu.add("详情");
+//		menu.add("删除");
+//		menu.add("取消");
+//	}
 	@Override
 	protected void onRestart() {
 		// TODO Auto-generated method stub
 		super.onRestart();
 //		mList = dataManage.getFavouriteArray(
 //				((MyApplication) getApplication()).getUserId(), fromIndex, amount);
-		if(mList.size() > 0)
-			updateListView(index);
+//		if(mList.size() > 0)
+//			updateListView(index);
 		
 	}
 	//更新listview
