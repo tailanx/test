@@ -222,7 +222,7 @@ public class OrderDataManage {
 			String goods_name = jObject.getString("goods_name");
 			cart.setProductText(unicode.revert(goods_name));
 			String img_name = jObject.getString("img_name");
-			cart.setImgUrl(ImageUrl.IMAGEURL + img_name);
+			cart.setImgUrl(ImageUrl.IMAGEURL + img_name + "!100");
 			cart.setPrice(Float.parseFloat(jObject.getString("price")));
 			cartsArray.add(cart);
 		}

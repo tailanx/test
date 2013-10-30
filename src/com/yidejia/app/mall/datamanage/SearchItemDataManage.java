@@ -138,7 +138,7 @@ public class SearchItemDataManage {
 			searchItem.setSelledAmount(temp);
 			temp = responseObject.getString("remarks");
 			searchItem.setCommentAmount(temp);
-			temp = ImageUrl.IMAGEURL + responseObject.getString("imgname");
+			temp = ImageUrl.IMAGEURL + responseObject.getString("imgname") + "!100";
 			searchItem.setImgUrl(temp);
 			searchArray.add(searchItem);
 		}

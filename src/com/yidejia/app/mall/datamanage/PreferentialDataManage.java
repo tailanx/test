@@ -191,7 +191,7 @@ public class PreferentialDataManage {
 					specials = new Specials();
 					listObject = goodsArray.getJSONObject(j);
 					specials.setUId(listObject.getString("goods_id"));
-					specials.setImgUrl(ImageUrl.IMAGEURL + listObject.getString("imgname"));
+					specials.setImgUrl(ImageUrl.IMAGEURL + listObject.getString("imgname") + "!100");
 					specials.setPrice(listObject.getString("price"));
 					specials.setScores(listObject.getString("score_price"));
 					specials.setBrief(listObject.getString("desc"));

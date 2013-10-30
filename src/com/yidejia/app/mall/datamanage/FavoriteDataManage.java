@@ -417,7 +417,7 @@ public class FavoriteDataManage {
 					searchItem.setCommentAmount(remarks);
 					String imageName = infoItem.getString("imgname");
 //					ImageUrl imageUrlClass = new ImageUrl();
-					String imageUrl = ImageUrl.IMAGEURL + imageName;//imageUrlClass.getImageUrl();
+					String imageUrl = ImageUrl.IMAGEURL + imageName + "!100";//imageUrlClass.getImageUrl();
 					searchItem.setImgUrl(imageUrl);
 					
 //					String maddress = infoItem.getString("address");

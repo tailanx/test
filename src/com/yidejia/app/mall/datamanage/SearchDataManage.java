@@ -202,7 +202,7 @@ public class SearchDataManage {
 			temp = responseObject.getString("remarks");
 			searchItem.setCommentAmount(temp);
 			Log.i(TAG, "remarks:"+temp);
-			temp = ImageUrl.IMAGEURL + responseObject.getString("imgname");
+			temp = ImageUrl.IMAGEURL + responseObject.getString("imgname") + "!100";
 			searchItem.setImgUrl(temp);
 			Log.i(TAG, "imageUrl:"+temp);
 			
