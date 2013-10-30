@@ -153,19 +153,20 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetAddress(JNIEnv* env
 	if(chwhere != NULL)
 		addString(urlString, chwhere);
 
-	addString(urlString, "+and+valid_flag%3D%27y%27&option%5Boffset%5D=");
+	addString(urlString, "&option%5Boffset%5D=");
+//	addString(urlString, "+and+valid_flag%3D%27y%27&option%5Boffset%5D=");
 	if(choffset != NULL)addString(urlString, choffset);
 
 	addString(urlString, "&option%5Blimit%5D=");
 	if(chlimit != NULL)addString(urlString, chlimit);
 
-	addString(urlString, "&option%5Bgroup%5D=");
-	if(chgroup != NULL)addString(urlString, chgroup);
+//	addString(urlString, "&option%5Bgroup%5D=");
+//	if(chgroup != NULL)addString(urlString, chgroup);
+//
+//	addString(urlString, "&option%5Border%5D=");
+//	if(chorder != NULL)addString(urlString, chorder);
 
-	addString(urlString, "&option%5Border%5D=");
-	if(chorder != NULL)addString(urlString, chorder);
-
-	addString(urlString, "&fields=");
+	addString(urlString, "&fields=%2A");
 	if(chfields != NULL)addString(urlString, chfields);
 
 	addString(urlString, pHead);
