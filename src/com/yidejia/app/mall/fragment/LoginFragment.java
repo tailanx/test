@@ -143,8 +143,8 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 			
 			fragment = new  MyMallActivity();
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
-			
-			ft.replace(R.id.main_fragment, fragment).commit();
+			if(fragment.isAdded()) ft.hide(LoginFragment.this).show(fragment).commit();
+			else ft.hide(LoginFragment.this).replace(R.id.main_fragment, fragment).commit();
 //		if(name==null||"".equals(name)){
 //			Toast.makeText(getSherlockActivity(), "请输入用户名或者密码",Toast.LENGTH_LONG).show();
 //		}

@@ -240,9 +240,9 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 
 	private void initDisplayImageOption() {
 		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.hot_sell_right_top_image)
-				.showImageOnFail(R.drawable.hot_sell_right_top_image)
-				.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+				.showStubImage(R.drawable.user_head)
+				.showImageOnFail(R.drawable.user_head)
+				.showImageForEmptyUri(R.drawable.user_head)
 				.cacheInMemory(true).cacheOnDisc(true).build();
 	}
 
