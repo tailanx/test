@@ -176,7 +176,7 @@ public class AddressDataManage {
 			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return addressesArray;
 		}
-		TaskGetList taskGetList = new TaskGetList("customer_id="+userId+"+and+valid_flag%3D%27y%27", String.valueOf(fromIndex), String.valueOf(acount), "", "", "%2A");
+		TaskGetList taskGetList = new TaskGetList("customer_id%3D"+userId+"+and+valid_flag%3D%27y%27", String.valueOf(fromIndex), String.valueOf(acount), "", "", "");
 		boolean state = false ;
 		try {
 			state = taskGetList.execute().get();
@@ -213,7 +213,7 @@ public class AddressDataManage {
 			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return addressesArray;
 		}
-		TaskGetList taskGetList = new TaskGetList("customer_id="+userId+"+and+is_default%3D%27y%27+and+valid_flag%3D%27y%27", String.valueOf(0), String.valueOf(10), "", "", "%2A");
+		TaskGetList taskGetList = new TaskGetList("customer_id%3D"+userId+"+and+is_default%3D%27y%27+and+valid_flag%3D%27y%27", String.valueOf(0), String.valueOf(10), "", "", "");
 		boolean state = false ;
 		try {
 			state = taskGetList.execute().get();
