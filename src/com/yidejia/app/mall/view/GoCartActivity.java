@@ -58,17 +58,20 @@ public class GoCartActivity extends SherlockActivity {// implements
 
 		counTextView = (TextView) findViewById(R.id.shopping_cart_sum_number);// �ܵ�����
 
-		mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.shopping_cart_item_goods_scrollView);
-		String label = getResources().getString(R.string.update_time)
-				+ DateUtils.formatDateTime(GoCartActivity.this,
-						System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
-								| DateUtils.FORMAT_SHOW_DATE
-								| DateUtils.FORMAT_SHOW_TIME);
-		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
-				label);
-		mPullToRefreshScrollView.setOnRefreshListener(listener);
+//		mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.shopping_cart_item_goods_scrollView);
+//		String label = getResources().getString(R.string.update_time)
+//				+ DateUtils.formatDateTime(GoCartActivity.this,
+//						System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
+//								| DateUtils.FORMAT_SHOW_DATE
+//								| DateUtils.FORMAT_SHOW_TIME);
+//		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
+//				label);
+//		mPullToRefreshScrollView.setOnRefreshListener(listener);
 
-		LinearLayout layout = (LinearLayout) findViewById(R.id.shopping_cart_relative2);
+//		LinearLayout layout = (LinearLayout) findViewById(R.id.shopping_cart_relative2);
+		LinearLayout layout = new LinearLayout(this);
+		layout.setOrientation(LinearLayout.VERTICAL);
+		ScrollView scrollView = (ScrollView) findViewById(R.id.shopping_cart_item_goods_scrollView);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
@@ -109,21 +112,21 @@ public class GoCartActivity extends SherlockActivity {// implements
 					}else {
 						StringBuffer sb = new StringBuffer();
 						ArrayList<Cart> mList = dataManage.getCartsArray();
-						for(int i = 0; i<mList.size();i++){
-							Cart cart = new Cart();
-							sb.append(cart.getUId());
-							sb.append(",");
-							sb.append(cart.getAmount());
-							sb.append("n");
-							sb.append(";");
-						}
-						preferentialDataManage.getPreferential(sb.toString(),myApplication.getUserId());
-						if (preferentialDataManage.getFreeGoods().size() != 0
-								|| preferentialDataManage.getScoreGoods().size() != 0) {
-							Intent intent = new Intent(GoCartActivity.this,
-									ExchangeFreeActivity.class);
-
-						}else{
+//						for(int i = 0; i<mList.size();i++){
+//							Cart cart = new Cart();
+//							sb.append(cart.getUId());
+//							sb.append(",");
+//							sb.append(cart.getAmount());
+//							sb.append("n");
+//							sb.append(";");
+//						}
+//						preferentialDataManage.getPreferential(sb.toString(),myApplication.getUserId());
+//						if (preferentialDataManage.getFreeGoods().size() != 0
+//								|| preferentialDataManage.getScoreGoods().size() != 0) {
+//							Intent intent = new Intent(GoCartActivity.this,
+//									ExchangeFreeActivity.class);
+//							
+//						}else{
 					
 					Intent intent = new Intent(GoCartActivity.this,
 							CstmPayActivity.class);
@@ -135,14 +138,15 @@ public class GoCartActivity extends SherlockActivity {// implements
 
 						bundle.putString("price", sum + "");
 						intent.putExtras(bundle);
+						intent.putExtra("carts", mList);
 						GoCartActivity.this.startActivity(intent);
 					} else {
-						Toast.makeText(GoCartActivity.this, getResources().getString(R.string.no_buy),
+						Toast.makeText(GoCartActivity.this, getResources().getString(R.string.buy_nothing),
 								Toast.LENGTH_LONG).show();
 					}
 					}
 				}
-				}
+//				}
 			});
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -152,6 +156,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 		}
 		//
 		//
+		scrollView.addView(layout);
 	}
 
 	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {

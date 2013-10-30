@@ -40,7 +40,7 @@ public class PayUtil {
 	private LinearLayout mLinearLayoutLayout;// ���Ĳ���
 	private LinearLayout mLayout;// ���Ĳ���
 
-	private CartsDataManage dataManage;// ������ȡ�������
+//	private CartsDataManage dataManage;// ������ȡ�������
 	private Cart cart;
 	public PayUtil(Context context, LinearLayout mLayout,Cart cart) {
 		this.cart = cart;
@@ -48,9 +48,9 @@ public class PayUtil {
 		this.inflater = LayoutInflater.from(context);
 		this.mLinearLayoutLayout = mLayout;
 		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.hot_sell_right_top_image)
-				.showImageOnFail(R.drawable.hot_sell_right_top_image)
-				.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+				.showStubImage(R.drawable.image_bg)
+				.showImageOnFail(R.drawable.image_bg)
+				.showImageForEmptyUri(R.drawable.image_bg)
 				.cacheInMemory(true).cacheOnDisc(true).build();
 	
 	}
@@ -60,9 +60,9 @@ public class PayUtil {
 		this.inflater = LayoutInflater.from(context);
 		this.mLinearLayoutLayout = mLayout;
 		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.hot_sell_right_top_image)
-				.showImageOnFail(R.drawable.hot_sell_right_top_image)
-				.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+				.showStubImage(R.drawable.image_bg)
+				.showImageOnFail(R.drawable.image_bg)
+				.showImageForEmptyUri(R.drawable.image_bg)
 				.cacheInMemory(true).cacheOnDisc(true).build();
 	}
 
@@ -93,11 +93,11 @@ public class PayUtil {
 	private DisplayImageOptions options;
 	protected ImageLoader imageLoader = ImageLoader.getInstance();// ����ͼƬ
 
-	public String loadView() {
+	public String loadView(ArrayList<Cart> mList) {
 		StringBuffer goods = new StringBuffer();
 		try {
-			dataManage = new CartsDataManage();
-			ArrayList<Cart> mList = dataManage.getCartsArray();
+//			dataManage = new CartsDataManage();
+//			ArrayList<Cart> mList = dataManage.getCartsArray();
 			// Log.i("info", mList.size()+"mList");
 			for (int i = 0; i < mList.size(); i++) {
 				view = inflater.inflate(R.layout.go_pay_item, null);

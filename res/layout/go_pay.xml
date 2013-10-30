@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    
     android:id="@+id/go_pay_relative"
     android:background="@drawable/bg" >
 
@@ -37,7 +38,6 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/go_pay_sum_money"
             android:layout_toRightOf="@+id/go_pay_show_pay_money_price"
-            android:text="14400.00"
             android:textColor="#ed217c"
             android:textSize="15sp" />
 
@@ -65,7 +65,6 @@
         android:id="@+id/go_pay_scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
         android:layout_above="@id/go_pay_bottom"
       
          >
@@ -74,9 +73,11 @@
             android:id="@+id/wgo_pay_crollView_linearlayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-           
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
             android:layout_marginTop="8dp"
+            android:layout_gravity="top"
+            android:gravity="center"
             android:orientation="vertical" >
 	  <RelativeLayout
                 android:id="@+id/go_pay_relativelayout"
@@ -96,22 +97,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginLeft="4dp"
                     android:drawableLeft="@drawable/addressee_headicon"
                     android:drawablePadding="4dp"
                     android:gravity="center_vertical"
-                    android:text="收货人："
-                    android:textSize="16dp" />
+                    android:text="收货人:"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/go_pay_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginLeft="1dp"
                     android:layout_toRightOf="@id/go_pay_consignee"
-                    android:text="乔丹"
-                    android:textSize="16dp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/go_pay_number"
@@ -119,12 +119,11 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginRight="4dp"
                     android:drawableLeft="@drawable/phone_iocn"
                     android:drawablePadding="4dp"
                     android:gravity="center_vertical"
-                    android:text="18685241320"
-                    android:textSize="16dp" />
+                    android:textSize="14sp" />
             </RelativeLayout>
 
             <TextView
@@ -134,8 +133,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/delivery_address_down"
                 android:padding="10dp"
-                android:text="收货地址：有人肯定会对于android中放置图片的地到好奇下的dr是他会d图片放在drawabl辨率的图片"
-                android:textSize="15sp" />
+                android:text="收货地址:"
+                android:textSize="16sp" />
 	</RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -366,7 +365,6 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="6dp"
                     android:layout_toRightOf="@id/go_pay_addresss"
-                    android:text="广州配送中心"
                     android:textSize="20dp" />
 
                 <ImageView
@@ -578,6 +576,7 @@
                         android:hint="订单留言.........                                                                                                                                                  "
                         android:padding="10dp"
                         android:scrollbars="horizontal"
+                        android:text="技术测试,无实际付款"
                         android:textSize="15sp" />
 
                 </LinearLayout>

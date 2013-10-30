@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 Patrik Åkerfeldt
+ * Copyright (C) 2011 Patrik ÔøΩkerfeldt
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ public class ImageAdapter extends BaseAdapter {
 
 	private LayoutInflater mInflater;
 	private Context context;
-	private static final int[] ids = { R.drawable.banner1, R.drawable.banner2, R.drawable.banner3};	
+	private static final int[] ids = { R.drawable.image_bg, R.drawable.image_bg, R.drawable.image_bg};	
 	
 	public ImageAdapter(Context context) {
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

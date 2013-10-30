@@ -77,6 +77,14 @@ public class CommentUtil {
 			}
 			ArrayList<UserComment> userList = dataManage.getUserCommentsArray(
 					goodsId, fromIndex, amount, false);
+			if(userList.isEmpty() && !dataManage.isHasRst){
+				linearLayout.removeAllViews();
+				view = LayoutInflater.from(context).inflate(
+						R.layout.act_guang, null);
+				TextView emptyTextView = (TextView) view.findViewById(R.id.empty_text);
+				emptyTextView.setText(R.string.none_comment);
+				linearLayout.addView(view);
+			}
 			for (int i = 0; i < userList.size(); i++) {
 				setupShow();// ?????
 				UserComment userComment = userList.get(i);

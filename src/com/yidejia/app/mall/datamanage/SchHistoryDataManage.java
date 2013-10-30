@@ -55,6 +55,7 @@ public class SchHistoryDataManage {
 		Editor editor = sp.edit();
 		try {
 			schHstryAmount++;
+			Log.i(TAG, "id is "+schHstryAmount+ "details is "+ details);
 			editor.putString(""+schHstryAmount, details);
 			editor.commit();
 			myApplication.setSchHstryAmount(schHstryAmount);
@@ -76,7 +77,8 @@ public class SchHistoryDataManage {
 			Map<String, ?>spMap = sp.getAll();
 			if(!spMap.isEmpty()){
 				for (Entry<String, ?> entry : spMap.entrySet()) {
-//					String key = entry.getKey();
+					String key = entry.getKey();
+					Log.i(TAG, "key:"+key);
 					String value = (String) entry.getValue();
 					historyArray.add(value);
 				}
@@ -98,6 +100,7 @@ public class SchHistoryDataManage {
 			Editor editor = sp.edit();
 			editor.clear();
 			editor.commit();
+			schHstryAmount = 0;
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception

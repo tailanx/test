@@ -89,7 +89,7 @@ public class WaitDeliverUtil {
 		try {
 			orderDataManage = new OrderDataManage(context);
 			ArrayList<Order> mList = orderDataManage.getOrderArray(
-					myApplication.getUserId(), "", "", "", fromIndex + "",//代发货
+					myApplication.getUserId(), "", "", "已付款", fromIndex + "",//代发货
 					amount + "", myApplication.getToken());
 			Log.i("info", mList.size() + "mList");
 			for (int i = 0; i < mList.size(); i++) {

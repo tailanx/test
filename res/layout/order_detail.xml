@@ -18,7 +18,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
             android:text="应付总额："
-            android:textSize="15sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/go_pay_show_pay_money"
@@ -26,9 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/order_detail_sum_money"
             android:layout_toRightOf="@+id/order_detail_sum_money"
-            android:text="￥14400.00"
             android:textColor="#ed217c"
-            android:textSize="15sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -61,8 +60,8 @@
             android:id="@+id/order_detail_crollView_linearlayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
             android:layout_marginTop="8dp"
             android:orientation="vertical" >
 
@@ -76,22 +75,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginLeft="4dp"
                     android:drawableLeft="@drawable/addressee_headicon"
                     android:drawablePadding="4dp"
                     android:gravity="center_vertical"
-                    android:text="收货人："
-                    android:textSize="16dp" />
+                    android:text="收货人:"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/order_detail_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginLeft="1dp"
                     android:layout_toRightOf="@id/go_pay_consignee"
-                    android:text="乔丹"
-                    android:textSize="16dp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/order_detail_number"
@@ -99,12 +97,11 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginRight="4dp"
                     android:drawableLeft="@drawable/phone_iocn"
                     android:drawablePadding="4dp"
                     android:gravity="center_vertical"
-                    android:text="18685241320"
-                    android:textSize="16dp" />
+                    android:textSize="14sp" />
             </RelativeLayout>
 
             <TextView
@@ -113,8 +110,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/delivery_address_down"
                 android:padding="10dp"
-                android:text="收货地址：有人肯定会对于android中放置图片的地到好奇下的dr是他会d图片放在drawabl辨率的图片"
-                android:textSize="15sp" />
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -128,7 +124,7 @@
                     android:background="@drawable/order_detailsbg_top"
                     android:gravity="center"
                     android:text="订单详情"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -140,7 +136,7 @@
              
             </LinearLayout>
 
-            <RelativeLayout
+            <RelativeLayout android:id="@+id/order_detail_data_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/order_statusbg_down" >
@@ -153,7 +149,7 @@
                     android:layout_marginTop="6dp"
                     android:text="订单额："
                     android:textColor="#b4b4b4"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/order_detail_dingdan_sum"
@@ -162,9 +158,8 @@
                     android:layout_marginLeft="2dp"
                     android:layout_marginTop="6dp"
                     android:layout_toRightOf="@id/order_detail_dingdan"
-                    android:text="1476元"
                     android:textColor="#b4b4b4"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/order_detail_yunhui"
@@ -175,7 +170,7 @@
                     android:layout_toRightOf="@id/order_detail_dingdan_sum"
                     android:text="运费："
                     android:textColor="#b4b4b4"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/order_detail_yunhui_sum"
@@ -184,9 +179,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="6dp"
                     android:layout_toRightOf="@id/order_detail_yunhui"
-                    android:text="10元"
                     android:textColor="#b4b4b4"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/order_detail_biaohao"
@@ -196,7 +190,7 @@
                     android:layout_below="@id/order_detail_dingdan"
                     android:text="订单编号："
                     android:textColor="#b4b4b4"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/order_detail_biaohao_number"
@@ -204,9 +198,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/order_detail_dingdan"
                     android:layout_toRightOf="@id/order_detail_biaohao"
-                    android:text="d20012345200023"
                     android:textColor="#b4b4b4"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/order_detail_time"
@@ -216,7 +209,7 @@
                     android:layout_below="@id/order_detail_biaohao"
                     android:text="下单时间："
                     android:textColor="#b4b4b4"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/order_detail_time_number"
@@ -224,9 +217,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/order_detail_biaohao"
                     android:layout_toRightOf="@id/order_detail_time"
-                    android:text="2013-08-2414:09:55:03"
                     android:textColor="#b4b4b4"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

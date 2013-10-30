@@ -1,12 +1,9 @@
 package com.yidejia.app.mall.fragment;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
-import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.app.Fragment;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,7 +11,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
-import android.text.format.DateUtils;
+//import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,15 +20,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+//import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+//import com.handmark.pulltorefresh.library.PullToRefreshBase;
+//import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+//import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
@@ -39,11 +38,10 @@ import com.yidejia.app.mall.datamanage.PreferentialDataManage;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Specials;
-import com.yidejia.app.mall.model.UserComment;
+//import com.yidejia.app.mall.model.UserComment;
 import com.yidejia.app.mall.util.CartUtil;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.CstmPayActivity;
-import com.yidejia.app.mall.view.EditorActivity;
 import com.yidejia.app.mall.view.ExchangeFreeActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 
@@ -59,38 +57,38 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	private TextView number2;
 	private ImageView addImageView2;
 	private int sumString;
+
 	private TextView sumTextView;// 总的钱数
 	private TextView counTextView;// 总的数量
-	private TextView priceTextView1;// 价格
-	private TextView priceTextView2;// 价格
-	private View person;
-	private View person2;
+	// private TextView priceTextView1;// 价格
+	// private TextView priceTextView2;// 价格
+	// private View person;
+	// private View person2;
 	private CartsDataManage dataManage;
-//	private Button shoppingCartTopay;
-	private ImageView mImageView;// 返回
-	private ArrayList<UserComment> mlist;
+	// private Button shoppingCartTopay;
+	// private ImageView mImageView;// 返回
+	// private ArrayList<UserComment> mlist;
 	private CartUtil cartUtil;
 	private CheckBox mBox;
-	private final int MENU1 = 0x111;
-	private final int MENU2 = 0x112;
-	private final int MENU3 = 0x113;
+	// private final int MENU1 = 0x111;
+	// private final int MENU2 = 0x112;
+	// private final int MENU3 = 0x113;
 	private LinearLayout layout;
 	private View view;
 	// private CartsDataManage dataManage2;
 	// private AddressDataManage addressManage;// 地址管理
-	private PullToRefreshScrollView mPullToRefreshScrollView;// 刷新界面
-	private Fragment mFragment;
+	// private PullToRefreshScrollView mPullToRefreshScrollView;// 刷新界面
+	// private Fragment mFragment;
 	private MyApplication myApplication;
 	private PreferentialDataManage preferentialDataManage;
-	private List<HashMap<String, Float>> mlList = null;
+	// private List<HashMap<String, Float>> mlList = null;
 
 	private InnerReceiver receiver;
-	public static   ArrayList<Specials> arrayListFree;
-	public static  ArrayList<Specials> arrayListExchange;
-	
+	public static ArrayList<Specials> arrayListFree;
+	public static ArrayList<Specials> arrayListExchange;
+
 	private ArrayList<Cart> mList;
-	
-	
+
 	// private InnerReceiver receiver;
 
 	// private void doClick(View v) {
@@ -211,21 +209,21 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	// }
 	// }
 
-//	public ArrayList<Specials> getArrayListFree() {
-//		return arrayListFree;
-//	}
-//
-//	public void setArrayListFree(ArrayList<Specials> arrayListFree) {
-//		this.arrayListFree = arrayListFree;
-//	}
-//
-//	public ArrayList<Specials> getArrayListExchange() {
-//		return arrayListExchange;
-//	}
-//
-//	public void setArrayListExchange(ArrayList<Specials> arrayListExchange) {
-//		this.arrayListExchange = arrayListExchange;
-//	}
+	// public ArrayList<Specials> getArrayListFree() {
+	// return arrayListFree;
+	// }
+	//
+	// public void setArrayListFree(ArrayList<Specials> arrayListFree) {
+	// this.arrayListFree = arrayListFree;
+	// }
+	//
+	// public ArrayList<Specials> getArrayListExchange() {
+	// return arrayListExchange;
+	// }
+	//
+	// public void setArrayListExchange(ArrayList<Specials> arrayListExchange) {
+	// this.arrayListExchange = arrayListExchange;
+	// }
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -256,43 +254,62 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 			getSherlockActivity().registerReceiver(receiver, filter);
 			// registerForContextMenu(layout);
 
-			layout = (LinearLayout) view
-					.findViewById(R.id.shopping_cart_relative2);
+//			layout = (LinearLayout) view
+//					.findViewById(R.id.shopping_cart_relative2);
 
 			// getSherlockActivity().getSupportActionBar().setCustomView(
 			// R.layout.actionbar_cart);
-			cartUtil = new CartUtil(getSherlockActivity(), layout,
-					counTextView, sumTextView, mBox);
+
+//		layout = (LinearLayout) view.findViewById(R.id.shopping_cart_relative2);
+		layout = new LinearLayout(getSherlockActivity());
+		layout.setOrientation(LinearLayout.VERTICAL);
+		ScrollView scrollView = (ScrollView) view.findViewById(R.id.shopping_cart_item_goods_scrollView);
+		scrollView.addView(layout);
+
+		cartUtil = new CartUtil(getSherlockActivity(), layout,
+				counTextView, sumTextView, mBox);
 
 			cartUtil.AllComment();
 
 			
-			mPullToRefreshScrollView = (PullToRefreshScrollView) view
-					.findViewById(R.id.shopping_cart_item_goods_scrollView);
-			String label = getResources().getString(R.string.update_time)
-					+ DateUtils.formatDateTime(getSherlockActivity(),
-							System.currentTimeMillis(),
-							DateUtils.FORMAT_SHOW_TIME
-									| DateUtils.FORMAT_ABBREV_ALL
-									| DateUtils.FORMAT_SHOW_DATE);
-			mPullToRefreshScrollView.getLoadingLayoutProxy()
-					.setLastUpdatedLabel(label);
-			mPullToRefreshScrollView.onRefreshComplete();
-			mPullToRefreshScrollView.setOnRefreshListener(listener);
+//			mPullToRefreshScrollView = (PullToRefreshScrollView) view
+//					.findViewById(R.id.shopping_cart_item_goods_scrollView);
+//			String label = getResources().getString(R.string.update_time)
+//					+ DateUtils.formatDateTime(getSherlockActivity(),
+//							System.currentTimeMillis(),
+//							DateUtils.FORMAT_SHOW_TIME
+//									| DateUtils.FORMAT_ABBREV_ALL
+//									| DateUtils.FORMAT_SHOW_DATE);
+//			mPullToRefreshScrollView.getLoadingLayoutProxy()
+//					.setLastUpdatedLabel(label);
+//			mPullToRefreshScrollView.onRefreshComplete();
+//			mPullToRefreshScrollView.setOnRefreshListener(listener);
 
 			// 结算
 			Button shoppingCartTopay = (Button) getSherlockActivity().findViewById(
 					R.id.shopping_cart_go_pay);
 			//弹出积分换购的对话框
-			dialog = new Builder(getSherlockActivity())
-			.setTitle("换购商品")
-			.setIcon(android.R.drawable.dialog_frame)
-			.setMessage(
-					getResources().getString(R.string.exchange_produce))
-			.setPositiveButton(
-					"确定",
-					new android.content.DialogInterface.OnClickListener() {
 
+//		mPullToRefreshScrollView = (PullToRefreshScrollView) view
+//				.findViewById(R.id.shopping_cart_item_goods_scrollView);
+//		String label = getResources().getString(R.string.update_time)
+//				+ DateUtils.formatDateTime(getSherlockActivity(),
+//						System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
+//								| DateUtils.FORMAT_ABBREV_ALL
+//								| DateUtils.FORMAT_SHOW_DATE);
+//		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
+//				label);
+//		mPullToRefreshScrollView.onRefreshComplete();
+//		mPullToRefreshScrollView.setOnRefreshListener(listener);
+		dialog = new Builder(getSherlockActivity())
+		.setTitle("换购商品")
+		.setIcon(android.R.drawable.dialog_frame)
+		.setMessage(
+				getResources().getString(R.string.exchange_produce))
+				.setPositiveButton(
+						"确定",
+						new android.content.DialogInterface.OnClickListener() {
+		
 						@Override
 						public void onClick(DialogInterface arg0,
 								int arg1) {
@@ -307,20 +324,99 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 							getSherlockActivity().startActivity(intent);
 
 						}
-					}).setNegativeButton("取消", new android.content.DialogInterface.OnClickListener() {
-						
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
-							Intent intent = new Intent(getSherlockActivity(),CstmPayActivity.class);
-							Bundle bundle = new Bundle();
-							float sum = Float.parseFloat(sumTextView
-									.getText().toString());
-							bundle.putString("price", sum + "");
-							intent.putExtras(bundle);
-							getSherlockActivity().startActivity(intent);
-						}
-					}).create();
+					}).setNegativeButton("取消" ,null).create();
+					
+		
+//		shoppingCartTopay.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				// getAddresses();
+//				if (!myApplication.getIsLogin()) {
+////					Toast.makeText(getSherlockActivity(), "你还未登陆，请先登陆",
+////							Toast.LENGTH_LONG).show();
+//					new Builder(getSherlockActivity()).setTitle(getResources().getString(R.string.tips))
+//					.setMessage(R.string.please_login).setPositiveButton(R.string.sure, new DialogInterface.OnClickListener(){
+//
+//						@Override
+//						public void onClick(
+//								DialogInterface dialog,
+//								int which) {
+//							// TODO Auto-generated method stub
+//							Intent intent = new Intent(getSherlockActivity(),
+//									LoginActivity.class);
+//							startActivity(intent);
+//						}
+//						
+//					}).setNegativeButton(R.string.searchCancel, new DialogInterface.OnClickListener(){
+//
+//						@Override
+//						public void onClick(
+//								DialogInterface dialog,
+//								int which) {
+//							// TODO Auto-generated method stub
+//							
+//						}
+//						
+//					}).create().show();
+//					
+//					return;
+//				} else {
+//					StringBuffer sb = new StringBuffer();
+//					ArrayList<Cart> mList = dataManage.getCartsArray();
+//					@SuppressWarnings("unchecked")
+//					ArrayList<Cart> orderCarts = (ArrayList<Cart>)mList.clone();//暂时的购物清单列表
+////					for (int i = 0; i < orderCarts.size(); i++) {
+////						Cart cart = orderCarts.get(i);
+////						sb.append(cart.getUId());
+////						sb.append(",");
+////						sb.append(cart.getAmount());
+////						sb.append("n");
+////						sb.append(";");
+////					}
+////					preferentialDataManage.getPreferential(sb.toString(),     
+////							myApplication.getUserId());
+////					if (preferentialDataManage.getFreeGoods().size() != 0
+////							|| preferentialDataManage.getScoreGoods().size() != 0) {
+////						arrayListFree = preferentialDataManage.getFreeGoods();
+////						Intent intent = new Intent(getSherlockActivity(),
+////								ExchangeFreeActivity.class);
+////						startActivity(intent);
+////					} else {
+//						// Log.i("info", CartActivity.arrayListFree+
+//						// "CartActivity.arrayListFree");
+//
+//						Intent intent1 = new Intent(getSherlockActivity(),
+//								CstmPayActivity.class);
+//						Bundle bundle = new Bundle();
+//						float sum = Float.parseFloat(sumTextView.getText()
+//								.toString());
+//						intent1.putExtra("carts", orderCarts);
+////						@Override
+////						public void onClick(DialogInterface dialog, int which) {
+////							// TODO Auto-generated method stub
+////							Intent intent = new Intent(getSherlockActivity(),CstmPayActivity.class);
+////							Bundle bundle = new Bundle();
+////							float sum = Float.parseFloat(sumTextView
+////									.getText().toString());
+////							bundle.putString("price", sum + "");
+////							intent1.putExtras(bundle);
+////							getSherlockActivity().startActivity(intent);
+////
+////							getSherlockActivity().startActivity(intent1);
+//						if(sum>0){
+//							bundle.putString("price", sum + "");
+//							intent1.putExtras(bundle);
+//							getSherlockActivity().startActivity(intent1);
+//						} else {
+//							Toast.makeText(
+//									getSherlockActivity(),
+//									getResources().getString(
+//											R.string.buy_nothing),
+//									Toast.LENGTH_LONG).show();
+//						}
+//					})
 			if(shoppingCartTopay==null){
 				Toast.makeText(
 						getSherlockActivity(),
@@ -404,6 +500,9 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 							// }
 						}
 					}
+						// }
+//					}
+
 				}
 			});
 			}
@@ -427,28 +526,23 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 		getSherlockActivity().unregisterReceiver(receiver);
 	}
 
-	private int fromIndex = 0;
-	private int amontIndex = 10;
-	// 刷新添加事件
-	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
-
-		@Override
-		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-			// TODO Auto-generated method stub
-
-			String label = getResources().getString(R.string.update_time)
-					+ DateUtils.formatDateTime(getSherlockActivity(),
-							System.currentTimeMillis(),
-							DateUtils.FORMAT_SHOW_DATE
-									| DateUtils.FORMAT_SHOW_TIME
-									| DateUtils.FORMAT_ABBREV_ALL);
-
-			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-			// fromIndex += amontIndex;
-			mPullToRefreshScrollView.onRefreshComplete();
-		}
-	};
-
+	/*
+	 * private int fromIndex = 0; private int amontIndex = 10; // 刷新添加事件 private
+	 * OnRefreshListener<ScrollView> listener = new
+	 * OnRefreshListener<ScrollView>() {
+	 * 
+	 * @Override public void onRefresh(PullToRefreshBase<ScrollView>
+	 * refreshView) { // TODO Auto-generated method stub
+	 * 
+	 * String label = getResources().getString(R.string.update_time) +
+	 * DateUtils.formatDateTime(getSherlockActivity(),
+	 * System.currentTimeMillis(), DateUtils.FORMAT_SHOW_DATE |
+	 * DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_ABBREV_ALL);
+	 * 
+	 * refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label); //
+	 * fromIndex += amontIndex; mPullToRefreshScrollView.onRefreshComplete(); }
+	 * };
+	 */
 	// @Override
 	// public void onCreateContextMenu(ContextMenu menu, View v,
 	// ContextMenuInfo menuInfo) {

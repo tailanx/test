@@ -29,6 +29,9 @@ public class MyCollectActivity extends SherlockActivity {
 	private FavoriteDataManage dataManage;
 	private ListView mListView;
 	private ArrayList<SearchItem> mList;
+	private int index;//
+	private int fromIndex = 0;
+	private int amount = 10;
 //	private View mycollectView;
 //	private LinearLayout layout;
 //	private ImageView headImage;//头像
@@ -70,23 +73,25 @@ public class MyCollectActivity extends SherlockActivity {
 					int position, long id) {
 				// TODO Auto-generated method stub
 				//未完成的删掉收藏
-				return false;
+				index = position;
+				return true;
 			}
 		});
 	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setActionbar();
 		dataManage = new FavoriteDataManage(this);
-		mList = dataManage.getFavouriteArray(((MyApplication)getApplication()).getUserId()
-, 0, 10);
-//		Log.i("info", mList.size()+"");
-		if(mList.size()<=0){
+		mList = dataManage.getFavouriteArray(
+				((MyApplication) getApplication()).getUserId(), fromIndex, amount);
+		// Log.i("info", mList.size()+"");
+		if (mList.size() <= 0) {
 			setContentView(R.layout.favorite_empty);
-		}else{
-		setContentView(R.layout.my_collect);
-		setupShow();
+		} else {
+			setContentView(R.layout.my_collect);
+			setupShow();
 		}
 	}
 	
@@ -121,4 +126,23 @@ public class MyCollectActivity extends SherlockActivity {
 		menu.add("删除");
 		menu.add("取消");
 	}
+	@Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+		super.onRestart();
+//		mList = dataManage.getFavouriteArray(
+//				((MyApplication) getApplication()).getUserId(), fromIndex, amount);
+		if(mList.size() > 0)
+			updateListView(index);
+		
+	}
+	//更新listview
+	private void updateListView(int index){
+		int visiblePosition = mListView.getFirstVisiblePosition();  
+		View v = mListView.getChildAt(index - visiblePosition);
+		mList.remove(index);
+		mListView.removeView(v);
+	}
+	
+	
 }

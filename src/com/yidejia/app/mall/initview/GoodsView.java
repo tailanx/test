@@ -204,7 +204,10 @@ public class GoodsView {
 						float sum = Float.parseFloat(priceString);
 						if(sum <= 0) return;////价格出错
 						Bundle bundle = new Bundle();
-						bundle.putSerializable("Cart", cart);
+						ArrayList<Cart> carts = new ArrayList<Cart>();
+						carts.add(cart);
+//						bundle.putSerializable("Cart", cart);
+						intent.putExtra("carts", carts);
 						bundle.putString("price", priceString);
 						intent.putExtras(bundle);
 						activity.startActivity(intent);
@@ -409,8 +412,8 @@ public class GoodsView {
 
 	private void initDisplayImageOption() {
 		builder = new AlertDialog.Builder(activity)
-		.setTitle(activity.getResources().getString(R.string.add_cart_scs_title))
-		.setMessage(activity.getResources().getString(R.string.add_cart_scs))
+		.setTitle(activity.getResources().getString(R.string.login_title))
+		.setMessage(activity.getResources().getString(R.string.login_acount))
 		.setPositiveButton(activity.getResources().getString(R.string.go2cart),
 				new android.content.DialogInterface.OnClickListener() {
 
@@ -425,9 +428,9 @@ public class GoodsView {
 					}
 				}).setNegativeButton(activity.getResources().getString(R.string.guang_again), null).create();
 		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.hot_sell_right_top_image)
-				.showImageOnFail(R.drawable.hot_sell_right_top_image)
-				.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+				.showStubImage(R.drawable.image_bg)
+				.showImageOnFail(R.drawable.image_bg)
+				.showImageForEmptyUri(R.drawable.image_bg)
 				.cacheInMemory(true).cacheOnDisc(true).build();
 	}
 

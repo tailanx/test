@@ -46,9 +46,9 @@ public class ExchangeAdapter extends BaseAdapter {
 		this.mlist = mList;
 		this.inflater = LayoutInflater.from(context);
 		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.hot_sell_right_top_image)
-				.showImageOnFail(R.drawable.hot_sell_right_top_image)
-				.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+				.showStubImage(R.drawable.image_bg)
+				.showImageOnFail(R.drawable.image_bg)
+				.showImageForEmptyUri(R.drawable.image_bg)
 				.cacheInMemory(true).cacheOnDisc(true).build();
 		isSelected = new HashMap<Integer, Boolean>();
 		mlist1 = new ArrayList<HashMap<String, Float>>();
@@ -122,6 +122,7 @@ public class ExchangeAdapter extends BaseAdapter {
 	private DisplayImageOptions options;
 	protected ImageLoader imageLoader = ImageLoader.getInstance();// ����ͼƬ
 	int i = 0;
+
 
 	@Override
 	public View getView(final int postion, View covertView, ViewGroup arg2) {
@@ -197,6 +198,11 @@ public class ExchangeAdapter extends BaseAdapter {
 							context.getResources().getString(
 									R.string.price_error), Toast.LENGTH_LONG)
 							.show();
+					Toast.makeText(context, "����Ҫ������Ĳ�Ʒ������ͷ���ϵ",
+							Toast.LENGTH_LONG).show();
+
+
+
 				} else {
 					sum++;
 					holder.count.setText(sum + "");
@@ -220,6 +226,7 @@ public class ExchangeAdapter extends BaseAdapter {
 				if (sum <= 1) {
 					Toast.makeText(context,
 							context.getResources().getString(R.string.mix),
+
 							Toast.LENGTH_LONG).show();
 				} else {
 					sum--;

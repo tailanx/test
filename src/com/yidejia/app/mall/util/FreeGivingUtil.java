@@ -66,7 +66,7 @@ public class FreeGivingUtil {
 	
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	private DisplayImageOptions options;
-	protected ImageLoader imageLoader = ImageLoader.getInstance();// ╪стьм╪ф╛
+	protected ImageLoader imageLoader = ImageLoader.getInstance();// О©╫О©╫О©╫О©╫м╪ф╛
 	static final List<String> displayedImages = Collections
 			.synchronizedList(new LinkedList<String>());
 
@@ -88,9 +88,9 @@ public class FreeGivingUtil {
 	}
 	private void initDisplayImageOption() {
 		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.hot_sell_right_top_image)
-				.showImageOnFail(R.drawable.hot_sell_right_top_image)
-				.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+				.showStubImage(R.drawable.image_bg)
+				.showImageOnFail(R.drawable.image_bg)
+				.showImageForEmptyUri(R.drawable.image_bg)
 				.cacheInMemory(true).cacheOnDisc(true).build();
 	}
 	

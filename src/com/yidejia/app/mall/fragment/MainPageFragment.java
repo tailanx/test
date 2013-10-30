@@ -106,6 +106,8 @@ public class MainPageFragment extends SherlockFragment {
 	private void createView(View view, LayoutInflater inflater){
 		getMainListFirstItem();
 		FrameLayout layout = (FrameLayout) view.findViewById(R.id.layout);
+//		mMainView = (ViewGroup) inflater.inflate(
+//				R.layout.layout_first_item_in_main_listview, null);
 		layout.addView(mMainView);
 		RelativeLayout shorcutLayout = (RelativeLayout) view.findViewById(R.id.function_parent_layout);
 		View child = inflater.inflate(R.layout.main_function, null);
@@ -157,6 +159,7 @@ public class MainPageFragment extends SherlockFragment {
 				hotSellView.initAcymerView(acymerArray);
 				hotSellView.initInerbtyView(inerbtyArray);
 				main_mall_notice_content.setText(ggTitleArray.get(0));
+				getMainListFirstItem();
 //			mPullToRefreshScrollView.onRefreshComplete();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -533,9 +536,9 @@ public class MainPageFragment extends SherlockFragment {
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	private void initDisplayImageOption(){
 		options = new DisplayImageOptions.Builder()
-//			.showStubImage(R.drawable.hot_sell_right_top_image)
-//			.showImageOnFail(R.drawable.hot_sell_right_top_image)
-//			.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+			.showStubImage(R.drawable.banner_bg)
+			.showImageOnFail(R.drawable.banner_bg)
+			.showImageForEmptyUri(R.drawable.banner_bg)
 			.cacheInMemory(true)
 			.cacheOnDisc(true)
 			.build();

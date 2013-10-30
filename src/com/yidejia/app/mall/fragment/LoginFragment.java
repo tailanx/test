@@ -1,12 +1,8 @@
 package com.yidejia.app.mall.fragment;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,10 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TableRow;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.yidejia.app.mall.MainActivity;
 import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.MyMallActivity;
@@ -26,7 +20,6 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.IpAddress;
 import com.yidejia.app.mall.datamanage.UserDatamanage;
 import com.yidejia.app.mall.view.FindPwActivity;
-import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.view.RegistActivity;
 
 public class LoginFragment extends SherlockFragment implements OnClickListener{
@@ -143,8 +136,8 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 			
 			fragment = new  MyMallActivity();
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
-			
-			ft.replace(R.id.main_fragment, fragment).commit();
+			if(fragment.isAdded()) ft.hide(LoginFragment.this).show(fragment).commit();
+			else ft.hide(LoginFragment.this).replace(R.id.main_fragment, fragment).commit();
 //		if(name==null||"".equals(name)){
 //			Toast.makeText(getSherlockActivity(), "请输入用户名或者密码",Toast.LENGTH_LONG).show();
 //		}

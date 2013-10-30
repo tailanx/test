@@ -78,6 +78,7 @@ public class BaseInfoFragment extends SherlockFragment {
 			receiver = new InnerReceiver();
 			IntentFilter filter = new IntentFilter();
 			filter.addAction(Consts.UPDATE_CHANGE);
+			filter.addAction(Consts.BROAD_UPDATE_CHANGE);
 			view.invalidate();
 			getSherlockActivity().registerReceiver(receiver, filter);
 			/*
@@ -170,7 +171,7 @@ public class BaseInfoFragment extends SherlockFragment {
 		public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
 			String action = intent.getAction();
-			if (Consts.UPDATE_CHANGE.equals(action)) {
+			if (Consts.UPDATE_CHANGE.equals(action)||Consts.BROAD_UPDATE_CHANGE.equals(action)) {
 			mButton.setText(dataManage.getCartAmount()+"");
 			}
 		}

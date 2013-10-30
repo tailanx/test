@@ -70,6 +70,12 @@ public class JNICallBack {
 	//获取订单数据
 	public static native String getHttp4GetOrder(String user_id, String code, String date, String status, String offset1, String limit1, String token);
 	
+	//获取待评价商品列表
+	public static native String getHttp4GetNoEvaluate(String user_id);
+	
+	//根据订单编号获取订单信息
+	public static native String getHttp4GetOrderByCode(String code);
+	
 	//修改支付状态
 	public static native String getHttp4PayOut(String customer_id, String code);
 	

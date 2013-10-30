@@ -20,6 +20,7 @@ import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.order.CancelOrder;
+import com.yidejia.app.mall.net.order.GetOrderByCode;
 import com.yidejia.app.mall.net.order.GetOrderList;
 import com.yidejia.app.mall.net.order.PayOutOrder;
 import com.yidejia.app.mall.net.order.SaveOrder;
@@ -46,6 +47,7 @@ public class OrderDataManage {
 		orders = new ArrayList<Order>();
 		cartsArray = new ArrayList<Cart>();
 		unicode = new UnicodeToString();
+		order = new Order();
 	}
 
 	/**
@@ -122,9 +124,9 @@ public class OrderDataManage {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage(context.getResources().getString(R.string.searching));
-			bar.show();
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(context.getResources().getString(R.string.searching));
+//			bar.show();
 		}
 
 		@Override
@@ -156,12 +158,12 @@ public class OrderDataManage {
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			bar.dismiss();
+//			bar.dismiss();
 			// if(result)
 			// Toast.makeText(context, "�ɹ�", Toast.LENGTH_SHORT).show();
 		}
 
-		private ProgressDialog bar = new ProgressDialog(context);
+//		private ProgressDialog bar = new ProgressDialog(context);
 	}
 
 	private ArrayList<Order> analysisGetListJson(String httpResultString)
@@ -659,5 +661,63 @@ public class OrderDataManage {
 		}
 	}
 
+	private Order order;//
+	/**
+	 * @param code 根据订单号返回订单详情
+	 */
+	public Order getOrderByCode(String code){
+		TaskGOBC taskGOBC = new TaskGOBC(code);
+		try {
+			boolean state = taskGOBC.execute().get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return order;
+	}
 
+	
+	private class TaskGOBC extends AsyncTask<Void, Void, Boolean>{
+
+		public String code = "";
+		public TaskGOBC(String code){
+			this.code = code;
+		}
+		
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			GetOrderByCode gobc = new GetOrderByCode();
+			try {
+				String httpResponse = gobc.getHttpResponse(code);
+				try {
+					JSONObject httpJsonObject = new JSONObject(httpResponse);
+					int respCode = httpJsonObject.getInt("code");
+					if(respCode == 1){
+						String respString = httpJsonObject.getString("response");
+						JSONObject respObject = new JSONObject(respString);
+						order.setId(respObject.getString("order_id"));
+						order.setOrderCode(respObject.getString("order_code"));
+						order.setDate(respObject.getString("the_date"));
+						order.setStatus(respObject.getString("status"));
+						order.setCore(respObject.getString("goods_ascore"));
+						order.setShipFee(respObject.getString("ship_fee"));
+//						goods_acash
+						return true;
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return false;
+		}
+		
+	}
 }

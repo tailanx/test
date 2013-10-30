@@ -21,8 +21,10 @@ import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -102,6 +104,16 @@ public class SelledResultFragment extends SherlockFragment {
 		View view = null;
 		if(!isHasResult){
 			view = inflater.inflate(R.layout.search_empty, container, false);
+			Log.e(TAG, "search_empty");
+			Button guang_btn = (Button) view.findViewById(R.id.guang_button);
+			guang_btn.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					getSherlockActivity().finish();
+				}
+			});
 			return view;
 		}
 		if(isShowWithList){

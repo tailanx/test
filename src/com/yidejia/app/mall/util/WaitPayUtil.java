@@ -32,7 +32,7 @@ public class WaitPayUtil {
 	private TextView numberTextView;// 订单的编号
 	private TextView sumPrice;// 订单的总价格
 	private TextView countTextView;// 总数目
-	private Button cancel;
+  	private Button cancel;
 
 	private OrderDataManage orderDataManage;// 用来获取订单数据
 	private Button mButton;

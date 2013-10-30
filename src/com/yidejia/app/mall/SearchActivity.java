@@ -101,6 +101,7 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 					//未包含该记录，添加
 					if(!historyArrayList.contains(name)){
 						boolean state = historyDataManage.addHistory(name);
+						historyArrayList.add(name);
 						Log.i("SchHistory", "state:"+state);
 					}
 					adapter.notifyDataSetChanged();
@@ -235,6 +236,7 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 				//未包含该记录，添加
 				if(!historyArrayList.contains(name)){
 					boolean state = historyDataManage.addHistory(name);
+					historyArrayList.add(name);
 					Log.i("SchHistory", "state:"+state);
 				}
 				adapter.notifyDataSetChanged();

@@ -6,6 +6,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.datamanage.TaskNoEva;
 import com.yidejia.app.mall.util.CommentUtil;
 
 import android.app.Activity;
@@ -25,63 +26,63 @@ import android.widget.TextView;
 public class EvaluationActivity extends SherlockActivity {
 	private LinearLayout layout;
 	private MyApplication myApplication;
-	public void doClick(View v) {
-		Intent intent = new Intent();
-		switch (v.getId()) {
-		// case R.id.evaluation_button://返回
-		// intent.setClass(this, MyMallActivity.class);
-		// break;
-		case R.id.evaluation_item_evaluation:// 评价
-			intent.setClass(this, PersonEvaluationActivity.class);
-		}
-		startActivity(intent);
-		// 结束当前Activity；
-		EvaluationActivity.this.finish();
-	}
-	private PullToRefreshScrollView mPullToRefreshScrollView;
+
+	private ScrollView mPullToRefreshScrollView;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.evaluation);
 		myApplication = (MyApplication) getApplication();
 		setActionbar();
-		setContentView(R.layout.evaluation);
 		layout = (LinearLayout) findViewById(R.id.evaluation_scrollView_linearlayout1);
-		mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.item_goods_scrollView);
-		mPullToRefreshScrollView.setOnRefreshListener(listener);
-		String label = getResources().getString(R.string.update_time)	+ DateUtils.formatDateTime(
-				EvaluationActivity.this.getApplicationContext(),
-				System.currentTimeMillis(),
-				DateUtils.FORMAT_SHOW_TIME
-					| DateUtils.FORMAT_SHOW_DATE
-					| DateUtils.FORMAT_ABBREV_ALL);
-		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(label);;
-	setupShow();
+		mPullToRefreshScrollView = (ScrollView) findViewById(R.id.evaluation_scrollView);
+//		mPullToRefreshScrollView.ScrollView(listener);
+//		String label = getResources().getString(R.string.update_time)
+//				+ DateUtils.formatDateTime(
+//						EvaluationActivity.this.getApplicationContext(),
+//						System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
+//								| DateUtils.FORMAT_SHOW_DATE
+//								| DateUtils.FORMAT_ABBREV_ALL);
+//		ScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
+//				label);
+//		;
+		// setupShow();
+		// View person = getLayoutInflater().inflate(R.layout.evaluation_item,
+		// null);
+		// layout.addView(person);
+		TaskNoEva taskNoEva = new TaskNoEva(EvaluationActivity.this, layout);
+		taskNoEva.getWaitingComment(myApplication.getUserId(), true);
 	}
+
 	private int fromIndex = 0;
 	private int amount = 10;
-	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
+//	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
+//
+//		@Override
+//		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+//			// TODO Auto-generated method stub
+//			String label = getResources().getString(R.string.update_time)
+//					+ DateUtils.formatDateTime(
+//							EvaluationActivity.this.getApplicationContext(),
+//							System.currentTimeMillis(),
+//							DateUtils.FORMAT_SHOW_TIME
+//									| DateUtils.FORMAT_SHOW_DATE
+//									| DateUtils.FORMAT_ABBREV_ALL);
+//			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+//			// fromIndex += amount;
+//			TaskNoEva taskNoEva = new TaskNoEva(EvaluationActivity.this, layout);
+//			taskNoEva.getWaitingComment(myApplication.getUserId(), false);
+//			mPullToRefreshScrollView.onRefreshComplete();
+//		}
+//	};
 
-		@Override
-		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-			// TODO Auto-generated method stub
-			String label = getResources().getString(R.string.update_time)	+ DateUtils.formatDateTime(
-					EvaluationActivity.this.getApplicationContext(),
-					System.currentTimeMillis(),
-					DateUtils.FORMAT_SHOW_TIME
-						| DateUtils.FORMAT_SHOW_DATE
-						| DateUtils.FORMAT_ABBREV_ALL);
-			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-			fromIndex += amount;
-		
-			mPullToRefreshScrollView.onRefreshComplete();
-		}
-		
-	};
-	private void setupShow(){
-		new CommentUtil(EvaluationActivity.this, layout).AllCommentUserId(myApplication.getUserId()
-				, fromIndex, amount);
+	private void setupShow() {
+		new CommentUtil(EvaluationActivity.this, layout).AllCommentUserId(
+				myApplication.getUserId(), fromIndex, amount);
 	}
+
 	private void setActionbar() {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);

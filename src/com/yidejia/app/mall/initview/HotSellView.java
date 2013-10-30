@@ -237,9 +237,9 @@ public class HotSellView {
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	private void initDisplayImageOption(){
 		options = new DisplayImageOptions.Builder()
-			.showStubImage(R.drawable.hot_sell_right_top_image)
-			.showImageOnFail(R.drawable.hot_sell_right_top_image)
-			.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+			.showStubImage(R.drawable.image_bg)
+			.showImageOnFail(R.drawable.image_bg)
+			.showImageForEmptyUri(R.drawable.image_bg)
 			.cacheInMemory(true)
 			.cacheOnDisc(true)
 			.build();

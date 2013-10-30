@@ -49,6 +49,7 @@ public class EditorActivity extends SherlockActivity {
 		Builder helpbuilder = new Builder(this);
 		Builder aboutbuilder = new Builder(this);
 		Builder exitbuilder = new Builder(this);
+		Builder phonebuilder = new Builder(this);
 //		dialogAbout.setc
 		dialogClear = builder
 				.setTitle("提示")
@@ -68,13 +69,13 @@ public class EditorActivity extends SherlockActivity {
 				.setPositiveButton("确定", null).setNegativeButton("取消", null).create();
 		dialogAbout = aboutbuilder.setTitle("关于").setIcon(R.drawable.ic_launcher)
 				.setView(mLayout2).setPositiveButton("确定", null).setNegativeButton("取消", null).create();
-		dialogphone = builder.setTitle("艾蒂妲")
+		dialogphone = phonebuilder.setTitle("艾蒂妲")
 				.setIcon(android.R.drawable.divider_horizontal_dim_dark)
-				.setView(mLayout3).setPositiveButton("确定", null).create();
+				.setView(mLayout3).setPositiveButton("确定", null).setNegativeButton("取消", null).create();
 		
 		exit = exitbuilder.setTitle("艾蒂妲")
 				.setIcon(android.R.drawable.divider_horizontal_dim_dark)
-				.setView(mLayout3)
+				.setMessage(getResources().getString(R.string.retrun_back))
 				.setPositiveButton("确定",
 						new android.content.DialogInterface.OnClickListener() {
 
