@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,7 +69,7 @@ public class CstmPayActivity extends SherlockActivity {
 	private Handler mHandler;// 创建handler对象
 	private MyApplication myApplication;
 	private EditText comment;//评论
-	
+	private ScrollView go_pay_scrollView;
 	
 	// private Myreceiver receiver;
 	// private Addresses addresses;
@@ -210,6 +211,7 @@ public class CstmPayActivity extends SherlockActivity {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		try {
@@ -230,17 +232,18 @@ public class CstmPayActivity extends SherlockActivity {
 				addressDataManage = new AddressDataManage(this);
 				Intent intent = getIntent();
 				final String sum = intent.getStringExtra("price");
-				Cart cart = (Cart) intent.getSerializableExtra("Cart");
-				if (cart == null) {
+//				Cart cart = (Cart) intent.getSerializableExtra("Cart");
+				ArrayList<Cart> carts = (ArrayList<Cart>)intent.getSerializableExtra("carts");
+				if (!carts.isEmpty()) {
 
 					setContentView(R.layout.go_pay);
-					
+					go_pay_scrollView = (ScrollView) findViewById(R.id.go_pay_scrollView);
 					setupShow();
 					addAddress();
 					setActionbar();
 					LinearLayout layout = (LinearLayout) findViewById(R.id.go_pay_relative2);
 					PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
-					goods = pay.loadView();
+					goods = pay.loadView(carts);
 					//获取免邮界限
 					ExpressDataManage expressDataManage = new ExpressDataManage(CstmPayActivity.this);
 					ArrayList<FreePost> freePosts = expressDataManage.getFreePostList("0", "20");
@@ -276,10 +279,11 @@ public class CstmPayActivity extends SherlockActivity {
 						}
 					};
 				} else {
+					/*
 					setActionbar();
 					setContentView(R.layout.go_pay);
 					LinearLayout layout = (LinearLayout) findViewById(R.id.go_pay_relative2);
-					PayUtil pay = new PayUtil(CstmPayActivity.this, layout, cart);
+					PayUtil pay = new PayUtil(CstmPayActivity.this, layout, carts.get(0));
 					goods = pay.cartLoadView();
 					setupShow();
 					addAddress();
@@ -318,6 +322,7 @@ public class CstmPayActivity extends SherlockActivity {
 							super.handleMessage(msg);
 						}
 					};
+					*/
 				}
 				//提交订单
 				saveOrderBtn.setOnClickListener(new OnClickListener() {
@@ -334,6 +339,7 @@ public class CstmPayActivity extends SherlockActivity {
 									getResources().getString(
 											R.string.select_pay_type),
 									Toast.LENGTH_LONG).show();
+							go_pay_scrollView.smoothScrollTo(0, 0);
 							return;
 						}
 						int mode = 1;
@@ -349,7 +355,7 @@ public class CstmPayActivity extends SherlockActivity {
 						OrderDataManage orderDataManage = new OrderDataManage(CstmPayActivity.this);
 						orderDataManage.saveOrder(myApplication.getUserId(),
 								"0", recipientId, "", "0", expressNum,
-								postMethod, peiSongCenter, goods, "",
+								postMethod, peiSongCenter, goods, comment.getText().toString(),
 								pay_type, myApplication.getToken());
 						orderCode = orderDataManage.getOrderCode();
 						resp_code = orderDataManage.getRespCode();
@@ -446,9 +452,7 @@ public class CstmPayActivity extends SherlockActivity {
 	 */
 	private void addAddress() {
 		try {
-			ArrayList<Addresses> mList = addressDataManage.getAddressesArray(
-
-					myApplication.getUserId(), 0, 10);
+			ArrayList<Addresses> mList = addressDataManage.getDefAddresses(myApplication.getUserId());
 			Log.i("info", mList.size() + " mlist");
 			if (mList.size() == 0) {
 				Intent intent = new Intent(CstmPayActivity.this,

@@ -112,21 +112,21 @@ public class GoCartActivity extends SherlockActivity {// implements
 					}else {
 						StringBuffer sb = new StringBuffer();
 						ArrayList<Cart> mList = dataManage.getCartsArray();
-						for(int i = 0; i<mList.size();i++){
-							Cart cart = new Cart();
-							sb.append(cart.getUId());
-							sb.append(",");
-							sb.append(cart.getAmount());
-							sb.append("n");
-							sb.append(";");
-						}
-						preferentialDataManage.getPreferential(sb.toString(),myApplication.getUserId());
-						if (preferentialDataManage.getFreeGoods().size() != 0
-								|| preferentialDataManage.getScoreGoods().size() != 0) {
-							Intent intent = new Intent(GoCartActivity.this,
-									ExchangeFreeActivity.class);
-
-						}else{
+//						for(int i = 0; i<mList.size();i++){
+//							Cart cart = new Cart();
+//							sb.append(cart.getUId());
+//							sb.append(",");
+//							sb.append(cart.getAmount());
+//							sb.append("n");
+//							sb.append(";");
+//						}
+//						preferentialDataManage.getPreferential(sb.toString(),myApplication.getUserId());
+//						if (preferentialDataManage.getFreeGoods().size() != 0
+//								|| preferentialDataManage.getScoreGoods().size() != 0) {
+//							Intent intent = new Intent(GoCartActivity.this,
+//									ExchangeFreeActivity.class);
+//							
+//						}else{
 					
 					Intent intent = new Intent(GoCartActivity.this,
 							CstmPayActivity.class);
@@ -138,14 +138,15 @@ public class GoCartActivity extends SherlockActivity {// implements
 
 						bundle.putString("price", sum + "");
 						intent.putExtras(bundle);
+						intent.putExtra("carts", mList);
 						GoCartActivity.this.startActivity(intent);
 					} else {
-						Toast.makeText(GoCartActivity.this, getResources().getString(R.string.no_buy),
+						Toast.makeText(GoCartActivity.this, getResources().getString(R.string.buy_nothing),
 								Toast.LENGTH_LONG).show();
 					}
 					}
 				}
-				}
+//				}
 			});
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

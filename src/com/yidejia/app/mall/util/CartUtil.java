@@ -457,7 +457,8 @@ public class CartUtil {
 												}
 
 											} else {
-												new Builder(context).setTitle("提示").setMessage("你还没登录，现在去登录？").setPositiveButton("确定", new DialogInterface.OnClickListener(){
+												new Builder(context).setTitle(context.getResources().getString(R.string.tips))
+												.setMessage(R.string.please_login).setPositiveButton(R.string.sure, new DialogInterface.OnClickListener(){
 
 													@Override
 													public void onClick(

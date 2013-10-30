@@ -1,16 +1,23 @@
 package com.yidejia.app.mall.fragment;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+//import java.util.HashMap;
+//import java.util.List;
 
-import android.app.Fragment;
+
+
+
+
+
+//import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
-import android.text.format.DateUtils;
+//import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,16 +25,16 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageView;
+//import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
-import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+//import com.handmark.pulltorefresh.library.PullToRefreshBase;
+//import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+//import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
@@ -35,48 +42,49 @@ import com.yidejia.app.mall.datamanage.PreferentialDataManage;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Specials;
-import com.yidejia.app.mall.model.UserComment;
+//import com.yidejia.app.mall.model.UserComment;
 import com.yidejia.app.mall.util.CartUtil;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.CstmPayActivity;
-import com.yidejia.app.mall.view.ExchangeFreeActivity;
+//import com.yidejia.app.mall.view.ExchangeFreeActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 
+import android.app.AlertDialog.Builder;
 //import com.yidejia.app.mall.view.PayActivity;
 
 public class CartActivity extends SherlockFragment implements OnClickListener {
-	private ImageView subtract;// 减
-	private TextView number;
-	private ImageView addImageView;
-
-	private ImageView subtract2;// 减
-	private TextView number2;
-	private ImageView addImageView2;
-	private int sumString;
+//	private ImageView subtract;// 减
+//	private TextView number;
+//	private ImageView addImageView;
+//
+//	private ImageView subtract2;// 减
+//	private TextView number2;
+//	private ImageView addImageView2;
+//	private int sumString;
 	private TextView sumTextView;// 总的钱数
 	private TextView counTextView;// 总的数量
-	private TextView priceTextView1;// 价格
-	private TextView priceTextView2;// 价格
-	private View person;
-	private View person2;
+//	private TextView priceTextView1;// 价格
+//	private TextView priceTextView2;// 价格
+//	private View person;
+//	private View person2;
 	private CartsDataManage dataManage;
 	private Button shoppingCartTopay;
-	private ImageView mImageView;// 返回
-	private ArrayList<UserComment> mlist;
+//	private ImageView mImageView;// 返回
+//	private ArrayList<UserComment> mlist;
 	private CartUtil cartUtil;
 	private CheckBox mBox;
-	private final int MENU1 = 0x111;
-	private final int MENU2 = 0x112;
-	private final int MENU3 = 0x113;
+//	private final int MENU1 = 0x111;
+//	private final int MENU2 = 0x112;
+//	private final int MENU3 = 0x113;
 	private LinearLayout layout;
 	private View view;
 //	private CartsDataManage dataManage2;
 	// private AddressDataManage addressManage;// 地址管理
-	private PullToRefreshScrollView mPullToRefreshScrollView;// 刷新界面
-	private Fragment mFragment;
+//	private PullToRefreshScrollView mPullToRefreshScrollView;// 刷新界面
+//	private Fragment mFragment;
 	private MyApplication myApplication;
 	private PreferentialDataManage preferentialDataManage;
-	private List<HashMap<String, Float>> mlList = null;
+//	private List<HashMap<String, Float>> mlList = null;
 
 	private InnerReceiver receiver;
 	public static ArrayList<Specials> arrayListFree;
@@ -261,25 +269,49 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 				// TODO Auto-generated method stub
 				// getAddresses();
 				if (!myApplication.getIsLogin()) {
-					Toast.makeText(getSherlockActivity(), "你还未登陆，请先登陆",
-							Toast.LENGTH_LONG).show();
-					Intent intent = new Intent(getSherlockActivity(),
-							LoginActivity.class);
-					startActivity(intent);
+//					Toast.makeText(getSherlockActivity(), "你还未登陆，请先登陆",
+//							Toast.LENGTH_LONG).show();
+					new Builder(getSherlockActivity()).setTitle(getResources().getString(R.string.tips))
+					.setMessage(R.string.please_login).setPositiveButton(R.string.sure, new DialogInterface.OnClickListener(){
+
+						@Override
+						public void onClick(
+								DialogInterface dialog,
+								int which) {
+							// TODO Auto-generated method stub
+							Intent intent = new Intent(getSherlockActivity(),
+									LoginActivity.class);
+							startActivity(intent);
+						}
+						
+					}).setNegativeButton(R.string.searchCancel, new DialogInterface.OnClickListener(){
+
+						@Override
+						public void onClick(
+								DialogInterface dialog,
+								int which) {
+							// TODO Auto-generated method stub
+							
+						}
+						
+					}).create().show();
+					
 					return;
 				} else {
 					StringBuffer sb = new StringBuffer();
 					ArrayList<Cart> mList = dataManage.getCartsArray();
-					for (int i = 0; i < mList.size(); i++) {
-						Cart cart = mList.get(i);
-						sb.append(cart.getUId());
-						sb.append(",");
-						sb.append(cart.getAmount());
-						sb.append("n");
-						sb.append(";");
-					}
-					preferentialDataManage.getPreferential(sb.toString(),     
-							myApplication.getUserId());
+					@SuppressWarnings("unchecked")
+					ArrayList<Cart> orderCarts = (ArrayList<Cart>)mList.clone();//暂时的购物清单列表
+//					for (int i = 0; i < orderCarts.size(); i++) {
+//						Cart cart = orderCarts.get(i);
+//						sb.append(cart.getUId());
+//						sb.append(",");
+//						sb.append(cart.getAmount());
+//						sb.append("n");
+//						sb.append(";");
+//					}
+//					preferentialDataManage.getPreferential(sb.toString(),     
+//							myApplication.getUserId());
 //					if (preferentialDataManage.getFreeGoods().size() != 0
 //							|| preferentialDataManage.getScoreGoods().size() != 0) {
 //						arrayListFree = preferentialDataManage.getFreeGoods();
@@ -295,7 +327,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 						Bundle bundle = new Bundle();
 						float sum = Float.parseFloat(sumTextView.getText()
 								.toString());
-						intent1.putExtra("carts", mList);
+						intent1.putExtra("carts", orderCarts);
 						if (sum > 0) {
 							bundle.putString("price", sum + "");
 							intent1.putExtras(bundle);
@@ -325,6 +357,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 		getSherlockActivity().unregisterReceiver(receiver);
 	}
 
+	/*
 	private int fromIndex = 0;
 	private int amontIndex = 10;
 	// 刷新添加事件
@@ -346,7 +379,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 			mPullToRefreshScrollView.onRefreshComplete();
 		}
 	};
-
+*/
 	// @Override
 	// public void onCreateContextMenu(ContextMenu menu, View v,
 	// ContextMenuInfo menuInfo) {
