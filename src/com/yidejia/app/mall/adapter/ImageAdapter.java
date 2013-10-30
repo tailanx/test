@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 Patrik Åkerfeldt
+ * Copyright (C) 2011 Patrik ÔøΩkerfeldt
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ public class ImageAdapter extends BaseAdapter {
 
 	private LayoutInflater mInflater;
 	private Context context;
-	private static final int[] ids = { R.drawable.banner1, R.drawable.banner2, R.drawable.banner3};	
+//	private static final int[] ids = { R.drawable.banner1, R.drawable.banner2, R.drawable.banner3};	
 	
 	public ImageAdapter(Context context) {
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -43,8 +43,8 @@ public class ImageAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		return ids.length;
-//		return 1000;
+//		return ids.length;
+		return 3;
 //		return Integer.MAX_VALUE;
 	}
 
@@ -65,13 +65,13 @@ public class ImageAdapter extends BaseAdapter {
 		}
 		final int p = position;
 //		Log.e("MainActivity", "length:"+getCount());
-		((ImageView) convertView.findViewById(R.id.imgView)).setImageResource(ids[position%ids.length]);
+//		((ImageView) convertView.findViewById(R.id.imgView)).setImageResource(ids[position%ids.length]);
 		convertView.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Toast.makeText(context, "position:"+p%ids.length, Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context, "position:"+p%ids.length, Toast.LENGTH_SHORT).show();
 			}
 		});
 		return convertView;
