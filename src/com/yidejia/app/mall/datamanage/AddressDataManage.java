@@ -176,7 +176,44 @@ public class AddressDataManage {
 			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return addressesArray;
 		}
-		TaskGetList taskGetList = new TaskGetList("customer_id="+userId, String.valueOf(fromIndex), String.valueOf(acount), "", "", "%2A");
+		TaskGetList taskGetList = new TaskGetList("customer_id="+userId+"+and+valid_flag%3D%27y%27", String.valueOf(fromIndex), String.valueOf(acount), "", "", "%2A");
+		boolean state = false ;
+		try {
+			state = taskGetList.execute().get();
+			if(isNoMore){
+				Toast.makeText(context, context.getResources().getString(R.string.nomore), Toast.LENGTH_SHORT).show();
+				isNoMore = false;
+				state = true;
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			Log.e(TAG, "TaskGetList() InterruptedException");
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.e(TAG, "TaskGetList() ExecutionException");
+		}
+		if(!state){
+			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
+		}
+		
+		return addressesArray;
+	}
+	
+	
+	/**
+	 * 根据用户id获取默认地址
+	 * @param userId 用户id
+	 * @return
+	 */
+	public ArrayList<Addresses> getDefAddresses(String userId){
+		if(!ConnectionDetector.isConnectingToInternet(context)) {
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+			return addressesArray;
+		}
+		TaskGetList taskGetList = new TaskGetList("customer_id="+userId+"+and+is_default%3D%27y%27+and+valid_flag%3D%27y%27", String.valueOf(0), String.valueOf(10), "", "", "%2A");
 		boolean state = false ;
 		try {
 			state = taskGetList.execute().get();
@@ -243,7 +280,7 @@ public class AddressDataManage {
 	 * @param httpResultString
 	 * @return
 	 */
-	private ArrayList<Addresses> analysisGetListJson(String httpResultString){
+	public ArrayList<Addresses> analysisGetListJson(String httpResultString){
 		JSONObject httpResultObject;
 		try {
 			httpResultObject = new JSONObject(httpResultString);
@@ -257,7 +294,7 @@ public class AddressDataManage {
 				for (int i = 0; i < length; i++) {
 					Addresses addresses = new Addresses();
 					addressItem = responseArray.getJSONObject(i);
-					if("n".equals(addressItem.getString("valid_flag"))) continue;
+//					if("n".equals(addressItem.getString("valid_flag"))) continue;
 					String recipient_id = addressItem.getString("recipient_id");
 					addresses.setAddressId(recipient_id);
 					String name = addressItem.getString("customer_name");
