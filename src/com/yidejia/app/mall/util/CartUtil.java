@@ -61,6 +61,7 @@ public class CartUtil {
 	private CartsDataManage dataManage;
 	private List<Object> mList;
 	private FavoriteDataManage favoriteDataManage;
+	public static List<HashMap<String, Object>> list1;
 	// private MyApplication myApplication;
 	// private InnerReceiver receiver;
 
@@ -188,6 +189,7 @@ public class CartUtil {
 			userList = dataManage.getCartsArray();
 
 			list = new ArrayList<HashMap<String, Float>>();
+			list1 = new ArrayList<HashMap<String, Object>>();
 			int a = 0;
 			float b = 0;
 			for (int i = 0; i < userList.size(); i++) {
@@ -261,6 +263,7 @@ public class CartUtil {
 				priceTextView.setText(cart.getPrice() + "");
 
 				final HashMap<String, Float> map = new HashMap<String, Float>();
+				final HashMap<String, Object> map1 = new HashMap<String, Object>();
 				final Handler handler = new Handler() {
 					public void handleMessage(Message msg) {
 						if (msg.what == 123) {
@@ -567,8 +570,10 @@ public class CartUtil {
 							boolean isChecked) {
 						if (checkBox.isChecked()) {
 							map.put("check", (float) 1.0);
+							map1.put("check", (float) 1.0);
 						} else {
 							map.put("check", (float) 0.0);
+							map1.put("check", (float) 0.0);
 						}
 						Message ms = new Message();
 						ms.what = 123;
@@ -579,13 +584,16 @@ public class CartUtil {
 				mList.add(checkBox);
 				map.put("check",
 						(float) (checkBox.isChecked() == false ? 0 : 1));
+				map1.put("check",
+						(float) (checkBox.isChecked() == false ? 0 : 1));
+				map1.put("cart",cart);
 				map.put("count",
 						(float) Integer.parseInt(number.getText().toString()));
 				map.put("price",
 						Float.parseFloat(priceTextView.getText().toString()));
 				map.put("produce", Float.parseFloat(cart.getUId()));
 				list.add(map);
-				
+				list1.add(map1);
 				mBox.setOnClickListener(new OnClickListener() {
 
 					@Override

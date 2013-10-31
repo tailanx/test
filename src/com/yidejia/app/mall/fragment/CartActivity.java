@@ -1,6 +1,8 @@
 package com.yidejia.app.mall.fragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import android.app.AlertDialog.Builder;
 import android.app.AlertDialog;
@@ -364,10 +366,10 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 					
 					return;
 				} else {
-					StringBuffer sb = new StringBuffer();
-					ArrayList<Cart> mList = dataManage.getCartsArray();
-					@SuppressWarnings("unchecked")
-					ArrayList<Cart> orderCarts = (ArrayList<Cart>)mList.clone();//暂时的购物清单列表
+//					StringBuffer sb = new StringBuffer();
+//					ArrayList<Cart> mList = dataManage.getCartsArray();
+//					@SuppressWarnings("unchecked")
+//					ArrayList<Cart> orderCarts = (ArrayList<Cart>)mList.clone();//暂时的购物清单列表
 //					for (int i = 0; i < orderCarts.size(); i++) {
 //						Cart cart = orderCarts.get(i);
 //						sb.append(cart.getUId());
@@ -387,13 +389,23 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 //					} else {
 						// Log.i("info", CartActivity.arrayListFree+
 						// "CartActivity.arrayListFree");
-
+					ArrayList<Cart> cartList = new ArrayList<Cart>();
+					List<HashMap<String, Object>> orderCarts = CartUtil.list1;
+					for(int i=0;i<orderCarts.size();i++){
+						HashMap<String, Object> map = orderCarts.get(i);
+						float ischeck =  Float.parseFloat(map.get("check").toString());
+						Log.i("info", ischeck + "    ischeck");
+						Cart  cart1	= (Cart) map.get("cart");
+						if(ischeck == 1.0){
+							cartList.add(cart1);
+					}
+					}
 						Intent intent1 = new Intent(getSherlockActivity(),
 								CstmPayActivity.class);
 						Bundle bundle = new Bundle();
 						float sum = Float.parseFloat(sumTextView.getText()
 								.toString());
-						intent1.putExtra("carts", orderCarts);
+						intent1.putExtra("carts", cartList);
 //						@Override
 //						public void onClick(DialogInterface dialog, int which) {
 //							// TODO Auto-generated method stub

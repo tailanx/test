@@ -1,10 +1,16 @@
 package com.yidejia.app.mall.view;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -30,7 +36,7 @@ import com.yidejia.app.mall.util.CartUtil;
 
 public class GoCartActivity extends SherlockActivity {// implements
 														// OnClickListener
-
+	private AlertDialog dialog;
 	private TextView sumTextView;// �ܵ�Ǯ��
 	private TextView counTextView;// �ܵ�����
 	private CheckBox mBox;// ѡ���
@@ -94,24 +100,122 @@ public class GoCartActivity extends SherlockActivity {// implements
 					GoCartActivity.this.finish();
 				}
 			});
-			mbutton.setOnClickListener(new OnClickListener() {
+			dialog = new Builder(GoCartActivity.this)
+			.setTitle("换购商品")
+			.setIcon(android.R.drawable.dialog_frame)
+			.setMessage(
+					getResources().getString(R.string.exchange_produce))
+			.setPositiveButton(
+					"确定",
+					new android.content.DialogInterface.OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					if (!((MyApplication) GoCartActivity.this.getApplication())
-							.getIsLogin()) {
+						@Override
+						public void onClick(DialogInterface arg0,
+								int arg1) {
+							Intent intent = new Intent(
+									GoCartActivity.this,
+									ExchangeFreeActivity.class);
+							Bundle bundle = new Bundle();
+							float sum = Float.parseFloat(sumTextView
+									.getText().toString());
+							bundle.putString("price", sum + "");
+							intent.putExtras(bundle);
+							GoCartActivity.this.startActivity(intent);
 
-						Toast.makeText(GoCartActivity.this, getResources().getString(R.string.please_login),
+						}
+					})
+			.setNegativeButton(
+					"取消",
+					new android.content.DialogInterface.OnClickListener() {
 
-								Toast.LENGTH_LONG).show();
-						Intent intent = new Intent(GoCartActivity.this,
-								LoginActivity.class);
-						startActivity(intent);
-						return;
-					}else {
-						StringBuffer sb = new StringBuffer();
-						ArrayList<Cart> mList = dataManage.getCartsArray();
+						@Override
+						public void onClick(DialogInterface dialog,
+								int which) {
+							// TODO Auto-generated method stub
+							Intent intent = new Intent(
+									GoCartActivity.this,
+									CstmPayActivity.class);
+							Bundle bundle = new Bundle();
+							float sum = Float.parseFloat(sumTextView
+									.getText().toString());
+							bundle.putString("price", sum + "");
+							intent.putExtras(bundle);
+							GoCartActivity.this.startActivity(intent);
+
+						}
+					}).create();
+
+	if (mbutton == null) {
+		Toast.makeText(
+				GoCartActivity.this,
+				GoCartActivity.this.getResources().getString(
+						R.string.no_network), Toast.LENGTH_SHORT)
+				.show();
+	} else {
+		mbutton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				// getAddresses();
+				if (!myApplication.getIsLogin()) {
+					new Builder(GoCartActivity.this)
+							.setTitle(
+									getResources().getString(
+											R.string.tips))
+							.setMessage(R.string.please_login)
+							.setPositiveButton(
+									R.string.sure,
+									new DialogInterface.OnClickListener() {
+
+										@Override
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											// TODO Auto-generated
+											// method stub
+											Intent intent = new Intent(
+													GoCartActivity.this,
+													LoginActivity.class);
+											startActivity(intent);
+										}
+										//
+									})
+							.setNegativeButton(
+									R.string.searchCancel,
+									new DialogInterface.OnClickListener() {
+
+										@Override
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											// TODO Auto-generated
+											// method stub
+
+										}
+										//
+									}).create().show();
+					//
+					return;
+				} else {
+					ArrayList<Cart> cartList = new ArrayList<Cart>();
+					List<HashMap<String, Object>> orderCarts = CartUtil.list1;
+					for(int i=0;i<orderCarts.size();i++){
+						HashMap<String, Object> map = orderCarts.get(i);
+						float ischeck =  Float.parseFloat(map.get("check").toString());
+						Log.i("info", ischeck + "    ischeck");
+						Cart  cart1	= (Cart) map.get("cart");
+						if(ischeck == 1.0){
+							cartList.add(cart1);
+					}
+					}
+					Intent intent1 = new Intent(GoCartActivity.this,
+							CstmPayActivity.class);
+					Bundle bundle = new Bundle();
+					float sum = Float.parseFloat(sumTextView.getText()
+							.toString());
+					intent1.putExtra("carts", cartList);
+			
 //						for(int i = 0; i<mList.size();i++){
 //							Cart cart = new Cart();
 //							sb.append(cart.getUId());
@@ -128,26 +232,21 @@ public class GoCartActivity extends SherlockActivity {// implements
 //							
 //						}else{
 					
-					Intent intent = new Intent(GoCartActivity.this,
-							CstmPayActivity.class);
-					float sum = Float.parseFloat(sumTextView.getText()
-							.toString());
-
 					if (sum > 0) {
-						Bundle bundle = new Bundle();
 
 						bundle.putString("price", sum + "");
-						intent.putExtras(bundle);
-						intent.putExtra("carts", mList);
-						GoCartActivity.this.startActivity(intent);
+						intent1.putExtras(bundle);
+						intent1.putExtra("carts", cartList);
+						GoCartActivity.this.startActivity(intent1);
 					} else {
 						Toast.makeText(GoCartActivity.this, getResources().getString(R.string.buy_nothing),
 								Toast.LENGTH_LONG).show();
 					}
-					}
 				}
+					}
 //				}
 			});
+	}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -220,6 +220,7 @@ public class CstmPayActivity extends SherlockActivity {
 	}
 
 	private RelativeLayout reLayout;
+	private String sum;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -242,7 +243,7 @@ public class CstmPayActivity extends SherlockActivity {
 				this.finish();
 			} else {
 				Intent intent = getIntent();
-				final String sum = intent.getStringExtra("price");
+				sum = intent.getStringExtra("price");
 				// Cart cart = (Cart) intent.getSerializableExtra("Cart");
 				ArrayList<Cart> carts;
 				
@@ -287,31 +288,7 @@ public class CstmPayActivity extends SherlockActivity {
 				goods = pay.loadView(carts);
 				//添加地址、快递费用、配送中心
 				addAddress();
-				// 获取免邮界限
-				ExpressDataManage expressDataManage = new ExpressDataManage(
-							CstmPayActivity.this);
-				ArrayList<FreePost> freePosts = expressDataManage
-							.getFreePostList("0", "20");
-				float fP = Float.MAX_VALUE;
-				if (freePosts.size() != 0)
-					fP = Float.parseFloat(freePosts.get(0).getMax());
-				Log.i("info", fP + "   fp");
-				try {
-					if (Float.parseFloat(sum) >= fP) {// 大于等于免邮费用
-						sumPrice.setText(sum);
-						expressNum = "0";
-						isFree = true;
-					} else {
-						sumPrice.setText(Float.parseFloat(sum)
-								+ Float.parseFloat((general.isChecked() ? generalPrice
-										.getText().toString() : emsPrice
-										.getText().toString())) + "");
-						isFree = false;
-					}
-				} catch (NumberFormatException e) {
-					// TODO: handle exception
-					e.printStackTrace();
-				}
+				
 				mHandler = new Handler() {
 					@Override
 					public void handleMessage(Message msg) {
@@ -574,6 +551,9 @@ public class CstmPayActivity extends SherlockActivity {
 		sb.append(addresses.getAddress());
 		address.setText(sb.toString());
 		recipientId = addresses.getAddressId();//地址id
+		//设置底部价格的总数
+		setTotalPrice(sum);
+		
 		//设置快递费用和配送中心
 		setKuaiDi(addresses);
 	}
@@ -583,8 +563,11 @@ public class CstmPayActivity extends SherlockActivity {
 	 * @param addresses
 	 */
 	private void setKuaiDi(Addresses addresses){
-		Express express = new ExpressDataManage(this).getExpressesExpenses(
-				addresses.getProvice(), "y").get(0);
+		Express express;
+		ArrayList<Express> expressArray = new ExpressDataManage(this).getExpressesExpenses(
+				addresses.getProvice(), "y");
+		if(expressArray.isEmpty()) return;
+		express = expressArray.get(0);
 		Log.i(TAG, "peisong id"+ express.getPreId());
 		//设置配送中心
 		setPeiSong(express.getPreId());
@@ -613,6 +596,37 @@ public class CstmPayActivity extends SherlockActivity {
 			peiSong.setText(peiSongCenter);
 		} catch (Exception e) {
 			// TODO: handle exception
+		}
+	}
+	/**
+	 * 根据免邮信息设置底部 总的价格
+	 * @param sum
+	 */
+	private void setTotalPrice(String sum){
+		// 获取免邮界限
+		ExpressDataManage expressDataManage = new ExpressDataManage(
+					CstmPayActivity.this);
+		ArrayList<FreePost> freePosts = expressDataManage
+					.getFreePostList("0", "20");
+		float fP = Float.MAX_VALUE;
+		if (freePosts.size() != 0)
+			fP = Float.parseFloat(freePosts.get(0).getMax());
+		Log.i("info", fP + "   fp");
+		try {
+			if (Float.parseFloat(sum) >= fP) {// 大于等于免邮费用
+				sumPrice.setText(sum);
+				expressNum = "0";
+				isFree = true;
+			} else {
+				sumPrice.setText(Float.parseFloat(sum)
+						+ Float.parseFloat((general.isChecked() ? generalPrice
+								.getText().toString() : emsPrice
+								.getText().toString())) + "");
+				isFree = false;
+			}
+		} catch (NumberFormatException e) {
+			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 
@@ -665,7 +679,7 @@ public class CstmPayActivity extends SherlockActivity {
 //				sb.append(addresses1.getArea());
 //				sb.append(addresses1.getAddress());
 //				address.setText(sb.toString());
-				Log.i(TAG, null + "hello");
+//				Log.i(TAG, null + "hello");
 				recipientId = addresses1.getAddressId();
 				setAdd(addresses1);
 			}
