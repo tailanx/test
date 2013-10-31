@@ -44,6 +44,7 @@ import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.ExpressDataManage;
 import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.datamanage.PreferentialDataManage;
+import com.yidejia.app.mall.datamanage.VoucherDataManage;
 import com.yidejia.app.mall.fragment.CartActivity.InnerReceiver;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.Cart;
@@ -85,6 +86,7 @@ public class CstmPayActivity extends SherlockActivity {
 
 	// private EditText comment;//评论
 	private ScrollView go_pay_scrollView;
+	private VoucherDataManage voucherDataManage;
 
 	// private Myreceiver receiver;
 	// private Addresses addresses;
@@ -186,38 +188,39 @@ public class CstmPayActivity extends SherlockActivity {
 					}
 				}
 			});
-//			// 快递
-//			general.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-//
-//				@Override
-//				public void onCheckedChanged(CompoundButton buttonView,
-//						boolean isChecked) {
-//					if (!isChecked) {
-//						emsBox.setChecked(true);
-//					} else {
-//						emsBox.setChecked(false);
-//						Message ms = new Message();
-//						mHandler.sendEmptyMessage(Consts.GENERAL);
-//					}
-//
-//				}
-//			});
-//			emsBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-//
-//				@Override
-//				public void onCheckedChanged(CompoundButton buttonView,
-//						boolean isChecked) {
-//					// TODO Auto-generated method stub
-//					if (!isChecked) {
-//						general.setChecked(true);
-//						;
-//
-//					} else {
-//						general.setChecked(false);
-//						mHandler.sendEmptyMessage(Consts.EMS);
-//					}
-//				}
-//			});
+			// // 快递
+			// general.setOnCheckedChangeListener(new OnCheckedChangeListener()
+			// {
+			//
+			// @Override
+			// public void onCheckedChanged(CompoundButton buttonView,
+			// boolean isChecked) {
+			// if (!isChecked) {
+			// emsBox.setChecked(true);
+			// } else {
+			// emsBox.setChecked(false);
+			// Message ms = new Message();
+			// mHandler.sendEmptyMessage(Consts.GENERAL);
+			// }
+			//
+			// }
+			// });
+			// emsBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			//
+			// @Override
+			// public void onCheckedChanged(CompoundButton buttonView,
+			// boolean isChecked) {
+			// // TODO Auto-generated method stub
+			// if (!isChecked) {
+			// general.setChecked(true);
+			// ;
+			//
+			// } else {
+			// general.setChecked(false);
+			// mHandler.sendEmptyMessage(Consts.EMS);
+			// }
+			// }
+			// });
 
 			zhifubao.setOnClickListener(new OnClickListener() {
 
@@ -291,14 +294,19 @@ public class CstmPayActivity extends SherlockActivity {
 	}
 
 	private RelativeLayout reLayout;
-
+	private String isCartActivity; 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		try {
 			super.onCreate(savedInstanceState);
-			// TODO Auto-generated method stub
+			Intent intent = getIntent();
+			final String sum = intent.getStringExtra("price");
+			isCartActivity = intent.getStringExtra("cartActivity");
 			myApplication = (MyApplication) getApplication();
+			voucherDataManage = new VoucherDataManage(CstmPayActivity.this);
+			voucher =Integer.parseInt(voucherDataManage.getUserVoucher(myApplication.getUserId(), myApplication.getToken()));
+			// TODO Auto-generated method stub
 			preferentialDataManage = new PreferentialDataManage(
 					CstmPayActivity.this);
 			dialog = new Builder(CstmPayActivity.this)
@@ -316,13 +324,12 @@ public class CstmPayActivity extends SherlockActivity {
 									Intent intent = new Intent(
 											CstmPayActivity.this,
 											ExchangeFreeActivity.class);
-									// Bundle bundle = new Bundle();
-									// float sum = Float.parseFloat(sumTextView
-									// .getText().toString());
-									// bundle.putString("price", sum + "");
-									// intent.putExtras(bundle);
+									Bundle bundle = new Bundle();
+									bundle.putString("cartActivity", isCartActivity);
+									bundle.putString("price", sum + "");
+									intent.putExtras(bundle);
 									CstmPayActivity.this.startActivity(intent);
-
+									 CstmPayActivity.this.finish();
 								}
 							}).setNegativeButton("取消", null).create();
 			// new android.content.DialogInterface.OnClickListener() {
@@ -352,13 +359,11 @@ public class CstmPayActivity extends SherlockActivity {
 				Toast.makeText(this,
 						getResources().getString(R.string.please_login),
 						Toast.LENGTH_LONG).show();
-				Intent intent = new Intent(this, LoginActivity.class);
-				startActivity(intent);
+				Intent intent1 = new Intent(this, LoginActivity.class);
+				startActivity(intent1);
 				this.finish();
 			} else {
 				addressDataManage = new AddressDataManage(this);
-				Intent intent = getIntent();
-				final String sum = intent.getStringExtra("price");
 				// Cart cart = (Cart) intent.getSerializableExtra("Cart");
 				ArrayList<Cart> carts = (ArrayList<Cart>) intent
 						.getSerializableExtra("carts");
@@ -368,7 +373,7 @@ public class CstmPayActivity extends SherlockActivity {
 					sb.append(cart.getUId());
 					sb.append(",");
 					sb.append(cart.getAmount());
-					sb.append("n");
+					sb.append("y");
 					sb.append(";");
 				}
 				preferentialDataManage.getPreferential(sb.toString(),
@@ -378,213 +383,14 @@ public class CstmPayActivity extends SherlockActivity {
 
 					arrayListFree = preferentialDataManage.getFreeGoods();
 					arrayListExchange = preferentialDataManage.getScoreGoods();
+				}
+				if (isCartActivity.equals("Y")||isCartActivity.equals("N")) {
 					dialog.show();
-				}
-				// if (!carts.isEmpty()) {
-				setContentView(R.layout.go_pay);
-				// 注册返回时的广播
-				receiver = new InnerReceiver();
-				IntentFilter filter = new IntentFilter();
-				filter.addAction(Consts.BACK_UPDATE_CHANGE);
-				CstmPayActivity.this.registerReceiver(receiver, filter);
-
-				go_pay_scrollView = (ScrollView) findViewById(R.id.go_pay_scrollView);
-				setupShow();
-				addAddress();
-				setActionbar();
-				layout = (LinearLayout) findViewById(R.id.go_pay_relative2);
-				RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.go_shopping_use_evalution);
-				relativeLayout.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						Intent intent = new Intent(CstmPayActivity.this,
-								ExchangeFreeActivity.class);
-						intent.putExtra("voucher", voucher);
-						CstmPayActivity.this.startActivity(intent);
-					}
-				});
-				reLayout = (RelativeLayout) findViewById(R.id.go_pay_relative);
-				addressRelative = (RelativeLayout) findViewById(R.id.go_pay_relativelayout);
-				// 地址增加监听事件
-				addressRelative.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View arg0) {
-						// TODO Auto-generated method stub
-						Intent intent = new Intent(CstmPayActivity.this,
-								PayAddress.class);
-						CstmPayActivity.this.startActivityForResult(intent,
-								Consts.AddressRequestCode);
-					}
-				});
-				PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
-				goods = pay.loadView(carts);
-				// 获取免邮界限
-				ExpressDataManage expressDataManage = new ExpressDataManage(
-						CstmPayActivity.this);
-				ArrayList<FreePost> freePosts = expressDataManage
-						.getFreePostList("0", "20");
-				float fP = Float.MAX_VALUE;
-				if (freePosts.size() != 0)
-					fP = Float.parseFloat(freePosts.get(0).getMax());
-				Log.i("info", fP + "   fp");
-				if (Float.parseFloat(sum) > fP) {
-					sumPrice.setText(sum);
-					expressNum = "0";
+					show(sum, carts);
 				} else {
-					sumPrice.setText(Double.parseDouble(sum)
-							+ Double.parseDouble((general.isChecked() ? generalPrice
-									.getText().toString() : emsPrice.getText()
-									.toString())) + "");
+					// if (!carts.isEmpty()) {
+					show(sum, carts);
 				}
-				mHandler = new Handler() {
-					@Override
-					public void handleMessage(Message msg) {
-						switch (msg.what) {
-						case Consts.GENERAL:
-							expressNum = generalPrice.getText().toString();
-							sumPrice.setText(Double.parseDouble(sum)
-									+ Double.parseDouble(expressNum) + "");
-							postMethod = getResources().getString(
-									R.string.ship_post);// 快递方式
-							break;
-						case Consts.EMS:
-							expressNum = emsPrice.getText().toString();
-							sumPrice.setText(Double.parseDouble(sum)
-									+ Double.parseDouble(expressNum) + "");
-							postMethod = "EMS";
-							break;
-						}
-						super.handleMessage(msg);
-					}
-				};
-				// } else {
-				// /*
-				// * setActionbar(); setContentView(R.layout.go_pay);
-				// * LinearLayout layout = (LinearLayout)
-				// * findViewById(R.id.go_pay_relative2); PayUtil pay = new
-				// * PayUtil(CstmPayActivity.this, layout, cart); PayUtil pay
-				// * = new PayUtil(CstmPayActivity.this, layout,
-				// * carts.get(0));
-				// *
-				// * goods = pay.cartLoadView(); setupShow(); addAddress(); //
-				// * 获取免邮界限 ExpressDataManage expressDataManage = new
-				// * ExpressDataManage( CstmPayActivity.this);
-				// * ArrayList<FreePost> freePosts = expressDataManage
-				// * .getFreePostList("0", "20"); float fP = Float.MAX_VALUE;
-				// * if (freePosts.size() != 0) fP =
-				// * Float.parseFloat(freePosts.get(0).getMax());
-				// *
-				// * if (Float.parseFloat(sum) > fP) { sumPrice.setText(sum);
-				// * } else { sumPrice.setText(Double.parseDouble(sum) +
-				// * Double.parseDouble((general.isChecked() ? generalPrice
-				// * .getText().toString() : emsPrice .getText().toString()))
-				// * + ""); } mHandler = new Handler() {
-				// *
-				// * @Override public void handleMessage(Message msg) { switch
-				// * (msg.what) { case Consts.GENERAL: expressNum =
-				// * generalPrice.getText().toString();
-				// * sumPrice.setText(Double.parseDouble(sum) +
-				// * Double.parseDouble(expressNum) + ""); postMethod =
-				// * getResources().getString( R.string.ship_post);// 快递方式
-				// * break; case Consts.EMS: expressNum =
-				// * emsPrice.getText().toString();
-				// * sumPrice.setText(Double.parseDouble(sum) +
-				// * Double.parseDouble(expressNum) + ""); postMethod = "EMS";
-				// * break; } super.handleMessage(msg); } };
-				// */
-				// }
-				// 提交订单
-				saveOrderBtn.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						if (!yinlianCheckBox.isChecked()
-								&& !zhifubaoCheckBox.isChecked()
-								&& !zhifubaowangyeCheckBox.isChecked()
-								&& !caifutongCheckBox.isChecked()) {
-							Toast.makeText(
-									CstmPayActivity.this,
-									getResources().getString(
-											R.string.select_pay_type),
-									Toast.LENGTH_LONG).show();
-							go_pay_scrollView.smoothScrollTo(0, 0);
-							return;
-						}
-						int mode = 1;
-						String pay_type = "";
-						if (yinlianCheckBox.isChecked()) {
-							pay_type = "union";
-							mode = 1;
-						} else if (caifutongCheckBox.isChecked()) {
-							mode = 0;
-							pay_type = "tenpay";
-						} else {
-						}
-						OrderDataManage orderDataManage = new OrderDataManage(
-								CstmPayActivity.this);
-						orderDataManage.saveOrder(myApplication.getUserId(),
-								"0", recipientId, "", "0", expressNum,
-								postMethod, peiSongCenter, goods, "", pay_type,
-								myApplication.getToken());
-						// postMethod, peiSongCenter, goods,
-						// comment.getText().toString(),
-						// pay_type, myApplication.getToken());
-						orderCode = orderDataManage.getOrderCode();
-						resp_code = orderDataManage.getRespCode();
-						tn = orderDataManage.getTN();
-						// Log.e("OrderCode", orderCode);
-						if (orderCode == null || "".equals(orderCode))
-							return;
-						Intent userpayintent = new Intent(CstmPayActivity.this,
-								UserPayActivity.class);
-						Bundle bundle = new Bundle();
-
-						bundle.putInt("mode", mode);
-						// bundle.putString("name", "hello");
-						// bundle.putString("amount", "1.00");
-						bundle.putString("code", orderCode);
-						bundle.putString("uid", myApplication.getUserId());
-						bundle.putString("resp_code", resp_code);
-						bundle.putString("tn", tn);
-
-						userpayintent.putExtras(bundle);
-						startActivity(userpayintent);
-						CstmPayActivity.this.finish();
-
-						// //测试提交订单
-						// FutureTask<Map<String, String>> task = new
-						// FutureTask<Map<String, String>>(call);
-						// Thread th = new Thread(task);
-						// th.start();
-						// Map<String, String> resp;
-						// try {
-						// resp = task.get();
-						// Log.d(TAG, "task status: " + task.isDone());
-						//
-						// if (null != resp && null != resp.get("code") &&
-						// "0000".equals(resp.get("code"))) {
-						// String tn = resp.get("tn");
-						// UPPayAssistEx.startPayByJAR(CstmPayActivity.this,
-						// PayActivity.class, null, null, tn, "01");
-						//
-						// } else {
-						// // UPPayAssistEx.startPayByJAR(CstmPayActivity.this,
-						// // PayActivity.class, null, null, "121364646464646",
-						// "01");
-						// }
-						// } catch (InterruptedException e) {
-						// // TODO Auto-generated catch block
-						// e.printStackTrace();
-						// } catch (ExecutionException e) {
-						// // TODO Auto-generated catch block
-						// e.printStackTrace();
-						// }
-					}
-				});
 			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
@@ -594,6 +400,227 @@ public class CstmPayActivity extends SherlockActivity {
 					Toast.LENGTH_SHORT).show();
 		}
 
+	}
+
+	private void show(final String sum, ArrayList<Cart> carts) {
+		setContentView(R.layout.go_pay);
+		// 注册返回时的广播
+		receiver = new InnerReceiver();
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Consts.BACK_UPDATE_CHANGE);
+		CstmPayActivity.this.registerReceiver(receiver, filter);
+
+		go_pay_scrollView = (ScrollView) findViewById(R.id.go_pay_scrollView);
+		setupShow();
+		addAddress();
+		setActionbar();
+		layout = (LinearLayout) findViewById(R.id.go_pay_relative2);
+		RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.go_shopping_use_evalution);
+		relativeLayout.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(CstmPayActivity.this,
+						ExchangeFreeActivity.class);
+				intent.putExtra("voucher", voucher);
+				intent.putExtra("cartActivity", isCartActivity);
+				Log.i("info", voucher+"   voucher");
+				intent.putExtra("price", sum + "");
+				CstmPayActivity.this.startActivity(intent);
+				CstmPayActivity.this.finish();
+			}
+		});
+		reLayout = (RelativeLayout) findViewById(R.id.go_pay_relative);
+		addressRelative = (RelativeLayout) findViewById(R.id.go_pay_relativelayout);
+		// 地址增加监听事件
+		addressRelative.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(CstmPayActivity.this,
+						PayAddress.class);
+				CstmPayActivity.this.startActivityForResult(intent,
+						Consts.AddressRequestCode);
+			}
+		});
+		PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
+		goods = pay.loadView(carts);
+		// 获取免邮界限
+		ExpressDataManage expressDataManage = new ExpressDataManage(
+				CstmPayActivity.this);
+		ArrayList<FreePost> freePosts = expressDataManage
+				.getFreePostList("0", "20");
+		float fP = Float.MAX_VALUE;
+		if (freePosts.size() != 0)
+			fP = Float.parseFloat(freePosts.get(0).getMax());
+		Log.i("info", fP + "   fp");
+		if (Float.parseFloat(sum) > fP) {
+			sumPrice.setText(sum);
+			expressNum = "0";
+		} else {
+			sumPrice.setText(Double.parseDouble(sum)
+					+ Double.parseDouble((general.isChecked() ? generalPrice
+							.getText().toString() : emsPrice
+							.getText().toString())) + "");
+		}
+		mHandler = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				switch (msg.what) {
+				case Consts.GENERAL:
+					expressNum = generalPrice.getText().toString();
+					sumPrice.setText(Double.parseDouble(sum)
+							+ Double.parseDouble(expressNum) + "");
+					postMethod = getResources().getString(
+							R.string.ship_post);// 快递方式
+					break;
+				case Consts.EMS:
+					expressNum = emsPrice.getText().toString();
+					sumPrice.setText(Double.parseDouble(sum)
+							+ Double.parseDouble(expressNum) + "");
+					postMethod = "EMS";
+					break;
+				}
+				super.handleMessage(msg);
+			}
+		};
+		// } else {
+		// /*
+		// * setActionbar(); setContentView(R.layout.go_pay);
+		// * LinearLayout layout = (LinearLayout)
+		// * findViewById(R.id.go_pay_relative2); PayUtil pay = new
+		// * PayUtil(CstmPayActivity.this, layout, cart); PayUtil
+		// pay
+		// * = new PayUtil(CstmPayActivity.this, layout,
+		// * carts.get(0));
+		// *
+		// * goods = pay.cartLoadView(); setupShow(); addAddress();
+		// //
+		// * 获取免邮界限 ExpressDataManage expressDataManage = new
+		// * ExpressDataManage( CstmPayActivity.this);
+		// * ArrayList<FreePost> freePosts = expressDataManage
+		// * .getFreePostList("0", "20"); float fP =
+		// Float.MAX_VALUE;
+		// * if (freePosts.size() != 0) fP =
+		// * Float.parseFloat(freePosts.get(0).getMax());
+		// *
+		// * if (Float.parseFloat(sum) > fP) {
+		// sumPrice.setText(sum);
+		// * } else { sumPrice.setText(Double.parseDouble(sum) +
+		// * Double.parseDouble((general.isChecked() ? generalPrice
+		// * .getText().toString() : emsPrice
+		// .getText().toString()))
+		// * + ""); } mHandler = new Handler() {
+		// *
+		// * @Override public void handleMessage(Message msg) {
+		// switch
+		// * (msg.what) { case Consts.GENERAL: expressNum =
+		// * generalPrice.getText().toString();
+		// * sumPrice.setText(Double.parseDouble(sum) +
+		// * Double.parseDouble(expressNum) + ""); postMethod =
+		// * getResources().getString( R.string.ship_post);// 快递方式
+		// * break; case Consts.EMS: expressNum =
+		// * emsPrice.getText().toString();
+		// * sumPrice.setText(Double.parseDouble(sum) +
+		// * Double.parseDouble(expressNum) + ""); postMethod =
+		// "EMS";
+		// * break; } super.handleMessage(msg); } };
+		// */
+		// }
+		// 提交订单
+		saveOrderBtn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if (!yinlianCheckBox.isChecked()
+						&& !zhifubaoCheckBox.isChecked()
+						&& !zhifubaowangyeCheckBox.isChecked()
+						&& !caifutongCheckBox.isChecked()) {
+					Toast.makeText(
+							CstmPayActivity.this,
+							getResources().getString(
+									R.string.select_pay_type),
+							Toast.LENGTH_LONG).show();
+					go_pay_scrollView.smoothScrollTo(0, 0);
+					return;
+				}
+				int mode = 1;
+				String pay_type = "";
+				if (yinlianCheckBox.isChecked()) {
+					pay_type = "union";
+					mode = 1;
+				} else if (caifutongCheckBox.isChecked()) {
+					mode = 0;
+					pay_type = "tenpay";
+				} else {
+				}
+				OrderDataManage orderDataManage = new OrderDataManage(
+						CstmPayActivity.this);
+				orderDataManage.saveOrder(
+						myApplication.getUserId(), "0",
+						recipientId, "", "0", expressNum,
+						postMethod, peiSongCenter, goods, "",
+						pay_type, myApplication.getToken());
+				// postMethod, peiSongCenter, goods,
+				// comment.getText().toString(),
+				// pay_type, myApplication.getToken());
+				orderCode = orderDataManage.getOrderCode();
+				resp_code = orderDataManage.getRespCode();
+				tn = orderDataManage.getTN();
+				// Log.e("OrderCode", orderCode);
+				if (orderCode == null || "".equals(orderCode))
+					return;
+				Intent userpayintent = new Intent(
+						CstmPayActivity.this, UserPayActivity.class);
+				Bundle bundle = new Bundle();
+
+				bundle.putInt("mode", mode);
+				// bundle.putString("name", "hello");
+				// bundle.putString("amount", "1.00");
+				bundle.putString("code", orderCode);
+				bundle.putString("uid", myApplication.getUserId());
+				bundle.putString("resp_code", resp_code);
+				bundle.putString("tn", tn);
+
+				userpayintent.putExtras(bundle);
+				startActivity(userpayintent);
+				CstmPayActivity.this.finish();
+
+				// //测试提交订单
+				// FutureTask<Map<String, String>> task = new
+				// FutureTask<Map<String, String>>(call);
+				// Thread th = new Thread(task);
+				// th.start();
+				// Map<String, String> resp;
+				// try {
+				// resp = task.get();
+				// Log.d(TAG, "task status: " + task.isDone());
+				//
+				// if (null != resp && null != resp.get("code") &&
+				// "0000".equals(resp.get("code"))) {
+				// String tn = resp.get("tn");
+				// UPPayAssistEx.startPayByJAR(CstmPayActivity.this,
+				// PayActivity.class, null, null, tn, "01");
+				//
+				// } else {
+				// //
+				// UPPayAssistEx.startPayByJAR(CstmPayActivity.this,
+				// // PayActivity.class, null, null,
+				// "121364646464646",
+				// "01");
+				// }
+				// } catch (InterruptedException e) {
+				// // TODO Auto-generated catch block
+				// e.printStackTrace();
+				// } catch (ExecutionException e) {
+				// // TODO Auto-generated catch block
+				// e.printStackTrace();
+				// }
+			}
+		});
 	}
 
 	// @Override

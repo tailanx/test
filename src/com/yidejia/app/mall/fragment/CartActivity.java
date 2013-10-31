@@ -475,6 +475,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 							//
 							// getSherlockActivity().startActivity(intent1);
 							if (sum > 0) {
+								bundle.putString("cartActivity", "Y");
 								bundle.putString("price", sum + "");
 								intent1.putExtras(bundle);
 								getSherlockActivity().startActivity(intent1);

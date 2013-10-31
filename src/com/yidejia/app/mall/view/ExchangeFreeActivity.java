@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -21,6 +18,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,11 +31,10 @@ import com.yidejia.app.mall.datamanage.VoucherDataManage;
 import com.yidejia.app.mall.fragment.CartActivity;
 import com.yidejia.app.mall.fragment.ExchangeAdapter;
 import com.yidejia.app.mall.fragment.ExchangeFragment;
+import com.yidejia.app.mall.fragment.FreeGivingAdapter;
 import com.yidejia.app.mall.fragment.FreeGivingFragment;
-import com.yidejia.app.mall.fragment.CartActivity.InnerReceiver;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Specials;
-import com.yidejia.app.mall.util.CartUtil;
 import com.yidejia.app.mall.util.Consts;
 
 public class ExchangeFreeActivity extends SherlockFragmentActivity {
@@ -55,7 +52,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 	private int position_two;
 	private int position_three;
 	private Resources resources;
-	private String price;
+	private String sumprice;
 	private List<HashMap<String, Float>> exchange;// 换购商品
 	private List<HashMap<String, Object>> cart;// 换购商品
 	private VoucherDataManage dataManage;// 用户积分
@@ -63,38 +60,49 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 	private MyApplication myApplication;
 	// private CartActivity cartActivity;
 	private ArrayList<Cart> mArrayList;
+	private String isString;
 
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 		// WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		price = getIntent().getStringExtra("price");
 		// cartActivity = new CartActivity();
 		setContentView(R.layout.pay_free);
 		resources = getResources();
-		Intent intent =getIntent();
-		int jifen  = intent.getIntExtra("voucher", -1);
-		Log.i("info", jifen+"jifen");
+		Intent intent = getIntent();
+		sumprice = intent.getStringExtra("price");
+		// Log.i("info", sumprice);
+		int jifen = intent.getIntExtra("voucher", -1);
+		isString = intent.getStringExtra("cartActivity");
+		 Log.i("info", isString +"  isString");
+		if (isString.equals("Y")) {
+			mArrayList = CartActivity.cartList;
+		} else {
+			mArrayList = GoCartActivity.cartList;
+		}
+		if (mArrayList == null) {
+			Toast.makeText(ExchangeFreeActivity.this,
+					getResources().getString(R.string.no_network),
+					Toast.LENGTH_SHORT).show();
+		}
+		// Log.i("info", jifen + "jifen");
 		dataManage = new VoucherDataManage(ExchangeFreeActivity.this);
 		myApplication = (MyApplication) getApplication();
-		if(jifen==-1){
+		if (jifen == -1) {
 			voucher = Integer.parseInt(dataManage.getUserVoucher(
 					myApplication.getUserId(), myApplication.getToken()));
-		}else{
+		} else {
 			voucher = jifen;
 		}
-		
+
 		InitWidth();
 		InitTextView();
 		InitViewPager();
 		setActionBar();
-		
 
 	}
-
 
 	private void setActionBar() {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -102,19 +110,39 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
-		ImageView back = (ImageView) findViewById(R.id.compose_back);
-		// Button confirm = (Button) findViewById(R.id.actionbar_right);
-		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
+		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+		ImageView back = (ImageView) findViewById(R.id.actionbar_left);
+		Button confirm = (Button) findViewById(R.id.actionbar_right);
+		confirm.setText(getResources().getString(R.string.complete));
+		TextView titleTextView = (TextView) findViewById(R.id.actionbar_title);
 		titleTextView.setText(getResources().getString(
 				R.string.produce_exchange));
-
 		back.setOnClickListener(new OnClickListener() {
 
 			@Override
-			public void onClick(View arg0) {
-				Intent intent = new Intent(Consts.BACK_UPDATE_CHANGE);
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(ExchangeFreeActivity.this,
+						CstmPayActivity.class);
 
+				Bundle bundle = new Bundle();
+				bundle.putString("price", sumprice);
+				intent.putExtra("cartActivity", "G");
+				bundle.putSerializable("carts", mArrayList);
+				intent.putExtras(bundle);
+				ExchangeFreeActivity.this.startActivity(intent);
+				ExchangeFreeActivity.this.finish();
+			}
+		});
+
+		confirm.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+
+				Intent intent = new Intent(Consts.BACK_UPDATE_CHANGE);
+				intent.setClass(ExchangeFreeActivity.this,
+						CstmPayActivity.class);
 				Bundle bundle = new Bundle();
 
 				// TODO Auto-generated method stub
@@ -122,90 +150,95 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 				exchange = ExchangeAdapter.mlist1;
 				cart = ExchangeAdapter.mlist2;
 
-//				Log.i("info", exchange.toString() + "    exchange.toString()");
+				// Log.i("info", exchange.toString() +
+				// "    exchange.toString()");
 				float sum1 = 0;
 				float sum = 0;
-				mArrayList = CartActivity.cartList;
+
 				for (int i = 0; i < exchange.size(); i++) {
 					HashMap<String, Float> map = exchange.get(i);
-//					HashMap<String, Object> map1 = cart.get(i);
+					// HashMap<String, Object> map1 = cart.get(i);
 
 					Float isSelelct = map.get("isCheck");
 					Float price = map.get("price");
 					Float count = map.get("count");
 
-//					Float isSelelct1 = Float.parseFloat(map1.get("isCheck1")
-//							.toString());
-//					Specials specials = (Specials) map1.get("cart");
-//					Cart cart = new Cart();
-//
-//					cart.setImgUrl(specials.getImgUrl());
-//					cart.setPrice(0);
-//					cart.setProductText(specials.getBrief());
-//					cart.setUId(specials.getUId());
-//					cart.setSalledAmmount(count.intValue());
+					// Float isSelelct1 = Float.parseFloat(map1.get("isCheck1")
+					// .toString());
+					// Specials specials = (Specials) map1.get("cart");
+					// Cart cart = new Cart();
+					//
+					// cart.setImgUrl(specials.getImgUrl());
+					// cart.setPrice(0);
+					// cart.setProductText(specials.getBrief());
+					// cart.setUId(specials.getUId());
+					// cart.setSalledAmmount(count.intValue());
 					// Log.i("info", count+"    count");
-//					 Log.i("info", isSelelct1+"    isSelelct1");
+					// Log.i("info", isSelelct1+"    isSelelct1");
 					// Log.i("info", price+"    price");
 					// Log.i("info", cart+"    cart");
 					if (isSelelct == 0.0) {
 						sum = price * count;
-						Log.i("info", sum+"   sum");
-						
+						// Log.i("info", sum + "   sum");
+
 						sum1 += sum;
 					}
 
 					// Log.i("info", sum1+"    sum1");
 					// sum1 =sum1/exchange.size()+1;
 				}
-					if (sum1 > voucher) {
-						Toast.makeText(ExchangeFreeActivity.this,
-								getResources().getString(R.string.my_voucher),
-								Toast.LENGTH_SHORT).show();
-						Toast.makeText(
-								ExchangeFreeActivity.this,
-								getResources().getString(R.string.show_voucher)
-										+ voucher, Toast.LENGTH_SHORT).show();
-						return;
-					}
-					else if (sum1 <= voucher ) {//&& isSelelct1 == 0.0
-						for (int i = 0; i < cart.size(); i++) {
-							HashMap<String, Object> map1 = cart.get(i);
-							Float isSelelct1 = Float.parseFloat(map1.get("isCheck1")
-									.toString());
-							Float count1 = Float.parseFloat(map1.get("count1")
-									.toString());
-						
-							
-							Specials specials = (Specials) map1.get("cart");
-							Cart cart = new Cart();
-		
-							cart.setImgUrl(specials.getImgUrl());
-							cart.setPrice(0);
-							cart.setProductText(specials.getBrief());
-							cart.setUId(specials.getUId());
-							cart.setSalledAmmount(count1.intValue());
+				if (sum1 > voucher) {
+					Toast.makeText(ExchangeFreeActivity.this,
+							getResources().getString(R.string.my_voucher),
+							Toast.LENGTH_SHORT).show();
+					Toast.makeText(
+							ExchangeFreeActivity.this,
+							getResources().getString(R.string.show_voucher)
+									+ voucher, Toast.LENGTH_SHORT).show();
+					return;
+				} else if (sum1 <= voucher) {// && isSelelct1 == 0.0
+					for (int i = 0; i < cart.size(); i++) {
+						HashMap<String, Object> map1 = cart.get(i);
+						Float isSelelct1 = Float.parseFloat(map1
+								.get("isCheck1").toString());
+						Float count1 = Float.parseFloat(map1.get("count1")
+								.toString());
+
+						Specials specials = (Specials) map1.get("cart");
+						Cart cart = new Cart();
+
+						cart.setImgUrl(specials.getImgUrl());
+						cart.setPrice(0);
+						cart.setProductText(specials.getBrief());
+						cart.setUId(specials.getUId());
+						cart.setSalledAmmount(count1.intValue());
 						// if(mArrayList==null){
 						// Toast.makeText(ExchangeFreeActivity.this,
 						// getResources().getString(R.string.no_network),
 						// Toast.LENGTH_SHORT).show();
 						// }
-							if(isSelelct1==0.0){
-						mArrayList.add(cart);
-//						Log.i("info", CartActivity.cartList
-//								+ "    CartActivity.cartList");
-						voucher = (int) (voucher-sum1);
-							}
+						if (isSelelct1 == 0.0) {
+							mArrayList.add(cart);
+							voucher = (int) (voucher - sum1);
+						}
 					}
-				intent.putExtra("voucher", voucher);
-				intent.putExtra("carts", mArrayList);
-				Log.i("info", sum1 + "    sum1");
-				Log.i("info",voucher
-						+ "    voucher");
-				ExchangeFreeActivity.this.sendBroadcast(intent);
-				ExchangeFreeActivity.this.finish();
+					// Cart cart1 = new
+					// FreeGivingAdapter(ExchangeFreeActivity.this,
+					// CstmPayActivity.arrayListFree).getCart();
+					Cart cart1 = FreeGivingAdapter.carts;
+					if (cart1.getUId() != null) {
+						Log.i("info", mArrayList+"   mArrayList");
+						mArrayList.add(cart1);
+					}
+					intent.putExtra("price", sumprice);
+					intent.putExtra("voucher", voucher);
+					intent.putExtra("carts", mArrayList);
+					intent.putExtra("cartActivity", "N");
+					ExchangeFreeActivity.this.startActivity(intent);
+					ExchangeFreeActivity.this.sendBroadcast(intent);
+					ExchangeFreeActivity.this.finish();
 
-			}
+				}
 			}
 		});
 

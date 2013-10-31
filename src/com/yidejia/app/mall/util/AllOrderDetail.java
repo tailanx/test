@@ -154,7 +154,7 @@ public class AllOrderDetail {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(context, "锟斤拷锟界不锟斤拷锟斤拷锟斤拷", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_SHORT).show();
 
 		}
 		// sumTextView.setText(sumPrice+"");

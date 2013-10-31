@@ -49,6 +49,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 	private MyApplication myApplication;
 	private CartsDataManage dataManage;
 	private PreferentialDataManage preferentialDataManage ;
+	public static ArrayList<Cart> cartList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -233,7 +234,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 //						}else{
 					
 					if (sum > 0) {
-
+						bundle.putString("cartActivity", "N");
 						bundle.putString("price", sum + "");
 						intent1.putExtras(bundle);
 						intent1.putExtra("carts", cartList);

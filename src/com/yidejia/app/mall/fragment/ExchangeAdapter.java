@@ -40,7 +40,6 @@ public class ExchangeAdapter extends BaseAdapter {
 	public static List<HashMap<String, Object>> mlist2;
 	private LayoutInflater inflater;
 
-	// private Handler handler;
 
 	public ExchangeAdapter(ArrayList<Specials> mList, Context context) {
 		this.context = context;
@@ -74,7 +73,7 @@ public class ExchangeAdapter extends BaseAdapter {
 	 */
 	private void initData() {
 		for (int i = 0; i < mlist.size(); i++) {
-			Log.i("info", mlist.size() + "size");
+//			Log.i("info", mlist.size() + "size");
 			getIsSelected().put(i, false);
 		}
 	}
@@ -161,7 +160,6 @@ public class ExchangeAdapter extends BaseAdapter {
 					map1.put("count1",
 							Float.parseFloat(holder.count.getText().toString()));
 				}
-//				Log.i("info", mlist1.toString() + "    mlist1");
 			};
 		};
 		Specials s = mlist.get(postion);
@@ -179,7 +177,6 @@ public class ExchangeAdapter extends BaseAdapter {
 					boolean isChecked) {
 				// TODO Auto-generated method stub
 				if (isChecked) {
-					// Log.i("info", holder.cb.isChecked() + "    mlist1");
 					isSelected.put(postion, true);
 					map.put("isCheck", (float) 0);
 					map1.put("isCheck1", (float) 0);
@@ -188,9 +185,7 @@ public class ExchangeAdapter extends BaseAdapter {
 					isSelected.put(postion, false);
 					map.put("isCheck", (float) 1);
 					map1.put("isCheck1", (float) 1);
-					// map.put("isCheck", (float) 1);
 				}
-//				Log.i("info", mlist1.toString() + "    mlist1");  
 			}
 		});
 		holder.add.setOnClickListener(new OnClickListener() {
@@ -198,7 +193,6 @@ public class ExchangeAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				int sum = Integer.parseInt(holder.count.getText().toString());
-				// Log.i("info", sum + " sum");
 				if (sum >= 9999) {
 					Toast.makeText(
 							context,
@@ -211,10 +205,6 @@ public class ExchangeAdapter extends BaseAdapter {
 				} else {
 					sum++;
 					holder.count.setText(sum + "");
-					// map.put("count",
-					// Float.parseFloat(holder.count.getText().toString()));
-					// mTextView.setText(Integer.parseInt(number.getText()
-					// .toString())+"");
 				}
 				Message ms = new Message();
 				ms.what = 113;
@@ -237,16 +227,12 @@ public class ExchangeAdapter extends BaseAdapter {
 					sum--;
 					holder.count.setText(sum + "");
 
-					// map.put("count",
-					// Float.parseFloat(holder.count.getText().toString()));
 				}
-				//
 				Message ms = new Message();
 				ms.what = 113;
 				handler.sendMessage(ms);
 			}
 		});
-		//
 		map1.put("isCheck1", (float) (holder.cb.isChecked() == true ? 0 : 1));
 		map1.put("cart", s);
 		map1.put("price1", Float.parseFloat(s.getScores()));
@@ -259,8 +245,6 @@ public class ExchangeAdapter extends BaseAdapter {
 		i++;
 		mlist1.add(map);
 		mlist2.add(map1);
-		// Log.i("info", i+"i");
-//		Log.i("info", mlist1.toString() + "    mlist1"); 
 		return covertView;
 	}
 
