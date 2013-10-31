@@ -37,6 +37,7 @@ public class ExchangeAdapter extends BaseAdapter {
 	private ArrayList<Specials> mlist;
 	private static HashMap<Integer, Boolean> isSelected;// =״̬
 	public static List<HashMap<String, Float>> mlist1;
+	public static List<HashMap<String, Object>> mlist2;
 	private LayoutInflater inflater;
 
 	// private Handler handler;
@@ -52,6 +53,7 @@ public class ExchangeAdapter extends BaseAdapter {
 				.cacheInMemory(true).cacheOnDisc(true).build();
 		isSelected = new HashMap<Integer, Boolean>();
 		mlist1 = new ArrayList<HashMap<String, Float>>();
+		mlist2 = new ArrayList<HashMap<String, Object>>();
 		initData();
 	}
 
@@ -128,6 +130,7 @@ public class ExchangeAdapter extends BaseAdapter {
 	public View getView(final int postion, View covertView, ViewGroup arg2) {
 		// TODO Auto-generated method stub
 		final HashMap<String, Float> map = new HashMap<String, Float>();
+		final HashMap<String, Object> map1 = new HashMap<String, Object>();
 		final ViewHolder holder;
 		if (covertView == null) {
 			covertView = inflater.inflate(R.layout.exchange_produce_item, null);
@@ -155,15 +158,17 @@ public class ExchangeAdapter extends BaseAdapter {
 				if (msg.what == 113) {
 					map.put("count",
 							Float.parseFloat(holder.count.getText().toString()));
+					map1.put("count1",
+							Float.parseFloat(holder.count.getText().toString()));
 				}
-				Log.i("info", mlist1.toString() + "    mlist1");
+//				Log.i("info", mlist1.toString() + "    mlist1");
 			};
 		};
 		Specials s = mlist.get(postion);
 		imageLoader.displayImage(s.getImgUrl(), holder.iv, options,
 				animateFirstListener);
 		holder.tvContent.setText(s.getBrief());
-		holder.tvPrice.setText(s.getPrice());
+		holder.tvPrice.setText(s.getScores());
 		holder.cb.setChecked(getIsSelected().get(postion));
 		holder.count.setText(1 + "");
 
@@ -177,13 +182,15 @@ public class ExchangeAdapter extends BaseAdapter {
 					// Log.i("info", holder.cb.isChecked() + "    mlist1");
 					isSelected.put(postion, true);
 					map.put("isCheck", (float) 0);
+					map1.put("isCheck1", (float) 0);
 					// map.put("isCheck", (float) 0 );
 				} else {
 					isSelected.put(postion, false);
 					map.put("isCheck", (float) 1);
+					map1.put("isCheck1", (float) 1);
 					// map.put("isCheck", (float) 1);
 				}
-				Log.i("info", mlist1.toString() + "    mlist1");  
+//				Log.i("info", mlist1.toString() + "    mlist1");  
 			}
 		});
 		holder.add.setOnClickListener(new OnClickListener() {
@@ -198,9 +205,7 @@ public class ExchangeAdapter extends BaseAdapter {
 							context.getResources().getString(
 									R.string.price_error), Toast.LENGTH_LONG)
 							.show();
-					Toast.makeText(context, "����Ҫ������Ĳ�Ʒ������ͷ���ϵ",
-							Toast.LENGTH_LONG).show();
-
+					
 
 
 				} else {
@@ -242,13 +247,20 @@ public class ExchangeAdapter extends BaseAdapter {
 			}
 		});
 		//
-		map.put("price", Float.parseFloat(s.getPrice()));
+		map1.put("isCheck1", (float) (holder.cb.isChecked() == true ? 0 : 1));
+		map1.put("cart", s);
+		map1.put("price1", Float.parseFloat(s.getScores()));
+		map1.put("count1", Float.parseFloat(holder.count.getText().toString()));
+		
+		
+		map.put("price", Float.parseFloat(s.getScores()));
 		map.put("count", Float.parseFloat(holder.count.getText().toString()));
 		map.put("isCheck", (float) (holder.cb.isChecked() == true ? 0 : 1));
-		Log.i("info", mlist1.toString() + "    mlist1");
 		i++;
 		mlist1.add(map);
+		mlist2.add(map1);
 		// Log.i("info", i+"i");
+//		Log.i("info", mlist1.toString() + "    mlist1"); 
 		return covertView;
 	}
 

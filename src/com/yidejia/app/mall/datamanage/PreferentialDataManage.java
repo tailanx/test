@@ -58,6 +58,8 @@ public class PreferentialDataManage {
 	 * @return  返回免费送，积分换购商品
 	 */
 	public void getPreferential(String goods, String userId){
+		this.goods = goods;
+		this.userid = userId;
 		boolean state = false;
 		TaskVerify taskVerify = new TaskVerify();
 		try {
@@ -94,6 +96,7 @@ public class PreferentialDataManage {
 	 * @return 返回免费送，积分换购商品
 	 */
 	public void getPreferential(int userId, String cards){
+		
 		return ;
 	}
 	/**

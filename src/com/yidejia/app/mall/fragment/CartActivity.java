@@ -77,6 +77,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	// private final int MENU3 = 0x113;
 	private LinearLayout layout;
 	private View view;
+	public static ArrayList<Cart> cartList;
 	// private CartsDataManage dataManage2;
 	// private AddressDataManage addressManage;// 地址管理
 	// private PullToRefreshScrollView mPullToRefreshScrollView;// 刷新界面
@@ -91,7 +92,9 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 
 	private ArrayList<Cart> mList;
 	private Button shoppingCartTopay;
+	
 
+	
 	// private InnerReceiver receiver;
 
 	// private void doClick(View v) {
@@ -228,6 +231,14 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	// this.arrayListExchange = arrayListExchange;
 	// }
 
+//	public ArrayList<Cart> getCartList() {
+//		return cartList;
+//	}
+//
+//	public void setCartList(ArrayList<Cart> cartList) {
+//		this.cartList = cartList;
+//	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -303,50 +314,50 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 			// label);
 			// mPullToRefreshScrollView.onRefreshComplete();
 			// mPullToRefreshScrollView.setOnRefreshListener(listener);
-			dialog = new Builder(getSherlockActivity())
-					.setTitle("换购商品")
-					.setIcon(android.R.drawable.dialog_frame)
-					.setMessage(
-							getResources().getString(R.string.exchange_produce))
-					.setPositiveButton(
-							"确定",
-							new android.content.DialogInterface.OnClickListener() {
-
-								@Override
-								public void onClick(DialogInterface arg0,
-										int arg1) {
-									Intent intent = new Intent(
-											getSherlockActivity(),
-											ExchangeFreeActivity.class);
-									Bundle bundle = new Bundle();
-									float sum = Float.parseFloat(sumTextView
-											.getText().toString());
-									bundle.putString("price", sum + "");
-									intent.putExtras(bundle);
-									getSherlockActivity().startActivity(intent);
-
-								}
-							})
-					.setNegativeButton(
-							"取消",
-							new android.content.DialogInterface.OnClickListener() {
-
-								@Override
-								public void onClick(DialogInterface dialog,
-										int which) {
-									// TODO Auto-generated method stub
-									Intent intent = new Intent(
-											getSherlockActivity(),
-											CstmPayActivity.class);
-									Bundle bundle = new Bundle();
-									float sum = Float.parseFloat(sumTextView
-											.getText().toString());
-									bundle.putString("price", sum + "");
-									intent.putExtras(bundle);
-									getSherlockActivity().startActivity(intent);
-
-								}
-							}).create();
+//			dialog = new Builder(getSherlockActivity())
+//					.setTitle("换购商品")
+//					.setIcon(android.R.drawable.dialog_frame)
+//					.setMessage(
+//							getResources().getString(R.string.exchange_produce))
+//					.setPositiveButton(
+//							"确定",
+//							new android.content.DialogInterface.OnClickListener() {
+//
+//								@Override
+//								public void onClick(DialogInterface arg0,
+//										int arg1) {
+//									Intent intent = new Intent(
+//											getSherlockActivity(),
+//											ExchangeFreeActivity.class);
+//									Bundle bundle = new Bundle();
+//									float sum = Float.parseFloat(sumTextView
+//											.getText().toString());
+//									bundle.putString("price", sum + "");
+//									intent.putExtras(bundle);
+//									getSherlockActivity().startActivity(intent);
+//
+//								}
+//							})
+//					.setNegativeButton(
+//							"取消",
+//							new android.content.DialogInterface.OnClickListener() {
+//
+//								@Override
+//								public void onClick(DialogInterface dialog,
+//										int which) {
+//									// TODO Auto-generated method stub
+//									Intent intent = new Intent(
+//											getSherlockActivity(),
+//											CstmPayActivity.class);
+//									Bundle bundle = new Bundle();
+//									float sum = Float.parseFloat(sumTextView
+//											.getText().toString());
+//									bundle.putString("price", sum + "");
+//									intent.putExtras(bundle);
+//									getSherlockActivity().startActivity(intent);
+//
+//								}
+//							}).create();
 
 			if (shoppingCartTopay == null) {
 				Toast.makeText(
@@ -431,7 +442,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 							// // "CartActivity.arrayListFree");
 							//
 ////							ArrayList<Cart> mList = dataManage.getCartsArray();
-							ArrayList<Cart> cartList = new ArrayList<Cart>();
+							cartList = new ArrayList<Cart>();
 							List<HashMap<String, Object>> orderCarts = CartUtil.list1;
 							for(int i=0;i<orderCarts.size();i++){
 								HashMap<String, Object> map = orderCarts.get(i);
@@ -680,7 +691,6 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 				cartUtil.AllComment();
 			}
 		}
-
 	}
 
 }

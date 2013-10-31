@@ -16,6 +16,7 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.PreferentialDataManage;
 import com.yidejia.app.mall.fragment.ExchangeAdapter.ViewHolder;
 import com.yidejia.app.mall.model.Specials;
+import com.yidejia.app.mall.view.CstmPayActivity;
 
 public class ExchangeFragment extends SherlockFragment {
 //	private TextView titleTextView;//订单的状态
@@ -63,7 +64,7 @@ public class ExchangeFragment extends SherlockFragment {
 		dataManage  = new PreferentialDataManage(getSherlockActivity());
 		View view= inflater.inflate(R.layout.exchange_produce, null);//获取视图对象
 		listview = (ListView) view.findViewById(R.id.exchange_shopping_listview);
-		adapter = new ExchangeAdapter(CartActivity.arrayListExchange,getActivity());
+		adapter = new ExchangeAdapter(CstmPayActivity.arrayListExchange,getActivity());
 		listview.setAdapter(adapter);
 		//		LinearLayout relativeLayout = (LinearLayout)view.findViewById(R.id.shopping_cart_relative2);//获取布局
 
@@ -73,6 +74,7 @@ public class ExchangeFragment extends SherlockFragment {
 //		setupShow(view);
 //		getData();
 				
+		
 //		View produce = inflater.inflate(R.layout.all_order_item_produce, null);//产品详细
 //		View produce1 = inflater.inflate(R.layout.all_order_item_produce, null);//产品详细
 //		

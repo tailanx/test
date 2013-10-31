@@ -14,6 +14,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.PreferentialDataManage;
 import com.yidejia.app.mall.fragment.FreeGivingAdapter.ViewHolder;
+import com.yidejia.app.mall.view.CstmPayActivity;
 
 public class FreeGivingFragment extends SherlockFragment {
 //	private TextView titleTextView;//订单的状态
@@ -68,7 +69,7 @@ public class FreeGivingFragment extends SherlockFragment {
 		LinearLayout relativeLayout = (LinearLayout)view.findViewById(R.id.free_shopping_cart_relative2);//获取布局
 		listView = (ListView) view.findViewById(R.id.free_giving_listview);
 		Log.i("info", CartActivity.arrayListFree+  "CartActivity.arrayListFree");
-		adapter = new FreeGivingAdapter(getSherlockActivity(), CartActivity.arrayListFree);//preferentialDataManage.getFreeGoods()
+		adapter = new FreeGivingAdapter(getSherlockActivity(), CstmPayActivity.arrayListFree);//preferentialDataManage.getFreeGoods()
 		listView.setAdapter(adapter);
         listView.setOnItemClickListener(listItemClickListener);  
 //		AllOrderUtil allOrderUtil = new AllOrderUtil(getSherlockActivity(), relativeLayout);

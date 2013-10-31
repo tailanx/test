@@ -211,7 +211,7 @@ public class EditorActivity extends SherlockActivity {
 				// TODO Auto-generated method stub
 				// Toast.makeText(ComposeActivity.this, "button",
 				// Toast.LENGTH_SHORT).show();
-				
+				EditorActivity.this.finish();
 			}
 		});
 

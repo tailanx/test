@@ -182,6 +182,6 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 //		});
 //		
 //		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
-//		titleTextView.setText("登录");
+//		titleTextView.setText("登录1");
 //	}
 //}
