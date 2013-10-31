@@ -130,6 +130,7 @@ public class CartsDataManage {
 	 * @return cartsArray 购物车产品列表
 	 */
 	public ArrayList<Cart> getCartsArray(){
+		ArrayList<Cart> cartsArray = new ArrayList<Cart>();
 		try {
 			Map<String, ?>spMap = sp.getAll();
 			if(!spMap.isEmpty()){

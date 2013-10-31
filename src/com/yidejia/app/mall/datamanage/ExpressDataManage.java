@@ -148,13 +148,16 @@ public class ExpressDataManage {
 	private void analysisJson(String responseString) throws JSONException{
 		JSONArray responseArray = new JSONArray(responseString);
 		JSONObject responseObject;
-		Express express = new Express();
+		Express express;
 		int length = responseArray.length();
 		for (int i = 0; i < length; i++) {
+			express = new Express();
 			responseObject = responseArray.getJSONObject(i);
 			express.setEms(responseObject.getString("ems"));
 			express.setExpress(responseObject.getString("express"));
+			if(i == 0) Log.i(TAG, "pre_id:" + responseObject.getString("pre_id"));
 			express.setPreId(responseObject.getString("pre_id"));
+			if(i==0)Log.i(TAG, express.getPreId());
 			express.setIsDefault("y".equals(responseObject.getString("is_default")));
 			expresses.add(express);
 		}
