@@ -368,6 +368,9 @@ public class CstmPayActivity extends SherlockActivity {
 				ArrayList<Cart> carts = (ArrayList<Cart>) intent
 						.getSerializableExtra("carts");
 				StringBuffer sb = new StringBuffer();
+				if("".equals(carts)){
+					Toast.makeText(CstmPayActivity.this, getResources().getString(R.string.no_network), Toast.LENGTH_SHORT).show();
+				}
 				for (int i = 0; i < carts.size(); i++) {
 					Cart cart = carts.get(i);
 					sb.append(cart.getUId());
