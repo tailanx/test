@@ -53,9 +53,9 @@ public class MyCollectActivity extends SherlockActivity {
 		mPullRefreshListView = (PullToRefreshListView) findViewById(R.id.my_collect_listview);
 		String label = getResources().getString(R.string.update_time)
 				+ DateUtils.formatDateTime(this,
-						System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
-								| DateUtils.FORMAT_SHOW_DATE
-								| DateUtils.FORMAT_SHOW_DATE);
+						System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
+						| DateUtils.FORMAT_SHOW_DATE
+						| DateUtils.FORMAT_ABBREV_ALL);
 		mPullRefreshListView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 		mListView = mPullRefreshListView.getRefreshableView();
 		fAdapter = new FavoriteAdapter(this, mList);
@@ -158,9 +158,9 @@ public class MyCollectActivity extends SherlockActivity {
 			// TODO Auto-generated method stub
 			String label = MyCollectActivity.this.getResources().getString(R.string.update_time)
 					+ DateUtils.formatDateTime(MyCollectActivity.this,
-							System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
-									| DateUtils.FORMAT_SHOW_DATE
-									| DateUtils.FORMAT_SHOW_DATE);
+							System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
+							| DateUtils.FORMAT_SHOW_DATE
+							| DateUtils.FORMAT_ABBREV_ALL);
 			mPullRefreshListView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 			FavoriteDataManage manage = new FavoriteDataManage(MyCollectActivity.this);
 			fromIndex = 0;
@@ -187,9 +187,9 @@ public class MyCollectActivity extends SherlockActivity {
 			// TODO Auto-generated method stub
 			String label = MyCollectActivity.this.getResources().getString(R.string.update_time)
 					+ DateUtils.formatDateTime(MyCollectActivity.this,
-							System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
-									| DateUtils.FORMAT_SHOW_DATE
-									| DateUtils.FORMAT_SHOW_DATE);
+							System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
+							| DateUtils.FORMAT_SHOW_DATE
+							| DateUtils.FORMAT_ABBREV_ALL);
 			mPullRefreshListView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 			FavoriteDataManage manage = new FavoriteDataManage(MyCollectActivity.this);
 			fromIndex += amount;
@@ -218,9 +218,9 @@ public class MyCollectActivity extends SherlockActivity {
 			// TODO Auto-generated method stub
 			String label = MyCollectActivity.this.getResources().getString(R.string.update_time)
 					+ DateUtils.formatDateTime(MyCollectActivity.this,
-							System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
-									| DateUtils.FORMAT_SHOW_DATE
-									| DateUtils.FORMAT_SHOW_DATE);
+							System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
+							| DateUtils.FORMAT_SHOW_DATE
+							| DateUtils.FORMAT_ABBREV_ALL);
 			mPullRefreshListView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 			FavoriteDataManage manage = new FavoriteDataManage(MyCollectActivity.this);
 			fromIndex += amount;
