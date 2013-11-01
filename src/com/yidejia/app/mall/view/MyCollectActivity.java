@@ -25,6 +25,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.unionpay.mpay.utils.m;
 import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
@@ -101,6 +102,8 @@ public class MyCollectActivity extends SherlockActivity {
 							// TODO Auto-generated method stub
 							if(delFav(pid)){
 //								updateListView(index);
+								mPullRefreshListView.setRefreshing();
+								mPullRefreshListView.onRefreshComplete();
 							}
 						}
 					}).setNegativeButton(R.string.searchCancel, null).create().show();
