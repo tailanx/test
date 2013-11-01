@@ -145,7 +145,7 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 			goodsViewPager.setCurrentItem(currIndex);
 			goodsViewPager
 					.setOnPageChangeListener(new GoodsPagerChangeListener());
-			goodsViewPager.setOffscreenPageLimit(1);
+			goodsViewPager.setOffscreenPageLimit(2);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -206,7 +206,12 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 			default:
 				break;
 			}
-
+//			fragmentsList.get(currIndex).onPause(); // 调用切换前Fargment的onPause()
+////        fragments.get(currentPageIndex).onStop(); // 调用切换前Fargment的onStop()
+//			if(fragmentsList.get(arg0).isAdded()){
+////            fragments.get(i).onStart(); // 调用切换后Fargment的onStart()
+//				fragmentsList.get(arg0).onResume(); // 调用切换后Fargment的onResume()
+//			}
 			currIndex = arg0;
 		}
 	}
