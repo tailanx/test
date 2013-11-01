@@ -155,9 +155,9 @@ public class CstmPayActivity extends SherlockActivity {
 			caifutongCheckBox = (CheckBox) findViewById(R.id.caifutong_checkbox);
 
 			//支付宝和财付通暂时不可见
-			zhifubao.setVisibility(ViewGroup.GONE);
-			zhifubaowangye.setVisibility(ViewGroup.GONE);
-			cafutong.setVisibility(ViewGroup.GONE);
+//			zhifubao.setVisibility(ViewGroup.GONE);
+//			zhifubaowangye.setVisibility(ViewGroup.GONE);
+//			cafutong.setVisibility(ViewGroup.GONE);
 			
 			generalRelative.setOnClickListener(new OnClickListener() {
 
@@ -585,12 +585,18 @@ public class CstmPayActivity extends SherlockActivity {
 				} else if (caifutongCheckBox.isChecked()) {
 					mode = 0;
 					pay_type = "tenpay";
+					Toast.makeText(CstmPayActivity.this, "亲，暂时不支持该支付方式！", Toast.LENGTH_LONG).show();
+					return;
 				} else if(zhifubaoCheckBox.isChecked()){
 					mode = 2;
 					pay_type = "alipay";
+					Toast.makeText(CstmPayActivity.this, "亲，暂时不支持该支付方式！", Toast.LENGTH_LONG).show();
+					return;
 				} else {
 					mode = 3;
 					pay_type = "aliwappay";
+					Toast.makeText(CstmPayActivity.this, "亲，暂时不支持该支付方式！", Toast.LENGTH_LONG).show();
+					return;
 				}
 				OrderDataManage orderDataManage = new OrderDataManage(
 						CstmPayActivity.this);
