@@ -56,7 +56,7 @@ public class AlreadyCompleteUtil {
 		public void loadView(int fromIndex, int amount){
 			try {
 				orderDataManage = new OrderDataManage(context);
-				ArrayList<Order> mList = orderDataManage.getOrderArray(myApplication.getUserId(), "", "", "", fromIndex+"", amount+"",myApplication.getToken());///已签收
+				ArrayList<Order> mList = orderDataManage.getOrderArray(myApplication.getUserId(), "", "", "已发货", fromIndex+"", amount+"",myApplication.getToken());///已签收
 				Log.i("info", mList.size()+"mList");
 				for(int i=0;i<mList.size();i++){
 					setupShow();
