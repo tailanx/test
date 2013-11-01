@@ -21,7 +21,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/go_pay_show_pay_money"
+            android:id="@+id/order_detail_go_pay_show_pay_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/order_detail_sum_money"

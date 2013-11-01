@@ -37,9 +37,9 @@ public class ExchangeAdapter extends BaseAdapter {
 	private ArrayList<Specials> mlist;
 	private static HashMap<Integer, Boolean> isSelected;// =״̬
 	public static List<HashMap<String, Float>> mlist1;
+	public static List<HashMap<String, Object>> mlist2;
 	private LayoutInflater inflater;
 
-	// private Handler handler;
 
 	public ExchangeAdapter(ArrayList<Specials> mList, Context context) {
 		this.context = context;
@@ -52,6 +52,7 @@ public class ExchangeAdapter extends BaseAdapter {
 				.cacheInMemory(true).cacheOnDisc(true).build();
 		isSelected = new HashMap<Integer, Boolean>();
 		mlist1 = new ArrayList<HashMap<String, Float>>();
+		mlist2 = new ArrayList<HashMap<String, Object>>();
 		initData();
 	}
 
@@ -72,7 +73,7 @@ public class ExchangeAdapter extends BaseAdapter {
 	 */
 	private void initData() {
 		for (int i = 0; i < mlist.size(); i++) {
-			Log.i("info", mlist.size() + "size");
+//			Log.i("info", mlist.size() + "size");
 			getIsSelected().put(i, false);
 		}
 	}
@@ -128,6 +129,7 @@ public class ExchangeAdapter extends BaseAdapter {
 	public View getView(final int postion, View covertView, ViewGroup arg2) {
 		// TODO Auto-generated method stub
 		final HashMap<String, Float> map = new HashMap<String, Float>();
+		final HashMap<String, Object> map1 = new HashMap<String, Object>();
 		final ViewHolder holder;
 		if (covertView == null) {
 			covertView = inflater.inflate(R.layout.exchange_produce_item, null);
@@ -155,8 +157,9 @@ public class ExchangeAdapter extends BaseAdapter {
 				if (msg.what == 113) {
 					map.put("count",
 							Float.parseFloat(holder.count.getText().toString()));
+					map1.put("count1",
+							Float.parseFloat(holder.count.getText().toString()));
 				}
-				Log.i("info", mlist1.toString() + "    mlist1");
 			};
 		};
 		Specials s = mlist.get(postion);
@@ -174,16 +177,15 @@ public class ExchangeAdapter extends BaseAdapter {
 					boolean isChecked) {
 				// TODO Auto-generated method stub
 				if (isChecked) {
-					// Log.i("info", holder.cb.isChecked() + "    mlist1");
 					isSelected.put(postion, true);
 					map.put("isCheck", (float) 0);
+					map1.put("isCheck1", (float) 0);
 					// map.put("isCheck", (float) 0 );
 				} else {
 					isSelected.put(postion, false);
 					map.put("isCheck", (float) 1);
-					// map.put("isCheck", (float) 1);
+					map1.put("isCheck1", (float) 1);
 				}
-				Log.i("info", mlist1.toString() + "    mlist1");  
 			}
 		});
 		holder.add.setOnClickListener(new OnClickListener() {
@@ -191,25 +193,18 @@ public class ExchangeAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				int sum = Integer.parseInt(holder.count.getText().toString());
-				// Log.i("info", sum + " sum");
 				if (sum >= 9999) {
 					Toast.makeText(
 							context,
 							context.getResources().getString(
 									R.string.price_error), Toast.LENGTH_LONG)
 							.show();
-					Toast.makeText(context, "����Ҫ������Ĳ�Ʒ������ͷ���ϵ",
-							Toast.LENGTH_LONG).show();
-
+					
 
 
 				} else {
 					sum++;
 					holder.count.setText(sum + "");
-					// map.put("count",
-					// Float.parseFloat(holder.count.getText().toString()));
-					// mTextView.setText(Integer.parseInt(number.getText()
-					// .toString())+"");
 				}
 				Message ms = new Message();
 				ms.what = 113;
@@ -232,23 +227,24 @@ public class ExchangeAdapter extends BaseAdapter {
 					sum--;
 					holder.count.setText(sum + "");
 
-					// map.put("count",
-					// Float.parseFloat(holder.count.getText().toString()));
 				}
-				//
 				Message ms = new Message();
 				ms.what = 113;
 				handler.sendMessage(ms);
 			}
 		});
-		//
-		map.put("price", Float.parseFloat(s.getPrice()));
+		map1.put("isCheck1", (float) (holder.cb.isChecked() == true ? 0 : 1));
+		map1.put("cart", s);
+		map1.put("price1", Float.parseFloat(s.getScores()));
+		map1.put("count1", Float.parseFloat(holder.count.getText().toString()));
+		
+		
+		map.put("price", Float.parseFloat(s.getScores()));
 		map.put("count", Float.parseFloat(holder.count.getText().toString()));
 		map.put("isCheck", (float) (holder.cb.isChecked() == true ? 0 : 1));
-		Log.i("info", mlist1.toString() + "    mlist1");
 		i++;
 		mlist1.add(map);
-		// Log.i("info", i+"i");
+		mlist2.add(map1);
 		return covertView;
 	}
 

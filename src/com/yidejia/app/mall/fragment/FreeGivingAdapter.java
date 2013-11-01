@@ -2,11 +2,15 @@ package com.yidejia.app.mall.fragment;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +27,7 @@ import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Specials;
 
 public class FreeGivingAdapter extends BaseAdapter {
@@ -30,7 +35,8 @@ public class FreeGivingAdapter extends BaseAdapter {
 	private Activity activity;
 	private LayoutInflater inflater;
 	private ArrayList<Specials> mList;
-
+	private static List<HashMap<String, Object>> list;
+	public static Cart carts;
 
 	public FreeGivingAdapter(Activity context, ArrayList<Specials> mList) {
 		this.activity = context;
@@ -41,12 +47,15 @@ public class FreeGivingAdapter extends BaseAdapter {
 				.showImageOnFail(R.drawable.image_bg)
 				.showImageForEmptyUri(R.drawable.image_bg)
 				.cacheInMemory(true).cacheOnDisc(true).build();
+		list  = new ArrayList<HashMap<String,Object>>();
 		// init();
 		// sp = context.getSharedPreferences("CHECK",0);
 		// SharedPreferences.Editor editor = sp.edit();
 		// editor.putString("statePosition", );
+		carts = new Cart();
 	}
-
+	
+	
 	/**
 	 * �޸����ʱ,���õķ���
 	 * 
@@ -103,7 +112,9 @@ public class FreeGivingAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
+		Log.i("info", position+"           postion");
 		ViewHolder holder = null;
+		HashMap< String , Object> map = new HashMap<String, Object>();
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.free_giving_item, null);
 			holder = new ViewHolder();
@@ -120,7 +131,12 @@ public class FreeGivingAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		// ��ȡ���
-		Specials specials = mList.get(position);
+		final Handler handler = new Handler(){
+			public void handleMessage(Message msg) {
+				
+			};
+		};
+		final Specials specials = mList.get(position);
 		// �������ʾ��item��
 		holder.title.setText(specials.getBrief());
 		holder.price.setText(specials.getPrice());
@@ -141,7 +157,18 @@ public class FreeGivingAdapter extends BaseAdapter {
 						if (tempCheckBox != null)
 							tempCheckBox.setChecked(false);
 					}
+					try {
+						carts.setUId(specials.getUId());
+						carts.setImgUrl(specials.getImgUrl());
+						carts.setProductText(specials.getBrief());
+						carts.setSalledAmmount(1);
+						carts.setPrice(Float.parseFloat(specials.getScores()));
+					} catch (NumberFormatException e) {
+						e.printStackTrace();
+					}
 					temp = buttonView.getId();// ���浱ǰѡ�е�checkbox��idֵ
+					Message ms = new Message();
+					handler.sendEmptyMessage(114);
 				}
 			}
 
@@ -152,6 +179,11 @@ public class FreeGivingAdapter extends BaseAdapter {
 			holder.cb.setChecked(true);
 		else
 			holder.cb.setChecked(false);
+		for(int i=0;i<mList.size();i++){
+			map.put("check", holder.cb.isChecked());
+		}
+		list.add(map);
+		Log.i("info", list.toString()+"  list.toString()");
 		return convertView;
 	}
 
@@ -160,6 +192,10 @@ public class FreeGivingAdapter extends BaseAdapter {
 		ImageView mImageView;// ͼƬ
 		TextView price;// �۸�
 		CheckBox cb;
+	}
+	
+	public Cart getCart(){
+		return this.carts;
 	}
 
 }

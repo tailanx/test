@@ -93,7 +93,7 @@ public class PayUtil {
 	private DisplayImageOptions options;
 	protected ImageLoader imageLoader = ImageLoader.getInstance();// ����ͼƬ
 
-	public String loadView(ArrayList<Cart> mList) {
+	public String loadView(ArrayList<Cart> mList) {//, boolean isHuanGou
 		StringBuffer goods = new StringBuffer();
 		try {
 //			dataManage = new CartsDataManage();

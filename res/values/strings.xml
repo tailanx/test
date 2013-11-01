@@ -234,6 +234,6 @@
 	<!-- 订单号 -->
 	<string name="no_token_id">订单号为空或位数不对，请检查输入的订单号！</string>
 	<string name="amount">数量:</string>
-	
+	 <string name="complete">完成</string>
 	 <string name="retrun_back">确定退出应用</string>
 </resources>

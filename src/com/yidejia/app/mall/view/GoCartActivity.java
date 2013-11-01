@@ -49,6 +49,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 	private MyApplication myApplication;
 	private CartsDataManage dataManage;
 	private PreferentialDataManage preferentialDataManage ;
+	public static ArrayList<Cart> cartList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -198,7 +199,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 					//
 					return;
 				} else {
-					ArrayList<Cart> cartList = new ArrayList<Cart>();
+					 cartList = new ArrayList<Cart>();
 					List<HashMap<String, Object>> orderCarts = CartUtil.list1;
 					for(int i=0;i<orderCarts.size();i++){
 						HashMap<String, Object> map = orderCarts.get(i);
@@ -233,10 +234,9 @@ public class GoCartActivity extends SherlockActivity {// implements
 //						}else{
 					
 					if (sum > 0) {
-
+						bundle.putString("cartActivity","N");
 						bundle.putString("price", sum + "");
 						intent1.putExtras(bundle);
-						intent1.putExtra("carts", cartList);
 						GoCartActivity.this.startActivity(intent1);
 					} else {
 						Toast.makeText(GoCartActivity.this, getResources().getString(R.string.buy_nothing),
