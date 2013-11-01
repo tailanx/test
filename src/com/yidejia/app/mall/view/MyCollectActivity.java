@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,6 +20,7 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.SearchActivity;
 import com.yidejia.app.mall.adapter.FavoriteAdapter;
 import com.yidejia.app.mall.datamanage.FavoriteDataManage;
 import com.yidejia.app.mall.model.SearchItem;
@@ -39,6 +40,7 @@ public class MyCollectActivity extends SherlockActivity {
 //	private TextView price;//价格
 //	private TextView sellCount;//卖出的总数
 //	private TextView compment;//评论
+	
 	private void setupShow(){
 		mListView = (ListView) findViewById(R.id.my_collect_listview);
 		fAdapter = new FavoriteAdapter(this, mList);
@@ -89,11 +91,22 @@ public class MyCollectActivity extends SherlockActivity {
 		// Log.i("info", mList.size()+"");
 		if (mList.size() <= 0) {
 			setContentView(R.layout.favorite_empty);
+			Button search = (Button) findViewById(R.id.favorite_empty_button);
+			search.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Intent intentOrder = new Intent(MyCollectActivity.this, SearchActivity.class);
+					MyCollectActivity.this.startActivity(intentOrder);
+				}
+			});
 		} else {
 			setContentView(R.layout.my_collect);
 			setupShow();
 		}
 	}
+	
 	
 	private void setActionbar(){
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);

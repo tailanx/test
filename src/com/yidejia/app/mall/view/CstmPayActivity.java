@@ -387,12 +387,12 @@ public class CstmPayActivity extends SherlockActivity {
 					arrayListFree = preferentialDataManage.getFreeGoods();
 					arrayListExchange = preferentialDataManage.getScoreGoods();
 				}
-				if (isCartActivity.equals("Y")||isCartActivity.equals("N")) {
+				if (isCartActivity.equals("Y")) {//||isCartActivity.equals("N")
 					dialog.show();
-					show(sum, carts);
+					show(sum, carts,true);
 				} else {
 					// if (!carts.isEmpty()) {
-					show(sum, carts);
+					show(sum, carts,false);
 				}
 			}
 		} catch (NumberFormatException e) {
@@ -405,7 +405,7 @@ public class CstmPayActivity extends SherlockActivity {
 
 	}
 
-	private void show(final String sum, ArrayList<Cart> carts) {
+	private void show(final String sum, ArrayList<Cart> carts, boolean isHuanGou) {
 		setContentView(R.layout.go_pay);
 		// 注册返回时的广播
 		receiver = new InnerReceiver();
@@ -449,7 +449,8 @@ public class CstmPayActivity extends SherlockActivity {
 			}
 		});
 		PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
-		goods = pay.loadView(carts);
+		String goodsTemp = pay.loadView(carts, isHuanGou);
+		goods = goods+goodsTemp;
 		// 获取免邮界限
 		ExpressDataManage expressDataManage = new ExpressDataManage(
 				CstmPayActivity.this);
@@ -833,7 +834,7 @@ public class CstmPayActivity extends SherlockActivity {
 				// ArrayList<Cart> carts = ExchangeFreeActivity.mArrayList;
 				Log.i("voucher", carts + "  voucher");
 				PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
-				goods = pay.loadView(carts);
+				goods = pay.loadView(carts, true);
 			}
 		}
 	}

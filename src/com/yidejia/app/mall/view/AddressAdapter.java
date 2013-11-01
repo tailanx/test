@@ -1,8 +1,11 @@
 package com.yidejia.app.mall.view;
+import android.app.AlertDialog.Builder;
 
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +33,7 @@ public class AddressAdapter extends BaseAdapter {
 	private LayoutInflater inflater;
 	private MyApplication myApplication;
 	private int temp = -1;
+	private AlertDialog dialog;
 
 	public AddressAdapter(Activity context, ArrayList<Addresses> mAddresses) {
 		this.mAddresses = mAddresses;
@@ -37,6 +41,7 @@ public class AddressAdapter extends BaseAdapter {
 		dataManage = new AddressDataManage(context);
 		this.activity = context;
 		this.inflater = LayoutInflater.from(context);
+	
 
 	}
 
@@ -103,6 +108,18 @@ public class AddressAdapter extends BaseAdapter {
 		}
 
 		final Addresses addresses = mAddresses.get(position);
+		
+dialog = new Builder(activity).setTitle(activity.getResources().getString(R.string.tips)).setIcon(R.drawable.ic_launcher).setMessage(activity.getResources().getString(R.string.delete_address)).setPositiveButton(activity.getResources().getString(R.string.sure),new android.content.DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				dataManage.deleteAddress(myApplication.getUserId(),
+						addresses.getAddressId(), myApplication.getToken());
+				mAddresses.remove(addresses);
+				notifyDataSetChanged();
+			}
+		}).setNegativeButton(activity.getResources().getString(R.string.cancel), null).create();
 		// if(position == 0){
 		// temp = Integer.parseInt(addresses.getAddressId());
 		// Log.i("info", position+"onResume");
@@ -134,11 +151,13 @@ public class AddressAdapter extends BaseAdapter {
 		holder.deteleImageView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				
 				// TODO Auto-generated method stub
-				dataManage.deleteAddress(myApplication.getUserId(),
-						addresses.getAddressId(), myApplication.getToken());
-				mAddresses.remove(addresses);
-				notifyDataSetChanged();
+//				dataManage.deleteAddress(myApplication.getUserId(),
+//						addresses.getAddressId(), myApplication.getToken());
+//				mAddresses.remove(addresses);
+//				notifyDataSetChanged();
+				dialog.show();
 			}
 		});     
 
