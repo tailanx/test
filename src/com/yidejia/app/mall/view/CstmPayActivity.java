@@ -20,6 +20,7 @@ import android.os.Message;
 import android.preference.PreferenceManager.OnActivityResultListener;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -153,6 +154,11 @@ public class CstmPayActivity extends SherlockActivity {
 			yinlianCheckBox = (CheckBox) findViewById(R.id.yinlian_checkbox);
 			caifutongCheckBox = (CheckBox) findViewById(R.id.caifutong_checkbox);
 
+			//支付宝和财付通暂时不可见
+			zhifubao.setVisibility(ViewGroup.GONE);
+			zhifubaowangye.setVisibility(ViewGroup.GONE);
+			cafutong.setVisibility(ViewGroup.GONE);
+			
 			generalRelative.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -319,7 +325,7 @@ public class CstmPayActivity extends SherlockActivity {
 					.setMessage(
 							getResources().getString(R.string.exchange_produce))
 					.setPositiveButton(
-							"确定",
+							getResources().getString(R.string.sure),
 							new android.content.DialogInterface.OnClickListener() {
 
 								@Override
@@ -579,7 +585,12 @@ public class CstmPayActivity extends SherlockActivity {
 				} else if (caifutongCheckBox.isChecked()) {
 					mode = 0;
 					pay_type = "tenpay";
+				} else if(zhifubaoCheckBox.isChecked()){
+					mode = 2;
+					pay_type = "alipay";
 				} else {
+					mode = 3;
+					pay_type = "aliwappay";
 				}
 				OrderDataManage orderDataManage = new OrderDataManage(
 						CstmPayActivity.this);
