@@ -104,8 +104,8 @@ public class TaskGetOrderByCode {
 			super.onPreExecute();
 //			if (isFirstIn) {
 				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-				bar.setMessage(activity.getResources().getString(
-						R.string.searching));
+//				bar.setMessage(activity.getResources().getString(
+//						R.string.searching));
 				bar.show();
 //			}
 		}
