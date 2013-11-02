@@ -286,7 +286,7 @@ public class UserCommentDataManage {
 								String quantity = arrayObject.getString("quantity");
 								String evaluate_status = arrayObject.getString("evaluate_status");
 								String dry_status = arrayObject.getString("dry_status");
-								String imageUrl = ImageUrl.IMAGEURL + arrayObject.getString("imgname");
+								String imageUrl = ImageUrl.IMAGEURL + arrayObject.getString("imgname") + "!100";
 								String goodsname = "";
 								GetProductAddress address = new GetProductAddress(context);
 								try {

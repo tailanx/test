@@ -58,9 +58,9 @@ public class PreferentialDataManage {
 	 * @return  返回免费送，积分换购商品
 	 */
 	public void getPreferential(String goods, String userId){
+		boolean state = false;
 		this.goods = goods;
 		this.userid = userId;
-		boolean state = false;
 		TaskVerify taskVerify = new TaskVerify();
 		try {
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);  
@@ -96,7 +96,6 @@ public class PreferentialDataManage {
 	 * @return 返回免费送，积分换购商品
 	 */
 	public void getPreferential(int userId, String cards){
-		
 		return ;
 	}
 	/**
@@ -194,7 +193,7 @@ public class PreferentialDataManage {
 					specials = new Specials();
 					listObject = goodsArray.getJSONObject(j);
 					specials.setUId(listObject.getString("goods_id"));
-					specials.setImgUrl(ImageUrl.IMAGEURL + listObject.getString("imgname"));
+					specials.setImgUrl(ImageUrl.IMAGEURL + listObject.getString("imgname") + "!100");
 					specials.setPrice(listObject.getString("price"));
 					specials.setScores(listObject.getString("score_price"));
 					specials.setBrief(listObject.getString("desc"));

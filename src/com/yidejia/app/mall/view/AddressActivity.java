@@ -170,6 +170,10 @@ public class AddressActivity extends SherlockActivity {
 		Log.e(TAG, titleTextView.getText().toString());
 	}
 
+	public void updateView(ArrayList<Addresses> musics) {
+		adapter.changeData(musics);
+	}
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		try {
@@ -203,9 +207,15 @@ public class AddressActivity extends SherlockActivity {
 
 			} else if (requestCode == DefinalDate.requestcode
 					&& resultCode == DefinalDate.responcode1) {
-				new AddressUtil(AddressActivity.this, layout)
-						.updateAddresses(data);
-				layout.invalidate();
+//				listView.removeAllViews();
+//				ArrayList<Addresses> addresses =  mAddresses = addressDataManage.getAddressesArray(
+//						myApplication.getUserId(), fromIndex, acount);
+//				adapter.changeData(addresses);
+//				adapter.notifyDataSetChanged();
+//				new AddressUtil(AddressActivity.this, layout)
+//						.updateAddresses(data);
+//				layout.invalidate();
+				
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

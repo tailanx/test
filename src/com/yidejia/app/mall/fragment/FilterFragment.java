@@ -2,6 +2,7 @@ package com.yidejia.app.mall.fragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.SearchResultActivity;
 import com.yidejia.app.mall.adapter.FilterExListAdapter;
@@ -11,6 +12,7 @@ import com.yidejia.app.mall.datamanage.PriceDataManage;
 import com.yidejia.app.mall.model.Brand;
 import com.yidejia.app.mall.model.Function;
 import com.yidejia.app.mall.model.PriceLevel;
+
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -75,7 +77,7 @@ public class FilterFragment extends Fragment {
 		filterAdapter.setFuns(funsArray);
 		filterAdapter.setPrices(pricesArray);
 		filterListView.setAdapter(filterAdapter);
-		filterListView.setGroupIndicator(null);//³ýÈ¥×Ô´øµÄ¼ýÍ·
+		filterListView.setGroupIndicator(null);//ï¿½ï¿½È¥ï¿½Ô´ï¿½Ä¼ï¿½Í·
 		filterListView.setChoiceMode(ExpandableListView.CHOICE_MODE_MULTIPLE);
 		Resources res = getResources();
 	    Drawable drawable = res.getDrawable(R.drawable.filter_line);
@@ -94,12 +96,17 @@ public class FilterFragment extends Fragment {
 				ArrayList<Integer> clickChildState = (ArrayList<Integer>) clickParentState.get(groupPosition);
 				if(!clickParentState.isEmpty() && clickParentState.containsKey(groupPosition)){
 					if(!clickChildState.contains(childPosition)){
+						clickChildState.clear();
 						clickChildState.add(childPosition);
+//						clickParentState.remove(groupPosition);
+//						clickParentState.put(groupPosition, clickChildState);
 //						clickParentState.put(groupPosition, clickChildState);
 						imageView.setImageResource(R.drawable.filter_selected);
 						Log.d(TAG, "!!!!click at " + groupPosition +":"+childPosition);
 					} else {
 						clickChildState.remove((Integer)childPosition);
+//						clickParentState.remove(groupPosition);
+//						clickParentState.put(groupPosition, clickChildState);
 						imageView.setImageResource(R.drawable.filter_unchecked);
 						Log.d(TAG, "!!!click at " + groupPosition +":"+childPosition);
 					}
@@ -123,7 +130,7 @@ public class FilterFragment extends Fragment {
 				}
 //				parent.invalidate();
 //				filterAdapter.setClickParentState(clickParentState);
-//				filterAdapter.notifyDataSetChanged();
+				filterAdapter.notifyDataSetChanged();
 				return false;
 			}
 		});
@@ -228,16 +235,33 @@ public class FilterFragment extends Fragment {
 				else {
 					switch (parent) {
 					case 0:
-						Brand brand = brandsArray.get(i);
-						temp.append(brand.getBrandName());
+						Brand brand = null;
+						if (brandsArray.size() != 0) {
+							brand = brandsArray.get(state - 1);
+							temp.append(brand.getBrandName());
+						} else {
+							String[] brandStrings = {"acymer","inerbty"};
+							temp.append(brandStrings[state - 1]);
+						}
 						break;
 					case 1:
-						Function fun = funsArray.get(i);
-						temp.append(fun.getFunId());
+						Function fun = null;
+						if (funsArray.size() != 0) {
+							fun = funsArray.get(state - 1);
+							temp.append(fun.getFunId());
+						} else{
+							String[] listIds = new String[]{"12","13","17","20","22","24","28","27"};
+							temp.append(listIds[state - 1]);
+						}
 						break;
 					case 2:
-						PriceLevel price = pricesArray.get(i);
-						temp.append(price.getPriceId());
+						PriceLevel price = null;
+						if (pricesArray.size() != 0) {
+							price = pricesArray.get(state - 1);
+							temp.append(price.getPriceId());
+						} else{
+							temp.append(state);
+						}
 						break;
 
 					default:

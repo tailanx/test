@@ -68,7 +68,7 @@ public class CstmPayActivity extends SherlockActivity {
 	private TextView generalPrice;// 普通配送价格
 	private TextView emsPrice;// ems配送价格
 	private AddressDataManage addressDataManage;
-	private ExpressDataManage expressDataManage;// 配送中心
+//	private ExpressDataManage expressDataManage;// 配送中心
 	private CheckBox zhifubaoCheckBox;// 支付宝
 	private CheckBox zhifubaowangyeCheckBox;// 支付宝网页支付
 	private CheckBox yinlianCheckBox;// 银联支付
@@ -88,12 +88,13 @@ public class CstmPayActivity extends SherlockActivity {
 	private ScrollView go_pay_scrollView;
 	private VoucherDataManage voucherDataManage;
 
-	// private Myreceiver receiver;
+//	 private Myreceiver receiver;
 	// private Addresses addresses;
 	private String peiSongCenter = "";// //配送中心
 	private String recipientId = "";// 收集人id
 	private String expressNum = "";// 快递费用
 	private String postMethod = "EMS";// 快递方式
+	private boolean isFree = false;//是否满足免邮条件
 	private String goods;// 商品串
 	private String orderCode;// 订单号
 	private String resp_code;// 返回状态码
@@ -126,7 +127,7 @@ public class CstmPayActivity extends SherlockActivity {
 	 */
 	public void setupShow() {
 		try {
-			expressDataManage = new ExpressDataManage(this);
+//			expressDataManage = new ExpressDataManage(this);
 
 			sumPrice = (TextView) findViewById(R.id.go_pay_show_pay_money);
 			saveOrderBtn = (Button) findViewById(R.id.save_order_btn);
@@ -295,13 +296,16 @@ public class CstmPayActivity extends SherlockActivity {
 
 	private RelativeLayout reLayout;
 	private String isCartActivity; 
+	private String sum;
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		try {
 			super.onCreate(savedInstanceState);
 			Intent intent = getIntent();
-			final String sum = intent.getStringExtra("price");
+//			final String sum = intent.getStringExtra("price");
+			sum = intent.getStringExtra("price");
+			Log.i(TAG, "sum:" + sum);
 			isCartActivity = intent.getStringExtra("cartActivity");
 			myApplication = (MyApplication) getApplication();
 			voucherDataManage = new VoucherDataManage(CstmPayActivity.this);
@@ -363,10 +367,13 @@ public class CstmPayActivity extends SherlockActivity {
 				startActivity(intent1);
 				this.finish();
 			} else {
-				addressDataManage = new AddressDataManage(this);
+				
 				// Cart cart = (Cart) intent.getSerializableExtra("Cart");
-				ArrayList<Cart> carts = (ArrayList<Cart>) intent
+				ArrayList<Cart> carts;
+				
+				carts = (ArrayList<Cart>) intent
 						.getSerializableExtra("carts");
+				if (carts.isEmpty()) return;
 				StringBuffer sb = new StringBuffer();
 				if("".equals(carts)){
 					Toast.makeText(CstmPayActivity.this, getResources().getString(R.string.no_network), Toast.LENGTH_SHORT).show();
@@ -389,7 +396,6 @@ public class CstmPayActivity extends SherlockActivity {
 				}
 				if (isCartActivity.equals("Y")) {//||isCartActivity.equals("N")
 					dialog.show();
-					show(sum, carts,true);
 				} else {
 					// if (!carts.isEmpty()) {
 					show(sum, carts,false);
@@ -406,16 +412,19 @@ public class CstmPayActivity extends SherlockActivity {
 	}
 
 	private void show(final String sum, ArrayList<Cart> carts, boolean isHuanGou) {
+
+		Log.i(TAG, "show sum:"+sum);
 		setContentView(R.layout.go_pay);
 		// 注册返回时的广播
 		receiver = new InnerReceiver();
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Consts.BACK_UPDATE_CHANGE);
 		CstmPayActivity.this.registerReceiver(receiver, filter);
-
+		
+		addressDataManage = new AddressDataManage(this);
 		go_pay_scrollView = (ScrollView) findViewById(R.id.go_pay_scrollView);
 		setupShow();
-		addAddress();
+		
 		setActionbar();
 		layout = (LinearLayout) findViewById(R.id.go_pay_relative2);
 		RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.go_shopping_use_evalution);
@@ -451,39 +460,51 @@ public class CstmPayActivity extends SherlockActivity {
 		PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
 		String goodsTemp = pay.loadView(carts, isHuanGou);
 		goods = goods+goodsTemp;
-		// 获取免邮界限
-		ExpressDataManage expressDataManage = new ExpressDataManage(
-				CstmPayActivity.this);
-		ArrayList<FreePost> freePosts = expressDataManage
-				.getFreePostList("0", "20");
-		float fP = Float.MAX_VALUE;
-		if (freePosts.size() != 0)
-			fP = Float.parseFloat(freePosts.get(0).getMax());
-		Log.i("info", fP + "   fp");
-		if (Float.parseFloat(sum) > fP) {
-			sumPrice.setText(sum);
-			expressNum = "0";
-		} else {
-			sumPrice.setText(Double.parseDouble(sum)
-					+ Double.parseDouble((general.isChecked() ? generalPrice
-							.getText().toString() : emsPrice
-							.getText().toString())) + "");
-		}
+		//添加地址、快递费用、配送中心
+		addAddress();
+//		// 获取免邮界限
+//		ExpressDataManage expressDataManage = new ExpressDataManage(
+//				CstmPayActivity.this);
+//		ArrayList<FreePost> freePosts = expressDataManage
+//				.getFreePostList("0", "20");
+//		float fP = Float.MAX_VALUE;
+//		if (freePosts.size() != 0)
+//			fP = Float.parseFloat(freePosts.get(0).getMax());
+//		Log.i("info", fP + "   fp");
+//		if (Float.parseFloat(sum) > fP) {
+//			sumPrice.setText(sum);
+//			expressNum = "0";
+//		} else {
+//			sumPrice.setText(Double.parseDouble(sum)
+//					+ Double.parseDouble((general.isChecked() ? generalPrice
+//							.getText().toString() : emsPrice
+//							.getText().toString())) + "");
+//		}
 		mHandler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
 				switch (msg.what) {
 				case Consts.GENERAL:
-					expressNum = generalPrice.getText().toString();
-					sumPrice.setText(Double.parseDouble(sum)
-							+ Double.parseDouble(expressNum) + "");
+					try {
+						expressNum = generalPrice.getText().toString();
+						sumPrice.setText(Float.parseFloat(sum)
+								+ Float.parseFloat(expressNum) + "");
+					} catch (Exception e) {
+						// TODO: handle exception
+						e.printStackTrace();
+					}
 					postMethod = getResources().getString(
 							R.string.ship_post);// 快递方式
 					break;
 				case Consts.EMS:
-					expressNum = emsPrice.getText().toString();
-					sumPrice.setText(Double.parseDouble(sum)
-							+ Double.parseDouble(expressNum) + "");
+					try {
+						expressNum = emsPrice.getText().toString();
+						sumPrice.setText(Float.parseFloat(sum)
+								+ Float.parseFloat(expressNum) + "");
+					} catch (Exception e) {
+						// TODO: handle exception
+						e.printStackTrace();
+					}
 					postMethod = "EMS";
 					break;
 				}
@@ -566,7 +587,7 @@ public class CstmPayActivity extends SherlockActivity {
 				orderDataManage.saveOrder(
 						myApplication.getUserId(), "0",
 						recipientId, "", "0", expressNum,
-						postMethod, peiSongCenter, goods, "",
+						postMethod, peiSongCenter, goods, comment.getText().toString(),//这里的comment.getText().toString()很重要
 						pay_type, myApplication.getToken());
 				// postMethod, peiSongCenter, goods,
 				// comment.getText().toString(),
@@ -661,9 +682,10 @@ public class CstmPayActivity extends SherlockActivity {
 	}
 
 	/**
-	 * 初始化控件
+	 * 地址和快递费用，配送中心
 	 */
 	private void addAddress() {
+		Log.i(TAG, "show sum:"+sum);
 		try {
 			// ArrayList<Addresses> mList1 =
 			// addressDataManage.getAddressesArray(
@@ -671,46 +693,32 @@ public class CstmPayActivity extends SherlockActivity {
 			// myApplication.getUserId(), 0, 10);
 			ArrayList<Addresses> mList = addressDataManage
 					.getDefAddresses(myApplication.getUserId());
-
+			Addresses addresses;
 			Log.i("info", mList.size() + " mlist");
 			if (mList.size() == 0) {
-				Intent intent = new Intent(CstmPayActivity.this,
-						NewAddressActivity.class);
-				CstmPayActivity.this.startActivity(intent);
-
+				ArrayList<Addresses> addArray = addressDataManage.getAddressesArray(myApplication.getUserId(), 0, 10);
+				if (addArray.isEmpty()) { //无默认地址并且无地址
+					Intent intent = new Intent(CstmPayActivity.this,
+							NewAddressActivity.class);
+					CstmPayActivity.this.startActivity(intent);
+					return;
+				} else {
+					addresses = addArray.get(0);
+				}
 			} else {
-				Addresses addresses = mList.get(0);
+				addresses = mList.get(0);
 				// 获取默认地址
 				int size = mList.size();
-				for (int i = 0; i < size; i++) {
+				for (int i = 0; size > 0 && i < size; i++) {
 					boolean isDefault = mList.get(i).getDefaultAddress();
 					if (isDefault) {
 						addresses = mList.get(i);
 						break;
 					}
 				}
-				userName.setText(addresses.getName());
-				phoneName.setText(addresses.getHandset());// �޸�Ϊ�ֻ�
-				StringBuffer sb = new StringBuffer();
-				sb.append(addresses.getProvice());
-				sb.append(addresses.getCity());
-				sb.append(addresses.getArea());
-				sb.append(addresses.getAddress());
-				address.setText(sb.toString());
-				recipientId = addresses.getAddressId();
-
-				Express express = expressDataManage.getExpressesExpenses(
-						addresses.getProvice(), "y").get(0);
-				peiSongCenter = expressDataManage
-						.getDistributionsList(express.getPreId(), 0 + "",
-								10 + "").get(0).getDisName(); // 获取配送中心
-				peiSong.setText(peiSongCenter);
-				generalPrice.setText(express.getExpress());
-				emsPrice.setText(express.getEms());
-				Log.i("info", addresses.getName());
-				postMethod = getResources().getString(R.string.ship_post);// 初始化快递方式;
-				expressNum = express.getExpress();// 初始化费用
 			}
+			setAdd(addresses);//设置地址
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -718,8 +726,135 @@ public class CstmPayActivity extends SherlockActivity {
 					getResources().getString(R.string.bad_network),
 					Toast.LENGTH_SHORT).show();
 		}
+//				userName.setText(addresses.getName());
+//				phoneName.setText(addresses.getHandset());// �޸�Ϊ�ֻ�
+//				StringBuffer sb = new StringBuffer();
+//				sb.append(addresses.getProvice());
+//				sb.append(addresses.getCity());
+//				sb.append(addresses.getArea());
+//				sb.append(addresses.getAddress());
+//				address.setText(sb.toString());
+//				recipientId = addresses.getAddressId();
+//
+//				Express express = expressDataManage.getExpressesExpenses(
+//						addresses.getProvice(), "y").get(0);
+//				peiSongCenter = expressDataManage
+//						.getDistributionsList(express.getPreId(), 0 + "",
+//								10 + "").get(0).getDisName(); // 获取配送中心
+//				peiSong.setText(peiSongCenter);
+//				generalPrice.setText(express.getExpress());
+//				emsPrice.setText(express.getEms());
+//				Log.i("info", addresses.getName());
+//				postMethod = getResources().getString(R.string.ship_post);// 初始化快递方式;
+//				expressNum = express.getExpress();// 初始化费用
+//			}
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			Toast.makeText(CstmPayActivity.this,
+//					getResources().getString(R.string.bad_network),
+//					Toast.LENGTH_SHORT).show();
+//		}
 	}
 
+	/**
+	 * 设置地址，快递和配送中心
+	 * @param addresses
+	 */
+	private void setAdd(Addresses addresses){
+		Log.i(TAG, "show sum:"+sum);
+		Log.i(TAG, "add address");
+		userName.setText(addresses.getName());
+		phoneName.setText(addresses.getHandset());// �޸�Ϊ�ֻ�
+		StringBuffer sb = new StringBuffer();
+		sb.append(addresses.getProvice());
+		sb.append(addresses.getCity());
+		sb.append(addresses.getArea());
+		sb.append(addresses.getAddress());
+		address.setText(sb.toString());
+		recipientId = addresses.getAddressId();//地址id
+		//判断是否免邮
+		canFree(sum);
+		
+		//设置快递费用和配送中心
+		setKuaiDi(addresses);
+	}
+	
+	/**
+	 * 设置快递费用和配送中心
+	 * @param addresses
+	 */
+	private void setKuaiDi(Addresses addresses){
+		Express express;
+		ArrayList<Express> expressArray = new ExpressDataManage(this).getExpressesExpenses(
+				addresses.getProvice(), "y");
+		if(expressArray.isEmpty()) return;
+		express = expressArray.get(0);
+		Log.i(TAG, "peisong id"+ express.getPreId());
+		//设置配送中心
+		setPeiSong(express.getPreId());
+		if (isFree) {
+			generalPrice.setText("0");
+			emsPrice.setText("0");
+			sumPrice.setText(sum);
+			expressNum = "0";
+		} else {
+			generalPrice.setText(express.getExpress());
+			emsPrice.setText(express.getEms());
+			sumPrice.setText(Float.parseFloat(sum)
+					+ Float.parseFloat((general.isChecked() ? generalPrice
+							.getText().toString() : emsPrice
+							.getText().toString())) + "");
+		}
+		Log.i("info", "setKuaidi:");
+		postMethod = getResources().getString(R.string.ship_post);// 初始化快递方式;
+		expressNum = express.getExpress();// 初始化费用
+	}
+	
+	/**
+	 * 根据配送中心的id获取配送中心
+	 * @param preId
+	 */
+	private void setPeiSong(String preId){
+		try {
+			peiSongCenter = new ExpressDataManage(this)
+					.getDistributionsList(preId, 0 + "", 10 + "")
+					.get(0).getDisName(); // 获取配送中心
+			Log.i("info", "setpeisong:"+peiSongCenter);
+			peiSong.setText(peiSongCenter);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	/**
+	 * 判断是否免邮
+	 * @param sum
+	 */
+	private void canFree(String sum){
+		// 获取免邮界限
+		ExpressDataManage expressDataManage = new ExpressDataManage(
+					CstmPayActivity.this);
+		ArrayList<FreePost> freePosts = expressDataManage
+					.getFreePostList("0", "20");
+		Log.i(TAG, "show sum:"+sum);
+		float fP = Float.MAX_VALUE;
+		if (freePosts.size() != 0)
+			fP = Float.parseFloat(freePosts.get(0).getMax());
+		Log.i("info", fP + "   fp");
+		try {
+			if (Float.parseFloat(sum) >= fP) {// 大于等于免邮费用
+				
+				isFree = true;
+			} else {
+				
+				isFree = false;
+			}
+		} catch (NumberFormatException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+	
 	private Callable<Map<String, String>> call = new Callable<Map<String, String>>() {
 
 		@Override
@@ -767,53 +902,54 @@ public class CstmPayActivity extends SherlockActivity {
 					.getSerializable("addresses1");
 			Log.i("info", addresses1.getAddress() + "str");
 			if (addresses1 != null) {
-				reLayout.removeView(addressRelative);
-				userName.setText(addresses1.getName());
-				phoneName.setText(addresses1.getHandset());// �޸�Ϊ�ֻ�
-				StringBuffer sb = new StringBuffer();
-				sb.append(addresses1.getProvice());
-				sb.append(addresses1.getCity());
-				sb.append(addresses1.getArea());
-				sb.append(addresses1.getAddress());
-				address.setText(sb.toString());
+//				reLayout.removeView(addressRelative);
+//				userName.setText(addresses1.getName());
+//				phoneName.setText(addresses1.getHandset());// �޸�Ϊ�ֻ�
+//				StringBuffer sb = new StringBuffer();
+//				sb.append(addresses1.getProvice());
+//				sb.append(addresses1.getCity());
+//				sb.append(addresses1.getArea());
+//				sb.append(addresses1.getAddress());
+//				address.setText(sb.toString());
+				setAdd(addresses1);
 			}
 			// }
 		} else {
-			String msg = "";
-			/*
-			 * 支付控件返回字符串:success、fail、cancel 分别代表支付成功，支付失败，支付取消
-			 */
-			String str = data.getExtras().getString("pay_result");
-			Log.i("info", str + "str");
-			if (str.equalsIgnoreCase("success")) {
-				msg = "支付成功！";
-				CartsDataManage cartsDataManage = new CartsDataManage();
-				cartsDataManage.cleanCart();
-				if (!"".equals(orderCode) && orderCode != null) {
-					OrderDataManage orderDataManage = new OrderDataManage(
-							CstmPayActivity.this);
-					orderDataManage.changeOrder(myApplication.getUserId(),
-							orderCode);
-				}
-			} else if (str.equalsIgnoreCase("fail")) {
-				msg = "支付失败！";
-			} else if (str.equalsIgnoreCase("cancel")) {
-				msg = "用户取消了支付";
-			}
-
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle("支付结果通知");
-			builder.setMessage(msg);
-			builder.setInverseBackgroundForced(true);
-			// builder.setCustomTitle();
-			builder.setNegativeButton("确定",
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.dismiss();
-						}
-					});
-			builder.create().show();
+//			String msg = "";
+//			/*
+//			 * 支付控件返回字符串:success、fail、cancel 分别代表支付成功，支付失败，支付取消
+//			 */
+//			String str = data.getExtras().getString("pay_result");
+//			Log.i("info", str + "str");
+//			if (str.equalsIgnoreCase("success")) {
+//				msg = "支付成功！";
+//				CartsDataManage cartsDataManage = new CartsDataManage();
+//				cartsDataManage.cleanCart();
+//				if (!"".equals(orderCode) && orderCode != null) {
+//					OrderDataManage orderDataManage = new OrderDataManage(
+//							CstmPayActivity.this);
+//					orderDataManage.changeOrder(myApplication.getUserId(),
+//							orderCode);
+//				}
+//			} else if (str.equalsIgnoreCase("fail")) {
+//				msg = "支付失败！";
+//			} else if (str.equalsIgnoreCase("cancel")) {
+//				msg = "用户取消了支付";
+//			}
+//
+//			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//			builder.setTitle("支付结果通知");
+//			builder.setMessage(msg);
+//			builder.setInverseBackgroundForced(true);
+//			// builder.setCustomTitle();
+//			builder.setNegativeButton("确定",
+//					new DialogInterface.OnClickListener() {
+//						@Override
+//						public void onClick(DialogInterface dialog, int which) {
+//							dialog.dismiss();
+//						}
+//					});
+//			builder.create().show();
 		}
 	}
 

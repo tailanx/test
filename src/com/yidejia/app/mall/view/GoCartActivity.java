@@ -216,6 +216,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 					float sum = Float.parseFloat(sumTextView.getText()
 							.toString());
 					intent1.putExtra("carts", cartList);
+			
 					
 //						for(int i = 0; i<mList.size();i++){
 //							Cart cart = new Cart();

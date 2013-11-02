@@ -129,7 +129,8 @@ public class BrandDataManage {
 			itemArray = responseArray.getJSONArray(i);
 			int count = itemArray.length();
 			for (int j = 0; j < count; j++) {
-				brand.setBrandName(itemArray.getString(j));
+				if(j == 0)
+					brand.setBrandName(itemArray.getString(j));
 				if(j < count - 1)
 					brand.setDesc(unicode.revert(itemArray.getString(j+1)));
 			}

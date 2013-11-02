@@ -125,7 +125,7 @@ public class TaskNoEva {
 								String dry_status = arrayObject
 										.getString("dry_status");
 								String imageUrl = ImageUrl.IMAGEURL
-										+ arrayObject.getString("imgname");
+										+ arrayObject.getString("imgname") + "!100";
 								String goodsname = "";
 								GetProductAddress address = new GetProductAddress(
 										activity);

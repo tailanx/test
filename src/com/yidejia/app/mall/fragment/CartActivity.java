@@ -687,6 +687,13 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
 				// Log.i("info", action + "action");
 				layout.removeAllViews();
+				sumTextView.setText(""+0.00);
+				counTextView.setText(""+0);
+				CartUtil cartUtil = new CartUtil(getSherlockActivity(), layout,
+						counTextView, sumTextView, mBox);
+				cartUtil.AllComment();
+			}else if(Consts.UPDATE_CHANGE.equals(action)){
+				layout.removeAllViews();	
 				CartUtil cartUtil = new CartUtil(getSherlockActivity(), layout,
 						counTextView, sumTextView, mBox);
 				cartUtil.AllComment();

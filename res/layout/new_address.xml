@@ -3,9 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
- 
-
-    <TableLayout
+    <LinearLayout
         android:id="@+id/new_address_tablelayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,17 +11,19 @@
         android:layout_marginLeft="4sp"
         android:layout_marginRight="4sp"
         android:layout_marginTop="4sp"
-        android:stretchColumns="1" >
+        android:orientation="vertical" >
 
-        <TableRow
+        <RelativeLayout
             android:id="@+id/new_address_tablerow1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/commentbg_up" >
 
             <TextView
                 android:id="@+id/new_address_item_textview1"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="8dp"
                 android:text="收货人姓名："
                 android:textSize="15sp" />
@@ -32,24 +32,32 @@
                 android:id="@+id/new_address_item_edittext1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/new_address_item_textview1"
                 android:background="@null"
-                android:maxLength="5"
+                android:maxLength="10"
+                android:hint="                                                                                     "
                 android:singleLine="true" />
-        </TableRow>
+        </RelativeLayout>
 
-        <TableRow
+<ImageView
+    android:id="@+id/image"
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:src="@drawable/dashed" />
+
+        <RelativeLayout
             android:id="@+id/new_address_tablerow2"
-            android:layout_marginTop="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/commentbg_middle" >
 
             <TextView
                 android:id="@+id/new_address_item_textview2"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="8dp"
-                android:gravity="left"
                 android:text="手机号码："
                 android:textSize="15sp" />
 
@@ -57,32 +65,66 @@
                 android:id="@+id/new_address_item_edittext2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/new_address_item_textview2"
                 android:background="@null"
                 android:phoneNumber="true"
+                android:hint="                                                                                          "
                 android:singleLine="true" />
-        </TableRow>
+        </RelativeLayout>
 
-        <TableRow
+<ImageView
+    android:id="@+id/image"
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:src="@drawable/dashed" />
+        <RelativeLayout
             android:id="@+id/new_address_tablerow3"
-            android:layout_marginTop="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/commentbg_middle" >
 
             <TextView
                 android:id="@+id/new_address_item_textview3"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="8dp"
                 android:gravity="left"
                 android:text="所在地区："
                 android:textSize="15sp" />
 
             <LinearLayout
-                android:layout_width="fill_parent"
+                android:id="@+id/new_address_linear"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_toRightOf="@id/new_address_item_textview3"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical" >
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/clear_conditions" >
 
+                <TextView
+                    android:id="@+id/country1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="省份"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/city1"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="市区"
+                    android:textSize="12sp" />
+
+                <!--
                 <com.yidejia.app.mall.address.WheelView
                     android:id="@+id/country"
                     android:layout_width="wrap_content"
@@ -96,26 +138,43 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
                     android:layout_weight="1" />
-
                 <com.yidejia.app.mall.address.WheelView
                     android:id="@+id/district"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
                     android:layout_weight="1" />
-            </LinearLayout>
-        </TableRow>
+                -->
 
-        <TableRow
+
+                <TextView
+                    android:id="@+id/district1"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="县镇"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+<ImageView
+    android:id="@+id/image"
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:src="@drawable/dashed" />
+        <RelativeLayout
             android:id="@+id/new_address_tablerow4"
-            android:layout_marginTop="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/commentbg_down" >
 
             <TextView
                 android:id="@+id/new_address_item_textview2"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+				android:layout_centerVertical="true"
                 android:layout_marginLeft="8dp"
                 android:gravity="left"
                 android:text="详细地址:"
@@ -125,11 +184,13 @@
                 android:id="@+id/new_address_item_edittext3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+				android:layout_centerVertical="true"
+				android:layout_toRightOf="@id/new_address_item_textview2"
                 android:background="@null"
+                android:hint="                                                                                            "
                 android:singleLine="true"
                 android:textSize="13sp" />
-        </TableRow>
-    </TableLayout>
+        </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

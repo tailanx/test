@@ -92,7 +92,7 @@ public class UserDatamanage {
 						myApplication.setVip(responseObject.getString("customer_grade"));
 						myApplication.setNick(responseObject.getString("customer_nick"));
 						String imgUrl = responseObject.getString("avatar_path");
-						myApplication.setUserHeadImg(ImageUrl.IMAGEURL + imgUrl);
+						myApplication.setUserHeadImg(ImageUrl.IMAGEURL + imgUrl + "!100");
 						String token = responseObject.getString("token");
 						myApplication.setToken(token);
 						message = context.getResources().getString(R.string.login_success);

@@ -14,6 +14,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -152,7 +153,6 @@ public class GoodsView {
 			shopping_cart_button = (Button) view
 					.findViewById(R.id.shopping_cart_button);
 			// CartsDataManage cartsDataManage = new CartsDataManage();
-			
 			cart_num = manage.getCartAmount();
 			if (cart_num == 0) {
 				shopping_cart_button.setVisibility(View.GONE);
@@ -203,14 +203,23 @@ public class GoodsView {
 					try{
 						float sum = Float.parseFloat(priceString);
 						if(sum <= 0) return;////价格出错
+						if(!myApplication.getIsLogin()){
+							Toast.makeText(activity,
+									activity.getResources().getString(R.string.please_login),
+									Toast.LENGTH_LONG).show();
+							Intent intent1 = new Intent(activity, LoginActivity.class);
+							activity.startActivity(intent1);
+						}else{
 						Bundle bundle = new Bundle();
 						ArrayList<Cart> carts = new ArrayList<Cart>();
 						carts.add(cart);
 //						bundle.putSerializable("Cart", cart);
+						bundle.putString("cartActivity","N");
 						intent.putExtra("carts", carts);
 						bundle.putString("price", priceString);
 						intent.putExtras(bundle);
 						activity.startActivity(intent);
+						}
 //						activity.finish();
 					} catch (NumberFormatException e){
 						//价格出错
@@ -314,6 +323,7 @@ public class GoodsView {
 				// matchGoodsImageLayout.addView(matchchild, lp_match);//
 				LinearLayout.LayoutParams lp_base = new LinearLayout.LayoutParams(
 						(new Float(px)).intValue(), LayoutParams.WRAP_CONTENT);
+				lp_base.gravity = Gravity.CENTER;
 				// View imageViewLayout = LayoutInflater.from(view.getContext())
 				// .inflate(R.layout.goods_banner_imageview, null);
 				// ImageView bannerImageView = (ImageView) imageViewLayout
@@ -322,7 +332,9 @@ public class GoodsView {
 				bannerImageView.setLayoutParams(lp_base);
 				imageLoader.displayImage(bannerArray.get(i).getImgUrl(),
 						bannerImageView, options, animateFirstListener);
+				Log.e(GoodsView.class.getName(), bannerArray.get(i).getImgUrl());
 				baseInfoImageLayout.setPadding(10, 0, 10, 0);
+				
 				// imageViewLayout.setPadding(10, 0, 10, 0);
 				bannerImageView.setPadding(10, 0, 10, 0);
 				baseInfoImageLayout.addView(bannerImageView, lp_base);
@@ -349,6 +361,7 @@ public class GoodsView {
 				// null);
 				// ImageView bannerImageView = (ImageView)
 				// imageViewLayout.findViewById(R.id.banner_imageview);
+				lp_base.gravity = Gravity.CENTER;
 				ImageView bannerImageView = new ImageView(activity);
 				bannerImageView.setLayoutParams(lp_base);
 				imageLoader.displayImage(bannerArray.get(i).getImgUrl(),

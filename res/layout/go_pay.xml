@@ -454,6 +454,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
                     android:checked="true"
+                    android:clickable="false" />
                     android:clickable="false"
                     />
             </RelativeLayout>

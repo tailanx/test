@@ -85,12 +85,21 @@ public class SearchFragment extends SherlockFragment {
 				Bundle bundle = new Bundle();
 //				bundle.putString("fun", arg0.getItemAtPosition(arg2).toString());
 				if (!functions.isEmpty()) {
-					bundle.putString("fun", functions.get(arg2).getFunId());
-					bundle.putString("title", functions.get(arg2).getFunName());
+					if(arg2 == 0) {
+						bundle.putString("fun", "");
+						bundle.putString("title", getResources().getString(R.string.filter_all));
+					} else {
+						bundle.putString("fun", functions.get(arg2 - 1).getFunId());
+						bundle.putString("title", functions.get(arg2 - 1).getFunName());
+					}
 				} else {
 					try {
 						bundle.putString("title", listContent[arg2]);
-						bundle.putString("fun", listIds[arg2]);
+						if(arg2 == 0){
+							bundle.putString("fun", "");
+						}else {
+							bundle.putString("fun", listIds[arg2 - 1]);
+						}
 					} catch (Exception e) {
 						// TODO: handle exception
 						bundle.putString("title", "");
@@ -153,6 +162,6 @@ public class SearchFragment extends SherlockFragment {
 		Log.d(TAG, "TestFragment-----onStart");
 	}
 	
-	private String[] listContent = new String[] { "眼部护理", "活肌抗衰", "美白淡斑", "保湿锁水", "控油抗痘", "特别护理", "周期护理", "营养美容" };
+	private String[] listContent = new String[] {"全部", "眼部护理", "活肌抗衰", "美白淡斑", "保湿锁水", "控油抗痘", "特别护理", "周期护理", "营养美容" };
 	private String[] listIds = new String[]{"12","13","17","20","22","24","28","27"};
 }

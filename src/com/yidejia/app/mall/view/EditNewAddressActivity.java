@@ -16,6 +16,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Dialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -23,12 +26,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,6 +70,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 	private String conutryString;
 	private String cityString;
 	private String districtString;
+	public static String addressId;
 
 	private Map<String, Object> valueMap2;
 	private String key2;
@@ -81,6 +87,10 @@ public class EditNewAddressActivity extends SherlockActivity {
 	private EditText nameTextView;// 收货人姓名
 	private EditText numberTextView;// 收货人电话
 	private EditText areaTextView;// 收货人地址
+	private TextView sheng;
+	private TextView shi;
+	private TextView qu;
+	private MyApplication myApplication;
 	// private Spinner spinner1 = null;
 	// private Spinner spinner2 = null;
 	// private Spinner spinner3 = null;
@@ -91,6 +101,33 @@ public class EditNewAddressActivity extends SherlockActivity {
 	 private boolean isUpdate;
 	 private boolean isDefauteUpdate;
 	 private String id;
+	 
+	 private View view;
+	 private Dialog dialog;
+
+		private void setupShow() {
+			view = LayoutInflater.from(EditNewAddressActivity.this).inflate(
+					R.layout.country_city, null);
+
+			dialog = new Builder(EditNewAddressActivity.this)
+					.setTitle(getResources().getString(R.string.country_city))
+					.setIcon(R.drawable.ic_launcher)
+					.setView(view)
+					.setPositiveButton(getResources().getString(R.string.sure),
+							new android.content.DialogInterface.OnClickListener() {
+								
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									// TODO Auto-generated method stub
+									sheng.setText(conutryString);
+									shi.setText(cityString);
+									qu.setText(districtString);
+								}
+							})
+					.setNegativeButton(getResources().getString(R.string.cancel),
+							null).create();
+		}
+		
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +152,9 @@ public class EditNewAddressActivity extends SherlockActivity {
 		numberTextView = (EditText) findViewById(R.id.new_address_item_edittext2);
 		areaTextView = (EditText) findViewById(R.id.new_address_item_edittext3);
 		
+		sheng = (TextView) findViewById(R.id.country1);
+		shi = (TextView) findViewById(R.id.city1);
+		qu = (TextView) findViewById(R.id.district1);
 
 		// spinner1.setPrompt("省");
 		// spinner2.setPrompt("城市");
@@ -123,6 +163,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 		// 获取bundle对象
 		Bundle bundle = this.getIntent().getExtras();
 		Addresses addresses = (Addresses) bundle.get("editaddress");
+		
 		String name = addresses.getName();
 		String phone = addresses.getHandset();
 		isDefauteUpdate = addresses.getDefaultAddress();
@@ -131,11 +172,26 @@ public class EditNewAddressActivity extends SherlockActivity {
 		// String city = addresses.getCity();
 		// String area = addresses.getArea();
 		String dString = addresses.getAddress();// 详细地址
-
+		
+		setupShow();
+		LinearLayout linear = (LinearLayout) findViewById(R.id.new_address_linear);
+		
+		sheng.setText(addresses.getProvice());
+		shi.setText(addresses.getCity());
+		qu.setText(addresses.getArea());
+		
 		nameTextView.setText(name);
 		numberTextView.setText(phone);
 
 		areaTextView.setText(dString);
+		
+
+		linear.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				dialog.show();
 		new Thread() {
 			public void run() {
 				try {
@@ -168,6 +224,8 @@ public class EditNewAddressActivity extends SherlockActivity {
 				}
 			}
 		}.start();
+			}
+		});
 
 	}
 
@@ -283,7 +341,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 				// Log.i("info", valueMap3 + "    valueMap3");
 
 				// Log.i("info", list + "  valueMap4 ");
-				WheelView country = (WheelView) findViewById(R.id.country);
+				WheelView country = (WheelView) view.findViewById(R.id.country);
 				Object[] countries = list.toArray();
 
 				country.setVisibleItems(5);
@@ -311,14 +369,33 @@ public class EditNewAddressActivity extends SherlockActivity {
 				// Object[list4.get(i).size()]);
 				// }
 				//
-				final WheelView city = (WheelView) findViewById(R.id.city);
+				country.setCurrentItem(0);
+				final WheelView city = (WheelView) view.findViewById(R.id.city);
 				city.setVisibleItems(5);
-				city.setAdapter(new ArrayWheelAdapter<String>(cities[3]));
+				city.setAdapter(new ArrayWheelAdapter<String>(cities[0]));
 				city.setCurrentItem(0);
-				final WheelView district = (WheelView) findViewById(R.id.district);
+				
+				
+				conutryString = list.get(0);
+				cityString = list1.get(0).get(0);
+				
+				final WheelView district = (WheelView) view.findViewById(R.id.district);
 				district.setVisibleItems(5);
+				HashMap<String, Object> mArrayList2 = list5
+						.get(0);
+				
+				ArrayList<String> mArrayList3 = (ArrayList<String>) mArrayList2
+						.get(cityString);
+				Log.i("info", mArrayList3.size() +"mArrayList3");
+				Object[] districts = mArrayList3.toArray();
 
-				conutryString = list.get(1);
+				district.setAdapter(new ArrayWheelAdapter<String>(
+						districts));
+				district.setCurrentItem(0);
+				
+				
+				districtString = mArrayList3.get(0);
+				
 				country.addChangingListener(new OnWheelChangedListener() {
 					public void onChanged(WheelView wheel, int oldValue,
 							int newValue) {
@@ -335,7 +412,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 								.get(newValue);
 						ArrayList<String> mArrayList3 = (ArrayList<String>) mArrayList2
 								.get(cityName);
-						districts = mArrayList3.toArray();
+						Object[]  districts = mArrayList3.toArray();
 
 						district.setAdapter(new ArrayWheelAdapter<String>(
 								districts));
@@ -348,8 +425,6 @@ public class EditNewAddressActivity extends SherlockActivity {
 					}
 				});
 
-				country.setCurrentItem(1);
-				city.setCurrentItem(1);
 				ArrayList<String> mArrayList = list1.get(1);
 				// String cityName = mArrayList.get(0);
 				// HashMap<String, Object> mArrayList2 = list5.get(0);
@@ -359,7 +434,6 @@ public class EditNewAddressActivity extends SherlockActivity {
 				// districts = mArrayList3.toArray();
 				// district.setAdapter(new
 				// ArrayWheelAdapter<String>(districts));
-				cityString = list1.get(1).get(0);
 				city.addChangingListener(new OnWheelChangedListener() {
 					public void onChanged(WheelView wheel, int oldValue,
 							int newValue) {
@@ -371,15 +445,15 @@ public class EditNewAddressActivity extends SherlockActivity {
 								.get(newValue);
 						ArrayList<String> mArrayList3 = (ArrayList<String>) mArrayList2
 								.get(cityName);
-						districts = mArrayList3.toArray();
+						Object[]  districts = mArrayList3.toArray();
 
 						district.setAdapter(new ArrayWheelAdapter<String>(
 								districts));
 						// district.setAdapter(new ArrayWheelAdapter<String>(
 						// districts));
-						district.setCurrentItem(1);
+						district.setCurrentItem(0);
 						cityString = cityName;
-						districtString = mArrayList3.get(1);
+						districtString = mArrayList3.get(0);
 						Log.i("info", conutryString + "   conutryString");
 						Log.i("info", cityString + "   cityString");
 						Log.i("info", districtString + "   districtString");
@@ -409,7 +483,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 				});
 
 				Log.i("info", districtString + "   districtString");
-				district.setCurrentItem(1);
+				district.setCurrentItem(0);
 				// Message ms = new Message();
 				// ms.what = 000;
 				// hanlder.sendMessage(ms);
@@ -642,9 +716,9 @@ public class EditNewAddressActivity extends SherlockActivity {
 				} else {
 
 					Addresses addresses = new Addresses();
-					addresses.setProvince(conutryString);
-					addresses.setCity(cityString);
-					addresses.setArea(districtString);
+					addresses.setProvince(sheng.getText().toString());
+					addresses.setCity(shi.getText().toString());
+					addresses.setArea(qu.getText().toString());
 					// Log.i("info",city +"district");
 					// Log.i("info",province +"district");
 					// Log.i("info",district +"district");
@@ -653,43 +727,86 @@ public class EditNewAddressActivity extends SherlockActivity {
 					// addresses.setCity(spinner2.getSelectedItem().toString());
 					addresses.setAddress(areaTextView.getText().toString());
 					addresses.setHandset(numberTextView.getText().toString());
+					addresses.setAddressId(id);
 
-					isUpdate = dataManage.updateAddress(
-							((MyApplication) EditNewAddressActivity.this
-									.getApplicationContext()).getUserId(),
-							nameTextView.getText().toString(), conutryString,
-							cityString, districtString, areaTextView
-									.getText().toString().trim(),
-							numberTextView.getText().toString(),
-							isDefauteUpdate, id,
-							((MyApplication) EditNewAddressActivity.this
-									.getApplicationContext()).getToken());
+//					isUpdate = dataManage.updateAddress(
+//							((MyApplication) EditNewAddressActivity.this
+//									.getApplicationContext()).getUserId(),
+//							nameTextView.getText().toString(), sheng.getText().toString(),
+//							shi.getText().toString(),qu.getText().toString(), areaTextView
+//									.getText().toString().trim(),
+//							numberTextView.getText().toString(),
+//							isDefauteUpdate, id,
+//							((MyApplication) EditNewAddressActivity.this
+//									.getApplicationContext()).getToken());
+//					myApplication = (MyApplication) getApplication();
+//					ArrayList<Addresses>  mlist = dataManage.getAddressesArray(
+//							myApplication.getUserId(), 0, 20);
+//					 Log.i("info", isUpdate+"addressId");
+//
+//					if (!isUpdate) {
+//						Toast.makeText(EditNewAddressActivity.this, "您的输入有问题",
+//								Toast.LENGTH_SHORT).show();
+//
+//					} else {
+//						// addresses.setAddressId(addressId+"");
+//						AddressActivity a = new AddressActivity();
+//						a.updateView(mlist);
+//						// 将数据绑定到Spinner视图上
+//						Intent intent = getIntent();
+//						// 获取bundle对象
+//						Bundle bundle = new Bundle();
+//						bundle.putSerializable("newaddress", addresses);
+//						intent.putExtras(bundle);// 放置bundle对象
+//						EditNewAddressActivity.this.setResult(
+//								DefinalDate.responcode1, intent);
+//						EditNewAddressActivity.this.finish();
+//						
 
-					addresses.setAddressId(new AddressDataManage(
-							EditNewAddressActivity.this).getAddressId() + "");
+					addressId = dataManage
+							.addAddress(
+									((MyApplication) EditNewAddressActivity.this
+											.getApplication())
+											.getUserId(),
+									nameTextView.getText()
+											.toString(),
+									sheng.getText().toString(),
+									shi.getText().toString(),
+									qu.getText().toString(),
+									areaTextView.getText()
+											.toString().trim(),
+									numberTextView.getText()
+											.toString(),
+									true,
+									((MyApplication) EditNewAddressActivity.this
+											.getApplication())
+											.getToken());
+					// Log.i("info", addressId+"addressId");
 
-					 Log.i("info", isUpdate+"addressId");
-
-					if (!isUpdate) {
-						Toast.makeText(EditNewAddressActivity.this, "您的输入有问题",
-								Toast.LENGTH_SHORT).show();
+					if ("".equals(addressId)) {
+						Toast.makeText(EditNewAddressActivity.this,
+								"您的输入有问题", Toast.LENGTH_SHORT)
+								.show();
 
 					} else {
 						// addresses.setAddressId(addressId+"");
-
-						// 将数据绑定到Spinner视图上
+						// ����ݰ󶨵�Spinner��ͼ��
 						Intent intent = getIntent();
-						// 获取bundle对象
+						// ��ȡbundle����
 						Bundle bundle = new Bundle();
-						bundle.putSerializable("newaddress", addresses);
-						intent.putExtras(bundle);// 放置bundle对象
+						bundle.putSerializable("newaddress",
+								addresses);
+						intent.putExtras(bundle);// ����bundle����
 						EditNewAddressActivity.this.setResult(
-								DefinalDate.responcode1, intent);
+								DefinalDate.responcode, intent);
 						EditNewAddressActivity.this.finish();
-						
+						// Toast.makeText(NewAddressActivity.this,
+						// "�༭�ɹ�",
+						// } Toast.LENGTH_LONG).show();
+					}
 					}
 				}
-			}
+			
 		});
 
 		TextView titleTextView = (TextView) findViewById(R.id.actionbar_title);

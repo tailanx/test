@@ -282,8 +282,10 @@ public class MainPageDataManage {
 			itemObject = hotsellJsonArray.getJSONObject(i);
 			String goodsId = itemObject.getString("goods_id");
 			baseProduct.setUId(goodsId);
-			String imgUrl = itemObject.getString("img_name");
-			baseProduct.setImgUrl(ImageUrl.IMAGEURL+imgUrl);
+			String imgUrl;
+			if(i==0 && index != 2)imgUrl = ImageUrl.IMAGEURL + itemObject.getString("img_name");
+			else imgUrl = ImageUrl.IMAGEURL + itemObject.getString("img_name");
+			baseProduct.setImgUrl(imgUrl);
 			String title = itemObject.getString("name");
 			baseProduct.setTitle(unicode.revert(title));
 			Log.i(TAG, title);

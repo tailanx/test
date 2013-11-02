@@ -151,7 +151,7 @@ public class FilterExListAdapter extends BaseExpandableListAdapter {
 		ArrayList<String> brandStrings = new ArrayList<String>();
 		brandStrings.add(mContext.getResources().getString(R.string.filter_all));
 		for (int i = 0; i < brandsArray.size(); i++) {
-			brandStrings.add(brandsArray.get(i).getBrandName());
+			brandStrings.add(brandsArray.get(i).getDesc());
 		}
 		filterHashMap.put(0, brandStrings);
 	}

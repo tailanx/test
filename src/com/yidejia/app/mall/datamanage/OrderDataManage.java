@@ -221,7 +221,7 @@ public class OrderDataManage {
 			String goods_name = jObject.getString("goods_name");
 			cart.setProductText(unicode.revert(goods_name));
 			String img_name = jObject.getString("img_name");
-			cart.setImgUrl(ImageUrl.IMAGEURL + img_name);
+			cart.setImgUrl(ImageUrl.IMAGEURL + img_name + "!100");
 			cart.setPrice(Float.parseFloat(jObject.getString("price")));
 			cartsArray.add(cart);
 		}
@@ -546,7 +546,7 @@ public class OrderDataManage {
 					String response = jsonObject.getString("response");
 					JSONObject responseObject = new JSONObject(response);
 					String result = responseObject.getString("@p_result");
-					if(unicode.revert(result).equals(context.getResources().getString(R.string.success_cancel_order1))){
+					if(unicode.revert(result).equals(context.getResources().getString(R.string.success_cancel_order))){
 						return true;
 					}
 				}

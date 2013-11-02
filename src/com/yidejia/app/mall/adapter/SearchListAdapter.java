@@ -32,6 +32,7 @@ public class SearchListAdapter extends BaseAdapter {
 			return;
 		}
 		length = functions.size();
+		length++;
 	}
 	
 	@Override
@@ -44,15 +45,16 @@ public class SearchListAdapter extends BaseAdapter {
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		if(!isEmpty) return functions.get(position).getFunName();
-		return listContent[position];
+		if(position == 0) return mContext.getResources().getString(R.string.filter_all);
+		if(!isEmpty && position != 0) return functions.get(position - 1).getFunName();
+		return listContent[position - 1];
 	}
 
 	@Override
 	public long getItemId(int position) {
 		// TODO Auto-generated method stub
 		try {
-			if(!isEmpty) return Long.parseLong(functions.get(position).getFunId());
+			if(!isEmpty && position != 0) return Long.parseLong(functions.get(position - 1).getFunId());
 		} catch (Exception e){
 			
 		}
@@ -63,13 +65,16 @@ public class SearchListAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 //		convertView = (View) mLayoutInflater.inflate(R.layout.search_list_item, null);
-		
 		convertView = (View) LayoutInflater.from(mContext).inflate(R.layout.search_list_item, null);
 		TextView search_list_text = (TextView) convertView.findViewById(R.id.search_list_item_text);
+		if(position == 0) {
+			search_list_text.setText(mContext.getResources().getString(R.string.filter_all));
+			return convertView;
+		}
 		if(isEmpty)
-			search_list_text.setText(listContent[position]);
+			search_list_text.setText(listContent[position - 1]);
 		else {
-			search_list_text.setText(functions.get(position).getFunName());
+			search_list_text.setText(functions.get(position - 1).getFunName());
 		}
 		return convertView;
 	}

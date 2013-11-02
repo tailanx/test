@@ -35,6 +35,7 @@ public class AddressAdapter extends BaseAdapter {
 	private int temp = -1;
 	private AlertDialog dialog;
 
+	
 	public AddressAdapter(Activity context, ArrayList<Addresses> mAddresses) {
 		this.mAddresses = mAddresses;
 		myApplication = (MyApplication) context.getApplication();
@@ -43,6 +44,13 @@ public class AddressAdapter extends BaseAdapter {
 		this.inflater = LayoutInflater.from(context);
 	
 
+	}
+
+	public void setMusics(ArrayList<Addresses> mAddresses) {
+		if (mAddresses != null)
+			this.mAddresses = mAddresses;
+		else
+			this.mAddresses = new ArrayList<Addresses>();
 	}
 
 	// public ArrayList<Addresses> getmAddresses() {
@@ -60,7 +68,11 @@ public class AddressAdapter extends BaseAdapter {
 	// this.setmAddresses(mAddresses);
 	// this.notifyDataSetChanged();
 	// }
-
+	
+	public void changeData(ArrayList<Addresses > addresses ){
+		this.setMusics(addresses);
+		this.notifyDataSetChanged();
+	}
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -109,7 +121,7 @@ public class AddressAdapter extends BaseAdapter {
 
 		final Addresses addresses = mAddresses.get(position);
 		
-dialog = new Builder(activity).setTitle(activity.getResources().getString(R.string.tips)).setIcon(R.drawable.ic_launcher).setMessage(activity.getResources().getString(R.string.delete_address)).setPositiveButton(activity.getResources().getString(R.string.sure),new android.content.DialogInterface.OnClickListener() {
+		dialog = new Builder(activity).setTitle(activity.getResources().getString(R.string.tips)).setIcon(R.drawable.ic_launcher).setMessage(activity.getResources().getString(R.string.delete_address)).setPositiveButton(activity.getResources().getString(R.string.sure),new android.content.DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -146,6 +158,9 @@ dialog = new Builder(activity).setTitle(activity.getResources().getString(R.stri
 				intent.putExtras(bundle);
 				((Activity) activity).startActivityForResult(intent,
 						DefinalDate.requestcode);
+				dataManage.deleteAddress(myApplication.getUserId(),
+						addresses.getAddressId(), myApplication.getToken());
+				mAddresses.remove(addresses);
 			}
 		});
 		holder.deteleImageView.setOnClickListener(new OnClickListener() {
