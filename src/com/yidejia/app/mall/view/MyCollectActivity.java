@@ -93,7 +93,9 @@ public class MyCollectActivity extends SherlockActivity {
 				// TODO Auto-generated method stub
 				//未完成的删掉收藏
 				index = position;
+				Log.i("MyCollectAct", "m" + mList.size());
 				final String pid = mList.get(position).getUId();
+				Log.e("MyCollectACT", pid);
 				new Builder(MyCollectActivity.this).setTitle(R.string.tips)
 					.setMessage("确定要删除收藏？").setPositiveButton(R.string.sure, new DialogInterface.OnClickListener() {
 						
