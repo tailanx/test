@@ -234,4 +234,21 @@ public class CartsDataManage {
 		return amount;
 	}
 	
+	/**
+	 * 获取购物车内商品种类的数量
+	 * @return
+	 */
+	public int getTypeCount(){
+		int count = 0;
+		try {
+			Map<String, ?>spMap = sp.getAll();
+			count = spMap.size();
+		} catch (Exception e) {
+			// TODO: handle exception
+			Log.e(TAG, "get cart type count err");
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
 }
