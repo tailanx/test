@@ -823,6 +823,9 @@ public class CstmPayActivity extends SherlockActivity {
 		Log.i(TAG, "peisong id"+ express.getPreId());
 		//设置配送中心
 		setPeiSong(express.getPreId());
+		Log.i("info", "setKuaidi:");
+		postMethod = getResources().getString(R.string.ship_post);// 初始化快递方式;
+		expressNum = express.getExpress();// 初始化费用
 		if (isFree) {
 			generalPrice.setText("0");
 			emsPrice.setText("0");
@@ -836,9 +839,6 @@ public class CstmPayActivity extends SherlockActivity {
 							.getText().toString() : emsPrice
 							.getText().toString())) + "");
 		}
-		Log.i("info", "setKuaidi:");
-		postMethod = getResources().getString(R.string.ship_post);// 初始化快递方式;
-		expressNum = express.getExpress();// 初始化费用
 	}
 	
 	/**
