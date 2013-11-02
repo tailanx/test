@@ -300,6 +300,7 @@ public class CstmPayActivity extends SherlockActivity {
 
 	}
 
+	private ArrayList<Cart> carts;//购物车的数据，非换购的数据
 	private RelativeLayout reLayout;
 	private String isCartActivity; 
 	private String sum;
@@ -375,7 +376,7 @@ public class CstmPayActivity extends SherlockActivity {
 			} else {
 				
 				// Cart cart = (Cart) intent.getSerializableExtra("Cart");
-				ArrayList<Cart> carts;
+				
 				
 				carts = (ArrayList<Cart>) intent
 						.getSerializableExtra("carts");
@@ -403,7 +404,9 @@ public class CstmPayActivity extends SherlockActivity {
 				if (isCartActivity.equals("Y")||isCartActivity.equals("N")) {
 					dialog.show();
 					show(carts);//sum, 
-				} else {
+				} else if (isCartActivity.equals("No")) {
+					show(carts);
+				}else {
 					// if (!carts.isEmpty()) {
 					show(carts);//sum, 
 				}
@@ -418,7 +421,7 @@ public class CstmPayActivity extends SherlockActivity {
 
 	}
 
-	private void show(ArrayList<Cart> carts) {//final String sum, 
+	private void show(final ArrayList<Cart> carts) {//final String sum, 
 		Log.i(TAG, "show sum:"+sum);
 		setContentView(R.layout.go_pay);
 		// 注册返回时的广播
@@ -614,6 +617,17 @@ public class CstmPayActivity extends SherlockActivity {
 				// Log.e("OrderCode", orderCode);
 				if (orderCode == null || "".equals(orderCode))
 					return;
+				if (isCartActivity.equals("Y")) {//；来自购物车
+					// 删除购物车的商品
+					CartsDataManage cartsDataManage = new CartsDataManage();
+					int length = carts.size();
+					for (int i = 0; i < length; i++) {
+						cartsDataManage.delCart(carts.get(i).getUId());
+					}
+					Intent intent = new Intent(Consts.BROAD_UPDATE_CHANGE);
+					CstmPayActivity.this.sendBroadcast(intent);
+				}
+				//跳转到支付页面
 				Intent userpayintent = new Intent(
 						CstmPayActivity.this, UserPayActivity.class);
 				Bundle bundle = new Bundle();
