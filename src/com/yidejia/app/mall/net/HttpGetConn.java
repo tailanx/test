@@ -38,10 +38,10 @@ public class HttpGetConn {
 		Log.i(TAG, urlString);
 		try {
 			HttpClient httpClient = new DefaultHttpClient();
-			httpClient.getParams().setIntParameter(
-                    HttpConnectionParams.SO_TIMEOUT, TIME_OUT_DELAY); // 读取超时设置
-			httpClient.getParams().setIntParameter(
-                    HttpConnectionParams.CONNECTION_TIMEOUT, TIME_OUT_DELAY);// 连接超时
+//			httpClient.getParams().setIntParameter(
+//                    HttpConnectionParams.SO_TIMEOUT, TIME_OUT_DELAY); // 读取超时设置
+//			httpClient.getParams().setIntParameter(
+//                    HttpConnectionParams.CONNECTION_TIMEOUT, TIME_OUT_DELAY);// 连接超时
 			HttpResponse httpResponse = httpClient.execute(httpRequst);
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				result = EntityUtils.toString(httpResponse.getEntity());
