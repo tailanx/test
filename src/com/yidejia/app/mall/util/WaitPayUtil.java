@@ -118,6 +118,8 @@ public class WaitPayUtil {
 						Bundle mBundle = new Bundle();
 						mBundle.putString("price",
 								waitPayOrderDetail.map.get("price") + "");
+						mBundle.putString("cartActivity", "Y");
+						intent.putExtra("carts", mOrder.getCartsArray());
 						intent.putExtras(mBundle);
 						context.startActivity(intent);
 					}
