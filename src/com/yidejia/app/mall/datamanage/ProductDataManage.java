@@ -80,14 +80,14 @@ public class ProductDataManage{  //implements CallBack
 			this.id = id;
 		}
 		
-		private ProgressDialog bar = new ProgressDialog(context);
+//		private ProgressDialog bar = new ProgressDialog(context);
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage(context.getResources().getString(R.string.searching));
-			bar.show();
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(context.getResources().getString(R.string.searching));
+//			bar.show();
 		}
 		
 		@Override
@@ -124,7 +124,7 @@ public class ProductDataManage{  //implements CallBack
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			bar.dismiss();
+//			bar.dismiss();
 		}
 		
 	}
