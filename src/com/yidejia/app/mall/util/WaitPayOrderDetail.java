@@ -108,15 +108,15 @@ public class WaitPayOrderDetail {
 					 ImageView head = (ImageView) view.findViewById(R.id.wait_order_item_image);
 					 TextView detail = (TextView) view.findViewById(R.id.wait_order_item_text);
 					 RelativeLayout mlayout = (RelativeLayout) view.findViewById(R.id.wait_pay_relative1);
-					 mlayout.setOnClickListener(new OnClickListener() {//��ӵ���¼�
-						
-						@Override
-						public void onClick(View v) {
-							
-							Intent intent = new Intent(context,GoodsInfoActivity.class);
-							context.startActivity(intent);
-						}
-					});
+//					 mlayout.setOnClickListener(new OnClickListener() {//��ӵ���¼�
+//						
+//						@Override
+//						public void onClick(View v) {
+//							
+////							Intent intent = new Intent(context,GoodsInfoActivity.class);
+////							context.startActivity(intent);
+//						}
+//					});
 					TextView price = (TextView) view.findViewById(R.id.wait_order_item_sum_price);
 					TextView count = (TextView) view.findViewById(R.id.wait_order_item_count_detail);
 				Cart cart = mArrayList.get(i);

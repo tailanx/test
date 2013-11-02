@@ -19,6 +19,7 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.view.CstmPayActivity;
+import com.yidejia.app.mall.view.OrderDetailActivity;
 
 public class WaitPayUtil {
 	private Context context;
@@ -76,6 +77,21 @@ public class WaitPayUtil {
 			Log.i("info", mList.size() + "mList");
 			for (int i = 0; i < mList.size(); i++) {
 				setupShow();
+//				View view = mInflater.inflate(R.layout.wair_pay_order_item_item, null);
+//				final LinearLayout linear1 = (LinearLayout) view
+//						.findViewById(R.id.wait_pay_order_linear);
+//				Button cancel = (Button) view.findViewById(R.id.wait_pay_order_item_cancal);
+//				LinearLayout mLayout = (LinearLayout) view
+//						.findViewById(R.id.wait_pay_order_relative2);
+//				Button mButton = (Button) view.findViewById(R.id.wait_pay_order_item_payment);
+//				TextView titleTextView = (TextView) view
+//						.findViewById(R.id.wait_pay_order_item_main_item_detail);
+//				TextView numberTextView = (TextView) view
+//						.findViewById(R.id.wait_pay_order_item_textview2_number);
+//				TextView sumPrice = (TextView) view
+//						.findViewById(R.id.wait_pay_order_sum_money_detail);
+//				TextView countTextView = (TextView) view
+//						.findViewById(R.id.wait_pay_order_item_textview7_count);
 				// Log.i("info", view+"+view");
 
 				final Order mOrder = mList.get(i);
@@ -113,14 +129,39 @@ public class WaitPayUtil {
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
+//						Intent intent = new Intent(context,
+//								CstmPayActivity.class);
+//						Bundle mBundle = new Bundle();
+//						mBundle.putString("price",
+//								waitPayOrderDetail.map.get("price") + "");
+//						mBundle.putString("cartActivity", "No");
+//						intent.putExtra("carts", mOrder.getCartsArray());
+//						intent.putExtras(mBundle);
+//						context.startActivity(intent);
 						Intent intent = new Intent(context,
-								CstmPayActivity.class);
-						Bundle mBundle = new Bundle();
-						mBundle.putString("price",
-								waitPayOrderDetail.map.get("price") + "");
-						mBundle.putString("cartActivity", "No");
+								OrderDetailActivity.class);
+
+						Bundle bundle = new Bundle();
+						bundle.putString("OrderCode", mOrder.getOrderCode());
+						bundle.putString("OrderPrice", waitPayOrderDetail.map.get("price") + "");
+						intent.putExtras(bundle);
 						intent.putExtra("carts", mOrder.getCartsArray());
-						intent.putExtras(mBundle);
+						context.startActivity(intent);
+					}
+				});
+				mLayout.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						Intent intent = new Intent(context,
+								OrderDetailActivity.class);
+
+						Bundle bundle = new Bundle();
+						bundle.putString("OrderCode", mOrder.getOrderCode());
+						bundle.putString("OrderPrice", waitPayOrderDetail.map.get("price") + "");
+						intent.putExtras(bundle);
+						intent.putExtra("carts", mOrder.getCartsArray());
 						context.startActivity(intent);
 					}
 				});

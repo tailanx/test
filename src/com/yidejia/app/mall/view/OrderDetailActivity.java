@@ -25,6 +25,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
@@ -80,8 +81,20 @@ public class OrderDetailActivity extends SherlockFragmentActivity {
 		for (int i = 0; i < length; i++) {
 			View view = getLayoutInflater().inflate(R.layout.order_detail_item,
 					null);
-			Cart cart = carts.get(i);
+			final Cart cart = carts.get(i);
 			setCartsInfo(view, cart);
+			view.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Intent goodsInfoIntent = new Intent(OrderDetailActivity.this, GoodsInfoActivity.class);
+					Bundle bundle = new Bundle();
+					bundle.putString("goodsId", cart.getUId());
+					goodsInfoIntent.putExtras(bundle);
+					startActivity(goodsInfoIntent);
+				}
+			});
 			layout.addView(view);
 		}
 		setupShow();
