@@ -125,7 +125,7 @@ public class AllOrderUtil {
 						mBundle.putString("price",
 								allOrderDetail.map.get("price") + "");
 						intent.putExtra("carts", mOrder.getCartsArray());
-						mBundle.putString("cartActivity", "Y");
+						mBundle.putString("cartActivity", "No");
 						intent.putExtras(mBundle);
 						context.startActivity(intent);
 					}
