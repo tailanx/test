@@ -122,15 +122,15 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(ExchangeFreeActivity.this,
-						CstmPayActivity.class);
-
-				Bundle bundle = new Bundle();
-				bundle.putString("price", sumprice);
-				intent.putExtra("cartActivity", "G");
-				bundle.putSerializable("carts", mArrayList);
-				intent.putExtras(bundle);
-				ExchangeFreeActivity.this.startActivity(intent);
+//				Intent intent = new Intent(ExchangeFreeActivity.this,
+//						CstmPayActivity.class);
+//
+//				Bundle bundle = new Bundle();
+//				bundle.putString("price", sumprice);
+//				intent.putExtra("cartActivity", "G");
+//				bundle.putSerializable("carts", mArrayList);
+//				intent.putExtras(bundle);
+//				ExchangeFreeActivity.this.startActivity(intent);
 				ExchangeFreeActivity.this.finish();
 			}
 		});
@@ -233,7 +233,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 					intent.putExtra("price", sumprice);
 					intent.putExtra("voucher", voucher);
 					intent.putExtra("carts", mArrayList);
-					intent.putExtra("cartActivity", "N");
+					intent.putExtra("cartActivity", "No");
 					ExchangeFreeActivity.this.startActivity(intent);
 					ExchangeFreeActivity.this.sendBroadcast(intent);
 					ExchangeFreeActivity.this.finish();

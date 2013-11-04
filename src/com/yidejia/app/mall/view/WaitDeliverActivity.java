@@ -154,12 +154,12 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 	                    animation = new TranslateAnimation(position_one, 0, 0, 0);
 	                    mMonth.setPressed(false);
 	                    mMonth.setBackgroundResource(R.drawable.product_details_bg);
-	                    mMonth.setTextColor(Color.parseColor("#ed217c"));
+	                    mMonth.setTextColor(Color.parseColor("#000000"));
 	                } else if (currIndex == 2) {
 	                    animation = new TranslateAnimation(position_two, 0, 0, 0);
 	                    mYear.setPressed(false);
 	                    mYear.setBackgroundResource(R.drawable.product_details_bg);
-	                    mYear.setTextColor(Color.parseColor("#ed217c"));
+	                    mYear.setTextColor(Color.parseColor("#000000"));
 	                } 
 	                mWeek.setPressed(true);
 	                mWeek.setBackgroundResource(R.drawable.produce_textview_selector);
@@ -170,12 +170,12 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 	                    animation = new TranslateAnimation(offset, position_one, 0, 0);
 	                    mWeek.setPressed(false);
 	                    mWeek.setBackgroundResource(R.drawable.product_details_bg);
-	                    mWeek.setTextColor(Color.parseColor("#ed217c"));
+	                    mWeek.setTextColor(Color.parseColor("#000000"));
 	                } else if (currIndex == 2) {
 	                    animation = new TranslateAnimation(position_two, position_one, 0, 0);
 	                    mYear.setPressed(false);
 	                    mYear.setBackgroundResource(R.drawable.product_details_bg);
-	                    mYear.setTextColor(Color.parseColor("#ed217c"));
+	                    mYear.setTextColor(Color.parseColor("#000000"));
 	                } 
 	                mMonth.setPressed(true);
 	                mMonth.setBackgroundResource(R.drawable.product_details_selected);
@@ -186,12 +186,12 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 	                    animation = new TranslateAnimation(offset, position_two, 0, 0);
 	                    mWeek.setPressed(false);
 	                    mWeek.setBackgroundResource(R.drawable.product_details_bg);
-	                    mWeek.setTextColor(Color.parseColor("#ed217c"));
+	                    mWeek.setTextColor(Color.parseColor("#000000"));
 	                } else if (currIndex == 1) {
 	                    animation = new TranslateAnimation(position_one, position_two, 0, 0);
 	                    mMonth.setPressed(false);
 	                    mMonth.setBackgroundResource(R.drawable.product_details_bg);
-	                    mMonth.setTextColor(Color.parseColor("#ed217c"));
+	                    mMonth.setTextColor(Color.parseColor("#000000"));
 	                } 
 	                mYear.setPressed(true);
 	                mYear.setBackgroundResource(R.drawable.product_details_selected);

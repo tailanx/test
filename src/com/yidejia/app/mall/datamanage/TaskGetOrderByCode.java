@@ -61,7 +61,7 @@ public class TaskGetOrderByCode {
 		detailTextView = (TextView) activity.findViewById(R.id.order_detail_position);
 		priceTextView = (TextView) activity.findViewById(R.id.order_detail_dingdan_sum);
 		emsTextView = (TextView) activity.findViewById(R.id.order_detail_yunhui_sum);
-		sumTextView = (TextView) activity.findViewById(R.id.go_pay_show_pay_money);
+		sumTextView = (TextView) activity.findViewById(R.id.order_detail_go_pay_show_pay_money);
 		payButton = (Button) activity.findViewById(R.id.order_detail_pay);
 		orderNumber = (TextView) activity.findViewById(R.id.order_detail_biaohao_number);
 		orderTime =  (TextView) activity.findViewById(R.id.order_detail_time_number);
@@ -104,8 +104,8 @@ public class TaskGetOrderByCode {
 			super.onPreExecute();
 //			if (isFirstIn) {
 				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-				bar.setMessage(activity.getResources().getString(
-						R.string.searching));
+//				bar.setMessage(activity.getResources().getString(
+//						R.string.searching));
 				bar.show();
 //			}
 		}
@@ -203,7 +203,7 @@ public class TaskGetOrderByCode {
 			
 			float odprice = Float.parseFloat(orderPrice);
 			float exprice = Float.parseFloat(expressNum);
-			
+
 			sumTextView.setText((odprice + exprice) + activity.getResources().getString(R.string.unit));
 		} catch (NumberFormatException e) {
 			// TODO: handle exception

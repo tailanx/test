@@ -112,7 +112,7 @@ public class FreeGivingAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
-		Log.i("info", position+"           postion");
+//		Log.i("info", position+"           postion");
 		ViewHolder holder = null;
 		HashMap< String , Object> map = new HashMap<String, Object>();
 		if (convertView == null) {
@@ -183,7 +183,7 @@ public class FreeGivingAdapter extends BaseAdapter {
 			map.put("check", holder.cb.isChecked());
 		}
 		list.add(map);
-		Log.i("info", list.toString()+"  list.toString()");
+//		Log.i("info", list.toString()+"  list.toString()");
 		return convertView;
 	}
 

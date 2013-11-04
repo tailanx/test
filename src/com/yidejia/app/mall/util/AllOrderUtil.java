@@ -119,13 +119,23 @@ public class AllOrderUtil {
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
+//						Intent intent = new Intent(context,
+//								CstmPayActivity.class);
+//						Bundle mBundle = new Bundle();
+//						mBundle.putString("price",
+//								allOrderDetail.map.get("price") + "");
+//						intent.putExtra("carts", mOrder.getCartsArray());
+//						mBundle.putString("cartActivity", "No");
+//						intent.putExtras(mBundle);
+//						context.startActivity(intent);
 						Intent intent = new Intent(context,
-								CstmPayActivity.class);
-						Bundle mBundle = new Bundle();
-						mBundle.putString("price",
-								allOrderDetail.map.get("price") + "");
+								OrderDetailActivity.class);
+
+						Bundle bundle = new Bundle();
+						bundle.putString("OrderCode", mOrder.getOrderCode());
+						bundle.putString("OrderPrice", allOrderDetail.map.get("price") + "");
+						intent.putExtras(bundle);
 						intent.putExtra("carts", mOrder.getCartsArray());
-						intent.putExtras(mBundle);
 						context.startActivity(intent);
 					}
 				});

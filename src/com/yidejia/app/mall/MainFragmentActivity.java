@@ -19,6 +19,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
@@ -165,6 +166,8 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		downShoppingLayout.setOnClickListener(new NavOnclick(3));
 		downMyLayout.setOnClickListener(new NavOnclick(4));
 		
+		//隐藏逛发现
+		downGuangLayout.setVisibility(ViewGroup.GONE);
 //		down_shopping_cart = (Button) findViewById(R.id.down_shopping_cart);
 //		CartsDataManage cartsDataManage = new CartsDataManage();
 //		int cartAcount = cartsDataManage.getCartAmount();

@@ -20,6 +20,7 @@ import android.os.Message;
 import android.preference.PreferenceManager.OnActivityResultListener;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -88,7 +89,7 @@ public class CstmPayActivity extends SherlockActivity {
 	private ScrollView go_pay_scrollView;
 	private VoucherDataManage voucherDataManage;
 
-//	 private Myreceiver receiver;
+	// private Myreceiver receiver;
 	// private Addresses addresses;
 	private String peiSongCenter = "";// //配送中心
 	private String recipientId = "";// 收集人id
@@ -153,6 +154,11 @@ public class CstmPayActivity extends SherlockActivity {
 			yinlianCheckBox = (CheckBox) findViewById(R.id.yinlian_checkbox);
 			caifutongCheckBox = (CheckBox) findViewById(R.id.caifutong_checkbox);
 
+			//支付宝和财付通暂时不可见
+//			zhifubao.setVisibility(ViewGroup.GONE);
+//			zhifubaowangye.setVisibility(ViewGroup.GONE);
+//			cafutong.setVisibility(ViewGroup.GONE);
+			
 			generalRelative.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -294,6 +300,7 @@ public class CstmPayActivity extends SherlockActivity {
 
 	}
 
+	private ArrayList<Cart> carts;//购物车的数据，非换购的数据
 	private RelativeLayout reLayout;
 	private String isCartActivity; 
 	private String sum;
@@ -319,7 +326,7 @@ public class CstmPayActivity extends SherlockActivity {
 					.setMessage(
 							getResources().getString(R.string.exchange_produce))
 					.setPositiveButton(
-							"确定",
+							getResources().getString(R.string.sure),
 							new android.content.DialogInterface.OnClickListener() {
 
 								@Override
@@ -371,6 +378,7 @@ public class CstmPayActivity extends SherlockActivity {
 				// Cart cart = (Cart) intent.getSerializableExtra("Cart");
 				ArrayList<Cart> carts;
 				
+				
 				carts = (ArrayList<Cart>) intent
 						.getSerializableExtra("carts");
 				if (carts.isEmpty()) return;
@@ -394,11 +402,14 @@ public class CstmPayActivity extends SherlockActivity {
 					arrayListFree = preferentialDataManage.getFreeGoods();
 					arrayListExchange = preferentialDataManage.getScoreGoods();
 				}
-				if (isCartActivity.equals("Y")) {//||isCartActivity.equals("N")
+				if (isCartActivity.equals("Y")||isCartActivity.equals("N")) {//
 					dialog.show();
-				} else {
+					show(carts,false);//sum, 
+				} else if (isCartActivity.equals("N0")) {
+					show(carts,true);
+				}else {
 					// if (!carts.isEmpty()) {
-					show(sum, carts,false);
+//					show(carts,);//sum, 
 				}
 			}
 		} catch (NumberFormatException e) {
@@ -411,15 +422,14 @@ public class CstmPayActivity extends SherlockActivity {
 
 	}
 
-	private void show(final String sum, ArrayList<Cart> carts, boolean isHuanGou) {
-
+	private void show(final ArrayList<Cart> carts, boolean isHuanGou) {
 		Log.i(TAG, "show sum:"+sum);
 		setContentView(R.layout.go_pay);
 		// 注册返回时的广播
 		receiver = new InnerReceiver();
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Consts.BACK_UPDATE_CHANGE);
-		CstmPayActivity.this.registerReceiver(receiver, filter);
+		registerReceiver(receiver, filter);
 		
 		addressDataManage = new AddressDataManage(this);
 		go_pay_scrollView = (ScrollView) findViewById(R.id.go_pay_scrollView);
@@ -458,8 +468,7 @@ public class CstmPayActivity extends SherlockActivity {
 			}
 		});
 		PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
-		String goodsTemp = pay.loadView(carts, isHuanGou);
-		goods = goods+goodsTemp;
+		goods = pay.loadView(carts,isHuanGou);
 		//添加地址、快递费用、配送中心
 		addAddress();
 //		// 获取免邮界限
@@ -580,7 +589,18 @@ public class CstmPayActivity extends SherlockActivity {
 				} else if (caifutongCheckBox.isChecked()) {
 					mode = 0;
 					pay_type = "tenpay";
+					Toast.makeText(CstmPayActivity.this, "亲，暂时不支持该支付方式！", Toast.LENGTH_LONG).show();
+					return;
+				} else if(zhifubaoCheckBox.isChecked()){
+					mode = 2;
+					pay_type = "alipay";
+					Toast.makeText(CstmPayActivity.this, "亲，暂时不支持该支付方式！", Toast.LENGTH_LONG).show();
+					return;
 				} else {
+					mode = 3;
+					pay_type = "aliwappay";
+					Toast.makeText(CstmPayActivity.this, "亲，暂时不支持该支付方式！", Toast.LENGTH_LONG).show();
+					return;
 				}
 				OrderDataManage orderDataManage = new OrderDataManage(
 						CstmPayActivity.this);
@@ -598,6 +618,17 @@ public class CstmPayActivity extends SherlockActivity {
 				// Log.e("OrderCode", orderCode);
 				if (orderCode == null || "".equals(orderCode))
 					return;
+				if (isCartActivity.equals("Y")) {//；来自购物车
+					// 删除购物车的商品
+					CartsDataManage cartsDataManage = new CartsDataManage();
+					int length = carts.size();
+					for (int i = 0; i < length; i++) {
+						cartsDataManage.delCart(carts.get(i).getUId());
+					}
+					Intent intent = new Intent(Consts.BROAD_UPDATE_CHANGE);
+					CstmPayActivity.this.sendBroadcast(intent);
+				}
+				//跳转到支付页面
 				Intent userpayintent = new Intent(
 						CstmPayActivity.this, UserPayActivity.class);
 				Bundle bundle = new Bundle();
@@ -685,7 +716,7 @@ public class CstmPayActivity extends SherlockActivity {
 	 * 地址和快递费用，配送中心
 	 */
 	private void addAddress() {
-		Log.i(TAG, "show sum:"+sum);
+//		Log.i(TAG, "show sum:"+sum);
 		try {
 			// ArrayList<Addresses> mList1 =
 			// addressDataManage.getAddressesArray(
@@ -694,7 +725,7 @@ public class CstmPayActivity extends SherlockActivity {
 			ArrayList<Addresses> mList = addressDataManage
 					.getDefAddresses(myApplication.getUserId());
 			Addresses addresses;
-			Log.i("info", mList.size() + " mlist");
+//			Log.i("info", mList.size() + " mlist");
 			if (mList.size() == 0) {
 				ArrayList<Addresses> addArray = addressDataManage.getAddressesArray(myApplication.getUserId(), 0, 10);
 				if (addArray.isEmpty()) { //无默认地址并且无地址
@@ -762,8 +793,8 @@ public class CstmPayActivity extends SherlockActivity {
 	 * @param addresses
 	 */
 	private void setAdd(Addresses addresses){
-		Log.i(TAG, "show sum:"+sum);
-		Log.i(TAG, "add address");
+//		Log.i(TAG, "show sum:"+sum);
+//		Log.i(TAG, "add address");
 		userName.setText(addresses.getName());
 		phoneName.setText(addresses.getHandset());// �޸�Ϊ�ֻ�
 		StringBuffer sb = new StringBuffer();
@@ -793,6 +824,9 @@ public class CstmPayActivity extends SherlockActivity {
 		Log.i(TAG, "peisong id"+ express.getPreId());
 		//设置配送中心
 		setPeiSong(express.getPreId());
+		Log.i("info", "setKuaidi:");
+		postMethod = getResources().getString(R.string.ship_post);// 初始化快递方式;
+		expressNum = express.getExpress();// 初始化费用
 		if (isFree) {
 			generalPrice.setText("0");
 			emsPrice.setText("0");
@@ -900,7 +934,7 @@ public class CstmPayActivity extends SherlockActivity {
 				&& resultCode == Consts.AddressResponseCode) {
 			Addresses addresses1 = (Addresses) data.getExtras()
 					.getSerializable("addresses1");
-			Log.i("info", addresses1.getAddress() + "str");
+//			Log.i("info", addresses1.getAddress() + "str");
 			if (addresses1 != null) {
 //				reLayout.removeView(addressRelative);
 //				userName.setText(addresses1.getName());

@@ -253,7 +253,7 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 		myApplication = (MyApplication) getSherlockActivity().getApplication();
 
 		personCountDataManage = new PersonCountDataManage(getSherlockActivity());
-
+		personCountDataManage.getCountData(myApplication.getUserId(), myApplication.getToken());
 		Log.i("info", personCountDataManage + "        personCountDataManage");
 		View view = inflater.inflate(R.layout.person_shopping_mall1, container,
 				false);

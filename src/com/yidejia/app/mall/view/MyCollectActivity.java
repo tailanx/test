@@ -2,12 +2,12 @@ package com.yidejia.app.mall.view;
 
 import java.util.ArrayList;
 
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -18,15 +18,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.unionpay.mpay.utils.m;
 import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
@@ -56,9 +53,9 @@ public class MyCollectActivity extends SherlockActivity {
 		mPullRefreshListView = (PullToRefreshListView) findViewById(R.id.my_collect_listview);
 		String label = getResources().getString(R.string.update_time)
 				+ DateUtils.formatDateTime(this,
-						System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
-								| DateUtils.FORMAT_SHOW_DATE
-								| DateUtils.FORMAT_SHOW_DATE);
+						System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
+						| DateUtils.FORMAT_SHOW_DATE
+						| DateUtils.FORMAT_ABBREV_ALL);
 		mPullRefreshListView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 		mListView = mPullRefreshListView.getRefreshableView();
 		fAdapter = new FavoriteAdapter(this, mList);
@@ -96,7 +93,9 @@ public class MyCollectActivity extends SherlockActivity {
 				// TODO Auto-generated method stub
 				//未完成的删掉收藏
 				index = position;
+				Log.i("MyCollectAct", "m" + mList.size());
 				final String pid = mList.get(position).getUId();
+				Log.e("MyCollectACT", pid);
 				new Builder(MyCollectActivity.this).setTitle(R.string.tips)
 					.setMessage("确定要删除收藏？").setPositiveButton(R.string.sure, new DialogInterface.OnClickListener() {
 						
@@ -172,9 +171,9 @@ public class MyCollectActivity extends SherlockActivity {
 			// TODO Auto-generated method stub
 			String label = MyCollectActivity.this.getResources().getString(R.string.update_time)
 					+ DateUtils.formatDateTime(MyCollectActivity.this,
-							System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
-									| DateUtils.FORMAT_SHOW_DATE
-									| DateUtils.FORMAT_SHOW_DATE);
+							System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
+							| DateUtils.FORMAT_SHOW_DATE
+							| DateUtils.FORMAT_ABBREV_ALL);
 			mPullRefreshListView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 			FavoriteDataManage manage = new FavoriteDataManage(MyCollectActivity.this);
 			fromIndex = 0;
@@ -201,9 +200,9 @@ public class MyCollectActivity extends SherlockActivity {
 			// TODO Auto-generated method stub
 			String label = MyCollectActivity.this.getResources().getString(R.string.update_time)
 					+ DateUtils.formatDateTime(MyCollectActivity.this,
-							System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
-									| DateUtils.FORMAT_SHOW_DATE
-									| DateUtils.FORMAT_SHOW_DATE);
+							System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
+							| DateUtils.FORMAT_SHOW_DATE
+							| DateUtils.FORMAT_ABBREV_ALL);
 			mPullRefreshListView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 			FavoriteDataManage manage = new FavoriteDataManage(MyCollectActivity.this);
 			fromIndex += amount;
@@ -232,9 +231,9 @@ public class MyCollectActivity extends SherlockActivity {
 			// TODO Auto-generated method stub
 			String label = MyCollectActivity.this.getResources().getString(R.string.update_time)
 					+ DateUtils.formatDateTime(MyCollectActivity.this,
-							System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
-									| DateUtils.FORMAT_SHOW_DATE
-									| DateUtils.FORMAT_SHOW_DATE);
+							System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
+							| DateUtils.FORMAT_SHOW_DATE
+							| DateUtils.FORMAT_ABBREV_ALL);
 			mPullRefreshListView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 			FavoriteDataManage manage = new FavoriteDataManage(MyCollectActivity.this);
 			fromIndex += amount;

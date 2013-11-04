@@ -35,7 +35,7 @@ public class PreferentialDataManage {
 	private Resources res;
 	
 	private boolean isNoMore = false;//判断是否还有更多数据,true为没有更多了
-	private ProgressDialog bar;
+//	private ProgressDialog bar;
 	/**
 	 * {@link #getPreferential(String, String)}
 	 * <p>
@@ -48,7 +48,7 @@ public class PreferentialDataManage {
 		freeProductArray = new ArrayList<Specials>();
 		scoresProductArray = new ArrayList<Specials>();
 		activeProductArray = new ArrayList<Specials>();
-		bar = new ProgressDialog(context);
+//		bar = new ProgressDialog(context);
 		res = context.getResources();
 	}
 	/**
@@ -63,12 +63,12 @@ public class PreferentialDataManage {
 		this.userid = userId;
 		TaskVerify taskVerify = new TaskVerify();
 		try {
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);  
-			bar.setMessage(res.getString(R.string.searching));
-			bar.show();
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);  
+//			bar.setMessage(res.getString(R.string.searching));
+//			bar.show();
 //			Log.i("info", taskVerify.execute().get()+"    taskVerify");
 			state = taskVerify.execute().get();
-			bar.dismiss();
+//			bar.dismiss();
 			if(isNoMore){
 				Toast.makeText(context, res.getString(R.string.nomore), Toast.LENGTH_SHORT).show();
 				isNoMore = false;
