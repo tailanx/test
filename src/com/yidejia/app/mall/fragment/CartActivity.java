@@ -269,8 +269,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 			// layout = (LinearLayout) view
 			// .findViewById(R.id.shopping_cart_relative2);
 
-			// getSherlockActivity().getSupportActionBar().setCustomView(
-			// R.layout.actionbar_cart);
+			getSherlockActivity().getSupportActionBar().setCustomView(R.layout.actionbar_cart);
 
 			// layout = (LinearLayout)
 			// view.findViewById(R.id.shopping_cart_relative2);
