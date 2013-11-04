@@ -51,7 +51,7 @@ android:layout_below="@id/evaluation_relative1"
             android:layout_marginRight="8dp"
             android:layout_marginTop="12dp"
             android:orientation="vertical" >
-
+			<!-- 
             <RelativeLayout
                 android:id="@+id/evaluation_relative2"
                 android:layout_width="wrap_content"
@@ -85,7 +85,6 @@ android:layout_below="@id/evaluation_relative1"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:layout_toRightOf="@id/evaluation_sum"
-                    android:text="￥160.00"
                     android:textColor="#ed217c"
                     android:textSize="15sp" />
 
@@ -107,9 +106,10 @@ android:layout_below="@id/evaluation_relative1"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/evaluation_sum"
                     android:layout_marginLeft="4dp"
-                    android:text="数量：1"
+                    android:text="数量："
                     android:textSize="15sp" />
             </RelativeLayout>
+             -->
         </LinearLayout>
     </ScrollView>
 
