@@ -170,7 +170,7 @@ public class UserPayActivity extends Activity{
 		if (null != respCode && "00".equals(respCode) && null != upayTn) {
 			
 			UPPayAssistEx.startPayByJAR(UserPayActivity.this,
-					PayActivity.class, null, null, upayTn, "01");
+					PayActivity.class, null, null, upayTn, "00");
 			
 		} else {
 			Toast.makeText(UserPayActivity.this, "", Toast.LENGTH_LONG).show();
@@ -214,7 +214,7 @@ public class UserPayActivity extends Activity{
 			if (null != resp && null != resp.get("code") && "0000".equals(resp.get("code"))) {
 				String tn = resp.get("tn");
 				UPPayAssistEx.startPayByJAR(this,
-						PayActivity.class, null, null, tn, "01");
+						PayActivity.class, null, null, tn, "00");
 				
 			} else {
 				
