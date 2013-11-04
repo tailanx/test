@@ -126,6 +126,7 @@ android:uiOptions="splitActionBarWhenNarrow"
         <activity android:name="com.yidejia.app.mall.view.EditNewAddressActivity"
             android:screenOrientation="portrait" />
         <activity android:name="com.yidejia.app.mall.view.ExchangeFreeActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity android:name="com.yidejia.app.mall.view.OptionActivity"
             android:screenOrientation="portrait" />

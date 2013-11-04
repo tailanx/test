@@ -101,6 +101,7 @@ public class CstmPayActivity extends SherlockActivity {
 	private String resp_code;// 返回状态码
 	private String tn;// 流水号
 	private LinearLayout layout;
+	public static ArrayList<Cart> cartList;
 
 	private static final String SERVER_URL = "http://202.104.148.76/splugin/interface";
 	private static final String TRADE_COMMAND = "1001";
@@ -312,11 +313,12 @@ public class CstmPayActivity extends SherlockActivity {
 			Intent intent = getIntent();
 //			final String sum = intent.getStringExtra("price");
 			sum = intent.getStringExtra("price");
+			cartList = new ArrayList<Cart>();
 			Log.i(TAG, "sum:" + sum);
 			isCartActivity = intent.getStringExtra("cartActivity");
 			myApplication = (MyApplication) getApplication();
-			voucherDataManage = new VoucherDataManage(CstmPayActivity.this);
-			voucher =Integer.parseInt(voucherDataManage.getUserVoucher(myApplication.getUserId(), myApplication.getToken()));
+//			voucherDataManage = new VoucherDataManage(CstmPayActivity.this);
+//			voucher =Integer.parseInt(voucherDataManage.getUserVoucher(myApplication.getUserId(), myApplication.getToken()));
 			// TODO Auto-generated method stub
 			preferentialDataManage = new PreferentialDataManage(
 					CstmPayActivity.this);
@@ -342,7 +344,18 @@ public class CstmPayActivity extends SherlockActivity {
 									CstmPayActivity.this.startActivity(intent);
 									 CstmPayActivity.this.finish();
 								}
-							}).setNegativeButton("取消", null).create();
+							}).setNegativeButton("取消", new android.content.DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// TODO Auto-generated method stub
+									if(isCartActivity.equals("Y")||isCartActivity.equals("N")){
+									voucherDataManage = new VoucherDataManage(CstmPayActivity.this);
+									voucher =Integer.parseInt(voucherDataManage.getUserVoucher(myApplication.getUserId(), myApplication.getToken()));
+									}
+									}}
+							).create();
 			// new android.content.DialogInterface.OnClickListener() {
 			//
 			// @Override
@@ -405,7 +418,9 @@ public class CstmPayActivity extends SherlockActivity {
 				if (isCartActivity.equals("Y")||isCartActivity.equals("N")) {//
 					dialog.show();
 					show(carts,false);//sum, 
-				} else if (isCartActivity.equals("N0")) {
+				} else if (isCartActivity.equals("E")) {
+					voucher = intent.getIntExtra("voucher", -1);
+					Log.i("voucher", voucher + "  voucher");
 					show(carts,true);
 				}else {
 					// if (!carts.isEmpty()) {
@@ -426,10 +441,10 @@ public class CstmPayActivity extends SherlockActivity {
 		Log.i(TAG, "show sum:"+sum);
 		setContentView(R.layout.go_pay);
 		// 注册返回时的广播
-		receiver = new InnerReceiver();
-		IntentFilter filter = new IntentFilter();
-		filter.addAction(Consts.BACK_UPDATE_CHANGE);
-		registerReceiver(receiver, filter);
+//		receiver = new InnerReceiver();
+//		IntentFilter filter = new IntentFilter();
+//		filter.addAction(Consts.BACK_UPDATE_CHANGE);
+//		registerReceiver(receiver, filter);
 		
 		addressDataManage = new AddressDataManage(this);
 		go_pay_scrollView = (ScrollView) findViewById(R.id.go_pay_scrollView);
@@ -445,12 +460,12 @@ public class CstmPayActivity extends SherlockActivity {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(CstmPayActivity.this,
 						ExchangeFreeActivity.class);
+				cartList = carts;
 				intent.putExtra("voucher", voucher);
 				intent.putExtra("cartActivity", isCartActivity);
 				Log.i("info", voucher+"   voucher");
 				intent.putExtra("price", sum + "");
 				CstmPayActivity.this.startActivity(intent);
-				CstmPayActivity.this.finish();
 			}
 		});
 		reLayout = (RelativeLayout) findViewById(R.id.go_pay_relative);
@@ -910,12 +925,12 @@ public class CstmPayActivity extends SherlockActivity {
 		}
 	};
 
-	@Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-		unregisterReceiver(receiver);
-	}
+//	@Override
+//	protected void onDestroy() {
+//		// TODO Auto-generated method stub
+//		super.onDestroy();
+//		unregisterReceiver(receiver);
+//	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -989,23 +1004,24 @@ public class CstmPayActivity extends SherlockActivity {
 
 	private int voucher;
 
-	public class InnerReceiver extends BroadcastReceiver {
-
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			// TODO Auto-generated method stub
-			String action = intent.getAction();
-			if (Consts.BACK_UPDATE_CHANGE.equals(action)) {
-				// Log.i("info", action + "action");
-				layout.removeAllViews();
-				voucher = intent.getIntExtra("voucher", -1);
-				ArrayList<Cart> carts = (ArrayList<Cart>) intent
-						.getSerializableExtra("carts");
-				// ArrayList<Cart> carts = ExchangeFreeActivity.mArrayList;
-				Log.i("voucher", carts + "  voucher");
-				PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
-				goods = pay.loadView(carts, true);
-			}
-		}
-	}
+//	public class InnerReceiver extends BroadcastReceiver {
+//
+//		@Override
+//		public void onReceive(Context context, Intent intent) {
+//			// TODO Auto-generated method stub
+//			String action = intent.getAction();
+//			Log.i("voucher", "no" + "  nihao");
+//			if (Consts.BACK_UPDATE_CHANGE.equals(action)) {
+//				// Log.i("info", action + "action");
+//				layout.removeAllViews();
+//				voucher = intent.getIntExtra("voucher", -1);
+//				Log.i("voucher", voucher + "  voucher");
+//				cartList = (ArrayList<Cart>) intent
+//						.getSerializableExtra("carts");
+//				// ArrayList<Cart> carts = ExchangeFreeActivity.mArrayList;
+//				PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
+//				goods = pay.loadView(cartList, true);
+//			}
+//		}
+//	}
 }
