@@ -2,33 +2,32 @@ package com.yidejia.app.mall.view;
 
 import java.util.ArrayList;
 
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.unionpay.mpay.utils.m;
 import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.SearchActivity;
 import com.yidejia.app.mall.adapter.FavoriteAdapter;
 import com.yidejia.app.mall.datamanage.FavoriteDataManage;
 import com.yidejia.app.mall.model.SearchItem;
@@ -49,6 +48,7 @@ public class MyCollectActivity extends SherlockActivity {
 //	private TextView price;//价格
 //	private TextView sellCount;//卖出的总数
 //	private TextView compment;//评论
+	
 	private void setupShow(){
 		mPullRefreshListView = (PullToRefreshListView) findViewById(R.id.my_collect_listview);
 		String label = getResources().getString(R.string.update_time)
@@ -124,11 +124,22 @@ public class MyCollectActivity extends SherlockActivity {
 		// Log.i("info", mList.size()+"");
 		if (mList.size() <= 0) {
 			setContentView(R.layout.favorite_empty);
+			Button search = (Button) findViewById(R.id.favorite_empty_button);
+			search.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Intent intentOrder = new Intent(MyCollectActivity.this, SearchActivity.class);
+					MyCollectActivity.this.startActivity(intentOrder);
+				}
+			});
 		} else {
 			setContentView(R.layout.my_collect);
 			setupShow();
 		}
 	}
+	
 	
 	private void setActionbar(){
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);

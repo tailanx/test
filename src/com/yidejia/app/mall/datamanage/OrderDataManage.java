@@ -21,7 +21,6 @@ import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.order.CancelOrder;
 import com.yidejia.app.mall.net.order.GetOrderByCode;
-import com.yidejia.app.mall.net.order.GetOrderCode;
 import com.yidejia.app.mall.net.order.GetOrderList;
 import com.yidejia.app.mall.net.order.PayOutOrder;
 import com.yidejia.app.mall.net.order.SaveOrder;

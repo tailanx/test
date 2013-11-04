@@ -233,7 +233,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 					intent.putExtra("price", sumprice);
 					intent.putExtra("voucher", voucher);
 					intent.putExtra("carts", mArrayList);
-					intent.putExtra("cartActivity", "N");
+					intent.putExtra("cartActivity", "No");
 					ExchangeFreeActivity.this.startActivity(intent);
 					ExchangeFreeActivity.this.sendBroadcast(intent);
 					ExchangeFreeActivity.this.finish();

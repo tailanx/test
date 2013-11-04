@@ -376,6 +376,7 @@ public class CstmPayActivity extends SherlockActivity {
 			} else {
 				
 				// Cart cart = (Cart) intent.getSerializableExtra("Cart");
+				ArrayList<Cart> carts;
 				
 				
 				carts = (ArrayList<Cart>) intent
@@ -401,14 +402,14 @@ public class CstmPayActivity extends SherlockActivity {
 					arrayListFree = preferentialDataManage.getFreeGoods();
 					arrayListExchange = preferentialDataManage.getScoreGoods();
 				}
-				if (isCartActivity.equals("Y")||isCartActivity.equals("N")) {
+				if (isCartActivity.equals("Y")||isCartActivity.equals("N")) {//
 					dialog.show();
-					show(carts);//sum, 
-				} else if (isCartActivity.equals("No")) {
-					show(carts);
+					show(carts,false);//sum, 
+				} else if (isCartActivity.equals("N0")) {
+					show(carts,true);
 				}else {
 					// if (!carts.isEmpty()) {
-					show(carts);//sum, 
+//					show(carts,);//sum, 
 				}
 			}
 		} catch (NumberFormatException e) {
@@ -421,14 +422,14 @@ public class CstmPayActivity extends SherlockActivity {
 
 	}
 
-	private void show(final ArrayList<Cart> carts) {//final String sum, 
+	private void show(final ArrayList<Cart> carts, boolean isHuanGou) {
 		Log.i(TAG, "show sum:"+sum);
 		setContentView(R.layout.go_pay);
 		// 注册返回时的广播
 		receiver = new InnerReceiver();
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Consts.BACK_UPDATE_CHANGE);
-		CstmPayActivity.this.registerReceiver(receiver, filter);
+		registerReceiver(receiver, filter);
 		
 		addressDataManage = new AddressDataManage(this);
 		go_pay_scrollView = (ScrollView) findViewById(R.id.go_pay_scrollView);
@@ -467,7 +468,7 @@ public class CstmPayActivity extends SherlockActivity {
 			}
 		});
 		PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
-		goods = pay.loadView(carts);
+		goods = pay.loadView(carts,isHuanGou);
 		//添加地址、快递费用、配送中心
 		addAddress();
 //		// 获取免邮界限
@@ -715,7 +716,7 @@ public class CstmPayActivity extends SherlockActivity {
 	 * 地址和快递费用，配送中心
 	 */
 	private void addAddress() {
-		Log.i(TAG, "show sum:"+sum);
+//		Log.i(TAG, "show sum:"+sum);
 		try {
 			// ArrayList<Addresses> mList1 =
 			// addressDataManage.getAddressesArray(
@@ -724,7 +725,7 @@ public class CstmPayActivity extends SherlockActivity {
 			ArrayList<Addresses> mList = addressDataManage
 					.getDefAddresses(myApplication.getUserId());
 			Addresses addresses;
-			Log.i("info", mList.size() + " mlist");
+//			Log.i("info", mList.size() + " mlist");
 			if (mList.size() == 0) {
 				ArrayList<Addresses> addArray = addressDataManage.getAddressesArray(myApplication.getUserId(), 0, 10);
 				if (addArray.isEmpty()) { //无默认地址并且无地址
@@ -792,8 +793,8 @@ public class CstmPayActivity extends SherlockActivity {
 	 * @param addresses
 	 */
 	private void setAdd(Addresses addresses){
-		Log.i(TAG, "show sum:"+sum);
-		Log.i(TAG, "add address");
+//		Log.i(TAG, "show sum:"+sum);
+//		Log.i(TAG, "add address");
 		userName.setText(addresses.getName());
 		phoneName.setText(addresses.getHandset());// �޸�Ϊ�ֻ�
 		StringBuffer sb = new StringBuffer();
@@ -839,6 +840,9 @@ public class CstmPayActivity extends SherlockActivity {
 							.getText().toString() : emsPrice
 							.getText().toString())) + "");
 		}
+		Log.i("info", "setKuaidi:");
+		postMethod = getResources().getString(R.string.ship_post);// 初始化快递方式;
+		expressNum = express.getExpress();// 初始化费用
 	}
 	
 	/**
@@ -930,7 +934,7 @@ public class CstmPayActivity extends SherlockActivity {
 				&& resultCode == Consts.AddressResponseCode) {
 			Addresses addresses1 = (Addresses) data.getExtras()
 					.getSerializable("addresses1");
-			Log.i("info", addresses1.getAddress() + "str");
+//			Log.i("info", addresses1.getAddress() + "str");
 			if (addresses1 != null) {
 //				reLayout.removeView(addressRelative);
 //				userName.setText(addresses1.getName());
@@ -1000,7 +1004,7 @@ public class CstmPayActivity extends SherlockActivity {
 				// ArrayList<Cart> carts = ExchangeFreeActivity.mArrayList;
 				Log.i("voucher", carts + "  voucher");
 				PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
-				goods = pay.loadView(carts);
+				goods = pay.loadView(carts, true);
 			}
 		}
 	}

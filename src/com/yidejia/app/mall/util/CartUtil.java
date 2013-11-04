@@ -1,4 +1,4 @@
-package com.yidejia.app.mall.util;
+  package com.yidejia.app.mall.util;
 
 import java.util.ArrayList;
 import java.util.Collections;

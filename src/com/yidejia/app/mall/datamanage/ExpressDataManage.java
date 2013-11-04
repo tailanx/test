@@ -89,6 +89,7 @@ public class ExpressDataManage {
 		public TaskExpress(String where, String offset, String limit, String group, String order, String fields){
 			this.where = where;
 			this.offset = offset;
+			this.offset = offset;	
 			this.limit = limit;
 			this.group = group;
 			this.order = order;

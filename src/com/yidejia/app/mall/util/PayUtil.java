@@ -93,7 +93,7 @@ public class PayUtil {
 	private DisplayImageOptions options;
 	protected ImageLoader imageLoader = ImageLoader.getInstance();// ����ͼƬ
 
-	public String loadView(ArrayList<Cart> mList) {//, boolean isHuanGou
+	public String loadView(ArrayList<Cart> mList, boolean isHuanGou) {//, boolean isHuanGou
 		StringBuffer goods = new StringBuffer();
 		try {
 //			dataManage = new CartsDataManage();
@@ -133,7 +133,10 @@ public class PayUtil {
 				sumPrice.setText(cart.getPrice() + "");
 				String amount = cart.getAmount() + "";
 				countTextView.setText(amount);
-				goods.append(cart.getUId()+","+amount+"n;");
+				if(isHuanGou)
+					goods.append(cart.getUId()+","+amount+"y;");
+				else
+					goods.append(cart.getUId()+","+amount+"n;");
 				// numberTextView.setText(mOrder.getOrderCode());
 				//
 				// final AllOrderDetail allOrderDetail = new

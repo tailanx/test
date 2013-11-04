@@ -10,6 +10,7 @@ public class Consts {
 	public static final int AddressResponseCode = 223;
 	public static final int PayRequestCode = 224;
 	public static final int PayResponseCode = 225;
+	public static final String ADD_SUBSTARCT_UPDATE_ = "com.yidejia.add.substarct";
 }
 
 

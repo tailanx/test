@@ -203,14 +203,23 @@ public class GoodsView {
 					try{
 						float sum = Float.parseFloat(priceString);
 						if(sum <= 0) return;////价格出错
+						if(!myApplication.getIsLogin()){
+							Toast.makeText(activity,
+									activity.getResources().getString(R.string.please_login),
+									Toast.LENGTH_LONG).show();
+							Intent intent1 = new Intent(activity, LoginActivity.class);
+							activity.startActivity(intent1);
+						}else{
 						Bundle bundle = new Bundle();
 						ArrayList<Cart> carts = new ArrayList<Cart>();
 						carts.add(cart);
 //						bundle.putSerializable("Cart", cart);
+						bundle.putString("cartActivity","N");
 						intent.putExtra("carts", carts);
 						bundle.putString("price", priceString);
 						intent.putExtras(bundle);
 						activity.startActivity(intent);
+						}
 //						activity.finish();
 					} catch (NumberFormatException e){
 						//价格出错
