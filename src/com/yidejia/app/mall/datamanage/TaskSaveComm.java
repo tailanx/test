@@ -108,6 +108,8 @@ public class TaskSaveComm {
 			if(result){
 				bar.dismiss();
 				Toast.makeText(activity, "提交评论成功！", Toast.LENGTH_LONG).show();
+				int resultCode = 4002;
+				activity.setResult(resultCode);//通知更新界面
 				activity.finish();
 			}else {
 				bar.dismiss();

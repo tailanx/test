@@ -237,7 +237,8 @@ public class TaskNoEva {
 								// 评价
 								intent.setClass(activity, PersonEvaluationActivity.class);
 								intent.putExtra("goodsId", goodsId);
-								activity.startActivity(intent);
+								int requestCode = 4001;
+								activity.startActivityForResult(intent, requestCode);
 								// 结束当前Activity；
 //								activity.finish();
 							}

@@ -1,33 +1,33 @@
 package com.yidejia.app.mall.view;
 
 import com.actionbarsherlock.app.SherlockActivity;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+//import com.handmark.pulltorefresh.library.PullToRefreshBase;
+//import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+//import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.TaskNoEva;
 import com.yidejia.app.mall.util.CommentUtil;
 
-import android.app.Activity;
+//import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.format.DateUtils;
+//import android.text.format.DateUtils;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+//import android.view.Window;
+//import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
+//import android.widget.RelativeLayout;
+//import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class EvaluationActivity extends SherlockActivity {
 	private LinearLayout layout;
 	private MyApplication myApplication;
 
-	private ScrollView mPullToRefreshScrollView;
+//	private ScrollView mPullToRefreshScrollView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class EvaluationActivity extends SherlockActivity {
 		myApplication = (MyApplication) getApplication();
 		setActionbar();
 		layout = (LinearLayout) findViewById(R.id.evaluation_scrollView_linearlayout1);
-		mPullToRefreshScrollView = (ScrollView) findViewById(R.id.evaluation_scrollView);
+//		mPullToRefreshScrollView = (ScrollView) findViewById(R.id.evaluation_scrollView);
 //		mPullToRefreshScrollView.ScrollView(listener);
 //		String label = getResources().getString(R.string.update_time)
 //				+ DateUtils.formatDateTime(
@@ -56,8 +56,8 @@ public class EvaluationActivity extends SherlockActivity {
 		taskNoEva.getWaitingComment(myApplication.getUserId(), true);
 	}
 
-	private int fromIndex = 0;
-	private int amount = 10;
+//	private int fromIndex = 0;
+//	private int amount = 10;
 //	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
 //
 //		@Override
@@ -78,10 +78,10 @@ public class EvaluationActivity extends SherlockActivity {
 //		}
 //	};
 
-	private void setupShow() {
-		new CommentUtil(EvaluationActivity.this, layout).AllCommentUserId(
-				myApplication.getUserId(), fromIndex, amount);
-	}
+//	private void setupShow() {
+//		new CommentUtil(EvaluationActivity.this, layout).AllCommentUserId(
+//				myApplication.getUserId(), fromIndex, amount);
+//	}
 
 	private void setActionbar() {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -109,4 +109,17 @@ public class EvaluationActivity extends SherlockActivity {
 		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
 		titleTextView.setText(getResources().getString(R.string.evaluation));
 	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+//		super.onActivityResult(requestCode, resultCode, data);
+		if(requestCode == 4001 && resultCode == 4002){
+			layout.removeAllViews();
+			TaskNoEva taskNoEva = new TaskNoEva(EvaluationActivity.this, layout);
+			taskNoEva.getWaitingComment(myApplication.getUserId(), true);
+		}
+	}
+	
+	
 }

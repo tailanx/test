@@ -5,6 +5,7 @@ import java.util.Date;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -106,6 +107,7 @@ public class PersonEvaluationActivity extends SherlockActivity {
 	
 	private String getRateTitle(int rate){
 		String[] titleStrings = {"不满意","一般般","还可以","满意","很满意"};
-		return titleStrings[rate];
+		Log.i("title", titleStrings[rate - 1]);
+		return titleStrings[rate - 1];
 	}
 }
