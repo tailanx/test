@@ -20,7 +20,9 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
 import com.yidejia.app.mall.adapter.WaitDeliverFragmentAdapter;
+import com.yidejia.app.mall.fragment.AllOrderFragment;
 import com.yidejia.app.mall.fragment.WaitDeliverFragment;
 
 public class WaitDeliverActivity extends SherlockFragmentActivity {
@@ -102,15 +104,15 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 		 LayoutInflater mInflater = getLayoutInflater();
 	     View activityView = mInflater.inflate(R.layout.wait_deliver_item_main, null);
 	     
-	     Fragment weekfragment = WaitDeliverFragment.newInstance(getResources().getString(R.string.order_time_week));
-	     Fragment monthFragment = WaitDeliverFragment.newInstance(getResources().getString(R.string.order_time_month));
-	     Fragment yearFragment=WaitDeliverFragment.newInstance(getResources().getString(R.string.order_time_year));
+	     Fragment weekfragment = AllOrderFragment.newInstance(2, 0);
+	     Fragment monthFragment = AllOrderFragment.newInstance(2, 1);
+	     Fragment yearFragment = AllOrderFragment.newInstance(2, 2);
 	     
 	     fragmentsList.add(yearFragment);
 	     fragmentsList.add(monthFragment);
 	     fragmentsList.add(weekfragment);
 	     
-	     mPager.setAdapter(new WaitDeliverFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
+	     mPager.setAdapter(new AllOrderFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
 	     mPager.setCurrentItem(0);
 	     mPager.setOffscreenPageLimit(2);
 	     mPager.setOnPageChangeListener(new MyOnPageChangeListener());

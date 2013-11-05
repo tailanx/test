@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 
 
+
+
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -26,10 +28,14 @@ import android.widget.TextView;
 
 
 
+
+
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
 import com.yidejia.app.mall.adapter.WaitPayFragmentAdapter;
+import com.yidejia.app.mall.fragment.AllOrderFragment;
 import com.yidejia.app.mall.fragment.WaitPayFragment;
 
 public class WaitPayActivity extends SherlockFragmentActivity {
@@ -115,15 +121,16 @@ public class WaitPayActivity extends SherlockFragmentActivity {
 		 fragmentsList = new ArrayList<Fragment>();
 		 LayoutInflater mInflater = getLayoutInflater();
 	     
-		 Fragment weekfragment = WaitPayFragment.newInstance("近一周");
-	     Fragment monthFragment = WaitPayFragment.newInstance("近一月");
-	     Fragment yearFragment=WaitPayFragment.newInstance("近一年");
+		 Fragment weekfragment = AllOrderFragment.newInstance(1, 0);
+	     Fragment monthFragment = AllOrderFragment.newInstance(1, 1);
+	     Fragment yearFragment = AllOrderFragment.newInstance(1, 2);
 	     
 	     fragmentsList.add(yearFragment);
 	     fragmentsList.add(monthFragment);
 	     fragmentsList.add(weekfragment);
 	     
-	     mPager.setAdapter(new WaitPayFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
+//	     mPager.setAdapter(new WaitPayFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
+	     mPager.setAdapter(new AllOrderFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
 	     mPager.setCurrentItem(0);
 	     mPager.setOffscreenPageLimit(2);
 	     mPager.setOnPageChangeListener(new MyOnPageChangeListener());

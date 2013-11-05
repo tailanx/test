@@ -3,6 +3,7 @@ package com.yidejia.app.mall.view;
 import java.util.ArrayList;
 
 
+
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -25,7 +26,9 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
 import com.yidejia.app.mall.adapter.AlreadyComFragmentAdapter;
+import com.yidejia.app.mall.fragment.AllOrderFragment;
 import com.yidejia.app.mall.fragment.AlreadyComFragment;
 
 public class AlreadyComActivity extends SherlockFragmentActivity {
@@ -108,15 +111,15 @@ public class AlreadyComActivity extends SherlockFragmentActivity {
 		 LayoutInflater mInflater = getLayoutInflater();
 	   
 	     
-	     Fragment weekfragment = AlreadyComFragment.newInstance(getResources().getString(R.string.order_time_week));
-	     Fragment monthFragment = AlreadyComFragment.newInstance(getResources().getString(R.string.order_time_month));
-	     Fragment yearFragment=AlreadyComFragment.newInstance(getResources().getString(R.string.order_time_year));
+		 Fragment weekfragment = AllOrderFragment.newInstance(4, 0);
+	     Fragment monthFragment = AllOrderFragment.newInstance(4, 1);
+	     Fragment yearFragment = AllOrderFragment.newInstance(4, 2);
 	     
 	     fragmentsList.add(yearFragment);
 	     fragmentsList.add(monthFragment);
 	     fragmentsList.add(weekfragment);
 	     
-	     mPager.setAdapter(new AlreadyComFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
+	     mPager.setAdapter(new AllOrderFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
 	     mPager.setCurrentItem(0);
 	     mPager.setOffscreenPageLimit(2);
 	     mPager.setOnPageChangeListener(new MyOnPageChangeListener());
