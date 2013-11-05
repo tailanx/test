@@ -225,6 +225,9 @@ public class TaskNoEva {
 						evaluation_item_count.setText("数量:" + mCart.getAmount());
 						evaluation_sum_money.setText((mCart.getPrice() * mCart.getAmount()) + "");
 						evaluation_item_total_num.setText("数量:" + mCart.getAmount() + "");
+						
+						final String goodsId = mCart.getUId();
+						
 						evaluation_item_evaluation.setOnClickListener(new OnClickListener() {
 							
 							@Override
@@ -233,6 +236,7 @@ public class TaskNoEva {
 								Intent intent = new Intent();
 								// 评价
 								intent.setClass(activity, PersonEvaluationActivity.class);
+								intent.putExtra("goodsId", goodsId);
 								activity.startActivity(intent);
 								// 结束当前Activity；
 //								activity.finish();
@@ -241,6 +245,8 @@ public class TaskNoEva {
 						layout.addView(view);
 					}
 				}
+			} else {
+				Toast.makeText(activity, "未搜索到数据", Toast.LENGTH_LONG).show();
 			}
 		}
 

@@ -200,6 +200,7 @@ public class UserPayActivity extends Activity{
 		}
 	};
 	
+	/**
 	//银联支付
 	private void UPPay(){
 
@@ -228,6 +229,7 @@ public class UserPayActivity extends Activity{
 		}
 		
 	}
+	*/
 	
 	// 接收财付通支付返回值的Handler
 	protected Handler mHandler = new Handler() {

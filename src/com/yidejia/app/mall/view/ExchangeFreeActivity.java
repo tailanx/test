@@ -56,7 +56,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 	private List<HashMap<String, Float>> exchange;// 换购商品
 	private List<HashMap<String, Object>> cart;// 换购商品
 	private VoucherDataManage dataManage;// 用户积分
-	private int voucher;// 用户积分
+	private float voucher;// 用户积分
 	private MyApplication myApplication;
 	// private CartActivity cartActivity;
 	private ArrayList<Cart> mArrayList;
@@ -81,11 +81,11 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 //		 Log.i("info", isString +"  isString");
 		if (isString.equals("Y")) {
 			mArrayList = CartActivity.cartList;
-			voucher = Integer.parseInt(dataManage.getUserVoucher(
+			voucher = Float.parseFloat(dataManage.getUserVoucher(
 					myApplication.getUserId(), myApplication.getToken()));
 		} else if(isString.equals("N")){
 			mArrayList = GoCartActivity.cartList;
-			voucher = Integer.parseInt(dataManage.getUserVoucher(
+			voucher = Float.parseFloat(dataManage.getUserVoucher(
 					myApplication.getUserId(), myApplication.getToken()));
 		}else {
 			mArrayList = CstmPayActivity.cartList;
