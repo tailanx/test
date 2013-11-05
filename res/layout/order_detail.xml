@@ -111,6 +111,54 @@
                 android:background="@drawable/delivery_address_down"
                 android:padding="10dp"
                 android:textSize="16sp" />
+            
+            <RelativeLayout
+                android:id="@+id/change_pay_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:background="@drawable/forgot_password" >
+
+                <TextView
+                    android:id="@+id/pay_type_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:drawableLeft="@drawable/payment_icon"
+                    android:drawablePadding="6dp"
+                    android:gravity="center_vertical"
+                    android:text="支付方式:"
+                    android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/order_pay_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/pay_type_text"
+                    android:gravity="center_vertical"
+                    android:text="银联支付"
+                    android:textSize="15sp" />
+                
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical|right"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:drawableRight="@drawable/arrow"
+                    android:drawablePadding="3dp"
+                    android:text="修改"
+                    android:textSize="15sp" />
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -207,6 +255,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@id/order_detail_dingdan"
                     android:layout_below="@id/order_detail_biaohao"
+                    android:layout_marginBottom="10dp"
+                    android:paddingBottom="10dp"
                     android:text="下单时间："
                     android:textColor="#b4b4b4"
                     android:textSize="16sp" />
@@ -217,6 +267,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/order_detail_biaohao"
                     android:layout_toRightOf="@id/order_detail_time"
+                    android:layout_alignBaseline="@id/order_detail_time"
                     android:textColor="#b4b4b4"
                     android:textSize="16sp" />
             </RelativeLayout>
