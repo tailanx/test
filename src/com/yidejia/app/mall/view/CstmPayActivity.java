@@ -391,7 +391,7 @@ public class CstmPayActivity extends SherlockActivity {
 					sb.append(cart.getUId());
 					sb.append(",");
 					sb.append(cart.getAmount());
-					sb.append("y");
+					sb.append("n");
 					sb.append(";");
 				}
 				preferentialDataManage.getPreferential(sb.toString(),
@@ -405,7 +405,7 @@ public class CstmPayActivity extends SherlockActivity {
 				if (isCartActivity.equals("Y")||isCartActivity.equals("N")) {//
 					dialog.show();
 					show(carts,false);//sum, 
-				} else if (isCartActivity.equals("N0")) {
+				} else if (isCartActivity.equals("No")) {
 					show(carts,true);
 				}else {
 					// if (!carts.isEmpty()) {
