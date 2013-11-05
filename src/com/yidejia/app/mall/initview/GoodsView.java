@@ -322,7 +322,7 @@ public class GoodsView {
 				// baseInfoImageLayout.addView(child, lp_base);//
 				// matchGoodsImageLayout.addView(matchchild, lp_match);//
 				LinearLayout.LayoutParams lp_base = new LinearLayout.LayoutParams(
-						(new Float(px)).intValue(), LayoutParams.WRAP_CONTENT);
+						(new Float(px)).intValue(), (new Float(px)).intValue());//LayoutParams.WRAP_CONTENT);//(new Float(px)).intValue()
 				lp_base.gravity = Gravity.CENTER;
 				// View imageViewLayout = LayoutInflater.from(view.getContext())
 				// .inflate(R.layout.goods_banner_imageview, null);
@@ -333,10 +333,10 @@ public class GoodsView {
 				imageLoader.displayImage(bannerArray.get(i).getImgUrl(),
 						bannerImageView, options, animateFirstListener);
 				Log.e(GoodsView.class.getName(), bannerArray.get(i).getImgUrl());
-				baseInfoImageLayout.setPadding(10, 0, 10, 0);
+				baseInfoImageLayout.setPadding(20, 0, 20, 0);
 				
 				// imageViewLayout.setPadding(10, 0, 10, 0);
-				bannerImageView.setPadding(10, 0, 10, 0);
+				bannerImageView.setPadding(20, 0, 20, 0);
 				baseInfoImageLayout.addView(bannerImageView, lp_base);
 			}
 		} catch (Exception e) {
@@ -355,7 +355,7 @@ public class GoodsView {
 					r.getDisplayMetrics());
 			for (int i = 0; i < lenght; i++) {
 				LinearLayout.LayoutParams lp_base = new LinearLayout.LayoutParams(
-						(new Float(px)).intValue(), LayoutParams.WRAP_CONTENT);
+						(new Float(px)).intValue(), (new Float(px)).intValue());//LayoutParams.WRAP_CONTENT);
 				// View imageViewLayout =
 				// LayoutInflater.from(view.getContext()).inflate(R.layout.goods_banner_imageview,
 				// null);
@@ -368,7 +368,7 @@ public class GoodsView {
 						bannerImageView, options, animateFirstListener);
 				matchGoodsImageLayout.setPadding(80, 0, 80, 0);
 				// imageViewLayout.setPadding(10, 0, 10, 0);
-				bannerImageView.setPadding(10, 0, 10, 0);
+				bannerImageView.setPadding(20, 0, 20, 0);
 				final int index = i;
 				bannerImageView.setOnClickListener(new OnClickListener() {
 
