@@ -22,8 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_margin="6dp"
+        
         android:layout_toRightOf="@+id/main_home_title_logo"
         android:background="@drawable/search_text_bg"
         android:ems="16"
@@ -31,7 +31,7 @@
         android:editable="false"
         android:imeOptions="actionSearch"
         android:focusable="false"
-        android:paddingLeft="1dp"
+        android:paddingRight="10dp"
         android:singleLine="true" >
     </EditText>
 
