@@ -75,12 +75,22 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 		sumprice = intent.getStringExtra("price");
 		// Log.i("info", sumprice);
 		int jifen = intent.getIntExtra("voucher", -1);
+		dataManage = new VoucherDataManage(ExchangeFreeActivity.this);
+		myApplication = (MyApplication) getApplication();
 		isString = intent.getStringExtra("cartActivity");
-		 Log.i("info", isString +"  isString");
+//		 Log.i("info", isString +"  isString");
 		if (isString.equals("Y")) {
 			mArrayList = CartActivity.cartList;
-		} else {
+			voucher = Integer.parseInt(dataManage.getUserVoucher(
+					myApplication.getUserId(), myApplication.getToken()));
+		} else if(isString.equals("N")){
 			mArrayList = GoCartActivity.cartList;
+			voucher = Integer.parseInt(dataManage.getUserVoucher(
+					myApplication.getUserId(), myApplication.getToken()));
+		}else {
+			mArrayList = CstmPayActivity.cartList;
+			voucher = jifen;
+
 		}
 		if (mArrayList == null) {
 			Toast.makeText(ExchangeFreeActivity.this,
@@ -88,14 +98,13 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 					Toast.LENGTH_SHORT).show();
 		}
 		// Log.i("info", jifen + "jifen");
-		dataManage = new VoucherDataManage(ExchangeFreeActivity.this);
-		myApplication = (MyApplication) getApplication();
-		if (jifen == -1) {
-			voucher = Integer.parseInt(dataManage.getUserVoucher(
-					myApplication.getUserId(), myApplication.getToken()));
-		} else {
-			voucher = jifen;
-		}
+//		dataManage = new VoucherDataManage(ExchangeFreeActivity.this);
+//		if (jifen == -1) {
+//			voucher = Integer.parseInt(dataManage.getUserVoucher(
+//					myApplication.getUserId(), myApplication.getToken()));
+//		} else {
+//			voucher = jifen;
+//		}
 
 		InitWidth();
 		InitTextView();
@@ -174,7 +183,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 					// cart.setUId(specials.getUId());
 					// cart.setSalledAmmount(count.intValue());
 					// Log.i("info", count+"    count");
-					// Log.i("info", isSelelct1+"    isSelelct1");
+//					 Log.i("info", isSelelct+"    isSelelct");
 					// Log.i("info", price+"    price");
 					// Log.i("info", cart+"    cart");
 					if (isSelelct == 0.0) {
@@ -184,9 +193,10 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 						sum1 += sum;
 					}
 
-					// Log.i("info", sum1+"    sum1");
 					// sum1 =sum1/exchange.size()+1;
 				}
+//				Log.i("info", sum1+"    sum1");
+//				Log.i("voucher", voucher + "  voucher");
 				if (sum1 > voucher) {
 					Toast.makeText(ExchangeFreeActivity.this,
 							getResources().getString(R.string.my_voucher),
@@ -195,7 +205,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 							ExchangeFreeActivity.this,
 							getResources().getString(R.string.show_voucher)
 									+ voucher, Toast.LENGTH_SHORT).show();
-					return;
+					ExchangeFreeActivity.this.finish();
 				} else if (sum1 <= voucher) {// && isSelelct1 == 0.0
 					for (int i = 0; i < cart.size(); i++) {
 						HashMap<String, Object> map1 = cart.get(i);
@@ -218,6 +228,8 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 						// Toast.LENGTH_SHORT).show();
 						// }
 						if (isSelelct1 == 0.0) {
+//							Log.i("info", mArrayList+"   mArrayList");
+//							Log.i("info", cart+"   cart");
 							mArrayList.add(cart);
 							voucher = (int) (voucher - sum1);
 						}
@@ -227,13 +239,14 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 					// CstmPayActivity.arrayListFree).getCart();
 					Cart cart1 = FreeGivingAdapter.carts;
 					if (cart1.getUId() != null) {
-						Log.i("info", mArrayList+"   mArrayList");
+//						Log.i("info", mArrayList+"   mArrayList");
 						mArrayList.add(cart1);
 					}
 					intent.putExtra("price", sumprice);
+					Log.i("voucher", voucher + "  voucher");
 					intent.putExtra("voucher", voucher);
 					intent.putExtra("carts", mArrayList);
-					intent.putExtra("cartActivity", "No");
+					intent.putExtra("cartActivity", "E");
 					ExchangeFreeActivity.this.startActivity(intent);
 					ExchangeFreeActivity.this.sendBroadcast(intent);
 					ExchangeFreeActivity.this.finish();
