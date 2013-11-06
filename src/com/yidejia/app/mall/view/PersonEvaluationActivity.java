@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.yidejia.app.mall.MyApplication;
@@ -93,6 +94,10 @@ public class PersonEvaluationActivity extends SherlockActivity {
 				String uid = myApplication.getUserId();
 				String nick = myApplication.getNick();
 				String commentText = commentContext.getText().toString();
+				if("".equals(commentText.trim()) || null == commentText.trim()){
+					Toast.makeText(PersonEvaluationActivity.this, "内容不能为空", Toast.LENGTH_LONG).show();
+					return;
+				}
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				String dateString = sdf.format(new Date());
 				int rate = (int) commRate.getRating();
