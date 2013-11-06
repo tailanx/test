@@ -145,6 +145,7 @@ public class AddressAdapter extends BaseAdapter {
 		holder.ctTextView.setText(sb.toString());
 		holder.detailTextView.setText(addresses.getAddress());
 		holder.nameTextView.setText(addresses.getName());
+		Log.i("info", (addresses.getHandset()+" (addresses.getHandset()"));
 		holder.phoneTextView.setText(addresses.getHandset());
 		holder.editImageView.setOnClickListener(new OnClickListener() {
 

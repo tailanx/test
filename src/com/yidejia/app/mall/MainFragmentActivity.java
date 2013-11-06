@@ -289,7 +289,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 					getSupportActionBar().setCustomView(R.layout.actionbar_search);
 					searchText = (EditText) findViewById(R.id.search_bar_edittext);
 //					searchText.setSelected(false);
-					Log.i("info", searchText + " searchText");
+//					Log.i("info", searchText + " searchText");
 					searchText.clearFocus();
 					searchText.setCursorVisible(false);
 //					searchText.setOnTouchListener(go2searchListener);
@@ -328,7 +328,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 						getSupportActionBar().setCustomView(R.layout.actionbar_mymall);
 						imageView = (ImageView) findViewById(
 								R.id.person_shopping_button1);
-						Log.i("info", imageView + " imageView");
+//						Log.i("info", imageView + " imageView");
 						imageView.clearFocus();
 						imageView.setFocusable(true);
 						imageView.setOnClickListener(edit);
@@ -495,7 +495,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 				for(int i=0;i<orderCarts.size();i++){
 					HashMap<String, Object> map = orderCarts.get(i);
 					float ischeck =  Float.parseFloat(map.get("check").toString());
-					Log.i("info", ischeck + "    ischeck");
+//					Log.i("info", ischeck + "    ischeck");
 					Cart  cart1	= (Cart) map.get("cart");
 					if(ischeck == 1.0){
 						cartList.add(cart1);
