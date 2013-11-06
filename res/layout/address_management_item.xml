@@ -40,6 +40,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_below="@id/address_management_item_address1"
+                android:lines="2"
+                android:ellipsize="end"
                 android:paddingLeft="8dp"
                 android:textSize="18sp" />
 

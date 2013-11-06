@@ -359,9 +359,9 @@ public class MainPageFragment extends SherlockFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				if (!isLogin()) {
+				
 					dialog.show();
-				}
+				
 				// Intent intentOrder = new
 				// Intent(getSherlockActivity(),MyCollectActivity.class);
 				// getSherlockActivity().startActivity(intentOrder);
@@ -373,9 +373,9 @@ public class MainPageFragment extends SherlockFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				if (!isLogin()) {
+				
 					dialog.show();
-				}
+				
 				// Intent intentOrder = new
 				// Intent(getSherlockActivity(),MyCollectActivity.class);
 				// getSherlockActivity().startActivity(intentOrder);
@@ -413,12 +413,10 @@ public class MainPageFragment extends SherlockFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				if (!isLogin()) {
 					dialog.show();
 					// Intent intentOrder = new
 					// Intent(getSherlockActivity(),IntegeralActivity.class);
 					// getSherlockActivity().startActivity(intentOrder);
-				}
 			}
 		});
 		RelativeLayout myMessage = (RelativeLayout) child

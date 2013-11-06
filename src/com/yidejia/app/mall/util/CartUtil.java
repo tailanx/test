@@ -266,6 +266,7 @@ public class CartUtil {
 				final HashMap<String, Object> map1 = new HashMap<String, Object>();
 				final Handler handler = new Handler() {
 					public void handleMessage(Message msg) {
+						
 						if (msg.what == 123) {
 
 							// map.put("check",checkBox.isChecked()==false?0:1);
@@ -307,7 +308,49 @@ public class CartUtil {
 							context.sendBroadcast(intent);
 							mTextView.setText(count + "");
 							// Log.i("info", list.toString());
-						} else if (msg.what == 124) {
+						} else if (msg.what == 113) {
+
+							// map.put("check",checkBox.isChecked()==false?0:1);
+
+							// Log.i("info", 123+"");
+							map.put("count", Float.parseFloat(number.getText()
+									.toString()));
+							// map.put(Integer.parseInt(number.getText().toString()),Integer.parseInt(priceTextView.getText().toString()));
+							dataManage.mdfCartAmount(cart.getUId(), Integer
+									.parseInt(number.getText().toString()));
+							int count = 0;
+							double sum = 0;
+							float price = 0;
+							int j = 0;
+							for (int i = 0; i < list.size(); i++) {
+								HashMap<String, Float> map = list.get(i);
+								float ischeck = map.get("check");
+								j += ischeck;
+								if (ischeck == 1) {
+									float count1 = map.get("count");
+									count += map.get("count");
+									price = map.get("price");
+									sum += count1 * price;
+
+								} else {
+									mBox.setChecked(false);
+								}
+
+							}
+							// Log.i("info", j+"+j");
+							if (j == list.size()) {
+
+								// Log.i("info", list.size()+"+list.size");
+								mBox.setChecked(true);
+								// Log.i("info",mBox.isChecked()+"");
+							}
+							sumTextView.setText(sum + "");
+							mTextView.setText(count + "");
+							// Log.i("info", list.toString());
+						} 
+						
+						
+						else if (msg.what == 124) {
 							checkBox.setChecked(true);
 							int count = 0;
 							double sum = 0;
@@ -332,7 +375,7 @@ public class CartUtil {
 
 							}
 							sumTextView.setText(sum + "");
-							Intent intent = new Intent(Consts.UPDATE_CHANGE);
+							Intent intent = new Intent(Consts.CHECK_UPDATE_CHANGE);
 							context.sendBroadcast(intent);
 							mTextView.setText(count + "");
 						} else if (msg.what == 125) {
@@ -574,9 +617,10 @@ public class CartUtil {
 						} else {
 							map.put("check", (float) 0.0);
 							map1.put("check", (float) 0.0);
+							mBox.setChecked(false);
 						}
 						Message ms = new Message();
-						ms.what = 123;
+						ms.what = 113;
 						handler.sendMessage(ms);
 					}
 				});
@@ -598,6 +642,7 @@ public class CartUtil {
 
 					@Override
 					public void onClick(View v) {
+						Log.i("info", mBox.isChecked()+"   mBox");
 						if (mBox.isChecked()) {
 							Message msg = new Message();
 							msg.what = 124;
@@ -643,6 +688,7 @@ public class CartUtil {
 				//
 				// }
 				// });
+				Log.i("info", mBox.isChecked()+"   mBox");
 				linearLayout.addView(view);
 
 			}

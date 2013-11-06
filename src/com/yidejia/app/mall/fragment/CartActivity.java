@@ -59,7 +59,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	private TextView number2;
 	private ImageView addImageView2;
 	private int sumString;
-
+	public static float sum ;
 	private TextView sumTextView;// 总的钱数
 	private TextView counTextView;// 总的数量
 	// private TextView priceTextView1;// 价格
@@ -244,12 +244,14 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 			Bundle savedInstanceState) {
 		// addressManage = new AddressDataManage(getSherlockActivity());
 		try {
+			dataManage = new CartsDataManage();
 			myApplication = (MyApplication) getSherlockActivity()
 					.getApplicationContext();
 			Log.i(CartActivity.class.getName(), "CartActivity__onCreateView");
-			view = inflater.inflate(R.layout.shopping_cart, container, false);
+			
+			
+			view = inflater.inflate(R.layout.shopping_cart,null);
 
-			dataManage = new CartsDataManage();
 			// TODO Auto-generated method stub
 
 			sumTextView = (TextView) view
@@ -259,10 +261,14 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 
 			counTextView = (TextView) view
 					.findViewById(R.id.shopping_cart_sum_number);// 总的数量
+			
+			shoppingCartTopay = (Button) getSherlockActivity()
+					.findViewById(R.id.shopping_cart_go_pay);
 
 			receiver = new InnerReceiver();
 			IntentFilter filter = new IntentFilter();
 			filter.addAction(Consts.BROAD_UPDATE_CHANGE);
+			filter.addAction(Consts.UPDATE_CHANGE);
 			getSherlockActivity().registerReceiver(receiver, filter);
 			// registerForContextMenu(layout);
 
@@ -299,8 +305,6 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 			// mPullToRefreshScrollView.setOnRefreshListener(listener);
 
 			// 结算
-			shoppingCartTopay = (Button) getSherlockActivity()
-					.findViewById(R.id.shopping_cart_go_pay);
 			// 弹出积分换购的对话框
 
 			// mPullToRefreshScrollView = (PullToRefreshScrollView) view
@@ -359,13 +363,13 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 //								}
 //							}).create();
 
-			if (shoppingCartTopay == null) {
-				Toast.makeText(
-						getSherlockActivity(),
-						getSherlockActivity().getResources().getString(
-								R.string.no_network), Toast.LENGTH_SHORT)
-						.show();
-			} else {
+//			if (shoppingCartTopay == null) {
+//				Toast.makeText(
+//						getSherlockActivity(),
+//						getSherlockActivity().getResources().getString(
+//								R.string.no_network), Toast.LENGTH_SHORT)
+//						.show();
+//			} else {
 				shoppingCartTopay.setOnClickListener(new OnClickListener() {
 
 					@Override
@@ -456,7 +460,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 							Intent intent1 = new Intent(getSherlockActivity(),
 									CstmPayActivity.class);
 							Bundle bundle = new Bundle();
-							float sum = Float.parseFloat(sumTextView.getText()
+							 sum = Float.parseFloat(sumTextView.getText()
 									.toString());
 							intent1.putExtra("carts", cartList);
 //							
@@ -577,7 +581,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 
 				// }
 				// });
-			}
+//			}
 			//
 		} catch (NotFoundException e) {
 			// TODO Auto-generated catch block
