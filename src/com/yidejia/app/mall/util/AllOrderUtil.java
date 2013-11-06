@@ -13,7 +13,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 
+import com.unionpay.uppay.task.s;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.OrderDataManage;
@@ -95,11 +99,16 @@ public class AllOrderUtil {
 				titleTextView.setText(mOrder.getStatus());
 				numberTextView.setText(mOrder.getOrderCode());
 				
-				mOrderType = getOrderTypeCode(mOrder.getStatus());
+				int mOrderType = getOrderTypeCode(mOrder.getStatus());
 				mOkBtn.setText(setOkBtnText(mOrderType));
 				if(mOrderType == 1 || mOrderType == 2) 
 					mCancalBtn.setText(setCancelBtnText(mOrderType));
-				else mCancalBtn.setVisibility(View.GONE);
+				else {
+					mCancalBtn.setVisibility(View.GONE);
+					if(mOrderType == -1){
+						mOkBtn.setVisibility(View.GONE);
+					}
+				}
 
 				final AllOrderDetail allOrderDetail = new AllOrderDetail(
 						context, mOrder, mLayout);
@@ -110,32 +119,25 @@ public class AllOrderUtil {
 					countTextView.setText(allOrderDetail.map.get("count")
 							.intValue() + "");
 				}
-				mCancalBtn.setOnClickListener( new OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						boolean isSucess = orderDataManage.cancelOrder(myApplication.getUserId(),mOrder.getOrderCode(), myApplication.getToken());
-						Log.i("info", isSucess + "      isSucess");
-						mLinearLayoutLayout.removeView(layout1);
-					}
-				});
-				mOkBtn.setOnClickListener(new OkClickListener(mOrder.getOrderCode(), allOrderDetail.map.get("price") + "", mOrder.getCartsArray()));
+				if (mOrderType == 1) {
+					mCancalBtn.setOnClickListener(new CancelClickListener(
+							mOrderType, mOrder.getOrderCode(), layout1));
+				} else if (mOrderType == 2) {
+					mCancalBtn.setOnClickListener(new CancelClickListener(
+							mOrderType, mOrder.getOrderCode(),
+							allOrderDetail.map.get("price") + "", mOrder
+									.getCartsArray()));
+				}
+				mOkBtn.setOnClickListener(new OkClickListener(mOrderType, mOrder.getOrderCode(), allOrderDetail.map.get("price") + "", mOrder.getCartsArray()));
 				
 				mLayout.setOnClickListener(new OnClickListener() {
 					
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
-						Intent intent = new Intent(context,
-								OrderDetailActivity.class);
-
-						Bundle bundle = new Bundle();
-						bundle.putString("OrderCode", mOrder.getOrderCode());
-						bundle.putString("OrderPrice", allOrderDetail.map.get("price") + "");
-						intent.putExtras(bundle);
-						intent.putExtra("carts", mOrder.getCartsArray());
-						context.startActivity(intent);
+						go2OrderDetail(mOrder.getOrderCode(),
+								allOrderDetail.map.get("price") + "",
+								mOrder.getCartsArray());
 					}
 				});
 //				Log.i("info", mLinearLayoutLayout + "+layout");
@@ -207,7 +209,7 @@ public class AllOrderUtil {
 	
 	/**
 	 * 根据订单的状态（orderType）获取确定按钮的显示文字text
-	 * @param orderType 0-4分别表示全部订单，待付款订单，待发货订单，已发货订单，已完成订单
+	 * @param orderType 0-5分别表示全部订单，待付款订单，待发货订单，已发货订单，已完成订单,已取消订单
 	 * @return
 	 */
 	private String setOkBtnText(int orderType){
@@ -227,6 +229,9 @@ public class AllOrderUtil {
 			break;
 		case 4:
 			text = "评价";
+			break;
+		case 5:
+			text = "删除";
 			break;
 
 		default:
@@ -274,38 +279,56 @@ public class AllOrderUtil {
 		else if("录入".equals(str)) code = 1;
 		else if("已发货".equals(str)) code = 3;
 		else if("已签收".equals(str)) code = 4;
-		else code = 0;
+		else if("已取消".equals(str)) code = 5;
+		else code = -1;
 		return code;
 	}
 
-	
-	private int mOrderType;
+	/**
+	 * 
+	 * 查看物流，删除，评价， 付款按钮
+	 *
+	 */
 	private class OkClickListener implements View.OnClickListener{
 		
+		private int mOrderType;
 		private String OrderPrice;
 		private String OrderCode;
 		private ArrayList<Cart> carts;
 		
-		public OkClickListener(String OrderCode, String OrderPrice, ArrayList<Cart> carts){
+		public OkClickListener(int mOrderType, String OrderCode, String OrderPrice, ArrayList<Cart> carts){
 			this.OrderCode = OrderCode;
 			this.OrderPrice = OrderPrice;
 			this.carts = carts;
+			this.mOrderType = mOrderType;
 		}
 		
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
+			Log.i(AllOrderUtil.class.getName(), "orderType:" + mOrderType);
 			switch (mOrderType) {
 			case 1:
-				Intent intent = new Intent(context,
+				Intent detailIntent = new Intent(context,
 						OrderDetailActivity.class);
 
-				Bundle bundle = new Bundle();
-				bundle.putString("OrderCode", OrderCode);//mOrder.getOrderCode()
-				bundle.putString("OrderPrice", OrderPrice);//allOrderDetail.map.get("price") + ""
-				intent.putExtras(bundle);
-				intent.putExtra("carts", carts);//mOrder.getCartsArray()
-				context.startActivity(intent);
+				Bundle detailBundle = new Bundle();
+				detailBundle.putString("OrderCode", OrderCode);//mOrder.getOrderCode()
+				detailBundle.putString("OrderPrice", OrderPrice);//allOrderDetail.map.get("price") + ""
+				detailIntent.putExtras(detailBundle);
+				detailIntent.putExtra("carts", carts);//mOrder.getCartsArray()
+				context.startActivity(detailIntent);
+				break;
+			case 5:
+//				Intent delIntent = new Intent(context,
+//						OrderDetailActivity.class);
+//				
+//				Bundle bundle = new Bundle();
+//				bundle.putString("OrderCode", OrderCode);//mOrder.getOrderCode()
+//				bundle.putString("OrderPrice", OrderPrice);//allOrderDetail.map.get("price") + ""
+//				intent.putExtras(bundle);
+//				intent.putExtra("carts", carts);//mOrder.getCartsArray()
+//				context.startActivity(intent);
 				break;
 
 			default:
@@ -314,5 +337,80 @@ public class AllOrderUtil {
 		}
 		
 	};
+	
+	/**
+	 * 
+	 * 取消按钮
+	 *
+	 */
+	private class CancelClickListener implements View.OnClickListener{
+		
+		private String orderCode;
+		private int mOrderType;
+		private LinearLayout layout1;
+		private String orderPrice;
+		private ArrayList<Cart> carts;
+		
+		public CancelClickListener(int mOrderType, String orderCode, LinearLayout layout1){
+			this.orderCode = orderCode;
+			this.mOrderType = mOrderType;
+			this.layout1 = layout1;
+		}
+		
+		public CancelClickListener(int mOrderType, String orderCode, String orderPrice, ArrayList<Cart> carts){
+			this.orderCode = orderCode;
+			this.orderPrice = orderPrice;
+			this.mOrderType = mOrderType;
+			this.carts = carts;
+		}
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			switch (mOrderType) {
+			case 1:
+				if(null == layout1) break;
+				new Builder(context).setTitle(R.string.tips)
+				.setMessage(R.string.del_order)
+				.setPositiveButton(context.getResources().getString(R.string.sure), new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						
+						boolean isSucess = orderDataManage.cancelOrder(myApplication.getUserId(), orderCode, myApplication.getToken());
+						Log.i("info", isSucess + "      isSucess");
+						mLinearLayoutLayout.removeView(layout1);
+					}
+				}).setNegativeButton(context.getResources().getString(R.string.cancel), null).create().show();
+				break;
+			case 2:
+				if(carts.isEmpty() || "".equals(orderPrice) || null == orderPrice)break;
+				go2OrderDetail(orderCode, orderPrice, carts);
+				break;
+			default:
+				break;
+			}
+		}
+		
+	}
+	
+	/**
+	 * 跳转到订单详情
+	 * @param orderCode 订单号
+	 * @param orderPrice 订单价格
+	 * @param carts 购物清单
+	 */
+	private void go2OrderDetail(String orderCode, String orderPrice, ArrayList<Cart> carts){
+		Intent intent = new Intent(context,
+				OrderDetailActivity.class);
+
+		Bundle bundle = new Bundle();
+		bundle.putString("OrderCode", orderCode);
+		bundle.putString("OrderPrice", orderPrice);
+		intent.putExtras(bundle);
+		intent.putExtra("carts", carts);
+		context.startActivity(intent);
+	}
 }
 
