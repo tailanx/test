@@ -3,11 +3,14 @@ package com.yidejia.app.mall;
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
+import android.app.AlertDialog.Builder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
@@ -38,9 +41,13 @@ import com.yidejia.app.mall.fragment.MainPageFragment;
 import com.yidejia.app.mall.fragment.MyMallFragment;
 import com.yidejia.app.mall.fragment.SearchFragment;
 import com.yidejia.app.mall.fragment.ShoppingCartFragment;
+import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.ImageUrl;
+import com.yidejia.app.mall.util.CartUtil;
 import com.yidejia.app.mall.util.Consts;
+import com.yidejia.app.mall.view.CstmPayActivity;
+import com.yidejia.app.mall.view.EditorActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.widget.YLImageButton;
 
@@ -214,6 +221,8 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 	
 	private TextView searchText;
 	private EditText searchEditText;
+	private  ImageView imageView;
+	private Button shoppingCartTopay;//去结算
 	private boolean isSearch = false;
 	private boolean isMainSearch = false;
 	
@@ -280,6 +289,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 					getSupportActionBar().setCustomView(R.layout.actionbar_search);
 					searchText = (EditText) findViewById(R.id.search_bar_edittext);
 //					searchText.setSelected(false);
+//					Log.i("info", searchText + " searchText");
 					searchText.clearFocus();
 					searchText.setCursorVisible(false);
 //					searchText.setOnTouchListener(go2searchListener);
@@ -297,12 +307,14 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 //					down_shopping_TextView.setTextColor(Color.WHITE);
 					getSupportActionBar()
 							.setCustomView(R.layout.actionbar_cart);
+					shoppingCartTopay = (Button) findViewById(R.id.shopping_cart_go_pay);
+					shoppingCartTopay.setOnClickListener(goPay);
 					break;
 				case 4:
 					isLogin = ((MyApplication) getApplication())
 							.getIsLogin();
 
-					Log.i("info", isLogin + "");
+					
 					down_my_textview.setTextColor(res.getColor(R.color.white));
 					if (isLogin) {
 //						newFragment = new MyMallActivity();
@@ -314,6 +326,13 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 						down_my_imageView
 								.setImageResource(R.drawable.down_my_hover);
 						getSupportActionBar().setCustomView(R.layout.actionbar_mymall);
+						imageView = (ImageView) findViewById(
+								R.id.person_shopping_button1);
+//						Log.i("info", imageView + " imageView");
+						imageView.clearFocus();
+						imageView.setFocusable(true);
+						imageView.setOnClickListener(edit);
+						
 						break;
 					} else {
 //						newFragment = new LoginFragment();
@@ -464,6 +483,59 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		}
 	};
 	*/
+	public static ArrayList<Cart> cartList;
+	private OnClickListener goPay = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+		
+				cartList = new ArrayList<Cart>();
+				List<HashMap<String, Object>> orderCarts = CartUtil.list1;
+				for(int i=0;i<orderCarts.size();i++){
+					HashMap<String, Object> map = orderCarts.get(i);
+					float ischeck =  Float.parseFloat(map.get("check").toString());
+//					Log.i("info", ischeck + "    ischeck");
+					Cart  cart1	= (Cart) map.get("cart");
+					if(ischeck == 1.0){
+						cartList.add(cart1);
+				}
+				}
+				Intent intent1 = new Intent(MainFragmentActivity.this,
+						CstmPayActivity.class);
+				Bundle bundle = new Bundle();
+				float sum = CartActivity.sum;
+				intent1.putExtra("carts", cartList);
+
+				if (sum > 0) {
+					bundle.putString("cartActivity", "Y");
+					bundle.putString("price", sum + "");
+					intent1.putExtras(bundle);
+					MainFragmentActivity.this.startActivity(intent1);
+				} else {
+					Toast.makeText(
+							MainFragmentActivity.this,
+							getResources().getString(
+									R.string.buy_nothing),
+							Toast.LENGTH_LONG).show();
+				}
+			}
+			
+			
+		
+	};
+	private OnClickListener edit = new OnClickListener() {
+		
+
+		@Override
+		public void onClick(View arg0) {
+			Intent intent = new Intent(MainFragmentActivity.this,
+					EditorActivity.class);
+			startActivity(intent);
+
+		}
+		
+	};
 	private OnClickListener go2SearchListener2 = new OnClickListener() {
 		
 		@Override
@@ -512,4 +584,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 	    }
 		return super.onKeyUp(keyCode, event);
 	}
+	
+
+	
 }

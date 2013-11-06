@@ -49,7 +49,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 	private MyApplication myApplication;
 	private CartsDataManage dataManage;
 	private PreferentialDataManage preferentialDataManage ;
-	public static ArrayList<Cart> cartList;
+	private   ArrayList<Cart> cartList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

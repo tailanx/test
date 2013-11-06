@@ -130,7 +130,11 @@ public class PayUtil {
 				// }else{
 				// headImage.setImageResource(R.drawable.ic_launcher);
 				// }
-				sumPrice.setText(cart.getPrice() + "");
+				if(cart.getPrice()>0.0){
+					sumPrice.setText(cart.getPrice()+"积分");
+					}else{
+						sumPrice.setText("￥"+cart.getPrice());
+					}
 				String amount = cart.getAmount() + "";
 				countTextView.setText(amount);
 				if(isHuanGou)
@@ -186,7 +190,11 @@ public class PayUtil {
 						.findViewById(R.id.go_pay_item_sum_detail);// �۸�
 				TextView countTextView = (TextView) view
 						.findViewById(R.id.go_pay_item_count_detail);// ��Ʒ��Ŀ
-				sumPrice.setText(cart.getPrice()+"");
+				if(cart.getPrice()>0.0){
+				sumPrice.setText(cart.getPrice()+"积分");
+				}else{
+					sumPrice.setText("￥"+cart.getPrice());
+				}
 				countTextView.setText(cart.getAmount()+"");
 				titleTextView.setText(cart.getProductText());
 				String head = cart.getImgUrl();
