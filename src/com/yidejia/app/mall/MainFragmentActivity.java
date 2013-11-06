@@ -503,8 +503,8 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 	            Toast.makeText(getApplicationContext(), getResources().getString(R.string.exit), Toast.LENGTH_SHORT).show();                                
 	            exitTime = System.currentTimeMillis();   
 	        } else {
-	        	((MyApplication)getApplication()).setUserId("");
-	        	((MyApplication)getApplication()).setToken("");
+//	        	((MyApplication)getApplication()).setUserId("");
+//	        	((MyApplication)getApplication()).setToken("");
 	            finish();
 //	            System.exit(0);
 	        }
