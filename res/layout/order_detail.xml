@@ -65,7 +65,8 @@
             android:layout_marginTop="8dp"
             android:orientation="vertical" >
 
-            <RelativeLayout
+            <RelativeLayout 
+                android:id="@+id/order_address_layout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/new_delivery_address_up" >
@@ -113,7 +114,7 @@
                 android:textSize="16sp" />
             
             <RelativeLayout
-                android:id="@+id/change_pay_type"
+                android:id="@+id/change_pay_type_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -146,6 +147,7 @@
                     android:textSize="15sp" />
                 
                 <TextView
+                    android:id="@+id/change_pay_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|right"
