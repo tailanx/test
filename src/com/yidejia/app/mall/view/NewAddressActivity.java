@@ -882,7 +882,7 @@ public class NewAddressActivity extends SherlockActivity {
 								// addresses.setCity(spinner2.getSelectedItem().toString());
 								addresses.setAddress(areaTextView.getText()
 										.toString());
-								addresses.setPhone(numberTextView.getText()
+								addresses.setHandset(numberTextView.getText()
 										.toString());
 
 								addressId = dataManage
