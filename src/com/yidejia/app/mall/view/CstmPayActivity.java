@@ -351,8 +351,8 @@ public class CstmPayActivity extends SherlockActivity {
 										int which) {
 									// TODO Auto-generated method stub
 									if(isCartActivity.equals("Y")||isCartActivity.equals("N")){
-									voucherDataManage = new VoucherDataManage(CstmPayActivity.this);
-									voucher =Integer.parseInt(voucherDataManage.getUserVoucher(myApplication.getUserId(), myApplication.getToken()));
+//									voucherDataManage = new VoucherDataManage(CstmPayActivity.this);
+//									voucher =Float.parseFloat(voucherDataManage.getUserVoucher(myApplication.getUserId(), myApplication.getToken()));
 									}
 									}}
 							).create();
@@ -1002,7 +1002,7 @@ public class CstmPayActivity extends SherlockActivity {
 		}
 	}
 
-	private int voucher;
+	private float voucher;
 
 //	public class InnerReceiver extends BroadcastReceiver {
 //
