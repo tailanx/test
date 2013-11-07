@@ -29,11 +29,11 @@ public class WelcomeActivity extends Activity {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(WelcomeActivity.this, SearchResultActivity.class);
+				Intent intent = new Intent(WelcomeActivity.this, MainFragmentActivity.class);
 				startActivity(intent);
 				WelcomeActivity.this.finish();
 			}
-		}, 12000);
+		}, 2*1000);
 	}
 	
 	
