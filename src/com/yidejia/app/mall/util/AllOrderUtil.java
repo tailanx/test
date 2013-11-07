@@ -68,7 +68,17 @@ public class AllOrderUtil {
 //		}
 //	}
 	
+	private int orderType;//0-4分别表示全部订单，待付款订单，待发货订单，已发货订单，已完成订单
+	
+	/**
+	 * 获取订单和加载订单到视图层
+	 * @param orderTimeType 0-2 分别表示近一周，近一月，近一年
+	 * @param orderType 0-4分别表示全部订单，待付款订单，待发货订单，已发货订单，已完成订单
+	 * @param fromIndex 获取订单的开始下标
+	 * @param amount 获取订单的个数
+	 */
 	public void loadView(int orderTimeType, int orderType, int fromIndex, int amount) {
+		this.orderType = orderType;
 		try {
 			orderDataManage = new OrderDataManage(context);
 			final ArrayList<Order> mList = orderDataManage.getOrderArray(
@@ -385,7 +395,7 @@ public class AllOrderUtil {
 			case 1:
 				if(null == layout1) break;
 				new Builder(context).setTitle(R.string.tips)
-				.setMessage(R.string.del_order)
+				.setMessage(R.string.cancel_order)
 				.setPositiveButton(context.getResources().getString(R.string.sure), new DialogInterface.OnClickListener() {
 					
 					@Override
@@ -394,7 +404,8 @@ public class AllOrderUtil {
 						
 						boolean isSucess = orderDataManage.cancelOrder(myApplication.getUserId(), orderCode, myApplication.getToken());
 						Log.i("info", isSucess + "      isSucess");
-						mLinearLayoutLayout.removeView(layout1);
+						if(orderType == 1)
+							mLinearLayoutLayout.removeView(layout1);
 					}
 				}).setNegativeButton(context.getResources().getString(R.string.cancel), null).create().show();
 				break;
