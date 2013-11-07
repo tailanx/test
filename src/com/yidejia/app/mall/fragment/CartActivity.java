@@ -377,119 +377,9 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 						// TODO Auto-generated method stub
 						// getAddresses();
 						if (!myApplication.getIsLogin()) {
-							new Builder(getSherlockActivity())
-									.setTitle(
-											getResources().getString(
-													R.string.tips))
-									.setMessage(R.string.please_login)
-									.setPositiveButton(
-											R.string.sure,
-											new DialogInterface.OnClickListener() {
-
-												@Override
-												public void onClick(
-														DialogInterface dialog,
-														int which) {
-													// TODO Auto-generated
-													// method stub
-													Intent intent = new Intent(
-															getSherlockActivity(),
-															LoginActivity.class);
-													startActivity(intent);
-												}
-												//
-											})
-									.setNegativeButton(
-											R.string.searchCancel,
-											new DialogInterface.OnClickListener() {
-
-												@Override
-												public void onClick(
-														DialogInterface dialog,
-														int which) {
-													// TODO Auto-generated
-													// method stub
-
-												}
-												//
-											}).create().show();
-							//
-							return;
+							showLoginTips();
 						} else {
-//							StringBuffer sb = new StringBuffer();
-//							@SuppressWarnings("unchecked")
-							// for (int i = 0; i < orderCarts.size(); i++) {
-							// Cart cart = orderCarts.get(i);
-							// sb.append(cart.getUId());
-							// sb.append(",");
-							// sb.append(cart.getAmount());
-							// sb.append("n");
-							// sb.append(";");
-							// }
-							// //
-							// preferentialDataManage.getPreferential(sb.toString(),
-							// // myApplication.getUserId());
-							// // if
-							// (preferentialDataManage.getFreeGoods().size() !=
-							// 0
-							// // ||
-							// preferentialDataManage.getScoreGoods().size() !=
-							// 0) {
-							// // arrayListFree =
-							// preferentialDataManage.getFreeGoods();
-							// // Intent intent = new
-							// Intent(getSherlockActivity(),
-							// // ExchangeFreeActivity.class);
-							// // startActivity(intent);
-							// // } else {
-							// // Log.i("info", CartActivity.arrayListFree+
-							// // "CartActivity.arrayListFree");
-							//
-////							ArrayList<Cart> mList = dataManage.getCartsArray();
-							cartList = new ArrayList<Cart>();
-							List<HashMap<String, Object>> orderCarts = CartUtil.list1;
-							for(int i=0;i<orderCarts.size();i++){
-								HashMap<String, Object> map = orderCarts.get(i);
-								float ischeck =  Float.parseFloat(map.get("check").toString());
-								Log.i("info", ischeck + "    ischeck");
-								Cart  cart1	= (Cart) map.get("cart");
-								if(ischeck == 1.0){
-									cartList.add(cart1);
-							}
-							}
-							Intent intent1 = new Intent(getSherlockActivity(),
-									CstmPayActivity.class);
-							Bundle bundle = new Bundle();
-							 sum = Float.parseFloat(sumTextView.getText()
-									.toString());
-							intent1.putExtra("carts", cartList);
-//							
-							// @Override
-							// public void onClick(DialogInterface dialog, int
-							// which) {
-							// // TODO Auto-generated method stub
-							// Intent intent = new
-							// Intent(getSherlockActivity(),CstmPayActivity.class);
-							// Bundle bundle = new Bundle();
-							// float sum = Float.parseFloat(sumTextView
-							// .getText().toString());
-							// bundle.putString("price", sum + "");
-							// intent1.putExtras(bundle);
-							// getSherlockActivity().startActivity(intent);
-							//
-							// getSherlockActivity().startActivity(intent1);
-							if (sum > 0) {
-								bundle.putString("cartActivity", "Y");
-								bundle.putString("price", sum + "");
-								intent1.putExtras(bundle);
-								getSherlockActivity().startActivity(intent1);
-							} else {
-								Toast.makeText(
-										getSherlockActivity(),
-										getResources().getString(
-												R.string.buy_nothing),
-										Toast.LENGTH_LONG).show();
-							}
+							go2Pay();
 						}
 					}
 				});
@@ -601,6 +491,62 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 		super.onDestroy();
 		getSherlockActivity().unregisterReceiver(receiver);
 	}
+	
+	private void showLoginTips(){
+		new Builder(getSherlockActivity())
+				.setTitle(getResources().getString(R.string.tips))
+				.setMessage(R.string.please_login)
+				.setPositiveButton(R.string.sure,
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// TODO Auto-generated
+								// method stub
+								Intent intent = new Intent(
+										getSherlockActivity(),
+										LoginActivity.class);
+								startActivity(intent);
+							}
+							//
+						})
+				.setNegativeButton(R.string.searchCancel,null)
+				.create().show();
+	}
+	
+	private void go2Pay(){
+		cartList = new ArrayList<Cart>();
+		List<HashMap<String, Object>> orderCarts = CartUtil.list1;
+		for (int i = 0; i < orderCarts.size(); i++) {
+			HashMap<String, Object> map = orderCarts.get(i);
+			float ischeck = Float.parseFloat(map.get("check")
+					.toString());
+			Log.i("info", ischeck + "    ischeck");
+			Cart cart1 = (Cart) map.get("cart");
+			if (ischeck == 1.0) {
+				cartList.add(cart1);
+			}
+		}
+		sum = Float.parseFloat(sumTextView.getText()
+				.toString());
+		if (sum > 0) {
+			Intent intent1 = new Intent(getSherlockActivity(),
+					CstmPayActivity.class);
+			intent1.putExtra("carts", cartList);
+			Bundle bundle = new Bundle();
+			bundle.putString("cartActivity", "Y");
+			bundle.putString("price", sum + "");
+			intent1.putExtras(bundle);
+			getSherlockActivity().startActivity(intent1);
+		} else {
+			Toast.makeText(
+					getSherlockActivity(),
+					getResources().getString(
+							R.string.buy_nothing),
+					Toast.LENGTH_LONG).show();
+		}
+	}
 
 	/*
 	 * private int fromIndex = 0; private int amontIndex = 10; // 刷新添加事件 private
@@ -691,8 +637,8 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
 				// Log.i("info", action + "action");
 				layout.removeAllViews();
-				sumTextView.setText(""+0.00);
-				counTextView.setText(""+0);
+//				sumTextView.setText(""+0.00);
+//				counTextView.setText(""+0);
 				CartUtil cartUtil = new CartUtil(getSherlockActivity(), layout,
 						counTextView, sumTextView, mBox);
 				cartUtil.AllComment();

@@ -61,7 +61,7 @@ public class FavoriteDataManage {
 			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return favoriteArray;
 		}
-		TaskGetList taskGetList = new TaskGetList("userid="+userId, String.valueOf(fromIndex), String.valueOf(acount), "", "", "%2A");
+		TaskGetList taskGetList = new TaskGetList("userid="+userId, String.valueOf(fromIndex), String.valueOf(acount), "", "created+desc", "%2A");
 		boolean state = false ;
 		try {
 			state = taskGetList.execute().get();

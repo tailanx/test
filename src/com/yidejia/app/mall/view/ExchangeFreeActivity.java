@@ -59,7 +59,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 	private List<HashMap<String, Float>> exchange;// 换购商品
 	private List<HashMap<String, Object>> cart;// 换购商品
 	private VoucherDataManage dataManage;// 用户积分
-	private double voucher;// 用户积分
+	private float voucher;// 用户积分
 	private MyApplication myApplication;
 	// private CartActivity cartActivity;
 	private ArrayList<Cart> mArrayList;
@@ -73,6 +73,12 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 		// this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 		// WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		// cartActivity = new CartActivity();
+		Intent intent = getIntent();
+		sumprice = intent.getStringExtra("price");
+		float jifen = intent.getFloatExtra("voucher", -1);
+		isString = intent.getStringExtra("cartActivity");
+		Log.i("info", jifen +"  jifen");
+		mArrayList = (ArrayList<Cart>) intent.getSerializableExtra("carts");
 		setContentView(R.layout.pay_free);
 		resources = getResources();
 		dialog = new Builder(this).setIcon(R.drawable.ic_launcher).setTitle(getResources()
@@ -185,12 +191,14 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 							// CstmPayActivity.arrayListFree).getCart();
 							Cart cart1 = FreeGivingAdapter.carts;
 							if (cart1.getUId() != null) {
-								Log.i("info", mArrayList+"   mArrayList");
+								Log.i("info", mArrayList.size()+"   mArrayList");
 								mArrayList.add(cart1);
+								Log.i("info", mArrayList.size()+"   mArrayList");
 							}
 							intent.putExtra("price", sumprice);
-							Log.i("info", voucher+"   voucher");
+//							Log.i("info", voucher+"   voucher");
 							intent.putExtra("voucher", voucher);
+							Log.i("info", mArrayList.size()+"   mArrayList");
 							intent.putExtra("carts", mArrayList);
 							intent.putExtra("cartActivity", "E");
 						}
@@ -200,13 +208,6 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 					}
 				})
 				.setNegativeButton(getResources().getString(R.string.cancel), null).create();				
-		Intent intent = getIntent();
-		sumprice = intent.getStringExtra("price");
-		// Log.i("info", sumprice);
-		Double jifen = intent.getDoubleExtra("voucher", -1);
-		isString = intent.getStringExtra("cartActivity");
-		 Log.i("info", jifen +"  jifen");
-		mArrayList = (ArrayList<Cart>) intent.getSerializableExtra("carts");
 		//		if (isString.equals("Y")) {
 //		} else {
 //			mArrayList = (ArrayList<Cart>) intent.getSerializableExtra("carts");
@@ -220,7 +221,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 		dataManage = new VoucherDataManage(ExchangeFreeActivity.this);
 		myApplication = (MyApplication) getApplication();
 		if (jifen == -1) {
-			voucher = Double.parseDouble(dataManage.getUserVoucher(
+			voucher = Float.parseFloat(dataManage.getUserVoucher(
 					myApplication.getUserId(), myApplication.getToken()));
 		} else {
 			voucher = jifen;

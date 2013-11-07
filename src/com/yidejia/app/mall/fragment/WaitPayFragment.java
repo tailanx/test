@@ -15,6 +15,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.util.AllOrderUtil;
 import com.yidejia.app.mall.util.WaitPayUtil;
 import com.yidejia.app.mall.view.OrderDetailActivity;
 
@@ -27,9 +28,9 @@ public class WaitPayFragment extends SherlockFragment {
 	private int amount = 10;
 
 	private void setupShow() {
-		WaitPayUtil waitPayUtil = new WaitPayUtil(getSherlockActivity(),
-				relativeLayout);
-		waitPayUtil.loadView(fromIndex, amount);
+//		AllOrderUtil allOrderUtil = new AllOrderUtil(getSherlockActivity(),
+//				relativeLayout);
+//		allOrderUtil.loadView(fromIndex, amount);
 	}
 
 	// 通过单例模式，构建对象

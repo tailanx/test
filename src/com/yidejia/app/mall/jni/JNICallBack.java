@@ -82,6 +82,9 @@ public class JNICallBack {
 	//取消订单
 	public static native String getHttp4CancelOrder(String id, String code, String token);
 	
+	//删除订单
+	public static native String getHttp4DelOrder(String id, String code, String token);
+	
 	//签收订单
 	public static native String getHttp4SignOrder(String id, String code, String token);
 	

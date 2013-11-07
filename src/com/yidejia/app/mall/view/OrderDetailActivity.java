@@ -32,6 +32,7 @@ import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.datamanage.TaskGetOrderByCode;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.Cart;
+import com.yidejia.app.mall.util.Consts;
 
 public class OrderDetailActivity extends SherlockFragmentActivity {
 //	private TextView nameTextView;//收件人姓名
@@ -99,6 +100,25 @@ public class OrderDetailActivity extends SherlockFragmentActivity {
 		}
 		setupShow();
 	}
+	
+	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+//		super.onActivityResult(arg0, arg1, arg2);
+		if (data == null) {
+			return;
+		}
+		if (requestCode == Consts.AddressRequestCode
+				&& resultCode == Consts.AddressResponseCode) {
+			Addresses addresses1 = (Addresses) data.getExtras()
+					.getSerializable("addresses1");
+			taskOrderByCode.setAddress(addresses1);
+		}
+	}
+
+
 
 	private void setActionBar() {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -123,6 +143,8 @@ public class OrderDetailActivity extends SherlockFragmentActivity {
 	int fromIndex = 0;
 	int acount = 10;
 	StringBuffer sb = new StringBuffer();
+	TaskGetOrderByCode taskOrderByCode;
+	
 	private void setupShow(){
 //		ArrayList<Addresses> addresses = addressDataManage.getAddressesArray(myApplication.getUserId(), fromIndex, acount);
 //		if(addresses.isEmpty())return;
@@ -151,7 +173,7 @@ public class OrderDetailActivity extends SherlockFragmentActivity {
 //		}
 		
 		
-		TaskGetOrderByCode taskOrderByCode = new TaskGetOrderByCode(this);
+		taskOrderByCode = new TaskGetOrderByCode(this);
 		taskOrderByCode.getOderBC(orderCode, orderPrice);
 	}
 	/**

@@ -26,7 +26,8 @@ public class AllOrderFragment extends SherlockFragment {
 	// private View view;
 	// private OrderDataManage orderDataManage ;//用来获取订单数据
 
-	private String hello;
+	private int orderTimeType;
+	private int orderType;
 	private String defaultHello = "default hello";
 	private PullToRefreshScrollView mPullToRefreshScrollView;// 刷新
 	private LinearLayout relativeLayout;
@@ -39,7 +40,7 @@ public class AllOrderFragment extends SherlockFragment {
 	private void setupShow() {
 		AllOrderUtil allOrderUtil = new AllOrderUtil(getSherlockActivity(),
 				relativeLayout);
-		allOrderUtil.loadView(fromIndex, amount);
+		allOrderUtil.loadView(orderTimeType, orderType, fromIndex, amount);
 
 		// mLayout = (LinearLayout)
 		// view.findViewById(R.id.all_order_item_main_scrollView_linearlayout1);
@@ -55,10 +56,17 @@ public class AllOrderFragment extends SherlockFragment {
 	}
 
 	// 通过单例模式，构建对象
-	public static AllOrderFragment newInstance(String s) {
+	/**
+	 * 跳转到fragment
+	 * @param orderType 0-4分别表示全部订单，待付款订单，待发货订单，已发货订单，已完成订单
+	 * @param orderTimeType 0-2 分别表示近一周，近一月，近一年
+	 * @return
+	 */
+	public static AllOrderFragment newInstance(int orderType, int orderTimeType) {
 		AllOrderFragment waitFragment = new AllOrderFragment();
 		Bundle bundle = new Bundle();
-		bundle.putString("Hello", s);
+		bundle.putInt("orderTimeType", orderTimeType);
+		bundle.putInt("orderType", orderType);
 		waitFragment.setArguments(bundle);
 		return waitFragment;
 	}
@@ -69,9 +77,8 @@ public class AllOrderFragment extends SherlockFragment {
 		super.onCreate(savedInstanceState);
 		// 获取存储的参数
 		Bundle args = getArguments();
-		hello = args != null ? args.getString("hello") : defaultHello;
-		
-
+		orderTimeType = args != null ? args.getInt("orderTimeType") : 0;
+		orderType = args != null ? args.getInt("orderType") : 0;
 	}
 
 	private int fromIndex = 0;

@@ -2,6 +2,9 @@ package com.yidejia.app.mall.datamanage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,15 +14,23 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 //import android.content.activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
+import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.unionpay.mpay.widgets.p;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.net.ConnectionDetector;
@@ -81,8 +92,8 @@ public class TaskNoEva {
 			super.onPreExecute();
 			if (isFirstIn) {
 				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-				bar.setMessage(activity.getResources().getString(
-						R.string.searching));
+//				bar.setMessage(activity.getResources().getString(
+//						R.string.searching));
 				bar.show();
 			}
 		}
@@ -118,10 +129,13 @@ public class TaskNoEva {
 								String goodsid = arrayObject
 										.getString("goods_id");
 								String price = arrayObject.getString("price");
+//								if("".equals(price) || null == price || "0.0".equals(price))
+//									break;
 								String quantity = arrayObject
 										.getString("quantity");
 								String evaluate_status = arrayObject
 										.getString("evaluate_status");
+								if("y".equals(evaluate_status)) continue;
 								String dry_status = arrayObject
 										.getString("dry_status");
 								String imageUrl = ImageUrl.IMAGEURL
@@ -162,12 +176,12 @@ public class TaskNoEva {
 									// TODO: handle exception
 								}
 								waitCommGoods.add(mCart);
-								return true;
 							}
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+						return true;
 					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -189,6 +203,7 @@ public class TaskNoEva {
 			if(isFirstIn)
 				bar.dismiss();
 			if(result){
+				initDisplayImageOption();
 				if (!waitCommGoods.isEmpty()) {
 					int length = waitCommGoods.size();
 					Cart mCart;
@@ -200,12 +215,19 @@ public class TaskNoEva {
 						TextView evaluation_item_count = (TextView) view.findViewById(R.id.evaluation_item_count);
 						TextView evaluation_sum_money = (TextView) view.findViewById(R.id.evaluation_sum_money);
 						TextView evaluation_item_total_num = (TextView) view.findViewById(R.id.evaluation_item_total_num);
+						
+						ImageView evaluation_item_image = (ImageView) view.findViewById(R.id.evaluation_item_image);
+						imageLoader.displayImage(mCart.getImgUrl(), evaluation_item_image, options,
+								animateFirstListener);
 						Button evaluation_item_evaluation = (Button) view.findViewById(R.id.evaluation_item_evaluation);
 						evaluation_item_text.setText(mCart.getProductText());
-						evaluation_item_sum.setText(mCart.getPrice() + "");
-						evaluation_item_count.setText(mCart.getAmount() + "");
+						evaluation_item_sum.setText(mCart.getPrice() + activity.getResources().getString(R.string.unit));
+						evaluation_item_count.setText("数量:" + mCart.getAmount());
 						evaluation_sum_money.setText((mCart.getPrice() * mCart.getAmount()) + "");
-						evaluation_item_total_num.setText(mCart.getAmount() + "");
+						evaluation_item_total_num.setText("数量:" + mCart.getAmount() + "");
+						
+						final String goodsId = mCart.getUId();
+						
 						evaluation_item_evaluation.setOnClickListener(new OnClickListener() {
 							
 							@Override
@@ -214,18 +236,52 @@ public class TaskNoEva {
 								Intent intent = new Intent();
 								// 评价
 								intent.setClass(activity, PersonEvaluationActivity.class);
-								activity.startActivity(intent);
+								intent.putExtra("goodsId", goodsId);
+								int requestCode = 4001;
+								activity.startActivityForResult(intent, requestCode);
 								// 结束当前Activity；
-								activity.finish();
+//								activity.finish();
 							}
 						});
 						layout.addView(view);
 					}
 				}
+			} else {
+				Toast.makeText(activity, "未搜索到数据", Toast.LENGTH_LONG).show();
 			}
 		}
 
 		
 		
+	}
+	
+	static final List<String> displayedImages = Collections.synchronizedList(new LinkedList<String>());
+	private static class AnimateFirstDisplayListener extends SimpleImageLoadingListener {
+
+
+		@Override
+		public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+			if (loadedImage != null) {
+				ImageView imageView = (ImageView) view;
+				boolean firstDisplay = !displayedImages.contains(imageUri);
+				if (firstDisplay) {
+					FadeInBitmapDisplayer.animate(imageView, 500);
+					displayedImages.add(imageUri);
+				}
+			}
+		}
+	}
+	
+	private DisplayImageOptions options;
+	protected ImageLoader imageLoader = ImageLoader.getInstance();
+	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+	private void initDisplayImageOption(){
+		options = new DisplayImageOptions.Builder()
+			.showStubImage(R.drawable.image_bg)
+			.showImageOnFail(R.drawable.image_bg)
+			.showImageForEmptyUri(R.drawable.image_bg)
+			.cacheInMemory(true)
+			.cacheOnDisc(true)
+			.build();
 	}
 }

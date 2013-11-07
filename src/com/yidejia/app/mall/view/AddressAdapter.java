@@ -1,5 +1,4 @@
 package com.yidejia.app.mall.view;
-
 import android.app.AlertDialog.Builder;
 
 import java.util.ArrayList;
