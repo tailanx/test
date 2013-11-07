@@ -970,8 +970,6 @@ public class CstmPayActivity extends SherlockActivity {
 		 * 
 		 ************************************************/
 
-		Log.i("voucher", requestCode + "  requestCode");
-		Log.i("voucher", resultCode + "  resultCode");
 		if (data == null) {
 			return;
 		}
@@ -995,7 +993,6 @@ public class CstmPayActivity extends SherlockActivity {
 			} else if (requestCode == Consts.CstmPayActivity_Request
 					&& resultCode == Consts.CstmPayActivity_Response) {
 				carts = (ArrayList<Cart>) data.getSerializableExtra("carts");
-				Log.i("info", carts.size()+"   carts.size()");
 				voucher = data.getFloatExtra("voucher", -1);
 //				Log.i("voucher", voucher + "  voucher");
 //				Log.i("voucher", voucher + "  voucher");
