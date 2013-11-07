@@ -327,9 +327,7 @@ public class CstmPayActivity extends SherlockActivity {
 			isCartActivity = intent.getStringExtra("cartActivity");
 			myApplication = (MyApplication) getApplication();
 			voucherDataManage = new VoucherDataManage(CstmPayActivity.this);
-//			Log.i("info", voucherDataManage.getUserVoucher(myApplication.getUserId(), myApplication.getToken())+"");
-			
-			// TODO Auto-generated method stub
+
 			preferentialDataManage = new PreferentialDataManage(
 					CstmPayActivity.this);
 			dialog = new Builder(CstmPayActivity.this)
@@ -344,6 +342,7 @@ public class CstmPayActivity extends SherlockActivity {
 								@Override
 								public void onClick(DialogInterface arg0,
 										int arg1) {
+									// TODO Auto-generated method stub
 									Intent intent = new Intent(
 											CstmPayActivity.this,
 											ExchangeFreeActivity.class);
@@ -409,7 +408,10 @@ public class CstmPayActivity extends SherlockActivity {
 //				
 //							
 				voucher = Float.parseFloat(voucherDataManage.getUserVoucher(myApplication.getUserId(), myApplication.getToken()));
-
+				String voucherString1 = voucherDataManage.getUserVoucher(myApplication.getUserId(), myApplication.getToken());
+				if("".equals(voucherString1) || null == voucherString1) voucher = 0;
+				else voucher = Float.parseFloat(voucherString1);
+				
 				if (carts.isEmpty()) return;
 				StringBuffer sb = new StringBuffer();
 				if("".equals(carts)){
@@ -434,23 +436,27 @@ public class CstmPayActivity extends SherlockActivity {
 				
 				
 				if (isCartActivity.equals("Y")||isCartActivity.equals("N")) {//
-					if(voucher > 0||maxPay>299){
+					show(carts,false);//sum, 
+					if(voucher > 0||maxPay>fP){
 						Log.i("info", voucher+"   voucher");
 						Log.i("info", maxPay+"   maxPay");
 					dialog.show();
 
+
 					show(carts,false);//sum, 
+
 //				} else if (isCartActivity.equals("E")) {
 //					voucher = intent.getIntExtra("voucher", -1);
 //					Log.i("voucher", voucher + "  voucher");
 //					show(carts,true);
-					}else {
-					// if (!carts.isEmpty()) {
-//					show(carts,);//sum, 
-						Log.i("info", voucher+"   voucher");
-						Log.i("info", maxPay+"   maxPay");
-						show(carts, false);
 					}
+//					else {
+//					// if (!carts.isEmpty()) {
+////					show(carts,);//sum, 
+//						Log.i("info", voucher+"   voucher");
+//						Log.i("info", maxPay+"   maxPay");
+//						show(carts, false);
+//					}
 				}
 			}
 		} catch (NumberFormatException e) {

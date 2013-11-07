@@ -68,7 +68,19 @@ public class AllOrderUtil {
 //		}
 //	}
 	
+	private int orderType;//0-4分别表示全部订单，待付款订单，待发货订单，已发货订单，已完成订单
+//	private int mOrderType;//订单的状态
+//	private Handler mHandler;
+	
+	/**
+	 * 获取订单和加载订单到视图层
+	 * @param orderTimeType 0-2 分别表示近一周，近一月，近一年
+	 * @param orderType 0-4分别表示全部订单，待付款订单，待发货订单，已发货订单，已完成订单
+	 * @param fromIndex 获取订单的开始下标
+	 * @param amount 获取订单的个数
+	 */
 	public void loadView(int orderTimeType, int orderType, int fromIndex, int amount) {
+		this.orderType = orderType;
 		try {
 			orderDataManage = new OrderDataManage(context);
 			final ArrayList<Order> mList = orderDataManage.getOrderArray(
@@ -79,13 +91,13 @@ public class AllOrderUtil {
 				
 				final View view = inflater.inflate(R.layout.all_order_item_item, null);
 				// Log.i("info", view+"");
-				Button mCancalBtn = (Button) view.findViewById(R.id.all_order_item_main_cancal);
-				Button mOkBtn = (Button) view
+				final Button mCancelBtn = (Button) view.findViewById(R.id.all_order_item_main_cancal);
+				final Button mOkBtn = (Button) view
 						.findViewById(R.id.all_order_item_main_pay);
 				final LinearLayout layout1= (LinearLayout) view.findViewById(R.id.all_order_item_main_linerar);
 				LinearLayout mLayout = (LinearLayout) view
 						.findViewById(R.id.all_order_item_main_relative2);
-				TextView titleTextView = (TextView) view
+				final TextView titleTextView = (TextView) view
 						.findViewById(R.id.all_order_item_main_item_detail);
 				TextView numberTextView = (TextView) view
 						.findViewById(R.id.all_order_item_main_item_number);
@@ -102,9 +114,9 @@ public class AllOrderUtil {
 				int mOrderType = getOrderTypeCode(mOrder.getStatus());
 				mOkBtn.setText(setOkBtnText(mOrderType));
 				if(mOrderType == 1 || mOrderType == 2) 
-					mCancalBtn.setText(setCancelBtnText(mOrderType));
+					mCancelBtn.setText(setCancelBtnText(mOrderType));
 				else {
-					mCancalBtn.setVisibility(View.GONE);
+					mCancelBtn.setVisibility(View.GONE);
 					if(mOrderType == -1){
 						mOkBtn.setVisibility(View.GONE);
 					}
@@ -119,14 +131,17 @@ public class AllOrderUtil {
 					countTextView.setText(allOrderDetail.map.get("count")
 							.intValue() + "");
 				}
-				if (mOrderType == 1) {
-					mCancalBtn.setOnClickListener(new CancelClickListener(
-							mOrderType, mOrder.getOrderCode(), layout1));
-				} else if (mOrderType == 2) {
-					mCancalBtn.setOnClickListener(new CancelClickListener(
+				if (mOrderType == 1) {//
+					mCancelBtn.setOnClickListener(new CancelClickListener(
 							mOrderType, mOrder.getOrderCode(),
 							allOrderDetail.map.get("price") + "", mOrder
-									.getCartsArray()));
+									.getCartsArray(), layout1, titleTextView,
+							mOkBtn));
+				} else if (mOrderType == 2) {
+					mCancelBtn.setOnClickListener(new CancelClickListener(
+							mOrderType, mOrder.getOrderCode(),
+							allOrderDetail.map.get("price") + "", mOrder
+									.getCartsArray(), null, null, null));
 				}
 				mOkBtn.setOnClickListener(new OkClickListener(mOrderType, mOrder.getOrderCode(), allOrderDetail.map.get("price") + "", mOrder.getCartsArray()));
 				
@@ -142,6 +157,23 @@ public class AllOrderUtil {
 				});
 //				Log.i("info", mLinearLayoutLayout + "+layout");
 				mLinearLayoutLayout.addView(view);
+				/*
+				mHandler = new Handler(){  
+			        
+			        public void handleMessage(Message msg) {  
+			            switch (msg.what) {  
+			            case 1:  
+//			                updateTitle();  
+//			            	mOrderType = 5;
+			            	mOkBtn.setOnClickListener(new OkClickListener(5, mOrder.getOrderCode(), allOrderDetail.map.get("price") + "", mOrder.getCartsArray()));
+			            	mCancelBtn.setVisibility(View.GONE);
+							mOkBtn.setText(context.getResources().getString(R.string.delete_produce));
+							titleTextView.setText("已取消");
+			                break;  
+			            }  
+			        }
+			    }; 
+			    */
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -329,6 +361,21 @@ public class AllOrderUtil {
 //				intent.putExtras(bundle);
 //				intent.putExtra("carts", carts);//mOrder.getCartsArray()
 //				context.startActivity(intent);
+//				if(null == layout1) break;
+//				new Builder(context).setTitle(R.string.tips)
+//				.setMessage(R.string.del_order)
+//				.setPositiveButton(context.getResources().getString(R.string.sure), new DialogInterface.OnClickListener() {
+//					
+//					@Override
+//					public void onClick(DialogInterface dialog, int which) {
+//						// TODO Auto-generated method stub
+//						
+//						boolean isSucess = orderDataManage.cancelOrder(myApplication.getUserId(), orderCode, myApplication.getToken());
+//						Log.i("info", isSucess + "      isSucess");
+//						mLinearLayoutLayout.removeView(layout1);
+//					}
+//				}).setNegativeButton(context.getResources().getString(R.string.cancel), null).create().show();
+				Toast.makeText(context, "del", Toast.LENGTH_SHORT).show();
 				break;
 
 			default:
@@ -348,30 +395,45 @@ public class AllOrderUtil {
 		private String orderCode;
 		private int mOrderType;
 		private LinearLayout layout1;
+		private TextView titleTextView;
+		private Button mOkBtn;
 		private String orderPrice;
 		private ArrayList<Cart> carts;
 		
-		public CancelClickListener(int mOrderType, String orderCode, LinearLayout layout1){
+//		public CancelClickListener(int mOrderType, String orderCode, LinearLayout layout1){
+//			this.orderCode = orderCode;
+//			this.mOrderType = mOrderType;
+//			this.layout1 = layout1;
+//		}
+		
+		public CancelClickListener(int mOrderType, String orderCode,
+				String orderPrice, ArrayList<Cart> carts,
+				LinearLayout layout1, TextView titleTextView, Button okButton) {
 			this.orderCode = orderCode;
 			this.mOrderType = mOrderType;
 			this.layout1 = layout1;
-		}
-		
-		public CancelClickListener(int mOrderType, String orderCode, String orderPrice, ArrayList<Cart> carts){
-			this.orderCode = orderCode;
+			this.titleTextView = titleTextView;
+			this.mOkBtn = okButton;
 			this.orderPrice = orderPrice;
-			this.mOrderType = mOrderType;
 			this.carts = carts;
 		}
+		
+//		public CancelClickListener(int mOrderType, String orderCode, String orderPrice, ArrayList<Cart> carts){
+//			this.orderCode = orderCode;
+//			this.orderPrice = orderPrice;
+//			this.mOrderType = mOrderType;
+//			this.carts = carts;
+//		}
 
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
+			final View mCancelBtn = v;
 			switch (mOrderType) {
 			case 1:
 				if(null == layout1) break;
 				new Builder(context).setTitle(R.string.tips)
-				.setMessage(R.string.del_order)
+				.setMessage(R.string.cancel_order)
 				.setPositiveButton(context.getResources().getString(R.string.sure), new DialogInterface.OnClickListener() {
 					
 					@Override
@@ -380,7 +442,20 @@ public class AllOrderUtil {
 						
 						boolean isSucess = orderDataManage.cancelOrder(myApplication.getUserId(), orderCode, myApplication.getToken());
 						Log.i("info", isSucess + "      isSucess");
-						mLinearLayoutLayout.removeView(layout1);
+						if (isSucess) {
+							if (orderType == 1)//待付款订单页remove掉该订单
+								mLinearLayoutLayout.removeView(layout1);
+							else if (orderType == 0) {//全部订单页修改支付状态和隐藏取消按钮
+//								Message message = new Message();  
+//					            message.what = 1;  
+//					            mHandler.sendMessage(message); 
+								if(mOkBtn == null) return;
+								mOkBtn.setOnClickListener(new OkClickListener(5, orderCode, orderPrice, carts));
+				            	mCancelBtn.setVisibility(View.GONE);
+								mOkBtn.setText(context.getResources().getString(R.string.delete_produce));
+								titleTextView.setText("已取消");
+							}
+						}
 					}
 				}).setNegativeButton(context.getResources().getString(R.string.cancel), null).create().show();
 				break;
@@ -412,5 +487,22 @@ public class AllOrderUtil {
 		intent.putExtra("carts", carts);
 		context.startActivity(intent);
 	}
+	
+	/*
+	private Handler mHandler = new Handler(){  
+        
+        public void handleMessage(Message msg) {  
+            switch (msg.what) {  
+            case 1:  
+//                updateTitle();  
+            	mOrderType = 5;
+				cancleView.setVisibility(View.GONE);
+				okButton.setText(context.getResources().getString(R.string.delete_produce));
+				titleTextView.setText("已取消");
+                break;  
+            }  
+        };  
+    };
+    */  
 }
 

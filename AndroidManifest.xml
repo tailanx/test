@@ -71,14 +71,16 @@ android:uiOptions="splitActionBarWhenNarrow"
             android:screenOrientation="portrait"
             android:uiOptions="splitActionBarWhenNarrow"
             android:windowSoftInputMode="adjustPan" >
+            
+        </activity>
+        <activity android:name="com.yidejia.app.mall.WelcomeActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name="com.yidejia.app.mall.WelcomeActivity"
-            android:screenOrientation="portrait" >
         </activity>
         <activity android:name="com.yidejia.app.mall.UserPayActivity"
             android:screenOrientation="portrait" >
