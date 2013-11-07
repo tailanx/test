@@ -329,6 +329,20 @@ public class AllOrderUtil {
 //				intent.putExtras(bundle);
 //				intent.putExtra("carts", carts);//mOrder.getCartsArray()
 //				context.startActivity(intent);
+//				if(null == layout1) break;
+//				new Builder(context).setTitle(R.string.tips)
+//				.setMessage(R.string.del_order)
+//				.setPositiveButton(context.getResources().getString(R.string.sure), new DialogInterface.OnClickListener() {
+//					
+//					@Override
+//					public void onClick(DialogInterface dialog, int which) {
+//						// TODO Auto-generated method stub
+//						
+//						boolean isSucess = orderDataManage.cancelOrder(myApplication.getUserId(), orderCode, myApplication.getToken());
+//						Log.i("info", isSucess + "      isSucess");
+//						mLinearLayoutLayout.removeView(layout1);
+//					}
+//				}).setNegativeButton(context.getResources().getString(R.string.cancel), null).create().show();
 				break;
 
 			default:
