@@ -130,10 +130,16 @@ public class PayUtil {
 				// }else{
 				// headImage.setImageResource(R.drawable.ic_launcher);
 				// }
-				if(cart.getPrice()>0.0){
+				String  a = cart.getPrice()+"";
+				Log.i("info", a+" a");
+				int b= a.indexOf(".");
+				Log.i("info", b+" b");
+				Log.i("info", a.charAt(b+1)+" a.charAt(b+1)");
+				if(((int)(a.charAt(b+1)))!=((int)1)){
+					Log.i("info", (((int)(a.charAt(b+1)))!=((int)1))+"    a s");
+					sumPrice.setText("￥"+cart.getPrice());
+				}else{
 					sumPrice.setText(cart.getPrice()+"积分");
-					}else{
-						sumPrice.setText("￥"+cart.getPrice());
 					}
 				String amount = cart.getAmount() + "";
 				countTextView.setText(amount);

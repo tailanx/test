@@ -35,7 +35,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/new_address_item_textview1"
                 android:background="@null"
-                android:maxLength="10"
+                android:maxLength="6"
                 android:hint="                                                                                     "
                 android:singleLine="true" />
         </RelativeLayout>

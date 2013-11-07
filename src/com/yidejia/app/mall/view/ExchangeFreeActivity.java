@@ -153,7 +153,8 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 								Cart cart = new Cart();
 
 								cart.setImgUrl(specials.getImgUrl());
-								cart.setPrice(Float.parseFloat(specials.getScores()));
+								float a = (float) 0.1;
+								cart.setPrice(Float.parseFloat(specials.getScores())+a);
 								cart.setProductText(specials.getBrief());
 								cart.setUId(specials.getUId());
 								cart.setSalledAmmount(count1.intValue());
