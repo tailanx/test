@@ -21,6 +21,7 @@ import com.unionpay.uppay.task.s;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.OrderDataManage;
+import com.yidejia.app.mall.datamanage.AnlsGetOrderData;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.view.CstmPayActivity;
@@ -42,11 +43,15 @@ public class AllOrderUtil {
 
 	private OrderDataManage orderDataManage ;//������ȡ�������
 	
-	public AllOrderUtil(Context context,LinearLayout mLayout){
+	public AllOrderUtil(Context context, LinearLayout mLayout){
 		this.context = context;
 		this.inflater = LayoutInflater.from(context);
 		this.mLinearLayoutLayout = mLayout;
 		myApplication  = (MyApplication) context.getApplicationContext();
+	}
+	
+	public AllOrderUtil(){
+		
 	}
 //	/**
 //	 * ʵ�����
@@ -79,102 +84,21 @@ public class AllOrderUtil {
 	 * @param fromIndex 获取订单的开始下标
 	 * @param amount 获取订单的个数
 	 */
+	
 	public void loadView(int orderTimeType, int orderType, int fromIndex, int amount) {
 		this.orderType = orderType;
 		try {
-			orderDataManage = new OrderDataManage(context);
-			final ArrayList<Order> mList = orderDataManage.getOrderArray(
-					myApplication.getUserId(), "", String.valueOf(getOrderTime(orderTimeType)), getOrderTpye(orderType), fromIndex + "",
-					amount + "", myApplication.getToken());
+//			orderDataManage = new OrderDataManage(context);
+//			final ArrayList<Order> mList = orderDataManage.getOrderArray(
+//					myApplication.getUserId(), "", String.valueOf(getOrderTime(orderTimeType)), getOrderTpye(orderType), fromIndex + "",
+//					amount + "", myApplication.getToken());
 			// Log.i("info", mList.size()+"mList");
-			for (int i = 0; i < mList.size(); i++) {
-				
-				final View view = inflater.inflate(R.layout.all_order_item_item, null);
-				// Log.i("info", view+"");
-				final Button mCancelBtn = (Button) view.findViewById(R.id.all_order_item_main_cancal);
-				final Button mOkBtn = (Button) view
-						.findViewById(R.id.all_order_item_main_pay);
-				final LinearLayout layout1= (LinearLayout) view.findViewById(R.id.all_order_item_main_linerar);
-				LinearLayout mLayout = (LinearLayout) view
-						.findViewById(R.id.all_order_item_main_relative2);
-				final TextView titleTextView = (TextView) view
-						.findViewById(R.id.all_order_item_main_item_detail);
-				TextView numberTextView = (TextView) view
-						.findViewById(R.id.all_order_item_main_item_number);
-				TextView sumPrice = (TextView) view
-						.findViewById(R.id.all_order_item_main_sum_money_deatil);
-				TextView countTextView = (TextView) view
-						.findViewById(R.id.all_order_item_main_item_textview7_detail);
-				
-				
-				final Order mOrder = mList.get(i);
-				titleTextView.setText(mOrder.getStatus());
-				numberTextView.setText(mOrder.getOrderCode());
-				
-				int mOrderType = getOrderTypeCode(mOrder.getStatus());
-				mOkBtn.setText(setOkBtnText(mOrderType));
-				if(mOrderType == 1 || mOrderType == 2) 
-					mCancelBtn.setText(setCancelBtnText(mOrderType));
-				else {
-					mCancelBtn.setVisibility(View.GONE);
-					if(mOrderType == -1){
-						mOkBtn.setVisibility(View.GONE);
-					}
-				}
-
-				final AllOrderDetail allOrderDetail = new AllOrderDetail(
-						context, mOrder, mLayout);
-				allOrderDetail.addView();// ������Ʒ
-				for (int j = 0; j < allOrderDetail.map.size(); j++) {
-
-					sumPrice.setText(allOrderDetail.map.get("price") + "");
-					countTextView.setText(allOrderDetail.map.get("count")
-							.intValue() + "");
-				}
-				if (mOrderType == 1) {//
-					mCancelBtn.setOnClickListener(new CancelClickListener(
-							mOrderType, mOrder.getOrderCode(),
-							allOrderDetail.map.get("price") + "", mOrder
-									.getCartsArray(), layout1, titleTextView,
-							mOkBtn));
-				} else if (mOrderType == 2) {
-					mCancelBtn.setOnClickListener(new CancelClickListener(
-							mOrderType, mOrder.getOrderCode(),
-							allOrderDetail.map.get("price") + "", mOrder
-									.getCartsArray(), null, null, null));
-				}
-				mOkBtn.setOnClickListener(new OkClickListener(mOrderType, mOrder.getOrderCode(), allOrderDetail.map.get("price") + "", mOrder.getCartsArray()));
-				
-				mLayout.setOnClickListener(new OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						go2OrderDetail(mOrder.getOrderCode(),
-								allOrderDetail.map.get("price") + "",
-								mOrder.getCartsArray());
-					}
-				});
-//				Log.i("info", mLinearLayoutLayout + "+layout");
-				mLinearLayoutLayout.addView(view);
-				/*
-				mHandler = new Handler(){  
-			        
-			        public void handleMessage(Message msg) {  
-			            switch (msg.what) {  
-			            case 1:  
-//			                updateTitle();  
-//			            	mOrderType = 5;
-			            	mOkBtn.setOnClickListener(new OkClickListener(5, mOrder.getOrderCode(), allOrderDetail.map.get("price") + "", mOrder.getCartsArray()));
-			            	mCancelBtn.setVisibility(View.GONE);
-							mOkBtn.setText(context.getResources().getString(R.string.delete_produce));
-							titleTextView.setText("已取消");
-			                break;  
-			            }  
-			        }
-			    }; 
-			    */
-			}
+//			viewCtrl(mList);
+			AnlsGetOrderData taskGetOrder = new AnlsGetOrderData(context, mLinearLayoutLayout, orderType);
+			taskGetOrder.getOrderArray(myApplication.getUserId(), "",
+					String.valueOf(getOrderTime(orderTimeType)),
+					getOrderTpye(orderType), fromIndex + "", amount + "",
+					myApplication.getToken());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -184,13 +108,105 @@ public class AllOrderUtil {
 
 		}
 	}
+	/**/
+	
+	public void viewCtrl(ArrayList<Order> mList){
+		for (int i = 0; i < mList.size(); i++) {
+			
+			final View view = inflater.inflate(R.layout.all_order_item_item, null);
+			// Log.i("info", view+"");
+			final Button mCancelBtn = (Button) view.findViewById(R.id.all_order_item_main_cancal);
+			final Button mOkBtn = (Button) view
+					.findViewById(R.id.all_order_item_main_pay);
+			final LinearLayout layout1= (LinearLayout) view.findViewById(R.id.all_order_item_main_linerar);
+			LinearLayout mLayout = (LinearLayout) view
+					.findViewById(R.id.all_order_item_main_relative2);
+			final TextView titleTextView = (TextView) view
+					.findViewById(R.id.all_order_item_main_item_detail);
+			TextView numberTextView = (TextView) view
+					.findViewById(R.id.all_order_item_main_item_number);
+			TextView sumPrice = (TextView) view
+					.findViewById(R.id.all_order_item_main_sum_money_deatil);
+			TextView countTextView = (TextView) view
+					.findViewById(R.id.all_order_item_main_item_textview7_detail);
+			
+			
+			final Order mOrder = mList.get(i);
+			titleTextView.setText(mOrder.getStatus());
+			numberTextView.setText(mOrder.getOrderCode());
+			
+			int mOrderType = getOrderTypeCode(mOrder.getStatus());
+			mOkBtn.setText(setOkBtnText(mOrderType));
+			if(mOrderType == 1 || mOrderType == 2) 
+				mCancelBtn.setText(setCancelBtnText(mOrderType));
+			else {
+				mCancelBtn.setVisibility(View.GONE);
+				if(mOrderType == -1){
+					mOkBtn.setVisibility(View.GONE);
+				}
+			}
+
+			final AllOrderDetail allOrderDetail = new AllOrderDetail(
+					context, mOrder, mLayout);
+			allOrderDetail.addView();// ������Ʒ
+			for (int j = 0; j < allOrderDetail.map.size(); j++) {
+
+				sumPrice.setText(allOrderDetail.map.get("price") + "");
+				countTextView.setText(allOrderDetail.map.get("count")
+						.intValue() + "");
+			}
+			if (mOrderType == 1) {//
+				mCancelBtn.setOnClickListener(new CancelClickListener(
+						mOrderType, mOrder.getOrderCode(),
+						allOrderDetail.map.get("price") + "", mOrder
+								.getCartsArray(), layout1, titleTextView,
+						mOkBtn));
+			} else if (mOrderType == 2) {
+				mCancelBtn.setOnClickListener(new CancelClickListener(
+						mOrderType, mOrder.getOrderCode(),
+						allOrderDetail.map.get("price") + "", mOrder
+								.getCartsArray(), null, null, null));
+			}
+			mOkBtn.setOnClickListener(new OkClickListener(mOrderType, mOrder.getOrderCode(), allOrderDetail.map.get("price") + "", mOrder.getCartsArray()));
+			
+			mLayout.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					go2OrderDetail(mOrder.getOrderCode(),
+							allOrderDetail.map.get("price") + "",
+							mOrder.getCartsArray());
+				}
+			});
+//			Log.i("info", mLinearLayoutLayout + "+layout");
+			mLinearLayoutLayout.addView(view);
+			/*
+			mHandler = new Handler(){  
+		        
+		        public void handleMessage(Message msg) {  
+		            switch (msg.what) {  
+		            case 1:  
+//		                updateTitle();  
+//		            	mOrderType = 5;
+		            	mOkBtn.setOnClickListener(new OkClickListener(5, mOrder.getOrderCode(), allOrderDetail.map.get("price") + "", mOrder.getCartsArray()));
+		            	mCancelBtn.setVisibility(View.GONE);
+						mOkBtn.setText(context.getResources().getString(R.string.delete_produce));
+						titleTextView.setText("已取消");
+		                break;  
+		            }  
+		        }
+		    }; 
+		    */
+		}
+	}
 	
 	/**
 	 * 根据订单的状态（orderType）获取请求订单数据的字符串字段值
 	 * @param orderType（0-4分别表示全部订单，待付款订单，待发货订单，已发货订单，已完成订单）
 	 * @return
 	 */
-	private String getOrderTpye(int orderType){
+	public String getOrderTpye(int orderType){
 		String orderTypeStr = "";
 		switch (orderType) {
 		case 0:
@@ -220,7 +236,7 @@ public class AllOrderUtil {
 	 * @param orderTimeType 0-2 分别表示近一周，近一月，近一年
 	 * @return 近一周，近一月，近一年数据查询的时间戳
 	 */
-	private long getOrderTime(int orderTimeType){
+	public long getOrderTime(int orderTimeType){
 		long orderTime = System.currentTimeMillis()/1000;
 		switch (orderTimeType) {
 		case 0:
