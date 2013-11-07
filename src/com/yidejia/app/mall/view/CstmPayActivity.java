@@ -102,6 +102,7 @@ public class CstmPayActivity extends SherlockActivity {
 	private String tn;// 流水号
 	private LinearLayout layout;
 	public static ArrayList<Cart> cartList;
+	private float jifen = 0;
 
 	private static final String SERVER_URL = "http://202.104.148.76/splugin/interface";
 	private static final String TRADE_COMMAND = "1001";
@@ -326,9 +327,7 @@ public class CstmPayActivity extends SherlockActivity {
 			isCartActivity = intent.getStringExtra("cartActivity");
 			myApplication = (MyApplication) getApplication();
 			voucherDataManage = new VoucherDataManage(CstmPayActivity.this);
-			String voucherString = voucherDataManage.getUserVoucher(myApplication.getUserId(), myApplication.getToken());
-			if("".equals(voucherString) || null == voucherString) voucher = 0;
-			else voucher = Float.parseFloat(voucherString);
+
 			preferentialDataManage = new PreferentialDataManage(
 					CstmPayActivity.this);
 			dialog = new Builder(CstmPayActivity.this)
@@ -407,7 +406,12 @@ public class CstmPayActivity extends SherlockActivity {
 				// Cart cart = (Cart) intent.getSerializableExtra("Cart");
 //				ArrayList<Cart> carts;
 //				
-//				
+//							
+				voucher = Float.parseFloat(voucherDataManage.getUserVoucher(myApplication.getUserId(), myApplication.getToken()));
+				String voucherString1 = voucherDataManage.getUserVoucher(myApplication.getUserId(), myApplication.getToken());
+				if("".equals(voucherString1) || null == voucherString1) voucher = 0;
+				else voucher = Float.parseFloat(voucherString1);
+				
 				if (carts.isEmpty()) return;
 				StringBuffer sb = new StringBuffer();
 				if("".equals(carts)){
@@ -429,12 +433,18 @@ public class CstmPayActivity extends SherlockActivity {
 					arrayListFree = preferentialDataManage.getFreeGoods();
 					arrayListExchange = preferentialDataManage.getScoreGoods();
 				}
+				
+				
 				if (isCartActivity.equals("Y")||isCartActivity.equals("N")) {//
 					show(carts,false);//sum, 
 					if(voucher > 0||maxPay>fP){
 						Log.i("info", voucher+"   voucher");
 						Log.i("info", maxPay+"   maxPay");
 					dialog.show();
+
+
+					show(carts,false);//sum, 
+
 //				} else if (isCartActivity.equals("E")) {
 //					voucher = intent.getIntExtra("voucher", -1);
 //					Log.i("voucher", voucher + "  voucher");
@@ -647,7 +657,7 @@ public class CstmPayActivity extends SherlockActivity {
 						CstmPayActivity.this);
 				orderDataManage.saveOrder(
 						myApplication.getUserId(), "0",
-						recipientId, "", "0", expressNum,
+						recipientId, "", jifen+"", expressNum,
 						postMethod, peiSongCenter, goods, comment.getText().toString(),//这里的comment.getText().toString()很重要
 						pay_type, myApplication.getToken());
 				// postMethod, peiSongCenter, goods,
@@ -666,7 +676,7 @@ public class CstmPayActivity extends SherlockActivity {
 					for (int i = 0; i < length; i++) {
 						cartsDataManage.delCart(carts.get(i).getUId());
 					}
-					Intent intent = new Intent(Consts.BROAD_UPDATE_CHANGE);
+					Intent intent = new Intent(Consts.DELETE_CART);
 					CstmPayActivity.this.sendBroadcast(intent);
 				}
 				//跳转到支付页面
@@ -997,6 +1007,9 @@ public class CstmPayActivity extends SherlockActivity {
 					&& resultCode == Consts.CstmPayActivity_Response) {
 				carts = (ArrayList<Cart>) data.getSerializableExtra("carts");
 				voucher = data.getFloatExtra("voucher", -1);
+				Log.i("voucher", jifen+"    jifen");
+				jifen = data.getFloatExtra("jifen", -1);
+				Log.i("voucher", jifen+"    jifen");
 //				Log.i("voucher", voucher + "  voucher");
 //				Log.i("voucher", voucher + "  voucher");
 //				isCartActivity = data.getStringExtra("cartActivity");

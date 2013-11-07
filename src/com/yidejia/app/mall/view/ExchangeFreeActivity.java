@@ -65,6 +65,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 	private ArrayList<Cart> mArrayList;
 	private String isString;
 	private AlertDialog dialog;
+	private float sum1 = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +104,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 
 						// Log.i("info", exchange.toString() +
 						// "    exchange.toString()");
-						float sum1 = 0;
+					
 						float sum = 0;
 
 						for (int i = 0; i < exchange.size(); i++) {
@@ -198,6 +199,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 							intent.putExtra("price", sumprice);
 //							Log.i("info", voucher+"   voucher");
 							intent.putExtra("voucher", voucher);
+							intent.putExtra("jifen", sum1);
 							Log.i("info", mArrayList.size()+"   mArrayList");
 							intent.putExtra("carts", mArrayList);
 							intent.putExtra("cartActivity", "E");

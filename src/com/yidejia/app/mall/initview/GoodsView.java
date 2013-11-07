@@ -168,9 +168,9 @@ public class GoodsView {
 						// TODO Auto-generated method stub
 						cart_num++;
 						setCartNum(cart_num);
+						boolean istrue = manage.addCart(cart);
 						Intent intent = new Intent(Consts.BROAD_UPDATE_CHANGE);
 						activity.sendBroadcast(intent);
-						boolean istrue = manage.addCart(cart);
 						if (istrue) {
 							Toast.makeText(
 									activity,

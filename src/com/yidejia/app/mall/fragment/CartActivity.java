@@ -269,6 +269,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 			IntentFilter filter = new IntentFilter();
 			filter.addAction(Consts.BROAD_UPDATE_CHANGE);
 			filter.addAction(Consts.UPDATE_CHANGE);
+			filter.addAction(Consts.DELETE_CART);
 			getSherlockActivity().registerReceiver(receiver, filter);
 			// registerForContextMenu(layout);
 
@@ -290,7 +291,10 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 					counTextView, sumTextView, mBox);
 
 			cartUtil.AllComment();
+			sum = Float.parseFloat(sumTextView.getText()
+					.toString());
 
+			Log.i("info", sum+"sum");
 			// mPullToRefreshScrollView = (PullToRefreshScrollView) view
 			// .findViewById(R.id.shopping_cart_item_goods_scrollView);
 			// String label = getResources().getString(R.string.update_time)
@@ -363,13 +367,13 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 //								}
 //							}).create();
 
-//			if (shoppingCartTopay == null) {
-//				Toast.makeText(
-//						getSherlockActivity(),
-//						getSherlockActivity().getResources().getString(
-//								R.string.no_network), Toast.LENGTH_SHORT)
-//						.show();
-//			} else {
+			if (shoppingCartTopay == null) {
+				Toast.makeText(
+						getSherlockActivity(),
+						getSherlockActivity().getResources().getString(
+								R.string.no_network), Toast.LENGTH_SHORT)
+						.show();
+			} else {
 				shoppingCartTopay.setOnClickListener(new OnClickListener() {
 
 					@Override
@@ -471,7 +475,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 
 				// }
 				// });
-//			}
+			}
 			//
 		} catch (NotFoundException e) {
 			// TODO Auto-generated catch block
@@ -528,8 +532,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 				cartList.add(cart1);
 			}
 		}
-		sum = Float.parseFloat(sumTextView.getText()
-				.toString());
+		
 		if (sum > 0) {
 			Intent intent1 = new Intent(getSherlockActivity(),
 					CstmPayActivity.class);
@@ -637,16 +640,24 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
 				// Log.i("info", action + "action");
 				layout.removeAllViews();
-//				sumTextView.setText(""+0.00);
-//				counTextView.setText(""+0);
+				sumTextView.setText(""+0.00);
+				counTextView.setText(""+0);
 				CartUtil cartUtil = new CartUtil(getSherlockActivity(), layout,
 						counTextView, sumTextView, mBox);
 				cartUtil.AllComment();
+				sum = Float.parseFloat(sumTextView.getText()
+						.toString());
 			}else if(Consts.UPDATE_CHANGE.equals(action)){
 				layout.removeAllViews();	
 				CartUtil cartUtil = new CartUtil(getSherlockActivity(), layout,
 						counTextView, sumTextView, mBox);
 				cartUtil.AllComment();
+				sum = Float.parseFloat(sumTextView.getText()
+						.toString());
+			}else if(Consts.DELETE_CART.equals(action)){
+				layout.removeAllViews();
+				sumTextView.setText(""+0.00);
+				counTextView.setText(""+0);
 			}
 		}
 	}

@@ -79,6 +79,7 @@ public class BaseInfoFragment extends SherlockFragment {
 			IntentFilter filter = new IntentFilter();
 			filter.addAction(Consts.UPDATE_CHANGE);
 			filter.addAction(Consts.BROAD_UPDATE_CHANGE);
+			filter.addAction(Consts.DELETE_CART);
 			view.invalidate();
 			getSherlockActivity().registerReceiver(receiver, filter);
 			/*
@@ -165,6 +166,7 @@ public class BaseInfoFragment extends SherlockFragment {
 		getSherlockActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
 		return dm.widthPixels;
 	} 
+	private int number1;
 	public class InnerReceiver extends BroadcastReceiver {
 
 		@Override
@@ -172,7 +174,17 @@ public class BaseInfoFragment extends SherlockFragment {
 			// TODO Auto-generated method stub
 			String action = intent.getAction();
 			if (Consts.UPDATE_CHANGE.equals(action)||Consts.BROAD_UPDATE_CHANGE.equals(action)) {
-			mButton.setText(dataManage.getCartAmount()+"");
+				number1 = dataManage.getCartAmount();
+			mButton.setText(number1+"");
+			}
+			if(Consts.DELETE_CART.equals(action)){
+				number1 = dataManage.getCartAmount();
+				if(number1==0){
+					mButton.setVisibility(View.GONE);
+				}else{
+					mButton.setVisibility(view.VISIBLE);
+					mButton.setText(number1+"");
+				}
 			}
 		}
 

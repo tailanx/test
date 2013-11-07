@@ -196,15 +196,12 @@ public class AddressAdapter extends BaseAdapter {
 			position = temp;
 		}
 
-		if (position == temp)// 比对position和当前的temp是否一致
-			holder.cb.setChecked(true);
-		else
-			holder.cb.setChecked(false);
 
-		isSelect = holder.cb.isChecked();
-		if (isSelect) {
-			
-		} else {
+//		isSelect = holder.cb.isChecked();
+//		if (isSelect) {
+//			
+//		} 
+//		else {
 			holder.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView,
@@ -225,11 +222,19 @@ public class AddressAdapter extends BaseAdapter {
 						}
 						temp = buttonView.getId();// 保存当前选中的checkbox的id值
 					}
+					else{
+						return ;
+					}
+					
 				}
 
 			});
-		}
+//		}
 
+			if (position == temp)// 比对position和当前的temp是否一致
+				holder.cb.setChecked(true);
+			else
+				holder.cb.setChecked(false);
 		// holder.cb.stOnCheckedChangeListener(new OnCheckedChangeListener() {
 		//
 		// // 把上次被选中的checkbox设为false

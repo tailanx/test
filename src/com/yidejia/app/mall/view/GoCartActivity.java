@@ -6,8 +6,11 @@ import java.util.List;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -30,9 +33,11 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.PreferentialDataManage;
+import com.yidejia.app.mall.fragment.CartActivity.InnerReceiver;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.util.CartUtil;
+import com.yidejia.app.mall.util.Consts;
 
 public class GoCartActivity extends SherlockActivity {// implements
 														// OnClickListener
@@ -50,7 +55,15 @@ public class GoCartActivity extends SherlockActivity {// implements
 	private CartsDataManage dataManage;
 	private PreferentialDataManage preferentialDataManage ;
 	private   ArrayList<Cart> cartList;
-
+	private LinearLayout layout ;
+	public static float sum ;
+	private InnerReceiver receiver;
+	@Override
+		protected void onDestroy() {
+			// TODO Auto-generated method stub
+			super.onDestroy();
+			unregisterReceiver(receiver);
+		}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -76,7 +89,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 //		mPullToRefreshScrollView.setOnRefreshListener(listener);
 
 //		LinearLayout layout = (LinearLayout) findViewById(R.id.shopping_cart_relative2);
-		LinearLayout layout = new LinearLayout(this);
+		layout = new LinearLayout(this);
 		layout.setOrientation(LinearLayout.VERTICAL);
 		ScrollView scrollView = (ScrollView) findViewById(R.id.shopping_cart_item_goods_scrollView);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -87,6 +100,14 @@ public class GoCartActivity extends SherlockActivity {// implements
 		cartUtil = new CartUtil(GoCartActivity.this, layout, counTextView,
 				sumTextView, mBox);
 		cartUtil.AllComment();
+		
+		receiver = new InnerReceiver();
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Consts.BROAD_UPDATE_CHANGE);
+		filter.addAction(Consts.UPDATE_CHANGE);
+		filter.addAction(Consts.DELETE_CART);
+		GoCartActivity.this.registerReceiver(receiver, filter);
+		
 		mbutton = (Button) findViewById(R.id.actionbar_right);
 		mTextView = (TextView) findViewById(R.id.actionbar_title);
 		mImageView = (ImageView) findViewById(R.id.actionbar_left);
@@ -101,50 +122,50 @@ public class GoCartActivity extends SherlockActivity {// implements
 					GoCartActivity.this.finish();
 				}
 			});
-			dialog = new Builder(GoCartActivity.this)
-			.setTitle("换购商品")
-			.setIcon(android.R.drawable.dialog_frame)
-			.setMessage(
-					getResources().getString(R.string.exchange_produce))
-			.setPositiveButton(
-					"确定",
-					new android.content.DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface arg0,
-								int arg1) {
-							Intent intent = new Intent(
-									GoCartActivity.this,
-									ExchangeFreeActivity.class);
-							Bundle bundle = new Bundle();
-							float sum = Float.parseFloat(sumTextView
-									.getText().toString());
-							bundle.putString("price", sum + "");
-							intent.putExtras(bundle);
-							GoCartActivity.this.startActivity(intent);
-
-						}
-					})
-			.setNegativeButton(
-					"取消",
-					new android.content.DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog,
-								int which) {
-							// TODO Auto-generated method stub
-							Intent intent = new Intent(
-									GoCartActivity.this,
-									CstmPayActivity.class);
-							Bundle bundle = new Bundle();
-							float sum = Float.parseFloat(sumTextView
-									.getText().toString());
-							bundle.putString("price", sum + "");
-							intent.putExtras(bundle);
-							GoCartActivity.this.startActivity(intent);
-
-						}
-					}).create();
+//			dialog = new Builder(GoCartActivity.this)
+//			.setTitle("换购商品")
+//			.setIcon(android.R.drawable.dialog_frame)
+//			.setMessage(
+//					getResources().getString(R.string.exchange_produce))
+//			.setPositiveButton(
+//					"确定",
+//					new android.content.DialogInterface.OnClickListener() {
+//
+//						@Override
+//						public void onClick(DialogInterface arg0,
+//								int arg1) {
+//							Intent intent = new Intent(
+//									GoCartActivity.this,
+//									ExchangeFreeActivity.class);
+//							Bundle bundle = new Bundle();
+//							float sum = Float.parseFloat(sumTextView
+//									.getText().toString());
+//							bundle.putString("price", sum + "");
+//							intent.putExtras(bundle);
+//							GoCartActivity.this.startActivity(intent);
+//
+//						}
+//					})
+//			.setNegativeButton(
+//					"取消",
+//					new android.content.DialogInterface.OnClickListener() {
+//
+//						@Override
+//						public void onClick(DialogInterface dialog,
+//								int which) {
+//							// TODO Auto-generated method stub
+//							Intent intent = new Intent(
+//									GoCartActivity.this,
+//									CstmPayActivity.class);
+//							Bundle bundle = new Bundle();
+//							float sum = Float.parseFloat(sumTextView
+//									.getText().toString());
+//							bundle.putString("price", sum + "");
+//							intent.putExtras(bundle);
+//							GoCartActivity.this.startActivity(intent);
+//
+//						}
+//					}).create();
 
 	if (mbutton == null) {
 		Toast.makeText(
@@ -235,7 +256,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 //						}else{
 					
 					if (sum > 0) {
-						bundle.putString("cartActivity","N");
+						bundle.putString("cartActivity","Y");
 						bundle.putString("price", sum + "");
 						intent1.putExtras(bundle);
 						GoCartActivity.this.startActivity(intent1);
@@ -274,6 +295,36 @@ public class GoCartActivity extends SherlockActivity {// implements
 			mPullToRefreshScrollView.onRefreshComplete();
 		}
 	};
+	public class InnerReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			String action = intent.getAction();
+			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
+				// Log.i("info", action + "action");
+				layout.removeAllViews();
+//				sumTextView.setText(""+0.00);
+//				counTextView.setText(""+0);
+				CartUtil cartUtil = new CartUtil(GoCartActivity.this, layout,
+						counTextView, sumTextView, mBox);
+				cartUtil.AllComment();
+				sum = Float.parseFloat(sumTextView.getText()
+						.toString());
+			}else if(Consts.UPDATE_CHANGE.equals(action)){
+				layout.removeAllViews();	
+				CartUtil cartUtil = new CartUtil(GoCartActivity.this, layout,
+						counTextView, sumTextView, mBox);
+				cartUtil.AllComment();
+				sum = Float.parseFloat(sumTextView.getText()
+						.toString());
+			}else if(Consts.DELETE_CART.equals(action)){
+				layout.removeAllViews();
+				sumTextView.setText(""+0.00);
+				counTextView.setText(""+0);
+			}
+		}
+	}
 	// try {
 	// TODO Auto-generated method stub
 	// requestWindowFeature(Window.FEATURE_NO_TITLE);
