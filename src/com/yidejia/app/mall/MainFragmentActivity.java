@@ -117,6 +117,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Consts.UPDATE_CHANGE);
 		filter.addAction(Consts.BROAD_UPDATE_CHANGE);
+		filter.addAction(Consts.DELETE_CART);
 		registerReceiver(receiver, filter);
 	}
 	@Override
@@ -144,8 +145,11 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		number = cartsDataManage.getCartAmount();
 		cartImage = (Button) findViewById(R.id.down_shopping_cart);
 
+		if(number==0){
+			cartImage.setVisibility(View.GONE);
+		}else{
 		cartImage.setText(number + "");
-		
+		}
 		downGuangLayout = (RelativeLayout) findViewById(R.id.down_guang_layout);
 		downSearchLayout = (RelativeLayout) findViewById(R.id.down_search_layout);
 		downShoppingLayout = (RelativeLayout) findViewById(R.id.down_shopping_layout);
@@ -555,11 +559,28 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 			if (Consts.UPDATE_CHANGE.equals(action)) {
 				cartsDataManage = new CartsDataManage();
 				number = cartsDataManage.getCartAmount();
+				if(number==0){
+					cartImage.setVisibility(View.GONE);
+				}else{
+					cartImage.setVisibility(View.VISIBLE);
 				cartImage.setText(number + "");
+			}
 			}
 			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
 				cartsDataManage = new CartsDataManage();
 				number = cartsDataManage.getCartAmount();
+				Log.i("info", number + "number");
+				if(number==0){
+					cartImage.setVisibility(View.GONE);
+				}else{
+					cartImage.setVisibility(View.VISIBLE);
+				cartImage.setText(number + "");
+			}
+			}
+			if(Consts.DELETE_CART.equals(action)){
+				cartsDataManage = new CartsDataManage();
+				number = cartsDataManage.getCartAmount();
+				cartImage.setVisibility(View.GONE);
 				cartImage.setText(number + "");
 			}
 		}
