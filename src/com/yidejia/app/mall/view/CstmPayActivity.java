@@ -318,16 +318,17 @@ public class CstmPayActivity extends SherlockActivity {
 //			final String sum = intent.getStringExtra("price");
 			sum = intent.getStringExtra("price");
 			maxPay = Float.parseFloat(sum);
-			carts = new ArrayList<Cart>();
+//			carts = new ArrayList<Cart>();
 //			cartList = new ArrayList<Cart>();
 			Log.i(TAG, "sum:" + sum);
+			carts = (ArrayList<Cart>) intent
+					.getSerializableExtra("carts");
 			isCartActivity = intent.getStringExtra("cartActivity");
 			myApplication = (MyApplication) getApplication();
 			voucherDataManage = new VoucherDataManage(CstmPayActivity.this);
 			String voucherString = voucherDataManage.getUserVoucher(myApplication.getUserId(), myApplication.getToken());
 			if("".equals(voucherString) || null == voucherString) voucher = 0;
 			else voucher = Float.parseFloat(voucherString);
-			// TODO Auto-generated method stub
 			preferentialDataManage = new PreferentialDataManage(
 					CstmPayActivity.this);
 			dialog = new Builder(CstmPayActivity.this)
@@ -342,6 +343,7 @@ public class CstmPayActivity extends SherlockActivity {
 								@Override
 								public void onClick(DialogInterface arg0,
 										int arg1) {
+									// TODO Auto-generated method stub
 									Intent intent = new Intent(
 											CstmPayActivity.this,
 											ExchangeFreeActivity.class);
@@ -403,11 +405,9 @@ public class CstmPayActivity extends SherlockActivity {
 			} else {
 				
 				// Cart cart = (Cart) intent.getSerializableExtra("Cart");
-				ArrayList<Cart> carts;
-				
-				
-				carts = (ArrayList<Cart>) intent
-						.getSerializableExtra("carts");
+//				ArrayList<Cart> carts;
+//				
+//				
 				if (carts.isEmpty()) return;
 				StringBuffer sb = new StringBuffer();
 				if("".equals(carts)){
@@ -476,7 +476,7 @@ public class CstmPayActivity extends SherlockActivity {
 		layout = (LinearLayout) findViewById(R.id.go_pay_relative2);
 		pay = new PayUtil(CstmPayActivity.this, layout);
 
-		goods = pay.loadView(carts, false);
+//		goods = pay.loadView(carts, false);
 		
 //		RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.go_shopping_use_evalution);
 //		relativeLayout.setOnClickListener(new OnClickListener() {
@@ -509,7 +509,7 @@ public class CstmPayActivity extends SherlockActivity {
 			}
 		});
 //		PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
-//		goods = pay.loadView(carts,isHuanGou);
+		goods = pay.loadView(carts,isHuanGou);
 		//添加地址、快递费用、配送中心
 		addAddress();
 //		// 获取免邮界限
@@ -992,16 +992,15 @@ public class CstmPayActivity extends SherlockActivity {
 //				sb.append(addresses1.getAddress());
 //				address.setText(sb.toString());
 				setAdd(addresses1);
+			}
 			} else if (requestCode == Consts.CstmPayActivity_Request
 					&& resultCode == Consts.CstmPayActivity_Response) {
-
 				carts = (ArrayList<Cart>) data.getSerializableExtra("carts");
 				voucher = data.getFloatExtra("voucher", -1);
-				Log.i("voucher", voucher + "  voucher");
-				Log.i("voucher", voucher + "  voucher");
-				isCartActivity = data.getStringExtra("cartActivity");
+//				Log.i("voucher", voucher + "  voucher");
+//				Log.i("voucher", voucher + "  voucher");
+//				isCartActivity = data.getStringExtra("cartActivity");
 				show(carts,false);
-			 }
 		} else {
 //			String msg = "";
 //			/*

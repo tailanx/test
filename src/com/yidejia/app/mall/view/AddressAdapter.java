@@ -34,15 +34,14 @@ public class AddressAdapter extends BaseAdapter {
 	private MyApplication myApplication;
 	private int temp = -1;
 	private AlertDialog dialog;
+	private boolean isSelect;// 获取checkbox是否选中状态
 
-	
 	public AddressAdapter(Activity context, ArrayList<Addresses> mAddresses) {
 		this.mAddresses = mAddresses;
 		myApplication = (MyApplication) context.getApplication();
 		dataManage = new AddressDataManage(context);
 		this.activity = context;
 		this.inflater = LayoutInflater.from(context);
-	
 
 	}
 
@@ -68,11 +67,12 @@ public class AddressAdapter extends BaseAdapter {
 	// this.setmAddresses(mAddresses);
 	// this.notifyDataSetChanged();
 	// }
-	
-	public void changeData(ArrayList<Addresses > addresses ){
+
+	public void changeData(ArrayList<Addresses> addresses) {
 		this.setMusics(addresses);
 		this.notifyDataSetChanged();
 	}
+
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -120,18 +120,32 @@ public class AddressAdapter extends BaseAdapter {
 		}
 
 		final Addresses addresses = mAddresses.get(position);
-		
-		dialog = new Builder(activity).setTitle(activity.getResources().getString(R.string.tips)).setIcon(R.drawable.ic_launcher).setMessage(activity.getResources().getString(R.string.delete_address)).setPositiveButton(activity.getResources().getString(R.string.sure),new android.content.DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
-				dataManage.deleteAddress(myApplication.getUserId(),
-						addresses.getAddressId(), myApplication.getToken());
-				mAddresses.remove(addresses);
-				notifyDataSetChanged();
-			}
-		}).setNegativeButton(activity.getResources().getString(R.string.cancel), null).create();
+
+		dialog = new Builder(activity)
+				.setTitle(activity.getResources().getString(R.string.tips))
+				.setIcon(R.drawable.ic_launcher)
+				.setMessage(
+						activity.getResources().getString(
+								R.string.delete_address))
+				.setPositiveButton(
+						activity.getResources().getString(R.string.sure),
+						new android.content.DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// TODO Auto-generated method stub
+								dataManage.deleteAddress(
+										myApplication.getUserId(),
+										addresses.getAddressId(),
+										myApplication.getToken());
+								mAddresses.remove(addresses);
+								notifyDataSetChanged();
+							}
+						})
+				.setNegativeButton(
+						activity.getResources().getString(R.string.cancel),
+						null).create();
 		// if(position == 0){
 		// temp = Integer.parseInt(addresses.getAddressId());
 		// Log.i("info", position+"onResume");
@@ -145,7 +159,6 @@ public class AddressAdapter extends BaseAdapter {
 		holder.ctTextView.setText(sb.toString());
 		holder.detailTextView.setText(addresses.getAddress());
 		holder.nameTextView.setText(addresses.getName());
-		Log.i("info", (addresses.getHandset()+" (addresses.getHandset()"));
 		holder.phoneTextView.setText(addresses.getHandset());
 		holder.editImageView.setOnClickListener(new OnClickListener() {
 
@@ -167,53 +180,81 @@ public class AddressAdapter extends BaseAdapter {
 		holder.deteleImageView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
+
 				// TODO Auto-generated method stub
-//				dataManage.deleteAddress(myApplication.getUserId(),
-//						addresses.getAddressId(), myApplication.getToken());
-//				mAddresses.remove(addresses);
-//				notifyDataSetChanged();
+				// dataManage.deleteAddress(myApplication.getUserId(),
+				// addresses.getAddressId(), myApplication.getToken());
+				// mAddresses.remove(addresses);
+				// notifyDataSetChanged();
 				dialog.show();
 			}
-		});     
+		});
 
 		holder.cb.setId(position);// 对checkbox的id进行重新设置为当前的position
 		if (addresses.getDefaultAddress()) {
+			temp = position;
 			position = temp;
 		}
-		Log.i("info", position+ "isCheck");
-		
-		holder.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
-			// 把上次被选中的checkbox设为false
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView,
-					boolean isChecked) {
-				Log.i("info", temp + "    temp");
-				if (isChecked) {// 实现checkbox的单选功能,同样适用于radiobutton
-					boolean isSuceess = dataManage.setDefaultAddress(
-							myApplication.getUserId(),
-							addresses.getAddressId(), myApplication.getToken());
-					if (temp != -1) {
-						// 找到上次点击的checkbox,并把它设置为false,对重新选择时可以将以前的关掉
-						CheckBox tempCheckBox = (CheckBox) activity
-								.findViewById(temp);
-						if (tempCheckBox != null)
-							tempCheckBox.setChecked(false);
-					}
-					temp = buttonView.getId();// 保存当前选中的checkbox的id值
-				}else{
-					return;
-				}
-			}
-		});
-		
-		// System.out.println("temp:"+temp);
-		// System.out.println("position:"+position);
 		if (position == temp)// 比对position和当前的temp是否一致
 			holder.cb.setChecked(true);
 		else
 			holder.cb.setChecked(false);
+
+		isSelect = holder.cb.isChecked();
+		if (isSelect) {
+			
+		} else {
+			holder.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView,
+						boolean isChecked) {
+					// TODO Auto-generated method stub
+					if (isChecked) {// 实现checkbox的单选功能,同样适用于radiobutton
+						boolean isSucces = dataManage.setDefaultAddress(
+								myApplication.getUserId(),
+								addresses.getAddressId(),
+								myApplication.getToken());
+						Log.i("info", isSucces + "    isSuccess");
+						if (temp != -1) {
+							// 找到上次点击的checkbox,并把它设置为false,对重新选择时可以将以前的关掉
+							CheckBox tempCheckBox = (CheckBox) activity
+									.findViewById(temp);
+							if (tempCheckBox != null)
+								tempCheckBox.setChecked(false);
+						}
+						temp = buttonView.getId();// 保存当前选中的checkbox的id值
+					}
+				}
+
+			});
+		}
+
+		// holder.cb.stOnCheckedChangeListener(new OnCheckedChangeListener() {
+		//
+		// // 把上次被选中的checkbox设为false
+		// @Override
+		// public void onCheckedChanged(CompoundButton buttonView,
+		// boolean isChecked) {
+		// Log.i("info", temp + "    temp");
+		// if (isChecked) {// 实现checkbox的单选功能,同样适用于radiobutton
+		//
+		// if (temp != -1) {
+		// // 找到上次点击的checkbox,并把它设置为false,对重新选择时可以将以前的关掉
+		// CheckBox tempCheckBox = (CheckBox) activity
+		// .findViewById(temp);
+		// if (tempCheckBox != null)
+		// tempCheckBox.setChecked(false);
+		// }
+		// temp = buttonView.getId();// 保存当前选中的checkbox的id值
+		// }else{
+		// return;
+		// }
+		// }
+		// });
+		// }
+		// System.out.println("temp:"+temp);
+		// System.out.println("position:"+position);
 
 		return convertView;
 	}

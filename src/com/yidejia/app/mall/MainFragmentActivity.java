@@ -505,6 +505,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 						CstmPayActivity.class);
 				Bundle bundle = new Bundle();
 				float sum = CartActivity.sum;
+				
 				intent1.putExtra("carts", cartList);
 
 				if (sum > 0) {

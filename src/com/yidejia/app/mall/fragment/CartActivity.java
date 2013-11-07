@@ -528,7 +528,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 				cartList.add(cart1);
 			}
 		}
-		float sum = Float.parseFloat(sumTextView.getText()
+		sum = Float.parseFloat(sumTextView.getText()
 				.toString());
 		if (sum > 0) {
 			Intent intent1 = new Intent(getSherlockActivity(),
@@ -637,8 +637,8 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
 				// Log.i("info", action + "action");
 				layout.removeAllViews();
-				sumTextView.setText(""+0.00);
-				counTextView.setText(""+0);
+//				sumTextView.setText(""+0.00);
+//				counTextView.setText(""+0);
 				CartUtil cartUtil = new CartUtil(getSherlockActivity(), layout,
 						counTextView, sumTextView, mBox);
 				cartUtil.AllComment();
