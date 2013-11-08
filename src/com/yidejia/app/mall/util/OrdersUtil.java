@@ -26,6 +26,7 @@ import com.unionpay.uppay.task.s;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.OrderDataManage;
+import com.yidejia.app.mall.datamanage.TaskDelOrder;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.net.ConnectionDetector;
@@ -163,9 +164,15 @@ public class OrdersUtil {
 				mCancelBtn.setOnClickListener(new CancelClickListener(
 						mOrderType, mOrder.getOrderCode(),
 						allOrderDetail.map.get("price") + "", mOrder
-								.getCartsArray(), null, null, null));
+								.getCartsArray(), layout1, titleTextView, mOkBtn));
 			}
-			mOkBtn.setOnClickListener(new OkClickListener(mOrderType, mOrder.getOrderCode(), allOrderDetail.map.get("price") + "", mOrder.getCartsArray()));
+			if (mOrderType == 5) {//删除按钮
+				mOkBtn.setOnClickListener(new OkClickListener(mOrderType,
+						mOrder.getOrderCode(), myApplication.getUserId(),
+						myApplication.getToken(), layout1));
+			} else{
+				mOkBtn.setOnClickListener(new OkClickListener(mOrderType, mOrder.getOrderCode(), allOrderDetail.map.get("price") + "", mOrder.getCartsArray()));
+			}
 			
 			mLayout.setOnClickListener(new OnClickListener() {
 				
@@ -332,24 +339,53 @@ public class OrdersUtil {
 		else code = -1;
 		return code;
 	}
+	
+	private TaskDelOrder taskDelOrder;
 
 	/**
 	 * 
 	 * 查看物流，删除，评价， 付款按钮
-	 *
+	 *	
 	 */
 	private class OkClickListener implements View.OnClickListener{
 		
 		private int mOrderType;
-		private String OrderPrice;
-		private String OrderCode;
+		private String orderPrice;
+		private String orderCode;
 		private ArrayList<Cart> carts;
 		
+		private String userId;
+		private String token;
+		private LinearLayout layout1;
+		
+		/**
+		 * 待付款订单的ok按钮点击事件
+		 * @param mOrderType 订单类型，0-5分别表示全部订单，待付款订单，待发货订单，已发货订单，已完成订单，已取消订单
+		 * @param OrderCode 订单号
+		 * @param OrderPrice 订单价格
+		 * @param carts 订单商品数据
+		 */
 		public OkClickListener(int mOrderType, String OrderCode, String OrderPrice, ArrayList<Cart> carts){
-			this.OrderCode = OrderCode;
-			this.OrderPrice = OrderPrice;
+			this.orderCode = OrderCode;
+			this.orderPrice = OrderPrice;
 			this.carts = carts;
 			this.mOrderType = mOrderType;
+		}
+		
+		/**
+		 * 全部订单已取消订单的删除按钮的点击事件
+		 * @param mOrderType 订单类型，0-5分别表示全部订单，待付款订单，待发货订单，已发货订单，已完成订单，已取消订单
+		 * @param orderCode 订单号
+		 * @param userId 用户id
+		 * @param token 
+		 * @param layout1 删除的一项界面
+		 */
+		public OkClickListener(int mOrderType, String orderCode, String userId, String token, LinearLayout layout1){
+			this.mOrderType = mOrderType;
+			this.orderCode = orderCode;
+			this.userId = userId;
+			this.token = token;
+			this.layout1 = layout1;
 		}
 		
 		@Override
@@ -362,8 +398,8 @@ public class OrdersUtil {
 						OrderDetailActivity.class);
 
 				Bundle detailBundle = new Bundle();
-				detailBundle.putString("OrderCode", OrderCode);//mOrder.getOrderCode()
-				detailBundle.putString("OrderPrice", OrderPrice);//allOrderDetail.map.get("price") + ""
+				detailBundle.putString("OrderCode", orderCode);//mOrder.getOrderCode()
+				detailBundle.putString("OrderPrice", orderPrice);//allOrderDetail.map.get("price") + ""
 				detailIntent.putExtras(detailBundle);
 				detailIntent.putExtra("carts", carts);//mOrder.getCartsArray()
 				context.startActivity(detailIntent);
@@ -378,21 +414,23 @@ public class OrdersUtil {
 //				intent.putExtras(bundle);
 //				intent.putExtra("carts", carts);//mOrder.getCartsArray()
 //				context.startActivity(intent);
-//				if(null == layout1) break;
-//				new Builder(context).setTitle(R.string.tips)
-//				.setMessage(R.string.del_order)
-//				.setPositiveButton(context.getResources().getString(R.string.sure), new DialogInterface.OnClickListener() {
-//					
-//					@Override
-//					public void onClick(DialogInterface dialog, int which) {
-//						// TODO Auto-generated method stub
-//						
+				if(null == layout1) break;
+				new Builder(context).setTitle(R.string.tips)
+				.setMessage(R.string.del_order)
+				.setPositiveButton(context.getResources().getString(R.string.sure), new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						
 //						boolean isSucess = orderDataManage.cancelOrder(myApplication.getUserId(), orderCode, myApplication.getToken());
 //						Log.i("info", isSucess + "      isSucess");
 //						mLinearLayoutLayout.removeView(layout1);
-//					}
-//				}).setNegativeButton(context.getResources().getString(R.string.cancel), null).create().show();
-				Toast.makeText(context, "del", Toast.LENGTH_SHORT).show();
+						taskDelOrder = new TaskDelOrder(context, mLinearLayoutLayout, layout1);
+						taskDelOrder.delOrder(userId, orderCode, token);
+					}
+				}).setNegativeButton(context.getResources().getString(R.string.cancel), null).create().show();
+//				Toast.makeText(context, "del", Toast.LENGTH_SHORT).show();
 				break;
 
 			default:
@@ -422,7 +460,16 @@ public class OrdersUtil {
 //			this.mOrderType = mOrderType;
 //			this.layout1 = layout1;
 //		}
-		
+		/**
+		 * 
+		 * @param mOrderType 订单类型，0-5分别表示全部订单，待付款订单，待发货订单，已发货订单，已完成订单，已取消订单
+		 * @param orderCode 订单号
+		 * @param orderPrice 订单总价
+		 * @param carts 订单商品
+		 * @param layout1 订单项的布局
+		 * @param titleTextView 订单状态的显示的textview
+		 * @param okButton 订单项的ok按钮
+		 */
 		public CancelClickListener(int mOrderType, String orderCode,
 				String orderPrice, ArrayList<Cart> carts,
 				LinearLayout layout1, TextView titleTextView, Button okButton) {
@@ -479,12 +526,12 @@ public class OrdersUtil {
 							Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 							return;
 						}
-						if(cancelOrder != null && cancelOrder.getStatus() == AsyncTask.Status.RUNNING){
-							cancelOrder.cancel(true);
+						if(taskCancelOrder != null && taskCancelOrder.getStatus() == AsyncTask.Status.RUNNING){
+							taskCancelOrder.cancel(true);
 						}
-						cancelOrder = new TaskCancelOrder(myApplication.getUserId(), orderCode, myApplication.getToken(),
-								orderPrice, carts, titleTextView, mOkBtn, mCancelBtn);
-						cancelOrder.execute();
+						taskCancelOrder = new TaskCancelOrder(myApplication.getUserId(), orderCode, myApplication.getToken(),
+								orderPrice, carts, titleTextView, mOkBtn, mCancelBtn, layout1);
+						taskCancelOrder.execute();
 					}
 				}).setNegativeButton(context.getResources().getString(R.string.cancel), null).create().show();
 				break;
@@ -538,7 +585,7 @@ public class OrdersUtil {
 	
 	private String TAG = OrdersUtil.class.getName();
 	
-	private TaskCancelOrder cancelOrder;
+	private TaskCancelOrder taskCancelOrder;
 	
 	
 	/**
@@ -561,6 +608,7 @@ public class OrdersUtil {
 		private TextView titleTextView;
 		private Button mOkBtn;
 		private View mCancelBtn;
+		private LinearLayout layout1;
 		
 		private ProgressDialog bar ;
 		
@@ -578,7 +626,7 @@ public class OrdersUtil {
 		 * @param mCancelBtn 取消按钮
 		 */
 		public TaskCancelOrder(String customer_id, String code, String token, String orderPrice, ArrayList<Cart> carts,
-				TextView titleTextView, Button mOkBtn, View mCancelBtn){
+				TextView titleTextView, Button mOkBtn, View mCancelBtn, LinearLayout layout1){
 			this.customer_id = customer_id;
 			this.code = code;
 			this.token = token;
@@ -587,6 +635,7 @@ public class OrdersUtil {
 			this.titleTextView = titleTextView;
 			this.mCancelBtn = mCancelBtn;
 			this.mOkBtn = mOkBtn;
+			this.layout1 = layout1;
 			bar = new ProgressDialog(context);
 			unicode = new UnicodeToString();
 		}
@@ -602,8 +651,8 @@ public class OrdersUtil {
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-			CancelOrder cancelOrder = new CancelOrder();
 			try {
+				CancelOrder cancelOrder = new CancelOrder();
 				String httpResponse = cancelOrder.getHttpResponseString(customer_id, code, token);
 				JSONObject jsonObject = new JSONObject(httpResponse);
 				int responseCode = jsonObject.getInt("code");
@@ -611,7 +660,7 @@ public class OrdersUtil {
 					String response = jsonObject.getString("response");
 					JSONObject responseObject = new JSONObject(response);
 					String result = responseObject.getString("@p_result");
-					if(unicode.revert(result).equals(context.getResources().getString(R.string.success_cancel_order))){
+					if(unicode.revert(result).equals("success取消成功")){
 						return true;
 					}
 				}
@@ -632,7 +681,15 @@ public class OrdersUtil {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			if(result){
-				setAfterCancelView(code, orderPrice, carts, titleTextView, mOkBtn, mCancelBtn);
+				if(orderType == 0){//取消订单后支付按钮变成删除按钮，标题变成已取消状态， 取消按钮不可见
+					setAfterCancelView(code, titleTextView, mOkBtn, mCancelBtn, layout1);
+//					setAfterCancelView(code, orderPrice, carts, titleTextView, mOkBtn, mCancelBtn);
+				} else if (orderType == 1){//待付款订单页remove掉该订单
+					mLinearLayoutLayout.removeView(layout1);
+				}
+				Toast.makeText(context, context.getResources().getString(R.string.success_cancel_order), Toast.LENGTH_SHORT).show();
+			} else {
+				Toast.makeText(context, context.getResources().getString(R.string.fail_cancel_order), Toast.LENGTH_SHORT).show();
 			}
 			bar.dismiss();
 		}
@@ -648,14 +705,25 @@ public class OrdersUtil {
 	 * @param mCancelBtn 取消按钮
 	 */
 	private void setAfterCancelView(String orderCode,
-			String orderPrice, ArrayList<Cart> carts,
-			TextView titleTextView, Button mOkBtn, View mCancelBtn){
+//			String orderPrice, ArrayList<Cart> carts,
+			TextView titleTextView, Button mOkBtn, View mCancelBtn,
+			LinearLayout layout1){
 		if(mOkBtn == null) return;
-		mOkBtn.setOnClickListener(new OkClickListener(5, orderCode, orderPrice, carts));
+		mOkBtn.setOnClickListener(new OkClickListener(5, orderCode, myApplication.getUserId(), myApplication.getToken(), layout1));
     	mCancelBtn.setVisibility(View.GONE);
 		mOkBtn.setText(context.getResources().getString(R.string.delete_produce));
 		titleTextView.setText("已取消");
 	}
 	
+	/**
+	 * 取消运行的task
+	 */
+	public void cancelTask(){
+		if(taskCancelOrder != null && taskCancelOrder.getStatus() == AsyncTask.Status.RUNNING){
+			taskCancelOrder.cancel(true);
+		}
+		if(taskDelOrder != null)
+			taskDelOrder.cancelTask();
+	}
 }
 

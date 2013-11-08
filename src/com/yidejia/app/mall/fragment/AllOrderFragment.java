@@ -184,10 +184,13 @@ public class AllOrderFragment extends SherlockFragment {
 		if(taskGetOrder != null && taskGetOrder.getStatus() == AsyncTask.Status.RUNNING){
 			taskGetOrder.cancel(true);
 		}
+		if(allOrderUtil != null)
+			allOrderUtil.cancelTask();
 	}
 	
 	private boolean isFirstOpen = true;//是否为第一次进入该页面
 	private ArrayList<Order> orders;
+	private OrdersUtil allOrderUtil;
 	
 	private class TaskGetOrder extends AsyncTask<Void, Void, Boolean>{
 		@Override
@@ -239,7 +242,7 @@ public class AllOrderFragment extends SherlockFragment {
 			super.onPostExecute(result);
 			 if(result){
 				 if(fromIndex == 0) relativeLayout.removeAllViews();//清空数据
-				 OrdersUtil allOrderUtil = new OrdersUtil(getSherlockActivity(), relativeLayout);
+				 allOrderUtil = new OrdersUtil(getSherlockActivity(), relativeLayout);
 				 allOrderUtil.viewCtrl(orders, orderType);
 			 }
 			// Toast.makeText(context, "�ɹ�", Toast.LENGTH_SHORT).show();

@@ -5,25 +5,38 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.order.DelOrder;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class TaskDelOrder {
 	
 	private Context context;
+	private LinearLayout mLinearLayout;//整个页面的布局
+	private LinearLayout layout1;//待删除的订单项的布局
 	private TaskDel taskDel;
 	private String customer_id;
 	private String orderCode;
 	private String token;
 	private String TAG = TaskDelOrder.class.getName();
 	
-	public TaskDelOrder(Context context){
+	/**
+	 * 
+	 * @param context 上下文context
+	 * @param mLinearLayout 整个页面的布局
+	 * @param layout1 待删除的订单项的布局
+	 */
+	public TaskDelOrder(Context context, LinearLayout mLinearLayout, LinearLayout layout1){
 		this.context = context;
+		this.mLinearLayout = mLinearLayout;
+		this.layout1 = layout1;
 	}
 	
 	/**
@@ -36,6 +49,14 @@ public class TaskDelOrder {
 		this.customer_id = customer_id;
 		this.orderCode = orderCode;
 		this.token = token;
+		if(!ConnectionDetector.isConnectingToInternet(context)) {//没网络时的提示
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+			return;
+		}
+		if (taskDel != null
+				&& taskDel.getStatus() == AsyncTask.Status.RUNNING) {
+			taskDel.cancel(true); // 如果Task还在运行，则先取消它
+		}
 		
 		taskDel = new TaskDel();
 		taskDel.execute();
@@ -73,6 +94,7 @@ public class TaskDelOrder {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			if(result){
+				mLinearLayout.removeView(layout1);
 				Toast.makeText(context, "删除订单成功！", Toast.LENGTH_LONG).show();
 			} else {
 				Toast.makeText(context, "删除订单失败！", Toast.LENGTH_LONG).show();
@@ -121,5 +143,15 @@ public class TaskDelOrder {
 		}
 		
 		return isSuccess;
+	}
+	
+	/**
+	 * 取消运行的task
+	 */
+	public void cancelTask(){
+		if (taskDel != null
+				&& taskDel.getStatus() == AsyncTask.Status.RUNNING) {
+			taskDel.cancel(true); // 如果Task还在运行，则先取消它
+		}
 	}
 }
