@@ -15,6 +15,8 @@ import com.unionpay.UPPayAssistEx;
 import com.unionpay.uppay.PayActivity;
 import com.yidejia.app.mall.util.Http;
 import com.yidejia.app.mall.util.MessageUtil;
+import com.yidejia.app.mall.view.AllOrderActivity;
+import com.yidejia.app.mall.view.WaitPayActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -136,7 +138,8 @@ public class UserPayActivity extends Activity{
         if (data == null) {
             return;
         }
-
+        
+        boolean isSuccess = false;
         String msg = "";
         /*
          * 支付控件返回字符串:success、fail、cancel
@@ -145,29 +148,58 @@ public class UserPayActivity extends Activity{
         String str = data.getExtras().getString("pay_result");
         if (str.equalsIgnoreCase("success")) {
             msg = "支付成功！";
+            isSuccess = true;
         } else if (str.equalsIgnoreCase("fail")) {
-            msg = "支付失败！";
+            msg = "支付失败，是否重试？";
+            isSuccess = false;
         } else if (str.equalsIgnoreCase("cancel")) {
-            msg = "用户取消了支付";
+            msg = "支付失败，是否重试？";
+            isSuccess = false;
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("支付结果通知");
+        builder.setTitle("提示");
         builder.setMessage(msg);
         builder.setInverseBackgroundForced(true);
         //builder.setCustomTitle();
-        builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                UserPayActivity.this.finish();
-            }
-        });
+		if (isSuccess) {//支付成功
+			builder.setPositiveButton("确定",
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						Intent intent = new Intent(UserPayActivity.this, AllOrderActivity.class);
+	                    startActivity(intent);
+						UserPayActivity.this.finish();
+				}
+			});
+		} else {
+			builder.setPositiveButton("是",
+					new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+//					UserPayActivity.this.finish();
+					if(payMode == 1){
+						UnionPayOrder();
+					}
+				}
+			});
+        	builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    Intent intent = new Intent(UserPayActivity.this, WaitPayActivity.class);
+                    startActivity(intent);
+                    UserPayActivity.this.finish();
+                }
+            });
+        }
         builder.create().show();
 	}
 	
 	private void UnionPayOrder(){
-		if (null != respCode && "00".equals(respCode) && null != upayTn) {
+		if (null != respCode && "00".equals(respCode) && null != upayTn && !"".equals(upayTn)) {
 			
 			UPPayAssistEx.startPayByJAR(UserPayActivity.this,
 					PayActivity.class, null, null, upayTn, "00");
