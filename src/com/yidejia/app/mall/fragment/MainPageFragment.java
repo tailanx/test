@@ -95,9 +95,9 @@ public class MainPageFragment extends SherlockFragment {
 				.setTitle(getResources().getString(R.string.tips))
 				.setIcon(R.drawable.ic_launcher)
 				.setMessage(getResources().getString(R.string.waiting4open))
-				.setNegativeButton(
-						getSherlockActivity().getResources().getString(
-								R.string.cancel), null)
+//				.setNegativeButton(
+//						getSherlockActivity().getResources().getString(
+//								R.string.cancel), null)
 				.setPositiveButton(
 						getSherlockActivity().getResources().getString(
 								R.string.sure), null).create();
@@ -425,11 +425,12 @@ public class MainPageFragment extends SherlockFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				if (!isLogin()) {
-					Intent intentOrder = new Intent(getSherlockActivity(),
-							PersonActivity.class);
-					getSherlockActivity().startActivity(intentOrder);
-				}
+//				if (!isLogin()) {
+//					Intent intentOrder = new Intent(getSherlockActivity(),
+//							PersonActivity.class);
+//					getSherlockActivity().startActivity(intentOrder);
+//				}
+				dialog.show();
 			}
 		});
 	}

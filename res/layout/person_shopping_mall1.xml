@@ -438,7 +438,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:background="@drawable/layout_selector3" >
+                android:background="@drawable/layout_selector2" >
 
                 <ImageView
                     android:id="@+id/main2_main2_linearlayout7_imageview1"

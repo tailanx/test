@@ -86,6 +86,7 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 		personMessage = (RelativeLayout) view
 				.findViewById(R.id.main2_main2_linearlayout20);// 个人中心
 		personMessage.setOnClickListener(this);
+		personMessage.setVisibility(ViewGroup.GONE);//这个版本隐藏这个功能
 		mExchange = (RelativeLayout) view
 				.findViewById(R.id.main2_main2_linearlayout10);// 退换货
 		mExchange.setOnClickListener(this);
