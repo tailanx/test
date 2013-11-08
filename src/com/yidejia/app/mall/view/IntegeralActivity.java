@@ -3,6 +3,8 @@ package com.yidejia.app.mall.view;
 import java.util.ArrayList;
 
 
+
+
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -24,36 +26,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.IntegeralFragmentAdapter;
+import com.yidejia.app.mall.datamanage.VoucherDataManage;
 import com.yidejia.app.mall.fragment.IntegeralFragment;
 
 public class IntegeralActivity extends SherlockFragmentActivity {
 	    private static final String TAG = "MainActivity";
-	    private ViewPager mPager;
-	    private ArrayList<Fragment> fragmentsList;
-	 
-	    private TextView mCoupons,mIntegeral;
-	    private ImageView ivBottomLine;
-	    private int currIndex = 0;
-	    private int bottomLineWidth;
-	    private int offset = 0;
-	    private int position_one;
-	    private int position_two;
-	    private int position_three;
-	    private Resources resources;
-	    
-	    public void doClick(View v){
-			switch (v.getId()) {
-//			case R.id.my_card_voucher_button1:
-//				Intent intent = new Intent(IntegeralActivity.this,MyMallActivity.class);
-//				startActivity(intent);
-//				//结束当前Activity；
-//				IntegeralActivity.this.finish();
-//				break;
-
-			}
-		}
+//	    private ViewPager mPager;
+//	    private ArrayList<Fragment> fragmentsList;
+//	 
+//	    private TextView mCoupons,mIntegeral;
+//	    private ImageView ivBottomLine;
+//	    private int currIndex = 0;
+//	    private int bottomLineWidth;
+//	    private int offset = 0;
+//	    private int position_one;
+//	    private int position_two;
+//	    private int position_three;
+//	    private Resources resources;
+	    private VoucherDataManage voucherDataManage;//积分
+	    private MyApplication myApplication;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +55,43 @@ public class IntegeralActivity extends SherlockFragmentActivity {
 		setActionBar();
 //		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.my_card_voucher);
-		resources = getResources();
-		InitWidth();
-		InitTextView();
-		InitViewPager();
+//		setContentView(R.layout.my_card_voucher);
+//		resources = getResources();
+//		InitWidth();
+//		InitTextView();
+//		InitViewPager();
 		
+		//已取消优惠券只显示积分
+		setContentView(R.layout.coupons);
+		
+		voucherDataManage = new VoucherDataManage(IntegeralActivity.this);
+		myApplication = (MyApplication)getApplication();
+		voucherDataManage.getUserVoucher(myApplication.getUserId(), myApplication.getToken());
+//		String ji = voucherDataManage.getUserVoucher(myApplication.getUserId(), myApplication.getToken());
+//		TextView jiFen = (TextView) findViewById(R.id.jiefen);
+//		if(ji==null||"".equals(ji)){
+//			jiFen.setText("0");
+//		}else{
+//			jiFen.setText(ji);
+//		}
 	}
+	
+	
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		if(voucherDataManage != null){
+			voucherDataManage.cancelTask();
+		}
+	}
+
+
+
+	/**
+	 * 设置头部
+	 */
 	private void setActionBar(){
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -90,6 +114,7 @@ public class IntegeralActivity extends SherlockFragmentActivity {
 		});
 	}
 
+	/*
 	private void InitTextView(){
 		mCoupons = (TextView)findViewById(R.id.my_card_voucher_Coupons);
 		mIntegeral = (TextView)findViewById(R.id.my_card_voucher_mIntegeral);
@@ -190,5 +215,5 @@ public class IntegeralActivity extends SherlockFragmentActivity {
 				
 			}
 	    }
-
+*/
 }

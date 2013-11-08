@@ -10,9 +10,12 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.voucher.Voucher;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -27,10 +30,11 @@ public class VoucherDataManage {
 	
 	private String voucherNum = "";
 	private String TAG = VoucherDataManage.class.getName();
-	private Context context;
+	private Activity activity;
+	private TaskVoucher taskVoucher;
 	
-	public VoucherDataManage(Context context){
-		this.context = context;
+	public VoucherDataManage(Activity activity){
+		this.activity = activity;
 	}
 	
 	/**
@@ -42,35 +46,49 @@ public class VoucherDataManage {
 		this.id = userid;
 		this.token = token;
 		
-		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+		if(!ConnectionDetector.isConnectingToInternet(activity)) {
+			Toast.makeText(activity, activity.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return voucherNum;
 		}
-		boolean state = false;
-		
-		TaskVoucher taskVoucher = new TaskVoucher();
-		
-		try {
-			state = taskVoucher.execute().get();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			Log.e(TAG, "task voucher InterruptedException");
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			Log.e(TAG, "task voucher ExecutionException");
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO: handle exception
-			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
+//		boolean state = false;
+		if(taskVoucher != null && AsyncTask.Status.RUNNING == taskVoucher.getStatus()){
+			taskVoucher.cancel(true);
 		}
-		if(!state){
-			
-		}
+		taskVoucher = new TaskVoucher();
+		taskVoucher.execute();
+		
+//		try {
+//			state = taskVoucher.execute().get();
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			Log.e(TAG, "task voucher InterruptedException");
+//			e.printStackTrace();
+//		} catch (ExecutionException e) {
+//			// TODO Auto-generated catch block
+//			Log.e(TAG, "task voucher ExecutionException");
+//			e.printStackTrace();
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
+//		}
+//		if(!state){
+//			
+//		}
 		return voucherNum;
 	};
 	
 	private class TaskVoucher extends AsyncTask<Void, Void, Boolean>{
+		
+		private ProgressDialog bar;
+		
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			bar = new ProgressDialog(activity);
+			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			bar.show();
+		}
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
@@ -98,6 +116,27 @@ public class VoucherDataManage {
 			}
 			return false;
 		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(result){
+				TextView jiFen = (TextView) activity.findViewById(R.id.jiefen);
+				if(voucherNum==null||"".equals(voucherNum)){
+					jiFen.setText("0");
+				}else{
+					jiFen.setText(voucherNum);
+				}
+			}
+			bar.dismiss();
+		}
 		
+	}
+	
+	public void cancelTask(){
+		if(taskVoucher != null && AsyncTask.Status.RUNNING == taskVoucher.getStatus()){
+			taskVoucher.cancel(true);
+		}
 	}
 }
