@@ -164,7 +164,7 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 	                    mYear.setTextColor(Color.parseColor("#000000"));
 	                } 
 	                mWeek.setPressed(true);
-	                mWeek.setBackgroundResource(R.drawable.produce_textview_selector);
+	                mWeek.setBackgroundResource(R.drawable.product_details_selected);
 	                mWeek.setTextColor(Color.parseColor("#702c91"));
 	                break;
 	            case 1:
