@@ -155,7 +155,14 @@ public class CstmPayActivity extends SherlockActivity {
 			zhifubaowangyeCheckBox = (CheckBox) findViewById(R.id.zhufubaowangye_checkbox);
 			yinlianCheckBox = (CheckBox) findViewById(R.id.yinlian_checkbox);
 			caifutongCheckBox = (CheckBox) findViewById(R.id.caifutong_checkbox);
-
+			
+//			//支付宝和财付通暂时不可选
+//			zhifubaoCheckBox.setClickable(false);
+//			zhifubaowangyeCheckBox.setClickable(false);
+//			caifutongCheckBox.setClickable(false);
+			//	默认选择银联支付
+			yinlianCheckBox.setChecked(true);
+			
 			//支付宝和财付通暂时不可见
 //			zhifubao.setVisibility(ViewGroup.GONE);
 //			zhifubaowangye.setVisibility(ViewGroup.GONE);
@@ -230,7 +237,9 @@ public class CstmPayActivity extends SherlockActivity {
 			// }
 			// }
 			// });
-
+			
+			
+			/*隐藏支付宝财付通的支付方式*/
 			zhifubao.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -292,6 +301,7 @@ public class CstmPayActivity extends SherlockActivity {
 					}
 				}
 			});
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -640,17 +650,17 @@ public class CstmPayActivity extends SherlockActivity {
 				} else if (caifutongCheckBox.isChecked()) {
 					mode = 0;
 					pay_type = "tenpay";
-					Toast.makeText(CstmPayActivity.this, "亲，暂时不支持该支付方式！", Toast.LENGTH_LONG).show();
+					Toast.makeText(CstmPayActivity.this, "亲，暂时只支持银联的支付方式哦！", Toast.LENGTH_LONG).show();
 					return;
 				} else if(zhifubaoCheckBox.isChecked()){
 					mode = 2;
 					pay_type = "alipay";
-					Toast.makeText(CstmPayActivity.this, "亲，暂时不支持该支付方式！", Toast.LENGTH_LONG).show();
+					Toast.makeText(CstmPayActivity.this, "亲，暂时只支持银联的支付方式哦！", Toast.LENGTH_LONG).show();
 					return;
 				} else {
 					mode = 3;
 					pay_type = "aliwappay";
-					Toast.makeText(CstmPayActivity.this, "亲，暂时不支持该支付方式！", Toast.LENGTH_LONG).show();
+					Toast.makeText(CstmPayActivity.this, "亲，暂时只支持银联的支付方式哦！", Toast.LENGTH_LONG).show();
 					return;
 				}
 				OrderDataManage orderDataManage = new OrderDataManage(
@@ -696,36 +706,6 @@ public class CstmPayActivity extends SherlockActivity {
 				startActivity(userpayintent);
 				CstmPayActivity.this.finish();
 
-				// //测试提交订单
-				// FutureTask<Map<String, String>> task = new
-				// FutureTask<Map<String, String>>(call);
-				// Thread th = new Thread(task);
-				// th.start();
-				// Map<String, String> resp;
-				// try {
-				// resp = task.get();
-				// Log.d(TAG, "task status: " + task.isDone());
-				//
-				// if (null != resp && null != resp.get("code") &&
-				// "0000".equals(resp.get("code"))) {
-				// String tn = resp.get("tn");
-				// UPPayAssistEx.startPayByJAR(CstmPayActivity.this,
-				// PayActivity.class, null, null, tn, "01");
-				//
-				// } else {
-				// //
-				// UPPayAssistEx.startPayByJAR(CstmPayActivity.this,
-				// // PayActivity.class, null, null,
-				// "121364646464646",
-				// "01");
-				// }
-				// } catch (InterruptedException e) {
-				// // TODO Auto-generated catch block
-				// e.printStackTrace();
-				// } catch (ExecutionException e) {
-				// // TODO Auto-generated catch block
-				// e.printStackTrace();
-				// }
 			}
 		});
 	}
