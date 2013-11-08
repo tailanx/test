@@ -85,7 +85,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="2dp"
-                    android:text="2.累计消费金额达1000-2000元范围类，客户购买100元产品，获得3个陷阱积分。"
+                    android:text="2.累计消费金额达1000-2000元范围类，客户购买100元产品，获得3个现金积分。"
                     android:textSize="12sp" />
 
                 <TextView
@@ -94,7 +94,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="2dp"
-                    android:text="3.累计消费金额达2000-5000元范围类，客户购买100元产品，获得5个陷阱积分。"
+                    android:text="3.累计消费金额达2000-5000元范围类，客户购买100元产品，获得5个现金积分。"
                     android:textSize="12sp" />
 
                 <TextView
@@ -103,7 +103,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="2dp"
-                    android:text="4.累计消费金额达5000-10000元范围类，客户购买100元产品，获得10个陷阱积分。"
+                    android:text="4.累计消费金额达5000-10000元范围类，客户购买100元产品，获得10个现金积分。"
                     android:textSize="12sp" />
 
                 <TextView
