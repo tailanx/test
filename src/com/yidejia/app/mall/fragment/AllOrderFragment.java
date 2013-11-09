@@ -229,7 +229,7 @@ public class AllOrderFragment extends SherlockFragment {
 				// TODO: handle exception
 				e.printStackTrace();
 				// Toast.makeText(context, "�������", Toast.LENGTH_SHORT).show();
-				return true;
+				return false;
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
@@ -245,7 +245,10 @@ public class AllOrderFragment extends SherlockFragment {
 			 if(result){
 				 if(fromIndex == 0) relativeLayout.removeAllViews();//清空数据
 				 allOrderUtil = new OrdersUtil(getSherlockActivity(), relativeLayout);
-				 allOrderUtil.viewCtrl(orders, orderType);
+				 if(!orders.isEmpty()){
+					 Log.e(TAG, orderType + "type and length" + orders.size());
+					 allOrderUtil.viewCtrl(orders, orderType);
+				 }
 			 }
 			// Toast.makeText(context, "�ɹ�", Toast.LENGTH_SHORT).show();
 			if(isFirstOpen){

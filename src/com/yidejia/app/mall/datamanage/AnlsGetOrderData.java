@@ -176,6 +176,7 @@ public class AnlsGetOrderData {
 	 */
 	public ArrayList<Order> analysisGetListJson(String httpResultString)
 			throws JSONException {
+		ArrayList<Order> orders = new ArrayList<Order>();
 		JSONObject httpJsonObject = new JSONObject(httpResultString);
 		int code = httpJsonObject.getInt("code");
 		if (code == 1) {
@@ -198,7 +199,12 @@ public class AnlsGetOrderData {
 				String goods_ascore = itemObject.getString("goods_ascore");
 				itemOrder.setCore(goods_ascore);
 				String goods_acash = itemObject.getString("goods_acash");
-				itemOrder.setOrderSummary(Float.parseFloat(goods_acash));
+				try {
+					itemOrder.setOrderSummary(Float.parseFloat(goods_acash));
+				} catch (Exception e) {
+					// TODO: handle exception
+					itemOrder.setOrderSummary(0.0F);
+				}
 				String ship_fee = itemObject.getString("ship_fee");
 				itemOrder.setShipFee(ship_fee);
 				String lines = itemObject.getString("lines");

@@ -174,11 +174,13 @@ public class OrdersUtil {
 						mOrderType, mOrder.getOrderCode(),
 						allOrderDetail.map.get("price") + "", mOrder
 								.getCartsArray(), layout1, titleTextView, mOkBtn));
+				
+				mOkBtn.setOnClickListener(new OkClickListener(mOrderType, mOrder.getOrderCode(), mOrder.getDate()));
 			} else if(mOrderType == 3){//左边退换货
 //				mCancelBtn.setText(setCancelBtnText(mOrderType));
 				mCancelBtn.setOnClickListener(new CancelClickListener(mOrderType, mOrder.getOrderCode(), mOrder.getDate()));
 			} else {
-//				mCancelBtn.setVisibility(View.GONE);
+				mCancelBtn.setVisibility(View.GONE);
 				if(mOrderType == -1){
 					mOkBtn.setVisibility(View.GONE);
 				}
@@ -413,6 +415,20 @@ public class OrdersUtil {
 			this.layout1 = layout1;
 		}
 		
+		private String orderDate;
+		
+		/**
+		 * 右边按钮退换货点击事件
+		 * @param mOrderType 只能是2
+		 * @param orderCode 订单号
+		 * @param orderDate 订单时间
+		 */
+		public OkClickListener(int mOrderType, String orderCode, String orderDate){
+			this.mOrderType = mOrderType;
+			this.orderCode = orderCode;
+			this.orderDate = orderDate;
+		}
+		
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
@@ -430,6 +446,9 @@ public class OrdersUtil {
 				detailIntent.putExtras(detailBundle);
 				detailIntent.putExtra("carts", carts);//mOrder.getCartsArray()
 				context.startActivity(detailIntent);
+				break;
+			case 2://退货
+				go2Return(orderCode, orderDate);
 				break;
 			case 3://查看物流
 				break;
@@ -605,6 +624,7 @@ public class OrdersUtil {
 		Bundle bundle = new Bundle();
 		bundle.putString("orderCode", orderCode);
 		bundle.putString("orderDate", orderDate);
+		retIintent.putExtras(bundle);
 		context.startActivity(retIintent);
 		
 	}
