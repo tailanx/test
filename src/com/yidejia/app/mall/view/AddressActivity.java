@@ -103,12 +103,14 @@ public class AddressActivity extends SherlockActivity {
 		listView = (ListView) findViewById(R.id.address_management_listview);
 		layout = (LinearLayout) findViewById(R.id.address_management_relative2);
 		addressDataManage = new AddressDataManage(AddressActivity.this);
+		
 		myApplication = (MyApplication) getApplication();
 		mAddresses = addressDataManage.getAddressesArray(
 				myApplication.getUserId(), fromIndex, acount);
 		adapter = new AddressAdapter(AddressActivity.this, mAddresses);
 		listView.setAdapter(adapter);
-		Utility.setListViewHeightBasedOnChildren(listView);
+//		Utility.setListViewHeightBasedOnChildren(listView);
+		
 		listView.setOnItemClickListener(listItemClickListener);
 	}
 
@@ -169,9 +171,9 @@ public class AddressActivity extends SherlockActivity {
 		Log.e(TAG, titleTextView.getText().toString());
 	}
 
-	public void updateView(ArrayList<Addresses> musics) {
-		adapter.changeData(musics);
-	}
+//	public void updateView(ArrayList<Addresses> musics) {
+//		adapter.changeData(musics);
+//	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -190,9 +192,9 @@ public class AddressActivity extends SherlockActivity {
 					// adapter.mAddresses =
 					// addressDataManage1.getAddressesArray(myApplication.getUserId(),
 					// fromIndex, acount);
-					Utility.setListViewHeightBasedOnChildren(listView);
-					// listView.setAdapter(adapter);
 					adapter.notifyDataSetChanged();
+//										Utility.setListViewHeightBasedOnChildren(listView);
+					listView.setAdapter(adapter);
 					// new AddressUtil(AddressActivity.this,
 					// layout).addAddresses(data);
 					// layout.invalidate();

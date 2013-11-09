@@ -143,11 +143,8 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 							Toast.makeText(ExchangeFreeActivity.this,
 									getResources().getString(R.string.my_voucher),
 									Toast.LENGTH_SHORT).show();
-							Toast.makeText(
-									ExchangeFreeActivity.this,
-									getResources().getString(R.string.show_voucher)
-											+ voucher, Toast.LENGTH_SHORT).show();
-							return;
+						
+//							return;
 						} else if (sum1 <= voucher) {// && isSelelct1 == 0.0
 							for (int i = 0; i < cart.size(); i++) {
 								HashMap<String, Object> map1 = cart.get(i);
@@ -172,24 +169,13 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 								// }
 								boolean isExsist = false;
 								if (isSelelct1 == 0.0) {
-//									for(int j=0;i<mArrayList.size();j++){
-//										Cart  cartList = mArrayList.get(j);
-//										if(cartList.getUId().equals(cart.getUId())){
-//											cartList.setSalledAmmount(cartList.getAmount()+cart.getAmount());
-//											isExsist = true;
-//											break;
-//										}
-		//
-//									}
-//									if(!isExsist)mArrayList.add(cart);
+					
 									mArrayList.add(cart);
 									voucher = (int) (voucher - sum1);
 								}
 							}
 							Log.i("info", voucher+"   vouche1r");
-							// Cart cart1 = new
-							// FreeGivingAdapter(ExchangeFreeActivity.this,
-							// CstmPayActivity.arrayListFree).getCart();
+							
 							Cart cart1 = FreeGivingAdapter.carts;
 							if (cart1.getUId() != null) {
 								Log.i("info", mArrayList.size()+"   mArrayList");

@@ -103,6 +103,7 @@ public class CstmPayActivity extends SherlockActivity {
 	private LinearLayout layout;
 	public static ArrayList<Cart> cartList;
 	private float jifen = 0;
+	public static String voucherString1;//积分
 
 	private static final String SERVER_URL = "http://202.104.148.76/splugin/interface";
 	private static final String TRADE_COMMAND = "1001";
@@ -417,8 +418,9 @@ public class CstmPayActivity extends SherlockActivity {
 //				ArrayList<Cart> carts;
 //				
 //							
-				String voucherString1 = voucherDataManage.getUserVoucherForPay(myApplication.getUserId(), myApplication.getToken(), true);
-//				voucher = Float.parseFloat(voucherString1);
+				 voucherString1 = voucherDataManage.getUserVoucherForPay(myApplication.getUserId(), myApplication.getToken(), true);
+
+				 //				voucher = Float.parseFloat(voucherString1);
 				if("".equals(voucherString1) || null == voucherString1) voucher = 0;
 				else voucher = Float.parseFloat(voucherString1);
 				Log.e(TAG, voucherString1+ ":voucher and is cartact" + isCartActivity);

@@ -34,6 +34,7 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.VoucherDataManage;
 import com.yidejia.app.mall.model.Specials;
+import com.yidejia.app.mall.view.CstmPayActivity;
 
 public class ExchangeAdapter extends BaseAdapter {
 	private Activity activity;
@@ -52,8 +53,13 @@ public class ExchangeAdapter extends BaseAdapter {
 		this.inflater = LayoutInflater.from(context);
 		voucherDataManage = new VoucherDataManage(context);
 		myApplication = (MyApplication) activity.getApplication();
-		userVoucher = Double.parseDouble(voucherDataManage.getUserVoucher(
-				myApplication.getUserId(), myApplication.getToken()));
+		
+		Log.e("voucher",CstmPayActivity.voucherString1+"");
+		userVoucher = Double.parseDouble(CstmPayActivity.voucherString1);//用户的积分
+		
+//		userVoucher = Double.parseDouble(voucherDataManage.getUserVoucher(
+//				myApplication.getUserId(), myApplication.getToken()));
+		
 		options = new DisplayImageOptions.Builder()
 				.showStubImage(R.drawable.image_bg)
 				.showImageOnFail(R.drawable.image_bg)
@@ -170,16 +176,16 @@ public class ExchangeAdapter extends BaseAdapter {
 				}
 				HashMap<String, Object> hashmap ;
 				Double sum = 0.00;
-				if (msg.what == 115) {
-					for(int i=0;i<mlist2.size();i++){
-						 hashmap  = mlist2.get(i);
-						sum =  Double.parseDouble((String) hashmap.get("price"));
-						sum += sum;
-						if(userVoucher<sum){
-							Toast.makeText(activity, "亲，您的积分不够", Toast.LENGTH_SHORT).show();
-						}
-					}
-				}
+//				if (msg.what == 115) {
+//					for(int i=0;i<mlist2.size();i++){
+//						 hashmap  = mlist2.get(i);
+//						sum =  Double.parseDouble((String) hashmap.get("price"));
+//						sum += sum;
+//						if(userVoucher<sum){
+//							Toast.makeText(activity, "亲，您的积分不够", Toast.LENGTH_SHORT).show();
+//						}
+//					}
+//				}
 			};
 		};
 		Specials s = mlist.get(postion);
@@ -206,9 +212,9 @@ public class ExchangeAdapter extends BaseAdapter {
 					map.put("isCheck", (float) 1);
 					map1.put("isCheck1", (float) 1);
 				}
-				Message ms = new Message();
-				ms.what = 115;
-				handler.sendMessage(ms);
+//				Message ms = new Message();
+//				ms.what = 115;
+//				handler.sendMessage(ms);
 			}
 
 		});
