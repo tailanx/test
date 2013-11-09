@@ -1,5 +1,10 @@
 package com.yidejia.app.mall.fragment;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -9,28 +14,30 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.datamanage.AnlsGetOrderData;
+import com.yidejia.app.mall.model.Order;
+import com.yidejia.app.mall.net.ConnectionDetector;
+import com.yidejia.app.mall.net.order.GetOrderList;
 import com.yidejia.app.mall.util.AllOrderUtil;
+import com.yidejia.app.mall.util.OrdersUtil;
 
 public class AllOrderFragment extends SherlockFragment {
-	// private TextView titleTextView;//订单的状态
-	// private TextView numberTextView;//订单的编号
-	// private TextView sumPrice;//订单的总价格
-	// private TextView countTextView;//订单的总数目
-	// private LinearLayout mLayout;//外层的布局
-	// private View view;
-	// private OrderDataManage orderDataManage ;//用来获取订单数据
 
 	private int orderTimeType;
 	private int orderType;
-	private String defaultHello = "default hello";
+	private String TAG = AllOrderFragment.class.getName();
 	private PullToRefreshScrollView mPullToRefreshScrollView;// 刷新
 	private LinearLayout relativeLayout;
+	private MyApplication myApplication;
+	private TaskGetOrder taskGetOrder;
 
 	/**
 	 * 实例化对象
@@ -41,18 +48,6 @@ public class AllOrderFragment extends SherlockFragment {
 		AllOrderUtil allOrderUtil = new AllOrderUtil(getSherlockActivity(),
 				relativeLayout);
 		allOrderUtil.loadView(orderTimeType, orderType, fromIndex, amount);
-
-		// mLayout = (LinearLayout)
-		// view.findViewById(R.id.all_order_item_main_scrollView_linearlayout1);
-		// orderDataManage = new OrderDataManage(getSherlockActivity());
-		// titleTextView =
-		// (TextView)view.findViewById(R.id.all_order_item_main_item_detail);
-		// numberTextView =
-		// (TextView)view.findViewById(R.id.all_order_item_main_item_number);
-		// sumPrice =
-		// (TextView)view.findViewById(R.id.all_order_item_main_sum_money_deatil);
-		// countTextView =
-		// (TextView)view.findViewById(R.id.all_order_item_main_item_textview7);
 	}
 
 	// 通过单例模式，构建对象
@@ -79,6 +74,7 @@ public class AllOrderFragment extends SherlockFragment {
 		Bundle args = getArguments();
 		orderTimeType = args != null ? args.getInt("orderTimeType") : 0;
 		orderType = args != null ? args.getInt("orderType") : 0;
+		myApplication = (MyApplication) getSherlockActivity().getApplication();
 	}
 
 	private int fromIndex = 0;
@@ -87,6 +83,10 @@ public class AllOrderFragment extends SherlockFragment {
 		// 下拉刷新
 		@Override
 		public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+			if(!ConnectionDetector.isConnectingToInternet(getSherlockActivity())) {
+				Toast.makeText(getSherlockActivity(), getSherlockActivity().getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+				return;
+			}
 			String label = getResources().getString(R.string.update_time)
 					+ DateUtils.formatDateTime(getSherlockActivity(),
 							System.currentTimeMillis(),
@@ -95,16 +95,25 @@ public class AllOrderFragment extends SherlockFragment {
 									| DateUtils.FORMAT_SHOW_TIME);
 			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 			fromIndex = 0;//刷新的index要改为0
-			relativeLayout.removeAllViews();//清空数据
-			setupShow();
-			mPullToRefreshScrollView.onRefreshComplete();
-
+//			relativeLayout.removeAllViews();//清空数据
+//			setupShow();
+//			isFirstOpen = true;//刷新时改变状态用来显示bar
+//			mPullToRefreshScrollView.onRefreshComplete();
+			if(taskGetOrder != null && taskGetOrder.getStatus() == AsyncTask.Status.RUNNING){
+				taskGetOrder.cancel(true);
+			}
+			taskGetOrder = new TaskGetOrder();
+			taskGetOrder.execute();
 		}
 
 		// 上拉加载
 		@Override
 		public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
 			// TODO Auto-generated method stub
+			if(!ConnectionDetector.isConnectingToInternet(getSherlockActivity())) {
+				Toast.makeText(getSherlockActivity(), getSherlockActivity().getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+				return;
+			}
 			String label = getResources().getString(R.string.update_time)
 					+ DateUtils.formatDateTime(getSherlockActivity(),
 							System.currentTimeMillis(),
@@ -113,9 +122,13 @@ public class AllOrderFragment extends SherlockFragment {
 									| DateUtils.FORMAT_SHOW_TIME);
 			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 			fromIndex += amount;
-			setupShow();
-			mPullToRefreshScrollView.onRefreshComplete();
-
+//			setupShow();
+//			mPullToRefreshScrollView.onRefreshComplete();
+			if(taskGetOrder != null && taskGetOrder.getStatus() == AsyncTask.Status.RUNNING){
+				taskGetOrder.cancel(true);
+			}
+			taskGetOrder = new TaskGetOrder();
+			taskGetOrder.execute();
 		}
 	};
 
@@ -136,39 +149,6 @@ public class AllOrderFragment extends SherlockFragment {
 								| DateUtils.FORMAT_SHOW_DATE
 								| DateUtils.FORMAT_SHOW_DATE);
 		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-		// Log.i("info", allOrderUtil+"");
-//		setupShow();//初始化
-		// getData();
-
-		// View produce = inflater.inflate(R.layout.all_order_item_produce,
-		// null);//产品详细
-		// View produce1 = inflater.inflate(R.layout.all_order_item_produce,
-		// null);//产品详细
-		//
-		// relativeLayout.addView(produce);
-		// relativeLayout.addView(produce1);
-		//
-		// produce1.setOnClickListener(new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View arg0) {
-		// Intent intent = new
-		// Intent(getSherlockActivity(),OrderDetailActivity.class);
-		//
-		// startActivity(intent);
-		// }
-		// });
-		// //添加监听
-		// produce.setOnClickListener(new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View arg0) {
-		// Intent intent = new
-		// Intent(getSherlockActivity(),OrderDetailActivity.class);
-		//
-		// startActivity(intent);
-		// }
-		// });
 		return view;
 	}
 
@@ -176,7 +156,18 @@ public class AllOrderFragment extends SherlockFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		setupShow();
+//		setupShow();
+//		mPullToRefreshScrollView.setPullToRefreshEnabled(true);
+//		mPullToRefreshScrollView.setRefreshing();
+		if(!ConnectionDetector.isConnectingToInternet(getSherlockActivity())) {
+			Toast.makeText(getSherlockActivity(), getSherlockActivity().getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+			return;
+		}
+		if(taskGetOrder != null && taskGetOrder.getStatus() == AsyncTask.Status.RUNNING){
+			taskGetOrder.cancel(true);
+		}
+		taskGetOrder = new TaskGetOrder();
+		taskGetOrder.execute();
 	}
 
 	@Override
@@ -190,7 +181,82 @@ public class AllOrderFragment extends SherlockFragment {
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
+		if(taskGetOrder != null && taskGetOrder.getStatus() == AsyncTask.Status.RUNNING){
+			taskGetOrder.cancel(true);
+		}
+		if(allOrderUtil != null)
+			allOrderUtil.cancelTask();
 	}
+	
+	private boolean isFirstOpen = true;//是否为第一次进入该页面
+	private ArrayList<Order> orders;
+	private OrdersUtil allOrderUtil;
+	
+	private class TaskGetOrder extends AsyncTask<Void, Void, Boolean>{
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			if(isFirstOpen){
+				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(context.getResources().getString(R.string.searching));
+				bar.show();
+			}
+		}
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			GetOrderList getList = new GetOrderList(getSherlockActivity());
+			try {
+				AllOrderUtil util = new AllOrderUtil();
+				
+//				String httpResultString = getList.getHttpResponse(userId,
+//						code, the_day, status, offset, limit, token);
+				String httpResultString = getList.getHttpResponse(myApplication.getUserId(), "",
+						String.valueOf(util.getOrderTime(orderTimeType)),
+						util.getOrderTpye(orderType), fromIndex + "", amount + "",
+						myApplication.getToken());
+				AnlsGetOrderData task = new AnlsGetOrderData(getSherlockActivity(), relativeLayout, orderType);
+				orders = task.analysisGetListJson(httpResultString);
+				return true;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Log.e(TAG, "task getlist ioex");
+				return false;
+			} catch (NumberFormatException e) {
+				// TODO: handle exception
+				// Toast.makeText(context, "�������", Toast.LENGTH_SHORT).show();
+				return true;
+			} catch (Exception e) {
+				// TODO: handle exception
+				Log.e(TAG, "task getlist other ex");
+				return false;
+			}
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			 if(result){
+				 if(fromIndex == 0) relativeLayout.removeAllViews();//清空数据
+				 allOrderUtil = new OrdersUtil(getSherlockActivity(), relativeLayout);
+				 allOrderUtil.viewCtrl(orders, orderType);
+			 }
+			// Toast.makeText(context, "�ɹ�", Toast.LENGTH_SHORT).show();
+			if(isFirstOpen){
+				bar.dismiss();
+				isFirstOpen = false;
+			} else {
+				mPullToRefreshScrollView.onRefreshComplete();
+			}
+		}
+
+		private ProgressDialog bar = new ProgressDialog(getSherlockActivity());
+	}
+//	}
 	// /**
 	// * 用来展示数据的
 	// */
