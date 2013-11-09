@@ -77,6 +77,50 @@ public class VoucherDataManage {
 		return voucherNum;
 	};
 	
+	private boolean isFromPay = false;
+	
+	/**
+	 * 获取用户积分
+	 * @param userid 用户id
+	 * @return
+	 */
+	public String getUserVoucherForPay(String userid, String token, boolean isFromPay){
+		this.id = userid;
+		this.token = token;
+		this.isFromPay = isFromPay;
+		
+		if(!ConnectionDetector.isConnectingToInternet(activity)) {
+			Toast.makeText(activity, activity.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+			return voucherNum;
+		}
+//		if(taskVoucher != null && AsyncTask.Status.RUNNING == taskVoucher.getStatus()){
+//			taskVoucher.cancel(true);
+//		}
+		taskVoucher = new TaskVoucher();
+//		taskVoucher.execute();
+		
+		boolean state = false;
+		try {
+			state = taskVoucher.execute().get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			Log.e(TAG, "task voucher InterruptedException");
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			Log.e(TAG, "task voucher ExecutionException");
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			Toast.makeText(activity, activity.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
+		}
+		if(!state){
+			
+		}
+		return voucherNum;
+	};
+	
 	private class TaskVoucher extends AsyncTask<Void, Void, Boolean>{
 		
 		private ProgressDialog bar;
@@ -121,7 +165,7 @@ public class VoucherDataManage {
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			if(result){
+			if(result && !isFromPay){
 				TextView jiFen = (TextView) activity.findViewById(R.id.jiefen);
 				if(voucherNum==null||"".equals(voucherNum)){
 					jiFen.setText("0");

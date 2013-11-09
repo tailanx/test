@@ -417,11 +417,11 @@ public class CstmPayActivity extends SherlockActivity {
 //				ArrayList<Cart> carts;
 //				
 //							
-				voucher = Float.parseFloat(voucherDataManage.getUserVoucher(myApplication.getUserId(), myApplication.getToken()));
-				String voucherString1 = voucherDataManage.getUserVoucher(myApplication.getUserId(), myApplication.getToken());
+				String voucherString1 = voucherDataManage.getUserVoucherForPay(myApplication.getUserId(), myApplication.getToken(), true);
+//				voucher = Float.parseFloat(voucherString1);
 				if("".equals(voucherString1) || null == voucherString1) voucher = 0;
 				else voucher = Float.parseFloat(voucherString1);
-				
+				Log.e(TAG, voucherString1+ ":voucher and is cartact" + isCartActivity);
 				if (carts.isEmpty()) return;
 				StringBuffer sb = new StringBuffer();
 				if("".equals(carts)){
@@ -450,10 +450,10 @@ public class CstmPayActivity extends SherlockActivity {
 					if(voucher > 0||maxPay>fP){
 						Log.i("info", voucher+"   voucher");
 						Log.i("info", maxPay+"   maxPay");
-					dialog.show();
+						dialog.show();
 
-
-					show(carts,false);//sum, 
+//
+//					show(carts,false);//sum, 
 
 //				} else if (isCartActivity.equals("E")) {
 //					voucher = intent.getIntExtra("voucher", -1);
