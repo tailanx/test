@@ -132,7 +132,7 @@ public class TaskDelOrder {
 			String response = httpObject.getString("response");
 			if(code == 1){
 				JSONObject respObject = new JSONObject(response);
-				String result = respObject.getString("");
+				String result = respObject.getString("@p_result");
 				if("success删除成功".equals(result)){
 					return true;
 				}
