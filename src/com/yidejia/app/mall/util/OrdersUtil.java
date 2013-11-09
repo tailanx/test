@@ -27,12 +27,14 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.datamanage.TaskDelOrder;
+import com.yidejia.app.mall.model.Brand;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.order.CancelOrder;
 import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.view.OrderDetailActivity;
+import com.yidejia.app.mall.view.ReturnActivity;
 
 public class OrdersUtil {
 	private Context context;
@@ -110,6 +112,7 @@ public class OrdersUtil {
 	
 	public void viewCtrl(ArrayList<Order> mList, int orderType){
 		this.orderType = orderType;
+		if(mList.isEmpty()) return;
 		for (int i = 0; i < mList.size(); i++) {
 			
 			final View view = inflater.inflate(R.layout.all_order_item_item, null);
@@ -131,47 +134,65 @@ public class OrdersUtil {
 			
 			
 			final Order mOrder = mList.get(i);
-			titleTextView.setText(mOrder.getStatus());
-			numberTextView.setText(mOrder.getOrderCode());
+			titleTextView.setText(mOrder.getStatus());//设置状态
+			numberTextView.setText(mOrder.getOrderCode());//设置订单号
 			
-			int mOrderType = getOrderTypeCode(mOrder.getStatus());
-			mOkBtn.setText(setOkBtnText(mOrderType));
-			if(mOrderType == 1 || mOrderType == 2) 
-				mCancelBtn.setText(setCancelBtnText(mOrderType));
-			else {
-				mCancelBtn.setVisibility(View.GONE);
-				if(mOrderType == -1){
-					mOkBtn.setVisibility(View.GONE);
-				}
-			}
+			int mOrderType = getOrderTypeCode(mOrder.getStatus());//根据订单状态获取订单类型
+			
+//			if(mOrderType == 1 || mOrderType == 2 || mOrderType == 3) 
+//				mCancelBtn.setText(setCancelBtnText(mOrderType));
+//			else {
+//				mCancelBtn.setVisibility(View.GONE);
+//				if(mOrderType == -1){
+//					mOkBtn.setVisibility(View.GONE);
+//				}
+//			}
 
 			final AllOrderDetail allOrderDetail = new AllOrderDetail(
 					context, mOrder, mLayout);
 			allOrderDetail.addView();// ������Ʒ
 			for (int j = 0; j < allOrderDetail.map.size(); j++) {
 
-				sumPrice.setText(allOrderDetail.map.get("price") + "");
+				sumPrice.setText(allOrderDetail.map.get("price") + "");//设置订单总价格
+				//设置订单商品总数
 				countTextView.setText(allOrderDetail.map.get("count")
 						.intValue() + "");
 			}
-			if (mOrderType == 1) {//
+			
+			mOkBtn.setText(setOkBtnText(mOrderType));//设置右边按钮的显示
+			mCancelBtn.setText(setCancelBtnText(mOrderType));//设置左边按钮的显示
+			if (mOrderType == 1) {//左边取消
+				
 				mCancelBtn.setOnClickListener(new CancelClickListener(
 						mOrderType, mOrder.getOrderCode(),
 						allOrderDetail.map.get("price") + "", mOrder
 								.getCartsArray(), layout1, titleTextView,
 						mOkBtn));
-			} else if (mOrderType == 2) {
+			} else if (mOrderType == 2) {//左边查看
+//				mCancelBtn.setText(setCancelBtnText(mOrderType));
 				mCancelBtn.setOnClickListener(new CancelClickListener(
 						mOrderType, mOrder.getOrderCode(),
 						allOrderDetail.map.get("price") + "", mOrder
 								.getCartsArray(), layout1, titleTextView, mOkBtn));
+			} else if(mOrderType == 3){//左边退换货
+//				mCancelBtn.setText(setCancelBtnText(mOrderType));
+				mCancelBtn.setOnClickListener(new CancelClickListener(mOrderType, mOrder.getOrderCode(), mOrder.getDate()));
+			} else {
+//				mCancelBtn.setVisibility(View.GONE);
+				if(mOrderType == -1){
+					mOkBtn.setVisibility(View.GONE);
+				}
 			}
+			
+			
 			if (mOrderType == 5) {//删除按钮
 				mOkBtn.setOnClickListener(new OkClickListener(mOrderType,
 						mOrder.getOrderCode(), myApplication.getUserId(),
 						myApplication.getToken(), layout1));
 			} else{
-				mOkBtn.setOnClickListener(new OkClickListener(mOrderType, mOrder.getOrderCode(), allOrderDetail.map.get("price") + "", mOrder.getCartsArray()));
+				mOkBtn.setOnClickListener(new OkClickListener(mOrderType,
+						mOrder.getOrderCode(), allOrderDetail.map.get("price")
+								+ "", mOrder.getCartsArray(), mOrder.getTn()));
 			}
 			
 			mLayout.setOnClickListener(new OnClickListener() {
@@ -278,7 +299,7 @@ public class OrdersUtil {
 			text = "付款";
 			break;
 		case 2:
-			text = "催货";
+			text = "退换货";
 			break;
 		case 3:
 			text = "查看物流";
@@ -314,6 +335,7 @@ public class OrdersUtil {
 			text = "查看";
 			break;
 		case 3:
+			text = "退换货";
 			break;
 		case 4:
 			break;
@@ -353,6 +375,7 @@ public class OrdersUtil {
 		private String orderPrice;
 		private String orderCode;
 		private ArrayList<Cart> carts;
+		private String orderTn;
 		
 		private String userId;
 		private String token;
@@ -364,12 +387,14 @@ public class OrdersUtil {
 		 * @param OrderCode 订单号
 		 * @param OrderPrice 订单价格
 		 * @param carts 订单商品数据
+		 * @param orderTn 流水号
 		 */
-		public OkClickListener(int mOrderType, String OrderCode, String OrderPrice, ArrayList<Cart> carts){
+		public OkClickListener(int mOrderType, String OrderCode, String OrderPrice, ArrayList<Cart> carts, String orderTn){
 			this.orderCode = OrderCode;
 			this.orderPrice = OrderPrice;
 			this.carts = carts;
 			this.mOrderType = mOrderType;
+			this.orderTn = orderTn;
 		}
 		
 		/**
@@ -393,18 +418,25 @@ public class OrdersUtil {
 			// TODO Auto-generated method stub
 			Log.i(OrdersUtil.class.getName(), "orderType:" + mOrderType);
 			switch (mOrderType) {
-			case 1:
+			case 1://支付
+				if(carts.isEmpty()) break;
 				Intent detailIntent = new Intent(context,
 						OrderDetailActivity.class);
 
 				Bundle detailBundle = new Bundle();
 				detailBundle.putString("OrderCode", orderCode);//mOrder.getOrderCode()
 				detailBundle.putString("OrderPrice", orderPrice);//allOrderDetail.map.get("price") + ""
+				detailBundle.putString("OrderTn", orderTn);
 				detailIntent.putExtras(detailBundle);
 				detailIntent.putExtra("carts", carts);//mOrder.getCartsArray()
 				context.startActivity(detailIntent);
 				break;
-			case 5:
+			case 3://查看物流
+				break;
+			case 4://评价
+				
+				break;
+			case 5://删除
 //				Intent delIntent = new Intent(context,
 //						OrderDetailActivity.class);
 //				
@@ -488,6 +520,20 @@ public class OrdersUtil {
 //			this.mOrderType = mOrderType;
 //			this.carts = carts;
 //		}
+		
+		
+		private String orderDate;//下订单时间
+		/**
+		 * 退换货用
+		 * @param mOrderType 只能是3，代表退换货
+		 * @param orderCode 订单号
+		 * @param orderDate 下订单时间
+		 */
+		public CancelClickListener(int mOrderType, String orderCode, String orderDate){
+			this.mOrderType = mOrderType;
+			this.orderCode = orderCode;
+			this.orderDate = orderDate;
+		}
 
 		@Override
 		public void onClick(View v) {
@@ -539,6 +585,10 @@ public class OrdersUtil {
 				if(carts.isEmpty() || "".equals(orderPrice) || null == orderPrice)break;
 				go2OrderDetail(orderCode, orderPrice, carts);
 				break;
+				
+			case 3:
+				go2Return(orderCode, orderDate);
+				break;
 			default:
 				break;
 			}
@@ -546,7 +596,18 @@ public class OrdersUtil {
 		
 	}
 	
-	
+	/**
+	 * 跳转到退换货
+	 * @param orderCode 订单号
+	 */
+	private void go2Return(String orderCode, String orderDate){
+		Intent retIintent = new Intent(context, ReturnActivity.class);
+		Bundle bundle = new Bundle();
+		bundle.putString("orderCode", orderCode);
+		bundle.putString("orderDate", orderDate);
+		context.startActivity(retIintent);
+		
+	}
 	
 	/**
 	 * 跳转到订单详情

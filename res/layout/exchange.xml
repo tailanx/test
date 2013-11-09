@@ -49,7 +49,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/exchange_biaohao"
-                    android:text="d20012345200023"
                     android:textSize="15sp" />
 
                 <TextView
@@ -69,7 +68,6 @@
                     android:layout_below="@id/exchange_biaohao"
                     android:layout_marginTop="4dp"
                     android:layout_toRightOf="@id/exchange_time"
-                    android:text="2013-08-2414:09:55:03"
                     android:textSize="15sp" />
             </RelativeLayout>
 
@@ -132,7 +130,8 @@
                         android:text="退货原因："
                         android:textSize="16sp" />
 
-                    <Spinner
+                    <Spinner 
+                        android:id="@+id/exchange_spinner"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"

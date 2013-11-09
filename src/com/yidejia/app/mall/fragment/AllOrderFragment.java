@@ -227,10 +227,12 @@ public class AllOrderFragment extends SherlockFragment {
 				return false;
 			} catch (NumberFormatException e) {
 				// TODO: handle exception
+				e.printStackTrace();
 				// Toast.makeText(context, "�������", Toast.LENGTH_SHORT).show();
 				return true;
 			} catch (Exception e) {
 				// TODO: handle exception
+				e.printStackTrace();
 				Log.e(TAG, "task getlist other ex");
 				return false;
 			}

@@ -8,12 +8,12 @@
 extern "C" {
 #endif
 
-//static const char *url = "http://192.168.1.254:802/";
-static const char *url = "http://fw1.atido.net/";
+static const char *url = "http://192.168.1.254:802/";
+const char *strTemp = "ChunTianfw_mobile123456";
+//static const char *url = "http://fw1.atido.net/";
+//const char *strTemp = "ChunTianfw_mobile@SDF!TD#DF#*CB$GER@";
 
 const char *pHead = "&key=fw_mobile&format=array&ts=";
-const char *strTemp = "ChunTianfw_mobile@SDF!TD#DF#*CB$GER@";
-//const char *strTemp = "ChunTianfw_mobile123456";
 
 #define LEN 1024
 
@@ -2232,6 +2232,79 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ChangeRead(JNIEnv* env
 	addString(urlString, "&sign=");
 	addString(encrypt, strTemp);
 	addString(encrypt, "ucenter.message.changeRead");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
+
+//�����Ϣδ�Ѷ�״̬ ����pid, userid ,post
+jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetReturn(JNIEnv* env,
+		jobject thiz, jstring userid, jstring order_code,
+		jstring the_date, jstring contact, jstring phone, jstring cause, jstring desc, jstring token){//
+
+	const char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
+	const char *chorder_code = (*env)->GetStringUTFChars(env, order_code, NULL);
+	const char *chthe_date = (*env)->GetStringUTFChars(env, the_date, NULL);
+	const char *chcontact = (*env)->GetStringUTFChars(env, contact, NULL);
+	const char *chphone = (*env)->GetStringUTFChars(env, phone, NULL);
+	const char *chcause = (*env)->GetStringUTFChars(env, cause, NULL);
+	const char *chdesc = (*env)->GetStringUTFChars(env, desc, NULL);
+	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+//	memset(encrypt, 0, LEN * sizeof(char));
+
+	const char *api="api=ucenter.returnorder.save";
+
+//	addString(urlString, url);
+	addString(urlString, api);
+
+	addString(urlString, "&user_id=");
+	if(chuid != NULL)addString(urlString, chuid);
+	addString(urlString, "&order_code=");
+	if(chorder_code != NULL)addString(urlString, chorder_code);
+	addString(urlString, "&the_date=");
+	if(chthe_date != NULL)addString(urlString, chthe_date);
+	addString(urlString, "&contact=");
+	if(chcontact != NULL)addString(urlString, chcontact);
+	addString(urlString, "&contact_manner=");
+	if(chphone != NULL)addString(urlString, chphone);
+	addString(urlString, "&cause=");
+	if(chcause != NULL)addString(urlString, chcause);
+	addString(urlString, "&desc=");
+	if(chdesc != NULL)addString(urlString, chdesc);
+	addString(urlString, "&token=");
+	if(chtoken != NULL)addString(urlString, chtoken);
+
+	addString(urlString, pHead);
+
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
+
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "ucenter.returnorder.save");
 	addString(encrypt, chtime);
 
 	MD5_CTX md5;

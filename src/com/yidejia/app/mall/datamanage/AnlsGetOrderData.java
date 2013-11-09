@@ -203,6 +203,7 @@ public class AnlsGetOrderData {
 				itemOrder.setShipFee(ship_fee);
 				String lines = itemObject.getString("lines");
 				itemOrder.setCartsArray(analysisCart(lines));
+				itemOrder.setTn(itemObject.getString("tn"));
 				orders.add(itemOrder);
 			}
 		} else if(code == -1){
