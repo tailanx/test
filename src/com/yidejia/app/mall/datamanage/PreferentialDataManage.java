@@ -202,6 +202,8 @@ public class PreferentialDataManage {
 						freeProductArray.add(specials);
 					} else if("3".equals(activeId)){
 						scoresProductArray.add(specials);
+					} else if("27".equals(activeId)){
+						scoresProductArray.add(specials);
 					}
 				}
 			}
