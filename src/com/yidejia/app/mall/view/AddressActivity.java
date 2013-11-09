@@ -24,7 +24,6 @@ import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.util.AddressUtil;
 import com.yidejia.app.mall.util.DefinalDate;
 import com.yidejia.app.mall.util.Utility;
-import com.yidejia.app.mall.view.AddressAdapter.ViewHolder;
 
 public class AddressActivity extends SherlockActivity {
 
@@ -118,15 +117,15 @@ public class AddressActivity extends SherlockActivity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-
-			// // 取得ViewHolder对象，这样就省去了通过层层的findViewById去实例化我们需要的cb实例的步骤
-			ViewHolder viewHolder = (ViewHolder) view.getTag();
-//			if (viewHolder.cb.isChecked()) {
-//				Log.i("info", viewHolder.cb.isChecked()+"    viewHolder");
-//				return;
-//			} else {
-//				Log.i("info", viewHolder.cb.isChecked()+"    viewHolder11");
-				viewHolder.cb.toggle();// 把CheckBox的选中状态改为当前状态的反,gridview确保是单一选中
+//
+//			// // 取得ViewHolder对象，这样就省去了通过层层的findViewById去实例化我们需要的cb实例的步骤
+//			ViewHolder viewHolder = (ViewHolder) view.getTag();
+////			if (viewHolder.cb.isChecked()) {
+////				Log.i("info", viewHolder.cb.isChecked()+"    viewHolder");
+////				return;
+////			} else {
+////				Log.i("info", viewHolder.cb.isChecked()+"    viewHolder11");
+//				viewHolder.cb.toggle();// 把CheckBox的选中状态改为当前状态的反,gridview确保是单一选中
 		}
 	};
 

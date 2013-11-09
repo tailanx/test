@@ -58,6 +58,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 	private LinearLayout layout ;
 	public static float sum ;
 	private InnerReceiver receiver;
+	private int sumCart;
 	@Override
 		protected void onDestroy() {
 			// TODO Auto-generated method stub
@@ -65,13 +66,31 @@ public class GoCartActivity extends SherlockActivity {// implements
 			unregisterReceiver(receiver);
 		}
 	@Override
+		protected void onStart() {
+			// TODO Auto-generated method stub
+			super.onStart();
+		}
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.shopping_cart);
 		myApplication = (MyApplication) getApplication();
 		addressManage = new AddressDataManage(GoCartActivity.this);
 		preferentialDataManage = new PreferentialDataManage(GoCartActivity.this);
 		dataManage = new CartsDataManage();
+		sumCart = dataManage.getCartAmount();
+		
+		receiver = new InnerReceiver();
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Consts.BROAD_UPDATE_CHANGE);
+		filter.addAction(Consts.UPDATE_CHANGE);
+		filter.addAction(Consts.DELETE_CART);
+		GoCartActivity.this.registerReceiver(receiver, filter);
+		if(sumCart == 0){
+			Intent intent = new Intent(GoCartActivity.this,NOProduceActivity.class);
+			this.startActivity(intent);
+			this.finish();
+		}else{
+		setContentView(R.layout.shopping_cart);
 		mBox = (CheckBox) findViewById(R.id.shopping_cart_checkbox);// ѡ���
 
 		sumTextView = (TextView) findViewById(R.id.shopping_cart_sum_money);// �ܵ�Ǯ��
@@ -101,12 +120,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 				sumTextView, mBox);
 		cartUtil.AllComment();
 		
-		receiver = new InnerReceiver();
-		IntentFilter filter = new IntentFilter();
-		filter.addAction(Consts.BROAD_UPDATE_CHANGE);
-		filter.addAction(Consts.UPDATE_CHANGE);
-		filter.addAction(Consts.DELETE_CART);
-		GoCartActivity.this.registerReceiver(receiver, filter);
+	
 		
 		mbutton = (Button) findViewById(R.id.actionbar_right);
 		mTextView = (TextView) findViewById(R.id.actionbar_title);
@@ -168,11 +182,12 @@ public class GoCartActivity extends SherlockActivity {// implements
 //					}).create();
 
 	if (mbutton == null) {
-		Toast.makeText(
-				GoCartActivity.this,
-				GoCartActivity.this.getResources().getString(
-						R.string.no_network), Toast.LENGTH_SHORT)
-				.show();
+		Log.e(GoCartActivity.class.getName(), "go cart act btn is null");
+//		Toast.makeText(
+//				GoCartActivity.this,
+//				GoCartActivity.this.getResources().getString(
+//						R.string.no_network), Toast.LENGTH_SHORT)
+//				.show();
 	} else {
 		mbutton.setOnClickListener(new OnClickListener() {
 
@@ -278,6 +293,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 		//
 		//
 		scrollView.addView(layout);
+		}
 	}
 
 	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
@@ -301,16 +317,23 @@ public class GoCartActivity extends SherlockActivity {// implements
 		public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
 			String action = intent.getAction();
+			Intent intent1 = new Intent(GoCartActivity.this, NOProduceActivity.class);
 			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
 				// Log.i("info", action + "action");
 				layout.removeAllViews();
 //				sumTextView.setText(""+0.00);
 //				counTextView.setText(""+0);
+				sumCart = dataManage.getCartAmount();
+				if(sumCart==0){
+					GoCartActivity.this.startActivity(intent1);
+					GoCartActivity.this.finish();
+				}else{
 				CartUtil cartUtil = new CartUtil(GoCartActivity.this, layout,
 						counTextView, sumTextView, mBox);
 				cartUtil.AllComment();
 				sum = Float.parseFloat(sumTextView.getText()
 						.toString());
+				}
 			}else if(Consts.UPDATE_CHANGE.equals(action)){
 				layout.removeAllViews();	
 				CartUtil cartUtil = new CartUtil(GoCartActivity.this, layout,
@@ -320,8 +343,19 @@ public class GoCartActivity extends SherlockActivity {// implements
 						.toString());
 			}else if(Consts.DELETE_CART.equals(action)){
 				layout.removeAllViews();
-				sumTextView.setText(""+0.00);
-				counTextView.setText(""+0);
+//				sumTextView.setText(""+0.00);
+//				counTextView.setText(""+0);
+				sumCart = dataManage.getCartAmount();
+				if(sumCart==0){
+					GoCartActivity.this.startActivity(intent1);
+					GoCartActivity.this.finish();
+				}else{
+				CartUtil cartUtil = new CartUtil(GoCartActivity.this, layout,
+						counTextView, sumTextView, mBox);
+				cartUtil.AllComment();
+				sum = Float.parseFloat(sumTextView.getText()
+						.toString());
+				}
 			}
 		}
 	}

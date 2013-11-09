@@ -7,6 +7,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,6 +37,9 @@ public class AddressAdapter extends BaseAdapter {
 	private int temp = -1;
 	private AlertDialog dialog;
 	private boolean isSelect;// 获取checkbox是否选中状态
+	private SharedPreferences sp;
+	private int oldPostion = -1;
+	
 
 	public AddressAdapter(Activity context, ArrayList<Addresses> mAddresses) {
 		this.mAddresses = mAddresses;
@@ -42,7 +47,10 @@ public class AddressAdapter extends BaseAdapter {
 		dataManage = new AddressDataManage(context);
 		this.activity = context;
 		this.inflater = LayoutInflater.from(context);
-
+		sp = context.getSharedPreferences("aaa",Activity.MODE_PRIVATE);
+		Editor editor = sp.edit();
+		editor.putInt("statePosition", oldPostion);
+		editor.commit();
 	}
 
 	public void setMusics(ArrayList<Addresses> mAddresses) {
@@ -94,7 +102,9 @@ public class AddressAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup arg2) {
 		// TODO Auto-generated method stub
-		ViewHolder holder = null;
+		final ViewHolder holder ;
+		
+		final int lastPosition = sp.getInt("statePosition", -1);
 
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.address_management_item,
@@ -192,49 +202,56 @@ public class AddressAdapter extends BaseAdapter {
 
 		holder.cb.setId(position);// 对checkbox的id进行重新设置为当前的position
 		if (addresses.getDefaultAddress()) {
-			temp = position;
 			position = temp;
+			holder.cb.setChecked(true);
+		}else{
+			holder.cb.setChecked(false);
 		}
-
-
-//		isSelect = holder.cb.isChecked();
-//		if (isSelect) {
-//			
-//		} 
-//		else {
+		
+		Log.i("voucher", position + "    position");
+		isSelect = holder.cb.isChecked();
+		if (isSelect) {
+			return convertView;
+		} 
+		else {
 			holder.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView,
 						boolean isChecked) {
+					holder.cb.setChecked(true);
 					// TODO Auto-generated method stub
-					if (isChecked) {// 实现checkbox的单选功能,同样适用于radiobutton
+//					if (!isChecked) {// 实现checkbox的单选功能,同样适用于radiobutton
 						boolean isSucces = dataManage.setDefaultAddress(
 								myApplication.getUserId(),
 								addresses.getAddressId(),
 								myApplication.getToken());
 						Log.i("info", isSucces + "    isSuccess");
-						if (temp != -1) {
+						if (lastPosition != -1) {
 							// 找到上次点击的checkbox,并把它设置为false,对重新选择时可以将以前的关掉
 							CheckBox tempCheckBox = (CheckBox) activity
 									.findViewById(temp);
 							if (tempCheckBox != null)
 								tempCheckBox.setChecked(false);
 						}
-						temp = buttonView.getId();// 保存当前选中的checkbox的id值
-					}
-					else{
-						return ;
-					}
-					
+//						temp = buttonView.getId();// 保存当前选中的checkbox的id值
+						Editor editor = sp.edit();
+						editor.putInt("statePosition", temp);
+						editor.commit();
+//					}
+//					else{
+//						holder.cb.setChecked(true);
+//						return ;
+//					}
+//					
 				}
-
+//
 			});
-//		}
+		}
 
-			if (position == temp)// 比对position和当前的temp是否一致
-				holder.cb.setChecked(true);
-			else
-				holder.cb.setChecked(false);
+//			if (position == temp)// 比对position和当前的temp是否一致
+//				
+//			else
+//				holder.cb.setChecked(false);
 		// holder.cb.stOnCheckedChangeListener(new OnCheckedChangeListener() {
 		//
 		// // 把上次被选中的checkbox设为false

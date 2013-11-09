@@ -193,7 +193,7 @@ public class CartUtil {
 			int a = 0;
 			float b = 0;
 			for (int i = 0; i < userList.size(); i++) {
-				// Log.i("info", userList.size()+"  +userList");
+				 Log.e("info", userList.size()+"  +userList");
 				// checkmMap = new HashMap<String, Boolean>();
 
 				final Cart cart = userList.get(i);
@@ -444,9 +444,13 @@ public class CartUtil {
 											ms1.what = 125;
 											mList.remove(checkBox);
 											handler.sendMessage(ms1);
-											
-											Intent intent1 = new Intent(
-													Consts.BROAD_UPDATE_CHANGE);
+											Intent intent1 = null;
+											if(dataManage.getCartAmount() == 0){
+												intent1 = new Intent(Consts.BROAD_UPDATE_CHANGE);
+											}else {
+												intent1 = new Intent(
+													Consts.UPDATE_CHANGE);
+											}
 											context.sendBroadcast(intent1);
 
 											break;
@@ -694,10 +698,11 @@ public class CartUtil {
 			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
+			Log.e(CartUtil.class.getName(), "类型转换出错");
 			e.printStackTrace();
-			Toast.makeText(context,
-					context.getResources().getString(R.string.no_network),
-					Toast.LENGTH_SHORT).show();
+//			Toast.makeText(context,
+//					"lei xing zhuan huan chu cuo ",
+//					Toast.LENGTH_SHORT).show();
 
 		}
 	}

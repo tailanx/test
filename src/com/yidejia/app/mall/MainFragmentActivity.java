@@ -39,6 +39,7 @@ import com.yidejia.app.mall.fragment.GuangFragment;
 import com.yidejia.app.mall.fragment.LoginFragment;
 import com.yidejia.app.mall.fragment.MainPageFragment;
 import com.yidejia.app.mall.fragment.MyMallFragment;
+import com.yidejia.app.mall.fragment.NoProduceFragment;
 import com.yidejia.app.mall.fragment.SearchFragment;
 import com.yidejia.app.mall.fragment.ShoppingCartFragment;
 import com.yidejia.app.mall.model.Cart;
@@ -61,7 +62,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 
 //	private ViewPager main_act_pager;
 	private ArrayList<Fragment> fragmentsList;
-	private int currentIndex = 0;//当前导航所在页面
+	public int currentIndex = 0;//当前导航所在页面
 	private RelativeLayout downHomeLayout;
 	private RelativeLayout downGuangLayout;
 	private RelativeLayout downSearchLayout;
@@ -81,6 +82,8 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 	private TextView down_my_textview;
 	private int number;
 	private InnerReceiver receiver;
+	private CartsDataManage cartDataManage;
+	public int cartNumber;
 	
 //	private Button down_shopping_cart;//购物车个数按钮
 	
@@ -104,10 +107,13 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		super.onCreate(savedBundleState);
 		setContentView(R.layout.activity_main_fragment_layout);
 		setActionBarConfig();
+		
 		if(savedBundleState == null){
 			initView();
 		}
 		MAINACTIVITY = this;
+		
+		cartDataManage = new CartsDataManage();
 		initNavView();
 		if (ConnectionDetector.isConnectingToInternet(this)) {
 			ImageUrl imageUrl = new ImageUrl();
@@ -189,12 +195,14 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 //			down_shopping_cart.setText("" + cartAcount);
 //		}
 	}
+	
 	private Fragment mainFragment = MainPageFragment.newInstance(0);
 	private Fragment guangFragment = new GuangFragment();
 	private Fragment searchFragment = SearchFragment.newInstance(2);
 	private Fragment cartFragment = new CartActivity();
 	private Fragment myFragment = new MyMallActivity();
 	private Fragment loginFragment = new LoginFragment();
+	private Fragment noProduceFragment = new NoProduceFragment();
 	private void initView(){
 //		mainFragment = MainPageFragment.newInstance(0);
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -300,20 +308,24 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 					searchText.setOnClickListener(go2SearchListener2);
 					break;
 				case 3:
-//					newFragment = ShoppingCartFragment.newInstance(3);
-//					newFragment = new CartActivity();
+					cartNumber = cartDataManage.getCartAmount();
 					setNavBackground();
-//					downShoppingLayout.setPressed(true);
 					down_shopping_textview.setTextColor(res.getColor(R.color.white));
 					downShoppingLayout.setBackgroundResource(R.drawable.down_hover1);
-//					down_shopping_imageView.setPressed(true);
 					down_shopping_imageView.setImageResource(R.drawable.down_shopping_hover);
-//					down_shopping_TextView.setTextColor(Color.WHITE);
 					getSupportActionBar()
-							.setCustomView(R.layout.actionbar_cart);
+					.setCustomView(R.layout.actionbar_cart);
+
 					shoppingCartTopay = (Button) findViewById(R.id.shopping_cart_go_pay);
 					shoppingCartTopay.setOnClickListener(goPay);
-					break;
+					if(cartNumber == 0){
+						shoppingCartTopay.setVisibility(View.GONE);
+						id = 5;
+						break;
+					}else{
+						shoppingCartTopay.setVisibility(View.VISIBLE);
+						break;
+					}
 				case 4:
 					isLogin = ((MyApplication) getApplication())
 							.getIsLogin();
@@ -354,22 +366,29 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 				default:
 					break;
 				}
-				//用于切换时保存fragment
-				FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-				if(getCurrFragment(id).isAdded())
-					ft.hide(getCurrFragment(currentIndex)).show(getCurrFragment(id)).commit();
-				else ft.hide(getCurrFragment(currentIndex)).add(R.id.main_fragment, getCurrFragment(id)).commit();//.addToBackStack(fragmentTag[id])
-//				ft.replace(R.id.main_fragment, getCurrFragment(id)).commit();
-//				currFragment = newFragment;
+				changeFragment(getCurrFragment(currentIndex), getCurrFragment(id));
+				if(id == 5) id = 3;
 			}
 			currentIndex = id;
 		}
 
 	}
 	
+	public void changeFragment(Fragment curFragment, Fragment newFragment){
+		//用于切换时保存fragment
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		if(newFragment.isAdded())
+			ft.hide(curFragment).show(newFragment).commit();
+		else ft.hide(curFragment).add(R.id.main_fragment, newFragment).commit();//.addToBackStack(fragmentTag[id])
+//		ft.replace(R.id.main_fragment, getCurrFragment(id)).commit();
+//		currFragment = newFragment;
+
+	}
+	
 	private boolean isLogin;
+	
 	//获取当前的fragment, 用于切换时保存fragment
-	private Fragment getCurrFragment(int index){
+	public Fragment getCurrFragment(int index){
 		Fragment fragment = null;
 		switch (index) {
 		case 0:
@@ -382,6 +401,9 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 			fragment = searchFragment;
 			break;
 		case 3:
+//			if(cartNumber==0)
+//				fragment = noProduceFragment;
+//			else fragment = cartFragment;
 			fragment = cartFragment;
 			break;
 		case 4:
@@ -389,7 +411,9 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 				fragment = loginFragment;
 			else fragment = myFragment;
 			break;
-
+		case 5:
+			fragment = noProduceFragment;
+			break;
 		default:
 			break;
 		}
@@ -447,6 +471,15 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 //			down_my_TextView.setTextColor(Color.rgb(180, 180, 180));
 			down_my_imageView.setImageResource(R.drawable.down_my_normal);
 
+		} else if(currentIndex == 5){
+			down_shopping_textview.setTextColor(this.getResources().getColor(
+					R.color.white_white));
+//			downShoppingLayout.setPressed(false);
+			downShoppingLayout.setBackgroundResource(R.drawable.downbg);
+//			down_shopping_imageView.setPressed(false);
+//			down_shopping_TextView.setTextColor(Color.rgb(180, 180, 180));
+			down_shopping_imageView
+					.setImageResource(R.drawable.down_shopping_normal);
 		}
 	}
 
@@ -556,8 +589,8 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
 			String action = intent.getAction();
+			cartsDataManage = new CartsDataManage();
 			if (Consts.UPDATE_CHANGE.equals(action)) {
-				cartsDataManage = new CartsDataManage();
 				number = cartsDataManage.getCartAmount();
 				if(number==0){
 					cartImage.setVisibility(View.GONE);
@@ -567,21 +600,34 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 			}
 			}
 			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
-				cartsDataManage = new CartsDataManage();
 				number = cartsDataManage.getCartAmount();
 				Log.i("info", number + "number");
 				if(number==0){
 					cartImage.setVisibility(View.GONE);
+					if(currentIndex == 3){
+						changeFragment(cartFragment, noProduceFragment);
+						currentIndex = 5;
+					}
+					
 				}else{
 					cartImage.setVisibility(View.VISIBLE);
 				cartImage.setText(number + "");
 			}
 			}
 			if(Consts.DELETE_CART.equals(action)){
-				cartsDataManage = new CartsDataManage();
-				number = cartsDataManage.getCartAmount();
-				cartImage.setVisibility(View.GONE);
-				cartImage.setText(number + "");
+					number = cartsDataManage.getCartAmount();
+					if(number==0){
+						cartImage.setVisibility(View.GONE);
+						getSupportActionBar()
+						.setCustomView(R.layout.actionbar_compose);
+						ImageView back = (ImageView) findViewById(R.id.compose_back);
+						back.setVisibility(View.GONE);
+						TextView title = (TextView) findViewById(R.id.compose_title);
+						title.setText(getResources().getString(R.string.no_cart1));
+					}else{
+						cartImage.setVisibility(View.VISIBLE);
+						cartImage.setText(number+"");
+					}
 			}
 		}
 
