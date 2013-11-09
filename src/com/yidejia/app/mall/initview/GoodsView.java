@@ -169,7 +169,7 @@ public class GoodsView {
 						cart_num++;
 						setCartNum(cart_num);
 						boolean istrue = manage.addCart(cart);
-						Intent intent = new Intent(Consts.BROAD_UPDATE_CHANGE);
+						Intent intent = new Intent(Consts.UPDATE_CHANGE);
 						activity.sendBroadcast(intent);
 						if (istrue) {
 							Toast.makeText(

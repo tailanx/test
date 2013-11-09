@@ -182,7 +182,7 @@ public class BaseInfoFragment extends SherlockFragment {
 				if(number1==0){
 					mButton.setVisibility(View.GONE);
 				}else{
-					mButton.setVisibility(view.VISIBLE);
+					mButton.setVisibility(View.VISIBLE);
 					mButton.setText(number1+"");
 				}
 			}
