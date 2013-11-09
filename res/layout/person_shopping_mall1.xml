@@ -71,6 +71,7 @@
                     android:layout_toRightOf="@id/favorites"
                     android:drawableLeft="@drawable/message"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:text="0"
                     android:textColor="#FFeeeeee"
                     android:textSize="14sp" />
