@@ -175,7 +175,7 @@ public class OrdersUtil {
 						allOrderDetail.map.get("price") + "", mOrder
 								.getCartsArray(), layout1, titleTextView, mOkBtn));
 				
-				mOkBtn.setOnClickListener(new OkClickListener(mOrderType, mOrder.getOrderCode(), mOrder.getDate()));
+//				mOkBtn.setOnClickListener(new OkClickListener(mOrderType, mOrder.getOrderCode(), mOrder.getDate()));
 			} else if(mOrderType == 3){//左边退换货
 //				mCancelBtn.setText(setCancelBtnText(mOrderType));
 				mCancelBtn.setOnClickListener(new CancelClickListener(mOrderType, mOrder.getOrderCode(), mOrder.getDate()));
@@ -187,11 +187,16 @@ public class OrdersUtil {
 			}
 			
 			
-			if (mOrderType == 5) {//删除按钮
+			if (mOrderType == 5) {// 右边删除按钮
 				mOkBtn.setOnClickListener(new OkClickListener(mOrderType,
 						mOrder.getOrderCode(), myApplication.getUserId(),
 						myApplication.getToken(), layout1));
-			} else{
+			} else if (mOrderType == 2) {//右边退换货按钮
+				mOkBtn.setOnClickListener(new OkClickListener(mOrderType,
+						mOrder.getOrderCode(), mOrder.getDate()));
+			} else if(mOrderType == 4){//右边评价按钮
+				mOkBtn.setVisibility(View.GONE);
+			}else {
 				mOkBtn.setOnClickListener(new OkClickListener(mOrderType,
 						mOrder.getOrderCode(), allOrderDetail.map.get("price")
 								+ "", mOrder.getCartsArray(), mOrder.getTn()));
