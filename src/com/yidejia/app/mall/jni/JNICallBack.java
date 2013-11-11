@@ -130,4 +130,7 @@ public class JNICallBack {
 	
 	//标记消息未已读状态
 	public static native String getHttp4ChangeRead(String userId, String msgId, String token);
+	
+	//申请退换货
+	public static native String getHttp4GetReturn(String user_id, String order_code, String the_date, String contact, String phone, String cause, String desc, String token);
 }

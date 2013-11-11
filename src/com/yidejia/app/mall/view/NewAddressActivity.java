@@ -248,9 +248,10 @@ public class NewAddressActivity extends SherlockActivity {
 				.setView(view)
 				.setPositiveButton(getResources().getString(R.string.sure),
 						new android.content.DialogInterface.OnClickListener() {
-							
+
 							@Override
-							public void onClick(DialogInterface dialog, int which) {
+							public void onClick(DialogInterface dialog,
+									int which) {
 								// TODO Auto-generated method stub
 								sheng.setText(conutryString);
 								shi.setText(cityString);
@@ -309,22 +310,20 @@ public class NewAddressActivity extends SherlockActivity {
 		nameTextView = (EditText) findViewById(R.id.new_address_item_edittext1);
 		numberTextView = (EditText) findViewById(R.id.new_address_item_edittext2);
 		areaTextView = (EditText) findViewById(R.id.new_address_item_edittext3);
-		
 
 		sheng = (TextView) findViewById(R.id.country1);
 		shi = (TextView) findViewById(R.id.city1);
 		qu = (TextView) findViewById(R.id.district1);
-		
+
 		sheng.setText(getResources().getString(R.string.sheng));
 		shi.setText(getResources().getString(R.string.shi));
 		qu.setText(getResources().getString(R.string.xianzhen));
-	
 
 		setupShow();
 		LinearLayout linear = (LinearLayout) findViewById(R.id.new_address_linear);
-		
+
 		linear.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -335,12 +334,14 @@ public class NewAddressActivity extends SherlockActivity {
 							String uri = "http://static.atido.com/min/b=js&f=helper/address.js";
 							HttpGet httpRequst = new HttpGet(uri);
 							HttpClient httpClient = new DefaultHttpClient();
-							HttpResponse httpResponse = httpClient.execute(httpRequst);
+							HttpResponse httpResponse = httpClient
+									.execute(httpRequst);
 							HttpEntity entity = httpResponse.getEntity();
 
 							if (entity != null) {
 								BufferedReader br = new BufferedReader(
-										new InputStreamReader(entity.getContent()));
+										new InputStreamReader(entity
+												.getContent()));
 								String line = null;
 								// Log.i(MainActivity.class.getName(),line.toString());
 								int i = 0;
@@ -363,7 +364,7 @@ public class NewAddressActivity extends SherlockActivity {
 				}.start();
 			}
 		});
-		
+
 	}
 
 	StringBuffer sb = new StringBuffer();
@@ -386,17 +387,17 @@ public class NewAddressActivity extends SherlockActivity {
 				list4 = new ArrayList<ArrayList<String>>();
 				list5 = new ArrayList<HashMap<String, Object>>();
 				while (keyIterator.hasNext()) {
-					key = keyIterator.next();//获取省市区
+					key = keyIterator.next();// 获取省市区
 					list.add(key);
 
 					value = dataJson.get(key);
-//					 Log.i("info", value + "     value");
+					// Log.i("info", value + "     value");
 					// valueMap.put(key, valueMap);
 					JSONObject dataJson1 = new JSONObject(value + "");
 					Iterator<String> keyIterator2 = dataJson1.keys();// ��+��
 
 					int i = 0;
-					list2 = new ArrayList<String>();//市
+					list2 = new ArrayList<String>();// 市
 					// valueMap2 = new HashMap<String, Object>();
 
 					while (keyIterator2.hasNext()) {
@@ -465,7 +466,7 @@ public class NewAddressActivity extends SherlockActivity {
 					list5.add(valueMap);
 
 				}
-//				Log.i("info", list3.size() + "    list3 size");
+				// Log.i("info", list3.size() + "    list3 size");
 				// for(int j=0;j<list1.size();j++){
 				// Log.i("info", list1.get(j) + "          list1");
 				// }
@@ -475,8 +476,7 @@ public class NewAddressActivity extends SherlockActivity {
 				// Log.i("info", list + "  valueMap4 ");
 
 				WheelView country = (WheelView) view.findViewById(R.id.country);
-				
-				
+
 				Object[] countries = list.toArray();
 
 				country.setVisibleItems(5);
@@ -505,33 +505,30 @@ public class NewAddressActivity extends SherlockActivity {
 				// Object[list4.get(i).size()]);
 				// }
 				//
-				
+
 				final WheelView city = (WheelView) view.findViewById(R.id.city);
 				city.setVisibleItems(5);
 				city.setAdapter(new ArrayWheelAdapter<String>(cities[0]));
 				city.setCurrentItem(0);
-//				city.setCurrentItem(0);
-				
+				// city.setCurrentItem(0);
+
 				conutryString = list.get(0);
 				cityString = list1.get(0).get(0);
-				
+
 				final WheelView district = (WheelView) view
 						.findViewById(R.id.district);
 				district.setVisibleItems(5);
-				
-				HashMap<String, Object> mArrayList2 = list5
-						.get(0);
-				
+
+				HashMap<String, Object> mArrayList2 = list5.get(0);
+
 				ArrayList<String> mArrayList3 = (ArrayList<String>) mArrayList2
 						.get(cityString);
-				Log.i("info", mArrayList3.size() +"mArrayList3");
+				Log.i("info", mArrayList3.size() + "mArrayList3");
 				Object[] districts = mArrayList3.toArray();
 
-				district.setAdapter(new ArrayWheelAdapter<String>(
-						districts));
+				district.setAdapter(new ArrayWheelAdapter<String>(districts));
 				district.setCurrentItem(0);
-				
-				
+
 				districtString = mArrayList3.get(0);
 				country.addChangingListener(new OnWheelChangedListener() {
 					public void onChanged(WheelView wheel, int oldValue,
@@ -556,9 +553,9 @@ public class NewAddressActivity extends SherlockActivity {
 						district.setCurrentItem(0);
 						cityString = cityName;
 						districtString = mArrayList3.get(0);
-//						Log.i("info", conutryString + "   conutryString");
-//						Log.i("info", cityString + "   cityString");
-//						Log.i("info", districtString + "   districtString");
+						// Log.i("info", conutryString + "   conutryString");
+						// Log.i("info", cityString + "   cityString");
+						// Log.i("info", districtString + "   districtString");
 					}
 				});
 
@@ -576,16 +573,16 @@ public class NewAddressActivity extends SherlockActivity {
 							int newValue) {
 						// Log.i("info", "nihao");
 						ArrayList<String> mArrayList = list1.get(a);
-						Log.i("info", mArrayList.size()+"   mArrayList");
+						Log.i("info", mArrayList.size() + "   mArrayList");
 						b = newValue;
-						
+
 						String cityName = mArrayList.get(newValue);
 						HashMap<String, Object> mArrayList2 = list5
 								.get(newValue);
-						
+
 						ArrayList<String> mArrayList3 = (ArrayList<String>) mArrayList2
 								.get(cityName);
-						Log.i("info", mArrayList3.size() +"mArrayList3");
+						Log.i("info", mArrayList3.size() + "mArrayList3");
 						Object[] districts = mArrayList3.toArray();
 
 						district.setAdapter(new ArrayWheelAdapter<String>(
@@ -595,9 +592,9 @@ public class NewAddressActivity extends SherlockActivity {
 						district.setCurrentItem(0);
 						cityString = cityName;
 						districtString = mArrayList3.get(0);
-//						Log.i("info", conutryString + "   conutryString");
-//						Log.i("info", cityString + "   cityString");
-//						Log.i("info", districtString + "   districtString");
+						// Log.i("info", conutryString + "   conutryString");
+						// Log.i("info", cityString + "   cityString");
+						// Log.i("info", districtString + "   districtString");
 					}
 				});
 				district.addChangingListener(new OnWheelChangedListener() {
@@ -607,7 +604,7 @@ public class NewAddressActivity extends SherlockActivity {
 							int newValue) {
 						// TODO Auto-generated method stub
 						ArrayList<String> mArrayList1 = list1.get(a);
-						
+
 						String cityName = mArrayList1.get(b);
 						HashMap<String, Object> mArrayList2 = list5
 								.get(newValue);
@@ -616,9 +613,9 @@ public class NewAddressActivity extends SherlockActivity {
 						district.setCurrentItem(newValue);
 
 						districtString = mArrayList3.get(newValue);
-//						Log.i("info", conutryString + "   conutryString");
-//						Log.i("info", cityString + "   cityString");
-//						Log.i("info", districtString + "   districtString");
+						// Log.i("info", conutryString + "   conutryString");
+						// Log.i("info", cityString + "   cityString");
+						// Log.i("info", districtString + "   districtString");
 
 					}
 				});
@@ -866,6 +863,16 @@ public class NewAddressActivity extends SherlockActivity {
 								Toast.makeText(NewAddressActivity.this,
 										"收货人姓名,电话不能为空 ", Toast.LENGTH_SHORT)
 										.show();
+
+							}
+							if (conutryString == null || cityString == null
+									|| districtString == null) {
+								Toast.makeText(
+										NewAddressActivity.this,
+										getResources().getString(
+												R.string.address_tip),
+										Toast.LENGTH_SHORT).show();
+
 							} else {
 
 								Addresses addresses = new Addresses();

@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import android.app.AlertDialog.Builder;
 import android.app.AlertDialog;
-import android.app.Dialog;
+import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -65,7 +64,6 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 	private ArrayList<Cart> mArrayList;
 	private String isString;
 	private AlertDialog dialog;
-	private float sum1 = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +105,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 					
 						float sum = 0;
 
+						float sum1 = 0;
 						for (int i = 0; i < exchange.size(); i++) {
 							HashMap<String, Float> map = exchange.get(i);
 							// HashMap<String, Object> map1 = cart.get(i);
@@ -143,8 +142,11 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 							Toast.makeText(ExchangeFreeActivity.this,
 									getResources().getString(R.string.my_voucher),
 									Toast.LENGTH_SHORT).show();
-						
-//							return;
+//							for (int i = 0; i < cart.size(); i++) {
+							Intent intent1  = new Intent(Consts.EXCHANG_FREE);
+							sendBroadcast(intent1);
+							return;
+//							}
 						} else if (sum1 <= voucher) {// && isSelelct1 == 0.0
 							for (int i = 0; i < cart.size(); i++) {
 								HashMap<String, Object> map1 = cart.get(i);
@@ -167,7 +169,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 								// getResources().getString(R.string.no_network),
 								// Toast.LENGTH_SHORT).show();
 								// }
-								boolean isExsist = false;
+								
 								if (isSelelct1 == 0.0) {
 					
 									mArrayList.add(cart);

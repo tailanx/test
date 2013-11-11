@@ -441,7 +441,7 @@ public class CstmPayActivity extends SherlockActivity {
 						myApplication.getUserId());
 				if (preferentialDataManage.getFreeGoods().size() != 0
 						|| preferentialDataManage.getScoreGoods().size() != 0) {
-
+					Log.i("info", preferentialDataManage.getFreeGoods().size()+"   preferentialDataManage.getFreeGoods()");
 					arrayListFree = preferentialDataManage.getFreeGoods();
 					arrayListExchange = preferentialDataManage.getScoreGoods();
 				}

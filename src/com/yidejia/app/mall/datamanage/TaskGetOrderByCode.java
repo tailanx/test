@@ -12,6 +12,7 @@ import android.app.ProgressDialog;
 //import android.content.activity;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.UserPayActivity;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Order;
@@ -35,13 +37,11 @@ import com.yidejia.app.mall.net.goodsinfo.GetProductAddress;
 import com.yidejia.app.mall.net.order.GetOrderByCode;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.CstmPayActivity;
+import com.yidejia.app.mall.view.OrderDetailActivity;
 import com.yidejia.app.mall.view.PayAddress;
 import com.yidejia.app.mall.view.PersonEvaluationActivity;
 
 public class TaskGetOrderByCode {
-	
-//	private int fromIndex = 0;
-//	private int amount = 10;
 	
 	private Activity activity;
 //	private View view;
@@ -50,6 +50,7 @@ public class TaskGetOrderByCode {
 	private TaskGOBC taskGobc;
 	private Order order;//
 	private String recipient_id;
+	private String TAG = TaskGetOrderByCode.class.getName();
 	
 	
 	public TaskGetOrderByCode(Activity activity){//, LinearLayout layout
@@ -61,13 +62,14 @@ public class TaskGetOrderByCode {
 		findIds();
 	}
 	
-	public void getOderBC(String code, String price){//, boolean isFirstIn
+	public void getOderBC(String code, String price, String orderTn){//, boolean isFirstIn
 		if(!ConnectionDetector.isConnectingToInternet(activity)) {
 			Toast.makeText(activity, activity.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return;
 		}
 		this.orderCode = code;
 		this.orderPrice = price;
+		this.orderTn = orderTn;
 		
 		if (taskGobc != null
 				&& taskGobc.getStatus() == AsyncTask.Status.RUNNING) {
@@ -181,6 +183,7 @@ public class TaskGetOrderByCode {
 	private RelativeLayout orderAddressLayout;//收件人地址的布局
 	private String orderCode;//传递过来的订单号
 	private String orderPrice;//传递过来的价格总数
+	private String orderTn;//传递过来的流水号
 	private ArrayList<Addresses> addresses ;
 	private TaskGetUserAddress taskGetUserAddress;
 	
@@ -213,7 +216,28 @@ public class TaskGetOrderByCode {
 		//录入状态时才显示付款和修改支付方式的按钮
 		if("录入".equals(order.getStatus())){
 			payButton.setVisibility(View.VISIBLE);
-			payButton.setOnClickListener(null);
+			payButton.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					if("".equals(orderTn) || null == orderTn) {
+						Log.e(TAG, "tn is null");
+						return;
+					}
+					Log.e(TAG, "tn is not null");
+					Intent intent = new Intent(activity, UserPayActivity.class);
+					Bundle bundle = new Bundle();
+					bundle.putInt("mode", 1);
+					bundle.putString("tn", orderTn);
+					bundle.putString("resp_code", "00");
+					bundle.putString("code", orderCode);
+					bundle.putString("uid", ((MyApplication)activity.getApplication()).getUserId());
+					intent.putExtras(bundle);
+					activity.startActivity(intent);
+					activity.finish();
+				}
+			});
 			changePayTypeTextView.setVisibility(View.VISIBLE);
 			orderAddressLayout.setOnClickListener(new OnClickListener() {
 				

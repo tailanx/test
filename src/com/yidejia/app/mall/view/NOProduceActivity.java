@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.SearchActivity;
+import com.yidejia.app.mall.SearchResultActivity;
 
 public class NOProduceActivity extends SherlockActivity {
 	private Button mButton;
@@ -27,7 +28,8 @@ public class NOProduceActivity extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intentOrder = new Intent(NOProduceActivity.this, SearchActivity.class);
+				Intent intentOrder = new Intent(NOProduceActivity.this, SearchResultActivity.class);
+				intentOrder.putExtra("title", "全部");
 				NOProduceActivity.this.startActivity(intentOrder);
 			}
 		});

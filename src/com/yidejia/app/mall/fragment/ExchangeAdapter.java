@@ -7,7 +7,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
@@ -34,6 +37,7 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.VoucherDataManage;
 import com.yidejia.app.mall.model.Specials;
+import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.CstmPayActivity;
 
 public class ExchangeAdapter extends BaseAdapter {
@@ -46,11 +50,18 @@ public class ExchangeAdapter extends BaseAdapter {
 	private VoucherDataManage voucherDataManage;// 积分的信息
 	private double userVoucher;// 用户积分
 	private MyApplication myApplication;
+	private InnerReciver receiver;
 
 	public ExchangeAdapter(ArrayList<Specials> mList, Activity context) {
+		
 		this.activity = context;
 		this.mlist = mList;
 		this.inflater = LayoutInflater.from(context);
+		receiver = new InnerReciver();
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Consts.EXCHANG_FREE);
+		context.registerReceiver(receiver, filter);
+		
 		voucherDataManage = new VoucherDataManage(context);
 		myApplication = (MyApplication) activity.getApplication();
 		
@@ -69,6 +80,8 @@ public class ExchangeAdapter extends BaseAdapter {
 		mlist1 = new ArrayList<HashMap<String, Float>>();
 		mlist2 = new ArrayList<HashMap<String, Object>>();
 		initData();
+		
+		
 	}
 
 	public ExchangeAdapter() {
@@ -138,7 +151,7 @@ public class ExchangeAdapter extends BaseAdapter {
 	private DisplayImageOptions options;
 	protected ImageLoader imageLoader = ImageLoader.getInstance();// ����ͼƬ
 	int i = 0;
-
+	private  Handler handler;
 	@Override
 	public View getView(final int postion, View covertView, ViewGroup arg2) {
 		// TODO Auto-generated method stub
@@ -166,7 +179,7 @@ public class ExchangeAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) covertView.getTag();
 		}
-		final Handler handler = new Handler() {
+		handler = new Handler() {
 			public void handleMessage(Message msg) {
 				if (msg.what == 113) {
 					map.put("count",
@@ -174,18 +187,11 @@ public class ExchangeAdapter extends BaseAdapter {
 					map1.put("count1",
 							Float.parseFloat(holder.count.getText().toString()));
 				}
-				HashMap<String, Object> hashmap ;
-				Double sum = 0.00;
-//				if (msg.what == 115) {
-//					for(int i=0;i<mlist2.size();i++){
-//						 hashmap  = mlist2.get(i);
-//						sum =  Double.parseDouble((String) hashmap.get("price"));
-//						sum += sum;
-//						if(userVoucher<sum){
-//							Toast.makeText(activity, "亲，您的积分不够", Toast.LENGTH_SHORT).show();
-//						}
-//					}
-//				}
+				if(msg.what == 114){
+					Log.i("info", "    sum1");
+					holder.cb.setChecked(false);
+				}
+				
 			};
 		};
 		Specials s = mlist.get(postion);
@@ -211,6 +217,9 @@ public class ExchangeAdapter extends BaseAdapter {
 					isSelected.put(postion, false);
 					map.put("isCheck", (float) 1);
 					map1.put("isCheck1", (float) 1);
+					holder.cb.setChecked(false);
+					
+					map1.put("price", 0);
 				}
 //				Message ms = new Message();
 //				ms.what = 115;
@@ -287,4 +296,20 @@ public class ExchangeAdapter extends BaseAdapter {
 
 	}
 
+	public class InnerReciver extends BroadcastReceiver{
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			String  action = intent.getAction();
+			if(Consts.EXCHANG_FREE.equals(action)){
+//				 Log.i("info", action+"    sum1");
+				 Message ms = new Message();
+				 ms.what = 114;
+				 handler.sendMessage(ms);
+			}
+		}
+		
+	}
+	
 }

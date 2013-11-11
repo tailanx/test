@@ -17,6 +17,8 @@ public class Order {
     private String ship_fee;	//快递费
     private String core;//积分
     private String date;// 时间
+    
+    private String tn;//流水号
     /**
      * 订单号
      * @param orderCode 订单号
@@ -118,6 +120,22 @@ public class Order {
     
     public String getShipFee(){
     	return ship_fee;
+    }
+    
+    /**
+     * 
+     * @return 流水号
+     */
+    public String getTn(){
+    	return tn;
+    }
+    
+    /**
+     * 设置流水号
+     * @param tn
+     */
+    public void setTn(String tn){
+    	this.tn = tn;
     }
     
     

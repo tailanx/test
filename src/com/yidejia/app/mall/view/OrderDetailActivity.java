@@ -28,6 +28,7 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.UserPayActivity;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.datamanage.TaskGetOrderByCode;
 import com.yidejia.app.mall.model.Addresses;
@@ -49,6 +50,10 @@ public class OrderDetailActivity extends SherlockFragmentActivity {
 //	private MyApplication myApplication;
 	private String orderCode;//传递过来的订单号
 	private String orderPrice;//传递过来的价格总数
+	private String orderTn;//传递过来的流水号
+	
+	private String TAG = OrderDetailActivity.class.getName();
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +68,13 @@ public class OrderDetailActivity extends SherlockFragmentActivity {
 		orderCode = intent.getExtras().getString("OrderCode");
 		orderPrice =  intent.getExtras().getString("OrderPrice");
 		ArrayList<Cart> carts = (ArrayList<Cart>)intent.getSerializableExtra("carts");
+		try {
+			orderTn = intent.getExtras().getString("OrderTn");
+		} catch (Exception e) {
+			// TODO: handle exception
+			Log.e(TAG, "tn is null");
+			e.printStackTrace();
+		}
 		Log.i("info", orderCode +"   orderCode");
 //		nameTextView = (TextView) findViewById(R.id.order_detail_name);
 //		phoneTextView = (TextView) findViewById(R.id.order_detail_number);
@@ -70,7 +82,30 @@ public class OrderDetailActivity extends SherlockFragmentActivity {
 //		priceTextView = (TextView) findViewById(R.id.order_detail_dingdan_sum);
 //		emsTextView = (TextView) findViewById(R.id.order_detail_yunhui_sum);
 //		sumTextView = (TextView) findViewById(R.id.go_pay_show_pay_money);
-//		payButton = (Button) findViewById(R.id.order_detail_pay);
+//		Button payButton = (Button) findViewById(R.id.order_detail_pay);
+//		payButton.setClickable(true);
+//		payButton.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				if("".equals(orderTn) || null == orderTn) {
+//					Log.e(TAG, "tn is null");
+//					return;
+//				}
+//				Log.e(TAG, "tn is not null");
+//				Intent intent = new Intent(OrderDetailActivity.this, UserPayActivity.class);
+//				Bundle bundle = new Bundle();
+//				bundle.putInt("mode", 1);
+//				bundle.putString("tn", orderTn);
+//				bundle.putString("resp_code", "00");
+//				bundle.putString("code", orderCode);
+//				bundle.putString("uid", ((MyApplication)getApplication()).getUserId());
+//				intent.putExtras(bundle);
+//				startActivity(intent);
+//				OrderDetailActivity.this.finish();
+//			}
+//		});
 //		orderNumber = (TextView) findViewById(R.id.order_detail_biaohao_number);
 //		orderTime =  (TextView) findViewById(R.id.order_detail_time_number);
 		
@@ -174,7 +209,7 @@ public class OrderDetailActivity extends SherlockFragmentActivity {
 		
 		
 		taskOrderByCode = new TaskGetOrderByCode(this);
-		taskOrderByCode.getOderBC(orderCode, orderPrice);
+		taskOrderByCode.getOderBC(orderCode, orderPrice, orderTn);
 	}
 	/**
 	 * 设置购物清单商品信息

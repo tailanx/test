@@ -97,27 +97,27 @@
 
         <Button
             android:id="@+id/all_order_item_main_cancal"
-            android:layout_width="55dp"
+            android:layout_width="70dp"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_marginRight="8dp"
             android:layout_toLeftOf="@+id/all_order_item_main_pay"
             android:background="@drawable/clear_conditions"
             android:text="取消"
-            android:textSize="15sp" />
+            android:textSize="14sp" />
 
         <Button
             android:id="@id/all_order_item_main_pay"
-            android:layout_width="55dp"
+            android:layout_width="75dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:background="@drawable/complete"
          
-            android:text="付款"
+            android:text="查看物流"
             android:textColor="#eeeeee"
-            android:textSize="15sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/all_order_item_main_item_textview7"

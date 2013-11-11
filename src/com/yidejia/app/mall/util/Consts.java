@@ -15,6 +15,7 @@ public class Consts {
 	public static final int CstmPayActivity_Request = 226;
 	public static final int CstmPayActivity_Response = 227;
 	public static final String ADD_SUBSTARCT_UPDATE_ = "com.yidejia.add.substarct";
+	public static final String EXCHANG_FREE = "com.yidejia.exchange_free";
 }
 
 
