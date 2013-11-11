@@ -391,6 +391,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		Fragment fragment = null;
 		switch (index) {
 		case 0:
+			Log.e("NoProduceFragment", "NoProduceFragment3");
 			fragment = mainFragment;
 			break;
 		case 1:
@@ -400,9 +401,14 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 			fragment = searchFragment;
 			break;
 		case 3:
-			if(number==0)
+			if(number==0){
 				fragment = noProduce;
-			fragment = cartFragment;
+				Log.e("NoProduceFragment", "NoProduceFragment1");
+			}
+			else{fragment = cartFragment;
+			Log.e("NoProduceFragment", "NoProduceFragment2");
+			}
+			
 			break;
 		case 4:
 			if (!isLogin)
