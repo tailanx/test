@@ -204,7 +204,8 @@ public class CartUtil {
 				view.setTag(i);
 				final RelativeLayout layout = (RelativeLayout) view
 						.findViewById(R.id.rela);
-
+				ImageView  cartDelete = (ImageView) view.findViewById(R.id.shopping_cart_item_delete);
+				
 				ImageView headImageView = (ImageView) view
 						.findViewById(R.id.shopping_cart_item__imageview1);
 				TextView detailTextView = (TextView) view
@@ -233,6 +234,7 @@ public class CartUtil {
 				String path = cart.getImgUrl();
 				imageLoader.displayImage(path, headImageView, options,
 						animateFirstListener);
+				
 				// Bitmap bm = BitmapFactory.decodeFile(path);
 				// if (bm != null) {
 				// headImageView.setImageBitmap(bm);
@@ -663,6 +665,28 @@ public class CartUtil {
 							}
 
 						}
+					}
+				});
+				cartDelete.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						map.put("count", (float) 0);
+						boolean isDel = dataManage
+								.delCart(cart.getUId());
+						Message ms1 = new Message();
+						ms1.what = 125;
+						mList.remove(checkBox);
+						handler.sendMessage(ms1);
+						Intent intent1 = null;
+						if(dataManage.getCartAmount() == 0){
+							intent1 = new Intent(Consts.BROAD_UPDATE_CHANGE);
+						}else {
+							intent1 = new Intent(
+								Consts.UPDATE_CHANGE);
+						}
+						context.sendBroadcast(intent1);
 					}
 				});
 				// ���ü���

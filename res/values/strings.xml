@@ -250,4 +250,5 @@
 	            <string name="no_cart">购物车</string>
 	              <string name="no_cart1">购物车1</string>
 	           <string name="sure_commit">确认您所选购的换购商品</string>
+	            <string name="address_tip">请选择您所有地区信息。</string>
 </resources>

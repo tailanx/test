@@ -52,28 +52,27 @@ import com.yidejia.app.mall.view.EditorActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.widget.YLImageButton;
 
-
 /**
  * 用于五大导航
+ * 
  * @author long bin
- *
+ * 
  */
 public class MainFragmentActivity extends SherlockFragmentActivity {
 
-//	private ViewPager main_act_pager;
+	// private ViewPager main_act_pager;
 	private ArrayList<Fragment> fragmentsList;
-	public int currentIndex = 0;//当前导航所在页面
+	private int currentIndex = 0;// 当前导航所在页面
 	private RelativeLayout downHomeLayout;
 	private RelativeLayout downGuangLayout;
 	private RelativeLayout downSearchLayout;
 	private RelativeLayout downShoppingLayout;
 	private RelativeLayout downMyLayout;
-	private ImageView down_home_imageView;//首页按钮图片
-	private ImageView down_guang_imageView;//逛按钮图片
-	private ImageView down_search_imageView;//搜索按钮图片
-	private ImageView down_shopping_imageView; //购物车按钮图片
-	private ImageView down_my_imageView; //我的商城按钮图片
-	
+	private ImageView down_home_imageView;// 首页按钮图片
+	private ImageView down_guang_imageView;// 逛按钮图片
+	private ImageView down_search_imageView;// 搜索按钮图片
+	private ImageView down_shopping_imageView; // 购物车按钮图片
+	private ImageView down_my_imageView; // 我的商城按钮图片
 	private CartsDataManage cartsDataManage;
 	private TextView down_home_textview;
 	private TextView down_guang_textview;
@@ -82,38 +81,28 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 	private TextView down_my_textview;
 	private int number;
 	private InnerReceiver receiver;
-	private CartsDataManage cartDataManage;
-	public int cartNumber;
-	
-//	private Button down_shopping_cart;//购物车个数按钮
-	
-//	private TextView down_home_TextView;
-//	private TextView down_guang_TextView;
-//	private TextView down_search_TextView;
-//	private TextView down_shopping_TextView;
-//	private TextView down_my_TextView;
-	
+	// private Button down_shopping_cart;//购物车个数按钮
+	// private TextView down_home_TextView;
+	// private TextView down_guang_TextView;
+	// private TextView down_search_TextView;
+	// private TextView down_shopping_TextView;
+	// private TextView down_my_TextView;
 	private Button cartImage;
-	
 	private Bitmap bmp;
 	private Resources res;
 	private Map<String, SoftReference<Bitmap>> imageCache = new HashMap<String, SoftReference<Bitmap>>();
-	
 	public static Activity MAINACTIVITY;
-	
+
 	@Override
 	protected void onCreate(Bundle savedBundleState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedBundleState);
 		setContentView(R.layout.activity_main_fragment_layout);
 		setActionBarConfig();
-		
-		if(savedBundleState == null){
+		if (savedBundleState == null) {
 			initView();
 		}
 		MAINACTIVITY = this;
-		
-		cartDataManage = new CartsDataManage();
 		initNavView();
 		if (ConnectionDetector.isConnectingToInternet(this)) {
 			ImageUrl imageUrl = new ImageUrl();
@@ -126,118 +115,116 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		filter.addAction(Consts.DELETE_CART);
 		registerReceiver(receiver, filter);
 	}
+
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		unregisterReceiver(receiver);
 		super.onDestroy();
 	}
-	
-/**
- * 初始化底部导航栏
- */
+
+	/**
+	 * 初始化底部导航栏
+	 */
 	private void initNavView() {
-		//改变底部首页背景，有按下去的效果的背景
+		// 改变底部首页背景，有按下去的效果的背景
 		downHomeLayout = (RelativeLayout) findViewById(R.id.down_home_layout);
-//		downHomeLayout.setBackgroundResource(R.drawable.down_hover);
+		// downHomeLayout.setBackgroundResource(R.drawable.down_hover);
 		down_home_imageView = (ImageView) findViewById(R.id.down_home_icon);
 		res = getResources();
-//		bmp = BitmapFactory.decodeResource(res, R.drawable.home_hover);
-//		down_home_imageView.setImageBitmap(bmp);
-//		down_home_imageView.setImageResource(R.drawable.home_hover);//或者这样
-		
+		// bmp = BitmapFactory.decodeResource(res, R.drawable.home_hover);
+		// down_home_imageView.setImageBitmap(bmp);
+		// down_home_imageView.setImageResource(R.drawable.home_hover);//或者这样
 		// cartsDataManage = new CartsDataManage();
 		cartsDataManage = new CartsDataManage();
 		number = cartsDataManage.getCartAmount();
 		cartImage = (Button) findViewById(R.id.down_shopping_cart);
 
-		if(number==0){
+		if (number == 0) {
 			cartImage.setVisibility(View.GONE);
-		}else{
-		cartImage.setText(number + "");
+		} else {
+			cartImage.setText(number + "");
 		}
 		downGuangLayout = (RelativeLayout) findViewById(R.id.down_guang_layout);
 		downSearchLayout = (RelativeLayout) findViewById(R.id.down_search_layout);
 		downShoppingLayout = (RelativeLayout) findViewById(R.id.down_shopping_layout);
 		downMyLayout = (RelativeLayout) findViewById(R.id.down_my_layout);
-		
 		down_guang_imageView = (ImageView) findViewById(R.id.down_guang_icon);
 		down_search_imageView = (ImageView) findViewById(R.id.down_search_icon);
 		down_shopping_imageView = (ImageView) findViewById(R.id.down_shopping_icon);
 		down_my_imageView = (ImageView) findViewById(R.id.down_my_icon);
-		
 		down_home_textview = (TextView) findViewById(R.id.down_home_text);
 		down_guang_textview = (TextView) findViewById(R.id.down_guang_text);
 		down_search_textview = (TextView) findViewById(R.id.down_search_text);
 		down_shopping_textview = (TextView) findViewById(R.id.down_shopping_text);
 		down_my_textview = (TextView) findViewById(R.id.down_my_text);
-		
-//		down_guang_TextView = (TextView) findViewById(R.id.down_guang_text);
-//		down_search_TextView = (TextView) findViewById(R.id.down_search_text);
-//		down_shopping_TextView = (TextView) findViewById(R.id.down_shopping_text);
-//		down_my_TextView = (TextView) findViewById(R.id.down_my_text);
-		
+		// down_guang_TextView = (TextView) findViewById(R.id.down_guang_text);
+		// down_search_TextView = (TextView)
+		// findViewById(R.id.down_search_text);
+		// down_shopping_TextView = (TextView)
+		// findViewById(R.id.down_shopping_text);
+		// down_my_TextView = (TextView) findViewById(R.id.down_my_text);
 		downHomeLayout.setOnClickListener(new NavOnclick(0));
 		downGuangLayout.setOnClickListener(new NavOnclick(1));
 		downSearchLayout.setOnClickListener(new NavOnclick(2));
 		downShoppingLayout.setOnClickListener(new NavOnclick(3));
 		downMyLayout.setOnClickListener(new NavOnclick(4));
-		
-		//隐藏逛发现
+		// 隐藏逛发现
 		downGuangLayout.setVisibility(ViewGroup.GONE);
-//		down_shopping_cart = (Button) findViewById(R.id.down_shopping_cart);
-//		CartsDataManage cartsDataManage = new CartsDataManage();
-//		int cartAcount = cartsDataManage.getCartAmount();
-//		if(cartAcount == 0){
-//			down_shopping_cart.setVisibility(View.GONE);
-//		} else{
-//			down_shopping_cart.setVisibility(View.VISIBLE);
-//			down_shopping_cart.setText("" + cartAcount);
-//		}
+		// down_shopping_cart = (Button) findViewById(R.id.down_shopping_cart);
+		// CartsDataManage cartsDataManage = new CartsDataManage();
+		// int cartAcount = cartsDataManage.getCartAmount();
+		// if(cartAcount == 0){
+		// down_shopping_cart.setVisibility(View.GONE);
+		// } else{
+		// down_shopping_cart.setVisibility(View.VISIBLE);
+		// down_shopping_cart.setText("" + cartAcount);
+		// }
 	}
-	
+
 	private Fragment mainFragment = MainPageFragment.newInstance(0);
 	private Fragment guangFragment = new GuangFragment();
 	private Fragment searchFragment = SearchFragment.newInstance(2);
 	private Fragment cartFragment = new CartActivity();
 	private Fragment myFragment = new MyMallActivity();
 	private Fragment loginFragment = new LoginFragment();
-	private Fragment noProduceFragment = new NoProduceFragment();
-	private void initView(){
-//		mainFragment = MainPageFragment.newInstance(0);
+	private Fragment noProduce = new NoProduceFragment();
+
+	private void initView() {
+		// mainFragment = MainPageFragment.newInstance(0);
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.main_fragment, mainFragment).commit();//.addToBackStack(fragmentTag[0])
+		ft.add(R.id.main_fragment, mainFragment).commit();// .addToBackStack(fragmentTag[0])
 	}
+
 	/**
 	 * 这里不是fragment+ viewpager 实现，不用add fragment进来
 	 */
-	private void addView(){
-//		main_act_pager = (ViewPager) findViewById(R.id.main_act_pager);
+	private void addView() {
+		// main_act_pager = (ViewPager) findViewById(R.id.main_act_pager);
 		fragmentsList = new ArrayList<Fragment>();
-		
 		Fragment mainPageFragment = MainPageFragment.newInstance(0);
 		Fragment guangFragment = MainPageFragment.newInstance(1);
 		Fragment searchFragment = SearchFragment.newInstance(2);
 		Fragment shoppingCartFragment = ShoppingCartFragment.newInstance(3);
 		Fragment personalFragment = ShoppingCartFragment.newInstance(4);
-		
 		fragmentsList.add(mainPageFragment);
 		fragmentsList.add(guangFragment);
 		fragmentsList.add(searchFragment);
 		fragmentsList.add(shoppingCartFragment);
 		fragmentsList.add(personalFragment);
-		
-//		main_act_pager.setAdapter(new MainFragmentPagerAdapter(getSupportFragmentManager(), fragmentsList));
-//		main_act_pager.setCurrentItem(currentIndex);
+		// main_act_pager.setAdapter(new
+		// MainFragmentPagerAdapter(getSupportFragmentManager(),
+		// fragmentsList));
+		// main_act_pager.setCurrentItem(currentIndex);
 	}
-	
+
 	private TextView searchText;
 	private EditText searchEditText;
-	private  ImageView imageView;
-	private Button shoppingCartTopay;//去结算
+	private ImageView imageView;
+	private Button shoppingCartTopay;// 去结算
 	private boolean isSearch = false;
 	private boolean isMainSearch = false;
-	
+
 	private class NavOnclick implements View.OnClickListener {
 
 		private int id;
@@ -249,91 +236,103 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-//			switch (id) {
-//			case R.id.down_search_layout:
-//				main_act_pager.setCurrentItem(2);
-//				break;
-//				
-//			default:
-//				break;
-//			}
-//			Fragment newFragment = null;
-			if(currentIndex != id){
-//				main_act_pager.setCurrentItem(id);
+			// switch (id) {
+			// case R.id.down_search_layout:
+			// main_act_pager.setCurrentItem(2);
+			// break;
+			//
+			// default:
+			// break;
+			// }
+			// Fragment newFragment = null;
+			if (currentIndex != id) {
+				// main_act_pager.setCurrentItem(id);
 				switch (id) {
 				case 0:
-//					newFragment = MainPageFragment.newInstance(0);
+					// newFragment = MainPageFragment.newInstance(0);
 					setNavBackground();
-//					downHomeLayout.setPressed(true);
-					down_home_textview.setTextColor(res.getColor(R.color.white));
-					downHomeLayout.setBackgroundResource(R.drawable.down_hover1);
-//					down_home_imageView.setPressed(true);
+					// downHomeLayout.setPressed(true);
+					down_home_textview
+							.setTextColor(res.getColor(R.color.white));
+					downHomeLayout
+							.setBackgroundResource(R.drawable.down_hover1);
+					// down_home_imageView.setPressed(true);
 					down_home_imageView.setImageResource(R.drawable.home_hover);
-//					down_home_TextView.setTextColor(Color.WHITE);//getResources().getColor(R.color.white)
-					getSupportActionBar().setCustomView(R.layout.actionbar_main_home_title);
+					// down_home_TextView.setTextColor(Color.WHITE);//getResources().getColor(R.color.white)
+					getSupportActionBar().setCustomView(
+							R.layout.actionbar_main_home_title);
 					searchEditText = (EditText) findViewById(R.id.main_home_title_search);
-//					searchEditText.setSelected(false);
+					// searchEditText.setSelected(false);
 					searchEditText.clearFocus();
 					searchEditText.setCursorVisible(false);
-//					searchEditText.setOnTouchListener(go2searchListener);
+					// searchEditText.setOnTouchListener(go2searchListener);
 					searchEditText.setOnClickListener(go2SearchListener2);
 					break;
 				case 1:
-//					newFragment = MainPageFragment.newInstance(1);
-//					newFragment = new GuangFragment();
+					// newFragment = MainPageFragment.newInstance(1);
+					// newFragment = new GuangFragment();
 					setNavBackground();
-//					downGuangLayout.setPressed(true);
-					down_guang_textview.setTextColor(res.getColor(R.color.white));
-					downGuangLayout.setBackgroundResource(R.drawable.down_hover1);
-//					down_guang_imageView.setPressed(true);
-					down_guang_imageView.setImageResource(R.drawable.down_guang_hover);
-//					down_guang_TextView.setTextColor(Color.WHITE);
+					// downGuangLayout.setPressed(true);
+					down_guang_textview.setTextColor(res
+							.getColor(R.color.white));
+					downGuangLayout
+							.setBackgroundResource(R.drawable.down_hover1);
+					// down_guang_imageView.setPressed(true);
+					down_guang_imageView
+							.setImageResource(R.drawable.down_guang_hover);
+					// down_guang_TextView.setTextColor(Color.WHITE);
 					break;
 				case 2:
-//					newFragment = SearchFragment.newInstance(2);
+					// newFragment = SearchFragment.newInstance(2);
 					setNavBackground();
-//					downSearchLayout.setPressed(true);
-					down_search_textview.setTextColor(res.getColor(R.color.white));
-					downSearchLayout.setBackgroundResource(R.drawable.down_hover1);
-//					down_search_imageView.setPressed(true);
-					down_search_imageView.setImageResource(R.drawable.down_search_hover);
-//					down_search_TextView.setTextColor(Color.WHITE);
-					getSupportActionBar().setCustomView(R.layout.actionbar_search);
+					// downSearchLayout.setPressed(true);
+					down_search_textview.setTextColor(res
+							.getColor(R.color.white));
+					downSearchLayout
+							.setBackgroundResource(R.drawable.down_hover1);
+					// down_search_imageView.setPressed(true);
+					down_search_imageView
+							.setImageResource(R.drawable.down_search_hover);
+					// down_search_TextView.setTextColor(Color.WHITE);
+					getSupportActionBar().setCustomView(
+							R.layout.actionbar_search);
 					searchText = (EditText) findViewById(R.id.search_bar_edittext);
-//					searchText.setSelected(false);
-//					Log.i("info", searchText + " searchText");
+					// searchText.setSelected(false);
+					// Log.i("info", searchText + " searchText");
 					searchText.clearFocus();
 					searchText.setCursorVisible(false);
-//					searchText.setOnTouchListener(go2searchListener);
+					// searchText.setOnTouchListener(go2searchListener);
 					searchText.setOnClickListener(go2SearchListener2);
 					break;
 				case 3:
-					cartNumber = cartDataManage.getCartAmount();
+					// newFragment = ShoppingCartFragment.newInstance(3);
+					// newFragment = new CartActivity();
 					setNavBackground();
-					down_shopping_textview.setTextColor(res.getColor(R.color.white));
-					downShoppingLayout.setBackgroundResource(R.drawable.down_hover1);
-					down_shopping_imageView.setImageResource(R.drawable.down_shopping_hover);
+					// downShoppingLayout.setPressed(true);
+					down_shopping_textview.setTextColor(res
+							.getColor(R.color.white));
+					downShoppingLayout
+							.setBackgroundResource(R.drawable.down_hover1);
+					// down_shopping_imageView.setPressed(true);
+					down_shopping_imageView
+							.setImageResource(R.drawable.down_shopping_hover);
+					// down_shopping_TextView.setTextColor(Color.WHITE);
 					getSupportActionBar()
-					.setCustomView(R.layout.actionbar_cart);
-
+							.setCustomView(R.layout.actionbar_cart);
 					shoppingCartTopay = (Button) findViewById(R.id.shopping_cart_go_pay);
 					shoppingCartTopay.setOnClickListener(goPay);
-					if(cartNumber == 0){
-						shoppingCartTopay.setVisibility(View.GONE);
-						id = 5;
-						break;
-					}else{
+					if(number!=0){
 						shoppingCartTopay.setVisibility(View.VISIBLE);
-						break;
+					}else{
+						shoppingCartTopay.setVisibility(View.GONE);
 					}
+					break;
 				case 4:
-					isLogin = ((MyApplication) getApplication())
-							.getIsLogin();
+					isLogin = ((MyApplication) getApplication()).getIsLogin();
 
-					
 					down_my_textview.setTextColor(res.getColor(R.color.white));
 					if (isLogin) {
-//						newFragment = new MyMallActivity();
+						// newFragment = new MyMallActivity();
 						setNavBackground();
 						// downMyLayout.setPressed(true);
 						downMyLayout
@@ -341,17 +340,17 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 						// down_my_imageView.setPressed(true);
 						down_my_imageView
 								.setImageResource(R.drawable.down_my_hover);
-						getSupportActionBar().setCustomView(R.layout.actionbar_mymall);
-						imageView = (ImageView) findViewById(
-								R.id.person_shopping_button1);
-//						Log.i("info", imageView + " imageView");
+						getSupportActionBar().setCustomView(
+								R.layout.actionbar_mymall);
+						imageView = (ImageView) findViewById(R.id.person_shopping_button1);
+						// Log.i("info", imageView + " imageView");
 						imageView.clearFocus();
 						imageView.setFocusable(true);
 						imageView.setOnClickListener(edit);
-						
 						break;
 					} else {
-//						newFragment = new LoginFragment();
+						
+						// newFragment = new LoginFragment();
 						setNavBackground();
 						// downMyLayout.setPressed(true);
 						downMyLayout
@@ -366,29 +365,29 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 				default:
 					break;
 				}
-				changeFragment(getCurrFragment(currentIndex), getCurrFragment(id));
-				if(id == 5) id = 3;
+				// 用于切换时保存fragment
+				FragmentTransaction ft = getSupportFragmentManager()
+						.beginTransaction();
+				if (getCurrFragment(id).isAdded())
+					ft.hide(getCurrFragment(currentIndex))
+							.show(getCurrFragment(id)).commit();
+				else
+					ft.hide(getCurrFragment(currentIndex))
+							.add(R.id.main_fragment, getCurrFragment(id))
+							.commit();// .addToBackStack(fragmentTag[id])
+					// ft.replace(R.id.main_fragment,
+					// getCurrFragment(id)).commit();
+					// currFragment = newFragment;
 			}
 			currentIndex = id;
 		}
 
 	}
-	
-	public void changeFragment(Fragment curFragment, Fragment newFragment){
-		//用于切换时保存fragment
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		if(newFragment.isAdded())
-			ft.hide(curFragment).show(newFragment).commit();
-		else ft.hide(curFragment).add(R.id.main_fragment, newFragment).commit();//.addToBackStack(fragmentTag[id])
-//		ft.replace(R.id.main_fragment, getCurrFragment(id)).commit();
-//		currFragment = newFragment;
 
-	}
-	
 	private boolean isLogin;
-	
-	//获取当前的fragment, 用于切换时保存fragment
-	public Fragment getCurrFragment(int index){
+
+	// 获取当前的fragment, 用于切换时保存fragment
+	private Fragment getCurrFragment(int index) {
 		Fragment fragment = null;
 		switch (index) {
 		case 0:
@@ -401,85 +400,73 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 			fragment = searchFragment;
 			break;
 		case 3:
-//			if(cartNumber==0)
-//				fragment = noProduceFragment;
-//			else fragment = cartFragment;
+			if(number==0)
+				fragment = noProduce;
 			fragment = cartFragment;
 			break;
 		case 4:
-			if(!isLogin)
+			if (!isLogin)
 				fragment = loginFragment;
-			else fragment = myFragment;
+			else
+				fragment = myFragment;
 			break;
-		case 5:
-			fragment = noProduceFragment;
-			break;
+
 		default:
 			break;
 		}
 		return fragment;
 	}
-	
-	private String[] fragmentTag = {"main", "guang", "search", "cart", "my"};
-	
-	private void setNavBackground(){
+
+	private String[] fragmentTag = { "main", "guang", "search", "cart", "my" };
+
+	private void setNavBackground() {
 		if (currentIndex == 0) {
 			down_home_textview.setTextColor(this.getResources().getColor(
 					R.color.white_white));
-//			downHomeLayout.setPressed(false);
+			// downHomeLayout.setPressed(false);
 			downHomeLayout.setBackgroundResource(R.drawable.downbg);
-//			down_home_imageView.setPressed(false);
-//			down_home_TextView.setTextColor(Color.rgb(180, 180, 180));
+			// down_home_imageView.setPressed(false);
+			// down_home_TextView.setTextColor(Color.rgb(180, 180, 180));
 			down_home_imageView.setImageResource(R.drawable.home_normal);
 
 		} else if (currentIndex == 1) {
 			down_guang_textview.setTextColor(this.getResources().getColor(
 					R.color.white_white));
-//			downGuangLayout.setPressed(false);
+			// downGuangLayout.setPressed(false);
 			downGuangLayout.setBackgroundResource(R.drawable.downbg);
-//			down_guang_imageView.setPressed(false);
-			down_guang_imageView
-					.setImageResource(R.drawable.down_guang_normal);
-//			down_guang_TextView.setTextColor(Color.rgb(180, 180, 180));
+			// down_guang_imageView.setPressed(false);
+			down_guang_imageView.setImageResource(R.drawable.down_guang_normal);
+			// down_guang_TextView.setTextColor(Color.rgb(180, 180, 180));
 
 		} else if (currentIndex == 2) {
 			down_search_textview.setTextColor(this.getResources().getColor(
 					R.color.white_white));
-//			downSearchLayout.setPressed(false);
+			// downSearchLayout.setPressed(false);
 			downSearchLayout.setBackgroundResource(R.drawable.downbg);
-//			down_search_imageView.setPressed(false);
-//			down_search_TextView.setTextColor(Color.rgb(180, 180, 180));
+			// down_search_imageView.setPressed(false);
+			// down_search_TextView.setTextColor(Color.rgb(180, 180, 180));
 			down_search_imageView
 					.setImageResource(R.drawable.down_search_normal);
 
 		} else if (currentIndex == 3) {
 			down_shopping_textview.setTextColor(this.getResources().getColor(
 					R.color.white_white));
-//			downShoppingLayout.setPressed(false);
+			// downShoppingLayout.setPressed(false);
 			downShoppingLayout.setBackgroundResource(R.drawable.downbg);
-//			down_shopping_imageView.setPressed(false);
-//			down_shopping_TextView.setTextColor(Color.rgb(180, 180, 180));
+			// down_shopping_imageView.setPressed(false);
+			// down_shopping_TextView.setTextColor(Color.rgb(180, 180, 180));
 			down_shopping_imageView
 					.setImageResource(R.drawable.down_shopping_normal);
 
 		} else if (currentIndex == 4) {
 			down_my_textview.setTextColor(this.getResources().getColor(
 					R.color.white_white));
-//			downMyLayout.setPressed(false);
+			// downMyLayout.setPressed(false);
 			downMyLayout.setBackgroundResource(R.drawable.downbg);
-//			down_my_imageView.setPressed(false);
-//			down_my_TextView.setTextColor(Color.rgb(180, 180, 180));
+			// down_my_imageView.setPressed(false);
+			// down_my_TextView.setTextColor(Color.rgb(180, 180, 180));
 			down_my_imageView.setImageResource(R.drawable.down_my_normal);
 
-		} else if(currentIndex == 5){
-			down_shopping_textview.setTextColor(this.getResources().getColor(
-					R.color.white_white));
-//			downShoppingLayout.setPressed(false);
-			downShoppingLayout.setBackgroundResource(R.drawable.downbg);
-//			down_shopping_imageView.setPressed(false);
-//			down_shopping_TextView.setTextColor(Color.rgb(180, 180, 180));
-			down_shopping_imageView
-					.setImageResource(R.drawable.down_shopping_normal);
 		}
 	}
 
@@ -490,7 +477,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
-//		invalidateOptionsMenu();
+		// invalidateOptionsMenu();
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		// getSupportActionBar().setDisplayOptions(getSupportActionBar().DISPLAY_SHOW_HOME,
@@ -500,70 +487,58 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setNavigationMode(
 				ActionBar.NAVIGATION_MODE_STANDARD);
 		// getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-//		getSupportActionBar().setHomeButtonEnabled(true);
+		// getSupportActionBar().setHomeButtonEnabled(true);
 		searchEditText = (EditText) findViewById(R.id.main_home_title_search);
-//		searchEditText.setSelected(false);
+		// searchEditText.setSelected(false);
 		searchEditText.clearFocus();
 		searchEditText.setCursorVisible(false);
-//		searchEditText.setOnTouchListener(go2searchListener);
+		// searchEditText.setOnTouchListener(go2searchListener);
 		searchEditText.setOnClickListener(go2SearchListener2);
 	}
+
 	/*
-	private OnTouchListener go2searchListener = new OnTouchListener() {
-		
-		@Override
-		public boolean onTouch(View v, MotionEvent event) {
-			// TODO Auto-generated method stub
-			Intent intent = new Intent(MainFragmentActivity.this, SearchActivity.class);
-			startActivity(intent);
-			return true;
-		}
-	};
-	*/
+	 * private OnTouchListener go2searchListener = new OnTouchListener() {
+	 * 
+	 * @Override public boolean onTouch(View v, MotionEvent event) { // TODO
+	 * Auto-generated method stub Intent intent = new
+	 * Intent(MainFragmentActivity.this, SearchActivity.class);
+	 * startActivity(intent); return true; } };
+	 */
 	public static ArrayList<Cart> cartList;
 	private OnClickListener goPay = new OnClickListener() {
-		
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-		
-				cartList = new ArrayList<Cart>();
-				List<HashMap<String, Object>> orderCarts = CartUtil.list1;
-				for(int i=0;i<orderCarts.size();i++){
-					HashMap<String, Object> map = orderCarts.get(i);
-					float ischeck =  Float.parseFloat(map.get("check").toString());
-//					Log.i("info", ischeck + "    ischeck");
-					Cart  cart1	= (Cart) map.get("cart");
-					if(ischeck == 1.0){
-						cartList.add(cart1);
-				}
-				}
-				Intent intent1 = new Intent(MainFragmentActivity.this,
-						CstmPayActivity.class);
-				Bundle bundle = new Bundle();
-				float sum = CartActivity.sum;
-				
-				intent1.putExtra("carts", cartList);
-
-				if (sum > 0) {
-					bundle.putString("cartActivity", "Y");
-					bundle.putString("price", sum + "");
-					intent1.putExtras(bundle);
-					MainFragmentActivity.this.startActivity(intent1);
-				} else {
-					Toast.makeText(
-							MainFragmentActivity.this,
-							getResources().getString(
-									R.string.buy_nothing),
-							Toast.LENGTH_LONG).show();
+			cartList = new ArrayList<Cart>();
+			List<HashMap<String, Object>> orderCarts = CartUtil.list1;
+			for (int i = 0; i < orderCarts.size(); i++) {
+				HashMap<String, Object> map = orderCarts.get(i);
+				float ischeck = Float.parseFloat(map.get("check").toString());
+				// Log.i("info", ischeck + " ischeck");
+				Cart cart1 = (Cart) map.get("cart");
+				if (ischeck == 1.0) {
+					cartList.add(cart1);
 				}
 			}
-			
-			
-		
+			Intent intent1 = new Intent(MainFragmentActivity.this,
+					CstmPayActivity.class);
+			Bundle bundle = new Bundle();
+			float sum = CartActivity.sum;
+			intent1.putExtra("carts", cartList);
+
+			if (sum > 0) {
+				bundle.putString("cartActivity", "Y");
+				bundle.putString("price", sum + "");
+				intent1.putExtras(bundle);
+				MainFragmentActivity.this.startActivity(intent1);
+			} else {
+				Toast.makeText(MainFragmentActivity.this,
+						getResources().getString(R.string.buy_nothing),
+						Toast.LENGTH_LONG).show();
+			}
+		}
 	};
 	private OnClickListener edit = new OnClickListener() {
-		
 
 		@Override
 		public void onClick(View arg0) {
@@ -572,17 +547,17 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 			startActivity(intent);
 
 		}
-		
 	};
 	private OnClickListener go2SearchListener2 = new OnClickListener() {
-		
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			Intent intent = new Intent(MainFragmentActivity.this, SearchActivity.class);
+			Intent intent = new Intent(MainFragmentActivity.this,
+					SearchActivity.class);
 			startActivity(intent);
 		}
 	};
+
 	private class InnerReceiver extends BroadcastReceiver {
 
 		@Override
@@ -592,67 +567,63 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 			cartsDataManage = new CartsDataManage();
 			if (Consts.UPDATE_CHANGE.equals(action)) {
 				number = cartsDataManage.getCartAmount();
-				if(number==0){
+				if (number == 0) {
 					cartImage.setVisibility(View.GONE);
-				}else{
+				} else {
 					cartImage.setVisibility(View.VISIBLE);
-				cartImage.setText(number + "");
-			}
+					cartImage.setText(number + "");
+				}
 			}
 			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
 				number = cartsDataManage.getCartAmount();
-				Log.i("info", number + "number");
-				if(number==0){
+//				Log.i("info", number + "number");
+				if (number == 0) {
 					cartImage.setVisibility(View.GONE);
-					if(currentIndex == 3){
-						changeFragment(cartFragment, noProduceFragment);
-						currentIndex = 5;
-					}
-					
-				}else{
+				} else {
 					cartImage.setVisibility(View.VISIBLE);
-				cartImage.setText(number + "");
-			}
+					cartImage.setText(number + "");
+				}
 			}
 			if(Consts.DELETE_CART.equals(action)){
-					number = cartsDataManage.getCartAmount();
-					if(number==0){
-						cartImage.setVisibility(View.GONE);
-						getSupportActionBar()
-						.setCustomView(R.layout.actionbar_compose);
-						ImageView back = (ImageView) findViewById(R.id.compose_back);
-						back.setVisibility(View.GONE);
-						TextView title = (TextView) findViewById(R.id.compose_title);
-						title.setText(getResources().getString(R.string.no_cart1));
-					}else{
-						cartImage.setVisibility(View.VISIBLE);
-						cartImage.setText(number+"");
-					}
-			}
+				number = cartsDataManage.getCartAmount();
+				if(number==0){
+					cartImage.setVisibility(View.GONE);
+					getSupportActionBar()
+					.setCustomView(R.layout.actionbar_compose);
+					ImageView back = (ImageView) findViewById(R.id.compose_back);
+					back.setVisibility(View.GONE);
+					TextView title = (TextView) findViewById(R.id.compose_title);
+					title.setText(getResources().getString(R.string.no_cart1));
+				}else{
+					cartImage.setVisibility(View.VISIBLE);
+					cartImage.setText(number+"");
+				}
+		}
 		}
 
 	}
 
-	//双击返回键退出程序
-    private long exitTime = 0;
+	// 双击返回键退出程序
+	private long exitTime = 0;
+
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
-		if(keyCode == KeyEvent.KEYCODE_BACK ){   
-	        if((System.currentTimeMillis()-exitTime) > 2000){  
-	            Toast.makeText(getApplicationContext(), getResources().getString(R.string.exit), Toast.LENGTH_SHORT).show();                                
-	            exitTime = System.currentTimeMillis();   
-	        } else {
-//	        	((MyApplication)getApplication()).setUserId("");
-//	        	((MyApplication)getApplication()).setToken("");
-	            finish();
-//	            System.exit(0);
-	        }
-	        return true;   
-	    }
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if ((System.currentTimeMillis() - exitTime) > 2000) {
+				Toast.makeText(getApplicationContext(),
+						getResources().getString(R.string.exit),
+						Toast.LENGTH_SHORT).show();
+				exitTime = System.currentTimeMillis();
+			} else {
+				// ((MyApplication)getApplication()).setUserId("");
+				// ((MyApplication)getApplication()).setToken("");
+				finish();
+				// System.exit(0);
+			}
+			return true;
+		}
 		return super.onKeyUp(keyCode, event);
 	}
-	
 
-	
 }

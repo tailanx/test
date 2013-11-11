@@ -70,18 +70,21 @@ public class BaseInfoFragment extends SherlockFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		try {
-			// TODO Auto-generated method stub
-			Log.d(TAG, "TestFragment-----onCreateView");
-			dataManage = new CartsDataManage();
-			view = inflater.inflate(R.layout.item_goods_base_info, container, false);
-			mButton = (Button) view.findViewById(R.id.shopping_cart_button);
+			
 			receiver = new InnerReceiver();
 			IntentFilter filter = new IntentFilter();
 			filter.addAction(Consts.UPDATE_CHANGE);
 			filter.addAction(Consts.BROAD_UPDATE_CHANGE);
 			filter.addAction(Consts.DELETE_CART);
-			view.invalidate();
 			getSherlockActivity().registerReceiver(receiver, filter);
+			
+			// TODO Auto-generated method stub
+			Log.d(TAG, "TestFragment-----onCreateView");
+			dataManage = new CartsDataManage();
+			view = inflater.inflate(R.layout.item_goods_base_info, container, false);
+			mButton = (Button) view.findViewById(R.id.shopping_cart_button);
+		
+			view.invalidate();
 			/*
 			switch (goodsId) {
 			case 0:

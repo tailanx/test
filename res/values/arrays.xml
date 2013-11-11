@@ -2,9 +2,9 @@
 <resources>
 
     <string-array name="reason">
-        <item>质量问题</item>
-        <item>服务问题</item>
-        <item>其他问题</item>
+        <item>质量问题  </item>
+        <item>服务问题  </item>
+        <item>其他问题 </item>
     </string-array>
     <string-array name="province">
         <item>-省份-</item>

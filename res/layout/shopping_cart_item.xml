@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="12dp" />
-   
 
     <ImageView
         android:id="@+id/shopping_cart_item__imageview1"
@@ -70,22 +69,19 @@
 
     <RelativeLayout
         android:id="@+id/shopping_cart_item_relative"
-        android:layout_alignLeft="@id/shopping_cart_item_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/shopping_cart_item_text"
         android:layout_below="@id/shopping_cart_item_money"
-        
-        android:layout_toLeftOf="@id/shopping_cart_item_right"
-         >
+        android:layout_toLeftOf="@id/shopping_cart_item_right" >
 
         <ImageView
             android:id="@+id/imageView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/quantity_bg"
             android:clickable="false"
-             />
+            android:src="@drawable/quantity_bg" />
 
         <ImageView
             android:id="@+id/shopping_cart_item_subtract"
@@ -95,24 +91,30 @@
             android:layout_centerVertical="true"
             android:src="@drawable/reduction" />
 
-         <ImageView
+        <ImageView
             android:id="@+id/shopping_cart_item_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignRight="@+id/imageView1"
             android:src="@drawable/addition" />
+
         <TextView
             android:id="@+id/shopping_cart_item_edit_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:gravity="center"
             android:layout_toLeftOf="@id/shopping_cart_item_add"
             android:layout_toRightOf="@id/shopping_cart_item_subtract"
-             />
-
-       
-
+            android:gravity="center" />
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/shopping_cart_item_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/shopping_cart_item_relative"
+        android:layout_toRightOf="@id/shopping_cart_item_relative"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/shopdelete" />
 
 </RelativeLayout>

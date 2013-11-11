@@ -6,9 +6,14 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,31 +34,55 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.datamanage.VoucherDataManage;
 import com.yidejia.app.mall.model.Specials;
+import com.yidejia.app.mall.util.Consts;
+import com.yidejia.app.mall.view.CstmPayActivity;
 
 public class ExchangeAdapter extends BaseAdapter {
-	private Context context;
+	private Activity activity;
 	private ArrayList<Specials> mlist;
 	private static HashMap<Integer, Boolean> isSelected;// =״̬
 	public static List<HashMap<String, Float>> mlist1;
 	public static List<HashMap<String, Object>> mlist2;
 	private LayoutInflater inflater;
+	private VoucherDataManage voucherDataManage;// 积分的信息
+	private double userVoucher;// 用户积分
+	private MyApplication myApplication;
+	private InnerReciver receiver;
 
-
-	public ExchangeAdapter(ArrayList<Specials> mList, Context context) {
-		this.context = context;
+	public ExchangeAdapter(ArrayList<Specials> mList, Activity context) {
+		
+		this.activity = context;
 		this.mlist = mList;
 		this.inflater = LayoutInflater.from(context);
+		receiver = new InnerReciver();
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Consts.EXCHANG_FREE);
+		context.registerReceiver(receiver, filter);
+		
+		voucherDataManage = new VoucherDataManage(context);
+		myApplication = (MyApplication) activity.getApplication();
+		
+		Log.e("voucher",CstmPayActivity.voucherString1+"");
+		userVoucher = Double.parseDouble(CstmPayActivity.voucherString1);//用户的积分
+		
+//		userVoucher = Double.parseDouble(voucherDataManage.getUserVoucher(
+//				myApplication.getUserId(), myApplication.getToken()));
+		
 		options = new DisplayImageOptions.Builder()
 				.showStubImage(R.drawable.image_bg)
 				.showImageOnFail(R.drawable.image_bg)
-				.showImageForEmptyUri(R.drawable.image_bg)
-				.cacheInMemory(true).cacheOnDisc(true).build();
+				.showImageForEmptyUri(R.drawable.image_bg).cacheInMemory(true)
+				.cacheOnDisc(true).build();
 		isSelected = new HashMap<Integer, Boolean>();
 		mlist1 = new ArrayList<HashMap<String, Float>>();
 		mlist2 = new ArrayList<HashMap<String, Object>>();
 		initData();
+		
+		
 	}
 
 	public ExchangeAdapter() {
@@ -73,7 +102,7 @@ public class ExchangeAdapter extends BaseAdapter {
 	 */
 	private void initData() {
 		for (int i = 0; i < mlist.size(); i++) {
-//			Log.i("info", mlist.size() + "size");
+			// Log.i("info", mlist.size() + "size");
 			getIsSelected().put(i, false);
 		}
 	}
@@ -123,14 +152,13 @@ public class ExchangeAdapter extends BaseAdapter {
 	private DisplayImageOptions options;
 	protected ImageLoader imageLoader = ImageLoader.getInstance();// ����ͼƬ
 	int i = 0;
-
-
+	private  Handler handler;
 	@Override
 	public View getView(final int postion, View covertView, ViewGroup arg2) {
 		// TODO Auto-generated method stub
 		final HashMap<String, Float> map = new HashMap<String, Float>();
 		final HashMap<String, Object> map1 = new HashMap<String, Object>();
-		final ViewHolder holder;
+		 final ViewHolder holder;
 		if (covertView == null) {
 			covertView = inflater.inflate(R.layout.exchange_produce_item, null);
 			holder = new ViewHolder();
@@ -152,7 +180,7 @@ public class ExchangeAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) covertView.getTag();
 		}
-		final Handler handler = new Handler() {
+		handler = new Handler() {
 			public void handleMessage(Message msg) {
 				if (msg.what == 113) {
 					map.put("count",
@@ -160,6 +188,15 @@ public class ExchangeAdapter extends BaseAdapter {
 					map1.put("count1",
 							Float.parseFloat(holder.count.getText().toString()));
 				}
+				if(msg.what == 114){
+					Log.i("info", "    sum1");
+					for(int j=0;j<mlist2.size();j++){
+						HashMap<String, Object> map = mlist2.get(j);
+						map.put("isCheck1", 1);
+						holder.cb.setChecked(false);
+					}
+				}
+				
 			};
 		};
 		Specials s = mlist.get(postion);
@@ -185,8 +222,15 @@ public class ExchangeAdapter extends BaseAdapter {
 					isSelected.put(postion, false);
 					map.put("isCheck", (float) 1);
 					map1.put("isCheck1", (float) 1);
+					holder.cb.setChecked(false);
+					
+					map1.put("price", 0);
 				}
+//				Message ms = new Message();
+//				ms.what = 115;
+//				handler.sendMessage(ms);
 			}
+
 		});
 		holder.add.setOnClickListener(new OnClickListener() {
 
@@ -195,12 +239,10 @@ public class ExchangeAdapter extends BaseAdapter {
 				int sum = Integer.parseInt(holder.count.getText().toString());
 				if (sum >= 9999) {
 					Toast.makeText(
-							context,
-							context.getResources().getString(
+							activity,
+							activity.getResources().getString(
 									R.string.price_error), Toast.LENGTH_LONG)
 							.show();
-					
-
 
 				} else {
 					sum++;
@@ -219,8 +261,8 @@ public class ExchangeAdapter extends BaseAdapter {
 				// TODO Auto-generated method stub
 				int sum = Integer.parseInt(holder.count.getText().toString());
 				if (sum <= 1) {
-					Toast.makeText(context,
-							context.getResources().getString(R.string.mix),
+					Toast.makeText(activity,
+							activity.getResources().getString(R.string.mix),
 
 							Toast.LENGTH_LONG).show();
 				} else {
@@ -237,11 +279,11 @@ public class ExchangeAdapter extends BaseAdapter {
 		map1.put("cart", s);
 		map1.put("price1", Float.parseFloat(s.getScores()));
 		map1.put("count1", Float.parseFloat(holder.count.getText().toString()));
-		
-		
+
 		map.put("price", Float.parseFloat(s.getScores()));
 		map.put("count", Float.parseFloat(holder.count.getText().toString()));
 		map.put("isCheck", (float) (holder.cb.isChecked() == true ? 0 : 1));
+
 		i++;
 		mlist1.add(map);
 		mlist2.add(map1);
@@ -259,4 +301,18 @@ public class ExchangeAdapter extends BaseAdapter {
 
 	}
 
+	public class InnerReciver extends BroadcastReceiver{
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			String  action = intent.getAction();
+			if(Consts.EXCHANG_FREE.equals(action)){
+				 initData();
+				 notifyDataSetChanged();
+			}
+		}
+		
+	}
+	
 }

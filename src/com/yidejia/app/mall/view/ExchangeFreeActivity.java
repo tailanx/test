@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import android.app.AlertDialog.Builder;
 import android.app.AlertDialog;
-import android.app.Dialog;
+import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -65,7 +64,6 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 	private ArrayList<Cart> mArrayList;
 	private String isString;
 	private AlertDialog dialog;
-	private float sum1 = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +105,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 					
 						float sum = 0;
 
+						float sum1 = 0;
 						for (int i = 0; i < exchange.size(); i++) {
 							HashMap<String, Float> map = exchange.get(i);
 							// HashMap<String, Object> map1 = cart.get(i);
@@ -143,11 +142,11 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 							Toast.makeText(ExchangeFreeActivity.this,
 									getResources().getString(R.string.my_voucher),
 									Toast.LENGTH_SHORT).show();
-							Toast.makeText(
-									ExchangeFreeActivity.this,
-									getResources().getString(R.string.show_voucher)
-											+ voucher, Toast.LENGTH_SHORT).show();
+//							for (int i = 0; i < cart.size(); i++) {
+							Intent intent1  = new Intent(Consts.EXCHANG_FREE);
+							sendBroadcast(intent1);
 							return;
+//							}
 						} else if (sum1 <= voucher) {// && isSelelct1 == 0.0
 							for (int i = 0; i < cart.size(); i++) {
 								HashMap<String, Object> map1 = cart.get(i);
@@ -170,26 +169,15 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 								// getResources().getString(R.string.no_network),
 								// Toast.LENGTH_SHORT).show();
 								// }
-								boolean isExsist = false;
+								
 								if (isSelelct1 == 0.0) {
-//									for(int j=0;i<mArrayList.size();j++){
-//										Cart  cartList = mArrayList.get(j);
-//										if(cartList.getUId().equals(cart.getUId())){
-//											cartList.setSalledAmmount(cartList.getAmount()+cart.getAmount());
-//											isExsist = true;
-//											break;
-//										}
-		//
-//									}
-//									if(!isExsist)mArrayList.add(cart);
+					
 									mArrayList.add(cart);
 									voucher = (int) (voucher - sum1);
 								}
 							}
 							Log.i("info", voucher+"   vouche1r");
-							// Cart cart1 = new
-							// FreeGivingAdapter(ExchangeFreeActivity.this,
-							// CstmPayActivity.arrayListFree).getCart();
+							
 							Cart cart1 = FreeGivingAdapter.carts;
 							if (cart1.getUId() != null) {
 								Log.i("info", mArrayList.size()+"   mArrayList");
