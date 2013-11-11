@@ -133,4 +133,10 @@ public class JNICallBack {
 	
 	//申请退换货
 	public static native String getHttp4GetReturn(String user_id, String order_code, String the_date, String contact, String phone, String cause, String desc, String token);
-}
+	
+	//查看退换货
+	public static native String getHttp4GetReturnList(String userid, String offset, String limit, String token);
+	
+	
+}	
+	
