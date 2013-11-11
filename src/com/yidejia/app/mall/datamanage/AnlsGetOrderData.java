@@ -207,9 +207,11 @@ public class AnlsGetOrderData {
 				}
 				String ship_fee = itemObject.getString("ship_fee");
 				itemOrder.setShipFee(ship_fee);
+				itemOrder.setShipCode(itemObject.getString("ship_code"));
+				itemOrder.setShipCompany(itemObject.getString("ship_company"));
 				String lines = itemObject.getString("lines");
 				itemOrder.setCartsArray(analysisCart(lines));
-				itemOrder.setTn(itemObject.getString("tn"));
+//				itemOrder.setTn(itemObject.getString("tn"));
 				orders.add(itemOrder);
 			}
 		} else if(code == -1){

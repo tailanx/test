@@ -62,14 +62,14 @@ public class TaskGetOrderByCode {
 		findIds();
 	}
 	
-	public void getOderBC(String code, String price, String orderTn){//, boolean isFirstIn
+	public void getOderBC(String code, String price){//, boolean isFirstIn  , String orderTn
 		if(!ConnectionDetector.isConnectingToInternet(activity)) {
 			Toast.makeText(activity, activity.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return;
 		}
 		this.orderCode = code;
 		this.orderPrice = price;
-		this.orderTn = orderTn;
+//		this.orderTn = orderTn;
 		
 		if (taskGobc != null
 				&& taskGobc.getStatus() == AsyncTask.Status.RUNNING) {
@@ -183,7 +183,7 @@ public class TaskGetOrderByCode {
 	private RelativeLayout orderAddressLayout;//收件人地址的布局
 	private String orderCode;//传递过来的订单号
 	private String orderPrice;//传递过来的价格总数
-	private String orderTn;//传递过来的流水号
+//	private String orderTn;//传递过来的流水号
 	private ArrayList<Addresses> addresses ;
 	private TaskGetUserAddress taskGetUserAddress;
 	
@@ -221,21 +221,8 @@ public class TaskGetOrderByCode {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					if("".equals(orderTn) || null == orderTn) {
-						Log.e(TAG, "tn is null");
-						return;
-					}
-					Log.e(TAG, "tn is not null");
-					Intent intent = new Intent(activity, UserPayActivity.class);
-					Bundle bundle = new Bundle();
-					bundle.putInt("mode", 1);
-					bundle.putString("tn", orderTn);
-					bundle.putString("resp_code", "00");
-					bundle.putString("code", orderCode);
-					bundle.putString("uid", ((MyApplication)activity.getApplication()).getUserId());
-					intent.putExtras(bundle);
-					activity.startActivity(intent);
-					activity.finish();
+					TaskGetTn task = new TaskGetTn(activity);
+					task.getOrderTn(orderCode);
 				}
 			});
 			changePayTypeTextView.setVisibility(View.VISIBLE);
