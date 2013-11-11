@@ -2325,7 +2325,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetReturn(JNIEnv* env,
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//查看退换货信息
+//查看退换货信息 get
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetReturnList(JNIEnv* env,
 		jobject thiz, jstring userId,  jstring offset1, jstring limit1, jstring token){//
 
@@ -2338,23 +2338,29 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetReturnList(JNIEnv* 
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api="?api=ucenter.returnorder.getList";
+	const char *api="?api=ucenter.returnorder.getByUserId";
 
 	addString(urlString, url);
 	addString(urlString, api);
 
-	addString(urlString, "&where=user_id=");
+//	addString(urlString, "&where=user_id=");
+	addString(urlString, "&user_id=");
 	if(chname != NULL)addString(urlString, chname);
 
 	addString(urlString, "&token=");
 	if(chtoken != NULL)addString(urlString, chtoken);
 
-	addString(urlString, "&option%5Boffset%5D=");
+	addString(urlString, "&offset1=");
 	if(choffset1 != NULL)addString(urlString, choffset1);
-	addString(urlString, "&option%5Blimit%5D=");
+	addString(urlString, "&limit1=");
 	if(chlimit1 != NULL)addString(urlString, chlimit1);
 
-	addString(urlString, "&option%5Border%5D=the_date+desc&fields=%2A");
+//	addString(urlString, "&option%5Boffset%5D=");
+//	if(choffset1 != NULL)addString(urlString, choffset1);
+//	addString(urlString, "&option%5Blimit%5D=");
+//	if(chlimit1 != NULL)addString(urlString, chlimit1);
+//
+//	addString(urlString, "&option%5Border%5D=the_date+desc&fields=%2A");
 
 	addString(urlString, pHead);
 
@@ -2367,7 +2373,117 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetReturnList(JNIEnv* 
 	addString(urlString, chtime);
 	addString(urlString, "&sign=");
 	addString(encrypt, strTemp);
-	addString(encrypt, "ucenter.returnorder.getList");
+	addString(encrypt, "ucenter.returnorder.getByUserId");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
+
+//查看退换货信息 get
+jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetShipLog(JNIEnv* env,
+		jobject thiz, jstring code){//,  jstring offset1, jstring limit1, jstring token
+
+	const char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
+//	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+//	const char *choffset1 = (*env)->GetStringUTFChars(env, offset1, NULL);
+//	const char *chlimit1 = (*env)->GetStringUTFChars(env, limit1, NULL);
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+	const char *api="?api=order.express.shipLog";
+
+	addString(urlString, url);
+	addString(urlString, api);
+
+	addString(urlString, "&code=");
+	if(chcode != NULL)addString(urlString, chcode);
+
+	addString(urlString, pHead);
+
+
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
+
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "order.express.shipLog");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
+
+//获取tn
+jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetTn(JNIEnv* env,
+		jobject thiz, jstring userid, jstring order_code, jstring token){//
+
+	const char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
+	const char *chorder_code = (*env)->GetStringUTFChars(env, order_code, NULL);
+	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+//	memset(encrypt, 0, LEN * sizeof(char));
+
+	const char *api="api=ucenter.order.push";
+
+//	addString(urlString, url);
+	addString(urlString, api);
+
+	addString(urlString, "&id=");
+	if(chuid != NULL)addString(urlString, chuid);
+	addString(urlString, "&code=");
+	if(chorder_code != NULL)addString(urlString, chorder_code);
+	addString(urlString, "&token=");
+	if(chtoken != NULL)addString(urlString, chtoken);
+
+	addString(urlString, pHead);
+
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
+
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "ucenter.order.push");
 	addString(encrypt, chtime);
 
 	MD5_CTX md5;
