@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.RetOrderInfo;
+import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.net.HttpPostConn;
 
 public class GetReturnOrder {
@@ -21,8 +22,8 @@ public class GetReturnOrder {
 			String limit, String token) throws IOException {
 		String url = JNICallBack.getHttp4GetReturnList(user_id, offset,
 				limit, token);
-		HttpPostConn conn = new HttpPostConn(url);
-		return conn.getHttpResponse();
+		HttpGetConn conn = new HttpGetConn(url, true);
+		return conn.getJsonResult();
 	}
 	
 	/**
@@ -59,6 +60,7 @@ public class GetReturnOrder {
 				info.setDesc(itemObject.getString("desc"));
 				retOrders.add(info);
 			}
+			return true;
 		}
 		return false;
 	}

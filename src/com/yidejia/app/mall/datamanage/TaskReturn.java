@@ -8,7 +8,7 @@ import org.json.JSONException;
 
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.net.order.ReturnOrder;
+import com.yidejia.app.mall.net.order.SaveReturnOrder;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -101,7 +101,7 @@ public class TaskReturn {
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-			ReturnOrder order = new ReturnOrder();
+			SaveReturnOrder order = new SaveReturnOrder();
 			try {
 				String httpResp = order.getHttpResp(userId, orderCode, theDate, contact, contact_manner, cause, desc, token);
 				try {
