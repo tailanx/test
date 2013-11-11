@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -157,7 +158,7 @@ public class ExchangeAdapter extends BaseAdapter {
 		// TODO Auto-generated method stub
 		final HashMap<String, Float> map = new HashMap<String, Float>();
 		final HashMap<String, Object> map1 = new HashMap<String, Object>();
-		final ViewHolder holder;
+		 final ViewHolder holder;
 		if (covertView == null) {
 			covertView = inflater.inflate(R.layout.exchange_produce_item, null);
 			holder = new ViewHolder();
@@ -179,7 +180,7 @@ public class ExchangeAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) covertView.getTag();
 		}
-		  final Handler handler = new Handler() {
+		handler = new Handler() {
 			public void handleMessage(Message msg) {
 				if (msg.what == 113) {
 					map.put("count",
@@ -189,7 +190,11 @@ public class ExchangeAdapter extends BaseAdapter {
 				}
 				if(msg.what == 114){
 					Log.i("info", "    sum1");
-					holder.cb.setChecked(false);
+					for(int j=0;j<mlist2.size();j++){
+						HashMap<String, Object> map = mlist2.get(j);
+						map.put("isCheck1", 1);
+						holder.cb.setChecked(false);
+					}
 				}
 				
 			};
@@ -303,10 +308,8 @@ public class ExchangeAdapter extends BaseAdapter {
 			// TODO Auto-generated method stub
 			String  action = intent.getAction();
 			if(Consts.EXCHANG_FREE.equals(action)){
-//				 Log.i("info", action+"    sum1");
-				 Message ms = new Message();
-				 ms.what = 114;
-				 handler.sendMessage(ms);
+				 initData();
+				 notifyDataSetChanged();
 			}
 		}
 		
