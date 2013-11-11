@@ -179,7 +179,7 @@ public class ExchangeAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) covertView.getTag();
 		}
-		handler = new Handler() {
+		  final Handler handler = new Handler() {
 			public void handleMessage(Message msg) {
 				if (msg.what == 113) {
 					map.put("count",

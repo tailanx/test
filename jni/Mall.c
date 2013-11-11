@@ -8,10 +8,10 @@
 extern "C" {
 #endif
 
-//static const char *url = "http://192.168.1.254:802/";
-//const char *strTemp = "ChunTianfw_mobile123456";
-static const char *url = "http://fw1.atido.net/";
-const char *strTemp = "ChunTianfw_mobile@SDF!TD#DF#*CB$GER@";
+static const char *url = "http://192.168.1.254:802/";
+const char *strTemp = "ChunTianfw_mobile123456";
+//static const char *url = "http://fw1.atido.net/";
+//const char *strTemp = "ChunTianfw_mobile@SDF!TD#DF#*CB$GER@";
 
 const char *pHead = "&key=fw_mobile&format=array&ts=";
 
@@ -2305,6 +2305,69 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetReturn(JNIEnv* env,
 	addString(urlString, "&sign=");
 	addString(encrypt, strTemp);
 	addString(encrypt, "ucenter.returnorder.save");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
+
+//查看退换货信息
+jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetReturnList(JNIEnv* env,
+		jobject thiz, jstring userId,  jstring offset1, jstring limit1, jstring token){//
+
+	const char *chname = (*env)->GetStringUTFChars(env, userId, NULL);
+	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	const char *choffset1 = (*env)->GetStringUTFChars(env, offset1, NULL);
+	const char *chlimit1 = (*env)->GetStringUTFChars(env, limit1, NULL);
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+	const char *api="?api=ucenter.returnorder.getList";
+
+	addString(urlString, url);
+	addString(urlString, api);
+
+	addString(urlString, "&where=user_id=");
+	if(chname != NULL)addString(urlString, chname);
+
+	addString(urlString, "&token=");
+	if(chtoken != NULL)addString(urlString, chtoken);
+
+	addString(urlString, "&option%5Boffset%5D=");
+	if(choffset1 != NULL)addString(urlString, choffset1);
+	addString(urlString, "&option%5Blimit%5D=");
+	if(chlimit1 != NULL)addString(urlString, chlimit1);
+
+	addString(urlString, "&option%5Border%5D=the_date+desc&fields=%2A");
+
+	addString(urlString, pHead);
+
+
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
+
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "ucenter.returnorder.getList");
 	addString(encrypt, chtime);
 
 	MD5_CTX md5;
