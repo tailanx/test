@@ -8,10 +8,10 @@
 extern "C" {
 #endif
 
-//static const char *url = "http://192.168.1.254:802/";
-//const char *strTemp = "ChunTianfw_mobile123456";
-static const char *url = "http://fw1.atido.net/";
-const char *strTemp = "ChunTianfw_mobile@SDF!TD#DF#*CB$GER@";
+static const char *url = "http://192.168.1.254:802/";
+const char *strTemp = "ChunTianfw_mobile123456";
+//static const char *url = "http://fw1.atido.net/";
+//const char *strTemp = "ChunTianfw_mobile@SDF!TD#DF#*CB$GER@";
 
 const char *pHead = "&key=fw_mobile&format=array&ts=";
 
