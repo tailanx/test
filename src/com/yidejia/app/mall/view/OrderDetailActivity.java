@@ -68,13 +68,13 @@ public class OrderDetailActivity extends SherlockFragmentActivity {
 		orderCode = intent.getExtras().getString("OrderCode");
 		orderPrice =  intent.getExtras().getString("OrderPrice");
 		ArrayList<Cart> carts = (ArrayList<Cart>)intent.getSerializableExtra("carts");
-		try {
-			orderTn = intent.getExtras().getString("OrderTn");
-		} catch (Exception e) {
-			// TODO: handle exception
-			Log.e(TAG, "tn is null");
-			e.printStackTrace();
-		}
+//		try {
+//			orderTn = intent.getExtras().getString("OrderTn");
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			Log.e(TAG, "tn is null");
+//			e.printStackTrace();
+//		}
 		Log.i("info", orderCode +"   orderCode");
 //		nameTextView = (TextView) findViewById(R.id.order_detail_name);
 //		phoneTextView = (TextView) findViewById(R.id.order_detail_number);
@@ -209,7 +209,7 @@ public class OrderDetailActivity extends SherlockFragmentActivity {
 		
 		
 		taskOrderByCode = new TaskGetOrderByCode(this);
-		taskOrderByCode.getOderBC(orderCode, orderPrice, orderTn);
+		taskOrderByCode.getOderBC(orderCode, orderPrice);//TN , orderTn
 	}
 	/**
 	 * 设置购物清单商品信息
