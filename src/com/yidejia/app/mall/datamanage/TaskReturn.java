@@ -69,7 +69,7 @@ public class TaskReturn {
 		userId = ((MyApplication)activity.getApplication()).getUserId();
 		token = ((MyApplication)activity.getApplication()).getToken();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		theDate = sdf.format(new Date(0));
+		theDate = sdf.format(new Date());
 	}
 	
 	
