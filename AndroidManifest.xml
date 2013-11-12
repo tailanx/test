@@ -58,7 +58,7 @@ android:uiOptions="splitActionBarWhenNarrow"
             android:uiOptions="splitActionBarWhenNarrow" >
         </activity>
         <activity android:name="com.yidejia.app.mall.GoodsInfoActivity" 
-            android:launchMode="singleTask"
+
             android:screenOrientation="portrait"
             >
         	    

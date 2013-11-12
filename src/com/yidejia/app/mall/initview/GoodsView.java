@@ -380,6 +380,7 @@ public class GoodsView {
 						Bundle bundle = new Bundle();
 						bundle.putString("goodsId", bannerArray.get(index).getUId());
 						intent.putExtras(bundle);
+//						activity.notifyAll();
 						activity.startActivity(intent);
 						activity.finish();
 					}
