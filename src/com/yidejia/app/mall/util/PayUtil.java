@@ -99,6 +99,7 @@ public class PayUtil {
 //			dataManage = new CartsDataManage();
 //			ArrayList<Cart> mList = dataManage.getCartsArray();
 			// Log.i("info", mList.size()+"mList");
+			Log.i("voucher", mList.size()+"    carts.size()");
 			for (int i = 0; i < mList.size(); i++) {
 				view = inflater.inflate(R.layout.go_pay_item, null);
 				// Log.i("info", view+"");
@@ -119,27 +120,29 @@ public class PayUtil {
 						.findViewById(R.id.go_pay_item_count_detail);// ��Ʒ��Ŀ
 
 				// Order mOrder = mList.get(i);
+				Log.i("info", cart+" cart");
 				titleTextView.setText(cart.getProductText());
 				String head = cart.getImgUrl();
 				imageLoader.displayImage(head, headImage, options,
 						animateFirstListener);
-				// Log.i("info", head+"   head");
-				// Bitmap bm = BitmapFactory.decodeFile(head);
-				// if(bm != null){
-				// headImage.setImageBitmap(bm);
-				// }else{
-				// headImage.setImageResource(R.drawable.ic_launcher);
-				// }
+//				// Log.i("info", head+"   head");
+//				// Bitmap bm = BitmapFactory.decodeFile(head);
+//				// if(bm != null){
+//				// headImage.setImageBitmap(bm);
+//				// }else{
+//				// headImage.setImageResource(R.drawable.ic_launcher);
+//				// }
 				String  a = cart.getPrice()+"";
 				Log.i("info", a+" a");
-				int b= a.indexOf(".");
-				Log.i("info", b+" b");
-				Log.i("info", a.charAt(b+1)+" a.charAt(b+1)");
-				if(((int)(a.charAt(b+1)))!=((int)1)){
-					Log.i("info", (((int)(a.charAt(b+1)))!=((int)1))+"    a s");
-					sumPrice.setText("￥"+cart.getPrice());
+//				int b= a.indexOf(".");
+//				
+//				Log.e("info", a.charAt(b+1)+"");
+				
+				if(("0.0".equals(a))){
+
+					sumPrice.setText(cart.getScort()+"  积分");
 				}else{
-					sumPrice.setText(cart.getPrice()+"积分");
+					sumPrice.setText("￥ "+cart.getPrice());
 					}
 				String amount = cart.getAmount() + "";
 				countTextView.setText(amount);

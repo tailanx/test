@@ -29,7 +29,13 @@ public class NOProduceActivity extends SherlockActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent intentOrder = new Intent(NOProduceActivity.this, SearchResultActivity.class);
-				intentOrder.putExtra("title", "全部");
+				Bundle bundle = new Bundle();
+				bundle.putString("title", "全部");
+				bundle.putString("name", "");
+				bundle.putString("price", "");
+				bundle.putString("brand", "");
+				bundle.putString("fun", "");
+				intentOrder.putExtras(bundle);
 				NOProduceActivity.this.startActivity(intentOrder);
 			}
 		});

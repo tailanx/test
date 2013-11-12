@@ -763,8 +763,8 @@ public class EditNewAddressActivity extends SherlockActivity {
 //						EditNewAddressActivity.this.finish();
 //						
 
-					addressId = dataManage
-							.addAddress(
+					boolean isSuccess = dataManage
+							.updateAddress(
 									((MyApplication) EditNewAddressActivity.this
 											.getApplication())
 											.getUserId(),
@@ -777,13 +777,13 @@ public class EditNewAddressActivity extends SherlockActivity {
 											.toString().trim(),
 									numberTextView.getText()
 											.toString(),
-									true,
+									true, id,
 									((MyApplication) EditNewAddressActivity.this
 											.getApplication())
 											.getToken());
 					// Log.i("info", addressId+"addressId");
 
-					if ("".equals(addressId)) {
+					if (!isSuccess) {
 						Toast.makeText(EditNewAddressActivity.this,
 								"您的输入有问题", Toast.LENGTH_SHORT)
 								.show();

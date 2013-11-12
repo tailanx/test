@@ -8,11 +8,19 @@ import java.io.Serializable;
  *
  */
 public class Cart implements Serializable{
+	public String getScort() {
+		return Scort;
+	}
+	public void setScort(String scort) {
+		Scort = scort;
+	}
 	private String uId;                //商品Id
 	private int amount;             //购买数量
 	private String productText;     //商品描述（《＝256字节）
 	private float price;            //价格
 	private String imgUrl;          //商品小图链接地址
+	private String Scort;//积分
+	
 	/**
 	 * 
 	 * @param uId 设置product id

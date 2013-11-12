@@ -222,6 +222,8 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 //		getSupportActionBar().setHomeButtonEnabled(true);
 //		getSupportActionBar().set
 		autoCompleteTextView = (EditText) findViewById(R.id.searchActivity_autoComplete);
+		autoCompleteTextView.setCursorVisible(true);
+		
 		adapter = new ArrayAdapter<String>(this, //定义匹配源的adapter
                 android.R.layout.simple_dropdown_item_1line, historyArrayList);
 //		searchTextView.setAdapter(adapter);

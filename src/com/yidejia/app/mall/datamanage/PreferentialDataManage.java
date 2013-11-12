@@ -184,31 +184,51 @@ public class PreferentialDataManage {
 			resArray = new JSONArray(response);
 			for (int i = 0; i < resArray.length(); i++) {
 				JSONObject itemObject = resArray.getJSONObject(i);
+				
 				String activeId = itemObject.getString("id");
-				String goods_list = itemObject.getString("good_list");
-				JSONArray goodsArray = new JSONArray(goods_list);
-				Specials specials;
-				JSONObject listObject;
-				for (int j = 0; j < goodsArray.length(); j++) {
-					specials = new Specials();
-					listObject = goodsArray.getJSONObject(j);
-					specials.setUId(listObject.getString("goods_id"));
-					specials.setImgUrl(ImageUrl.IMAGEURL + listObject.getString("imgname") + "!100");
-					specials.setPrice(listObject.getString("price"));
-					specials.setScores(listObject.getString("score_price"));
-					specials.setBrief(listObject.getString("desc"));
-					//还没有完成
-					if("2".equals(activeId)){
-						freeProductArray.add(specials);
-					} else if("3".equals(activeId)){
-						scoresProductArray.add(specials);
-					} else if("27".equals(activeId)){
-						scoresProductArray.add(specials);
+//				
+//				if("2".equals(activeId)){
+//					Log.i("info", itemObject.getString("id")+"       id222222222222");
+//					continue;
+//				}
+				
+//				Log.i("info", itemObject.getString("id")+"       id333333333333333");
+//				Log.i("info", itemObject.getString("good_list")+"    good_list");
+				String goods_list = "";
+				try{
+					goods_list = itemObject.getString("good_list");
+					JSONArray goodsArray = new JSONArray(goods_list);
+					Specials specials;
+					JSONObject listObject;
+					for (int j = 0; j < goodsArray.length(); j++) {
+						specials = new Specials();
+						listObject = goodsArray.getJSONObject(j);
+						if (null == listObject) {
+							continue;
+						}
+						specials.setUId(listObject.getString("goods_id"));
+						specials.setImgUrl(ImageUrl.IMAGEURL + listObject.getString("imgname") + "!100");
+						specials.setPrice(listObject.getString("price"));
+						specials.setScores(listObject.getString("score_price"));
+						specials.setBrief(listObject.getString("desc"));
+						//还没有完成
+						if("2".equals(activeId)){
+							freeProductArray.add(specials);
+						} else if("3".equals(activeId)){
+							scoresProductArray.add(specials);
+						} else if("27".equals(activeId)){
+							scoresProductArray.add(specials);
+						}
 					}
+				} catch(Exception e){
+					e.printStackTrace();
+					continue;
 				}
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch(Exception e){
 			e.printStackTrace();
 		}
 	}

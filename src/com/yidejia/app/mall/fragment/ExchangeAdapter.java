@@ -223,7 +223,6 @@ public class ExchangeAdapter extends BaseAdapter {
 					map.put("isCheck", (float) 1);
 					map1.put("isCheck1", (float) 1);
 					holder.cb.setChecked(false);
-					
 					map1.put("price", 0);
 				}
 //				Message ms = new Message();

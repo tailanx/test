@@ -884,8 +884,8 @@ public class CstmPayActivity extends SherlockActivity {
 							.getText().toString())) + "");
 		}
 		Log.i("info", "setKuaidi:");
-		postMethod = getResources().getString(R.string.ship_post);// 初始化快递方式;
-		expressNum = express.getExpress();// 初始化费用
+//		postMethod = getResources().getString(R.string.ship_post);// 初始化快递方式;
+//		expressNum = express.getExpress();// 初始化费用
 	}
 	
 	/**
@@ -972,7 +972,9 @@ public class CstmPayActivity extends SherlockActivity {
 		 * 步骤3：处理银联手机支付控件返回的支付结果
 		 * 
 		 ************************************************/
-
+		
+		Log.i("info", requestCode + "   requestCode");
+		Log.i("info",resultCode + "   resultCode");
 		if (data == null) {
 			return;
 		}
@@ -980,22 +982,26 @@ public class CstmPayActivity extends SherlockActivity {
 				&& resultCode == Consts.AddressResponseCode) {
 			Addresses addresses1 = (Addresses) data.getExtras()
 					.getSerializable("addresses1");
-//			Log.i("info", addresses1.getAddress() + "str");
+			Log.i("info", addresses1.getAddress() + "str");
 			if (addresses1 != null) {
-//				reLayout.removeView(addressRelative);
-//				userName.setText(addresses1.getName());
-//				phoneName.setText(addresses1.getHandset());// �޸�Ϊ�ֻ�
-//				StringBuffer sb = new StringBuffer();
-//				sb.append(addresses1.getProvice());
-//				sb.append(addresses1.getCity());
-//				sb.append(addresses1.getArea());
-//				sb.append(addresses1.getAddress());
-//				address.setText(sb.toString());
+				reLayout.removeView(addressRelative);
+				userName.setText(addresses1.getName());
+				phoneName.setText(addresses1.getHandset());// �޸�Ϊ�ֻ�
+				StringBuffer sb = new StringBuffer();
+				sb.append(addresses1.getProvice());
+				sb.append(addresses1.getCity());
+				sb.append(addresses1.getArea());
+				sb.append(addresses1.getAddress());
+				address.setText(sb.toString());
 				setAdd(addresses1);
 			}
 			} else if (requestCode == Consts.CstmPayActivity_Request
 					&& resultCode == Consts.CstmPayActivity_Response) {
+				
+				
 				carts = (ArrayList<Cart>) data.getSerializableExtra("carts");
+				Log.i("voucher", carts.size()+"    carts.size()11");
+				
 				voucher = data.getFloatExtra("voucher", -1);
 				Log.i("voucher", jifen+"    jifen");
 				jifen = data.getFloatExtra("jifen", -1);

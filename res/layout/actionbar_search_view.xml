@@ -43,18 +43,21 @@
         android:layout_gravity="center_vertical"
         android:layout_margin="5.0dp"
         android:layout_toLeftOf="@id/search_btn"
+        android:cursorVisible="true"
         android:layout_toRightOf="@id/search_back_btn"
         android:background="@drawable/search_text_bg"
+         android:textCursorDrawable="@null"
         android:drawableLeft="@drawable/top_search_icon"
         android:drawablePadding="6dp"
-        android:focusable="true"
         android:gravity="center_vertical"
         android:hint="@string/searchHint"
-        android:imeOptions="actionSearch"
+ 	    android:imeOptions="actionSearch"
         android:inputType="text"
         android:singleLine="true"
         android:textColor="#ff000000"
-        android:textSize="16.0sp" />
+        android:textSize="16.0sp" >
+        
+        </EditText>
     
     <!-- 
     android:completionThreshold="1"

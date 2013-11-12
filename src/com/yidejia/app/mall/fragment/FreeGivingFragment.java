@@ -69,6 +69,7 @@ public class FreeGivingFragment extends SherlockFragment {
 		LinearLayout relativeLayout = (LinearLayout)view.findViewById(R.id.free_shopping_cart_relative2);//获取布局
 		listView = (ListView) view.findViewById(R.id.free_giving_listview);
 		Log.i("info", CartActivity.arrayListFree+  "CartActivity.arrayListFree");
+		if(CstmPayActivity.arrayListFree.isEmpty()) return view;
 		adapter = new FreeGivingAdapter(getSherlockActivity(), CstmPayActivity.arrayListFree);//preferentialDataManage.getFreeGoods()
 		listView.setAdapter(adapter);
         listView.setOnItemClickListener(listItemClickListener);  

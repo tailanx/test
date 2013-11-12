@@ -37,11 +37,14 @@ public class FreeGivingAdapter extends BaseAdapter {
 	private ArrayList<Specials> mList;
 	private static List<HashMap<String, Object>> list;
 	public static Cart carts;
+	private int length = 0;
 
 	public FreeGivingAdapter(Activity context, ArrayList<Specials> mList) {
 		this.activity = context;
 		this.inflater = LayoutInflater.from(context);
 		this.mList = mList;
+		if(mList.isEmpty()) length = 0;
+		else length = mList.size();
 		options = new DisplayImageOptions.Builder()
 				.showStubImage(R.drawable.image_bg)
 				.showImageOnFail(R.drawable.image_bg)
@@ -67,18 +70,20 @@ public class FreeGivingAdapter extends BaseAdapter {
 
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return mList.size();
+		return length;
 	}
 
 	@Override
 	public Specials getItem(int position) {
 		// TODO Auto-generated method stub
+		if(length == 0) return null;
 		return mList.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
 		// TODO Auto-generated method stub
+		if(length == 0) return position;
 		return Long.parseLong(mList.get(position).getUId());
 	}
 
