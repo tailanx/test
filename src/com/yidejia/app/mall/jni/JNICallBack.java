@@ -143,6 +143,13 @@ public class JNICallBack {
 	//获取tn
 	public static native String getHttp4GetTn(String userid, String order_code, String token);
 	
+	//获取图片验证码
+	public static native String getHttp4GetCode(String name);
 	
+	//发送验证码
+	public static native String getHttp4SendMsg(String name, String code);
+	
+	//验证验证码
+	public static native String getHttp4CheckCode(String name, String code);
 }	
 	

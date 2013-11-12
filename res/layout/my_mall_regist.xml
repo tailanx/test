@@ -55,6 +55,7 @@
                         android:background="@null"
                         android:ellipsize="middle"
                         android:hint="请输入手机号码"
+                        android:maxLength="11"
                         android:inputType="phone"
                         android:singleLine="true"
                         android:textSize="15sp" />
@@ -74,12 +75,13 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/forgot_password"
                         android:drawableLeft="@drawable/verification"
-                        android:drawablePadding="8dp"
+                        android:drawablePadding="6dp"
                         android:gravity="center_vertical"
                         android:hint="输入短信验证码"
+                        android:maxLength="6"
                         android:paddingLeft="10dp"
                         android:singleLine="true"
-                        android:textSize="15dp" />
+                        android:textSize="14dp" />
 
                     <ImageView
                         android:id="@+id/my_mall_regist_password_validation_button"
@@ -106,9 +108,9 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:drawableLeft="@drawable/password_icon"
-                        android:drawablePadding="8dp"
-                        android:padding="8dp"
-                        android:text="密码"
+                        android:drawablePadding="6dp"
+                        android:padding="6dp"
+                        android:text="密         码"
                         android:gravity="center"
                         android:textColor="#b4b4b4"
                         android:textSize="16sp" />
@@ -119,10 +121,10 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:background="@null"
-                        android:hint="数字，或字符的长度至少为6个"
+                        android:hint="数字或字符长度至少为6位"
                         android:inputType="textPassword"
                         android:singleLine="true"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -139,8 +141,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:drawableLeft="@drawable/password_icon"
-                        android:drawablePadding="8dp"
-                        android:padding="8dp"
+                        android:drawablePadding="6dp"
+                        android:padding="6dp"
                         android:text="确认密码"
                         android:gravity="center"
                         android:textColor="#b4b4b4"
@@ -152,8 +154,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:background="@null"
-                        android:textSize="12sp"
-                        android:hint="请输入相同的密码"
+                        android:textSize="14sp"
+                        android:hint="请输入重复密码"
                         android:inputType="textPassword"
                         android:singleLine="true" />
                 </LinearLayout>

@@ -18,6 +18,8 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.IpAddress;
 import com.yidejia.app.mall.datamanage.UserDatamanage;
+import com.yidejia.app.mall.task.TaskCheckCode;
+import com.yidejia.app.mall.task.TaskGetCode;
 
 public class RegistActivity extends SherlockActivity {
 	public Button mback;// ����
@@ -27,6 +29,7 @@ public class RegistActivity extends SherlockActivity {
 	private EditText mEditText;
 	private EditText mEditText2;
 	private Button mButton;
+	private ImageView getCodeImgView;
 
 	private String account;
 	private String pwd;
@@ -37,6 +40,10 @@ public class RegistActivity extends SherlockActivity {
 	private String ipAddress;
 	private CheckBox mBox;
 
+	private TaskGetCode getCodeTask;
+	
+	private TaskCheckCode taskCheckCode ;
+	
 	// public void doClick(View v){
 	// Intent intent = new Intent();
 	// switch (v.getId()) {
@@ -54,7 +61,7 @@ public class RegistActivity extends SherlockActivity {
 		mEditText2 = (EditText) findViewById(R.id.my_mall_regist_obtain);
 		mButton = (Button) findViewById(R.id.find_password_confirm_button);
 		mBox = (CheckBox) findViewById(R.id.my_mall_regist_checkbox);
-
+		getCodeImgView = (ImageView) findViewById(R.id.my_mall_regist_password_validation_button);
 	}
 
 	@Override
@@ -72,69 +79,45 @@ public class RegistActivity extends SherlockActivity {
 			
 			setupShow();
 			setActionbar();
+			
+			mBox.setChecked(true);
+			
 			mButton.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					account = mZhanghao.getText().toString();
-					pwd = mPws.getText().toString();
-					confirmPwd = mEditText.getText().toString();
-					obtain = mEditText2.getText().toString();
-					// if(!mBox.isChecked()){
-					// Toast.makeText(RegistActivity.this, "��ѡ���������",
-					// Toast.LENGTH_LONG).show();els
-					// }
-					boolean phone = isPhoneNumberVaild(account);
-					if(phone){
-					if (obtain == null || "".equals(obtain)) {
-						Toast.makeText(RegistActivity.this,
-								getResources().getString(R.string.obtain),
-								Toast.LENGTH_LONG).show();
-					} else {
-						if (pwd.length() < 6) {
-							Toast.makeText(
-									RegistActivity.this,
-									getResources().getString(
-											R.string.pwd_length),
-									Toast.LENGTH_SHORT).show();
-						} else {
-							if (pwd.equals(confirmPwd)) {
-								boolean isSucess = userManage.register(account,
-										pwd, "", ip.getIpAddress());
-								RegistActivity.this.finish();
-								if (isSucess) {
-									Toast.makeText(
-											RegistActivity.this,
-											getResources().getString(
-													R.string.equal),
-											Toast.LENGTH_LONG).show();
-								}
-								Log.i("info", isSucess + "        isSucess");
-
-							} else {
-								Toast.makeText(
-										RegistActivity.this,
-										getResources().getString(
-												R.string.regist_false),
-										Toast.LENGTH_LONG).show();
-							}
-						}
-					}
-				}else{
-					Toast.makeText(RegistActivity.this, getResources().getString(R.string.phone), Toast.LENGTH_SHORT).show();
-				}
+					registerListener();
 				}
 				
+			});
+			
+			getCodeImgView.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					getCodeListener();
+				}
 			});
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(RegistActivity.this,
-					getResources().getString(R.string.no_network),
-					Toast.LENGTH_LONG).show();
+//			Toast.makeText(RegistActivity.this,
+//					getResources().getString(R.string.no_network),
+//					Toast.LENGTH_LONG).show();
 		}
+	}
+
+	
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		if(taskCheckCode != null) taskCheckCode.closeTask();
+		if(getCodeTask != null) getCodeTask.closeTask();
 	}
 
 	private void setActionbar() {
@@ -164,16 +147,77 @@ public class RegistActivity extends SherlockActivity {
 		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
 		titleTextView.setText(getResources().getString(R.string.regist));
 	}
-	public static boolean isPhoneNumberVaild(String num){
-		  boolean isValid = false;
-		  String expre = "^\\(?(\\d{3})\\)?[-]?(\\d{3})[-]?(\\d{5})$";
-		  CharSequence inputStr = num;
-		  Pattern pattern = Pattern.compile(expre);
-		  Matcher matcher = pattern.matcher(inputStr);
-		  
-		  if(matcher.matches()){
-		   isValid = true;
-		  }
-		  return isValid;
-		 }
+	
+	/**
+	 * 注册按钮点击事件监听
+	 */
+	private void registerListener(){
+		account = mZhanghao.getText().toString().trim();//账号
+		pwd = mPws.getText().toString().trim();//密码
+		confirmPwd = mEditText.getText().toString().trim();//重复密码
+		obtain = mEditText2.getText().toString().trim();//验证码
+		if (!mBox.isChecked()) {
+			Toast.makeText(RegistActivity.this, "请先勾选同意协议!",
+					Toast.LENGTH_LONG).show();
+			return;
+		}
+		boolean phone = isPhoneNumberVaild(account);
+		if (phone) {
+			if (obtain == null || "".equals(obtain)) {
+				Toast.makeText(RegistActivity.this,
+						getResources().getString(R.string.obtain),
+						Toast.LENGTH_LONG).show();
+			} else {
+				if (pwd.length() < 6) {
+					Toast.makeText(RegistActivity.this,
+							getResources().getString(R.string.pwd_length),
+							Toast.LENGTH_SHORT).show();
+				} else {
+					if (pwd.equals(confirmPwd)) {
+						
+						taskCheckCode = new TaskCheckCode(RegistActivity.this);
+						taskCheckCode.checkCode(account, obtain, pwd, ipAddress, "");
+					} else {
+						Toast.makeText(
+								RegistActivity.this,
+								getResources().getString(R.string.regist_false),
+								Toast.LENGTH_LONG).show();
+					}
+				}
+			}
+		} else {
+			Toast.makeText(RegistActivity.this,
+					getResources().getString(R.string.phone),
+					Toast.LENGTH_SHORT).show();
+		}
+	}
+	
+	/**
+	 * 获取验证码的事件监听
+	 */
+	private void getCodeListener(){
+		account = mZhanghao.getText().toString().trim();//账号
+		boolean isphone = isPhoneNumberVaild(account);
+		if(!isphone){
+			Toast.makeText(RegistActivity.this,
+					getResources().getString(R.string.phone),
+					Toast.LENGTH_SHORT).show();
+			return;
+		}
+		getCodeTask = new TaskGetCode(RegistActivity.this);
+		getCodeTask.getCode(account);
+	}
+	
+	public static boolean isPhoneNumberVaild(String num) {
+		boolean isValid = false;
+		String expre = "^\\(?(\\d{3})\\)?[-]?(\\d{3})[-]?(\\d{5})$";
+		CharSequence inputStr = num;
+		Pattern pattern = Pattern.compile(expre);
+		Matcher matcher = pattern.matcher(inputStr);
+
+		if (matcher.matches()) {
+			isValid = true;
+		}
+		return isValid;
+	}
 }

@@ -62,10 +62,26 @@ public class TaskReturn {
 	}
 	
 	private void getParam(){
-		cause = spinner.getSelectedItem().toString();
-		contact = contactEditText.getText().toString();
-		contact_manner = phoneEditText.getText().toString();
-		desc = msgEditText.getText().toString();
+		cause = spinner.getSelectedItem().toString().trim();
+		contact = contactEditText.getText().toString().trim();
+		contact_manner = phoneEditText.getText().toString().trim();
+		desc = msgEditText.getText().toString().trim();
+		if(cause.isEmpty()){
+			Toast.makeText(activity, "请选择退换原因!", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if(contact.isEmpty()){
+			Toast.makeText(activity, "联系人不能为空!", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if(contact_manner.isEmpty()){
+			Toast.makeText(activity, "联系方式不能为空!", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if(desc.isEmpty()){
+			Toast.makeText(activity, "原因描述不能为空!", Toast.LENGTH_LONG).show();
+			return;
+		}
 		userId = ((MyApplication)activity.getApplication()).getUserId();
 		token = ((MyApplication)activity.getApplication()).getToken();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
