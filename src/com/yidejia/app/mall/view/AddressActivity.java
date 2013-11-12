@@ -22,6 +22,7 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.util.AddressUtil;
+import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DefinalDate;
 import com.yidejia.app.mall.util.Utility;
 
@@ -111,14 +112,18 @@ public class AddressActivity extends SherlockActivity {
 		listView.setAdapter(adapter);
 //		Utility.setListViewHeightBasedOnChildren(listView);
 		
-		listView.setOnItemClickListener(listItemClickListener);
-	}
-
-	OnItemClickListener listItemClickListener = new OnItemClickListener() {
-
+		listView.setOnItemClickListener(new OnItemClickListener() {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
+			Log.i("info",   "   OnItemClickListener");
+			Addresses addresses = mAddresses.get(position);
+			Intent intent = new Intent(AddressActivity.this, CstmPayActivity.class);
+			Bundle bundle = new Bundle();
+			bundle.putSerializable("addresses1", addresses);
+			intent.putExtras(bundle);
+			AddressActivity.this.setResult(Consts.AddressResponseCode, intent);
+			AddressActivity.this.finish();
 //
 //			// // 取得ViewHolder对象，这样就省去了通过层层的findViewById去实例化我们需要的cb实例的步骤
 //			ViewHolder viewHolder = (ViewHolder) view.getTag();
@@ -129,7 +134,9 @@ public class AddressActivity extends SherlockActivity {
 ////				Log.i("info", viewHolder.cb.isChecked()+"    viewHolder11");
 //				viewHolder.cb.toggle();// 把CheckBox的选中状态改为当前状态的反,gridview确保是单一选中
 		}
-	};
+		});
+	}
+	
 
 	private void setActionbar() {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);

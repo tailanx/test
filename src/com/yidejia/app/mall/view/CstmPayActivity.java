@@ -972,7 +972,9 @@ public class CstmPayActivity extends SherlockActivity {
 		 * 步骤3：处理银联手机支付控件返回的支付结果
 		 * 
 		 ************************************************/
-
+		
+		Log.i("info", requestCode + "   requestCode");
+		Log.i("info",resultCode + "   resultCode");
 		if (data == null) {
 			return;
 		}
@@ -980,17 +982,17 @@ public class CstmPayActivity extends SherlockActivity {
 				&& resultCode == Consts.AddressResponseCode) {
 			Addresses addresses1 = (Addresses) data.getExtras()
 					.getSerializable("addresses1");
-//			Log.i("info", addresses1.getAddress() + "str");
+			Log.i("info", addresses1.getAddress() + "str");
 			if (addresses1 != null) {
-//				reLayout.removeView(addressRelative);
-//				userName.setText(addresses1.getName());
-//				phoneName.setText(addresses1.getHandset());// �޸�Ϊ�ֻ�
-//				StringBuffer sb = new StringBuffer();
-//				sb.append(addresses1.getProvice());
-//				sb.append(addresses1.getCity());
-//				sb.append(addresses1.getArea());
-//				sb.append(addresses1.getAddress());
-//				address.setText(sb.toString());
+				reLayout.removeView(addressRelative);
+				userName.setText(addresses1.getName());
+				phoneName.setText(addresses1.getHandset());// �޸�Ϊ�ֻ�
+				StringBuffer sb = new StringBuffer();
+				sb.append(addresses1.getProvice());
+				sb.append(addresses1.getCity());
+				sb.append(addresses1.getArea());
+				sb.append(addresses1.getAddress());
+				address.setText(sb.toString());
 				setAdd(addresses1);
 			}
 			} else if (requestCode == Consts.CstmPayActivity_Request

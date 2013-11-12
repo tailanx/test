@@ -133,9 +133,10 @@ public class PayUtil {
 				String  a = cart.getPrice()+"";
 				Log.i("info", a+" a");
 				int b= a.indexOf(".");
-				Log.i("info", b+" b");
+				
 				Log.i("info", a.charAt(b+1)+" a.charAt(b+1)");
-				if(((int)(a.charAt(b+1)))!=((int)1)){
+				
+				if(((int)(a.charAt(b+1)))!=((int)5)){
 					Log.i("info", (((int)(a.charAt(b+1)))!=((int)1))+"    a s");
 					sumPrice.setText("￥"+cart.getPrice());
 				}else{
