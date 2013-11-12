@@ -62,6 +62,7 @@ public class CartUtil {
 	private List<Object> mList;
 	private FavoriteDataManage favoriteDataManage;
 	public static List<HashMap<String, Object>> list1;
+
 	// private MyApplication myApplication;
 	// private InnerReceiver receiver;
 
@@ -667,10 +668,10 @@ public class CartUtil {
 						}
 					}
 				});
-				cartDelete.setOnClickListener(new OnClickListener() {
-					
+				final AlertDialog dialog1 = new Builder(context).setTitle(context.getResources().getString(R.string.delete_produce)).setIcon(R.drawable.ic_launcher).setMessage(context.getResources().getString(R.string.sure_delete_produce)).setPositiveButton(context.getResources().getString(R.string.sure),new android.content.DialogInterface.OnClickListener() {
+
 					@Override
-					public void onClick(View v) {
+					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
 						map.put("count", (float) 0);
 						boolean isDel = dataManage
@@ -687,6 +688,13 @@ public class CartUtil {
 								Consts.UPDATE_CHANGE);
 						}
 						context.sendBroadcast(intent1);
+					}}).setNegativeButton(context.getResources().getString(R.string.cancel), null).create();
+				cartDelete.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+					dialog1.show();
 					}
 				});
 				// ���ü���

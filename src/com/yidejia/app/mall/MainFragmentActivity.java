@@ -391,6 +391,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		Fragment fragment = null;
 		switch (index) {
 		case 0:
+			Log.e("NoProduceFragment", "MainFragment");
 			fragment = mainFragment;
 			break;
 		case 1:
@@ -400,9 +401,14 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 			fragment = searchFragment;
 			break;
 		case 3:
-			if(number==0)
+			if(number==0){
 				fragment = noProduce;
-			fragment = cartFragment;
+				Log.e("NoProduceFragment", "noProduce");
+			}
+			else{fragment = cartFragment;
+			Log.e("NoProduceFragment", "cartFragment");
+			}
+			
 			break;
 		case 4:
 			if (!isLogin)
@@ -570,6 +576,8 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 				if (number == 0) {
 					cartImage.setVisibility(View.GONE);
 				} else {
+//					if(fragment.isAdded()) ft.hide(NoProduceFragment.this).show(fragment). commitAllowingStateLoss();
+//					else ft.hide(NoProduceFragment.this).replace(R.id.main_fragment, fragment). commitAllowingStateLoss();
 					cartImage.setVisibility(View.VISIBLE);
 					cartImage.setText(number + "");
 				}
@@ -593,7 +601,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 					ImageView back = (ImageView) findViewById(R.id.compose_back);
 					back.setVisibility(View.GONE);
 					TextView title = (TextView) findViewById(R.id.compose_title);
-					title.setText(getResources().getString(R.string.no_cart1));
+					title.setText(getResources().getString(R.string.no_cart));
 				}else{
 					cartImage.setVisibility(View.VISIBLE);
 					cartImage.setText(number+"");

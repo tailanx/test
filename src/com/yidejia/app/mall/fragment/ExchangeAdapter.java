@@ -152,7 +152,7 @@ public class ExchangeAdapter extends BaseAdapter {
 	private DisplayImageOptions options;
 	protected ImageLoader imageLoader = ImageLoader.getInstance();// ����ͼƬ
 	int i = 0;
-	private  Handler handler;
+	
 	@Override
 	public View getView(final int postion, View covertView, ViewGroup arg2) {
 		// TODO Auto-generated method stub
@@ -180,7 +180,7 @@ public class ExchangeAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) covertView.getTag();
 		}
-		handler = new Handler() {
+		  final Handler handler = new Handler() {
 			public void handleMessage(Message msg) {
 				if (msg.what == 113) {
 					map.put("count",
@@ -311,8 +311,10 @@ public class ExchangeAdapter extends BaseAdapter {
 				 initData();
 				 notifyDataSetChanged();
 			}
+			context.unregisterReceiver(receiver);
 		}
 		
 	}
+	
 	
 }

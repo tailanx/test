@@ -689,12 +689,15 @@ public class CstmPayActivity extends SherlockActivity {
 						cartsDataManage.delCart(carts.get(i).getUId());
 					}
 					Intent intent = null;
-					if(cartsDataManage.getCartAmount() != 0){
+//					if(cartsDataManage.getCartAmount() != 0){
+						Log.e("NoProduceFragment", "DELETE_CART");
 						intent = new Intent(Consts.DELETE_CART);
-					} else {
-						intent = new Intent(Consts.BROAD_UPDATE_CHANGE);
-					}
-					CstmPayActivity.this.sendBroadcast(intent);
+						CstmPayActivity.this.sendBroadcast(intent);
+//					}
+//					else {
+//						Log.e("NoProduceFragment", "BROAD_UPDATE_CHANGE");
+//						intent = new Intent(Consts.BROAD_UPDATE_CHANGE);
+//					}
 				}
 				//跳转到支付页面
 				Intent userpayintent = new Intent(

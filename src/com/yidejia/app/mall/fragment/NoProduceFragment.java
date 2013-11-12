@@ -29,7 +29,7 @@ public class NoProduceFragment extends SherlockFragment {
 	private Button mButton;
 	private int sumCart;//购物车中数目
 	private CartsDataManage dataManage;
-	private FragmentTransaction ft;
+	
 	private InnerReceiver receiver;
 	private Activity activity;
 	private Fragment fragment;
@@ -55,7 +55,7 @@ public class NoProduceFragment extends SherlockFragment {
 		activity =  MainFragmentActivity.MAINACTIVITY;
 		activity.registerReceiver(receiver, filter);
 		
-		ft = getFragmentManager().beginTransaction();
+		
 		view = inflater.inflate(R.layout.no_produce,container,false);
 		mButton = (Button) view.findViewById(R.id.no_produce_button);
 		Log.e("NoProduceFragment", "NoProduceFragment");
@@ -126,8 +126,9 @@ public class NoProduceFragment extends SherlockFragment {
 				sumCart = dataManage.getCartAmount();
 //				layout.removeAllViews();
 				if(sumCart!=0){
-					if(fragment.isAdded()) ft.hide(NoProduceFragment.this).show(fragment). commitAllowingStateLoss();
-					ft.hide(NoProduceFragment.this).replace(R.id.main_fragment, fragment). commitAllowingStateLoss();
+					FragmentTransaction ft = getFragmentManager().beginTransaction();
+					if(fragment.isAdded()) ft.hide(NoProduceFragment.this).commitAllowingStateLoss();
+					else ft.hide(NoProduceFragment.this). commitAllowingStateLoss();
 //					view = inflater.inflate(R.layout.no_produce, container, false);
 				}
 				

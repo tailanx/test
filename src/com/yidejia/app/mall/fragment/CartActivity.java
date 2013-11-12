@@ -252,14 +252,14 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	
 	private LayoutInflater inflater;
 	private ViewGroup container;
-	private FragmentTransaction ft ;
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		// addressManage = new AddressDataManage(getSherlockActivity());
-		
+		Log.e("NoProduceFragment", "CarActivity");
 		receiver = new InnerReceiver();
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Consts.BROAD_UPDATE_CHANGE);
@@ -268,13 +268,14 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 		activity =  MainFragmentActivity.MAINACTIVITY;
 		activity.registerReceiver(receiver, filter);
 		
+		getSherlockActivity().getSupportActionBar().setCustomView(
+				R.layout.actionbar_cart);
+		
 		Log.e(TAG, "on createView");
 		this.inflater = inflater;
 		this.container = container;
 		fragment = new NoProduceFragment();
-		
-		ft = getFragmentManager()
-				.beginTransaction();
+	
 		try {
 			dataManage = new CartsDataManage();
 			myApplication = (MyApplication) activity
@@ -287,9 +288,11 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 				setViewCtrl();
 			}
 			else {
+				FragmentTransaction ft = getFragmentManager().beginTransaction();
 				if(fragment.isAdded()) ft.hide(CartActivity.this).show(fragment).commit();
 				ft.hide(CartActivity.this).replace(R.id.main_fragment, fragment).commit();
 //				view = inflater.inflate(R.layout.no_produce, container, false);
+//				setViewCtrl();
 //				shoppingCartTopay.setVisibility(View.GONE);
 //				return view;
 			}
@@ -518,9 +521,10 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 				
 //				activity = CartActivity.this.getSherlockActivity();
 				if (sumCart == 0) {
+					FragmentTransaction ft = getFragmentManager().beginTransaction();
 					if(fragment.isAdded()) ft.hide(CartActivity.this).show(fragment).commitAllowingStateLoss();
-					ft.hide(CartActivity.this).replace(R.id.main_fragment, fragment).commitAllowingStateLoss();
-//					shoppingCartTopay.setVisibility(View.GONE);			 
+					else ft.hide(CartActivity.this).replace(R.id.main_fragment, fragment).commitAllowingStateLoss();
+					shoppingCartTopay.setVisibility(View.GONE);			 
 				} else {
 					layout.removeAllViews();
 					CartUtil cartUtil = new CartUtil(getSherlockActivity(),
@@ -529,7 +533,9 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 					sum = Float.parseFloat(sumTextView.getText().toString());
 //					
 				}
-			} else if (Consts.UPDATE_CHANGE.equals(action)) {
+			} 
+				else if (Consts.UPDATE_CHANGE.equals(action)) {
+					
 				layout.removeAllViews();
 //				sumCart = dataManage.getCartAmount();
 				
@@ -537,19 +543,17 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 						counTextView, sumTextView, mBox);
 				cartUtil.AllComment();
 				sum = Float.parseFloat(sumTextView.getText().toString());
-			} else if (Consts.DELETE_CART.equals(action)) {
+			}
+				else if (Consts.DELETE_CART.equals(action)) {
+				layout.removeAllViews();
 				sumCart = dataManage.getCartAmount();
 				if (sumCart == 0) {
-//					layout.removeAllViews();
-//					activity.startActivity(intent1);
-					if(fragment.isAdded()){
-						ft.hide(CartActivity.this).show(fragment).commit();
-					}
-					else {
-						ft.hide(CartActivity.this).replace(R.id.main_fragment, fragment).commit();
-					}
-
+					Log.e("NoProduceFragment", "CarActivity");
+					FragmentTransaction ft = getFragmentManager().beginTransaction();
+					if(fragment.isAdded()) ft.hide(CartActivity.this).commitAllowingStateLoss();
+					else ft.hide(CartActivity.this).replace(R.id.main_fragment, fragment).commitAllowingStateLoss();
 				} else {
+					Log.e("NoProduceFragment", "CarActivity!=0");
 					CartUtil cartUtil = new CartUtil(activity,
 							layout, counTextView, sumTextView, mBox);
 					cartUtil.AllComment();
@@ -560,5 +564,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 			}
 		}
 	}
+	
+	
 
 }

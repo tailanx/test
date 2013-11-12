@@ -161,7 +161,7 @@ public class RegistActivity extends SherlockActivity {
 					Toast.LENGTH_LONG).show();
 			return;
 		}
-		boolean phone = isPhoneNumberVaild(account);
+		boolean phone = isMobileNO(account);
 		if (phone) {
 			if (obtain == null || "".equals(obtain)) {
 				Toast.makeText(RegistActivity.this,
@@ -197,7 +197,7 @@ public class RegistActivity extends SherlockActivity {
 	 */
 	private void getCodeListener(){
 		account = mZhanghao.getText().toString().trim();//账号
-		boolean isphone = isPhoneNumberVaild(account);
+		boolean isphone = isMobileNO(account);
 		if(!isphone){
 			Toast.makeText(RegistActivity.this,
 					getResources().getString(R.string.phone),
@@ -208,16 +208,11 @@ public class RegistActivity extends SherlockActivity {
 		getCodeTask.getCode(account);
 	}
 	
-	public static boolean isPhoneNumberVaild(String num) {
-		boolean isValid = false;
-		String expre = "^\\(?(\\d{3})\\)?[-]?(\\d{3})[-]?(\\d{5})$";
-		CharSequence inputStr = num;
-		Pattern pattern = Pattern.compile(expre);
-		Matcher matcher = pattern.matcher(inputStr);
-
-		if (matcher.matches()) {
-			isValid = true;
-		}
-		return isValid;
+	public static boolean isMobileNO(String mobiles) {
+		Pattern p = Pattern
+				.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+		Matcher m = p.matcher(mobiles);
+		Log.e("info", m.matches() + "");
+		return m.matches();
 	}
 }
