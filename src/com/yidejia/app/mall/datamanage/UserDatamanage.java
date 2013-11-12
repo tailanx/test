@@ -90,6 +90,10 @@ public class UserDatamanage {
 				Log.e(TAG, "login io ex");
 				e.printStackTrace();
 				issuccess = false;
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				issuccess = false;
 			}
 			return issuccess;
 		}
