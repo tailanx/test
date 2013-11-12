@@ -8,10 +8,10 @@
 extern "C" {
 #endif
 
-static const char *url = "http://192.168.1.254:802/";
-const char *strTemp = "ChunTianfw_mobile123456";
-//static const char *url = "http://fw1.atido.net/";
-//const char *strTemp = "ChunTianfw_mobile@SDF!TD#DF#*CB$GER@";
+//static const char *url = "http://192.168.1.254:802/";
+//const char *strTemp = "ChunTianfw_mobile123456";
+static const char *url = "http://fw1.atido.net/";
+const char *strTemp = "ChunTianfw_mobile@SDF!TD#DF#*CB$GER@";
 
 const char *pHead = "&key=fw_mobile&format=array&ts=";
 
@@ -2484,6 +2484,180 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetTn(JNIEnv* env,
 	addString(urlString, "&sign=");
 	addString(encrypt, strTemp);
 	addString(encrypt, "ucenter.order.push");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
+
+//get the photo code post
+jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetCode(JNIEnv* env,
+		jobject thiz, jstring name){//, jstring order_code, jstring token
+
+	const char *chuid = (*env)->GetStringUTFChars(env, name, NULL);
+//	const char *chorder_code = (*env)->GetStringUTFChars(env, order_code, NULL);
+//	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+//	memset(encrypt, 0, LEN * sizeof(char));
+
+	const char *api="api=common.code.getCode";
+
+//	addString(urlString, url);
+	addString(urlString, api);
+
+	addString(urlString, "&timelimit=60&count=3&type=num");
+	addString(urlString, "&name=");
+	if(chuid != NULL)addString(urlString, chuid);
+
+//	if(chorder_code != NULL)addString(urlString, chorder_code);
+//	addString(urlString, "&token=");
+//	if(chtoken != NULL)addString(urlString, chtoken);
+
+	addString(urlString, pHead);
+
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
+
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "common.code.getCode");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
+
+//send message post
+jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SendMsg(JNIEnv* env,
+		jobject thiz, jstring name, jstring code){//, jstring order_code, jstring token
+
+	const char *chuid = (*env)->GetStringUTFChars(env, name, NULL);
+	const char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
+//	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+//	memset(encrypt, 0, LEN * sizeof(char));
+
+	const char *api="api=common.sms.sendCode";
+
+//	addString(urlString, url);
+	addString(urlString, api);
+
+//	addString(urlString, "&timelimit=60&count=3&type=num");
+	addString(urlString, "&mobileNo=");
+	if(chuid != NULL)addString(urlString, chuid);
+
+//	if(chorder_code != NULL)addString(urlString, chorder_code);
+	addString(urlString, "&code=");
+	if(chcode != NULL)addString(urlString, chcode);
+
+	addString(urlString, pHead);
+
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
+
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "common.sms.sendCode");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
+
+//check the msg code post
+jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CheckCode(JNIEnv* env,
+		jobject thiz, jstring name, jstring code){//, jstring order_code, jstring token
+
+	const char *chuid = (*env)->GetStringUTFChars(env, name, NULL);
+	const char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
+//	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+//	memset(encrypt, 0, LEN * sizeof(char));
+
+	const char *api="api=common.sms.checkCode";
+
+//	addString(urlString, url);
+	addString(urlString, api);
+
+//	addString(urlString, "&timelimit=60&count=3&type=num");
+	addString(urlString, "&mobileNo=");
+	if(chuid != NULL)addString(urlString, chuid);
+
+//	if(chorder_code != NULL)addString(urlString, chorder_code);
+	addString(urlString, "&code=");
+	if(chcode != NULL)addString(urlString, chcode);
+
+	addString(urlString, pHead);
+
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
+
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "common.sms.checkCode");
 	addString(encrypt, chtime);
 
 	MD5_CTX md5;

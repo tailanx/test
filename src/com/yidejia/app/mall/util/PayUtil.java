@@ -142,7 +142,7 @@ public class PayUtil {
 
 					sumPrice.setText(cart.getScort()+"  积分");
 				}else{
-					sumPrice.setText("￥  "+cart.getPrice());
+					sumPrice.setText("￥ "+cart.getPrice());
 					}
 				String amount = cart.getAmount() + "";
 				countTextView.setText(amount);
