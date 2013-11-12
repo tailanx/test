@@ -311,8 +311,10 @@ public class ExchangeAdapter extends BaseAdapter {
 				 initData();
 				 notifyDataSetChanged();
 			}
+			context.unregisterReceiver(receiver);
 		}
 		
 	}
+	
 	
 }

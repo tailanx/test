@@ -391,7 +391,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		Fragment fragment = null;
 		switch (index) {
 		case 0:
-			Log.e("NoProduceFragment", "NoProduceFragment3");
+			Log.e("NoProduceFragment", "MainFragment");
 			fragment = mainFragment;
 			break;
 		case 1:
@@ -403,10 +403,10 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		case 3:
 			if(number==0){
 				fragment = noProduce;
-				Log.e("NoProduceFragment", "NoProduceFragment1");
+				Log.e("NoProduceFragment", "noProduce");
 			}
 			else{fragment = cartFragment;
-			Log.e("NoProduceFragment", "NoProduceFragment2");
+			Log.e("NoProduceFragment", "cartFragment");
 			}
 			
 			break;
@@ -576,6 +576,8 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 				if (number == 0) {
 					cartImage.setVisibility(View.GONE);
 				} else {
+//					if(fragment.isAdded()) ft.hide(NoProduceFragment.this).show(fragment). commitAllowingStateLoss();
+//					else ft.hide(NoProduceFragment.this).replace(R.id.main_fragment, fragment). commitAllowingStateLoss();
 					cartImage.setVisibility(View.VISIBLE);
 					cartImage.setText(number + "");
 				}
