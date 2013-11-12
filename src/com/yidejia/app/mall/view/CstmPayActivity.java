@@ -997,7 +997,11 @@ public class CstmPayActivity extends SherlockActivity {
 			}
 			} else if (requestCode == Consts.CstmPayActivity_Request
 					&& resultCode == Consts.CstmPayActivity_Response) {
+				
+				
 				carts = (ArrayList<Cart>) data.getSerializableExtra("carts");
+				Log.i("voucher", carts.size()+"    carts.size()11");
+				
 				voucher = data.getFloatExtra("voucher", -1);
 				Log.i("voucher", jifen+"    jifen");
 				jifen = data.getFloatExtra("jifen", -1);

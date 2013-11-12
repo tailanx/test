@@ -67,6 +67,10 @@ public class NoProduceFragment extends SherlockFragment {
 				Bundle bundle = new Bundle();
 				Log.e("info", "gouwuche");
 				bundle.putString("title", "全部");
+				bundle.putString("name", "");
+				bundle.putString("price", "");
+				bundle.putString("brand", "");
+				bundle.putString("fun", "");
 				intent.putExtras(bundle);
 				getSherlockActivity().startActivity(intent);
 			}

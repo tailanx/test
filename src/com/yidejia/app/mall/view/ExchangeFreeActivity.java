@@ -76,7 +76,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 		sumprice = intent.getStringExtra("price");
 		float jifen = intent.getFloatExtra("voucher", -1);
 		isString = intent.getStringExtra("cartActivity");
-		Log.i("info", jifen +"  jifen");
+//		Log.i("info", jifen +"  jifen");
 		mArrayList = (ArrayList<Cart>) intent.getSerializableExtra("carts");
 		setContentView(R.layout.pay_free);
 		resources = getResources();
@@ -135,7 +135,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 								sum1 += sum;
 							}
 
-							 Log.i("info", sum1+"    sum1");
+//							 Log.i("info", sum1+"    sum1");
 							// sum1 =sum1/exchange.size()+1;
 						}
 						if (sum1 > voucher) {
@@ -159,8 +159,8 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 								Cart cart = new Cart();
 
 								cart.setImgUrl(specials.getImgUrl());
-								float a = (float) 0.5;
-								cart.setPrice(Float.parseFloat(specials.getScores())+a);
+								cart.setPrice(0);
+								cart.setScort(specials.getScores());
 								cart.setProductText(specials.getBrief());
 								cart.setUId(specials.getUId());
 								cart.setSalledAmmount(count1.intValue());
@@ -176,19 +176,22 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 									voucher = (int) (voucher - sum1);
 								}
 							}
-							Log.i("info", voucher+"   vouche1r");
+//							Log.i("info", voucher+"   vouche1r");
 							
 							Cart cart1 = FreeGivingAdapter.carts;
-							if (cart1.getUId() != null) {
-								Log.i("info", mArrayList.size()+"   mArrayList");
+//							Log.i("voucher", cart1+"   cart1");
+//							Log.i("voucher", cart1.getUId()+"   cart1.getUId()");
+							
+							if (cart1 != null) {
+//								Log.i("voucher", mArrayList.size()+"   mArrayList1");
 								mArrayList.add(cart1);
-								Log.i("info", mArrayList.size()+"   mArrayList");
+//								Log.i("voucher", mArrayList.size()+"   mArrayList2");
 							}
 							intent.putExtra("price", sumprice);
 //							Log.i("info", voucher+"   voucher");
 							intent.putExtra("voucher", voucher);
 							intent.putExtra("jifen", sum1);
-							Log.i("info", mArrayList.size()+"   mArrayList");
+//							Log.i("info", mArrayList.size()+"   mArrayList");
 							intent.putExtra("carts", mArrayList);
 							intent.putExtra("cartActivity", "E");
 						}

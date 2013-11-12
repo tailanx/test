@@ -34,7 +34,6 @@ public class AddressAdapter extends BaseAdapter {
 	private LayoutInflater inflater;
 	private MyApplication myApplication;
 	private int temp = -1;
-	private AlertDialog dialog;
 	private boolean isSelect;
 	public AddressAdapter(Activity context, ArrayList<Addresses> mAddresses) {
 		this.mAddresses = mAddresses;
@@ -109,7 +108,7 @@ public class AddressAdapter extends BaseAdapter {
 
 		final Addresses addresses = mAddresses.get(position);
 
-		dialog = new Builder(activity)
+	final AlertDialog dialog = new Builder(activity)
 				.setTitle(activity.getResources().getString(R.string.tips))
 				.setIcon(R.drawable.ic_launcher)
 				.setMessage(
@@ -168,11 +167,11 @@ public class AddressAdapter extends BaseAdapter {
 
 				// TODO Auto-generated method stub
 				Log.i("info", addresses.getAddressId());
-				dataManage.deleteAddress(myApplication.getUserId(),
-				addresses.getAddressId(), myApplication.getToken());
-				mAddresses.remove(addresses);
-				notifyDataSetChanged();
-				// dialog.show();
+//				dataManage.deleteAddress(myApplication.getUserId(),
+//				addresses.getAddressId(), myApplication.getToken());
+//				mAddresses.remove(addresses);
+//				notifyDataSetChanged();
+				 dialog.show();
 			}
 		});
 
