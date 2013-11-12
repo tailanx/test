@@ -182,7 +182,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 //					}).create();
 
 	if (mbutton == null) {
-		Log.e(GoCartActivity.class.getName(), "go cart act btn is null");
+//		Log.e(GoCartActivity.class.getName(), "go cart act btn is null");
 //		Toast.makeText(
 //				GoCartActivity.this,
 //				GoCartActivity.this.getResources().getString(
@@ -240,7 +240,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 					for(int i=0;i<orderCarts.size();i++){
 						HashMap<String, Object> map = orderCarts.get(i);
 						float ischeck =  Float.parseFloat(map.get("check").toString());
-						Log.i("info", ischeck + "    ischeck");
+//						Log.i("info", ischeck + "    ischeck");
 						Cart  cart1	= (Cart) map.get("cart");
 						if(ischeck == 1.0){
 							cartList.add(cart1);
@@ -317,6 +317,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 		public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
 			String action = intent.getAction();
+			NOProduceActivity noProduceActivity = new NOProduceActivity();
 			Intent intent1 = new Intent(GoCartActivity.this, NOProduceActivity.class);
 			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
 				// Log.i("info", action + "action");
@@ -343,12 +344,11 @@ public class GoCartActivity extends SherlockActivity {// implements
 						.toString());
 			}else if(Consts.DELETE_CART.equals(action)){
 				layout.removeAllViews();
-//				sumTextView.setText(""+0.00);
-//				counTextView.setText(""+0);
 				sumCart = dataManage.getCartAmount();
 				if(sumCart==0){
-					GoCartActivity.this.startActivity(intent1);
+//					Log.e("NoProduceFragment", "GoCarActivity");
 					GoCartActivity.this.finish();
+//					startActivity(intent1);
 				}else{
 				CartUtil cartUtil = new CartUtil(GoCartActivity.this, layout,
 						counTextView, sumTextView, mBox);

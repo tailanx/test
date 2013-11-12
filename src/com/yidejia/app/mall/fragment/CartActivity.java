@@ -545,19 +545,15 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 				sum = Float.parseFloat(sumTextView.getText().toString());
 			}
 				else if (Consts.DELETE_CART.equals(action)) {
+				layout.removeAllViews();
 				sumCart = dataManage.getCartAmount();
 				if (sumCart == 0) {
-//					layout.removeAllViews();
-//					activity.startActivity(intent1);
+					Log.e("NoProduceFragment", "CarActivity");
 					FragmentTransaction ft = getFragmentManager().beginTransaction();
-					if(fragment.isAdded()){
-						ft.hide(CartActivity.this).show(fragment).commit();
-					}
-					else {
-						ft.hide(CartActivity.this).replace(R.id.main_fragment, fragment).commit();
-					}
-
+					if(fragment.isAdded()) ft.hide(CartActivity.this).commitAllowingStateLoss();
+					else ft.hide(CartActivity.this).replace(R.id.main_fragment, fragment).commitAllowingStateLoss();
 				} else {
+					Log.e("NoProduceFragment", "CarActivity!=0");
 					CartUtil cartUtil = new CartUtil(activity,
 							layout, counTextView, sumTextView, mBox);
 					cartUtil.AllComment();

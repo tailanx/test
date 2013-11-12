@@ -601,7 +601,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 					ImageView back = (ImageView) findViewById(R.id.compose_back);
 					back.setVisibility(View.GONE);
 					TextView title = (TextView) findViewById(R.id.compose_title);
-					title.setText(getResources().getString(R.string.no_cart1));
+					title.setText(getResources().getString(R.string.no_cart));
 				}else{
 					cartImage.setVisibility(View.VISIBLE);
 					cartImage.setText(number+"");
