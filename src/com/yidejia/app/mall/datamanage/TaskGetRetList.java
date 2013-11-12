@@ -13,6 +13,7 @@ import com.yidejia.app.mall.net.order.GetReturnOrder;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -51,7 +52,7 @@ public class TaskGetRetList {
 		this.token = token;
 		this.fromIndex = fromIndex;
 		this.amount = amount;
-		
+		if(fromIndex == 0) allOrderLayout.removeAllViews();
 		if(task != null && task.getStatus().RUNNING == AsyncTask.Status.RUNNING){
 			task.cancel(true);
 		}
@@ -70,6 +71,15 @@ public class TaskGetRetList {
 	private void add2view(RetOrderInfo info){
 		View view = ctrl.getRetView();
 		ctrl.setText(info.getStatus(), info.getOrderCode(), info.getTheDate());
+		view.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+//				Intent intent = new Intent(activity, ReturnActivity.class);
+//				activity.startActivity(intent);
+			}
+		});
 		allOrderLayout.addView(view);
 	}
 	
