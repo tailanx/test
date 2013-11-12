@@ -137,6 +137,12 @@ public class JNICallBack {
 	//查看退换货
 	public static native String getHttp4GetReturnList(String userid, String offset, String limit, String token);
 	
+	//查看物流
+	public static native String getHttp4GetShipLog(String code);
+	
+	//获取tn
+	public static native String getHttp4GetTn(String userid, String order_code, String token);
+	
 	
 }	
 	

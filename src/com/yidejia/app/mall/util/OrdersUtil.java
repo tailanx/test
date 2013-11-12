@@ -32,6 +32,7 @@ import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.order.CancelOrder;
+import com.yidejia.app.mall.view.CheckActivity;
 import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.view.OrderDetailActivity;
 import com.yidejia.app.mall.view.ReturnActivity;
@@ -196,10 +197,13 @@ public class OrdersUtil {
 						mOrder.getOrderCode(), mOrder.getDate()));
 			} else if(mOrderType == 4){//右边评价按钮
 				mOkBtn.setVisibility(View.GONE);
-			}else {
+			} else if(mOrderType == 3){//右边查看物流按钮
+				mOkBtn.setOnClickListener(new OkClickListener(mOrderType,
+						mOrder.getShipCode(), mOrder.getShipCompany()));
+			} else {
 				mOkBtn.setOnClickListener(new OkClickListener(mOrderType,
 						mOrder.getOrderCode(), allOrderDetail.map.get("price")
-								+ "", mOrder.getCartsArray(), mOrder.getTn()));
+								+ "", mOrder.getCartsArray()));//, mOrder.getTn()
 			}
 			
 			mLayout.setOnClickListener(new OnClickListener() {
@@ -382,7 +386,7 @@ public class OrdersUtil {
 		private String orderPrice;
 		private String orderCode;
 		private ArrayList<Cart> carts;
-		private String orderTn;
+//		private String orderTn;
 		
 		private String userId;
 		private String token;
@@ -394,14 +398,14 @@ public class OrdersUtil {
 		 * @param OrderCode 订单号
 		 * @param OrderPrice 订单价格
 		 * @param carts 订单商品数据
-		 * @param orderTn 流水号
+//		 * @param orderTn 流水号
 		 */
-		public OkClickListener(int mOrderType, String OrderCode, String OrderPrice, ArrayList<Cart> carts, String orderTn){
+		public OkClickListener(int mOrderType, String OrderCode, String OrderPrice, ArrayList<Cart> carts){//, String orderTn
 			this.orderCode = OrderCode;
 			this.orderPrice = OrderPrice;
 			this.carts = carts;
 			this.mOrderType = mOrderType;
-			this.orderTn = orderTn;
+//			this.orderTn = orderTn;
 		}
 		
 		/**
@@ -423,10 +427,10 @@ public class OrdersUtil {
 		private String orderDate;
 		
 		/**
-		 * 右边按钮退换货点击事件
-		 * @param mOrderType 只能是2
-		 * @param orderCode 订单号
-		 * @param orderDate 订单时间
+		 * 右边按钮退换货（2）或查看物流（3）点击事件
+		 * @param mOrderType 只能是2或3
+		 * @param orderCode orderType为2时是订单号，3为快递单
+		 * @param orderDate orderType为2时是订单时间，3为快递公司
 		 */
 		public OkClickListener(int mOrderType, String orderCode, String orderDate){
 			this.mOrderType = mOrderType;
@@ -447,7 +451,7 @@ public class OrdersUtil {
 				Bundle detailBundle = new Bundle();
 				detailBundle.putString("OrderCode", orderCode);//mOrder.getOrderCode()
 				detailBundle.putString("OrderPrice", orderPrice);//allOrderDetail.map.get("price") + ""
-				detailBundle.putString("OrderTn", orderTn);
+//				detailBundle.putString("OrderTn", orderTn);
 				detailIntent.putExtras(detailBundle);
 				detailIntent.putExtra("carts", carts);//mOrder.getCartsArray()
 				context.startActivity(detailIntent);
@@ -456,6 +460,7 @@ public class OrdersUtil {
 				go2Return(orderCode, orderDate);
 				break;
 			case 3://查看物流
+				go2Logistics(orderCode, orderDate);
 				break;
 			case 4://评价
 				
@@ -564,7 +569,7 @@ public class OrdersUtil {
 			// TODO Auto-generated method stub
 			final View mCancelBtn = v;
 			switch (mOrderType) {
-			case 1:
+			case 1://取消订单
 				if(null == layout1) break;
 				new Builder(context).setTitle(R.string.tips)
 				.setMessage(R.string.cancel_order)
@@ -605,12 +610,12 @@ public class OrdersUtil {
 					}
 				}).setNegativeButton(context.getResources().getString(R.string.cancel), null).create().show();
 				break;
-			case 2:
+			case 2://跳转到订单详情
 				if(carts.isEmpty() || "".equals(orderPrice) || null == orderPrice)break;
 				go2OrderDetail(orderCode, orderPrice, carts);
 				break;
 				
-			case 3:
+			case 3://跳转到退换货
 				go2Return(orderCode, orderDate);
 				break;
 			default:
@@ -811,5 +816,20 @@ public class OrdersUtil {
 		if(taskDelOrder != null)
 			taskDelOrder.cancelTask();
 	}
+	
+	/**
+	 * 去到查看物流页面
+	 * @param shipCode 快递单号
+	 * @param shipCompany 快递公司
+	 */
+	private void go2Logistics(String shipCode, String shipCompany){
+		Intent intent = new Intent(context, CheckActivity.class);
+		Bundle bundle = new Bundle();
+		bundle.putString("shipCode", shipCode);
+		bundle.putString("shipCompany", shipCompany);
+		intent.putExtras(bundle);
+		context.startActivity(intent);
+	}
+
 }
 
