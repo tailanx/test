@@ -178,7 +178,13 @@ public class BaseInfoFragment extends SherlockFragment {
 			String action = intent.getAction();
 			if (Consts.UPDATE_CHANGE.equals(action)||Consts.BROAD_UPDATE_CHANGE.equals(action)) {
 				number1 = dataManage.getCartAmount();
-			mButton.setText(number1+"");
+//			mButton.setText(number1+"");
+				if(number1==0){
+					mButton.setVisibility(View.GONE);
+				}else{
+					mButton.setVisibility(View.VISIBLE);
+					mButton.setText(number1+"");
+				}
 			}
 			if(Consts.DELETE_CART.equals(action)){
 				number1 = dataManage.getCartAmount();
