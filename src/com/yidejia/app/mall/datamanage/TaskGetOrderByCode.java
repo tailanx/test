@@ -200,7 +200,7 @@ public class TaskGetOrderByCode {
 		orderNumber = (TextView) activity.findViewById(R.id.order_detail_biaohao_number);
 		orderTime = (TextView) activity.findViewById(R.id.order_detail_time_number);
 		changePayTypeTextView = (TextView) activity.findViewById(R.id.change_pay_type);
-		orderAddressLayout = (RelativeLayout) activity.findViewById(R.id.order_address_layout);
+//		orderAddressLayout = (RelativeLayout) activity.findViewById(R.id.order_address_layout);
 	}
 	
 	private void setupShow(){
@@ -226,17 +226,17 @@ public class TaskGetOrderByCode {
 				}
 			});
 			changePayTypeTextView.setVisibility(View.VISIBLE);
-			orderAddressLayout.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					Intent intent = new Intent(activity,
-							PayAddress.class);
-					activity.startActivityForResult(intent,
-							Consts.AddressRequestCode);
-				}
-			});
+//			orderAddressLayout.setOnClickListener(new OnClickListener() {
+//				
+//				@Override
+//				public void onClick(View v) {
+//					// TODO Auto-generated method stub
+//					Intent intent = new Intent(activity,
+//							PayAddress.class);
+//					activity.startActivityForResult(intent,
+//							Consts.AddressRequestCode);
+//				}
+//			});
 		} else{
 			payButton.setVisibility(View.GONE);
 			changePayTypeTextView.setVisibility(View.GONE);

@@ -157,6 +157,8 @@ public class AddressAdapter extends BaseAdapter {
 				Bundle bundle = new Bundle();
 				bundle.putSerializable("editaddress", addresses);
 				intent.putExtras(bundle);
+				mAddresses.remove(addresses);
+				notifyDataSetChanged();
 				((Activity) activity).startActivityForResult(intent,
 						DefinalDate.requestcode);
 			}

@@ -687,6 +687,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 		// startActionMode(new
 		// AnActionModeOfEpicProportions(ComposeActivity.this));
 		ImageView leftButton = (ImageView) findViewById(R.id.actionbar_left);
+		leftButton.setVisibility(View.GONE);
 		leftButton.setOnClickListener(new OnClickListener() {
 
 			@Override
