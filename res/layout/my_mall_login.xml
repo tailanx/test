@@ -69,7 +69,7 @@
 
             <TableLayout
                 android:id="@+id/my_mall_login_background"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="220dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
@@ -99,12 +99,13 @@
 
                     <EditText 
                         android:id="@+id/my_mall_login__edittext_account"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_gravity="center_vertical|left"
+                        android:layout_marginRight="10dp"
+                        android:paddingRight="10dp"
                         android:background="@null"
                         android:clickable="false"
-                        android:paddingRight="180dp"
                         android:hint="伊的家账号"
                         android:singleLine="true" />
                 </TableRow>
@@ -131,13 +132,12 @@
 
                     <EditText
                         android:id="@+id/my_mall_login__edittext_password"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_gravity="center_vertical|left"
                         android:background="@null"
                         android:inputType="textPassword"
                      	android:clickable="false"
-                      	android:paddingRight="180dp"
                         android:hint="******"
                         android:singleLine="true" />
                 </TableRow>

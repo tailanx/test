@@ -73,13 +73,13 @@ public class RegistActivity extends SherlockActivity {
 			// this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 			// this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 			// WindowManager.LayoutParams.FLAG_FULLSCREEN);
+			setActionbar();
 			userManage = new UserDatamanage(RegistActivity.this);
 			ip = new IpAddress();
 			ipAddress = ip.getIpAddress();
 			setContentView(R.layout.my_mall_regist);
 			
 			setupShow();
-			setActionbar();
 			
 			mBox.setChecked(true);
 			
