@@ -159,11 +159,25 @@ public class AddressActivity extends SherlockActivity {
 		@Override
 		public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 			// TODO Auto-generated method stub
-			String label = getResources().getString(R.string.update_time)+DateUtils.formatDateTime(AddressActivity.this, System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL|DateUtils.FORMAT_SHOW_DATE|DateUtils.FORMAT_SHOW_TIME);
+			String label = getResources().getString(R.string.update_time)+DateUtils.formatDateTime(AddressActivity.this, System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME|DateUtils.FORMAT_SHOW_DATE|DateUtils.FORMAT_ABBREV_ALL);
 			pullToRefreshListView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-			fromIndex  += acount;
-			setupShow();
+			fromIndex = 0;
+			AddressDataManage dataManage = new AddressDataManage(AddressActivity.this);
+			ArrayList<Addresses> addressesList = dataManage.getAddressesArray(myApplication.getUserId(), fromIndex, acount);
 			pullToRefreshListView.onRefreshComplete();
+			if(addressesList.isEmpty()){
+				if(mAddresses.isEmpty()){
+					Toast.makeText(AddressActivity.this, getResources().getString(R.string.load_addresses), Toast.LENGTH_SHORT).show();
+				}else{
+					Toast.makeText(AddressActivity.this, getResources().getString(R.string.nomore), Toast.LENGTH_SHORT).show();
+				}
+//				Toast.makeText(AddressActivity.this, t, duration).show();
+			}else{
+				mAddresses.clear();
+				mAddresses.addAll(addressesList);
+				adapter.notifyDataSetChanged();
+			}
+//			setupShow();
 		}
 	};
 
@@ -230,7 +244,7 @@ public class AddressActivity extends SherlockActivity {
 					// fromIndex, acount);
 					adapter.notifyDataSetChanged();
 //										Utility.setListViewHeightBasedOnChildren(listView);
-					listView.setAdapter(adapter);
+//					listView.setAdapter(adapter);
 					// new AddressUtil(AddressActivity.this,
 					// layout).addAddresses(data);
 					// layout.invalidate();

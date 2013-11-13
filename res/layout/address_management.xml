@@ -8,13 +8,13 @@
         xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/address_item_main_refresh_scrollview111"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/main_bg"
-        android:descendantFocusability="afterDescendants"
-        android:scrollbars="none"
+        android:layout_height="match_parent"
+        android:cacheColorHint="#00000000"
+        android:fastScrollEnabled="false"
+        android:footerDividersEnabled="true"
+        android:smoothScrollbar="true"
         ptr:ptrAnimationStyle="flip"
-        ptr:ptrMode="pullDownFromTop" >
-
+        ptr:ptrMode="pullDownFromTop">
     </com.handmark.pulltorefresh.library.PullToRefreshListView>
 
 </RelativeLayout>
