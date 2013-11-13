@@ -62,7 +62,7 @@ public class MainPageFragment extends SherlockFragment {
 		fragment.setArguments(bundle);
 
 		return fragment;
-	}
+	} 
 
 	private int main;
 	private int defaultInt = -1;

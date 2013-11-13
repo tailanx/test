@@ -180,7 +180,7 @@ public class MainPageDataManage {
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-			GetHomePage getHomePage = new GetHomePage(context);
+			GetHomePage getHomePage = new GetHomePage();
 			try {
 				String httpResultString = getHomePage.getHomePageJsonString();
 				analysisGetHomeJson(httpResultString);
