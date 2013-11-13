@@ -377,6 +377,7 @@ public class CstmPayActivity extends SherlockActivity {
 										int which) {
 									// TODO Auto-generated method stub
 									if(isCartActivity.equals("Y")||isCartActivity.equals("N")){
+										show(carts, false);
 //									voucherDataManage = new VoucherDataManage(CstmPayActivity.this);
 //									voucher =Float.parseFloat(voucherDataManage.getUserVoucher(myApplication.getUserId(), myApplication.getToken()));
 									}
