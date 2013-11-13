@@ -2678,6 +2678,66 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CheckCode(JNIEnv* env,
 	return (*env)->NewStringUTF(env, urlString);
 }
 
+//check the msg code post
+jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ResetPsw(JNIEnv* env,
+		jobject thiz, jstring name,jstring psw, jstring code){//, jstring order_code, jstring token
+
+	const char *chuid = (*env)->GetStringUTFChars(env, name, NULL);
+	const char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
+	const char *chpassword = (*env)->GetStringUTFChars(env, psw, NULL);
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+//	memset(encrypt, 0, LEN * sizeof(char));
+
+	const char *api="api=user.passport.resetPassword";
+
+//	addString(urlString, url);
+	addString(urlString, api);
+
+//	addString(urlString, "&timelimit=60&count=3&type=num");
+	addString(urlString, "&handset=");
+	if(chuid != NULL)addString(urlString, chuid);
+
+//	if(chorder_code != NULL)addString(urlString, chorder_code);
+	addString(urlString, "&code=");
+	if(chcode != NULL)addString(urlString, chcode);
+	addString(urlString, "&password=");
+	if(chpassword != NULL)addString(urlString, chpassword);
+
+	addString(urlString, pHead);
+
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
+
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "user.passport.resetPassword");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
+
 #ifdef __cplusplus
 }
 #endif
