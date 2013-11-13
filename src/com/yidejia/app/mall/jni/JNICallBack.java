@@ -151,5 +151,8 @@ public class JNICallBack {
 	
 	//验证验证码
 	public static native String getHttp4CheckCode(String name, String code);
+	
+	//重置密码
+	public static native String getHttp4ResetPsw(String name, String psw, String code);
 }	
 	
