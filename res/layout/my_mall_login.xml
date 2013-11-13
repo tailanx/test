@@ -88,12 +88,12 @@
                         android:id="@+id/my_mall_login_account"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_gravity="center_vertical|left"
                         android:drawableLeft="@drawable/account_icon"
-                        android:drawablePadding="8dp"
-                        android:padding="8dp"
+                        android:layout_marginLeft="5dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="center|left"
                         android:text="账号"
-                        android:gravity="center"
                         android:textColor="#b4b4b4"
                         android:textSize="20sp" />
 
@@ -107,6 +107,7 @@
                         android:background="@null"
                         android:clickable="false"
                         android:hint="伊的家账号"
+                        android:textSize="20sp"
                         android:singleLine="true" />
                 </TableRow>
 
@@ -121,12 +122,12 @@
                         android:id="@+id/my_mall_login_password"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_gravity="center_vertical|left"
                         android:drawableLeft="@drawable/password_icon"
-                        android:drawablePadding="8dp"
-                        android:padding="8dp"
                         android:text="密码"
-                        android:gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="center|left"
                         android:textColor="#b4b4b4"
                         android:textSize="20sp" />
 
@@ -139,7 +140,9 @@
                         android:inputType="textPassword"
                      	android:clickable="false"
                         android:hint="******"
+                        android:textSize="20sp"
                         android:singleLine="true" />
+                    
                 </TableRow>
 
                 <TableRow
