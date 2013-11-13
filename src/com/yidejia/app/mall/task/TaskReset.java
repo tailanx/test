@@ -27,6 +27,7 @@ public class TaskReset {
 	
 	public void resetPsw(String name, String psw, String code){
 		this.name = name;
+
 		this.psw = psw;
 		this.code = code;
 		
