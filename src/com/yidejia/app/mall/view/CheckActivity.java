@@ -43,10 +43,12 @@ public class CheckActivity extends SherlockActivity {
 		
 		findIds();
 		shipCompanyTextView.setText(shipCompany);
-		shipCodeTextView.setText("6350485541");
+//		shipCodeTextView.setText("6350485541");
+		shipCodeTextView.setText(shipCode);
 		
 		task = new TaskGetShipLog(CheckActivity.this, logistics_details_layout);
-		task.getShipLogs("6350485541");
+//		task.getShipLogs("6350485541");
+		task.getShipLogs(shipCode);
 	}
 	
 	
