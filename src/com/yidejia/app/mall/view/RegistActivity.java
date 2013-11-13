@@ -20,6 +20,7 @@ import com.yidejia.app.mall.ctrl.IpAddress;
 import com.yidejia.app.mall.datamanage.UserDatamanage;
 import com.yidejia.app.mall.task.TaskCheckCode;
 import com.yidejia.app.mall.task.TaskGetCode;
+import com.yidejia.app.mall.util.IsPhone;
 
 public class RegistActivity extends SherlockActivity {
 	public Button mback;// ����
@@ -161,7 +162,7 @@ public class RegistActivity extends SherlockActivity {
 					Toast.LENGTH_LONG).show();
 			return;
 		}
-		boolean phone = isMobileNO(account);
+		boolean phone = IsPhone.isMobileNO(account);
 		if (phone) {
 			if (obtain == null || "".equals(obtain)) {
 				Toast.makeText(RegistActivity.this,
@@ -197,7 +198,7 @@ public class RegistActivity extends SherlockActivity {
 	 */
 	private void getCodeListener(){
 		account = mZhanghao.getText().toString().trim();//账号
-		boolean isphone = isMobileNO(account);
+		boolean isphone = IsPhone.isMobileNO(account);
 		if(!isphone){
 			Toast.makeText(RegistActivity.this,
 					getResources().getString(R.string.phone),
@@ -208,11 +209,5 @@ public class RegistActivity extends SherlockActivity {
 		getCodeTask.getCode(account);
 	}
 	
-	public static boolean isMobileNO(String mobiles) {
-		Pattern p = Pattern
-				.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
-		Matcher m = p.matcher(mobiles);
-		Log.e("info", m.matches() + "");
-		return m.matches();
-	}
+	
 }

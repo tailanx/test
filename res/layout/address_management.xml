@@ -4,23 +4,17 @@
     android:layout_height="fill_parent"
     android:background="@drawable/bg" >
 
-          	<LinearLayout
-            android:id="@+id/address_management_relative2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="4dp"
-            android:descendantFocusability="blocksDescendants"
-           >
-       
-         
-            <ListView 
-                android:id="@+id/address_management_listview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                
-                ></ListView>
- </LinearLayout>
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/address_item_main_refresh_scrollview111"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/main_bg"
+        android:descendantFocusability="afterDescendants"
+        android:scrollbars="none"
+        ptr:ptrAnimationStyle="flip"
+        ptr:ptrMode="pullDownFromTop" >
+
+    </com.handmark.pulltorefresh.library.PullToRefreshListView>
 
 </RelativeLayout>

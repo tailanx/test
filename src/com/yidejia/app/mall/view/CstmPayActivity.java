@@ -885,8 +885,8 @@ public class CstmPayActivity extends SherlockActivity {
 							.getText().toString())) + "");
 		}
 		Log.i("info", "setKuaidi:");
-		postMethod = getResources().getString(R.string.ship_post);// 初始化快递方式;
-		expressNum = express.getExpress();// 初始化费用
+//		postMethod = getResources().getString(R.string.ship_post);// 初始化快递方式;
+//		expressNum = express.getExpress();// 初始化费用
 	}
 	
 	/**

@@ -22,6 +22,7 @@ import com.yidejia.app.mall.MyMallActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.IpAddress;
 import com.yidejia.app.mall.datamanage.UserDatamanage;
+import com.yidejia.app.mall.task.TaskLoginAct;
 
 public class LoginActivity extends SherlockActivity implements OnClickListener{
 	private RelativeLayout findPwd;//找回密码
@@ -31,10 +32,10 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 	private EditText stringPassword;
 
 	
-	private MyMallActivity newFragment;
 	private UserDatamanage userManage;//登陆的接口
 	private IpAddress ip;
-	private MyApplication myApplication;
+	
+	private TaskLoginAct taskLoginAct;
 	
 //	private void doClick(View v){
 //		switch (v.getId()) {
@@ -82,7 +83,7 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 		ip = new IpAddress();
 		setActionbar();
 		userManage = new UserDatamanage(LoginActivity.this);
-		myApplication = (MyApplication) getApplication();
+		
 		findPwd = (RelativeLayout)findViewById(R.id.my_mall_login_retrieve_password);
 		//设置监听
 		findPwd.setOnClickListener(this);
@@ -134,43 +135,73 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 			LoginActivity.this.startActivity(registIntent);
 		
 			break;
-		case R.id.my_mall_login_button://登录
-		String name = stringName.getText().toString();
-		String pwd = stringPassword.getText().toString();
-		boolean isSucess = userManage.userLogin(name, pwd, ip.getIpAddress());
-		Log.i("info",isSucess +"   isSucess");
-		if(isSucess){
-			myApplication.setIsLogin(true);
+		case R.id.my_mall_login_button:// 登录
+			String name = stringName.getText().toString().trim();
+			String pwd = stringPassword.getText().toString().trim();
 			
-//			Log.i("info", myApplication.getToken()+"      myApplication.getToken()");
-			this.finish();
-			//		if(name==null||"".equals(name)){
-//			Toast.makeText(this, "请输入用户名或者密码",Toast.LENGTH_LONG).show();
-//		}
-//		if(pwd==null||"".equals(pwd)){
-//			Toast.makeText(this, "请输入用户名或者密码",Toast.LENGTH_LONG).show();
-//		}
-//		if(name.equals("aaa")&&pwd.equals("111")){   //登录成功
-//			newFragment = new MyMallActivity();
-//			this.finish();
-//			((MyApplication) getApplication()).setIsLogin(true);
-//			Log.i("info", myApplication.getIsLogin()+"");
-//			myApplication.setIsLogin(true);
-//			Log.i("info", myApplication.getIsLogin()+"");
-//		FragmentTransaction ft = getFragmentManager().beginTransaction();
-//	    ft.replace(R.id.main_fragment, newFragment).commit();
-//			Message ms = new Message();
-//			ms.what = 000;
-//			myApplication.getHandler().sendMessage(ms);
-		
-		}else{
-			Toast.makeText(LoginActivity.this, getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+			if(name == null || "".equals(name)){
+				Toast.makeText(LoginActivity.this, "账号不能为空!", Toast.LENGTH_LONG).show();
+				return;
+			}
+			if(pwd == null || "".equals(pwd)){
+				Toast.makeText(LoginActivity.this, "密码不能为空!", Toast.LENGTH_LONG).show();
+				return;
+			}
+			
+			taskLoginAct = new TaskLoginAct(LoginActivity.this);
+			
+			taskLoginAct.loginAct(name, pwd, ip.getIpAddress());
+			
+			break;
+//			boolean isSucess = userManage.userLogin(name, pwd,
+//					ip.getIpAddress());
+//			Log.i("info", isSucess + "   isSucess");
+//			if (isSucess) {
+//				myApplication.setIsLogin(true);
+//
+//				// Log.i("info",
+//				// myApplication.getToken()+"      myApplication.getToken()");
+//				this.finish();
+//				// if(name==null||"".equals(name)){
+//				// Toast.makeText(this, "请输入用户名或者密码",Toast.LENGTH_LONG).show();
+//				// }
+//				// if(pwd==null||"".equals(pwd)){
+//				// Toast.makeText(this, "请输入用户名或者密码",Toast.LENGTH_LONG).show();
+//				// }
+//				// if(name.equals("aaa")&&pwd.equals("111")){ //登录成功
+//				// newFragment = new MyMallActivity();
+//				// this.finish();
+//				// ((MyApplication) getApplication()).setIsLogin(true);
+//				// Log.i("info", myApplication.getIsLogin()+"");
+//				// myApplication.setIsLogin(true);
+//				// Log.i("info", myApplication.getIsLogin()+"");
+//				// FragmentTransaction ft =
+//				// getFragmentManager().beginTransaction();
+//				// ft.replace(R.id.main_fragment, newFragment).commit();
+//				// Message ms = new Message();
+//				// ms.what = 000;
+//				// myApplication.getHandler().sendMessage(ms);
+//
+//			} else {
+//				Toast.makeText(LoginActivity.this,
+//						getResources().getString(R.string.no_network),
+//						Toast.LENGTH_LONG).show();
+//			}
 		}
- 		}
-		
+
 	}
 	
+	
 
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		if(taskLoginAct != null){
+			taskLoginAct.closeTask();
+		}
+	}
+	
 	private void setActionbar(){
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);

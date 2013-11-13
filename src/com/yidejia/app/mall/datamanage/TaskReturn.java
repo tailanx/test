@@ -9,6 +9,7 @@ import org.json.JSONException;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.net.order.SaveReturnOrder;
+import com.yidejia.app.mall.util.IsPhone;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -80,6 +81,12 @@ public class TaskReturn {
 		}
 		if(desc.isEmpty()){
 			Toast.makeText(activity, "原因描述不能为空!", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if(!IsPhone.isMobileNO(contact_manner)){
+			Toast.makeText(activity,
+					activity.getResources().getString(R.string.phone),
+					Toast.LENGTH_SHORT).show();
 			return;
 		}
 		userId = ((MyApplication)activity.getApplication()).getUserId();

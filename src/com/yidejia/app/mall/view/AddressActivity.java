@@ -3,7 +3,9 @@ package com.yidejia.app.mall.view;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.database.DatabaseUtils;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,14 +19,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.model.Addresses;
-import com.yidejia.app.mall.util.AddressUtil;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DefinalDate;
-import com.yidejia.app.mall.util.Utility;
 
 public class AddressActivity extends SherlockActivity {
 
@@ -39,13 +43,14 @@ public class AddressActivity extends SherlockActivity {
 	// private ImageView deleteImageView;//删除
 	// private ImageView editImageView;//编辑
 	// private CheckBox checkBox;//单选框
-	private LinearLayout layout;
+//	private LinearLayout layout;
 	// private View view;
 	private AddressAdapter adapter;
 	private AddressDataManage addressDataManage;
 	private ListView listView;
 	private ArrayList<Addresses> mAddresses;
 	private MyApplication myApplication;
+	private PullToRefreshListView pullToRefreshListView;
 	// private void setupShow(){
 	//
 	// try {
@@ -91,8 +96,8 @@ public class AddressActivity extends SherlockActivity {
 	// adapter.changeDate(mAddresses);
 	// }
 
-	int fromIndex = 0;
-	int acount = 50;
+//	int fromIndex = 0;
+//	int acount = 50;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -100,9 +105,17 @@ public class AddressActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setActionbar();
 		setContentView(R.layout.address_management);
-
-		listView = (ListView) findViewById(R.id.address_management_listview);
-		layout = (LinearLayout) findViewById(R.id.address_management_relative2);
+		
+		pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.address_item_main_refresh_scrollview111);
+		
+		pullToRefreshListView.setOnRefreshListener(listener);
+		
+		String label = getResources().getString(R.string.update_time)+DateUtils.formatDateTime(this, System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL|DateUtils.FORMAT_SHOW_DATE|DateUtils.FORMAT_SHOW_TIME);
+		pullToRefreshListView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+		
+		
+		listView = pullToRefreshListView.getRefreshableView();
+//		layout = (LinearLayout) findViewById(R.id.address_management_relative2);
 		addressDataManage = new AddressDataManage(AddressActivity.this);
 		
 		myApplication = (MyApplication) getApplication();
@@ -136,7 +149,23 @@ public class AddressActivity extends SherlockActivity {
 		}
 		});
 	}
-	
+	private void setupShow(){
+		adapter.notifyDataSetChanged();
+	}
+	private int fromIndex = 0;
+	private int acount = 10;
+	private OnRefreshListener<ListView> listener = new OnRefreshListener<ListView>() {
+
+		@Override
+		public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+			// TODO Auto-generated method stub
+			String label = getResources().getString(R.string.update_time)+DateUtils.formatDateTime(AddressActivity.this, System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL|DateUtils.FORMAT_SHOW_DATE|DateUtils.FORMAT_SHOW_TIME);
+			pullToRefreshListView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+			fromIndex  += acount;
+			setupShow();
+			pullToRefreshListView.onRefreshComplete();
+		}
+	};
 
 	private void setActionbar() {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
