@@ -1,7 +1,7 @@
 package com.yidejia.app.mall.fragment;
 
+import java.io.IOException;
 import java.util.ArrayList;
-
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,16 +24,20 @@ import com.yidejia.app.mall.datamanage.MainPageDataManage;
 import com.yidejia.app.mall.initview.HotSellView;
 import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.model.MainProduct;
+import com.yidejia.app.mall.net.homepage.GetHomePage;
 import com.yidejia.app.mall.view.AllOrderActivity;
 import com.yidejia.app.mall.view.IntegeralActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.view.MyCollectActivity;
 import com.yidejia.app.mall.view.PersonActivity;
 import com.yidejia.app.mall.widget.YLViewPager;
+
 import android.app.AlertDialog.Builder;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
@@ -185,23 +189,26 @@ public class MainPageFragment extends SherlockFragment {
 										| DateUtils.FORMAT_ABBREV_ALL);
 				refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 				// mPullToRefreshScrollView.setRefreshing();
-				MainPageDataManage manage = new MainPageDataManage(
-						getSherlockActivity(), mPullToRefreshScrollView);
-
-				manage.getMainPageData();
-				bannerArray = manage.getBannerArray();
-				acymerArray = manage.getAcymerArray();
-				inerbtyArray = manage.getInerbtyArray();
-				hotsellArray = manage.getHotSellArray();
-				ggTitleArray = manage.getGGTitle();
-				HotSellView hotSellView = new HotSellView(view,
-						getSherlockActivity());
-				hotSellView.initHotSellView(hotsellArray);
-				hotSellView.initAcymerView(acymerArray);
-				hotSellView.initInerbtyView(inerbtyArray);
-				main_mall_notice_content.setText(ggTitleArray.get(0));
-				getMainListFirstItem();
+//				MainPageDataManage manage = new MainPageDataManage(
+//						getSherlockActivity(), mPullToRefreshScrollView);
+//
+//				manage.getMainPageData();
+//				bannerArray = manage.getBannerArray();
+//				acymerArray = manage.getAcymerArray();
+//				inerbtyArray = manage.getInerbtyArray();
+//				hotsellArray = manage.getHotSellArray();
+//				ggTitleArray = manage.getGGTitle();
+//				HotSellView hotSellView = new HotSellView(view,
+//						getSherlockActivity());
+//				hotSellView.initHotSellView(hotsellArray);
+//				hotSellView.initAcymerView(acymerArray);
+//				hotSellView.initInerbtyView(inerbtyArray);
+//				main_mall_notice_content.setText(ggTitleArray.get(0));
+//				getMainListFirstItem();
 				// mPullToRefreshScrollView.onRefreshComplete();
+				closeTask();
+				task = new Task();
+				task.execute();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -212,6 +219,12 @@ public class MainPageFragment extends SherlockFragment {
 		}
 
 	};
+	
+	private void closeTask(){
+		if(task != null && task.getStatus().RUNNING == AsyncTask.Status.RUNNING){
+			task.cancel(true);
+		}
+	}
 
 	/**
 	 * 获取首页商品hotsell,acymer,inerbty布局的控件和跳转
@@ -448,23 +461,26 @@ public class MainPageFragment extends SherlockFragment {
 			super.onActivityCreated(savedInstanceState);
 			Log.d(TAG, "TestFragment-----onActivityCreated");
 			// intentToView(view);
-			MainPageDataManage manage = new MainPageDataManage(
-					getSherlockActivity(), null);
-			manage.getMainPageData();
-			bannerArray = manage.getBannerArray();
-			acymerArray = manage.getAcymerArray();
-			inerbtyArray = manage.getInerbtyArray();
-			hotsellArray = manage.getHotSellArray();
-			ggTitleArray = manage.getGGTitle();
+//			MainPageDataManage manage = new MainPageDataManage(
+//					getSherlockActivity(), null);
+//			manage.getMainPageData();
+//			bannerArray = manage.getBannerArray();
+//			acymerArray = manage.getAcymerArray();
+//			inerbtyArray = manage.getInerbtyArray();
+//			hotsellArray = manage.getHotSellArray();
+//			ggTitleArray = manage.getGGTitle();
 
-			createView(view, inflater);
-			HotSellView hotSellView = new HotSellView(view,
-					getSherlockActivity());
-			hotSellView.initHotSellView(hotsellArray);
-			hotSellView.initAcymerView(acymerArray);
-			hotSellView.initInerbtyView(inerbtyArray);
-			intentToView(view);
-			main_mall_notice_content.setText(ggTitleArray.get(0));
+//			createView(view, inflater);
+//			HotSellView hotSellView = new HotSellView(view,
+//					getSherlockActivity());
+//			hotSellView.initHotSellView(hotsellArray);
+//			hotSellView.initAcymerView(acymerArray);
+//			hotSellView.initInerbtyView(inerbtyArray);
+//			intentToView(view);
+//			main_mall_notice_content.setText(ggTitleArray.get(0));
+			closeTask();
+			task = new Task();
+			task.execute();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -472,6 +488,74 @@ public class MainPageFragment extends SherlockFragment {
 					getResources().getString(R.string.bad_network),
 					Toast.LENGTH_SHORT).show();
 		}
+	}
+	
+	private boolean isFirstIn = true;
+	private Task task;
+	
+	private class Task extends AsyncTask<Void, Void, Boolean>{
+
+		private ProgressDialog bar;
+		
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// TODO Auto-gene|rated method stub
+			GetHomePage getHomePage = new GetHomePage();
+			String httpresp;
+			try {
+				httpresp = getHomePage.getHomePageJsonString();
+				boolean issuccess = getHomePage.analysisGetHomeJson(httpresp);
+				bannerArray = getHomePage.getBannerArray();
+				acymerArray = getHomePage.getAcymerArray();
+				inerbtyArray = getHomePage.getInerbtyArray();
+				hotsellArray = getHomePage.getHotSellArray();
+				ggTitleArray = getHomePage.getGGTitle();
+				return issuccess;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return false;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			if (isFirstIn) {
+				bar = new ProgressDialog(getSherlockActivity());
+				bar.setCancelable(false);
+				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+				bar.show();
+			}
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(result){
+				createView(view, inflater);
+				HotSellView hotSellView = new HotSellView(view,
+						getSherlockActivity());
+				hotSellView.initHotSellView(hotsellArray);
+				hotSellView.initAcymerView(acymerArray);
+				hotSellView.initInerbtyView(inerbtyArray);
+				intentToView(view);
+				main_mall_notice_content.setText(ggTitleArray.get(0));
+			} else{
+				Toast.makeText(getSherlockActivity(),
+						getResources().getString(R.string.bad_network),
+						Toast.LENGTH_SHORT).show();
+			}
+			if(isFirstIn){
+				bar.dismiss();
+				isFirstIn = false;
+			} else {
+				mPullToRefreshScrollView.onRefreshComplete();
+			}
+		}
+		
 	}
 
 	@Override
