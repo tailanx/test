@@ -1,5 +1,6 @@
 package com.yidejia.app.mall.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.PreferentialDataManage;
 import com.yidejia.app.mall.fragment.FreeGivingAdapter.ViewHolder;
@@ -68,7 +70,7 @@ public class FreeGivingFragment extends SherlockFragment {
 		View view= inflater.inflate(R.layout.free_giving, null);//获取视图对象
 		LinearLayout relativeLayout = (LinearLayout)view.findViewById(R.id.free_shopping_cart_relative2);//获取布局
 		listView = (ListView) view.findViewById(R.id.free_giving_listview);
-		Log.i("info", CartActivity.arrayListFree+  "CartActivity.arrayListFree");
+//		Log.i("info", CartActivity.arrayListFree+  "CartActivity.arrayListFree");
 		if(CstmPayActivity.arrayListFree.isEmpty()) return view;
 		adapter = new FreeGivingAdapter(getSherlockActivity(), CstmPayActivity.arrayListFree);//preferentialDataManage.getFreeGoods()
 		listView.setAdapter(adapter);
@@ -104,6 +106,7 @@ public class FreeGivingFragment extends SherlockFragment {
 //				startActivity(intent);
 //			}
 //		});
+        listView.setOnItemClickListener(listItemClickListener);
 		return view;
 	}
 
@@ -113,8 +116,14 @@ public class FreeGivingFragment extends SherlockFragment {
     public void onItemClick(AdapterView<?> parent, View view, int position,  
             long id) {  
         //// 取得ViewHolder对象，这样就省去了通过层层的findViewById去实例化我们需要的cb实例的步骤    
-        ViewHolder viewHolder=(ViewHolder)view.getTag();                          
-        viewHolder.cb.toggle();// 把CheckBox的选中状态改为当前状态的反,gridview确保是单一选中  
+//        ViewHolder viewHolder=(ViewHolder)view.getTag();                          
+//        viewHolder.cb.toggle();// 把CheckBox的选中状态改为当前状态的反,gridview确保是单一选中  
+    	Log.i("info", "voucher:" +"adsadasfasfasdf");
+    	Intent  intent = new Intent(getSherlockActivity(), GoodsInfoActivity.class);
+		Bundle bundle = new Bundle();
+		bundle.putString("goodsId", CstmPayActivity.arrayListFree.get(position).getUId());
+		intent.putExtras(bundle);
+		getSherlockActivity().startActivity(intent);
         
     }  
 };  
