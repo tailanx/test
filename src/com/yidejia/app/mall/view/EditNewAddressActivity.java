@@ -799,7 +799,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 								addresses);
 						intent.putExtras(bundle);// ����bundle����
 						EditNewAddressActivity.this.setResult(
-								DefinalDate.responcode1, intent);
+								DefinalDate.responcode, intent);
 						EditNewAddressActivity.this.finish();
 						// Toast.makeText(NewAddressActivity.this,
 						// "�༭�ɹ�",
