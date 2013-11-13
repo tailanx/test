@@ -133,12 +133,13 @@ public class PayUtil {
 //				// headImage.setImageResource(R.drawable.ic_launcher);
 //				// }
 				String  a = cart.getPrice()+"";
+				String b= cart.getScort()+"";
 				Log.i("info", a+" a");
 //				int b= a.indexOf(".");
 //				
 //				Log.e("info", a.charAt(b+1)+"");
 				
-				if(("0.0".equals(a))){
+				if(("0.0".equals(a))&&!"0".equals(b)){
 
 					sumPrice.setText(cart.getScort()+"  积分");
 				}else{

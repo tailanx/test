@@ -168,7 +168,7 @@ public class FreeGivingAdapter extends BaseAdapter {
 						carts.setProductText(specials.getBrief());
 						carts.setSalledAmmount(1);
 						carts.setPrice(0);
-						
+						carts.setScort(0+"");
 					} catch (NumberFormatException e) {
 						e.printStackTrace();
 					}

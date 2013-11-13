@@ -687,6 +687,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 		// startActionMode(new
 		// AnActionModeOfEpicProportions(ComposeActivity.this));
 		ImageView leftButton = (ImageView) findViewById(R.id.actionbar_left);
+		leftButton.setVisibility(View.GONE);
 		leftButton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -798,7 +799,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 								addresses);
 						intent.putExtras(bundle);// ����bundle����
 						EditNewAddressActivity.this.setResult(
-								DefinalDate.responcode, intent);
+								DefinalDate.responcode1, intent);
 						EditNewAddressActivity.this.finish();
 						// Toast.makeText(NewAddressActivity.this,
 						// "�༭�ɹ�",
