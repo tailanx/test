@@ -251,7 +251,7 @@
 	              <string name="no_cart1">购物车1</string>
 	           <string name="sure_commit">确认您所选购的换购商品</string>
 	            <string name="address_tip">请选择您所有地区信息。</string>
-	             <string name="delete_produce">删除商品</string>
+	             <string name="delete_produce1">删除商品</string>
 	                <string name="sure_delete_produce">确认删除该商品</string>
 	                  <string name="load_addresses">亲，你还没有添加地址哦！</string>
 	                  
