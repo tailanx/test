@@ -1,45 +1,157 @@
-com.jingzhuan.neican.BaseActivity:
-====    137:164:private void setactionbarTitle(java.lang.String)
-com.jingzhuan.neican.BaseActivity$1
-com.jingzhuan.neican.BaseActivity$2
-com.jingzhuan.neican.BuildConfig
-com.jingzhuan.neican.InternalActivity:
-    private com.jingzhuan.neican.InternalActivity$GetDataTask task
-com.jingzhuan.neican.R:
-====    10:10:public R()
-com.jingzhuan.neican.R$anim
-com.jingzhuan.neican.R$array
-com.jingzhuan.neican.R$attr
-com.jingzhuan.neican.R$bool
-com.jingzhuan.neican.R$color
-com.jingzhuan.neican.R$dimen
-com.jingzhuan.neican.R$drawable
-com.jingzhuan.neican.R$id
-com.jingzhuan.neican.R$integer
-com.jingzhuan.neican.R$layout
-com.jingzhuan.neican.R$menu
-com.jingzhuan.neican.R$string
-com.jingzhuan.neican.R$style
-com.jingzhuan.neican.R$styleable:
-    public static final int PullToRefresh_ptrAdapterViewBackground
-    public static final int PullToRefresh_ptrAnimationStyle
-    public static final int PullToRefresh_ptrDrawable
-    public static final int PullToRefresh_ptrDrawableBottom
-    public static final int PullToRefresh_ptrDrawableEnd
-    public static final int PullToRefresh_ptrDrawableStart
-    public static final int PullToRefresh_ptrDrawableTop
-    public static final int PullToRefresh_ptrHeaderBackground
-    public static final int PullToRefresh_ptrHeaderSubTextColor
-    public static final int PullToRefresh_ptrHeaderTextAppearance
-    public static final int PullToRefresh_ptrHeaderTextColor
-    public static final int PullToRefresh_ptrListViewExtrasEnabled
-    public static final int PullToRefresh_ptrMode
-    public static final int PullToRefresh_ptrOverScroll
-    public static final int PullToRefresh_ptrRefreshableViewBackground
-    public static final int PullToRefresh_ptrRotateDrawableWhilePulling
-    public static final int PullToRefresh_ptrScrollingWhileRefreshingEnabled
-    public static final int PullToRefresh_ptrShowIndicator
-    public static final int PullToRefresh_ptrSubHeaderTextAppearance
+com.UCMobile.PayPlugin.PayInterface
+com.UCMobile.PayPlugin.PluginIcon
+com.UCMobile.PayPlugin.PluginSurfaceView
+com.UCMobile.PayPlugin.a
+com.ant.liao.GifDecoder:
+    public static final int STATUS_PARSING
+    public static final int STATUS_FORMAT_ERROR
+    public static final int STATUS_OPEN_ERROR
+    public static final int STATUS_FINISH
+    private static final int MaxStackSize
+====    28:84:public GifDecoder(byte[],com.ant.liao.GifAction)
+====    125:125:public int getStatus()
+====    133:133:public boolean parseOk()
+====    142:149:public int getDelay(int)
+====    157:165:public int[] getDelays()
+====    186:186:public int getLoopCount()
+====    288:288:public com.ant.liao.GifFrame getCurrentFrame()
+====    314:315:public void reset()
+com.ant.liao.GifView:
+====    89:95:private void setGifDecoderImage(byte[])
+====    115:116:public void setGifImage(byte[])
+====    123:124:public void setGifImage(java.io.InputStream)
+====    194:199:public void showCover()
+====    206:209:public void showAnimation()
+====    228:237:public void setShowDimension(int,int)
+com.ant.liao.R
+com.ant.liao.R$attr
+com.ant.liao.R$drawable
+com.ant.liao.R$string
+com.jeremyfeinstein.slidingmenu.CustomViewAbove:
+    private static final java.lang.String TAG
+    private static final boolean DEBUG
+    private static final boolean USE_CACHE
+    private static final int MAX_SETTLE_DURATION
+    private static final int MIN_DISTANCE_FOR_FLING
+    private static final int INVALID_POINTER
+====    262:263:public void setOnOpenedListener(com.jeremyfeinstein.slidingmenu.SlidingMenu$OnOpenedListener)
+====    266:267:public void setOnClosedListener(com.jeremyfeinstein.slidingmenu.SlidingMenu$OnClosedListener)
+====    282:285:public void addIgnoredView(android.view.View)
+====    288:289:public void removeIgnoredView(android.view.View)
+====    292:293:public void clearIgnoredViews()
+====    325:325:public int getContentLeft()
+====    350:356:public int getChildWidth(int)
+====    361:361:public boolean isSlidingEnabled()
+====    365:366:public void setSlidingEnabled(boolean)
+====    375:376:void smoothScrollTo(int,int)
+====    571:571:public int getTouchMode()
+====    900:917:protected boolean canScroll(android.view.View,boolean,int,int,int)
+com.jeremyfeinstein.slidingmenu.CustomViewAbove$SimpleOnPageChangeListener:
+====    146:146:public void onPageScrollStateChanged(int)
+com.jeremyfeinstein.slidingmenu.CustomViewBehind:
+    private static final java.lang.String TAG
+    private static final int MARGIN_THRESHOLD
+====    49:50:public void setCanvasTransformer(com.jeremyfeinstein.slidingmenu.SlidingMenu$CanvasTransformer)
+====    58:59:public void setMarginThreshold(int)
+====    62:62:public int getMarginThreshold()
+====    85:89:public void setSecondaryContent(android.view.View)
+====    168:168:public int getMode()
+====    176:176:public float getScrollScale()
+====    185:187:public void setSecondaryShadowDrawable(android.graphics.drawable.Drawable)
+====    417:426:public void setSelectedView(android.view.View)
+com.jeremyfeinstein.slidingmenu.R:
+====    9:9:public R()
+com.jeremyfeinstein.slidingmenu.R$attr
+com.jeremyfeinstein.slidingmenu.R$bool
+com.jeremyfeinstein.slidingmenu.R$color
+com.jeremyfeinstein.slidingmenu.R$dimen
+com.jeremyfeinstein.slidingmenu.R$drawable
+com.jeremyfeinstein.slidingmenu.R$id:
+    public static final int abs__action_bar
+    public static final int abs__action_bar_container
+    public static final int abs__action_bar_subtitle
+    public static final int abs__action_bar_title
+    public static final int abs__action_context_bar
+    public static final int abs__action_menu_divider
+    public static final int abs__action_menu_presenter
+    public static final int abs__action_mode_bar
+    public static final int abs__action_mode_bar_stub
+    public static final int abs__action_mode_close_button
+    public static final int abs__activity_chooser_view_content
+    public static final int abs__checkbox
+    public static final int abs__content
+    public static final int abs__default_activity_button
+    public static final int abs__expand_activities_button
+    public static final int abs__home
+    public static final int abs__icon
+    public static final int abs__image
+    public static final int abs__imageButton
+    public static final int abs__list_item
+    public static final int abs__progress_circular
+    public static final int abs__progress_horizontal
+    public static final int abs__radio
+    public static final int abs__search_badge
+    public static final int abs__search_bar
+    public static final int abs__search_button
+    public static final int abs__search_close_btn
+    public static final int abs__search_edit_frame
+    public static final int abs__search_go_btn
+    public static final int abs__search_mag_icon
+    public static final int abs__search_plate
+    public static final int abs__search_src_text
+    public static final int abs__search_voice_btn
+    public static final int abs__shortcut
+    public static final int abs__split_action_bar
+    public static final int abs__submit_area
+    public static final int abs__textButton
+    public static final int abs__title
+    public static final int abs__up
+    public static final int disableHome
+    public static final int edit_query
+    public static final int fullscreen
+    public static final int homeAsUp
+    public static final int left
+    public static final int listMode
+    public static final int margin
+    public static final int normal
+    public static final int right
+    public static final int showCustom
+    public static final int showHome
+    public static final int showTitle
+    public static final int slidingmenumain
+    public static final int tabMode
+    public static final int useLogo
+    public static final int wrap_content
+====    285:285:public R$id()
+com.jeremyfeinstein.slidingmenu.R$integer
+com.jeremyfeinstein.slidingmenu.R$layout:
+    public static final int abs__action_bar_home
+    public static final int abs__action_bar_tab
+    public static final int abs__action_bar_tab_bar_view
+    public static final int abs__action_bar_title_item
+    public static final int abs__action_menu_item_layout
+    public static final int abs__action_menu_layout
+    public static final int abs__action_mode_bar
+    public static final int abs__action_mode_close_item
+    public static final int abs__activity_chooser_view
+    public static final int abs__activity_chooser_view_list_item
+    public static final int abs__list_menu_item_checkbox
+    public static final int abs__list_menu_item_icon
+    public static final int abs__list_menu_item_radio
+    public static final int abs__popup_menu_item_layout
+    public static final int abs__screen_action_bar
+    public static final int abs__screen_action_bar_overlay
+    public static final int abs__screen_simple
+    public static final int abs__screen_simple_overlay_action_mode
+    public static final int abs__search_dropdown_item_icons_2line
+    public static final int abs__search_view
+    public static final int abs__simple_dropdown_hint
+    public static final int sherlock_spinner_dropdown_item
+    public static final int sherlock_spinner_item
+====    346:346:public R$layout()
+com.jeremyfeinstein.slidingmenu.R$string
+com.jeremyfeinstein.slidingmenu.R$style
+com.jeremyfeinstein.slidingmenu.R$styleable:
     public static final int SherlockActionBar_background
     public static final int SherlockActionBar_backgroundSplit
     public static final int SherlockActionBar_backgroundStacked
@@ -207,158 +319,17 @@ com.jingzhuan.neican.R$styleable:
     public static final int TextAppearance_android_textStyle
     public static final int TextAppearance_android_typeface
     public static final int TextAppearance_textAllCaps
-====    1759:1759:public R$styleable()
-com.jingzhuan.neican.RegisterActivity:
-====    574:588:public static java.lang.String GetHostIp()
-com.jingzhuan.neican.ResetActivity:
-====    435:449:public static java.lang.String GetHostIp()
-com.jingzhuan.neican.WelcomeActivity:
-====    103:106:private void setVersion()
-====    109:111:private void getVersion()
-====    114:158:private void showDialog(java.lang.String)
-====    101:101:static synthetic void access$15(com.jingzhuan.neican.WelcomeActivity)
-com.jingzhuan.neican.WelcomeActivity$1
-com.jingzhuan.neican.WelcomeActivity$2
-com.jingzhuan.neican.WelcomeActivity$3
-com.jingzhuan.neican.adapter.FavoriteAdapter:
-====    28:30:public FavoriteAdapter(android.content.Context,int)
-com.jingzhuan.neican.adapter.GnzfbTxtListAdapter:
-====    34:36:public GnzfbTxtListAdapter(android.content.Context,int)
-com.jingzhuan.neican.adapter.JzkpTxtListAdapter:
-====    19:32:public JzkpTxtListAdapter(android.content.Context,int)
-com.jingzhuan.neican.adapter.QqscNumListAdapter
-com.jingzhuan.neican.adapter.QqscNumListAdapter$Holder
-com.jingzhuan.neican.adapter.QqscTxtListAdapter:
-====    34:36:public QqscTxtListAdapter(android.content.Context,int)
-com.jingzhuan.neican.adapter.RdzxTxtListAdapter:
-====    20:35:public RdzxTxtListAdapter(android.content.Context,int)
-com.jingzhuan.neican.adapter.YdggNumListAdapter:
-====    41:43:public YdggNumListAdapter(android.content.Context,int)
-com.jingzhuan.neican.adapter.YdggTxtListAdapter:
-====    28:30:public YdggTxtListAdapter(android.content.Context,int)
-com.jingzhuan.neican.addview.AddJrzy:
-    private com.jingzhuan.neican.InternalActivity$GetDataTask getDataTask
-com.jingzhuan.neican.control.DESUtil:
-====    26:26:public java.security.Key getKey()
-====    30:31:public void setKey(java.security.Key)
-====    106:118:private byte[] encryptByte(byte[])
-====    129:140:private byte[] decryptByte(byte[])
-com.jingzhuan.neican.control.DeviceUuidFactory
-com.jingzhuan.neican.database.DataBaseHelperAdapter:
-    private static final java.lang.String DB_NAME
-    public static final java.lang.String KEY_ID
-    public static final java.lang.String KEY_ART_TITLE
-    public static final java.lang.String KEY_ART_URL
-    public static final java.lang.String KEY_USER_ID
-    public static final java.lang.String KEY_USER_PASSWORD
-    private static final java.lang.String DB_TABLE_FAVORITE
-    private static final java.lang.String DB_TABLE_USER
-    private static final java.lang.String DB_TABLE_USER_DEFAULT
-    private static final int DB_VERSION
-    private static final java.lang.String DB_CREATE_FAVORITE
-    private static final java.lang.String DB_CREATE_USER
-    private static final java.lang.String DB_CREATE_USER_DEFAULT
-====    123:123:public boolean deleteUserData(long)
-====    132:136:public android.database.Cursor selectData(long)
-====    156:156:public boolean deleteUserDefaultData(long)
-====    164:167:public boolean updateUserDefualtDate(long,java.lang.String,java.lang.String)
-com.jingzhuan.neican.database.DataBaseHelperAdapter$DataBaseHelper:
-====    55:57:public DataBaseHelperAdapter$DataBaseHelper(android.content.Context,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int)
-com.jingzhuan.neican.database.UserDataBaseHelper:
-====    28:68:public void delete(java.lang.String)
-com.jingzhuan.neican.getdatatask.TaskHjsdData
-com.jingzhuan.neican.getdatatask.TaskHjsdData$JrzyTask
-com.jingzhuan.neican.getdatatask.TaskJrzyData
-com.jingzhuan.neican.getdatatask.TaskJrzyData$JrzyTask
-com.jingzhuan.neican.getdatatask.TaskJzgnzfbData
-com.jingzhuan.neican.getdatatask.TaskJzgnzfbData$JzgnzfblTask
-com.jingzhuan.neican.getdatatask.TaskJzkpData
-com.jingzhuan.neican.getdatatask.TaskJzkpData$JzkpTask
-com.jingzhuan.neican.getdatatask.TaskMainPageData
-com.jingzhuan.neican.getdatatask.TaskMainPageData$MainPageTask
-com.jingzhuan.neican.getdatatask.TaskQqscylData
-com.jingzhuan.neican.getdatatask.TaskQqscylData$QqscylTask
-com.jingzhuan.neican.getdatatask.TaskRdzxData
-com.jingzhuan.neican.getdatatask.TaskRdzxData$RdzxTask
-com.jingzhuan.neican.getdatatask.TaskYdggData
-com.jingzhuan.neican.getdatatask.TaskYdggData$YdggTask
-com.jingzhuan.neican.net.CheckIsExistJson:
-====    62:62:public java.lang.String getRespose()
-====    70:70:public java.lang.String getMsg()
-com.jingzhuan.neican.net.HjsdJson:
-====    115:115:public long getTs()
-com.jingzhuan.neican.net.JrzyJson:
-====    106:106:public long getTs()
-com.jingzhuan.neican.net.JzgnzfbJson:
-====    115:115:public long getTs()
-com.jingzhuan.neican.net.JzkpJson:
-====    115:115:public long getTs()
-com.jingzhuan.neican.net.LoginJson:
-    private java.util.ArrayList hjsdTitle
-    private java.util.ArrayList hjsdTime
-    private java.util.ArrayList hjsdUrl
-    private long ts
-====    90:115:private void analysisJson(java.lang.String)
-====    122:122:public long getTs()
-com.jingzhuan.neican.net.MainPageJson:
-====    319:319:public long getTs()
-====    323:324:public void setRdzxTitle(java.util.ArrayList)
-====    326:327:public void setImageUrl(java.util.ArrayList)
-====    329:330:public void setYdgg(java.util.ArrayList)
-====    332:333:public void setJzyhgnzfb(java.util.ArrayList)
-====    335:336:public void setQqscyl(java.util.ArrayList)
-====    338:339:public void setJrsdTitle(java.lang.String)
-com.jingzhuan.neican.net.QqscylJson:
-====    113:113:public long getTs()
-com.jingzhuan.neican.net.RdzxJson:
-====    115:115:public long getTs()
-com.jingzhuan.neican.net.RegisterJson:
-====    60:60:public int getResponseCode()
-com.jingzhuan.neican.net.ResetPswJson:
-====    61:61:public int getResponseCode()
-com.jingzhuan.neican.net.SmsJson:
-====    64:64:public int getResponseCode()
-====    72:72:public java.lang.String getMsg()
-com.jingzhuan.neican.net.YdggJson:
-====    117:117:public long getTs()
-com.jingzhuan.neican.slidingmenu.CustomViewAbove:
-    private static final java.lang.String TAG
-    private static final boolean DEBUG
-    private static final boolean USE_CACHE
-    private static final int MAX_SETTLE_DURATION
-    private static final int MIN_DISTANCE_FOR_FLING
-    private static final int INVALID_POINTER
-====    261:262:public void setOnOpenedListener(com.jingzhuan.neican.slidingmenu.SlidingMenu$OnOpenedListener)
-====    265:266:public void setOnClosedListener(com.jingzhuan.neican.slidingmenu.SlidingMenu$OnClosedListener)
-====    281:284:public void addIgnoredView(android.view.View)
-====    287:288:public void removeIgnoredView(android.view.View)
-====    291:292:public void clearIgnoredViews()
-====    324:324:public int getContentLeft()
-====    349:355:public int getChildWidth(int)
-====    360:360:public boolean isSlidingEnabled()
-====    364:365:public void setSlidingEnabled(boolean)
-====    374:375:void smoothScrollTo(int,int)
-====    570:570:public int getTouchMode()
-====    899:916:protected boolean canScroll(android.view.View,boolean,int,int,int)
-com.jingzhuan.neican.slidingmenu.CustomViewAbove$SimpleOnPageChangeListener:
-====    145:145:public void onPageScrollStateChanged(int)
-com.jingzhuan.neican.slidingmenu.CustomViewBehind:
-    private static final java.lang.String TAG
-    private static final int MARGIN_THRESHOLD
-====    50:51:public void setCanvasTransformer(com.jingzhuan.neican.slidingmenu.SlidingMenu$CanvasTransformer)
-====    59:60:public void setMarginThreshold(int)
-====    63:63:public int getMarginThreshold()
-====    169:169:public int getMode()
-====    177:177:public float getScrollScale()
-====    418:427:public void setSelectedView(android.view.View)
-com.jingzhuan.neican.slidingmenu.SlidingActivityBase
-com.jingzhuan.neican.slidingmenu.SlidingActivityHelper:
-====    150:152:public void setContentView(android.view.View)
-====    179:180:public void toggle()
-com.jingzhuan.neican.slidingmenu.SlidingFragmentActivity:
+====    481:481:public R$styleable()
+com.jeremyfeinstein.slidingmenu.SlidingActivityBase
+com.jeremyfeinstein.slidingmenu.SlidingActivityHelper:
+====    149:151:public void setContentView(android.view.View)
+====    178:179:public void toggle()
+====    200:201:public void showSecondaryMenu()
+com.jeremyfeinstein.slidingmenu.SlidingFragmentActivity:
 ====    111:112:public void toggle()
 ====    118:119:public void showContent()
-com.jingzhuan.neican.slidingmenu.SlidingMenu:
+====    132:133:public void showSecondaryMenu()
+com.jeremyfeinstein.slidingmenu.SlidingMenu:
     private static final java.lang.String TAG
     public static final int SLIDING_WINDOW
     public static final int SLIDING_CONTENT
@@ -368,10 +339,13 @@ com.jingzhuan.neican.slidingmenu.SlidingMenu:
     public static final int LEFT
     public static final int RIGHT
     public static final int LEFT_RIGHT
+====    398:399:public void setSecondaryMenu(int)
+====    407:409:public void setSecondaryMenu(android.view.View)
 ====    426:427:public void setSlidingEnabled(boolean)
 ====    435:435:public boolean isSlidingEnabled()
 ====    454:454:public int getMode()
 ====    463:474:public void setStatic(boolean)
+====    497:498:public void showSecondaryMenu()
 ====    530:531:public void toggle()
 ====    539:544:public void toggle(boolean)
 ====    570:570:public int getBehindOffset()
@@ -380,41 +354,988 @@ com.jingzhuan.neican.slidingmenu.SlidingMenu:
 ====    657:657:public float getBehindScrollScale()
 ====    665:665:public int getTouchmodeMarginThreshold()
 ====    673:674:public void setTouchmodeMarginThreshold(int)
-====    694:695:public void setBehindCanvasTransformer(com.jingzhuan.neican.slidingmenu.SlidingMenu$CanvasTransformer)
+====    694:695:public void setBehindCanvasTransformer(com.jeremyfeinstein.slidingmenu.SlidingMenu$CanvasTransformer)
 ====    703:703:public int getTouchModeAbove()
+====    762:763:public void setSecondaryShadowDrawable(int)
+====    771:772:public void setSecondaryShadowDrawable(android.graphics.drawable.Drawable)
 ====    826:827:public void setSelectedView(android.view.View)
 ====    844:845:public void setSelectorBitmap(android.graphics.Bitmap)
 ====    853:854:public void addIgnoredView(android.view.View)
 ====    862:863:public void removeIgnoredView(android.view.View)
 ====    869:870:public void clearIgnoredViews()
-====    879:880:public void setOnOpenListener(com.jingzhuan.neican.slidingmenu.SlidingMenu$OnOpenListener)
-====    889:890:public void setOnCloseListener(com.jingzhuan.neican.slidingmenu.SlidingMenu$OnCloseListener)
-====    898:899:public void setOnOpenedListener(com.jingzhuan.neican.slidingmenu.SlidingMenu$OnOpenedListener)
-====    907:908:public void setOnClosedListener(com.jingzhuan.neican.slidingmenu.SlidingMenu$OnClosedListener)
-com.jingzhuan.neican.slidingmenu.SlidingMenu$1:
+====    879:880:public void setOnOpenListener(com.jeremyfeinstein.slidingmenu.SlidingMenu$OnOpenListener)
+====    889:890:public void setOnCloseListener(com.jeremyfeinstein.slidingmenu.SlidingMenu$OnCloseListener)
+====    898:899:public void setOnOpenedListener(com.jeremyfeinstein.slidingmenu.SlidingMenu$OnOpenedListener)
+====    907:908:public void setOnClosedListener(com.jeremyfeinstein.slidingmenu.SlidingMenu$OnClosedListener)
+com.jeremyfeinstein.slidingmenu.SlidingMenu$1:
     public static final int POSITION_OPEN
     public static final int POSITION_CLOSE
-com.jingzhuan.neican.widget.Switch:
+com.nostra13.universalimageloader.cache.disc.BaseDiscCache:
+    private static final java.lang.String ERROR_ARG_NULL
+====    40:41:public BaseDiscCache(java.io.File)
+====    63:69:public void clear()
+com.nostra13.universalimageloader.cache.disc.DiscCacheAware:
+====    public abstract void clear()
+com.nostra13.universalimageloader.cache.disc.LimitedDiscCache:
+    private static final int INVALID_SIZE
+====    55:56:public LimitedDiscCache(java.io.File,int)
+====    119:122:public void clear()
+com.nostra13.universalimageloader.cache.disc.impl.FileCountLimitedDiscCache:
+====    40:41:public FileCountLimitedDiscCache(java.io.File,int)
+com.nostra13.universalimageloader.cache.disc.impl.LimitedAgeDiscCache
+com.nostra13.universalimageloader.cache.disc.impl.TotalSizeLimitedDiscCache:
+    private static final int MIN_NORMAL_CACHE_SIZE_IN_MB
+    private static final int MIN_NORMAL_CACHE_SIZE
+com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache:
+====    36:37:public UnlimitedDiscCache(java.io.File)
+com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator:
+    private static final java.lang.String HASH_ALGORITHM
+    private static final int RADIX
+com.nostra13.universalimageloader.cache.memory.BaseMemoryCache:
+====    63:64:public void clear()
+com.nostra13.universalimageloader.cache.memory.LimitedMemoryCache:
+    private static final int MAX_NORMAL_CACHE_SIZE_IN_MB
+    private static final int MAX_NORMAL_CACHE_SIZE
+====    98:101:public void clear()
+com.nostra13.universalimageloader.cache.memory.MemoryCacheAware:
+====    public abstract void clear()
+com.nostra13.universalimageloader.cache.memory.impl.FIFOLimitedMemoryCache
+com.nostra13.universalimageloader.cache.memory.impl.FuzzyKeyMemoryCache:
+====    72:73:public void clear()
+com.nostra13.universalimageloader.cache.memory.impl.LRULimitedMemoryCache:
+    private static final int INITIAL_CAPACITY
+    private static final float LOAD_FACTOR
+====    76:78:public void clear()
+com.nostra13.universalimageloader.cache.memory.impl.LargestLimitedMemoryCache
+com.nostra13.universalimageloader.cache.memory.impl.LimitedAgeMemoryCache
+com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache:
+====    126:127:public void clear()
+com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache
+com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache
+com.nostra13.universalimageloader.core.DefaultConfigurationFactory:
+====    50:50:public DefaultConfigurationFactory()
+com.nostra13.universalimageloader.core.DisplayBitmapTask:
+    private static final java.lang.String LOG_DISPLAY_IMAGE_IN_IMAGEVIEW
+    private static final java.lang.String LOG_TASK_CANCELLED_IMAGEVIEW_REUSED
+    private static final java.lang.String LOG_TASK_CANCELLED_IMAGEVIEW_LOST
+com.nostra13.universalimageloader.core.DisplayImageOptions$Builder:
+====    237:238:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder resetViewBeforeLoading()
+====    243:244:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder resetViewBeforeLoading(boolean)
+====    253:254:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder cacheInMemory()
+====    269:270:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder cacheOnDisc()
+====    290:292:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder bitmapConfig(android.graphics.Bitmap$Config)
+====    304:306:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder decodingOptions(android.graphics.BitmapFactory$Options)
+====    311:312:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder delayBeforeLoading(int)
+====    317:318:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder extraForDownloader(java.lang.Object)
+====    327:328:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder preProcessor(com.nostra13.universalimageloader.core.process.BitmapProcessor)
+====    336:337:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder postProcessor(com.nostra13.universalimageloader.core.process.BitmapProcessor)
+====    345:347:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder displayer(com.nostra13.universalimageloader.core.display.BitmapDisplayer)
+====    355:356:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder handler(android.os.Handler)
+com.nostra13.universalimageloader.core.ImageLoader:
+    static final java.lang.String LOG_INIT_CONFIG
+    static final java.lang.String LOG_DESTROY
+    static final java.lang.String LOG_LOAD_IMAGE_FROM_MEMORY_CACHE
+    private static final java.lang.String WARNING_RE_INIT_CONFIG
+    private static final java.lang.String ERROR_WRONG_ARGUMENTS
+    private static final java.lang.String ERROR_NOT_INIT
+    private static final java.lang.String ERROR_INIT_CONFIG_WITH_NULL
+====    102:102:public boolean isInited()
+====    117:118:public void displayImage(java.lang.String,android.widget.ImageView)
+====    134:135:public void displayImage(java.lang.String,android.widget.ImageView,com.nostra13.universalimageloader.core.DisplayImageOptions)
+====    151:152:public void displayImage(java.lang.String,android.widget.ImageView,com.nostra13.universalimageloader.core.assist.ImageLoadingListener)
+====    236:237:public void loadImage(java.lang.String,com.nostra13.universalimageloader.core.assist.ImageLoadingListener)
+====    254:255:public void loadImage(java.lang.String,com.nostra13.universalimageloader.core.assist.ImageSize,com.nostra13.universalimageloader.core.assist.ImageLoadingListener)
+====    273:274:public void loadImage(java.lang.String,com.nostra13.universalimageloader.core.DisplayImageOptions,com.nostra13.universalimageloader.core.assist.ImageLoadingListener)
+====    296:316:public void loadImage(java.lang.String,com.nostra13.universalimageloader.core.assist.ImageSize,com.nostra13.universalimageloader.core.DisplayImageOptions,com.nostra13.universalimageloader.core.assist.ImageLoadingListener)
+====    335:336:public com.nostra13.universalimageloader.cache.memory.MemoryCacheAware getMemoryCache()
+====    345:347:public void clearMemoryCache()
+====    355:356:public com.nostra13.universalimageloader.cache.disc.DiscCacheAware getDiscCache()
+====    365:367:public void clearDiscCache()
+====    371:371:public java.lang.String getLoadingUriForView(android.widget.ImageView)
+====    380:381:public void cancelDisplayTask(android.widget.ImageView)
+====    394:395:public void denyNetworkDownloads(boolean)
+====    405:406:public void handleSlowNetwork(boolean)
+====    413:414:public void pause()
+====    418:419:public void resume()
+====    426:427:public void stop()
+====    435:439:public void destroy()
+com.nostra13.universalimageloader.core.ImageLoaderConfiguration:
+====    134:134:public static com.nostra13.universalimageloader.core.ImageLoaderConfiguration createDefault(android.content.Context)
+com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder:
+    private static final java.lang.String WARNING_OVERLAP_DISC_CACHE_PARAMS
+    private static final java.lang.String WARNING_OVERLAP_DISC_CACHE_NAME_GENERATOR
+    private static final java.lang.String WARNING_OVERLAP_MEMORY_CACHE
+    private static final java.lang.String WARNING_OVERLAP_EXECUTOR
+    public static final int DEFAULT_THREAD_POOL_SIZE
+    public static final int DEFAULT_THREAD_PRIORITY
+====    203:205:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder memoryCacheExtraOptions(int,int)
+====    221:226:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder discCacheExtraOptions(int,int,android.graphics.Bitmap$CompressFormat,int,com.nostra13.universalimageloader.core.process.BitmapProcessor)
+====    243:248:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder taskExecutor(java.util.concurrent.Executor)
+====    270:275:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder taskExecutorForCachedImages(java.util.concurrent.Executor)
+====    283:288:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder threadPoolSize(int)
+====    348:355:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder memoryCacheSize(int)
+====    368:377:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder memoryCacheSizePercentage(int)
+====    391:396:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder memoryCache(com.nostra13.universalimageloader.cache.memory.MemoryCacheAware)
+====    408:415:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder discCacheSize(int)
+====    427:435:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder discCacheFileCount(int)
+====    460:461:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder imageDownloader(com.nostra13.universalimageloader.core.download.ImageDownloader)
+====    471:472:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder imageDecoder(com.nostra13.universalimageloader.core.decode.ImageDecoder)
+====    490:498:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder discCache(com.nostra13.universalimageloader.cache.disc.DiscCacheAware)
+====    508:509:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder defaultDisplayImageOptions(com.nostra13.universalimageloader.core.DisplayImageOptions)
+====    517:518:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder writeDebugLogs()
+com.nostra13.universalimageloader.core.ImageLoaderEngine:
+====    132:133:void denyNetworkDownloads(boolean)
+====    143:144:void handleSlowNetwork(boolean)
+====    151:152:void pause()
+====    156:160:void resume()
+====    164:173:void stop()
+com.nostra13.universalimageloader.core.LoadAndDisplayImageTask:
+    private static final java.lang.String LOG_WAITING_FOR_RESUME
+    private static final java.lang.String LOG_RESUME_AFTER_PAUSE
+    private static final java.lang.String LOG_DELAY_BEFORE_LOADING
+    private static final java.lang.String LOG_START_DISPLAY_IMAGE_TASK
+    private static final java.lang.String LOG_WAITING_FOR_IMAGE_LOADED
+    private static final java.lang.String LOG_GET_IMAGE_FROM_MEMORY_CACHE_AFTER_WAITING
+    private static final java.lang.String LOG_LOAD_IMAGE_FROM_NETWORK
+    private static final java.lang.String LOG_LOAD_IMAGE_FROM_DISC_CACHE
+    private static final java.lang.String LOG_PREPROCESS_IMAGE
+    private static final java.lang.String LOG_POSTPROCESS_IMAGE
+    private static final java.lang.String LOG_CACHE_IMAGE_IN_MEMORY
+    private static final java.lang.String LOG_CACHE_IMAGE_ON_DISC
+    private static final java.lang.String LOG_PROCESS_IMAGE_BEFORE_CACHE_ON_DISC
+    private static final java.lang.String LOG_TASK_CANCELLED_IMAGEVIEW_REUSED
+    private static final java.lang.String LOG_TASK_CANCELLED_IMAGEVIEW_LOST
+    private static final java.lang.String LOG_TASK_INTERRUPTED
+    private static final java.lang.String ERROR_PRE_PROCESSOR_NULL
+    private static final java.lang.String ERROR_POST_PROCESSOR_NULL
+    private static final java.lang.String ERROR_PROCESSOR_FOR_DISC_CACHE_NULL
+    private static final int BUFFER_SIZE
+com.nostra13.universalimageloader.core.ProcessAndDisplayImageTask:
+    private static final java.lang.String LOG_POSTPROCESS_IMAGE
+com.nostra13.universalimageloader.core.assist.DiscCacheUtil
+com.nostra13.universalimageloader.core.assist.FailReason:
+====    37:37:public com.nostra13.universalimageloader.core.assist.FailReason$FailType getType()
+====    42:42:public java.lang.Throwable getCause()
+com.nostra13.universalimageloader.core.assist.ImageSize:
+    private static final int TO_STRING_MAX_LENGHT
+    private static final java.lang.String SEPARATOR
+com.nostra13.universalimageloader.core.assist.MemoryCacheUtil:
+    private static final java.lang.String URI_AND_SIZE_SEPARATOR
+    private static final java.lang.String WIDTH_AND_HEIGHT_SEPARATOR
+====    37:38:private MemoryCacheUtil()
+====    66:72:public static java.util.List findCachedBitmapsForImageUri(java.lang.String,com.nostra13.universalimageloader.cache.memory.MemoryCacheAware)
+====    82:88:public static java.util.List findCacheKeysForImageUri(java.lang.String,com.nostra13.universalimageloader.cache.memory.MemoryCacheAware)
+====    98:107:public static void removeFromCache(java.lang.String,com.nostra13.universalimageloader.cache.memory.MemoryCacheAware)
+com.nostra13.universalimageloader.core.assist.PauseOnScrollListener
+com.nostra13.universalimageloader.core.assist.deque.BlockingDeque:
+====    public abstract void addFirst(java.lang.Object)
+====    public abstract void addLast(java.lang.Object)
+====    public abstract boolean offerFirst(java.lang.Object)
+====    public abstract boolean offerLast(java.lang.Object)
+====    public abstract void putFirst(java.lang.Object)
+====    public abstract void putLast(java.lang.Object)
+====    public abstract boolean offerFirst(java.lang.Object,long,java.util.concurrent.TimeUnit)
+====    public abstract boolean offerLast(java.lang.Object,long,java.util.concurrent.TimeUnit)
+====    public abstract java.lang.Object takeFirst()
+====    public abstract java.lang.Object takeLast()
+====    public abstract java.lang.Object pollFirst(long,java.util.concurrent.TimeUnit)
+====    public abstract java.lang.Object pollLast(long,java.util.concurrent.TimeUnit)
+====    public abstract boolean removeFirstOccurrence(java.lang.Object)
+====    public abstract boolean removeLastOccurrence(java.lang.Object)
+====    public abstract boolean add(java.lang.Object)
+====    public abstract boolean offer(java.lang.Object)
+====    public abstract void put(java.lang.Object)
+====    public abstract boolean offer(java.lang.Object,long,java.util.concurrent.TimeUnit)
+====    public abstract java.lang.Object remove()
+====    public abstract java.lang.Object poll()
+====    public abstract java.lang.Object take()
+====    public abstract java.lang.Object poll(long,java.util.concurrent.TimeUnit)
+====    public abstract java.lang.Object element()
+====    public abstract java.lang.Object peek()
+====    public abstract boolean remove(java.lang.Object)
+====    public abstract boolean contains(java.lang.Object)
+====    public abstract int size()
+====    public abstract java.util.Iterator iterator()
+====    public abstract void push(java.lang.Object)
+com.nostra13.universalimageloader.core.assist.deque.Deque:
+====    public abstract void addFirst(java.lang.Object)
+====    public abstract void addLast(java.lang.Object)
+====    public abstract boolean offerFirst(java.lang.Object)
+====    public abstract boolean offerLast(java.lang.Object)
+====    public abstract java.lang.Object removeFirst()
+====    public abstract java.lang.Object removeLast()
+====    public abstract java.lang.Object pollFirst()
+====    public abstract java.lang.Object pollLast()
+====    public abstract java.lang.Object getFirst()
+====    public abstract java.lang.Object getLast()
+====    public abstract java.lang.Object peekFirst()
+====    public abstract java.lang.Object peekLast()
+====    public abstract boolean removeFirstOccurrence(java.lang.Object)
+====    public abstract boolean removeLastOccurrence(java.lang.Object)
+====    public abstract boolean add(java.lang.Object)
+====    public abstract boolean offer(java.lang.Object)
+====    public abstract java.lang.Object remove()
+====    public abstract java.lang.Object poll()
+====    public abstract java.lang.Object element()
+====    public abstract java.lang.Object peek()
+====    public abstract void push(java.lang.Object)
+====    public abstract java.lang.Object pop()
+====    public abstract boolean remove(java.lang.Object)
+====    public abstract boolean contains(java.lang.Object)
+====    public abstract int size()
+====    public abstract java.util.Iterator iterator()
+====    public abstract java.util.Iterator descendingIterator()
+com.nostra13.universalimageloader.core.assist.deque.LIFOLinkedBlockingDeque:
+    private static final long serialVersionUID
+com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque:
+    private static final long serialVersionUID
+====    165:178:public LinkedBlockingDeque(java.util.Collection)
+====    294:296:public void addFirst(java.lang.Object)
+====    342:352:public void putFirst(java.lang.Object)
+====    377:391:public boolean offerFirst(java.lang.Object,long,java.util.concurrent.TimeUnit)
+====    430:432:public java.lang.Object removeLast()
+====    446:452:public java.lang.Object pollLast()
+====    469:478:public java.lang.Object takeLast()
+====    501:514:public java.lang.Object pollLast(long,java.util.concurrent.TimeUnit)
+====    530:532:public java.lang.Object getLast()
+====    546:552:public java.lang.Object peekLast()
+====    573:586:public boolean removeLastOccurrence(java.lang.Object)
+====    738:739:public void push(java.lang.Object)
+====    745:745:public java.lang.Object pop()
+====    1007:1007:public java.util.Iterator descendingIterator()
+====    1133:1146:private void writeObject(java.io.ObjectOutputStream)
+====    1155:1167:private void readObject(java.io.ObjectInputStream)
+com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque$DescendingItr
+com.nostra13.universalimageloader.core.decode.BaseImageDecoder:
+    protected static final java.lang.String LOG_SABSAMPLE_IMAGE
+    protected static final java.lang.String LOG_SCALE_IMAGE
+    protected static final java.lang.String LOG_ROTATE_IMAGE
+    protected static final java.lang.String LOG_FLIP_IMAGE
+    protected static final java.lang.String ERROR_CANT_DECODE_IMAGE
+com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer:
+====    34:36:public FadeInBitmapDisplayer(int)
+com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer
+com.nostra13.universalimageloader.core.download.BaseImageDownloader:
+    public static final int DEFAULT_HTTP_CONNECT_TIMEOUT
+    public static final int DEFAULT_HTTP_READ_TIMEOUT
+    protected static final int BUFFER_SIZE
+    protected static final java.lang.String ALLOWED_URI_CHARS
+    protected static final int MAX_REDIRECT_COUNT
+    private static final java.lang.String ERROR_UNSUPPORTED_SCHEME
+====    65:69:public BaseImageDownloader(android.content.Context,int,int)
+com.nostra13.universalimageloader.core.download.HttpClientImageDownloader
+com.nostra13.universalimageloader.utils.ImageSizeUtils:
+====    35:36:private ImageSizeUtils()
+com.nostra13.universalimageloader.utils.IoUtils:
+    private static final int BUFFER_SIZE
+====    33:34:private IoUtils()
+com.nostra13.universalimageloader.utils.L:
+    private static final java.lang.String LOG_FORMAT
+====    32:33:private L()
+====    37:38:public static void enableLogging()
+====    42:43:public static void disableLogging()
+====    66:67:public static varargs void e(java.lang.Throwable,java.lang.String,java.lang.Object[])
+com.nostra13.universalimageloader.utils.StorageUtils:
+    private static final java.lang.String EXTERNAL_STORAGE_PERMISSION
+    private static final java.lang.String INDIVIDUAL_DIR_NAME
+====    38:39:private StorageUtils()
+====    91:98:public static java.io.File getOwnCacheDirectory(android.content.Context,java.lang.String)
+com.tenpay.android.service.DownloadDialog:
+    private static final int M
+    private static final int K
+    private static final int RETRY_TIMES
+    protected static final int INIT_PROGRESS
+    protected static final int DOWNLOAD_PROGRESS
+    protected static final int MSG_SOCKET_TIMEOUT
+    protected static final int MSG_RETRY_DOWNLOAD
+    protected static final int MSG_IO_EXCEPTION
+    protected static final int MSG_SOCKET_EXCEPTION
+====    66:145:public DownloadDialog(android.content.Context)
+====    66:151:public DownloadDialog(android.content.Context,java.lang.String)
+com.tenpay.android.service.IRemoteServiceCallback$Stub:
+    private static final java.lang.String DESCRIPTOR
+    static final int TRANSACTION_startActivity
+com.tenpay.android.service.IRemoteServiceCallback$Stub$Proxy:
+====    79:79:public java.lang.String getInterfaceDescriptor()
+com.tenpay.android.service.ITenpayService$Stub:
+    private static final java.lang.String DESCRIPTOR
+    static final int TRANSACTION_gotoPay
+    static final int TRANSACTION_shareLogin
+====    13:16:public ITenpayService$Stub()
+====    34:34:public android.os.IBinder asBinder()
+com.tenpay.android.service.ITenpayService$Stub$Proxy:
+====    87:87:public java.lang.String getInterfaceDescriptor()
+com.tenpay.android.service.TenpayServiceHelper:
+    protected static final java.lang.String TAG
+====    134:205:public boolean shareLogin(java.util.Map,android.os.Handler,int)
+====    337:352:public void installTenpayService()
+====    359:374:public void installTenpayService(android.content.DialogInterface$OnCancelListener)
+====    442:461:protected void showInstallConfirmDlg(android.content.Context,java.lang.String)
+====    491:517:protected void showGetAppFromNetDlg(android.content.Context,java.lang.String)
+====    522:551:protected void showGetAppFromNetDlg(android.content.Context,java.lang.String,android.content.DialogInterface$OnCancelListener)
+com.tenpay.android.service.TenpayServiceHelper$10
+com.tenpay.android.service.TenpayServiceHelper$11
+com.tenpay.android.service.TenpayServiceHelper$11$1
+com.tenpay.android.service.TenpayServiceHelper$12
+com.tenpay.android.service.TenpayServiceHelper$3
+com.tenpay.android.service.TenpayServiceHelper$5
+com.tenpay.android.service.TenpayServiceHelper$6
+com.tenpay.android.service.TenpayServiceHelper$9
+com.tenpay.android.service.TenpayServiceHelper$9$1
+com.unionpay.UPPayAssistEx:
+    public static final int PLUGIN_VALID
+    public static final int PLUGIN_NOT_FOUND
+====    public UPPayAssistEx()
+====    public static int startPay(android.app.Activity,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    public static int startPayFromBrowser(android.app.Activity,java.lang.String,java.lang.String)
+====    private static int a(android.app.Activity,java.lang.String,java.lang.String)
+====    private static int a(android.app.Activity,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    private static boolean a(android.app.Activity)
+====    public static boolean installUPPayPlugin(android.content.Context)
+com.unionpay.uppay.model.BankCardInfo:
+====    public void setType(java.lang.String)
+====    public android.graphics.drawable.BitmapDrawable getDrawable(android.content.Context)
+com.unionpay.uppay.model.PAAInfo:
+    private java.lang.String k
+    private java.lang.String r
+====    public java.lang.String getUserProvide()
+====    public java.lang.String getMerchantCountry()
+====    public java.lang.String getTransCurrency()
+====    public java.lang.String getSecurityChipType()
+====    public java.lang.String getDigest()
+====    public java.lang.String getAccountUniqueID()
+====    public java.lang.String getOrderGeneratedTime()
+====    public java.lang.String getCardholderIdInfo()
+====    public void setDigest(java.lang.String)
+====    public java.lang.String getSignatureEncoding()
+====    public void setSignatureEncoding(java.lang.String)
+com.unionpay.uppay.model.PurchaseInfo:
+====    public PurchaseInfo(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    public java.lang.String getBankCardNumber()
+====    public java.lang.String getUniqueIDCode()
+====    public java.lang.String getCvn2()
+====    public java.lang.String getExpireDate()
+com.unionpay.uppay.model.ResponseInfo:
+    private java.lang.String b
+    private java.lang.String c
+====    public void setErrMessage(java.lang.String)
+====    public java.lang.String getResponseCode()
+====    public void setResponseCode(java.lang.String)
+====    public java.lang.String getTsn()
+====    public void setTsn(java.lang.String)
+====    public void setBalance(java.lang.String)
+====    public void setOperationCode(int)
+com.unionpay.uppay.net.HttpConnection:
+    private static org.apache.http.client.HttpClient a
+    private static org.apache.http.conn.ClientConnectionManager b
+    private org.apache.http.HttpResponse d
+    private com.unionpay.uppay.net.HttpParameters e
+    private java.io.InputStream f
+    private org.apache.http.HttpEntity g
+    private byte[] h
+====    public HttpConnection(com.unionpay.uppay.net.HttpParameters)
+====    public final int connect()
+====    public final byte[] getResponseData()
+com.unionpay.uppay.net.HttpParameters
+com.unionpay.uppay.net.a:
+====    public static void a()
+com.unionpay.uppay.net.c
+com.unionpay.uppay.net.d
+com.unionpay.uppay.util.DeviceInfo:
+====    public DeviceInfo()
+====    public static boolean isSdCardExist()
+====    public static java.lang.String[] getRootDirectory()
+====    public static java.lang.String[] getExternalStorageDirectory()
+====    public static int screenOrientation(android.content.Context)
+====    public static boolean isTermKindOfMobile(android.content.Context)
+com.unionpay.uppay.util.PayEngine:
+    private int a
+====    public void setNativePayEngine(int)
+====    public int getNativePayEngine()
+====    public java.lang.String createStringFromGbk(byte[])
+====    public native int requestSupportBankList()
+====    public native java.lang.String getResponseCode()
+====    public native java.lang.String getPayType()
+====    public native java.lang.String getTransSerialNumber()
+====    public native java.lang.String getBillAmount()
+====    public native java.lang.String getSettleDate()
+====    public native java.lang.String getAccountUniqueIDState()
+====    public native java.lang.String getBillconvertRate()
+====    public native java.lang.String getBillcurrency()
+====    public native java.lang.String getMerchantLimitedAmount()
+com.unionpay.uppay.util.h:
+====    public final android.graphics.drawable.BitmapDrawable a(android.content.Context,java.lang.String)
+com.yidejia.app.mall.BuildConfig
+com.yidejia.app.mall.DBManager
+com.yidejia.app.mall.DataCleanManager:
+====    20:20:public DataCleanManager()
+====    60:61:public static void cleanDatabaseByName(android.content.Context,java.lang.String)
+====    94:95:public static void cleanCustomCache(java.lang.String)
+====    105:113:public static varargs void cleanApplicationData(android.content.Context,java.lang.String[])
+com.yidejia.app.mall.MainActivity:
+    private com.handmark.pulltorefresh.library.PullToRefreshScrollView mPullToRefreshScrollView
+    protected android.support.v4.app.ListFragment mFrag
+    private android.widget.ViewFlipper viewFlipper
+    private android.view.GestureDetector detector
     private static final java.lang.String TAG
-    private static final int TOUCH_MODE_IDLE
-    private static final int TOUCH_MODE_DOWN
-    private static final int TOUCH_MODE_DRAGGING
-    private static final int SANS
-    private static final int SERIF
-    private static final int MONOSPACE
-====    248:250:public void setSwitchPadding(int)
-====    260:260:public int getSwitchPadding()
-====    272:274:public void setSwitchMinWidth(int)
-====    285:285:public int getSwitchMinWidth()
-====    296:298:public void setThumbTextPadding(int)
-====    308:308:public int getThumbTextPadding()
-====    319:321:public void setTrackDrawable(android.graphics.drawable.Drawable)
-====    331:332:public void setTrackResource(int)
-====    342:342:public android.graphics.drawable.Drawable getTrackDrawable()
-====    354:356:public void setThumbDrawable(android.graphics.drawable.Drawable)
-====    367:368:public void setThumbResource(int)
-====    379:379:public android.graphics.drawable.Drawable getThumbDrawable()
-====    388:388:public java.lang.CharSequence getTextOn()
-====    397:399:public void setTextOn(java.lang.CharSequence)
-====    407:407:public java.lang.CharSequence getTextOff()
-====    416:418:public void setTextOff(java.lang.CharSequence)
+    private android.widget.ImageSwitcher imageSwitcher
+    android.view.animation.Animation leftInAnimation
+    android.view.animation.Animation leftOutAnimation
+    android.view.animation.Animation rightInAnimation
+    android.view.animation.Animation rightOutAnimation
+====    264:267:private android.widget.ImageView getImageView(int)
+com.yidejia.app.mall.MainFragmentActivity:
+    private java.util.ArrayList fragmentsList
+    private android.graphics.Bitmap bmp
+====    204:219:private void addView()
+com.yidejia.app.mall.MyApplication:
+====    57:57:public int getSchHstryAmount()
+====    92:92:public java.lang.String getPassword()
+com.yidejia.app.mall.R
+com.yidejia.app.mall.R$anim
+com.yidejia.app.mall.R$array
+com.yidejia.app.mall.R$attr
+com.yidejia.app.mall.R$bool
+com.yidejia.app.mall.R$color
+com.yidejia.app.mall.R$dimen
+com.yidejia.app.mall.R$drawable
+com.yidejia.app.mall.R$id
+com.yidejia.app.mall.R$integer
+com.yidejia.app.mall.R$layout
+com.yidejia.app.mall.R$menu
+com.yidejia.app.mall.R$raw
+com.yidejia.app.mall.R$string
+com.yidejia.app.mall.R$style
+com.yidejia.app.mall.R$styleable
+com.yidejia.app.mall.R$xml
+com.yidejia.app.mall.SearchActivity:
+    private com.yidejia.app.mall.search.SuggestionsAdapter mSuggestionsAdapter
+com.yidejia.app.mall.SlideImageLayout:
+    private int bmpWidth
+    private int bmpHeight
+====    49:91:public android.view.View getSlideImageLayout(android.graphics.Bitmap)
+====    128:129:public void setPageIndex(int)
+com.yidejia.app.mall.SlideImageLayout$ImageOnClickListener
+com.yidejia.app.mall.Test
+com.yidejia.app.mall.UserPayActivity:
+    private static final java.lang.String SERVER_URL
+    private static final java.lang.String TRADE_COMMAND
+    static final int MSG_PAY_RESULT
+com.yidejia.app.mall.adapter.AllOrderFragmentAdapter:
+====    15:16:public AllOrderFragmentAdapter(android.support.v4.app.FragmentManager)
+com.yidejia.app.mall.adapter.AlreadyComFragmentAdapter
+com.yidejia.app.mall.adapter.AlreadyOrderFragmentAdapter:
+====    15:16:public AlreadyOrderFragmentAdapter(android.support.v4.app.FragmentManager)
+com.yidejia.app.mall.adapter.BaseFragmentPagerAdapter
+com.yidejia.app.mall.adapter.FavoriteAdapter:
+====    60:62:public void changeDate(java.util.ArrayList)
+com.yidejia.app.mall.adapter.ImageAdapter
+com.yidejia.app.mall.adapter.ImageAdapter$1
+com.yidejia.app.mall.adapter.IntegeralFragmentAdapter:
+====    15:16:public IntegeralFragmentAdapter(android.support.v4.app.FragmentManager)
+com.yidejia.app.mall.adapter.MainFragmentPagerAdapter
+com.yidejia.app.mall.adapter.MyAdapter
+com.yidejia.app.mall.adapter.MyAdapter$MyAdapterView
+com.yidejia.app.mall.adapter.SearchResultListAdapter
+com.yidejia.app.mall.adapter.WaitDeliverFragmentAdapter
+com.yidejia.app.mall.adapter.WaitPayFragmentAdapter
+com.yidejia.app.mall.address.ArrayWheelAdapter:
+    public static final int DEFAULT_LENGTH
+    private java.lang.Object[] items
+com.yidejia.app.mall.address.NumericWheelAdapter
+com.yidejia.app.mall.address.WheelView:
+    private static final int SCROLLING_DURATION
+    private static final int MIN_DELTA_FOR_SCROLLING
+    private static final int VALUE_TEXT_COLOR
+    private static final int ITEMS_TEXT_COLOR
+    private static final int ADDITIONAL_ITEM_HEIGHT
+    private static final int TEXT_SIZE
+    private static final int ITEM_OFFSET
+    private static final int ADDITIONAL_ITEMS_SPACE
+    private static final int LABEL_OFFSET
+    private static final int PADDING
+    private static final int DEF_VISIBLE_ITEMS
+====    196:198:public void setInterpolator(android.view.animation.Interpolator)
+====    206:206:public int getVisibleItems()
+====    226:226:public java.lang.String getLabel()
+====    236:241:public void setLabel(java.lang.String)
+====    256:257:public void removeChangingListener(com.yidejia.app.mall.address.OnWheelChangedListener)
+====    275:276:public void addScrollingListener(com.yidejia.app.mall.address.OnWheelScrollListener)
+====    283:284:public void removeScrollingListener(com.yidejia.app.mall.address.OnWheelScrollListener)
+====    310:310:public int getCurrentItem()
+====    360:360:public boolean isCyclic()
+====    368:372:public void setCyclic(boolean)
+com.yidejia.app.mall.datamanage.AddressDataManage:
+====    653:653:public java.lang.String getReason()
+====    659:659:public java.lang.String getAddressId()
+com.yidejia.app.mall.datamanage.AnlsGetOrderData:
+====    69:100:public void getOrderArray(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    31:31:static synthetic android.content.Context access$0(com.yidejia.app.mall.datamanage.AnlsGetOrderData)
+====    33:33:static synthetic java.lang.String access$1(com.yidejia.app.mall.datamanage.AnlsGetOrderData)
+====    32:32:static synthetic android.widget.LinearLayout access$2(com.yidejia.app.mall.datamanage.AnlsGetOrderData)
+====    30:30:static synthetic java.util.ArrayList access$3(com.yidejia.app.mall.datamanage.AnlsGetOrderData)
+====    37:37:static synthetic int access$4(com.yidejia.app.mall.datamanage.AnlsGetOrderData)
+com.yidejia.app.mall.datamanage.AnlsGetOrderData$TaskGetList
+com.yidejia.app.mall.datamanage.CartsDataManage:
+====    177:184:public boolean cleanCart()
+====    242:251:public int getTypeCount()
+com.yidejia.app.mall.datamanage.FavoriteDataManage:
+====    291:291:public int getFavoriteId()
+com.yidejia.app.mall.datamanage.MainPageDataManage
+com.yidejia.app.mall.datamanage.MainPageDataManage$TaskMainPage
+com.yidejia.app.mall.datamanage.MessageDataManage:
+====    147:164:public boolean changeReadState(java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.datamanage.MessageDataManage$TaskChangeRead
+com.yidejia.app.mall.datamanage.OrderDataManage:
+====    73:101:public java.util.ArrayList getOrderArray(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    171:203:private java.util.ArrayList analysisGetListJson(java.lang.String)
+====    209:229:private java.util.ArrayList analysisCart(java.lang.String)
+====    404:426:public boolean changeOrder(java.lang.String,java.lang.String)
+====    492:514:public boolean cancelOrder(java.lang.String,java.lang.String,java.lang.String)
+====    582:604:public boolean signOrder(java.lang.String,java.lang.String,java.lang.String)
+====    669:679:public com.yidejia.app.mall.model.Order getOrderByCode(java.lang.String)
+====    169:169:static synthetic java.util.ArrayList access$1(com.yidejia.app.mall.datamanage.OrderDataManage,java.lang.String)
+====    664:664:static synthetic com.yidejia.app.mall.model.Order access$7(com.yidejia.app.mall.datamanage.OrderDataManage)
+com.yidejia.app.mall.datamanage.OrderDataManage$TaskCancel
+com.yidejia.app.mall.datamanage.OrderDataManage$TaskChange
+com.yidejia.app.mall.datamanage.OrderDataManage$TaskGOBC
+com.yidejia.app.mall.datamanage.OrderDataManage$TaskGetList
+com.yidejia.app.mall.datamanage.OrderDataManage$TaskSign
+com.yidejia.app.mall.datamanage.PersonCountDataManage:
+====    113:113:public java.lang.String getOrder()
+com.yidejia.app.mall.datamanage.PreferentialDataManage:
+====    99:99:public void getPreferential(int,java.lang.String)
+====    107:108:public boolean addFreePruduct(int)
+====    116:117:public boolean deleteFreePruduct(int)
+====    125:126:public boolean addScoresPruduct(int)
+====    134:135:public boolean deleteScoresPruduct(int)
+====    143:144:public boolean commitOrder(int)
+com.yidejia.app.mall.datamanage.ProductDataManage
+com.yidejia.app.mall.datamanage.ProductDataManage$TaskProduct
+com.yidejia.app.mall.datamanage.SearchItemDataManage
+com.yidejia.app.mall.datamanage.SearchItemDataManage$TaskSearch
+com.yidejia.app.mall.datamanage.TaskCancelOrder
+com.yidejia.app.mall.datamanage.TaskGetOrderByCode:
+    private android.widget.RelativeLayout orderAddressLayout
+com.yidejia.app.mall.datamanage.UserCommentDataManage:
+    private java.util.ArrayList waitCommGoods
+====    100:106:public boolean commitComment(java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
+====    237:252:public java.util.ArrayList getWaitingComment(java.lang.String)
+====    255:255:static synthetic java.util.ArrayList access$3(com.yidejia.app.mall.datamanage.UserCommentDataManage)
+com.yidejia.app.mall.datamanage.UserCommentDataManage$TaskSave
+com.yidejia.app.mall.datamanage.UserCommentDataManage$TaskWaitComm
+com.yidejia.app.mall.datamanage.UserDatamanage:
+    private java.lang.String cps
+====    104:131:public boolean register(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    31:31:static synthetic java.lang.String access$6(com.yidejia.app.mall.datamanage.UserDatamanage)
+====    34:34:static synthetic void access$7(com.yidejia.app.mall.datamanage.UserDatamanage,boolean)
+====    34:34:static synthetic boolean access$8(com.yidejia.app.mall.datamanage.UserDatamanage)
+com.yidejia.app.mall.datamanage.UserDatamanage$TaskRegister
+com.yidejia.app.mall.exception.NullSearchResultEx:
+    private static final long serialVersionUID
+====    20:21:public NullSearchResultEx(java.lang.String,java.lang.Throwable)
+====    24:25:public NullSearchResultEx(java.lang.Throwable)
+com.yidejia.app.mall.exception.UserLoginEx
+com.yidejia.app.mall.fragment.AllOrderFragment:
+====    48:51:private void setupShow()
+com.yidejia.app.mall.fragment.AlreadyComFragment
+com.yidejia.app.mall.fragment.AlreadyComFragment$1
+com.yidejia.app.mall.fragment.AlreadyOrderFragment
+com.yidejia.app.mall.fragment.AlreadyOrderFragment$1
+com.yidejia.app.mall.fragment.BaseInfoFragment:
+    private java.lang.String goodsId
+    private int number
+====    161:164:private int getPixels(int)
+com.yidejia.app.mall.fragment.CartActivity:
+    private android.app.AlertDialog dialog
+    private android.widget.ImageView subtract
+    private android.widget.TextView number
+    private android.widget.ImageView addImageView
+    private android.widget.ImageView subtract2
+    private android.widget.TextView number2
+    private android.widget.ImageView addImageView2
+    private int sumString
+    private com.yidejia.app.mall.datamanage.PreferentialDataManage preferentialDataManage
+    public static java.util.ArrayList arrayListFree
+    public static java.util.ArrayList arrayListExchange
+    private java.util.ArrayList mList
+com.yidejia.app.mall.fragment.CommentFragment:
+    private android.view.View produceView
+    private com.yidejia.app.mall.datamanage.UserCommentDataManage dataManage
+com.yidejia.app.mall.fragment.ExchangeAdapter:
+====    97:98:public static void setIsSelected(java.util.HashMap)
+com.yidejia.app.mall.fragment.ExchangeFragment:
+====    45:45:private void setupShow(android.view.View)
+com.yidejia.app.mall.fragment.FreeGivingAdapter:
+====    68:69:public void changeDate(java.util.ArrayList)
+====    204:204:public com.yidejia.app.mall.model.Cart getCart()
+com.yidejia.app.mall.fragment.FreeGivingFragment:
+====    46:46:private void setupShow(android.view.View)
+com.yidejia.app.mall.fragment.IntegeralFragment
+com.yidejia.app.mall.fragment.LoginFragment:
+    private com.yidejia.app.mall.MyMallActivity newFragment
+com.yidejia.app.mall.fragment.MyMallFragment
+com.yidejia.app.mall.fragment.MyMallFragment$1
+com.yidejia.app.mall.fragment.ShoppingCartFragment
+com.yidejia.app.mall.fragment.WaitDeliverFragment
+com.yidejia.app.mall.fragment.WaitDeliverFragment$1
+com.yidejia.app.mall.fragment.WaitPayFragment
+com.yidejia.app.mall.fragment.WaitPayFragment$1
+com.yidejia.app.mall.initview.GoodsView:
+====    516:522:private void changeFravoriteBg()
+com.yidejia.app.mall.interfacecallback.CallBack
+com.yidejia.app.mall.jni.JNICallBack:
+====    public native java.lang.String getHttp4DelComment(java.lang.String)
+====    public native java.lang.String getHttp4PayOut(java.lang.String,java.lang.String)
+====    public native java.lang.String getHttp4SignOrder(java.lang.String,java.lang.String,java.lang.String)
+====    public native java.lang.String getHttp4GetEffect(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    public native java.lang.String getHttp4ChangeRead(java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.model.Addresses:
+    private java.lang.String recipient_id
+====    77:77:public java.lang.String getPhone()
+====    97:98:public void setRecipientId(java.lang.String)
+====    100:100:public java.lang.String getRecipientId()
+com.yidejia.app.mall.model.Brand:
+    private int brandId
+====    22:22:public int getBrandId()
+====    26:27:public void setBrandId(int)
+com.yidejia.app.mall.model.Express:
+====    80:80:public java.lang.String getDisDesc()
+====    99:99:public boolean getIsDefault()
+com.yidejia.app.mall.model.FreePost:
+====    20:20:public java.lang.String getId()
+====    34:34:public java.lang.String getName()
+====    48:48:public java.lang.String getStartDate()
+====    62:62:public java.lang.String getEndDate()
+====    90:90:public java.lang.String getDesc()
+com.yidejia.app.mall.model.Function:
+====    29:29:public java.lang.String getDesc()
+com.yidejia.app.mall.model.MainProduct:
+    private java.lang.String subTitle
+====    43:43:public java.lang.String getSubTitle()
+====    47:48:public void setSubTitle(java.lang.String)
+com.yidejia.app.mall.model.MsgCenter:
+====    17:17:public java.lang.String getMsgid()
+====    38:38:public java.lang.String getUid()
+====    45:45:public java.lang.String getPid()
+====    52:52:public java.lang.String getUrl()
+====    59:59:public java.lang.String getIsread()
+com.yidejia.app.mall.model.MyListItem
+com.yidejia.app.mall.model.Order:
+    private int orderAmount
+    private java.lang.String tn
+====    78:78:public float getOrderSummary()
+====    85:86:public void setOrderAmount(int)
+====    92:92:public int getOrderAmount()
+====    100:100:public java.lang.String getId()
+====    116:116:public java.lang.String getCore()
+====    132:132:public java.lang.String getTn()
+====    140:141:public void setTn(java.lang.String)
+com.yidejia.app.mall.model.Preferential
+com.yidejia.app.mall.model.ProductBaseInfo:
+    private java.lang.String brief
+====    76:77:public void setBrief(java.lang.String)
+====    83:83:public java.lang.String getBrief()
+com.yidejia.app.mall.model.RetOrderInfo:
+====    26:26:public java.lang.String getId()
+====    69:69:public java.lang.String getContact()
+====    83:83:public java.lang.String getContact_manner()
+====    111:111:public java.lang.String getCause()
+====    125:125:public java.lang.String getDesc()
+com.yidejia.app.mall.model.SearchItem:
+====    52:52:public java.lang.String getBrief()
+====    135:135:public java.lang.String getFavoriteId()
+====    152:152:public java.lang.String getTheCode()
+====    166:166:public java.lang.String getModule()
+====    180:180:public java.lang.String getBrand()
+====    194:194:public java.lang.String getSpec()
+====    208:208:public java.lang.String getDesc()
+com.yidejia.app.mall.model.UserComment:
+    private java.lang.String userPictureUrl
+    private java.lang.String productBaseDetail
+====    14:14:public java.lang.String getUserId()
+====    41:42:public void setUserPictureUrl(java.lang.String)
+====    48:48:public java.lang.String getUserPictureUrl()
+====    72:73:public void setProductBaseDetail(java.lang.String)
+====    79:79:public java.lang.String getProductBaseDetail()
+====    94:94:public int getRate()
+====    121:121:public java.lang.String getGoodsId()
+====    133:133:public java.lang.String getTitle()
+====    145:145:public java.lang.String getId()
+com.yidejia.app.mall.model.UserCount
+com.yidejia.app.mall.model.UserInfo
+com.yidejia.app.mall.net.ConnectionDetector:
+====    10:12:public ConnectionDetector()
+com.yidejia.app.mall.net.GetImageUrlPrefix:
+====    17:40:private void setKeysAndValues()
+====    43:48:private java.lang.String getHttpAddress()
+com.yidejia.app.mall.net.HttpAddressParam:
+====    3:3:public HttpAddressParam()
+com.yidejia.app.mall.net.HttpPostConn:
+    private java.lang.String[] keys
+    private java.lang.String[] values
+====    28:42:public HttpPostConn(java.lang.String[],java.lang.String[])
+====    45:75:public java.lang.String getJsonResult()
+com.yidejia.app.mall.net.address.DeleteUserAddress:
+====    39:68:private void setKeysAndValues(java.lang.String,java.lang.String)
+====    75:83:public java.lang.String getHttpAddress(java.lang.String,java.lang.String)
+====    87:87:public java.util.Map getHttpAddressMap()
+====    93:96:public java.lang.String deleteAddress(java.lang.String,java.lang.String)
+com.yidejia.app.mall.net.address.GetUserAddressList:
+====    32:70:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    73:78:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.net.address.SaveUserAddress:
+====    36:79:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    83:92:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    112:116:public java.lang.String saveAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.net.commments.DeleteProductComment
+com.yidejia.app.mall.net.commments.GetProductCommentList:
+====    32:68:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    71:76:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.net.commments.SaveProductComment:
+====    35:63:private void setKeysAndValues(java.lang.String)
+====    66:74:private java.lang.String getHttpAddress(java.lang.String)
+com.yidejia.app.mall.net.express.GetDistributionList:
+====    32:68:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    71:76:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.net.express.GetExpressList:
+====    32:68:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    71:76:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.net.express.GetFreeList:
+====    32:68:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    71:76:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.net.favorite.CheckExistsFavorite:
+====    36:65:private void setKeysAndValues(java.lang.String,java.lang.String)
+====    68:76:private java.lang.String getHttpAddress(java.lang.String,java.lang.String)
+com.yidejia.app.mall.net.favorite.DeleteFavorite:
+====    33:62:private void setKeysAndValues(java.lang.String,java.lang.String)
+====    65:73:private java.lang.String getHttpAddress(java.lang.String,java.lang.String)
+====    85:88:public java.lang.String deleteFavorite(java.lang.String,java.lang.String)
+com.yidejia.app.mall.net.favorite.GetFavoriteList:
+====    32:68:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    71:76:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.net.favorite.SaveFavorite:
+====    35:63:private void setKeysAndValues(java.lang.String,java.lang.String)
+====    66:74:private java.lang.String getHttpAddress(java.lang.String,java.lang.String)
+====    87:90:public java.lang.String saveFavorite(java.lang.String,java.lang.String)
+com.yidejia.app.mall.net.goodsinfo.GetProductAddress:
+====    183:183:public java.util.ArrayList getBannerProducts()
+====    187:187:public java.util.ArrayList getRecommentProducts()
+com.yidejia.app.mall.net.order.CancelOrder:
+====    29:59:private void setKeysAndValues(java.lang.String,java.lang.String)
+====    62:67:private java.lang.String getHttpAddress(java.lang.String,java.lang.String)
+com.yidejia.app.mall.net.order.DelOrder:
+====    34:80:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    84:90:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    112:116:public java.lang.String getListJsonString(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.net.order.GetOrderByCode:
+    private android.content.Context context
+====    22:90:public GetOrderByCode(android.content.Context)
+====    37:39:public java.lang.String getTNCode(java.lang.String,java.lang.String)
+====    43:79:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    82:87:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    94:97:public java.lang.String getListJsonString(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.net.order.GetOrderCode
+com.yidejia.app.mall.net.order.GetOrderList:
+====    32:68:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    71:76:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    83:86:public java.lang.String getListJsonString(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.net.order.GetOrderNoEva
+com.yidejia.app.mall.net.order.PayOutOrder
+com.yidejia.app.mall.net.order.SaveOrder:
+====    34:80:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    84:90:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    112:116:public java.lang.String getListJsonString(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.net.order.SignOrder
+com.yidejia.app.mall.net.search.BrandDataUtil:
+====    18:47:private void setKeysAndValues()
+====    50:55:private java.lang.String getHttpAddress()
+com.yidejia.app.mall.net.search.EffectDataUtil:
+====    72:73:public java.lang.String getHttpResponseString(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.net.search.GetSearchList
+com.yidejia.app.mall.net.search.PriceDataUtil:
+====    18:47:private void setKeysAndValues()
+====    50:55:private java.lang.String getHttpAddress()
+com.yidejia.app.mall.net.search.SearchDataUtil:
+====    30:68:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+====    71:76:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.net.user.ChangeRead
+com.yidejia.app.mall.net.voucher.Voucher:
+====    31:59:private void setKeysAndValues(java.lang.String)
+====    62:70:private java.lang.String getHttpAddress(java.lang.String)
+====    82:85:public java.lang.String getResponse(java.lang.String)
+com.yidejia.app.mall.search.SuggestionsAdapter
+com.yidejia.app.mall.task.TaskGetCode:
+====    84:84:public int getRegCode()
+com.yidejia.app.mall.task.TaskLoginFragment
+com.yidejia.app.mall.util.AddressUtil
+com.yidejia.app.mall.util.AddressUtil$1
+com.yidejia.app.mall.util.AddressUtil$10
+com.yidejia.app.mall.util.AddressUtil$2
+com.yidejia.app.mall.util.AddressUtil$3
+com.yidejia.app.mall.util.AddressUtil$4
+com.yidejia.app.mall.util.AddressUtil$5
+com.yidejia.app.mall.util.AddressUtil$6
+com.yidejia.app.mall.util.AddressUtil$7
+com.yidejia.app.mall.util.AddressUtil$8
+com.yidejia.app.mall.util.AddressUtil$9
+com.yidejia.app.mall.util.AllOrderDetail:
+    private com.yidejia.app.mall.datamanage.OrderDataManage orderDataManage
+com.yidejia.app.mall.util.AllOrderUtil:
+    private android.content.Context context
+    private android.view.LayoutInflater inflater
+    private com.yidejia.app.mall.MyApplication myApplication
+    private android.widget.LinearLayout mLinearLayoutLayout
+    private android.widget.LinearLayout mLayout
+    private com.yidejia.app.mall.datamanage.OrderDataManage orderDataManage
+    private int orderType
+====    46:51:public AllOrderUtil(android.content.Context,android.widget.LinearLayout)
+====    89:110:public void loadView(int,int,int,int)
+====    114:202:public void viewCtrl(java.util.ArrayList)
+====    264:288:private java.lang.String setOkBtnText(int)
+====    297:316:private java.lang.String setCancelBtnText(int)
+====    325:332:private int getOrderTypeCode(java.lang.String)
+====    496:505:private void go2OrderDetail(java.lang.String,java.lang.String,java.util.ArrayList)
+====    31:31:static synthetic android.content.Context access$0(com.yidejia.app.mall.util.AllOrderUtil)
+====    44:44:static synthetic com.yidejia.app.mall.datamanage.OrderDataManage access$1(com.yidejia.app.mall.util.AllOrderUtil)
+====    34:34:static synthetic com.yidejia.app.mall.MyApplication access$2(com.yidejia.app.mall.util.AllOrderUtil)
+====    76:76:static synthetic int access$3(com.yidejia.app.mall.util.AllOrderUtil)
+====    41:41:static synthetic android.widget.LinearLayout access$4(com.yidejia.app.mall.util.AllOrderUtil)
+====    495:495:static synthetic void access$5(com.yidejia.app.mall.util.AllOrderUtil,java.lang.String,java.lang.String,java.util.ArrayList)
+com.yidejia.app.mall.util.AllOrderUtil$1
+com.yidejia.app.mall.util.AllOrderUtil$CancelClickListener
+com.yidejia.app.mall.util.AllOrderUtil$CancelClickListener$1
+com.yidejia.app.mall.util.AllOrderUtil$OkClickListener
+com.yidejia.app.mall.util.AlreadyCompleteDetail
+com.yidejia.app.mall.util.AlreadyCompleteDetail$1
+com.yidejia.app.mall.util.AlreadyCompleteDetail$AnimateFirstDisplayListener
+com.yidejia.app.mall.util.AlreadyCompleteUtil
+com.yidejia.app.mall.util.AlreadyCompleteUtil$1
+com.yidejia.app.mall.util.AlreadyOrderDetail
+com.yidejia.app.mall.util.AlreadyOrderDetail$1
+com.yidejia.app.mall.util.AlreadyOrderDetail$AnimateFirstDisplayListener
+com.yidejia.app.mall.util.AlreadyOrderUtil
+com.yidejia.app.mall.util.AnActionModeOfEpicProportions
+com.yidejia.app.mall.util.Base64:
+    public static final int DEFAULT
+    public static final int NO_PADDING
+    public static final int NO_WRAP
+    public static final int CRLF
+    public static final int URL_SAFE
+    public static final int NO_CLOSE
+====    477:480:public static java.lang.String encodeToString(byte[],int,int,int)
+com.yidejia.app.mall.util.Base64$Coder:
+====    public abstract boolean process(byte[],int,int,boolean)
+====    public abstract int maxOutputSize(int)
+com.yidejia.app.mall.util.Base64$Decoder:
+    private static final int SKIP
+    private static final int EQUALS
+====    254:254:public int maxOutputSize(int)
+com.yidejia.app.mall.util.Base64$Encoder:
+    public static final int LINE_GROUPS
+====    600:600:public int maxOutputSize(int)
+com.yidejia.app.mall.util.CartUtil:
+    private android.widget.TextView number
+com.yidejia.app.mall.util.CommentUtil:
+====    97:134:public void AllCommentUserId(java.lang.String,int,int)
+com.yidejia.app.mall.util.Consts
+com.yidejia.app.mall.util.DESUtil
+com.yidejia.app.mall.util.DPIUtil
+com.yidejia.app.mall.util.DefinalDate
+com.yidejia.app.mall.util.FreeGivingUtil
+com.yidejia.app.mall.util.FreeGivingUtil$AnimateFirstDisplayListener
+com.yidejia.app.mall.util.Http:
+    private static final java.lang.String METHOD_POST
+    private static final int CACHE_SIZE
+    private static final int CONNECT_TIMEOUT
+    private static final int READ_TIMEOUT
+====    10:10:public Http()
+com.yidejia.app.mall.util.IsPhone:
+====    8:8:public IsPhone()
+com.yidejia.app.mall.util.MessageUtil:
+    private static final java.lang.String CHARSET
+    public static final java.lang.String QSTRING_EQUAL
+    public static final java.lang.String QSTRING_SPLIT
+====    9:9:public MessageUtil()
+com.yidejia.app.mall.util.OrdersUtil:
+    private android.widget.LinearLayout mLayout
+com.yidejia.app.mall.util.PayUtil:
+    private android.widget.LinearLayout mLayout
+    private com.yidejia.app.mall.model.Cart cart
+====    45:94:public PayUtil(android.content.Context,android.widget.LinearLayout,com.yidejia.app.mall.model.Cart)
+====    191:222:public java.lang.String cartLoadView()
+com.yidejia.app.mall.util.UnicodeToString:
+====    66:87:public java.lang.String convert(java.lang.String)
+com.yidejia.app.mall.util.Utility
+com.yidejia.app.mall.util.WaitDeliverDetail
+com.yidejia.app.mall.util.WaitDeliverDetail$1
+com.yidejia.app.mall.util.WaitDeliverDetail$AnimateFirstDisplayListener
+com.yidejia.app.mall.util.WaitDeliverUtil
+com.yidejia.app.mall.util.WaitDeliverUtil$1
+com.yidejia.app.mall.util.WaitPayOrderDetail
+com.yidejia.app.mall.util.WaitPayOrderDetail$AnimateFirstDisplayListener
+com.yidejia.app.mall.util.WaitPayUtil
+com.yidejia.app.mall.util.WaitPayUtil$1
+com.yidejia.app.mall.util.WaitPayUtil$2
+com.yidejia.app.mall.util.WaitPayUtil$3
+com.yidejia.app.mall.view.AddressActivity:
+    private com.yidejia.app.mall.datamanage.AddressDataManage mangerAddressDataManage
+====    153:154:private void setupShow()
+com.yidejia.app.mall.view.AddressAdapter:
+    private boolean isSelect
+com.yidejia.app.mall.view.AllOrderActivity:
+    private int position_three
+    private com.handmark.pulltorefresh.library.PullToRefreshScrollView mPullToRefreshScrollView
+com.yidejia.app.mall.view.AlreadyComActivity:
+    private static final java.lang.String TAG
+    private int position_three
+com.yidejia.app.mall.view.AlreadyOrderActivity:
+    private static final java.lang.String TAG
+    private int position_three
+com.yidejia.app.mall.view.CstmPayActivity:
+    private com.yidejia.app.mall.fragment.CartActivity$InnerReceiver receiver
+    public static java.util.ArrayList cartList
+    private static final java.lang.String SERVER_URL
+    private static final java.lang.String TRADE_COMMAND
+====    113:113:public static java.util.ArrayList getArrayListFree()
+====    117:118:public static void setArrayListFree(java.util.ArrayList)
+====    121:121:public static java.util.ArrayList getArrayListExchange()
+====    126:127:public static void setArrayListExchange(java.util.ArrayList)
+com.yidejia.app.mall.view.EditNewAddressActivity:
+    public static java.lang.String addressId
+    private java.util.Map valueMap2
+    private com.yidejia.app.mall.MyApplication myApplication
+    private boolean isUpdate
+com.yidejia.app.mall.view.EditorActivity:
+    int width
+    int height
+com.yidejia.app.mall.view.ExchangeFreeActivity:
+    private static final java.lang.String TAG
+    private int position_three
+com.yidejia.app.mall.view.GoCartActivity:
+    private android.app.AlertDialog dialog
+com.yidejia.app.mall.view.IntegeralActivity:
+    private static final java.lang.String TAG
+com.yidejia.app.mall.view.LoginActivity:
+    private com.yidejia.app.mall.datamanage.UserDatamanage userManage
+com.yidejia.app.mall.view.MyCollectActivity:
+====    271:275:private void updateListView(int)
+com.yidejia.app.mall.view.NewAddressActivity:
+    private java.util.Map valueMap2
+com.yidejia.app.mall.view.OrderDetailActivity:
+    private java.lang.String orderTn
+com.yidejia.app.mall.view.RegistActivity:
+    public android.widget.Button mback
+com.yidejia.app.mall.view.WaitDeliverActivity:
+    private static final java.lang.String TAG
+    private int position_three
+com.yidejia.app.mall.view.WaitPayActivity:
+    private static final java.lang.String TAG
+    private int position_three
+com.yidejia.app.mall.widget.YLImageButton:
+====    36:37:public void setTextColor(int)
+====    49:51:public void setText(int)
+====    54:55:public void setTextX(float)
+====    58:59:public void setTextY(float)
+====    62:63:public void setText(java.lang.CharSequence)
+====    66:67:public void setPaintAlign(android.graphics.Paint$Align)
