@@ -327,7 +327,6 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 				counTextView, sumTextView, mBox);
 
 		cartUtil.AllComment();
-		float sum = Float.parseFloat(sumTextView.getText().toString());
 
 		scrollView.addView(layout);
 		Log.i("info", sum + "sum");
@@ -349,7 +348,8 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 					if (!myApplication.getIsLogin()) {
 						showLoginTips();
 					} else {
-						go2Pay();
+						 float sum = Float.parseFloat(sumTextView.getText().toString());
+						go2Pay(sum);
 					}
 				}
 			});
@@ -385,7 +385,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 				.create().show();
 	}
 
-	private void go2Pay() {
+	private void go2Pay(float sum) {
 		cartList = new ArrayList<Cart>();
 		List<HashMap<String, Object>> orderCarts = CartUtil.list1;
 		for (int i = 0; i < orderCarts.size(); i++) {
