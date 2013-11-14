@@ -410,8 +410,8 @@ public class MainPageFragment extends SherlockFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intentOrder = new Intent(getSherlockActivity(),MyCollectActivity.class);
-				getSherlockActivity().startActivity(intentOrder);
+//				Intent intentOrder = new Intent(getSherlockActivity(),MyCollectActivity.class);
+//				getSherlockActivity().startActivity(intentOrder);
 				
 					dialog.show();
 				
@@ -426,8 +426,8 @@ public class MainPageFragment extends SherlockFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intentOrder = new Intent(getSherlockActivity(),MyCollectActivity.class);
-				getSherlockActivity().startActivity(intentOrder);
+//				Intent intentOrder = new Intent(getSherlockActivity(),MyCollectActivity.class);
+//				getSherlockActivity().startActivity(intentOrder);
 				
 					dialog.show();
 				
@@ -468,8 +468,8 @@ public class MainPageFragment extends SherlockFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intentOrder = new Intent(getSherlockActivity(),IntegeralActivity.class);
-				getSherlockActivity().startActivity(intentOrder);
+//				Intent intentOrder = new Intent(getSherlockActivity(),IntegeralActivity.class);
+//				getSherlockActivity().startActivity(intentOrder);
 					dialog.show();
 					// Intent intentOrder = new
 					// Intent(getSherlockActivity(),IntegeralActivity.class);
@@ -482,8 +482,8 @@ public class MainPageFragment extends SherlockFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intentOrder = new Intent(getSherlockActivity(),PersonActivity.class);
-				getSherlockActivity().startActivity(intentOrder);
+//				Intent intentOrder = new Intent(getSherlockActivity(),PersonActivity.class);
+//				getSherlockActivity().startActivity(intentOrder);
 //				if (!isLogin()) {
 //					Intent intentOrder = new Intent(getSherlockActivity(),
 //							PersonActivity.class);
