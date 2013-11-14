@@ -15,7 +15,6 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.PreferentialDataManage;
-import com.yidejia.app.mall.fragment.FreeGivingAdapter.ViewHolder;
 import com.yidejia.app.mall.view.CstmPayActivity;
 
 public class FreeGivingFragment extends SherlockFragment {

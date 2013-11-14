@@ -1,14 +1,21 @@
 package com.yidejia.app.mall;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.tenpay.android.service.TenpayServiceHelper;
 import com.unionpay.UPPayAssistEx;
@@ -17,17 +24,6 @@ import com.yidejia.app.mall.util.Http;
 import com.yidejia.app.mall.util.MessageUtil;
 import com.yidejia.app.mall.view.AllOrderActivity;
 import com.yidejia.app.mall.view.WaitPayActivity;
-
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
-import android.widget.Toast;
 
 public class UserPayActivity extends Activity{
 	private static final String SERVER_URL = "http://202.104.148.76/splugin/interface";

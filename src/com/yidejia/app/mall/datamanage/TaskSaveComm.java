@@ -5,14 +5,14 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.net.ConnectionDetector;
-import com.yidejia.app.mall.net.commments.SaveProductComment;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.widget.Toast;
+
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.net.ConnectionDetector;
+import com.yidejia.app.mall.net.commments.SaveProductComment;
 
 public class TaskSaveComm {
 

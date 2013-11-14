@@ -22,8 +22,6 @@ package com.yidejia.app.mall.address;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.yidejia.app.mall.R;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -44,6 +42,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
+
+import com.yidejia.app.mall.R;
 
 /**
  * Numeric wheel view.

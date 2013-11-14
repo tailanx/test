@@ -6,15 +6,14 @@ import java.util.concurrent.ExecutionException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.net.ConnectionDetector;
-import com.yidejia.app.mall.net.user.GetCount;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
+
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.net.ConnectionDetector;
+import com.yidejia.app.mall.net.user.GetCount;
 
 /**
  * 个人中心昵称下面的几个数据

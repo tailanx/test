@@ -3,11 +3,6 @@ package com.yidejia.app.mall.adapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.model.Brand;
-import com.yidejia.app.mall.model.Function;
-import com.yidejia.app.mall.model.PriceLevel;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
@@ -17,6 +12,11 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.model.Brand;
+import com.yidejia.app.mall.model.Function;
+import com.yidejia.app.mall.model.PriceLevel;
 
 @SuppressLint("UseSparseArrays")
 public class FilterExListAdapter extends BaseExpandableListAdapter {

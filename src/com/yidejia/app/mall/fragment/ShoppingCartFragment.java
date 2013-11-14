@@ -1,14 +1,13 @@
 package com.yidejia.app.mall.fragment;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.yidejia.app.mall.R;
-
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.actionbarsherlock.app.SherlockFragment;
+import com.yidejia.app.mall.R;
 
 public class ShoppingCartFragment extends SherlockFragment {
 	

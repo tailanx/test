@@ -6,20 +6,16 @@ import java.util.concurrent.ExecutionException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.yidejia.app.mall.MyApplication;
-import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.net.ConnectionDetector;
-import com.yidejia.app.mall.net.ImageUrl;
-import com.yidejia.app.mall.net.user.Login;
-import com.yidejia.app.mall.net.user.Register;
-import com.yidejia.app.mall.view.RegistActivity;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.net.ConnectionDetector;
+import com.yidejia.app.mall.net.user.Login;
+import com.yidejia.app.mall.net.user.Register;
 
 public class UserDatamanage {
 	

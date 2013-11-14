@@ -2,11 +2,11 @@ package com.yidejia.app.mall.task;
 
 import java.io.IOException;
 
-import com.yidejia.app.mall.net.user.GetCode;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+
+import com.yidejia.app.mall.net.user.GetCode;
 
 public class TaskGetCode {
 	

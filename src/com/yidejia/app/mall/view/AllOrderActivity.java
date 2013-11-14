@@ -2,10 +2,6 @@ package com.yidejia.app.mall.view;
 
 import java.util.ArrayList;
 
-
-
-
-
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -17,7 +13,6 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
@@ -25,13 +20,9 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
-
-
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
-import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.fragment.AllOrderFragment;
-import com.yidejia.app.mall.model.Order;
 
 public class AllOrderActivity extends SherlockFragmentActivity  {
 	    private static final String TAG = AllOrderActivity.class.getName();

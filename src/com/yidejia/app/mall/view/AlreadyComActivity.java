@@ -2,23 +2,16 @@ package com.yidejia.app.mall.view;
 
 import java.util.ArrayList;
 
-
-
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
@@ -27,9 +20,7 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
-import com.yidejia.app.mall.adapter.AlreadyComFragmentAdapter;
 import com.yidejia.app.mall.fragment.AllOrderFragment;
-import com.yidejia.app.mall.fragment.AlreadyComFragment;
 
 public class AlreadyComActivity extends SherlockFragmentActivity {
 	    private static final String TAG = "MainActivity";

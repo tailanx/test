@@ -1,5 +1,7 @@
 package com.yidejia.app.mall;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,10 +15,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
-
-import java.util.ArrayList;
-
-import com.yidejia.app.mall.R;
 
 
 public class SlideImageLayout {

@@ -18,7 +18,6 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.model.Order;
-import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.view.OrderDetailActivity;
 
 public class WaitPayUtil {

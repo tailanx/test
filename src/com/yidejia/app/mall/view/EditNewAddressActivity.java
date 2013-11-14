@@ -5,7 +5,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.http.HttpEntity;
@@ -16,12 +15,12 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Dialog;
 import android.app.AlertDialog.Builder;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -29,27 +28,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.actionbarsherlock.app.SherlockActivity;
-import com.yidejia.app.mall.DBManager;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.adapter.MyAdapter;
 import com.yidejia.app.mall.address.ArrayWheelAdapter;
 import com.yidejia.app.mall.address.OnWheelChangedListener;
 import com.yidejia.app.mall.address.WheelView;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.model.Addresses;
-import com.yidejia.app.mall.model.MyListItem;
 import com.yidejia.app.mall.util.DefinalDate;
 
 public class EditNewAddressActivity extends SherlockActivity {
@@ -192,38 +185,8 @@ public class EditNewAddressActivity extends SherlockActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				dialog.show();
-		new Thread() {
-			public void run() {
-				try {
-					String uri = "http://static.atido.com/min/b=js&f=helper/address.js";
-					HttpGet httpRequst = new HttpGet(uri);
-					HttpClient httpClient = new DefaultHttpClient();
-					HttpResponse httpResponse = httpClient.execute(httpRequst);
-					HttpEntity entity = httpResponse.getEntity();
-
-					if (entity != null) {
-						BufferedReader br = new BufferedReader(
-								new InputStreamReader(entity.getContent()));
-						String line = null;
-						// Log.i(MainActivity.class.getName(),line.toString());
-						int i = 0;
-						while ((line = br.readLine()) != null) {
-							if (i == 0) {
-								Message msg = new Message();
-								msg.what = 0x123;
-								msg.obj = line;
-								hanlder.sendMessage(msg);
-								i++;
-							}
-						}
-
-					}
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}.start();
+				TaskNew editAddresss = new TaskNew();
+				editAddresss.execute();
 			}
 		});
 
@@ -764,8 +727,8 @@ public class EditNewAddressActivity extends SherlockActivity {
 //						EditNewAddressActivity.this.finish();
 //						
 
-					boolean isSuccess = dataManage
-							.updateAddress(
+					addressId = dataManage
+							.addAddress(
 									((MyApplication) EditNewAddressActivity.this
 											.getApplication())
 											.getUserId(),
@@ -778,13 +741,13 @@ public class EditNewAddressActivity extends SherlockActivity {
 											.toString().trim(),
 									numberTextView.getText()
 											.toString(),
-									true, id,
+									true,
 									((MyApplication) EditNewAddressActivity.this
 											.getApplication())
 											.getToken());
 					// Log.i("info", addressId+"addressId");
 
-					if (!isSuccess) {
+					if ("".equals(addressId)) {
 						Toast.makeText(EditNewAddressActivity.this,
 								"您的输入有问题", Toast.LENGTH_SHORT)
 								.show();
@@ -813,4 +776,70 @@ public class EditNewAddressActivity extends SherlockActivity {
 		TextView titleTextView = (TextView) findViewById(R.id.actionbar_title);
 		titleTextView.setText("编辑收货地址");
 	}
+	
+	private class TaskNew extends AsyncTask<Void, Void, Boolean>{
+		private ProgressDialog bar;
+		
+
+	@Override
+	protected void onPostExecute(Boolean result) {
+		// TODO Auto-generated method stub
+		super.onPostExecute(result);
+		if(result){
+			bar.cancel();
+		}
+	
+	}
+	//显示进度的提示
+	@Override
+	protected void onPreExecute() {
+		// TODO Auto-generated method stub
+		super.onPreExecute();
+		bar = new ProgressDialog(EditNewAddressActivity.this);
+		bar.setTitle(getResources().getString(R.string.load_addresses1));
+		bar.setMessage(getResources().getString(R.string.load_addresses2));
+		bar.setCancelable(true);
+		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		bar.show();
+	}
+	//完成实际的下载
+	@Override
+	protected Boolean doInBackground(Void... params) {
+		// TODO Auto-generated method stub
+		try {
+			String uri = "http://static.atido.com/min/b=js&f=helper/address.js";
+			HttpGet httpRequst = new HttpGet(uri);
+			HttpClient httpClient = new DefaultHttpClient();
+			HttpResponse httpResponse = httpClient.execute(httpRequst);
+			HttpEntity entity = httpResponse.getEntity();
+
+			if (entity != null) {
+				BufferedReader br = new BufferedReader(
+						new InputStreamReader(entity.getContent()));
+				String line = null;
+				// Log.i(MainActivity.class.getName(),line.toString());
+				int i = 0;
+				while ((line = br.readLine()) != null) {
+					if (i == 0) {
+						Message msg = new Message();
+						msg.what = 0x123;
+						msg.obj = line;
+						hanlder.sendMessage(msg);
+						i++;
+					return true;
+					}
+				}
+
+			}else{
+				Toast.makeText(EditNewAddressActivity.this, getResources().getString(R.string.no_network), Toast.LENGTH_SHORT).show();
+				return false;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+}
+	
 }

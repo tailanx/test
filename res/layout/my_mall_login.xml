@@ -143,7 +143,7 @@
                         android:hint="******       "
                         android:maxLength="20"
                         android:textSize="18sp"
-                        android:singleLine="true" />
+					    android:singleLine="true" />
                 </TableRow>
 
                 <TableRow

@@ -7,23 +7,20 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
-import android.app.AlertDialog.Builder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -38,7 +35,6 @@ import com.yidejia.app.mall.fragment.CartActivity;
 import com.yidejia.app.mall.fragment.GuangFragment;
 import com.yidejia.app.mall.fragment.LoginFragment;
 import com.yidejia.app.mall.fragment.MainPageFragment;
-import com.yidejia.app.mall.fragment.MyMallFragment;
 import com.yidejia.app.mall.fragment.NoProduceFragment;
 import com.yidejia.app.mall.fragment.SearchFragment;
 import com.yidejia.app.mall.fragment.ShoppingCartFragment;
@@ -49,8 +45,6 @@ import com.yidejia.app.mall.util.CartUtil;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.view.EditorActivity;
-import com.yidejia.app.mall.view.LoginActivity;
-import com.yidejia.app.mall.widget.YLImageButton;
 
 /**
  * 用于五大导航

@@ -6,17 +6,16 @@ import java.util.concurrent.ExecutionException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.net.ConnectionDetector;
-import com.yidejia.app.mall.net.voucher.Voucher;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.net.ConnectionDetector;
+import com.yidejia.app.mall.net.voucher.Voucher;
 
 /**
  * 获取用户积分

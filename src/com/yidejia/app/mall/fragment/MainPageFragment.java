@@ -6,6 +6,30 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.format.DateUtils;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.actionbarsherlock.app.SherlockFragment;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
@@ -31,30 +55,6 @@ import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.view.MyCollectActivity;
 import com.yidejia.app.mall.view.PersonActivity;
 import com.yidejia.app.mall.widget.YLViewPager;
-
-import android.app.AlertDialog.Builder;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.text.format.DateUtils;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainPageFragment extends SherlockFragment {
 
@@ -84,6 +84,7 @@ public class MainPageFragment extends SherlockFragment {
 		super.onCreate(savedInstanceState);
 		Bundle bundle = getArguments();
 		main = (bundle != null) ? bundle.getInt("main") : defaultInt;
+		getSherlockActivity().getSupportActionBar().setCustomView(R.layout.actionbar_main_home_title);
 		// getSherlockActivity().getSupportActionBar().setCustomView(R.layout.actionbar_main_home_title);
 	}
 
@@ -94,6 +95,7 @@ public class MainPageFragment extends SherlockFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		view = inflater.inflate(R.layout.activity_main_layout, container, false);
 		myApplication = (MyApplication) getSherlockActivity().getApplication();
 		dialog = new Builder(getSherlockActivity())
 				.setTitle(getResources().getString(R.string.tips))
@@ -120,6 +122,7 @@ public class MainPageFragment extends SherlockFragment {
 		return view;
 	}
 
+	
 	/**
 	 * activity启动时调用这个方法显示界面
 	 * 
@@ -132,23 +135,27 @@ public class MainPageFragment extends SherlockFragment {
 		// mMainView = (ViewGroup) inflater.inflate(
 		// R.layout.layout_first_item_in_main_listview, null);
 		layout.addView(mMainView);
-		RelativeLayout shorcutLayout = (RelativeLayout) view
-				.findViewById(R.id.function_parent_layout);
+		RelativeLayout shorcutLayout = (RelativeLayout) view.findViewById(R.id.function_parent_layout);
+		
 		View child = inflater.inflate(R.layout.main_function, null);
 		shorcutLayout.addView(child);
 
+		mPullToRefreshScrollView = (PullToRefreshScrollView) view.findViewById(R.id.main_pull_refresh_scrollview);
 		mPullToRefreshScrollView = (PullToRefreshScrollView) view
 				.findViewById(R.id.main_pull_refresh_scrollview);
 		mPullToRefreshScrollView.setScrollingWhileRefreshingEnabled(true);
+		mPullToRefreshScrollView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
 		mPullToRefreshScrollView
 				.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
 		mPullToRefreshScrollView.setVerticalScrollBarEnabled(false); // 禁用垂直滚动
 		mPullToRefreshScrollView.setHorizontalScrollBarEnabled(false); // 禁用水平滚动
+	
 		String label = getResources().getString(R.string.update_time)
 				+ DateUtils.formatDateTime(getSherlockActivity()
 						.getApplicationContext(), System.currentTimeMillis(),
 						DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE
 								| DateUtils.FORMAT_ABBREV_ALL);
+		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
 				label);
 		mPullToRefreshScrollView.setOnRefreshListener(listener);
@@ -158,6 +165,7 @@ public class MainPageFragment extends SherlockFragment {
 				.findViewById(R.id.main_mall_notice_content);
 	}
 
+		
 	private boolean isLogin() {
 		if (!myApplication.getIsLogin()) {
 			Toast.makeText(getSherlockActivity(),
@@ -189,6 +197,21 @@ public class MainPageFragment extends SherlockFragment {
 										| DateUtils.FORMAT_ABBREV_ALL);
 				refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 				// mPullToRefreshScrollView.setRefreshing();
+				MainPageDataManage manage = new MainPageDataManage(getSherlockActivity(), mPullToRefreshScrollView);
+				
+				manage.getMainPageData();
+				bannerArray = manage.getBannerArray();
+				acymerArray = manage.getAcymerArray();
+				inerbtyArray = manage.getInerbtyArray();
+				hotsellArray = manage.getHotSellArray();
+				ggTitleArray = manage.getGGTitle();
+				HotSellView hotSellView = new HotSellView(view,getSherlockActivity());
+				hotSellView.initHotSellView(hotsellArray);
+				hotSellView.initAcymerView(acymerArray);
+				hotSellView.initInerbtyView(inerbtyArray);
+				main_mall_notice_content.setText(ggTitleArray.get(0));
+
+
 //				MainPageDataManage manage = new MainPageDataManage(
 //						getSherlockActivity(), mPullToRefreshScrollView);
 //
@@ -212,12 +235,14 @@ public class MainPageFragment extends SherlockFragment {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				Toast.makeText(getSherlockActivity(), getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 				Toast.makeText(getSherlockActivity(),
 						getResources().getString(R.string.bad_network),
 						Toast.LENGTH_SHORT).show();
 			}
 		}
 
+		
 	};
 	
 	private void closeTask(){
@@ -234,70 +259,83 @@ public class MainPageFragment extends SherlockFragment {
 	private void intentToView(View view) {
 		try {
 			// hot sell 左边
-			RelativeLayout hotsellLeft = (RelativeLayout) view
-					.findViewById(R.id.main_hot_sell_left);
+			RelativeLayout hotsellLeft = (RelativeLayout)view.findViewById(R.id.main_hot_sell_left);
+			hotsellLeft.setOnClickListener(new MainGoodsOnclick(hotsellArray.get(0).getUId()));
+			
 			hotsellLeft.setOnClickListener(new MainGoodsOnclick(hotsellArray
 					.get(0).getUId()));
 			// hot sell 右上
-			RelativeLayout hotsellRightTop = (RelativeLayout) view
-					.findViewById(R.id.main_hot_sell_right_top);
+			RelativeLayout hotsellRightTop = (RelativeLayout)view.findViewById(R.id.main_hot_sell_right_top);
+			hotsellRightTop.setOnClickListener(new MainGoodsOnclick(hotsellArray.get(1).getUId()));
+		
 			hotsellRightTop.setOnClickListener(new MainGoodsOnclick(
 					hotsellArray.get(1).getUId()));
 			// hot sell 右下
-			RelativeLayout hotsellRightDown = (RelativeLayout) view
-					.findViewById(R.id.main_hot_sell_right_down);
+			RelativeLayout hotsellRightDown = (RelativeLayout)view.findViewById(R.id.main_hot_sell_right_down);
+			hotsellRightDown.setOnClickListener(new MainGoodsOnclick(hotsellArray.get(2).getUId()));
+		
 			hotsellRightDown.setOnClickListener(new MainGoodsOnclick(
 					hotsellArray.get(2).getUId()));
 
 			// acymer 左边
-			RelativeLayout acymeiLeft = (RelativeLayout) view
-					.findViewById(R.id.main_acymei_left);
+			RelativeLayout acymeiLeft = (RelativeLayout)view.findViewById(R.id.main_acymei_left);
+			acymeiLeft.setOnClickListener(new MainGoodsOnclick(acymerArray.get(0).getUId()));
+
 			acymeiLeft.setOnClickListener(new MainGoodsOnclick(acymerArray.get(
 					0).getUId()));
 			// acymer 右上
-			RelativeLayout acymeiRightTop = (RelativeLayout) view
-					.findViewById(R.id.main_acymei_right_top);
+			RelativeLayout acymeiRightTop = (RelativeLayout)view.findViewById(R.id.main_acymei_right_top);
+			acymeiRightTop.setOnClickListener(new MainGoodsOnclick(acymerArray.get(1).getUId()));
+	
 			acymeiRightTop.setOnClickListener(new MainGoodsOnclick(acymerArray
 					.get(1).getUId()));
 			// acymer 右下
-			RelativeLayout acymeiRightDown = (RelativeLayout) view
-					.findViewById(R.id.main_acymei_right_down);
+			RelativeLayout acymeiRightDown = (RelativeLayout)view.findViewById(R.id.main_acymei_right_down);
+			acymeiRightDown.setOnClickListener(new MainGoodsOnclick(acymerArray.get(2).getUId()));
+	
 			acymeiRightDown.setOnClickListener(new MainGoodsOnclick(acymerArray
 					.get(2).getUId()));
 
 			// inerbty 左上
-			RelativeLayout inerbtyTopLeft = (RelativeLayout) view
-					.findViewById(R.id.main_inerbty_top_left);
+			RelativeLayout inerbtyTopLeft = (RelativeLayout)view.findViewById(R.id.main_inerbty_top_left);
+			inerbtyTopLeft.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(0).getUId()));
+		
 			inerbtyTopLeft.setOnClickListener(new MainGoodsOnclick(inerbtyArray
 					.get(0).getUId()));
 			// inerbty 右上
-			RelativeLayout inerbtyTopRight = (RelativeLayout) view
-					.findViewById(R.id.main_inerbty_top_right);
+			RelativeLayout inerbtyTopRight = (RelativeLayout)view.findViewById(R.id.main_inerbty_top_right);
+			inerbtyTopRight.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(1).getUId()));
+	
 			inerbtyTopRight.setOnClickListener(new MainGoodsOnclick(
 					inerbtyArray.get(1).getUId()));
 			// inerbty 左中
-			RelativeLayout nerbtyMidLeft = (RelativeLayout) view
-					.findViewById(R.id.main_inerbty_mid_left);
+			RelativeLayout nerbtyMidLeft = (RelativeLayout)view.findViewById(R.id.main_inerbty_mid_left);
+			nerbtyMidLeft.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(2).getUId()));
+	
 			nerbtyMidLeft.setOnClickListener(new MainGoodsOnclick(inerbtyArray
 					.get(2).getUId()));
 			// inerbty 右中
-			RelativeLayout inerbtyMidRight = (RelativeLayout) view
-					.findViewById(R.id.main_inerbty_mid_right);
+			RelativeLayout inerbtyMidRight = (RelativeLayout)view.findViewById(R.id.main_inerbty_mid_right);
+			inerbtyMidRight.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(3).getUId()));
+
 			inerbtyMidRight.setOnClickListener(new MainGoodsOnclick(
 					inerbtyArray.get(3).getUId()));
 			// inerbty 左下
-			RelativeLayout inerbtyDownLeft = (RelativeLayout) view
-					.findViewById(R.id.main_inerbty_down_left);
+			RelativeLayout inerbtyDownLeft = (RelativeLayout)view.findViewById(R.id.main_inerbty_down_left);
+			inerbtyDownLeft.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(4).getUId()));
+
 			inerbtyDownLeft.setOnClickListener(new MainGoodsOnclick(
 					inerbtyArray.get(4).getUId()));
 			// inerbty 右下
-			RelativeLayout inerbtyDownRight = (RelativeLayout) view
-					.findViewById(R.id.main_inerbty_down_right);
+			RelativeLayout inerbtyDownRight = (RelativeLayout)view.findViewById(R.id.main_inerbty_down_right);
+			inerbtyDownRight.setOnClickListener(new MainGoodsOnclick(inerbtyArray.get(5).getUId()));
+
 			inerbtyDownRight.setOnClickListener(new MainGoodsOnclick(
 					inerbtyArray.get(5).getUId()));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Toast.makeText(getSherlockActivity(), getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 			Toast.makeText(getSherlockActivity(),
 					getResources().getString(R.string.bad_network),
 					Toast.LENGTH_SHORT).show();
@@ -321,8 +359,8 @@ public class MainPageFragment extends SherlockFragment {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			Intent intentLeft = new Intent(getSherlockActivity(),
-					GoodsInfoActivity.class);
+			Intent intentLeft = new Intent(getSherlockActivity(), GoodsInfoActivity.class);
+	
 			Bundle bundle = new Bundle();
 			bundle.putString("goodsId", goodsId);
 			intentLeft.putExtras(bundle);
@@ -337,41 +375,43 @@ public class MainPageFragment extends SherlockFragment {
 	 * @param child
 	 */
 	private void functionIntent(View child) {
-		RelativeLayout myOrder = (RelativeLayout) child
-				.findViewById(R.id.function_my_order);// 订单
+		RelativeLayout myOrder = (RelativeLayout) child.findViewById(R.id.function_my_order);//订单
+
 
 		myOrder.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
+				Intent intentOrder = new Intent(getSherlockActivity(),AllOrderActivity.class);
 				if (!isLogin()) {
-					Intent intentOrder = new Intent(getSherlockActivity(),
-							AllOrderActivity.class);
+					
 					getSherlockActivity().startActivity(intentOrder);
 				}
 			}
 		});
 
-		RelativeLayout myCollect = (RelativeLayout) child
-				.findViewById(R.id.function_my_favorite);// 收藏
+		RelativeLayout myCollect = (RelativeLayout) child.findViewById(R.id.function_my_favorite);//收藏
+
 		myCollect.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
+				Intent intentOrder = new Intent(getSherlockActivity(),MyCollectActivity.class);
 				if (!isLogin()) {
-					Intent intentOrder = new Intent(getSherlockActivity(),
-							MyCollectActivity.class);
+					
 					getSherlockActivity().startActivity(intentOrder);
 				}
 			}
 
 		});
-		RelativeLayout myEvent = (RelativeLayout) child
-				.findViewById(R.id.function_event);// 活动馆
+		RelativeLayout myEvent = (RelativeLayout) child.findViewById(R.id.function_event);//活动馆
+	
 		myEvent.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
+//				Intent intentOrder = new Intent(getSherlockActivity(),MyCollectActivity.class);
+//				getSherlockActivity().startActivity(intentOrder);
 				
 					dialog.show();
 				
@@ -380,12 +420,14 @@ public class MainPageFragment extends SherlockFragment {
 				// getSherlockActivity().startActivity(intentOrder);
 			}
 		});
-		RelativeLayout myMember = (RelativeLayout) child
-				.findViewById(R.id.function_member);// 会员购
+		RelativeLayout myMember = (RelativeLayout) child.findViewById(R.id.function_member);//会员购
+
 		myMember.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
+//				Intent intentOrder = new Intent(getSherlockActivity(),MyCollectActivity.class);
+//				getSherlockActivity().startActivity(intentOrder);
 				
 					dialog.show();
 				
@@ -394,50 +436,54 @@ public class MainPageFragment extends SherlockFragment {
 				// getSherlockActivity().startActivity(intentOrder);
 			}
 		});
-		RelativeLayout myHistory = (RelativeLayout) child
-				.findViewById(R.id.function_history);// 浏览历史
+		RelativeLayout myHistory = (RelativeLayout) child.findViewById(R.id.function_history);//浏览历史
+
 		myHistory.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
-				if (!isLogin()) {
-					Intent intentOrder = new Intent(getSherlockActivity(),
-							SearchActivity.class);
+				Intent intentOrder = new Intent(getSherlockActivity(), SearchActivity.class);
+//				if (!isLogin()) {
+				
 					getSherlockActivity().startActivity(intentOrder);
-				}
+//				}
 			}
 		});
-		RelativeLayout myCoupon = (RelativeLayout) child
-				.findViewById(R.id.function_coupon);// 积分卡券
+		RelativeLayout myCoupon = (RelativeLayout) child.findViewById(R.id.function_coupon);//积分卡券
+	
 		myCoupon.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
+				Intent intentOrder = new Intent(getSherlockActivity(),IntegeralActivity.class);
 				if (!isLogin()) {
-					Intent intentOrder = new Intent(getSherlockActivity(),
-							IntegeralActivity.class);
+			
 					getSherlockActivity().startActivity(intentOrder);
 				}
 			}
 		});
-		RelativeLayout mySkin = (RelativeLayout) child
-				.findViewById(R.id.function_skin);// 肌肤测试
+		RelativeLayout mySkin = (RelativeLayout) child.findViewById(R.id.function_skin);//肌肤测试
+	
 		mySkin.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
+//				Intent intentOrder = new Intent(getSherlockActivity(),IntegeralActivity.class);
+//				getSherlockActivity().startActivity(intentOrder);
 					dialog.show();
 					// Intent intentOrder = new
 					// Intent(getSherlockActivity(),IntegeralActivity.class);
 					// getSherlockActivity().startActivity(intentOrder);
 			}
 		});
-		RelativeLayout myMessage = (RelativeLayout) child
-				.findViewById(R.id.function_message);// 消息中心
+		RelativeLayout myMessage = (RelativeLayout) child.findViewById(R.id.function_message);//消息中心
+
 		myMessage.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
+//				Intent intentOrder = new Intent(getSherlockActivity(),PersonActivity.class);
+//				getSherlockActivity().startActivity(intentOrder);
 //				if (!isLogin()) {
 //					Intent intentOrder = new Intent(getSherlockActivity(),
 //							PersonActivity.class);
@@ -461,6 +507,14 @@ public class MainPageFragment extends SherlockFragment {
 			super.onActivityCreated(savedInstanceState);
 			Log.d(TAG, "TestFragment-----onActivityCreated");
 			// intentToView(view);
+			MainPageDataManage manage = new MainPageDataManage(getSherlockActivity(), null);
+			manage.getMainPageData();
+			bannerArray = manage.getBannerArray();
+			acymerArray = manage.getAcymerArray();
+			inerbtyArray = manage.getInerbtyArray();
+			hotsellArray = manage.getHotSellArray();
+			ggTitleArray = manage.getGGTitle();
+
 //			MainPageDataManage manage = new MainPageDataManage(
 //					getSherlockActivity(), null);
 //			manage.getMainPageData();
@@ -534,19 +588,26 @@ public class MainPageFragment extends SherlockFragment {
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
+//			try{
 			if(result){
 				createView(view, inflater);
-				HotSellView hotSellView = new HotSellView(view,
-						getSherlockActivity());
+			HotSellView hotSellView = new HotSellView(view,getSherlockActivity());
+		
 				hotSellView.initHotSellView(hotsellArray);
 				hotSellView.initAcymerView(acymerArray);
 				hotSellView.initInerbtyView(inerbtyArray);
 				intentToView(view);
 				main_mall_notice_content.setText(ggTitleArray.get(0));
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			Toast.makeText(getSherlockActivity(), getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 			} else{
 				Toast.makeText(getSherlockActivity(),
 						getResources().getString(R.string.bad_network),
 						Toast.LENGTH_SHORT).show();
+
+
 			}
 			if(isFirstIn){
 				bar.dismiss();
@@ -570,6 +631,7 @@ public class MainPageFragment extends SherlockFragment {
 	private ViewGroup mImageCircleView = null;
 	private SlideImageLayout mSlideLayout;
 	private ImageView[] mImageCircleViews;
+//	private static final int[] ids = { R.drawable.banner1, R.drawable.banner2, R.drawable.banner3};
 	// private static final int[] ids = { R.drawable.banner1,
 	// R.drawable.banner2, R.drawable.banner3};
 	private int length = 0;
@@ -583,6 +645,8 @@ public class MainPageFragment extends SherlockFragment {
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		mMainView = (ViewGroup) inflater.inflate(
 				R.layout.layout_first_item_in_main_listview, null);
+		if(length == 0) return mMainView;
+		mViewPager = (YLViewPager) mMainView.findViewById(R.id.image_slide_page);
 		if (length == 0)
 			return mMainView;
 		mViewPager = (YLViewPager) mMainView
@@ -595,6 +659,7 @@ public class MainPageFragment extends SherlockFragment {
 				.findViewById(R.id.layout_circle_images);
 		// mSlideTitle = (TextView) mMainView.findViewById(R.id.tvSlideTitle);
 
+		Log.i(TAG, "length--------------------------------"+bannerArray.size());
 		Log.i(TAG,
 				"length--------------------------------" + bannerArray.size());
 		for (int i = 0; i < length; i++) {
@@ -652,16 +717,21 @@ public class MainPageFragment extends SherlockFragment {
 
 		public Object instantiateItem(ViewGroup view, int position) {
 			// ((ViewPager) view).addView(mImagePageViewList.get(position));
-			View imageLayout = inflater.inflate(R.layout.item_pager_image,
-					view, false);
-			final ImageView imageView = (ImageView) imageLayout
-					.findViewById(R.id.image);
-			// Toast.makeText(getSherlockActivity(),
-			// bannerArray.get(position).getImgUrl(),
-			// Toast.LENGTH_SHORT).show();
-			imageLoader.displayImage(bannerArray.get(position).getImgUrl(),
-					imageView, options, animateFirstListener);
-			// imageView.setBackgroundResource(ids[position%length]);
+            View imageLayout = inflater.inflate(R.layout.item_pager_image, view, false);
+			final ImageView imageView = (ImageView) imageLayout.findViewById(R.id.image);
+//			Toast.makeText(getSherlockActivity(), bannerArray.get(position).getImgUrl(), Toast.LENGTH_SHORT).show();
+			imageLoader.displayImage(bannerArray.get(position).getImgUrl(), imageView, options,
+					animateFirstListener);
+//			View imageLayout = inflater.inflate(R.layout.item_pager_image,
+//					view, false);
+//			final ImageView imageView = (ImageView) imageLayout
+//					.findViewById(R.id.image);
+//			// Toast.makeText(getSherlockActivity(),
+//			// bannerArray.get(position).getImgUrl(),
+//			// Toast.LENGTH_SHORT).show();
+//			imageLoader.displayImage(bannerArray.get(position).getImgUrl(),
+//					imageView, options, animateFirstListener);
+//			// imageView.setBackgroundResource(ids[position%length]);
 			imageView.setOnClickListener(new ImageOnClickListener(position));
 			((ViewPager) view).addView(imageLayout, 0);
 			return imageLayout;
@@ -694,11 +764,11 @@ public class MainPageFragment extends SherlockFragment {
 
 			@Override
 			public void onClick(View v) {
+//        		Toast.makeText(getActivity(), "我点击了第"+"["+pageIndex%length+"]几个", Toast.LENGTH_SHORT).show();
+        		Intent intent = new Intent(getSherlockActivity(), GoodsInfoActivity.class);
 				// Toast.makeText(getActivity(),
 				// "我点击了第"+"["+pageIndex%length+"]几个",
 				// Toast.LENGTH_SHORT).show();
-				Intent intent = new Intent(getSherlockActivity(),
-						GoodsInfoActivity.class);
 				Bundle bundle = new Bundle();
 				bundle.putString("goodsId", bannerArray.get(index).getUId());
 				intent.putExtras(bundle);
@@ -719,9 +789,8 @@ public class MainPageFragment extends SherlockFragment {
 		}
 
 		@Override
-		public void onPageScrolled(int position, float positionOffset,
-				int positionOffsetPixels) {
-			// if(positionOffset >= 50){
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+	
 			// mViewPager.setCurrentItem(pageIndex);
 			// }
 		}
@@ -733,12 +802,14 @@ public class MainPageFragment extends SherlockFragment {
 			// slideImageAdapter.setPageIndex(index);
 			// pageIndex = index;
 			int length = mImageCircleViews.length;
+            mImageCircleViews[index%length].setBackgroundResource(R.drawable.dot1);
 			mImageCircleViews[index % length]
 					.setBackgroundResource(R.drawable.dot1);
 			for (int i = 0; i < length; i++) {
 				// mSlideTitle.setText(""+i);
 
 				if (index % length != i) {
+                    mImageCircleViews[i%length].setBackgroundResource(R.drawable.dot2);
 					mImageCircleViews[i % length]
 							.setBackgroundResource(R.drawable.dot2);
 				}
@@ -749,27 +820,36 @@ public class MainPageFragment extends SherlockFragment {
 
 	private int width;
 
+    
+    
 	private DisplayImageOptions options;
 	protected ImageLoader imageLoader = ImageLoader.getInstance();
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
 	private void initDisplayImageOption() {
 		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.banner_bg)
+//			.showStubImage(R.drawable.hot_sell_right_top_image)
+//			.showImageOnFail(R.drawable.hot_sell_right_top_image)
+//			.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+//			.cacheInMemory(true)
+//			.cacheOnDisc(true)
+//			.build();
+			.showStubImage(R.drawable.banner_bg)
 				.showImageOnFail(R.drawable.banner_bg)
 				.showImageForEmptyUri(R.drawable.banner_bg).cacheInMemory(true)
 				.cacheOnDisc(true).build();
 	}
 
-	static final List<String> displayedImages = Collections
-			.synchronizedList(new LinkedList<String>());
+	static final List<String> displayedImages = Collections.synchronizedList(new LinkedList<String>());
+	
+
 
 	private static class AnimateFirstDisplayListener extends
 			SimpleImageLoadingListener {
 
 		@Override
-		public void onLoadingComplete(String imageUri, View view,
-				Bitmap loadedImage) {
+		public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+	
 			if (loadedImage != null) {
 				ImageView imageView = (ImageView) view;
 				boolean firstDisplay = !displayedImages.contains(imageUri);
@@ -780,4 +860,5 @@ public class MainPageFragment extends SherlockFragment {
 			}
 		}
 	}
+	
 }

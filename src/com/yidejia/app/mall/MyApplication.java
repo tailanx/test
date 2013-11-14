@@ -1,10 +1,5 @@
 package com.yidejia.app.mall;
 
-import java.util.LinkedList;
-
-import java.util.List;
-
-
 import android.app.Application;
 
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;

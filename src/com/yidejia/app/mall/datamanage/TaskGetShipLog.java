@@ -3,14 +3,14 @@ package com.yidejia.app.mall.datamanage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.yidejia.app.mall.ctrl.ShipLogViewCtrl;
-import com.yidejia.app.mall.model.ShipLog;
-import com.yidejia.app.mall.net.express.GetShipLog;
-
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import com.yidejia.app.mall.ctrl.ShipLogViewCtrl;
+import com.yidejia.app.mall.model.ShipLog;
+import com.yidejia.app.mall.net.express.GetShipLog;
 
 public class TaskGetShipLog {
 	

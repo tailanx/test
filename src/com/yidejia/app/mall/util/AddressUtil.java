@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager.OnActivityResultListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,9 +23,7 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.model.Addresses;
-import com.yidejia.app.mall.view.AddressActivity;
 import com.yidejia.app.mall.view.EditNewAddressActivity;
-import com.yidejia.app.mall.view.NewAddressActivity;
 
 public class AddressUtil {
 	private LinearLayout linearLayout;

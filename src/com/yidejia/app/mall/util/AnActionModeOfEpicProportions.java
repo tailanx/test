@@ -19,19 +19,19 @@ public class AnActionModeOfEpicProportions implements ActionMode.Callback {
 	@Override
 	public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 		// TODO Auto-generated method stub
-		menu.add(0, 0, Menu.NONE, "Ê×Ò³")
+		menu.add(0, 0, Menu.NONE, "ï¿½ï¿½Ò³")
 		.setIcon(R.drawable.home_normal)
 		.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-		menu.add(0, 1, Menu.NONE, "·¢ÏÖ¡¤¹ä")
+		menu.add(0, 1, Menu.NONE, "ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½")
 		.setIcon(R.drawable.down_guang_normal)
 		.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-		menu.add(0, 2, Menu.NONE, "ËÑË÷")
+		menu.add(0, 2, Menu.NONE, "ï¿½ï¿½ï¿½ï¿½")
 		.setIcon(R.drawable.down_search_normal)
 		.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-		menu.add(0, 3, Menu.NONE, "¹ºÎï³µ")
+		menu.add(0, 3, Menu.NONE, "ï¿½ï¿½ï¿½ï³µ")
 		.setIcon(R.drawable.down_shopping_normal)
 		.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-		menu.add(0, 4, Menu.NONE, "ÎÒµÄÉÌ³Ç")
+		menu.add(0, 4, Menu.NONE, "ï¿½Òµï¿½ï¿½Ì³ï¿½")
 		.setIcon(R.drawable.down_my_normal)
 		.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 		

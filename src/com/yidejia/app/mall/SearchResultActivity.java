@@ -1,11 +1,6 @@
 package com.yidejia.app.mall;
 
 
-import com.jeremyfeinstein.slidingmenu.SlidingFragmentActivity;
-import com.jeremyfeinstein.slidingmenu.SlidingMenu;
-import com.yidejia.app.mall.fragment.FilterFragment;
-import com.yidejia.app.mall.fragment.SelledResultFragment;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +13,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.jeremyfeinstein.slidingmenu.SlidingFragmentActivity;
+import com.jeremyfeinstein.slidingmenu.SlidingMenu;
+import com.yidejia.app.mall.fragment.FilterFragment;
+import com.yidejia.app.mall.fragment.SelledResultFragment;
 
 public class SearchResultActivity extends SlidingFragmentActivity {
 

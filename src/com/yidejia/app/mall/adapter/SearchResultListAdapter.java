@@ -1,13 +1,12 @@
 package com.yidejia.app.mall.adapter;
 
-import com.yidejia.app.mall.R;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
+
+import com.yidejia.app.mall.R;
 
 public class SearchResultListAdapter extends BaseAdapter {
 

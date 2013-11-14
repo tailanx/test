@@ -1,11 +1,11 @@
 package com.yidejia.app.mall.ctrl;
 
-import com.yidejia.app.mall.R;
-
 import android.app.Activity;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.TextView;
+
+import com.yidejia.app.mall.R;
 
 public class ShipLogViewCtrl {
 	

@@ -2,12 +2,12 @@ package com.yidejia.app.mall.task;
 
 import java.io.IOException;
 
-import com.yidejia.app.mall.net.user.Register;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.widget.Toast;
+
+import com.yidejia.app.mall.net.user.Register;
 
 public class TaskRegister {
 	
