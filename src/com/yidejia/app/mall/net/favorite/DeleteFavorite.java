@@ -14,7 +14,7 @@ import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.util.Md5;
 /**
- * É¾³ýÊÕ²Ø
+ * É¾ï¿½ï¿½ï¿½Õ²ï¿½
  * @author long bin
  *
  */
@@ -89,7 +89,7 @@ public class DeleteFavorite {
 	}
 	
 	public String deleteFavorite(String userid, String goodsid, String token) throws IOException{
-		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4DelFav(userid, goodsid, token));
+		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4DelFav(userid, goodsid, token));
 		return result = conn.getHttpResponse();
 	}
 	
@@ -128,7 +128,7 @@ public class DeleteFavorite {
 //				// TODO Auto-generated method stub
 //				super.onStart();
 //				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//				bar.setMessage("ÕýÔÚ²éÑ¯");
+//				bar.setMessage("ï¿½ï¿½ï¿½Ú²ï¿½Ñ¯");
 //				bar.show();
 //			}
 //			

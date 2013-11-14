@@ -141,8 +141,7 @@ public class TaskNoEva {
 								String imageUrl = ImageUrl.IMAGEURL
 										+ arrayObject.getString("imgname") + "!100";
 								String goodsname = "";
-								GetProductAddress address = new GetProductAddress(
-										activity);
+								GetProductAddress address = new GetProductAddress();
 								try {
 									String productString = address
 											.getProductJsonString(goodsid);

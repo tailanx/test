@@ -19,7 +19,7 @@ public class GetTn {
 	 * @throws IOException
 	 */
 	public String getTnHttpResp(String userid, String orderCode, String token) throws IOException{
-		String url = JNICallBack.getHttp4GetTn(userid, orderCode, token);
+		String url = new JNICallBack().getHttp4GetTn(userid, orderCode, token);
 		HttpPostConn conn = new HttpPostConn(url);
 		return conn.getHttpResponse();
 	}

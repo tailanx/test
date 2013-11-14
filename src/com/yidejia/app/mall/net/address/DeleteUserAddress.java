@@ -104,7 +104,7 @@ public class DeleteUserAddress {
 	 * @throws IOException
 	 */
 	public String deleteAddress(String cid, String aid, String token) throws IOException{
-		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4DelAddress(cid, aid, token));
+		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4DelAddress(cid, aid, token));
 		return result = conn.getHttpResponse();
 	}
 	

@@ -16,7 +16,7 @@ import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.util.Md5;
 /**
- * »ý·Ö¿¨È¯
+ * ï¿½ï¿½Ö¿ï¿½È¯
  * @author long bin
  *
  */
@@ -86,7 +86,7 @@ public class Voucher {
 	}
 	
 	public String getHttpResponse(String id, String token) throws IOException{
-		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4GetVoucher(id, token));
+		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4GetVoucher(id, token));
 		return result = conn.getHttpResponse();
 	}
 //	public String getVoucherJson(){
@@ -124,7 +124,7 @@ public class Voucher {
 //				// TODO Auto-generated method stub
 //				super.onStart();
 //				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//				bar.setMessage("ÕýÔÚ²éÑ¯");
+//				bar.setMessage("ï¿½ï¿½ï¿½Ú²ï¿½Ñ¯");
 //				bar.show();
 //			}
 //			

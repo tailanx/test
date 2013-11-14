@@ -77,7 +77,7 @@ public class PayOutOrder {
 	public String getHttpResponseString(String customer_id, String code)throws IOException{
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress(customer_id, code));
 //		result = conn.getJsonResult();
-		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4PayOut(customer_id, code));
+		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4PayOut(customer_id, code));
 		result = conn.getHttpResponse();
 		return result;
 	}

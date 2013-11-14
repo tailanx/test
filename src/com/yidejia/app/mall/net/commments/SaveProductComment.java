@@ -88,7 +88,7 @@ public class SaveProductComment {
 //		getHttpAddress(id);
 //		HttpPostConn conn = new HttpPostConn(keys, values);
 //		result = conn.getJsonResult();
-		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4SaveComment(goods_id, user_id, user_name, title, experience, commentDate));
+		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4SaveComment(goods_id, user_id, user_name, title, experience, commentDate));
 		result = conn.getHttpResponse();
 		return result;
 	}

@@ -98,7 +98,7 @@ public class GetOrderByCode {
 	}
 	
 	public String getHttpResponse(String code) throws IOException{
-		HttpGetConn conn = new HttpGetConn(JNICallBack.getHttp4GetOrderByCode(code),true);
+		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetOrderByCode(code),true);
 		return result = conn.getJsonResult();
 	}
 //	public String getFavoriteListJson(){

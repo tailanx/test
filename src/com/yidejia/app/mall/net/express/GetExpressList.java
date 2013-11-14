@@ -83,7 +83,7 @@ public class GetExpressList {
 			throws IOException {
 		// HttpGetConn conn = new HttpGetConn(getHttpAddress(where, offset,
 		// limit, group, order, fields));
-		HttpGetConn conn = new HttpGetConn(JNICallBack.getHttp4GetExpress(
+		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetExpress(
 				where, offset, limit, group, order, fields), true);
 		result = conn.getJsonResult();
 		return result;

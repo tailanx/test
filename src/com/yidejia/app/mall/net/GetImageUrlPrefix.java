@@ -51,7 +51,7 @@ public class GetImageUrlPrefix {
 	private String result = "";
 	public String getUrlJsonString()throws IOException{
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress());
-		HttpGetConn conn = new HttpGetConn(JNICallBack.getHttp4ImageUrlPrefix(), true);
+		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4ImageUrlPrefix(), true);
 		result = conn.getJsonResult();
 		return result;
 	}

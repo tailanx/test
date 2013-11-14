@@ -82,7 +82,7 @@ public class GetFreeList {
 			String group, String order, String fields) throws IOException {
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress(where, offset, limit,
 //				group, order, fields));
-		HttpGetConn conn = new HttpGetConn(JNICallBack.getHttp4GetFree(where, offset, limit, group, order, fields), true);
+		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetFree(where, offset, limit, group, order, fields), true);
 		result = conn.getJsonResult();
 		return result;
 	}

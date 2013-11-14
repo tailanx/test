@@ -24,7 +24,7 @@ public class WaitingComment {
 	private String result = "";
 	public String getHttpResp(String userid)throws IOException{
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress(where, offset, limit, group, order, fields));
-		HttpGetConn conn = new HttpGetConn(JNICallBack.getHttp4GetNoEvaluate(userid), true);
+		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetNoEvaluate(userid), true);
 		result = conn.getJsonResult();
 		Log.i(TAG, result);
 		return result;

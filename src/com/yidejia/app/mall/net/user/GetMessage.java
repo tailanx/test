@@ -10,7 +10,7 @@ public class GetMessage {
 	public String getHttpResponse(String userId, String offset, String limit, String token) throws IOException{
 //		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4GetMessage(userId, token, offset, limit));
 //		return conn.getHttpResponse();
-		HttpGetConn conn = new HttpGetConn(JNICallBack.getHttp4GetMessage(userId, token, offset, limit), true);
+		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetMessage(userId, token, offset, limit), true);
 		return conn.getJsonResult();
 	}
 }

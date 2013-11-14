@@ -69,7 +69,7 @@ public class EffectDataUtil {
 	
 	public String getHttpResponseString(String where, String offset, String limit, String group, String order, String fields) throws IOException{
 //		HttpGetConn httpGetConn = new HttpGetConn(getHttpAddress(where, offset, limit, fields));
-		HttpGetConn httpGetConn = new HttpGetConn(JNICallBack.getHttp4GetEffect(where, offset, limit, group, order, fields), true);
+		HttpGetConn httpGetConn = new HttpGetConn(new JNICallBack().getHttp4GetEffect(where, offset, limit, group, order, fields), true);
 		return httpGetConn.getJsonResult();
 	}
 }

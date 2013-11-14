@@ -57,7 +57,7 @@ public class PriceDataUtil {
 	
 	public String getHttpResponseString() throws IOException{
 //		HttpGetConn httpGetConn = new HttpGetConn(getHttpAddress());
-		HttpGetConn httpGetConn = new HttpGetConn(JNICallBack.getHttp4GetPrice(), true);
+		HttpGetConn httpGetConn = new HttpGetConn(new JNICallBack().getHttp4GetPrice(), true);
 		return httpGetConn.getJsonResult();
 	}
 }

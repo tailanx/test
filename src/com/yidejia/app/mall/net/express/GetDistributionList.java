@@ -79,7 +79,7 @@ public class GetDistributionList {
 	private String result = "";
 	public String getListJsonString(String where, String offset, String limit, String group, String order, String fields)throws IOException{
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress(where, offset, limit, group, order, fields));
-		HttpGetConn conn = new HttpGetConn(JNICallBack.getHttp4GetDistribute(where, offset, limit, group, order, fields), true);
+		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetDistribute(where, offset, limit, group, order, fields), true);
 		result = conn.getJsonResult();
 		return result;
 	}

@@ -19,7 +19,7 @@ public class Login {
 	private String TAG = Login.class.getName();
 	
 	public String getHttpResponse(String username, String password, String ip) throws IOException{
-		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4Login(username, password, ip));
+		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4Login(username, password, ip));
 		return conn.getHttpResponse();
 	}
 	

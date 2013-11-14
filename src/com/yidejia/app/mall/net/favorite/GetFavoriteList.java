@@ -14,7 +14,7 @@ import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.util.Md5;
 /**
- * »ñÈ¡ÊÕ²ØÁÐ±í
+ * ï¿½ï¿½È¡ï¿½Õ²ï¿½ï¿½Ð±ï¿½
  * @author long bin
  *
  */
@@ -83,7 +83,7 @@ public class GetFavoriteList {
 			throws IOException {
 		// HttpGetConn conn = new HttpGetConn(getHttpAddress(where, offset,
 		// limit, group, order, fields));
-		HttpGetConn conn = new HttpGetConn(JNICallBack.getHttp4GetFav(where,
+		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetFav(where,
 				offset, limit, group, order, fields), true);
 		result = conn.getJsonResult();
 		return result;
@@ -120,7 +120,7 @@ public class GetFavoriteList {
 //				// TODO Auto-generated method stub
 //				super.onStart();
 //				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//				bar.setMessage("ÕýÔÚ²éÑ¯");
+//				bar.setMessage("ï¿½ï¿½ï¿½Ú²ï¿½Ñ¯");
 //				bar.show();
 //			}
 //			

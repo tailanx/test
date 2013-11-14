@@ -121,7 +121,7 @@ public class SaveOrder {
 			String ship_fee, String ship_type, String ship_entity_name,
 			String goods_qty_scr, String comments, String pay_type, String token)
 			throws IOException {
-		String url = JNICallBack.getHttp4SaveOrder(customer_id, ticket_id,
+		String url = new JNICallBack().getHttp4SaveOrder(customer_id, ticket_id,
 				recipient_id, pingou_id, goods_ascore, ship_fee, new String(
 						ship_type.getBytes("UTF-8"), "UTF-8"), new String(
 						ship_entity_name.getBytes("UTF-8"), "UTF-8"),

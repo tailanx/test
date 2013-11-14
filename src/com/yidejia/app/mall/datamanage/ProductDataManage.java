@@ -93,7 +93,7 @@ public class ProductDataManage{  //implements CallBack
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-			GetProductAddress address = new GetProductAddress(context);
+			GetProductAddress address = new GetProductAddress();
 			try {
 				String resultString = address.getProductJsonString(id);
 				try {

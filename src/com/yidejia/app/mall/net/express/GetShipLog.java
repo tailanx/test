@@ -22,7 +22,7 @@ public class GetShipLog {
 	 * @throws IOException
 	 */
 	public String getHttpResp(String code) throws IOException{
-		HttpGetConn conn = new HttpGetConn(JNICallBack.getHttp4GetShipLog(code),true);
+		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetShipLog(code),true);
 		return conn.getJsonResult();
 	}
 	

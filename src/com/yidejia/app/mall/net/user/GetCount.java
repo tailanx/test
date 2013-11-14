@@ -10,7 +10,7 @@ public class GetCount {
 	public String getHttpResponse(String userId, String token) throws IOException{
 //		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4GetCount(userId, token));
 //		return conn.getHttpResponse();
-		HttpGetConn conn = new HttpGetConn(JNICallBack.getHttp4GetCount(userId, token), true);
+		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetCount(userId, token), true);
 		return conn.getJsonResult();
 	}
 }

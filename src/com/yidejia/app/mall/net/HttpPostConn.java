@@ -97,7 +97,7 @@ public class HttpPostConn {
 //			ByteArrayEntity arrayEntity = new ByteArrayEntity(paramArrayOfByte); 
 //			arrayEntity.setContentType("application/octet-stream"); 
 			
-			String url = JNICallBack.HTTPURL;
+			String url = new JNICallBack().HTTPURL;
 			HttpPost httpPost = new HttpPost(url); 
 			Log.i(TAG, url+"?"+param);
 //			httpPost.setEntity(arrayEntity); 

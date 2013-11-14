@@ -288,7 +288,7 @@ public class UserCommentDataManage {
 								String dry_status = arrayObject.getString("dry_status");
 								String imageUrl = ImageUrl.IMAGEURL + arrayObject.getString("imgname") + "!100";
 								String goodsname = "";
-								GetProductAddress address = new GetProductAddress(context);
+								GetProductAddress address = new GetProductAddress();
 								try {
 									String productString = address.getProductJsonString(goodsid);
 									JSONObject productObject = new JSONObject(productString);

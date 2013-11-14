@@ -94,7 +94,7 @@ public class GetOrderNoEva {
 	}
 	
 	public String getHttpResponse(String user_id) throws IOException{
-		HttpGetConn conn = new HttpGetConn(JNICallBack.getHttp4GetNoEvaluate(user_id), true);
+		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetNoEvaluate(user_id), true);
 		return result = conn.getJsonResult();
 	}
 //	public String getFavoriteListJson(){

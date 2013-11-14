@@ -77,7 +77,7 @@ public class CancelOrder {
 	public String getHttpResponseString(String customer_id, String code, String token)throws IOException{
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress(customer_id, code));
 //		result = conn.getJsonResult();
-		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4CancelOrder(customer_id, code, token));
+		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4CancelOrder(customer_id, code, token));
 		result = conn.getHttpResponse();
 		return result;
 	}

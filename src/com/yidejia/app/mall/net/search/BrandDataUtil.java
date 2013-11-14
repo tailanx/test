@@ -57,7 +57,7 @@ public class BrandDataUtil {
 	
 	public String getHttpResponseString() throws IOException{
 //		HttpGetConn httpGetConn = new HttpGetConn(getHttpAddress());
-		HttpGetConn httpGetConn = new HttpGetConn(JNICallBack.getHttp4GetBrand(), true);
+		HttpGetConn httpGetConn = new HttpGetConn(new JNICallBack().getHttp4GetBrand(), true);
 		return httpGetConn.getJsonResult();
 	}
 }

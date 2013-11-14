@@ -86,7 +86,7 @@ public class DeleteProductComment {
 //		getHttpAddress(id);
 //		HttpPostConn conn = new HttpPostConn(keys, values);
 //		result = conn.getJsonResult();
-		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4DelComment(id));
+		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4DelComment(id));
 		result = conn.getHttpResponse();
 		return result;
 	}
