@@ -3,6 +3,7 @@ package com.yidejia.app.mall.view;
 import java.util.ArrayList;
 
 
+
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -25,7 +26,9 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
 import com.yidejia.app.mall.adapter.AlreadyComFragmentAdapter;
+import com.yidejia.app.mall.fragment.AllOrderFragment;
 import com.yidejia.app.mall.fragment.AlreadyComFragment;
 
 public class AlreadyComActivity extends SherlockFragmentActivity {
@@ -64,6 +67,7 @@ public class AlreadyComActivity extends SherlockFragmentActivity {
 //		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.already_complete);
+		
 		resources = getResources();
 		InitWidth();
 		InitTextView();
@@ -107,15 +111,15 @@ public class AlreadyComActivity extends SherlockFragmentActivity {
 		 LayoutInflater mInflater = getLayoutInflater();
 	   
 	     
-	     Fragment weekfragment = AlreadyComFragment.newInstance(getResources().getString(R.string.order_time_week));
-	     Fragment monthFragment = AlreadyComFragment.newInstance(getResources().getString(R.string.order_time_month));
-	     Fragment yearFragment=AlreadyComFragment.newInstance(getResources().getString(R.string.order_time_year));
+		 Fragment weekfragment = AllOrderFragment.newInstance(4, 0);
+	     Fragment monthFragment = AllOrderFragment.newInstance(4, 1);
+	     Fragment yearFragment = AllOrderFragment.newInstance(4, 2);
 	     
 	     fragmentsList.add(yearFragment);
 	     fragmentsList.add(monthFragment);
 	     fragmentsList.add(weekfragment);
 	     
-	     mPager.setAdapter(new AlreadyComFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
+	     mPager.setAdapter(new AllOrderFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
 	     mPager.setCurrentItem(0);
 	     mPager.setOffscreenPageLimit(2);
 	     mPager.setOnPageChangeListener(new MyOnPageChangeListener());
@@ -159,12 +163,12 @@ public class AlreadyComActivity extends SherlockFragmentActivity {
 	                	mMonth.setPressed(false);
 	                    animation = new TranslateAnimation(position_one, 0, 0, 0);
 	                    mMonth.setBackgroundResource(R.drawable.product_details_bg);
-	                    mMonth.setTextColor(Color.parseColor("#ed217c"));
+	                    mMonth.setTextColor(Color.parseColor("#000000"));
 	                } else if (currIndex == 2) {
 	                	mYear.setPressed(false);
 	                    animation = new TranslateAnimation(position_two, 0, 0, 0);
 	                    mYear.setBackgroundResource(R.drawable.product_details_bg);
-	                    mYear.setTextColor(Color.parseColor("#ed217c"));
+	                    mYear.setTextColor(Color.parseColor("#000000"));
 	                } 
 	                mWeek.setPressed(true);
 	                mWeek.setBackgroundResource(R.drawable.product_details_selected);
@@ -175,12 +179,12 @@ public class AlreadyComActivity extends SherlockFragmentActivity {
 	                	mWeek.setPressed(false);
 	                	mWeek.setBackgroundResource(R.drawable.product_details_bg);
 	                    animation = new TranslateAnimation(offset, position_one, 0, 0);
-	                    mWeek.setTextColor(Color.parseColor("#ed217c"));
+	                    mWeek.setTextColor(Color.parseColor("#000000"));
 	                } else if (currIndex == 2) {
 	                    mYear.setPressed(false);
 	                    mYear.setBackgroundResource(R.drawable.product_details_bg);
 	                	animation = new TranslateAnimation(position_two, position_one, 0, 0);
-	                    mYear.setTextColor(Color.parseColor("#ed217c"));
+	                    mYear.setTextColor(Color.parseColor("#000000"));
 	                } 
 	                mMonth.setPressed(true);
 	                mMonth.setBackgroundResource(R.drawable.product_details_selected);
@@ -191,12 +195,12 @@ public class AlreadyComActivity extends SherlockFragmentActivity {
 	                	mWeek.setPressed(false);
 	                	mWeek.setBackgroundResource(R.drawable.product_details_bg);
 	                    animation = new TranslateAnimation(offset, position_two, 0, 0);
-	                    mWeek.setTextColor(Color.parseColor("#ed217c"));
+	                    mWeek.setTextColor(Color.parseColor("#000000"));
 	                } else if (currIndex == 1) {
 	                    mMonth.setPressed(false);
 	                    mMonth.setBackgroundResource(R.drawable.product_details_bg);
 	                	animation = new TranslateAnimation(position_one, position_two, 0, 0);
-	                    mMonth.setTextColor(Color.parseColor("#ed217c"));
+	                    mMonth.setTextColor(Color.parseColor("#000000"));
 	                } 
 	                mYear.setPressed(true);
 	                mYear.setBackgroundResource(R.drawable.product_details_selected);

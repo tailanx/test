@@ -86,6 +86,7 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 		personMessage = (RelativeLayout) view
 				.findViewById(R.id.main2_main2_linearlayout20);// 个人中心
 		personMessage.setOnClickListener(this);
+		personMessage.setVisibility(ViewGroup.GONE);//这个版本隐藏这个功能
 		mExchange = (RelativeLayout) view
 				.findViewById(R.id.main2_main2_linearlayout10);// 退换货
 		mExchange.setOnClickListener(this);
@@ -240,9 +241,9 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 
 	private void initDisplayImageOption() {
 		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.hot_sell_right_top_image)
-				.showImageOnFail(R.drawable.hot_sell_right_top_image)
-				.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+				.showStubImage(R.drawable.user_head)
+				.showImageOnFail(R.drawable.user_head)
+				.showImageForEmptyUri(R.drawable.user_head)
 				.cacheInMemory(true).cacheOnDisc(true).build();
 	}
 
@@ -253,7 +254,7 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 		myApplication = (MyApplication) getSherlockActivity().getApplication();
 
 		personCountDataManage = new PersonCountDataManage(getSherlockActivity());
-
+		personCountDataManage.getCountData(myApplication.getUserId(), myApplication.getToken());
 		Log.i("info", personCountDataManage + "        personCountDataManage");
 		View view = inflater.inflate(R.layout.person_shopping_mall1, container,
 				false);

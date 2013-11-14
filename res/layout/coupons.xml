@@ -2,12 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg" >
+    android:background="@drawable/bg" xmlns:tools="http://schemas.android.com/tools" tools:context=".view.CstmPayActivity">
 
     <ScrollView
         android:id="@+id/coupons_scrollView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
         <LinearLayout
             android:id="@+id/coupons_scrollView_linearlayout1"
@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginTop="12dp"
             android:orientation="vertical" >
 
@@ -40,7 +41,6 @@
                     android:layout_marginLeft="40dp"
                     android:layout_toRightOf="@id/coupons_text"
                     android:paddingTop="20dp"
-                    android:text="200"
                     android:textColor="#ed217c"
                     android:textSize="35sp" />
 
@@ -56,9 +56,9 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/coupons_relative2"
+                android:layout_height="match_parent"
                 android:background="@drawable/integration_downbg"
+                android:layout_marginBottom="10dp"
                 android:orientation="vertical" >
 
                 <TextView
@@ -85,7 +85,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="2dp"
-                    android:text="2.累计消费金额达1000-2000元范围类，客户购买100元产品，获得3个陷阱积分。"
+                    android:text="2.累计消费金额达1000-2000元范围类，客户购买100元产品，获得3个现金积分。"
                     android:textSize="12sp" />
 
                 <TextView
@@ -94,7 +94,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="2dp"
-                    android:text="3.累计消费金额达2000-5000元范围类，客户购买100元产品，获得5个陷阱积分。"
+                    android:text="3.累计消费金额达2000-5000元范围类，客户购买100元产品，获得5个现金积分。"
                     android:textSize="12sp" />
 
                 <TextView
@@ -103,7 +103,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="2dp"
-                    android:text="4.累计消费金额达5000-10000元范围类，客户购买100元产品，获得10个陷阱积分。"
+                    android:text="4.累计消费金额达5000-10000元范围类，客户购买100元产品，获得10个现金积分。"
                     android:textSize="12sp" />
 
                 <TextView
@@ -118,10 +118,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="一个现金分析折合1元人民币，现金积分会根据客户的VIP升级级别进行设置"
+                    android:layout_margin="8dp"
+                    android:text="6.一个现金分析折合1元人民币，现金积分会根据客户的VIP升级级别进行设置"
                     android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>

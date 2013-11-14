@@ -2,33 +2,38 @@ package com.yidejia.app.mall.util;
 
 import java.util.ArrayList;
 
-import com.yidejia.app.mall.MyApplication;
-import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.datamanage.OrderDataManage;
-import com.yidejia.app.mall.model.Order;
-
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.MyApplication;
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.datamanage.OrderDataManage;
+import com.yidejia.app.mall.model.Order;
+import com.yidejia.app.mall.view.PersonEvaluationActivity;
+
 public class AlreadyCompleteUtil {
 	private Context context;
 	private LayoutInflater mInflater;
-	private LinearLayout mLinearLayout;//Íâ²ã¼ÓÔØÓÃµÄ
-	private LinearLayout mLayout;//ÓÃÀ´´«²ÎÓÃµÄ
+	private LinearLayout mLinearLayout;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½
+	private LinearLayout mLayout;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½
 	private View view;
 	private MyApplication myApplication;
 	
-	private TextView titleTextView;//¶©µ¥µÄ×´Ì¬
-	private TextView numberTextView;//¶©µ¥µÄ±àºÅ
-	private TextView sumPrice;//¶©µ¥µÄ×Ü¼Û¸ñ
-	private TextView countTextView;//×ÜÊıÄ¿
+	private TextView titleTextView;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
+	private TextView numberTextView;//ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½
+	private TextView sumPrice;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü¼Û¸ï¿½
+	private TextView countTextView;//ï¿½ï¿½ï¿½ï¿½Ä¿
+	private Button comment;//è¯„ä»· 
 	
-	private OrderDataManage orderDataManage ;//ÓÃÀ´»ñÈ¡¶©µ¥Êı¾İ
+	private OrderDataManage orderDataManage ;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	public AlreadyCompleteUtil(Context context,LinearLayout layout){
 		this.context = context;
@@ -43,15 +48,15 @@ public class AlreadyCompleteUtil {
 		numberTextView = (TextView)view.findViewById(R.id.already_complete_item_main_item_textview2_number);
 		sumPrice = (TextView)view.findViewById(R.id.already_complete_item_main_sum_money_detail);
 		countTextView = (TextView)view.findViewById(R.id.already_complete_item_main_item_textview7_detail);
-		
+		comment = (Button) view.findViewById(R.id.already_complete_item_main_item_comment);
 	}
 	/**
-	 * ¼ÓÔØÊÓÍ¼
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 	 */
 		public void loadView(int fromIndex, int amount){
 			try {
 				orderDataManage = new OrderDataManage(context);
-				ArrayList<Order> mList = orderDataManage.getOrderArray(myApplication.getUserId(), "", "", "ÒÑÇ©ÊÕ", fromIndex+"", amount+"",myApplication.getToken());
+				ArrayList<Order> mList = orderDataManage.getOrderArray(myApplication.getUserId(), "", "", "å·²å‘è´§", fromIndex+"", amount+"",myApplication.getToken());///å·²ç­¾æ”¶
 				Log.i("info", mList.size()+"mList");
 				for(int i=0;i<mList.size();i++){
 					setupShow();
@@ -61,7 +66,7 @@ public class AlreadyCompleteUtil {
 					numberTextView.setText(mOrder.getOrderCode());
 					
 					AlreadyCompleteDetail alreadyCompleteDetail = new AlreadyCompleteDetail(context, mOrder, mLayout);
-					alreadyCompleteDetail.addView();//¼ÓÔØÉÌÆ·
+					alreadyCompleteDetail.addView();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
 					for(int j=0;j<alreadyCompleteDetail.map.size();j++){
 //					Log.i("info", mLinearLayoutLayout+"+mlayout");
 					sumPrice.setText(alreadyCompleteDetail.map.get("price")+"");
@@ -69,6 +74,16 @@ public class AlreadyCompleteUtil {
 					}
 //					sumPrice.setText(100+"");
 //					countTextView.setText(1+"");
+					comment.setOnClickListener( new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							Intent intent = new Intent(context,PersonEvaluationActivity.class);
+							context.startActivity(intent);
+							
+						}
+					});
 					mLinearLayout.addView(view);
 					Log.i("info", mLinearLayout+"+mlayout");
 				}

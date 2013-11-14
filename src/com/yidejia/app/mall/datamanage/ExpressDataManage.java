@@ -89,21 +89,22 @@ public class ExpressDataManage {
 		public TaskExpress(String where, String offset, String limit, String group, String order, String fields){
 			this.where = where;
 			this.offset = offset;
+			this.offset = offset;	
 			this.limit = limit;
 			this.group = group;
 			this.order = order;
 			this.fields = fields;
 		}
 		
-		private ProgressDialog bar = new ProgressDialog(context);
+//		private ProgressDialog bar = new ProgressDialog(context);
 		
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage(context.getResources().getString(R.string.searching));
-			bar.show();
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(context.getResources().getString(R.string.searching));
+//			bar.show();
 		}
 
 		@Override
@@ -139,7 +140,7 @@ public class ExpressDataManage {
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			bar.dismiss();
+//			bar.dismiss();
 //			if(result)
 //				Toast.makeText(context, "�ɹ�", Toast.LENGTH_SHORT).show();
 		}
@@ -148,13 +149,16 @@ public class ExpressDataManage {
 	private void analysisJson(String responseString) throws JSONException{
 		JSONArray responseArray = new JSONArray(responseString);
 		JSONObject responseObject;
-		Express express = new Express();
+		Express express;
 		int length = responseArray.length();
 		for (int i = 0; i < length; i++) {
+			express = new Express();
 			responseObject = responseArray.getJSONObject(i);
 			express.setEms(responseObject.getString("ems"));
 			express.setExpress(responseObject.getString("express"));
+			if(i == 0) Log.i(TAG, "pre_id:" + responseObject.getString("pre_id"));
 			express.setPreId(responseObject.getString("pre_id"));
+			if(i==0)Log.i(TAG, express.getPreId());
 			express.setIsDefault("y".equals(responseObject.getString("is_default")));
 			expresses.add(express);
 		}
@@ -209,15 +213,15 @@ public class ExpressDataManage {
 			this.fields = fields;
 		}
 		
-		private ProgressDialog bar = new ProgressDialog(context);
+//		private ProgressDialog bar = new ProgressDialog(context);
 		
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage(context.getResources().getString(R.string.searching));
-			bar.show();
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(context.getResources().getString(R.string.searching));
+//			bar.show();
 		}
 
 		@Override
@@ -253,7 +257,7 @@ public class ExpressDataManage {
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			bar.dismiss();
+//			bar.dismiss();
 //			if(result)
 //				Toast.makeText(context, "�ɹ�", Toast.LENGTH_SHORT).show();
 		}
@@ -324,15 +328,15 @@ public class ExpressDataManage {
 			this.fields = fields;
 		}
 		
-		private ProgressDialog bar = new ProgressDialog(context);
+//		private ProgressDialog bar = new ProgressDialog(context);
 		
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage(context.getResources().getString(R.string.searching));
-			bar.show();
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(context.getResources().getString(R.string.searching));
+//			bar.show();
 		}
 		
 		@Override
@@ -368,7 +372,7 @@ public class ExpressDataManage {
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			bar.dismiss();
+//			bar.dismiss();
 //			if(result)
 //				Toast.makeText(context, "�ɹ�", Toast.LENGTH_SHORT).show();
 		}

@@ -12,7 +12,10 @@ import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.user.Login;
 import com.yidejia.app.mall.net.user.Register;
+import com.yidejia.app.mall.view.RegistActivity;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -30,8 +33,8 @@ public class UserDatamanage {
 	private String message;
 	private boolean isSuccess = true;
 	
-	private Context context;
-	public UserDatamanage(Context context){
+	private Activity context;
+	public UserDatamanage(Activity context){
 		this.context = context;
 	}
 	/**
@@ -76,48 +79,23 @@ public class UserDatamanage {
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 			Login login = new Login();
+			boolean issuccess = false;
 			try {
 				String httpResponse = login.getHttpResponse(username, password, ip);
-				try {
-					int code;
-					JSONObject jsonObject = new JSONObject(httpResponse);
-					code = jsonObject.getInt("code");
-					String response = jsonObject.getString("response");
-					if(code == 1000){
-						MyApplication myApplication = (MyApplication) context.getApplicationContext();
-						JSONObject responseObject = new JSONObject(response);
-						String customer_id = responseObject.getString("customer_id");
-						myApplication.setUserId(customer_id);
-						myApplication.setPassword(responseObject.getString("password"));
-						myApplication.setVip(responseObject.getString("customer_grade"));
-						myApplication.setNick(responseObject.getString("customer_nick"));
-						String imgUrl = responseObject.getString("avatar_path");
-						myApplication.setUserHeadImg(ImageUrl.IMAGEURL + imgUrl);
-						String token = responseObject.getString("token");
-						myApplication.setToken(token);
-						message = context.getResources().getString(R.string.login_success);
-						return true;
-					} if(code == 1001 || code ==1002){
-						message = context.getResources().getString(R.string.login_error);
-//						throw new UserLoginEx(message);
-						isSuccess = false;
-					} else{
-						message = jsonObject.getString("msg");
-						isSuccess = false;
-					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					Log.e(TAG, "login json ex");
-					e.printStackTrace();
-					isSuccess = false;
-				}
+				issuccess = login.analysisHttpResp(context, httpResponse);
+				message = login.getMsg();
+				return issuccess;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				Log.e(TAG, "login io ex");
 				e.printStackTrace();
-				isSuccess = false;
+				issuccess = false;
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				issuccess = false;
 			}
-			return isSuccess;
+			return issuccess;
 		}
 		
 	}
@@ -134,18 +112,19 @@ public class UserDatamanage {
 			return state;
 		}
 		TaskRegister taskRegister = new TaskRegister();
-		try {
-			state = taskRegister.execute().get();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e){
-			Log.e(TAG, "login other ex");
-			e.printStackTrace();
-		} 
+		taskRegister.execute();
+//		try {
+//			state = taskRegister.execute().get();
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ExecutionException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (Exception e){
+//			Log.e(TAG, "login other ex");
+//			e.printStackTrace();
+//		} 
 		if(!isSuccess){
 			Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 		}
@@ -188,6 +167,35 @@ public class UserDatamanage {
 			}
 			return isSuccess;
 		}
+		
+		private ProgressDialog bar;
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			
+			bar = new ProgressDialog(context);
+			bar.setCancelable(false);
+			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			bar.show();
+			
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			bar.dismiss();
+			if (result) {
+				Toast.makeText(context,
+						context.getResources().getString(R.string.equal),
+						Toast.LENGTH_LONG).show();
+				context.finish();
+			}
+		}
+		
+		
 		
 	}
 }

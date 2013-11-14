@@ -15,8 +15,12 @@ public class Order {
     private float orderSummary;         //订单总额
     private int orderAmount;            //订单商品总数量
     private String ship_fee;	//快递费
+    private String ship_code; //快递单号
+    private String ship_company;//快递公司
     private String core;//积分
     private String date;// 时间
+    
+    private String tn;//流水号
     /**
      * 订单号
      * @param orderCode 订单号
@@ -119,6 +123,56 @@ public class Order {
     public String getShipFee(){
     	return ship_fee;
     }
+    
+    /**
+     * 
+     * @return 流水号
+     */
+    public String getTn(){
+    	return tn;
+    }
+    
+    /**
+     * 设置流水号
+     * @param tn
+     */
+    public void setTn(String tn){
+    	this.tn = tn;
+    }
+    
+    /**
+     * 设置快递单号(不是订单号哦)
+     * @param ship_code
+     */
+    public void setShipCode(String ship_code){
+    	this.ship_code = ship_code;
+    }
+    
+    /**
+     * 获取快递单号(不是订单号哦)
+     * @return
+     */
+    public String getShipCode(){
+    	return ship_code;
+    }
+    
+    /**
+     * 设置快递公司名称
+     * @param ship_code
+     */
+    public void setShipCompany(String ship_company){
+    	this.ship_company = ship_company;
+    }
+    
+    /**
+     * 获取快递公司名称
+     * @return
+     */
+    public String getShipCompany(){
+    	return ship_company;
+    }
+    
+    
     
     
     /*获取订单列表

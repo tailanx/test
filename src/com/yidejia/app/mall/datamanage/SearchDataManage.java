@@ -84,11 +84,12 @@ public class SearchDataManage {
 			// TODO Auto-generated catch block
 			Log.e(TAG, "task search ExecutionException ");
 			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO: handle exception
-			Log.e(TAG, "task search Exception ");
-			e.printStackTrace();
 		} 
+//		catch (Exception e) {
+//			// TODO: handle exception
+//			Log.e(TAG, "task search Exception ");
+//			e.printStackTrace();
+//		} 
 		if(!state){
 			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		} 
@@ -201,7 +202,7 @@ public class SearchDataManage {
 			temp = responseObject.getString("remarks");
 			searchItem.setCommentAmount(temp);
 			Log.i(TAG, "remarks:"+temp);
-			temp = ImageUrl.IMAGEURL + responseObject.getString("imgname");
+			temp = ImageUrl.IMAGEURL + responseObject.getString("imgname") + "!100";
 			searchItem.setImgUrl(temp);
 			Log.i(TAG, "imageUrl:"+temp);
 			

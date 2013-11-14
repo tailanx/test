@@ -130,6 +130,7 @@ public class CartsDataManage {
 	 * @return cartsArray 购物车产品列表
 	 */
 	public ArrayList<Cart> getCartsArray(){
+		ArrayList<Cart> cartsArray = new ArrayList<Cart>();
 		try {
 			Map<String, ?>spMap = sp.getAll();
 			if(!spMap.isEmpty()){
@@ -231,6 +232,23 @@ public class CartsDataManage {
 		}
 		Log.i(TAG, ""+amount);
 		return amount;
+	}
+	
+	/**
+	 * 获取购物车内商品种类的数量
+	 * @return
+	 */
+	public int getTypeCount(){
+		int count = 0;
+		try {
+			Map<String, ?>spMap = sp.getAll();
+			count = spMap.size();
+		} catch (Exception e) {
+			// TODO: handle exception
+			Log.e(TAG, "get cart type count err");
+			e.printStackTrace();
+		}
+		return count;
 	}
 	
 }

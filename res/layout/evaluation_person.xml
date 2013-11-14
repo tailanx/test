@@ -24,16 +24,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/evaluation_person_pingfen"
-            android:rating="3"
+            android:rating="5"
             android:stepSize="1" />
     </RelativeLayout>
-
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none" >
-
-        <LinearLayout
+    
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -43,14 +38,22 @@
             android:orientation="vertical" >
 
             <EditText
-                android:layout_width="wrap_content"
+                android:id="@+id/comment_context"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@null"
-                android:hint="商品评价...."
+                android:hint="商品评价....                                                                                   "
                 android:textSize="16sp" />
         </LinearLayout>
-    </ScrollView>
+<!-- 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
 
+        
+    </ScrollView>
+-->
 </LinearLayout>

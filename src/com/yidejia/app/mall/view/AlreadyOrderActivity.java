@@ -3,6 +3,7 @@ package com.yidejia.app.mall.view;
 import java.util.ArrayList;
 
 
+
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -25,7 +26,9 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
 import com.yidejia.app.mall.adapter.AlreadyOrderFragmentAdapter;
+import com.yidejia.app.mall.fragment.AllOrderFragment;
 import com.yidejia.app.mall.fragment.AlreadyOrderFragment;
 
 public class AlreadyOrderActivity extends SherlockFragmentActivity {
@@ -45,10 +48,10 @@ public class AlreadyOrderActivity extends SherlockFragmentActivity {
 	    public void doClick(View v){
 	    	Intent intent = new Intent();
 			switch (v.getId()){
-			case R.id.already_oreder_item_main_exchange://ÍË»»»õ
+			case R.id.already_oreder_item_main_exchange://ï¿½Ë»ï¿½ï¿½ï¿½
 				intent.setClass(this, ReturnActivity.class);
 				break;
-			case R.id.already_oreder_item_main_search://²é¿´ÎïÁ÷
+			case R.id.already_oreder_item_main_search://ï¿½é¿´ï¿½ï¿½ï¿½ï¿½
 				intent.setClass(this, CheckActivity.class);
 				break;
 
@@ -78,8 +81,8 @@ public class AlreadyOrderActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
 //		startActionMode(new AnActionModeOfEpicProportions(ComposeActivity.this));
-		ImageView button = (ImageView) findViewById(R.id.compose_back);//·µ»Ø
-//		button.setText("·µ»Ø");
+		ImageView button = (ImageView) findViewById(R.id.compose_back);//ï¿½ï¿½ï¿½ï¿½
+//		button.setText("ï¿½ï¿½ï¿½ï¿½");
 //		button.setTextSize(16);
 //		button.setImageResource(R.drawable.filter);
 		button.setOnClickListener(new OnClickListener() {
@@ -112,14 +115,15 @@ public class AlreadyOrderActivity extends SherlockFragmentActivity {
 		 LayoutInflater mInflater = getLayoutInflater();
 	  
 	     
-	     Fragment weekfragment = AlreadyOrderFragment.newInstance(getResources().getString(R.string.order_time_week));
-	     Fragment monthFragment = AlreadyOrderFragment.newInstance(getResources().getString(R.string.order_time_month));
-	     Fragment yearFragment=AlreadyOrderFragment.newInstance(getResources().getString(R.string.order_time_year));
+		 Fragment weekfragment = AllOrderFragment.newInstance(3, 0);
+	     Fragment monthFragment = AllOrderFragment.newInstance(3, 1);
+	     Fragment yearFragment = AllOrderFragment.newInstance(3, 2);
 	     
 	     fragmentsList.add(yearFragment);
 	     fragmentsList.add(monthFragment);
 	     fragmentsList.add(weekfragment);
 	     
+	     mPager.setAdapter(new AllOrderFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
 	     mPager.setAdapter(new AlreadyOrderFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
 	     mPager.setCurrentItem(0);
 	     mPager.setOffscreenPageLimit(2);
@@ -130,12 +134,12 @@ public class AlreadyOrderActivity extends SherlockFragmentActivity {
 
 	
 	private void InitWidth() {
-		ivBottomLine = (ImageView) findViewById(R.id.iv_bottom_line);//»¬¶¯
+		ivBottomLine = (ImageView) findViewById(R.id.iv_bottom_line);//ï¿½ï¿½ï¿½ï¿½
         bottomLineWidth = ivBottomLine.getLayoutParams().width;
         DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);//»ñÈ¡µ±Ç°ÆÁÄ»µÄÊôÐÔ
-        int screenW = dm.widthPixels;//ÆÁÄ»µÄ¿í
-        offset = (int) ((screenW / 3 - bottomLineWidth)/2);//ÆðÊ¼Î»ÖÃ
+        getWindowManager().getDefaultDisplay().getMetrics(dm);//ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        int screenW = dm.widthPixels;//ï¿½ï¿½Ä»ï¿½Ä¿ï¿½
+        offset = (int) ((screenW / 3 - bottomLineWidth)/2);//ï¿½ï¿½Ê¼Î»ï¿½ï¿½
 
         position_one = (int) (screenW / 3);
         position_two = position_one * 2;
@@ -159,17 +163,17 @@ public class AlreadyOrderActivity extends SherlockFragmentActivity {
 	        public void onPageSelected(int arg0) {
 	            Animation animation = null;
 	            switch (arg0) {
-	            case 0://¼ÙÈçÊÇµÚÒ»¸ö±»Ñ¡ÖÐ£¬Ìí¼ÓÊÂ¼þ
-	                if (currIndex == 1) {//µ±Ç°ÊÇµÚ¶þ¸ö
+	            case 0://ï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
+	                if (currIndex == 1) {//ï¿½ï¿½Ç°ï¿½ÇµÚ¶ï¿½ï¿½ï¿½
 	                	mMonth.setPressed(false);
 	                	mMonth.setBackgroundResource(R.drawable.product_details_bg);
 	                    animation = new TranslateAnimation(position_one, 0, 0, 0);
-	                    mMonth.setTextColor(Color.parseColor("#ed217c"));
+	                    mMonth.setTextColor(Color.parseColor("#000000"));
 	                } else if (currIndex == 2) {
 	                	mYear.setPressed(false);
 	                	mYear.setBackgroundResource(R.drawable.product_details_bg);
 	                    animation = new TranslateAnimation(position_two, 0, 0, 0);
-	                    mYear.setTextColor(Color.parseColor("#ed217c"));
+	                    mYear.setTextColor(Color.parseColor("#000000"));
 	                } 
 	                mWeek.setPressed(true);
 	                mWeek.setBackgroundResource(R.drawable.product_details_selected);
@@ -180,12 +184,12 @@ public class AlreadyOrderActivity extends SherlockFragmentActivity {
 	                	mWeek.setPressed(false);
 	                	mWeek.setBackgroundResource(R.drawable.product_details_bg);
 	                    animation = new TranslateAnimation(offset, position_one, 0, 0);
-	                    mWeek.setTextColor(Color.parseColor("#ed217c"));
+	                    mWeek.setTextColor(Color.parseColor("#000000"));
 	                } else if (currIndex == 2) {
 	                    animation = new TranslateAnimation(position_two, position_one, 0, 0);
 	                    mYear.setPressed(false);
 	                    mYear.setBackgroundResource(R.drawable.product_details_bg);
-	                    mYear.setTextColor(Color.parseColor("#ed217c"));
+	                    mYear.setTextColor(Color.parseColor("#000000"));
 	                } 
 	                mMonth.setPressed(true);
 	                mMonth.setBackgroundResource(R.drawable.product_details_selected);
@@ -196,12 +200,12 @@ public class AlreadyOrderActivity extends SherlockFragmentActivity {
 	                    animation = new TranslateAnimation(offset, position_two, 0, 0);
 	                    mWeek.setPressed(false);
 	                    mWeek.setBackgroundResource(R.drawable.product_details_bg);
-	                    mWeek.setTextColor(Color.parseColor("#ed217c"));
+	                    mWeek.setTextColor(Color.parseColor("#000000"));
 	                } else if (currIndex == 1) {
 	                	mMonth.setPressed(false);
 	                	mMonth.setBackgroundResource(R.drawable.product_details_bg);
 	                    animation = new TranslateAnimation(position_one, position_two, 0, 0);
-	                    mMonth.setTextColor(Color.parseColor("#ed217c"));
+	                    mMonth.setTextColor(Color.parseColor("#000000"));
 	                } 
 	                mYear.setPressed(true);
 	                mYear.setBackgroundResource(R.drawable.product_details_selected);

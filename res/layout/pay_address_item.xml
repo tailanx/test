@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/account_bg" >
+
+    <RelativeLayout
+        android:id="@+id/pay_address_item_address_relative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true" >
+
+        <ImageView
+            android:id="@+id/pay_address_item_address_delete"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:paddingRight="4dp"
+            android:src="@drawable/delete" />
+
+        <ImageView
+            android:id="@+id/pay_address_item_address_edit"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:paddingRight="4dp"
+            android:layout_below="@+id/pay_address_item_address_delete"
+            android:src="@drawable/address_edit" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/pay_address_item_address_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="4dp"
+        android:layout_toLeftOf="@id/pay_address_item_address_relative" >
+
+        <TextView
+            android:id="@+id/pay_address_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:ellipsize="end"
+            android:paddingLeft="4dp"
+            android:singleLine="true"
+            android:text="发发啊发发"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/pay_address_item_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:text="12234567890"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/pay_address_item_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pay_address_item_name"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:lines="2"
+            android:paddingLeft="4dp"
+            android:text="对方的方式地方都是的方式的方式地方收复失地时代发生的发生的发生的发生的发生的dsfsfsdf"
+            android:textSize="12dp" />
+    </RelativeLayout>
+
+</RelativeLayout>

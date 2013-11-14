@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/go_pay_relative"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    
     android:background="@drawable/bg" >
 
     <RelativeLayout
@@ -37,7 +37,6 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/go_pay_sum_money"
             android:layout_toRightOf="@+id/go_pay_show_pay_money_price"
-            android:text="14400.00"
             android:textColor="#ed217c"
             android:textSize="15sp" />
 
@@ -65,70 +64,75 @@
         android:id="@+id/go_pay_scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:layout_above="@id/go_pay_bottom"
-      
-         >
+        android:layout_above="@id/go_pay_bottom" >
 
         <LinearLayout
             android:id="@+id/wgo_pay_crollView_linearlayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-           
+            android:layout_gravity="top"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
             android:layout_marginTop="8dp"
+            android:gravity="center"
             android:orientation="vertical" >
 
-
             <RelativeLayout
+                android:id="@+id/go_pay_relativelayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/new_delivery_address_up" >
 
-                <TextView
-                    android:id="@+id/go_pay_consignee"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/go_pay_relativelayout1"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="8dp"
-                    android:drawableLeft="@drawable/addressee_headicon"
-                    android:drawablePadding="4dp"
-                    android:gravity="center_vertical"
-                    android:text="收货人："
-                    android:textSize="16dp" />
+                    android:background="@drawable/new_delivery_address_up" >
+
+                    <TextView
+                        android:id="@+id/go_pay_consignee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="4dp"
+                        android:drawableLeft="@drawable/addressee_headicon"
+                        android:drawablePadding="4dp"
+                        android:gravity="center_vertical"
+                        android:text="收货人:"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/go_pay_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="1dp"
+                        android:layout_toRightOf="@id/go_pay_consignee"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/go_pay_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="4dp"
+                        android:drawableLeft="@drawable/phone_iocn"
+                        android:drawablePadding="4dp"
+                        android:gravity="center_vertical"
+                        android:textSize="14sp" />
+                </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/go_pay_name"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/go_pay_address"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="8dp"
-                    android:layout_toRightOf="@id/go_pay_consignee"
-                    android:text="乔丹"
-                    android:textSize="16dp" />
-
-                <TextView
-                    android:id="@+id/go_pay_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="8dp"
-                    android:drawableLeft="@drawable/phone_iocn"
-                    android:drawablePadding="4dp"
-                    android:gravity="center_vertical"
-                    android:text="18685241320"
-                    android:textSize="16dp" />
+                    android:layout_below="@id/go_pay_relativelayout1"
+                    android:background="@drawable/delivery_address_down"
+                    android:padding="10dp"
+                    android:text="收货地址:"
+                    android:textSize="16sp" />
             </RelativeLayout>
-
-            <TextView
-                android:id="@+id/go_pay_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/delivery_address_down"
-                android:padding="10dp"
-                android:text="收货地址：有人肯定会对于android中放置图片的地到好奇下的dr是他会d图片放在drawabl辨率的图片"
-                android:textSize="15sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -149,6 +153,7 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/go_pay_zhifubao_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/new_menubg_middle" >
@@ -190,10 +195,12 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="4dp" />
+                    android:layout_marginRight="4dp"
+                    android:clickable="false" />
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/go_pay_zhifubao_wangyezhifu_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/new_menubg_middle" >
@@ -235,10 +242,12 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="4dp" />
+                    android:layout_marginRight="4dp"
+                    android:clickable="false" />
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/go_pay_zhifubao_yinlian_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/new_menubg_middle" >
@@ -279,11 +288,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true" 
-                    android:layout_marginRight="4dp"/>
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="4dp"
+                    android:clickable="false" />
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/go_pay_zhifubao_caifutong_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/commentbg_down" >
@@ -324,8 +335,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true" 
-                    android:layout_marginRight="4dp"/>
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="4dp"
+                    android:clickable="false" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -359,7 +371,6 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="6dp"
                     android:layout_toRightOf="@id/go_pay_addresss"
-                    android:text="广州配送中心"
                     android:textSize="20dp" />
 
                 <ImageView
@@ -390,6 +401,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/go_pay_general_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/new_menubg_middle" >
@@ -441,10 +453,14 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
-                    android:checked="true" />
+                    android:checked="true"
+                    android:clickable="false" />
+                    android:clickable="false"
+                    />
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/go_pay_payEMS_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/commentbg_down" >
@@ -485,7 +501,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@id/go_pay_payEMS_money"
                     android:layout_below="@id/go_pay_payEMS_money"
-                    android:text="偏远地区请选择EMS配送 如：到镇，村胡地址’"
+                    android:text="偏远地区请选择EMS配送 如：到镇，村，户地址’"
                     android:textSize="8sp" />
 
                 <CheckBox
@@ -495,7 +511,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp" />
+                    android:layout_marginRight="10dp"
+                    android:clickable="false"
+                     />
             </RelativeLayout>
 
             <RelativeLayout
@@ -528,7 +546,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                   	android:paddingRight="20dp"
+                    android:paddingRight="20dp"
                     android:src="@drawable/arrow" />
             </RelativeLayout>
 
@@ -571,12 +589,11 @@
                         android:hint="订单留言.........                                                                                                                                                  "
                         android:padding="10dp"
                         android:scrollbars="horizontal"
+                        android:text="技术测试,无实际付款"
                         android:textSize="15sp" />
-
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>
     </ScrollView>
 
 </RelativeLayout>
-

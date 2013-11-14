@@ -1,30 +1,31 @@
 package com.yidejia.app.mall.fragment;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.datamanage.ProductDataManage;
-import com.yidejia.app.mall.initview.GoodsView;
-import com.yidejia.app.mall.model.ProductBaseInfo;
-import com.yidejia.app.mall.util.DPIUtil;
-
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
+import android.widget.Toast;
+
+import com.actionbarsherlock.app.SherlockFragment;
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.datamanage.CartsDataManage;
+import com.yidejia.app.mall.initview.GoodsView;
+import com.yidejia.app.mall.model.ProductBaseInfo;
+import com.yidejia.app.mall.util.Consts;
 
 public class BaseInfoFragment extends SherlockFragment {
 	
-
+	private InnerReceiver receiver;
+	private CartsDataManage dataManage;
 	public static BaseInfoFragment newInstance(ProductBaseInfo info) {
 		BaseInfoFragment baseInfoFragment = new BaseInfoFragment();
 		Bundle bundle = new Bundle();
@@ -57,32 +58,52 @@ public class BaseInfoFragment extends SherlockFragment {
 	}
 
 	private View view;
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		getSherlockActivity().unregisterReceiver(receiver);
+	}
 	
+	private Button mButton;//购物车
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		Log.d(TAG, "TestFragment-----onCreateView");
-		view = inflater.inflate(R.layout.item_goods_base_info, container, false);
-		/*
-		switch (goodsId) {
-		case 0:
-			view = inflater.inflate(R.layout.item_goods_emulate, container, false);
-			break;
-		case 1:
+		try {
+			
+			receiver = new InnerReceiver();
+			IntentFilter filter = new IntentFilter();
+			filter.addAction(Consts.UPDATE_CHANGE);
+			filter.addAction(Consts.BROAD_UPDATE_CHANGE);
+			filter.addAction(Consts.DELETE_CART);
+			getSherlockActivity().registerReceiver(receiver, filter);
+			
+			// TODO Auto-generated method stub
+			Log.d(TAG, "TestFragment-----onCreateView");
+			dataManage = new CartsDataManage();
 			view = inflater.inflate(R.layout.item_goods_base_info, container, false);
+			mButton = (Button) view.findViewById(R.id.shopping_cart_button);
+		
+			view.invalidate();
+			/*
+			switch (goodsId) {
+			case 0:
+				view = inflater.inflate(R.layout.item_goods_emulate, container, false);
+				break;
+			case 1:
+				view = inflater.inflate(R.layout.item_goods_base_info, container, false);
 //			View parentView =  inflater.inflate(R.layout.activity_goods_info_layout, null);//获取购物车
 //			final Button cartButotn =(Button) parentView.findViewById(R.id.shopping_cart_button);
 //			number = Integer.parseInt(cartButotn.getText().toString());
-			ImageView buyNow = (ImageView)view.findViewById(R.id.buy_now);//立即购买
-			buyNow.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View arg0) {
+				ImageView buyNow = (ImageView)view.findViewById(R.id.buy_now);//立即购买
+				buyNow.setOnClickListener(new OnClickListener() {
 					
-					
-				}
-			});
+					@Override
+					public void onClick(View arg0) {
+						
+						
+					}
+				});
 //			ImageView addCart = (ImageView)view.findViewById(R.id.add_to_cart);//加入购物车
 //			addCart.setOnClickListener(new OnClickListener() {
 //				
@@ -94,18 +115,24 @@ public class BaseInfoFragment extends SherlockFragment {
 //					
 //				}
 //			});
-			
-			addBaseImage(view);
-			break;
-		case 2:
-			view = inflater.inflate(R.layout.item_goods_base_info, container, false);
-			break;
-		default:
-			view = inflater.inflate(R.layout.item_goods_base_info, container, false);
-			addBaseImage(view);
-			break;
+				
+				addBaseImage(view);
+				break;
+			case 2:
+				view = inflater.inflate(R.layout.item_goods_base_info, container, false);
+				break;
+			default:
+				view = inflater.inflate(R.layout.item_goods_base_info, container, false);
+				addBaseImage(view);
+				break;
+			}
+			*/
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		Toast.makeText(getSherlockActivity(),getResources().getString(R.string.no_network),
+		Toast.LENGTH_SHORT).show();
 		}
-		*/
 //		addBaseImage(view);
 		
 		return view;
@@ -142,5 +169,33 @@ public class BaseInfoFragment extends SherlockFragment {
 		getSherlockActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
 		return dm.widthPixels;
 	} 
-	
+	private int number1;
+	public class InnerReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			String action = intent.getAction();
+			if (Consts.UPDATE_CHANGE.equals(action)||Consts.BROAD_UPDATE_CHANGE.equals(action)) {
+				number1 = dataManage.getCartAmount();
+//			mButton.setText(number1+"");
+				if(number1==0){
+					mButton.setVisibility(View.GONE);
+				}else{
+					mButton.setVisibility(View.VISIBLE);
+					mButton.setText(number1+"");
+				}
+			}
+			if(Consts.DELETE_CART.equals(action)){
+				number1 = dataManage.getCartAmount();
+				if(number1==0){
+					mButton.setVisibility(View.GONE);
+				}else{
+					mButton.setVisibility(View.VISIBLE);
+					mButton.setText(number1+"");
+				}
+			}
+		}
+
+	}
 }

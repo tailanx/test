@@ -21,7 +21,7 @@ public class RecommendActivity extends SherlockActivity {
 //		case R.id.my_collect_button1:
 //			Intent intent = new Intent(MyCollectActivity.this,MyMallActivity.class);
 //			startActivity(intent);
-//			//����ǰActivity��
+//			//?????Activity??
 //			MyCollectActivity.this.finish();
 //			break;
 //		
@@ -34,6 +34,7 @@ public class RecommendActivity extends SherlockActivity {
 //		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setActionbar();
 		setContentView(R.layout.recommend);
+		
 		LinearLayout layout = (LinearLayout) findViewById(R.id.recommend_scrollView_linearlayout1);
 		
 
@@ -46,12 +47,12 @@ public class RecommendActivity extends SherlockActivity {
 //		TextView textView4 = (TextView) person.findViewById(R.id.wait_pay_order_item_textview6);
 //		TextView textView5 = (TextView) person.findViewById(R.id.wait_pay_order_item_textview7);
 //
-//		textView.setText("����״̬������ɶ�����");
-//		textView1.setText("��������ss");
-//		textView2.setText("��160.00");
-//		textView2.setText("������x1");
-//		textView2.setText("��������160.00");
-//		textView2.setText("������x2");
+//		textView.setText("??????????????????");
+//		textView1.setText("????????ss");
+//		textView2.setText("??160.00");
+//		textView2.setText("??????x1");
+//		textView2.setText("?????????160.00");
+//		textView2.setText("??????x2");
 		layout.addView(person1);
 		layout.addView(person2);
 		

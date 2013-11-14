@@ -52,10 +52,10 @@ public class HttpPostConn {
 //		Log.i(TAG, urlString);
 		try {
 			HttpClient httpClient = new DefaultHttpClient();
-			httpClient.getParams().setIntParameter(
-                    HttpConnectionParams.SO_TIMEOUT, TIME_OUT_DELAY); // ��ȡ��ʱ����
-			httpClient.getParams().setIntParameter(
-                    HttpConnectionParams.CONNECTION_TIMEOUT, TIME_OUT_DELAY);// ���ӳ�ʱ
+//			httpClient.getParams().setIntParameter(
+//                    HttpConnectionParams.SO_TIMEOUT, TIME_OUT_DELAY); // ��ȡ��ʱ����
+//			httpClient.getParams().setIntParameter(
+//                    HttpConnectionParams.CONNECTION_TIMEOUT, TIME_OUT_DELAY);// ���ӳ�ʱ
 			HttpResponse httpResponse = httpClient.execute(httpRequst);
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				result = EntityUtils.toString(httpResponse.getEntity(), HTTP.UTF_8);
@@ -109,10 +109,10 @@ public class HttpPostConn {
 			
 			HttpClient client = new DefaultHttpClient(); 
 			
-			client.getParams().setIntParameter(
-					HttpConnectionParams.SO_TIMEOUT, TIME_OUT_DELAY); // ��ȡ��ʱ����
-			client.getParams().setIntParameter(
-					HttpConnectionParams.CONNECTION_TIMEOUT, TIME_OUT_DELAY);// ���ӳ�ʱ
+//			client.getParams().setIntParameter(
+//					HttpConnectionParams.SO_TIMEOUT, TIME_OUT_DELAY); // ��ȡ��ʱ����
+//			client.getParams().setIntParameter(
+//					HttpConnectionParams.CONNECTION_TIMEOUT, TIME_OUT_DELAY);// ���ӳ�ʱ
 			HttpResponse httpResponse = client.execute(httpPost);
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				result = EntityUtils.toString(httpResponse.getEntity(), HTTP.UTF_8);

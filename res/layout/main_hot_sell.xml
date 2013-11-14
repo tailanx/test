@@ -64,7 +64,6 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
                     android:gravity="center_horizontal"
-                    android:text="时间轴套餐"
                     android:textSize="16sp" />
 
                 <TextView
@@ -76,7 +75,6 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center_horizontal"
                     android:maxEms="7"
-                    android:text="$468.00"
                     android:textColor="@color/price_color"
                     android:textSize="14sp" />
 
@@ -88,7 +86,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="15dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/hotsellimage" />
+                    android:src="@drawable/image_bg" />
 
                 <RelativeLayout
                     android:id="@+id/main_hot_sell_left"
@@ -121,7 +119,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="2dp"
-                        android:src="@drawable/hot_sell_right_top_image" />
+                        android:src="@drawable/image_bg" />
 
                     <TextView
                         android:id="@+id/main_hot_sell_right_top_title"
@@ -132,7 +130,6 @@
                         android:layout_marginTop="20dp"
                         android:layout_toLeftOf="@+id/main_hot_sell_right_top_image"
                         android:maxEms="5"
-                        android:text="水漾保湿蚕丝面膜"
                         android:textSize="16sp" />
 
                     <TextView
@@ -143,7 +140,6 @@
                         android:layout_below="@id/main_hot_sell_right_top_title"
                         android:layout_marginTop="5dp"
                         android:layout_toLeftOf="@id/main_hot_sell_right_top_image"
-                        android:text="$78.00"
                         android:textColor="@color/price_color"
                         android:textSize="14sp" />
 
@@ -170,7 +166,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="2dp"
-                        android:src="@drawable/hot_sell_right_top_image" />
+                        android:src="@drawable/image_bg" />
 
                     <TextView
                         android:id="@+id/main_hot_sell_right_down_title"
@@ -181,7 +177,6 @@
                         android:layout_marginTop="20dp"
                         android:layout_toLeftOf="@+id/main_hot_sell_right_down_image"
                         android:maxEms="5"
-                        android:text="水漾保湿蚕丝面膜"
                         android:textSize="16sp" />
 
                     <TextView
@@ -192,7 +187,6 @@
                         android:layout_below="@id/main_hot_sell_right_down_title"
                         android:layout_marginTop="5dp"
                         android:layout_toLeftOf="@id/main_hot_sell_right_down_image"
-                        android:text="$78.00"
                         android:textColor="@color/price_color"
                         android:textSize="14sp" />
 
@@ -267,7 +261,6 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:gravity="center_horizontal"
-                    android:text="时间轴套餐"
                     android:textSize="16sp" />
 
                 <TextView
@@ -279,7 +272,6 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center_horizontal"
                     android:maxEms="7"
-                    android:text="$468.00"
                     android:textColor="@color/price_color"
                     android:textSize="14sp" />
 
@@ -291,7 +283,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="15dp"
-                    android:src="@drawable/hotsellimage" />
+                    android:src="@drawable/image_bg" />
 
                 <RelativeLayout
                     android:id="@+id/main_acymei_left"
@@ -323,7 +315,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="2dp"
-                        android:src="@drawable/hot_sell_right_top_image" />
+                        android:src="@drawable/image_bg" />
 
                     <TextView
                         android:id="@+id/main_acymei_right_top_title"
@@ -334,7 +326,6 @@
                         android:layout_marginTop="20dp"
                         android:layout_toLeftOf="@+id/main_acymei_right_top_image"
                         android:maxEms="5"
-                        android:text="水漾保湿蚕丝面膜"
                         android:textSize="16sp" />
 
                     <TextView
@@ -345,7 +336,6 @@
                         android:layout_below="@id/main_acymei_right_top_title"
                         android:layout_marginTop="5dp"
                         android:layout_toLeftOf="@id/main_acymei_right_top_image"
-                        android:text="$78.00"
                         android:textColor="@color/price_color"
                         android:textSize="14sp" />
 
@@ -372,7 +362,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="2dp"
-                        android:src="@drawable/hot_sell_right_top_image" />
+                        android:src="@drawable/image_bg" />
 
                     <TextView
                         android:id="@+id/main_acymei_right_down_title"
@@ -383,7 +373,6 @@
                         android:layout_marginTop="20dp"
                         android:layout_toLeftOf="@+id/main_acymei_right_down_image"
                         android:maxEms="5"
-                        android:text="水漾保湿蚕丝面膜"
                         android:textSize="16sp" />
 
                     <TextView
@@ -393,7 +382,6 @@
                         android:layout_alignLeft="@+id/main_acymei_right_down_title"
                         android:layout_below="@+id/main_acymei_right_down_title"
                         android:layout_marginTop="10dp"
-                        android:text="$78.00"
                         android:textColor="@color/price_color"
                         android:textSize="14sp" />
 
@@ -466,7 +454,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="2dp"
-                    android:src="@drawable/hot_sell_right_top_image" />
+                    android:src="@drawable/image_bg" />
 
                 <TextView
                     android:id="@+id/main_inerbty_top_left_name"
@@ -479,7 +467,6 @@
                     android:layout_toLeftOf="@+id/main_inerbty_top_left_image"
                     android:gravity="center|left"
                     android:minEms="5"
-                    android:text="胶原蛋白粉"
                     android:textSize="16sp" />
 
                 <TextView
@@ -489,7 +476,6 @@
                     android:layout_alignLeft="@+id/main_inerbty_top_left_name"
                     android:layout_below="@+id/main_inerbty_top_left_name"
                     android:layout_toLeftOf="@+id/main_inerbty_top_left_image"
-                    android:text="$468.00"
                     android:textColor="@color/price_color" />
 
                 <RelativeLayout
@@ -515,7 +501,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="2dp"
-                    android:src="@drawable/hot_sell_right_top_image" />
+                    android:src="@drawable/image_bg" />
 
                 <TextView
                     android:id="@+id/main_inerbty_top_right_name"
@@ -527,7 +513,6 @@
                     android:layout_marginTop="20dp"
                     android:layout_toLeftOf="@+id/main_inerbty_top_right_image"
                     android:gravity="center|left"
-                    android:text="胶原蛋白粉"
                     android:minEms="5"
                     android:textSize="16sp" />
 
@@ -538,7 +523,6 @@
                     android:layout_alignLeft="@+id/main_inerbty_top_right_name"
                     android:layout_below="@+id/main_inerbty_top_right_name"
                     android:layout_toLeftOf="@+id/main_inerbty_top_right_image"
-                    android:text="$468.00"
                     android:textColor="@color/price_color" />
 
                 <RelativeLayout
@@ -572,7 +556,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="2dp"
-                    android:src="@drawable/hot_sell_right_top_image" />
+                    android:src="@drawable/image_bg" />
 
                 <TextView
                     android:id="@+id/main_inerbty_mid_left_name"
@@ -584,7 +568,6 @@
                     android:layout_marginTop="20dp"
                     android:layout_toLeftOf="@+id/main_inerbty_mid_left_image"
                     android:gravity="center|left"
-                    android:text="胶原蛋白粉"
                     android:minEms="5"
                     android:textSize="16sp" />
 
@@ -595,7 +578,6 @@
                     android:layout_alignLeft="@+id/main_inerbty_mid_left_name"
                     android:layout_below="@+id/main_inerbty_mid_left_name"
                     android:layout_toLeftOf="@+id/main_inerbty_mid_left_image"
-                    android:text="$468.00"
                     android:textColor="@color/price_color" />
 
                 <RelativeLayout
@@ -621,7 +603,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="2dp"
-                    android:src="@drawable/hot_sell_right_top_image" />
+                    android:src="@drawable/image_bg" />
 
                 <TextView
                     android:id="@+id/main_inerbty_mid_right_name"
@@ -633,7 +615,6 @@
                     android:layout_marginTop="20dp"
                     android:layout_toLeftOf="@+id/main_inerbty_mid_right_image"
                     android:gravity="center|left"
-                    android:text="胶原蛋白粉"
                     android:minEms="5"
                     android:textSize="16sp" />
 
@@ -644,7 +625,6 @@
                     android:layout_alignLeft="@+id/main_inerbty_mid_right_name"
                     android:layout_below="@+id/main_inerbty_mid_right_name"
                     android:layout_toLeftOf="@+id/main_inerbty_mid_right_image"
-                    android:text="$468.00"
                     android:textColor="@color/price_color" />
 
                 <RelativeLayout
@@ -678,7 +658,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="2dp"
-                    android:src="@drawable/hot_sell_right_top_image" />
+                    android:src="@drawable/image_bg" />
 
                 <TextView
                     android:id="@+id/main_inerbty_down_left_name"
@@ -690,7 +670,6 @@
                     android:layout_marginTop="20dp"
                     android:layout_toLeftOf="@+id/main_inerbty_down_left_image"
                     android:gravity="center|left"
-                    android:text="胶原蛋白粉"
                     android:minEms="5"
                     android:textSize="16sp" />
 
@@ -701,7 +680,6 @@
                     android:layout_alignLeft="@+id/main_inerbty_down_left_name"
                     android:layout_below="@+id/main_inerbty_down_left_name"
                     android:layout_toLeftOf="@+id/main_inerbty_down_left_image"
-                    android:text="$468.00"
                     android:textColor="@color/price_color" />
 
                 <RelativeLayout
@@ -727,7 +705,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="2dp"
-                    android:src="@drawable/hot_sell_right_top_image" />
+                    android:src="@drawable/image_bg" />
 
                 <TextView
                     android:id="@+id/main_inerbty_down_right_name"
@@ -739,7 +717,6 @@
                     android:layout_marginTop="20dp"
                     android:layout_toLeftOf="@+id/main_inerbty_down_right_image"
                     android:gravity="center|left"
-                    android:text="胶原蛋白粉"
                     android:minEms="5"
                     android:textSize="16sp" />
 

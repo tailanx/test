@@ -1,10 +1,19 @@
 package com.yidejia.app.mall.view;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -22,12 +31,17 @@ import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
+import com.yidejia.app.mall.datamanage.CartsDataManage;
+import com.yidejia.app.mall.datamanage.PreferentialDataManage;
+import com.yidejia.app.mall.fragment.CartActivity.InnerReceiver;
 import com.yidejia.app.mall.model.Addresses;
+import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.util.CartUtil;
+import com.yidejia.app.mall.util.Consts;
 
 public class GoCartActivity extends SherlockActivity {// implements
 														// OnClickListener
-
+	private AlertDialog dialog;
 	private TextView sumTextView;// �ܵ�Ǯ��
 	private TextView counTextView;// �ܵ�����
 	private CheckBox mBox;// ѡ���
@@ -38,31 +52,65 @@ public class GoCartActivity extends SherlockActivity {// implements
 	private ImageView mImageView;// ����
 	private TextView mTextView;// title
 	private MyApplication myApplication;
-
+	private CartsDataManage dataManage;
+	private PreferentialDataManage preferentialDataManage ;
+	private   ArrayList<Cart> cartList;
+	private LinearLayout layout ;
+	public static float sum ;
+	private InnerReceiver receiver;
+	private int sumCart;
+	@Override
+		protected void onDestroy() {
+			// TODO Auto-generated method stub
+			super.onDestroy();
+			unregisterReceiver(receiver);
+		}
+	@Override
+		protected void onStart() {
+			// TODO Auto-generated method stub
+			super.onStart();
+		}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.shopping_cart);
 		myApplication = (MyApplication) getApplication();
 		addressManage = new AddressDataManage(GoCartActivity.this);
-
+		preferentialDataManage = new PreferentialDataManage(GoCartActivity.this);
+		dataManage = new CartsDataManage();
+		sumCart = dataManage.getCartAmount();
+		
+		receiver = new InnerReceiver();
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Consts.BROAD_UPDATE_CHANGE);
+		filter.addAction(Consts.UPDATE_CHANGE);
+		filter.addAction(Consts.DELETE_CART);
+		GoCartActivity.this.registerReceiver(receiver, filter);
+		if(sumCart == 0){
+			Intent intent = new Intent(GoCartActivity.this,NOProduceActivity.class);
+			this.startActivity(intent);
+			this.finish();
+		}else{
+		setContentView(R.layout.shopping_cart);
 		mBox = (CheckBox) findViewById(R.id.shopping_cart_checkbox);// ѡ���
 
 		sumTextView = (TextView) findViewById(R.id.shopping_cart_sum_money);// �ܵ�Ǯ��
 
 		counTextView = (TextView) findViewById(R.id.shopping_cart_sum_number);// �ܵ�����
 
-		mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.shopping_cart_item_goods_scrollView);
-		String label = getResources().getString(R.string.update_time)
-				+ DateUtils.formatDateTime(GoCartActivity.this,
-						System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
-								| DateUtils.FORMAT_SHOW_DATE
-								| DateUtils.FORMAT_SHOW_TIME);
-		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
-				label);
-		mPullToRefreshScrollView.setOnRefreshListener(listener);
+//		mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.shopping_cart_item_goods_scrollView);
+//		String label = getResources().getString(R.string.update_time)
+//				+ DateUtils.formatDateTime(GoCartActivity.this,
+//						System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
+//								| DateUtils.FORMAT_SHOW_DATE
+//								| DateUtils.FORMAT_SHOW_TIME);
+//		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
+//				label);
+//		mPullToRefreshScrollView.setOnRefreshListener(listener);
 
-		LinearLayout layout = (LinearLayout) findViewById(R.id.shopping_cart_relative2);
+//		LinearLayout layout = (LinearLayout) findViewById(R.id.shopping_cart_relative2);
+		layout = new LinearLayout(this);
+		layout.setOrientation(LinearLayout.VERTICAL);
+		ScrollView scrollView = (ScrollView) findViewById(R.id.shopping_cart_item_goods_scrollView);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
@@ -71,6 +119,9 @@ public class GoCartActivity extends SherlockActivity {// implements
 		cartUtil = new CartUtil(GoCartActivity.this, layout, counTextView,
 				sumTextView, mBox);
 		cartUtil.AllComment();
+		
+	
+		
 		mbutton = (Button) findViewById(R.id.actionbar_right);
 		mTextView = (TextView) findViewById(R.id.actionbar_title);
 		mImageView = (ImageView) findViewById(R.id.actionbar_left);
@@ -85,46 +136,164 @@ public class GoCartActivity extends SherlockActivity {// implements
 					GoCartActivity.this.finish();
 				}
 			});
-			mbutton.setOnClickListener(new OnClickListener() {
+//			dialog = new Builder(GoCartActivity.this)
+//			.setTitle("换购商品")
+//			.setIcon(android.R.drawable.dialog_frame)
+//			.setMessage(
+//					getResources().getString(R.string.exchange_produce))
+//			.setPositiveButton(
+//					"确定",
+//					new android.content.DialogInterface.OnClickListener() {
+//
+//						@Override
+//						public void onClick(DialogInterface arg0,
+//								int arg1) {
+//							Intent intent = new Intent(
+//									GoCartActivity.this,
+//									ExchangeFreeActivity.class);
+//							Bundle bundle = new Bundle();
+//							float sum = Float.parseFloat(sumTextView
+//									.getText().toString());
+//							bundle.putString("price", sum + "");
+//							intent.putExtras(bundle);
+//							GoCartActivity.this.startActivity(intent);
+//
+//						}
+//					})
+//			.setNegativeButton(
+//					"取消",
+//					new android.content.DialogInterface.OnClickListener() {
+//
+//						@Override
+//						public void onClick(DialogInterface dialog,
+//								int which) {
+//							// TODO Auto-generated method stub
+//							Intent intent = new Intent(
+//									GoCartActivity.this,
+//									CstmPayActivity.class);
+//							Bundle bundle = new Bundle();
+//							float sum = Float.parseFloat(sumTextView
+//									.getText().toString());
+//							bundle.putString("price", sum + "");
+//							intent.putExtras(bundle);
+//							GoCartActivity.this.startActivity(intent);
+//
+//						}
+//					}).create();
 
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					if (!((MyApplication) GoCartActivity.this.getApplication())
-							.getIsLogin()) {
-						Toast.makeText(GoCartActivity.this, getResources().getString(R.string.please_login),
-								Toast.LENGTH_LONG).show();
-						Intent intent = new Intent(GoCartActivity.this,
-								LoginActivity.class);
-						startActivity(intent);
-						return;
+	if (mbutton == null) {
+//		Log.e(GoCartActivity.class.getName(), "go cart act btn is null");
+//		Toast.makeText(
+//				GoCartActivity.this,
+//				GoCartActivity.this.getResources().getString(
+//						R.string.no_network), Toast.LENGTH_SHORT)
+//				.show();
+	} else {
+		mbutton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				// getAddresses();
+				if (!myApplication.getIsLogin()) {
+					new Builder(GoCartActivity.this)
+							.setTitle(
+									getResources().getString(
+											R.string.tips))
+							.setMessage(R.string.please_login)
+							.setPositiveButton(
+									R.string.sure,
+									new DialogInterface.OnClickListener() {
+
+										@Override
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											// TODO Auto-generated
+											// method stub
+											Intent intent = new Intent(
+													GoCartActivity.this,
+													LoginActivity.class);
+											startActivity(intent);
+										}
+										//
+									})
+							.setNegativeButton(
+									R.string.searchCancel,
+									new DialogInterface.OnClickListener() {
+
+										@Override
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											// TODO Auto-generated
+											// method stub
+
+										}
+										//
+									}).create().show();
+					//
+					return;
+				} else {
+					 cartList = new ArrayList<Cart>();
+					List<HashMap<String, Object>> orderCarts = CartUtil.list1;
+					for(int i=0;i<orderCarts.size();i++){
+						HashMap<String, Object> map = orderCarts.get(i);
+						float ischeck =  Float.parseFloat(map.get("check").toString());
+//						Log.i("info", ischeck + "    ischeck");
+						Cart  cart1	= (Cart) map.get("cart");
+						if(ischeck == 1.0){
+							cartList.add(cart1);
 					}
-					Intent intent = new Intent(GoCartActivity.this,
+					}
+					Intent intent1 = new Intent(GoCartActivity.this,
 							CstmPayActivity.class);
+					Bundle bundle = new Bundle();
 					float sum = Float.parseFloat(sumTextView.getText()
 							.toString());
-
+					intent1.putExtra("carts", cartList);
+			
+					
+//						for(int i = 0; i<mList.size();i++){
+//							Cart cart = new Cart();
+//							sb.append(cart.getUId());
+//							sb.append(",");
+//							sb.append(cart.getAmount());
+//							sb.append("n");
+//							sb.append(";");
+//						}
+//						preferentialDataManage.getPreferential(sb.toString(),myApplication.getUserId());
+//						if (preferentialDataManage.getFreeGoods().size() != 0
+//								|| preferentialDataManage.getScoreGoods().size() != 0) {
+//							Intent intent = new Intent(GoCartActivity.this,
+//									ExchangeFreeActivity.class);
+//							
+//						}else{
+					
 					if (sum > 0) {
-						Bundle bundle = new Bundle();
-
+						bundle.putString("cartActivity","Y");
 						bundle.putString("price", sum + "");
-						intent.putExtras(bundle);
-						GoCartActivity.this.startActivity(intent);
+						intent1.putExtras(bundle);
+						GoCartActivity.this.startActivity(intent1);
 					} else {
-						Toast.makeText(GoCartActivity.this, getResources().getString(R.string.no_buy),
+						Toast.makeText(GoCartActivity.this, getResources().getString(R.string.buy_nothing),
 								Toast.LENGTH_LONG).show();
 					}
 				}
-//
+					}
+//				}
 			});
+	}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(GoCartActivity.this, getResources().getString(R.string.no_network), Toast.LENGTH_SHORT)
+			Toast.makeText(GoCartActivity.this, getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT)
 					.show();
 		}
 		//
 		//
+		scrollView.addView(layout);
+		}
 	}
 
 	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
@@ -142,6 +311,54 @@ public class GoCartActivity extends SherlockActivity {// implements
 			mPullToRefreshScrollView.onRefreshComplete();
 		}
 	};
+	public class InnerReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			String action = intent.getAction();
+			NOProduceActivity noProduceActivity = new NOProduceActivity();
+			Intent intent1 = new Intent(GoCartActivity.this, NOProduceActivity.class);
+			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
+				// Log.i("info", action + "action");
+				layout.removeAllViews();
+//				sumTextView.setText(""+0.00);
+//				counTextView.setText(""+0);
+				sumCart = dataManage.getCartAmount();
+				if(sumCart==0){
+					GoCartActivity.this.startActivity(intent1);
+					GoCartActivity.this.finish();
+				}else{
+				CartUtil cartUtil = new CartUtil(GoCartActivity.this, layout,
+						counTextView, sumTextView, mBox);
+				cartUtil.AllComment();
+				sum = Float.parseFloat(sumTextView.getText()
+						.toString());
+				}
+			}else if(Consts.UPDATE_CHANGE.equals(action)){
+				layout.removeAllViews();	
+				CartUtil cartUtil = new CartUtil(GoCartActivity.this, layout,
+						counTextView, sumTextView, mBox);
+				cartUtil.AllComment();
+				sum = Float.parseFloat(sumTextView.getText()
+						.toString());
+			}else if(Consts.DELETE_CART.equals(action)){
+				layout.removeAllViews();
+				sumCart = dataManage.getCartAmount();
+				if(sumCart==0){
+//					Log.e("NoProduceFragment", "GoCarActivity");
+					GoCartActivity.this.finish();
+//					startActivity(intent1);
+				}else{
+				CartUtil cartUtil = new CartUtil(GoCartActivity.this, layout,
+						counTextView, sumTextView, mBox);
+				cartUtil.AllComment();
+				sum = Float.parseFloat(sumTextView.getText()
+						.toString());
+				}
+			}
+		}
+	}
 	// try {
 	// TODO Auto-generated method stub
 	// requestWindowFeature(Window.FEATURE_NO_TITLE);

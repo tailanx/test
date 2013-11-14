@@ -40,56 +40,60 @@
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/account_icon"
                         android:drawablePadding="4dp"
-                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
                         android:padding="10dp"
                         android:text="账号"
+                        android:gravity="center"
                         android:textColor="#b4b4b4"
                         android:textSize="16sp" />
 
                     <EditText
                         android:id="@+id/my_mall_regist_edittext_account"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_gravity="center_vertical|left"
                         android:background="@null"
                         android:ellipsize="middle"
                         android:hint="请输入手机号码"
+                        android:maxLength="11"
                         android:inputType="phone"
                         android:singleLine="true"
                         android:textSize="15sp" />
                 </LinearLayout>
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="12dp"
                     android:orientation="horizontal" >
-
-                    <EditText
-                        android:id="@+id/my_mall_regist_obtain"
-                        android:layout_width="180dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/forgot_password"
-                        android:drawableLeft="@drawable/verification"
-                        android:drawablePadding="8dp"
-                        android:gravity="center_vertical"
-                        android:hint="输入短信验证码"
-                        android:paddingLeft="10dp"
-                        android:singleLine="true"
-                        android:textSize="15dp" />
 
                     <ImageView
                         android:id="@+id/my_mall_regist_password_validation_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="12dp"
-                        android:layout_toRightOf="@id/my_mall_regist_obtain"
                         android:singleLine="true"
                         android:src="@drawable/obtain_verification" />
-                </LinearLayout>
+                    <EditText
+                        android:id="@+id/my_mall_regist_obtain"
+                        android:layout_toLeftOf="@id/my_mall_regist_password_validation_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/forgot_password"
+                        android:drawableLeft="@drawable/verification"
+                        android:drawablePadding="6dp"
+                        android:gravity="center_vertical"
+                        android:hint="输入短信验证码"
+                        android:maxLength="6"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textSize="14sp" />
+
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -105,22 +109,23 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:drawableLeft="@drawable/password_icon"
-                        android:drawablePadding="8dp"
-                        android:padding="8dp"
-                        android:text="密码"
+                        android:drawablePadding="6dp"
+                        android:padding="6dp"
+                        android:text="密         码"
+                        android:gravity="center"
                         android:textColor="#b4b4b4"
                         android:textSize="16sp" />
 
                     <EditText
                         android:id="@+id/my_mall_regist_password"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_gravity="center_vertical|left"
                         android:background="@null"
-                        android:hint="数字，或字符的长度至少为6个"
+                        android:hint="数字或字符长度至少为6位"
                         android:inputType="textPassword"
                         android:singleLine="true"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -137,20 +142,21 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:drawableLeft="@drawable/password_icon"
-                        android:drawablePadding="8dp"
-                        android:padding="8dp"
+                        android:drawablePadding="6dp"
+                        android:padding="6dp"
                         android:text="确认密码"
+                        android:gravity="center"
                         android:textColor="#b4b4b4"
                         android:textSize="16sp" />
 
                     <EditText
                         android:id="@+id/my_mall_regist_confirm_password"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_gravity="center_vertical|left"
                         android:background="@null"
-                        android:textSize="12sp"
-                        android:hint="请输入相同的密码"
+                        android:textSize="14sp"
+                        android:hint="请输入重复密码"
                         android:inputType="textPassword"
                         android:singleLine="true" />
                 </LinearLayout>

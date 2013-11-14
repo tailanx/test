@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical" >
+    
+    
+    <Button android:id="@+id/guang_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/clear_search"
+        android:text="去逛一下"
+        android:textColor="#eeeeee"
+        android:textSize="15sp" />
+    
+  <TextView
+        android:id="@+id/search_empty_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/guang_button"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        android:text="未搜索到相关内容"
+        android:textColor="#b4b4b4"
+        android:textSize="15sp" />
+
+    <ImageView
+        android:id="@+id/search_empty_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/search_empty_textview"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/search_icon" />
+
+</RelativeLayout>

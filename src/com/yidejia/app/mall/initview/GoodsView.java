@@ -14,7 +14,9 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -92,8 +94,9 @@ public class GoodsView {
 			// 价格
 			TextView price = (TextView) view.findViewById(R.id.price);
 			final String priceString = info.getPrice();
+			float priceNum = 0.0f;
 			try {
-				float priceNum = Float.parseFloat(priceString);
+				priceNum = Float.parseFloat(priceString);
 				cart.setPrice(priceNum);
 				price.setText(priceString + activity.getResources().getString(R.string.unit));
 			} catch (Exception e) {
@@ -132,10 +135,20 @@ public class GoodsView {
 			TextView standard_content_text = (TextView) view
 					.findViewById(R.id.standard_content_text);
 			standard_content_text.setText(info.getProductSpecifications());
+			//推荐购物view group
+			matchGoodsImageLayout = (LinearLayout) view
+					.findViewById(R.id.match_goods_image);
 			bannerArray = info.getBannerArray();
 			addBaseImage(view, bannerArray);
 			recommendArray = info.getRecommendArray();
-			addMatchImage(view, recommendArray);
+			if(recommendArray.isEmpty()){
+				//推荐搭配不可见
+				matchGoodsImageLayout.setVisibility(ViewGroup.GONE);
+				TextView match_goods_tip = (TextView) view.findViewById(R.id.match_goods);
+				match_goods_tip.setVisibility(View.GONE);
+			} else{
+				addMatchImage(view, recommendArray);
+			}
 			// 购物车个数
 			shopping_cart_button = (Button) view
 					.findViewById(R.id.shopping_cart_button);
@@ -147,30 +160,39 @@ public class GoodsView {
 				setCartNum(cart_num);
 			}
 			// 加入购物车按钮点击事件
-			if(cart.getPrice()>0){
-			add_to_cart.setOnClickListener(new OnClickListener() {
+			if (priceNum > 0) {
+				add_to_cart.setOnClickListener(new OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					cart_num++;
-					setCartNum(cart_num);
-					Intent intent = new Intent(Consts.UPDATE_CHANGE);
-					activity.sendBroadcast(intent);
-					boolean istrue = manage.addCart(cart);
-						if(istrue){
-							Toast.makeText(activity, activity.getResources().getString(R.string.add_cart_scs), Toast.LENGTH_SHORT).show();
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						cart_num++;
+						setCartNum(cart_num);
+						boolean istrue = manage.addCart(cart);
+						Intent intent = new Intent(Consts.UPDATE_CHANGE);
+						activity.sendBroadcast(intent);
+						if (istrue) {
+							Toast.makeText(
+									activity,
+									activity.getResources().getString(
+											R.string.add_cart_scs),
+									Toast.LENGTH_SHORT).show();
 						}
 					}
 					// Log.i("info", istrue+"   cart_num");
-//				if (istrue) {
-//					builder.show();
-//				}
-				
-			});
-		}else{
-			Toast.makeText(activity, "这是赠品，不能够购买", Toast.LENGTH_LONG).show();
-		}
+					// if (istrue) {
+					// builder.show();
+					// }
+
+				});
+			} else {
+				Toast.makeText(activity, "这是赠品，不能够购买", Toast.LENGTH_LONG)
+						.show();
+				add_to_cart.setImageResource(R.drawable.add_to_cart_hover);
+				add_to_cart.setClickable(false);
+				buy_now.setImageResource(R.drawable.buy_now_hover);
+				buy_now.setClickable(false);
+			}
 			// 立即购买按钮
 			buy_now.setOnClickListener(new OnClickListener() {
 
@@ -181,11 +203,23 @@ public class GoodsView {
 					try{
 						float sum = Float.parseFloat(priceString);
 						if(sum <= 0) return;////价格出错
+						if(!myApplication.getIsLogin()){
+							Toast.makeText(activity,
+									activity.getResources().getString(R.string.please_login),
+									Toast.LENGTH_LONG).show();
+							Intent intent1 = new Intent(activity, LoginActivity.class);
+							activity.startActivity(intent1);
+						}else{
 						Bundle bundle = new Bundle();
-						bundle.putSerializable("Cart", cart);
+						ArrayList<Cart> carts = new ArrayList<Cart>();
+						carts.add(cart);
+//						bundle.putSerializable("Cart", cart);
+						bundle.putString("cartActivity","N");
+						intent.putExtra("carts", carts);
 						bundle.putString("price", priceString);
 						intent.putExtras(bundle);
 						activity.startActivity(intent);
+						}
 //						activity.finish();
 					} catch (NumberFormatException e){
 						//价格出错
@@ -227,7 +261,7 @@ public class GoodsView {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(activity, activity.getResources().getString(R.string.bad_network), Toast.LENGTH_LONG);
+			Toast.makeText(activity, activity.getResources().getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -288,7 +322,8 @@ public class GoodsView {
 				// baseInfoImageLayout.addView(child, lp_base);//
 				// matchGoodsImageLayout.addView(matchchild, lp_match);//
 				LinearLayout.LayoutParams lp_base = new LinearLayout.LayoutParams(
-						(new Float(px)).intValue(), LayoutParams.WRAP_CONTENT);
+						(new Float(px)).intValue(), (new Float(px)).intValue());//LayoutParams.WRAP_CONTENT);//(new Float(px)).intValue()
+				lp_base.gravity = Gravity.CENTER;
 				// View imageViewLayout = LayoutInflater.from(view.getContext())
 				// .inflate(R.layout.goods_banner_imageview, null);
 				// ImageView bannerImageView = (ImageView) imageViewLayout
@@ -297,9 +332,11 @@ public class GoodsView {
 				bannerImageView.setLayoutParams(lp_base);
 				imageLoader.displayImage(bannerArray.get(i).getImgUrl(),
 						bannerImageView, options, animateFirstListener);
-				baseInfoImageLayout.setPadding(10, 0, 10, 0);
+				Log.e(GoodsView.class.getName(), bannerArray.get(i).getImgUrl());
+				baseInfoImageLayout.setPadding(20, 0, 20, 0);
+				
 				// imageViewLayout.setPadding(10, 0, 10, 0);
-				bannerImageView.setPadding(10, 0, 10, 0);
+				bannerImageView.setPadding(20, 0, 20, 0);
 				baseInfoImageLayout.addView(bannerImageView, lp_base);
 			}
 		} catch (Exception e) {
@@ -312,27 +349,26 @@ public class GoodsView {
 	private void addMatchImage(View view,
 			final ArrayList<MainProduct> bannerArray) {
 		try {
-			matchGoodsImageLayout = (LinearLayout) view
-					.findViewById(R.id.match_goods_image);
 			int lenght = bannerArray.size();
 			Resources r = activity.getResources();
 			float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 90,
 					r.getDisplayMetrics());
 			for (int i = 0; i < lenght; i++) {
 				LinearLayout.LayoutParams lp_base = new LinearLayout.LayoutParams(
-						(new Float(px)).intValue(), LayoutParams.WRAP_CONTENT);
+						(new Float(px)).intValue(), (new Float(px)).intValue());//LayoutParams.WRAP_CONTENT);
 				// View imageViewLayout =
 				// LayoutInflater.from(view.getContext()).inflate(R.layout.goods_banner_imageview,
 				// null);
 				// ImageView bannerImageView = (ImageView)
 				// imageViewLayout.findViewById(R.id.banner_imageview);
+				lp_base.gravity = Gravity.CENTER;
 				ImageView bannerImageView = new ImageView(activity);
 				bannerImageView.setLayoutParams(lp_base);
 				imageLoader.displayImage(bannerArray.get(i).getImgUrl(),
 						bannerImageView, options, animateFirstListener);
 				matchGoodsImageLayout.setPadding(80, 0, 80, 0);
 				// imageViewLayout.setPadding(10, 0, 10, 0);
-				bannerImageView.setPadding(10, 0, 10, 0);
+				bannerImageView.setPadding(20, 0, 20, 0);
 				final int index = i;
 				bannerImageView.setOnClickListener(new OnClickListener() {
 
@@ -344,6 +380,7 @@ public class GoodsView {
 						Bundle bundle = new Bundle();
 						bundle.putString("goodsId", bannerArray.get(index).getUId());
 						intent.putExtras(bundle);
+//						activity.notifyAll();
 						activity.startActivity(intent);
 						activity.finish();
 					}
@@ -389,8 +426,8 @@ public class GoodsView {
 
 	private void initDisplayImageOption() {
 		builder = new AlertDialog.Builder(activity)
-		.setTitle(activity.getResources().getString(R.string.add_cart_scs_title))
-		.setMessage(activity.getResources().getString(R.string.add_cart_scs))
+		.setTitle(activity.getResources().getString(R.string.login_title))
+		.setMessage(activity.getResources().getString(R.string.login_acount))
 		.setPositiveButton(activity.getResources().getString(R.string.go2cart),
 				new android.content.DialogInterface.OnClickListener() {
 
@@ -399,15 +436,15 @@ public class GoodsView {
 							int which) {
 						// TODO Auto-generated method stub
 						Intent intent = new Intent(activity,
-								GoCartActivity.class);
+								LoginActivity.class);
 						activity.startActivity(intent);
 						activity.finish();
 					}
 				}).setNegativeButton(activity.getResources().getString(R.string.guang_again), null).create();
 		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.hot_sell_right_top_image)
-				.showImageOnFail(R.drawable.hot_sell_right_top_image)
-				.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+				.showStubImage(R.drawable.image_bg)
+				.showImageOnFail(R.drawable.image_bg)
+				.showImageForEmptyUri(R.drawable.image_bg)
 				.cacheInMemory(true).cacheOnDisc(true).build();
 	}
 
@@ -421,33 +458,41 @@ public class GoodsView {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			FavoriteDataManage manage = new FavoriteDataManage(activity);
-			if(!isLogin){
+			if (!isLogin) {
 				builder.show();
-				
-				}
-			else if (isLogin && !"".equals(userid)) {
+
+			} else if (isLogin && !"".equals(userid)) {
 				// 登录状态下
-				if (!manage.checkExists(userid, productId, myApplication.getToken())) {
+				if (!manage.checkExists(userid, productId,
+						myApplication.getToken())) {
 					// 未收藏，现在添加收藏
-					if (manage.addFavourite(userid, productId, myApplication.getToken())) {
+					if (manage.addFavourite(userid, productId,
+							myApplication.getToken())) {
 						// 收藏成功
-						 Toast.makeText(activity, activity.getResources().getString(R.string.add_fav_scs),
-						 Toast.LENGTH_SHORT)
-						 .show();
+						Toast.makeText(
+								activity,
+								activity.getResources().getString(
+										R.string.add_fav_scs),
+								Toast.LENGTH_SHORT).show();
 						add_favorites
 								.setImageResource(R.drawable.add_favorites2);
 					} else {
-						 Toast.makeText(activity, activity.getResources().getString(R.string.add_fav_fail),
-						 Toast.LENGTH_SHORT).show();
+						Toast.makeText(
+								activity,
+								activity.getResources().getString(
+										R.string.add_fav_fail),
+								Toast.LENGTH_SHORT).show();
 						add_favorites
 								.setImageResource(R.drawable.add_favorites1);
 					}
 				} else {
 					// 已收藏，现在删除收藏
-					if (manage.deleteFavourite(userid, productId, myApplication.getToken())) {
+					if (manage.deleteFavourite(userid, productId,
+							myApplication.getToken())) {
 						// 删除成功
 						add_favorites
 								.setImageResource(R.drawable.add_favorites1);
+						Toast.makeText(activity, activity.getResources().getString(R.string.del_fav_ok), Toast.LENGTH_LONG).show();
 					} else {
 						// 删除失败
 						add_favorites
@@ -457,8 +502,8 @@ public class GoodsView {
 			} else {
 				// 未登录状态下，收藏到本地
 				// 改变图片
-				flag = !flag;
-				changeFravoriteBg();
+//				flag = !flag;
+//				changeFravoriteBg();
 			}
 		}
 	};

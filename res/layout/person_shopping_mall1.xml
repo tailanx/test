@@ -19,15 +19,15 @@
 
     <ScrollView
         android:id="@+id/scrollView1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/main2_main2_bottom"
-        android:scrollbars="none" >
+        android:scrollbars="none"
+         >
 
         <LinearLayout
             android:id="@+id/person_main2_main2_linearlayout1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/bg"
             android:orientation="vertical" >
 
@@ -57,9 +57,9 @@
                     android:layout_toRightOf="@id/person_shopping_image_person"
                     android:drawableLeft="@drawable/favorites"
                     android:gravity="center"
-                    android:text="15"
+                    android:text="0"
                     android:textColor="#FFeeeeee"
-                    android:textSize="14dp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/message"
@@ -71,9 +71,10 @@
                     android:layout_toRightOf="@id/favorites"
                     android:drawableLeft="@drawable/message"
                     android:gravity="center"
-                    android:text="15"
+                    android:visibility="gone"
+                    android:text="0"
                     android:textColor="#FFeeeeee"
-                    android:textSize="14dp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/integration"
@@ -85,9 +86,9 @@
                     android:layout_toRightOf="@id/message"
                     android:drawableLeft="@drawable/integration"
                     android:gravity="center"
-                    android:text="15"
+                    android:text="0"
                     android:textColor="#FFeeeeee"
-                    android:textSize="14dp" />
+                    android:textSize="14sp" />
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -103,9 +104,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:shadowRadius="6.0"
-                        android:text="Ethanisme"
+                        android:text=" "
                         android:textColor="#FFeeeeee"
-                        android:textSize="20dp" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/person_shopping_person_vip"
@@ -115,9 +116,9 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="15dp"
                         android:layout_toRightOf="@id/person_shopping_person_name"
-                        android:text="VIP5"
+                        android:text="VIP0"
                         android:textColor="#FFeeeeee"
-                        android:textSize="21dp" />
+                        android:textSize="20sp" />
                 </RelativeLayout>
             </RelativeLayout>
 
@@ -148,8 +149,8 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/main2_main2_linearlayout1_imageview1"
                     android:padding="4dp"
-                    android:text="全部订单"
-                    android:textSize="20dp" />
+                    android:text="@string/all_order"
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:id="@+id/main2_main2_linearlayout1_imageview2"
@@ -177,7 +178,6 @@
                 android:id="@+id/main2_main2_linearlayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/main2_main2_linearlayout1"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:background="@drawable/layout_selector2" >
@@ -198,8 +198,8 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/main2_main2_linearlayout2_imageview1"
                     android:padding="4dp"
-                    android:text="待付款订单"
-                    android:textSize="20dp" />
+                    android:text="@string/wait_pay"
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:id="@+id/main2_main2_linearlayout2_imageview2"
@@ -232,6 +232,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@id/main2_main2_linearlayout2_imageview2"
+                    android:visibility="gone"
                     android:background="@drawable/message_bg" />
             </RelativeLayout>
 
@@ -239,7 +240,6 @@
                 android:id="@+id/main2_main2_linearlayout6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/main2_main2_linearlayout2"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:background="@drawable/layout_selector2" >
@@ -260,8 +260,8 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/main2_main2_linearlayout6_imageview1"
                     android:padding="4dp"
-                    android:text="待发货订单"
-                    android:textSize="20dp" />
+                    android:text="@string/wait_deliver"
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:id="@+id/main2_main2_linearlayout6_imageview2"
@@ -290,9 +290,6 @@
                 android:id="@+id/main2_main2_linearlayout4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_below="@id/main2_main2_linearlayout6"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:background="@drawable/layout_selector2" >
@@ -313,8 +310,8 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/main2_main2_linearlayout4_imageview1"
                     android:padding="4dp"
-                    android:text="已发货订单"
-                    android:textSize="20dp" />
+                    android:text="@string/deliver_order"
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:id="@+id/main2_main2_linearlayout4_imageview2"
@@ -342,7 +339,6 @@
                 android:id="@+id/main2_main2_linearlayout3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/main2_main2_linearlayout4"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:background="@drawable/layout_selector3" >
@@ -363,8 +359,8 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/main2_main2_linearlayout3_imageview1"
                     android:padding="4dp"
-                    android:text="已完成订单"
-                    android:textSize="20dp" />
+                    android:text="@string/complete_order"
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:id="@+id/main2_main2_linearlayout3_imageview2"
@@ -392,9 +388,6 @@
                 android:id="@+id/main2_main2_linearlayout5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_below="@id/main2_main2_linearlayout3"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:layout_marginTop="8dp"
@@ -416,8 +409,8 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/main2_main2_linearlayout5_imageview1"
                     android:padding="4dp"
-                    android:text="积分卡券"
-                    android:textSize="20dp" />
+                    android:text="@string/main_voucher_text"
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:id="@+id/main2_main2_linearlayout5_imageview2"
@@ -444,10 +437,9 @@
                 android:id="@+id/main2_main2_linearlayout7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/main2_main2_linearlayout5"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:background="@drawable/layout_selector3" >
+                android:background="@drawable/layout_selector2" >
 
                 <ImageView
                     android:id="@+id/main2_main2_linearlayout7_imageview1"
@@ -465,8 +457,8 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/main2_main2_linearlayout7_imageview1"
                     android:padding="4dp"
-                    android:text="我的收藏"
-                    android:textSize="20dp" />
+                    android:text="@string/my_collect"
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:id="@+id/main2_main2_linearlayout7_imageview2"
@@ -494,10 +486,9 @@
                 android:id="@+id/main2_main2_linearlayout20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/main2_main2_linearlayout7"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:layout_marginTop="8sp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/layout_selector1"
                 android:clickable="true"
                 android:focusable="true" >
@@ -518,8 +509,8 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/main2_main2_linearlayout8_imageview1"
                     android:padding="4dp"
-                    android:text="消息中心"
-                    android:textSize="20dp" />
+                    android:text="@string/person_message"
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:id="@+id/main2_main2_linearlayout8_imageview2"
@@ -537,6 +528,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
+                    android:visibility="gone"
                     android:layout_toLeftOf="@id/main2_main2_linearlayout8_imageview2"
                     android:background="@drawable/message_bg" />
             </RelativeLayout>
@@ -545,7 +537,6 @@
                 android:id="@+id/main2_main2_linearlayout9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/main2_main2_linearlayout7"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:background="@drawable/layout_selector3" >
@@ -566,8 +557,8 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/main2_main2_linearlayout9_imageview1"
                     android:padding="4dp"
-                    android:text="收货地址管理"
-                    android:textSize="20dp" />
+                    android:text="@string/manage_address"
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:id="@+id/main2_main2_linearlayout9_imageview2"
@@ -595,10 +586,9 @@
                 android:id="@+id/main2_main2_linearlayout10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/main2_main2_linearlayout9"
-                android:layout_marginLeft="4sp"
-                android:layout_marginRight="4sp"
-                android:layout_marginTop="8sp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/layout_selector1" >
 
                 <ImageView
@@ -617,8 +607,8 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/main2_main2_linearlayout10_imageview1"
                     android:padding="4dp"
-                    android:text="退换货"
-                    android:textSize="20dp" />
+                    android:text="@string/exchanged"
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:id="@+id/main2_main2_linearlayout10_imageview2"
@@ -647,7 +637,6 @@
                 android:id="@+id/main2_main2_linearlayout11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/main2_main2_linearlayout10"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:background="@drawable/layout_selector3" >
@@ -668,8 +657,8 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/main2_main2_linearlayout11_imageview1"
                     android:padding="4dp"
-                    android:text="评价晒单"
-                    android:textSize="20dp" />
+                    android:text="@string/evaluation"
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:id="@+id/main2_main2_linearlayout11_imageview2"

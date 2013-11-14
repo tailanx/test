@@ -147,7 +147,7 @@ public class MyMallFragment extends SherlockFragment implements OnClickListener 
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		View view = inflater.inflate(R.layout.person_shopping_mall1, container, false);
-		getSherlockActivity().getSupportActionBar().setCustomView(R.layout.actionbar_mymall);
+//		getSherlockActivity().getSupportActionBar().setCustomView(R.layout.actionbar_mymall);
 		setupView(view);
 		
 		imageView.setOnClickListener(new OnClickListener() {

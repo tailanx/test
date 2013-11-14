@@ -57,6 +57,7 @@ public class AlreadyComFragment extends SherlockFragment {
 									| DateUtils.FORMAT_SHOW_TIME);
 			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 			fromIndex += amount;
+			relativeLayout.removeAllViews();//清空数据
 			setupShow();
 			mPullToRefreshScrollView.onRefreshComplete();
 
@@ -132,6 +133,20 @@ public class AlreadyComFragment extends SherlockFragment {
 		// }
 		// });
 		return view;
+	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		setupShow();
+	}
+
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+//		setupShow();
 	}
 
 	@Override

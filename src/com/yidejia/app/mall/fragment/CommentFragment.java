@@ -51,6 +51,7 @@ public class CommentFragment extends SherlockFragment  {
 		linearLayout = (LinearLayout) view.findViewById(R.id.item_goods_scrollView_linearlayout1);
 //		produceView = inflater.inflate(R.layout.item_goods_emulate_item, null);
 //		dataManage = new UserCommentDataManage(getSherlockActivity());
+		
 		mPullToRefreshScrollView.setOnRefreshListener(listener);
 		String label = getResources().getString(R.string.update_time)	+ DateUtils.formatDateTime(
 				getSherlockActivity().getApplicationContext(),

@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
-
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.yidejia.app.mall.MainFragmentActivity;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 
 public class EditorActivity extends SherlockActivity {
@@ -32,6 +34,8 @@ public class EditorActivity extends SherlockActivity {
 	private AlertDialog dialogphone;
 	private AlertDialog dialogClear;
 	private AlertDialog exit;
+	
+	private MyApplication myApplication;
 
 	private void setupShow() {
 		LinearLayout mLayout1 = (LinearLayout) getLayoutInflater().inflate(
@@ -42,6 +46,11 @@ public class EditorActivity extends SherlockActivity {
 				R.layout.phone_number, null);
 
 		Builder builder = new Builder(this);
+		Builder helpbuilder = new Builder(this);
+		Builder aboutbuilder = new Builder(this);
+		Builder exitbuilder = new Builder(this);
+		Builder phonebuilder = new Builder(this);
+//		dialogAbout.setc
 		dialogClear = builder
 				.setTitle("提示")
 				.setMessage("您确认清除缓存图片吗？")
@@ -55,21 +64,26 @@ public class EditorActivity extends SherlockActivity {
 
 							}
 						}).setNegativeButton("取消", null).create();
-		dialogHelp = builder.setTitle("艾蒂妲服务条款")
+		dialogHelp = helpbuilder.setTitle("艾蒂妲服务条款")
 				.setIcon(android.R.drawable.menu_frame).setView(mLayout1)
-				.setPositiveButton("确定", null).create();
-		dialogAbout = builder.setTitle("关于").setIcon(R.drawable.ic_launcher)
-				.setView(mLayout2).setPositiveButton("确定", null).create();
-		dialogphone = builder.setTitle("艾蒂妲")
+				.setPositiveButton("确定", null).setNegativeButton("取消", null).create();
+		dialogAbout = aboutbuilder.setTitle("关于").setIcon(R.drawable.ic_launcher)
+				.setView(mLayout2).setPositiveButton("确定", null).setNegativeButton("取消", null).create();
+		dialogphone = phonebuilder.setTitle("艾蒂妲")
 				.setIcon(android.R.drawable.divider_horizontal_dim_dark)
-				.setView(mLayout3).setPositiveButton("确定", null).create();
-		exit = builder
+				.setView(mLayout3).setPositiveButton("确定", null).setNegativeButton("取消", null).create();
+		
+		exit = exitbuilder.setTitle("艾蒂妲")
+				.setIcon(android.R.drawable.divider_horizontal_dim_dark)
+				.setMessage(getResources().getString(R.string.retrun_back))
 				.setPositiveButton("确定",
 						new android.content.DialogInterface.OnClickListener() {
 
 							public void onClick(DialogInterface arg0, int arg1) {
-								System.exit(0);
-
+								myApplication.setIsLogin(false);
+								Intent intent = new Intent(EditorActivity.this, MainFragmentActivity.class);
+								EditorActivity.this.startActivity(intent);
+								EditorActivity.this.finish();
 							}
 
 						}).setNegativeButton("取消", null).create();
@@ -97,10 +111,11 @@ public class EditorActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		WindowManager manager = getWindowManager();
-		Display display = manager.getDefaultDisplay();
-		width = display.getWidth();
-		height = display.getHeight() + 300;
+//		WindowManager manager = getWindowManager();
+//		Display display = manager.getDefaultDisplay();
+//		width = display.getWidth();
+//		height = display.getHeight() + 300;\
+		myApplication = (MyApplication) getApplication();
 		setActionbar();
 		setContentView(R.layout.editor);
 		help = (RelativeLayout) findViewById(R.id.editor_linearLayout1);
@@ -139,7 +154,7 @@ public class EditorActivity extends SherlockActivity {
 			public void onClick(View arg0) {
 				dialogHelp.show();
 
-				dialogHelp.getWindow().setLayout(width, height / 2);
+//				dialogHelp.getWindow().setLayout(width, height / 2);
 			}
 
 		});
@@ -157,7 +172,7 @@ public class EditorActivity extends SherlockActivity {
 			@Override
 			public void onClick(View arg0) {
 				dialogAbout.show();
-				dialogHelp.getWindow().setLayout(width, height / 2);
+//				dialogHelp.getWindow().setLayout(width, height / 2);
 			}
 
 		});

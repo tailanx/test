@@ -80,14 +80,14 @@ public class ProductDataManage{  //implements CallBack
 			this.id = id;
 		}
 		
-		private ProgressDialog bar = new ProgressDialog(context);
+//		private ProgressDialog bar = new ProgressDialog(context);
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage(context.getResources().getString(R.string.searching));
-			bar.show();
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(context.getResources().getString(R.string.searching));
+//			bar.show();
 		}
 		
 		@Override
@@ -124,7 +124,7 @@ public class ProductDataManage{  //implements CallBack
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			bar.dismiss();
+//			bar.dismiss();
 		}
 		
 	}
@@ -170,7 +170,7 @@ public class ProductDataManage{  //implements CallBack
 		String pics = responseObject.getString("pics");
 //		analysisPicJson(pics, bannerArray);
 		String imgString = analysisPicJson(pics, bannerArray);
-		productBaseInfo.setImgUrl(ImageUrl.IMAGEURL+imgString);
+		productBaseInfo.setImgUrl(ImageUrl.IMAGEURL+imgString + "!100");
 		productBaseInfo.setBannerArray(bannerArray);
 //		Log.i(TAG,pics);
 		String collects = responseObject.getString("collects");
@@ -179,7 +179,7 @@ public class ProductDataManage{  //implements CallBack
 		productBaseInfo.setRecommendArray(recommendArray);
 	}
 	/**
-	 * 解析商品轮播图片
+	 * 解析商品推荐轮播图片
 	 * @param picString
 	 * @throws JSONException 
 	 */
@@ -196,7 +196,7 @@ public class ProductDataManage{  //implements CallBack
 				String goodsId = itemObject.getString("goods_id");
 				baseProduct.setUId(goodsId);
 				String imgUrlTemp = itemObject.getString("imgname");
-				String imgUrl = ImageUrl.IMAGEURL + imgUrlTemp;
+				String imgUrl = ImageUrl.IMAGEURL + imgUrlTemp + "!150";
 				baseProduct.setImgUrl(imgUrl);
 				baseProduct.setPrice(itemObject.getString("price"));
 				baseProduct.setTitle(itemObject.getString("goods_name"));
@@ -225,7 +225,7 @@ public class ProductDataManage{  //implements CallBack
 				JSONObject itemObject = new JSONObject(itemsString);
 				String id = itemObject.getString("goods_id");
 				baseProduct.setUId(id);
-				String imgUrlTemp = ImageUrl.IMAGEURL + itemObject.getString("imgname");
+				String imgUrlTemp = ImageUrl.IMAGEURL + itemObject.getString("imgname") + "!200";
 				baseProduct.setImgUrl(imgUrlTemp);
 				picList.add(baseProduct);
 			}

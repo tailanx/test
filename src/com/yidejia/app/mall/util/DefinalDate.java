@@ -3,7 +3,8 @@ package com.yidejia.app.mall.util;
 import android.R.integer;
 
 public class DefinalDate {
-	public final static int requestcode=110;//ÇëÇóÂë
-	public final static int responcode=120;//·µ»ØÂë
-	public final static int responcode1=130;//·µ»ØÂë
+	public final static int requestcode=110;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public final static int responcode=120;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public final static int responcode2=140;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public final static int responcode1=130;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 }

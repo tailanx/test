@@ -40,7 +40,7 @@ public class PayUtil {
 	private LinearLayout mLinearLayoutLayout;// ���Ĳ���
 	private LinearLayout mLayout;// ���Ĳ���
 
-	private CartsDataManage dataManage;// ������ȡ�������
+//	private CartsDataManage dataManage;// ������ȡ�������
 	private Cart cart;
 	public PayUtil(Context context, LinearLayout mLayout,Cart cart) {
 		this.cart = cart;
@@ -48,9 +48,9 @@ public class PayUtil {
 		this.inflater = LayoutInflater.from(context);
 		this.mLinearLayoutLayout = mLayout;
 		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.hot_sell_right_top_image)
-				.showImageOnFail(R.drawable.hot_sell_right_top_image)
-				.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+				.showStubImage(R.drawable.image_bg)
+				.showImageOnFail(R.drawable.image_bg)
+				.showImageForEmptyUri(R.drawable.image_bg)
 				.cacheInMemory(true).cacheOnDisc(true).build();
 	
 	}
@@ -60,9 +60,9 @@ public class PayUtil {
 		this.inflater = LayoutInflater.from(context);
 		this.mLinearLayoutLayout = mLayout;
 		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.hot_sell_right_top_image)
-				.showImageOnFail(R.drawable.hot_sell_right_top_image)
-				.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+				.showStubImage(R.drawable.image_bg)
+				.showImageOnFail(R.drawable.image_bg)
+				.showImageForEmptyUri(R.drawable.image_bg)
 				.cacheInMemory(true).cacheOnDisc(true).build();
 	}
 
@@ -93,12 +93,13 @@ public class PayUtil {
 	private DisplayImageOptions options;
 	protected ImageLoader imageLoader = ImageLoader.getInstance();// ����ͼƬ
 
-	public String loadView() {
+	public String loadView(ArrayList<Cart> mList, boolean isHuanGou) {//, boolean isHuanGou
 		StringBuffer goods = new StringBuffer();
 		try {
-			dataManage = new CartsDataManage();
-			ArrayList<Cart> mList = dataManage.getCartsArray();
+//			dataManage = new CartsDataManage();
+//			ArrayList<Cart> mList = dataManage.getCartsArray();
 			// Log.i("info", mList.size()+"mList");
+			Log.i("voucher", mList.size()+"    carts.size()");
 			for (int i = 0; i < mList.size(); i++) {
 				view = inflater.inflate(R.layout.go_pay_item, null);
 				// Log.i("info", view+"");
@@ -119,21 +120,37 @@ public class PayUtil {
 						.findViewById(R.id.go_pay_item_count_detail);// ��Ʒ��Ŀ
 
 				// Order mOrder = mList.get(i);
+				Log.i("info", cart+" cart");
 				titleTextView.setText(cart.getProductText());
 				String head = cart.getImgUrl();
 				imageLoader.displayImage(head, headImage, options,
 						animateFirstListener);
-				// Log.i("info", head+"   head");
-				// Bitmap bm = BitmapFactory.decodeFile(head);
-				// if(bm != null){
-				// headImage.setImageBitmap(bm);
-				// }else{
-				// headImage.setImageResource(R.drawable.ic_launcher);
-				// }
-				sumPrice.setText(cart.getPrice() + "");
+//				// Log.i("info", head+"   head");
+//				// Bitmap bm = BitmapFactory.decodeFile(head);
+//				// if(bm != null){
+//				// headImage.setImageBitmap(bm);
+//				// }else{
+//				// headImage.setImageResource(R.drawable.ic_launcher);
+//				// }
+				String  a = cart.getPrice()+"";
+				String b= cart.getScort()+"";
+				Log.i("info", a+" a");
+//				int b= a.indexOf(".");
+//				
+//				Log.e("info", a.charAt(b+1)+"");
+				
+				if(("0.0".equals(a))&&!"0".equals(b)){
+
+					sumPrice.setText(cart.getScort()+"  积分");
+				}else{
+					sumPrice.setText("￥ "+cart.getPrice());
+					}
 				String amount = cart.getAmount() + "";
 				countTextView.setText(amount);
-				goods.append(cart.getUId()+","+amount+"n;");
+				if(isHuanGou)
+					goods.append(cart.getUId()+","+amount+"y;");
+				else
+					goods.append(cart.getUId()+","+amount+"n;");
 				// numberTextView.setText(mOrder.getOrderCode());
 				//
 				// final AllOrderDetail allOrderDetail = new
@@ -183,7 +200,11 @@ public class PayUtil {
 						.findViewById(R.id.go_pay_item_sum_detail);// �۸�
 				TextView countTextView = (TextView) view
 						.findViewById(R.id.go_pay_item_count_detail);// ��Ʒ��Ŀ
-				sumPrice.setText(cart.getPrice()+"");
+				if(cart.getPrice()>0.0){
+				sumPrice.setText(cart.getPrice()+"积分");
+				}else{
+					sumPrice.setText("￥"+cart.getPrice());
+				}
 				countTextView.setText(cart.getAmount()+"");
 				titleTextView.setText(cart.getProductText());
 				String head = cart.getImgUrl();

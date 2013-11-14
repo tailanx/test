@@ -18,7 +18,7 @@
             android:background="@drawable/product_details_selected"
             android:gravity="center"
             android:text="近一周"
-            android:textColor="#000000" />
+            android:textColor="@color/search_result_top" />
 
         <TextView
             android:id="@+id/already_complete_moonth"
@@ -29,7 +29,7 @@
             android:background="@drawable/product_details_bg"
             android:gravity="center"
             android:text="近一月"
-            android:textColor="#ed217c" />
+            android:textColor="@color/dark_black" />
 
         <TextView
             android:id="@+id/already_completer_year"
@@ -39,7 +39,7 @@
             android:background="@drawable/product_details_bg"
             android:gravity="center"
             android:text="近一年"
-            android:textColor="#ed217c" />
+            android:textColor="@color/dark_black" />
     </LinearLayout>
 
     <RelativeLayout

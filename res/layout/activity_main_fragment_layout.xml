@@ -7,7 +7,7 @@
     <RelativeLayout
         android:id="@+id/down_parent_layout"
         android:layout_width="match_parent"
-        android:layout_height="51dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal" >
 
@@ -26,7 +26,7 @@
     <FrameLayout
         android:id="@+id/main_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/down_parent_layout"
         android:layout_alignParentTop="true" >
     </FrameLayout>

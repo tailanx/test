@@ -1,12 +1,8 @@
 package com.yidejia.app.mall.fragment;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,10 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.TableRow;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.yidejia.app.mall.MainActivity;
 import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.MyMallActivity;
@@ -25,7 +20,6 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.IpAddress;
 import com.yidejia.app.mall.datamanage.UserDatamanage;
 import com.yidejia.app.mall.view.FindPwActivity;
-import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.view.RegistActivity;
 
 public class LoginFragment extends SherlockFragment implements OnClickListener{
@@ -54,7 +48,7 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.my_mall_login, container, false);
-		getSherlockActivity().getSupportActionBar().setCustomView(R.layout.login_top);
+//		getSherlockActivity().getSupportActionBar().setCustomView(R.layout.login_top);
 		userManage = new UserDatamanage(getSherlockActivity());
 		myApplication = (MyApplication)getSherlockActivity().getApplication();
 		ipAddress = new IpAddress();
@@ -68,7 +62,33 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 		
 		stringName = (EditText)view.findViewById(R.id.my_mall_login__edittext_account);
 		stringPassword = (EditText)view.findViewById(R.id.my_mall_login__edittext_password);
-		
+		// 优化登录账号密码焦点获取
+		TableRow login_acount = (TableRow) view.findViewById(R.id.login_acount);
+		TableRow login_psw = (TableRow) view.findViewById(R.id.login_psw);
+		login_acount
+				.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
+		login_psw.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
+		login_acount.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				stringName.requestFocus();
+				stringName.setCursorVisible(true);
+				stringPassword.setCursorVisible(false);
+			}
+		});
+
+		login_psw.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				stringPassword.requestFocus();
+				stringPassword.setCursorVisible(true);
+				stringName.setCursorVisible(false);
+			}
+		});
 		return view;
 	}
 
@@ -116,8 +136,8 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 			
 			fragment = new  MyMallActivity();
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
-			
-			ft.replace(R.id.main_fragment, fragment).commit();
+			if(fragment.isAdded()) ft.hide(LoginFragment.this).show(fragment).commit();
+			else ft.hide(LoginFragment.this).replace(R.id.main_fragment, fragment).commit();
 //		if(name==null||"".equals(name)){
 //			Toast.makeText(getSherlockActivity(), "请输入用户名或者密码",Toast.LENGTH_LONG).show();
 //		}
@@ -162,6 +182,6 @@ public class LoginFragment extends SherlockFragment implements OnClickListener{
 //		});
 //		
 //		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
-//		titleTextView.setText("登录");
+//		titleTextView.setText("登录1");
 //	}
 //}

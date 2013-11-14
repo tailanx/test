@@ -19,6 +19,7 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.view.CstmPayActivity;
+import com.yidejia.app.mall.view.OrderDetailActivity;
 
 public class WaitPayUtil {
 	private Context context;
@@ -32,9 +33,11 @@ public class WaitPayUtil {
 	private TextView numberTextView;// 订单的编号
 	private TextView sumPrice;// 订单的总价格
 	private TextView countTextView;// 总数目
+  	private Button cancel;
 
 	private OrderDataManage orderDataManage;// 用来获取订单数据
 	private Button mButton;
+	private LinearLayout linear1;
 
 	public WaitPayUtil(Context context, LinearLayout layout) {
 		this.context = context;
@@ -45,6 +48,9 @@ public class WaitPayUtil {
 
 	public void setupShow() {
 		view = mInflater.inflate(R.layout.wair_pay_order_item_item, null);
+		linear1 = (LinearLayout) view
+				.findViewById(R.id.wait_pay_order_linear);
+		cancel = (Button) view.findViewById(R.id.wait_pay_order_item_cancal);
 		mLayout = (LinearLayout) view
 				.findViewById(R.id.wait_pay_order_relative2);
 		mButton = (Button) view.findViewById(R.id.wait_pay_order_item_payment);
@@ -62,21 +68,37 @@ public class WaitPayUtil {
 	/**
 	 * 加载视图
 	 */
-	public void loadView(int fromIndex,int amount) {
+	public void loadView(int fromIndex, int amount) {
 		try {
 			orderDataManage = new OrderDataManage(context);
-			ArrayList<Order> mList = orderDataManage.getOrderArray(myApplication.getUserId(),
-					"", "", "已签收", fromIndex +"", amount + "",myApplication.getToken());
+			ArrayList<Order> mList = orderDataManage.getOrderArray(
+					myApplication.getUserId(), "", "", "录入", fromIndex + "",
+					amount + "", myApplication.getToken());
 			Log.i("info", mList.size() + "mList");
 			for (int i = 0; i < mList.size(); i++) {
 				setupShow();
+//				View view = mInflater.inflate(R.layout.wair_pay_order_item_item, null);
+//				final LinearLayout linear1 = (LinearLayout) view
+//						.findViewById(R.id.wait_pay_order_linear);
+//				Button cancel = (Button) view.findViewById(R.id.wait_pay_order_item_cancal);
+//				LinearLayout mLayout = (LinearLayout) view
+//						.findViewById(R.id.wait_pay_order_relative2);
+//				Button mButton = (Button) view.findViewById(R.id.wait_pay_order_item_payment);
+//				TextView titleTextView = (TextView) view
+//						.findViewById(R.id.wait_pay_order_item_main_item_detail);
+//				TextView numberTextView = (TextView) view
+//						.findViewById(R.id.wait_pay_order_item_textview2_number);
+//				TextView sumPrice = (TextView) view
+//						.findViewById(R.id.wait_pay_order_sum_money_detail);
+//				TextView countTextView = (TextView) view
+//						.findViewById(R.id.wait_pay_order_item_textview7_count);
 				// Log.i("info", view+"+view");
 
-				Order mOrder = mList.get(i);
+				final Order mOrder = mList.get(i);
 
 				titleTextView.setText(mOrder.getStatus());
 
-//				Log.i("info", mOrder.getStatus()+ "  ");
+				// Log.i("info", mOrder.getStatus()+ "  ");
 
 				numberTextView.setText(mOrder.getOrderCode());
 
@@ -93,27 +115,66 @@ public class WaitPayUtil {
 
 				// sumPrice.setText(100+"");
 				// countTextView.setText(1+"");
-				mButton.setOnClickListener(new OnClickListener() {
+				cancel.setOnClickListener( new OnClickListener() {
 					
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
-						Intent intent = new Intent(context,CstmPayActivity.class);
-						Bundle mBundle = new Bundle();
-						mBundle.putString("price", waitPayOrderDetail.map.get("price")+"");
-						intent.putExtras(mBundle);
+						orderDataManage.cancelOrder(myApplication.getUserId(), mOrder.getOrderCode(), myApplication.getToken());
+						mLinearLayout.removeView(linear1);
+					}
+				});
+				mButton.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+//						Intent intent = new Intent(context,
+//								CstmPayActivity.class);
+//						Bundle mBundle = new Bundle();
+//						mBundle.putString("price",
+//								waitPayOrderDetail.map.get("price") + "");
+//						mBundle.putString("cartActivity", "No");
+//						intent.putExtra("carts", mOrder.getCartsArray());
+//						intent.putExtras(mBundle);
+//						context.startActivity(intent);
+						Intent intent = new Intent(context,
+								OrderDetailActivity.class);
+
+						Bundle bundle = new Bundle();
+						bundle.putString("OrderCode", mOrder.getOrderCode());
+						bundle.putString("OrderPrice", waitPayOrderDetail.map.get("price") + "");
+						intent.putExtras(bundle);
+						intent.putExtra("carts", mOrder.getCartsArray());
 						context.startActivity(intent);
 					}
-				});	
+				});
+				mLayout.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						Intent intent = new Intent(context,
+								OrderDetailActivity.class);
+
+						Bundle bundle = new Bundle();
+						bundle.putString("OrderCode", mOrder.getOrderCode());
+						bundle.putString("OrderPrice", waitPayOrderDetail.map.get("price") + "");
+						intent.putExtras(bundle);
+						intent.putExtra("carts", mOrder.getCartsArray());
+						context.startActivity(intent);
+					}
+				});
 				mLinearLayout.addView(view);
-//				Log.i("info", mLinearLayout + "+mlayout");
+				// Log.i("info", mLinearLayout + "+mlayout");
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
+			Toast.makeText(context,
+					context.getResources().getString(R.string.bad_network),
+					Toast.LENGTH_SHORT).show();
 
 		}
 	}
 }
-

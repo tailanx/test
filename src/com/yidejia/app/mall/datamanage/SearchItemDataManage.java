@@ -65,14 +65,14 @@ public class SearchItemDataManage {
 			this.fields = fields;
 		}
 		
-		private ProgressDialog bar = new ProgressDialog(context);
+//		private ProgressDialog bar = new ProgressDialog(context);
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage("正在查询");
-			bar.show();
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage("正在查询");
+//			bar.show();
 		}
 		
 		@Override
@@ -111,7 +111,7 @@ public class SearchItemDataManage {
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			bar.dismiss();
+//			bar.dismiss();
 		}
 	}
 	
@@ -138,7 +138,7 @@ public class SearchItemDataManage {
 			searchItem.setSelledAmount(temp);
 			temp = responseObject.getString("remarks");
 			searchItem.setCommentAmount(temp);
-			temp = ImageUrl.IMAGEURL + responseObject.getString("imgname");
+			temp = ImageUrl.IMAGEURL + responseObject.getString("imgname") + "!100";
 			searchItem.setImgUrl(temp);
 			searchArray.add(searchItem);
 		}

@@ -49,12 +49,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <ListView
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            xmlns:ptr="http://schemas.android.com/apk/res-auto"
             android:id="@+id/my_collect_listview"
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_centerHorizontal="true" >
-        </ListView>
+            android:layout_height="wrap_content"
+            android:cacheColorHint="#00000000"
+            android:fastScrollEnabled="false"
+            android:smoothScrollbar="true"
+        	android:footerDividersEnabled="true"
+        	ptr:ptrAnimationStyle="flip"
+        	ptr:ptrMode="both">
+        </com.handmark.pulltorefresh.library.PullToRefreshListView>
     </LinearLayout>
 <!--     </ScrollView> -->
 

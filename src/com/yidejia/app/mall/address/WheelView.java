@@ -68,7 +68,8 @@ public class WheelView extends View {
 			0x00AAAAAA, 0x00AAAAAA };
 
 	/** Additional items height (is added to standard text item height) */
-	private static final int ADDITIONAL_ITEM_HEIGHT = 15;
+	//高度设置
+	private static final int ADDITIONAL_ITEM_HEIGHT = 30;
 
 	/** Text size */
 	private static final int TEXT_SIZE = 18;

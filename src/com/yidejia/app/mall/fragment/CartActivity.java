@@ -1,17 +1,22 @@
 package com.yidejia.app.mall.fragment;
 
 import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.List;
 
-import android.app.Fragment;
+import android.app.Activity;
+import android.app.AlertDialog.Builder;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
-import android.text.format.DateUtils;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+//import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,31 +25,42 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+//import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragment;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+import com.unionpay.uppay.task.s;
+import com.yidejia.app.mall.MainFragmentActivity;
+//import com.handmark.pulltorefresh.library.PullToRefreshBase;
+//import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+//import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.MyApplication;
+import com.yidejia.app.mall.MyMallActivity;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.PreferentialDataManage;
 import com.yidejia.app.mall.model.Addresses;
-import com.yidejia.app.mall.model.UserComment;
+import com.yidejia.app.mall.model.Cart;
+import com.yidejia.app.mall.model.Specials;
+//import com.yidejia.app.mall.model.UserComment;
 import com.yidejia.app.mall.util.CartUtil;
 import com.yidejia.app.mall.util.Consts;
+import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.view.ExchangeFreeActivity;
 import com.yidejia.app.mall.view.GoCartActivity;
 import com.yidejia.app.mall.view.LoginActivity;
-import com.yidejia.app.mall.view.NewAddressActivity;
+import com.yidejia.app.mall.view.NOProduceActivity;
+
 //import com.yidejia.app.mall.view.PayActivity;
 
 public class CartActivity extends SherlockFragment implements OnClickListener {
+	private AlertDialog dialog;
 	private ImageView subtract;// 减
 	private TextView number;
 	private ImageView addImageView;
@@ -53,33 +69,41 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	private TextView number2;
 	private ImageView addImageView2;
 	private int sumString;
+	public static float sum;
 	private TextView sumTextView;// 总的钱数
 	private TextView counTextView;// 总的数量
-	private TextView priceTextView1;// 价格
-	private TextView priceTextView2;// 价格
-	private View person;
-	private View person2;
+	// private TextView priceTextView1;// 价格
+	// private TextView priceTextView2;// 价格
+	// private View person;
+	// private View person2;
 	private CartsDataManage dataManage;
-	private Button shoppingCartTopay;
-	private ImageView mImageView;// 返回
-	private ArrayList<UserComment> mlist;
+	// private Button shoppingCartTopay;
+	// private ImageView mImageView;// 返回
+	// private ArrayList<UserComment> mlist;
 	private CartUtil cartUtil;
 	private CheckBox mBox;
-	private final int MENU1 = 0x111;
-	private final int MENU2 = 0x112;
-	private final int MENU3 = 0x113;
+	// private final int MENU1 = 0x111;
+	// private final int MENU2 = 0x112;
+	// private final int MENU3 = 0x113;
 	private LinearLayout layout;
 	private View view;
-	private CartsDataManage dataManage2;
+	public static ArrayList<Cart> cartList;
+	// private CartsDataManage dataManage2;
 	// private AddressDataManage addressManage;// 地址管理
-	private PullToRefreshScrollView mPullToRefreshScrollView;// 刷新界面
-	private Fragment mFragment;
+	// private PullToRefreshScrollView mPullToRefreshScrollView;// 刷新界面
+	// private Fragment mFragment;
 	private MyApplication myApplication;
 	private PreferentialDataManage preferentialDataManage;
-	private List<HashMap<String, Float>> mlList = null;
+	// private List<HashMap<String, Float>> mlList = null;
 
-	// private InnerReceiver receiver;
+	private InnerReceiver receiver;
+	public static ArrayList<Specials> arrayListFree;
+	public static ArrayList<Specials> arrayListExchange;
 
+	private ArrayList<Cart> mList;
+	private Button shoppingCartTopay;
+	private int sumCart;
+	private NoProduceFragment fragment;
 	// private InnerReceiver receiver;
 
 	// private void doClick(View v) {
@@ -200,131 +224,222 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	// }
 	// }
 
+	// public ArrayList<Specials> getArrayListFree() {
+	// return arrayListFree;
+	// }
+	//
+	// public void setArrayListFree(ArrayList<Specials> arrayListFree) {
+	// this.arrayListFree = arrayListFree;
+	// }
+	//
+	// public ArrayList<Specials> getArrayListExchange() {
+	// return arrayListExchange;
+	// }
+	//
+	// public void setArrayListExchange(ArrayList<Specials> arrayListExchange) {
+	// this.arrayListExchange = arrayListExchange;
+	// }
+
+	// public ArrayList<Cart> getCartList() {
+	// return cartList;
+	// }
+	//
+	// public void setCartList(ArrayList<Cart> cartList) {
+	// this.cartList = cartList;
+	// }
+	
+	public static boolean isCartNull = true;
+	
+	private LayoutInflater inflater;
+	private ViewGroup container;
+
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// addressManage = new AddressDataManage(getSherlockActivity());
-		myApplication = (MyApplication) getSherlockActivity()
-				.getApplicationContext();
-		preferentialDataManage = new PreferentialDataManage(
-				getSherlockActivity());
-		Log.i(CartActivity.class.getName(), "CartActivity__onCreateView");
-		view = inflater.inflate(R.layout.shopping_cart, container, false);
-
-		// dataManage = new CartsDataManage();
 		// TODO Auto-generated method stub
-		// receiver = new InnerReceiver();
-		// IntentFilter filter = new IntentFilter();
-		// filter.addAction(Consts.UPDATE_CHANGE);
-		// getSherlockActivity().registerReceiver(receiver, filter);
-		// // registerForContextMenu(layout);
+		// addressManage = new AddressDataManage(getSherlockActivity());
+		Log.e("NoProduceFragment", "CarActivity");
+		receiver = new InnerReceiver();
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Consts.BROAD_UPDATE_CHANGE);
+		filter.addAction(Consts.UPDATE_CHANGE);
+		filter.addAction(Consts.DELETE_CART);
+		activity =  MainFragmentActivity.MAINACTIVITY;
+		activity.registerReceiver(receiver, filter);
+		
+		getSherlockActivity().getSupportActionBar().setCustomView(
+				R.layout.actionbar_cart);
+		
+		Log.e(TAG, "on createView");
+		this.inflater = inflater;
+		this.container = container;
+		fragment = new NoProduceFragment();
+	
+		try {
+			dataManage = new CartsDataManage();
+			myApplication = (MyApplication) activity
+					.getApplicationContext();
+			Log.i(CartActivity.class.getName(), "CartActivity__onCreateView");
+			if(dataManage.getCartAmount() != 0)isCartNull = false;
+			else isCartNull = true;
+			if(!isCartNull) {
+				view = inflater.inflate(R.layout.shopping_cart, container, false);
+				setViewCtrl();
+			}
+			else {
+				FragmentTransaction ft = getFragmentManager().beginTransaction();
+				if(fragment.isAdded()) ft.hide(CartActivity.this).show(fragment).commit();
+				ft.hide(CartActivity.this).replace(R.id.main_fragment, fragment).commit();
+//				view = inflater.inflate(R.layout.no_produce, container, false);
+//				setViewCtrl();
+//				shoppingCartTopay.setVisibility(View.GONE);
+//				return view;
+			}
 
-		mBox = (CheckBox) view.findViewById(R.id.shopping_cart_checkbox);// 选择框
+		} catch (NotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+//			Toast.makeText(
+//					getSherlockActivity(),
+//					getSherlockActivity().getResources().getString(
+//							R.string.no_network), Toast.LENGTH_SHORT).show();
+		}
+		return view;
 
+	}
+	
+	private static Activity activity;
+	
+	private void setViewCtrl(){
 		sumTextView = (TextView) view
 				.findViewById(R.id.shopping_cart_sum_money);// 总的钱数
+
+		mBox = (CheckBox) view.findViewById(R.id.shopping_cart_checkbox);// 选择框
 
 		counTextView = (TextView) view
 				.findViewById(R.id.shopping_cart_sum_number);// 总的数量
 
-		layout = (LinearLayout) view.findViewById(R.id.shopping_cart_relative2);
-
-		getSherlockActivity().getSupportActionBar().setCustomView(
-				R.layout.actionbar_cart);
-		cartUtil = new CartUtil(getSherlockActivity(), layout, counTextView,
-				sumTextView, mBox);
+		shoppingCartTopay = (Button) activity.findViewById(
+				R.id.shopping_cart_go_pay);
+		try{
+			shoppingCartTopay.setVisibility(View.VISIBLE);
+		} catch(Exception e){
+			Log.e(CartActivity.class.getName(), "set visibility err");
+		}
+		layout = new LinearLayout(activity);
+		layout.setOrientation(LinearLayout.VERTICAL);
+		ScrollView scrollView = (ScrollView) view
+				.findViewById(R.id.shopping_cart_item_goods_scrollView);
+		
+		cartUtil = new CartUtil(activity, layout,
+				counTextView, sumTextView, mBox);
 
 		cartUtil.AllComment();
+		sum = Float.parseFloat(sumTextView.getText().toString());
 
-		mPullToRefreshScrollView = (PullToRefreshScrollView) view
-				.findViewById(R.id.shopping_cart_item_goods_scrollView);
-		String label = "上次更新于"
-				+ DateUtils.formatDateTime(getSherlockActivity(),
-						System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
-								| DateUtils.FORMAT_ABBREV_ALL
-								| DateUtils.FORMAT_SHOW_DATE);
-		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
-				label);
-		mPullToRefreshScrollView.onRefreshComplete();
-		mPullToRefreshScrollView.setOnRefreshListener(listener);
+		scrollView.addView(layout);
+		Log.i("info", sum + "sum");
+		
+		if (shoppingCartTopay == null) {
+			Log.e(CartActivity.class.getName(), "cart act button is null");
+//			Toast.makeText(
+//					getSherlockActivity(),
+//					getSherlockActivity().getResources().getString(
+//							R.string.no_network), Toast.LENGTH_SHORT)
+//					.show();
+		} else {
+			shoppingCartTopay.setOnClickListener(new OnClickListener() {
 
-		// 结算
-		shoppingCartTopay = (Button) getSherlockActivity().findViewById(
-				R.id.shopping_cart_go_pay);
-		shoppingCartTopay.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				// getAddresses();
-				if (!myApplication.getIsLogin()) {
-					Toast.makeText(getSherlockActivity(), "你还未登陆，请先登陆",
-							Toast.LENGTH_LONG).show();
-					Intent intent = new Intent(getSherlockActivity(),
-							LoginActivity.class);
-					startActivity(intent);
-					return;
-				} else {
-					
-					preferentialDataManage.getPreferential("1337,10n;",myApplication.getUserId());
-					if (preferentialDataManage.getFreeGoods().size() != 0
-							|| preferentialDataManage.getScoreGoods().size() != 0) {
-
-						Intent intent = new Intent(getSherlockActivity(),
-								ExchangeFreeActivity.class);
-
-						Bundle bundle = new Bundle();
-						float sum = Float.parseFloat(sumTextView.getText()
-								.toString());
-
-						if (sum > 0) {
-							bundle.putString("price", sum + "");
-							intent.putExtras(bundle);
-							getSherlockActivity().startActivity(intent);
-						} else {
-							Toast.makeText(getSherlockActivity(), "你还未购买任何商品",
-									Toast.LENGTH_LONG).show();
-
-						}
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					// getAddresses();
+					if (!myApplication.getIsLogin()) {
+						showLoginTips();
+					} else {
+						go2Pay();
 					}
 				}
-			}
-		});
-
-		//
-		return view;
-
+			});
+		}
 	}
 
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		// getSherlockActivity().unregisterReceiver(receiver);
+		activity.unregisterReceiver(receiver);
 	}
 
-	private int fromIndex = 0;
-	private int amontIndex = 10;
-	// 刷新添加事件
-	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
+	private void showLoginTips() {
+		new Builder(activity)
+				.setTitle(getResources().getString(R.string.tips))
+				.setMessage(R.string.please_login)
+				.setPositiveButton(R.string.sure,
+						new DialogInterface.OnClickListener() {
 
-		@Override
-		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-			// TODO Auto-generated method stub
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// TODO Auto-generated
+								// method stub
+								Intent intent = new Intent(
+										activity,
+										LoginActivity.class);
+								startActivity(intent);
+							}
+							//
+						}).setNegativeButton(R.string.searchCancel, null)
+				.create().show();
+	}
 
-			String label = "上次更新于"
-					+ DateUtils.formatDateTime(getSherlockActivity(),
-							System.currentTimeMillis(),
-							DateUtils.FORMAT_SHOW_DATE
-									| DateUtils.FORMAT_SHOW_TIME
-									| DateUtils.FORMAT_ABBREV_ALL);
-
-			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-			// fromIndex += amontIndex;
-			mPullToRefreshScrollView.onRefreshComplete();
+	private void go2Pay() {
+		cartList = new ArrayList<Cart>();
+		List<HashMap<String, Object>> orderCarts = CartUtil.list1;
+		for (int i = 0; i < orderCarts.size(); i++) {
+			HashMap<String, Object> map = orderCarts.get(i);
+			float ischeck = Float.parseFloat(map.get("check").toString());
+			Log.i("info", ischeck + "    ischeck");
+			Cart cart1 = (Cart) map.get("cart");
+			if (ischeck == 1.0) {
+				cartList.add(cart1);
+			}
 		}
-	};
 
+		if (sum > 0) {
+			Intent intent1 = new Intent(activity,
+					CstmPayActivity.class);
+			intent1.putExtra("carts", cartList);
+			Bundle bundle = new Bundle();
+			bundle.putString("cartActivity", "Y");
+			bundle.putString("price", sum + "");
+			intent1.putExtras(bundle);
+			activity.startActivity(intent1);
+		} else {
+			Toast.makeText(activity,
+					getResources().getString(R.string.buy_nothing),
+					Toast.LENGTH_LONG).show();
+		}
+	}
+
+	/*
+	 * private int fromIndex = 0; private int amontIndex = 10; // 刷新添加事件 private
+	 * OnRefreshListener<ScrollView> listener = new
+	 * OnRefreshListener<ScrollView>() {
+	 * 
+	 * @Override public void onRefresh(PullToRefreshBase<ScrollView>
+	 * refreshView) { // TODO Auto-generated method stub
+	 * 
+	 * String label = getResources().getString(R.string.update_time) +
+	 * DateUtils.formatDateTime(getSherlockActivity(),
+	 * System.currentTimeMillis(), DateUtils.FORMAT_SHOW_DATE |
+	 * DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_ABBREV_ALL);
+	 * 
+	 * refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label); //
+	 * fromIndex += amontIndex; mPullToRefreshScrollView.onRefreshComplete(); }
+	 * };
+	 */
 	// @Override
 	// public void onCreateContextMenu(ContextMenu menu, View v,
 	// ContextMenuInfo menuInfo) {
@@ -356,14 +471,17 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	public void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-	
+//		setViewCtrl();
+//		container.requestLayout();
 		Log.i(CartActivity.class.getName(), "cart on start");
 	}
+
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		// TODO Auto-generated method stub
 		super.onSaveInstanceState(outState);
 	}
+
 	// /**
 	// * 判断是否用户已经有保存好的地址
 	// */
@@ -386,23 +504,67 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 	// }
 	//
 	// }
-	// public class InnerReceiver extends BroadcastReceiver {
-	//
-	// @Override
-	// public void onReceive(Context context, Intent intent) {
-	// // TODO Auto-generated method stub
-	// String action = intent.getAction();
-	// if (Consts.UPDATE_CHANGE.equals(action)) {
-	// layout.removeAllViews();
-	// cartUtil = new CartUtil(getSherlockActivity(), layout, counTextView,
-	// sumTextView, mBox);
-	//
-	// cartUtil.AllComment();
-	// // number = cartsDataManage.getCartAmount();
-	// // cartImage.setText(number + "");
-	// }
-	// }
-	//
-	// }
+	
+	String TAG = CartActivity.class.getName();
+
+	public class InnerReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			String action = intent.getAction();
+//			FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
+				sumCart = dataManage.getCartAmount();
+				Log.i("voucher",sumCart+"    sumCart");
+				
+//				activity = CartActivity.this.getSherlockActivity();
+				if (sumCart == 0) {
+					FragmentTransaction ft = getFragmentManager().beginTransaction();
+					if(fragment.isAdded()) ft.hide(CartActivity.this).show(fragment).commitAllowingStateLoss();
+					else ft.hide(CartActivity.this).replace(R.id.main_fragment, fragment).commitAllowingStateLoss();
+					shoppingCartTopay.setVisibility(View.GONE);			 
+				} else {
+					layout.removeAllViews();
+					CartUtil cartUtil = new CartUtil(getSherlockActivity(),
+							layout, counTextView, sumTextView, mBox);
+					cartUtil.AllComment();
+					sum = Float.parseFloat(sumTextView.getText().toString());
+//					
+				}
+			} 
+				else if (Consts.UPDATE_CHANGE.equals(action)) {
+					
+				layout.removeAllViews();
+//				sumCart = dataManage.getCartAmount();
+				
+				CartUtil cartUtil = new CartUtil(activity, layout,
+						counTextView, sumTextView, mBox);
+				cartUtil.AllComment();
+				sum = Float.parseFloat(sumTextView.getText().toString());
+			}
+				else if (Consts.DELETE_CART.equals(action)) {
+				layout.removeAllViews();
+				sumCart = dataManage.getCartAmount();
+				if (sumCart == 0) {
+					Log.e("NoProduceFragment", "CarActivity");
+					FragmentTransaction ft = getFragmentManager().beginTransaction();
+					if(fragment.isAdded()) ft.hide(CartActivity.this).commitAllowingStateLoss();
+					else ft.hide(CartActivity.this).replace(R.id.main_fragment, fragment).commitAllowingStateLoss();
+				} else {
+					Log.e("NoProduceFragment", "CarActivity!=0");
+					CartUtil cartUtil = new CartUtil(activity,
+							layout, counTextView, sumTextView, mBox);
+					cartUtil.AllComment();
+					sum = Float.parseFloat(sumTextView.getText().toString());
+				}
+				// sumTextView.setText(""+0.00);
+				// counTextView.setText(""+0);
+			}
+		}
+	}
+	
+	
 
 }

@@ -54,10 +54,12 @@ public class WaitDeliverFragment extends SherlockFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.wait_deliver_item_main, null);// 获取视图对象
+//		setupShow();
 		mPullToRefreshScrollView = (PullToRefreshScrollView) view
 				.findViewById(R.id.wait_deliver_order_item_main_refresh_scrollview11);
 		relativeLayout = (LinearLayout) view
-				.findViewById(R.id.already_order_item_main_refresh_scrollview11);// 获取布局
+				.findViewById(R.id.wait_deliver_order_scrollView_linearlayout1);// 获取布局
+//		setupShow();
 		mPullToRefreshScrollView.setOnRefreshListener(listener);
 		String label = getResources().getString(R.string.update_time)
 				+ DateUtils.formatDateTime(getSherlockActivity(),
@@ -109,7 +111,8 @@ public class WaitDeliverFragment extends SherlockFragment {
 									| DateUtils.FORMAT_SHOW_DATE
 									| DateUtils.FORMAT_SHOW_TIME);
 			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-
+			fromIndex = 0;
+			relativeLayout.removeAllViews();//清空数据
 			setupShow();
 			mPullToRefreshScrollView.onRefreshComplete();
 
@@ -132,6 +135,20 @@ public class WaitDeliverFragment extends SherlockFragment {
 
 		}
 	};
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		setupShow();
+	}
+
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+//		setupShow();
+	}
 
 	@Override
 	public void onDestroy() {

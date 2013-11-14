@@ -39,19 +39,19 @@ import com.yidejia.app.mall.view.OrderDetailActivity;
 public class AllOrderDetail {
 	private Context context;
 	private LayoutInflater inflater;
-	private OrderDataManage orderDataManage;// »ñÈ¡¶©µ¥ÏêÇéµÄÊı¾İ
-	private Order order;// ¶©µ¥
-//	private TextView detail;// ÉÌÆ·µÄÏêÇé
-//	private TextView price;// ÉÌÆ·µÄ¼Û¸ñ
-//	private TextView count;// ÉÌÆ·µÄÊıÁ¿
-//	private ImageView head;// Í·Ïñ
+	private OrderDataManage orderDataManage;// é”Ÿæ–¤æ‹·å–é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+	private Order order;// é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+//	private TextView detail;// é”Ÿæ–¤æ‹·å“é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+//	private TextView price;// é”Ÿæ–¤æ‹·å“é”Ÿä¾¥ä»·é©æ‹·
+//	private TextView count;// é”Ÿæ–¤æ‹·å“é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+//	private ImageView head;// å¤´é”Ÿæ–¤æ‹·
 	private LinearLayout layout;
 //	private View view;
 
-	private float sumPrice = 0;// ×ÜµÄ¼Û¸ñ
-	private int sumCount = 0;// ×ÜµÄÊıÁ¿
+	private float sumPrice = 0;// é”Ÿæ°çš„ä»·é©æ‹·
+	private int sumCount = 0;// é”Ÿæ°ç¢‰æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
 
-	public static HashMap<String, Float> map;// ÓÃÀ´´æ·ÅÊı¾İ
+	public HashMap<String, Float> map;// é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
 
 	public AllOrderDetail(Context context, Order order, LinearLayout layout) {// ,TextView
 																				// sumView
@@ -87,13 +87,13 @@ public class AllOrderDetail {
 
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	private DisplayImageOptions options;
-	protected ImageLoader imageLoader = ImageLoader.getInstance();// ¼ÓÔØÍ¼Æ¬
+	protected ImageLoader imageLoader = ImageLoader.getInstance();// é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·å›¾ç‰‡
 
 	private void initDisplayImageOption() {
 		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.hot_sell_right_top_image)
-				.showImageOnFail(R.drawable.hot_sell_right_top_image)
-				.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
+				.showStubImage(R.drawable.image_bg)
+				.showImageOnFail(R.drawable.image_bg)
+				.showImageForEmptyUri(R.drawable.image_bg)
 				.cacheInMemory(true).cacheOnDisc(true).build();
 	}
 
@@ -104,7 +104,7 @@ public class AllOrderDetail {
 			// Log.i("info", mArrayList.size()+"");
 			for (int i = 0; i < mArrayList.size(); i++) {
 				final Cart cart = mArrayList.get(i);
-			View	view = inflater.inflate(R.layout.all_order_item_produce, null);
+				View view = inflater.inflate(R.layout.all_order_item_produce, null);
 				ImageView head = (ImageView) view
 						.findViewById(R.id.all_order_item_image);
 				TextView detail = (TextView) view
@@ -121,19 +121,19 @@ public class AllOrderDetail {
 						animateFirstListener);
 				// Bitmap bm = BitmapFactory.decodeFile(urlString);
 
-				relativeLayout.setOnClickListener(new OnClickListener() {// Ìí¼Óµã»÷ÊÂ¼ş
-
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(context,
-								GoodsInfoActivity.class);
-
-						Bundle bundle = new Bundle();
-						bundle.putString("goodsId", cart.getUId());
-						intent.putExtras(bundle);
-						context.startActivity(intent);
-					}
-				});
+//				relativeLayout.setOnClickListener(new OnClickListener() {// é”Ÿæ–¤æ‹·æ‹¥é”Ÿæ–¤æ‹·é”Ÿé“°ç¡·æ‹·
+//
+//					@Override
+//					public void onClick(View v) {
+//						Intent intent = new Intent(context,
+//								OrderDetailActivity.class);
+//
+//						Bundle bundle = new Bundle();
+//						bundle.putString("goodsId", cart.getUId());
+//						intent.putExtras(bundle);
+//						context.startActivity(intent);
+//					}
+//				});
 				// if(bm!=null){
 				// head.setImageBitmap(bm);
 				// }else{
@@ -154,7 +154,7 @@ public class AllOrderDetail {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_SHORT).show();
 
 		}
 		// sumTextView.setText(sumPrice+"");
@@ -192,19 +192,19 @@ public class AllOrderDetail {
 //public class AllOrderDetail {
 //	private Context context;
 //	private LayoutInflater inflater;
-//	private OrderDataManage orderDataManage;// »ñÈ¡¶©µ¥ÏêÇéµÄÊı¾İ
-//	private Order order;// ¶©µ¥
-//	private TextView detail;//ÉÌÆ·µÄÏêÇé
-//	private TextView price;//ÉÌÆ·µÄ¼Û¸ñ
-//	private TextView count;//ÉÌÆ·µÄÊıÁ¿
-//	private ImageView head;//Í·Ïñ
+//	private OrderDataManage orderDataManage;// é”Ÿæ–¤æ‹·å–é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+//	private Order order;// é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+//	private TextView detail;//é”Ÿæ–¤æ‹·å“é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+//	private TextView price;//é”Ÿæ–¤æ‹·å“é”Ÿä¾¥ä»·é©æ‹·
+//	private TextView count;//é”Ÿæ–¤æ‹·å“é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+//	private ImageView head;//å¤´é”Ÿæ–¤æ‹·
 //	private LinearLayout layout;
 //	private View view;
 //
-//	private float sumPrice = 0;//×ÜµÄ¼Û¸ñ
-//	private  int sumCount=0;//×ÜµÄÊıÁ¿
+//	private float sumPrice = 0;//é”Ÿæ°çš„ä»·é©æ‹·
+//	private  int sumCount=0;//é”Ÿæ°ç¢‰æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
 //	
-//	public static HashMap<String, Float> map;//ÓÃÀ´´æ·ÅÊı¾İ
+//	public static HashMap<String, Float> map;//é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
 //	public AllOrderDetail(Context context, Order order,LinearLayout layout) {//,TextView sumView
 //		
 //		this.context = context;
@@ -214,7 +214,7 @@ public class AllOrderDetail {
 //	}
 //
 //	/**
-//	 * ÊµÀı»¯¿Ø¼ş
+//	 * å®é”Ÿæ–¤æ‹·ä¸¶é”Ÿï¿½
 //	 */
 //	public void setupShow() {
 //		 view = inflater.inflate(R.layout.all_order_item_produce, null);
@@ -236,7 +236,7 @@ public class AllOrderDetail {
 //				setupShow();
 //				String urlString = cart.getImgUrl();
 //				Bitmap bm = BitmapFactory.decodeFile(urlString);
-//				detail.setOnClickListener(new OnClickListener() {//Ìí¼Óµã»÷ÊÂ¼ş
+//				detail.setOnClickListener(new OnClickListener() {//é”Ÿæ–¤æ‹·æ‹¥é”Ÿæ–¤æ‹·é”Ÿé“°ç¡·æ‹·
 //					
 //					@Override
 //					public void onClick(View v) {
@@ -268,7 +268,7 @@ public class AllOrderDetail {
 //		} catch (Exception e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
-//			Toast.makeText(context, "ÍøÂç²»¸øÁ¦£¡", Toast.LENGTH_SHORT).show();
+//			Toast.makeText(context, "é”Ÿæ–¤æ‹·é”Ÿç•Œä¸é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·", Toast.LENGTH_SHORT).show();
 //
 //		}
 ////		sumTextView.setText(sumPrice+"");

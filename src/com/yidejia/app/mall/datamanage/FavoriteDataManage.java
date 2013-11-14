@@ -61,7 +61,7 @@ public class FavoriteDataManage {
 			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return favoriteArray;
 		}
-		TaskGetList taskGetList = new TaskGetList("userid="+userId, String.valueOf(fromIndex), String.valueOf(acount), "", "", "%2A");
+		TaskGetList taskGetList = new TaskGetList("userid="+userId, String.valueOf(fromIndex), String.valueOf(acount), "", "created+desc", "%2A");
 		boolean state = false ;
 		try {
 			state = taskGetList.execute().get();
@@ -340,15 +340,15 @@ public class FavoriteDataManage {
 			this.fields = fields;
 		}
 		
-		private ProgressDialog bar = new ProgressDialog(context);
+//		private ProgressDialog bar = new ProgressDialog(context);
 		
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage(context.getResources().getString(R.string.searching));
-			bar.show();
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(context.getResources().getString(R.string.searching));
+//			bar.show();
 		}
 		
 		@Override
@@ -375,7 +375,7 @@ public class FavoriteDataManage {
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			bar.dismiss();
+//			bar.dismiss();
 //			if(result)
 //				Toast.makeText(context, "�ɹ�", Toast.LENGTH_SHORT).show();
 		}
@@ -417,7 +417,7 @@ public class FavoriteDataManage {
 					searchItem.setCommentAmount(remarks);
 					String imageName = infoItem.getString("imgname");
 //					ImageUrl imageUrlClass = new ImageUrl();
-					String imageUrl = ImageUrl.IMAGEURL + imageName;//imageUrlClass.getImageUrl();
+					String imageUrl = ImageUrl.IMAGEURL + imageName + "!100";//imageUrlClass.getImageUrl();
 					searchItem.setImgUrl(imageUrl);
 					
 //					String maddress = infoItem.getString("address");

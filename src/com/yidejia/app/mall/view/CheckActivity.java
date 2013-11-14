@@ -3,6 +3,7 @@ package com.yidejia.app.mall.view;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.yidejia.app.mall.ComposeActivity;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.datamanage.TaskGetShipLog;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,29 +14,22 @@ import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class CheckActivity extends SherlockActivity {
-	/*
-	public void doClick(View v){
-		switch (v.getId()) {
-		case R.id.address_management_button1:
-			Intent intent = new Intent(AddressActivity.this,MyMallActivity.class);
-			startActivity(intent);
-			//结束当前Activity；
-			AddressActivity.this.finish();
-			break;
-		case R.id.address_management_button2:
-			Intent intent2 = new Intent(AddressActivity.this,NewAddressActivity.class);
-			startActivity(intent2);
-			//结束当前Activity；
-			AddressActivity.this.finish();
-			break;
-		}
-	}
-	*/
+
+	private String shipCode;//快递单号
+	private String shipCompany;//快递公司
+	
+	private TextView shipCompanyTextView;//
+	private TextView shipCodeTextView;
+	private LinearLayout logistics_details_layout;
+	
+	private TaskGetShipLog task;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,8 +37,37 @@ public class CheckActivity extends SherlockActivity {
 		//这里父布局要用scrollview
 		setContentView(R.layout.check_logistics);
 		
-
+		Bundle bundle = getIntent().getExtras();
+		shipCode = bundle.getString("shipCode");
+		shipCompany = bundle.getString("shipCompany");
 		
+		findIds();
+		shipCompanyTextView.setText(shipCompany);
+//		shipCodeTextView.setText("6350485541");
+		shipCodeTextView.setText(shipCode);
+		
+		task = new TaskGetShipLog(CheckActivity.this, logistics_details_layout);
+//		task.getShipLogs("6350485541");
+		task.getShipLogs(shipCode);
+	}
+	
+	
+	
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		if(task != null) task.closeTask();
+	}
+
+
+
+
+	private void findIds(){
+		shipCompanyTextView = (TextView) findViewById(R.id.check_logistics_name);
+		shipCodeTextView = (TextView) findViewById(R.id.check_logistics_number);
+		logistics_details_layout = (LinearLayout) findViewById(R.id.logistics_details_layout);
 	}
 	
 	private void setActionbar(){

@@ -1,79 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
-    android:orientation="vertical" >
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/express_topbg"
-        android:orientation="horizontal" >
-
-        <ImageView
-            android:id="@+id/check_logistics_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:src="@drawable/lbex" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/check_logistics_image"
-            android:layout_marginLeft="4dp"
-            android:layout_toRightOf="@id/check_logistics_image"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/check_logistics_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="申通快递"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/check_logistics_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="运单编号：6685298838459"
-                android:textSize="15sp" />
-        </LinearLayout>
-    </RelativeLayout>
+    android:background="@drawable/bg" >
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:background="@drawable/express_middlebg"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/check_logistics_who"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
-            android:text="已签收，签收人是【草签】"
-            android:textColor="#ed217c"
-            android:textSize="15sp" />
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/express_topbg"
+            android:orientation="horizontal" >
 
-        <TextView
+            <ImageView
+                android:id="@+id/check_logistics_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/lbex" />
+<!-- 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/check_logistics_image"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/check_logistics_image"
+                android:orientation="vertical" >
+ -->
+                <TextView
+                    android:id="@+id/check_logistics_name"
+                    android:layout_toRightOf="@id/check_logistics_image"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/check_logistics_number_text"
+                    android:layout_toRightOf="@id/check_logistics_image"
+                    android:layout_below="@id/check_logistics_name"
+                    android:layout_alignLeft="@id/check_logistics_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="运单编号："
+                    android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/check_logistics_number"
+                    android:layout_toRightOf="@id/check_logistics_number_text"
+                    android:layout_below="@id/check_logistics_name"
+                    android:layout_alignBaseline="@id/check_logistics_number_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp" />
+                <!-- 
+            </LinearLayout>
+             -->
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/logistics_details_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="4dp"
-            android:text="2013-08-30 11:50:12"
-            android:textColor="#ed217c"
-            android:textSize="15sp" />
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:orientation="vertical" >
+<!-- 
+            <TextView
+                android:id="@+id/check_logistics_who"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="30dp"
+                android:textColor="#ed217c"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="4dp"
+                android:textColor="#ed217c"
+                android:textSize="15sp" />
+                 -->
+        </LinearLayout>
     </LinearLayout>
-
+    <!--
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -152,5 +171,6 @@
             android:text="2013-08-30 11:50:12"
             android:textSize="15sp" />
     </LinearLayout>
+        -->
 
-</LinearLayout>
+</ScrollView>

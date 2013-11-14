@@ -6,10 +6,16 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +23,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,26 +34,59 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.datamanage.VoucherDataManage;
 import com.yidejia.app.mall.model.Specials;
+import com.yidejia.app.mall.util.Consts;
+import com.yidejia.app.mall.view.CstmPayActivity;
 
 public class ExchangeAdapter extends BaseAdapter {
-	private Context context;
+	private Activity activity;
 	private ArrayList<Specials> mlist;
-	private static HashMap<Integer, Boolean> isSelected;// ÓÃÀ´±£´æÑ¡ÖĞµÄ×´Ì¬
+	private static HashMap<Integer, Boolean> isSelected;// =×´Ì¬
+	public static List<HashMap<String, Float>> mlist1;
+	public static List<HashMap<String, Object>> mlist2;
 	private LayoutInflater inflater;
-//	private Handler handler;
+	private VoucherDataManage voucherDataManage;// ç§¯åˆ†çš„ä¿¡æ¯
+	private double userVoucher;// ç”¨æˆ·ç§¯åˆ†
+	private MyApplication myApplication;
+	private InnerReciver receiver;
 
-	public ExchangeAdapter(ArrayList<Specials> mList, Context context) {
-		this.context = context;
+	public ExchangeAdapter(ArrayList<Specials> mList, Activity context) {
+		
+		this.activity = context;
 		this.mlist = mList;
 		this.inflater = LayoutInflater.from(context);
+		receiver = new InnerReciver();
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Consts.EXCHANG_FREE);
+		context.registerReceiver(receiver, filter);
+		
+		voucherDataManage = new VoucherDataManage(context);
+		myApplication = (MyApplication) activity.getApplication();
+		
+		Log.e("voucher",CstmPayActivity.voucherString1+"");
+		userVoucher = Double.parseDouble(CstmPayActivity.voucherString1);//ç”¨æˆ·çš„ç§¯åˆ†
+		
+//		userVoucher = Double.parseDouble(voucherDataManage.getUserVoucher(
+//				myApplication.getUserId(), myApplication.getToken()));
+		
 		options = new DisplayImageOptions.Builder()
-		.showStubImage(R.drawable.hot_sell_right_top_image)
-		.showImageOnFail(R.drawable.hot_sell_right_top_image)
-		.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
-		.cacheInMemory(true).cacheOnDisc(true).build();
+				.showStubImage(R.drawable.image_bg)
+				.showImageOnFail(R.drawable.image_bg)
+				.showImageForEmptyUri(R.drawable.image_bg).cacheInMemory(true)
+				.cacheOnDisc(true).build();
+		isSelected = new HashMap<Integer, Boolean>();
+		mlist1 = new ArrayList<HashMap<String, Float>>();
+		mlist2 = new ArrayList<HashMap<String, Object>>();
 		initData();
+		
+		
+	}
+
+	public ExchangeAdapter() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public static HashMap<Integer, Boolean> getIsSelected() {
@@ -57,10 +98,11 @@ public class ExchangeAdapter extends BaseAdapter {
 	}
 
 	/**
-	 * ³õÊ¼»¯checkboxµÄÑ¡ÖĞ×´Ì¬
+	 * ï¿½ï¿½Ê¼ï¿½ï¿½checkboxï¿½ï¿½Ñ¡ï¿½ï¿½×´Ì¬
 	 */
 	private void initData() {
 		for (int i = 0; i < mlist.size(); i++) {
+			// Log.i("info", mlist.size() + "size");
 			getIsSelected().put(i, false);
 		}
 	}
@@ -104,16 +146,19 @@ public class ExchangeAdapter extends BaseAdapter {
 	}
 
 	/**
-	 * ¼ÓÔØÊÓÍ¼
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 	 */
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	private DisplayImageOptions options;
-	protected ImageLoader imageLoader = ImageLoader.getInstance();// ¼ÓÔØÍ¼Æ¬
-
-	ViewHolder holder = null;
+	protected ImageLoader imageLoader = ImageLoader.getInstance();// ï¿½ï¿½ï¿½ï¿½Í¼Æ¬
+	int i = 0;
+	
 	@Override
-	public View getView(int postion, View covertView, ViewGroup arg2) {
+	public View getView(final int postion, View covertView, ViewGroup arg2) {
 		// TODO Auto-generated method stub
+		final HashMap<String, Float> map = new HashMap<String, Float>();
+		final HashMap<String, Object> map1 = new HashMap<String, Object>();
+		 final ViewHolder holder;
 		if (covertView == null) {
 			covertView = inflater.inflate(R.layout.exchange_produce_item, null);
 			holder = new ViewHolder();
@@ -135,53 +180,112 @@ public class ExchangeAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) covertView.getTag();
 		}
+		  final Handler handler = new Handler() {
+			public void handleMessage(Message msg) {
+				if (msg.what == 113) {
+					map.put("count",
+							Float.parseFloat(holder.count.getText().toString()));
+					map1.put("count1",
+							Float.parseFloat(holder.count.getText().toString()));
+				}
+				if(msg.what == 114){
+					Log.i("info", "    sum1");
+					for(int j=0;j<mlist2.size();j++){
+						HashMap<String, Object> map = mlist2.get(j);
+						map.put("isCheck1", 1);
+						holder.cb.setChecked(false);
+					}
+				}
+				
+			};
+		};
 		Specials s = mlist.get(postion);
-		imageLoader.displayImage(s.getImgUrl(), holder.iv, options, animateFirstListener);
+		imageLoader.displayImage(s.getImgUrl(), holder.iv, options,
+				animateFirstListener);
 		holder.tvContent.setText(s.getBrief());
-		holder.tvPrice.setText(s.getPrice());
+		holder.tvPrice.setText(s.getScores());
 		holder.cb.setChecked(getIsSelected().get(postion));
-		
+		holder.count.setText(1 + "");
+
+		holder.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				// TODO Auto-generated method stub
+				if (isChecked) {
+					isSelected.put(postion, true);
+					map.put("isCheck", (float) 0);
+					map1.put("isCheck1", (float) 0);
+					// map.put("isCheck", (float) 0 );
+				} else {
+					isSelected.put(postion, false);
+					map.put("isCheck", (float) 1);
+					map1.put("isCheck1", (float) 1);
+					holder.cb.setChecked(false);
+					map1.put("price", 0);
+				}
+//				Message ms = new Message();
+//				ms.what = 115;
+//				handler.sendMessage(ms);
+			}
+
+		});
 		holder.add.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				int sum = Integer.parseInt(holder.count.getText().toString());
-				
 				if (sum >= 9999) {
-					Toast.makeText(context, "ÄúÏëÒª¹ºÂò¸ü¶àµÄ²úÆ·£¬ÇëÓë¿Í·şÁªÏµ",
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(
+							activity,
+							activity.getResources().getString(
+									R.string.price_error), Toast.LENGTH_LONG)
+							.show();
+
 				} else {
 					sum++;
 					holder.count.setText(sum + "");
-					// mTextView.setText(Integer.parseInt(number.getText()
-					// .toString())+"");
 				}
-//				Message ms = new Message();
-//				ms.what = 123;
-//				handler.sendMessage(ms);
-				
+				Message ms = new Message();
+				ms.what = 113;
+				handler.sendMessage(ms);
+
 			}
 		});
 		holder.subtract.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				int sum = Integer.parseInt(holder.count.getText().toString());
 				if (sum <= 1) {
-					Toast.makeText(context, "ÒÑ¾­ÊÇ×îĞ¡µÄÊıÖµÁË",
+					Toast.makeText(activity,
+							activity.getResources().getString(R.string.mix),
+
 							Toast.LENGTH_LONG).show();
 				} else {
 					sum--;
 					holder.count.setText(sum + "");
-					
+
 				}
-//			
-//				Message ms = new Message();
-//				ms.what = 123;
-//				handler.sendMessage(ms);
+				Message ms = new Message();
+				ms.what = 113;
+				handler.sendMessage(ms);
 			}
 		});
+		map1.put("isCheck1", (float) (holder.cb.isChecked() == true ? 0 : 1));
+		map1.put("cart", s);
+		map1.put("price1", Float.parseFloat(s.getScores()));
+		map1.put("count1", Float.parseFloat(holder.count.getText().toString()));
+
+		map.put("price", Float.parseFloat(s.getScores()));
+		map.put("count", Float.parseFloat(holder.count.getText().toString()));
+		map.put("isCheck", (float) (holder.cb.isChecked() == true ? 0 : 1));
+
+		i++;
+		mlist1.add(map);
+		mlist2.add(map1);
 		return covertView;
 	}
 
@@ -193,6 +297,23 @@ public class ExchangeAdapter extends BaseAdapter {
 		private ImageView subtract;
 		private ImageView add;
 		private TextView count;
+
 	}
 
+	public class InnerReciver extends BroadcastReceiver{
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			String  action = intent.getAction();
+			if(Consts.EXCHANG_FREE.equals(action)){
+				 initData();
+				 notifyDataSetChanged();
+			}
+			context.unregisterReceiver(receiver);
+		}
+		
+	}
+	
+	
 }

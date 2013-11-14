@@ -3,6 +3,9 @@ package com.yidejia.app.mall.view;
 import java.util.ArrayList;
 
 
+
+
+
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -24,9 +27,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+
+
+
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
 import com.yidejia.app.mall.adapter.WaitPayFragmentAdapter;
+import com.yidejia.app.mall.fragment.AllOrderFragment;
 import com.yidejia.app.mall.fragment.WaitPayFragment;
 
 public class WaitPayActivity extends SherlockFragmentActivity {
@@ -73,6 +82,7 @@ public class WaitPayActivity extends SherlockFragmentActivity {
 		InitWidth();
 		InitTextView();
 		InitViewPager();
+
 		
 	}
 
@@ -86,7 +96,7 @@ public class WaitPayActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
 		ImageView back = (ImageView) findViewById(R.id.compose_back);
 		TextView  titleTextView = (TextView) findViewById(R.id.compose_title);
-		titleTextView.setText("待付款订单");
+		titleTextView.setText(getResources().getString(R.string.wait_pay));
 		
 		back.setOnClickListener(new OnClickListener() {
 			
@@ -111,15 +121,16 @@ public class WaitPayActivity extends SherlockFragmentActivity {
 		 fragmentsList = new ArrayList<Fragment>();
 		 LayoutInflater mInflater = getLayoutInflater();
 	     
-		 Fragment weekfragment = WaitPayFragment.newInstance("近一周");
-	     Fragment monthFragment = WaitPayFragment.newInstance("近一月");
-	     Fragment yearFragment=WaitPayFragment.newInstance("近一年");
+		 Fragment weekfragment = AllOrderFragment.newInstance(1, 0);
+	     Fragment monthFragment = AllOrderFragment.newInstance(1, 1);
+	     Fragment yearFragment = AllOrderFragment.newInstance(1, 2);
 	     
 	     fragmentsList.add(yearFragment);
 	     fragmentsList.add(monthFragment);
 	     fragmentsList.add(weekfragment);
 	     
-	     mPager.setAdapter(new WaitPayFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
+//	     mPager.setAdapter(new WaitPayFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
+	     mPager.setAdapter(new AllOrderFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
 	     mPager.setCurrentItem(0);
 	     mPager.setOffscreenPageLimit(2);
 	     mPager.setOnPageChangeListener(new MyOnPageChangeListener());
@@ -163,12 +174,12 @@ public class WaitPayActivity extends SherlockFragmentActivity {
 	                    animation = new TranslateAnimation(position_one, 0, 0, 0);
 	                    mMonth.setPressed(false);
 	                    mMonth.setBackgroundResource(R.drawable.product_details_bg);
-	                    mMonth.setTextColor(Color.parseColor("#ed217c"));
+	                    mMonth.setTextColor(Color.parseColor("#000000"));
 	                } else if (currIndex == 2) {
 	                    animation = new TranslateAnimation(position_two, 0, 0, 0);
 	                    mYear.setPressed(false);
 	                    mYear.setBackgroundResource(R.drawable.product_details_bg);
-	                    mYear.setTextColor(Color.parseColor("#ed217c"));
+	                    mYear.setTextColor(Color.parseColor("#000000"));
 	                } 
 	                mWeek.setPressed(true);
 	                mWeek.setTextColor(Color.parseColor("#702c91"));
@@ -179,12 +190,12 @@ public class WaitPayActivity extends SherlockFragmentActivity {
 	                    animation = new TranslateAnimation(offset, position_one, 0, 0);
 	                    mWeek.setPressed(false);
 	                    mWeek.setBackgroundResource(R.drawable.product_details_bg);
-	                    mWeek.setTextColor(Color.parseColor("#ed217c"));
+	                    mWeek.setTextColor(Color.parseColor("#000000"));
 	                } else if (currIndex == 2) {
 	                    animation = new TranslateAnimation(position_two, position_one, 0, 0);
 	                    mYear.setPressed(false);
 	                    mYear.setBackgroundResource(R.drawable.product_details_bg);
-	                    mYear.setTextColor(Color.parseColor("#ed217c"));
+	                    mYear.setTextColor(Color.parseColor("#000000"));
 	                } 
 	                mMonth.setPressed(true);
 	                mMonth.setBackgroundResource(R.drawable.product_details_selected);
@@ -195,12 +206,12 @@ public class WaitPayActivity extends SherlockFragmentActivity {
 	                    animation = new TranslateAnimation(offset, position_two, 0, 0);
 	                    mWeek.setPressed(false);
 	                    mWeek.setBackgroundResource(R.drawable.product_details_bg);
-	                    mWeek.setTextColor(Color.parseColor("#ed217c"));
+	                    mWeek.setTextColor(Color.parseColor("#000000"));
 	                } else if (currIndex == 1) {
 	                	mMonth.setPressed(false);
 	                	mMonth.setBackgroundResource(R.drawable.product_details_bg);
 	                    animation = new TranslateAnimation(position_one, position_two, 0, 0);
-	                    mMonth.setTextColor(Color.parseColor("#ed217c"));
+	                    mMonth.setTextColor(Color.parseColor("#000000"));
 	                } 
 	                mYear.setPressed(true);
 	                mYear.setTextColor(Color.parseColor("#702c91"));

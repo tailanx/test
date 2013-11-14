@@ -25,13 +25,13 @@
 			case R.id.address_management_button1:
 				Intent intent = new Intent(AddressActivity.this,MyMallActivity.class);
 				startActivity(intent);
-				//����ǰActivity��
+				//?????Activity??
 				AddressActivity.this.finish();
 				break;
 			case R.id.address_management_button2:
 				Intent intent2 = new Intent(AddressActivity.this,NewAddressActivity.class);
 				startActivity(intent2);
-				//����ǰActivity��
+				//?????Activity??
 				AddressActivity.this.finish();
 				break;
 			}
@@ -41,7 +41,7 @@
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			setActionbar();
-			//���︸����Ҫ��scrollview
+			//???��???????scrollview
 			setContentView(R.layout.opinion);
 
 		}
@@ -76,7 +76,7 @@
 //					Toast.makeText(ComposeActivity.this, "button", Toast.LENGTH_SHORT).show();
 //					Intent intent = new Intent(AddressActivity.this,MyMallActivity.class);
 //					startActivity(intent);
-					//����ǰActivity��
+					//?????Activity??
 					OptionActivity.this.finish();
 				}
 			});

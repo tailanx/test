@@ -70,11 +70,20 @@ public class JNICallBack {
 	//获取订单数据
 	public static native String getHttp4GetOrder(String user_id, String code, String date, String status, String offset1, String limit1, String token);
 	
+	//获取待评价商品列表
+	public static native String getHttp4GetNoEvaluate(String user_id);
+	
+	//根据订单编号获取订单信息
+	public static native String getHttp4GetOrderByCode(String code);
+	
 	//修改支付状态
 	public static native String getHttp4PayOut(String customer_id, String code);
 	
 	//取消订单
 	public static native String getHttp4CancelOrder(String id, String code, String token);
+	
+	//删除订单
+	public static native String getHttp4DelOrder(String id, String code, String token);
 	
 	//签收订单
 	public static native String getHttp4SignOrder(String id, String code, String token);
@@ -84,7 +93,7 @@ public class JNICallBack {
 			String ticket_id, String recipient_id, String pingou_id,
 			String goods_ascore, String ship_fee, String ship_type,
 			String ship_entity_name, String goods_qty_scr, String comments,
-			String token);
+			String pay_type, String token);
 
 	//获取品牌
 	public static native String getHttp4GetBrand();
@@ -121,4 +130,29 @@ public class JNICallBack {
 	
 	//标记消息未已读状态
 	public static native String getHttp4ChangeRead(String userId, String msgId, String token);
-}
+	
+	//申请退换货
+	public static native String getHttp4GetReturn(String user_id, String order_code, String the_date, String contact, String phone, String cause, String desc, String token);
+	
+	//查看退换货
+	public static native String getHttp4GetReturnList(String userid, String offset, String limit, String token);
+	
+	//查看物流
+	public static native String getHttp4GetShipLog(String code);
+	
+	//获取tn
+	public static native String getHttp4GetTn(String userid, String order_code, String token);
+	
+	//获取图片验证码
+	public static native String getHttp4GetCode(String name);
+	
+	//发送验证码
+	public static native String getHttp4SendMsg(String name, String code);
+	
+	//验证验证码
+	public static native String getHttp4CheckCode(String name, String code);
+	
+	//重置密码
+	public static native String getHttp4ResetPsw(String name, String psw, String code);
+}	
+	

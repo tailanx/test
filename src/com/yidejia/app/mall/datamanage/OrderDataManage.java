@@ -20,6 +20,7 @@ import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.order.CancelOrder;
+import com.yidejia.app.mall.net.order.GetOrderByCode;
 import com.yidejia.app.mall.net.order.GetOrderList;
 import com.yidejia.app.mall.net.order.PayOutOrder;
 import com.yidejia.app.mall.net.order.SaveOrder;
@@ -46,6 +47,7 @@ public class OrderDataManage {
 		orders = new ArrayList<Order>();
 		cartsArray = new ArrayList<Cart>();
 		unicode = new UnicodeToString();
+		order = new Order();
 	}
 
 	/**
@@ -122,9 +124,9 @@ public class OrderDataManage {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage(context.getResources().getString(R.string.searching));
-			bar.show();
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(context.getResources().getString(R.string.searching));
+//			bar.show();
 		}
 
 		@Override
@@ -156,12 +158,12 @@ public class OrderDataManage {
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			bar.dismiss();
+//			bar.dismiss();
 			// if(result)
 			// Toast.makeText(context, "�ɹ�", Toast.LENGTH_SHORT).show();
 		}
 
-		private ProgressDialog bar = new ProgressDialog(context);
+//		private ProgressDialog bar = new ProgressDialog(context);
 	}
 
 	private ArrayList<Order> analysisGetListJson(String httpResultString)
@@ -204,6 +206,7 @@ public class OrderDataManage {
 	private ArrayList<Cart> cartsArray;
 
 	private ArrayList<Cart> analysisCart(String lines) throws JSONException {
+		ArrayList<Cart> cartsArray = new ArrayList<Cart>();
 		JSONArray jsonArray = new JSONArray(lines);
 		int length = jsonArray.length();
 		Cart cart;
@@ -218,7 +221,7 @@ public class OrderDataManage {
 			String goods_name = jObject.getString("goods_name");
 			cart.setProductText(unicode.revert(goods_name));
 			String img_name = jObject.getString("img_name");
-			cart.setImgUrl(ImageUrl.IMAGEURL + img_name);
+			cart.setImgUrl(ImageUrl.IMAGEURL + img_name + "!100");
 			cart.setPrice(Float.parseFloat(jObject.getString("price")));
 			cartsArray.add(cart);
 		}
@@ -256,14 +259,14 @@ public class OrderDataManage {
 	public boolean saveOrder(String customer_id, String ticket_id,
 			String recipient_id, String pingou_id, String goods_ascore,
 			String ship_fee, String ship_type, String ship_entity_name,
-			String goods_qty_scr, String comments, String token) {
+			String goods_qty_scr, String comments, String pay_type, String token) {
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
 			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return false;
 		}
 		TaskSave taskSave = new TaskSave(customer_id, ticket_id, recipient_id,
 				pingou_id, goods_ascore, ship_fee, ship_type, ship_entity_name,
-				goods_qty_scr, comments, token);
+				goods_qty_scr, comments, pay_type, token);
 		boolean state = false;
 		try {
 			state = taskSave.execute().get();
@@ -295,11 +298,12 @@ public class OrderDataManage {
 		private String ship_entity_name;
 		private String goods_qty_scr;
 		private String comments;
+		private String pay_type;
 		private String token;
 		public TaskSave(String customer_id, String ticket_id,
 				String recipient_id, String pingou_id, String goods_ascore,
 				String ship_fee, String ship_type, String ship_entity_name,
-				String goods_qty_scr, String comments, String token) {
+				String goods_qty_scr, String comments, String pay_type, String token) {
 			this.customer_id = customer_id;
 			this.ticket_id = ticket_id;
 			this.recipient_id = recipient_id;
@@ -310,18 +314,19 @@ public class OrderDataManage {
 			this.ship_entity_name = ship_entity_name;
 			this.goods_qty_scr = goods_qty_scr;
 			this.comments = comments;
+			this.pay_type = pay_type;
 			this.token = token;
 		}
 
-		private ProgressDialog bar = new ProgressDialog(context);
+//		private ProgressDialog bar = new ProgressDialog(context);
 
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage(context.getResources().getString(R.string.searching));
-			bar.show();
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(context.getResources().getString(R.string.searching));
+//			bar.show();
 		}
 
 		@Override
@@ -331,7 +336,7 @@ public class OrderDataManage {
 			try {
 				String httpResponse = saveOrderList.getHttpResponse(customer_id, ticket_id,
 						recipient_id, pingou_id, goods_ascore, ship_fee, ship_type,
-						ship_entity_name, goods_qty_scr, comments, token);
+						ship_entity_name, goods_qty_scr, comments, pay_type, token);
 				JSONObject jsonObject = new JSONObject(httpResponse);
 				int code = jsonObject.getInt("code");
 				if(code == 1){
@@ -340,6 +345,8 @@ public class OrderDataManage {
 					String result = responseObject.getString("@p_result");
 					if(unicode.revert(result).equals(context.getResources().getString(R.string.success_save_order))){
 						orderCode = responseObject.getString("@p_order_code");
+						resp_code = responseObject.getString("@p_resp_code");
+						tn = responseObject.getString("@p_tn");
 						return true;
 					}
 				}
@@ -359,17 +366,33 @@ public class OrderDataManage {
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			bar.dismiss();
+//			bar.dismiss();
 		}
 	}
 	
 	private String orderCode = "";//提交订单成功后返回的订单号
+	private String tn = "";//提交订单成功后返回的订单流水号
+	private String resp_code;//提交订单成功后返回的状态码
 	/**
 	 * 
 	 * @return orderCode 提交订单成功后返回的订单号
 	 */
 	public String getOrderCode(){
 		return orderCode;
+	}
+	/**
+	 * 
+	 * @return 提交订单成功后返回的状态码
+	 */
+	public String getRespCode(){
+		return resp_code;
+	}
+	/**
+	 * 
+	 * @return 提交订单成功后返回的订单流水号
+	 */
+	public String getTN(){
+		return tn;
 	}
 	/**
 	 * 修改订单支付状态
@@ -411,15 +434,15 @@ public class OrderDataManage {
 			this.code = code;
 		}
 		
-		private ProgressDialog bar = new ProgressDialog(context);
+//		private ProgressDialog bar = new ProgressDialog(context);
 
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage(context.getResources().getString(R.string.searching));
-			bar.show();
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(context.getResources().getString(R.string.searching));
+//			bar.show();
 		}
 		@Override
 		protected Boolean doInBackground(Void... params) {
@@ -454,7 +477,7 @@ public class OrderDataManage {
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			bar.dismiss();
+//			bar.dismiss();
 		}
 	}
 	
@@ -501,15 +524,15 @@ public class OrderDataManage {
 			this.token = token;
 		}
 		
-		private ProgressDialog bar = new ProgressDialog(context);
+//		private ProgressDialog bar = new ProgressDialog(context);
 		
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage(context.getResources().getString(R.string.searching));
-			bar.show();
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(context.getResources().getString(R.string.searching));
+//			bar.show();
 		}
 		@Override
 		protected Boolean doInBackground(Void... params) {
@@ -544,7 +567,7 @@ public class OrderDataManage {
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			bar.dismiss();
+//			bar.dismiss();
 		}
 	}
 	
@@ -591,15 +614,15 @@ public class OrderDataManage {
 			this.token = token;
 		}
 		
-		private ProgressDialog bar = new ProgressDialog(context);
+//		private ProgressDialog bar = new ProgressDialog(context);
 		
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage(context.getResources().getString(R.string.searching));
-			bar.show();
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(context.getResources().getString(R.string.searching));
+//			bar.show();
 		}
 		@Override
 		protected Boolean doInBackground(Void... params) {
@@ -634,9 +657,67 @@ public class OrderDataManage {
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			bar.dismiss();
+//			bar.dismiss();
 		}
 	}
 
+	private Order order;//
+	/**
+	 * @param code 根据订单号返回订单详情
+	 */
+	public Order getOrderByCode(String code){
+		TaskGOBC taskGOBC = new TaskGOBC(code);
+		try {
+			boolean state = taskGOBC.execute().get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return order;
+	}
 
+	
+	private class TaskGOBC extends AsyncTask<Void, Void, Boolean>{
+
+		public String code = "";
+		public TaskGOBC(String code){
+			this.code = code;
+		}
+		
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			GetOrderByCode gobc = new GetOrderByCode();
+			try {
+				String httpResponse = gobc.getHttpResponse(code);
+				try {
+					JSONObject httpJsonObject = new JSONObject(httpResponse);
+					int respCode = httpJsonObject.getInt("code");
+					if(respCode == 1){
+						String respString = httpJsonObject.getString("response");
+						JSONObject respObject = new JSONObject(respString);
+						order.setId(respObject.getString("order_id"));
+						order.setOrderCode(respObject.getString("order_code"));
+						order.setDate(respObject.getString("the_date"));
+						order.setStatus(respObject.getString("status"));
+						order.setCore(respObject.getString("goods_ascore"));
+						order.setShipFee(respObject.getString("ship_fee"));
+//						goods_acash
+						return true;
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return false;
+		}
+		
+	}
 }

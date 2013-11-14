@@ -2,31 +2,27 @@ package com.yidejia.app.mall.view;
 
 import java.util.ArrayList;
 
-
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
 import com.yidejia.app.mall.adapter.WaitDeliverFragmentAdapter;
+import com.yidejia.app.mall.fragment.AllOrderFragment;
 import com.yidejia.app.mall.fragment.WaitDeliverFragment;
 
 public class WaitDeliverActivity extends SherlockFragmentActivity {
@@ -70,7 +66,7 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 		InitWidth();
 		InitTextView();
 		InitViewPager();
-		
+	
 	}
 
 	private void setActionBar(){
@@ -108,15 +104,15 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 		 LayoutInflater mInflater = getLayoutInflater();
 	     View activityView = mInflater.inflate(R.layout.wait_deliver_item_main, null);
 	     
-	     Fragment weekfragment = WaitDeliverFragment.newInstance("近一周");
-	     Fragment monthFragment = WaitDeliverFragment.newInstance("近一月");
-	     Fragment yearFragment=WaitDeliverFragment.newInstance("近一年");
+	     Fragment weekfragment = AllOrderFragment.newInstance(2, 0);
+	     Fragment monthFragment = AllOrderFragment.newInstance(2, 1);
+	     Fragment yearFragment = AllOrderFragment.newInstance(2, 2);
 	     
 	     fragmentsList.add(yearFragment);
 	     fragmentsList.add(monthFragment);
 	     fragmentsList.add(weekfragment);
 	     
-	     mPager.setAdapter(new WaitDeliverFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
+	     mPager.setAdapter(new AllOrderFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
 	     mPager.setCurrentItem(0);
 	     mPager.setOffscreenPageLimit(2);
 	     mPager.setOnPageChangeListener(new MyOnPageChangeListener());
@@ -160,15 +156,15 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 	                    animation = new TranslateAnimation(position_one, 0, 0, 0);
 	                    mMonth.setPressed(false);
 	                    mMonth.setBackgroundResource(R.drawable.product_details_bg);
-	                    mMonth.setTextColor(Color.parseColor("#ed217c"));
+	                    mMonth.setTextColor(Color.parseColor("#000000"));
 	                } else if (currIndex == 2) {
 	                    animation = new TranslateAnimation(position_two, 0, 0, 0);
 	                    mYear.setPressed(false);
 	                    mYear.setBackgroundResource(R.drawable.product_details_bg);
-	                    mYear.setTextColor(Color.parseColor("#ed217c"));
+	                    mYear.setTextColor(Color.parseColor("#000000"));
 	                } 
 	                mWeek.setPressed(true);
-	                mWeek.setBackgroundResource(R.drawable.produce_textview_selector);
+	                mWeek.setBackgroundResource(R.drawable.product_details_selected);
 	                mWeek.setTextColor(Color.parseColor("#702c91"));
 	                break;
 	            case 1:
@@ -176,12 +172,12 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 	                    animation = new TranslateAnimation(offset, position_one, 0, 0);
 	                    mWeek.setPressed(false);
 	                    mWeek.setBackgroundResource(R.drawable.product_details_bg);
-	                    mWeek.setTextColor(Color.parseColor("#ed217c"));
+	                    mWeek.setTextColor(Color.parseColor("#000000"));
 	                } else if (currIndex == 2) {
 	                    animation = new TranslateAnimation(position_two, position_one, 0, 0);
 	                    mYear.setPressed(false);
 	                    mYear.setBackgroundResource(R.drawable.product_details_bg);
-	                    mYear.setTextColor(Color.parseColor("#ed217c"));
+	                    mYear.setTextColor(Color.parseColor("#000000"));
 	                } 
 	                mMonth.setPressed(true);
 	                mMonth.setBackgroundResource(R.drawable.product_details_selected);
@@ -192,12 +188,12 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 	                    animation = new TranslateAnimation(offset, position_two, 0, 0);
 	                    mWeek.setPressed(false);
 	                    mWeek.setBackgroundResource(R.drawable.product_details_bg);
-	                    mWeek.setTextColor(Color.parseColor("#ed217c"));
+	                    mWeek.setTextColor(Color.parseColor("#000000"));
 	                } else if (currIndex == 1) {
 	                    animation = new TranslateAnimation(position_one, position_two, 0, 0);
 	                    mMonth.setPressed(false);
 	                    mMonth.setBackgroundResource(R.drawable.product_details_bg);
-	                    mMonth.setTextColor(Color.parseColor("#ed217c"));
+	                    mMonth.setTextColor(Color.parseColor("#000000"));
 	                } 
 	                mYear.setPressed(true);
 	                mYear.setBackgroundResource(R.drawable.product_details_selected);

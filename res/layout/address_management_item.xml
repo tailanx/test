@@ -33,7 +33,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="8dp"
-                android:text="广东省广州市番禺区"
                 android:textSize="18sp" />
 
             <TextView
@@ -41,8 +40,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_below="@id/address_management_item_address1"
+                android:lines="2"
+                android:ellipsize="end"
                 android:paddingLeft="8dp"
-                android:text="番禺大道北555号天安科技园总部中心大厦二号楼1903"
                 android:textSize="18sp" />
 
             <TextView
@@ -62,7 +62,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@id/address_name"
                 android:layout_toRightOf="@id/address_name"
-                android:text="乔丹"
                 android:textSize="14sp" />
 
             <TextView
@@ -74,7 +73,6 @@
                 android:layout_marginRight="8dp"
                 android:drawableLeft="@drawable/phone_iocn"
                 android:gravity="bottom"
-                android:text="186000000"
                 android:textSize="14sp" />
         </RelativeLayout>
 
@@ -91,6 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:focusable="false"
                 android:layout_marginLeft="8dp" />
 
             <TextView
@@ -109,8 +108,6 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:clickable="true"
-                android:focusable="true"
                 android:src="@drawable/delete" />
 
             <ImageView
@@ -120,8 +117,6 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@id/address_management_item_relative1_textview1"
-                android:clickable="true"
-                android:focusable="true"
                 android:src="@drawable/address_edit" />
         </RelativeLayout>
     </LinearLayout>

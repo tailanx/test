@@ -166,11 +166,11 @@ public class MainPageDataManage {
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
-			super.onPreExecute();
+//			super.onPreExecute();
 			if (!isHasPTR) {
-				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-				bar.setMessage(context.getResources().getString(R.string.searching));
-				bar.show();
+//				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//				bar.setMessage(context.getResources().getString(R.string.searching));
+//				bar.show();
 			} else {
 				mPullToRefreshScrollView.setRefreshing();
 				
@@ -201,8 +201,8 @@ public class MainPageDataManage {
 		@Override
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
-			if(!isHasPTR)
-				bar.dismiss();
+			if(!isHasPTR);
+//				bar.dismiss();
 			else mPullToRefreshScrollView.onRefreshComplete();
 //			HotSellView hotSellView = new HotSellView(view);
 //			hotSellView.initHotSellView(hotSellArray);
@@ -212,7 +212,7 @@ public class MainPageDataManage {
 //				Toast.makeText(context, "�ɹ�", Toast.LENGTH_SHORT).show();
 			super.onPostExecute(result);
 		}
-		private ProgressDialog bar = new ProgressDialog(context);
+//		private ProgressDialog bar = new ProgressDialog(context);
 		
 	}
 	
@@ -282,8 +282,10 @@ public class MainPageDataManage {
 			itemObject = hotsellJsonArray.getJSONObject(i);
 			String goodsId = itemObject.getString("goods_id");
 			baseProduct.setUId(goodsId);
-			String imgUrl = itemObject.getString("img_name");
-			baseProduct.setImgUrl(ImageUrl.IMAGEURL+imgUrl);
+			String imgUrl;
+			if(i==0 && index != 2)imgUrl = ImageUrl.IMAGEURL + itemObject.getString("img_name");
+			else imgUrl = ImageUrl.IMAGEURL + itemObject.getString("img_name");
+			baseProduct.setImgUrl(imgUrl);
 			String title = itemObject.getString("name");
 			baseProduct.setTitle(unicode.revert(title));
 			Log.i(TAG, title);

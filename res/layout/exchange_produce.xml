@@ -3,22 +3,19 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg" >
 
-    <ScrollView
-        android:id="@+id/exchange_shopping_cart_scrollView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp" >
+
 
         <LinearLayout
             android:id="@+id/exchage_shopping_cart_relative2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+             >
       <ListView 
           android:id="@+id/exchange_shopping_listview"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content">
+          android:layout_height="match_parent"
+         >
           </ListView>
         </LinearLayout>
-    </ScrollView>
     </RelativeLayout>
