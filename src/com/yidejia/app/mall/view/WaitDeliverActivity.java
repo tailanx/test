@@ -18,12 +18,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
-import com.yidejia.app.mall.adapter.WaitDeliverFragmentAdapter;
 import com.yidejia.app.mall.fragment.AllOrderFragment;
-import com.yidejia.app.mall.fragment.WaitDeliverFragment;
 
 public class WaitDeliverActivity extends SherlockFragmentActivity {
 	    private static final String TAG = "MainActivity";

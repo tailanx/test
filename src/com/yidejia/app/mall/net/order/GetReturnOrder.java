@@ -10,7 +10,6 @@ import org.json.JSONObject;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.RetOrderInfo;
 import com.yidejia.app.mall.net.HttpGetConn;
-import com.yidejia.app.mall.net.HttpPostConn;
 
 public class GetReturnOrder {
 	

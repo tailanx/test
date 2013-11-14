@@ -2,11 +2,6 @@ package com.yidejia.app.mall.util;
 
 import java.util.ArrayList;
 
-import com.yidejia.app.mall.MyApplication;
-import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.datamanage.OrderDataManage;
-import com.yidejia.app.mall.model.Order;
-
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +9,11 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.yidejia.app.mall.MyApplication;
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.datamanage.OrderDataManage;
+import com.yidejia.app.mall.model.Order;
 
 public class AlreadyOrderUtil {
 	private Context context;

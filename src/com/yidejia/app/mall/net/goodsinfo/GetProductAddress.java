@@ -2,8 +2,6 @@ package com.yidejia.app.mall.net.goodsinfo;
 
 import java.io.IOException;
 
-
-
 import android.content.Context;
 import android.util.Log;
 
@@ -12,7 +10,7 @@ import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.util.Md5;
 /**
- * 获取商品信息
+ * 锟斤拷取锟斤拷品锟斤拷息
  * @author long bin
  *
  */
@@ -103,7 +101,7 @@ public class GetProductAddress {
 //				// TODO Auto-generated method stub
 //				super.onStart();
 //				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//				bar.setMessage("正在查询");
+//				bar.setMessage("锟斤拷锟节诧拷询");
 //				bar.show();
 //			}
 //			

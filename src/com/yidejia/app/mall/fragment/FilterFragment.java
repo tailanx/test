@@ -3,16 +3,6 @@ package com.yidejia.app.mall.fragment;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.SearchResultActivity;
-import com.yidejia.app.mall.adapter.FilterExListAdapter;
-import com.yidejia.app.mall.datamanage.BrandDataManage;
-import com.yidejia.app.mall.datamanage.FunctionDataManage;
-import com.yidejia.app.mall.datamanage.PriceDataManage;
-import com.yidejia.app.mall.model.Brand;
-import com.yidejia.app.mall.model.Function;
-import com.yidejia.app.mall.model.PriceLevel;
-
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -25,10 +15,20 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.ImageView;
-import android.widget.ExpandableListView.OnChildClickListener;
+
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.SearchResultActivity;
+import com.yidejia.app.mall.adapter.FilterExListAdapter;
+import com.yidejia.app.mall.datamanage.BrandDataManage;
+import com.yidejia.app.mall.datamanage.FunctionDataManage;
+import com.yidejia.app.mall.datamanage.PriceDataManage;
+import com.yidejia.app.mall.model.Brand;
+import com.yidejia.app.mall.model.Function;
+import com.yidejia.app.mall.model.PriceLevel;
 
 @SuppressLint("UseSparseArrays")
 public class FilterFragment extends Fragment {

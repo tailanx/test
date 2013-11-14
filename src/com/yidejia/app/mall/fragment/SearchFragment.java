@@ -2,26 +2,22 @@ package com.yidejia.app.mall.fragment;
 
 import java.util.ArrayList;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.SearchActivity;
-import com.yidejia.app.mall.SearchResultActivity;
-import com.yidejia.app.mall.adapter.SearchListAdapter;
-import com.yidejia.app.mall.datamanage.FunctionDataManage;
-import com.yidejia.app.mall.model.Function;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
+import com.actionbarsherlock.app.SherlockFragment;
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.SearchResultActivity;
+import com.yidejia.app.mall.adapter.SearchListAdapter;
+import com.yidejia.app.mall.datamanage.FunctionDataManage;
+import com.yidejia.app.mall.model.Function;
 
 public class SearchFragment extends SherlockFragment {
 	

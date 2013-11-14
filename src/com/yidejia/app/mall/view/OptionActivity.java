@@ -1,22 +1,16 @@
 
 	package com.yidejia.app.mall.view;
 
-	import com.actionbarsherlock.app.SherlockActivity;
-	import com.yidejia.app.mall.ComposeActivity;
-	import com.yidejia.app.mall.R;
-
-	import android.app.Activity;
-	import android.content.Intent;
 	import android.os.Bundle;
-	import android.view.View;
-	import android.view.Window;
-	import android.view.WindowManager;
-	import android.view.View.OnClickListener;
-	import android.widget.Button;
-	import android.widget.ImageView;
-	import android.widget.RelativeLayout;
-	import android.widget.TextView;
-	import android.widget.Toast;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.actionbarsherlock.app.SherlockActivity;
+import com.yidejia.app.mall.R;
 
 	public class OptionActivity extends SherlockActivity {
 		/*

@@ -1,12 +1,12 @@
 package com.yidejia.app.mall;
 
-import com.ant.liao.GifView;
-import com.ant.liao.GifView.GifImageType;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.ant.liao.GifView;
+import com.ant.liao.GifView.GifImageType;
 
 public class WelcomeActivity extends Activity {
 	

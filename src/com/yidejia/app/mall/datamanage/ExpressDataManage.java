@@ -10,7 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -23,8 +23,6 @@ import com.yidejia.app.mall.net.express.GetDistributionList;
 import com.yidejia.app.mall.net.express.GetExpressList;
 import com.yidejia.app.mall.net.express.GetFreeList;
 import com.yidejia.app.mall.util.UnicodeToString;
-
-import android.content.Context;
 
 public class ExpressDataManage {
 	

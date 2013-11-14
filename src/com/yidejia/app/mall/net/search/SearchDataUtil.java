@@ -2,9 +2,6 @@ package com.yidejia.app.mall.net.search;
 
 import java.io.IOException;
 
-
-
-import android.content.Context;
 import android.util.Log;
 
 import com.yidejia.app.mall.jni.JNICallBack;

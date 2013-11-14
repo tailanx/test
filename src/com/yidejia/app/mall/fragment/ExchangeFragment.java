@@ -1,7 +1,5 @@
 package com.yidejia.app.mall.fragment;
 
-import java.util.ArrayList;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,15 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.PreferentialDataManage;
-import com.yidejia.app.mall.fragment.ExchangeAdapter.ViewHolder;
-import com.yidejia.app.mall.model.Specials;
 import com.yidejia.app.mall.view.CstmPayActivity;
 
 public class ExchangeFragment extends SherlockFragment {

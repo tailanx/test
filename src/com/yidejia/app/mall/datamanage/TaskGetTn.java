@@ -2,16 +2,16 @@ package com.yidejia.app.mall.datamanage;
 
 import java.io.IOException;
 
-import com.yidejia.app.mall.MyApplication;
-import com.yidejia.app.mall.UserPayActivity;
-import com.yidejia.app.mall.net.order.GetTn;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.yidejia.app.mall.MyApplication;
+import com.yidejia.app.mall.UserPayActivity;
+import com.yidejia.app.mall.net.order.GetTn;
 
 public class TaskGetTn {
 

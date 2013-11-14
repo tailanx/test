@@ -1,11 +1,10 @@
 package com.yidejia.app.mall.view;
 
-import android.app.AlertDialog.Builder;
-
 import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -157,6 +156,10 @@ public class AddressAdapter extends BaseAdapter {
 				Bundle bundle = new Bundle();
 				bundle.putSerializable("editaddress", addresses);
 				intent.putExtras(bundle);
+				dataManage.deleteAddress(
+						myApplication.getUserId(),
+						addresses.getAddressId(),
+						myApplication.getToken());
 				mAddresses.remove(addresses);
 				notifyDataSetChanged();
 				((Activity) activity).startActivityForResult(intent,

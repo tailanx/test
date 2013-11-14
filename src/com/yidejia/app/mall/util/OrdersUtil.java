@@ -5,7 +5,10 @@ import java.util.ArrayList;
 
 import org.json.JSONObject;
 
+import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,23 +20,15 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 
-import com.unionpay.uppay.task.s;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.datamanage.TaskDelOrder;
-import com.yidejia.app.mall.model.Brand;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.order.CancelOrder;
 import com.yidejia.app.mall.view.CheckActivity;
-import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.view.OrderDetailActivity;
 import com.yidejia.app.mall.view.ReturnActivity;
 

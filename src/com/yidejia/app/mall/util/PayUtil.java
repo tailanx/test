@@ -1,20 +1,15 @@
 package com.yidejia.app.mall.util;
 
 import java.util.ArrayList;
-
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,11 +21,7 @@ import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.datamanage.CartsDataManage;
-
 import com.yidejia.app.mall.model.Cart;
-import com.yidejia.app.mall.model.Order;
-import com.yidejia.app.mall.view.CstmPayActivity;
 
 public class PayUtil {
 	private Context context;

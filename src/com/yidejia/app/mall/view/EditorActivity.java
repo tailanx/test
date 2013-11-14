@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.yidejia.app.mall.DataCleanManager;
 import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
@@ -59,21 +60,22 @@ public class EditorActivity extends SherlockActivity {
 
 							@Override
 							public void onClick(DialogInterface arg0, int arg1) {
+								DataCleanManager.cleanApplicationData(EditorActivity.this);
 								Toast.makeText(EditorActivity.this, "清除成功",
 										Toast.LENGTH_LONG).show();
 
 							}
 						}).setNegativeButton("取消", null).create();
-		dialogHelp = helpbuilder.setTitle("艾蒂妲服务条款")
+		dialogHelp = helpbuilder.setTitle("伊的家服务条款")
 				.setIcon(android.R.drawable.menu_frame).setView(mLayout1)
 				.setPositiveButton("确定", null).setNegativeButton("取消", null).create();
 		dialogAbout = aboutbuilder.setTitle("关于").setIcon(R.drawable.ic_launcher)
 				.setView(mLayout2).setPositiveButton("确定", null).setNegativeButton("取消", null).create();
-		dialogphone = phonebuilder.setTitle("艾蒂妲")
+		dialogphone = phonebuilder.setTitle("伊的家")
 				.setIcon(android.R.drawable.divider_horizontal_dim_dark)
 				.setView(mLayout3).setPositiveButton("确定", null).setNegativeButton("取消", null).create();
 		
-		exit = exitbuilder.setTitle("艾蒂妲")
+		exit = exitbuilder.setTitle("伊的家")
 				.setIcon(android.R.drawable.divider_horizontal_dim_dark)
 				.setMessage(getResources().getString(R.string.retrun_back))
 				.setPositiveButton("确定",

@@ -1,14 +1,5 @@
 package com.yidejia.app.mall.view;
 
-import com.actionbarsherlock.app.SherlockActivity;
-//import com.handmark.pulltorefresh.library.PullToRefreshBase;
-//import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
-//import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
-import com.yidejia.app.mall.MyApplication;
-import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.datamanage.TaskNoEva;
-import com.yidejia.app.mall.util.CommentUtil;
-
 //import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +13,14 @@ import android.widget.LinearLayout;
 //import android.widget.RelativeLayout;
 //import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.actionbarsherlock.app.SherlockActivity;
+//import com.handmark.pulltorefresh.library.PullToRefreshBase;
+//import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+//import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.yidejia.app.mall.MyApplication;
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.datamanage.TaskNoEva;
 
 public class EvaluationActivity extends SherlockActivity {
 	private LinearLayout layout;

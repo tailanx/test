@@ -2,7 +2,9 @@ package com.yidejia.app.mall.util;
 
 import java.util.ArrayList;
 
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,18 +15,13 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
 
-import com.unionpay.uppay.task.s;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.datamanage.AnlsGetOrderData;
+import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Order;
-import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.view.OrderDetailActivity;
 
 public class AllOrderUtil {

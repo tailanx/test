@@ -20,8 +20,6 @@ import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.SearchResultActivity;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
-import com.yidejia.app.mall.fragment.CartActivity.InnerReceiver;
-import com.yidejia.app.mall.util.CartUtil;
 import com.yidejia.app.mall.util.Consts;
 
 public class NoProduceFragment extends SherlockFragment {

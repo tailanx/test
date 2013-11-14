@@ -2,13 +2,13 @@ package com.yidejia.app.mall.task;
 
 import java.io.IOException;
 
-import com.yidejia.app.mall.MyApplication;
-import com.yidejia.app.mall.net.user.Login;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.widget.Toast;
+
+import com.yidejia.app.mall.MyApplication;
+import com.yidejia.app.mall.net.user.Login;
 
 public class TaskLoginAct {
 	

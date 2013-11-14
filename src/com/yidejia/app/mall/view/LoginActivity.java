@@ -82,7 +82,7 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 		setContentView(R.layout.my_mall_login);
 		ip = new IpAddress();
 		setActionbar();
-		userManage = new UserDatamanage(LoginActivity.this);
+//		userManage = new UserDatamanage(LoginActivity.this);
 		
 		findPwd = (RelativeLayout)findViewById(R.id.my_mall_login_retrieve_password);
 		//设置监听

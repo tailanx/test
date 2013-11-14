@@ -1,10 +1,8 @@
-  package com.yidejia.app.mall;
+package com.yidejia.app.mall;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -12,9 +10,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import com.yidejia.app.mall.adapter.ComposeExListAdapter;
-import com.yidejia.app.mall.adapter.SearchListAdapter;
 /**
  * 这个类是分类的类，现在用不到了
  * @author long bin 

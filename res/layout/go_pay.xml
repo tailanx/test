@@ -589,7 +589,6 @@
                         android:hint="订单留言.........                                                                                                                                                  "
                         android:padding="10dp"
                         android:scrollbars="horizontal"
-                        android:text="技术测试,无实际付款"
                         android:textSize="15sp" />
                 </LinearLayout>
             </ScrollView>

@@ -2,16 +2,15 @@ package com.yidejia.app.mall.adapter;
 
 import java.util.ArrayList;
 
-import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.datamanage.FunctionDataManage;
-import com.yidejia.app.mall.model.Function;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.model.Function;
 
 public class SearchListAdapter extends BaseAdapter {
 

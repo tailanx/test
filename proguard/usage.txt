@@ -1,0 +1,420 @@
+com.jingzhuan.neican.BaseActivity:
+====    137:164:private void setactionbarTitle(java.lang.String)
+com.jingzhuan.neican.BaseActivity$1
+com.jingzhuan.neican.BaseActivity$2
+com.jingzhuan.neican.BuildConfig
+com.jingzhuan.neican.InternalActivity:
+    private com.jingzhuan.neican.InternalActivity$GetDataTask task
+com.jingzhuan.neican.R:
+====    10:10:public R()
+com.jingzhuan.neican.R$anim
+com.jingzhuan.neican.R$array
+com.jingzhuan.neican.R$attr
+com.jingzhuan.neican.R$bool
+com.jingzhuan.neican.R$color
+com.jingzhuan.neican.R$dimen
+com.jingzhuan.neican.R$drawable
+com.jingzhuan.neican.R$id
+com.jingzhuan.neican.R$integer
+com.jingzhuan.neican.R$layout
+com.jingzhuan.neican.R$menu
+com.jingzhuan.neican.R$string
+com.jingzhuan.neican.R$style
+com.jingzhuan.neican.R$styleable:
+    public static final int PullToRefresh_ptrAdapterViewBackground
+    public static final int PullToRefresh_ptrAnimationStyle
+    public static final int PullToRefresh_ptrDrawable
+    public static final int PullToRefresh_ptrDrawableBottom
+    public static final int PullToRefresh_ptrDrawableEnd
+    public static final int PullToRefresh_ptrDrawableStart
+    public static final int PullToRefresh_ptrDrawableTop
+    public static final int PullToRefresh_ptrHeaderBackground
+    public static final int PullToRefresh_ptrHeaderSubTextColor
+    public static final int PullToRefresh_ptrHeaderTextAppearance
+    public static final int PullToRefresh_ptrHeaderTextColor
+    public static final int PullToRefresh_ptrListViewExtrasEnabled
+    public static final int PullToRefresh_ptrMode
+    public static final int PullToRefresh_ptrOverScroll
+    public static final int PullToRefresh_ptrRefreshableViewBackground
+    public static final int PullToRefresh_ptrRotateDrawableWhilePulling
+    public static final int PullToRefresh_ptrScrollingWhileRefreshingEnabled
+    public static final int PullToRefresh_ptrShowIndicator
+    public static final int PullToRefresh_ptrSubHeaderTextAppearance
+    public static final int SherlockActionBar_background
+    public static final int SherlockActionBar_backgroundSplit
+    public static final int SherlockActionBar_backgroundStacked
+    public static final int SherlockActionBar_customNavigationLayout
+    public static final int SherlockActionBar_displayOptions
+    public static final int SherlockActionBar_divider
+    public static final int SherlockActionBar_height
+    public static final int SherlockActionBar_homeLayout
+    public static final int SherlockActionBar_icon
+    public static final int SherlockActionBar_indeterminateProgressStyle
+    public static final int SherlockActionBar_itemPadding
+    public static final int SherlockActionBar_logo
+    public static final int SherlockActionBar_navigationMode
+    public static final int SherlockActionBar_progressBarPadding
+    public static final int SherlockActionBar_progressBarStyle
+    public static final int SherlockActionBar_subtitle
+    public static final int SherlockActionBar_subtitleTextStyle
+    public static final int SherlockActionBar_title
+    public static final int SherlockActionBar_titleTextStyle
+    public static final int SherlockActionMenuItemView_android_minWidth
+    public static final int SherlockActionMode_background
+    public static final int SherlockActionMode_backgroundSplit
+    public static final int SherlockActionMode_height
+    public static final int SherlockActionMode_subtitleTextStyle
+    public static final int SherlockActionMode_titleTextStyle
+    public static final int SherlockActivityChooserView_android_background
+    public static final int SherlockActivityChooserView_expandActivityOverflowButtonDrawable
+    public static final int SherlockActivityChooserView_initialActivityCount
+    public static final int SherlockMenuGroup_android_checkableBehavior
+    public static final int SherlockMenuGroup_android_enabled
+    public static final int SherlockMenuGroup_android_id
+    public static final int SherlockMenuGroup_android_menuCategory
+    public static final int SherlockMenuGroup_android_orderInCategory
+    public static final int SherlockMenuGroup_android_visible
+    public static final int SherlockMenuItem_android_actionLayout
+    public static final int SherlockMenuItem_android_actionProviderClass
+    public static final int SherlockMenuItem_android_actionViewClass
+    public static final int SherlockMenuItem_android_alphabeticShortcut
+    public static final int SherlockMenuItem_android_checkable
+    public static final int SherlockMenuItem_android_checked
+    public static final int SherlockMenuItem_android_enabled
+    public static final int SherlockMenuItem_android_icon
+    public static final int SherlockMenuItem_android_id
+    public static final int SherlockMenuItem_android_menuCategory
+    public static final int SherlockMenuItem_android_numericShortcut
+    public static final int SherlockMenuItem_android_onClick
+    public static final int SherlockMenuItem_android_orderInCategory
+    public static final int SherlockMenuItem_android_showAsAction
+    public static final int SherlockMenuItem_android_title
+    public static final int SherlockMenuItem_android_titleCondensed
+    public static final int SherlockMenuItem_android_visible
+    public static final int SherlockMenuView_headerBackground
+    public static final int SherlockMenuView_horizontalDivider
+    public static final int SherlockMenuView_itemBackground
+    public static final int SherlockMenuView_itemIconDisabledAlpha
+    public static final int SherlockMenuView_itemTextAppearance
+    public static final int SherlockMenuView_preserveIconSpacing
+    public static final int SherlockMenuView_verticalDivider
+    public static final int SherlockMenuView_windowAnimationStyle
+    public static final int SherlockSearchView_android_imeOptions
+    public static final int SherlockSearchView_android_inputType
+    public static final int SherlockSearchView_android_maxWidth
+    public static final int SherlockSearchView_iconifiedByDefault
+    public static final int SherlockSearchView_queryHint
+    public static final int SherlockSpinner_android_dropDownHorizontalOffset
+    public static final int SherlockSpinner_android_dropDownSelector
+    public static final int SherlockSpinner_android_dropDownVerticalOffset
+    public static final int SherlockSpinner_android_dropDownWidth
+    public static final int SherlockSpinner_android_gravity
+    public static final int SherlockSpinner_android_popupBackground
+    public static final int SherlockSpinner_android_popupPromptView
+    public static final int SherlockSpinner_android_prompt
+    public static final int SherlockTheme_actionBarDivider
+    public static final int SherlockTheme_actionBarItemBackground
+    public static final int SherlockTheme_actionBarSize
+    public static final int SherlockTheme_actionBarSplitStyle
+    public static final int SherlockTheme_actionBarStyle
+    public static final int SherlockTheme_actionBarTabBarStyle
+    public static final int SherlockTheme_actionBarTabStyle
+    public static final int SherlockTheme_actionBarTabTextStyle
+    public static final int SherlockTheme_actionBarWidgetTheme
+    public static final int SherlockTheme_actionButtonStyle
+    public static final int SherlockTheme_actionDropDownStyle
+    public static final int SherlockTheme_actionMenuTextAppearance
+    public static final int SherlockTheme_actionMenuTextColor
+    public static final int SherlockTheme_actionModeBackground
+    public static final int SherlockTheme_actionModeCloseButtonStyle
+    public static final int SherlockTheme_actionModeCloseDrawable
+    public static final int SherlockTheme_actionModePopupWindowStyle
+    public static final int SherlockTheme_actionModeShareDrawable
+    public static final int SherlockTheme_actionModeSplitBackground
+    public static final int SherlockTheme_actionModeStyle
+    public static final int SherlockTheme_actionOverflowButtonStyle
+    public static final int SherlockTheme_actionSpinnerItemStyle
+    public static final int SherlockTheme_activatedBackgroundIndicator
+    public static final int SherlockTheme_activityChooserViewStyle
+    public static final int SherlockTheme_buttonStyleSmall
+    public static final int SherlockTheme_dividerVertical
+    public static final int SherlockTheme_dropDownHintAppearance
+    public static final int SherlockTheme_dropDownListViewStyle
+    public static final int SherlockTheme_dropdownListPreferredItemHeight
+    public static final int SherlockTheme_homeAsUpIndicator
+    public static final int SherlockTheme_listPopupWindowStyle
+    public static final int SherlockTheme_listPreferredItemHeightSmall
+    public static final int SherlockTheme_listPreferredItemPaddingLeft
+    public static final int SherlockTheme_listPreferredItemPaddingRight
+    public static final int SherlockTheme_popupMenuStyle
+    public static final int SherlockTheme_searchAutoCompleteTextView
+    public static final int SherlockTheme_searchDropdownBackground
+    public static final int SherlockTheme_searchResultListItemHeight
+    public static final int SherlockTheme_searchViewCloseIcon
+    public static final int SherlockTheme_searchViewEditQuery
+    public static final int SherlockTheme_searchViewEditQueryBackground
+    public static final int SherlockTheme_searchViewGoIcon
+    public static final int SherlockTheme_searchViewSearchIcon
+    public static final int SherlockTheme_searchViewTextField
+    public static final int SherlockTheme_searchViewTextFieldRight
+    public static final int SherlockTheme_searchViewVoiceIcon
+    public static final int SherlockTheme_selectableItemBackground
+    public static final int SherlockTheme_spinnerDropDownItemStyle
+    public static final int SherlockTheme_spinnerItemStyle
+    public static final int SherlockTheme_textAppearanceLargePopupMenu
+    public static final int SherlockTheme_textAppearanceListItemSmall
+    public static final int SherlockTheme_textAppearanceSearchResultSubtitle
+    public static final int SherlockTheme_textAppearanceSearchResultTitle
+    public static final int SherlockTheme_textAppearanceSmall
+    public static final int SherlockTheme_textAppearanceSmallPopupMenu
+    public static final int SherlockTheme_textColorPrimary
+    public static final int SherlockTheme_textColorPrimaryDisableOnly
+    public static final int SherlockTheme_textColorPrimaryInverse
+    public static final int SherlockTheme_textColorSearchUrl
+    public static final int SherlockTheme_windowActionBar
+    public static final int SherlockTheme_windowActionBarOverlay
+    public static final int SherlockTheme_windowActionModeOverlay
+    public static final int SherlockTheme_windowContentOverlay
+    public static final int SherlockTheme_windowMinWidthMajor
+    public static final int SherlockTheme_windowMinWidthMinor
+    public static final int SherlockTheme_windowNoTitle
+    public static final int SherlockTheme_windowSplitActionBar
+    public static final int SherlockView_android_focusable
+    public static final int SlidingMenu_behindOffset
+    public static final int SlidingMenu_behindScrollScale
+    public static final int SlidingMenu_behindWidth
+    public static final int SlidingMenu_fadeDegree
+    public static final int SlidingMenu_fadeEnabled
+    public static final int SlidingMenu_mode
+    public static final int SlidingMenu_selectorDrawable
+    public static final int SlidingMenu_selectorEnabled
+    public static final int SlidingMenu_shadowDrawable
+    public static final int SlidingMenu_shadowWidth
+    public static final int SlidingMenu_touchModeAbove
+    public static final int SlidingMenu_touchModeBehind
+    public static final int SlidingMenu_viewAbove
+    public static final int SlidingMenu_viewBehind
+    public static final int Switch_switchminwidth
+    public static final int Switch_switchpadding
+    public static final int Switch_switchtextappearance
+    public static final int Switch_textoff
+    public static final int Switch_texton
+    public static final int Switch_thumbs
+    public static final int Switch_thumbtextpadding
+    public static final int Switch_tracks
+    public static final int TextAppearance_android_textColor
+    public static final int TextAppearance_android_textSize
+    public static final int TextAppearance_android_textStyle
+    public static final int TextAppearance_android_typeface
+    public static final int TextAppearance_textAllCaps
+====    1759:1759:public R$styleable()
+com.jingzhuan.neican.RegisterActivity:
+====    574:588:public static java.lang.String GetHostIp()
+com.jingzhuan.neican.ResetActivity:
+====    435:449:public static java.lang.String GetHostIp()
+com.jingzhuan.neican.WelcomeActivity:
+====    103:106:private void setVersion()
+====    109:111:private void getVersion()
+====    114:158:private void showDialog(java.lang.String)
+====    101:101:static synthetic void access$15(com.jingzhuan.neican.WelcomeActivity)
+com.jingzhuan.neican.WelcomeActivity$1
+com.jingzhuan.neican.WelcomeActivity$2
+com.jingzhuan.neican.WelcomeActivity$3
+com.jingzhuan.neican.adapter.FavoriteAdapter:
+====    28:30:public FavoriteAdapter(android.content.Context,int)
+com.jingzhuan.neican.adapter.GnzfbTxtListAdapter:
+====    34:36:public GnzfbTxtListAdapter(android.content.Context,int)
+com.jingzhuan.neican.adapter.JzkpTxtListAdapter:
+====    19:32:public JzkpTxtListAdapter(android.content.Context,int)
+com.jingzhuan.neican.adapter.QqscNumListAdapter
+com.jingzhuan.neican.adapter.QqscNumListAdapter$Holder
+com.jingzhuan.neican.adapter.QqscTxtListAdapter:
+====    34:36:public QqscTxtListAdapter(android.content.Context,int)
+com.jingzhuan.neican.adapter.RdzxTxtListAdapter:
+====    20:35:public RdzxTxtListAdapter(android.content.Context,int)
+com.jingzhuan.neican.adapter.YdggNumListAdapter:
+====    41:43:public YdggNumListAdapter(android.content.Context,int)
+com.jingzhuan.neican.adapter.YdggTxtListAdapter:
+====    28:30:public YdggTxtListAdapter(android.content.Context,int)
+com.jingzhuan.neican.addview.AddJrzy:
+    private com.jingzhuan.neican.InternalActivity$GetDataTask getDataTask
+com.jingzhuan.neican.control.DESUtil:
+====    26:26:public java.security.Key getKey()
+====    30:31:public void setKey(java.security.Key)
+====    106:118:private byte[] encryptByte(byte[])
+====    129:140:private byte[] decryptByte(byte[])
+com.jingzhuan.neican.control.DeviceUuidFactory
+com.jingzhuan.neican.database.DataBaseHelperAdapter:
+    private static final java.lang.String DB_NAME
+    public static final java.lang.String KEY_ID
+    public static final java.lang.String KEY_ART_TITLE
+    public static final java.lang.String KEY_ART_URL
+    public static final java.lang.String KEY_USER_ID
+    public static final java.lang.String KEY_USER_PASSWORD
+    private static final java.lang.String DB_TABLE_FAVORITE
+    private static final java.lang.String DB_TABLE_USER
+    private static final java.lang.String DB_TABLE_USER_DEFAULT
+    private static final int DB_VERSION
+    private static final java.lang.String DB_CREATE_FAVORITE
+    private static final java.lang.String DB_CREATE_USER
+    private static final java.lang.String DB_CREATE_USER_DEFAULT
+====    123:123:public boolean deleteUserData(long)
+====    132:136:public android.database.Cursor selectData(long)
+====    156:156:public boolean deleteUserDefaultData(long)
+====    164:167:public boolean updateUserDefualtDate(long,java.lang.String,java.lang.String)
+com.jingzhuan.neican.database.DataBaseHelperAdapter$DataBaseHelper:
+====    55:57:public DataBaseHelperAdapter$DataBaseHelper(android.content.Context,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int)
+com.jingzhuan.neican.database.UserDataBaseHelper:
+====    28:68:public void delete(java.lang.String)
+com.jingzhuan.neican.getdatatask.TaskHjsdData
+com.jingzhuan.neican.getdatatask.TaskHjsdData$JrzyTask
+com.jingzhuan.neican.getdatatask.TaskJrzyData
+com.jingzhuan.neican.getdatatask.TaskJrzyData$JrzyTask
+com.jingzhuan.neican.getdatatask.TaskJzgnzfbData
+com.jingzhuan.neican.getdatatask.TaskJzgnzfbData$JzgnzfblTask
+com.jingzhuan.neican.getdatatask.TaskJzkpData
+com.jingzhuan.neican.getdatatask.TaskJzkpData$JzkpTask
+com.jingzhuan.neican.getdatatask.TaskMainPageData
+com.jingzhuan.neican.getdatatask.TaskMainPageData$MainPageTask
+com.jingzhuan.neican.getdatatask.TaskQqscylData
+com.jingzhuan.neican.getdatatask.TaskQqscylData$QqscylTask
+com.jingzhuan.neican.getdatatask.TaskRdzxData
+com.jingzhuan.neican.getdatatask.TaskRdzxData$RdzxTask
+com.jingzhuan.neican.getdatatask.TaskYdggData
+com.jingzhuan.neican.getdatatask.TaskYdggData$YdggTask
+com.jingzhuan.neican.net.CheckIsExistJson:
+====    62:62:public java.lang.String getRespose()
+====    70:70:public java.lang.String getMsg()
+com.jingzhuan.neican.net.HjsdJson:
+====    115:115:public long getTs()
+com.jingzhuan.neican.net.JrzyJson:
+====    106:106:public long getTs()
+com.jingzhuan.neican.net.JzgnzfbJson:
+====    115:115:public long getTs()
+com.jingzhuan.neican.net.JzkpJson:
+====    115:115:public long getTs()
+com.jingzhuan.neican.net.LoginJson:
+    private java.util.ArrayList hjsdTitle
+    private java.util.ArrayList hjsdTime
+    private java.util.ArrayList hjsdUrl
+    private long ts
+====    90:115:private void analysisJson(java.lang.String)
+====    122:122:public long getTs()
+com.jingzhuan.neican.net.MainPageJson:
+====    319:319:public long getTs()
+====    323:324:public void setRdzxTitle(java.util.ArrayList)
+====    326:327:public void setImageUrl(java.util.ArrayList)
+====    329:330:public void setYdgg(java.util.ArrayList)
+====    332:333:public void setJzyhgnzfb(java.util.ArrayList)
+====    335:336:public void setQqscyl(java.util.ArrayList)
+====    338:339:public void setJrsdTitle(java.lang.String)
+com.jingzhuan.neican.net.QqscylJson:
+====    113:113:public long getTs()
+com.jingzhuan.neican.net.RdzxJson:
+====    115:115:public long getTs()
+com.jingzhuan.neican.net.RegisterJson:
+====    60:60:public int getResponseCode()
+com.jingzhuan.neican.net.ResetPswJson:
+====    61:61:public int getResponseCode()
+com.jingzhuan.neican.net.SmsJson:
+====    64:64:public int getResponseCode()
+====    72:72:public java.lang.String getMsg()
+com.jingzhuan.neican.net.YdggJson:
+====    117:117:public long getTs()
+com.jingzhuan.neican.slidingmenu.CustomViewAbove:
+    private static final java.lang.String TAG
+    private static final boolean DEBUG
+    private static final boolean USE_CACHE
+    private static final int MAX_SETTLE_DURATION
+    private static final int MIN_DISTANCE_FOR_FLING
+    private static final int INVALID_POINTER
+====    261:262:public void setOnOpenedListener(com.jingzhuan.neican.slidingmenu.SlidingMenu$OnOpenedListener)
+====    265:266:public void setOnClosedListener(com.jingzhuan.neican.slidingmenu.SlidingMenu$OnClosedListener)
+====    281:284:public void addIgnoredView(android.view.View)
+====    287:288:public void removeIgnoredView(android.view.View)
+====    291:292:public void clearIgnoredViews()
+====    324:324:public int getContentLeft()
+====    349:355:public int getChildWidth(int)
+====    360:360:public boolean isSlidingEnabled()
+====    364:365:public void setSlidingEnabled(boolean)
+====    374:375:void smoothScrollTo(int,int)
+====    570:570:public int getTouchMode()
+====    899:916:protected boolean canScroll(android.view.View,boolean,int,int,int)
+com.jingzhuan.neican.slidingmenu.CustomViewAbove$SimpleOnPageChangeListener:
+====    145:145:public void onPageScrollStateChanged(int)
+com.jingzhuan.neican.slidingmenu.CustomViewBehind:
+    private static final java.lang.String TAG
+    private static final int MARGIN_THRESHOLD
+====    50:51:public void setCanvasTransformer(com.jingzhuan.neican.slidingmenu.SlidingMenu$CanvasTransformer)
+====    59:60:public void setMarginThreshold(int)
+====    63:63:public int getMarginThreshold()
+====    169:169:public int getMode()
+====    177:177:public float getScrollScale()
+====    418:427:public void setSelectedView(android.view.View)
+com.jingzhuan.neican.slidingmenu.SlidingActivityBase
+com.jingzhuan.neican.slidingmenu.SlidingActivityHelper:
+====    150:152:public void setContentView(android.view.View)
+====    179:180:public void toggle()
+com.jingzhuan.neican.slidingmenu.SlidingFragmentActivity:
+====    111:112:public void toggle()
+====    118:119:public void showContent()
+com.jingzhuan.neican.slidingmenu.SlidingMenu:
+    private static final java.lang.String TAG
+    public static final int SLIDING_WINDOW
+    public static final int SLIDING_CONTENT
+    public static final int TOUCHMODE_MARGIN
+    public static final int TOUCHMODE_FULLSCREEN
+    public static final int TOUCHMODE_NONE
+    public static final int LEFT
+    public static final int RIGHT
+    public static final int LEFT_RIGHT
+====    426:427:public void setSlidingEnabled(boolean)
+====    435:435:public boolean isSlidingEnabled()
+====    454:454:public int getMode()
+====    463:474:public void setStatic(boolean)
+====    530:531:public void toggle()
+====    539:544:public void toggle(boolean)
+====    570:570:public int getBehindOffset()
+====    613:615:public void setAboveOffsetRes(int)
+====    647:649:public void setBehindWidthRes(int)
+====    657:657:public float getBehindScrollScale()
+====    665:665:public int getTouchmodeMarginThreshold()
+====    673:674:public void setTouchmodeMarginThreshold(int)
+====    694:695:public void setBehindCanvasTransformer(com.jingzhuan.neican.slidingmenu.SlidingMenu$CanvasTransformer)
+====    703:703:public int getTouchModeAbove()
+====    826:827:public void setSelectedView(android.view.View)
+====    844:845:public void setSelectorBitmap(android.graphics.Bitmap)
+====    853:854:public void addIgnoredView(android.view.View)
+====    862:863:public void removeIgnoredView(android.view.View)
+====    869:870:public void clearIgnoredViews()
+====    879:880:public void setOnOpenListener(com.jingzhuan.neican.slidingmenu.SlidingMenu$OnOpenListener)
+====    889:890:public void setOnCloseListener(com.jingzhuan.neican.slidingmenu.SlidingMenu$OnCloseListener)
+====    898:899:public void setOnOpenedListener(com.jingzhuan.neican.slidingmenu.SlidingMenu$OnOpenedListener)
+====    907:908:public void setOnClosedListener(com.jingzhuan.neican.slidingmenu.SlidingMenu$OnClosedListener)
+com.jingzhuan.neican.slidingmenu.SlidingMenu$1:
+    public static final int POSITION_OPEN
+    public static final int POSITION_CLOSE
+com.jingzhuan.neican.widget.Switch:
+    private static final java.lang.String TAG
+    private static final int TOUCH_MODE_IDLE
+    private static final int TOUCH_MODE_DOWN
+    private static final int TOUCH_MODE_DRAGGING
+    private static final int SANS
+    private static final int SERIF
+    private static final int MONOSPACE
+====    248:250:public void setSwitchPadding(int)
+====    260:260:public int getSwitchPadding()
+====    272:274:public void setSwitchMinWidth(int)
+====    285:285:public int getSwitchMinWidth()
+====    296:298:public void setThumbTextPadding(int)
+====    308:308:public int getThumbTextPadding()
+====    319:321:public void setTrackDrawable(android.graphics.drawable.Drawable)
+====    331:332:public void setTrackResource(int)
+====    342:342:public android.graphics.drawable.Drawable getTrackDrawable()
+====    354:356:public void setThumbDrawable(android.graphics.drawable.Drawable)
+====    367:368:public void setThumbResource(int)
+====    379:379:public android.graphics.drawable.Drawable getThumbDrawable()
+====    388:388:public java.lang.CharSequence getTextOn()
+====    397:399:public void setTextOn(java.lang.CharSequence)
+====    407:407:public java.lang.CharSequence getTextOff()
+====    416:418:public void setTextOff(java.lang.CharSequence)

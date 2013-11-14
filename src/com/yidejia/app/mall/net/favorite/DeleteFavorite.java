@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-
-
 import android.content.Context;
 import android.util.Log;
 
@@ -14,7 +12,7 @@ import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.util.Md5;
 /**
- * É¾³ýÊÕ²Ø
+ * É¾ï¿½ï¿½ï¿½Õ²ï¿½
  * @author long bin
  *
  */
@@ -128,7 +126,7 @@ public class DeleteFavorite {
 //				// TODO Auto-generated method stub
 //				super.onStart();
 //				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//				bar.setMessage("ÕýÔÚ²éÑ¯");
+//				bar.setMessage("ï¿½ï¿½ï¿½Ú²ï¿½Ñ¯");
 //				bar.show();
 //			}
 //			

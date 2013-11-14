@@ -2,13 +2,11 @@ package com.yidejia.app.mall.datamanage;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -21,7 +19,6 @@ import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.order.GetOrderList;
-import com.yidejia.app.mall.util.AllOrderUtil;
 import com.yidejia.app.mall.util.OrdersUtil;
 import com.yidejia.app.mall.util.UnicodeToString;
 

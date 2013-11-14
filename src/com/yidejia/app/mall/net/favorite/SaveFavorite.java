@@ -4,19 +4,15 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.http.conn.ConnectTimeoutException;
-
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.util.Md5;
 /**
- * ±£´æ£¨ÐÂ½¨,¸üÐÂ£©ÊÕ²Ø
+ * ï¿½ï¿½ï¿½æ£¨ï¿½Â½ï¿½,ï¿½ï¿½ï¿½Â£ï¿½ï¿½Õ²ï¿½
  * @author long bin
  *
  */
@@ -78,8 +74,8 @@ public class SaveFavorite {
 	private String urlString = "http://192.168.1.254:802/";
 	/**
 	 * 
-	 * @param userid ÓÃ»§id
-	 * @param goodsid ÊÕ²ØµÄÉÌÆ·id
+	 * @param userid ï¿½Ã»ï¿½id
+	 * @param goodsid ï¿½Õ²Øµï¿½ï¿½ï¿½Æ·id
 	 * @return http response string
 	 * @throws IOException
 	 */
@@ -130,7 +126,7 @@ public class SaveFavorite {
 //				// TODO Auto-generated method stub
 //				super.onStart();
 //				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//				bar.setMessage("ÕýÔÚ²éÑ¯");
+//				bar.setMessage("ï¿½ï¿½ï¿½Ú²ï¿½Ñ¯");
 //				bar.show();
 //			}
 //			

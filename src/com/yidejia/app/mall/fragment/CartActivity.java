@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
-import android.app.AlertDialog.Builder;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,7 +14,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 //import android.text.format.DateUtils;
 import android.util.Log;
@@ -31,17 +30,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
-import com.unionpay.uppay.task.s;
 import com.yidejia.app.mall.MainFragmentActivity;
 //import com.handmark.pulltorefresh.library.PullToRefreshBase;
 //import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 //import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.MyApplication;
-import com.yidejia.app.mall.MyMallActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.PreferentialDataManage;
@@ -52,10 +46,7 @@ import com.yidejia.app.mall.model.Specials;
 import com.yidejia.app.mall.util.CartUtil;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.CstmPayActivity;
-import com.yidejia.app.mall.view.ExchangeFreeActivity;
-import com.yidejia.app.mall.view.GoCartActivity;
 import com.yidejia.app.mall.view.LoginActivity;
-import com.yidejia.app.mall.view.NOProduceActivity;
 
 //import com.yidejia.app.mall.view.PayActivity;
 
@@ -259,7 +250,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		// addressManage = new AddressDataManage(getSherlockActivity());
-		Log.e("NoProduceFragment", "CarActivity");
+//		Log.e("NoProduceFragment", "CarActivity");
 		receiver = new InnerReceiver();
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Consts.BROAD_UPDATE_CHANGE);
@@ -336,7 +327,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 				counTextView, sumTextView, mBox);
 
 		cartUtil.AllComment();
-		sum = Float.parseFloat(sumTextView.getText().toString());
+		float sum = Float.parseFloat(sumTextView.getText().toString());
 
 		scrollView.addView(layout);
 		Log.i("info", sum + "sum");
@@ -406,7 +397,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 				cartList.add(cart1);
 			}
 		}
-
+		Log.i("NoProduceFragment", sum+"   sum");
 		if (sum > 0) {
 			Intent intent1 = new Intent(activity,
 					CstmPayActivity.class);
@@ -524,7 +515,8 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 					FragmentTransaction ft = getFragmentManager().beginTransaction();
 					if(fragment.isAdded()) ft.hide(CartActivity.this).show(fragment).commitAllowingStateLoss();
 					else ft.hide(CartActivity.this).replace(R.id.main_fragment, fragment).commitAllowingStateLoss();
-					shoppingCartTopay.setVisibility(View.GONE);			 
+					shoppingCartTopay.setVisibility(View.GONE);		
+					
 				} else {
 					layout.removeAllViews();
 					CartUtil cartUtil = new CartUtil(getSherlockActivity(),
@@ -548,12 +540,12 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 				layout.removeAllViews();
 				sumCart = dataManage.getCartAmount();
 				if (sumCart == 0) {
-					Log.e("NoProduceFragment", "CarActivity");
+//					Log.e("NoProduceFragment", "CarActivity");
 					FragmentTransaction ft = getFragmentManager().beginTransaction();
 					if(fragment.isAdded()) ft.hide(CartActivity.this).commitAllowingStateLoss();
 					else ft.hide(CartActivity.this).replace(R.id.main_fragment, fragment).commitAllowingStateLoss();
 				} else {
-					Log.e("NoProduceFragment", "CarActivity!=0");
+//					Log.e("NoProduceFragment", "CarActivity!=0");
 					CartUtil cartUtil = new CartUtil(activity,
 							layout, counTextView, sumTextView, mBox);
 					cartUtil.AllComment();

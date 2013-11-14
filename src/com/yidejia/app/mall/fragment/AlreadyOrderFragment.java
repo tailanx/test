@@ -1,24 +1,19 @@
 package com.yidejia.app.mall.fragment;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
-import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.util.AlreadyOrderUtil;
-import com.yidejia.app.mall.view.OrderDetailActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+
+import com.actionbarsherlock.app.SherlockFragment;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.util.AlreadyOrderUtil;
 
 public class AlreadyOrderFragment extends SherlockFragment {
 	private String hello;

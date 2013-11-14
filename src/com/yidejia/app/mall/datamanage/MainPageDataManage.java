@@ -8,7 +8,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -17,7 +16,6 @@ import android.widget.Toast;
 
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.initview.HotSellView;
 import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.model.MainProduct;
 import com.yidejia.app.mall.net.ConnectionDetector;
@@ -180,7 +178,7 @@ public class MainPageDataManage {
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-			GetHomePage getHomePage = new GetHomePage(context);
+			GetHomePage getHomePage = new GetHomePage();
 			try {
 				String httpResultString = getHomePage.getHomePageJsonString();
 				analysisGetHomeJson(httpResultString);

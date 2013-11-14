@@ -15,20 +15,14 @@
  */
 package com.yidejia.app.mall.adapter;
 
-import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.R.drawable;
-import com.yidejia.app.mall.R.id;
-import com.yidejia.app.mall.R.layout;
-
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.Toast;
+
+import com.yidejia.app.mall.R;
 
 public class ImageAdapter extends BaseAdapter {
 

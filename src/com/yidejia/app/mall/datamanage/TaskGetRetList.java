@@ -5,19 +5,17 @@ import java.util.ArrayList;
 
 import org.json.JSONException;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
+import android.view.View;
+import android.widget.LinearLayout;
+
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.RetViewCtrl;
 import com.yidejia.app.mall.model.RetOrderInfo;
 import com.yidejia.app.mall.net.order.GetReturnOrder;
-
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 public class TaskGetRetList {
 	

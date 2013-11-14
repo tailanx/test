@@ -3,43 +3,28 @@ package com.yidejia.app.mall.datamanage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-//import android.content.activity;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.UserPayActivity;
 import com.yidejia.app.mall.model.Addresses;
-import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.net.ConnectionDetector;
-import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.address.GetUserAddressList;
-import com.yidejia.app.mall.net.commments.WaitingComment;
-import com.yidejia.app.mall.net.goodsinfo.GetProductAddress;
 import com.yidejia.app.mall.net.order.GetOrderByCode;
-import com.yidejia.app.mall.util.Consts;
-import com.yidejia.app.mall.view.CstmPayActivity;
-import com.yidejia.app.mall.view.OrderDetailActivity;
-import com.yidejia.app.mall.view.PayAddress;
-import com.yidejia.app.mall.view.PersonEvaluationActivity;
+//import android.content.activity;
 
 public class TaskGetOrderByCode {
 	

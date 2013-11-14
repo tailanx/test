@@ -8,15 +8,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.model.Preferential;
 import com.yidejia.app.mall.model.Specials;
 import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.voucher.Verify;

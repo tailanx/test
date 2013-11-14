@@ -185,40 +185,8 @@ public class EditNewAddressActivity extends SherlockActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				dialog.show();
-				TaskNew editeNew = new TaskNew();
-				editeNew.execute();
-//		new Thread() {
-//			public void run() {
-//				try {
-//					String uri = "http://static.atido.com/min/b=js&f=helper/address.js";
-//					HttpGet httpRequst = new HttpGet(uri);
-//					HttpClient httpClient = new DefaultHttpClient();
-//					HttpResponse httpResponse = httpClient.execute(httpRequst);
-//					HttpEntity entity = httpResponse.getEntity();
-//
-//					if (entity != null) {
-//						BufferedReader br = new BufferedReader(
-//								new InputStreamReader(entity.getContent()));
-//						String line = null;
-//						// Log.i(MainActivity.class.getName(),line.toString());
-//						int i = 0;
-//						while ((line = br.readLine()) != null) {
-//							if (i == 0) {
-//								Message msg = new Message();
-//								msg.what = 0x123;
-//								msg.obj = line;
-//								hanlder.sendMessage(msg);
-//								i++;
-//							}
-//						}
-//
-//					}
-//				} catch (Exception e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//		}.start();
+				TaskNew editAddresss = new TaskNew();
+				editAddresss.execute();
 			}
 		});
 
@@ -759,8 +727,8 @@ public class EditNewAddressActivity extends SherlockActivity {
 //						EditNewAddressActivity.this.finish();
 //						
 
-					boolean isSuccess = dataManage
-							.updateAddress(
+					addressId = dataManage
+							.addAddress(
 									((MyApplication) EditNewAddressActivity.this
 											.getApplication())
 											.getUserId(),
@@ -773,13 +741,13 @@ public class EditNewAddressActivity extends SherlockActivity {
 											.toString().trim(),
 									numberTextView.getText()
 											.toString(),
-									true, id,
+									true,
 									((MyApplication) EditNewAddressActivity.this
 											.getApplication())
 											.getToken());
 					// Log.i("info", addressId+"addressId");
 
-					if (!isSuccess) {
+					if ("".equals(addressId)) {
 						Toast.makeText(EditNewAddressActivity.this,
 								"您的输入有问题", Toast.LENGTH_SHORT)
 								.show();
@@ -808,6 +776,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 		TextView titleTextView = (TextView) findViewById(R.id.actionbar_title);
 		titleTextView.setText("编辑收货地址");
 	}
+	
 	private class TaskNew extends AsyncTask<Void, Void, Boolean>{
 		private ProgressDialog bar;
 		
