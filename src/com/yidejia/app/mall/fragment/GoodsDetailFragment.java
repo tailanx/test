@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.yidejia.app.mall.R;
@@ -46,6 +47,19 @@ public class GoodsDetailFragment extends SherlockFragment{
 		WebSettings settings = webView.getSettings(); 
 		settings.setUseWideViewPort(true); 
         settings.setLoadWithOverviewMode(true); 
+        webView.setWebViewClient(new WebViewClient(){
+        	@Override
+            public void onPageFinished(WebView view, String url) {
+            };
+			@Override
+			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				// TODO Auto-generated method stub
+				
+				view.loadUrl(url);
+				return true;
+			}
+        	
+        });
 		webView.loadUrl(url);
 		return view;
 	}

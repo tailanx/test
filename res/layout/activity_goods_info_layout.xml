@@ -41,8 +41,8 @@
             android:text="商品详情" />
     </LinearLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/goods_viewpager"
+    <FrameLayout
+        android:id="@+id/goods_framelayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/goods_tabhost" />
