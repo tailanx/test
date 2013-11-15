@@ -534,8 +534,9 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 				
 //				activity = CartActivity.this.getSherlockActivity();
 				if (sumCart == 0) {
+					Log.e("NoProduceFragment", "DELETE_CART");
 					FragmentTransaction ft = getFragmentManager().beginTransaction();
-					if(fragment.isAdded()) ft.hide(CartActivity.this).commitAllowingStateLoss();//.show(fragment).
+					if(fragment.isAdded()) ft.hide(CartActivity.this).show(fragment).commitAllowingStateLoss();//.show(fragment).
 					else ft.hide(CartActivity.this).replace(R.id.main_fragment, fragment).commitAllowingStateLoss();
 					shoppingCartTopay.setVisibility(View.GONE);		
 					
