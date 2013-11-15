@@ -19,7 +19,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="18dp"
-            android:text="VIP 5"
+            android:text="vip 5"
             android:textSize="18sp" />
 
         <TextView
@@ -30,7 +30,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="85dp"
             android:layout_toLeftOf="@+id/user_level"
-            android:text="费大爷"
+            android:text="xiao fei"
             android:textSize="18sp" />
     </RelativeLayout>
 
@@ -59,7 +59,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="6dp"
-        android:text="产品评论主要显示用户对使用产品的评价信息，具体为卡片展示形式，显示用户头像、用户昵称、客户等级、评价内容、评分星级以及评论时间日期。"
+        android:text="hello word;"
         android:textSize="14sp" />
     <!--
         <ScrollView android:layout_below="@+id/emulate_user_layout"
@@ -109,7 +109,8 @@
             android:layout_gravity="center|right"
             android:layout_marginRight="10dp"
             android:gravity="right"
-            android:text="2013-8-31" />
+            android:text="2013-11-15"
+            />
     </RelativeLayout>
 
 </RelativeLayout>

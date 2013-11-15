@@ -1,80 +1,38 @@
 package com.yidejia.app.mall.net.commments;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-import org.apache.http.conn.ConnectTimeoutException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.yidejia.app.mall.jni.JNICallBack;
-import com.yidejia.app.mall.net.HttpAddressParam;
+import com.yidejia.app.mall.model.UserComment;
 import com.yidejia.app.mall.net.HttpGetConn;
-import com.yidejia.app.mall.util.Md5;
+import com.yidejia.app.mall.util.UnicodeToString;
 /**
  * 获取商品评论列表
  * @author long bin
  *
  */
 public class GetProductCommentList {
-	private String[] keys = new String[11];
-	private String[] values = new String[11];
+
 	private String TAG = "GetProductCommentList";
-	private Context context;
+
+	private UnicodeToString unicode;
+	private ArrayList<UserComment> userComments;
+	private boolean isNoMore = false;//判断是否还有更多数据,true为没有更多了
+	private boolean isHasRst = false;//判断是否有结果,true为有结果
 	
-	public GetProductCommentList(Context context){
-		this.context = context;
+	public GetProductCommentList(){
+		unicode = new UnicodeToString();
+		userComments = new ArrayList<UserComment>();
 	}
 	
-	private void setKeysAndValues(String where, String offset, String limit, String group, String order, String fields){
-		keys[0] = "api";
-		String api = "product.comments.getList";
-		values[0] = api;
-		keys[1] = "where";
-		values[1] = where;
-		keys[2] = "option%5Boffset%5D";
-		values[2] = offset;
-		keys[3] = "option%5Blimit%5D";
-		values[3] = limit;
-		keys[4] = "option%5Bgroup%5D";
-		values[4] = group;
-		keys[5] = "option%5Border%5D";
-		values[5] = order;
-		keys[6] = "fields";
-		values[6] = fields;
-		keys[7] = "key";
-//		values[7] = "fw_test";
-		values[7] = "fw_mobile";
-		keys[8] = "format";
-		values[8] = "array";
-		keys[9] = "ts";
-		long time = System.currentTimeMillis();
-		String ts = String.valueOf(time/1000);
-		values[9] = ts;
-		
-		keys[10] = "sign";
-		StringBuffer strTemp = new StringBuffer();
-//		strTemp.append("ChunTianfw_mobile123456");
-		strTemp.append("ChunTianfw_mobile@SDF!TD#DF#*CB$GER@");
-		strTemp.append(api);
-		strTemp.append(ts);
-		Md5 md = new Md5();
-		String result = md.getMD5Str(strTemp.toString());
-		md = null;
-        strTemp = null;
-		values[10] = result;
-	}
 	
-	private String getHttpAddress(String where, String offset, String limit, String group, String order, String fields){
-		StringBuffer result = new StringBuffer();
-//		result.append("http://192.168.1.254:802/?");
-		setKeysAndValues(where, offset, limit, group, order, fields);//"", "0", "1", "", "", "%2A"
-		result.append(HttpAddressParam.getHttpAddress(keys, values));
-		Log.i(TAG, result.toString());
-		return result.toString();
-	}
 	
 	private String result = "";
 	public String getCommentsListJsonString(String where, String offset, String limit, String group, String order, String fields)throws IOException{
@@ -83,46 +41,84 @@ public class GetProductCommentList {
 		result = conn.getJsonResult();
 		return result;
 	}
-//	public String getCommentsListJson(){
-//		AsyncHttpClient client = new AsyncHttpClient();
-//		client.setTimeout(5000);
-//		client.get(getHttpAddress(), new AsyncHttpResponseHandler(){
-//
-//			@Override
-//			public void onSuccess(String content) {
-//				// TODO Auto-generated method stub
-//				super.onSuccess(content);
-//				Toast.makeText(context, content, Toast.LENGTH_SHORT).show();
-//				Log.i(TAG, "1111"+content);
-//				bar.dismiss();
-//				result = content;
-//			}
-//
-//			@Override
-//			public void onFailure(Throwable error, String content) {
-//				// TODO Auto-generated method stub
-//				super.onFailure(error, content);
-//				Log.i(TAG, "2222"+content);
-//				if (error.getCause() instanceof ConnectTimeoutException) {
-//					System.out.println("Connection timeout !");
-//					Log.i(TAG, "Connection timeout ");
-//				}
-//				bar.dismiss();
-//			}
-//
-//			@Override
-//			public void onStart() {
-//				// TODO Auto-generated method stub
-//				super.onStart();
-//				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//				bar.setMessage("正在查询");
-//				bar.show();
-//			}
-//			
-//			private ProgressDialog bar = new ProgressDialog(context);
-//		});
-//		return result;
-//	}
-//	
+	
+	
+	/**
+	 * 解析所有评论数据
+	 * @param httpResultString
+	 * @return
+	 */
+	public boolean analysisGetListJson(String httpResultString){
+		JSONObject httpResultObject;
+		try {
+			httpResultObject = new JSONObject(httpResultString);
+			int code = httpResultObject.getInt("code");
+			Log.i(TAG, "code"+code);
+			if(code == 1){
+				isHasRst = true;
+				String responseString = httpResultObject.getString("response");
+				JSONArray responseArray = new JSONArray(responseString);
+				int length = responseArray.length();
+				JSONObject commentItem ;
+				UserComment comments;
+				for (int i = 0; i < length; i++) {
+					comments = new UserComment();
+					commentItem = responseArray.getJSONObject(i);
+					String id = commentItem.getString("id");
+					comments.setId(id);
+					String goodsId = commentItem.getString("goods_id");
+					comments.setGoodsId(goodsId);
+					String user_id = commentItem.getString("user_id");
+					comments.setUserId(user_id);
+					String name = commentItem.getString("user_name");
+					if(name == null || "".equals(name)) comments.setUserName(user_id);
+					else comments.setUserName(unicode.revert(name));
+					String title = commentItem.getString("title");
+					comments.setTitle(unicode.revert(title));
+					String experience = commentItem.getString("experience");
+					comments.setUserCommentText(unicode.revert(experience));
+					String commentDate = commentItem.getString("commentDate");
+					comments.setCommentTime(commentDate);
+					String level = commentItem.getString("customer_grade");
+					comments.setVipLevel(unicode.revert(level));
+//					String maddress = commentItem.getString("address");
+//					comments.setAddress(unicode.revert(maddress));
+//					String isDefault = commentItem.getString("is_default");
+//					boolean isDef = isDefault.equals("y") ? true : false;
+//					comments.setDefaultAddress(isDef);
+					int rate = 5;
+					comments.setRate(rate);
+					userComments.add(comments);
+				}
+				return true;
+			} else if(code == -1){
+				isNoMore = true;
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	/**
+	 * 获取评论列表
+	 * @return
+	 */
+	public ArrayList<UserComment> getComments(){
+		return userComments;
+	}
+	
+	/**
+	 * 检查是否没更多数据
+	 * @return
+	 */
+	public boolean getIsNoMore(){
+		return isNoMore;
+	}
+	
+	public boolean getIsHasRet(){
+		return isHasRst;
+	}
 	
 }
