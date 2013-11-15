@@ -85,6 +85,13 @@ public class CommentFragment extends SherlockFragment  {
 
 
 
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		if(util != null) util.closeTask();
+	}
+
 	private int fromIndex = 0;
 	private int amount = 10;
 	private void setupShow(){
