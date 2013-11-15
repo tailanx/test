@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -649,7 +651,6 @@ public class MainPageFragment extends SherlockFragment {
 		mImageCircleViews = new ImageView[length];
 		mImageCircleView = (ViewGroup) mMainView
 				.findViewById(R.id.layout_circle_images);
-		// mSlideTitle = (TextView) mMainView.findViewById(R.id.tvSlideTitle);
 
 		Log.i(TAG, "length--------------------------------"+bannerArray.size());
 		Log.i(TAG,
@@ -676,6 +677,7 @@ public class MainPageFragment extends SherlockFragment {
 	 * 滑动图片数据适配器
 	 */
 	private class SlideImageAdapter extends PagerAdapter {
+//		int i = 0;
 		private LayoutInflater inflater;
 
 		private ArrayList<BaseProduct> bannerArray;
@@ -706,12 +708,14 @@ public class MainPageFragment extends SherlockFragment {
 			// ((ViewPager) view).removeView(mImagePageViewList.get(arg1));
 			((ViewPager) container).removeView((View) object);
 		}
-
 		public Object instantiateItem(ViewGroup view, int position) {
 			// ((ViewPager) view).addView(mImagePageViewList.get(position));
             View imageLayout = inflater.inflate(R.layout.item_pager_image, view, false);
 			final ImageView imageView = (ImageView) imageLayout.findViewById(R.id.image);
 //			Toast.makeText(getSherlockActivity(), bannerArray.get(position).getImgUrl(), Toast.LENGTH_SHORT).show();
+			new Thread(){
+				
+			}.start();
 			imageLoader.displayImage(bannerArray.get(position).getImgUrl(), imageView, options,
 					animateFirstListener);
 //			View imageLayout = inflater.inflate(R.layout.item_pager_image,
@@ -795,15 +799,15 @@ public class MainPageFragment extends SherlockFragment {
 			// pageIndex = index;
 			int length = mImageCircleViews.length;
             mImageCircleViews[index%length].setBackgroundResource(R.drawable.dot1);
-			mImageCircleViews[index % length]
-					.setBackgroundResource(R.drawable.dot1);
+//			mImageCircleViews[index % length]
+//					.setBackgroundResource(R.drawable.dot1);
 			for (int i = 0; i < length; i++) {
 				// mSlideTitle.setText(""+i);
 
 				if (index % length != i) {
                     mImageCircleViews[i%length].setBackgroundResource(R.drawable.dot2);
-					mImageCircleViews[i % length]
-							.setBackgroundResource(R.drawable.dot2);
+//					mImageCircleViews[i % length]
+//							.setBackgroundResource(R.drawable.dot2);
 				}
 			}
 		}

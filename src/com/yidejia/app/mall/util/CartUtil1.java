@@ -43,7 +43,7 @@ import com.yidejia.app.mall.datamanage.FavoriteDataManage;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.view.LoginActivity;
 
-public class CartUtil {
+public class CartUtil1 {
 	private Context context;
 	private LayoutInflater inflater;
 	private LinearLayout linearLayout;
@@ -109,7 +109,7 @@ public class CartUtil {
 	/**
 	 * 
 	 */
-	public CartUtil() {
+	public CartUtil1() {
 
 	}
 
@@ -117,7 +117,7 @@ public class CartUtil {
 	 * 
 	 * @param context
 	 */
-	public CartUtil(Context context, LinearLayout linearLayout,
+	public CartUtil1(Context context, LinearLayout linearLayout,
 			TextView mTextView, TextView sumTextView, CheckBox box) {// ,View
 																		// view
 		this.inflater = LayoutInflater.from(context); // ,UserCommentDataManage
@@ -319,10 +319,9 @@ public class CartUtil {
 							float price = 0;
 							int j = 0;
 							for (int i = 0; i < list.size(); i++) {
-								
 								HashMap<String, Float> map = list.get(i);
 								float ischeck = map.get("check");
-								j += ischeck; 
+								j += ischeck;
 								if (ischeck == 1) {
 									float count1 = map.get("count");
 									count += map.get("count");
@@ -624,12 +623,12 @@ public class CartUtil {
 						
 						if (checkBox.isChecked()) {
 							Log.i("info", mBox.isChecked()+"   mBox2");
-							map.put("check", (float) 1);
-							map1.put("check", (float) 1);
+							map.put("check", (float) 1.0);
+							map1.put("check", (float) 1.0);
 						} else {
 							Log.i("info", mBox.isChecked()+"   mBox3");
-							map.put("check", (float) 0);
-							map1.put("check", (float) 0);
+							map.put("check", (float) 0.0);
+							map1.put("check", (float) 0.0);
 //							mBox.setChecked(false);
 						}
 						Message ms = new Message();
@@ -740,7 +739,7 @@ public class CartUtil {
 			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-			Log.e(CartUtil.class.getName(), "类型转换出错");
+			Log.e(CartUtil1.class.getName(), "类型转换出错");
 			e.printStackTrace();
 //			Toast.makeText(context,
 //					"lei xing zhuan huan chu cuo ",

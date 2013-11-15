@@ -314,6 +314,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 					getSupportActionBar()
 							.setCustomView(R.layout.actionbar_cart);
 					shoppingCartTopay = (Button) findViewById(R.id.shopping_cart_go_pay);
+					shoppingCartTopay.setVisibility(View.GONE);
 					shoppingCartTopay.setOnClickListener(goPay);
 					if(number!=0){
 						shoppingCartTopay.setVisibility(View.VISIBLE);
@@ -400,7 +401,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 				Log.e("NoProduceFragment", "noProduce");
 			}
 			else{fragment = cartFragment;
-			Log.e("NoProduceFragment", "cartFragment");
+			Log.e("NoProduceFragment", "cartFragment1");
 			}
 			
 			break;
@@ -509,23 +510,28 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
+			Log.e("NoProduceFragment", "cart act button is null11111");
 			cartList = new ArrayList<Cart>();
 			List<HashMap<String, Object>> orderCarts = CartUtil.list1;
+			float sum = 0;
 			for (int i = 0; i < orderCarts.size(); i++) {
 				HashMap<String, Object> map = orderCarts.get(i);
+				
 				float ischeck = Float.parseFloat(map.get("check").toString());
 				// Log.i("info", ischeck + " ischeck");
 				Cart cart1 = (Cart) map.get("cart");
 				if (ischeck == 1.0) {
 					cartList.add(cart1);
+					float sum1 = cart1.getPrice()*cart1.getAmount(); 
+					sum += sum1;
 				}
 			}
 			Intent intent1 = new Intent(MainFragmentActivity.this,
 					CstmPayActivity.class);
 			Bundle bundle = new Bundle();
-			float sum = CartActivity.sum;
+		
 			intent1.putExtra("carts", cartList);
-
+			Log.e("NoProduceFragment", sum+"  sum");
 			if (sum > 0) {
 				bundle.putString("cartActivity", "Y");
 				bundle.putString("price", sum + "");

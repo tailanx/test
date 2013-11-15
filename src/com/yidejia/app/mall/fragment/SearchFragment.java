@@ -66,8 +66,9 @@ public class SearchFragment extends SherlockFragment {
 		searchListView = (ListView) view.findViewById(R.id.search_result_list);
 //		searchEditText = (EditText) getSherlockActivity().findViewById(R.id.search_bar_edittext);
 //		searchEditText.clearFocus();
-		FunctionDataManage manage = new FunctionDataManage(getSherlockActivity());
-		functions = manage.getFunArray();
+//		FunctionDataManage manage = new FunctionDataManage(getSherlockActivity());
+//		functions = manage.getFunArray();
+		functions = new ArrayList<Function>();
 		SearchListAdapter searchListAdapter = new SearchListAdapter(getActivity(), functions);
 		searchListView.setAdapter(searchListAdapter);
 		searchListView.setOnItemClickListener(new OnItemClickListener() {

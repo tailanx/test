@@ -29,7 +29,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
-                android:text="艾蒂妲商城全国客服中心："
+                android:text="伊的家商城全国客服中心："
                 android:textSize="18sp" />
 
             <TextView
@@ -68,7 +68,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
-                android:text="欢迎您到广州艾蒂妲网络科技有限公司来！
+                android:text="欢迎您到广州伊的家网络科技有限公司来！
          
         "
                 android:textSize="15sp" />

@@ -28,6 +28,7 @@ public class SearchListAdapter extends BaseAdapter {
 		if(functions.isEmpty()) {
 			isEmpty = true;
 			length = listContent.length;
+			length++;
 			return;
 		}
 		length = functions.size();

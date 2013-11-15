@@ -25,7 +25,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@id/recommend_item__imageview1"
-            android:text="艾蒂妲商城"
+            android:text="伊的家商城"
             android:textColor="#ed217c"
             android:textSize="20sp" />
 
