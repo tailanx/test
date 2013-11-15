@@ -649,7 +649,6 @@ public class MainPageFragment extends SherlockFragment {
 		mImageCircleViews = new ImageView[length];
 		mImageCircleView = (ViewGroup) mMainView
 				.findViewById(R.id.layout_circle_images);
-		// mSlideTitle = (TextView) mMainView.findViewById(R.id.tvSlideTitle);
 
 		Log.i(TAG, "length--------------------------------"+bannerArray.size());
 		Log.i(TAG,
