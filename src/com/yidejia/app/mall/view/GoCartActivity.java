@@ -34,6 +34,7 @@ import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.PreferentialDataManage;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.util.CartUtil;
+import com.yidejia.app.mall.util.CartUtil1;
 import com.yidejia.app.mall.util.Consts;
 
 public class GoCartActivity extends SherlockActivity {// implements
@@ -43,7 +44,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 	private TextView counTextView;// �ܵ�����
 	private CheckBox mBox;// ѡ���
 	private Button mbutton;// ȥ����
-	private CartUtil cartUtil;
+	private CartUtil1 cartUtil1;
 	private AddressDataManage addressManage;// ��ַ�������
 	private PullToRefreshScrollView mPullToRefreshScrollView;// ����ˢ��
 	private ImageView mImageView;// ����
@@ -113,9 +114,9 @@ public class GoCartActivity extends SherlockActivity {// implements
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		GoCartActivity.this.getSupportActionBar().setCustomView(
 				R.layout.actionbar_common);
-		cartUtil = new CartUtil(GoCartActivity.this, layout, counTextView,
+		cartUtil1 = new CartUtil1(GoCartActivity.this, layout, counTextView,
 				sumTextView, mBox);
-		cartUtil.AllComment();
+		cartUtil1.AllComment();
 		
 	
 		

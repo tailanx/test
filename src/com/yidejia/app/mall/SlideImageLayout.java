@@ -23,7 +23,6 @@ public class SlideImageLayout {
 	private ImageView[] mImageViews = null; 
 	private ImageView mImageView = null;
 	private int pageIndex = 0;
-//	private GetTopAdData getTopAdData;
 	private Activity mActivity;
 	private float height;
 	private int width;

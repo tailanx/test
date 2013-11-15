@@ -196,21 +196,6 @@ public class MainPageFragment extends SherlockFragment {
 										| DateUtils.FORMAT_SHOW_DATE
 										| DateUtils.FORMAT_ABBREV_ALL);
 				refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-				// mPullToRefreshScrollView.setRefreshing();
-				MainPageDataManage manage = new MainPageDataManage(getSherlockActivity(), mPullToRefreshScrollView);
-				
-				manage.getMainPageData();
-				bannerArray = manage.getBannerArray();
-				acymerArray = manage.getAcymerArray();
-				inerbtyArray = manage.getInerbtyArray();
-				hotsellArray = manage.getHotSellArray();
-				ggTitleArray = manage.getGGTitle();
-				HotSellView hotSellView = new HotSellView(view,getSherlockActivity());
-				hotSellView.initHotSellView(hotsellArray);
-				hotSellView.initAcymerView(acymerArray);
-				hotSellView.initInerbtyView(inerbtyArray);
-				main_mall_notice_content.setText(ggTitleArray.get(0));
-
 
 //				MainPageDataManage manage = new MainPageDataManage(
 //						getSherlockActivity(), mPullToRefreshScrollView);

@@ -46,6 +46,7 @@ import com.yidejia.app.mall.model.Specials;
 import com.yidejia.app.mall.util.CartUtil;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.CstmPayActivity;
+import com.yidejia.app.mall.view.GoCartActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 
 //import com.yidejia.app.mall.view.PayActivity;
@@ -347,9 +348,10 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 					// getAddresses();
 					if (!myApplication.getIsLogin()) {
 						showLoginTips();
+						return;
 					} else {
-						 float sum = Float.parseFloat(sumTextView.getText().toString());
-						go2Pay(sum);
+						 
+						go2Pay();
 					}
 				}
 			});
@@ -385,33 +387,52 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 				.create().show();
 	}
 
-	private void go2Pay(float sum) {
-		cartList = new ArrayList<Cart>();
-		List<HashMap<String, Object>> orderCarts = CartUtil.list1;
-		for (int i = 0; i < orderCarts.size(); i++) {
-			HashMap<String, Object> map = orderCarts.get(i);
-			float ischeck = Float.parseFloat(map.get("check").toString());
-			Log.i("info", ischeck + "    ischeck");
-			Cart cart1 = (Cart) map.get("cart");
-			if (ischeck == 1.0) {
-				cartList.add(cart1);
+	private void go2Pay() {
+		 cartList = new ArrayList<Cart>();
+			List<HashMap<String, Object>> orderCarts = CartUtil.list1;
+			for(int i=0;i<orderCarts.size();i++){
+				HashMap<String, Object> map = orderCarts.get(i);
+				float ischeck =  Float.parseFloat(map.get("check").toString());
+//				Log.i("info", ischeck + "    ischeck");
+				Cart  cart1	= (Cart) map.get("cart");
+				if(ischeck == 1.0){
+					cartList.add(cart1);
 			}
-		}
-		Log.i("NoProduceFragment", sum+"   sum");
-		if (sum > 0) {
-			Intent intent1 = new Intent(activity,
+			}
+			Intent intent1 = new Intent(getSherlockActivity(),
 					CstmPayActivity.class);
-			intent1.putExtra("carts", cartList);
 			Bundle bundle = new Bundle();
-			bundle.putString("cartActivity", "Y");
-			bundle.putString("price", sum + "");
-			intent1.putExtras(bundle);
-			activity.startActivity(intent1);
-		} else {
-			Toast.makeText(activity,
-					getResources().getString(R.string.buy_nothing),
-					Toast.LENGTH_LONG).show();
-		}
+			float sum = Float.parseFloat(sumTextView.getText()
+					.toString());
+			intent1.putExtra("carts", cartList);
+	
+			
+//				for(int i = 0; i<mList.size();i++){
+//					Cart cart = new Cart();
+//					sb.append(cart.getUId());
+//					sb.append(",");
+//					sb.append(cart.getAmount());
+//					sb.append("n");
+//					sb.append(";");
+//				}
+//				preferentialDataManage.getPreferential(sb.toString(),myApplication.getUserId());
+//				if (preferentialDataManage.getFreeGoods().size() != 0
+//						|| preferentialDataManage.getScoreGoods().size() != 0) {
+//					Intent intent = new Intent(GoCartActivity.this,
+//							ExchangeFreeActivity.class);
+//					
+//				}else{
+			
+			if (sum > 0) {
+				bundle.putString("cartActivity","Y");
+				bundle.putString("price", sum + "");
+				intent1.putExtras(bundle);
+				getSherlockActivity().startActivity(intent1);
+			} else {
+				Toast.makeText(getSherlockActivity(), getResources().getString(R.string.buy_nothing),
+						Toast.LENGTH_LONG).show();
+			}
+		
 	}
 
 	/*
@@ -458,14 +479,14 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 
 	Addresses address = null;
 
-	@Override
-	public void onStart() {
-		// TODO Auto-generated method stub
-		super.onStart();
-//		setViewCtrl();
-//		container.requestLayout();
-		Log.i(CartActivity.class.getName(), "cart on start");
-	}
+//	@Override
+//	public void onStart() {
+//		// TODO Auto-generated method stub
+//		super.onStart();
+////		setViewCtrl();
+////		container.requestLayout();
+//		Log.i(CartActivity.class.getName(), "cart on start");
+//	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
@@ -513,7 +534,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 //				activity = CartActivity.this.getSherlockActivity();
 				if (sumCart == 0) {
 					FragmentTransaction ft = getFragmentManager().beginTransaction();
-					if(fragment.isAdded()) ft.hide(CartActivity.this).show(fragment).commitAllowingStateLoss();
+					if(fragment.isAdded()) ft.hide(CartActivity.this).commitAllowingStateLoss();//.show(fragment).
 					else ft.hide(CartActivity.this).replace(R.id.main_fragment, fragment).commitAllowingStateLoss();
 					shoppingCartTopay.setVisibility(View.GONE);		
 					

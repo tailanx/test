@@ -328,9 +328,10 @@ public class CartUtil {
 									price = map.get("price");
 									sum += count1 * price;
 
-								} else {
-									mBox.setChecked(false);
-								}
+								} 
+//								else {
+//									mBox.setChecked(false);
+//								}
 
 							}
 							// Log.i("info", j+"+j");
@@ -338,8 +339,14 @@ public class CartUtil {
 
 								// Log.i("info", list.size()+"+list.size");
 								mBox.setChecked(true);
+								Log.i("info", mBox.isChecked()+"   mBox6");
 								// Log.i("info",mBox.isChecked()+"");
+							}else {
+								mBox.setChecked(false);
+								Log.i("info", mBox.isChecked()+"   mBox7");
 							}
+							Log.i("info", count+ "        afafafas");
+							Log.i("info", sum+ "        afafafas");
 							sumTextView.setText(sum + "");
 							mTextView.setText(count + "");
 							// Log.i("info", list.toString());
@@ -370,9 +377,11 @@ public class CartUtil {
 								sum += count1 * price;
 
 							}
+							Log.i("info", count+ "        afafafas");
+							Log.i("info", sum+ "        afafafas");
 							sumTextView.setText(sum + "");
-							Intent intent = new Intent(Consts.CHECK_UPDATE_CHANGE);
-							context.sendBroadcast(intent);
+//							Intent intent = new Intent(Consts.CHECK_UPDATE_CHANGE);
+//							context.sendBroadcast(intent);
 							mTextView.setText(count + "");
 						} else if (msg.what == 125) {
 							linearLayout.removeView(layout);
@@ -611,13 +620,16 @@ public class CartUtil {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView,
 							boolean isChecked) {
+						
 						if (checkBox.isChecked()) {
+							Log.i("info", mBox.isChecked()+"   mBox2");
 							map.put("check", (float) 1.0);
 							map1.put("check", (float) 1.0);
 						} else {
+							Log.i("info", mBox.isChecked()+"   mBox3");
 							map.put("check", (float) 0.0);
 							map1.put("check", (float) 0.0);
-							mBox.setChecked(false);
+//							mBox.setChecked(false);
 						}
 						Message ms = new Message();
 						ms.what = 113;
@@ -644,6 +656,8 @@ public class CartUtil {
 					public void onClick(View v) {
 						Log.i("info", mBox.isChecked()+"   mBox");
 						if (mBox.isChecked()) {
+							mBox.setChecked(true);
+							Log.i("info", mBox.isChecked()+"   mBox5");
 							Message msg = new Message();
 							msg.what = 124;
 							handler.sendMessage(msg);
@@ -653,6 +667,8 @@ public class CartUtil {
 								Log.i("info", checkBox.isChecked() + "+j");
 							}
 						} else {
+							mBox.setChecked(false);
+							Log.i("info", mBox.isChecked()+"   mBox1");
 							for (int i = 0; i < mList.size(); i++) {
 								CheckBox checkBox = (CheckBox) mList.get(i);
 								checkBox.setChecked(false);
