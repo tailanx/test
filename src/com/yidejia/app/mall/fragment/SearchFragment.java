@@ -1,14 +1,18 @@
 package com.yidejia.app.mall.fragment;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
@@ -16,8 +20,9 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.SearchResultActivity;
 import com.yidejia.app.mall.adapter.SearchListAdapter;
-import com.yidejia.app.mall.datamanage.FunctionDataManage;
 import com.yidejia.app.mall.model.Function;
+import com.yidejia.app.mall.net.ConnectionDetector;
+import com.yidejia.app.mall.net.search.EffectDataUtil;
 
 public class SearchFragment extends SherlockFragment {
 	
@@ -37,6 +42,7 @@ public class SearchFragment extends SherlockFragment {
 	private String TAG = "SearchFragment";
 	
 	private ListView searchListView;
+	private SearchListAdapter searchListAdapter;
 //	private EditText searchEditText;//������
 	
 	@Override
@@ -66,53 +72,8 @@ public class SearchFragment extends SherlockFragment {
 		searchListView = (ListView) view.findViewById(R.id.search_result_list);
 //		searchEditText = (EditText) getSherlockActivity().findViewById(R.id.search_bar_edittext);
 //		searchEditText.clearFocus();
-//		FunctionDataManage manage = new FunctionDataManage(getSherlockActivity());
-//		functions = manage.getFunArray();
 		functions = new ArrayList<Function>();
-		SearchListAdapter searchListAdapter = new SearchListAdapter(getActivity(), functions);
-		searchListView.setAdapter(searchListAdapter);
-		searchListView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				// TODO Auto-generated method stub
-//				getSherlockActivity().getSupportActionBar().setCustomView(R.layout.actionbar_common);
-				Intent intent = new Intent(getActivity(), SearchResultActivity.class);
-				Bundle bundle = new Bundle();
-//				bundle.putString("fun", arg0.getItemAtPosition(arg2).toString());
-				if (!functions.isEmpty()) {
-					if(arg2 == 0) {
-						bundle.putString("fun", "");
-						bundle.putString("title", getResources().getString(R.string.filter_all));
-					} else {
-						bundle.putString("fun", functions.get(arg2 - 1).getFunId());
-						bundle.putString("title", functions.get(arg2 - 1).getFunName());
-					}
-				} else {
-					try {
-						bundle.putString("title", listContent[arg2]);
-						if(arg2 == 0){
-							bundle.putString("fun", "");
-						}else {
-							bundle.putString("fun", listIds[arg2 - 1]);
-						}
-					} catch (Exception e) {
-						// TODO: handle exception
-						bundle.putString("title", "");
-						bundle.putString("fun", "");
-					}
-				}
-				bundle.putString("name", "");
-				bundle.putString("price", "");
-				bundle.putString("brand", "");
-				intent.putExtras(bundle);
-//				intent.putExtra("bundle", arg2);
-				startActivity(intent);
-				
-//				searchEditText.clearFocus();
-			}
-		});
+		
 //		searchEditText.setOnFocusChangeListener(new OnFocusChangeListener() {
 //			
 //			@Override
@@ -143,13 +104,25 @@ public class SearchFragment extends SherlockFragment {
 		return view;
 	}
 
-
+	private Task task;
+	private void closeTask(){
+		if(task != null && task.getStatus().RUNNING == AsyncTask.Status.RUNNING){
+			task.cancel(true);
+		}
+	}
+	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		Log.d(TAG, "TestFragment-----onActivityCreated");
-		
+		if(!ConnectionDetector.isConnectingToInternet(getSherlockActivity())){
+			Toast.makeText(getSherlockActivity(), getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+			return;
+		}
+		closeTask();
+		task = new Task();
+		task.execute();
 	}
 
 	@Override
@@ -157,8 +130,93 @@ public class SearchFragment extends SherlockFragment {
 		// TODO Auto-generated method stub
 		super.onStart();
 		Log.d(TAG, "TestFragment-----onStart");
+//		if(functions == null || functions.isEmpty()){
+//			closeTask();
+//			task = new Task();
+//			task.execute();
+//		}
 	}
 	
-	private String[] listContent = new String[] {"全部", "眼部护理", "活肌抗衰", "美白淡斑", "保湿锁水", "控油抗痘", "特别护理", "周期护理", "营养美容" };
-	private String[] listIds = new String[]{"12","13","17","20","22","24","28","27"};
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		closeTask();
+	}
+
+//	private String[] listContent = new String[] {"全部", "眼部护理", "活肌抗衰", "美白淡斑", "保湿锁水", "控油抗痘", "特别护理", "周期护理", "营养美容" };
+//	private String[] listIds = new String[]{"12","13","17","20","22","24","28","27"};
+	
+	
+	private class Task extends AsyncTask<Void, Void, Boolean>{
+		private ProgressDialog bar;
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			bar = new ProgressDialog(getSherlockActivity());
+			bar.setCancelable(false);
+			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			bar.show();
+		}
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			EffectDataUtil util = new EffectDataUtil();
+			try {
+				String httpresp = util.getHttpResponseString();
+				boolean issuccess = util.analysis(httpresp);
+				functions = util.getFunctions();
+				return issuccess;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return false;
+		}
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(result){
+				Toast.makeText(getSherlockActivity(), "success"+functions.size(), Toast.LENGTH_SHORT).show();
+//				searchListAdapter.notifyDataSetChanged();
+				searchListAdapter = new SearchListAdapter(getActivity(), functions);
+				searchListView.setAdapter(searchListAdapter);
+//				searchListAdapter.setIsEmpty(functions.isEmpty());
+				searchListView.setOnItemClickListener(new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+							long arg3) {
+						// TODO Auto-generated method stub
+//						getSherlockActivity().getSupportActionBar().setCustomView(R.layout.actionbar_common);
+						Intent intent = new Intent(getActivity(), SearchResultActivity.class);
+						Bundle bundle = new Bundle();
+//						bundle.putString("fun", arg0.getItemAtPosition(arg2).toString());
+						if (!functions.isEmpty()) {
+							if(arg2 == 0) {
+								bundle.putString("fun", "");
+								bundle.putString("title", getResources().getString(R.string.filter_all));
+							} else {
+								bundle.putString("fun", functions.get(arg2 - 1).getFunId());
+								bundle.putString("title", functions.get(arg2 - 1).getFunName());
+							}
+						} 
+						bundle.putString("name", "");
+						bundle.putString("price", "");
+						bundle.putString("brand", "");
+						intent.putExtras(bundle);
+//						intent.putExtra("bundle", arg2);
+						startActivity(intent);
+						
+//						searchEditText.clearFocus();
+					}
+				});
+			}
+			bar.dismiss();
+		}
+		
+	}
 }
