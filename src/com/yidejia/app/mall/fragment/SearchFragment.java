@@ -180,11 +180,8 @@ public class SearchFragment extends SherlockFragment {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			if(result){
-				Toast.makeText(getSherlockActivity(), "success"+functions.size(), Toast.LENGTH_SHORT).show();
-//				searchListAdapter.notifyDataSetChanged();
 				searchListAdapter = new SearchListAdapter(getActivity(), functions);
 				searchListView.setAdapter(searchListAdapter);
-//				searchListAdapter.setIsEmpty(functions.isEmpty());
 				searchListView.setOnItemClickListener(new OnItemClickListener() {
 
 					@Override
@@ -192,31 +189,37 @@ public class SearchFragment extends SherlockFragment {
 							long arg3) {
 						// TODO Auto-generated method stub
 //						getSherlockActivity().getSupportActionBar().setCustomView(R.layout.actionbar_common);
-						Intent intent = new Intent(getActivity(), SearchResultActivity.class);
-						Bundle bundle = new Bundle();
-//						bundle.putString("fun", arg0.getItemAtPosition(arg2).toString());
-						if (!functions.isEmpty()) {
-							if(arg2 == 0) {
-								bundle.putString("fun", "");
-								bundle.putString("title", getResources().getString(R.string.filter_all));
-							} else {
-								bundle.putString("fun", functions.get(arg2 - 1).getFunId());
-								bundle.putString("title", functions.get(arg2 - 1).getFunName());
-							}
-						} 
-						bundle.putString("name", "");
-						bundle.putString("price", "");
-						bundle.putString("brand", "");
-						intent.putExtras(bundle);
-//						intent.putExtra("bundle", arg2);
-						startActivity(intent);
-						
-//						searchEditText.clearFocus();
+						listener(arg2);
 					}
 				});
 			}
 			bar.dismiss();
 		}
+		
+	}
+	
+	/**
+	 * 搜索项的监听函数
+	 * @param position
+	 */
+	private void listener(int position){
+		Intent intent = new Intent(getActivity(), SearchResultActivity.class);
+		Bundle bundle = new Bundle();
+//		bundle.putString("fun", arg0.getItemAtPosition(arg2).toString());
+		if (!functions.isEmpty()) {
+			if(position == 0) {
+				bundle.putString("fun", "");
+				bundle.putString("title", getResources().getString(R.string.filter_all));
+			} else {
+				bundle.putString("fun", functions.get(position - 1).getFunId());
+				bundle.putString("title", functions.get(position - 1).getFunName());
+			}
+		} 
+		bundle.putString("name", "");
+		bundle.putString("price", "");
+		bundle.putString("brand", "");
+		intent.putExtras(bundle);
+		startActivity(intent);
 		
 	}
 }
