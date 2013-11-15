@@ -576,17 +576,22 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 				if (number == 0) {
 					cartImage.setVisibility(View.GONE);
 				} else {
-//					if(fragment.isAdded()) ft.hide(NoProduceFragment.this).show(fragment). commitAllowingStateLoss();
-//					else ft.hide(NoProduceFragment.this).replace(R.id.main_fragment, fragment). commitAllowingStateLoss();
+					FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+					if(cartFragment.isAdded()) ft.remove(noProduce).show(cartFragment). commitAllowingStateLoss();
+					else ft.remove(noProduce).replace(R.id.main_fragment, cartFragment). commitAllowingStateLoss();
 					cartImage.setVisibility(View.VISIBLE);
 					cartImage.setText(number + "");
 				}
 			}
 			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
 				number = cartsDataManage.getCartAmount();
-//				Log.i("info", number + "number");
+				Log.e("NoProduceFragment", number + "number");
 				if (number == 0) {
+					FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+					if(noProduce.isAdded()) ft.remove(cartFragment).show(noProduce).commitAllowingStateLoss();//.show(fragment).
+					else ft.remove(cartFragment).replace(R.id.main_fragment, noProduce).commitAllowingStateLoss();
 					cartImage.setVisibility(View.GONE);
+					shoppingCartTopay.setVisibility(View.GONE);
 				} else {
 					cartImage.setVisibility(View.VISIBLE);
 					cartImage.setText(number + "");
