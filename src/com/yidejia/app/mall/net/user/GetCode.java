@@ -13,7 +13,7 @@ public class GetCode {
 	private int code;
 	
 	public String getHttpResp(String name) throws IOException{
-		String param = JNICallBack.getHttp4GetCode(name);
+		String param = new JNICallBack().getHttp4GetCode(name);
 		HttpPostConn conn = new HttpPostConn(param);
 		return conn.getHttpResponse();
 	}

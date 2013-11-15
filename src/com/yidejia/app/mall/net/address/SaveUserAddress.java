@@ -4,8 +4,12 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.http.conn.ConnectTimeoutException;
+
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
@@ -129,7 +133,7 @@ public class SaveUserAddress {
 			String handset, String province, String city, String district,
 			String address, String recipient_id, String token)
 			throws IOException {
-		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4SaveAddress(
+		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4SaveAddress(
 				customer_id, new String(customer_name.getBytes("UTF-8"),
 						"UTF-8"), handset,
 				new String(province.getBytes("UTF-8"), "UTF-8"), new String(

@@ -2,7 +2,10 @@ package com.yidejia.app.mall.util;
 
 import java.util.ArrayList;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,7 +27,6 @@ public class CommentUtil {
 	private TextView userName;// ???????
 	private TextView userLevel;// ??????
 	private TextView userContent;// ???
-	private TextView userGrade;// ???????
 	private TextView commentTime;// ???????
 
 	private UserCommentDataManage dataManage;
@@ -56,18 +58,7 @@ public class CommentUtil {
 
 	public void AllComment(String goodsId, int fromIndex, int amount) {
 		if (ConnectionDetector.isConnectingToInternet(context)) {
-//			ProgressDialog bar = new ProgressDialog(context);
-//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//			bar.setMessage(context.getResources().getString(R.string.searching));
-//			bar.show();
-//			try {
-//				Thread.sleep(3000);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
 			dataManage = new UserCommentDataManage(context);
-//			bar.dismiss();
 			if("".equals(goodsId) || goodsId == null) {
 				Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 				return;
@@ -152,17 +143,6 @@ public class CommentUtil {
 		userName = (TextView) view.findViewById(R.id.user_name);
 		userLevel = (TextView) view.findViewById(R.id.user_level);
 		userContent = (TextView) view.findViewById(R.id.emulate_text);
-		userGrade = (TextView) view.findViewById(R.id.emulate_grade);
-		commentTime = (TextView) view.findViewById(R.id.emulate_user_time);
-	}
-	private void setupShowUserId() {
-		view = LayoutInflater.from(context).inflate(
-				R.layout.evaluation_item, null);
-		userIcon = (ImageView) view.findViewById(R.id.user_icon);
-		userName = (TextView) view.findViewById(R.id.user_name);
-		userLevel = (TextView) view.findViewById(R.id.user_level);
-		userContent = (TextView) view.findViewById(R.id.emulate_text);
-		userGrade = (TextView) view.findViewById(R.id.emulate_grade);
 		commentTime = (TextView) view.findViewById(R.id.emulate_user_time);
 	}
 

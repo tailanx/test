@@ -12,7 +12,7 @@ public class CheckCode {
 	
 	
 	public String getHttpResp(String name, String msgCode) throws IOException{
-		String param = JNICallBack.getHttp4CheckCode(name, msgCode);
+		String param = new JNICallBack().getHttp4CheckCode(name, msgCode);
 		HttpPostConn conn = new HttpPostConn(param);
 		return conn.getHttpResponse();
 	}

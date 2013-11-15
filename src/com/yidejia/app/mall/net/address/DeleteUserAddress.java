@@ -4,8 +4,12 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.http.conn.ConnectTimeoutException;
+
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
@@ -100,7 +104,7 @@ public class DeleteUserAddress {
 	 * @throws IOException
 	 */
 	public String deleteAddress(String cid, String aid, String token) throws IOException{
-		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4DelAddress(cid, aid, token));
+		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4DelAddress(cid, aid, token));
 		return result = conn.getHttpResponse();
 	}
 	

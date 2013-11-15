@@ -16,12 +16,13 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
-import android.util.Log;
-
 import com.yidejia.app.mall.jni.JNICallBack;
+
+import android.util.Log;
 
 public class HttpPostConn {
 	private String urlString = "http://fw1.atido.net/";
@@ -96,7 +97,7 @@ public class HttpPostConn {
 //			ByteArrayEntity arrayEntity = new ByteArrayEntity(paramArrayOfByte); 
 //			arrayEntity.setContentType("application/octet-stream"); 
 			
-			String url = JNICallBack.HTTPURL;
+			String url = new JNICallBack().HTTPURL;
 			HttpPost httpPost = new HttpPost(url); 
 			Log.i(TAG, url+"?"+param);
 //			httpPost.setEntity(arrayEntity); 

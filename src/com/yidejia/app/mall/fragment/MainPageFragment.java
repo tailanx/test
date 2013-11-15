@@ -44,7 +44,6 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.SearchActivity;
 import com.yidejia.app.mall.SlideImageLayout;
-import com.yidejia.app.mall.datamanage.MainPageDataManage;
 import com.yidejia.app.mall.initview.HotSellView;
 import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.model.MainProduct;
@@ -53,7 +52,6 @@ import com.yidejia.app.mall.view.AllOrderActivity;
 import com.yidejia.app.mall.view.IntegeralActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.view.MyCollectActivity;
-import com.yidejia.app.mall.view.PersonActivity;
 import com.yidejia.app.mall.widget.YLViewPager;
 
 public class MainPageFragment extends SherlockFragment {
@@ -90,6 +88,7 @@ public class MainPageFragment extends SherlockFragment {
 
 	private View view;
 	private LayoutInflater inflater;
+	private FrameLayout layout;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -130,15 +129,12 @@ public class MainPageFragment extends SherlockFragment {
 	 * @param inflater
 	 */
 	private void createView(View view, LayoutInflater inflater) {
-		getMainListFirstItem();
-		FrameLayout layout = (FrameLayout) view.findViewById(R.id.layout);
-		// mMainView = (ViewGroup) inflater.inflate(
-		// R.layout.layout_first_item_in_main_listview, null);
-		layout.addView(mMainView);
+		
 		RelativeLayout shorcutLayout = (RelativeLayout) view.findViewById(R.id.function_parent_layout);
 		
 		View child = inflater.inflate(R.layout.main_function, null);
 		shorcutLayout.addView(child);
+		functionIntent(child);
 
 		mPullToRefreshScrollView = (PullToRefreshScrollView) view.findViewById(R.id.main_pull_refresh_scrollview);
 		mPullToRefreshScrollView = (PullToRefreshScrollView) view
@@ -160,9 +156,14 @@ public class MainPageFragment extends SherlockFragment {
 				label);
 		mPullToRefreshScrollView.setOnRefreshListener(listener);
 
-		functionIntent(child);
+		
 		main_mall_notice_content = (TextView) view
 				.findViewById(R.id.main_mall_notice_content);
+		
+		layout = (FrameLayout) view.findViewById(R.id.layout);
+		// mMainView = (ViewGroup) inflater.inflate(
+		// R.layout.layout_first_item_in_main_listview, null);
+		
 	}
 
 		
@@ -188,32 +189,16 @@ public class MainPageFragment extends SherlockFragment {
 		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
 			try {
 				// TODO Auto-generated method stub
-				String label = getResources().getString(R.string.update_time)
-						+ DateUtils.formatDateTime(getSherlockActivity()
-								.getApplicationContext(), System
-								.currentTimeMillis(),
-								DateUtils.FORMAT_SHOW_TIME
-										| DateUtils.FORMAT_SHOW_DATE
-										| DateUtils.FORMAT_ABBREV_ALL);
-				refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+//				String label = getResources().getString(R.string.update_time)
+//						+ DateUtils.formatDateTime(getSherlockActivity()
+//								.getApplicationContext(), System
+//								.currentTimeMillis(),
+//								DateUtils.FORMAT_SHOW_TIME
+//										| DateUtils.FORMAT_SHOW_DATE
+//										| DateUtils.FORMAT_ABBREV_ALL);
+//				refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+				// mPullToRefreshScrollView.setRefreshing();
 
-//				MainPageDataManage manage = new MainPageDataManage(
-//						getSherlockActivity(), mPullToRefreshScrollView);
-//
-//				manage.getMainPageData();
-//				bannerArray = manage.getBannerArray();
-//				acymerArray = manage.getAcymerArray();
-//				inerbtyArray = manage.getInerbtyArray();
-//				hotsellArray = manage.getHotSellArray();
-//				ggTitleArray = manage.getGGTitle();
-//				HotSellView hotSellView = new HotSellView(view,
-//						getSherlockActivity());
-//				hotSellView.initHotSellView(hotsellArray);
-//				hotSellView.initAcymerView(acymerArray);
-//				hotSellView.initInerbtyView(inerbtyArray);
-//				main_mall_notice_content.setText(ggTitleArray.get(0));
-//				getMainListFirstItem();
-				// mPullToRefreshScrollView.onRefreshComplete();
 				closeTask();
 				task = new Task();
 				task.execute();
@@ -479,11 +464,11 @@ public class MainPageFragment extends SherlockFragment {
 		});
 	}
 
-	private ArrayList<BaseProduct> bannerArray;
-	private ArrayList<MainProduct> acymerArray;
-	private ArrayList<MainProduct> inerbtyArray;
-	private ArrayList<MainProduct> hotsellArray;
-	private ArrayList<String> ggTitleArray;
+	private ArrayList<BaseProduct> bannerArray = new ArrayList<BaseProduct>();
+	private ArrayList<MainProduct> acymerArray = new ArrayList<MainProduct>();
+	private ArrayList<MainProduct> inerbtyArray = new ArrayList<MainProduct>();
+	private ArrayList<MainProduct> hotsellArray = new ArrayList<MainProduct>();
+	private ArrayList<String> ggTitleArray = new ArrayList<String>();
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -492,13 +477,6 @@ public class MainPageFragment extends SherlockFragment {
 			super.onActivityCreated(savedInstanceState);
 			Log.d(TAG, "TestFragment-----onActivityCreated");
 			// intentToView(view);
-			MainPageDataManage manage = new MainPageDataManage(getSherlockActivity(), null);
-			manage.getMainPageData();
-			bannerArray = manage.getBannerArray();
-			acymerArray = manage.getAcymerArray();
-			inerbtyArray = manage.getInerbtyArray();
-			hotsellArray = manage.getHotSellArray();
-			ggTitleArray = manage.getGGTitle();
 
 //			MainPageDataManage manage = new MainPageDataManage(
 //					getSherlockActivity(), null);
@@ -517,6 +495,8 @@ public class MainPageFragment extends SherlockFragment {
 //			hotSellView.initInerbtyView(inerbtyArray);
 //			intentToView(view);
 //			main_mall_notice_content.setText(ggTitleArray.get(0));
+			createView(view, inflater);
+			
 			closeTask();
 			task = new Task();
 			task.execute();
@@ -563,10 +543,14 @@ public class MainPageFragment extends SherlockFragment {
 			super.onPreExecute();
 			if (isFirstIn) {
 				bar = new ProgressDialog(getSherlockActivity());
-				bar.setCancelable(false);
+//				bar.setCancelable(false);
 				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 				bar.show();
 			}
+			if(!bannerArray.isEmpty())bannerArray.clear();
+			if(!inerbtyArray.isEmpty()) inerbtyArray.clear();
+			if(!hotsellArray.isEmpty()) hotsellArray.clear();
+			if(!acymerArray.isEmpty())acymerArray.clear();
 		}
 
 		@Override
@@ -575,14 +559,28 @@ public class MainPageFragment extends SherlockFragment {
 			super.onPostExecute(result);
 //			try{
 			if(result){
-				createView(view, inflater);
-			HotSellView hotSellView = new HotSellView(view,getSherlockActivity());
-		
-				hotSellView.initHotSellView(hotsellArray);
-				hotSellView.initAcymerView(acymerArray);
-				hotSellView.initInerbtyView(inerbtyArray);
-				intentToView(view);
-				main_mall_notice_content.setText(ggTitleArray.get(0));
+				try {
+					
+					layout.removeAllViews();
+					getMainListFirstItem();
+					layout.addView(mMainView);
+					
+					HotSellView hotSellView = new HotSellView(view,getSherlockActivity());
+					hotSellView.initHotSellView(hotsellArray);
+					hotSellView.initAcymerView(acymerArray);
+					hotSellView.initInerbtyView(inerbtyArray);
+					
+					try {
+						intentToView(view);
+					} catch (Exception e) {
+						// TODO: handle exception
+						e.printStackTrace();
+					}
+					
+					main_mall_notice_content.setText(ggTitleArray.get(0));
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 //		} catch (Exception e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
@@ -598,7 +596,16 @@ public class MainPageFragment extends SherlockFragment {
 				bar.dismiss();
 				isFirstIn = false;
 			} else {
+				
 				mPullToRefreshScrollView.onRefreshComplete();
+				String label = getResources().getString(R.string.update_time)
+						+ DateUtils.formatDateTime(getSherlockActivity()
+								.getApplicationContext(), System
+								.currentTimeMillis(),
+								DateUtils.FORMAT_SHOW_TIME
+								| DateUtils.FORMAT_SHOW_DATE
+								| DateUtils.FORMAT_ABBREV_ALL);
+				mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 			}
 		}
 		

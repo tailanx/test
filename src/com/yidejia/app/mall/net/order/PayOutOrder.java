@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
+import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.util.Md5;
 /**
@@ -76,7 +77,7 @@ public class PayOutOrder {
 	public String getHttpResponseString(String customer_id, String code)throws IOException{
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress(customer_id, code));
 //		result = conn.getJsonResult();
-		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4PayOut(customer_id, code));
+		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4PayOut(customer_id, code));
 		result = conn.getHttpResponse();
 		return result;
 	}

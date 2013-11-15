@@ -4,8 +4,12 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.http.conn.ConnectTimeoutException;
+
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
@@ -84,7 +88,7 @@ public class SaveProductComment {
 //		getHttpAddress(id);
 //		HttpPostConn conn = new HttpPostConn(keys, values);
 //		result = conn.getJsonResult();
-		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4SaveComment(goods_id, user_id, user_name, title, experience, commentDate));
+		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4SaveComment(goods_id, user_id, user_name, title, experience, commentDate));
 		result = conn.getHttpResponse();
 		return result;
 	}

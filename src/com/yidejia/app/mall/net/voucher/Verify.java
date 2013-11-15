@@ -7,7 +7,7 @@ import com.yidejia.app.mall.net.HttpPostConn;
 
 public class Verify {
 	public synchronized String getHttpResponse(String goods, String userid) throws IOException{
-		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4GetVerify(goods, userid));
+		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4GetVerify(goods, userid));
 		return conn.getHttpResponse();
 	}
 }

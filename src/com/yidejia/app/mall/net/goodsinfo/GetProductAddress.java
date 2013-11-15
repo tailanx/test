@@ -2,113 +2,192 @@ package com.yidejia.app.mall.net.goodsinfo;
 
 import java.io.IOException;
 
-import android.content.Context;
+
+
+
+import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.util.Log;
 
 import com.yidejia.app.mall.jni.JNICallBack;
-import com.yidejia.app.mall.net.HttpAddressParam;
+import com.yidejia.app.mall.model.BaseProduct;
+import com.yidejia.app.mall.model.MainProduct;
+import com.yidejia.app.mall.model.ProductBaseInfo;
 import com.yidejia.app.mall.net.HttpGetConn;
-import com.yidejia.app.mall.util.Md5;
+import com.yidejia.app.mall.net.ImageUrl;
+import com.yidejia.app.mall.util.UnicodeToString;
 /**
  * ��ȡ��Ʒ��Ϣ
  * @author long bin
  *
  */
 public class GetProductAddress {
-	private String[] keys = new String[6];
-	private String[] values = new String[6];
+	
 	private String TAG = GetProductAddress.class.getName();
-	private Context context;
 	
-	public GetProductAddress(Context context){
-		this.context = context;
-	}
+	private UnicodeToString unicode;
 	
-	private void setKeysAndValues(String id){
-		keys[0] = "api";
-		String api = "product.mallgood.getCollect";
-		values[0] = api;
-		keys[1] = "id";
-		values[1] = id;
-		keys[2] = "key";
-		values[2] = "fw_mobile";
-//		values[2] = "fw_test";
-		keys[3] = "format";
-		values[3] = "array";
-		keys[4] = "ts";
-		long time = System.currentTimeMillis();
-		String ts = String.valueOf(time/1000);
-		values[4] = ts;
-		
-		keys[5] = "sign";
-		StringBuffer strTemp = new StringBuffer();
-//		strTemp.append("ChunTianfw_mobile123456");
-		strTemp.append("ChunTianfw_mobile@SDF!TD#DF#*CB$GER@");
-		strTemp.append(api);
-		strTemp.append(ts);
-		Md5 md = new Md5();
-		String result = md.getMD5Str(strTemp.toString());
-		md = null;
-        strTemp = null;
-		values[5] = result;
-	}
+	private ProductBaseInfo productBaseInfo;
+	private ArrayList<BaseProduct> bannerArray;			//轮播商品
+	private ArrayList<MainProduct> recommendArray;    ///推荐搭配 
 	
-	private String getHttpAddress(String id){
-		StringBuffer result = new StringBuffer();
-//		result.append("http://192.168.1.254:802/?");
-		setKeysAndValues(id);
-		result.append(HttpAddressParam.getHttpAddress(keys, values));
-		Log.i(TAG, result.toString());
-		return result.toString();
+	public GetProductAddress(){
+		unicode = new UnicodeToString();
+		productBaseInfo = new ProductBaseInfo();
+		bannerArray = new ArrayList<BaseProduct>();
+		recommendArray = new ArrayList<MainProduct>();
 	}
 	
 	private String result = "";
 	public String getProductJsonString(String id)throws IOException{
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress(id));
-		HttpGetConn conn = new HttpGetConn(JNICallBack.getHttp4GetGoods(id), true);
+		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetGoods(id), true);
 		result = conn.getJsonResult();
 		return result;
 	}
-//	public String getFavoriteListJson(){
-//		AsyncHttpClient client = new AsyncHttpClient();
-//		client.setTimeout(5000);
-//		client.get(getHttpAddress(), new AsyncHttpResponseHandler(){
-//
-//			@Override
-//			public void onSuccess(String content) {
-//				// TODO Auto-generated method stub
-//				super.onSuccess(content);
-//				Toast.makeText(context, content, Toast.LENGTH_SHORT).show();
-//				Log.i(TAG, "1111"+content);
-//				bar.dismiss();
-//				result = content;
-//			}
-//
-//			@Override
-//			public void onFailure(Throwable error, String content) {
-//				// TODO Auto-generated method stub
-//				super.onFailure(error, content);
-//				Log.i(TAG, "2222"+content);
-//				if (error.getCause() instanceof ConnectTimeoutException) {
-//					System.out.println("Connection timeout !");
-//					Log.i(TAG, "Connection timeout ");
-//				}
-//				bar.dismiss();
-//			}
-//
-//			@Override
-//			public void onStart() {
-//				// TODO Auto-generated method stub
-//				super.onStart();
-//				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//				bar.setMessage("���ڲ�ѯ");
-//				bar.show();
-//			}
-//			
-//			private ProgressDialog bar = new ProgressDialog(context);
-//		});
-//		return result;
-//	}
-//	
+
+	/**
+	 * 解析http返回数据
+	 * @param httpresp
+	 * @return
+	 */
+	public boolean analysis(String httpresp){
+		boolean issuccess = false;
+		try {
+			JSONObject jsonObject = new JSONObject(httpresp);
+			int code = jsonObject.getInt("code");
+			String resp = jsonObject.getString("response");
+			if(code == 1){
+				analysisProductJson(resp);
+				issuccess = true;
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return issuccess;
+	}
 	
+	/**
+	 * 解析商品的json数据
+	 * @param jsonString
+	 * @throws JSONException
+	 */
+	private boolean analysisProductJson(String jsonString){
+		try {
+			JSONObject responseObject = new JSONObject(jsonString);
+			String uid = responseObject.getString("goods_id");
+			productBaseInfo.setUId(uid);
+			String goodName = responseObject.getString("goods_name");
+			productBaseInfo.setName(unicode.revert(goodName));
+			String price = responseObject.getString("price");
+			productBaseInfo.setPrice(price);
+			String sells = responseObject.getString("sells");
+			productBaseInfo.setSalledAmount(sells);
+			String remarks = responseObject.getString("remarks");
+			productBaseInfo.setCommentAmount(remarks);
+			String brands = responseObject.getString("brand");
+			productBaseInfo.setBrands(brands);
+			String theCode = responseObject.getString("the_code");
+			productBaseInfo.setProductNumber(theCode);
+			String sepc = responseObject.getString("sepc");
+			productBaseInfo.setProductSpecifications(sepc);
+			String info = responseObject.getString("info");
+			productBaseInfo.setProductDetailUrl(info);
+			String shaidan = responseObject.getString("shaidan");
+			productBaseInfo.setShowListAmount(shaidan);
+			String pics = responseObject.getString("pics");
+			analysisPicJson(pics, bannerArray);
+			productBaseInfo.setImgUrl(ImageUrl.IMAGEURL+imageUrlString + "!100");
+			productBaseInfo.setBannerArray(bannerArray);
+			String collects = responseObject.getString("collects");
+			analysisRecmJson(collects, recommendArray);
+			productBaseInfo.setRecommendArray(recommendArray);
+			return true;
+		} catch (JSONException e) {
+			// TODO: handle exception
+		}
+		return false;
+	}
+	
+	/**
+	 * 解析商品推荐轮播图片
+	 * @param picString
+	 * @throws JSONException 
+	 */
+	private void analysisRecmJson(String picString, ArrayList<MainProduct> picList){
+		JSONArray responseArray;
+		try {
+			responseArray = new JSONArray(picString);
+			MainProduct baseProduct;
+			JSONObject itemObject;
+			int length = responseArray.length();
+			for (int i = 0; i < length; i++) {
+				baseProduct = new MainProduct();
+				itemObject = responseArray.getJSONObject(i);
+				String goodsId = itemObject.getString("goods_id");
+				baseProduct.setUId(goodsId);
+				String imgUrlTemp = itemObject.getString("imgname");
+				String imgUrl = ImageUrl.IMAGEURL + imgUrlTemp + "!150";
+				baseProduct.setImgUrl(imgUrl);
+				baseProduct.setPrice(itemObject.getString("price"));
+				baseProduct.setTitle(itemObject.getString("goods_name"));
+				picList.add(baseProduct);
+				Log.i(TAG, picList.getClass().getName());
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			Log.e(TAG, "analysis RecmJson json err");
+			e.printStackTrace();
+		}
+	}
+	
+	private String imageUrlString = "";
+	/**
+	 * 解析轮播图片数据
+	 * @param picString
+	 * @param picList
+	 * @return
+	 */
+	private String analysisPicJson(String picString, ArrayList<BaseProduct> picList) {
+		JSONObject responseArray;
+		try {
+			responseArray = new JSONObject(picString);
+			imageUrlString = responseArray.getString("imgname");
+			Log.i(TAG, imageUrlString);
+			BaseProduct baseProduct;
+			int length = responseArray.length();
+			for (int i = 0; i < length - 1; i++) {
+				baseProduct = new BaseProduct();
+				String itemsString = responseArray.getString(String.valueOf(i));
+				JSONObject itemObject = new JSONObject(itemsString);
+				String id = itemObject.getString("goods_id");
+				baseProduct.setUId(id);
+				String imgUrlTemp = ImageUrl.IMAGEURL + itemObject.getString("imgname") + "!200";
+				baseProduct.setImgUrl(imgUrlTemp);
+				picList.add(baseProduct);
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			Log.e(TAG, "analysis Pic json err");
+			e.printStackTrace();
+		}
+		return imageUrlString;
+	}
+	
+	public ArrayList<BaseProduct> getBannerProducts(){
+		return bannerArray;
+	}
+	
+	public ArrayList<MainProduct> getRecommentProducts(){
+		return recommendArray;
+	}
+	
+	public ProductBaseInfo getProductBaseInfo(){
+		return productBaseInfo;
+	}
 }

@@ -42,7 +42,7 @@ public class GetHomePage {
 	private String result = "";
 	public String getHomePageJsonString()throws IOException{
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress());
-		HttpGetConn conn = new HttpGetConn(JNICallBack.getHttp4GetHome(), true);
+		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetHome(), true);
 		result = conn.getJsonResult();
 		return result;
 	}

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+
+
 import android.content.Context;
 import android.util.Log;
 
@@ -87,7 +89,7 @@ public class DeleteFavorite {
 	}
 	
 	public String deleteFavorite(String userid, String goodsid, String token) throws IOException{
-		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4DelFav(userid, goodsid, token));
+		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4DelFav(userid, goodsid, token));
 		return result = conn.getHttpResponse();
 	}
 	

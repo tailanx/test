@@ -2,6 +2,9 @@ package com.yidejia.app.mall.net.search;
 
 import java.io.IOException;
 
+
+
+import android.content.Context;
 import android.util.Log;
 
 import com.yidejia.app.mall.jni.JNICallBack;
@@ -88,7 +91,7 @@ public class SearchDataUtil {
 	 */
 	public String getHttpResponseString(String name, String fun, String brand, String price, String order1, String offset1, String limit1)throws IOException{
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress(name, fun, brand, price, order1, offset1, limit1));
-		String url = JNICallBack.getHttp4GetSearch(name, fun, brand, price, order1, offset1, limit1);
+		String url = new JNICallBack().getHttp4GetSearch(name, fun, brand, price, order1, offset1, limit1);
 		Log.e(TAG, "before conn"+url);
 		HttpGetConn conn = new HttpGetConn(url, true);
 		result = conn.getJsonResult();

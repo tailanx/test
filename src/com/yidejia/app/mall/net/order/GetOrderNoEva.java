@@ -2,8 +2,12 @@ package com.yidejia.app.mall.net.order;
 
 import java.io.IOException;
 
+import org.apache.http.conn.ConnectTimeoutException;
+
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
@@ -90,7 +94,7 @@ public class GetOrderNoEva {
 	}
 	
 	public String getHttpResponse(String user_id) throws IOException{
-		HttpGetConn conn = new HttpGetConn(JNICallBack.getHttp4GetNoEvaluate(user_id), true);
+		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetNoEvaluate(user_id), true);
 		return result = conn.getJsonResult();
 	}
 //	public String getFavoriteListJson(){

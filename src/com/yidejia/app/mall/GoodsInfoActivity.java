@@ -1,10 +1,14 @@
 package com.yidejia.app.mall;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
@@ -23,6 +27,8 @@ import com.yidejia.app.mall.fragment.CommentFragment;
 import com.yidejia.app.mall.fragment.GoodsDetailFragment;
 import com.yidejia.app.mall.model.ProductBaseInfo;
 import com.yidejia.app.mall.net.ConnectionDetector;
+import com.yidejia.app.mall.net.goodsinfo.GetProductAddress;
+import com.yidejia.app.mall.task.TaskRegister;
 
 /**
  * 商品基本信息类
@@ -36,23 +42,27 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 	private TextView goodsBasicInfo;// 基本信息
 	private TextView goodsDetails;// 详情
 	private TextView goodsReviews;// 评论
-	private ViewPager goodsViewPager;
+//	private ViewPager goodsViewPager;
 	private ArrayList<Fragment> fragmentsList;
 	private int currIndex = 1;
 	private int number = 0;
 	private Button cartButotn;
 	private String goodsId;
 	private ProductBaseInfo info;
+	
+	private Task task;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		Bundle bundle = getIntent().getExtras();
+		setActionbarConfig();
+		setContentView(R.layout.activity_goods_info_layout);
 		if (bundle != null) {
 			goodsId = bundle.getString("goodsId");
 			if (ConnectionDetector.isConnectingToInternet(this)) {
-				final ProductDataManage manage = new ProductDataManage(this);
+				/*final ProductDataManage manage = new ProductDataManage(this);
 				if (!"".equals(goodsId) && goodsId != null) {
 					info = manage.getProductData(goodsId);
 					// manage.getTask(goodsId);
@@ -64,13 +74,70 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 					// // manage.getTask(goodsId);
 					// }
 					// });
-				}
+				}*/
+				closeTask();
+				task = new Task();
+				task.execute();
+				
 			}
 		}
-		setActionbarConfig();
-		setContentView(R.layout.activity_goods_info_layout);
-		initView();
-		initViewPager();
+//		initView();
+//		initViewPager();
+	}
+	
+	private void closeTask(){
+		if(task != null && task.getStatus().RUNNING == AsyncTask.Status.RUNNING){
+			task.cancel(true);
+		}
+	}
+	
+	private class Task extends AsyncTask<Void, Void, Boolean>{
+		private ProgressDialog bar;
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			bar = new ProgressDialog(GoodsInfoActivity.this);
+			bar.setCancelable(false);
+			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			bar.show();
+		}
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(!result){
+				Toast.makeText(GoodsInfoActivity.this, getResources().getString(R.string.bad_network), Toast.LENGTH_LONG).show();
+			} else{
+				initView();
+				initViewPager();
+			}
+			bar.dismiss();
+		}
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			GetProductAddress product = new GetProductAddress();
+			try {
+				String httpresp = product.getProductJsonString(goodsId);
+				boolean issuccess = product.analysis(httpresp);
+				info = product.getProductBaseInfo();
+				return issuccess;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return false;
+		}
+	}
+	
+	
+
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		closeTask();
 	}
 
 	private TextView titleTextView;
@@ -112,6 +179,7 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 		goodsBasicInfo.setOnClickListener(new TabOnClickListener(1));
 		goodsReviews.setOnClickListener(new TabOnClickListener(0));
 		goodsDetails.setOnClickListener(new TabOnClickListener(2));
+		
 	}
 
 	private void initViewPager() {
@@ -120,14 +188,14 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 		// Integer.parseInt(cartButotn.getText().toString());//获取购物车上的数据
 
 		try {
-			LayoutInflater mInflater = getLayoutInflater();
-			View activityView = mInflater.inflate(
-					R.layout.item_goods_base_info, null);
-			ImageView cartAdd = (ImageView) activityView
-					.findViewById(R.id.add_to_cart);// 加入购物车
-			cartAdd.setOnClickListener(this);
+//			LayoutInflater mInflater = getLayoutInflater();
+//			View activityView = mInflater.inflate(
+//					R.layout.item_goods_base_info, null);
+//			ImageView cartAdd = (ImageView) activityView
+//					.findViewById(R.id.add_to_cart);// 加入购物车
+//			cartAdd.setOnClickListener(this);
 
-			goodsViewPager = (ViewPager) findViewById(R.id.goods_viewpager);
+//			goodsViewPager = (Fragment) findViewById(R.id.goods_framelayout);
 			fragmentsList = new ArrayList<Fragment>();
 			// Fragment emulate = BaseInfoFragment.newInstance("0");
 			Fragment emulate = CommentFragment.newInstance(goodsId);
@@ -139,93 +207,148 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 			fragmentsList.add(emulate);
 			fragmentsList.add(baseInfo);
 			fragmentsList.add(last);
+			FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+			ft.add(R.id.goods_framelayout, fragmentsList.get(1)).commit();
+			currIndex = 1;
 
-			goodsViewPager.setAdapter(new BaseFragmentPagerAdapter(
-					getSupportFragmentManager(), fragmentsList));
-			goodsViewPager.setCurrentItem(currIndex);
-			goodsViewPager
-					.setOnPageChangeListener(new GoodsPagerChangeListener());
-			goodsViewPager.setOffscreenPageLimit(2);
+//			goodsViewPager.setAdapter(new BaseFragmentPagerAdapter(
+//					getSupportFragmentManager(), fragmentsList));
+//			goodsViewPager.setCurrentItem(currIndex);
+//			goodsViewPager
+//					.setOnPageChangeListener(new GoodsPagerChangeListener());
+//			goodsViewPager.setOffscreenPageLimit(2);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Toast.makeText(
-					GoodsInfoActivity.this,
-					GoodsInfoActivity.this.getResources().getString(
-							R.string.bad_network), Toast.LENGTH_SHORT).show();
+//			Toast.makeText(
+//					GoodsInfoActivity.this,
+//					GoodsInfoActivity.this.getResources().getString(
+//							R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
 		// goodsViewPager.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
 	}
-
-	public class GoodsPagerChangeListener implements OnPageChangeListener {
-
-		@Override
-		public void onPageScrollStateChanged(int arg0) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void onPageScrolled(int arg0, float arg1, int arg2) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void onPageSelected(int arg0) {
-			// TODO Auto-generated method stub
-			setBackgrounDefault(currIndex);
-			switch (arg0) {
-			case 0:
-				goodsReviews
-						.setBackgroundResource(R.drawable.product_details_selected);
-				goodsReviews.setTextColor(Color.rgb(112, 44, 145));
-				goodsBasicInfo
-						.setBackgroundResource(R.drawable.product_details_bg);
-				goodsDetails
-						.setBackgroundResource(R.drawable.product_details_bg);
-				break;
-			case 1:
-				goodsReviews
-						.setBackgroundResource(R.drawable.product_details_bg);
-				goodsBasicInfo
-						.setBackgroundResource(R.drawable.product_details_selected);
-				goodsBasicInfo.setTextColor(Color.rgb(112, 44, 145));
-				goodsDetails
-						.setBackgroundResource(R.drawable.product_details_bg);
-				break;
-			case 2:
-				goodsReviews
-						.setBackgroundResource(R.drawable.product_details_bg);
-				goodsBasicInfo
-						.setBackgroundResource(R.drawable.product_details_bg);
-				goodsDetails
-						.setBackgroundResource(R.drawable.product_details_selected);
-				goodsDetails.setTextColor(Color.rgb(112, 44, 145));
-				break;
-			default:
-				break;
-			}
-//			fragmentsList.get(currIndex).onPause(); // 调用切换前Fargment的onPause()
-////        fragments.get(currentPageIndex).onStop(); // 调用切换前Fargment的onStop()
-//			if(fragmentsList.get(arg0).isAdded()){
-////            fragments.get(i).onStart(); // 调用切换后Fargment的onStart()
-//				fragmentsList.get(arg0).onResume(); // 调用切换后Fargment的onResume()
-//			}
-			currIndex = arg0;
+	
+	/**
+	 * 切换fragment 
+	 * @param index
+	 */
+	private void changeFragment(int index){
+		// 用于切换时保存fragment
+		try {
+			if(fragmentsList.get(index) == null || fragmentsList.get(currIndex) == null) return;
+			FragmentTransaction ft = getSupportFragmentManager()
+					.beginTransaction();
+			if (fragmentsList.get(index).isAdded())
+				ft.hide(fragmentsList.get(currIndex))
+				.show(fragmentsList.get(index)).commit();
+			else
+				ft.hide(fragmentsList.get(currIndex))
+				.add(R.id.goods_framelayout, fragmentsList.get(index))
+				.commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 
+//	public class GoodsPagerChangeListener implements OnPageChangeListener {
+//
+//		@Override
+//		public void onPageScrollStateChanged(int arg0) {
+//			// TODO Auto-generated method stub
+//
+//		}
+//
+//		@Override
+//		public void onPageScrolled(int arg0, float arg1, int arg2) {
+//			// TODO Auto-generated method stub
+//
+//		}
+//
+//		@Override
+//		public void onPageSelected(int arg0) {
+//			// TODO Auto-generated method stub
+//			setBackgrounDefault(currIndex);
+//			switch (arg0) {
+//			case 0:
+//				goodsReviews
+//						.setBackgroundResource(R.drawable.product_details_selected);
+//				goodsReviews.setTextColor(Color.rgb(112, 44, 145));
+//				goodsBasicInfo
+//						.setBackgroundResource(R.drawable.product_details_bg);
+//				goodsDetails
+//						.setBackgroundResource(R.drawable.product_details_bg);
+//				break;
+//			case 1:
+//				goodsReviews
+//						.setBackgroundResource(R.drawable.product_details_bg);
+//				goodsBasicInfo
+//						.setBackgroundResource(R.drawable.product_details_selected);
+//				goodsBasicInfo.setTextColor(Color.rgb(112, 44, 145));
+//				goodsDetails
+//						.setBackgroundResource(R.drawable.product_details_bg);
+//				break;
+//			case 2:
+//				goodsReviews
+//						.setBackgroundResource(R.drawable.product_details_bg);
+//				goodsBasicInfo
+//						.setBackgroundResource(R.drawable.product_details_bg);
+//				goodsDetails
+//						.setBackgroundResource(R.drawable.product_details_selected);
+//				goodsDetails.setTextColor(Color.rgb(112, 44, 145));
+//				break;
+//			default:
+//				break;
+//			}
+////			fragmentsList.get(currIndex).onPause(); // 调用切换前Fargment的onPause()
+//////        fragments.get(currentPageIndex).onStop(); // 调用切换前Fargment的onStop()
+////			if(fragmentsList.get(arg0).isAdded()){
+//////            fragments.get(i).onStart(); // 调用切换后Fargment的onStart()
+////				fragmentsList.get(arg0).onResume(); // 调用切换后Fargment的onResume()
+////			}
+//			currIndex = arg0;
+//		}
+//	}
+	/**
+	 * 设置选中的项的字体颜色和背景
+	 * @param index 选中项下标
+	 */
+	private void setNowBackground(int index) {
+		switch (index) {
+		case 0:
+			goodsReviews.setBackgroundResource(R.drawable.product_details_selected);
+			goodsReviews.setTextColor(Color.rgb(112, 44, 145));
+			break;
+		case 1:
+			goodsBasicInfo.setBackgroundResource(R.drawable.product_details_selected);
+			goodsBasicInfo.setTextColor(Color.rgb(112, 44, 145));
+			break;
+		case 2:
+			goodsDetails.setBackgroundResource(R.drawable.product_details_selected);
+			goodsDetails.setTextColor(Color.rgb(112, 44, 145));
+			break;
+		default:
+			break;
+		}
+	}
+
+	/**
+	 * 设置上次选中项为默认字体颜色和背景
+	 * @param lastIndex 上次选中下标
+	 */
 	private void setBackgrounDefault(int lastIndex) {
 		switch (lastIndex) {
 		case 0:
 			goodsReviews.setTextColor(Color.BLACK);
+			goodsReviews.setBackgroundResource(R.drawable.product_details_bg);
 			break;
 		case 1:
 			goodsBasicInfo.setTextColor(Color.BLACK);
+			goodsBasicInfo.setBackgroundResource(R.drawable.product_details_bg);
 			break;
 		case 2:
 			goodsDetails.setTextColor(Color.BLACK);
+			goodsDetails.setBackgroundResource(R.drawable.product_details_bg);
 			break;
 
 		default:
@@ -243,7 +366,12 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			goodsViewPager.setCurrentItem(index);
+//			goodsViewPager.setCurrentItem(index);
+			if(index == currIndex) return;//选中项为当前项（上次选中项） 则跳过
+			setBackgrounDefault(currIndex);//设置上次选中项的字体颜色和背景
+			setNowBackground(index);//设置选中项的字体颜色和背景
+			changeFragment(index);//跳转到不同的页面
+			currIndex = index;//改变当前项下标
 		}
 
 	}

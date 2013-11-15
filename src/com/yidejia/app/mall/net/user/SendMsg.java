@@ -12,7 +12,7 @@ public class SendMsg {
 	
 	
 	public String getHttpResp(String name, String code) throws IOException{
-		String param = JNICallBack.getHttp4SendMsg(name, code);
+		String param = new JNICallBack().getHttp4SendMsg(name, code);
 		HttpPostConn conn = new HttpPostConn(param);
 		return conn.getHttpResponse();
 	}

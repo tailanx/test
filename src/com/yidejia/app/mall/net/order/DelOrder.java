@@ -118,7 +118,7 @@ public class DelOrder {
 	
 	public String getHttpResponse(String customer_id, String code, String token)
 			throws IOException {
-		String url = JNICallBack.getHttp4DelOrder(customer_id, code, token);
+		String url = new JNICallBack().getHttp4DelOrder(customer_id, code, token);
 		
 		HttpPostConn conn = new HttpPostConn(url);
 //		HttpGetConn conn = new HttpGetConn(url, true);

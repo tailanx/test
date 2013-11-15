@@ -8,11 +8,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Context;
-import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.Toast;
-
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.interfacecallback.CallBack;
 import com.yidejia.app.mall.model.BaseProduct;
@@ -22,6 +17,12 @@ import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.goodsinfo.GetProductAddress;
 import com.yidejia.app.mall.util.UnicodeToString;
+
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.Toast;
 /**
  * 获取商品数据
  * @author long bin
@@ -92,7 +93,7 @@ public class ProductDataManage{  //implements CallBack
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-			GetProductAddress address = new GetProductAddress(context);
+			GetProductAddress address = new GetProductAddress();
 			try {
 				String resultString = address.getProductJsonString(id);
 				try {

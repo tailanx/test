@@ -2,8 +2,12 @@ package com.yidejia.app.mall.net.express;
 
 import java.io.IOException;
 
+import org.apache.http.conn.ConnectTimeoutException;
+
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
@@ -79,7 +83,7 @@ public class GetExpressList {
 			throws IOException {
 		// HttpGetConn conn = new HttpGetConn(getHttpAddress(where, offset,
 		// limit, group, order, fields));
-		HttpGetConn conn = new HttpGetConn(JNICallBack.getHttp4GetExpress(
+		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetExpress(
 				where, offset, limit, group, order, fields), true);
 		result = conn.getJsonResult();
 		return result;

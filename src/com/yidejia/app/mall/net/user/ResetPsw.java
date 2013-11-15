@@ -11,7 +11,7 @@ import com.yidejia.app.mall.net.HttpPostConn;
 public class ResetPsw {
 	
 	public String getHttpResponse(String username, String password,String code) throws IOException{
-		HttpPostConn conn = new HttpPostConn(JNICallBack.getHttp4ResetPsw(username, password, code));
+		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4ResetPsw(username, password, code));
 		return conn.getHttpResponse();
 	}
 	
