@@ -319,9 +319,10 @@ public class CartUtil {
 							float price = 0;
 							int j = 0;
 							for (int i = 0; i < list.size(); i++) {
+								
 								HashMap<String, Float> map = list.get(i);
 								float ischeck = map.get("check");
-								j += ischeck;
+								j += ischeck; 
 								if (ischeck == 1) {
 									float count1 = map.get("count");
 									count += map.get("count");
@@ -623,12 +624,12 @@ public class CartUtil {
 						
 						if (checkBox.isChecked()) {
 							Log.i("info", mBox.isChecked()+"   mBox2");
-							map.put("check", (float) 1.0);
-							map1.put("check", (float) 1.0);
+							map.put("check", (float) 1);
+							map1.put("check", (float) 1);
 						} else {
 							Log.i("info", mBox.isChecked()+"   mBox3");
-							map.put("check", (float) 0.0);
-							map1.put("check", (float) 0.0);
+							map.put("check", (float) 0);
+							map1.put("check", (float) 0);
 //							mBox.setChecked(false);
 						}
 						Message ms = new Message();

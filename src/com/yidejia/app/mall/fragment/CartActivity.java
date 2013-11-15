@@ -346,11 +346,12 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					// getAddresses();
+					Log.e("NoProduceFragment", "cart act button is null");
 					if (!myApplication.getIsLogin()) {
 						showLoginTips();
 						return;
 					} else {
-						 
+						Log.e("NoProduceFragment", "cart act button is null");
 						go2Pay();
 					}
 				}
@@ -393,7 +394,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 			for(int i=0;i<orderCarts.size();i++){
 				HashMap<String, Object> map = orderCarts.get(i);
 				float ischeck =  Float.parseFloat(map.get("check").toString());
-//				Log.i("info", ischeck + "    ischeck");
+				Log.e("voucher", ischeck + "    ischeck");
 				Cart  cart1	= (Cart) map.get("cart");
 				if(ischeck == 1.0){
 					cartList.add(cart1);
@@ -402,11 +403,11 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 			Intent intent1 = new Intent(getSherlockActivity(),
 					CstmPayActivity.class);
 			Bundle bundle = new Bundle();
-			float sum = Float.parseFloat(sumTextView.getText()
+			sum = Float.parseFloat(sumTextView.getText()
 					.toString());
 			intent1.putExtra("carts", cartList);
 	
-			
+			Log.i("voucher", sum + "    sum");
 //				for(int i = 0; i<mList.size();i++){
 //					Cart cart = new Cart();
 //					sb.append(cart.getUId());
@@ -550,11 +551,13 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 				else if (Consts.UPDATE_CHANGE.equals(action)) {
 					
 				layout.removeAllViews();
+//				CartUtil.list.clear();
 //				sumCart = dataManage.getCartAmount();
 				
 				CartUtil cartUtil = new CartUtil(activity, layout,
 						counTextView, sumTextView, mBox);
 				cartUtil.AllComment();
+				
 				sum = Float.parseFloat(sumTextView.getText().toString());
 			}
 				else if (Consts.DELETE_CART.equals(action)) {

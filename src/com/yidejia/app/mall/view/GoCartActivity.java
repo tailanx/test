@@ -234,7 +234,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 					return;
 				} else {
 					 cartList = new ArrayList<Cart>();
-					List<HashMap<String, Object>> orderCarts = CartUtil.list1;
+					List<HashMap<String, Object>> orderCarts = CartUtil1.list1;
 					for(int i=0;i<orderCarts.size();i++){
 						HashMap<String, Object> map = orderCarts.get(i);
 						float ischeck =  Float.parseFloat(map.get("check").toString());
@@ -327,7 +327,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 					GoCartActivity.this.startActivity(intent1);
 					GoCartActivity.this.finish();
 				}else{
-				CartUtil cartUtil = new CartUtil(GoCartActivity.this, layout,
+				CartUtil1 cartUtil = new CartUtil1(GoCartActivity.this, layout,
 						counTextView, sumTextView, mBox);
 				cartUtil.AllComment();
 				sum = Float.parseFloat(sumTextView.getText()
@@ -335,7 +335,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 				}
 			}else if(Consts.UPDATE_CHANGE.equals(action)){
 				layout.removeAllViews();	
-				CartUtil cartUtil = new CartUtil(GoCartActivity.this, layout,
+				CartUtil1 cartUtil = new CartUtil1(GoCartActivity.this, layout,
 						counTextView, sumTextView, mBox);
 				cartUtil.AllComment();
 				sum = Float.parseFloat(sumTextView.getText()
@@ -348,7 +348,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 					GoCartActivity.this.finish();
 //					startActivity(intent1);
 				}else{
-				CartUtil cartUtil = new CartUtil(GoCartActivity.this, layout,
+				CartUtil1 cartUtil = new CartUtil1(GoCartActivity.this, layout,
 						counTextView, sumTextView, mBox);
 				cartUtil.AllComment();
 				sum = Float.parseFloat(sumTextView.getText()
