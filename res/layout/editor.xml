@@ -102,7 +102,7 @@
                     android:padding="15dp"
                     android:src="@drawable/arrow" />
             </RelativeLayout>
-
+<!-- 
             <RelativeLayout
                 android:id="@+id/editor_linearLayout2"
                 android:layout_width="fill_parent"
@@ -127,7 +127,7 @@
                     android:padding="15dp"
                     android:src="@drawable/arrow" />
             </RelativeLayout>
-
+ -->
             <RelativeLayout
                 android:id="@+id/editor_linearLayout3"
                 android:layout_width="fill_parent"

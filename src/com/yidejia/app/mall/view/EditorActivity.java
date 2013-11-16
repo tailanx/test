@@ -24,7 +24,7 @@ import com.yidejia.app.mall.R;
 
 public class EditorActivity extends SherlockActivity {
 	private RelativeLayout help;
-	private RelativeLayout option;
+//	private RelativeLayout option;
 	private RelativeLayout clear;
 	private RelativeLayout about;
 	private RelativeLayout phone;
@@ -121,7 +121,8 @@ public class EditorActivity extends SherlockActivity {
 		setActionbar();
 		setContentView(R.layout.editor);
 		help = (RelativeLayout) findViewById(R.id.editor_linearLayout1);
-		option = (RelativeLayout) findViewById(R.id.editor_linearLayout2);
+//		option = (RelativeLayout) findViewById(R.id.editor_linearLayout2);
+//		option.setVisibility(View.GONE);
 		clear = (RelativeLayout) findViewById(R.id.editor_linearLayout3);
 
 		about = (RelativeLayout) findViewById(R.id.editor_linearLayout4);
@@ -138,18 +139,18 @@ public class EditorActivity extends SherlockActivity {
 			}
 
 		});
-		option.setOnClickListener(new android.view.View.OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-
-				Intent intent = new Intent(EditorActivity.this,
-						OptionActivity.class);
-				startActivity(intent);
-
-			}
-
-		});
+//		option.setOnClickListener(new android.view.View.OnClickListener() {
+//
+//			@Override
+//			public void onClick(View arg0) {
+//
+//				Intent intent = new Intent(EditorActivity.this,
+//						OptionActivity.class);
+//				startActivity(intent);
+//
+//			}
+//
+//		});
 		help.setOnClickListener(new android.view.View.OnClickListener() {
 
 			@Override
