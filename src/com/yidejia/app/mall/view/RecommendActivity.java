@@ -1,5 +1,7 @@
 package com.yidejia.app.mall.view;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,7 +32,7 @@ public class RecommendActivity extends SherlockActivity {
 //		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setActionbar();
-		setContentView(R.layout.recommend);
+		setContentView(R.layout.recommend_item);
 		
 //		LinearLayout layout = (LinearLayout) findViewById(R.id.recommend_scrollView_linearlayout1);
 		xiazai = (Button) findViewById(R.id.xiazai);
@@ -39,7 +41,8 @@ public class RecommendActivity extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
+				Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("http://static.yidejia.com/apk/skincare.apk"));
+				startActivity(intent);
 			}
 		});
 

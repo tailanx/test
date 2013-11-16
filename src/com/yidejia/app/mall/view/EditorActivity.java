@@ -72,18 +72,18 @@ public class EditorActivity extends SherlockActivity {
 				.setPositiveButton("确定", null).setNegativeButton("取消", null).create();
 //		dialogAbout = aboutbuilder.setTitle("关于").setIcon(R.drawable.ic_launcher)
 //				.setView(mLayout2).setPositiveButton("确定", null).setNegativeButton("取消", null).create();
-		dialogphone = phonebuilder.setTitle("伊的家")
-				.setIcon(android.R.drawable.divider_horizontal_dim_dark)
-				.setMessage("确认拨打客服热线").setPositiveButton("确定", new OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
-						String  number = phoneNumber.getText().toString();
-						Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+number));
-						startActivity(intent);
-					}
-				}).setNegativeButton("取消", null).create();
+//		dialogphone = phonebuilder.setTitle("伊的家")
+//				.setIcon(android.R.drawable.divider_horizontal_dim_dark)
+//				.setMessage("确认拨打客服热线").setPositiveButton("确定", new OnClickListener() {
+//					
+//					@Override
+//					public void onClick(DialogInterface dialog, int which) {
+//						// TODO Auto-generated method stub
+//						String  number = phoneNumber.getText().toString();
+//						Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+number));
+//						startActivity(intent);
+//					}
+//				}).setNegativeButton("取消", null).create();
 		
 		exit = exitbuilder.setTitle("伊的家")
 				.setIcon(android.R.drawable.divider_horizontal_dim_dark)
@@ -197,7 +197,9 @@ public class EditorActivity extends SherlockActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				dialogphone.show();
+				String  number = phoneNumber.getText().toString();
+				Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+number));
+				startActivity(intent);
 				
 			}
 

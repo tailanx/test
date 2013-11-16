@@ -38,7 +38,7 @@
             android:ellipsize="end"
             android:lines="4"
             android:text="护肤管家致力于打造美丽女性身边的专业顾问，每天提供最新的美容护肤知识，护肤咨询，为您提供。。。。"
-            android:textSize="18sp" />
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/xiazai"
