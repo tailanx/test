@@ -27,7 +27,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 	private TextView popularityTextView;
 	private ImageView showWithList;
 	private ImageView showWithImage;
-	private Fragment newFragment;
+	private SelledResultFragment newFragment;
 	
 	private int lastIndex = 0;
 	private boolean isShowWithList = true;
@@ -71,7 +71,13 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 		showWithList = (ImageView) findViewById(R.id.search_with_list);
 		
 		Log.e("SearchResultActivity", "begin setFragment");
-		setFragment(0, isShowWithList);
+//		setFragment(0, isShowWithList);
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		Bundle newBundle = (Bundle) bundle.clone();
+		newBundle.putString("order", "sells+desc");
+		sellFragment = SelledResultFragment.newInstance(newBundle, isShowWithList);
+		ft.replace(R.id.search_result_fragment, sellFragment).commit();
+		currFragment = sellFragment;
 		Log.e("SearchResultActivity", "finish setFragment");
 		
 		selledTextView.setOnClickListener(new AddFragmentListener(0));
@@ -81,29 +87,48 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 		showWithImage.setOnClickListener(new AddFragmentListener(4));
 	}
 	
+	
+	private SelledResultFragment sellFragment;
+	private SelledResultFragment priceFragment;
+	private SelledResultFragment needsFragment;
+	private int currindex = 0;
+	private SelledResultFragment currFragment;
+	
 	private void setFragment(int index, boolean isShowWithList){
 		Bundle newBundle = (Bundle) bundle.clone();
 		switch (index) {
 		case 0:
 			newBundle.putString("order", "sells+desc");
+			if(sellFragment == null)
+				sellFragment = SelledResultFragment.newInstance(newBundle, isShowWithList);
+			newFragment = sellFragment;
 			break;
 		case 1:
 			String orderString = "";
 			if(isDesc) orderString = "price+desc";
 			else orderString = "price+asc";
 			newBundle.putString("order", orderString);
+			if(priceFragment == null)
+				priceFragment = SelledResultFragment.newInstance(newBundle, isShowWithList);
+			newFragment = priceFragment;
 			break;
 		case 2:
 			newBundle.putString("order", "needs+desc");
+			if(needsFragment == null)
+				needsFragment = SelledResultFragment.newInstance(newBundle, isShowWithList);
+			newFragment = needsFragment;
 			break;
 
 		default:
 			break;
 		}
-		newFragment = SelledResultFragment.newInstance(newBundle, isShowWithList);
+		
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.search_result_fragment, newFragment).commit();
+		if(newFragment.isAdded()) ft.hide(currFragment).show(newFragment).commit();
+		else ft.hide(currFragment).replace(R.id.search_result_fragment, newFragment).commit();
         newBundle = null;
+        currindex = index;
+        currFragment = newFragment;
 	}
 	
 	private TextView titleTextView;

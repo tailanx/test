@@ -49,6 +49,7 @@ import com.yidejia.app.mall.SlideImageLayout;
 import com.yidejia.app.mall.initview.HotSellView;
 import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.model.MainProduct;
+import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.homepage.GetHomePage;
 import com.yidejia.app.mall.view.AllOrderActivity;
 import com.yidejia.app.mall.view.IntegeralActivity;
@@ -200,7 +201,10 @@ public class MainPageFragment extends SherlockFragment {
 //										| DateUtils.FORMAT_ABBREV_ALL);
 //				refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 				// mPullToRefreshScrollView.setRefreshing();
-
+				if(!ConnectionDetector.isConnectingToInternet(getSherlockActivity())){
+					Toast.makeText(getSherlockActivity(), getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+					return;
+				}
 				closeTask();
 				task = new Task();
 				task.execute();
@@ -498,7 +502,10 @@ public class MainPageFragment extends SherlockFragment {
 //			intentToView(view);
 //			main_mall_notice_content.setText(ggTitleArray.get(0));
 			createView(view, inflater);
-			
+			if(!ConnectionDetector.isConnectingToInternet(getSherlockActivity())){
+				Toast.makeText(getSherlockActivity(), getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+				return;
+			}
 			closeTask();
 			task = new Task();
 			task.execute();

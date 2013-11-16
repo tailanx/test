@@ -24,6 +24,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.SearchResultActivity;
 import com.yidejia.app.mall.adapter.SelledResultListAdapter;
 import com.yidejia.app.mall.datamanage.SearchDataManage;
 import com.yidejia.app.mall.exception.NullSearchResultEx;
@@ -111,6 +112,15 @@ public class SelledResultFragment extends SherlockFragment {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
+					Intent intent = new Intent (getSherlockActivity(),SearchResultActivity.class);
+					Bundle bundle = new Bundle();
+					bundle.putString("title", "全部");
+					bundle.putString("name", "");
+					bundle.putString("price", "");
+					bundle.putString("brand", "");
+					bundle.putString("fun", "");
+					intent.putExtras(bundle);
+					getSherlockActivity().startActivity(intent);
 					getSherlockActivity().finish();
 				}
 			});

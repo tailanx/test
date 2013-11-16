@@ -97,7 +97,7 @@ public class FunctionDataManage {
 		protected Boolean doInBackground(Void... params) {
 			EffectDataUtil effectDataUtil = new EffectDataUtil();
 			try {
-				httpResponseString = effectDataUtil.getHttpResponseString(where, offset, limit, fields);
+				httpResponseString = effectDataUtil.getHttpResponseString();
 				if(!"".equals(httpResponseString)){
 					JSONObject jsonObject = new JSONObject(httpResponseString);
 					int code = jsonObject.getInt("code");

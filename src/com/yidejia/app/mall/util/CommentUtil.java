@@ -1,11 +1,12 @@
 package com.yidejia.app.mall.util;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,22 +15,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.datamanage.UserCommentDataManage;
 import com.yidejia.app.mall.model.UserComment;
 import com.yidejia.app.mall.net.ConnectionDetector;
+import com.yidejia.app.mall.net.commments.GetProductCommentList;
 
 public class CommentUtil {
 	private Context context;
-	private LayoutInflater inflater;
 	private LinearLayout linearLayout;
 	private View view;
-	private ImageView userIcon;// ??????
-	private TextView userName;// ???????
-	private TextView userLevel;// ??????
-	private TextView userContent;// ???
-	private TextView commentTime;// ???????
 
-	private UserCommentDataManage dataManage;
 
 	/**
 	 *   
@@ -43,107 +37,156 @@ public class CommentUtil {
 	 * @param context
 	 */
 	public CommentUtil(Context context, LinearLayout linearLayout) {// ,View
-																	// view
-		this.inflater = LayoutInflater.from(context); // ,UserCommentDataManage
-														// dataManage
 		this.linearLayout = linearLayout;
 		this.context = context;
 		// this.view = view;
 		// this.dataManage = dataManage;
+		getCommentList = new GetProductCommentList();
 	}
+	
+	private String goodsId;
+	private int fromIndex;
+	private int amount ;
+	private boolean isNoMore = false;
+	private boolean isHasRet = true;
+	private ArrayList<UserComment> comments = new ArrayList<UserComment>();
+	private Task task;
+	private boolean isFirstIn = true;//第一次进入
+	private boolean issuccess = false;
+	private GetProductCommentList getCommentList;
 
 	/**
 	 * ???????????
 	 */
 
 	public void AllComment(String goodsId, int fromIndex, int amount) {
+		this.goodsId = goodsId;
+		this.fromIndex = fromIndex;
+		this.amount = amount;
 		if (ConnectionDetector.isConnectingToInternet(context)) {
-			dataManage = new UserCommentDataManage(context);
 			if("".equals(goodsId) || goodsId == null) {
 				Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 				return;
 			}
-			ArrayList<UserComment> userList = dataManage.getUserCommentsArray(
-					goodsId, fromIndex, amount, false);
-			if(userList.isEmpty() && !dataManage.isHasRst){
+			closeTask();
+			task = new Task();
+			task.execute();
+		}
+	}
+	
+	private class Task extends AsyncTask<Void, Void, Boolean>{
+		
+		private ProgressDialog bar;
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			if (isFirstIn) {
+				bar = new ProgressDialog(context);
+				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+				// bar.setCancelable(false);
+				bar.show();
+			}
+		}
+		
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			
+			try {
+				String httpresp = getCommentList.getCommentsListJsonString("goods_id=" + goodsId, fromIndex + "", amount + "", "", "", "%2A");
+				issuccess = getCommentList.analysisGetListJson(httpresp);
+				comments = getCommentList.getComments();
+				isNoMore = getCommentList.getIsNoMore();
+				isHasRet = getCommentList.getIsHasRet();
+				return issuccess;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+			return false;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(isFirstIn){
+				bar.dismiss();
+				isFirstIn = false;
+			}
+			issuccess = result;
+			Log.e(CommentUtil.class.getName(), "ishasret:"+isHasRet + "and isnomore"+isNoMore);
+			if(comments.isEmpty() && !isHasRet){
 				linearLayout.removeAllViews();
 				view = LayoutInflater.from(context).inflate(
 						R.layout.act_guang, null);
 				TextView emptyTextView = (TextView) view.findViewById(R.id.empty_text);
 				emptyTextView.setText(R.string.none_comment);
+				Log.e(CommentUtil.class.getName(), "ishasret:"+isHasRet + "and isnomore"+isNoMore);
 				linearLayout.addView(view);
+				return;
+			} else if(isNoMore){
+				Toast.makeText(context, context.getResources().getString(R.string.nomore), Toast.LENGTH_LONG).show();
+				return;
 			}
-			for (int i = 0; i < userList.size(); i++) {
-				setupShow();// ?????
-				UserComment userComment = userList.get(i);
-//				String path = userComment.getUserPictureUrl();
-//				Bitmap bm = BitmapFactory.decodeFile(path);
-//				if (bm != null) {
-//					userIcon.setImageBitmap(bm);
-//				} else {
-//					userIcon.setImageResource(R.drawable.ic_launcher);
-//				}
-				userName.setText(userComment.getUserName());
-				userLevel.setText(userComment.getVipLevel());
-				userContent.setText(userComment.getUserCommentText());
-				// userGrade.setText(userComment.getRate()+"");
-				commentTime.setText(userComment.getCommentTime());
-				linearLayout.addView(view);
+			int length = comments.size();
+			Log.e(CommentUtil.class.getName(), "length:"+length);
+			
+			for (int i = 0; i < length; i++) {
+				try {
+					UserComment userComment = comments.get(i);
+					View view = LayoutInflater.from(context).inflate(
+							R.layout.item_goods_emulate_item, null);
+					TextView userName = (TextView) view.findViewById(R.id.user_name);
+					TextView userLevel = (TextView) view.findViewById(R.id.user_level);
+					TextView userContent = (TextView) view.findViewById(R.id.emulate_text);
+					TextView commentTime = (TextView) view.findViewById(R.id.emulate_user_time);
+					Log.e(CommentUtil.class.getName(), "view"+view + "and layout"+linearLayout);
+					userName.setText(userComment.getUserName());
+					userLevel.setText(userComment.getVipLevel());
+					userContent.setText(userComment.getUserCommentText());
+//					 userGrade.setText(userComment.getRate()+"");
+					commentTime.setText(userComment.getCommentTime());
+					linearLayout.addView(view);
+				} catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
 			}
+		}
+		
+	}
+	
+	
+	public void closeTask(){
+		if(task != null && task.getStatus().RUNNING == AsyncTask.Status.RUNNING){
+			task.cancel(true);
 		}
 	}
 
-	public void AllCommentUserId(String goodsId, int fromIndex, int amount) {
-		if (ConnectionDetector.isConnectingToInternet(context)) {
-//			ProgressDialog bar = new ProgressDialog(context);
-//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//			bar.setMessage(context.getResources().getString(R.string.searching));
-//			bar.show();
-//			try {
-//				Thread.sleep(3000);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-			dataManage = new UserCommentDataManage(context);
-//			bar.dismiss();
-			if("".equals(goodsId) || goodsId == null) {
-				Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
-				return;
-			}
-			ArrayList<UserComment> userList = dataManage.getUserCommentsArray(
-					goodsId, fromIndex, amount, true);
-			for (int i = 0; i < userList.size(); i++) {
-				setupShow();// ?????
-				UserComment userComment = userList.get(i);
-//				String path = userComment.getUserPictureUrl();
-//				Bitmap bm = BitmapFactory.decodeFile(path);
-//				if (bm != null) {
-//					userIcon.setImageBitmap(bm);
-//				} else {
-//					userIcon.setImageResource(R.drawable.ic_launcher);
-//				}
-				userName.setText(userComment.getUserName());
-				userLevel.setText(userComment.getVipLevel());
-				userContent.setText(userComment.getUserCommentText());
-				// userGrade.setText(userComment.getRate()+"");
-				commentTime.setText(userComment.getCommentTime());
-				linearLayout.addView(view);
-			}
-		}
-	}
 	/**
 	 * 
 	 * ?????
 	 */
-	private void setupShow() {
-		view = LayoutInflater.from(context).inflate(
+	private void setupShow(UserComment userComment) {
+		View view = LayoutInflater.from(context).inflate(
 				R.layout.item_goods_emulate_item, null);
-		userIcon = (ImageView) view.findViewById(R.id.user_icon);
-		userName = (TextView) view.findViewById(R.id.user_name);
-		userLevel = (TextView) view.findViewById(R.id.user_level);
-		userContent = (TextView) view.findViewById(R.id.emulate_text);
-		commentTime = (TextView) view.findViewById(R.id.emulate_user_time);
+		ImageView userIcon = (ImageView) view.findViewById(R.id.user_icon);
+		TextView userName = (TextView) view.findViewById(R.id.user_name);
+		TextView userLevel = (TextView) view.findViewById(R.id.user_level);
+		TextView userContent = (TextView) view.findViewById(R.id.emulate_text);
+		TextView commentTime = (TextView) view.findViewById(R.id.emulate_user_time);
+		userName.setText(userComment.getUserName());
+		userLevel.setText(userComment.getVipLevel());
+		userContent.setText(userComment.getUserCommentText());
+		// userGrade.setText(userComment.getRate()+"");
+		commentTime.setText(userComment.getCommentTime());
+		Log.e(CommentUtil.class.getName(), userComment.getUserName());
+		linearLayout.addView(view);
 	}
 
 }

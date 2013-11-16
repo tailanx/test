@@ -16,10 +16,13 @@ public class SearchListAdapter extends BaseAdapter {
 
 	private Context mContext;
 //	private LayoutInflater mLayoutInflater;
-	private String[] listContent = new String[] { "眼部护理", "活肌抗衰", "美白淡斑", "保湿锁水", "控油抗痘", "特别护理", "周期护理", "营养美容" };
+//	private String[] listContent = new String[] { "眼部护理", "活肌抗衰", "美白淡斑", "保湿锁水" };//, "控油抗痘", "特别护理", "周期护理", "营养美容"
 	private ArrayList<Function> functions;
 	private int length = 0;
 	private boolean isEmpty = false;
+	public void setIsEmpty(boolean isEmpty){
+		this.isEmpty = isEmpty;
+	}
 	
 	public SearchListAdapter(Context mContext, ArrayList<Function> functions){
 		this.mContext = mContext;
@@ -27,7 +30,8 @@ public class SearchListAdapter extends BaseAdapter {
 		this.functions = functions;
 		if(functions.isEmpty()) {
 			isEmpty = true;
-			length = listContent.length;
+//			length = listContent.length;
+			length++;
 			return;
 		}
 		length = functions.size();
@@ -37,7 +41,8 @@ public class SearchListAdapter extends BaseAdapter {
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-//		if(!isEmpty) length = listContent.length;
+//		if(!isEmpty) length = listContent.length + 1;
+//		else length = functions.size() + 1;
 		return length;
 	}
 	
@@ -46,7 +51,8 @@ public class SearchListAdapter extends BaseAdapter {
 		// TODO Auto-generated method stub
 		if(position == 0) return mContext.getResources().getString(R.string.filter_all);
 		if(!isEmpty && position != 0) return functions.get(position - 1).getFunName();
-		return listContent[position - 1];
+//		return listContent[position - 1];
+		return position;
 	}
 
 	@Override
@@ -70,8 +76,8 @@ public class SearchListAdapter extends BaseAdapter {
 			search_list_text.setText(mContext.getResources().getString(R.string.filter_all));
 			return convertView;
 		}
-		if(isEmpty)
-			search_list_text.setText(listContent[position - 1]);
+		if(isEmpty);
+//			search_list_text.setText(listContent[position - 1]);
 		else {
 			search_list_text.setText(functions.get(position - 1).getFunName());
 		}

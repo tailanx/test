@@ -134,7 +134,7 @@ public class UserCommentDataManage {
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-			GetProductCommentList getList = new GetProductCommentList(context);
+			GetProductCommentList getList = new GetProductCommentList();
 			try {
 				String httpResultString = getList.getCommentsListJsonString(where, offset, limit, group, order, fields);
 				analysisGetListJson(httpResultString);
