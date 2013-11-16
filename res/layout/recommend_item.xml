@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/order_statusbg_top2" >
+    android:background="@drawable/bg" >
 
     <RelativeLayout
         android:id="@+id/recommend_item_relative1"
@@ -14,30 +14,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/product_image_bg"
-            android:padding="20dp"
-            android:src="@drawable/comment_head" />
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/skincarerlogo" />
 
         <TextView
+            android:id="@+id/hufuguangjia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
+            android:layout_alignTop="@id/recommend_item__imageview1"
+            android:layout_marginLeft="4dp"
             android:layout_toRightOf="@id/recommend_item__imageview1"
-            android:text="伊的家商城"
-            android:textColor="#ed217c"
+            android:text="护肤管家"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/recommend_item_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/arrow" />
+            android:layout_marginLeft="4dp"
+            android:layout_below="@id/hufuguangjia"
+            android:layout_toRightOf="@id/recommend_item__imageview1"
+            android:ellipsize="end"
+            android:lines="4"
+            android:text="护肤管家致力于打造美丽女性身边的专业顾问，每天提供最新的美容护肤知识，护肤咨询，为您提供。。。。"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/xiazai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:background="@drawable/xiazai"
+            android:layout_below="@id/recommend_item__imageview1"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"/>
     </RelativeLayout>
 
 </RelativeLayout>

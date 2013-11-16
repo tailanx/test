@@ -5,6 +5,7 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
@@ -41,10 +42,10 @@ public class EditorActivity extends SherlockActivity {
 	private void setupShow() {
 		LinearLayout mLayout1 = (LinearLayout) getLayoutInflater().inflate(
 				R.layout.help, null);
-		LinearLayout mLayout2 = (LinearLayout) getLayoutInflater().inflate(
-				R.layout.about, null);
-		LinearLayout mLayout3 = (LinearLayout) getLayoutInflater().inflate(
-				R.layout.phone_number, null);
+//		LinearLayout mLayout2 = (LinearLayout) getLayoutInflater().inflate(
+//				R.layout.about, null);
+//		LinearLayout mLayout3 = (LinearLayout) getLayoutInflater().inflate(
+//				R.layout.phone_number, null);
 
 		Builder builder = new Builder(this);
 		Builder helpbuilder = new Builder(this);
@@ -69,11 +70,20 @@ public class EditorActivity extends SherlockActivity {
 		dialogHelp = helpbuilder.setTitle("伊的家服务条款")
 				.setIcon(android.R.drawable.menu_frame).setView(mLayout1)
 				.setPositiveButton("确定", null).setNegativeButton("取消", null).create();
-		dialogAbout = aboutbuilder.setTitle("关于").setIcon(R.drawable.ic_launcher)
-				.setView(mLayout2).setPositiveButton("确定", null).setNegativeButton("取消", null).create();
+//		dialogAbout = aboutbuilder.setTitle("关于").setIcon(R.drawable.ic_launcher)
+//				.setView(mLayout2).setPositiveButton("确定", null).setNegativeButton("取消", null).create();
 		dialogphone = phonebuilder.setTitle("伊的家")
 				.setIcon(android.R.drawable.divider_horizontal_dim_dark)
-				.setView(mLayout3).setPositiveButton("确定", null).setNegativeButton("取消", null).create();
+				.setMessage("确认拨打客服热线").setPositiveButton("确定", new OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						String  number = phoneNumber.getText().toString();
+						Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+number));
+						startActivity(intent);
+					}
+				}).setNegativeButton("取消", null).create();
 		
 		exit = exitbuilder.setTitle("伊的家")
 				.setIcon(android.R.drawable.divider_horizontal_dim_dark)
@@ -108,7 +118,7 @@ public class EditorActivity extends SherlockActivity {
 
 	int width;
 	int height;
-
+	private TextView phoneNumber;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -120,6 +130,7 @@ public class EditorActivity extends SherlockActivity {
 		myApplication = (MyApplication) getApplication();
 		setActionbar();
 		setContentView(R.layout.editor);
+		phoneNumber =  (TextView) findViewById(R.id.main2_main2_linearlayout1_imageview22);
 		help = (RelativeLayout) findViewById(R.id.editor_linearLayout1);
 //		option = (RelativeLayout) findViewById(R.id.editor_linearLayout2);
 //		option.setVisibility(View.GONE);
@@ -174,7 +185,9 @@ public class EditorActivity extends SherlockActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				dialogAbout.show();
+				Intent intent = new Intent(EditorActivity.this,AboutActivity.class);
+				EditorActivity.this.startActivity(intent);
+				//				dialogAbout.show();
 //				dialogHelp.getWindow().setLayout(width, height / 2);
 			}
 
@@ -185,7 +198,7 @@ public class EditorActivity extends SherlockActivity {
 			@Override
 			public void onClick(View arg0) {
 				dialogphone.show();
-
+				
 			}
 
 		});

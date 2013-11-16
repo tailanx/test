@@ -3,6 +3,7 @@ package com.yidejia.app.mall.view;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ public class RecommendActivity extends SherlockActivity {
 //		
 //		}
 //	}
+	private Button xiazai ;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,11 +32,19 @@ public class RecommendActivity extends SherlockActivity {
 		setActionbar();
 		setContentView(R.layout.recommend);
 		
-		LinearLayout layout = (LinearLayout) findViewById(R.id.recommend_scrollView_linearlayout1);
-		
+//		LinearLayout layout = (LinearLayout) findViewById(R.id.recommend_scrollView_linearlayout1);
+		xiazai = (Button) findViewById(R.id.xiazai);
+		xiazai.setOnClickListener( new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
-		View person1 = getLayoutInflater().inflate(R.layout.recommend_item, null);
-		View person2 = getLayoutInflater().inflate(R.layout.recommend_item, null);
+//		View person1 = getLayoutInflater().inflate(R.layout.recommend_item, null);
+//		View person2 = getLayoutInflater().inflate(R.layout.recommend_item, null);
 //		TextView textView = (TextView) person.findViewById(R.id.wait_pay_order_item_textview1);
 //		TextView textView1 = (TextView) person.findViewById(R.id.wait_pay_order_item_textview3);
 //		TextView textView2 = (TextView) person.findViewById(R.id.wait_pay_order_item_textview4);
@@ -48,8 +58,8 @@ public class RecommendActivity extends SherlockActivity {
 //		textView2.setText("??????x1");
 //		textView2.setText("?????????160.00");
 //		textView2.setText("??????x2");
-		layout.addView(person1);
-		layout.addView(person2);
+//		layout.addView(person1);
+//		layout.addView(person2);
 		
 	}
 	
