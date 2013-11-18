@@ -4,27 +4,42 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg" >
 
-    <RelativeLayout
-        android:id="@+id/recommend_item_relative1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
 
-        <ImageView
-            android:id="@+id/recommend_item__imageview1"
+        <RelativeLayout
+            android:id="@+id/recommend_item_relative_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/skincarerlogo" />
+            android:layout_alignParentLeft="true" >
+
+            <ImageView
+                android:id="@+id/recommend_item__imageview1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/skincarerlogo" />
+
+            <Button
+                android:id="@+id/xiazai"
+                android:layout_width="96dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/recommend_item__imageview1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/xiazai" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/hufuguangjia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/recommend_item__imageview1"
+            android:layout_alignTop="@id/recommend_item_relative_left"
             android:layout_marginLeft="4dp"
-            android:layout_toRightOf="@id/recommend_item__imageview1"
+            android:layout_marginTop="12dp"
+            android:layout_toRightOf="@id/recommend_item_relative_left"
             android:text="护肤管家"
             android:textSize="20sp" />
 
@@ -32,22 +47,12 @@
             android:id="@+id/recommend_item_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
             android:layout_below="@id/hufuguangjia"
-            android:layout_toRightOf="@id/recommend_item__imageview1"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_toRightOf="@id/recommend_item_relative_left"
             android:ellipsize="end"
-            android:lines="4"
-            android:text="护肤管家致力于打造美丽女性身边的专业顾问，每天提供最新的美容护肤知识，护肤咨询，为您提供。。。。"
-            android:textSize="15sp" />
-
-        <Button
-            android:id="@+id/xiazai"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-            android:background="@drawable/xiazai"
-            android:layout_below="@id/recommend_item__imageview1"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="4dp"/>
-    </RelativeLayout>
+            android:text="护肤管家致力于打造美丽女性身边的专业顾问，每天提供最新的美容护肤知识，护肤咨询，为您提供......"
+            android:textSize="18sp" />
 
 </RelativeLayout>
