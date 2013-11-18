@@ -4,77 +4,41 @@ import java.io.IOException;
 
 
 
-import android.content.Context;
+
+
+import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.util.Log;
 
 import com.yidejia.app.mall.jni.JNICallBack;
-import com.yidejia.app.mall.net.HttpAddressParam;
+import com.yidejia.app.mall.model.SearchItem;
 import com.yidejia.app.mall.net.HttpGetConn;
-import com.yidejia.app.mall.util.Md5;
+import com.yidejia.app.mall.net.ImageUrl;
+import com.yidejia.app.mall.util.UnicodeToString;
 /**
  * ��ȡ��������б�
  * @author long bin
  *
  */
 public class SearchDataUtil {
-	private String[] keys = new String[12];
-	private String[] values = new String[12];
 	private String TAG = SearchDataUtil.class.getName();
-//	private Context context;
 	
-	public SearchDataUtil(){//Context context
-//		this.context = context;
+	private UnicodeToString unicode;
+	private ArrayList<SearchItem> searchArray;
+	
+	private boolean isNoMore = false;//判断是否还有更多数据,true为没有更多了
+	private boolean isHasResult = false;//判断是否有搜索结果
+	
+	public SearchDataUtil(){
+		unicode = new UnicodeToString();
+		searchArray = new ArrayList<SearchItem>();
 	}
 	
-	private void setKeysAndValues(String name, String fun, String brand,String price, String order1, String offset1, String limit1){
-		keys[0] = "api";
-		String api = "product.mallgood.search";
-		values[0] = api;
-		keys[1] = "name";
-		values[1] = name;
-		keys[2] = "fun";
-		values[2] = fun;
-		keys[3] = "brand";
-		values[3] = brand;
-		keys[4] = "price";
-		values[4] = price;
-		keys[5] = "order1";
-		values[5] = order1;
-		keys[6] = "offset1";
-		values[6] = offset1;
-		keys[7] = "limit1";
-		values[7] = limit1;
-		keys[8] = "key";
-//		values[8] = "fw_test";
-		values[8] = "fw_mobile";
-		keys[9] = "format";
-		values[9] = "array";
-		keys[10] = "ts";
-		long time = System.currentTimeMillis();
-		String ts = String.valueOf(time/1000);
-		values[10] = ts;
-		
-		keys[11] = "sign";
-		StringBuffer strTemp = new StringBuffer();
-//		strTemp.append("ChunTianfw_mobile123456");
-		strTemp.append("ChunTianfw_mobile@SDF!TD#DF#*CB$GER@");
-		strTemp.append(api);
-		strTemp.append(ts);
-		Md5 md = new Md5();
-		String result = md.getMD5Str(strTemp.toString());
-		md = null;
-        strTemp = null;
-		values[11] = result;
-	}
 	
-	private String getHttpAddress(String name, String fun, String brand, String price, String order1, String offset1, String limit1){
-		StringBuffer result = new StringBuffer();
-//		result.append("http://192.168.1.254:802/?");
-		setKeysAndValues(name, fun, brand, price, order1, offset1, limit1);//"", "0", "1", "", "", "%2A"
-		result.append(HttpAddressParam.getHttpAddress(keys, values));
-		Log.i(TAG, result.toString());
-		return result.toString();
-	}
 	
 	private String result = "";
 	/**
@@ -97,46 +61,83 @@ public class SearchDataUtil {
 		result = conn.getJsonResult();
 		return result;
 	}
-//	public String getFavoriteListJson(){
-//		AsyncHttpClient client = new AsyncHttpClient();
-//		client.setTimeout(5000);
-//		client.get(getHttpAddress(), new AsyncHttpResponseHandler(){
-//
-//			@Override
-//			public void onSuccess(String content) {
-//				// TODO Auto-generated method stub
-//				super.onSuccess(content);
-//				Toast.makeText(context, content, Toast.LENGTH_SHORT).show();
-//				Log.i(TAG, "1111"+content);
-//				bar.dismiss();
-//				result = content;
-//			}
-//
-//			@Override
-//			public void onFailure(Throwable error, String content) {
-//				// TODO Auto-generated method stub
-//				super.onFailure(error, content);
-//				Log.i(TAG, "2222"+content);
-//				if (error.getCause() instanceof ConnectTimeoutException) {
-//					System.out.println("Connection timeout !");
-//					Log.i(TAG, "Connection timeout ");
-//				}
-//				bar.dismiss();
-//			}
-//
-//			@Override
-//			public void onStart() {
-//				// TODO Auto-generated method stub
-//				super.onStart();
-//				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//				bar.setMessage("���ڲ�ѯ");
-//				bar.show();
-//			}
-//			
-//			private ProgressDialog bar = new ProgressDialog(context);
-//		});
-//		return result;
-//	}
-//	
+
+	public boolean analysis(String httpresp){
+		try {
+			JSONObject jsonObject = new JSONObject(httpresp);
+			int code = jsonObject.getInt("code");
+			if (code == 1) {
+				isHasResult = true;
+				String responseString = jsonObject.getString("response");
+				analysisJson(responseString);
+				return true;
+			} else if (code == -1) {
+				// ����ʧ��
+				isNoMore = true;
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			Log.e(TAG, "task getlist other ex");
+			e.printStackTrace();
+			return false;
+		}
+	}
 	
+	private void analysisJson(String jsonString) throws JSONException{
+		JSONObject dataObject = new JSONObject(jsonString);
+		String dataString = dataObject.getString("data");
+		JSONArray responseArray = new JSONArray(dataString);
+		SearchItem searchItem;
+		JSONObject responseObject;
+		int length = responseArray.length();
+		for (int i = 0; i < length; i++) {
+			searchItem = new SearchItem();
+			responseObject = responseArray.getJSONObject(i);
+			String temp = responseObject.getString("goods_id");
+			searchItem.setUId(temp);
+			Log.i(TAG, "goods_id:"+temp);
+			temp = responseObject.getString("price");
+			searchItem.setPrice(temp);
+			Log.i(TAG, "price:"+temp);
+			temp = responseObject.getString("goods_name");
+			searchItem.setName(unicode.revert(temp));
+			Log.i(TAG, "goods_name:"+temp);
+			temp = responseObject.getString("sells");
+			searchItem.setSelledAmount(temp);
+			Log.i(TAG, "sells:"+temp);
+			temp = responseObject.getString("remarks");
+			searchItem.setCommentAmount(temp);
+			Log.i(TAG, "remarks:"+temp);
+			temp = ImageUrl.IMAGEURL + responseObject.getString("imgname") + "!100";
+			searchItem.setImgUrl(temp);
+			Log.i(TAG, "imageUrl:"+temp);
+			
+			searchItem.setTheCode(responseObject.getString("the_code"));
+			Log.i(TAG, "thecode:"+responseObject.getString("the_code"));
+			searchItem.setModule(unicode.revert(responseObject.getString("module")));
+			Log.i(TAG, "module:"+unicode.revert(responseObject.getString("module")));
+			searchItem.setBrand(responseObject.getString("brand"));
+			Log.i(TAG, "brand:"+responseObject.getString("brand"));
+			searchItem.setSpec(responseObject.getString("spec"));
+			Log.i(TAG, "spec:"+responseObject.getString("spec"));
+			searchItem.setDesc(unicode.revert(responseObject.getString("desc")));
+			Log.i(TAG, "desc:"+responseObject.getString("desc"));
+			searchArray.add(searchItem);
+		}
+	}
+	
+	public ArrayList<SearchItem> getSearchResults(){
+		return searchArray;
+	}
+	
+	public boolean getIsNomore(){
+		return isNoMore;
+	}
+	
+	public boolean getIsHasRst(){
+		return isHasResult;
+	}
 }

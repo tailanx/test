@@ -84,7 +84,7 @@ public class BaseInfoFragment extends SherlockFragment {
 			view = inflater.inflate(R.layout.item_goods_base_info, container, false);
 			mButton = (Button) view.findViewById(R.id.shopping_cart_button);
 		
-			view.invalidate();
+//			view.invalidate();
 			/*
 			switch (goodsId) {
 			case 0:

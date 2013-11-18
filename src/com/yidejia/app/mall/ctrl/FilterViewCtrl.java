@@ -1,104 +1,74 @@
-package com.yidejia.app.mall.fragment;
+package com.yidejia.app.mall.ctrl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
-import android.widget.ImageView;
 
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.SearchResultActivity;
 import com.yidejia.app.mall.adapter.FilterExListAdapter;
-import com.yidejia.app.mall.datamanage.BrandDataManage;
-import com.yidejia.app.mall.datamanage.FunctionDataManage;
-import com.yidejia.app.mall.datamanage.PriceDataManage;
 import com.yidejia.app.mall.model.Brand;
 import com.yidejia.app.mall.model.Function;
 import com.yidejia.app.mall.model.PriceLevel;
-import com.yidejia.app.mall.task.TaskFilter;
 
-@SuppressLint("UseSparseArrays")
-public class FilterFragment extends Fragment {
-	
+public class FilterViewCtrl {
 	private FilterExListAdapter filterAdapter;
 	private ExpandableListView filterListView;
 	private HashMap<Integer, ArrayList<Integer>> clickParentState = new HashMap<Integer, ArrayList<Integer>>();
 	private ArrayList<Integer> clickChildState = new ArrayList<Integer>();
-	private String TAG = "FilterFragment";
 	
 	private ArrayList<Brand> brandsArray;
 	private ArrayList<Function> funsArray;
 	private ArrayList<PriceLevel> pricesArray;
-	private View view;
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		view = getActivity().getLayoutInflater().inflate(R.layout.activity_filter, null);
-		
-//		BrandDataManage brandDataManage = new BrandDataManage(getActivity());
-//		brandsArray = brandDataManage.getBrandArray();
-		
-//		PriceDataManage priceDataManage = new PriceDataManage(getActivity());
-//		pricesArray = priceDataManage.getPriceArray();
-		
-//		FunctionDataManage functionDataManage = new FunctionDataManage(getActivity());
-//		funsArray = functionDataManage.getFunArray();
-		
-//		initView(view);
-//		initTopView(view);
-		return view;
+	
+	private Activity activity;
+	private String TAG = FilterViewCtrl.class.getName();
+	
+	public FilterViewCtrl(Activity activity){
+		this.activity = activity;
 	}
 	
-	private TaskFilter taskFilter;
+	public void getView(View view){
+		initView(view);
+		initTopView(view);
+	}
 	
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onActivityCreated(savedInstanceState);
-		taskFilter = new TaskFilter(getActivity(), view);
-		taskFilter.getFilter();
+	public void setBrands(ArrayList<Brand> brands){
+		this.brandsArray = brands;
 	}
-
-	@Override
-	public void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-		if(taskFilter != null) taskFilter.closeTask();
+	
+	public void setFuns(ArrayList<Function> funs){
+		this.funsArray = funs;
 	}
-
+	
+	public void setPrices(ArrayList<PriceLevel> prices){
+		this.pricesArray = prices;
+	}
+	
 	private void initView(View view){
 		filterListView = (ExpandableListView) view.findViewById(R.id.filter_listview);
 		
-		filterAdapter = new FilterExListAdapter(getActivity(), clickParentState);
+		filterAdapter = new FilterExListAdapter(activity, clickParentState);
 		filterAdapter.setBrands(brandsArray);
 		filterAdapter.setFuns(funsArray);
 		filterAdapter.setPrices(pricesArray);
 		filterListView.setAdapter(filterAdapter);
 		filterListView.setGroupIndicator(null);//��ȥ�Դ�ļ�ͷ
 		filterListView.setChoiceMode(ExpandableListView.CHOICE_MODE_MULTIPLE);
-		Resources res = getResources();
+		Resources res = activity.getResources();
 	    Drawable drawable = res.getDrawable(R.drawable.filter_line);
 		filterListView.setChildDivider(drawable);
 		filterListView.setDividerHeight(2);
@@ -205,7 +175,8 @@ public class FilterFragment extends Fragment {
 		});
 		/**/
 	}
-	private int groudLastIndex = -1;
+	
+private int groudLastIndex = -1;
 	
 	private Button filter_complete;
 	private Button filter_clear_conditions;
@@ -229,15 +200,15 @@ public class FilterFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(getActivity() instanceof SearchResultActivity){
-					SearchResultActivity activity = (SearchResultActivity) getActivity();
+				if(activity instanceof SearchResultActivity){
+					SearchResultActivity searchResultActivity = (SearchResultActivity) activity;
 					Bundle bundle = new Bundle();
 //					ArrayList<Integer> selectState;
 //					selectState = clickParentState.get(0);
 					bundle.putString("brand", getSelectState(clickParentState.get(0), 0));
 					bundle.putString("fun", getSelectState(clickParentState.get(1), 1));
 					bundle.putString("price", getSelectState(clickParentState.get(2), 2));
-					activity.selectContent(bundle);
+					searchResultActivity.selectContent(bundle);
 				}
 			}
 		});
