@@ -36,6 +36,7 @@ import com.yidejia.app.mall.adapter.FavoriteAdapter;
 import com.yidejia.app.mall.datamanage.FavoriteDataManage;
 import com.yidejia.app.mall.model.SearchItem;
 import com.yidejia.app.mall.net.favorite.GetFavoriteList;
+import com.yidejia.app.mall.task.TaskDelFav;
 
 public class MyCollectActivity extends SherlockActivity {
 	private FavoriteAdapter fAdapter;
@@ -88,11 +89,11 @@ public class MyCollectActivity extends SherlockActivity {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							// TODO Auto-generated method stub
-							if(delFav(pid)){
+							delFav(pid);
 //								updateListView(index);
-								mPullRefreshListView.setRefreshing();
-								mPullRefreshListView.onRefreshComplete();
-							}
+//								mPullRefreshListView.setRefreshing();
+//								mPullRefreshListView.onRefreshComplete();
+							
 						}
 					}).setNegativeButton(R.string.searchCancel, null).create().show();
 				return true;
@@ -335,10 +336,17 @@ public class MyCollectActivity extends SherlockActivity {
 		if(task != null && task.getStatus().RUNNING == AsyncTask.Status.RUNNING){
 			task.cancel(true);
 		}
+		if(taskDelFav != null){
+			taskDelFav.closeTask();
+		}
 	}
 	
-	private boolean delFav(String productId){
-		FavoriteDataManage manage = new FavoriteDataManage(MyCollectActivity.this);
-		return manage.deleteFavourite(((MyApplication)getApplication()).getUserId(), productId, ((MyApplication)getApplication()).getToken());
+	private TaskDelFav taskDelFav;
+	
+	private void delFav(String productId){
+//		FavoriteDataManage manage = new FavoriteDataManage(MyCollectActivity.this);
+//		return manage.deleteFavourite(((MyApplication)getApplication()).getUserId(), productId, ((MyApplication)getApplication()).getToken());
+		taskDelFav = new TaskDelFav(MyCollectActivity.this, mPullRefreshListView);
+		taskDelFav.delFav(((MyApplication)getApplication()).getUserId(), productId, ((MyApplication)getApplication()).getToken());
 	}
 }
