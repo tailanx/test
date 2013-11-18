@@ -6,6 +6,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.Context;
 import android.util.Log;
 
@@ -19,123 +23,45 @@ import com.yidejia.app.mall.util.Md5;
  *
  */
 public class DeleteFavorite {
-	private String[] keys = new String[7];
-	private String[] values = new String[7];
-	private String TAG = "DeleteFavorite";
-	private Context context;
-	private Map<String, String> httpAddressMap = new ConcurrentHashMap<String, String>();
 	
-	public DeleteFavorite(Context context){
-		this.context = context;
-	}
-	
-	private void setKeysAndValues(String userid, String goodsid){
-		keys[0] = "api";
-		String api = "product.favoliten.deleteByUg";
-		values[0] = api;
-		keys[1] = "userid";
-		values[1] = userid;
-		keys[2] = "goods_id";
-		values[2] = goodsid;
-		
-		keys[3] = "key";
-		values[3] = "fw_mobile";
-//		values[3] = "fw_test";
-		keys[4] = "format";
-		values[4] = "array";
-		keys[5] = "ts";
-		long time = System.currentTimeMillis();
-		String ts = String.valueOf(time/1000);
-		values[5] = ts;
-		
-		keys[6] = "sign";
-		StringBuffer strTemp = new StringBuffer();
-//		strTemp.append("ChunTianfw_mobile123456");
-		strTemp.append("ChunTianfw_mobile@SDF!TD#DF#*CB$GER@");
-		strTemp.append(api);
-		strTemp.append(ts);
-		Md5 md = new Md5();
-		String result = md.getMD5Str(strTemp.toString());
-		md = null;
-        strTemp = null;
-		values[6] = result;
-	}
-	
-	private String getHttpAddress(String userid, String goodsid){
-		StringBuffer result = new StringBuffer();
-//		result.append("http://192.168.1.254:802/?");
-		setKeysAndValues(userid, goodsid);
-		result.append(HttpAddressParam.getHttpAddress(keys, values));
-		Log.i(TAG, result.toString());
-		for (int j = 0; j < keys.length; j++) {
-			httpAddressMap.put(keys[j], values[j]);
-		}
-		return result.toString();
-	}
-	
-	private String result = "";
-	private String urlString = "http://192.168.1.254:802/";
-	/**
-	 * 
-	 * @param id
-	 * @return
-	 * @throws IOException
-	 */
-	public String deleteFavorite(String userid, String goodsid) throws IOException{
-		getHttpAddress(userid, goodsid);
-		HttpPostConn conn = new HttpPostConn(keys, values);
-		result = conn.getJsonResult();
-		return result;
-	}
+	private String TAG = DeleteFavorite.class.getName();
 	
 	public String deleteFavorite(String userid, String goodsid, String token) throws IOException{
 		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4DelFav(userid, goodsid, token));
-		return result = conn.getHttpResponse();
+		return conn.getHttpResponse();
 	}
 	
-//	public String deleteFavoriteJson(){
-//		AsyncHttpClient client = new AsyncHttpClient();
-//		getHttpAddress();
-//		RequestParams params = new RequestParams(httpAddressMap);
-//		
-//		client.setTimeout(5000);
-//		client.post("http://192.168.1.254:802/", params, new AsyncHttpResponseHandler(){
-//
-//			@Override
-//			public void onSuccess(String content) {
-//				// TODO Auto-generated method stub
-//				super.onSuccess(content);
-//				Toast.makeText(context, content, Toast.LENGTH_SHORT).show();
-//				Log.i(TAG, "1111"+content);
-//				bar.dismiss();
-//				result  = content;
-//			}
-//
-//			@Override
-//			public void onFailure(Throwable error, String content) {
-//				// TODO Auto-generated method stub
-//				super.onFailure(error, content);
-//				Log.i(TAG, "2222"+content);
-//				if (error.getCause() instanceof ConnectTimeoutException) {
-//					System.out.println("Connection timeout !");
-//					Log.i(TAG, "Connection timeout ");
-//				}
-//				bar.dismiss();
-//			}
-//
-//			@Override
-//			public void onStart() {
-//				// TODO Auto-generated method stub
-//				super.onStart();
-//				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//				bar.setMessage("���ڲ�ѯ");
-//				bar.show();
-//			}
-//			
-//			private ProgressDialog bar = new ProgressDialog(context);
-//		});
-//		return result;
-//	}
-//	
+	/**
+	 * 解析添加收藏数据
+	 * @param resultJson http返回的数据
+	 * @return
+	 */
+	public boolean analysicDeleteJson(String resultJson) {
+		if ("".equals(resultJson))
+			return false;
+
+		JSONObject httpResultObject;
+		try {
+			httpResultObject = new JSONObject(resultJson);
+			int code = httpResultObject.getInt("code");
+			Log.i(TAG, "analysis delete json code"+code);
+			if (code == 1){
+				return true;
+			}
+			else {
+				return false;
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			Log.e(TAG, "delete favorite analysis json jsonexception error");
+			e.printStackTrace();
+			return false;
+		} catch (Exception e) {
+			// TODO: handle exception
+			Log.e(TAG, "delete favorite analysis json exception error");
+			e.printStackTrace();
+			return false;
+		}
+	}
 	
 }

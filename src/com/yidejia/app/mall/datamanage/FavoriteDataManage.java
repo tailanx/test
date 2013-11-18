@@ -174,7 +174,7 @@ public class FavoriteDataManage {
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-			DeleteFavorite deleteFavorite = new DeleteFavorite(context);
+			DeleteFavorite deleteFavorite = new DeleteFavorite();
 			try {
 				String httpResultString = deleteFavorite.deleteFavorite(userId, String.valueOf(productId), token);///String.valueOf(userId), 
 				
