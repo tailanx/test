@@ -50,19 +50,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
                 android:layout_margin="2dp"
-                android:text="扫描二维码，分享给您的朋友"
+                android:text="扫描二维码，分享给您的朋友\n也可下载伊的家"
                 android:textColor="@color/dark"
                 android:textSize="13sp" />
 
-            <TextView
+            <!-- <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="2dp"
                 android:text="也可下载伊的家"
                 android:textColor="@color/dark"
-                android:textSize="15sp" />
+                android:textSize="15sp" /> -->
 
             <TextView
                 android:layout_width="wrap_content"
