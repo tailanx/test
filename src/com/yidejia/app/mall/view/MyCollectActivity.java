@@ -176,6 +176,8 @@ public class MyCollectActivity extends SherlockActivity {
 		titleTextView.setText("我的收藏");
 	}
 	
+	private boolean isDownRefresh = false;
+	
 	private OnRefreshListener2<ListView> listener2 = new OnRefreshListener2<ListView>() {
 
 		@Override
@@ -204,7 +206,8 @@ public class MyCollectActivity extends SherlockActivity {
 //				mList.addAll(favList);
 //				fAdapter.notifyDataSetChanged();
 //			}
-			favList.clear();
+//			favList.clear();
+			isDownRefresh = true;
 			closeTask();
 			task = new Task();
 			task.execute();
@@ -299,6 +302,10 @@ public class MyCollectActivity extends SherlockActivity {
 					mPullRefreshListView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 					
 //					if(!isFirstIn) {
+					if(isDownRefresh) {
+						favList.clear();
+						isDownRefresh = false;
+					}
 						favList.addAll(mList);
 						fAdapter.notifyDataSetChanged();
 //						mListView.setAdapter(fAdapter);
