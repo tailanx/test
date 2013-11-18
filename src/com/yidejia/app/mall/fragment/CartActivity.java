@@ -260,8 +260,8 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 		activity =  MainFragmentActivity.MAINACTIVITY;
 		activity.registerReceiver(receiver, filter);
 		
-		getSherlockActivity().getSupportActionBar().setCustomView(
-				R.layout.actionbar_cart);
+//		getSherlockActivity().getSupportActionBar().setCustomView(
+//				R.layout.actionbar_cart);
 		
 		Log.e(TAG, "on createView");
 		this.inflater = inflater;
@@ -538,7 +538,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 					FragmentTransaction ft = getFragmentManager().beginTransaction();
 					if(fragment.isAdded()) ft.hide(CartActivity.this).show(fragment).commitAllowingStateLoss();//.show(fragment).
 					else ft.hide(CartActivity.this).replace(R.id.main_fragment, fragment).commitAllowingStateLoss();
-					shoppingCartTopay.setVisibility(View.GONE);		
+//					shoppingCartTopay.setVisibility(View.GONE);		
 					
 				} else {
 					layout.removeAllViews();

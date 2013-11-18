@@ -648,10 +648,10 @@ public class MainPageFragment extends SherlockFragment {
 				R.layout.layout_first_item_in_main_listview, null);
 		if(length == 0) return mMainView;
 		mViewPager = (YLViewPager) mMainView.findViewById(R.id.image_slide_page);
-		if (length == 0)
-			return mMainView;
-		mViewPager = (YLViewPager) mMainView
-				.findViewById(R.id.image_slide_page);
+//		if (length == 0)
+//			return mMainView;
+//		mViewPager = (YLViewPager) mMainView
+//				.findViewById(R.id.image_slide_page);
 		mSlideLayout = new SlideImageLayout(getActivity(),
 				mMainView.getContext(), width);
 		mSlideLayout.setCircleImageLayout(length);
@@ -662,6 +662,19 @@ public class MainPageFragment extends SherlockFragment {
 		Log.i(TAG, "length--------------------------------"+bannerArray.size());
 		Log.i(TAG,
 				"length--------------------------------" + bannerArray.size());
+//		Timer timer = new Timer();
+//		timer.schedule(new TimerTask() {
+//			
+//			@Override
+//			public void run() {
+//				int i=0;
+//				
+//					i++;
+//				// TODO Auto-generated method stub
+//				Log.i("voucher",i+"");
+//				}
+//				
+//		}, 3000);
 		for (int i = 0; i < length; i++) {
 
 			// mainImageData.getBitmaps().get(i)

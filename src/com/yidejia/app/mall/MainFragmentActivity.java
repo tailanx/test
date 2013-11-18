@@ -577,8 +577,9 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 					cartImage.setVisibility(View.GONE);
 				} else {
 					FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-					if(cartFragment.isAdded()) ft.remove(noProduce).show(cartFragment). commitAllowingStateLoss();
-					else ft.remove(noProduce).replace(R.id.main_fragment, cartFragment). commitAllowingStateLoss();
+					if(cartFragment.isAdded()) ft.hide(noProduce).commitAllowingStateLoss();
+					else ft.remove(noProduce).show(cartFragment).commitAllowingStateLoss();//replace(R.id.main_fragment, cartFragment)
+//					shoppingCartTopay.setVisibility(View.GONE);
 					cartImage.setVisibility(View.VISIBLE);
 					cartImage.setText(number + "");
 				}

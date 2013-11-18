@@ -319,6 +319,12 @@ public class SelledResultFragment extends SherlockFragment {
 				if(isHasResult && isNoMore){
 					Toast.makeText(getSherlockActivity(), getSherlockActivity().getResources().getString(R.string.nomore), Toast.LENGTH_SHORT).show();
 					isNoMore = false;
+					if (!isFirstIn) {
+						if (isShowWithList)
+							mPullToRefreshListView.onRefreshComplete();
+						else
+							mPullToRefreshScrollView.onRefreshComplete();
+					}
 					return;
 				}
 				if(!isHasResult) {

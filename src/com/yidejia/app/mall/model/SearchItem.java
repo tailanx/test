@@ -1,8 +1,4 @@
 package com.yidejia.app.mall.model;
-
-import android.os.Parcel;
-import android.os.Parcelable;
-
 /**
  * 搜索模块需求和接口 
  * <p>
@@ -11,7 +7,7 @@ import android.os.Parcelable;
  * @author long bin
  *
  */
-public class SearchItem {//implements Parcelable
+public class SearchItem {
 	private String uId;                //商品Id
 	private String name; 			//商品名称
 	private String price;            //价格
@@ -211,20 +207,5 @@ public class SearchItem {//implements Parcelable
 	public String getDesc(){
 		return desc;
 	}
-	
-	
-	
-/*	
-	
-	@Override
-	public int describeContents() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		// TODO Auto-generated method stub
-		
-	}*/
 }
 

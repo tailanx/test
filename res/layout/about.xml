@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     android:orientation="vertical" >
 
     <ScrollView
@@ -13,74 +14,73 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                android:text="关于我们"
-                android:textSize="20sp" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/logo" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                android:text="一，公司简介:"
-                android:textSize="18sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                android:text="广州伊的家网络科技有限公司是一家专业化的个人护理品集团企业，妍诗美是其旗下的化妆品项目。公司由一大批专业且有丰富经验的快速消费品运营专家、资深电子商务运营师、终端及渠道研究人员组成，致力于打造新型快速消费品渠道模式，创建新型销售平台为核心战略发展方向。公司设有专业从事天然化妆品产品研制和技术开发的科研机构——伊的家皮肤科研中心，汇集来自高端生物专家、医学家、化学家联合组成的精英团队。雄厚的研发实力不断催生高科技产品，诠释新时代美容文化理念，引导国际美容潮流。
-        。"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="2dp"
+                android:text="伊的家iphone客户端"
+                android:textColor="@color/dark"
                 android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                android:text="二、 护肤理念：
-"
-                android:textSize="18sp" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="2dp"
+                android:text="V1.0 build1001"
+                android:textColor="@color/dark"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/erweima" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                android:text="妍诗美一直以来以改善皮肤状况，归还人类健康美肌为首要任务，把皮肤的固本培元作为产品核心理念，强调吧补水对于健康皮肤的重要性，以调理肌底为本，与国际先进技术接轨，以高质量为产品研发宗旨，建立起完善的服务体系，务求为广大客户提供优质服务，以产品实力来征服市场挑剔的眼光。推出市场短短一年多，便迅速蹿红网络化妆品界，成交记录连连破灯，真实有效的产品、零投诉的口碑、热情贴心的销售服务、遍布全球的经销商、专业的美容顾问解惑、强大的技术支持……使之成为时尚女性跟风追随的对象，并陆续被化妆界、名模界、摄影界的美肤达人纳入囊中，成为炙手可热的化妆品品牌。
-         
-        "
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="2dp"
+                android:text="扫描二维码，分享给您的朋友"
+                android:textColor="@color/dark"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="2dp"
+                android:text="也可下载伊的家"
+                android:textColor="@color/dark"
                 android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                android:text="三、 王国版图：
- "
-                android:textSize="18sp" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:text="YIDEJIA 伊的家"
+                android:textColor="#8d5aa6"
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                android:text="伊的家在中国成立短短两年，已成功启动100多家经销商，几十个网络营运中心，并于2010年底利用3个月时间在全国建立20个产品配送中心，将产品配送覆盖全国各个角落，做到真正的网络购物T+1（当天购买，次日到货）配送服务，让用户更好地体验网络购物的快捷便利！伊的家成功开创主动式网络营销模式，并形成了以广州为中心，覆盖全国的销售网络，以其自然、和谐的产品风格、卓越不凡的产品效果迅速风靡世界，被亚洲女性奉为美容圣品，蔓延中国之际，在古老的国度掀起自然护肤热潮。伊的家秉承“固本培元”的理念，并以其独特的经营模式、先进的管理理念、强势的广告宣传、高效的精英团队，良好的销售服务，求深谋远虑发展之策，不断开拓延伸伊的家的王国版图。 "
-                android:textSize="15sp" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="2dp"
+                android:text="Copyright @ 2013 YiDeJia.All Right Reserved"
+                android:textColor="#8d5aa6"
+                android:textSize="13sp" />
         </LinearLayout>
     </ScrollView>
 

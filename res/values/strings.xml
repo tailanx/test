@@ -253,5 +253,6 @@
     <string name="load_addresses">亲，你还没有添加地址哦！</string>
     <string name="load_addresses1">任务正在执行中</string>
     <string name="load_addresses2">正在加载地址。。。</string>
-
+	 <string name="edit_about">关于</string>
+    
 </resources>

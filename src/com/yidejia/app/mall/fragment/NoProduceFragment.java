@@ -129,8 +129,8 @@ public class NoProduceFragment extends SherlockFragment {
 //				layout.removeAllViews();
 				if(sumCart!=0){
 					FragmentTransaction ft = getFragmentManager().beginTransaction();
-					if(fragment.isAdded()) ft.hide(NoProduceFragment.this).commitAllowingStateLoss();
-					else ft.hide(NoProduceFragment.this). commitAllowingStateLoss();
+					if(fragment.isAdded()) ft.remove(NoProduceFragment.this).commitAllowingStateLoss();
+					else ft.remove(NoProduceFragment.this).commitAllowingStateLoss();
 //					view = inflater.inflate(R.layout.no_produce, container, false);
 				}
 				
