@@ -80,6 +80,7 @@
             android:layout_toRightOf="@+id/my_collect_item_comments"
             android:text="742"
             android:textSize="15sp" />
+      
 
         <TextView
             android:id="@id/my_collect_item_right"
@@ -89,7 +90,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="6dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/arrow" />
+            android:background="@drawable/shopdelete" />
     </RelativeLayout>
 
 </RelativeLayout>
