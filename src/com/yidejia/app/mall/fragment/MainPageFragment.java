@@ -52,6 +52,7 @@ import com.yidejia.app.mall.model.MainProduct;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.homepage.GetHomePage;
 import com.yidejia.app.mall.view.AllOrderActivity;
+import com.yidejia.app.mall.view.HistoryActivity;
 import com.yidejia.app.mall.view.IntegeralActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.view.MyCollectActivity;
@@ -418,7 +419,7 @@ public class MainPageFragment extends SherlockFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intentOrder = new Intent(getSherlockActivity(), SearchActivity.class);
+				Intent intentOrder = new Intent(getSherlockActivity(), HistoryActivity.class);
 //				if (!isLogin()) {
 				
 					getSherlockActivity().startActivity(intentOrder);

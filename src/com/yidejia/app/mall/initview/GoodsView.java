@@ -33,6 +33,7 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.datamanage.BrowseHistoryDataManage;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.FavoriteDataManage;
 import com.yidejia.app.mall.model.BaseProduct;
@@ -56,6 +57,7 @@ public class GoodsView {
 	private boolean isLogin;// 用户是否登录
 	private AlertDialog builder;
 	private MyApplication myApplication;
+	private BrowseHistoryDataManage historyDataManage;
 
 	public GoodsView(Activity activity, View view, int width) {
 		this.view = view;
@@ -78,6 +80,7 @@ public class GoodsView {
 			if (info == null)
 				return;
 			manage = new CartsDataManage();
+			historyDataManage = new BrowseHistoryDataManage();
 			cart_num = manage.getCartAmount();
 			final Cart cart = new Cart();
 			cart.setSalledAmmount(1);
@@ -104,6 +107,10 @@ public class GoodsView {
 						.show();
 				price.setText("");
 			}
+			//添加到浏览历史中去
+			
+			historyDataManage.addHistory(info);
+			
 			ImageView buy_now = (ImageView) view.findViewById(R.id.buy_now);
 			ImageView add_to_cart = (ImageView) view.findViewById(R.id.add_to_cart);
 			// 销售额

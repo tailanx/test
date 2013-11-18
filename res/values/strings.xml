@@ -253,6 +253,9 @@
     <string name="load_addresses">亲，你还没有添加地址哦！</string>
     <string name="load_addresses1">任务正在执行中</string>
     <string name="load_addresses2">正在加载地址。。。</string>
-	 <string name="edit_about">关于</string>
-    
+    <string name="edit_about">关于</string>
+    <string name="history_watch">浏览历史记录</string>
+	  <string name="all_delete">删除</string>
+	    <string name="delete_history">清空历史</string>
+	     <string name="sure_delete_history">确认清空浏览历史？</string>
 </resources>

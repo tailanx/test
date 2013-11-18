@@ -11,14 +11,16 @@ import org.json.JSONStringer;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Paint.Join;
 import android.util.Log;
 
 import com.yidejia.app.mall.MainFragmentActivity;
-import com.yidejia.app.mall.model.Cart;
+import com.yidejia.app.mall.model.ProductBaseInfo;
+import com.yidejia.app.mall.model.ProductBaseInfo;
 /**
  * 浏览历史模块
  * <p>
- *  添加到浏览历史{@link #addHistory( Cart)}
+ *  添加到浏览历史{@link #addHistory( ProductBaseInfo)}
  * <p>
  *  删除单个浏览历史商品{@link #delHistory( String)}
  * <p>
@@ -26,20 +28,20 @@ import com.yidejia.app.mall.model.Cart;
  * <p>
  *  清空浏览历史列表{@link #cleanHistory()}
  *  <p>
- *  获取浏览历史内商品总数{@link #getCartAmount()}
+ *  获取浏览历史内商品总数{@link #getProductBaseInfoAmount()}
  * @author long bin
  *
  */
 public class BrowseHistoryDataManage {
 	
-	private ArrayList<Cart> historyArray; 
+	private ArrayList<ProductBaseInfo> historyArray; 
 	private SharedPreferences sp;
 	
 	private String TAG = BrowseHistoryDataManage.class.getName();
 	
 	public BrowseHistoryDataManage(){
 		sp = MainFragmentActivity.MAINACTIVITY.getSharedPreferences("BrowseHistory", Activity.MODE_APPEND );
-		historyArray = new ArrayList<Cart>();
+		historyArray = new ArrayList<ProductBaseInfo>();
 	}
 	
 	/**
@@ -47,7 +49,7 @@ public class BrowseHistoryDataManage {
 	 * @param details 商品详情数据
 	 * @return boolean 返回"true" : 成功 "false" : 失败
 	 */
-	public boolean addHistory(Cart details) {
+	public boolean addHistory(ProductBaseInfo details) {
 		boolean flag = false;
 		String id = details.getUId();
 		boolean isExsist = checkIsExsist(id);
@@ -57,13 +59,15 @@ public class BrowseHistoryDataManage {
 		Editor editor = sp.edit();
 		try {
 			JSONStringer stringer = new JSONStringer(); 
-			String cartValues = stringer.object()//.key("goods_id").value(details.getUId())
+			String ProductBaseInfoValues = stringer.object()//.key("goods_id").value(details.getUId())
 					//.key("amount").value(details.getAmount())
-					.key("name").value(details.getProductText())
+					.key("name").value(details.getName())
 					.key("price").value(details.getPrice())
+					.key("sall_count").value(details.getSalledAmmount())
+					.key("comment_sum").value(details.getCommentAmount())
 					.key("img_url").value(details.getImgUrl()).endObject().toString();
-			Log.i(TAG, cartValues);
-			editor.putString(id, cartValues);
+			Log.i(TAG, ProductBaseInfoValues);
+			editor.putString(id, ProductBaseInfoValues);
 			editor.commit();
 			flag = true;
 		} catch (JSONException e) {
@@ -98,47 +102,49 @@ public class BrowseHistoryDataManage {
 	}
 	/**
 	 * 获取浏览历史列表
-	 * @return cartsArray 浏览历史产品列表
+	 * @return ProductBaseInfosArray 浏览历史产品列表
 	 */
-	public ArrayList<Cart> getHistoryArray(){
-		ArrayList<Cart> cartsArray = new ArrayList<Cart>();
+	public ArrayList<ProductBaseInfo> getHistoryArray(){
+		ArrayList<ProductBaseInfo> ProductBaseInfosArray = new ArrayList<ProductBaseInfo>();
 		try {
 			Map<String, ?>spMap = sp.getAll();
 			if(!spMap.isEmpty()){
-				Cart cart = null;
+				ProductBaseInfo ProductBaseInfo = null;
 				for (Entry<String, ?> entry : spMap.entrySet()) {
 					String key = entry.getKey();
-					cart = new Cart();
-					cart.setUId(key);
+					ProductBaseInfo = new ProductBaseInfo();
+					ProductBaseInfo.setUId(key);
 					String details = (String) entry.getValue();
 //					String amount = value.split(":#")[0];
 //					String details = value.split(":#")[1];
 					try {
-						cart.setSalledAmmount(1);
+						ProductBaseInfo.setSalledAmount(1+"");
 						JSONObject jsonObject = new JSONObject(details);
-						cart.setImgUrl(jsonObject.getString("img_url"));
-						cart.setPrice(Float.parseFloat(jsonObject.getString("price")));
-						cart.setProductText(jsonObject.getString("name"));
+						ProductBaseInfo.setImgUrl(jsonObject.getString("img_url"));
+						ProductBaseInfo.setPrice(Float.parseFloat(jsonObject.getString("price"))+"");
+						ProductBaseInfo.setBrief(jsonObject.getString("name"));
+						ProductBaseInfo.setCommentAmount(jsonObject.getString("comment_sum"));
+						ProductBaseInfo.setSalledAmount(jsonObject.getString("sall_count"));
 					} catch (NumberFormatException  e) {
 						// TODO: handle exception
-						Log.e(TAG, "get cart array NumberFormatException ");
+						Log.e(TAG, "get ProductBaseInfo array NumberFormatException ");
 						e.printStackTrace();
 					} catch (Exception e) {
 						// TODO: handle exception
-						Log.e(TAG, "get cart array json err ");
+						Log.e(TAG, "get ProductBaseInfo array json err ");
 						e.printStackTrace();
 					}
-					cartsArray.add(cart);
+					ProductBaseInfosArray.add(ProductBaseInfo);
 				}
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			Log.e(TAG, "get cart array err ");
+			Log.e(TAG, "get ProductBaseInfo array err ");
 			e.printStackTrace();
 		}
-		int length = cartsArray.size();
+		int length = ProductBaseInfosArray.size();
 		for (int i = 0; i < length; i++) {
-			historyArray.add(cartsArray.get(length - i - 1));
+			historyArray.add(ProductBaseInfosArray.get(length - i - 1));
 		}
 		return historyArray;
 	}
@@ -163,14 +169,14 @@ public class BrowseHistoryDataManage {
 	 * 获取浏览历史内商品的数量
 	 * @return
 	 */
-	public int getCartAmount(){
+	public int getProductBaseInfoAmount(){
 		int count = 0;
 		try {
 			Map<String, ?>spMap = sp.getAll();
 			count = spMap.size();
 		} catch (Exception e) {
 			// TODO: handle exception
-			Log.e(TAG, "get cart type count err");
+			Log.e(TAG, "get ProductBaseInfo type count err");
 			e.printStackTrace();
 		}
 		return count;
@@ -193,12 +199,12 @@ public class BrowseHistoryDataManage {
 	 * @return
 	 */
 	private boolean checkAndDel(){
-		int count = getCartAmount();
+		int count = getProductBaseInfoAmount();
 		if(count < 20)return true;
-		ArrayList<Cart> carts = getHistoryArray();
-		count = carts.size();
+		ArrayList<ProductBaseInfo> ProductBaseInfos = getHistoryArray();
+		count = ProductBaseInfos.size();
 		for (int i = 19; i < count; i++) {//从最早加入的20个开始删除
-			String id = carts.get(i).getUId();
+			String id = ProductBaseInfos.get(i).getUId();
 			delHistory(id);
 		}
 		return false;
