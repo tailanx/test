@@ -96,36 +96,30 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 	
 	private void setFragment(int index, boolean isShowWithList){
 		Bundle newBundle = (Bundle) bundle.clone();
+		SelledResultFragment newFragment = null;
 		switch (index) {
 		case 0:
 			newBundle.putString("order", "sells+desc");
-			if(sellFragment == null)
-				sellFragment = SelledResultFragment.newInstance(newBundle, isShowWithList);
-			newFragment = sellFragment;
 			break;
 		case 1:
 			String orderString = "";
 			if(isDesc) orderString = "price+desc";
 			else orderString = "price+asc";
 			newBundle.putString("order", orderString);
-			if(priceFragment == null)
-				priceFragment = SelledResultFragment.newInstance(newBundle, isShowWithList);
-			newFragment = priceFragment;
 			break;
 		case 2:
 			newBundle.putString("order", "needs+desc");
-			if(needsFragment == null)
-				needsFragment = SelledResultFragment.newInstance(newBundle, isShowWithList);
-			newFragment = needsFragment;
 			break;
 
 		default:
 			break;
 		}
+		newFragment = SelledResultFragment.newInstance(newBundle, isShowWithList);
 		
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		if(newFragment.isAdded()) ft.hide(currFragment).show(newFragment).commit();
-		else ft.hide(currFragment).replace(R.id.search_result_fragment, newFragment).commit();
+//		if(newFragment.isAdded()) ft.hide(currFragment).show(newFragment).commit();
+//		else ft.hide(currFragment).replace(R.id.search_result_fragment, newFragment).commit();
+		ft.replace(R.id.search_result_fragment, newFragment).commit();
         newBundle = null;
         currindex = index;
         currFragment = newFragment;
