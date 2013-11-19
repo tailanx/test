@@ -107,6 +107,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		filter.addAction(Consts.UPDATE_CHANGE);
 		filter.addAction(Consts.BROAD_UPDATE_CHANGE);
 		filter.addAction(Consts.DELETE_CART);
+		filter.addAction(Consts.RETURN_BACk);
 		registerReceiver(receiver, filter);
 	}
 
@@ -316,9 +317,9 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 					shoppingCartTopay = (Button) findViewById(R.id.shopping_cart_go_pay);
 					shoppingCartTopay.setVisibility(View.GONE);
 					shoppingCartTopay.setOnClickListener(goPay);
-					if(number!=0){
+					if (number != 0) {
 						shoppingCartTopay.setVisibility(View.VISIBLE);
-					}else{
+					} else {
 						shoppingCartTopay.setVisibility(View.GONE);
 					}
 					break;
@@ -344,7 +345,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 						imageView.setOnClickListener(edit);
 						break;
 					} else {
-						
+
 						// newFragment = new LoginFragment();
 						setNavBackground();
 						// downMyLayout.setPressed(true);
@@ -370,9 +371,9 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 					ft.hide(getCurrFragment(currentIndex))
 							.add(R.id.main_fragment, getCurrFragment(id))
 							.commit();// .addToBackStack(fragmentTag[id])
-					// ft.replace(R.id.main_fragment,
-					// getCurrFragment(id)).commit();
-					// currFragment = newFragment;
+				// ft.replace(R.id.main_fragment,
+				// getCurrFragment(id)).commit();
+				// currFragment = newFragment;
 			}
 			currentIndex = id;
 		}
@@ -396,14 +397,14 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 			fragment = searchFragment;
 			break;
 		case 3:
-			if(number==0){
+			if (number == 0) {
 				fragment = noProduce;
 				Log.e("NoProduceFragment", "noProduce");
+			} else {
+				fragment = cartFragment;
+				Log.e("NoProduceFragment", "cartFragment1");
 			}
-			else{fragment = cartFragment;
-			Log.e("NoProduceFragment", "cartFragment1");
-			}
-			
+
 			break;
 		case 4:
 			if (!isLogin)
@@ -516,22 +517,22 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 			float sum = 0;
 			for (int i = 0; i < orderCarts.size(); i++) {
 				HashMap<String, Object> map = orderCarts.get(i);
-				
+
 				float ischeck = Float.parseFloat(map.get("check").toString());
 				// Log.i("info", ischeck + " ischeck");
 				Cart cart1 = (Cart) map.get("cart");
 				if (ischeck == 1.0) {
 					cartList.add(cart1);
-					float sum1 = cart1.getPrice()*cart1.getAmount(); 
+					float sum1 = cart1.getPrice() * cart1.getAmount();
 					sum += sum1;
 				}
 			}
 			Intent intent1 = new Intent(MainFragmentActivity.this,
 					CstmPayActivity.class);
 			Bundle bundle = new Bundle();
-		
+
 			intent1.putExtra("carts", cartList);
-			Log.e("NoProduceFragment", sum+"  sum");
+			Log.e("NoProduceFragment", sum + "  sum");
 			if (sum > 0) {
 				bundle.putString("cartActivity", "Y");
 				bundle.putString("price", sum + "");
@@ -576,10 +577,15 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 				if (number == 0) {
 					cartImage.setVisibility(View.GONE);
 				} else {
-					FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-					if(cartFragment.isAdded()) ft.hide(noProduce).commitAllowingStateLoss();
-					else ft.remove(noProduce).show(cartFragment).commitAllowingStateLoss();//replace(R.id.main_fragment, cartFragment)
-//					shoppingCartTopay.setVisibility(View.GONE);
+					FragmentTransaction ft = getSupportFragmentManager()
+							.beginTransaction();
+					if (cartFragment.isAdded())
+						ft.hide(noProduce).commitAllowingStateLoss();
+					else
+						ft.remove(noProduce).show(cartFragment)
+								.commitAllowingStateLoss();// replace(R.id.main_fragment,
+															// cartFragment)
+						// shoppingCartTopay.setVisibility(View.GONE);
 					cartImage.setVisibility(View.VISIBLE);
 					cartImage.setText(number + "");
 				}
@@ -588,9 +594,15 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 				number = cartsDataManage.getCartAmount();
 				Log.e("NoProduceFragment", number + "number");
 				if (number == 0) {
-					FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-					if(noProduce.isAdded()) ft.remove(cartFragment).show(noProduce).commitAllowingStateLoss();//.show(fragment).
-					else ft.remove(cartFragment).replace(R.id.main_fragment, noProduce).commitAllowingStateLoss();
+					FragmentTransaction ft = getSupportFragmentManager()
+							.beginTransaction();
+					if (noProduce.isAdded())
+						ft.remove(cartFragment).show(noProduce)
+								.commitAllowingStateLoss();// .show(fragment).
+					else
+						ft.remove(cartFragment)
+								.replace(R.id.main_fragment, noProduce)
+								.commitAllowingStateLoss();
 					cartImage.setVisibility(View.GONE);
 					shoppingCartTopay.setVisibility(View.GONE);
 				} else {
@@ -598,21 +610,33 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 					cartImage.setText(number + "");
 				}
 			}
-			if(Consts.DELETE_CART.equals(action)){
+			if (Consts.DELETE_CART.equals(action)) {
 				number = cartsDataManage.getCartAmount();
-				if(number==0){
+				if (number == 0) {
 					cartImage.setVisibility(View.GONE);
-					getSupportActionBar()
-					.setCustomView(R.layout.actionbar_compose);
+					getSupportActionBar().setCustomView(
+							R.layout.actionbar_compose);
 					ImageView back = (ImageView) findViewById(R.id.compose_back);
 					back.setVisibility(View.GONE);
 					TextView title = (TextView) findViewById(R.id.compose_title);
 					title.setText(getResources().getString(R.string.no_cart));
-				}else{
+				} else {
 					cartImage.setVisibility(View.VISIBLE);
-					cartImage.setText(number+"");
+					cartImage.setText(number + "");
 				}
-		}
+			}
+//			if (Consts.RETURN_BACk.equals(action)) {
+//			
+//				 FragmentTransaction ft =
+//				 getSupportFragmentManager().beginTransaction();
+//				 if(mainFragment.isAdded())
+//				 ft.remove(myFragment).show(mainFragment).commitAllowingStateLoss();
+//				 else
+//				 ft.hide(myFragment).remove(myFragment).replace(R.id.main_fragment,
+//				 mainFragment).commitAllowingStateLoss();
+//				 getCurrFragment(0);
+//
+//			}
 		}
 
 	}

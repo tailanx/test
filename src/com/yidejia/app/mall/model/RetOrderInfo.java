@@ -1,11 +1,13 @@
 package com.yidejia.app.mall.model;
 
+import java.io.Serializable;
+
 /**
  * 退换货订单
  * @author long bin
  *
  */
-public class RetOrderInfo {
+public class RetOrderInfo implements Serializable{
 	
 	private String id;//退换货的id
 	private String orderCode;//订单号

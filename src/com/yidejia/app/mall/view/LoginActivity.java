@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -30,6 +31,7 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 	private Button mLogin;
 	private EditText stringName;
 	private EditText stringPassword;
+	private CheckBox mBox;
 
 	
 	private UserDatamanage userManage;//登陆的接口
@@ -83,6 +85,8 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 		ip = new IpAddress();
 		setActionbar();
 //		userManage = new UserDatamanage(LoginActivity.this);
+		//默认选中】
+		mBox = (CheckBox)findViewById(R.id.my_login_checkbox);
 		
 		findPwd = (RelativeLayout)findViewById(R.id.my_mall_login_retrieve_password);
 		//设置监听

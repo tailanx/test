@@ -92,7 +92,7 @@ public class TaskReturn {
 		userId = ((MyApplication)activity.getApplication()).getUserId();
 		token = ((MyApplication)activity.getApplication()).getToken();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		theDate = sdf.format(new Date());
+		theDate = sdf.format(new Date()).trim();
 	}
 	
 	
@@ -115,6 +115,7 @@ public class TaskReturn {
 			super.onPostExecute(result);
 			if(result){
 				Toast.makeText(activity, "提交成功!", Toast.LENGTH_LONG).show();
+				activity.finish();
 			}else {
 				Toast.makeText(activity, "提交失败!", Toast.LENGTH_LONG).show();
 			}

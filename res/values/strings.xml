@@ -255,7 +255,10 @@
     <string name="load_addresses2">正在加载地址。。。</string>
     <string name="edit_about">关于</string>
     <string name="history_watch">浏览历史记录</string>
-	  <string name="all_delete">删除</string>
-	    <string name="delete_history">清空历史</string>
-	     <string name="sure_delete_history">确认清空浏览历史？</string>
+    <string name="all_delete">删除</string>
+    <string name="delete_history">清空历史记录</string>
+    <string name="sure_delete_history">确认清空浏览历史？</string>
+    <string name="clean">清空</string>
+    <string name="zhanwulishishuju">亲，您的浏览记录为空</string>
+
 </resources>

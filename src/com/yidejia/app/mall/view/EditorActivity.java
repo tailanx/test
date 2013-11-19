@@ -7,6 +7,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
@@ -22,6 +23,7 @@ import com.yidejia.app.mall.DataCleanManager;
 import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.util.Consts;
 
 public class EditorActivity extends SherlockActivity {
 	private RelativeLayout help;
@@ -93,8 +95,12 @@ public class EditorActivity extends SherlockActivity {
 
 							public void onClick(DialogInterface arg0, int arg1) {
 								myApplication.setIsLogin(false);
-								Intent intent = new Intent(EditorActivity.this, MainFragmentActivity.class);
-								EditorActivity.this.startActivity(intent);
+//								Intent intent = new Intent(EditorActivity.this, MainFragmentActivity.class);
+								Intent  intent = new Intent();
+								intent.setAction(Consts.RETURN_BACk);
+								EditorActivity.this.sendBroadcast(intent);
+//								EditorActivity.this.startActivity(intent);
+								
 								EditorActivity.this.finish();
 							}
 
