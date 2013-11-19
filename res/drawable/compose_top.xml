@@ -2,6 +2,6 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:drawable="@drawable/back_hover" android:state_pressed="true"/>
-    <item android:drawable="@drawable/back1"/>
+    <item android:drawable="@drawable/back"/>
 
 </selector>
