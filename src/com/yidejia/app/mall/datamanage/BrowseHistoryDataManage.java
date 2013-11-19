@@ -1,8 +1,10 @@
 package com.yidejia.app.mall.datamanage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
-import java.util.Map.Entry;
+//import java.util.Map;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,11 +13,10 @@ import org.json.JSONStringer;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.graphics.Paint.Join;
 import android.util.Log;
 
+import com.unionpay.mpay.views.u;
 import com.yidejia.app.mall.MainFragmentActivity;
-import com.yidejia.app.mall.model.ProductBaseInfo;
 import com.yidejia.app.mall.model.ProductBaseInfo;
 /**
  * 浏览历史模块
@@ -36,12 +37,14 @@ public class BrowseHistoryDataManage {
 	
 	private ArrayList<ProductBaseInfo> historyArray; 
 	private SharedPreferences sp;
+	private ArrayList<String> keysList;
 	
 	private String TAG = BrowseHistoryDataManage.class.getName();
 	
 	public BrowseHistoryDataManage(){
 		sp = MainFragmentActivity.MAINACTIVITY.getSharedPreferences("BrowseHistory", Activity.MODE_APPEND );
 		historyArray = new ArrayList<ProductBaseInfo>();
+		keysList = new ArrayList<String>();
 	}
 	
 	/**
@@ -51,6 +54,7 @@ public class BrowseHistoryDataManage {
 	 */
 	public boolean addHistory(ProductBaseInfo details) {
 		boolean flag = false;
+		long time = System.currentTimeMillis();
 		String id = details.getUId();
 		boolean isExsist = checkIsExsist(id);
 		if(!isExsist){//如果浏览历史不存在改商品
@@ -58,16 +62,19 @@ public class BrowseHistoryDataManage {
 		}
 		Editor editor = sp.edit();
 		try {
+			
 			JSONStringer stringer = new JSONStringer(); 
 			String ProductBaseInfoValues = stringer.object()//.key("goods_id").value(details.getUId())
 					//.key("amount").value(details.getAmount())
+					.key("id").value(id)
 					.key("name").value(details.getName())
 					.key("price").value(details.getPrice())
-					.key("sall_count").value(details.getSalledAmmount())
+					.key("sell_count").value(details.getSalledAmmount())
 					.key("comment_sum").value(details.getCommentAmount())
-					.key("img_url").value(details.getImgUrl()).endObject().toString();
-			Log.i(TAG, ProductBaseInfoValues);
-			editor.putString(id, ProductBaseInfoValues);
+					.key("img_url").value(details.getImgUrl())
+					.endObject().toString();
+			Log.e(TAG, id+ProductBaseInfoValues);
+			editor.putString(time+"", ProductBaseInfoValues);
 			editor.commit();
 			flag = true;
 		} catch (JSONException e) {
@@ -89,8 +96,17 @@ public class BrowseHistoryDataManage {
 	public boolean delHistory(String uId){
 		boolean flag = false;
 		try {
+			ArrayList<ProductBaseInfo> baseInfos = getHistoryArray();
+			String key = "";
+			int length = baseInfos.size();
+			for (int i = 0; i < length; i++) {
+				if(baseInfos.get(i).getUId().equals(uId)){
+					key = keysList.get(i);
+					break;
+				}
+			}
 			Editor editor = sp.edit();
-			editor.remove(uId);
+			editor.remove(key);
 			editor.commit();
 			flag = true;
 		} catch (Exception e) {
@@ -102,13 +118,44 @@ public class BrowseHistoryDataManage {
 	}
 	/**
 	 * 获取浏览历史列表
-	 * @return ProductBaseInfosArray 浏览历史产品列表
+	 * @return productBaseInfosArray 浏览历史产品列表
 	 */
 	public ArrayList<ProductBaseInfo> getHistoryArray(){
-		ArrayList<ProductBaseInfo> ProductBaseInfosArray = new ArrayList<ProductBaseInfo>();
+		ArrayList<ProductBaseInfo> productBaseInfosArray = new ArrayList<ProductBaseInfo>();
+		ArrayList<String> keysArray = new ArrayList<String>();
 		try {
 			Map<String, ?>spMap = sp.getAll();
-			if(!spMap.isEmpty()){
+			Object[] key =  spMap.keySet().toArray();    
+			Arrays.sort(key); 
+			ProductBaseInfo productBaseInfo = null;
+			for (int i = 0; i < key.length; i++) {
+				String details = (String) spMap.get(key[i]);
+				keysArray.add((String)key[i]);
+				productBaseInfo = new ProductBaseInfo();
+				try {
+					JSONObject jsonObject = new JSONObject(details);
+					String id = jsonObject.getString("id");
+					productBaseInfo.setUId(id);
+					productBaseInfo.setSalledAmount(jsonObject.getString("sell_count"));
+					productBaseInfo.setImgUrl(jsonObject.getString("img_url"));
+					productBaseInfo.setPrice(Float.parseFloat(jsonObject.getString("price"))+"");
+					productBaseInfo.setBrief(jsonObject.getString("name"));
+					productBaseInfo.setCommentAmount(jsonObject.getString("comment_sum"));
+					Log.e(TAG, "ts:"+key+" and id"+id);
+					productBaseInfosArray.add(productBaseInfo);
+				} catch (NumberFormatException  e) {
+					// TODO: handle exception
+					Log.e(TAG, "get ProductBaseInfo array NumberFormatException ");
+					e.printStackTrace();
+				} catch (Exception e) {
+					// TODO: handle exception
+					Log.e(TAG, "get ProductBaseInfo array json err ");
+					e.printStackTrace();
+				}
+			
+			} 
+			
+			/*if(!spMap.isEmpty()){
 				ProductBaseInfo ProductBaseInfo = null;
 				for (Entry<String, ?> entry : spMap.entrySet()) {
 					String key = entry.getKey();
@@ -117,6 +164,7 @@ public class BrowseHistoryDataManage {
 					String details = (String) entry.getValue();
 //					String amount = value.split(":#")[0];
 //					String details = value.split(":#")[1];
+					Log.e(TAG, key);
 					try {
 						ProductBaseInfo.setSalledAmount(1+"");
 						JSONObject jsonObject = new JSONObject(details);
@@ -125,6 +173,24 @@ public class BrowseHistoryDataManage {
 						ProductBaseInfo.setBrief(jsonObject.getString("name"));
 						ProductBaseInfo.setCommentAmount(jsonObject.getString("comment_sum"));
 						ProductBaseInfo.setSalledAmount(jsonObject.getString("sall_count"));
+//						Date date = new Date();
+						long ts = jsonObject.getLong("ts");
+						int length = dates.size();
+						int i = length - 1;
+						for(; i > 0; i--){
+							if(ts > dates.get(i) && ts < dates.get(i - 1)){
+								dates.add(i, ts);
+								productBaseInfosArray.add(i, ProductBaseInfo);
+								Log.e(TAG, "add position:"+i);
+								break;
+							}
+						}
+						Log.d(TAG, "position:"+i+" and length:"+length);
+						if(i == 0 && length == dates.size()){
+							dates.add(0, ts);
+							Log.e(TAG, "add position:"+i);
+							productBaseInfosArray.add(0, ProductBaseInfo);
+						}
 					} catch (NumberFormatException  e) {
 						// TODO: handle exception
 						Log.e(TAG, "get ProductBaseInfo array NumberFormatException ");
@@ -134,17 +200,18 @@ public class BrowseHistoryDataManage {
 						Log.e(TAG, "get ProductBaseInfo array json err ");
 						e.printStackTrace();
 					}
-					ProductBaseInfosArray.add(ProductBaseInfo);
 				}
-			}
+			}*/
 		} catch (Exception e) {
 			// TODO: handle exception
 			Log.e(TAG, "get ProductBaseInfo array err ");
 			e.printStackTrace();
 		}
-		int length = ProductBaseInfosArray.size();
+//		historyArray = (ArrayList<ProductBaseInfo>)productBaseInfosArray.clone();
+		int length = productBaseInfosArray.size();
 		for (int i = 0; i < length; i++) {
-			historyArray.add(ProductBaseInfosArray.get(length - i - 1));
+			keysList.add(keysArray.get(length - i - 1));
+			historyArray.add(productBaseInfosArray.get(length - i - 1));
 		}
 		return historyArray;
 	}
@@ -190,7 +257,15 @@ public class BrowseHistoryDataManage {
 	private boolean checkIsExsist(String uid){
 		boolean issuccess = false;
 		issuccess = sp.contains(uid);
-		delHistory(uid);
+		ArrayList<ProductBaseInfo> productBaseInfos = getHistoryArray();
+		int length = productBaseInfos.size();
+		for(int i = 0; i < length; i++){
+			if(uid.equals(productBaseInfos.get(i).getUId())){
+				issuccess = true;
+				delHistory(uid);
+				break;
+			}
+		}
 		return issuccess;
 	}
 	
@@ -201,10 +276,10 @@ public class BrowseHistoryDataManage {
 	private boolean checkAndDel(){
 		int count = getProductBaseInfoAmount();
 		if(count < 20)return true;
-		ArrayList<ProductBaseInfo> ProductBaseInfos = getHistoryArray();
-		count = ProductBaseInfos.size();
+		ArrayList<ProductBaseInfo> productBaseInfos = getHistoryArray();
+		count = productBaseInfos.size();
 		for (int i = 19; i < count; i++) {//从最早加入的20个开始删除
-			String id = ProductBaseInfos.get(i).getUId();
+			String id = productBaseInfos.get(i).getUId();
 			delHistory(id);
 		}
 		return false;
