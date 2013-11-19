@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    android:orientation="vertical" >
+    >
 
     <!--
     <RelativeLayout
@@ -43,25 +43,65 @@
          >
     -->
 
-    <LinearLayout
+<!--     <LinearLayout
         android:id="@+id/wmy_collect_scrollView_linearlayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <com.handmark.pulltorefresh.library.PullToRefreshListView
-            xmlns:ptr="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/my_collect_listview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:cacheColorHint="#00000000"
-            android:fastScrollEnabled="false"
-            android:smoothScrollbar="true"
-        	android:footerDividersEnabled="true"
-        	ptr:ptrAnimationStyle="flip"
-        	ptr:ptrMode="both">
-        </com.handmark.pulltorefresh.library.PullToRefreshListView>
-    </LinearLayout>
+        android:orientation="vertical" > -->
+        
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/my_collect_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:cacheColorHint="#00000000"
+        
+        android:fastScrollEnabled="false"
+ 		android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:smoothScrollbar="true"
+        android:fadingEdge="none"
+        ptr:ptrAnimationStyle="flip"
+        ptr:ptrMode="both" />
+<!--     </LinearLayout> -->
 <!--     </ScrollView> -->
+ <RelativeLayout android:id="@+id/empty_fav"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:visibility="gone"
+    android:orientation="vertical" >
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/favorite_empty_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/search_icon" />
+
+    <TextView
+        android:id="@+id/favorite_empty_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/favorite_empty_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="收藏夹是空的"
+        android:textColor="#b4b4b4"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/favorite_empty_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/favorite_empty_textview"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/clear_search"
+        android:text="去逛一下"
+        android:textColor="#eeeeee"
+        android:textSize="15sp" />
+
+</RelativeLayout> 
+
+</RelativeLayout> 

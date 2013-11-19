@@ -340,6 +340,10 @@ public class SelledResultFragment extends SherlockFragment {
 //						emptyLayout = (RelativeLayout) view.findViewById(R.id.search_empty);
 						emptyLayout.setVisibility(View.VISIBLE);
 					}
+					if(isFirstIn){
+						bar.dismiss();
+						isFirstIn = false;
+					}
 					return;
 				
 				}
@@ -376,7 +380,7 @@ public class SelledResultFragment extends SherlockFragment {
 					mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 					mPullToRefreshScrollView.onRefreshComplete();
 				}
-			}
+			} 
 		}
 		@Override
 		protected Boolean doInBackground(Void... params) {

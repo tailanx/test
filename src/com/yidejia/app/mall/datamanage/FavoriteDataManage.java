@@ -174,7 +174,7 @@ public class FavoriteDataManage {
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-			DeleteFavorite deleteFavorite = new DeleteFavorite(context);
+			DeleteFavorite deleteFavorite = new DeleteFavorite();
 			try {
 				String httpResultString = deleteFavorite.deleteFavorite(userId, String.valueOf(productId), token);///String.valueOf(userId), 
 				
@@ -354,7 +354,7 @@ public class FavoriteDataManage {
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-			GetFavoriteList getList = new GetFavoriteList(context);
+			GetFavoriteList getList = new GetFavoriteList();
 			try {
 				String httpResultString = getList.getFavoritesListJsonString(where, offset, limit, group, order, fields);
 				analysisGetListJson(httpResultString);
