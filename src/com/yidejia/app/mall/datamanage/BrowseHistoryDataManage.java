@@ -52,6 +52,7 @@ public class BrowseHistoryDataManage {
 	public boolean addHistory(ProductBaseInfo details) {
 		boolean flag = false;
 		String id = details.getUId();
+		Log.e(TAG, "key:"+id);
 		boolean isExsist = checkIsExsist(id);
 		if(!isExsist){//如果浏览历史不存在改商品
 			checkAndDel();//检查是否有20个商品，并删除最早加入的商品
@@ -113,6 +114,7 @@ public class BrowseHistoryDataManage {
 				for (Entry<String, ?> entry : spMap.entrySet()) {
 					String key = entry.getKey();
 					ProductBaseInfo = new ProductBaseInfo();
+					Log.e(TAG, "key:"+key);
 					ProductBaseInfo.setUId(key);
 					String details = (String) entry.getValue();
 //					String amount = value.split(":#")[0];
@@ -190,7 +192,7 @@ public class BrowseHistoryDataManage {
 	private boolean checkIsExsist(String uid){
 		boolean issuccess = false;
 		issuccess = sp.contains(uid);
-		delHistory(uid);
+		if(issuccess)delHistory(uid);
 		return issuccess;
 	}
 	

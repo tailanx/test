@@ -36,7 +36,7 @@ public class ExchangeActivity extends SherlockFragmentActivity implements OnClic
 		setContentView(R.layout.all_order_item_main);
 		
 		mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.all_order_item_main_refresh_scrollview11);
-		
+
 		userId = ((MyApplication)getApplication()).getUserId();
 		token = ((MyApplication)getApplication()).getToken();
 		

@@ -164,6 +164,7 @@
                         android:textSize="16sp" />
 
                     <CheckBox
+                        android:id="@+id/my_login_checkbox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="默认选中"
@@ -176,7 +177,7 @@
 
             <Button
                 android:id="@+id/my_mall_login_button"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/login_background"

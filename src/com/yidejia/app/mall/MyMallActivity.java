@@ -4,9 +4,18 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+
+
+
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +32,9 @@ import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.yidejia.app.mall.datamanage.PersonCountDataManage;
+import com.yidejia.app.mall.fragment.LoginFragment;
+import com.yidejia.app.mall.fragment.MainPageFragment;
+import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.AddressActivity;
 import com.yidejia.app.mall.view.AllOrderActivity;
 import com.yidejia.app.mall.view.AlreadyComActivity;
@@ -71,6 +83,7 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 	private TextView vip;
 	private MyApplication myApplication;
 	private PersonCountDataManage personCountDataManage;
+	private InnerReceiver receiver;
 
 	// private TextView mTextView;
 
@@ -245,11 +258,24 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 				.showImageForEmptyUri(R.drawable.user_head)
 				.cacheInMemory(true).cacheOnDisc(true).build();
 	}
-
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		getSherlockActivity().unregisterReceiver(receiver);
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		receiver = new InnerReceiver();
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Consts.RETURN_BACk);
+		getSherlockActivity().registerReceiver(receiver, filter);
+		
+		fragment = new LoginFragment();
+		
 		myApplication = (MyApplication) getSherlockActivity().getApplication();
 
 		personCountDataManage = new PersonCountDataManage(getSherlockActivity());
@@ -514,4 +540,20 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 			break;
 		}
 	}
+	private Fragment fragment;
+	public class InnerReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			
+			String action = intent.getAction();
+			if(Consts.RETURN_BACk.equals(action)){
+				FragmentTransaction ft = getFragmentManager().beginTransaction();
+				if(fragment.isAdded()) ft.hide(MyMallActivity.this).show(fragment).commitAllowingStateLoss();
+				else ft.hide(MyMallActivity.this).replace(R.id.main_fragment, fragment).commitAllowingStateLoss();
+				
+			}
+		}
+		}
 }

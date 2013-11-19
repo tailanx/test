@@ -5,6 +5,8 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.net.HttpPostConn;
@@ -17,6 +19,7 @@ public class SaveReturnOrder {
 		String url = new JNICallBack().getHttp4GetReturn(user_id, order_code,
 				the_date, contact, phone, cause, desc, token);
 		HttpPostConn conn = new HttpPostConn(url);
+		Log.i("info", conn.getHttpResponse());
 		return conn.getHttpResponse();
 	}
 	

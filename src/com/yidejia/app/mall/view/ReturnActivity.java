@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.TaskReturn;
+import com.yidejia.app.mall.model.RetOrderInfo;
 
 
 public class ReturnActivity extends SherlockActivity {
@@ -21,6 +24,13 @@ public class ReturnActivity extends SherlockActivity {
 	private TextView orderDateTextView;
 	
 	private TaskReturn taskReturn;
+	private RetOrderInfo info;
+	private Button submit;
+	private EditText linkMan;
+	private EditText phoneNumber;
+	private Spinner reason;
+	private EditText describe;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +39,37 @@ public class ReturnActivity extends SherlockActivity {
 		setActionbar();
 		setContentView(R.layout.exchange);
 		Bundle bundle = getIntent().getExtras();
+		
+		info = (RetOrderInfo) bundle.get("info");
+		
 		order_code = bundle.getString("orderCode");
+		
 		the_date = bundle.getString("orderDate");
+		if(info==null||"".equals(info)){
 		findIds();
 		orderCodeTextView.setText(order_code);
 		orderDateTextView.setText(the_date);
+		}else{
+			submit.setVisibility(View.GONE);
+			findIds();
+			orderCodeTextView.setText(info.getOrderCode());
+			
+			
+			orderDateTextView.setText(info.getTheDate());
+			
+			linkMan.setText(info.getContact());
+			linkMan.setEnabled(false);
+			
+			phoneNumber.setText(info.getContact_manner());
+			phoneNumber.setEnabled(false);
+			
+			describe.setText(info.getDesc());
+			describe.setEnabled(false);
+			
+			reason.setPrompt(info.getCause());
+			reason.setEnabled(false);
+		}
+		
 	}
 	
 	
@@ -50,6 +86,10 @@ public class ReturnActivity extends SherlockActivity {
 	private void findIds(){
 		orderCodeTextView = (TextView) findViewById(R.id.exchange_biaohao_number);
 		orderDateTextView = (TextView) findViewById(R.id.exchange_time_number);
+		linkMan = (EditText) findViewById(R.id.exchange_edittext_lianxiren);
+		phoneNumber = (EditText) findViewById(R.id.exchange_edittext_lianxifangshi);
+		reason = (Spinner) findViewById(R.id.exchange_spinner);
+		describe = (EditText) findViewById(R.id.go_pay_leave_message);
 	}
 	
 	/**
@@ -64,7 +104,7 @@ public class ReturnActivity extends SherlockActivity {
 		getSupportActionBar().setIcon(R.drawable.back);
 		getSupportActionBar().setCustomView(R.layout.actionbar_common);
 		ImageView back = (ImageView) findViewById(R.id.actionbar_left);//����
-		Button submit = (Button) findViewById(R.id.actionbar_right);//�ύ
+		submit = (Button) findViewById(R.id.actionbar_right);//�ύ
 		submit.setText(getResources().getString(R.string.commit));
 		submit.setOnClickListener(listener);
 		back.setOnClickListener(new OnClickListener() {
