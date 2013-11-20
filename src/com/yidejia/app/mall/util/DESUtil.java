@@ -5,10 +5,13 @@ import java.security.SecureRandom;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
+import android.util.Base64;
+
 
 //import sun.misc.BASE64Decoder;
 //import sun.misc.BASE64Encoder;
-import android.util.Base64;
+
+import android.util.Log;
 
 public class DESUtil {
 	
@@ -19,7 +22,7 @@ public class DESUtil {
     }  
    
     public DESUtil(String str) {  
-       setKey(str); // Éú³ÉÃÜ³×  
+       setKey(str); // ï¿½ï¿½ï¿½ï¿½Ü³ï¿½  
     }  
    
     public Key getKey() {  
@@ -31,7 +34,7 @@ public class DESUtil {
     }  
    
     /** 
-      * ¸ù¾Ý²ÎÊýÉú³É KEY 
+      * ï¿½ï¿½Ý²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ KEY 
       */  
     public void setKey(String strKey) {  
        try {  
@@ -46,21 +49,25 @@ public class DESUtil {
     }  
    
     /** 
-      * ¼ÓÃÜ String Ã÷ÎÄÊäÈë ,String ÃÜÎÄÊä³ö 
+      * ï¿½ï¿½ï¿½ï¿½ String ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ,String ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
       */  
     public String encryptStr(String strMing) {  
        byte [] byteMi = null ;  
        byte [] byteMing = null ;  
-       String strMi = "" ; 
+       String strMi = null; 
 //       BASE64Encoder base64en = new BASE64Encoder();  
        try {  
            byteMing = strMing.getBytes( "UTF8" );  
-//           byteMi = this.encryptByte(byteMing);  
-           strMi = Base64.encodeToString(strMing.getBytes(), Base64.DEFAULT);
+           
+           byteMi = this.encryptByte(byteMing);  
+//           strMi = Base64.encodeToString(strMing.getBytes(), Base64.DEFAULT);
 //           strMi = base64en.encode(byteMi);  
+           strMi = new String(byteMi, "UTF8");
+  
        } catch (Exception e) {  
            throw new RuntimeException(  
                   "Error initializing SqlMap class. Cause: " + e);  
+           
        } finally {  
 //           base64en = null ;  
            byteMing = null ;  
@@ -70,7 +77,7 @@ public class DESUtil {
     }  
    
     /** 
-      * ½âÃÜ ÒÔ String ÃÜÎÄÊäÈë ,String Ã÷ÎÄÊä³ö 
+      * ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ String ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ,String ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
       * 
       * @param strMi 
       * @return 
@@ -79,25 +86,27 @@ public class DESUtil {
 //       BASE64Decoder base64De = new BASE64Decoder();  
        byte [] byteMing = null ;  
 //       byte [] byteMi = null ;  
-       String strMing = "" ;  
+       String strMing = null ;  
        try {  
-    	   byteMing = Base64.decode(strMi, Base64.DEFAULT);
+    	   byteMing = Base64.decode(strMi.getBytes(), Base64.DEFAULT);
 //           byteMi = base64De.decodeBuffer(strMi);  
-//           byteMing = this.decryptByte(byteMi);  
-           strMing = new String(byteMing, "UTF8" );  
+//           byteMing = this.decryptByte(strMi.getBytes());  
+//           strMing = new String(byteMing, "UTF8" );  
+//           Log.i("info", byteMing+"  byteMing1");
        } catch (Exception e) {  
-//           throw new RuntimeException(  
-//                  "Error initializing SqlMap class. Cause: " + e);  
+           throw new RuntimeException(  
+                  "Error initializing SqlMap class. Cause: " + e);  
        } finally {  
 //           base64De = null ;  
            byteMing = null ;  
 //           byteMi = null ;  
        }  
+       Log.i("info", strMing+"  byteMing");
        return strMing;  
     } 
     
     /** 
-     * ¼ÓÃÜÒÔ byte[] Ã÷ÎÄÊäÈë ,byte[] ÃÜÎÄÊä³ö 
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ byte[] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ,byte[] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
      * 
      * @param byteS 
      * @return 
@@ -119,7 +128,7 @@ public class DESUtil {
    }  
   
    /** 
-     * ½âÃÜÒÔ byte[] ÃÜÎÄÊäÈë , ÒÔ byte[] Ã÷ÎÄÊä³ö 
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ byte[] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ , ï¿½ï¿½ byte[] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
      * 
      * @param byteD 
      * @return 
@@ -132,8 +141,8 @@ public class DESUtil {
           cipher.init(Cipher. DECRYPT_MODE , key );  
           byteFina = cipher.doFinal(byteD);  
       } catch (Exception e) {  
-          throw new RuntimeException(  
-                 "Error initializing SqlMap class. Cause: " + e);  
+//          throw new RuntimeException(  
+//                 "Error initializing SqlMap class. Cause: " + e);  
       } finally {  
           cipher = null ;  
       }  

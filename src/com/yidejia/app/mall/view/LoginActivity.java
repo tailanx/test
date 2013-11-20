@@ -2,11 +2,12 @@
 package com.yidejia.app.mall.view;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+import android.preference.PreferenceManager;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -17,13 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
-import com.yidejia.app.mall.MainFragmentActivity;
-import com.yidejia.app.mall.MyApplication;
-import com.yidejia.app.mall.MyMallActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.IpAddress;
 import com.yidejia.app.mall.datamanage.UserDatamanage;
 import com.yidejia.app.mall.task.TaskLoginAct;
+import com.yidejia.app.mall.util.Consts;
+import com.yidejia.app.mall.util.DesUtils;
 
 public class LoginActivity extends SherlockActivity implements OnClickListener{
 	private RelativeLayout findPwd;//找回密码
@@ -32,7 +32,8 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 	private EditText stringName;
 	private EditText stringPassword;
 	private CheckBox mBox;
-
+	private SharedPreferences sp ;
+	private Consts consts;
 	
 	private UserDatamanage userManage;//登陆的接口
 	private IpAddress ip;
@@ -82,6 +83,8 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 //		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.my_mall_login);
+		sp = PreferenceManager.getDefaultSharedPreferences(this);
+		consts = new Consts();
 		ip = new IpAddress();
 		setActionbar();
 //		userManage = new UserDatamanage(LoginActivity.this);
@@ -123,6 +126,17 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 				stringName.setCursorVisible(false);
 			}
 		});
+		String usern = sp.getString("DESMI", null);
+		String userkey = usern + consts.getMiStr();
+		String userp = sp.getString("DESPWD", null);
+		String userpass = DesUtils.decode(userkey, userp);
+		if(usern!=null&&userpass!=null){
+			mBox.setChecked(true);
+			stringName.setText(usern);
+			stringPassword.setText(userpass);
+		}
+		
+		
 	}
 	@Override
 	public void onClick(View v) {
@@ -154,7 +168,7 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 			
 			taskLoginAct = new TaskLoginAct(LoginActivity.this);
 			
-			taskLoginAct.loginAct(name, pwd, ip.getIpAddress());
+			taskLoginAct.loginAct(name, pwd, ip.getIpAddress(),mBox,sp,consts);
 			
 			break;
 //			boolean isSucess = userManage.userLogin(name, pwd,

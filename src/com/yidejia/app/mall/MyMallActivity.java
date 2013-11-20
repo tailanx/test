@@ -549,10 +549,12 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 			
 			String action = intent.getAction();
 			if(Consts.RETURN_BACk.equals(action)){
-				FragmentTransaction ft = getFragmentManager().beginTransaction();
-				if(fragment.isAdded()) ft.hide(MyMallActivity.this).show(fragment).commitAllowingStateLoss();
-				else ft.hide(MyMallActivity.this).replace(R.id.main_fragment, fragment).commitAllowingStateLoss();
 				
+				getSherlockActivity().getSupportActionBar().setCustomView(
+						R.layout.login_top);
+				FragmentTransaction ft = getFragmentManager().beginTransaction();
+				if(fragment.isAdded()) ft.remove(MyMallActivity.this).show(fragment).commitAllowingStateLoss();//.hide(MyMallActivity.this)
+				else ft.remove(MyMallActivity.this).replace(R.id.main_fragment, fragment).commitAllowingStateLoss();//hide(MyMallActivity.this).
 			}
 		}
 		}
