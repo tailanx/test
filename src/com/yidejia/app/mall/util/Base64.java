@@ -19,6 +19,7 @@ package com.yidejia.app.mall.util;
 import java.io.UnsupportedEncodingException;
 
 import android.util.Base64OutputStream;
+import android.util.Log;
 
 /**
  * Utilities for encoding and decoding the Base64 representation of

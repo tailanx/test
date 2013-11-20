@@ -1,6 +1,14 @@
 package com.yidejia.app.mall.util;
 
 public class Consts {
+	public String getMiStr() {
+		return miStr;
+	}
+
+	public void setMiStr(String miStr) {
+		this.miStr = miStr;
+	}
+
 	public static final String DELETE_CART = "com.yidejia.delete";
 	public static final String CHECK_UPDATE_CHANGE = "com.yidejia.check";
 	public static final String BACK_UPDATE_CHANGE = "com.yidejia.back";
@@ -16,6 +24,8 @@ public class Consts {
 	public static final int CstmPayActivity_Response = 227;
 	public static final String ADD_SUBSTARCT_UPDATE_ = "com.yidejia.add.substarct";
 	public static final String EXCHANG_FREE = "com.yidejia.exchange_free";
+	public String miStr = "cMq2$jing@zhuan`^8!L"; 
+	
 	public static final String RETURN_BACk = "com.yidejia.exit";
 }
 

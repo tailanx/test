@@ -1,10 +1,15 @@
 package com.yidejia.app.mall.fragment;
 
+import java.io.IOException;
+
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +28,11 @@ import com.yidejia.app.mall.MyMallActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.IpAddress;
 import com.yidejia.app.mall.datamanage.UserDatamanage;
+import com.yidejia.app.mall.net.user.Login;
+import com.yidejia.app.mall.task.TaskLoginAct;
+import com.yidejia.app.mall.util.Consts;
+import com.yidejia.app.mall.util.DESUtil;
+import com.yidejia.app.mall.util.DesUtils;
 import com.yidejia.app.mall.view.FindPwActivity;
 import com.yidejia.app.mall.view.RegistActivity;
 
@@ -38,6 +48,8 @@ public class LoginFragment extends SherlockFragment implements OnClickListener {
 	private MyApplication myApplication;
 	private CheckBox mBox;
 	private SharedPreferences sp;
+	private Consts consts;
+	private Task taskLoginAct;
 
 	private MyMallActivity newFragment;
 
@@ -59,7 +71,10 @@ public class LoginFragment extends SherlockFragment implements OnClickListener {
 		// getSherlockActivity().getSupportActionBar().setCustomView(R.layout.login_top);
 		userManage = new UserDatamanage(getSherlockActivity());
 		myApplication = (MyApplication) getSherlockActivity().getApplication();
+
+
 		ipAddress = new IpAddress();
+		consts = new Consts();
 		sp = PreferenceManager
 				.getDefaultSharedPreferences(getSherlockActivity());
 		// 设置默认选中
@@ -104,12 +119,16 @@ public class LoginFragment extends SherlockFragment implements OnClickListener {
 				stringName.setCursorVisible(false);
 			}
 		});
-		String userName = sp.getString("name", null);
-		String userPwd = sp.getString("pwd", null);
-		if (userName != null && userPwd != null) {
+		String baseName = sp.getString("DESMI", null);
+		//
+		String basePwd = sp.getString("DESPWD", null);
+		 String keyName = baseName+consts.getMiStr();
+		 String basepasswrod = DesUtils.decode(keyName, basePwd);
+	
+		if (baseName != null && basepasswrod != null) {
 			mBox.setChecked(true);
-			stringName.setText(userName);
-			stringPassword.setText(userPwd);
+			stringName.setText(baseName);
+			stringPassword.setText(basepasswrod);
 		}
 		return view;
 	}
@@ -133,6 +152,10 @@ public class LoginFragment extends SherlockFragment implements OnClickListener {
 	// setContentView(R.layout.my_mall_login);
 	// setupShow();
 	// }
+	private String name;
+	private String pwd;
+	private String ip;
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -150,8 +173,9 @@ public class LoginFragment extends SherlockFragment implements OnClickListener {
 
 			break;
 		case R.id.my_mall_login_button:// 登录
-			String name = stringName.getText().toString();
-			String pwd = stringPassword.getText().toString();
+			name = stringName.getText().toString();
+			pwd = stringPassword.getText().toString();
+			ip = ipAddress.getIpAddress();
 			if (name == null || "".equals(name)) {
 				Toast.makeText(getSherlockActivity(), "账号不能为空!",
 						Toast.LENGTH_LONG).show();
@@ -162,13 +186,116 @@ public class LoginFragment extends SherlockFragment implements OnClickListener {
 						Toast.LENGTH_LONG).show();
 				return;
 			}
-			boolean isSucess = userManage.userLogin(name, pwd,
-					ipAddress.getIpAddress());
+//			if(taskLoginAct != null && taskLoginAct.getStatus().RUNNING == AsyncTask.Status.RUNNING){
+//				taskLoginAct.cancel(true);
+//			}
+			taskLoginAct = new Task();
+			  taskLoginAct.execute();
+			//			taskLoginAct.loginAct(name, pwd, ipAddress.getIpAddress());
+			break;
+		// boolean isSucess = userManage.userLogin(name, pwd,
+		// ipAddress.getIpAddress());
+		//
+		// // Log.i("info", isSucess +"isSucess");
+		// if (isSucess) {
+		// myApplication.setIsLogin(true);
+		//
+		// fragment = new MyMallActivity();
+		// FragmentTransaction ft = getFragmentManager()
+		// .beginTransaction();
+		// if (fragment.isAdded())
+		// ft.hide(LoginFragment.this).show(fragment).commit();
+		// else
+		// ft.hide(LoginFragment.this)
+		// .replace(R.id.main_fragment, fragment).commit();
+		//
+		// if (mBox.isChecked()) {
+		// sp.edit().putString("DESMI", name).commit();
+		//
+		// String keyName = name+consts.getMiStr();
+		//
+		//
+		// desUtil.setKey(keyName);
+		// String demi = desUtil.encryptStr(pwd);
+		// Log.i("info", demi+"     demi.getBytes()");
+		// // String basmi = Base64.encodeToString(demi.getBytes(),
+		// Base64.DEFAULT);
+		// // Log.i("info", basmi+"     basmi");
+		// sp.edit().putString("DESPWD", demi).commit();
+		//
+		//
+		// } else {
+		// sp.edit().remove("DESMI").commit();
+		// sp.edit().remove("DESPWD").commit();
+		// }
+		// if(name==null||"".equals(name)){
+		// Toast.makeText(getSherlockActivity(),
+		// "请输入用户名或者密码",Toast.LENGTH_LONG).show();
+		// }
+		// if(pwd==null||"".equals(pwd)){
+		// Toast.makeText(getSherlockActivity(),
+		// "请输入用户名或者密码",Toast.LENGTH_LONG).show();
+		// }
+		// if(name.equals("aaa")&&pwd.equals("111")){ //登录成功
+		// newFragment = new MyMallActivity();
+		// ((MyApplication)getSherlockActivity().getApplication()).setIsLogin(true);
+		// // Log.i("info", myApplication.getIsLogin()+"");
+		// myApplication.setIsLogin(true);
+		// Log.i("info", myApplication.getIsLogin()+"");
+		// Message ms = new Message();
+		// ms.what = 000;
+		// myApplication.getHandler().sendMessage(ms);
 
-			// Log.i("info", isSucess +"isSucess");
-			if (isSucess) {
+		// }else{
+		// Toast.makeText(getSherlockActivity(),
+		// getSherlockActivity().getResources().getString(R.string.login_error),
+		// Toast.LENGTH_SHORT).show();
+		// }
+		}
+
+	}
+
+	private String message;
+
+	private class Task extends AsyncTask<Void, Void, Boolean> {
+		private ProgressDialog bar;
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			Login login = new Login();
+			try {
+				String httpresp = login.getHttpResponse(name, pwd, ip);
+				boolean issuccess = login.analysisHttpResp(
+						getSherlockActivity(), httpresp);
+				message = login.getMsg();
+				return issuccess;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return false;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			bar = new ProgressDialog(getSherlockActivity());
+			bar.setCancelable(false);
+			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			bar.show();
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if (result) {
+				Toast.makeText(getSherlockActivity(), "登陆成功！",
+						Toast.LENGTH_LONG).show();
+				
 				myApplication.setIsLogin(true);
-
 				fragment = new MyMallActivity();
 				FragmentTransaction ft = getFragmentManager()
 						.beginTransaction();
@@ -177,35 +304,31 @@ public class LoginFragment extends SherlockFragment implements OnClickListener {
 				else
 					ft.hide(LoginFragment.this)
 							.replace(R.id.main_fragment, fragment).commit();
-
+				
 				if (mBox.isChecked()) {
-					sp.edit().putString("name", name).commit();
-					sp.edit().putString("pwd", pwd).commit();
-				} else {
-					sp.edit().remove("name").commit();
-					sp.edit().remove("pwd").commit();
-				}
-				// if(name==null||"".equals(name)){
-				// Toast.makeText(getSherlockActivity(),
-				// "请输入用户名或者密码",Toast.LENGTH_LONG).show();
-				// }
-				// if(pwd==null||"".equals(pwd)){
-				// Toast.makeText(getSherlockActivity(),
-				// "请输入用户名或者密码",Toast.LENGTH_LONG).show();
-				// }
-				// if(name.equals("aaa")&&pwd.equals("111")){ //登录成功
-				// newFragment = new MyMallActivity();
-				// ((MyApplication)getSherlockActivity().getApplication()).setIsLogin(true);
-				// // Log.i("info", myApplication.getIsLogin()+"");
-				// myApplication.setIsLogin(true);
-				// Log.i("info", myApplication.getIsLogin()+"");
-				// Message ms = new Message();
-				// ms.what = 000;
-				// myApplication.getHandler().sendMessage(ms);
-
-			}else{
-				Toast.makeText(getSherlockActivity(), getSherlockActivity().getResources().getString(R.string.login_error), Toast.LENGTH_SHORT).show();
+					 sp.edit().putString("DESMI", name).commit();
+					
+					 String keyName = name+consts.getMiStr();
+					
+					try {
+						String demi = DesUtils.encode(keyName,pwd);
+						sp.edit().putString("DESPWD", demi).commit();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					 
+				
+					
+					 } else {
+					 sp.edit().remove("DESMI").commit();
+					 sp.edit().remove("DESPWD").commit();
+					 }
+			} else {
+				Toast.makeText(getSherlockActivity(), message,
+						Toast.LENGTH_LONG).show();
 			}
+			bar.dismiss();
 		}
 
 	}

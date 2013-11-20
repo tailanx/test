@@ -127,7 +127,7 @@ public class AddressActivity extends SherlockActivity {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			Log.i("info",   "   OnItemClickListener");
-			Addresses addresses = mAddresses.get(position);
+			Addresses addresses = mAddresses.get(position-1);
 			Intent intent = new Intent(AddressActivity.this, CstmPayActivity.class);
 			Bundle bundle = new Bundle();
 			bundle.putSerializable("addresses1", addresses);
