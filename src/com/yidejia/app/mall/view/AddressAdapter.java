@@ -156,12 +156,13 @@ public class AddressAdapter extends BaseAdapter {
 				Bundle bundle = new Bundle();
 				bundle.putSerializable("editaddress", addresses);
 				intent.putExtras(bundle);
-				dataManage.deleteAddress(
-						myApplication.getUserId(),
-						addresses.getAddressId(),
-						myApplication.getToken());
-				mAddresses.remove(addresses);
-				notifyDataSetChanged();
+				//如果去到编辑的页面却不提交修改，肯定不能先删除该地址的，这样做是不合理的
+//				dataManage.deleteAddress(
+//						myApplication.getUserId(),
+//						addresses.getAddressId(),
+//						myApplication.getToken());
+//				mAddresses.remove(addresses);
+//				notifyDataSetChanged();
 				((Activity) activity).startActivityForResult(intent,
 						DefinalDate.requestcode);
 			}

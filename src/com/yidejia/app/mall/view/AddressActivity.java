@@ -186,7 +186,10 @@ public class AddressActivity extends SherlockActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent intent2 = new Intent(AddressActivity.this,
-						NewAddressActivity.class);
+						EditNewAddressActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putSerializable("editaddress", null);
+				intent2.putExtras(bundle);
 				startActivityForResult(intent2, DefinalDate.requestcode);// 发送Intent,并设置请求码
 				// AddressActivity.this.finish();
 			}
@@ -212,14 +215,19 @@ public class AddressActivity extends SherlockActivity {
 					Addresses addresses = (Addresses) bundle
 							.getSerializable("newaddress");
 					// Log.i(TAG, TAG+"onResume");
-					mAddresses.add(addresses);
+					/*mAddresses.add(addresses);
+					adapter.notifyDataSetChanged();
+					*/
+					pullToRefreshListView.setRefreshing();
+					pullToRefreshListView.onRefreshComplete();
+					
+					
 					// adapter.mAddresses.clear();
 					// AddressDataManage addressDataManage1= new
 					// AddressDataManage(AddressActivity.this);
 					// adapter.mAddresses =
 					// addressDataManage1.getAddressesArray(myApplication.getUserId(),
 					// fromIndex, acount);
-					adapter.notifyDataSetChanged();
 //										Utility.setListViewHeightBasedOnChildren(listView);
 //					listView.setAdapter(adapter);
 					// new AddressUtil(AddressActivity.this,

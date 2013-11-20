@@ -60,9 +60,9 @@ public class EditNewAddressActivity extends SherlockActivity {
 	private ArrayList<String> list3;// ��������ÿ������ĵ�ַ
 	private ArrayList<ArrayList<String>> list4;// ����������������ĵ�ַ
 	private ArrayList<HashMap<String, Object>> list5;
-	private String conutryString;
-	private String cityString;
-	private String districtString;
+	private String conutryString = "";
+	private String cityString = "";
+	private String districtString = "";
 	public static String addressId;
 
 	private Map<String, Object> valueMap2;
@@ -156,22 +156,30 @@ public class EditNewAddressActivity extends SherlockActivity {
 		// 获取bundle对象
 		Bundle bundle = this.getIntent().getExtras();
 		Addresses addresses = (Addresses) bundle.get("editaddress");
-		
-		String name = addresses.getName();
-		String phone = addresses.getHandset();
-		isDefauteUpdate = addresses.getDefaultAddress();
-		id = addresses.getAddressId();
-		// String provice = addresses.getProvice();
-		// String city = addresses.getCity();
-		// String area = addresses.getArea();
-		String dString = addresses.getAddress();// 详细地址
-		
+		String name = "";
+		String phone ="";
+		String dString = "";
+		id = "";
+		isDefauteUpdate = false;
+		if (addresses != null) {
+			name = addresses.getName();
+			phone = addresses.getHandset();
+			isDefauteUpdate = addresses.getDefaultAddress();
+			id = addresses.getAddressId();
+			// String provice = addresses.getProvice();
+			// String city = addresses.getCity();
+			// String area = addresses.getArea();
+			dString = addresses.getAddress();// 详细地址
+			conutryString = addresses.getProvice();//省
+			cityString = addresses.getCity();//市
+			districtString = addresses.getArea();//区
+		}
 		setupShow();
 		LinearLayout linear = (LinearLayout) findViewById(R.id.new_address_linear);
 		
-		sheng.setText(addresses.getProvice());
-		shi.setText(addresses.getCity());
-		qu.setText(addresses.getArea());
+		sheng.setText(conutryString);
+		shi.setText(cityString);
+		qu.setText(districtString);
 		
 		nameTextView.setText(name);
 		numberTextView.setText(phone);
@@ -463,174 +471,6 @@ public class EditNewAddressActivity extends SherlockActivity {
 		};
 	};
 
-	
-
-	// public void initSpinner1() {
-	// dbm = new DBManager(this);
-	// dbm.openDatabase();
-	// db = dbm.getDatabase();
-	// List<MyListItem> list = new ArrayList<MyListItem>();
-	//
-	// try {
-	// String sql = "select * from province";
-	// Cursor cursor = db.rawQuery(sql, null);
-	// cursor.moveToFirst();
-	// while (!cursor.isLast()) {
-	// String code = cursor.getString(cursor.getColumnIndex("code"));
-	// byte bytes[] = cursor.getBlob(2);
-	// String name = new String(bytes, "gbk");
-	// MyListItem myListItem = new MyListItem();
-	// myListItem.setName(name);
-	// myListItem.setPcode(code);
-	// list.add(myListItem);
-	// cursor.moveToNext();
-	// }
-	// String code = cursor.getString(cursor.getColumnIndex("code"));
-	// byte bytes[] = cursor.getBlob(2);
-	// String name = new String(bytes, "gbk");
-	// MyListItem myListItem = new MyListItem();
-	// myListItem.setName(name);
-	// myListItem.setPcode(code);
-	// list.add(myListItem);
-	//
-	// } catch (Exception e) {
-	// }
-	// dbm.closeDatabase();
-	// db.close();
-	// MyAdapter myAdapter = new MyAdapter(this, list);
-	// spinner1.setAdapter(myAdapter);
-	// spinner1.setSelection(new NewAddressActivity().postion1);
-	// spinner1.setOnItemSelectedListener(new SpinnerOnSelectedListener1());
-	// }
-	//
-	// public void initSpinner2(String pcode) {
-	// dbm = new DBManager(this);
-	// dbm.openDatabase();
-	// db = dbm.getDatabase();
-	// List<MyListItem> list = new ArrayList<MyListItem>();
-	//
-	// try {
-	// String sql = "select * from city where pcode='" + pcode + "'";
-	// Cursor cursor = db.rawQuery(sql, null);
-	// cursor.moveToFirst();
-	// while (!cursor.isLast()) {
-	// String code = cursor.getString(cursor.getColumnIndex("code"));
-	// byte bytes[] = cursor.getBlob(2);
-	// String name = new String(bytes, "gbk");
-	// MyListItem myListItem = new MyListItem();
-	// myListItem.setName(name);
-	// myListItem.setPcode(code);
-	// list.add(myListItem);
-	// cursor.moveToNext();
-	// }
-	// String code = cursor.getString(cursor.getColumnIndex("code"));
-	// byte bytes[] = cursor.getBlob(2);
-	// String name = new String(bytes, "gbk");
-	// MyListItem myListItem = new MyListItem();
-	// myListItem.setName(name);
-	// myListItem.setPcode(code);
-	// list.add(myListItem);
-	//
-	// } catch (Exception e) {
-	// }
-	// dbm.closeDatabase();
-	// db.close();
-	//
-	// MyAdapter myAdapter = new MyAdapter(this, list);
-	// spinner2.setAdapter(myAdapter);
-	// spinner2.setSelection(new NewAddressActivity().postion2);
-	// spinner2.setOnItemSelectedListener(new SpinnerOnSelectedListener2());
-	// }
-	//
-	// public void initSpinner3(String pcode) {
-	// dbm = new DBManager(this);
-	// dbm.openDatabase();
-	// db = dbm.getDatabase();
-	// List<MyListItem> list = new ArrayList<MyListItem>();
-	//
-	// try {
-	// String sql = "select * from district where pcode='" + pcode + "'";
-	// Cursor cursor = db.rawQuery(sql, null);
-	// cursor.moveToFirst();
-	// while (!cursor.isLast()) {
-	// String code = cursor.getString(cursor.getColumnIndex("code"));
-	// byte bytes[] = cursor.getBlob(2);
-	// String name = new String(bytes, "gbk");
-	// MyListItem myListItem = new MyListItem();
-	// myListItem.setName(name);
-	// myListItem.setPcode(code);
-	// list.add(myListItem);
-	// cursor.moveToNext();
-	// }
-	// String code = cursor.getString(cursor.getColumnIndex("code"));
-	// byte bytes[] = cursor.getBlob(2);
-	// String name = new String(bytes, "gbk");
-	// MyListItem myListItem = new MyListItem();
-	// myListItem.setName(name);
-	// myListItem.setPcode(code);
-	// list.add(myListItem);
-	//
-	// } catch (Exception e) {
-	// }
-	// dbm.closeDatabase();
-	// db.close();
-	//
-	// MyAdapter myAdapter = new MyAdapter(this, list);
-	// spinner3.setAdapter(myAdapter);
-	// spinner3.setSelection(new NewAddressActivity().postion3);
-	// spinner3.setOnItemSelectedListener(new SpinnerOnSelectedListener3());
-	// }
-
-	// class SpinnerOnSelectedListener1 implements OnItemSelectedListener {
-	//
-	// public void onItemSelected(AdapterView<?> adapterView, View view,
-	// int position, long id) {
-	// province = ((MyListItem) adapterView.getItemAtPosition(position))
-	// .getName();
-	// String pcode = ((MyListItem) adapterView
-	// .getItemAtPosition(position)).getPcode();
-	//
-	// initSpinner2(pcode);
-	// initSpinner3(pcode);
-	// }
-	//
-	// public void onNothingSelected(AdapterView<?> adapterView) {
-	// // TODO Auto-generated method stub
-	// }
-	// }
-	//
-	// class SpinnerOnSelectedListener2 implements OnItemSelectedListener {
-	//
-	// public void onItemSelected(AdapterView<?> adapterView, View view,
-	// int position, long id) {
-	// city = ((MyListItem) adapterView.getItemAtPosition(position))
-	// .getName();
-	// String pcode = ((MyListItem) adapterView
-	// .getItemAtPosition(position)).getPcode();
-	//
-	// initSpinner3(pcode);
-	// }
-	//
-	// public void onNothingSelected(AdapterView<?> adapterView) {
-	// // TODO Auto-generated method stub
-	// }
-	// }
-	//
-	// class SpinnerOnSelectedListener3 implements OnItemSelectedListener {
-	//
-	// public void onItemSelected(AdapterView<?> adapterView, View view,
-	// int position, long id) {
-	// district = ((MyListItem) adapterView.getItemAtPosition(position))
-	// .getName();
-	// // Toast.makeText(NewAddressActivity.this,
-	// // province + " " + city + " " + district, Toast.LENGTH_LONG)
-	// // .show();
-	// }
-	//
-	// public void onNothingSelected(AdapterView<?> adapterView) {
-	// // TODO Auto-generated method stub
-	// }
-	// }
 
 	@Override
 	protected void onDestroy() {
@@ -693,42 +533,9 @@ public class EditNewAddressActivity extends SherlockActivity {
 					addresses.setHandset(numberTextView.getText().toString());
 					addresses.setAddressId(id);
 
-//					isUpdate = dataManage.updateAddress(
-//							((MyApplication) EditNewAddressActivity.this
-//									.getApplicationContext()).getUserId(),
-//							nameTextView.getText().toString(), sheng.getText().toString(),
-//							shi.getText().toString(),qu.getText().toString(), areaTextView
-//									.getText().toString().trim(),
-//							numberTextView.getText().toString(),
-//							isDefauteUpdate, id,
-//							((MyApplication) EditNewAddressActivity.this
-//									.getApplicationContext()).getToken());
-//					myApplication = (MyApplication) getApplication();
-//					ArrayList<Addresses>  mlist = dataManage.getAddressesArray(
-//							myApplication.getUserId(), 0, 20);
-//					 Log.i("info", isUpdate+"addressId");
-//
-//					if (!isUpdate) {
-//						Toast.makeText(EditNewAddressActivity.this, "您的输入有问题",
-//								Toast.LENGTH_SHORT).show();
-//
-//					} else {
-//						// addresses.setAddressId(addressId+"");
-//						AddressActivity a = new AddressActivity();
-//						a.updateView(mlist);
-//						// 将数据绑定到Spinner视图上
-//						Intent intent = getIntent();
-//						// 获取bundle对象
-//						Bundle bundle = new Bundle();
-//						bundle.putSerializable("newaddress", addresses);
-//						intent.putExtras(bundle);// 放置bundle对象
-//						EditNewAddressActivity.this.setResult(
-//								DefinalDate.responcode1, intent);
-//						EditNewAddressActivity.this.finish();
-//						
 
-					addressId = dataManage
-							.addAddress(
+					boolean issuccess = dataManage
+							.updateAddress(
 									((MyApplication) EditNewAddressActivity.this
 											.getApplication())
 											.getUserId(),
@@ -741,13 +548,13 @@ public class EditNewAddressActivity extends SherlockActivity {
 											.toString().trim(),
 									numberTextView.getText()
 											.toString(),
-									true,
+									true, id,
 									((MyApplication) EditNewAddressActivity.this
 											.getApplication())
-											.getToken());
+											.getToken()); 
 					// Log.i("info", addressId+"addressId");
-
-					if ("".equals(addressId)) {
+//					addressId = id;
+					if (!issuccess) {
 						Toast.makeText(EditNewAddressActivity.this,
 								"您的输入有问题", Toast.LENGTH_SHORT)
 								.show();
@@ -786,7 +593,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 		if(result){
-			bar.cancel();
+			bar.dismiss();
 		}
 	
 	}
