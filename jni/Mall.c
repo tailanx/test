@@ -8,16 +8,16 @@
 extern "C" {
 #endif
 
-//static const char *url = "http://192.168.1.254:802/";
-//const char *strTemp = "ChunTianfw_mobile123456";
-static const char *url = "http://fw1.atido.net/";
-const char *strTemp = "ChunTianfw_mobile@SDF!TD#DF#*CB$GER@";
+//static char *url = "http://192.168.1.254:802/";
+//char *strTemp = "ChunTianfw_mobile123456";
+char *url = "http://fw1.atido.net/";
+char *strTemp = "ChunTianfw_mobile@SDF!TD#DF#*CB$GER@";
 
-const char *pHead = "&key=fw_mobile&format=array&ts=";
+char *pHead = "&key=fw_mobile&format=array&ts=";
 
 #define LEN 1024
 
-void addString(char* desc, const char* addition) {
+void addString(char* desc, char* addition) {
 //	int len = strlen(desc);
 //	int addLen = strlen(addition);
 //	memcpy(desc+len, (void*)addition, addLen);
@@ -40,7 +40,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ImageUrlPrefix(JNIEnv*
 
 //	memset(encrypt, 0, LEN * sizeof(char));
 
-	const char *api="?api=common.img.get";
+	char *api="?api=common.img.get";
 
 	addString(urlString, url);
 	addString(urlString, api);
@@ -77,15 +77,15 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ImageUrlPrefix(JNIEnv*
 //ɾ���û��ջ���ַ, ���� String cid , aid, token, ����post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelAddress(JNIEnv* env,
 		jobject thiz, jstring cid, jstring aid, jstring token){
-	const char *chcid = (*env)->GetStringUTFChars(env, cid, NULL);
-	const char *chaid = (*env)->GetStringUTFChars(env, aid, NULL);
-	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chcid = (*env)->GetStringUTFChars(env, cid, NULL);
+	char *chaid = (*env)->GetStringUTFChars(env, aid, NULL);
+	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN], urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api = "api=ucenter.address.delete";
+	char *api = "api=ucenter.address.delete";
 //	addString(urlString, url);
 	addString(urlString, api);
 
@@ -133,18 +133,18 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelAddress(JNIEnv* env
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetAddress(JNIEnv* env,
 		jobject thiz, jstring where, jstring offset, jstring limit, jstring group, jstring order, jstring fields){
 
-	const char *chwhere = (*env)->GetStringUTFChars(env, where, NULL);
-	const char *choffset = (*env)->GetStringUTFChars(env, offset, NULL);
-	const char *chlimit = (*env)->GetStringUTFChars(env, limit, NULL);
-	const char *chgroup = (*env)->GetStringUTFChars(env, group, NULL);
-	const char *chorder = (*env)->GetStringUTFChars(env, order, NULL);
-	const char *chfields = (*env)->GetStringUTFChars(env, fields, NULL);
+	char *chwhere = (*env)->GetStringUTFChars(env, where, NULL);
+	char *choffset = (*env)->GetStringUTFChars(env, offset, NULL);
+	char *chlimit = (*env)->GetStringUTFChars(env, limit, NULL);
+	char *chgroup = (*env)->GetStringUTFChars(env, group, NULL);
+	char *chorder = (*env)->GetStringUTFChars(env, order, NULL);
+	char *chfields = (*env)->GetStringUTFChars(env, fields, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api="?api=ucenter.address.getList";
+	char *api="?api=ucenter.address.getList";
 
 	addString(urlString, url);
 	addString(urlString, api);
@@ -206,21 +206,21 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveAddress(JNIEnv* en
 		jobject thiz, jstring customer_id, jstring customer_name, jstring handset, jstring province,
 		jstring city, jstring district, jstring address, jstring recipient_id, jstring token){
 
-	const char *chcid = (*env)->GetStringUTFChars(env, customer_id, NULL);
-	const char *chcname = (*env)->GetStringUTFChars(env, customer_name, NULL);
-	const char *chhandset = (*env)->GetStringUTFChars(env, handset, NULL);
-	const char *chprovince = (*env)->GetStringUTFChars(env, province, NULL);
-	const char *chcity = (*env)->GetStringUTFChars(env, city, NULL);
-	const char *chdistrict = (*env)->GetStringUTFChars(env, district, NULL);
-	const char *chaddress = (*env)->GetStringUTFChars(env, address, NULL);
-	const char *chrid = (*env)->GetStringUTFChars(env, recipient_id, NULL);
-	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chcid = (*env)->GetStringUTFChars(env, customer_id, NULL);
+	char *chcname = (*env)->GetStringUTFChars(env, customer_name, NULL);
+	char *chhandset = (*env)->GetStringUTFChars(env, handset, NULL);
+	char *chprovince = (*env)->GetStringUTFChars(env, province, NULL);
+	char *chcity = (*env)->GetStringUTFChars(env, city, NULL);
+	char *chdistrict = (*env)->GetStringUTFChars(env, district, NULL);
+	char *chaddress = (*env)->GetStringUTFChars(env, address, NULL);
+	char *chrid = (*env)->GetStringUTFChars(env, recipient_id, NULL);
+	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api="api=ucenter.address.save";
+	char *api="api=ucenter.address.save";
 
 //	addString(urlString, url);
 	addString(urlString, api);
@@ -287,13 +287,13 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveAddress(JNIEnv* en
 //ɾ���û�����, ���� String id�� ����post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelComment(JNIEnv* env,
 		jobject thiz, jstring id){
-	const char *chcid = (*env)->GetStringUTFChars(env, id, NULL);
+	char *chcid = (*env)->GetStringUTFChars(env, id, NULL);
 
 	char encrypt[LEN], urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api = "api=product.comments.delete";
+	char *api = "api=product.comments.delete";
 	addString(urlString, api);
 
 	addString(urlString, "&id=");
@@ -334,18 +334,18 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelComment(JNIEnv* env
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetComment(JNIEnv* env,
 		jobject thiz, jstring where, jstring offset, jstring limit, jstring group, jstring order, jstring fields){
 
-	const char *chwhere = (*env)->GetStringUTFChars(env, where, NULL);
-	const char *choffset = (*env)->GetStringUTFChars(env, offset, NULL);
-	const char *chlimit = (*env)->GetStringUTFChars(env, limit, NULL);
-	const char *chgroup = (*env)->GetStringUTFChars(env, group, NULL);
-	const char *chorder = (*env)->GetStringUTFChars(env, order, NULL);
-	const char *chfields = (*env)->GetStringUTFChars(env, fields, NULL);
+	char *chwhere = (*env)->GetStringUTFChars(env, where, NULL);
+	char *choffset = (*env)->GetStringUTFChars(env, offset, NULL);
+	char *chlimit = (*env)->GetStringUTFChars(env, limit, NULL);
+	char *chgroup = (*env)->GetStringUTFChars(env, group, NULL);
+	char *chorder = (*env)->GetStringUTFChars(env, order, NULL);
+	char *chfields = (*env)->GetStringUTFChars(env, fields, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api="?api=product.comments.getList";
+	char *api="?api=product.comments.getList";
 
 	addString(urlString, url);
 	addString(urlString, api);
@@ -407,18 +407,18 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveComment(
 		JNIEnv* env, jobject thiz, jstring goods_id, jstring user_id,
 		jstring user_name, jstring title, jstring experience, jstring commentDate) {
 
-	const char *chgoods_id = (*env)->GetStringUTFChars(env, goods_id, NULL);
-	const char *chuser_id = (*env)->GetStringUTFChars(env, user_id, NULL);
-	const char *chuser_name = (*env)->GetStringUTFChars(env, user_name, NULL);
-	const char *chtitle = (*env)->GetStringUTFChars(env, title, NULL);
-	const char *chex = (*env)->GetStringUTFChars(env, experience, NULL);
-	const char *chdate = (*env)->GetStringUTFChars(env, commentDate, NULL);
+	char *chgoods_id = (*env)->GetStringUTFChars(env, goods_id, NULL);
+	char *chuser_id = (*env)->GetStringUTFChars(env, user_id, NULL);
+	char *chuser_name = (*env)->GetStringUTFChars(env, user_name, NULL);
+	char *chtitle = (*env)->GetStringUTFChars(env, title, NULL);
+	char *chex = (*env)->GetStringUTFChars(env, experience, NULL);
+	char *chdate = (*env)->GetStringUTFChars(env, commentDate, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api="api=product.comments.save";
+	char *api="api=product.comments.save";
 
 //	addString(urlString, url);
 	addString(urlString, api);
@@ -472,18 +472,18 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveComment(
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetDistribute(JNIEnv* env,
 		jobject thiz, jstring where, jstring offset, jstring limit, jstring group, jstring order, jstring fields){
 
-	const char *chwhere = (*env)->GetStringUTFChars(env, where, NULL);
-	const char *choffset = (*env)->GetStringUTFChars(env, offset, NULL);
-	const char *chlimit = (*env)->GetStringUTFChars(env, limit, NULL);
-	const char *chgroup = (*env)->GetStringUTFChars(env, group, NULL);
-	const char *chorder = (*env)->GetStringUTFChars(env, order, NULL);
-	const char *chfields = (*env)->GetStringUTFChars(env, fields, NULL);
+	char *chwhere = (*env)->GetStringUTFChars(env, where, NULL);
+	char *choffset = (*env)->GetStringUTFChars(env, offset, NULL);
+	char *chlimit = (*env)->GetStringUTFChars(env, limit, NULL);
+	char *chgroup = (*env)->GetStringUTFChars(env, group, NULL);
+	char *chorder = (*env)->GetStringUTFChars(env, order, NULL);
+	char *chfields = (*env)->GetStringUTFChars(env, fields, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api="?api=ship.center.getList";
+	char *api="?api=ship.center.getList";
 
 	addString(urlString, url);
 	addString(urlString, api);
@@ -542,18 +542,18 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetDistribute(JNIEnv* 
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetExpress(JNIEnv* env,
 		jobject thiz, jstring where, jstring offset, jstring limit, jstring group, jstring order, jstring fields){
 
-	const char *chwhere = (*env)->GetStringUTFChars(env, where, NULL);
-	const char *choffset = (*env)->GetStringUTFChars(env, offset, NULL);
-	const char *chlimit = (*env)->GetStringUTFChars(env, limit, NULL);
-	const char *chgroup = (*env)->GetStringUTFChars(env, group, NULL);
-	const char *chorder = (*env)->GetStringUTFChars(env, order, NULL);
-	const char *chfields = (*env)->GetStringUTFChars(env, fields, NULL);
+	char *chwhere = (*env)->GetStringUTFChars(env, where, NULL);
+	char *choffset = (*env)->GetStringUTFChars(env, offset, NULL);
+	char *chlimit = (*env)->GetStringUTFChars(env, limit, NULL);
+	char *chgroup = (*env)->GetStringUTFChars(env, group, NULL);
+	char *chorder = (*env)->GetStringUTFChars(env, order, NULL);
+	char *chfields = (*env)->GetStringUTFChars(env, fields, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api="?api=ship.area.getList";
+	char *api="?api=ship.area.getList";
 
 	addString(urlString, url);
 	addString(urlString, api);
@@ -612,18 +612,18 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetExpress(JNIEnv* env
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetFree(JNIEnv* env,
 		jobject thiz, jstring where, jstring offset, jstring limit, jstring group, jstring order, jstring fields){
 
-	const char *chwhere = (*env)->GetStringUTFChars(env, where, NULL);
-	const char *choffset = (*env)->GetStringUTFChars(env, offset, NULL);
-	const char *chlimit = (*env)->GetStringUTFChars(env, limit, NULL);
-	const char *chgroup = (*env)->GetStringUTFChars(env, group, NULL);
-	const char *chorder = (*env)->GetStringUTFChars(env, order, NULL);
-	const char *chfields = (*env)->GetStringUTFChars(env, fields, NULL);
+	char *chwhere = (*env)->GetStringUTFChars(env, where, NULL);
+	char *choffset = (*env)->GetStringUTFChars(env, offset, NULL);
+	char *chlimit = (*env)->GetStringUTFChars(env, limit, NULL);
+	char *chgroup = (*env)->GetStringUTFChars(env, group, NULL);
+	char *chorder = (*env)->GetStringUTFChars(env, order, NULL);
+	char *chfields = (*env)->GetStringUTFChars(env, fields, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api="?api=ship.free.getList";
+	char *api="?api=ship.free.getList";
 
 	addString(urlString, url);
 	addString(urlString, api);
@@ -683,9 +683,9 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetFree(JNIEnv* env,
  */
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CheckFav(JNIEnv* env,
 		jobject thiz, jstring userid, jstring goodsid, jstring token){
-	const char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
-	const char *chgid = (*env)->GetStringUTFChars(env, goodsid, NULL);
-	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
+	char *chgid = (*env)->GetStringUTFChars(env, goodsid, NULL);
+	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN], urlString[LEN];
 	encrypt[0] = 0;
@@ -738,15 +738,15 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CheckFav(JNIEnv* env,
 //ɾ���ղ�, ���� String userid , goodsid, token, ����post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelFav(JNIEnv* env,
 		jobject thiz, jstring userid, jstring goodsid, jstring token){
-	const char *chcid = (*env)->GetStringUTFChars(env, userid, NULL);
-	const char *chgid = (*env)->GetStringUTFChars(env, goodsid, NULL);
-	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chcid = (*env)->GetStringUTFChars(env, userid, NULL);
+	char *chgid = (*env)->GetStringUTFChars(env, goodsid, NULL);
+	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN], urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api = "api=product.favoliten.deleteByUg";
+	char *api = "api=product.favoliten.deleteByUg";
 //	addString(urlString, url);
 	addString(urlString, api);
 
@@ -794,18 +794,18 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelFav(JNIEnv* env,
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetFav(JNIEnv* env,
 		jobject thiz, jstring where, jstring offset, jstring limit, jstring group, jstring order, jstring fields){
 
-	const char *chwhere = (*env)->GetStringUTFChars(env, where, NULL);
-	const char *choffset = (*env)->GetStringUTFChars(env, offset, NULL);
-	const char *chlimit = (*env)->GetStringUTFChars(env, limit, NULL);
-	const char *chgroup = (*env)->GetStringUTFChars(env, group, NULL);
-	const char *chorder = (*env)->GetStringUTFChars(env, order, NULL);
-	const char *chfields = (*env)->GetStringUTFChars(env, fields, NULL);
+	char *chwhere = (*env)->GetStringUTFChars(env, where, NULL);
+	char *choffset = (*env)->GetStringUTFChars(env, offset, NULL);
+	char *chlimit = (*env)->GetStringUTFChars(env, limit, NULL);
+	char *chgroup = (*env)->GetStringUTFChars(env, group, NULL);
+	char *chorder = (*env)->GetStringUTFChars(env, order, NULL);
+	char *chfields = (*env)->GetStringUTFChars(env, fields, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api="?api=product.favoliten.getList";
+	char *api="?api=product.favoliten.getList";
 
 	addString(urlString, url);
 	addString(urlString, api);
@@ -863,15 +863,15 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetFav(JNIEnv* env,
 //�����ղ�, ���� String userid , goodsid, token, ����post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveFav(JNIEnv* env,
 		jobject thiz, jstring userid, jstring goodsid, jstring token){
-	const char *chcid = (*env)->GetStringUTFChars(env, userid, NULL);
-	const char *chgid = (*env)->GetStringUTFChars(env, goodsid, NULL);
-	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chcid = (*env)->GetStringUTFChars(env, userid, NULL);
+	char *chgid = (*env)->GetStringUTFChars(env, goodsid, NULL);
+	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN], urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api = "api=product.favoliten.save";
+	char *api = "api=product.favoliten.save";
 //	addString(urlString, url);
 	addString(urlString, api);
 
@@ -918,13 +918,13 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveFav(JNIEnv* env,
 //��ȡ��Ʒ��Ϣ, ���� String id�� ����get
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetGoods(JNIEnv* env,
 		jobject thiz, jstring id){
-	const char *chcid = (*env)->GetStringUTFChars(env, id, NULL);
+	char *chcid = (*env)->GetStringUTFChars(env, id, NULL);
 
 	char encrypt[LEN], urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api = "?api=product.mallgood.getCollect";
+	char *api = "?api=product.mallgood.getCollect";
 
 	addString(urlString, url);
 	addString(urlString, api);
@@ -974,7 +974,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetHome(JNIEnv* env,
 
 //	memset(encrypt, 0, LEN * sizeof(char));
 
-	const char *api="?api=home.mobile.page";
+	char *api="?api=home.mobile.page";
 
 	addString(urlString, url);
 	addString(urlString, api);
@@ -1016,19 +1016,19 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetOrder(JNIEnv* env,
 		jobject thiz, jstring user_id, jstring code, jstring date,
 		jstring status, jstring offset1, jstring limit1, jstring token){
 
-	const char *chuser_id = (*env)->GetStringUTFChars(env, user_id, NULL);
-	const char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
-	const char *chdate = (*env)->GetStringUTFChars(env, date, NULL);
-	const char *chstatus = (*env)->GetStringUTFChars(env, status, NULL);
-	const char *choffset1 = (*env)->GetStringUTFChars(env, offset1, NULL);
-	const char *chlimit1 = (*env)->GetStringUTFChars(env, limit1, NULL);
-	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chuser_id = (*env)->GetStringUTFChars(env, user_id, NULL);
+	char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
+	char *chdate = (*env)->GetStringUTFChars(env, date, NULL);
+	char *chstatus = (*env)->GetStringUTFChars(env, status, NULL);
+	char *choffset1 = (*env)->GetStringUTFChars(env, offset1, NULL);
+	char *chlimit1 = (*env)->GetStringUTFChars(env, limit1, NULL);
+	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api="?api=ucenter.order.getOrders";
+	char *api="?api=ucenter.order.getOrders";
 
 	addString(urlString, url);
 	addString(urlString, api);
@@ -1090,19 +1090,19 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetOrder(JNIEnv* env,
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetOrderByCode(JNIEnv* env,
 		jobject thiz, jstring code){
 
-//	const char *chuser_id = (*env)->GetStringUTFChars(env, user_id, NULL);
-	const char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
-//	const char *chdate = (*env)->GetStringUTFChars(env, date, NULL);
-//	const char *chstatus = (*env)->GetStringUTFChars(env, status, NULL);
-//	const char *choffset1 = (*env)->GetStringUTFChars(env, offset1, NULL);
-//	const char *chlimit1 = (*env)->GetStringUTFChars(env, limit1, NULL);
-//	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+//	char *chuser_id = (*env)->GetStringUTFChars(env, user_id, NULL);
+	char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
+//	char *chdate = (*env)->GetStringUTFChars(env, date, NULL);
+//	char *chstatus = (*env)->GetStringUTFChars(env, status, NULL);
+//	char *choffset1 = (*env)->GetStringUTFChars(env, offset1, NULL);
+//	char *chlimit1 = (*env)->GetStringUTFChars(env, limit1, NULL);
+//	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api="?api=ucenter.order.getByCode";
+	char *api="?api=ucenter.order.getByCode";
 
 	addString(urlString, url);
 	addString(urlString, api);
@@ -1164,19 +1164,19 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetOrderByCode(JNIEnv*
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetNoEvaluate(JNIEnv* env,
 		jobject thiz, jstring user_id){
 
-	const char *chuser_id = (*env)->GetStringUTFChars(env, user_id, NULL);
-//	const char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
-//	const char *chdate = (*env)->GetStringUTFChars(env, date, NULL);
-//	const char *chstatus = (*env)->GetStringUTFChars(env, status, NULL);
-//	const char *choffset1 = (*env)->GetStringUTFChars(env, offset1, NULL);
-//	const char *chlimit1 = (*env)->GetStringUTFChars(env, limit1, NULL);
-//	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chuser_id = (*env)->GetStringUTFChars(env, user_id, NULL);
+//	char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
+//	char *chdate = (*env)->GetStringUTFChars(env, date, NULL);
+//	char *chstatus = (*env)->GetStringUTFChars(env, status, NULL);
+//	char *choffset1 = (*env)->GetStringUTFChars(env, offset1, NULL);
+//	char *chlimit1 = (*env)->GetStringUTFChars(env, limit1, NULL);
+//	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api="?api=ucenter.order.getNoEvaluate";
+	char *api="?api=ucenter.order.getNoEvaluate";
 
 	addString(urlString, url);
 	addString(urlString, api);
@@ -1237,15 +1237,15 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetNoEvaluate(JNIEnv* 
 //�޸�֧��״̬, ���� String customer_id , code, token, ����post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4PayOut(JNIEnv* env,
 		jobject thiz, jstring customer_id, jstring code){
-	const char *chcid = (*env)->GetStringUTFChars(env, customer_id, NULL);
-	const char *chgid = (*env)->GetStringUTFChars(env, code, NULL);
-//	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chcid = (*env)->GetStringUTFChars(env, customer_id, NULL);
+	char *chgid = (*env)->GetStringUTFChars(env, code, NULL);
+//	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN], urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api = "api=ucenter.order.payout";
+	char *api = "api=ucenter.order.payout";
 //	addString(urlString, url);
 	addString(urlString, api);
 
@@ -1292,15 +1292,15 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4PayOut(JNIEnv* env,
 //ȡ��, ���� String id , code, token, ����post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CancelOrder(JNIEnv* env,
 		jobject thiz, jstring id, jstring code, jstring token){
-	const char *chcid = (*env)->GetStringUTFChars(env, id, NULL);
-	const char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
-	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chcid = (*env)->GetStringUTFChars(env, id, NULL);
+	char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
+	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN], urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api = "api=ucenter.order.cancel";
+	char *api = "api=ucenter.order.cancel";
 //	addString(urlString, url);
 	addString(urlString, api);
 
@@ -1347,15 +1347,15 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CancelOrder(JNIEnv* en
 //ȡ��, ���� String id , code, token, ����post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelOrder(JNIEnv* env,
 		jobject thiz, jstring id, jstring code, jstring token){
-	const char *chcid = (*env)->GetStringUTFChars(env, id, NULL);
-	const char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
-	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chcid = (*env)->GetStringUTFChars(env, id, NULL);
+	char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
+	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN], urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api = "api=ucenter.order.delete";
+	char *api = "api=ucenter.order.delete";
 //	addString(urlString, url);
 	addString(urlString, api);
 
@@ -1402,15 +1402,15 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelOrder(JNIEnv* env,
 //ǩ�ն���, ���� String id , code, token, ����post
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SignOrder(JNIEnv* env,
 		jobject thiz, jstring id, jstring code, jstring token){
-	const char *chcid = (*env)->GetStringUTFChars(env, id, NULL);
-	const char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
-	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chcid = (*env)->GetStringUTFChars(env, id, NULL);
+	char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
+	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN], urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api = "api=ucenter.order.sign";
+	char *api = "api=ucenter.order.sign";
 //	addString(urlString, url);
 	addString(urlString, api);
 
@@ -1459,24 +1459,24 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SignOrder(JNIEnv* env,
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveOrder(JNIEnv* env,
 		jobject thiz, jstring customer_id, jstring ticket_id, jstring recipient_id, jstring pingou_id, jstring goods_ascore,
 		jstring ship_fee, jstring ship_type, jstring ship_entity_name, jstring goods_qty_scr, jstring comments, jstring pay_type, jstring token){
-	const char *chcustomer_id = (*env)->GetStringUTFChars(env, customer_id, NULL);
-	const char *chticket_id = (*env)->GetStringUTFChars(env, ticket_id, NULL);
-	const char *chrecipient_id = (*env)->GetStringUTFChars(env, recipient_id, NULL);
-	const char *chpingou_id = (*env)->GetStringUTFChars(env, pingou_id, NULL);
-	const char *chgoods_ascore = (*env)->GetStringUTFChars(env, goods_ascore, NULL);
-	const char *chship_fee = (*env)->GetStringUTFChars(env, ship_fee, NULL);
-	const char *chship_type = (*env)->GetStringUTFChars(env, ship_type, NULL);
-	const char *chship_entity_name = (*env)->GetStringUTFChars(env, ship_entity_name, NULL);
-	const char *chgoods_qty_scr = (*env)->GetStringUTFChars(env, goods_qty_scr, NULL);
-	const char *chcomments = (*env)->GetStringUTFChars(env, comments, NULL);
-	const char *chpay_type = (*env)->GetStringUTFChars(env, pay_type, NULL);
-	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chcustomer_id = (*env)->GetStringUTFChars(env, customer_id, NULL);
+	char *chticket_id = (*env)->GetStringUTFChars(env, ticket_id, NULL);
+	char *chrecipient_id = (*env)->GetStringUTFChars(env, recipient_id, NULL);
+	char *chpingou_id = (*env)->GetStringUTFChars(env, pingou_id, NULL);
+	char *chgoods_ascore = (*env)->GetStringUTFChars(env, goods_ascore, NULL);
+	char *chship_fee = (*env)->GetStringUTFChars(env, ship_fee, NULL);
+	char *chship_type = (*env)->GetStringUTFChars(env, ship_type, NULL);
+	char *chship_entity_name = (*env)->GetStringUTFChars(env, ship_entity_name, NULL);
+	char *chgoods_qty_scr = (*env)->GetStringUTFChars(env, goods_qty_scr, NULL);
+	char *chcomments = (*env)->GetStringUTFChars(env, comments, NULL);
+	char *chpay_type = (*env)->GetStringUTFChars(env, pay_type, NULL);
+	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN], urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api = "api=ucenter.order.save";
+	char *api = "api=ucenter.order.save";
 //	addString(urlString, url);
 	addString(urlString, api);
 
@@ -1547,7 +1547,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetBrand(JNIEnv* env,
 
 //	memset(encrypt, 0, LEN * sizeof(char));
 
-	const char *api="?api=product.mallgood.getBrands";
+	char *api="?api=product.mallgood.getBrands";
 
 	addString(urlString, url);
 	addString(urlString, api);
@@ -1588,18 +1588,18 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetBrand(JNIEnv* env,
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetEffect(JNIEnv* env,
 		jobject thiz, jstring where, jstring offset, jstring limit, jstring group, jstring order, jstring fields){
 
-	const char *chwhere = (*env)->GetStringUTFChars(env, where, NULL);
-	const char *choffset = (*env)->GetStringUTFChars(env, offset, NULL);
-	const char *chlimit = (*env)->GetStringUTFChars(env, limit, NULL);
-	const char *chgroup = (*env)->GetStringUTFChars(env, group, NULL);
-	const char *chorder = (*env)->GetStringUTFChars(env, order, NULL);
-	const char *chfields = (*env)->GetStringUTFChars(env, fields, NULL);
+	char *chwhere = (*env)->GetStringUTFChars(env, where, NULL);
+	char *choffset = (*env)->GetStringUTFChars(env, offset, NULL);
+	char *chlimit = (*env)->GetStringUTFChars(env, limit, NULL);
+	char *chgroup = (*env)->GetStringUTFChars(env, group, NULL);
+	char *chorder = (*env)->GetStringUTFChars(env, order, NULL);
+	char *chfields = (*env)->GetStringUTFChars(env, fields, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api="?api=product.effect.getList";
+	char *api="?api=product.effect.getList";
 
 	addString(urlString, url);
 	addString(urlString, api);
@@ -1658,20 +1658,20 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetEffect(JNIEnv* env,
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetSearch(JNIEnv* env,
 		jobject thiz, jstring name, jstring fun, jstring brand, jstring price, jstring order1, jstring offset1, jstring limit1){
 
-	const char *chname = (*env)->GetStringUTFChars(env, name, NULL);
-	const char *chfun = (*env)->GetStringUTFChars(env, fun, NULL);
-	const char *chbrand = (*env)->GetStringUTFChars(env, brand, NULL);
-	const char *chprice = (*env)->GetStringUTFChars(env, price, NULL);
-	const char *chorder1 = (*env)->GetStringUTFChars(env, order1, NULL);
-	const char *choffset1 = (*env)->GetStringUTFChars(env, offset1, NULL);
-	const char *chlimit1 = (*env)->GetStringUTFChars(env, limit1, NULL);
+	char *chname = (*env)->GetStringUTFChars(env, name, NULL);
+	char *chfun = (*env)->GetStringUTFChars(env, fun, NULL);
+	char *chbrand = (*env)->GetStringUTFChars(env, brand, NULL);
+	char *chprice = (*env)->GetStringUTFChars(env, price, NULL);
+	char *chorder1 = (*env)->GetStringUTFChars(env, order1, NULL);
+	char *choffset1 = (*env)->GetStringUTFChars(env, offset1, NULL);
+	char *chlimit1 = (*env)->GetStringUTFChars(env, limit1, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api="?api=product.mallgood.search";
+	char *api="?api=product.mallgood.search";
 
 	addString(urlString, url);
 	addString(urlString, api);
@@ -1747,7 +1747,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetPrice(JNIEnv* env,
 
 //	memset(encrypt, 0, LEN * sizeof(char));
 
-	const char *api="?api=product.mallgood.getPriceInterval";
+	char *api="?api=product.mallgood.getPriceInterval";
 
 	addString(urlString, url);
 	addString(urlString, api);
@@ -1788,8 +1788,8 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetPrice(JNIEnv* env,
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetVoucher(JNIEnv* env,
 		jobject thiz, jstring id, jstring token){
 
-	const char *chid = (*env)->GetStringUTFChars(env, id, NULL);
-	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chid = (*env)->GetStringUTFChars(env, id, NULL);
+	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
@@ -1797,7 +1797,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetVoucher(JNIEnv* env
 
 //	memset(encrypt, 0, LEN * sizeof(char));
 
-	const char *api="api=user.info.get";
+	char *api="api=user.info.get";
 
 //	addString(urlString, url);
 	addString(urlString, api);
@@ -1843,9 +1843,9 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetVoucher(JNIEnv* env
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4Login(JNIEnv* env,
 		jobject thiz, jstring username, jstring password, jstring ip){
 
-	const char *chuser = (*env)->GetStringUTFChars(env, username, NULL);
-	const char *chpsw = (*env)->GetStringUTFChars(env, password, NULL);
-	const char *chip = (*env)->GetStringUTFChars(env, ip, NULL);
+	char *chuser = (*env)->GetStringUTFChars(env, username, NULL);
+	char *chpsw = (*env)->GetStringUTFChars(env, password, NULL);
+	char *chip = (*env)->GetStringUTFChars(env, ip, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
@@ -1853,7 +1853,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4Login(JNIEnv* env,
 
 //	memset(encrypt, 0, LEN * sizeof(char));
 
-	const char *api="api=user.passport.login";
+	char *api="api=user.passport.login";
 
 //	addString(urlString, url);
 	addString(urlString, api);
@@ -1902,10 +1902,10 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4Login(JNIEnv* env,
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4Register(JNIEnv* env,
 		jobject thiz, jstring username, jstring password, jstring cps, jstring ip){
 
-	const char *chuser = (*env)->GetStringUTFChars(env, username, NULL);
-	const char *chpsw = (*env)->GetStringUTFChars(env, password, NULL);
-	const char *chcps = (*env)->GetStringUTFChars(env, cps, NULL);
-	const char *chip = (*env)->GetStringUTFChars(env, ip, NULL);
+	char *chuser = (*env)->GetStringUTFChars(env, username, NULL);
+	char *chpsw = (*env)->GetStringUTFChars(env, password, NULL);
+	char *chcps = (*env)->GetStringUTFChars(env, cps, NULL);
+	char *chip = (*env)->GetStringUTFChars(env, ip, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
@@ -1913,7 +1913,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4Register(JNIEnv* env,
 
 //	memset(encrypt, 0, LEN * sizeof(char));
 
-	const char *api="api=user.passport.register";
+	char *api="api=user.passport.register";
 
 //	addString(urlString, url);
 	addString(urlString, api);
@@ -1965,9 +1965,9 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4Register(JNIEnv* env,
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SetDefAddr(JNIEnv* env,
 		jobject thiz, jstring cid, jstring aid, jstring token){
 
-	const char *chcid = (*env)->GetStringUTFChars(env, cid, NULL);
-	const char *chaid = (*env)->GetStringUTFChars(env, aid, NULL);
-	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chcid = (*env)->GetStringUTFChars(env, cid, NULL);
+	char *chaid = (*env)->GetStringUTFChars(env, aid, NULL);
+	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
@@ -1975,7 +1975,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SetDefAddr(JNIEnv* env
 
 //	memset(encrypt, 0, LEN * sizeof(char));
 
-	const char *api="api=ucenter.address.setDefault";
+	char *api="api=ucenter.address.setDefault";
 
 //	addString(urlString, url);
 	addString(urlString, api);
@@ -2024,9 +2024,9 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SetDefAddr(JNIEnv* env
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetVerify(JNIEnv* env,
 		jobject thiz, jstring goods, jstring userid){//, jstring token
 
-	const char *chgoods = (*env)->GetStringUTFChars(env, goods, NULL);
-	const char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
-//	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chgoods = (*env)->GetStringUTFChars(env, goods, NULL);
+	char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
+//	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
@@ -2034,7 +2034,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetVerify(JNIEnv* env,
 
 //	memset(encrypt, 0, LEN * sizeof(char));
 
-	const char *api="api=active.verify.getList";
+	char *api="api=active.verify.getList";
 
 //	addString(urlString, url);
 	addString(urlString, api);
@@ -2083,14 +2083,14 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetVerify(JNIEnv* env,
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetCount(JNIEnv* env,
 		jobject thiz, jstring userId, jstring token){
 
-	const char *chname = (*env)->GetStringUTFChars(env, userId, NULL);
-	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chname = (*env)->GetStringUTFChars(env, userId, NULL);
+	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api="?api=user.info.getCount";
+	char *api="?api=user.info.getCount";
 
 	addString(urlString, url);
 	addString(urlString, api);
@@ -2137,16 +2137,16 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetCount(JNIEnv* env,
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetMessage(JNIEnv* env,
 		jobject thiz, jstring userId, jstring token, jstring offset1, jstring limit1){
 
-	const char *chname = (*env)->GetStringUTFChars(env, userId, NULL);
-	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
-	const char *choffset1 = (*env)->GetStringUTFChars(env, offset1, NULL);
-	const char *chlimit1 = (*env)->GetStringUTFChars(env, limit1, NULL);
+	char *chname = (*env)->GetStringUTFChars(env, userId, NULL);
+	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *choffset1 = (*env)->GetStringUTFChars(env, offset1, NULL);
+	char *chlimit1 = (*env)->GetStringUTFChars(env, limit1, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api="?api=ucenter.message.getByUserId";
+	char *api="?api=ucenter.message.getByUserId";
 
 	addString(urlString, url);
 	addString(urlString, api);
@@ -2197,9 +2197,9 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetMessage(JNIEnv* env
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ChangeRead(JNIEnv* env,
 		jobject thiz, jstring userid, jstring pid, jstring token){//
 
-	const char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
-	const char *chpid = (*env)->GetStringUTFChars(env, pid, NULL);
-	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
+	char *chpid = (*env)->GetStringUTFChars(env, pid, NULL);
+	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
@@ -2207,7 +2207,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ChangeRead(JNIEnv* env
 
 //	memset(encrypt, 0, LEN * sizeof(char));
 
-	const char *api="api=ucenter.message.changeRead";
+	char *api="api=ucenter.message.changeRead";
 
 //	addString(urlString, url);
 	addString(urlString, api);
@@ -2257,14 +2257,14 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetReturn(JNIEnv* env,
 		jobject thiz, jstring userid, jstring order_code,
 		jstring the_date, jstring contact, jstring phone, jstring cause, jstring desc, jstring token){//
 
-	const char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
-	const char *chorder_code = (*env)->GetStringUTFChars(env, order_code, NULL);
-	const char *chthe_date = (*env)->GetStringUTFChars(env, the_date, NULL);
-	const char *chcontact = (*env)->GetStringUTFChars(env, contact, NULL);
-	const char *chphone = (*env)->GetStringUTFChars(env, phone, NULL);
-	const char *chcause = (*env)->GetStringUTFChars(env, cause, NULL);
-	const char *chdesc = (*env)->GetStringUTFChars(env, desc, NULL);
-	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
+	char *chorder_code = (*env)->GetStringUTFChars(env, order_code, NULL);
+	char *chthe_date = (*env)->GetStringUTFChars(env, the_date, NULL);
+	char *chcontact = (*env)->GetStringUTFChars(env, contact, NULL);
+	char *chphone = (*env)->GetStringUTFChars(env, phone, NULL);
+	char *chcause = (*env)->GetStringUTFChars(env, cause, NULL);
+	char *chdesc = (*env)->GetStringUTFChars(env, desc, NULL);
+	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
@@ -2272,7 +2272,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetReturn(JNIEnv* env,
 
 //	memset(encrypt, 0, LEN * sizeof(char));
 
-	const char *api="api=ucenter.returnorder.save";
+	char *api="api=ucenter.returnorder.save";
 
 //	addString(urlString, url);
 	addString(urlString, api);
@@ -2329,16 +2329,16 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetReturn(JNIEnv* env,
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetReturnList(JNIEnv* env,
 		jobject thiz, jstring userId,  jstring offset1, jstring limit1, jstring token){//
 
-	const char *chname = (*env)->GetStringUTFChars(env, userId, NULL);
-	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
-	const char *choffset1 = (*env)->GetStringUTFChars(env, offset1, NULL);
-	const char *chlimit1 = (*env)->GetStringUTFChars(env, limit1, NULL);
+	char *chname = (*env)->GetStringUTFChars(env, userId, NULL);
+	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *choffset1 = (*env)->GetStringUTFChars(env, offset1, NULL);
+	char *chlimit1 = (*env)->GetStringUTFChars(env, limit1, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api="?api=ucenter.returnorder.getByUserId";
+	char *api="?api=ucenter.returnorder.getByUserId";
 
 	addString(urlString, url);
 	addString(urlString, api);
@@ -2398,16 +2398,16 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetReturnList(JNIEnv* 
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetShipLog(JNIEnv* env,
 		jobject thiz, jstring code){//,  jstring offset1, jstring limit1, jstring token
 
-	const char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
-//	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
-//	const char *choffset1 = (*env)->GetStringUTFChars(env, offset1, NULL);
-//	const char *chlimit1 = (*env)->GetStringUTFChars(env, limit1, NULL);
+	char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
+//	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+//	char *choffset1 = (*env)->GetStringUTFChars(env, offset1, NULL);
+//	char *chlimit1 = (*env)->GetStringUTFChars(env, limit1, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	const char *api="?api=order.express.shipLog";
+	char *api="?api=order.express.shipLog";
 
 	addString(urlString, url);
 	addString(urlString, api);
@@ -2451,9 +2451,9 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetShipLog(JNIEnv* env
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetTn(JNIEnv* env,
 		jobject thiz, jstring userid, jstring order_code, jstring token){//
 
-	const char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
-	const char *chorder_code = (*env)->GetStringUTFChars(env, order_code, NULL);
-	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
+	char *chorder_code = (*env)->GetStringUTFChars(env, order_code, NULL);
+	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
@@ -2461,7 +2461,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetTn(JNIEnv* env,
 
 //	memset(encrypt, 0, LEN * sizeof(char));
 
-	const char *api="api=ucenter.order.push";
+	char *api="api=ucenter.order.push";
 
 //	addString(urlString, url);
 	addString(urlString, api);
@@ -2508,9 +2508,9 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetTn(JNIEnv* env,
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetCode(JNIEnv* env,
 		jobject thiz, jstring name){//, jstring order_code, jstring token
 
-	const char *chuid = (*env)->GetStringUTFChars(env, name, NULL);
-//	const char *chorder_code = (*env)->GetStringUTFChars(env, order_code, NULL);
-//	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chuid = (*env)->GetStringUTFChars(env, name, NULL);
+//	char *chorder_code = (*env)->GetStringUTFChars(env, order_code, NULL);
+//	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
@@ -2518,7 +2518,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetCode(JNIEnv* env,
 
 //	memset(encrypt, 0, LEN * sizeof(char));
 
-	const char *api="api=common.code.getCode";
+	char *api="api=common.code.getCode";
 
 //	addString(urlString, url);
 	addString(urlString, api);
@@ -2566,9 +2566,9 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetCode(JNIEnv* env,
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SendMsg(JNIEnv* env,
 		jobject thiz, jstring name, jstring code){//, jstring order_code, jstring token
 
-	const char *chuid = (*env)->GetStringUTFChars(env, name, NULL);
-	const char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
-//	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chuid = (*env)->GetStringUTFChars(env, name, NULL);
+	char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
+//	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
@@ -2576,7 +2576,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SendMsg(JNIEnv* env,
 
 //	memset(encrypt, 0, LEN * sizeof(char));
 
-	const char *api="api=common.sms.sendCode";
+	char *api="api=common.sms.sendCode";
 
 //	addString(urlString, url);
 	addString(urlString, api);
@@ -2624,9 +2624,9 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SendMsg(JNIEnv* env,
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CheckCode(JNIEnv* env,
 		jobject thiz, jstring name, jstring code){//, jstring order_code, jstring token
 
-	const char *chuid = (*env)->GetStringUTFChars(env, name, NULL);
-	const char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
-//	const char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chuid = (*env)->GetStringUTFChars(env, name, NULL);
+	char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
+//	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
@@ -2634,7 +2634,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CheckCode(JNIEnv* env,
 
 //	memset(encrypt, 0, LEN * sizeof(char));
 
-	const char *api="api=common.sms.checkCode";
+	char *api="api=common.sms.checkCode";
 
 //	addString(urlString, url);
 	addString(urlString, api);
@@ -2682,9 +2682,9 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CheckCode(JNIEnv* env,
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ResetPsw(JNIEnv* env,
 		jobject thiz, jstring name,jstring psw, jstring code){//, jstring order_code, jstring token
 
-	const char *chuid = (*env)->GetStringUTFChars(env, name, NULL);
-	const char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
-	const char *chpassword = (*env)->GetStringUTFChars(env, psw, NULL);
+	char *chuid = (*env)->GetStringUTFChars(env, name, NULL);
+	char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
+	char *chpassword = (*env)->GetStringUTFChars(env, psw, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
@@ -2692,7 +2692,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ResetPsw(JNIEnv* env,
 
 //	memset(encrypt, 0, LEN * sizeof(char));
 
-	const char *api="api=user.passport.resetPassword";
+	char *api="api=user.passport.resetPassword";
 
 //	addString(urlString, url);
 	addString(urlString, api);
@@ -2718,6 +2718,51 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ResetPsw(JNIEnv* env,
 	addString(urlString, "&sign=");
 	addString(encrypt, strTemp);
 	addString(encrypt, "user.passport.resetPassword");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
+
+//查看退换货信息 get
+jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SkinQuestion(JNIEnv* env,
+		jobject thiz){
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+	char *api="?api=skin.simple.getQuestion";
+
+	addString(urlString, url);
+	addString(urlString, api);
+
+	addString(urlString, pHead);
+
+
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
+
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "skin.simple.getQuestion");
 	addString(encrypt, chtime);
 
 	MD5_CTX md5;
