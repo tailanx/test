@@ -1,8 +1,12 @@
 package com.yidejia.app.mall.net.address;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.apache.http.conn.ConnectTimeoutException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -10,9 +14,11 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.jni.JNICallBack;
+import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.util.Md5;
+import com.yidejia.app.mall.util.UnicodeToString;
 /**
  * 获取收件人列表
  * @author long bin
@@ -24,8 +30,17 @@ public class GetUserAddressList {
 	private String TAG = "GetUserAddressList";
 	private Context context;
 	
+	private boolean isNoMore = false;//判断是否还有更多数据,true为没有更多了
+	private ArrayList<Addresses> addressesArray;
+	private UnicodeToString unicode;
+	
 	public GetUserAddressList(Context context){
 		this.context = context;
+	}
+	
+	public GetUserAddressList(){
+		unicode = new UnicodeToString();
+		addressesArray = new ArrayList<Addresses>();
 	}
 	
 	private void setKeysAndValues(String where, String offset, String limit, String group, String order, String fields){
@@ -79,55 +94,81 @@ public class GetUserAddressList {
 	}
 	
 	private String result = "";
-	public String getAddressListJsonString(String where, String offset, String limit, String group, String order, String fields)throws IOException{
-//		HttpGetConn conn = new HttpGetConn(getHttpAddress(where, offset, limit, group, order, fields));
-		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetAddress(
-				where, offset, limit, group, order, fields), true);
+
+	public String getAddressListJsonString(String where, String offset,
+			String limit, String group, String order, String fields)
+			throws IOException {
+		// HttpGetConn conn = new HttpGetConn(getHttpAddress(where, offset,
+		// limit, group, order, fields));
+		HttpGetConn conn = new HttpGetConn(
+				new JNICallBack().getHttp4GetAddress(where, offset, limit, "",
+						"", ""), true);
 		result = conn.getJsonResult();
 		return result;
 	}
-//	public String getAddressListJson(String where, String offset, String limit, String group, String order, String fields){
-//		
-//		AsyncHttpClient client = new AsyncHttpClient();
-//		client.setTimeout(5000);
-//		client.get(getHttpAddress(where, offset, limit, group, order, fields), new AsyncHttpResponseHandler(){
-//
-//			@Override
-//			public void onSuccess(String content) {
-//				// TODO Auto-generated method stub
-//				super.onSuccess(content);
-//				Toast.makeText(context, content, Toast.LENGTH_SHORT).show();
-//				Log.i(TAG, "1111"+content);
-//				bar.dismiss();
-//				result = content;
-//			}
-//
-//			@Override
-//			public void onFailure(Throwable error, String content) {
-//				// TODO Auto-generated method stub
-//				super.onFailure(error, content);
-//				Log.i(TAG, "2222"+content);
-//				if (error.getCause() instanceof ConnectTimeoutException) {
-//					System.out.println("Connection timeout !");
-//					Log.i(TAG, "Connection timeout ");
-//				}
-//				bar.dismiss();
-//			}
-//
-//			@Override
-//			public void onStart() {
-//				// TODO Auto-generated method stub
-//				super.onStart();
-//				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//				bar.setMessage("正在查询");
-//				bar.show();
-//			}
-//			
-//			private ProgressDialog bar = new ProgressDialog(context);
-//		});
-//		
-//		return result;
-//	}
 	
+	public String getAddressHttpresp(String where, String offset, String limit)throws IOException{
+//		HttpGetConn conn = new HttpGetConn(getHttpAddress(where, offset, limit, group, order, fields));
+		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetAddress(
+				where, offset, limit, "", "", ""), true);
+		result = conn.getJsonResult();
+		return result;
+	}
 
+	public boolean analysis(String httpresp){
+		JSONObject httpResultObject;
+		try {
+			httpResultObject = new JSONObject(httpresp);
+			int code = httpResultObject.getInt("code");
+			Log.i(TAG, "code"+code);
+			if(code == 1){
+				String responseString = httpResultObject.getString("response");
+				JSONArray responseArray = new JSONArray(responseString);
+				int length = responseArray.length();
+				JSONObject addressItem ;
+				addressesArray.clear();
+				isNoMore = false;
+				for (int i = 0; i < length; i++) {
+					Addresses addresses = new Addresses();
+					addressItem = responseArray.getJSONObject(i);
+//					if("n".equals(addressItem.getString("valid_flag"))) continue;
+					String recipient_id = addressItem.getString("recipient_id");
+					addresses.setAddressId(recipient_id);
+					String name = addressItem.getString("customer_name");
+					addresses.setName(unicode.revert(name));
+					String handset = addressItem.getString("handset");
+					addresses.setHandset(handset);
+					String phone = addressItem.getString("telephone");
+					addresses.setPhone(phone);
+					String province = addressItem.getString("province");
+					addresses.setProvince(unicode.revert(province));
+					String city = addressItem.getString("city");
+					addresses.setCity(unicode.revert(city));
+					String area = addressItem.getString("district");
+					addresses.setArea(unicode.revert(area));
+					String maddress = addressItem.getString("address");
+					addresses.setAddress(unicode.revert(maddress));
+					String isDefault = addressItem.getString("is_default");
+					boolean isDef = isDefault.equals("y") ? true : false;
+					addresses.setDefaultAddress(isDef);
+					addressesArray.add(addresses);
+				}
+			} else if(code == -1){
+				isNoMore = true;
+			}
+			return true;
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public ArrayList<Addresses> getAddresses(){
+		return addressesArray;
+	}
+	
+	public boolean getIsNoMore(){
+		return isNoMore;
+	}
 }

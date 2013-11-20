@@ -69,6 +69,7 @@ public class GetFavoriteList {
 	public boolean analysisGetListJson(String httpResultString){
 		JSONObject httpResultObject;
 		favoriteArray.clear();
+		isNoMore = false;
 		try {
 			httpResultObject = new JSONObject(httpResultString);
 			int code = httpResultObject.getInt("code");
