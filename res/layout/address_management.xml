@@ -14,7 +14,7 @@
         android:footerDividersEnabled="true"
         android:smoothScrollbar="true"
         ptr:ptrAnimationStyle="flip"
-        ptr:ptrMode="pullDownFromTop">
+        ptr:ptrMode="both">
     </com.handmark.pulltorefresh.library.PullToRefreshListView>
 
 </RelativeLayout>

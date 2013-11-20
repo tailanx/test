@@ -1,8 +1,11 @@
 package com.yidejia.app.mall.view;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -19,82 +22,27 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.model.Addresses;
+import com.yidejia.app.mall.net.address.GetUserAddressList;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DefinalDate;
 
 public class AddressActivity extends SherlockActivity {
 
-	private AddressDataManage mangerAddressDataManage;
 
-	// private TextView areaTextView;//地区地址
-	// private TextView addressTextView;//具体地址
-	// private TextView nameTextView;//收货人姓名
-	// private TextView numberTextView;//收货人电话
-	// private ArrayList<Addresses> addressesArray;//收货人地址栏
-	private String TAG = "AddressDataManage";// log
-	// private ImageView deleteImageView;//删除
-	// private ImageView editImageView;//编辑
-	// private CheckBox checkBox;//单选框
-//	private LinearLayout layout;
-	// private View view;
+	private String TAG = AddressActivity.class.getName();// log
 	private AddressAdapter adapter;
-	private AddressDataManage addressDataManage;
+//	private AddressDataManage addressDataManage;
 	private ListView listView;
 	private ArrayList<Addresses> mAddresses;
 	private MyApplication myApplication;
+	private String userId;
 	private PullToRefreshListView pullToRefreshListView;
-	// private void setupShow(){
-	//
-	// try {
-	// layout = (LinearLayout) findViewById(R.id.address_management_relative2);
-	//
-	//
-	// // deleteImageView =
-	// (ImageView)view.findViewById(R.id.address_management_item_relative1_textview1);
-	// // editImageView =
-	// (ImageView)view.findViewById(R.id.address_management_item_relative1_textview2);
-	// // checkBox =
-	// (CheckBox)view.findViewById(R.id.address_management_item_relative1_checkBox1);
-	//
-	// // deleteImageView.setOnClickListener(this);
-	//
-	//
-	//
-	// // new AddressUtil(AddressActivity.this,layout).AllAddresses();
-	// } catch (Exception e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// Log.e(TAG, "addAddress() ExecutionException");
-	// }
-	// }
-
-	// @Override
-	// protected void onCreate(Bundle savedInstanceState) {
-	// super.onCreate(savedInstanceState);
-	// setActionbar();
-	// //���︸����Ҫ��scrollview
-	// setContentView(R.layout.address_management);
-	// // mangerAddressDataManage = new AddressDataManage(this);
-	// // addressesArray = mangerAddressDataManage.getAddressesArray(654321, 0,
-	// 10);
-	// // addView =
-	// getLayoutInflater().inflate(R.layout.address_management_item, null);
-	// setupShow();
-	// new AddressUtil(AddressActivity.this,layout).AllAddresses();
-	//
-	//
-	// }
-	// public void updateView(ArrayList<Addresses> mAddresses) {
-	// adapter.changeDate(mAddresses);
-	// }
-
-//	int fromIndex = 0;
-//	int acount = 50;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +53,7 @@ public class AddressActivity extends SherlockActivity {
 		
 		pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.address_item_main_refresh_scrollview111);
 		
-		pullToRefreshListView.setOnRefreshListener(listener);
+		pullToRefreshListView.setOnRefreshListener(listener2);
 		
 		String label = getResources().getString(R.string.update_time)+DateUtils.formatDateTime(this, System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL|DateUtils.FORMAT_SHOW_DATE|DateUtils.FORMAT_SHOW_TIME);
 		pullToRefreshListView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
@@ -113,45 +61,77 @@ public class AddressActivity extends SherlockActivity {
 		
 		listView = pullToRefreshListView.getRefreshableView();
 //		layout = (LinearLayout) findViewById(R.id.address_management_relative2);
-		addressDataManage = new AddressDataManage(AddressActivity.this);
+//		addressDataManage = new AddressDataManage(AddressActivity.this);
 		
 		myApplication = (MyApplication) getApplication();
-		mAddresses = addressDataManage.getAddressesArray(
-				myApplication.getUserId(), fromIndex, acount);
+		userId = myApplication.getUserId();
+		mAddresses = new ArrayList<Addresses>();
+//		mAddresses = addressDataManage.getAddressesArray(
+//				userId, fromIndex, acount);
 		adapter = new AddressAdapter(AddressActivity.this, mAddresses);
 		listView.setAdapter(adapter);
 //		Utility.setListViewHeightBasedOnChildren(listView);
 		
 		listView.setOnItemClickListener(new OnItemClickListener() {
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
-			Log.i("info",   "   OnItemClickListener");
-			Addresses addresses = mAddresses.get(position);
-			Intent intent = new Intent(AddressActivity.this, CstmPayActivity.class);
-			Bundle bundle = new Bundle();
-			bundle.putSerializable("addresses1", addresses);
-			intent.putExtras(bundle);
-			AddressActivity.this.setResult(Consts.AddressResponseCode, intent);
-			AddressActivity.this.finish();
-//
-//			// // 取得ViewHolder对象，这样就省去了通过层层的findViewById去实例化我们需要的cb实例的步骤
-//			ViewHolder viewHolder = (ViewHolder) view.getTag();
-////			if (viewHolder.cb.isChecked()) {
-////				Log.i("info", viewHolder.cb.isChecked()+"    viewHolder");
-////				return;
-////			} else {
-////				Log.i("info", viewHolder.cb.isChecked()+"    viewHolder11");
-//				viewHolder.cb.toggle();// 把CheckBox的选中状态改为当前状态的反,gridview确保是单一选中
-		}
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Log.i("info", "   OnItemClickListener");
+				Addresses addresses = mAddresses.get(position);
+				Intent intent = new Intent(AddressActivity.this,
+						CstmPayActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putSerializable("addresses1", addresses);
+				intent.putExtras(bundle);
+				AddressActivity.this.setResult(Consts.AddressResponseCode,
+						intent);
+				AddressActivity.this.finish();
+			}
 		});
+		
+		bar = new ProgressDialog(this);
+		getUserAddressList = new GetUserAddressList();
+		
+		closeTask();
+		task = new Task();
+		task.execute();
 	}
-	private void setupShow(){
-		adapter.notifyDataSetChanged();
+	
+	
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		closeTask();
 	}
+
+
+	private OnRefreshListener2<ListView> listener2 = new OnRefreshListener2<ListView>() {
+
+		@Override
+		public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+			// TODO Auto-generated method stub
+			fromIndex = 0;
+			closeTask();
+			task = new Task();
+			task.execute();
+		}
+
+		@Override
+		public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+			// TODO Auto-generated method stub
+			fromIndex += acount;
+			closeTask();
+			task = new Task();
+			task.execute();
+		}
+	};
+	
+
 	private int fromIndex = 0;
 	private int acount = 10;
-	private OnRefreshListener<ListView> listener = new OnRefreshListener<ListView>() {
+	/*private OnRefreshListener<ListView> listener = new OnRefreshListener<ListView>() {
 
 		@Override
 		public void onRefresh(PullToRefreshBase<ListView> refreshView) {
@@ -176,7 +156,7 @@ public class AddressActivity extends SherlockActivity {
 			}
 //			setupShow();
 		}
-	};
+	};*/
 
 	private void setActionbar() {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -272,6 +252,87 @@ public class AddressActivity extends SherlockActivity {
 					getResources().getString(R.string.bad_network),
 					Toast.LENGTH_SHORT).show();
 
+		}
+	}
+	
+	
+	private ProgressDialog bar;
+	private Task task;
+	private GetUserAddressList getUserAddressList;
+	private ArrayList<Addresses> addresses;
+	private boolean isNomore = false;
+	private boolean isFirstIn = true;
+	
+	private class Task extends AsyncTask<Void, Void, Boolean>{
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			try {
+				String httpresp = getUserAddressList.getAddressHttpresp("customer_id%3D"+userId+"+and+valid_flag%3D%27y%27", fromIndex + "", acount + "");
+				boolean issuccess = getUserAddressList.analysis(httpresp);
+//				if(addresses != null && !addresses.isEmpty()){
+//					addresses.clear();
+//				}
+				addresses = getUserAddressList.getAddresses();
+				isNomore = getUserAddressList.getIsNoMore();
+				return issuccess;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+			return false;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			if (isFirstIn) {
+				bar.setCancelable(false);
+				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+				bar.show();
+			}
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if (isFirstIn) {
+				bar.dismiss();
+				isFirstIn = false;
+			} else {
+				pullToRefreshListView.onRefreshComplete();
+			}
+			if(!result) {
+				if(fromIndex != 0) {
+					fromIndex -= acount;
+				}
+			} else {
+				if(!mAddresses.isEmpty() && isNomore) {
+					Toast.makeText(AddressActivity.this, getResources().getString(R.string.nomore), Toast.LENGTH_LONG).show();
+					isNomore = false;
+					return;
+				}
+				if(mAddresses != null && !mAddresses.isEmpty() && fromIndex == 0){
+					mAddresses.clear();
+				}
+				Log.e(TAG, "addresses size " + addresses.size());
+				mAddresses.addAll(addresses);
+				Log.e(TAG, "maddresses size " + mAddresses.size());
+				adapter.notifyDataSetChanged();
+			}
+		}
+		
+	}
+	
+	private void closeTask(){
+		if(task != null && task.getStatus().RUNNING == AsyncTask.Status.RUNNING){
+			task.cancel(true);
 		}
 	}
 
