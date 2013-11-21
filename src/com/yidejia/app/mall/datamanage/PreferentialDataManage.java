@@ -8,9 +8,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.R;
@@ -144,7 +146,27 @@ public class PreferentialDataManage {
 	
 	private String goods;
 	private String userid;
+
 	private class TaskVerify extends AsyncTask<Void, Void, Boolean>{
+		private ProgressDialog dig;
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(result){
+				Log.e("info", result+"   result");
+				dig.cancel();
+			}
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			dig = new ProgressDialog(context);
+			dig.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			dig.show();
+		}
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
@@ -158,7 +180,9 @@ public class PreferentialDataManage {
 					if(code == 1){
 						String response = httpJsonObject.getString("response");
 						analysis(response);
+						
 						return true;
+						
 					} else if(code == -1){
 						isNoMore = true;
 					}

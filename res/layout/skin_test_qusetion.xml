@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/bg"
+    >
+    <TextView android:id="@+id/skin_test_title"
+        	  android:layout_width="wrap_content"
+        	  android:layout_height="wrap_content"
+        	  android:text="欢迎您开始妍诗美专业皮肤测试"
+        	  android:textSize="20sp"
+        	  android:layout_marginTop="30dp"
+        	  android:layout_gravity="center"/>
+    
+    <TextView 
+        
+        android:id="@+id/skin_test_question_frist"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1.你目前最想解决的肌肤问题是什么(必选)"
+        android:textSize="15sp"/>
+    <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/comment">
+       <CheckBox 
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="眼部肌肤问题"
+           android:textSize="15sp"/>
+        
+        
+    </LinearLayout>
+    <RelativeLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        >
+        <TextView 
+            android:id="@+id/skin_test_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_centerVertical="true"
+            android:text="题目：8的1题"
+            android:textSize="15sp"/>
+        <Button 
+            android:id="@+id/skin_test_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:text="下一题"
+            android:textSize="15sp"
+            android:layout_alignParentRight="true"/>
+         <Button 
+            android:id="@+id/skin_test_pre"
+            android:layout_toLeftOf="@id/skin_test_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:text="上一题"
+            android:textSize="15sp"
+           />
+    </RelativeLayout>
+    
+
+</LinearLayout>

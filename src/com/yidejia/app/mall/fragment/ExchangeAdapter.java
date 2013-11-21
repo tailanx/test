@@ -11,6 +11,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.DataSetObserver;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
@@ -40,6 +41,12 @@ import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.CstmPayActivity;
 
 public class ExchangeAdapter extends BaseAdapter {
+	@Override
+	public void unregisterDataSetObserver(DataSetObserver observer) {
+		// TODO Auto-generated method stub
+		super.unregisterDataSetObserver(observer);
+	}
+
 	private Activity activity;
 	private ArrayList<Specials> mlist;
 	private static HashMap<Integer, Boolean> isSelected;// =״̬
@@ -49,17 +56,17 @@ public class ExchangeAdapter extends BaseAdapter {
 	private VoucherDataManage voucherDataManage;// 积分的信息
 	private double userVoucher;// 用户积分
 	private MyApplication myApplication;
-	private InnerReciver receiver;
+//	private InnerReciver receiver;
 
 	public ExchangeAdapter(ArrayList<Specials> mList, Activity context) {
 		
 		this.activity = context;
 		this.mlist = mList;
 		this.inflater = LayoutInflater.from(context);
-		receiver = new InnerReciver();
-		IntentFilter filter = new IntentFilter();
-		filter.addAction(Consts.EXCHANG_FREE);
-		context.registerReceiver(receiver, filter);
+//		receiver = new InnerReciver();
+//		IntentFilter filter = new IntentFilter();
+//		filter.addAction(Consts.EXCHANG_FREE);
+//		context.registerReceiver(receiver, filter);
 		
 		voucherDataManage = new VoucherDataManage(context);
 		myApplication = (MyApplication) activity.getApplication();
@@ -98,7 +105,7 @@ public class ExchangeAdapter extends BaseAdapter {
 	/**
 	 * ��ʼ��checkbox��ѡ��״̬
 	 */
-	private void initData() {
+	public void initData() {
 		for (int i = 0; i < mlist.size(); i++) {
 			// Log.i("info", mlist.size() + "size");
 			getIsSelected().put(i, false);
@@ -298,20 +305,20 @@ public class ExchangeAdapter extends BaseAdapter {
 
 	}
 
-	public class InnerReciver extends BroadcastReceiver{
-
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			// TODO Auto-generated method stub
-			String  action = intent.getAction();
-			if(Consts.EXCHANG_FREE.equals(action)){
-				 initData();
-				 notifyDataSetChanged();
-			}
-			context.unregisterReceiver(receiver);
-		}
-		
-	}
+//	public class InnerReciver extends BroadcastReceiver{
+//
+//		@Override
+//		public void onReceive(Context context, Intent intent) {
+//			// TODO Auto-generated method stub
+//			String  action = intent.getAction();
+//			if(Consts.EXCHANG_FREE.equals(action)){
+//				 initData();
+//				 notifyDataSetChanged();
+//			}
+//			context.unregisterReceiver(receiver);
+//		}
+//		
+//	}
 	
 	
 }

@@ -350,7 +350,7 @@ public class CstmPayActivity extends SherlockActivity {
 									bundle.putString("price", sum + "");
 									intent.putExtras(bundle);
 									intent.putExtra("carts", carts);
-									Log.i("info", "voucher:" + voucher);
+//									Log.i("info", "voucher:" + voucher);
 									intent.putExtra("voucher", voucher);
 									CstmPayActivity.this
 											.startActivityForResult(
@@ -457,8 +457,8 @@ public class CstmPayActivity extends SherlockActivity {
 			
 				if (preferentialDataManage.getFreeGoods().size() != 0
 						|| preferentialDataManage.getScoreGoods().size() != 0) {
-					Log.i("info", preferentialDataManage.getFreeGoods().size()
-							+ "   preferentialDataManage.getFreeGoods()");
+//					Log.i("info", preferentialDataManage.getFreeGoods().size()
+//							+ "   preferentialDataManage.getFreeGoods()");
 					arrayListFree = preferentialDataManage.getFreeGoods();
 					arrayListExchange = preferentialDataManage.getScoreGoods();
 				} 
@@ -467,8 +467,8 @@ public class CstmPayActivity extends SherlockActivity {
 							|| isCartActivity.equals("N")) {//
 						show(carts, false);// sum,
 						if (voucher > 0 || maxPay > fP) {
-							Log.i("info", voucher + "   voucher");
-							Log.i("info", maxPay + "   maxPay");
+//							Log.i("info", voucher + "   voucher");
+//							Log.i("info", maxPay + "   maxPay");
 							dialog.show();
 
 							//
@@ -902,7 +902,7 @@ public class CstmPayActivity extends SherlockActivity {
 							.getText().toString() : emsPrice.getText()
 							.toString())) + "");
 		}
-		Log.i("info", "setKuaidi:");
+//		Log.i("info", "setKuaidi:");
 		// postMethod = getResources().getString(R.string.ship_post);// 初始化快递方式;
 		// expressNum = express.getExpress();// 初始化费用
 	}
@@ -917,7 +917,7 @@ public class CstmPayActivity extends SherlockActivity {
 			peiSongCenter = new ExpressDataManage(this)
 					.getDistributionsList(preId, 0 + "", 10 + "").get(0)
 					.getDisName(); // 获取配送中心
-			Log.i("info", "setpeisong:" + peiSongCenter);
+//			Log.i("info", "setpeisong:" + peiSongCenter);
 			peiSong.setText(peiSongCenter);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -941,7 +941,7 @@ public class CstmPayActivity extends SherlockActivity {
 		fP = Float.MAX_VALUE;
 		if (freePosts.size() != 0)
 			fP = Float.parseFloat(freePosts.get(0).getMax());
-		Log.i("info", fP + "   fp");
+//		Log.i("info", fP + "   fp");
 		try {
 			if (Float.parseFloat(sum) >= fP) {// 大于等于免邮费用
 
@@ -994,8 +994,8 @@ public class CstmPayActivity extends SherlockActivity {
 		 * 
 		 ************************************************/
 
-		Log.i("info", requestCode + "   requestCode");
-		Log.i("info", resultCode + "   resultCode");
+//		Log.i("info", requestCode + "   requestCode");
+//		Log.i("info", resultCode + "   resultCode");
 		if (data == null) {
 			return;
 		}
