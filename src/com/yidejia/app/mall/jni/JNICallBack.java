@@ -154,5 +154,7 @@ public class JNICallBack {
 	
 	//重置密码
 	public native String getHttp4ResetPsw(String name, String psw, String code);
+	
+	public native String getHttp4SkinQuestion();
 }	
 	

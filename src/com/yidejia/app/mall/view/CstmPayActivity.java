@@ -789,7 +789,10 @@ public class CstmPayActivity extends SherlockActivity {
 						.getAddressesArray(myApplication.getUserId(), 0, 10);
 				if (addArray.isEmpty()) { // 无默认地址并且无地址
 					Intent intent = new Intent(CstmPayActivity.this,
-							NewAddressActivity.class);
+							EditNewAddressActivity.class);
+					Bundle bundle = new Bundle();
+					bundle.putSerializable("editaddress", null);
+					intent.putExtras(bundle);
 					CstmPayActivity.this.startActivity(intent);
 					return;
 				} else {
