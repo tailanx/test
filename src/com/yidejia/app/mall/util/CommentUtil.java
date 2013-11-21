@@ -172,7 +172,7 @@ public class CommentUtil {
 			task.cancel(true);
 		}
 	}
-	
+
 	private void setCommStar(int rate, LinearLayout starLayout){
 		float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20,
 				context.getResources().getDisplayMetrics());

@@ -1,6 +1,9 @@
 package com.yidejia.app.mall.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +16,8 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.PreferentialDataManage;
+
+import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.CstmPayActivity;
 
 public class ExchangeFragment extends SherlockFragment {
@@ -55,12 +60,21 @@ public class ExchangeFragment extends SherlockFragment {
 		// 获取存储的参数
 		Bundle args = getArguments();
 		hello = args != null ? args.getString("hello") : defaultHello;
-
 	}
+
+	
+	private InnerReciver receiver;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		
+		receiver = new InnerReciver();
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Consts.EXCHANG_FREE);
+		getSherlockActivity().registerReceiver(receiver, filter);
+		
+		
 		dataManage = new PreferentialDataManage(getSherlockActivity());
 		View view = inflater.inflate(R.layout.exchange_produce, null);// 获取视图对象
 		listview = (ListView) view
@@ -135,6 +149,23 @@ public class ExchangeFragment extends SherlockFragment {
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
+		getSherlockActivity().unregisterReceiver(receiver);
+	}
+	
+	
+	public class InnerReciver extends BroadcastReceiver{
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			String  action = intent.getAction();
+			if(Consts.EXCHANG_FREE.equals(action)){
+				 adapter.initData();
+				 adapter.notifyDataSetChanged();
+			}
+			
+		}
+		
 	}
 	// /**
 	// * 用来展示数据的

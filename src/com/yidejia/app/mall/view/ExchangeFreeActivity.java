@@ -15,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -99,7 +100,6 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 						exchange = ExchangeAdapter.mlist1;
 						cart = ExchangeAdapter.mlist2;
 
-						// Log.i("info", exchange.toString() +
 						// "    exchange.toString()");
 					
 						float sum = 0;
@@ -151,6 +151,9 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 								HashMap<String, Object> map1 = cart.get(i);
 								Float isSelelct1 = Float.parseFloat(map1
 										.get("isCheck1").toString());
+								
+								
+										
 								Float count1 = Float.parseFloat(map1.get("count1")
 										.toString());
 
@@ -168,32 +171,29 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 								// getResources().getString(R.string.no_network),
 								// Toast.LENGTH_SHORT).show();
 								// }
-								
-								if (isSelelct1 == 0.0) {
-					
+								if (isSelelct1 == 0.0 && count1>0) {
 									mArrayList.add(cart);
 									voucher = (int) (voucher - sum1);
 								}
 							}
 //							Log.i("info", voucher+"   vouche1r");
 							
-							Cart cart1 = FreeGivingAdapter.carts;
 //							Log.i("voucher", cart1+"   cart1");
 //							Log.i("voucher", cart1.getUId()+"   cart1.getUId()");
-							
-							if (cart1 != null) {
-//								Log.i("voucher", mArrayList.size()+"   mArrayList1");
-								mArrayList.add(cart1);
-//								Log.i("voucher", mArrayList.size()+"   mArrayList2");
-							}
-							intent.putExtra("price", sumprice);
-//							Log.i("info", voucher+"   voucher");
-							intent.putExtra("voucher", voucher);
-							intent.putExtra("jifen", sum1);
-//							Log.i("info", mArrayList.size()+"   mArrayList");
-							intent.putExtra("carts", mArrayList);
-							intent.putExtra("cartActivity", "E");
 						}
+						Cart cart1 = FreeGivingAdapter.carts;
+						Log.i("voucher", cart1+"   cart1");
+						if (cart1.getUId() != null) {
+							mArrayList.add(cart1);
+						}
+						intent.putExtra("price", sumprice);
+//							Log.i("info", voucher+"   voucher");
+						intent.putExtra("voucher", voucher);
+						intent.putExtra("jifen", sum1);
+						
+//							Log.i("info", mArrayList.size()+"   mArrayList");
+						intent.putExtra("carts", mArrayList);
+						intent.putExtra("cartActivity", "E");
 						setResult(Consts.CstmPayActivity_Response, intent);
 						ExchangeFreeActivity.this.finish();
 					

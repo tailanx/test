@@ -3,6 +3,7 @@ package com.yidejia.app.mall.view;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -50,8 +51,10 @@ public class ReturnActivity extends SherlockActivity {
 		orderCodeTextView.setText(order_code);
 		orderDateTextView.setText(the_date);
 		}else{
+			
 			submit.setVisibility(View.GONE);
 			findIds();
+			getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 			orderCodeTextView.setText(info.getOrderCode());
 			
 			
@@ -59,12 +62,15 @@ public class ReturnActivity extends SherlockActivity {
 			
 			linkMan.setText(info.getContact());
 			linkMan.setEnabled(false);
+			linkMan.requestFocus();
 			
 			phoneNumber.setText(info.getContact_manner());
 			phoneNumber.setEnabled(false);
+			phoneNumber.requestFocus();
 			
 			describe.setText(info.getDesc());
 			describe.setEnabled(false);
+			describe.requestFocus();
 			
 			reason.setPrompt(info.getCause());
 			reason.setEnabled(false);
