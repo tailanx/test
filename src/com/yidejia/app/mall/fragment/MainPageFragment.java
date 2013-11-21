@@ -56,6 +56,7 @@ import com.yidejia.app.mall.view.HistoryActivity;
 import com.yidejia.app.mall.view.IntegeralActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.view.MyCollectActivity;
+import com.yidejia.app.mall.view.SkinQuesActivity;
 import com.yidejia.app.mall.widget.YLViewPager;
 
 public class MainPageFragment extends SherlockFragment {
@@ -445,9 +446,9 @@ public class MainPageFragment extends SherlockFragment {
 
 			@Override
 			public void onClick(View arg0) {
-//				Intent intentOrder = new Intent(getSherlockActivity(),IntegeralActivity.class);
-//				getSherlockActivity().startActivity(intentOrder);
-					dialog.show();
+				Intent intentOrder = new Intent(getSherlockActivity(),SkinQuesActivity.class);
+				getSherlockActivity().startActivity(intentOrder);
+//					dialog.show();
 					// Intent intentOrder = new
 					// Intent(getSherlockActivity(),IntegeralActivity.class);
 					// getSherlockActivity().startActivity(intentOrder);
@@ -568,6 +569,8 @@ public class MainPageFragment extends SherlockFragment {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 //			try{
+			if(isAdded()){
+				
 			if(result){
 				try {
 					
@@ -595,7 +598,8 @@ public class MainPageFragment extends SherlockFragment {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //			Toast.makeText(getSherlockActivity(), getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
-			} else{
+			} 
+		}else{
 				Toast.makeText(getSherlockActivity(),
 						getResources().getString(R.string.bad_network),
 						Toast.LENGTH_SHORT).show();

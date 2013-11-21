@@ -18,6 +18,10 @@ public class Question {
 	private String message = "";
 	private ArrayList<Skin> skinQs;
 	
+	public Question(){
+		skinQs = new ArrayList<Skin>();
+	}
+	
 	public String getHttpResp(){
 		String url = new JNICallBack().getHttp4SkinQuestion();
 		HttpGetConn conn = new HttpGetConn(url, true);
@@ -71,8 +75,13 @@ public class Question {
 				skin.setName(itemObject.getString("name"));
 				skin.setQuestion(itemObject.getString("question"));
 				skin.setNeed(itemObject.getBoolean("need"));
-				String answer = itemObject.getString("answer");
-				analysisAnswer(answer, skin);
+				try{
+					String answer = itemObject.getString("answer");
+					analysisAnswer(answer, skin);
+				} catch(Exception e){
+					e.printStackTrace();
+				}
+				skinQs.add(skin);
 			}
 			return true;
 		} catch (JSONException e) {
