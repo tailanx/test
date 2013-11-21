@@ -2738,7 +2738,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ResetPsw(JNIEnv* env,
 	return (*env)->NewStringUTF(env, urlString);
 }
 
-//查看退换货信息 get
+//查看皮肤测试信息 get
 jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SkinQuestion(JNIEnv* env,
 		jobject thiz){
 
@@ -2763,6 +2763,91 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SkinQuestion(JNIEnv* e
 	addString(urlString, "&sign=");
 	addString(encrypt, strTemp);
 	addString(encrypt, "skin.simple.getQuestion");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
+
+//提交皮肤测试数据 post
+jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SkinAnswer(JNIEnv* env,
+		jobject thiz, jstring handset, jstring qq, jstring name,jstring gender, jstring birthday
+		, jstring improve_type, jstring skin_type, jstring want_type
+		, jstring brand, jstring channel, jstring cpsid, jstring ip){
+
+	char *chhandset = (*env)->GetStringUTFChars(env, handset, NULL);
+	char *chqq = (*env)->GetStringUTFChars(env, qq, NULL);
+	char *chname = (*env)->GetStringUTFChars(env, name, NULL);
+	char *chgender = (*env)->GetStringUTFChars(env, gender, NULL);
+	char *chbirthday = (*env)->GetStringUTFChars(env, birthday, NULL);
+	char *chimprove_type = (*env)->GetStringUTFChars(env, improve_type, NULL);
+	char *chskin_type = (*env)->GetStringUTFChars(env, skin_type, NULL);
+	char *chwant_type = (*env)->GetStringUTFChars(env, want_type, NULL);
+	char *chbrand = (*env)->GetStringUTFChars(env, brand, NULL);
+	char *chchannel = (*env)->GetStringUTFChars(env, channel, NULL);
+	char *chcpsid = (*env)->GetStringUTFChars(env, cpsid, NULL);
+	char *chip = (*env)->GetStringUTFChars(env, ip, NULL);
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+	char *api="api=skin.simple.getAnswer";
+
+	addString(urlString, api);
+
+	addString(urlString, "&handset=");
+	if(chhandset != NULL)addString(urlString, chhandset);
+	addString(urlString, "&qq=");
+	if(chqq != NULL)addString(urlString, chqq);
+	addString(urlString, "&name=");
+	if(chname != NULL)addString(urlString, chname);
+	addString(urlString, "&gender=");
+	if(chgender != NULL)addString(urlString, chgender);
+	addString(urlString, "&birthday=");
+	if(chbirthday != NULL)addString(urlString, chbirthday);
+	addString(urlString, "&improve_type=");
+	if(chimprove_type != NULL)addString(urlString, chimprove_type);
+	addString(urlString, "&skin_type=");
+	if(chskin_type != NULL)addString(urlString, chskin_type);
+	addString(urlString, "&want_type=");
+	if(chwant_type != NULL)addString(urlString, chwant_type);
+	addString(urlString, "&brand=");
+	if(chbrand != NULL)addString(urlString, chbrand);
+	addString(urlString, "&channel=");
+	if(chchannel != NULL)addString(urlString, chchannel);
+	addString(urlString, "&cpsid=");
+	if(chcpsid != NULL)addString(urlString, chcpsid);
+	addString(urlString, "&ip=");
+	if(chip != NULL)addString(urlString, chip);
+
+
+
+	addString(urlString, pHead);
+
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
+
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "skin.simple.getAnswer");
 	addString(encrypt, chtime);
 
 	MD5_CTX md5;

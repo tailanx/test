@@ -82,7 +82,7 @@ public class SkinQuesActivity extends Activity {
 		} else {
 			b = index + 1;
 			Skin skin = skinQuestions.get(index);
-			textview.setText("题目：" + maxLength + "的" + b + "题");
+			textview.setText("题目："+b+"/"+maxLength);
 			if (skin.isNeed()) {
 				name.setText(b + "." + skin.getQuestion() + "(必选)");
 				ArrayList<SkinQOption> option = (ArrayList<SkinQOption>) skin
@@ -151,8 +151,7 @@ public class SkinQuesActivity extends Activity {
 					isSucess = question.analysis(httpresp);
 					skinQuestions = question.getSkinQs();
 					maxLength = skinQuestions.size();
-					Log.e(SkinQuesActivity.class.getName(), "length:"
-							+ maxLength);
+					
 
 				}
 
