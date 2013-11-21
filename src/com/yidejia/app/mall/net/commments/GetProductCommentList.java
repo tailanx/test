@@ -55,6 +55,7 @@ public class GetProductCommentList {
 			int code = httpResultObject.getInt("code");
 			Log.i(TAG, "code"+code);
 			if(code == 1){
+				userComments.clear();
 				isHasRst = true;
 				String responseString = httpResultObject.getString("response");
 				JSONArray responseArray = new JSONArray(responseString);

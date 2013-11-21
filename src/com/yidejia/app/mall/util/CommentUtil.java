@@ -7,6 +7,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -94,7 +96,7 @@ public class CommentUtil {
 			// TODO Auto-generated method stub
 			
 			try {
-				String httpresp = getCommentList.getCommentsListJsonString("goods_id=" + goodsId, fromIndex + "", amount + "", "", "", "%2A");
+				String httpresp = getCommentList.getCommentsListJsonString("goods_id=" + goodsId, fromIndex + "", amount + "", "", "commentDate+desc", "%2A");
 				issuccess = getCommentList.analysisGetListJson(httpresp);
 				comments = getCommentList.getComments();
 				isNoMore = getCommentList.getIsNoMore();
@@ -145,11 +147,14 @@ public class CommentUtil {
 					TextView userLevel = (TextView) view.findViewById(R.id.user_level);
 					TextView userContent = (TextView) view.findViewById(R.id.emulate_text);
 					TextView commentTime = (TextView) view.findViewById(R.id.emulate_user_time);
+					LinearLayout starLayout = (LinearLayout) view.findViewById(R.id.emulate_grade_star);
 					Log.e(CommentUtil.class.getName(), "view"+view + "and layout"+linearLayout);
 					userName.setText(userComment.getUserName());
 					userLevel.setText(userComment.getVipLevel());
 					userContent.setText(userComment.getUserCommentText());
 //					 userGrade.setText(userComment.getRate()+"");
+					int rate = userComment.getRate();
+					if(context != null) setCommStar(rate, starLayout);
 					commentTime.setText(userComment.getCommentTime());
 					linearLayout.addView(view);
 				} catch (Exception e) {
@@ -165,6 +170,21 @@ public class CommentUtil {
 	public void closeTask(){
 		if(task != null && task.getStatus().RUNNING == AsyncTask.Status.RUNNING){
 			task.cancel(true);
+		}
+	}
+	
+	private void setCommStar(int rate, LinearLayout starLayout){
+		float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20,
+				context.getResources().getDisplayMetrics());
+		LinearLayout.LayoutParams lp_base = new LinearLayout.LayoutParams(
+				(new Float(px)).intValue(), (new Float(px)).intValue());
+		lp_base.gravity = Gravity.CENTER;
+		for (int i = 0; i < rate; i++) {
+			ImageView starImageView = new ImageView(context);
+			starImageView.setLayoutParams(lp_base);
+			starImageView.setPadding(5, 0, 5, 0);
+			starImageView.setImageResource(R.drawable.score1);
+			starLayout.addView(starImageView);
 		}
 	}
 
