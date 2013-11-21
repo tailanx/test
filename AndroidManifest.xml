@@ -152,6 +152,8 @@ android:uiOptions="splitActionBarWhenNarrow"
              android:screenOrientation="portrait" />
            <activity android:name="com.yidejia.app.mall.view.HistoryActivity"
              android:screenOrientation="portrait" />
+           <activity android:name="com.yidejia.app.mall.ActiveGoActivity"
+             android:screenOrientation="portrait" />
          <activity 
             android:name="com.unionpay.uppay.PayActivityEx"
 			android:label="@string/app_name" 

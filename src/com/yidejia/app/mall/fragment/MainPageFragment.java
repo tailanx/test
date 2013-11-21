@@ -41,6 +41,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.yidejia.app.mall.ActiveGoActivity;
 import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
@@ -390,11 +391,11 @@ public class MainPageFragment extends SherlockFragment {
 //				Intent intentOrder = new Intent(getSherlockActivity(),MyCollectActivity.class);
 //				getSherlockActivity().startActivity(intentOrder);
 				
-					dialog.show();
+//					dialog.show();
 				
-				// Intent intentOrder = new
-				// Intent(getSherlockActivity(),MyCollectActivity.class);
-				// getSherlockActivity().startActivity(intentOrder);
+				 Intent intent = new
+				 Intent(getSherlockActivity(),ActiveGoActivity.class);
+				 getSherlockActivity().startActivity(intent);
 			}
 		});
 		RelativeLayout myMember = (RelativeLayout) child.findViewById(R.id.function_member);//会员购
