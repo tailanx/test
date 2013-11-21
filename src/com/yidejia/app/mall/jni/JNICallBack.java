@@ -156,5 +156,9 @@ public class JNICallBack {
 	public native String getHttp4ResetPsw(String name, String psw, String code);
 	
 	public native String getHttp4SkinQuestion();
+	
+	public native String getHttp4SkinAnswer(String handset, String qq, String name,String gender, String birthday
+			, String improve_type, String skin_type, String want_type
+			, String brand, String channel, String cpsid, String ip);
 }	
 	
