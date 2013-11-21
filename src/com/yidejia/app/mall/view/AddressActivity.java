@@ -72,7 +72,7 @@ public class AddressActivity extends SherlockActivity {
 		listView.setAdapter(adapter);
 //		Utility.setListViewHeightBasedOnChildren(listView);
 		
-		listView.setOnItemClickListener(new OnItemClickListener() {
+		/*listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
@@ -87,7 +87,7 @@ public class AddressActivity extends SherlockActivity {
 						intent);
 				AddressActivity.this.finish();
 			}
-		});
+		});*/
 		
 		bar = new ProgressDialog(this);
 		getUserAddressList = new GetUserAddressList();
