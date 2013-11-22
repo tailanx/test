@@ -51,7 +51,7 @@ public class TaskFilter {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar = new ProgressDialog(context);
-			bar.setCancelable(false);
+			bar.setCancelable(true);
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 			bar.show();
 		}

@@ -44,7 +44,7 @@ public class TaskReset {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar = new ProgressDialog(activity);
-			bar.setCancelable(false);
+			bar.setCancelable(true);
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 			bar.show();
 		}
