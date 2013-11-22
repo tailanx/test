@@ -9,5 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
     </ListView>
+    
+    <RelativeLayout
+        android:id="@+id/search_item_refresh_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        >
+
+        <include layout="@layout/no_network_layout" />
+    </RelativeLayout>
 
 </RelativeLayout>
