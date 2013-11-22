@@ -42,7 +42,7 @@ public class LoginFragment extends SherlockFragment implements OnClickListener {
 	private Button mLogin;
 	private EditText stringName;
 	private EditText stringPassword;
-	private UserDatamanage userManage;
+//	private UserDatamanage userManage;
 	private IpAddress ipAddress;
 	private MyMallActivity fragment;
 	private MyApplication myApplication;
@@ -69,7 +69,7 @@ public class LoginFragment extends SherlockFragment implements OnClickListener {
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.my_mall_login, container, false);
 		// getSherlockActivity().getSupportActionBar().setCustomView(R.layout.login_top);
-		userManage = new UserDatamanage(getSherlockActivity());
+//		userManage = new UserDatamanage(getSherlockActivity());
 		myApplication = (MyApplication) getSherlockActivity().getApplication();
 
 
@@ -282,7 +282,7 @@ public class LoginFragment extends SherlockFragment implements OnClickListener {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar = new ProgressDialog(getSherlockActivity());
-			bar.setCancelable(false);
+			bar.setCancelable(true);
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 			bar.show();
 		}
