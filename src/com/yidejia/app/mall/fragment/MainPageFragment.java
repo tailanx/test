@@ -11,6 +11,7 @@ import java.util.TimerTask;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -143,12 +144,8 @@ public class MainPageFragment extends SherlockFragment {
 		functionIntent(child);
 
 		mPullToRefreshScrollView = (PullToRefreshScrollView) view.findViewById(R.id.main_pull_refresh_scrollview);
-		mPullToRefreshScrollView = (PullToRefreshScrollView) view
-				.findViewById(R.id.main_pull_refresh_scrollview);
 		mPullToRefreshScrollView.setScrollingWhileRefreshingEnabled(true);
 		mPullToRefreshScrollView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
-		mPullToRefreshScrollView
-				.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
 		mPullToRefreshScrollView.setVerticalScrollBarEnabled(false); // 禁用垂直滚动
 		mPullToRefreshScrollView.setHorizontalScrollBarEnabled(false); // 禁用水平滚动
 	
@@ -501,6 +498,18 @@ public class MainPageFragment extends SherlockFragment {
 //			hotSellView.initInerbtyView(inerbtyArray);
 //			intentToView(view);
 //			main_mall_notice_content.setText(ggTitleArray.get(0));
+			bar = new ProgressDialog(getSherlockActivity());
+			bar.setCancelable(true);
+			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					isFirstIn = false;
+					closeTask();
+				}
+			});
 			createView(view, inflater);
 			if(!ConnectionDetector.isConnectingToInternet(getSherlockActivity())){
 				Toast.makeText(getSherlockActivity(), getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
@@ -509,6 +518,7 @@ public class MainPageFragment extends SherlockFragment {
 			closeTask();
 			task = new Task();
 			task.execute();
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -520,10 +530,10 @@ public class MainPageFragment extends SherlockFragment {
 	
 	private boolean isFirstIn = true;
 	private Task task;
+	private ProgressDialog bar;
 	
 	private class Task extends AsyncTask<Void, Void, Boolean>{
 
-		private ProgressDialog bar;
 		
 		@Override
 		protected Boolean doInBackground(Void... params) {
@@ -551,9 +561,6 @@ public class MainPageFragment extends SherlockFragment {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			if (isFirstIn) {
-				bar = new ProgressDialog(getSherlockActivity());
-//				bar.setCancelable(false);
-				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 				bar.show();
 			}
 			if(!bannerArray.isEmpty())bannerArray.clear();
