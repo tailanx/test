@@ -19,7 +19,7 @@ import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
+//import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -41,9 +41,10 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.address.ArrayWheelAdapter;
 import com.yidejia.app.mall.address.OnWheelChangedListener;
 import com.yidejia.app.mall.address.WheelView;
-import com.yidejia.app.mall.datamanage.AddressDataManage;
+//import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.model.Addresses;
-import com.yidejia.app.mall.util.DefinalDate;
+import com.yidejia.app.mall.task.TaskSaveAddr;
+//import com.yidejia.app.mall.util.DefinalDate;
 
 public class EditNewAddressActivity extends SherlockActivity {
 	// private DBManager dbm;
@@ -51,7 +52,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 	// private TextView textView;
 	// // private Spinner province;
 	// // private Spinner city;
-	private AddressDataManage dataManage;
+//	private AddressDataManage dataManage;
 	private static HashMap<String, Object> valueMap;
 	private HashMap<Integer, String> valueMap3;
 	private ArrayList<String> list;
@@ -129,7 +130,8 @@ public class EditNewAddressActivity extends SherlockActivity {
 		// this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 		// WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		dataManage = new AddressDataManage(this);
+//		dataManage = new AddressDataManage(this);
+		myApplication = (MyApplication)getApplication();
 
 		setActionbar();
 		setContentView(R.layout.new_address);
@@ -471,11 +473,13 @@ public class EditNewAddressActivity extends SherlockActivity {
 		};
 	};
 
+	private TaskSaveAddr taskSaveAddr;
 
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
+		if(taskSaveAddr != null) taskSaveAddr.closeTask();
 	}
 
 	private void setActionbar() {
@@ -505,6 +509,9 @@ public class EditNewAddressActivity extends SherlockActivity {
 				EditNewAddressActivity.this.finish();
 			}
 		});
+		
+		taskSaveAddr = new TaskSaveAddr(EditNewAddressActivity.this);
+		
 		Button rightButton = (Button) findViewById(R.id.actionbar_right);
 		rightButton.setText("完成");
 		rightButton.setOnClickListener(new android.view.View.OnClickListener() {
@@ -518,23 +525,18 @@ public class EditNewAddressActivity extends SherlockActivity {
 					Toast.makeText(EditNewAddressActivity.this,
 							"收货人姓名,电话不能为空 ", Toast.LENGTH_SHORT).show();
 				} else {
+					String shengString = sheng.getText().toString().trim();
+					String shiString = shi.getText().toString().trim();
+					String quString = qu.getText().toString().trim();
+					String nameString = nameTextView.getText().toString().trim();
+					String areaString = areaTextView.getText().toString().trim();
+					String handsetString = numberTextView.getText().toString().trim();
+					String userId = myApplication.getUserId();
+					String token = myApplication.getToken();
+					
+					taskSaveAddr.saveAddr(userId, nameString, handsetString, shengString, shiString, quString, areaString, id, token);
 
-					Addresses addresses = new Addresses();
-					addresses.setProvince(sheng.getText().toString());
-					addresses.setCity(shi.getText().toString());
-					addresses.setArea(qu.getText().toString());
-					// Log.i("info",city +"district");
-					// Log.i("info",province +"district");
-					// Log.i("info",district +"district");
-					addresses.setName(nameTextView.getText().toString());
-					// addresses.setProvince(spinner1.getSelectedItem().toString());
-					// addresses.setCity(spinner2.getSelectedItem().toString());
-					addresses.setAddress(areaTextView.getText().toString());
-					addresses.setHandset(numberTextView.getText().toString());
-					addresses.setAddressId(id);
-
-
-					boolean issuccess = dataManage
+					/*boolean issuccess = dataManage
 							.updateAddress(
 									((MyApplication) EditNewAddressActivity.this
 											.getApplication())
@@ -560,8 +562,14 @@ public class EditNewAddressActivity extends SherlockActivity {
 								.show();
 
 					} else {
-						// addresses.setAddressId(addressId+"");
-						// ����ݰ󶨵�Spinner��ͼ��
+						Addresses addresses = new Addresses();
+						addresses.setProvince(shengString);
+						addresses.setCity(shiString);
+						addresses.setArea(quString);
+						addresses.setName(nameString);
+						addresses.setAddress(areaString);
+						addresses.setHandset(handsetString);
+						addresses.setAddressId(id);
 						Intent intent = getIntent();
 						// ��ȡbundle����
 						Bundle bundle = new Bundle();
@@ -574,7 +582,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 						// Toast.makeText(NewAddressActivity.this,
 						// "�༭�ɹ�",
 						// } Toast.LENGTH_LONG).show();
-					}
+					}*/
 					}
 				}
 			

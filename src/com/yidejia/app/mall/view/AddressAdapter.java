@@ -30,6 +30,7 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.net.ConnectionDetector;
+import com.yidejia.app.mall.net.address.DeleteUserAddress;
 import com.yidejia.app.mall.net.address.SetDefAddr;
 import com.yidejia.app.mall.util.DefinalDate;
 
@@ -38,7 +39,7 @@ import android.content.SharedPreferences.Editor;
 
 public class AddressAdapter extends BaseAdapter {
 	public ArrayList<Addresses> mAddresses;
-	private AddressDataManage dataManage;
+//	private AddressDataManage dataManage;
 	private Activity activity;
 	private LayoutInflater inflater;
 	private MyApplication myApplication;
@@ -49,11 +50,13 @@ public class AddressAdapter extends BaseAdapter {
 	public AddressAdapter(Activity context, ArrayList<Addresses> mAddresses) {
 		this.mAddresses = mAddresses;
 		myApplication = (MyApplication) context.getApplication();
-		dataManage = new AddressDataManage(context);
+//		dataManage = new AddressDataManage(context);
 		this.activity = context;
 		this.inflater = LayoutInflater.from(context);
 		setDefAddr = new SetDefAddr();
 		bar = new ProgressDialog(context);
+		
+		delAddress = new DeleteUserAddress(context);
 		
 		sp = MainFragmentActivity.MAINACTIVITY.getSharedPreferences("StateCBId", Activity.MODE_PRIVATE);
 		Editor editor = sp.edit();
@@ -142,12 +145,17 @@ public class AddressAdapter extends BaseAdapter {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								// TODO Auto-generated method stub
-								dataManage.deleteAddress(
+								/*dataManage.deleteAddress(
 										myApplication.getUserId(),
 										addresses.getAddressId(),
 										myApplication.getToken());
 								mAddresses.remove(addresses);
-								notifyDataSetChanged();
+								notifyDataSetChanged();*/
+								addressId = addresses.getAddressId();
+								closeTask();
+								delTask = new DelTask();
+								delTask.setAddresses(addresses);
+								delTask.execute();
 							}
 						})
 				.setNegativeButton(
@@ -339,6 +347,54 @@ public class AddressAdapter extends BaseAdapter {
 	public void closeTask(){
 		if(task != null && task.getStatus().RUNNING == AsyncTask.Status.RUNNING){
 			task.cancel(true);
+		}
+		if(delTask != null && delTask.getStatus().RUNNING == AsyncTask.Status.RUNNING){
+			delTask.cancel(true);
+		}
+	}
+	
+	
+	private DelTask delTask;
+	private DeleteUserAddress delAddress;
+	private class DelTask extends AsyncTask<Void, Void, Boolean> {
+		
+		private Addresses addresses;
+		public void setAddresses(Addresses addresses){
+			this.addresses = addresses;
+		}
+		
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			bar.setProgress(ProgressDialog.STYLE_SPINNER);
+			bar.setCancelable(true);
+			bar.show();
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			bar.dismiss();
+			if(result && addresses != null && !mAddresses.isEmpty()){
+				mAddresses.remove(addresses);
+				notifyDataSetChanged();
+			}
+		}
+		
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			try {
+				String httpresp = delAddress.deleteAddress(myApplication.getUserId(),
+							addressId, myApplication.getToken());
+				return delAddress.analysicDeleteJson(httpresp);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return false;
 		}
 	}
 }

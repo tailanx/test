@@ -211,16 +211,18 @@ public class AddressActivity extends SherlockActivity {
 			if (requestCode == DefinalDate.requestcode
 					&& resultCode == DefinalDate.responcode) {
 				try {
-					Bundle bundle = data.getExtras();
-					Addresses addresses = (Addresses) bundle
-							.getSerializable("newaddress");
+//					Bundle bundle = data.getExtras();
+//					Addresses addresses = (Addresses) bundle
+//							.getSerializable("newaddress");
 					// Log.i(TAG, TAG+"onResume");
 					/*mAddresses.add(addresses);
 					adapter.notifyDataSetChanged();
 					*/
-					pullToRefreshListView.setRefreshing();
-					pullToRefreshListView.onRefreshComplete();
-					
+//					if(fromIndex != 0){ 
+						fromIndex = 0;
+						pullToRefreshListView.setRefreshing();
+						pullToRefreshListView.onRefreshComplete();
+//					}
 					
 					// adapter.mAddresses.clear();
 					// AddressDataManage addressDataManage1= new
@@ -300,7 +302,7 @@ public class AddressActivity extends SherlockActivity {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			if (isFirstIn) {
-				bar.setCancelable(false);
+				bar.setCancelable(true);
 				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 				bar.show();
 			}
