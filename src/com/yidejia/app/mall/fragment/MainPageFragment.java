@@ -203,6 +203,7 @@ public class MainPageFragment extends SherlockFragment {
 				// mPullToRefreshScrollView.setRefreshing();
 				if(!ConnectionDetector.isConnectingToInternet(getSherlockActivity())){
 					Toast.makeText(getSherlockActivity(), getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+					mPullToRefreshScrollView.onRefreshComplete();
 					return;
 				}
 				closeTask();
@@ -513,6 +514,7 @@ public class MainPageFragment extends SherlockFragment {
 			createView(view, inflater);
 			if(!ConnectionDetector.isConnectingToInternet(getSherlockActivity())){
 				Toast.makeText(getSherlockActivity(), getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+				isFirstIn = false;
 				return;
 			}
 			closeTask();
@@ -574,57 +576,60 @@ public class MainPageFragment extends SherlockFragment {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 //			try{
-			if(isAdded()){
-				
-			if(result){
-				try {
-					
-					layout.removeAllViews();
-					getMainListFirstItem();
-					layout.addView(mMainView);
-					
-					HotSellView hotSellView = new HotSellView(view,getSherlockActivity());
-					hotSellView.initHotSellView(hotsellArray);
-					hotSellView.initAcymerView(acymerArray);
-					hotSellView.initInerbtyView(inerbtyArray);
-					
+			if (isAdded()) {
+
+				if (result) {
 					try {
-						intentToView(view);
+
+						layout.removeAllViews();
+						getMainListFirstItem();
+						layout.addView(mMainView);
+
+						HotSellView hotSellView = new HotSellView(view,
+								getSherlockActivity());
+						hotSellView.initHotSellView(hotsellArray);
+						hotSellView.initAcymerView(acymerArray);
+						hotSellView.initInerbtyView(inerbtyArray);
+
+						try {
+							intentToView(view);
+						} catch (Exception e) {
+							// TODO: handle exception
+							e.printStackTrace();
+						}
+
+						main_mall_notice_content.setText(ggTitleArray.get(0));
 					} catch (Exception e) {
 						// TODO: handle exception
-						e.printStackTrace();
 					}
-					
-					main_mall_notice_content.setText(ggTitleArray.get(0));
-				} catch (Exception e) {
-					// TODO: handle exception
+					// } catch (Exception e) {
+					// // TODO Auto-generated catch block
+					// e.printStackTrace();
+					// Toast.makeText(getSherlockActivity(),
+					// getResources().getString(R.string.bad_network),
+					// Toast.LENGTH_SHORT).show();
 				}
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			Toast.makeText(getSherlockActivity(), getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
-			} 
-		}else{
+			} else {
 				Toast.makeText(getSherlockActivity(),
 						getResources().getString(R.string.bad_network),
 						Toast.LENGTH_SHORT).show();
 
-
 			}
-			if(isFirstIn){
+			if (isFirstIn) {
 				bar.dismiss();
 				isFirstIn = false;
 			} else {
-				
+
 				mPullToRefreshScrollView.onRefreshComplete();
 				String label = getResources().getString(R.string.update_time)
 						+ DateUtils.formatDateTime(getSherlockActivity()
 								.getApplicationContext(), System
 								.currentTimeMillis(),
 								DateUtils.FORMAT_SHOW_TIME
-								| DateUtils.FORMAT_SHOW_DATE
-								| DateUtils.FORMAT_ABBREV_ALL);
-				mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+										| DateUtils.FORMAT_SHOW_DATE
+										| DateUtils.FORMAT_ABBREV_ALL);
+				mPullToRefreshScrollView.getLoadingLayoutProxy()
+						.setLastUpdatedLabel(label);
 			}
 		}
 		
