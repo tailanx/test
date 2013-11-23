@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.util.TypedValue;
@@ -13,9 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.UserComment;
 import com.yidejia.app.mall.net.ConnectionDetector;
@@ -25,6 +28,8 @@ public class CommentUtil {
 	private Context context;
 	private LinearLayout linearLayout;
 	private View view;
+	private PullToRefreshScrollView mPullToRefreshScrollView;
+	private RelativeLayout refresh_view;
 
 
 	/**
@@ -44,13 +49,20 @@ public class CommentUtil {
 		// this.view = view;
 		// this.dataManage = dataManage;
 		getCommentList = new GetProductCommentList();
+		bar = new ProgressDialog(context);
+		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+	}
+	
+	public void setRefreshView(PullToRefreshScrollView mPullToRefreshScrollView, RelativeLayout refresh_view){
+		this.mPullToRefreshScrollView = mPullToRefreshScrollView;
+		this.refresh_view = refresh_view;
 	}
 	
 	private String goodsId;
 	private int fromIndex;
 	private int amount ;
 	private boolean isNoMore = false;
-	private boolean isHasRet = true;
+	private boolean isHasRet = false;
 	private ArrayList<UserComment> comments = new ArrayList<UserComment>();
 	private Task task;
 	private boolean isFirstIn = true;//第一次进入
@@ -68,24 +80,43 @@ public class CommentUtil {
 		if (ConnectionDetector.isConnectingToInternet(context)) {
 			if("".equals(goodsId) || goodsId == null) {
 				Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
-				return;
+//				return;
+				refresh_view.setVisibility(view.VISIBLE);
+				mPullToRefreshScrollView.setVisibility(view.GONE);
+			} else {
+				closeTask();
+				task = new Task();
+				task.execute();
 			}
-			closeTask();
-			task = new Task();
-			task.execute();
+		} else {
+			refresh_view.setVisibility(view.VISIBLE);
+			mPullToRefreshScrollView.setVisibility(view.GONE);
 		}
+		bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+			
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				// TODO Auto-generated method stub
+//					isFirstIn = false;
+				if(!isHasRet){
+					refresh_view.setVisibility(view.VISIBLE);
+					mPullToRefreshScrollView.setVisibility(view.GONE);
+				}
+				closeTask();
+			}
+		});
 	}
+	
+	private ProgressDialog bar;
 	
 	private class Task extends AsyncTask<Void, Void, Boolean>{
 		
-		private ProgressDialog bar;
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			if (isFirstIn) {
-				bar = new ProgressDialog(context);
-				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+				
 				// bar.setCancelable(false);
 				bar.show();
 			}
@@ -94,7 +125,12 @@ public class CommentUtil {
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-			
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			try {
 				String httpresp = getCommentList.getCommentsListJsonString("goods_id=" + goodsId, fromIndex + "", amount + "", "", "commentDate+desc", "%2A");
 				issuccess = getCommentList.analysisGetListJson(httpresp);
@@ -135,6 +171,10 @@ public class CommentUtil {
 				Toast.makeText(context, context.getResources().getString(R.string.nomore), Toast.LENGTH_LONG).show();
 				return;
 			}
+			
+			refresh_view.setVisibility(view.GONE);
+			mPullToRefreshScrollView.setVisibility(view.VISIBLE);
+			
 			int length = comments.size();
 			Log.e(CommentUtil.class.getName(), "length:"+length);
 			
