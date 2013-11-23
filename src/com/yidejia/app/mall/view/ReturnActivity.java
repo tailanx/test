@@ -46,11 +46,11 @@ public class ReturnActivity extends SherlockActivity {
 		order_code = bundle.getString("orderCode");
 		
 		the_date = bundle.getString("orderDate");
-		if(info==null||"".equals(info)){
-		findIds();
-		orderCodeTextView.setText(order_code);
-		orderDateTextView.setText(the_date);
-		}else{
+		if (info == null || "".equals(info)) {
+			findIds();
+			orderCodeTextView.setText(order_code);
+			orderDateTextView.setText(the_date);
+		} else{
 			
 			submit.setVisibility(View.GONE);
 			findIds();
