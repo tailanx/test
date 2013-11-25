@@ -183,7 +183,7 @@
                 android:id="@+id/editor_linearLayout5"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/layout_selector2" >
+                android:background="@drawable/layout_selector3" >
 
                 <TextView
                     android:id="@+id/editor_hotline"
@@ -264,7 +264,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/clear_search"
-                android:onClick="doClick"
                 android:text="退出登录"
                 android:textColor="#ffeeeeee"
                 android:textSize="20sp" />
