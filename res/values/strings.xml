@@ -262,5 +262,16 @@
     <string name="sure_delete_history">确认清空浏览历史？</string>
     <string name="clean">清空</string>
     <string name="zhanwulishishuju">亲，您的浏览记录为空</string>
-
+    
+    <string name="zto">中通</string>
+    <string name="sto">申通</string>
+    <string name="yto">圆通</string>
+    <string name="yunda">韵达</string>
+    <string name="ems_ex">EMS</string>
+	<string name="uc_ex">优速</string>
+	<string name="lbex">龙邦</string>
+	<string name="ttkdex">天天</string>
+	<string name="qfkd"></string>
+	<string name="best_ex"></string>
+	
 </resources>
