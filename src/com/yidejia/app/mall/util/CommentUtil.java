@@ -126,12 +126,6 @@ public class CommentUtil {
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			try {
 				String httpresp = getCommentList.getCommentsListJsonString("goods_id=" + goodsId, fromIndex + "", amount + "", "", "commentDate+desc", "%2A");
 				issuccess = getCommentList.analysisGetListJson(httpresp);
 				comments = getCommentList.getComments();
