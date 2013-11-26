@@ -25,12 +25,12 @@ void addString(char* desc, char* addition) {
 //	strcpy(desc, addition);
 }
 
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4PostUrl(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4PostUrl(JNIEnv* env,
 		jobject thiz){
 	return (*env)->NewStringUTF(env, url);
 }
 //ͼƬ��ַ get
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ImageUrlPrefix(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ImageUrlPrefix(JNIEnv* env,
 		jobject thiz){
 	int i;
 
@@ -75,7 +75,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ImageUrlPrefix(JNIEnv*
 }
 
 //ɾ���û��ջ���ַ, ���� String cid , aid, token, ����post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelAddress(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelAddress(JNIEnv* env,
 		jobject thiz, jstring cid, jstring aid, jstring token){
 	char *chcid = (*env)->GetStringUTFChars(env, cid, NULL);
 	char *chaid = (*env)->GetStringUTFChars(env, aid, NULL);
@@ -130,7 +130,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelAddress(JNIEnv* env
 }
 
 //��ȡ�û��ջ���ַ, ���� where, offset, limit, group, order, fields,����get
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetAddress(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetAddress(JNIEnv* env,
 		jobject thiz, jstring where, jstring offset, jstring limit, jstring group, jstring order, jstring fields){
 
 	char *chwhere = (*env)->GetStringUTFChars(env, where, NULL);
@@ -202,7 +202,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetAddress(JNIEnv* env
 }
 
 //�����û��ջ���ַ, ����cid, cname, handset, province, city, district, address, rid, token �� ����post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveAddress(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveAddress(JNIEnv* env,
 		jobject thiz, jstring customer_id, jstring customer_name, jstring handset, jstring province,
 		jstring city, jstring district, jstring address, jstring recipient_id, jstring token){
 
@@ -285,7 +285,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveAddress(JNIEnv* en
 }
 
 //ɾ���û�����, ���� String id�� ����post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelComment(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelComment(JNIEnv* env,
 		jobject thiz, jstring id){
 	char *chcid = (*env)->GetStringUTFChars(env, id, NULL);
 
@@ -331,7 +331,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelComment(JNIEnv* env
 }
 
 //��ȡ�û�����, ���� where, offset, limit, group, order, fields,����get
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetComment(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetComment(JNIEnv* env,
 		jobject thiz, jstring where, jstring offset, jstring limit, jstring group, jstring order, jstring fields){
 
 	char *chwhere = (*env)->GetStringUTFChars(env, where, NULL);
@@ -403,7 +403,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetComment(JNIEnv* env
 //�����û�����, ����String goods_id,
 //String user_id, String user_name, String title, String experience,
 //String commentDate�� ����post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveComment(
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveComment(
 		JNIEnv* env, jobject thiz, jstring goods_id, jstring user_id,
 		jstring user_name, jstring title, jstring experience, jstring commentDate) {
 
@@ -469,7 +469,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveComment(
 }
 
 //��ȡ��������, ���� where, offset, limit, group, order, fields,����get
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetDistribute(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetDistribute(JNIEnv* env,
 		jobject thiz, jstring where, jstring offset, jstring limit, jstring group, jstring order, jstring fields){
 
 	char *chwhere = (*env)->GetStringUTFChars(env, where, NULL);
@@ -539,7 +539,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetDistribute(JNIEnv* 
 }
 
 //��ȡ���ͷ���, ���� where, offset, limit, group, order, fields,����get
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetExpress(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetExpress(JNIEnv* env,
 		jobject thiz, jstring where, jstring offset, jstring limit, jstring group, jstring order, jstring fields){
 
 	char *chwhere = (*env)->GetStringUTFChars(env, where, NULL);
@@ -609,7 +609,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetExpress(JNIEnv* env
 }
 
 //��ȡ�����б�, ���� where, offset, limit, group, order, fields,����get
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetFree(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetFree(JNIEnv* env,
 		jobject thiz, jstring where, jstring offset, jstring limit, jstring group, jstring order, jstring fields){
 
 	char *chwhere = (*env)->GetStringUTFChars(env, where, NULL);
@@ -681,7 +681,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetFree(JNIEnv* env,
 /**
  * ����ղ��Ƿ���� ,���� String userid, String goodsid, string token, post
  */
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CheckFav(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CheckFav(JNIEnv* env,
 		jobject thiz, jstring userid, jstring goodsid, jstring token){
 	char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
 	char *chgid = (*env)->GetStringUTFChars(env, goodsid, NULL);
@@ -736,7 +736,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CheckFav(JNIEnv* env,
 }
 
 //ɾ���ղ�, ���� String userid , goodsid, token, ����post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelFav(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelFav(JNIEnv* env,
 		jobject thiz, jstring userid, jstring goodsid, jstring token){
 	char *chcid = (*env)->GetStringUTFChars(env, userid, NULL);
 	char *chgid = (*env)->GetStringUTFChars(env, goodsid, NULL);
@@ -791,7 +791,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelFav(JNIEnv* env,
 }
 
 //��ȡ�ղ��б�, ���� where, offset, limit, group, order, fields,����get
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetFav(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetFav(JNIEnv* env,
 		jobject thiz, jstring where, jstring offset, jstring limit, jstring group, jstring order, jstring fields){
 
 	char *chwhere = (*env)->GetStringUTFChars(env, where, NULL);
@@ -861,7 +861,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetFav(JNIEnv* env,
 }
 
 //�����ղ�, ���� String userid , goodsid, token, ����post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveFav(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveFav(JNIEnv* env,
 		jobject thiz, jstring userid, jstring goodsid, jstring token){
 	char *chcid = (*env)->GetStringUTFChars(env, userid, NULL);
 	char *chgid = (*env)->GetStringUTFChars(env, goodsid, NULL);
@@ -916,7 +916,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveFav(JNIEnv* env,
 }
 
 //��ȡ��Ʒ��Ϣ, ���� String id�� ����get
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetGoods(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetGoods(JNIEnv* env,
 		jobject thiz, jstring id){
 	char *chcid = (*env)->GetStringUTFChars(env, id, NULL);
 
@@ -964,7 +964,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetGoods(JNIEnv* env,
 }
 
 //��ȡ��ҳ get
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetHome(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetHome(JNIEnv* env,
 		jobject thiz){
 	int i;
 
@@ -1012,7 +1012,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetHome(JNIEnv* env,
 }
 
 //��ȡ�������, ���� user_id, code, date, status, offset1, fields��token,����get
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetOrder(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetOrder(JNIEnv* env,
 		jobject thiz, jstring user_id, jstring code, jstring date,
 		jstring status, jstring offset1, jstring limit1, jstring token){
 
@@ -1087,7 +1087,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetOrder(JNIEnv* env,
 }
 
 //根据订单编号获取订单信息, code ！方法，get
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetOrderByCode(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetOrderByCode(JNIEnv* env,
 		jobject thiz, jstring code){
 
 //	char *chuser_id = (*env)->GetStringUTFChars(env, user_id, NULL);
@@ -1161,7 +1161,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetOrderByCode(JNIEnv*
 }
 
 //获取待评价商品列表 ,id ! get
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetNoEvaluate(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetNoEvaluate(JNIEnv* env,
 		jobject thiz, jstring user_id){
 
 	char *chuser_id = (*env)->GetStringUTFChars(env, user_id, NULL);
@@ -1235,7 +1235,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetNoEvaluate(JNIEnv* 
 }
 
 //�޸�֧��״̬, ���� String customer_id , code, token, ����post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4PayOut(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4PayOut(JNIEnv* env,
 		jobject thiz, jstring customer_id, jstring code){
 	char *chcid = (*env)->GetStringUTFChars(env, customer_id, NULL);
 	char *chgid = (*env)->GetStringUTFChars(env, code, NULL);
@@ -1290,7 +1290,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4PayOut(JNIEnv* env,
 }
 
 //ȡ��, ���� String id , code, token, ����post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CancelOrder(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CancelOrder(JNIEnv* env,
 		jobject thiz, jstring id, jstring code, jstring token){
 	char *chcid = (*env)->GetStringUTFChars(env, id, NULL);
 	char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
@@ -1345,7 +1345,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CancelOrder(JNIEnv* en
 }
 
 //ȡ��, ���� String id , code, token, ����post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelOrder(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelOrder(JNIEnv* env,
 		jobject thiz, jstring id, jstring code, jstring token){
 	char *chcid = (*env)->GetStringUTFChars(env, id, NULL);
 	char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
@@ -1400,7 +1400,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4DelOrder(JNIEnv* env,
 }
 
 //ǩ�ն���, ���� String id , code, token, ����post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SignOrder(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SignOrder(JNIEnv* env,
 		jobject thiz, jstring id, jstring code, jstring token){
 	char *chcid = (*env)->GetStringUTFChars(env, id, NULL);
 	char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
@@ -1456,7 +1456,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SignOrder(JNIEnv* env,
 
 //�ύ����, ���� customer_id , ticket_id,recipient_id,pingou_id, goods_ascore,ship_fee,
 //ship_type , ship_entity_name, goods_qty_scr,comments, token, ����post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveOrder(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveOrder(JNIEnv* env,
 		jobject thiz, jstring customer_id, jstring ticket_id, jstring recipient_id, jstring pingou_id, jstring goods_ascore,
 		jstring ship_fee, jstring ship_type, jstring ship_entity_name, jstring goods_qty_scr, jstring comments, jstring pay_type, jstring token){
 	char *chcustomer_id = (*env)->GetStringUTFChars(env, customer_id, NULL);
@@ -1537,7 +1537,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveOrder(JNIEnv* env,
 }
 
 //��ȡƷ�� get
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetBrand(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetBrand(JNIEnv* env,
 		jobject thiz){
 	int i;
 
@@ -1585,7 +1585,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetBrand(JNIEnv* env,
 }
 
 //��ȡ��Ч�б�, ���� where, offset, limit, group, order, fields,����get
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetEffect(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetEffect(JNIEnv* env,
 		jobject thiz, jstring where, jstring offset, jstring limit, jstring group, jstring order, jstring fields){
 
 	char *chwhere = (*env)->GetStringUTFChars(env, where, NULL);
@@ -1655,7 +1655,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetEffect(JNIEnv* env,
 }
 
 //��ȡ��������б�, ���� name, fun, brand, price, order1, offset1, limit1,����get
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetSearch(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetSearch(JNIEnv* env,
 		jobject thiz, jstring name, jstring fun, jstring brand, jstring price, jstring order1, jstring offset1, jstring limit1){
 
 	char *chname = (*env)->GetStringUTFChars(env, name, NULL);
@@ -1737,7 +1737,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetSearch(JNIEnv* env,
 }
 
 //��ȡ�۸����get
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetPrice(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetPrice(JNIEnv* env,
 		jobject thiz){
 	int i;
 
@@ -1785,7 +1785,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetPrice(JNIEnv* env,
 }
 
 //��ȡ�û����,����id�� token�� ����post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetVoucher(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetVoucher(JNIEnv* env,
 		jobject thiz, jstring id, jstring token){
 
 	char *chid = (*env)->GetStringUTFChars(env, id, NULL);
@@ -1840,7 +1840,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetVoucher(JNIEnv* env
 }
 
 //��¼,����username, password, ip�� ����post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4Login(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4Login(JNIEnv* env,
 		jobject thiz, jstring username, jstring password, jstring ip){
 
 	char *chuser = (*env)->GetStringUTFChars(env, username, NULL);
@@ -1899,7 +1899,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4Login(JNIEnv* env,
 }
 
 //ע��,����username , password, cps, ip�� ����post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4Register(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4Register(JNIEnv* env,
 		jobject thiz, jstring username, jstring password, jstring cps, jstring ip){
 
 	char *chuser = (*env)->GetStringUTFChars(env, username, NULL);
@@ -1962,7 +1962,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4Register(JNIEnv* env,
 }
 
 //����Ĭ�ϵ�ַ,����cid, aid�� token�� ����post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SetDefAddr(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SetDefAddr(JNIEnv* env,
 		jobject thiz, jstring cid, jstring aid, jstring token){
 
 	char *chcid = (*env)->GetStringUTFChars(env, cid, NULL);
@@ -2021,7 +2021,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SetDefAddr(JNIEnv* env
 }
 
 //��ȡ����ͺͻ�ֻ����б� ����goods, userid ,post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetVerify(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetVerify(JNIEnv* env,
 		jobject thiz, jstring goods, jstring userid){//, jstring token
 
 	char *chgoods = (*env)->GetStringUTFChars(env, goods, NULL);
@@ -2080,7 +2080,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetVerify(JNIEnv* env,
 }
 
 //��ȡ�û���֣��ղأ���Ϣ�� ��������, ���� userid, token,����get
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetCount(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetCount(JNIEnv* env,
 		jobject thiz, jstring userId, jstring token){
 
 	char *chname = (*env)->GetStringUTFChars(env, userId, NULL);
@@ -2134,7 +2134,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetCount(JNIEnv* env,
 }
 
 //��ȡ��Ϣ�����û���Ϣ�б�, ���� userid, token, offset1,limit1,����get
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetMessage(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetMessage(JNIEnv* env,
 		jobject thiz, jstring userId, jstring token, jstring offset1, jstring limit1){
 
 	char *chname = (*env)->GetStringUTFChars(env, userId, NULL);
@@ -2194,7 +2194,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetMessage(JNIEnv* env
 }
 
 //�����Ϣδ�Ѷ�״̬ ����pid, userid ,post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ChangeRead(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ChangeRead(JNIEnv* env,
 		jobject thiz, jstring userid, jstring pid, jstring token){//
 
 	char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
@@ -2253,7 +2253,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ChangeRead(JNIEnv* env
 }
 
 //�����Ϣδ�Ѷ�״̬ ����pid, userid ,post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetReturn(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetReturn(JNIEnv* env,
 		jobject thiz, jstring userid, jstring order_code,
 		jstring the_date, jstring contact, jstring phone, jstring cause, jstring desc, jstring token){//
 
@@ -2326,7 +2326,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetReturn(JNIEnv* env,
 }
 
 //查看退换货信息 get
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetReturnList(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetReturnList(JNIEnv* env,
 		jobject thiz, jstring userId,  jstring offset1, jstring limit1, jstring token){//
 
 	char *chname = (*env)->GetStringUTFChars(env, userId, NULL);
@@ -2395,7 +2395,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetReturnList(JNIEnv* 
 }
 
 //查看退换货信息 get
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetShipLog(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetShipLog(JNIEnv* env,
 		jobject thiz, jstring code){//,  jstring offset1, jstring limit1, jstring token
 
 	char *chcode = (*env)->GetStringUTFChars(env, code, NULL);
@@ -2448,7 +2448,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetShipLog(JNIEnv* env
 }
 
 //获取tn
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetTn(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetTn(JNIEnv* env,
 		jobject thiz, jstring userid, jstring order_code, jstring token){//
 
 	char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
@@ -2505,7 +2505,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetTn(JNIEnv* env,
 }
 
 //get the photo code post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetCode(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetCode(JNIEnv* env,
 		jobject thiz, jstring name){//, jstring order_code, jstring token
 
 	char *chuid = (*env)->GetStringUTFChars(env, name, NULL);
@@ -2563,7 +2563,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetCode(JNIEnv* env,
 }
 
 //send message post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SendMsg(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SendMsg(JNIEnv* env,
 		jobject thiz, jstring name, jstring code){//, jstring order_code, jstring token
 
 	char *chuid = (*env)->GetStringUTFChars(env, name, NULL);
@@ -2621,7 +2621,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SendMsg(JNIEnv* env,
 }
 
 //check the msg code post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CheckCode(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CheckCode(JNIEnv* env,
 		jobject thiz, jstring name, jstring code){//, jstring order_code, jstring token
 
 	char *chuid = (*env)->GetStringUTFChars(env, name, NULL);
@@ -2679,7 +2679,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4CheckCode(JNIEnv* env,
 }
 
 //check the msg code post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ResetPsw(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ResetPsw(JNIEnv* env,
 		jobject thiz, jstring name,jstring psw, jstring code){//, jstring order_code, jstring token
 
 	char *chuid = (*env)->GetStringUTFChars(env, name, NULL);
@@ -2739,7 +2739,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4ResetPsw(JNIEnv* env,
 }
 
 //查看皮肤测试信息 get
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SkinQuestion(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SkinQuestion(JNIEnv* env,
 		jobject thiz){
 
 	char encrypt[LEN] , urlString[LEN];
@@ -2784,7 +2784,7 @@ jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SkinQuestion(JNIEnv* e
 }
 
 //提交皮肤测试数据 post
-jstring Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SkinAnswer(JNIEnv* env,
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SkinAnswer(JNIEnv* env,
 		jobject thiz, jstring handset, jstring qq, jstring name,jstring gender, jstring birthday
 		, jstring improve_type, jstring skin_type, jstring want_type
 		, jstring brand, jstring channel, jstring cpsid, jstring ip){
