@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,7 +16,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +50,10 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 	private int currIndex = 1;
 	private int number = 0;
 	private Button cartButotn;
+	private ImageView refresh_data_btn;
+	private RelativeLayout refresh_view;
+	private FrameLayout goods_framelayout;
+	
 	private String goodsId;
 	private ProductBaseInfo info;
 	
@@ -59,6 +66,25 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 		Bundle bundle = getIntent().getExtras();
 		setActionbarConfig();
 		setContentView(R.layout.activity_goods_info_layout);
+		bar = new ProgressDialog(GoodsInfoActivity.this);
+		bar.setCancelable(true);
+		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		
+		bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+			
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				// TODO Auto-generated method stub
+				closeTask();
+				goods_framelayout.setVisibility(View.GONE);
+				refresh_view.setVisibility(View.VISIBLE);
+			}
+		});
+		
+		goods_framelayout = (FrameLayout) findViewById(R.id.goods_framelayout);
+		refresh_view = (RelativeLayout) findViewById(R.id.good_item_refresh_view);
+		refresh_data_btn = (ImageView) findViewById(R.id.refresh_data_btn);
+		
 		if (bundle != null) {
 			goodsId = bundle.getString("goodsId");
 			if (ConnectionDetector.isConnectingToInternet(this)) {
@@ -83,6 +109,17 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 		}
 //		initView();
 //		initViewPager();
+		
+		refresh_data_btn.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				closeTask();
+				task = new Task();
+				task.execute();
+			}
+		});
 	}
 	
 	private void closeTask(){
@@ -90,16 +127,14 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 			task.cancel(true);
 		}
 	}
+	private ProgressDialog bar;
+	
 	
 	private class Task extends AsyncTask<Void, Void, Boolean>{
-		private ProgressDialog bar;
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar = new ProgressDialog(GoodsInfoActivity.this);
-			bar.setCancelable(false);
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 			bar.show();
 		}
 		@Override
@@ -107,8 +142,10 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			if(!result){
-				Toast.makeText(GoodsInfoActivity.this, getResources().getString(R.string.bad_network), Toast.LENGTH_LONG).show();
+				Toast.makeText(GoodsInfoActivity.this, getResources().getString(R.string.no_product), Toast.LENGTH_LONG).show();
 			} else{
+				goods_framelayout.setVisibility(View.VISIBLE);
+				refresh_view.setVisibility(View.GONE);
 				initView();
 				initViewPager();
 			}
