@@ -58,6 +58,7 @@ import com.yidejia.app.mall.view.HistoryActivity;
 import com.yidejia.app.mall.view.IntegeralActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.view.MyCollectActivity;
+import com.yidejia.app.mall.view.SkinHomeActivity;
 import com.yidejia.app.mall.view.SkinQuesActivity;
 import com.yidejia.app.mall.widget.YLViewPager;
 
@@ -442,7 +443,7 @@ public class MainPageFragment extends SherlockFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intentOrder = new Intent(getSherlockActivity(),SkinQuesActivity.class);
+				Intent intentOrder = new Intent(getSherlockActivity(),SkinHomeActivity.class);
 				getSherlockActivity().startActivity(intentOrder);
 //					dialog.show();
 					// Intent intentOrder = new
@@ -576,58 +577,58 @@ public class MainPageFragment extends SherlockFragment {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 //			try{
-			if (isAdded()) {
-
-				if (result) {
-					try {
-
-						layout.removeAllViews();
-						getMainListFirstItem();
-						layout.addView(mMainView);
-
+			if(isAdded()){
+				
+			if(result){
+				try {
+					
+					layout.removeAllViews();
+					getMainListFirstItem();
+					layout.addView(mMainView);
+					
 						HotSellView hotSellView = new HotSellView(view,
 								getSherlockActivity());
-						hotSellView.initHotSellView(hotsellArray);
-						hotSellView.initAcymerView(acymerArray);
-						hotSellView.initInerbtyView(inerbtyArray);
-
-						try {
-							intentToView(view);
-						} catch (Exception e) {
-							// TODO: handle exception
-							e.printStackTrace();
-						}
-
-						main_mall_notice_content.setText(ggTitleArray.get(0));
+					hotSellView.initHotSellView(hotsellArray);
+					hotSellView.initAcymerView(acymerArray);
+					hotSellView.initInerbtyView(inerbtyArray);
+					
+					try {
+						intentToView(view);
 					} catch (Exception e) {
 						// TODO: handle exception
+						e.printStackTrace();
 					}
-					// } catch (Exception e) {
-					// // TODO Auto-generated catch block
-					// e.printStackTrace();
+					
+					main_mall_notice_content.setText(ggTitleArray.get(0));
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
 					// Toast.makeText(getSherlockActivity(),
 					// getResources().getString(R.string.bad_network),
 					// Toast.LENGTH_SHORT).show();
-				}
-			} else {
+			} 
+		}else{
 				Toast.makeText(getSherlockActivity(),
 						getResources().getString(R.string.bad_network),
 						Toast.LENGTH_SHORT).show();
 
 			}
-			if (isFirstIn) {
+			if(isFirstIn){
 				bar.dismiss();
 				isFirstIn = false;
 			} else {
-
+				
 				mPullToRefreshScrollView.onRefreshComplete();
 				String label = getResources().getString(R.string.update_time)
 						+ DateUtils.formatDateTime(getSherlockActivity()
 								.getApplicationContext(), System
 								.currentTimeMillis(),
 								DateUtils.FORMAT_SHOW_TIME
-										| DateUtils.FORMAT_SHOW_DATE
-										| DateUtils.FORMAT_ABBREV_ALL);
+								| DateUtils.FORMAT_SHOW_DATE
+								| DateUtils.FORMAT_ABBREV_ALL);
 				mPullToRefreshScrollView.getLoadingLayoutProxy()
 						.setLastUpdatedLabel(label);
 			}

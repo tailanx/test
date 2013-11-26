@@ -164,7 +164,6 @@ public class AddressActivity extends SherlockActivity {
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		// getSupportActionBar().setLogo(R.drawable.back);
-		getSupportActionBar().setIcon(R.drawable.back);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setCustomView(R.layout.actionbar_common);
 		// startActionMode(new
@@ -220,8 +219,8 @@ public class AddressActivity extends SherlockActivity {
 					*/
 //					if(fromIndex != 0){ 
 						fromIndex = 0;
-						pullToRefreshListView.setRefreshing();
-						pullToRefreshListView.onRefreshComplete();
+					pullToRefreshListView.setRefreshing();
+					pullToRefreshListView.onRefreshComplete();
 //					}
 					
 					// adapter.mAddresses.clear();

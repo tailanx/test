@@ -1165,24 +1165,4 @@ public class CstmPayActivity extends SherlockActivity {
 
 	private float voucher;
 
-	// public class InnerReceiver extends BroadcastReceiver {
-	//
-	// @Override
-	// public void onReceive(Context context, Intent intent) {
-	// // TODO Auto-generated method stub
-	// String action = intent.getAction();
-	// Log.i("voucher", "no" + "  nihao");
-	// if (Consts.BACK_UPDATE_CHANGE.equals(action)) {
-	// // Log.i("info", action + "action");
-	// layout.removeAllViews();
-	// voucher = intent.getIntExtra("voucher", -1);
-	// Log.i("voucher", voucher + "  voucher");
-	// cartList = (ArrayList<Cart>) intent
-	// .getSerializableExtra("carts");
-	// // ArrayList<Cart> carts = ExchangeFreeActivity.mArrayList;
-	// PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
-	// goods = pay.loadView(cartList, true);
-	// }
-	// }
-	// }
 }

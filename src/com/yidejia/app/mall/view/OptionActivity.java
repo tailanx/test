@@ -35,7 +35,7 @@ import com.yidejia.app.mall.R;
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			setActionbar();
-			//???��???????scrollview
+		
 			setContentView(R.layout.opinion);
 
 		}

@@ -8,14 +8,15 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!--  读取手机状态和身份  -->
-	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!-- 读取手机状态和身份 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name="com.yidejia.app.mall.MyApplication"
@@ -39,6 +40,7 @@ android:uiOptions="splitActionBarWhenNarrow"
             </intent-filter>
             <meta-data android:name="android.app.searchable"  
                    android:resource="@xml/main_searchable"/>  
+
         -->
         <activity
             android:name="com.yidejia.app.mall.MainActivity"
@@ -50,7 +52,6 @@ android:uiOptions="splitActionBarWhenNarrow"
         <activity
             android:name="com.yidejia.app.mall.SearchActivity"
             android:uiOptions="splitActionBarWhenNarrow"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
@@ -58,13 +59,12 @@ android:uiOptions="splitActionBarWhenNarrow"
             android:screenOrientation="portrait"
             android:uiOptions="splitActionBarWhenNarrow" >
         </activity>
-        <activity android:name="com.yidejia.app.mall.GoodsInfoActivity" 
-
-            android:screenOrientation="portrait"
-            >
-        	    
+        <activity
+            android:name="com.yidejia.app.mall.GoodsInfoActivity"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.yidejia.app.mall.SearchResultActivity"
+        <activity
+            android:name="com.yidejia.app.mall.SearchResultActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -72,106 +72,143 @@ android:uiOptions="splitActionBarWhenNarrow"
             android:screenOrientation="portrait"
             android:uiOptions="splitActionBarWhenNarrow"
             android:windowSoftInputMode="adjustPan" >
-            
         </activity>
-        <activity android:name="com.yidejia.app.mall.WelcomeActivity"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:screenOrientation="portrait" >
+        <activity
+            android:name="com.yidejia.app.mall.WelcomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.yidejia.app.mall.UserPayActivity"
+        <activity
+            android:name="com.yidejia.app.mall.UserPayActivity"
             android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.yidejia.app.mall.view.PersonActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.PersonActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.ExchangeActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.ExchangeActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.AllOrderActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.AllOrderActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.WaitPayActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.WaitPayActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.WaitDeliverActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.WaitDeliverActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.AlreadyOrderActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.AlreadyOrderActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.AlreadyComActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.AlreadyComActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.IntegeralActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.IntegeralActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.MyCollectActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.MyCollectActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.AddressActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.AddressActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.EvaluationActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.EvaluationActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.NewAddressActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.NewAddressActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.EditorActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.EditorActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.LoginActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.LoginActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.RegistActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.RegistActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.FindPwActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.FindPwActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.CstmPayActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.CstmPayActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.CheckActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.CheckActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.PersonEvaluationActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.PersonEvaluationActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.OrderDetailActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.OrderDetailActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.GoCartActivity"
-              android:launchMode="singleTask"
+        <activity
+            android:name="com.yidejia.app.mall.view.GoCartActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.EditNewAddressActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.EditNewAddressActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.ExchangeFreeActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.ExchangeFreeActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.OptionActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.OptionActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.RecommendActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.RecommendActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.yidejia.app.mall.view.ReturnActivity"
+        <activity
+            android:name="com.yidejia.app.mall.view.ReturnActivity"
             android:screenOrientation="portrait" />
-         <activity android:name="com.yidejia.app.mall.view.PayAddress"
-             android:screenOrientation="portrait" />
-         <activity android:name="com.yidejia.app.mall.view.NOProduceActivity"
-             android:screenOrientation="portrait" />
-           <activity android:name="com.yidejia.app.mall.view.AboutActivity"
-             android:screenOrientation="portrait" />
-           <activity android:name="com.yidejia.app.mall.view.HistoryActivity"
-             android:screenOrientation="portrait" />
-             <activity android:name="com.yidejia.app.mall.view.SkinQuesActivity"
-             android:screenOrientation="portrait" />
-             <activity android:name="com.yidejia.app.mall.ActiveGoActivity"
-             android:screenOrientation="portrait" />
-         <activity 
+        <activity
+            android:name="com.yidejia.app.mall.view.PayAddress"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yidejia.app.mall.view.NOProduceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yidejia.app.mall.view.AboutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yidejia.app.mall.view.HistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yidejia.app.mall.view.SkinQuesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yidejia.app.mall.view.SkinAnswerActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait" />
+         <activity
+            android:name="com.yidejia.app.mall.view.SkinHomeActivity"
+            android:screenOrientation="portrait" />
+          <activity
+            android:name="com.yidejia.app.mall.view.SkinResultAcitivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.unionpay.uppay.PayActivityEx"
-			android:label="@string/app_name" 
-			android:configChanges="orientation|keyboardHidden"
-			android:excludeFromRecents="true"
-			android:windowSoftInputMode="adjustResize">
-			
-		</activity>
-        
+            android:configChanges="orientation|keyboardHidden"
+            android:excludeFromRecents="true"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
         <activity
             android:name="com.unionpay.uppay.PayActivity"
             android:configChanges="orientation|keyboardHidden|screenLayout"
             android:excludeFromRecents="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.UPPay">
-           
+       
+            android:theme="@style/Theme.UPPay" >
         </activity>
     </application>
 

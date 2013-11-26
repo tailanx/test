@@ -42,6 +42,7 @@
     <string name="no_search_result">无搜索结果</string>
     <string name="login_error">用户不存在或密码错误</string>
     <string name="update_time">上次更新于</string>
+    <string name="buy_nothing">你还未购买任何商品，去选购商品吧</string>
     <string name="buy_nothing">您还未购买任何商品，去选购商品吧</string>
     <string name="price_error">价格出错，请联系我们的客服！</string>
     <string name="none_code">暂无</string>
@@ -262,16 +263,40 @@
     <string name="sure_delete_history">确认清空浏览历史？</string>
     <string name="clean">清空</string>
     <string name="zhanwulishishuju">亲，您的浏览记录为空</string>
-    
+    <string name="skin_test_frist">亲，已经是第一题了</string>
+    <string name="skin_test_last">亲，已经是最后一题了</string>
+    <string name="year">1980</string>
+    <string name="month">01</string>
+    <string name="day">01</string>
+    <string name="pre">下一题</string>
+    <string name="skin_name">姓名不能为空</string>
+    <string name="skin_bir">请选择出生日期</string>
+    <string name="skin_qq">qq号码不能为空</string>
+    <string name="skin_qq_error">qq号码长度不正确</string>
+    <string name="skin_phone">手机号码不能为空</string>
     <string name="zto">中通</string>
     <string name="sto">申通</string>
     <string name="yto">圆通</string>
     <string name="yunda">韵达</string>
     <string name="ems_ex">EMS</string>
-	<string name="uc_ex">优速</string>
-	<string name="lbex">龙邦</string>
-	<string name="ttkdex">天天</string>
-	<string name="qfkd">全峰</string>
-	<string name="best_ex">百世</string>
-	
+    <string name="uc_ex">优速</string>
+    <string name="lbex">龙邦</string>
+    <string name="ttkdex">天天</string>
+    <string name="qfkd">全峰</string>
+    <string name="best_ex">百世</string>
+    <string name="zto">中通</string>
+    <string name="sto">申通</string>
+    <string name="yto">圆通</string>
+    <string name="yunda">韵达</string>
+    <string name="ems_ex">EMS</string>
+    <string name="uc_ex">优速</string>
+    <string name="lbex">龙邦</string>
+    <string name="ttkdex">天天</string>
+    <string name="qfkd">全峰</string>
+    <string name="best_ex">百世</string>
+    <string name="yanshimei">妍诗美专业皮肤测试</string>
+    <string name="yanshimei_number">请输入服务号</string>
+    <string name="yanshimei_start">输入服务号立即开启美肌测试</string>
+    <string name="yanshimei_answer_title">     为了方便我们的护肤顾问为您服务，以及免费获取妍诗美的护肤资讯，请您留下您的相关信息</string>
+
 </resources>

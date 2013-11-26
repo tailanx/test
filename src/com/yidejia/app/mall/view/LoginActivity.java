@@ -226,7 +226,6 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 //		getSupportActionBar().setLogo(R.drawable.back);
-		getSupportActionBar().setIcon(R.drawable.back);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
 //		startActionMode(new AnActionModeOfEpicProportions(ComposeActivity.this));

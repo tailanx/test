@@ -2,7 +2,72 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/skinbg"
     android:orientation="vertical" >
-    
+
+    <ImageView
+        android:id="@+id/skin_test_home_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|top"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:src="@drawable/skin_test_home_back" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/skinlogo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="@string/yanshimei"
+        android:textColor="#e3004e"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="@string/yanshimei_number"
+        android:textColor="#e3004e"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/skin_test_home_number"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="#e3004e"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/fuwuhao"
+        android:inputType="number"
+        android:gravity="center"
+        android:maxLength="6"
+        android:singleLine="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:text="@string/yanshimei_start"
+        android:textColor="#f473a4"
+        android:textSize="16dp" />
+
+    <ImageView
+        android:id="@+id/skin_test_home_startSkin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:clickable="true"
+        android:src="@drawable/skin_test_home_start" />
 
 </LinearLayout>

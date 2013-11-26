@@ -3,6 +3,7 @@ package com.yidejia.app.mall.model;
 public class SkinQOption {
 	private String key = "";
 	private String value;
+	private boolean isSelected = false;
 	public String getKey() {
 		return key;
 	}
@@ -15,4 +16,11 @@ public class SkinQOption {
 	public void setValue(String value) {
 		this.value = value;
 	}
+	public boolean isSelected() {
+		return isSelected;
+	}
+	public void setSelected(boolean isSelected) {
+		this.isSelected = isSelected;
+	}
+	
 }
