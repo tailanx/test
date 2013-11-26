@@ -26,7 +26,6 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/order_detailsbg_top"
                 android:gravity="center"
-                android:text="订单详情"
                 android:textSize="15sp" />
 
             <RelativeLayout
