@@ -27,6 +27,7 @@
     <string name="service">a</string>
     <string name="tip">退货原因</string>
     <string name="bad_network">网络不给力!请刷新</string>
+    <string name="no_product">该商品已下架或不存在！</string>
     <string name="filter">筛选</string>
     <string name="filter_all">全部</string>
     <string name="unit">元</string>
