@@ -103,8 +103,8 @@ public class SkinHomeActivity extends Activity implements OnClickListener {
 			// TODO Auto-generated method stub
 			try {
 				CheckCps checkCps = new CheckCps();
-//				String httpresp = checkCps.getHttpResp(cpsNumber);
-				String httpresp = "{code:1}";
+				String httpresp = checkCps.getHttpResp(cpsNumber);
+//				String httpresp = "{code:1}";
 				boolean issuccess = checkCps.isCpsTrue(httpresp);
 				return issuccess;
 			} catch (Exception e) {
