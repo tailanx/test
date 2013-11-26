@@ -88,7 +88,7 @@
             android:layout_width="0dp"
             android:layout_height="90dp"
             android:layout_weight="1"
-            android:background="@drawable/member_buy"
+            android:background="@drawable/events_pavilion"
             
             android:orientation="vertical" >
 
@@ -117,7 +117,7 @@ android:background="@drawable/events_pavilion"                android:backgroun
                 android:id="@+id/function_event"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/function_member_selector"
+                android:background="@drawable/function_events_selector"
                 android:clickable="true" >
             </RelativeLayout>
         </RelativeLayout>
@@ -243,7 +243,7 @@ android:background="@drawable/events_pavilion"                android:backgroun
             android:layout_width="0dp"
             android:layout_height="90dp"
             android:layout_weight="1"
-            android:background="@drawable/message_center"
+            android:background="@drawable/skin_test"
             android:orientation="vertical" >
 
             <ImageView
@@ -271,7 +271,7 @@ android:background="@drawable/skin_test"                android:background="@dr
                 android:id="@+id/function_skin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/function_message_selector"
+                android:background="@drawable/function_skin_selector"
                 android:clickable="true" >
             </RelativeLayout>
         </RelativeLayout>

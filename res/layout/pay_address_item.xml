@@ -42,7 +42,6 @@
             android:ellipsize="end"
             android:paddingLeft="4dp"
             android:singleLine="true"
-            android:text="发发啊发发"
             android:textSize="12sp" />
 
         <TextView
@@ -51,7 +50,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginTop="20dp"
-            android:text="12234567890"
             android:textSize="12sp" />
 
         <TextView
@@ -63,8 +61,7 @@
             android:ellipsize="end"
             android:lines="2"
             android:paddingLeft="4dp"
-            android:text="对方的方式地方都是的方式的方式地方收复失地时代发生的发生的发生的发生的发生的dsfsfsdf"
-            android:textSize="12dp" />
+            android:textSize="12sp" />
     </RelativeLayout>
 
 </RelativeLayout>

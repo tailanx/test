@@ -17,8 +17,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="8dp"
             android:layout_centerVertical="true"
-            android:text="11cvc"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
          <TextView
             android:id="@+id/message_item_textview1"
             android:layout_width="match_parent"
@@ -31,7 +30,7 @@
             android:shadowColor="#00f"
             android:singleLine="true"
             android:text="会员特权!!!"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
         
     </RelativeLayout>
 
@@ -53,8 +52,7 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:padding="8dp"
-                android:text="如容易推匀的舒适质感，赋予平滑、透亮、无瑕的天使容颜无比的舒适感提供肌肤无比的润泽舒适感受，维生素F、E、B5能保护肌肤抵抗外界伤害以及预防肌肤老化"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>
 

@@ -14,7 +14,6 @@
         android:layout_gravity="center"
         android:layout_marginLeft="15dp"
         android:gravity="center"
-        android:text="ceshi"
         android:textSize="20sp" />
 
     <ImageView

@@ -24,7 +24,6 @@
         android:layout_toRightOf="@id/imageView_item"
         android:paddingBottom="16dip"
         android:paddingTop="16dip"
-        android:text="TextView"
         android:textSize="20sp" />
 
 </RelativeLayout>

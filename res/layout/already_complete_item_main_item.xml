@@ -18,7 +18,7 @@
             android:layout_marginTop="12dp"
             android:drawableLeft="@drawable/unpaid_orders_icon"
             android:text="订单状态："
-            android:textSize="13dp" />
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/already_complete_item_main_item_detail"
@@ -27,8 +27,7 @@
             android:layout_marginLeft="4dp"
             android:layout_marginTop="12dp"
             android:layout_toRightOf="@id/already_complete_item_main_item"
-            android:text="已完成订单"
-            android:textSize="13dp" />
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/already_complete_item_main_item_textview2_number"
@@ -37,8 +36,7 @@
             android:layout_alignBaseline="@id/already_complete_item_main_item"
             android:layout_alignParentRight="true"
             android:paddingRight="8dp"
-            android:text="1111111113333333"
-            android:textSize="11dp" />
+            android:textSize="11sp" />
 
         <TextView
             android:id="@+id/already_complete_item_main_item_textview2"
@@ -47,14 +45,13 @@
             android:layout_alignBaseline="@id/already_complete_item_main_item"
             android:layout_toLeftOf="@id/already_complete_item_main_item_textview2_number"
             android:text="订单号："
-            android:textSize="11dp" />
+            android:textSize="11sp" />
     </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/already_complete_item_main_relative2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/already_complete_item_main_produce"
         android:orientation="vertical" >
 
         <ListView
@@ -94,7 +91,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_toRightOf="@id/already_complete_item_main_sum_money"
-            android:text="160.0"
             android:textColor="#ed217c"
             android:textSize="15sp" />
 
@@ -125,7 +121,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/already_complete_item_main_sum"
             android:layout_toRightOf="@id/already_complete_item_main_item_textview7"
-            android:text="1"
             android:textSize="15sp" />
     </RelativeLayout>
 

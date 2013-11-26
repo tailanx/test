@@ -43,7 +43,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/already_complete_item_produce_text"
         android:layout_toRightOf="@id/already_complete_item_produce_sum"
-        android:text="160.00"
         android:textColor="#ed217c"
         android:textSize="15sp" />
 
