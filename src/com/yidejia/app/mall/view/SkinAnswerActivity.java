@@ -101,7 +101,9 @@ public class SkinAnswerActivity {
 				// TODO Auto-generated method stub
 
 				judgeNull(activity);
-
+				
+				
+				
 				Task task = new Task();
 				task.execute();
 			}

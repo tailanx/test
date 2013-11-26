@@ -9,9 +9,11 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -41,7 +43,7 @@ public class SkinQuesActivity extends Activity {
 	private ArrayList<Skin> skinQuestions;
 	private LinearLayout linearout;
 	private HashMap<Integer, String> haspMap;
-	private Skin skin;
+//	private Skin skin;
 	private ScrollView scrollView;
 	private RelativeLayout view;
 	private RelativeLayout nextRelative;
@@ -60,31 +62,31 @@ public class SkinQuesActivity extends Activity {
 		nextRelative = (RelativeLayout) findViewById(R.id.skin_test_question_next_relative);
 	}
 
-	private boolean istrue = false;
 	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.skin_test_qusetion);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+		setContentView(R.layout.skin_test_qusetion);
+
 		haspMap = new HashMap<Integer, String>();
 		setupShow();
-		
-		
+
 		back.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				SkinQuesActivity.this.finish();
 			}
 		});
-		
-		
-		skin = new Skin();
+
+//		skin = new Skin();
 
 		Task task = new Task();
 		task.execute();
@@ -93,7 +95,7 @@ public class SkinQuesActivity extends Activity {
 		next.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
+				Log.e("info", index+"  next111");
 				// TODO Auto-generated method stub
 				// 获取用户选择的答案
 				// List<Integer> m = getUserAnswers();
@@ -122,11 +124,12 @@ public class SkinQuesActivity extends Activity {
 					Skin skin1 = skinQuestions.get(index);
 					if (skin1.isIs_multiple()) {
 						ArrayList<SkinQOption> options = skin1.getOptions();
+						 boolean istrue = false;
 						for (int op = 0; op < options.size(); op++) {
 							SkinQOption skinQuestions = options.get(op);
 
 							if (skinQuestions.isSelected()) {
-//								mList.clear();
+								// mList.clear();
 								istrue = true;
 								index++;
 								setQuestionLayout();
@@ -139,12 +142,13 @@ public class SkinQuesActivity extends Activity {
 						}
 					}
 					if (!skin1.isIs_multiple() && skin1.isNeed()) {
-					 boolean istrue1 = false;
+						boolean istrue1 = false;
 						ArrayList<SkinQOption> options = skin1.getOptions();
 						for (int op = 0; op < options.size(); op++) {
 							SkinQOption skinQuestions = options.get(op);
-							Log.i("info", skinQuestions.isSelected()+"  skinQuestions.isSelected()");
-							
+							Log.i("info", skinQuestions.isSelected()
+									+ "  skinQuestions.isSelected()");
+
 							if (skinQuestions.isSelected()) {
 								istrue1 = true;
 								b = maxLength + 1;
@@ -153,7 +157,7 @@ public class SkinQuesActivity extends Activity {
 								nextRelative.setVisibility(View.GONE);
 								scrollView.setVisibility(View.GONE);
 								view.setVisibility(View.VISIBLE);
-								showView(view,SkinQuesActivity.this);
+								showView(view, SkinQuesActivity.this);
 							}
 						}
 						if (!istrue1) {
@@ -162,34 +166,34 @@ public class SkinQuesActivity extends Activity {
 									.show();
 							return;
 						}
-					} 
-						
-					
-//					b = maxLength + 1;
-////					index++;
-//					textview.setText(b + "/" + b);
-//					nextRelative.setVisibility(View.GONE);
-//					scrollView.setVisibility(View.GONE);
-//					view.setVisibility(View.VISIBLE);
-//				
-					
-					
+					}
+
+					// b = maxLength + 1;
+					// // index++;
+					// textview.setText(b + "/" + b);
+					// nextRelative.setVisibility(View.GONE);
+					// scrollView.setVisibility(View.GONE);
+					// view.setVisibility(View.VISIBLE);
+					//
+
 				} else if (index < maxLength - 1) {
 
 					Skin skin1 = skinQuestions.get(index);
-
+					
 					if (skin1.isIs_multiple()) {
 						ArrayList<SkinQOption> options = skin1.getOptions();
+						
+						boolean istrue = false;
+						
 						for (int op = 0; op < options.size(); op++) {
 							SkinQOption skinQuestions = options.get(op);
 
 							if (skinQuestions.isSelected()) {
 								
-								
-//								mList.clear();
-//								keys.set(index, mList.toString());
+								// mList.clear();
+								// keys.set(index, mList.toString());
 								istrue = true;
-								
+
 							}
 						}
 						if (!istrue) {
@@ -198,23 +202,25 @@ public class SkinQuesActivity extends Activity {
 							return;
 						}
 						index++;
-						
+
 						setQuestionLayout();
-						
-						keys.set(index-1, mList.toString());
-						
+
+						keys.set(index - 1, mList.toString());
+
 					}
 					if (!skin1.isIs_multiple() && skin1.isNeed()) {
-					 boolean istrue1 = false;
+						
+						Log.e("info", index+"  next");
+						boolean istrue1 = false;
 						ArrayList<SkinQOption> options = skin1.getOptions();
 						for (int op = 0; op < options.size(); op++) {
 							SkinQOption skinQuestions = options.get(op);
-//							Log.i("info", skinQuestions.isSelected()+"  skinQuestions.isSelected()");
-							
+							// Log.i("info",
+							// skinQuestions.isSelected()+"  skinQuestions.isSelected()");
+
 							if (skinQuestions.isSelected()) {
 								istrue1 = true;
-								index++;
-								setQuestionLayout();
+								
 							}
 						}
 						if (!istrue1) {
@@ -223,10 +229,14 @@ public class SkinQuesActivity extends Activity {
 									.show();
 							return;
 						}
-					} else if(!skin1.isNeed()) {
+						index++;
+						setQuestionLayout();
+						Log.e("info", index+"  next2");
+						
+					} else if (!skin1.isNeed()) {
 						index++;
 						Skin skin2 = skinQuestions.get(index);
-						if(skin2.isIs_multiple()){
+						if (skin2.isIs_multiple()) {
 							mList.clear();
 						}
 						setQuestionLayout();
@@ -241,8 +251,8 @@ public class SkinQuesActivity extends Activity {
 						// scrollView.setVisibility(View.VISIBLE);
 						// view.setVisibility(View.GONE);
 					}
-					Log.i(SkinQuesActivity.class.getName(),
-							keys.toString() + "   keys");
+					Log.i(SkinQuesActivity.class.getName(), keys.toString()
+							+ "   keys");
 				}
 			}
 		});
@@ -263,7 +273,7 @@ public class SkinQuesActivity extends Activity {
 					Skin skin1 = skinQuestions.get(index);
 					if (skin1.isIs_multiple()) {
 						mList.clear();
-					
+
 					}
 					nextRelative.setVisibility(View.VISIBLE);
 					scrollView.setVisibility(View.VISIBLE);
@@ -272,8 +282,9 @@ public class SkinQuesActivity extends Activity {
 					setQuestionLayout();
 
 				}
-				Log.i(SkinQuesActivity.class.getName(),
-						keys.toString() + "   keys");
+				Log.i(SkinQuesActivity.class.getName(), keys.toString()
+						+ "   keys");
+				Log.e("info", index+"  pre");
 			}
 		});
 
@@ -283,7 +294,7 @@ public class SkinQuesActivity extends Activity {
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
 
 				if (group.getCheckedRadioButtonId() == -1) {// ||group.getCheckedRadioButtonId()
-															// == 0
+															
 					return;
 				} else {
 					int lastBtnId = 0;
@@ -294,8 +305,8 @@ public class SkinQuesActivity extends Activity {
 					if (lastBtnId == checkedId) {
 						return;
 					}
-					// RadioButton btn = (RadioButton) findViewById(checkedId);
-					Log.e("info", group.getCheckedRadioButtonId() + "");
+//					// RadioButton btn = (RadioButton) findViewById(checkedId);
+//					Log.e("info", group.getCheckedRadioButtonId() + "");
 
 					RadioButton btn = (RadioButton) findViewById(group
 							.getCheckedRadioButtonId());
@@ -306,21 +317,21 @@ public class SkinQuesActivity extends Activity {
 					int valueLength = options.size();
 					for (int i = 0; i < valueLength; i++) {
 						if (options.get(i).getValue().equals(value)) {
-							
+
 							SkinQOption skinQuestions = options.get(i);
-							
+
 							skinQuestions.setSelected(true);
 
 							String key = options.get(i).getKey();
 
 							keys.set(index, key);
 							btnId.set(index, checkedId);
-							
-//							Log.i(SkinQuesActivity.class.getName(),
-//									keys.toString() + "   keys");
+
+							// Log.i(SkinQuesActivity.class.getName(),
+							// keys.toString() + "   keys");
 						}
 					}
-				
+
 				}
 				// //
 				// // TODO Auto-generated method stub
@@ -329,13 +340,15 @@ public class SkinQuesActivity extends Activity {
 				// group.getCheckedRadioButtonId() + "",
 				// Toast.LENGTH_SHORT).show();
 				// // }
+//				Log.e("info", index+"group");
 			}
+			
 		});
 
 	}
 
 	private List<Integer> btnId = new ArrayList<Integer>();
-	public  static List<String> keys = new ArrayList<String>();
+	public static List<String> keys = new ArrayList<String>();
 
 	private List<String> keys1 = new ArrayList<String>();
 	private List<Integer> mList = new ArrayList<Integer>();
@@ -358,11 +371,14 @@ public class SkinQuesActivity extends Activity {
 				final SkinQOption option = options.get(j);
 				final CheckBox cb = new CheckBox(SkinQuesActivity.this);
 
+				cb.setButtonDrawable(R.drawable.checkbox_style);
+				cb.setPadding(150, 0, 0, 0);
+
 				if (option.isSelected()) {
-//					Log.i("info", option.isSelected() + " ");
+					// Log.i("info", option.isSelected() + " ");
 					cb.setChecked(true);
 				}
-				Log.i("info", option.isSelected() + " ");
+//				Log.i("info", option.isSelected() + " ");
 				cb.setId(j);
 				if (option.isSelected()) {
 					a = cb.getId() + 1;
@@ -409,7 +425,7 @@ public class SkinQuesActivity extends Activity {
 							SkinQuesActivity.this);
 					// 选中的按钮
 					int checkId = btnId.get(index);
-					 Log.i("info", checkId+"checkId");
+//					Log.i("info", checkId + "checkId");
 					if (i == checkId) {
 						button.setChecked(true);
 					}
@@ -419,13 +435,15 @@ public class SkinQuesActivity extends Activity {
 					// null);
 					// button.setCompoundDrawables (null, null, end, null);
 					// button.
-					// LinearLayout.LayoutParams lp = new
-					// LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
-					// 80);
-					button.setPadding(150, 0, 0, 0);
+					LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+							android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
+							80);
+
+					button.setPadding(80, 0, 0, 0);
 
 					// button.setLayoutParams(lp);
 					// button.setCameraDistance(10.0f);
+					button.setGravity(Gravity.CENTER);
 					button.setBackgroundResource(R.drawable.listbg);
 					button.setButtonDrawable(R.drawable.checkbox_style);
 					button.setId(i);
@@ -434,12 +452,13 @@ public class SkinQuesActivity extends Activity {
 							R.color.skin_test));
 
 					group.addView(button);
-
-					group.setPadding(0, 50, 0, 50);
-					group.setVerticalFadingEdgeEnabled(true);
-					group.setFadingEdgeLength(50);
+					//
+					// group.setPadding(0, 50, 0, 50);
+					// group.setVerticalFadingEdgeEnabled(true);
+					// group.setFadingEdgeLength(50);
 
 				}
+//				Log.e("info", index+"  sssss");
 
 			} else {
 				name.setText(b + "." + skin.getQuestion()
@@ -523,9 +542,9 @@ public class SkinQuesActivity extends Activity {
 		}
 
 	}
-	
-	private void showView(RelativeLayout view,SkinQuesActivity activity){
-		SkinAnswerActivity sa = new SkinAnswerActivity(view,activity);
-		
+
+	private void showView(RelativeLayout view, SkinQuesActivity activity) {
+		SkinAnswerActivity sa = new SkinAnswerActivity(view, activity);
+
 	}
 }
