@@ -62,7 +62,7 @@ public class PersonEvaluationActivity extends SherlockActivity {
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 //		getSupportActionBar().setLogo(R.drawable.back);
-		getSupportActionBar().setIcon(R.drawable.back);
+		getSupportActionBar().setIcon(R.drawable.back1);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setCustomView(R.layout.actionbar_common);
 //		startActionMode(new AnActionModeOfEpicProportions(ComposeActivity.this));

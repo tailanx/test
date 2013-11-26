@@ -164,7 +164,7 @@ public class OrderDetailActivity extends SherlockFragmentActivity {
 				OrderDetailActivity.this.finish();
 			}
 		});
-		getSupportActionBar().setIcon(R.drawable.back);
+		getSupportActionBar().setIcon(R.drawable.back1);
 		TextView title = (TextView) findViewById(R.id.compose_title);
 		title.setText(getResources().getString(R.string.order_detail));
 	}

@@ -75,8 +75,9 @@ public class Question {
 				skin.setName(itemObject.getString("name"));
 				skin.setQuestion(itemObject.getString("question"));
 				skin.setNeed(itemObject.getBoolean("need"));
+				skin.setIs_multiple(itemObject.optBoolean("is_multiple"));
 				try{
-					String answer = itemObject.getString("answer");
+					String answer = itemObject.optString("answer");
 					analysisAnswer(answer, skin);
 				} catch(Exception e){
 					e.printStackTrace();
@@ -94,7 +95,7 @@ public class Question {
 	private boolean analysisAnswer(String answer, Skin skin){
 		SkinQOption option = null;
 		ArrayList<SkinQOption> options = new ArrayList<SkinQOption>();
-		try {
+		/*try {
 			JSONArray aJsonArray = new JSONArray(answer);
 			for (int i = 0; i < aJsonArray.length(); i++) {
 				String value = (String)aJsonArray.opt(i);
@@ -107,7 +108,7 @@ public class Question {
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		} */
 		try {
 			JSONObject aJsonObject = new JSONObject(answer);
 			@SuppressWarnings("unchecked")

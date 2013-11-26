@@ -17,7 +17,7 @@
         android:clickable="true"
         android:onClick="doClick"
         android:padding="6dp"
-        android:src="@drawable/back" />
+        android:src="@drawable/back1" />
 
     <TextView
         android:id="@+id/wait_pay_order_textview1"

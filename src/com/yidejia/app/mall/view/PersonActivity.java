@@ -124,7 +124,7 @@ public class PersonActivity extends SherlockActivity {
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		// getSupportActionBar().setLogo(R.drawable.back);
-		getSupportActionBar().setIcon(R.drawable.back);
+		getSupportActionBar().setIcon(R.drawable.back1);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
 		// startActionMode(new

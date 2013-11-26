@@ -56,6 +56,7 @@ import com.yidejia.app.mall.view.HistoryActivity;
 import com.yidejia.app.mall.view.IntegeralActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.view.MyCollectActivity;
+import com.yidejia.app.mall.view.SkinHomeActivity;
 import com.yidejia.app.mall.view.SkinQuesActivity;
 import com.yidejia.app.mall.widget.YLViewPager;
 
@@ -446,7 +447,7 @@ public class MainPageFragment extends SherlockFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intentOrder = new Intent(getSherlockActivity(),SkinQuesActivity.class);
+				Intent intentOrder = new Intent(getSherlockActivity(),SkinHomeActivity.class);
 				getSherlockActivity().startActivity(intentOrder);
 //					dialog.show();
 					// Intent intentOrder = new

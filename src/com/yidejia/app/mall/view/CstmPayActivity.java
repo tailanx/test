@@ -1,5 +1,6 @@
 package com.yidejia.app.mall.view;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,8 +8,10 @@ import java.util.concurrent.Callable;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -41,6 +44,7 @@ import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Express;
 import com.yidejia.app.mall.model.FreePost;
 import com.yidejia.app.mall.model.Specials;
+import com.yidejia.app.mall.net.address.GetUserAddressList;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.Http;
 import com.yidejia.app.mall.util.MessageUtil;
@@ -307,6 +311,7 @@ public class CstmPayActivity extends SherlockActivity {
 
 	private PayUtil pay;
 	private float maxPay;
+	private GetUserAddressList userAddress;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -327,6 +332,7 @@ public class CstmPayActivity extends SherlockActivity {
 
 			preferentialDataManage = new PreferentialDataManage(
 					CstmPayActivity.this);
+			userAddress = new GetUserAddressList();
 			dialog = new Builder(CstmPayActivity.this)
 					.setTitle(
 							getResources().getString(R.string.produce_exchange))
@@ -408,7 +414,7 @@ public class CstmPayActivity extends SherlockActivity {
 				startActivity(intent1);
 				this.finish();
 			} else {
-
+				
 				// Cart cart = (Cart) intent.getSerializableExtra("Cart");
 				// ArrayList<Cart> carts;
 				//
@@ -450,7 +456,7 @@ public class CstmPayActivity extends SherlockActivity {
 					if(voucher  == 0){
 						show(carts, false);
 						return;
-					}else{
+					} else{
 						dialog.show();
 					}
 				}
@@ -469,7 +475,7 @@ public class CstmPayActivity extends SherlockActivity {
 						if (voucher > 0 || maxPay > fP) {
 //							Log.i("info", voucher + "   voucher");
 //							Log.i("info", maxPay + "   maxPay");
-							dialog.show();
+//							dialog.show();
 
 							//
 							// show(carts,false);//sum,
@@ -551,7 +557,9 @@ public class CstmPayActivity extends SherlockActivity {
 		// PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
 		goods = pay.loadView(carts, isHuanGou);
 		// 添加地址、快递费用、配送中心
-		addAddress();
+			Task task = new Task();
+			task.execute();
+
 		// // 获取免邮界限
 		// ExpressDataManage expressDataManage = new ExpressDataManage(
 		// CstmPayActivity.this);
@@ -773,6 +781,8 @@ public class CstmPayActivity extends SherlockActivity {
 	/**
 	 * 地址和快递费用，配送中心
 	 */
+	private ArrayList<Addresses> mList;
+	private ArrayList<Addresses> addArray;
 	private void addAddress() {
 		// Log.i(TAG, "show sum:"+sum);
 		try {
@@ -780,13 +790,13 @@ public class CstmPayActivity extends SherlockActivity {
 			// addressDataManage.getAddressesArray(
 			//
 			// myApplication.getUserId(), 0, 10);
-			ArrayList<Addresses> mList = addressDataManage
-					.getDefAddresses(myApplication.getUserId());
+			mList = userAddresses;
 			Addresses addresses;
 			// Log.i("info", mList.size() + " mlist");
 			if (mList.size() == 0) {
-				ArrayList<Addresses> addArray = addressDataManage
-						.getAddressesArray(myApplication.getUserId(), 0, 10);
+//				ArrayList<Addresses> addArray = addressDataManage
+//						.getAddressesArray(myApplication.getUserId(), 0, 10);
+				addArray = userAddresses;
 				if (addArray.isEmpty()) { // 无默认地址并且无地址
 					Intent intent = new Intent(CstmPayActivity.this,
 							EditNewAddressActivity.class);
@@ -811,7 +821,6 @@ public class CstmPayActivity extends SherlockActivity {
 				}
 			}
 			setAdd(addresses);// 设置地址
-
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1073,6 +1082,10 @@ public class CstmPayActivity extends SherlockActivity {
 	}
 
 	private float voucher;
+	private int fromIndex = 0;
+	private int acount = 10;
+	private ArrayList<Addresses> userAddresses;
+	private boolean isFirstIn = true;
 
 	// public class InnerReceiver extends BroadcastReceiver {
 	//
@@ -1094,4 +1107,62 @@ public class CstmPayActivity extends SherlockActivity {
 	// }
 	// }
 	// }
+	
+	private class Task extends AsyncTask<Void, Void, Boolean>{
+		private ProgressDialog bar;
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(isFirstIn){
+				bar.dismiss();
+				isFirstIn = false;
+
+			}
+			
+			if(result){
+//				dialog.show();
+//				if(mList.isEmpty()){
+					
+//					mList.addAll(userAddresses);
+//					addArray.addAll(userAddresses);
+					addAddress();
+					
+//				}
+			}
+			
+			
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			if(isFirstIn){
+			bar = new ProgressDialog(CstmPayActivity.this);
+			bar.setCancelable(true);
+			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			bar.show();
+			}
+		}
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			boolean isGet = false;
+			try {
+				String httpString = userAddress.getAddressHttpresp("customer_id%3D"+myApplication.getUserId()+"+and+valid_flag%3D%27y%27", fromIndex + "", acount + "");
+				isGet = userAddress.analysis(httpString);
+				userAddresses = userAddress.getAddresses();
+				return isGet;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return false;
+		}
+		
+		
+	}
 }
