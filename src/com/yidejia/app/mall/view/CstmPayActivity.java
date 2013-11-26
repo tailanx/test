@@ -49,6 +49,7 @@ import com.yidejia.app.mall.model.Express;
 import com.yidejia.app.mall.model.FreePost;
 import com.yidejia.app.mall.model.Specials;
 import com.yidejia.app.mall.net.address.GetUserAddressList;
+import com.yidejia.app.mall.net.order.SaveOrder;
 import com.yidejia.app.mall.net.voucher.Voucher;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.Http;
@@ -477,13 +478,18 @@ public class CstmPayActivity extends SherlockActivity {
 	private void getVoucher() {
 //		voucherString1 = voucherDataManage.getUserVoucherForPay(
 //				myApplication.getUserId(), myApplication.getToken(), true);
-
-		voucher = Float.parseFloat(voucherString1);
+		try {
+			
+			voucher = Float.parseFloat(voucherString1);
+			Log.e(TAG, voucherString1 + ":voucher and is cartact" + isCartActivity);
+		} catch (Exception e) {
+			// TODO: handle exception
+			voucherString1 = "";
+		}
 		if ("".equals(voucherString1) || null == voucherString1)
 			voucher = 0;
 		else
 			voucher = Float.parseFloat(voucherString1);
-		Log.e(TAG, voucherString1 + ":voucher and is cartact" + isCartActivity);
 		if (carts.isEmpty())
 			return;
 		StringBuffer sb = new StringBuffer();
@@ -626,8 +632,8 @@ public class CstmPayActivity extends SherlockActivity {
 					go_pay_scrollView.smoothScrollTo(0, 0);
 					return;
 				}
-				int mode = 1;
-				String pay_type = "";
+				
+				
 				if (yinlianCheckBox.isChecked()) {
 					pay_type = "union";
 					mode = 1;
@@ -650,7 +656,7 @@ public class CstmPayActivity extends SherlockActivity {
 							Toast.LENGTH_LONG).show();
 					return;
 				}
-				OrderDataManage orderDataManage = new OrderDataManage(
+				/*OrderDataManage orderDataManage = new OrderDataManage(
 						CstmPayActivity.this);
 				orderDataManage.saveOrder(myApplication.getUserId(), "0",
 						recipientId, "", jifen + "", expressNum, postMethod,
@@ -663,43 +669,10 @@ public class CstmPayActivity extends SherlockActivity {
 				resp_code = orderDataManage.getRespCode();
 				tn = orderDataManage.getTN();
 				// Log.e("OrderCode", orderCode);
-				if (orderCode == null || "".equals(orderCode))
-					return;
-				if (isCartActivity.equals("Y")) {// ；来自购物车
-					// 删除购物车的商品
-					CartsDataManage cartsDataManage = new CartsDataManage();
-					int length = carts.size();
-					for (int i = 0; i < length; i++) {
-						cartsDataManage.delCart(carts.get(i).getUId());
-					}
-					Intent intent = null;
-					// if(cartsDataManage.getCartAmount() != 0){
-					Log.e("NoProduceFragment", "DELETE_CART");
-					intent = new Intent(Consts.DELETE_CART);
-					CstmPayActivity.this.sendBroadcast(intent);
-					// }
-					// else {
-					// Log.e("NoProduceFragment", "BROAD_UPDATE_CHANGE");
-					// intent = new Intent(Consts.BROAD_UPDATE_CHANGE);
-					// }
-				}
-				// 跳转到支付页面
-				Intent userpayintent = new Intent(CstmPayActivity.this,
-						UserPayActivity.class);
-				Bundle bundle = new Bundle();
-
-				bundle.putInt("mode", mode);
-				// bundle.putString("name", "hello");
-				// bundle.putString("amount", "1.00");
-				bundle.putString("code", orderCode);
-				bundle.putString("uid", myApplication.getUserId());
-				bundle.putString("resp_code", resp_code);
-				bundle.putString("tn", tn);
-
-				userpayintent.putExtras(bundle);
-				startActivity(userpayintent);
-				CstmPayActivity.this.finish();
-
+				*/
+				closeTask();
+				taskSaveOrder = new TaskSaveOrder();
+				taskSaveOrder.execute();
 			}
 		});
 	
@@ -708,6 +681,94 @@ public class CstmPayActivity extends SherlockActivity {
 		closeTask();
 		addressTask = new AddressTask();
 		addressTask.execute();
+	}
+	
+	String pay_type = "";
+	int mode = 1;
+	
+	private void go2Pay(int mode){
+		if (orderCode == null || "".equals(orderCode))
+			return;
+		if (isCartActivity.equals("Y")) {// ；来自购物车
+			// 删除购物车的商品
+			CartsDataManage cartsDataManage = new CartsDataManage();
+			int length = carts.size();
+			for (int i = 0; i < length; i++) {
+				cartsDataManage.delCart(carts.get(i).getUId());
+			}
+			Intent intent = null;
+			// if(cartsDataManage.getCartAmount() != 0){
+			Log.e("NoProduceFragment", "DELETE_CART");
+			intent = new Intent(Consts.DELETE_CART);
+			CstmPayActivity.this.sendBroadcast(intent);
+			// }
+			// else {
+			// Log.e("NoProduceFragment", "BROAD_UPDATE_CHANGE");
+			// intent = new Intent(Consts.BROAD_UPDATE_CHANGE);
+			// }
+		}
+		// 跳转到支付页面
+		Intent userpayintent = new Intent(CstmPayActivity.this,
+				UserPayActivity.class);
+		Bundle bundle = new Bundle();
+
+		bundle.putInt("mode", mode);
+		// bundle.putString("name", "hello");
+		// bundle.putString("amount", "1.00");
+		bundle.putString("code", orderCode);
+		bundle.putString("uid", myApplication.getUserId());
+		bundle.putString("resp_code", resp_code);
+		bundle.putString("tn", tn);
+
+		userpayintent.putExtras(bundle);
+		startActivity(userpayintent);
+		CstmPayActivity.this.finish();
+	}
+	
+	private TaskSaveOrder taskSaveOrder;
+	
+	private class TaskSaveOrder extends AsyncTask<Void, Void, Boolean> {
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			SaveOrder saveOrder = new SaveOrder(CstmPayActivity.this);
+			try {
+				String httpresp = saveOrder.getHttpResponse(myApplication.getUserId(), "0",
+							recipientId, "", jifen + "", expressNum, postMethod,
+							peiSongCenter, goods, comment.getText().toString(),// 这里的comment.getText().toString()很重要
+							pay_type, myApplication.getToken());
+				boolean issuccess = saveOrder.analysisHttpResp(httpresp);
+				orderCode = saveOrder.getOrderCode();
+				resp_code = saveOrder.getResp_code();
+				tn = saveOrder.getTn();
+				return issuccess;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return false;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			bar.show();
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			bar.dismiss();
+			if(result){
+				go2Pay(mode);
+			} else{
+				Toast.makeText(CstmPayActivity.this, "提交订单失败", Toast.LENGTH_LONG).show();
+			}
+		}
+		
 	}
 
 	// @Override
@@ -746,6 +807,9 @@ public class CstmPayActivity extends SherlockActivity {
 	private void closeTask(){
 		if(addressTask != null && addressTask.getStatus().RUNNING == Status.RUNNING){
 			addressTask.cancel(true);
+		}
+		if(taskSaveOrder != null && taskSaveOrder.getStatus().RUNNING == Status.RUNNING) {
+			taskSaveOrder.cancel(true);
 		}
 	}
 	
