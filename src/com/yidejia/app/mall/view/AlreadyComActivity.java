@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
+import com.yidejia.app.mall.ctrl.OrderViewCtrl;
 import com.yidejia.app.mall.fragment.AllOrderFragment;
 
 public class AlreadyComActivity extends SherlockFragmentActivity {
@@ -57,13 +58,15 @@ public class AlreadyComActivity extends SherlockFragmentActivity {
 		setActionBar();
 //		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.already_complete);
-		
-		resources = getResources();
-		InitWidth();
-		InitTextView();
-		InitViewPager();
-		
+//		setContentView(R.layout.already_complete);
+//		
+//		resources = getResources();
+//		InitWidth();
+//		InitTextView();
+//		InitViewPager();
+		setContentView(R.layout.all_order);
+		OrderViewCtrl viewCtrl = new OrderViewCtrl(this);
+		viewCtrl.viewCtrl(4);
 	}
 
 	private void setActionBar(){

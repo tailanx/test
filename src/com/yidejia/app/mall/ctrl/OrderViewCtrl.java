@@ -1,117 +1,48 @@
-package com.yidejia.app.mall.view;
+package com.yidejia.app.mall.ctrl;
 
 import java.util.ArrayList;
 
-import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
-import com.yidejia.app.mall.ctrl.OrderViewCtrl;
 import com.yidejia.app.mall.fragment.AllOrderFragment;
 
-public class AllOrderActivity extends SherlockFragmentActivity {
-	private static final String TAG = AllOrderActivity.class.getName();
-//	private ViewPager mPager;
-	private ArrayList<Fragment> fragmentsList;
-
-	private TextView mWeek, mMonth, mYear;
-	private ImageView ivBottomLine;
+public class OrderViewCtrl {
+	
 	private int currIndex = 0;
-	private int bottomLineWidth;
-	private int offset = 0;
-	private int position_one;
-	private int position_two;
-	private int position_three;
-	private Resources resources;
-	private PullToRefreshScrollView mPullToRefreshScrollView;
-
-	public void doClick(View v) {
-		Intent intent = new Intent();
-		switch (v.getId()) {
-		// case R.id.all_order_item_main_cancal://����
-		// intent.setClass(AllOrderActivity.this,MyMallActivity.class);
-		// break;
-		case R.id.all_order_item_main_pay:// ����
-			intent.setClass(this, CstmPayActivity.class);
-			startActivity(intent);
-			break;
-		case R.id.all_order_item_main_cancal:// ȡ��
-			// this.finish();
-		}
-		// ����ǰActivity��
-		finish();
+	private ArrayList<Fragment> fragmentsList;
+	private TextView mWeek, mMonth, mYear;
+	
+	private FragmentActivity activity;
+	
+	public OrderViewCtrl(FragmentActivity activity){
+		this.activity = activity;
 	}
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		// this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		// this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-		// WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setActionBar();
-		setContentView(R.layout.all_order);
-		OrderViewCtrl viewCtrl = new OrderViewCtrl(AllOrderActivity.this);
-		viewCtrl.viewCtrl(0);
-
-//		resources = getResources();
-//		InitWidth();
-//		InitTextView();
-//		InitViewPager();
+	
+	public void viewCtrl(int orderType){
+		initTextView();
+		initViewPager(orderType);
 	}
-
-	private void setActionBar() {
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setIcon(R.drawable.back);
-		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
-		ImageView back = (ImageView) findViewById(R.id.compose_back);
-		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
-		titleTextView.setText(getResources().getString(R.string.all_order));
-
-		back.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				AllOrderActivity.this.finish();
-			}
-		});
-	}
-
-	private void InitTextView() {
-		mWeek = (TextView) findViewById(R.id.all_order_week);
-		mMonth = (TextView) findViewById(R.id.all_order_moonth);
-		mYear = (TextView) findViewById(R.id.all_order_year);
+	
+	private void initTextView() {
+		mWeek = (TextView) activity.findViewById(R.id.all_order_week);
+		mMonth = (TextView) activity.findViewById(R.id.all_order_moonth);
+		mYear = (TextView) activity.findViewById(R.id.all_order_year);
 
 		mWeek.setOnClickListener(new MyOnClickListener(0));
 		mMonth.setOnClickListener(new MyOnClickListener(1));
 		mYear.setOnClickListener(new MyOnClickListener(2));
 	}
 
-	private void InitViewPager() {
+	private void initViewPager(int orderType) {
 		// mPager = (ViewPager) findViewById(R.id.all_order_vPager);
 		fragmentsList = new ArrayList<Fragment>();
-		LayoutInflater mInflater = getLayoutInflater();
+//		LayoutInflater mInflater = getLayoutInflater();
 		// View view = mInflater.inflate(R.layout.all_order_item_main, null);
 		//
 		// mPullToRefreshScrollView =
@@ -125,9 +56,9 @@ public class AllOrderActivity extends SherlockFragmentActivity {
 		// //����ˮƽ����
 		//
 
-		Fragment weekfragment = AllOrderFragment.newInstance(0, 0);
-		Fragment monthFragment = AllOrderFragment.newInstance(0, 1);
-		Fragment yearFragment = AllOrderFragment.newInstance(0, 2);
+		Fragment weekfragment = AllOrderFragment.newInstance(orderType, 0);
+		Fragment monthFragment = AllOrderFragment.newInstance(orderType, 1);
+		Fragment yearFragment = AllOrderFragment.newInstance(orderType, 2);
 
 		fragmentsList.add(yearFragment);
 		fragmentsList.add(monthFragment);
@@ -141,12 +72,12 @@ public class AllOrderActivity extends SherlockFragmentActivity {
 		 * MyOnPageChangeListener());
 		 */
 
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
 		ft.add(R.id.order_framelayout, fragmentsList.get(0)).commit();
 		currIndex = 0;
 	}
 
-	private void InitWidth() {
+	/*private void InitWidth() {
 		ivBottomLine = (ImageView) findViewById(R.id.iv_bottom_line);// ����
 		bottomLineWidth = ivBottomLine.getLayoutParams().width;
 		DisplayMetrics dm = new DisplayMetrics();
@@ -157,7 +88,7 @@ public class AllOrderActivity extends SherlockFragmentActivity {
 		position_one = (int) (screenW / 3);
 		position_two = position_one * 2;
 
-	}
+	}*/
 
 	public class MyOnClickListener implements View.OnClickListener {
 		private int index = 0;
@@ -242,7 +173,7 @@ public class AllOrderActivity extends SherlockFragmentActivity {
 		// 用于切换时保存fragment
 		try {
 			if(fragmentsList.get(index) == null || fragmentsList.get(currIndex) == null) return;
-			FragmentTransaction ft = getSupportFragmentManager()
+			FragmentTransaction ft = activity.getSupportFragmentManager()
 					.beginTransaction();
 //			if (fragmentsList.get(index).isAdded())
 //				ft.hide(fragmentsList.get(currIndex))
@@ -257,5 +188,4 @@ public class AllOrderActivity extends SherlockFragmentActivity {
 			e.printStackTrace();
 		}
 	}
-
 }
