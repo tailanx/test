@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
@@ -22,11 +23,12 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
+import com.yidejia.app.mall.ctrl.OrderViewCtrl;
 import com.yidejia.app.mall.fragment.AllOrderFragment;
 
 public class AllOrderActivity extends SherlockFragmentActivity  {
 	    private static final String TAG = AllOrderActivity.class.getName();
-	    private ViewPager mPager;
+//	private ViewPager mPager;
 	    private ArrayList<Fragment> fragmentsList;
 	 
 	    private TextView mWeek,mMonth,mYear;
@@ -40,8 +42,6 @@ public class AllOrderActivity extends SherlockFragmentActivity  {
 	    private Resources resources;
 		private PullToRefreshScrollView mPullToRefreshScrollView;
 
-		
-	    
 	    public void doClick(View v){
 			Intent intent = new Intent();
 			switch (v.getId()) {
@@ -63,14 +63,17 @@ public class AllOrderActivity extends SherlockFragmentActivity  {
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 //			this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//			this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		// this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+		// WindowManager.LayoutParams.FLAG_FULLSCREEN);
 			setActionBar();
 			setContentView(R.layout.all_order);
+		OrderViewCtrl viewCtrl = new OrderViewCtrl(AllOrderActivity.this);
+		viewCtrl.viewCtrl(0);
 			
-			resources = getResources();
-			InitWidth();
-			InitTextView();
-			InitViewPager();
+//		resources = getResources();
+//		InitWidth();
+//		InitTextView();
+//		InitViewPager();
 		}
 
 		private void setActionBar(){
@@ -94,6 +97,7 @@ public class AllOrderActivity extends SherlockFragmentActivity  {
 				}
 			});
 		}
+
 		private void InitTextView(){
 			mWeek = (TextView)findViewById(R.id.all_order_week);
 			mMonth = (TextView)findViewById(R.id.all_order_moonth);
@@ -103,17 +107,22 @@ public class AllOrderActivity extends SherlockFragmentActivity  {
 	        mMonth.setOnClickListener(new MyOnClickListener(1));
 	        mYear.setOnClickListener(new MyOnClickListener(2));
 		}
+
 		private void InitViewPager(){
-			 mPager = (ViewPager) findViewById(R.id.all_order_vPager);
+		// mPager = (ViewPager) findViewById(R.id.all_order_vPager);
 			 fragmentsList = new ArrayList<Fragment>();
 			 LayoutInflater mInflater = getLayoutInflater();
 //		     View view =  mInflater.inflate(R.layout.all_order_item_main, null);
 //		     
-//			mPullToRefreshScrollView = (PullToRefreshScrollView)view.findViewById(R.id.all_order_item_main_refresh_scrollview11);
+		// mPullToRefreshScrollView =
+		// (PullToRefreshScrollView)view.findViewById(R.id.all_order_item_main_refresh_scrollview11);
 //			mPullToRefreshScrollView.setScrollingWhileRefreshingEnabled(true);
-////			mPullToRefreshScrollView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
-//			mPullToRefreshScrollView.setVerticalScrollBarEnabled(false); //���ô�ֱ����
-//			mPullToRefreshScrollView.setHorizontalScrollBarEnabled(false); //����ˮƽ����
+		// //
+		// mPullToRefreshScrollView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
+		// mPullToRefreshScrollView.setVerticalScrollBarEnabled(false);
+		// //���ô�ֱ����
+		// mPullToRefreshScrollView.setHorizontalScrollBarEnabled(false);
+		// //����ˮƽ����
 //			 
 
 		     Fragment weekfragment = AllOrderFragment.newInstance(0, 0);
@@ -124,15 +133,19 @@ public class AllOrderActivity extends SherlockFragmentActivity  {
 		     fragmentsList.add(monthFragment);
 		     fragmentsList.add(weekfragment);
 		     
-		     mPager.setAdapter(new AllOrderFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
-		     mPager.setCurrentItem(0);
-		     mPager.setOffscreenPageLimit(2);
-		     mPager.setOnPageChangeListener(new MyOnPageChangeListener());
+		/*
+		 * mPager.setAdapter(new
+		 * AllOrderFragmentAdapter(this.getSupportFragmentManager(),
+		 * fragmentsList)); mPager.setCurrentItem(0);
+		 * mPager.setOffscreenPageLimit(2); mPager.setOnPageChangeListener(new
+		 * MyOnPageChangeListener());
+		 */
 				
-		     
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		ft.add(R.id.order_framelayout, fragmentsList.get(0)).commit();
+		currIndex = 0;
 		}
 
-		
 		private void InitWidth() {
 			ivBottomLine = (ImageView) findViewById(R.id.iv_bottom_line);//����
 	        bottomLineWidth = ivBottomLine.getLayoutParams().width;
@@ -145,6 +158,7 @@ public class AllOrderActivity extends SherlockFragmentActivity  {
 	        position_two = position_one * 2;
 	        
 	    }
+
 		  public class MyOnClickListener implements View.OnClickListener {
 		        private int index = 0;
 
@@ -154,23 +168,21 @@ public class AllOrderActivity extends SherlockFragmentActivity  {
 
 		        @Override
 		        public void onClick(View v) {
-		            mPager.setCurrentItem(index);
+//			mPager.setCurrentItem(index);
+			changeBGAndFragment(index);
 		        }
 		    };
-		    public class MyOnPageChangeListener implements OnPageChangeListener {
 
-		        @Override
-		        public void onPageSelected(int arg0) {
-		            Animation animation = null;
-		            switch (arg0) {
+	private void changeBGAndFragment(int index) {
+		switch (index) {
 		            case 0://�����ǵ�һ����ѡ�У�����¼�
 		                if (currIndex == 1) {//��ǰ�ǵڶ���
-		                    animation = new TranslateAnimation(position_one, 0, 0, 0);
+			// animation = new TranslateAnimation(position_one, 0, 0, 0);
 		                    mMonth.setPressed(false);
 		                    mMonth.setBackgroundResource(R.drawable.product_details_bg);
 		                    mMonth.setTextColor(Color.parseColor("#000000"));
 		                } else if (currIndex == 2) {
-		                    animation = new TranslateAnimation(position_two, 0, 0, 0);
+				// animation = new TranslateAnimation(position_two, 0, 0, 0);
 		                    mYear.setPressed(false);
 		                    mYear.setBackgroundResource(R.drawable.product_details_bg);
 		                    mYear.setTextColor(Color.parseColor("#000000"));
@@ -181,12 +193,14 @@ public class AllOrderActivity extends SherlockFragmentActivity  {
 		                break;
 		            case 1:
 		                if (currIndex == 0) {
-		                    animation = new TranslateAnimation(offset, position_one, 0, 0);
+				// animation = new TranslateAnimation(offset, position_one, 0,
+				// 0);
 		                    mWeek.setPressed(false);
 		                    mWeek.setBackgroundResource(R.drawable.product_details_bg);
 		                    mWeek.setTextColor(Color.parseColor("#000000"));
 		                } else if (currIndex == 2) {
-		                    animation = new TranslateAnimation(position_two, position_one, 0, 0);
+				// animation = new TranslateAnimation(position_two,
+				// position_one, 0, 0);
 		                    mYear.setPressed(false);
 		                    mYear.setBackgroundResource(R.drawable.product_details_bg);
 		                    mYear.setTextColor(Color.parseColor("#000000"));
@@ -197,14 +211,16 @@ public class AllOrderActivity extends SherlockFragmentActivity  {
 		                break;
 		            case 2:
 		                if (currIndex == 0) {
-		                    animation = new TranslateAnimation(offset, position_two, 0, 0);
+				// animation = new TranslateAnimation(offset, position_two, 0,
+				// 0);
 		                    mWeek.setPressed(false);
 		                    mWeek.setBackgroundResource(R.drawable.product_details_bg);
 		                    mWeek.setTextColor(Color.parseColor("#000000"));
 		                } else if (currIndex == 1) {
 		                	mMonth.setPressed(false);
 		                	 mMonth.setBackgroundResource(R.drawable.product_details_bg);
-		                    animation = new TranslateAnimation(position_one, position_two, 0, 0);
+				// animation = new TranslateAnimation(position_one,
+				// position_two, 0, 0);
 		                    mMonth.setTextColor(Color.parseColor("#000000"));
 		                } 
 		                mYear.setPressed(true);
@@ -214,23 +230,32 @@ public class AllOrderActivity extends SherlockFragmentActivity  {
 		                break;
 		           
 		            }
-		            currIndex = arg0;
-		            animation.setFillAfter(true);
-		            animation.setDuration(300);
-		            ivBottomLine.startAnimation(animation);
+		changeFragment(index);
+		currIndex = index;
 		        }
 
-				@Override
-				public void onPageScrollStateChanged(int arg0) {
-					// TODO Auto-generated method stub
-					
+	/**
+	 * 切换fragment 
+	 * @param index
+	 */
+	private void changeFragment(int index){
+		// 用于切换时保存fragment
+		try {
+			if(fragmentsList.get(index) == null || fragmentsList.get(currIndex) == null) return;
+			FragmentTransaction ft = getSupportFragmentManager()
+					.beginTransaction();
+//			if (fragmentsList.get(index).isAdded())
+//				ft.hide(fragmentsList.get(currIndex))
+//				.show(fragmentsList.get(index)).commit();
+//			else
+//				ft.hide(fragmentsList.get(currIndex))
+//				.add(R.id.order_framelayout, fragmentsList.get(index))
+//				.commit();
+			ft.replace(R.id.order_framelayout, fragmentsList.get(index)).commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
 				}
-
-				@Override
-				public void onPageScrolled(int arg0, float arg1, int arg2) {
-					// TODO Auto-generated method stub
-					
 				}
-		    }
 
 }

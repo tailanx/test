@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ import com.yidejia.app.mall.task.TaskLoginAct;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DESUtil;
 import com.yidejia.app.mall.util.DesUtils;
+import com.yidejia.app.mall.view.EditorActivity;
 import com.yidejia.app.mall.view.FindPwActivity;
 import com.yidejia.app.mall.view.RegistActivity;
 
@@ -42,7 +44,8 @@ public class LoginFragment extends SherlockFragment implements OnClickListener {
 	private Button mLogin;
 	private EditText stringName;
 	private EditText stringPassword;
-	private UserDatamanage userManage;
+	private ImageView configImageView;
+//	private UserDatamanage userManage;
 	private IpAddress ipAddress;
 	private MyMallActivity fragment;
 	private MyApplication myApplication;
@@ -53,26 +56,26 @@ public class LoginFragment extends SherlockFragment implements OnClickListener {
 
 	private MyMallActivity newFragment;
 
-	private void doClick(View v) {
-		switch (v.getId()) {
-		case R.id.login_edit:// 返回
-			Intent intent = new Intent(getSherlockActivity(),
-					MainFragmentActivity.class);
-			startActivity(intent);
-
-			break;
-		}
-	}
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.my_mall_login, container, false);
 		// getSherlockActivity().getSupportActionBar().setCustomView(R.layout.login_top);
-		userManage = new UserDatamanage(getSherlockActivity());
+//		userManage = new UserDatamanage(getSherlockActivity());
 		myApplication = (MyApplication) getSherlockActivity().getApplication();
 
-
+		configImageView = (ImageView) getSherlockActivity().findViewById(
+				R.id.config_btn);//设置
+		
+		configImageView.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(getSherlockActivity(),
+						EditorActivity.class);
+				getSherlockActivity().startActivity(intent);
+			}
+		});
+		
 		ipAddress = new IpAddress();
 		consts = new Consts();
 		sp = PreferenceManager
@@ -282,7 +285,7 @@ public class LoginFragment extends SherlockFragment implements OnClickListener {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar = new ProgressDialog(getSherlockActivity());
-			bar.setCancelable(false);
+			bar.setCancelable(true);
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 			bar.show();
 		}

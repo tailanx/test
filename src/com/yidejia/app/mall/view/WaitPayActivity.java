@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
+import com.yidejia.app.mall.ctrl.OrderViewCtrl;
 import com.yidejia.app.mall.fragment.AllOrderFragment;
 
 public class WaitPayActivity extends SherlockFragmentActivity {
@@ -62,12 +63,14 @@ public class WaitPayActivity extends SherlockFragmentActivity {
 //		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setActionBar();
-		setContentView(R.layout.wait_pay_order);
-		resources = getResources();
-		InitWidth();
-		InitTextView();
-		InitViewPager();
-
+//		setContentView(R.layout.wait_pay_order);
+//		resources = getResources();
+//		InitWidth();
+//		InitTextView();
+//		InitViewPager();
+		setContentView(R.layout.all_order);
+		OrderViewCtrl viewCtrl = new OrderViewCtrl(this);
+		viewCtrl.viewCtrl(1);
 		
 	}
 
@@ -77,7 +80,7 @@ public class WaitPayActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setIcon(R.drawable.back1);
+		getSupportActionBar().setIcon(R.drawable.back);
 		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
 		ImageView back = (ImageView) findViewById(R.id.compose_back);
 		TextView  titleTextView = (TextView) findViewById(R.id.compose_title);

@@ -81,7 +81,7 @@
                 android:id="@+id/go_pay_relativelayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/new_delivery_address_up" >
+                 >
 
                 <RelativeLayout
                     android:id="@+id/go_pay_relativelayout1"
@@ -156,6 +156,7 @@
                 android:id="@+id/go_pay_zhifubao_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:background="@drawable/new_menubg_middle" >
 
                 <ImageView
@@ -203,6 +204,7 @@
                 android:id="@+id/go_pay_zhifubao_wangyezhifu_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:background="@drawable/new_menubg_middle" >
 
                 <ImageView
@@ -250,7 +252,7 @@
                 android:id="@+id/go_pay_zhifubao_yinlian_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/new_menubg_middle" >
+                android:background="@drawable/delivery_address_down" >
 
                 <ImageView
                     android:id="@+id/go_pay_zhifubao_yinlian"
@@ -289,7 +291,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="4dp"
+                    android:layout_marginRight="6dp"
                     android:clickable="false" />
             </RelativeLayout>
 
@@ -297,6 +299,7 @@
                 android:id="@+id/go_pay_zhifubao_caifutong_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:background="@drawable/commentbg_down" >
 
                 <ImageView
@@ -371,7 +374,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="6dp"
                     android:layout_toRightOf="@id/go_pay_addresss"
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -455,15 +458,13 @@
                     android:layout_marginRight="10dp"
                     android:checked="true"
                     android:clickable="false" />
-                    android:clickable="false"
-                    />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/go_pay_payEMS_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/commentbg_down" >
+                android:background="@drawable/delivery_address_down" >
 
                 <TextView
                     android:id="@+id/go_pay_payEMS_money"
@@ -521,6 +522,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:visibility="gone"
                 android:background="@drawable/forgot_password" >
 
                 <ImageView
@@ -586,7 +588,7 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:editable="true"
-                        android:hint="订单留言.........                                                                                                                                                  "
+                        android:hint="订单留言......                                                                                                                                                 "
                         android:padding="10dp"
                         android:scrollbars="horizontal"
                         android:textSize="15sp" />

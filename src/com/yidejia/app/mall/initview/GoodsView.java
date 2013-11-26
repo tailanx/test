@@ -444,7 +444,7 @@ public class GoodsView {
 						Intent intent = new Intent(activity,
 								LoginActivity.class);
 						activity.startActivity(intent);
-						activity.finish();
+//						activity.finish();
 					}
 				}).setNegativeButton(activity.getResources().getString(R.string.guang_again), null).create();
 		options = new DisplayImageOptions.Builder()

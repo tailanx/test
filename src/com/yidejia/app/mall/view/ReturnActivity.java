@@ -46,11 +46,11 @@ public class ReturnActivity extends SherlockActivity {
 		order_code = bundle.getString("orderCode");
 		
 		the_date = bundle.getString("orderDate");
-		if(info==null||"".equals(info)){
-		findIds();
-		orderCodeTextView.setText(order_code);
-		orderDateTextView.setText(the_date);
-		}else{
+		if (info == null || "".equals(info)) {
+			findIds();
+			orderCodeTextView.setText(order_code);
+			orderDateTextView.setText(the_date);
+		} else{
 			
 			submit.setVisibility(View.GONE);
 			findIds();
@@ -107,7 +107,7 @@ public class ReturnActivity extends SherlockActivity {
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setIcon(R.drawable.back1);
+		getSupportActionBar().setIcon(R.drawable.back);
 		getSupportActionBar().setCustomView(R.layout.actionbar_common);
 		ImageView back = (ImageView) findViewById(R.id.actionbar_left);//����
 		submit = (Button) findViewById(R.id.actionbar_right);//�ύ

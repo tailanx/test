@@ -11,24 +11,24 @@ public class Skin {
 	private boolean need;
 	private boolean is_multiple;
 	
+////	
+//	/**�û�ѡ��Ĵ�*/
+//	private List<Integer> userAnswers=new ArrayList<Integer>();
 //	
-	/**用户选择的答案*/
-	private List<Integer> userAnswers=new ArrayList<Integer>();
-	
-	public List<Integer> getUserAnswers() {
-		return userAnswers;
-	}
-	
-	
-	public void setUserAnswers(List<Integer> userAnswers) {
-		this.userAnswers = userAnswers;
-	}
-	
-	
-	public void saveUserAnswers(List<Integer> userAns){
-		this.userAnswers.clear();
-		this.userAnswers.addAll(userAns);
-	}
+//	public List<Integer> getUserAnswers() {
+//		return userAnswers;
+//	}
+//	
+//	
+//	public void setUserAnswers(List<Integer> userAnswers) {
+//		this.userAnswers = userAnswers;
+//	}
+//	
+//	
+//	public void saveUserAnswers(List<Integer> userAns){
+//		this.userAnswers.clear();
+//		this.userAnswers.addAll(userAns);
+//	}
 
 	
 	public String getName() {

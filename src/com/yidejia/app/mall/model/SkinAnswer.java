@@ -2,12 +2,8 @@ package com.yidejia.app.mall.model;
 
 import java.io.Serializable;
 
-public class SkinAnswer implements Serializable{
 
-	@Override
-	public String toString() {
-		return "SkinAnswer [desc=" + desc + ", suggest=" + suggest + "]";
-	}
+public class SkinAnswer implements Serializable{
 
 	private String desc;
 	private String suggest;

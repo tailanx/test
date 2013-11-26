@@ -34,7 +34,6 @@
             android:layout_below="@+id/search_result_lg_image_left"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="YS06 胶原蛋白粉"
             android:textSize="16sp" />
 
         <TextView
@@ -51,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/search_result_lg_title_left"
             android:layout_toRightOf="@+id/search_result_lg_sell_left"
-            android:text="1280" />
+            />
 
         <TextView
             android:id="@+id/search_result_lg_price_left"
@@ -59,7 +58,6 @@
             android:layout_height="wrap_content"
             android:layout_alignRight="@+id/search_result_lg_image_left"
             android:layout_below="@+id/search_result_lg_title_left"
-            android:text="$468.00"
             android:textColor="@color/price_color"
             android:textSize="18sp" />
     </RelativeLayout>
@@ -93,7 +91,6 @@
             android:layout_below="@+id/search_result_lg_image_right"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="YS06 胶原蛋白粉"
             android:textSize="16sp" />
 
         <TextView
@@ -110,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/search_result_lg_title_right"
             android:layout_toRightOf="@+id/search_result_lg_sell_right"
-            android:text="1280" />
+		 />
 
         <TextView
             android:id="@+id/search_result_lg_price_right"
@@ -118,7 +115,6 @@
             android:layout_height="wrap_content"
             android:layout_alignRight="@+id/search_result_lg_image_right"
             android:layout_below="@+id/search_result_lg_title_right"
-            android:text="$468.00"
             android:textColor="@color/price_color"
             android:textSize="18sp" />
     </RelativeLayout>

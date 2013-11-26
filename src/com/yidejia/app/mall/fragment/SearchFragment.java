@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,7 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
@@ -42,6 +44,8 @@ public class SearchFragment extends SherlockFragment {
 	private String TAG = "SearchFragment";
 	
 	private ListView searchListView;
+	private RelativeLayout search_item_refresh_view;
+	private ImageView refresh_data_btn;
 	private SearchListAdapter searchListAdapter;
 //	private EditText searchEditText;//������
 	
@@ -70,9 +74,14 @@ public class SearchFragment extends SherlockFragment {
 		}
 //		getSherlockActivity().getSupportActionBar().setCustomView(R.layout.actionbar_search);
 		searchListView = (ListView) view.findViewById(R.id.search_result_list);
+		search_item_refresh_view = (RelativeLayout) view.findViewById(R.id.search_item_refresh_view);
+		refresh_data_btn = (ImageView) view.findViewById(R.id.refresh_data_btn);
 //		searchEditText = (EditText) getSherlockActivity().findViewById(R.id.search_bar_edittext);
 //		searchEditText.clearFocus();
 		functions = new ArrayList<Function>();
+		bar = new ProgressDialog(getSherlockActivity());
+		bar.setCancelable(true);
+		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		
 //		searchEditText.setOnFocusChangeListener(new OnFocusChangeListener() {
 //			
@@ -117,12 +126,36 @@ public class SearchFragment extends SherlockFragment {
 		super.onActivityCreated(savedInstanceState);
 		Log.d(TAG, "TestFragment-----onActivityCreated");
 		if(!ConnectionDetector.isConnectingToInternet(getSherlockActivity())){
-			Toast.makeText(getSherlockActivity(), getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
-			return;
+//			Toast.makeText(getSherlockActivity(), getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+			searchListView.setVisibility(View.GONE);
+			search_item_refresh_view.setVisibility(View.VISIBLE);
+		} else {
+			closeTask();
+			task = new Task();
+			task.execute();
 		}
-		closeTask();
-		task = new Task();
-		task.execute();
+		bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+			
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				// TODO Auto-generated method stub
+				closeTask();
+				if(functions.isEmpty()){
+					searchListView.setVisibility(View.GONE);
+					search_item_refresh_view.setVisibility(View.VISIBLE);
+				}
+			}
+		});
+		refresh_data_btn.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				closeTask();
+				task = new Task();
+				task.execute();
+			}
+		});
 	}
 
 	@Override
@@ -147,16 +180,13 @@ public class SearchFragment extends SherlockFragment {
 //	private String[] listContent = new String[] {"全部", "眼部护理", "活肌抗衰", "美白淡斑", "保湿锁水", "控油抗痘", "特别护理", "周期护理", "营养美容" };
 //	private String[] listIds = new String[]{"12","13","17","20","22","24","28","27"};
 	
+	private ProgressDialog bar;
 	
 	private class Task extends AsyncTask<Void, Void, Boolean>{
-		private ProgressDialog bar;
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar = new ProgressDialog(getSherlockActivity());
-			bar.setCancelable(false);
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 			bar.show();
 		}
 		@Override
@@ -180,6 +210,8 @@ public class SearchFragment extends SherlockFragment {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			if(result){
+				searchListView.setVisibility(View.VISIBLE);
+				search_item_refresh_view.setVisibility(View.GONE);
 				searchListAdapter = new SearchListAdapter(getActivity(), functions);
 				searchListView.setAdapter(searchListAdapter);
 				searchListView.setOnItemClickListener(new OnItemClickListener() {
@@ -192,6 +224,11 @@ public class SearchFragment extends SherlockFragment {
 						listener(arg2);
 					}
 				});
+			} else {
+				if(functions.isEmpty()){
+					searchListView.setVisibility(View.GONE);
+					search_item_refresh_view.setVisibility(View.VISIBLE);
+				}
 			}
 			bar.dismiss();
 		}

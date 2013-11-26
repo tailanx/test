@@ -11,7 +11,7 @@ import android.util.Log;
 
 
 public class ImageUrl {
-	public static String IMAGEURL = "http://img1.atido.com/";
+	public static String IMAGEURL = "http://img2.atido.com/";
 	private static String TAG = ImageUrl.class.getName();
 	
 	public String getImageUrl(){
@@ -19,7 +19,7 @@ public class ImageUrl {
 			return IMAGEURL;
 		} else{
 			Log.i(TAG, "is null?"+IMAGEURL);
-			TaskImageUrl taskImageUrl = new TaskImageUrl();
+			/*TaskImageUrl taskImageUrl = new TaskImageUrl();
 			boolean state = false ;
 			try {
 				state = taskImageUrl.execute().get();
@@ -37,7 +37,7 @@ public class ImageUrl {
 				// TODO Auto-generated catch block
 				Log.e(TAG, "TaskGetList() ExecutionException");
 				e.printStackTrace();
-			}
+			}*/
 			
 			return IMAGEURL;
 		}

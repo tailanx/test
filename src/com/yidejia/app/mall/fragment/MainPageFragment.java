@@ -11,6 +11,7 @@ import java.util.TimerTask;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -41,6 +42,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.yidejia.app.mall.ActiveGoActivity;
 import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
@@ -143,12 +145,8 @@ public class MainPageFragment extends SherlockFragment {
 		functionIntent(child);
 
 		mPullToRefreshScrollView = (PullToRefreshScrollView) view.findViewById(R.id.main_pull_refresh_scrollview);
-		mPullToRefreshScrollView = (PullToRefreshScrollView) view
-				.findViewById(R.id.main_pull_refresh_scrollview);
 		mPullToRefreshScrollView.setScrollingWhileRefreshingEnabled(true);
 		mPullToRefreshScrollView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
-		mPullToRefreshScrollView
-				.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
 		mPullToRefreshScrollView.setVerticalScrollBarEnabled(false); // 禁用垂直滚动
 		mPullToRefreshScrollView.setHorizontalScrollBarEnabled(false); // 禁用水平滚动
 	
@@ -206,6 +204,7 @@ public class MainPageFragment extends SherlockFragment {
 				// mPullToRefreshScrollView.setRefreshing();
 				if(!ConnectionDetector.isConnectingToInternet(getSherlockActivity())){
 					Toast.makeText(getSherlockActivity(), getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+					mPullToRefreshScrollView.onRefreshComplete();
 					return;
 				}
 				closeTask();
@@ -391,12 +390,9 @@ public class MainPageFragment extends SherlockFragment {
 			public void onClick(View arg0) {
 //				Intent intentOrder = new Intent(getSherlockActivity(),MyCollectActivity.class);
 //				getSherlockActivity().startActivity(intentOrder);
-				
-					dialog.show();
-				
-				// Intent intentOrder = new
-				// Intent(getSherlockActivity(),MyCollectActivity.class);
-				// getSherlockActivity().startActivity(intentOrder);
+				Intent intent = new Intent(getSherlockActivity(),
+						ActiveGoActivity.class);
+				getSherlockActivity().startActivity(intent);
 			}
 		});
 		RelativeLayout myMember = (RelativeLayout) child.findViewById(R.id.function_member);//会员购
@@ -504,14 +500,28 @@ public class MainPageFragment extends SherlockFragment {
 //			hotSellView.initInerbtyView(inerbtyArray);
 //			intentToView(view);
 //			main_mall_notice_content.setText(ggTitleArray.get(0));
+			bar = new ProgressDialog(getSherlockActivity());
+			bar.setCancelable(true);
+			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					isFirstIn = false;
+					closeTask();
+				}
+			});
 			createView(view, inflater);
 			if(!ConnectionDetector.isConnectingToInternet(getSherlockActivity())){
 				Toast.makeText(getSherlockActivity(), getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+				isFirstIn = false;
 				return;
 			}
 			closeTask();
 			task = new Task();
 			task.execute();
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -523,10 +533,10 @@ public class MainPageFragment extends SherlockFragment {
 	
 	private boolean isFirstIn = true;
 	private Task task;
+	private ProgressDialog bar;
 	
 	private class Task extends AsyncTask<Void, Void, Boolean>{
 
-		private ProgressDialog bar;
 		
 		@Override
 		protected Boolean doInBackground(Void... params) {
@@ -554,9 +564,6 @@ public class MainPageFragment extends SherlockFragment {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			if (isFirstIn) {
-				bar = new ProgressDialog(getSherlockActivity());
-//				bar.setCancelable(false);
-				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 				bar.show();
 			}
 			if(!bannerArray.isEmpty())bannerArray.clear();
@@ -579,7 +586,8 @@ public class MainPageFragment extends SherlockFragment {
 					getMainListFirstItem();
 					layout.addView(mMainView);
 					
-					HotSellView hotSellView = new HotSellView(view,getSherlockActivity());
+						HotSellView hotSellView = new HotSellView(view,
+								getSherlockActivity());
 					hotSellView.initHotSellView(hotsellArray);
 					hotSellView.initAcymerView(acymerArray);
 					hotSellView.initInerbtyView(inerbtyArray);
@@ -598,13 +606,14 @@ public class MainPageFragment extends SherlockFragment {
 //		} catch (Exception e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
-//			Toast.makeText(getSherlockActivity(), getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
+					// Toast.makeText(getSherlockActivity(),
+					// getResources().getString(R.string.bad_network),
+					// Toast.LENGTH_SHORT).show();
 			} 
 		}else{
 				Toast.makeText(getSherlockActivity(),
 						getResources().getString(R.string.bad_network),
 						Toast.LENGTH_SHORT).show();
-
 
 			}
 			if(isFirstIn){
@@ -620,7 +629,8 @@ public class MainPageFragment extends SherlockFragment {
 								DateUtils.FORMAT_SHOW_TIME
 								| DateUtils.FORMAT_SHOW_DATE
 								| DateUtils.FORMAT_ABBREV_ALL);
-				mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+				mPullToRefreshScrollView.getLoadingLayoutProxy()
+						.setLastUpdatedLabel(label);
 			}
 		}
 		

@@ -4,17 +4,18 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.http.conn.ConnectTimeoutException;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.util.Md5;
+import com.yidejia.app.mall.util.UnicodeToString;
 /**
  * ���棨�½����£��ռ�����Ϣ
  * @author long bin
@@ -26,10 +27,17 @@ public class SaveUserAddress {
 	private String TAG = "SaveUserAddress";
 	private Context context;
 	private Map<String, String> httpAddressMap = new ConcurrentHashMap<String, String>();
+	private UnicodeToString unicode;
+	
+	public SaveUserAddress(){
+		unicode = new UnicodeToString();
+	}
 	
 	public SaveUserAddress(Context context){
+		this();
 		this.context = context;
 	}
+	
 	
 	private void setKeysAndValues(String customer_id, String customer_name, String handset, String province,
 			String city, String district, String address, String recipient_id, String token){
@@ -93,7 +101,6 @@ public class SaveUserAddress {
 	}
 	
 	private String result = "";
-	private String urlString = "http://192.168.1.254:802/";
 	/**
 	 * 
 	 * @param customer_id
@@ -147,49 +154,61 @@ public class SaveUserAddress {
 //		Log.e(TAG, result);
 		return result;
 	}
-//	public String saveAddressJson(){
-//		AsyncHttpClient client = new AsyncHttpClient();
-//		getHttpAddress();
-//		RequestParams params = new RequestParams(httpAddressMap);
-//		
-//		client.setTimeout(5000);
-//		client.post("http://192.168.1.254:802/", params, new AsyncHttpResponseHandler(){
-//
-//			@Override
-//			public void onSuccess(String content) {
-//				// TODO Auto-generated method stub
-//				super.onSuccess(content);
-//				Toast.makeText(context, content, Toast.LENGTH_SHORT).show();
-//				Log.i(TAG, "1111"+content);
-//				bar.dismiss();
-//				result  = content;
-//			}
-//
-//			@Override
-//			public void onFailure(Throwable error, String content) {
-//				// TODO Auto-generated method stub
-//				super.onFailure(error, content);
-//				Log.i(TAG, "2222"+content);
-//				if (error.getCause() instanceof ConnectTimeoutException) {
-//					System.out.println("Connection timeout !");
-//					Log.i(TAG, "Connection timeout ");
-//				}
-//				bar.dismiss();
-//			}
-//
-//			@Override
-//			public void onStart() {
-//				// TODO Auto-generated method stub
-//				super.onStart();
-//				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//				bar.setMessage("���ڲ�ѯ");
-//				bar.show();
-//			}
-//			
-//			private ProgressDialog bar = new ProgressDialog(context);
-//		});
-//		return result;
-//	}
-	
+
+	private String isSuccessString = "";
+	private String recipient_id = "";
+	/**
+	 * 解析添加或修改地址数据
+	 * @param resultJson http返回的数据
+	 * @return
+	 */
+	public boolean analysicSaveJson(String resultJson) {
+		
+		if ("".equals(resultJson))
+			return false;
+		
+//		boolean isSaveSuccess = false;
+		JSONObject httpResultObject;
+		try {
+			httpResultObject = new JSONObject(resultJson);
+			int code = httpResultObject.getInt("code");
+			if (code == 1){
+				String response = httpResultObject.getString("response");
+				JSONObject responseJsonObject = new JSONObject(response);
+				String temp = responseJsonObject.getString("@p_recipient_id");
+//				recipient_id = Integer.parseInt(temp);
+				recipient_id = temp;
+				isSuccessString = responseJsonObject.getString("@p_result");
+				if(context.getResources().getString(R.string.success_del).equals(unicode.revert(isSuccessString))){
+//					isSaveSuccess = true;
+					return true;
+				}
+				else {
+//					isSaveSuccess = false;
+					return false;
+				}
+			} else {
+				return false;
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			Log.e(TAG, "save address analysis json jsonexception error");
+			e.printStackTrace();
+			return false;
+		} catch (Exception e) {
+			// TODO: handle exception
+			Log.e(TAG, "save address analysis json exception error");
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public String getRecipient_id() {
+		return recipient_id;
+	}
+
+	public String getIsSuccessString() {
+		return isSuccessString;
+	}
 	
 }

@@ -53,6 +53,7 @@ public class SkinHomeActivity extends Activity implements OnClickListener{
 		case R.id.skin_test_home_startSkin:
 			Intent intent = new Intent(SkinHomeActivity.this, SkinQuesActivity.class);
 			startActivity(intent);
+			this.finish();
 			break;
 		}
 	}

@@ -19,7 +19,6 @@
         android:layout_below="@+id/search_result_lg_image"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="YS06 胶原蛋白粉"
         android:textSize="16sp" />
 
     <TextView
@@ -35,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/search_result_lg_title"
         android:layout_toRightOf="@+id/search_result_lg_sell"
-        android:text="1280" />
+         />
 
     <TextView
         android:id="@+id/search_result_lg_price"
@@ -43,7 +42,6 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/search_result_lg_image"
         android:layout_below="@+id/search_result_lg_title"
-        android:text="$468.00"
         android:textColor="@color/price_color"
         android:textSize="18sp" />
 

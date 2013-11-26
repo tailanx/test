@@ -2,13 +2,19 @@ package com.yidejia.app.mall.net.order;
 
 import java.io.IOException;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Context;
 import android.util.Log;
 
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.util.Md5;
+import com.yidejia.app.mall.util.UnicodeToString;
 
 public class SaveOrder {
 	private String[] keys = new String[15];
@@ -132,5 +138,59 @@ public class SaveOrder {
 //		HttpGetConn conn = new HttpGetConn(url, true);
 		return result = conn.getHttpResponse();
 //		return conn.getJsonResult();
+	}
+	
+	public boolean analysisHttpResp(String httpResponse){
+		JSONObject jsonObject;
+		try {
+			jsonObject = new JSONObject(httpResponse);
+			int code = jsonObject.getInt("code");
+			if(code == 1){
+				String response = jsonObject.getString("response");
+				JSONObject responseObject = new JSONObject(response);
+				String result = responseObject.getString("@p_result");
+				if(unicode.revert(result).equals(context.getResources().getString(R.string.success_save_order))){
+					orderCode = responseObject.getString("@p_order_code");
+					resp_code = responseObject.getString("@p_resp_code");
+					tn = responseObject.getString("@p_tn");
+					return true;
+				}
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	private String orderCode;
+	private String resp_code;
+	private String tn;
+	private UnicodeToString unicode;
+	private Context context;
+	
+	public SaveOrder(){
+		
+	}
+	
+	public SaveOrder(Context context){
+		this();
+		this.context = context;
+		unicode = new UnicodeToString();
+	}
+
+	public String getOrderCode() {
+		return orderCode;
+	}
+
+	public String getResp_code() {
+		return resp_code;
+	}
+
+	public String getTn() {
+		return tn;
 	}
 }

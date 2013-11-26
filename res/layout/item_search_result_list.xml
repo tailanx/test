@@ -42,7 +42,6 @@
         android:layout_toRightOf="@+id/search_result_small_img_layout"
         android:ellipsize="end"
         android:maxLines="2"
-        android:text="妍诗美保湿蚕丝面膜25g*5/盒 保湿补水滋润美白淡斑"
         android:textSize="16sp" />
 
     <TextView
@@ -53,7 +52,6 @@
         android:layout_marginTop="10dp"
         android:layout_toLeftOf="@+id/search_result_small_arrow"
         android:layout_toRightOf="@+id/search_result_small_img_layout"
-        android:text="78.00"
         android:textColor="@color/price_color"
         android:textSize="16sp" />
 
@@ -74,7 +72,6 @@
         android:layout_alignBaseline="@+id/search_result_small_sell"
         android:layout_below="@+id/search_result_small_price"
         android:layout_toRightOf="@+id/search_result_small_sell"
-        android:text="5496"
         android:textSize="14sp" />
 
     <TextView
@@ -95,7 +92,6 @@
         android:layout_alignBaseline="@+id/search_result_small_sell"
         android:layout_below="@+id/search_result_small_price"
         android:layout_toRightOf="@+id/search_result_small_emulate"
-        android:text="5496"
         android:textSize="14sp" />
 
 </RelativeLayout>

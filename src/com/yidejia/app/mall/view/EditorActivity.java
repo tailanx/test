@@ -12,6 +12,7 @@ import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -23,6 +24,7 @@ import com.yidejia.app.mall.DataCleanManager;
 import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.ctrl.Check4Update;
 import com.yidejia.app.mall.util.Consts;
 
 public class EditorActivity extends SherlockActivity {
@@ -32,6 +34,7 @@ public class EditorActivity extends SherlockActivity {
 	private RelativeLayout about;
 	private RelativeLayout phone;
 	private RelativeLayout recommended;
+	private RelativeLayout check4updateLayout;
 
 	private AlertDialog dialogHelp;
 	private AlertDialog dialogAbout;
@@ -113,18 +116,12 @@ public class EditorActivity extends SherlockActivity {
 
 	}
 
-	public void doClick(View v) {
-		switch (v.getId()) {
-		case R.id.editor_exit:
-			exit.show();
-
-			break;
-		}
-	}
-
 	int width;
 	int height;
 	private TextView phoneNumber;
+	
+	private Check4Update check4Update;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -156,6 +153,19 @@ public class EditorActivity extends SherlockActivity {
 			}
 
 		});
+		
+		check4Update = new Check4Update(EditorActivity.this);
+		
+		check4updateLayout = (RelativeLayout) findViewById(R.id.editor_linearLayout7);
+		check4updateLayout.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				check4Update.checkUpdate();
+			}
+		});
+		
 //		option.setOnClickListener(new android.view.View.OnClickListener() {
 //
 //			@Override
@@ -168,6 +178,21 @@ public class EditorActivity extends SherlockActivity {
 //			}
 //
 //		});
+		Button editor_exit = (Button) findViewById(R.id.editor_exit);
+		
+		if(!myApplication.getIsLogin()){
+			editor_exit.setVisibility(View.GONE);
+		}
+		
+		editor_exit.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				exit.show();
+			}
+		});
+
 		help.setOnClickListener(new android.view.View.OnClickListener() {
 
 			@Override
@@ -221,7 +246,7 @@ public class EditorActivity extends SherlockActivity {
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		// getSupportActionBar().setLogo(R.drawable.back);
-		getSupportActionBar().setIcon(R.drawable.back1);
+		getSupportActionBar().setIcon(R.drawable.back);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
 		// startActionMode(new

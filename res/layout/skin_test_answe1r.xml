@@ -3,8 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
-    android:layout_marginBottom="10dp"
     android:layout_marginTop="20dp"
     android:scrollbars="none"
  >
@@ -22,7 +20,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="4dp"
             android:layout_gravity="center"
-            android:text="     为了方便我们的护肤顾问为您服务，以及免费获取妍诗美的护肤资讯，请您留下您的相关信息"
+            android:text="@string/yanshimei_answer_title"
             android:textColor="@color/price_color"
             android:textSize="15sp" />
 
@@ -31,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/listbg" >
 
             <TextView
@@ -63,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:background="@drawable/listbg" >
 
             <TextView
@@ -106,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:background="@drawable/listbg" >
 
             <TextView
@@ -137,7 +135,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:background="@drawable/listbg" >
 
             <TextView
@@ -170,7 +168,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:background="@drawable/listbg" >
 
             <TextView
@@ -204,7 +202,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:layout_gravity="center"
             android:src="@drawable/skin_commit" />
     </LinearLayout>

@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:text="妍诗美专业皮肤测试"
+        android:text="@string/yanshimei"
         android:textColor="#e3004e"
         android:textSize="20dp" />
 
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:text="请输入服务号"
+        android:text="@string/yanshimei_number"
         android:textColor="#e3004e"
         android:textSize="20dp" />
 
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
-        android:text="输入服务号立即开启美肌测试"
+        android:text="@string/yanshimei_start"
         android:textColor="#f473a4"
         android:textSize="16dp" />
 

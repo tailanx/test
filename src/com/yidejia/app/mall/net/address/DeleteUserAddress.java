@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.http.conn.ConnectTimeoutException;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -108,49 +110,32 @@ public class DeleteUserAddress {
 		return result = conn.getHttpResponse();
 	}
 	
-//	public String deleteAddressJson(){
-//		AsyncHttpClient client = new AsyncHttpClient();
-//		getHttpAddress("68298", "10");
-//		RequestParams params = new RequestParams(httpAddressMap);
-//		
-//		client.setTimeout(5000);
-//		client.post("http://192.168.1.254:802/", params, new AsyncHttpResponseHandler(){
-//
-//			@Override
-//			public void onSuccess(String content) {
-//				// TODO Auto-generated method stub
-//				super.onSuccess(content);
-////				Toast.makeText(context, content, Toast.LENGTH_SHORT).show();
-//				Log.i(TAG, "1111"+content);
-//				bar.dismiss();
-//				result = content;
-//			}
-//
-//			@Override
-//			public void onFailure(Throwable error, String content) {
-//				// TODO Auto-generated method stub
-//				super.onFailure(error, content);
-//				Log.i(TAG, "2222"+content);
-//				if (error.getCause() instanceof ConnectTimeoutException) {
-//					Log.i(TAG, "Connection timeout ");
-//				}
-//				bar.dismiss();
-//			}
-//
-//			@Override
-//			public void onStart() {
-//				// TODO Auto-generated method stub
-//				super.onStart();
-//				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//				bar.setMessage("正在查询");
-//				bar.show();
-//			}
-//			
-//			private ProgressDialog bar = new ProgressDialog(context);
-//		});
-//		
-//		return result;
-//	}
-	
+	/**
+	 * 解析删除数据
+	 * @param resultJson http 返回的数据
+	 * @return
+	 */
+	public boolean analysicDeleteJson(String resultJson) {
+		if ("".equals(resultJson))
+			return false;
+
+		JSONObject httpResultObject;
+		try {
+			httpResultObject = new JSONObject(resultJson);
+			int code = httpResultObject.getInt("code");
+			if (code == 1)
+				return true;
+			else return false;
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.e(TAG, "delete address analysis json jsonexception error");
+			return false;
+		} catch (Exception e) {
+			// TODO: handle exception
+			Log.e(TAG, "delete address analysis json exception error");
+			return false;
+		}
+	}
 	
 }

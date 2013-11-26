@@ -6,12 +6,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
+import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -45,6 +49,8 @@ import com.yidejia.app.mall.model.Express;
 import com.yidejia.app.mall.model.FreePost;
 import com.yidejia.app.mall.model.Specials;
 import com.yidejia.app.mall.net.address.GetUserAddressList;
+import com.yidejia.app.mall.net.order.SaveOrder;
+import com.yidejia.app.mall.net.voucher.Voucher;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.Http;
 import com.yidejia.app.mall.util.MessageUtil;
@@ -60,7 +66,7 @@ public class CstmPayActivity extends SherlockActivity {
 	private CheckBox emsBox;// ems配送
 	private TextView generalPrice;// 普通配送价格
 	private TextView emsPrice;// ems配送价格
-	private AddressDataManage addressDataManage;
+//	private AddressDataManage addressDataManage;
 	// private ExpressDataManage expressDataManage;// 配送中心
 	private CheckBox zhifubaoCheckBox;// 支付宝
 	private CheckBox zhifubaowangyeCheckBox;// 支付宝网页支付
@@ -96,9 +102,9 @@ public class CstmPayActivity extends SherlockActivity {
 	public static ArrayList<Cart> cartList;
 	private float jifen = 0;
 	public static String voucherString1;// 积分
-
-	private static final String SERVER_URL = "http://202.104.148.76/splugin/interface";
-	private static final String TRADE_COMMAND = "1001";
+//
+//	private static final String SERVER_URL = "http://202.104.148.76/splugin/interface";
+//	private static final String TRADE_COMMAND = "1001";
 	private final String TAG = getClass().getName();
 
 	public static ArrayList<Specials> getArrayListFree() {
@@ -311,7 +317,6 @@ public class CstmPayActivity extends SherlockActivity {
 
 	private PayUtil pay;
 	private float maxPay;
-	private GetUserAddressList userAddress;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -332,7 +337,6 @@ public class CstmPayActivity extends SherlockActivity {
 
 			preferentialDataManage = new PreferentialDataManage(
 					CstmPayActivity.this);
-			userAddress = new GetUserAddressList();
 			dialog = new Builder(CstmPayActivity.this)
 					.setTitle(
 							getResources().getString(R.string.produce_exchange))
@@ -356,7 +360,7 @@ public class CstmPayActivity extends SherlockActivity {
 									bundle.putString("price", sum + "");
 									intent.putExtras(bundle);
 									intent.putExtra("carts", carts);
-//									Log.i("info", "voucher:" + voucher);
+									// Log.i("info", "voucher:" + voucher);
 									intent.putExtra("voucher", voucher);
 									CstmPayActivity.this
 											.startActivityForResult(
@@ -383,28 +387,7 @@ public class CstmPayActivity extends SherlockActivity {
 									}
 								}
 							}).create();
-			// new android.content.DialogInterface.OnClickListener() {
-			//
-			// @Override
-			// public void onClick(DialogInterface dialog,
-			// int which) {
-			// // TODO Auto-generated method stub
-			// Intent intent = new Intent(
-			// CstmPayActivity.this,
-			// CstmPayActivity.class);
-			// Bundle bundle = new Bundle();
-			// // float sum = Float.parseFloat(sumTextView
-			// // .getText().toString());
-			// // bundle.putString("price", sum + "");
-			// // intent.putExtras(bundle);
-			// CstmPayActivity.this.startActivity(intent);
-			//
-			// }
-			// }).create();
-			// receiver = new Myreceiver();
-			// IntentFilter filter = new IntentFilter();
-			// filter.addAction(Consts.BUY_NEW);
-			// registerReceiver(receiver, filter);
+			
 			// 付款之前先判断用户是否登陆
 			if (!myApplication.getIsLogin()) {
 				Toast.makeText(this,
@@ -414,85 +397,10 @@ public class CstmPayActivity extends SherlockActivity {
 				startActivity(intent1);
 				this.finish();
 			} else {
+				show(carts, false);
 				
-				// Cart cart = (Cart) intent.getSerializableExtra("Cart");
-				// ArrayList<Cart> carts;
-				//
-				//
-				voucherString1 = voucherDataManage.getUserVoucherForPay(
-						myApplication.getUserId(), myApplication.getToken(),
-						true);
-
-				// voucher = Float.parseFloat(voucherString1);
-				if ("".equals(voucherString1) || null == voucherString1)
-					voucher = 0;
-				else
-					voucher = Float.parseFloat(voucherString1);
-				Log.e(TAG, voucherString1 + ":voucher and is cartact"
-						+ isCartActivity);
-				if (carts.isEmpty())
-					return;
-				StringBuffer sb = new StringBuffer();
-				if ("".equals(carts)) {
-					Toast.makeText(CstmPayActivity.this,
-							getResources().getString(R.string.no_network),
-							Toast.LENGTH_SHORT).show();
-				}
-				for (int i = 0; i < carts.size(); i++) {
-					Cart cart = carts.get(i);
-					sb.append(cart.getUId());
-					sb.append(",");
-					sb.append(cart.getAmount());
-					sb.append("n");
-					sb.append(";");
-				}
-				preferentialDataManage.getPreferential(sb.toString(),
-						myApplication.getUserId());
-				if(preferentialDataManage.getFreeGoods().size() == 0 && preferentialDataManage.getScoreGoods().size() == 0){
-					show(carts, false);
-					return;
-				}
-				if(preferentialDataManage.getFreeGoods().size() == 0 && preferentialDataManage.getScoreGoods().size() != 0){
-					if(voucher  == 0){
-						show(carts, false);
-						return;
-					} else{
-						dialog.show();
-					}
-				}
-			
-				if (preferentialDataManage.getFreeGoods().size() != 0
-						|| preferentialDataManage.getScoreGoods().size() != 0) {
-//					Log.i("info", preferentialDataManage.getFreeGoods().size()
-//							+ "   preferentialDataManage.getFreeGoods()");
-					arrayListFree = preferentialDataManage.getFreeGoods();
-					arrayListExchange = preferentialDataManage.getScoreGoods();
-				} 
-				
-					if (isCartActivity.equals("Y")
-							|| isCartActivity.equals("N")) {//
-						show(carts, false);// sum,
-						if (voucher > 0 || maxPay > fP) {
-//							Log.i("info", voucher + "   voucher");
-//							Log.i("info", maxPay + "   maxPay");
-//							dialog.show();
-
-							//
-							// show(carts,false);//sum,
-
-							// } else if (isCartActivity.equals("E")) {
-							// voucher = intent.getIntExtra("voucher", -1);
-							// Log.i("voucher", voucher + "  voucher");
-							// show(carts,true);
-						}
-						// else {
-						// // if (!carts.isEmpty()) {
-						// // show(carts,);//sum,
-						// Log.i("info", voucher+"   voucher");
-						// Log.i("info", maxPay+"   maxPay");
-						// show(carts, false);
-//					}
-				}
+//				getVoucher();
+				getPreferential();
 			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
@@ -503,6 +411,132 @@ public class CstmPayActivity extends SherlockActivity {
 		}
 
 	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		closeTask();
+		closeVoucherTask();
+	}
+
+	/**
+	 * 积分换购
+	 */
+	private void getPreferential(){
+		closeVoucherTask();
+		taskVoucher = new TaskVoucher();
+		taskVoucher.execute();
+	}
+	
+	private void closeVoucherTask(){
+		if(taskVoucher != null && Status.RUNNING == taskVoucher.getStatus().RUNNING){
+			taskVoucher.cancel(true);
+		}
+	}
+	
+	private TaskVoucher taskVoucher;
+	
+	private class TaskVoucher extends AsyncTask<Void, Void, Boolean> {
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			Voucher voucher = new Voucher();
+			try {
+				String httpResponse = voucher.getHttpResponse(myApplication.getUserId(), myApplication.getToken());
+				try {
+					JSONObject httpObject = new JSONObject(httpResponse);
+					int code = httpObject.getInt("code");
+					if(code == 1){
+						String response = httpObject.getString("response");
+						JSONObject resObject = new JSONObject(response);
+						voucherString1 = resObject.getString("can_use_score");
+						return true;
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return false;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			getVoucher();
+		}
+		
+		
+	}
+	
+	private void getVoucher() {
+//		voucherString1 = voucherDataManage.getUserVoucherForPay(
+//				myApplication.getUserId(), myApplication.getToken(), true);
+		try {
+			
+			voucher = Float.parseFloat(voucherString1);
+			Log.e(TAG, voucherString1 + ":voucher and is cartact" + isCartActivity);
+		} catch (Exception e) {
+			// TODO: handle exception
+			voucherString1 = "";
+		}
+		if ("".equals(voucherString1) || null == voucherString1)
+			voucher = 0;
+		else
+			voucher = Float.parseFloat(voucherString1);
+		if (carts.isEmpty())
+			return;
+		StringBuffer sb = new StringBuffer();
+		if ("".equals(carts)) {
+			Toast.makeText(CstmPayActivity.this,
+					getResources().getString(R.string.no_network),
+					Toast.LENGTH_SHORT).show();
+		}
+		for (int i = 0; i < carts.size(); i++) {
+			Cart cart = carts.get(i);
+			sb.append(cart.getUId());
+			sb.append(",");
+			sb.append(cart.getAmount());
+			sb.append("n");
+			sb.append(";");
+		}
+		preferentialDataManage.getPreferential(sb.toString(),
+				myApplication.getUserId());
+		if (preferentialDataManage.getFreeGoods().size() == 0
+				&& preferentialDataManage.getScoreGoods().size() == 0) {
+			return;
+		}
+		if (preferentialDataManage.getFreeGoods().size() == 0
+				&& preferentialDataManage.getScoreGoods().size() != 0) {
+			if (voucher == 0) {
+				// show(carts, false);
+				return;
+			} else {
+				dialog.show();
+			}
+		}
+
+		if (preferentialDataManage.getFreeGoods().size() != 0
+				|| preferentialDataManage.getScoreGoods().size() != 0) {
+			// Log.i("info", preferentialDataManage.getFreeGoods().size()
+			// + "   preferentialDataManage.getFreeGoods()");
+			arrayListFree = preferentialDataManage.getFreeGoods();
+			arrayListExchange = preferentialDataManage.getScoreGoods();
+		}
+
+		if (isCartActivity.equals("Y") || isCartActivity.equals("N")) {//
+		// show(carts, false);// sum,
+			if (voucher > 0 || !arrayListFree.isEmpty()) {
+				dialog.show();
+			}
+		}
+	}
 
 	private void show(final ArrayList<Cart> carts, boolean isHuanGou) {
 		Log.i(TAG, "show sum:" + sum);
@@ -512,8 +546,20 @@ public class CstmPayActivity extends SherlockActivity {
 		// IntentFilter filter = new IntentFilter();
 		// filter.addAction(Consts.BACK_UPDATE_CHANGE);
 		// registerReceiver(receiver, filter);
+		
+		bar = new ProgressDialog(this);
+		bar.setCancelable(true);
+		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+			
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				// TODO Auto-generated method stub
+				closeTask();
+			}
+		});
 
-		addressDataManage = new AddressDataManage(this);
+//		addressDataManage = new AddressDataManage(this);
 		go_pay_scrollView = (ScrollView) findViewById(R.id.go_pay_scrollView);
 		setupShow();
 
@@ -521,25 +567,6 @@ public class CstmPayActivity extends SherlockActivity {
 		layout = (LinearLayout) findViewById(R.id.go_pay_relative2);
 		pay = new PayUtil(CstmPayActivity.this, layout);
 
-		// goods = pay.loadView(carts, false);
-
-		// RelativeLayout relativeLayout = (RelativeLayout)
-		// findViewById(R.id.go_shopping_use_evalution);
-		// relativeLayout.setOnClickListener(new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// // TODO Auto-generated method stub
-		// Intent intent = new Intent(CstmPayActivity.this,
-		// ExchangeFreeActivity.class);
-		// cartList = carts;
-		// intent.putExtra("voucher", voucher);
-		// intent.putExtra("cartActivity", isCartActivity);
-		// Log.i("info", voucher+"   voucher");
-		// intent.putExtra("price", sum + "");
-		// CstmPayActivity.this.startActivity(intent);
-		// }
-		// });
 		reLayout = (RelativeLayout) findViewById(R.id.go_pay_relative);
 		addressRelative = (RelativeLayout) findViewById(R.id.go_pay_relativelayout);
 		// 地址增加监听事件
@@ -556,28 +583,8 @@ public class CstmPayActivity extends SherlockActivity {
 		});
 		// PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
 		goods = pay.loadView(carts, isHuanGou);
-		// 添加地址、快递费用、配送中心
-			Task task = new Task();
-			task.execute();
-
-		// // 获取免邮界限
-		// ExpressDataManage expressDataManage = new ExpressDataManage(
-		// CstmPayActivity.this);
-		// ArrayList<FreePost> freePosts = expressDataManage
-		// .getFreePostList("0", "20");
-		// float fP = Float.MAX_VALUE;
-		// if (freePosts.size() != 0)
-		// fP = Float.parseFloat(freePosts.get(0).getMax());
-		// Log.i("info", fP + "   fp");
-		// if (Float.parseFloat(sum) > fP) {
-		// sumPrice.setText(sum);
-		// expressNum = "0";
-		// } else {
-		// sumPrice.setText(Double.parseDouble(sum)
-		// + Double.parseDouble((general.isChecked() ? generalPrice
-		// .getText().toString() : emsPrice
-		// .getText().toString())) + "");
-		// }
+		
+		
 		mHandler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -608,49 +615,7 @@ public class CstmPayActivity extends SherlockActivity {
 				super.handleMessage(msg);
 			}
 		};
-		// } else {
-		// /*
-		// * setActionbar(); setContentView(R.layout.go_pay);
-		// * LinearLayout layout = (LinearLayout)
-		// * findViewById(R.id.go_pay_relative2); PayUtil pay = new
-		// * PayUtil(CstmPayActivity.this, layout, cart); PayUtil
-		// pay
-		// * = new PayUtil(CstmPayActivity.this, layout,
-		// * carts.get(0));
-		// *
-		// * goods = pay.cartLoadView(); setupShow(); addAddress();
-		// //
-		// * 获取免邮界限 ExpressDataManage expressDataManage = new
-		// * ExpressDataManage( CstmPayActivity.this);
-		// * ArrayList<FreePost> freePosts = expressDataManage
-		// * .getFreePostList("0", "20"); float fP =
-		// Float.MAX_VALUE;
-		// * if (freePosts.size() != 0) fP =
-		// * Float.parseFloat(freePosts.get(0).getMax());
-		// *
-		// * if (Float.parseFloat(sum) > fP) {
-		// sumPrice.setText(sum);
-		// * } else { sumPrice.setText(Double.parseDouble(sum) +
-		// * Double.parseDouble((general.isChecked() ? generalPrice
-		// * .getText().toString() : emsPrice
-		// .getText().toString()))
-		// * + ""); } mHandler = new Handler() {
-		// *
-		// * @Override public void handleMessage(Message msg) {
-		// switch
-		// * (msg.what) { case Consts.GENERAL: expressNum =
-		// * generalPrice.getText().toString();
-		// * sumPrice.setText(Double.parseDouble(sum) +
-		// * Double.parseDouble(expressNum) + ""); postMethod =
-		// * getResources().getString( R.string.ship_post);// 快递方式
-		// * break; case Consts.EMS: expressNum =
-		// * emsPrice.getText().toString();
-		// * sumPrice.setText(Double.parseDouble(sum) +
-		// * Double.parseDouble(expressNum) + ""); postMethod =
-		// "EMS";
-		// * break; } super.handleMessage(msg); } };
-		// */
-		// }
+		
 		// 提交订单
 		saveOrderBtn.setOnClickListener(new OnClickListener() {
 
@@ -667,8 +632,8 @@ public class CstmPayActivity extends SherlockActivity {
 					go_pay_scrollView.smoothScrollTo(0, 0);
 					return;
 				}
-				int mode = 1;
-				String pay_type = "";
+				
+				
 				if (yinlianCheckBox.isChecked()) {
 					pay_type = "union";
 					mode = 1;
@@ -691,7 +656,7 @@ public class CstmPayActivity extends SherlockActivity {
 							Toast.LENGTH_LONG).show();
 					return;
 				}
-				OrderDataManage orderDataManage = new OrderDataManage(
+				/*OrderDataManage orderDataManage = new OrderDataManage(
 						CstmPayActivity.this);
 				orderDataManage.saveOrder(myApplication.getUserId(), "0",
 						recipientId, "", jifen + "", expressNum, postMethod,
@@ -704,45 +669,106 @@ public class CstmPayActivity extends SherlockActivity {
 				resp_code = orderDataManage.getRespCode();
 				tn = orderDataManage.getTN();
 				// Log.e("OrderCode", orderCode);
-				if (orderCode == null || "".equals(orderCode))
-					return;
-				if (isCartActivity.equals("Y")) {// ；来自购物车
-					// 删除购物车的商品
-					CartsDataManage cartsDataManage = new CartsDataManage();
-					int length = carts.size();
-					for (int i = 0; i < length; i++) {
-						cartsDataManage.delCart(carts.get(i).getUId());
-					}
-					Intent intent = null;
-					// if(cartsDataManage.getCartAmount() != 0){
-					Log.e("NoProduceFragment", "DELETE_CART");
-					intent = new Intent(Consts.DELETE_CART);
-					CstmPayActivity.this.sendBroadcast(intent);
-					// }
-					// else {
-					// Log.e("NoProduceFragment", "BROAD_UPDATE_CHANGE");
-					// intent = new Intent(Consts.BROAD_UPDATE_CHANGE);
-					// }
-				}
-				// 跳转到支付页面
-				Intent userpayintent = new Intent(CstmPayActivity.this,
-						UserPayActivity.class);
-				Bundle bundle = new Bundle();
-
-				bundle.putInt("mode", mode);
-				// bundle.putString("name", "hello");
-				// bundle.putString("amount", "1.00");
-				bundle.putString("code", orderCode);
-				bundle.putString("uid", myApplication.getUserId());
-				bundle.putString("resp_code", resp_code);
-				bundle.putString("tn", tn);
-
-				userpayintent.putExtras(bundle);
-				startActivity(userpayintent);
-				CstmPayActivity.this.finish();
-
+				*/
+				closeTask();
+				taskSaveOrder = new TaskSaveOrder();
+				taskSaveOrder.execute();
 			}
 		});
+	
+		// 添加地址、快递费用、配送中心
+//		addAddress();
+		closeTask();
+		addressTask = new AddressTask();
+		addressTask.execute();
+	}
+	
+	String pay_type = "";
+	int mode = 1;
+	
+	private void go2Pay(int mode){
+		if (orderCode == null || "".equals(orderCode))
+			return;
+		if (isCartActivity.equals("Y")) {// ；来自购物车
+			// 删除购物车的商品
+			CartsDataManage cartsDataManage = new CartsDataManage();
+			int length = carts.size();
+			for (int i = 0; i < length; i++) {
+				cartsDataManage.delCart(carts.get(i).getUId());
+			}
+			Intent intent = null;
+			// if(cartsDataManage.getCartAmount() != 0){
+			Log.e("NoProduceFragment", "DELETE_CART");
+			intent = new Intent(Consts.DELETE_CART);
+			CstmPayActivity.this.sendBroadcast(intent);
+			// }
+			// else {
+			// Log.e("NoProduceFragment", "BROAD_UPDATE_CHANGE");
+			// intent = new Intent(Consts.BROAD_UPDATE_CHANGE);
+			// }
+		}
+		// 跳转到支付页面
+		Intent userpayintent = new Intent(CstmPayActivity.this,
+				UserPayActivity.class);
+		Bundle bundle = new Bundle();
+
+		bundle.putInt("mode", mode);
+		// bundle.putString("name", "hello");
+		// bundle.putString("amount", "1.00");
+		bundle.putString("code", orderCode);
+		bundle.putString("uid", myApplication.getUserId());
+		bundle.putString("resp_code", resp_code);
+		bundle.putString("tn", tn);
+
+		userpayintent.putExtras(bundle);
+		startActivity(userpayintent);
+		CstmPayActivity.this.finish();
+	}
+	
+	private TaskSaveOrder taskSaveOrder;
+	
+	private class TaskSaveOrder extends AsyncTask<Void, Void, Boolean> {
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			SaveOrder saveOrder = new SaveOrder(CstmPayActivity.this);
+			try {
+				String httpresp = saveOrder.getHttpResponse(myApplication.getUserId(), "0",
+							recipientId, "", jifen + "", expressNum, postMethod,
+							peiSongCenter, goods, comment.getText().toString(),// 这里的comment.getText().toString()很重要
+							pay_type, myApplication.getToken());
+				boolean issuccess = saveOrder.analysisHttpResp(httpresp);
+				orderCode = saveOrder.getOrderCode();
+				resp_code = saveOrder.getResp_code();
+				tn = saveOrder.getTn();
+				return issuccess;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return false;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			bar.show();
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			bar.dismiss();
+			if(result){
+				go2Pay(mode);
+			} else{
+				Toast.makeText(CstmPayActivity.this, "提交订单失败", Toast.LENGTH_LONG).show();
+			}
+		}
+		
 	}
 
 	// @Override
@@ -778,11 +804,89 @@ public class CstmPayActivity extends SherlockActivity {
 		}
 	}
 
+	private void closeTask(){
+		if(addressTask != null && addressTask.getStatus().RUNNING == Status.RUNNING){
+			addressTask.cancel(true);
+		}
+		if(taskSaveOrder != null && taskSaveOrder.getStatus().RUNNING == Status.RUNNING) {
+			taskSaveOrder.cancel(true);
+		}
+	}
+	
+	private GetUserAddressList getUserAddressList;
+	private AddressTask addressTask;
+	private ProgressDialog bar;
+	
+	private class AddressTask extends AsyncTask<Void, Void, Boolean> {
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			Boolean issuccess = false;
+			getUserAddressList = new GetUserAddressList();
+			String httpresp;
+			try {
+				
+				httpresp = getUserAddressList.getAddressHttpresp("customer_id%3D"+myApplication.getUserId()+"+and+is_default%3D%27y%27+and+valid_flag%3D%27y%27", 0 + "", 1 + "");
+				issuccess = getUserAddressList.analysis(httpresp);
+				mList = getUserAddressList.getAddresses();
+				Addresses addresses;
+				if(issuccess && mList != null && !mList.isEmpty()) {
+//					return issuccess;
+//					if()
+						addresses = mList.get(0);
+//					else issuccess = false;
+				} else {
+					httpresp = getUserAddressList.getAddressHttpresp(
+							"customer_id%3D" + myApplication.getUserId()
+									+ "+and+valid_flag%3D%27y%27", 0 + "",
+							1 + "");
+					issuccess = getUserAddressList.analysis(httpresp);
+					addArray = getUserAddressList.getAddresses();
+					if(issuccess && addArray != null && !addArray.isEmpty())addresses = addArray.get(0);
+					else return issuccess;
+				}
+				/*// 获取免邮界限
+				ExpressDataManage expressDataManage = new ExpressDataManage(
+						CstmPayActivity.this);
+				freePosts = expressDataManage.getFreePostList("0", "20");
+				expressArray = new ExpressDataManage(CstmPayActivity.this)
+				.getExpressesExpenses(addresses.getProvice(), "y");
+				peiSongCenter = new ExpressDataManage(CstmPayActivity.this)
+				.getDistributionsList(expressArray.get(0).getPreId(), 0 + "", 10 + "").get(0)
+				.getDisName(); */// 获取配送中心
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return issuccess;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			bar.show();
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(result){
+				addAddress();
+			} 
+			bar.dismiss();
+		}
+		
+	}
+	
+	private ArrayList<Addresses> mList;
+	private ArrayList<Addresses> addArray;
+	
 	/**
 	 * 地址和快递费用，配送中心
 	 */
-	private ArrayList<Addresses> mList;
-	private ArrayList<Addresses> addArray;
 	private void addAddress() {
 		// Log.i(TAG, "show sum:"+sum);
 		try {
@@ -790,25 +894,13 @@ public class CstmPayActivity extends SherlockActivity {
 			// addressDataManage.getAddressesArray(
 			//
 			// myApplication.getUserId(), 0, 10);
-			mList = userAddresses;
+//			ArrayList<Addresses> mList = new AddressDataManage()
+//					.getDefAddresses(myApplication.getUserId());
 			Addresses addresses;
 			// Log.i("info", mList.size() + " mlist");
-			if (mList.size() == 0) {
+			if (mList != null && !mList.isEmpty()) {
 //				ArrayList<Addresses> addArray = addressDataManage
-//						.getAddressesArray(myApplication.getUserId(), 0, 10);
-				addArray = userAddresses;
-				if (addArray.isEmpty()) { // 无默认地址并且无地址
-					Intent intent = new Intent(CstmPayActivity.this,
-							EditNewAddressActivity.class);
-					Bundle bundle = new Bundle();
-					bundle.putSerializable("editaddress", null);
-					intent.putExtras(bundle);
-					CstmPayActivity.this.startActivity(intent);
-					return;
-				} else {
-					addresses = addArray.get(0);
-				}
-			} else {
+//						.getAddressesArray(myApplication.getUserId(), 0, 1);
 				addresses = mList.get(0);
 				// 获取默认地址
 				int size = mList.size();
@@ -819,8 +911,26 @@ public class CstmPayActivity extends SherlockActivity {
 						break;
 					}
 				}
+				
+			} else {
+				if (addArray != null && !addArray.isEmpty()) { // 无默认地址并且无地址
+					addresses = addArray.get(0);
+				} else {
+					Intent intent = new Intent(CstmPayActivity.this,
+							EditNewAddressActivity.class);
+					Bundle bundle = new Bundle();
+					bundle.putSerializable("editaddress", null);
+					intent.putExtras(bundle);
+					CstmPayActivity.this.startActivity(intent);
+					return;
+				}
 			}
 			setAdd(addresses);// 设置地址
+			// 判断是否免邮
+			canFree(sum);
+
+			// 设置快递费用和配送中心
+			setKuaiDi(addresses);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -828,35 +938,6 @@ public class CstmPayActivity extends SherlockActivity {
 					getResources().getString(R.string.bad_network),
 					Toast.LENGTH_SHORT).show();
 		}
-		// userName.setText(addresses.getName());
-		// phoneName.setText(addresses.getHandset());// �޸�Ϊ�ֻ�
-		// StringBuffer sb = new StringBuffer();
-		// sb.append(addresses.getProvice());
-		// sb.append(addresses.getCity());
-		// sb.append(addresses.getArea());
-		// sb.append(addresses.getAddress());
-		// address.setText(sb.toString());
-		// recipientId = addresses.getAddressId();
-		//
-		// Express express = expressDataManage.getExpressesExpenses(
-		// addresses.getProvice(), "y").get(0);
-		// peiSongCenter = expressDataManage
-		// .getDistributionsList(express.getPreId(), 0 + "",
-		// 10 + "").get(0).getDisName(); // 获取配送中心
-		// peiSong.setText(peiSongCenter);
-		// generalPrice.setText(express.getExpress());
-		// emsPrice.setText(express.getEms());
-		// Log.i("info", addresses.getName());
-		// postMethod = getResources().getString(R.string.ship_post);// 初始化快递方式;
-		// expressNum = express.getExpress();// 初始化费用
-		// }
-		// } catch (Exception e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// Toast.makeText(CstmPayActivity.this,
-		// getResources().getString(R.string.bad_network),
-		// Toast.LENGTH_SHORT).show();
-		// }
 	}
 
 	/**
@@ -866,7 +947,7 @@ public class CstmPayActivity extends SherlockActivity {
 	 */
 	private void setAdd(Addresses addresses) {
 		// Log.i(TAG, "show sum:"+sum);
-		// Log.i(TAG, "add address");
+		 Log.e(TAG, "add address");
 		userName.setText(addresses.getName());
 		phoneName.setText(addresses.getHandset());// �޸�Ϊ�ֻ�
 		StringBuffer sb = new StringBuffer();
@@ -876,12 +957,9 @@ public class CstmPayActivity extends SherlockActivity {
 		sb.append(addresses.getAddress());
 		address.setText(sb.toString());
 		recipientId = addresses.getAddressId();// 地址id
-		// 判断是否免邮
-		canFree(sum);
-
-		// 设置快递费用和配送中心
-		setKuaiDi(addresses);
 	}
+	
+	private ArrayList<Express> expressArray ;
 
 	/**
 	 * 设置快递费用和配送中心
@@ -890,8 +968,8 @@ public class CstmPayActivity extends SherlockActivity {
 	 */
 	private void setKuaiDi(Addresses addresses) {
 		Express express;
-		ArrayList<Express> expressArray = new ExpressDataManage(this)
-				.getExpressesExpenses(addresses.getProvice(), "y");
+		expressArray = new ExpressDataManage(CstmPayActivity.this)
+		.getExpressesExpenses(addresses.getProvice(), "y");
 		if (expressArray.isEmpty())
 			return;
 		express = expressArray.get(0);
@@ -926,9 +1004,9 @@ public class CstmPayActivity extends SherlockActivity {
 	 */
 	private void setPeiSong(String preId) {
 		try {
-			peiSongCenter = new ExpressDataManage(this)
-					.getDistributionsList(preId, 0 + "", 10 + "").get(0)
-					.getDisName(); // 获取配送中心
+			peiSongCenter = new ExpressDataManage(CstmPayActivity.this)
+			.getDistributionsList(expressArray.get(0).getPreId(), 0 + "", 10 + "").get(0)
+			.getDisName(); // 获取配送中心
 //			Log.i("info", "setpeisong:" + peiSongCenter);
 			peiSong.setText(peiSongCenter);
 		} catch (Exception e) {
@@ -937,6 +1015,7 @@ public class CstmPayActivity extends SherlockActivity {
 	}
 
 	private float fP;
+	private ArrayList<FreePost> freePosts;
 
 	/**
 	 * 判断是否免邮
@@ -944,11 +1023,9 @@ public class CstmPayActivity extends SherlockActivity {
 	 * @param sum
 	 */
 	private void canFree(String sum) {
-		// 获取免邮界限
 		ExpressDataManage expressDataManage = new ExpressDataManage(
 				CstmPayActivity.this);
-		ArrayList<FreePost> freePosts = expressDataManage.getFreePostList("0",
-				"20");
+		freePosts = expressDataManage.getFreePostList("0", "20");
 		Log.i(TAG, "show sum:" + sum);
 		fP = Float.MAX_VALUE;
 		if (freePosts.size() != 0)
@@ -968,7 +1045,7 @@ public class CstmPayActivity extends SherlockActivity {
 		}
 	}
 
-	private Callable<Map<String, String>> call = new Callable<Map<String, String>>() {
+	/*private Callable<Map<String, String>> call = new Callable<Map<String, String>>() {
 
 		@Override
 		public Map<String, String> call() throws Exception {
@@ -987,7 +1064,7 @@ public class CstmPayActivity extends SherlockActivity {
 
 			return null;
 		}
-	};
+	};*/
 
 	// @Override
 	// protected void onDestroy() {
@@ -1027,6 +1104,11 @@ public class CstmPayActivity extends SherlockActivity {
 				sb.append(addresses1.getAddress());
 				address.setText(sb.toString());
 				setAdd(addresses1);
+				// 判断是否免邮
+				canFree(sum);
+
+				// 设置快递费用和配送中心
+				setKuaiDi(addresses1);
 			}
 		} else if (requestCode == Consts.CstmPayActivity_Request
 				&& resultCode == Consts.CstmPayActivity_Response) {
@@ -1082,87 +1164,5 @@ public class CstmPayActivity extends SherlockActivity {
 	}
 
 	private float voucher;
-	private int fromIndex = 0;
-	private int acount = 10;
-	private ArrayList<Addresses> userAddresses;
-	private boolean isFirstIn = true;
 
-	// public class InnerReceiver extends BroadcastReceiver {
-	//
-	// @Override
-	// public void onReceive(Context context, Intent intent) {
-	// // TODO Auto-generated method stub
-	// String action = intent.getAction();
-	// Log.i("voucher", "no" + "  nihao");
-	// if (Consts.BACK_UPDATE_CHANGE.equals(action)) {
-	// // Log.i("info", action + "action");
-	// layout.removeAllViews();
-	// voucher = intent.getIntExtra("voucher", -1);
-	// Log.i("voucher", voucher + "  voucher");
-	// cartList = (ArrayList<Cart>) intent
-	// .getSerializableExtra("carts");
-	// // ArrayList<Cart> carts = ExchangeFreeActivity.mArrayList;
-	// PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
-	// goods = pay.loadView(cartList, true);
-	// }
-	// }
-	// }
-	
-	private class Task extends AsyncTask<Void, Void, Boolean>{
-		private ProgressDialog bar;
-		@Override
-		protected void onPostExecute(Boolean result) {
-			// TODO Auto-generated method stub
-			super.onPostExecute(result);
-			if(isFirstIn){
-				bar.dismiss();
-				isFirstIn = false;
-
-			}
-			
-			if(result){
-//				dialog.show();
-//				if(mList.isEmpty()){
-					
-//					mList.addAll(userAddresses);
-//					addArray.addAll(userAddresses);
-					addAddress();
-					
-//				}
-			}
-			
-			
-		}
-
-		@Override
-		protected void onPreExecute() {
-			// TODO Auto-generated method stub
-			super.onPreExecute();
-			if(isFirstIn){
-			bar = new ProgressDialog(CstmPayActivity.this);
-			bar.setCancelable(true);
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.show();
-			}
-		}
-
-		@Override
-		protected Boolean doInBackground(Void... params) {
-			// TODO Auto-generated method stub
-			boolean isGet = false;
-			try {
-				String httpString = userAddress.getAddressHttpresp("customer_id%3D"+myApplication.getUserId()+"+and+valid_flag%3D%27y%27", fromIndex + "", acount + "");
-				isGet = userAddress.analysis(httpString);
-				userAddresses = userAddress.getAddresses();
-				return isGet;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			return false;
-		}
-		
-		
-	}
 }

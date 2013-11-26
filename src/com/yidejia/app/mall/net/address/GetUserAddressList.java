@@ -122,7 +122,7 @@ public class GetUserAddressList {
 			int code = httpResultObject.getInt("code");
 			Log.i(TAG, "code"+code);
 			if(code == 1){
-				String responseString = httpResultObject.getString("response");
+				String responseString = httpResultObject.optString("response");
 				JSONArray responseArray = new JSONArray(responseString);
 				int length = responseArray.length();
 				JSONObject addressItem ;
@@ -130,26 +130,26 @@ public class GetUserAddressList {
 				isNoMore = false;
 				for (int i = 0; i < length; i++) {
 					Addresses addresses = new Addresses();
-					addressItem = responseArray.getJSONObject(i);
+					addressItem = responseArray.optJSONObject(i);
 //					if("n".equals(addressItem.getString("valid_flag"))) continue;
-					String recipient_id = addressItem.getString("recipient_id");
+					String recipient_id = addressItem.optString("recipient_id");
 					addresses.setAddressId(recipient_id);
-					String name = addressItem.getString("customer_name");
+					String name = addressItem.optString("customer_name");
 					addresses.setName(unicode.revert(name));
-					String handset = addressItem.getString("handset");
+					String handset = addressItem.optString("handset");
 					addresses.setHandset(handset);
-					String phone = addressItem.getString("telephone");
+					String phone = addressItem.optString("telephone");
 					addresses.setPhone(phone);
-					String province = addressItem.getString("province");
+					String province = addressItem.optString("province");
 					addresses.setProvince(unicode.revert(province));
-					String city = addressItem.getString("city");
+					String city = addressItem.optString("city");
 					addresses.setCity(unicode.revert(city));
-					String area = addressItem.getString("district");
+					String area = addressItem.optString("district");
 					addresses.setArea(unicode.revert(area));
-					String maddress = addressItem.getString("address");
+					String maddress = addressItem.optString("address");
 					addresses.setAddress(unicode.revert(maddress));
-					String isDefault = addressItem.getString("is_default");
-					boolean isDef = isDefault.equals("y") ? true : false;
+					String isDefault = addressItem.optString("is_default");
+					boolean isDef = "y".equals(isDefault) ? true : false;
 					addresses.setDefaultAddress(isDef);
 					addressesArray.add(addresses);
 				}

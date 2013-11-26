@@ -7,17 +7,16 @@
     android:layout_alignParentTop="true"
     android:background="@drawable/topbg" >
 
-    <Button
-        android:id="@+id/login_edit"
+    <ImageView
+        android:id="@+id/config_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="5dp"
-        android:background="#00000000"
+        android:layout_marginRight="10dp"
         android:clickable="true"
-        android:onClick="doClick"
-        android:padding="6dp"
-        android:src="@drawable/back1" />
+        android:src="@drawable/edit_background"
+        android:textColor="#FFeeeeee" />
 
     <TextView
         android:id="@+id/wait_pay_order_textview1"

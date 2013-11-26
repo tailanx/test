@@ -89,6 +89,7 @@
             android:layout_height="90dp"
             android:layout_weight="1"
             android:background="@drawable/events_pavilion"
+            
             android:orientation="vertical" >
 
             <ImageView
@@ -98,7 +99,9 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/main_sport" />
-<!-- 	            android:drawableTop="@drawable/main_sport" -->
+<!-- 	            android:drawableTop="@drawable/main_sport"
+android:background="@drawable/events_pavilion"                android:background="@drawable/function_events_selector"
+ -->
 
             <TextView
                 android:id="@+id/main_event_text"
@@ -123,6 +126,7 @@
             android:layout_width="0dp"
             android:layout_height="90dp"
             android:layout_weight="1"
+            android:visibility="gone"
             android:background="@drawable/member_buy"
             android:orientation="vertical" >
 
@@ -249,7 +253,9 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/main_skin_test" />
-<!-- 	            android:drawableTop="@drawable/main_skin_test" -->
+<!-- 	            android:drawableTop="@drawable/main_skin_test"
+android:background="@drawable/skin_test"                android:background="@drawable/function_skin_selector"
+ -->
 
             <TextView
                 android:id="@+id/main_skin_test_text"
@@ -274,6 +280,7 @@
             android:layout_width="0dp"
             android:layout_height="90dp"
             android:layout_weight="1"
+            android:visibility="gone"
             android:background="@drawable/message_center"
             android:orientation="vertical" >
 

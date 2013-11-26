@@ -45,8 +45,10 @@ public class SkinQuesActivity extends Activity {
 	private ScrollView scrollView;
 	private RelativeLayout view;
 	private RelativeLayout nextRelative;
+	private ImageView back;
 
 	private void setupShow() {
+		back = (ImageView) findViewById(R.id.skin_test_question_back);
 		name = (TextView) findViewById(R.id.skin_test_question_frist);
 		group = (RadioGroup) findViewById(R.id.skin_test_question_radiogroup);
 		textview = (TextView) findViewById(R.id.skin_test_number);
@@ -70,6 +72,18 @@ public class SkinQuesActivity extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		haspMap = new HashMap<Integer, String>();
 		setupShow();
+		
+		
+		back.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				SkinQuesActivity.this.finish();
+			}
+		});
+		
+		
 		skin = new Skin();
 
 		Task task = new Task();
@@ -333,7 +347,6 @@ public class SkinQuesActivity extends Activity {
 		b = index + 1;
 		Skin skin = skinQuestions.get(index);
 		textview.setText(b + "/" + maxLength);
-		List<Integer> m = skin.getUserAnswers();
 		if (skin.isIs_multiple()) {
 			mList.clear();
 			name.setText(b + "." + skin.getQuestion() + "(必选)");

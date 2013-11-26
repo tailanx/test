@@ -35,7 +35,7 @@ import com.yidejia.app.mall.R;
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			setActionbar();
-			//???��???????scrollview
+		
 			setContentView(R.layout.opinion);
 
 		}
@@ -46,7 +46,7 @@ import com.yidejia.app.mall.R;
 			getSupportActionBar().setDisplayShowTitleEnabled(false);
 			getSupportActionBar().setDisplayUseLogoEnabled(false);
 //			getSupportActionBar().setLogo(R.drawable.back);
-			getSupportActionBar().setIcon(R.drawable.back1);
+			getSupportActionBar().setIcon(R.drawable.back);
 			getSupportActionBar().setDisplayShowCustomEnabled(true);
 			getSupportActionBar().setCustomView(R.layout.actionbar_common);
 //			startActionMode(new AnActionModeOfEpicProportions(ComposeActivity.this));

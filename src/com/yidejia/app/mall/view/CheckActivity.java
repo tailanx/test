@@ -7,6 +7,7 @@ import com.yidejia.app.mall.datamanage.TaskGetShipLog;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -27,6 +28,7 @@ public class CheckActivity extends SherlockActivity {
 	private TextView shipCompanyTextView;//
 	private TextView shipCodeTextView;
 	private LinearLayout logistics_details_layout;
+	private ImageView check_logistics_image;
 	
 	private TaskGetShipLog task;
 	
@@ -45,6 +47,9 @@ public class CheckActivity extends SherlockActivity {
 		shipCompanyTextView.setText(shipCompany);
 //		shipCodeTextView.setText("6350485541");
 		shipCodeTextView.setText(shipCode);
+		int id = getImageIdByShipCom(shipCompany);
+		if(id != -1)
+			check_logistics_image.setImageResource(id);
 		
 		task = new TaskGetShipLog(CheckActivity.this, logistics_details_layout);
 //		task.getShipLogs("6350485541");
@@ -68,6 +73,7 @@ public class CheckActivity extends SherlockActivity {
 		shipCompanyTextView = (TextView) findViewById(R.id.check_logistics_name);
 		shipCodeTextView = (TextView) findViewById(R.id.check_logistics_number);
 		logistics_details_layout = (LinearLayout) findViewById(R.id.logistics_details_layout);
+		check_logistics_image = (ImageView) findViewById(R.id.check_logistics_image);
 	}
 	
 	private void setActionbar(){
@@ -76,7 +82,7 @@ public class CheckActivity extends SherlockActivity {
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 //		getSupportActionBar().setLogo(R.drawable.back);
-		getSupportActionBar().setIcon(R.drawable.back1);
+		getSupportActionBar().setIcon(R.drawable.back);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
 //		startActionMode(new AnActionModeOfEpicProportions(ComposeActivity.this));
@@ -97,4 +103,37 @@ public class CheckActivity extends SherlockActivity {
 		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
 		titleTextView.setText(getResources().getString(R.string.check_logistics));
 	}
+	
+	/**
+	 * 根据公司名称 获取公司图片的id
+	 * @param shipCompany
+	 * @return
+	 */
+	private int getImageIdByShipCom(String shipCompany){
+		int id = -1;
+		Resources rs = getResources();
+		if(shipCompany.contains(rs.getString(R.string.zto))){
+			id = R.drawable.zto;
+		} else if(shipCompany.contains(rs.getString(R.string.sto))){
+			id = R.drawable.sto;
+		} else if(shipCompany.contains(rs.getString(R.string.yto))){
+			id = R.drawable.yto;
+		} else if(shipCompany.contains(rs.getString(R.string.ems_ex))){
+			id = R.drawable.ems;
+		} else if(shipCompany.contains(rs.getString(R.string.yunda))){
+			id = R.drawable.yunda;
+		} else if(shipCompany.contains(rs.getString(R.string.uc_ex))){
+			id = R.drawable.ucexpress;
+		} else if(shipCompany.contains(rs.getString(R.string.lbex))){
+			id = R.drawable.lbex;
+		} else if(shipCompany.contains(rs.getString(R.string.ttkdex))){
+			id = R.drawable.ttkdex;
+		} else if(shipCompany.contains(rs.getString(R.string.qfkd))){
+			id = R.drawable.qfkd;
+		} else if(shipCompany.contains(rs.getString(R.string.best_ex))){
+			id = R.drawable.best_express;
+		}
+		return id;
+	}
+	
 }

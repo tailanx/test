@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -56,6 +58,8 @@ public class CommentFragment extends SherlockFragment  {
 	
 	private View view;
 	private CommentUtil util;
+	private RelativeLayout refresh_view;
+	private ImageView refreshBtn;
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -74,7 +78,22 @@ public class CommentFragment extends SherlockFragment  {
 					| DateUtils.FORMAT_SHOW_DATE
 					| DateUtils.FORMAT_ABBREV_ALL);
 		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(label);;
+		
+		refresh_view = (RelativeLayout) view.findViewById(R.id.refresh_view);
+		refreshBtn = (ImageView) view.findViewById(R.id.refresh_data_btn);
+		
+		refreshBtn.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				fromIndex = 0;
+				setupShow();
+			}
+		});
+		
 		util = new CommentUtil(getSherlockActivity(), linearLayout);
+		util.setRefreshView(mPullToRefreshScrollView, refresh_view);
 		setupShow();//
 		
 		} catch (Exception e) {
