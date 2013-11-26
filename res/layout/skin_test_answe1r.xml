@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="20dp"
+    android:scrollbars="none"
+ >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/skin_test_describe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_gravity="center"
+            android:text="     为了方便我们的护肤顾问为您服务，以及免费获取妍诗美的护肤资讯，请您留下您的相关信息"
+            android:textColor="@color/price_color"
+            android:textSize="15sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/listbg" >
+
+            <TextView
+                android:id="@+id/skin_test_textview"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:padding="15dp"
+                android:text="您的姓名："
+                android:textColor="@color/price_color" />
+
+            <EditText
+                android:id="@+id/skin_test_name1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/skin_test_textview"
+                android:background="@null"
+                android:maxLength="5"
+                android:textColor="@color/price_color"
+                
+                android:singleLine="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/listbg" >
+
+            <TextView
+                android:id="@+id/skin_test_answer_bir"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="15dp"
+                android:text="性别："
+                android:textColor="@color/price_color"
+                android:textSize="15sp" />
+
+            <RadioGroup
+                android:id="@+id/skin_test_answer_group1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/skin_test_answer_bir"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/skin_test_answer_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="女"
+                    android:textColor="@color/price_color" />
+
+                <RadioButton
+                    android:id="@+id/skin_test_answer_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="男"
+                    android:textColor="@color/price_color" />
+            </RadioGroup>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/listbg" >
+
+            <TextView
+                android:id="@+id/skin_test_answer_sex"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:padding="15dp"
+                android:text="生日:"
+                android:textColor="@color/price_color"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/skin_test_birthday1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/skin_test_answer_sex"
+                android:alpha="0.4"
+                android:text="                        "
+                android:textColor="@color/price_color"/><!-- 
+                 -->
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/listbg" >
+
+            <TextView
+                android:id="@+id/skin_test_answer_qq"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:padding="15dp"
+                android:text="QQ号:"
+                android:textColor="@color/price_color"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/skin_test_answer_qqnumber1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_toRightOf="@id/skin_test_answer_qq"
+                android:textColor="@color/price_color"
+                android:background="@null"
+                android:singleLine="true"
+                android:inputType="number"
+                android:maxLength="10" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/listbg" >
+
+            <TextView
+                android:id="@+id/skin_test_answer_phone"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:padding="15dp"
+                android:text="手机号码:"
+                android:textColor="@color/price_color"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/skin_test_answer_phonenumber1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:textColor="@color/price_color"
+                android:layout_toRightOf="@id/skin_test_answer_phone"
+                android:background="@null"
+                android:singleLine="true"
+                 android:inputType="number"
+                android:maxLength="11" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/skin_test_answer_commit1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/skin_commit" />
+    </LinearLayout>
+
+</ScrollView>
