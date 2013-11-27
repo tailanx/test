@@ -164,7 +164,7 @@ public class SkinQuesActivity extends Activity {
 						}
 						if (!istrue1) {
 							Toast.makeText(SkinQuesActivity.this,
-									"亲，请先选择一个或多个选项1", Toast.LENGTH_SHORT)
+									getResources().getString(R.string.skin_check), Toast.LENGTH_SHORT)
 									.show();
 							return;
 						}
@@ -200,7 +200,7 @@ public class SkinQuesActivity extends Activity {
 						}
 						if (!istrue) {
 							Toast.makeText(SkinQuesActivity.this,
-									"亲，请先选择一个或多个选项", Toast.LENGTH_SHORT).show();
+									getResources().getString(R.string.skin_check), Toast.LENGTH_SHORT).show();
 							return;
 						}
 						index++;
@@ -227,7 +227,7 @@ public class SkinQuesActivity extends Activity {
 						}
 						if (!istrue1) {
 							Toast.makeText(SkinQuesActivity.this,
-									"亲，请先选择一个或多个选项1", Toast.LENGTH_SHORT)
+									"亲，请先选择一个或多个选项", Toast.LENGTH_SHORT)
 									.show();
 							return;
 						}

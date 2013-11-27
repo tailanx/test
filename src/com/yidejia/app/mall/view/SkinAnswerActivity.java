@@ -146,7 +146,7 @@ public class SkinAnswerActivity {
 							activity.getResources().getString(R.string.skin_qq),
 							Toast.LENGTH_SHORT).show();
 					return false;
-				} else if (qqNumber.length() <= 6 || qqNumber.length() >= 10) {
+				} else if (qqNumber.length() <3 || qqNumber.length() > 10) {
 					Toast.makeText(
 							activity,
 							activity.getResources().getString(
@@ -238,7 +238,7 @@ public class SkinAnswerActivity {
 					 Intent  intent = new Intent(activity, SkinResultAcitivity.class);
 					 Bundle bunlder = new Bundle();
 					 bunlder.putSerializable("SkinAnswer", skinAnswer);
-					
+					 bunlder.putString("skinName", a[1]);
 					 intent.putExtras(bunlder);
 					 activity.startActivity(intent);
 					 activity.finish();

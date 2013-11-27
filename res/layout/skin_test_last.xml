@@ -43,6 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:text="您的肌肤属于："
+                    android:layout_centerVertical="true"
                     android:textColor="@color/price_color"
                     android:textSize="15sp" />
 
@@ -52,9 +53,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_toRightOf="@id/skin_test_last_tip"
-                    android:text="混合型"
-                    android:textColor="@color/price_color"
-                    android:textSize="18sp" />
+                    android:layout_centerVertical="true"
+       
+                    android:textColor="#7492ea"
+                    android:textSize="20sp" />
             </RelativeLayout>
 
             <TextView
