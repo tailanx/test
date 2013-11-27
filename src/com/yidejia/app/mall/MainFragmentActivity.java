@@ -219,6 +219,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 	private Button shoppingCartTopay;// 去结算
 	private boolean isSearch = false;
 	private boolean isMainSearch = false;
+	private ImageView edit1;
 
 	private class NavOnclick implements View.OnClickListener {
 
@@ -356,6 +357,8 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 								.setImageResource(R.drawable.down_my_hover);
 						// down_my_TextView.setTextColor(Color.WHITE);
 						getSupportActionBar().setCustomView(R.layout.login_top);
+						edit1 = (ImageView) findViewById(R.id.config_btn);
+						edit1.setOnClickListener(edit);
 						break;
 					}
 				default:
@@ -597,14 +600,14 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 					FragmentTransaction ft = getSupportFragmentManager()
 							.beginTransaction();
 					if (noProduce.isAdded())
-						ft.remove(cartFragment).show(noProduce)
-								.commitAllowingStateLoss();// .show(fragment).
+						ft.remove(cartFragment)
+								.commitAllowingStateLoss();// .show(fragment).s how(noProduce)
 					else
 						ft.remove(cartFragment)
-								.replace(R.id.main_fragment, noProduce)
-								.commitAllowingStateLoss();
+								
+								.commitAllowingStateLoss();//.replace(R.id.main_fragment, noProduce)
 					cartImage.setVisibility(View.GONE);
-					shoppingCartTopay.setVisibility(View.GONE);
+//					shoppingCartTopay.setVisibility(View.GONE);
 				} else {
 					cartImage.setVisibility(View.VISIBLE);
 					cartImage.setText(number + "");
