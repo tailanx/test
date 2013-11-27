@@ -10,6 +10,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.RetViewCtrl;
 import com.yidejia.app.mall.model.RetOrderInfo;
 import com.yidejia.app.mall.net.order.GetReturnOrder;
+import com.yidejia.app.mall.view.ExchangeActivity;
 import com.yidejia.app.mall.view.ReturnActivity;
 
 public class TaskGetRetList {
@@ -114,6 +116,14 @@ public class TaskGetRetList {
 			super.onPostExecute(result);
 			if(result){
 //				Toast.makeText(activity, "提交成功!", Toast.LENGTH_LONG).show();
+				String label = activity.getResources().getString(R.string.update_time)
+						+ DateUtils.formatDateTime(activity,
+								System.currentTimeMillis(),
+								DateUtils.FORMAT_ABBREV_ALL
+										| DateUtils.FORMAT_SHOW_DATE
+										| DateUtils.FORMAT_SHOW_TIME);
+				mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+				
 				isSuccess = true;
 				if(isClean) {
 					allOrderLayout.removeAllViews();

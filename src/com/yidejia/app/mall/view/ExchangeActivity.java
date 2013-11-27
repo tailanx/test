@@ -99,13 +99,13 @@ public class ExchangeActivity extends SherlockFragmentActivity implements OnClic
 		public void onPullDownToRefresh(
 				PullToRefreshBase<ScrollView> refreshView) {
 			// TODO Auto-generated method stub
-			String label = getResources().getString(R.string.update_time)
+			/*String label = getResources().getString(R.string.update_time)
 					+ DateUtils.formatDateTime(ExchangeActivity.this,
 							System.currentTimeMillis(),
 							DateUtils.FORMAT_ABBREV_ALL
 									| DateUtils.FORMAT_SHOW_DATE
 									| DateUtils.FORMAT_SHOW_TIME);
-			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);*/
 			fromIndex = 0;//刷新的index要改为0
 			task.getRetOrderList(userId, token, fromIndex, amount);
 		}
@@ -113,13 +113,13 @@ public class ExchangeActivity extends SherlockFragmentActivity implements OnClic
 		@Override
 		public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
 			// TODO Auto-generated method stub
-			String label = getResources().getString(R.string.update_time)
+			/*String label = getResources().getString(R.string.update_time)
 					+ DateUtils.formatDateTime(ExchangeActivity.this,
 							System.currentTimeMillis(),
 							DateUtils.FORMAT_ABBREV_ALL
 									| DateUtils.FORMAT_SHOW_DATE
 									| DateUtils.FORMAT_SHOW_TIME);
-			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);*/
 			fromIndex += amount;
 			if(!task.getRetOrderList(userId, token, fromIndex, amount)){
 				fromIndex -= amount;
