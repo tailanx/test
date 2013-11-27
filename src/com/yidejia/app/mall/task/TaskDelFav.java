@@ -69,6 +69,7 @@ public class TaskDelFav {
 			super.onPreExecute();
 			bar.setCancelable(true);
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			bar.setMessage(context.getResources().getString(R.string.loading));
 			bar.show();
 		}
 

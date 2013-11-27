@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.net.user.GetCode;
 
 public class TaskGetCode {
@@ -59,6 +60,7 @@ public class TaskGetCode {
 			super.onPreExecute();
 			bar = new ProgressDialog(activity);
 			bar.setCancelable(true);
+			bar.setMessage(activity.getResources().getString(R.string.loading));
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 			bar.show();
 		}

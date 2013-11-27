@@ -2,6 +2,8 @@ package com.yidejia.app.mall.task;
 
 import java.io.IOException;
 
+
+import com.yidejia.app.mall.R;
 //import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.net.address.SaveUserAddress;
 import com.yidejia.app.mall.util.DefinalDate;
@@ -37,6 +39,7 @@ public class TaskSaveAddr {
 		this.activity = activity;
 		bar = new ProgressDialog(activity);
 		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		bar.setMessage(activity.getResources().getString(R.string.loading));
 		bar.setCancelable(true);
 		
 		saveUserAddress = new SaveUserAddress(activity);

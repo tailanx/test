@@ -80,8 +80,8 @@ public class TaskSaveComm {
 			super.onPreExecute();
 
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			// bar.setMessage(activity.getResources().getString(
-			// R.string.searching));
+			 bar.setMessage(activity.getResources().getString(
+			 R.string.loading));
 			bar.show();
 		}
 

@@ -306,7 +306,8 @@ public class SelledResultFragment extends SherlockFragment {
 			super.onPreExecute();
 			if (isFirstIn) {
 				bar = new ProgressDialog(getSherlockActivity());
-				bar.setCancelable(false);
+				bar.setCancelable(true);
+				bar.setMessage(getSherlockActivity().getResources().getString(R.string.loading));
 				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 				bar.show();
 			}

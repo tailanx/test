@@ -105,6 +105,7 @@ public class TaskGetRetList {
 			super.onPreExecute();
 			if (isFirstIn) {
 				bar = new ProgressDialog(activity);
+				bar.setMessage(activity.getResources().getString(R.string.loading));
 				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 				bar.show();
 			}

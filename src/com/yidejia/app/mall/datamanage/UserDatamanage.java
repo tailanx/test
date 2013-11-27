@@ -172,8 +172,9 @@ public class UserDatamanage {
 			super.onPreExecute();
 			
 			bar = new ProgressDialog(context);
-			bar.setCancelable(false);
+			bar.setCancelable(true);
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			bar.setMessage(context.getResources().getString(R.string.loading));
 			bar.show();
 			
 		}

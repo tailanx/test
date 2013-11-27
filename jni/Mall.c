@@ -8,10 +8,10 @@
 extern "C" {
 #endif
 
-static char *url = "http://192.168.1.254:802/";
-char *strTemp = "ChunTianfw_mobile123456";
-//char *url = "http://fw1.atido.net/";
-//char *strTemp = "ChunTianfw_mobile@SDF!TD#DF#*CB$GER@";
+//static char *url = "http://192.168.1.254:802/";
+//char *strTemp = "ChunTianfw_mobile123456";
+char *url = "http://fw1.atido.net/";
+char *strTemp = "ChunTianfw_mobile@SDF!TD#DF#*CB$GER@";
 
 char *pHead = "&key=fw_mobile&format=array&ts=";
 

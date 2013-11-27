@@ -531,6 +531,7 @@ public class SkinQuesActivity extends Activity {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar = new ProgressDialog(SkinQuesActivity.this);
+			bar.setMessage(getResources().getString(R.string.loading));
 			bar.setCancelable(true);
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 			bar.show();

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.yidejia.app.mall.MyApplication;
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.UserPayActivity;
 import com.yidejia.app.mall.net.order.GetTn;
 
@@ -53,6 +54,7 @@ public class TaskGetTn {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar = new ProgressDialog(activity);
+			bar.setMessage(activity.getResources().getString(R.string.loading));
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 			bar.show();
 		}

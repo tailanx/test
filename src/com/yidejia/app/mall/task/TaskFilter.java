@@ -3,6 +3,7 @@ package com.yidejia.app.mall.task;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.FilterViewCtrl;
 import com.yidejia.app.mall.model.Brand;
 import com.yidejia.app.mall.model.Function;
@@ -52,6 +53,7 @@ public class TaskFilter {
 			super.onPreExecute();
 			bar = new ProgressDialog(context);
 			bar.setCancelable(true);
+			bar.setMessage(context.getResources().getString(R.string.loading));
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 			bar.show();
 		}

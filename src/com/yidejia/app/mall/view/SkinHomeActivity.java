@@ -52,6 +52,7 @@ public class SkinHomeActivity extends Activity implements OnClickListener {
 		
 		bar = new ProgressDialog(this);
 		bar.setCancelable(true);
+		bar.setMessage(getResources().getString(R.string.loading));
 		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		
 		bar.setOnCancelListener(new DialogInterface.OnCancelListener() {

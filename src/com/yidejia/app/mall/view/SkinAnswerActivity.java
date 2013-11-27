@@ -268,6 +268,7 @@ public class SkinAnswerActivity {
 			super.onPreExecute();
 			bar = new ProgressDialog(activity);
 			bar.setCancelable(true);
+			bar.setMessage(activity.getResources().getString(R.string.loading));
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 			bar.show();
 

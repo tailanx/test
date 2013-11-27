@@ -134,8 +134,9 @@ public class PayAddress extends SherlockActivity {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setCancelable(false);
+			bar.setCancelable(true);
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			bar.setMessage(getResources().getString(R.string.loading));
 			bar.show();
 		}
 

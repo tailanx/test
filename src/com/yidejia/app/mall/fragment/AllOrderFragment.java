@@ -198,7 +198,7 @@ public class AllOrderFragment extends SherlockFragment {
 			super.onPreExecute();
 			if(isFirstOpen){
 				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//			bar.setMessage(context.getResources().getString(R.string.searching));
+				bar.setMessage(getSherlockActivity().getResources().getString(R.string.loading));
 				bar.show();
 			}
 		}

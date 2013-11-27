@@ -68,6 +68,7 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 		setContentView(R.layout.activity_goods_info_layout);
 		bar = new ProgressDialog(GoodsInfoActivity.this);
 		bar.setCancelable(true);
+		bar.setMessage(getResources().getString(R.string.loading));
 		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		
 		bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
