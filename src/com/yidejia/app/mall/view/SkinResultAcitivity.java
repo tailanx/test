@@ -3,6 +3,7 @@ package com.yidejia.app.mall.view;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ public class SkinResultAcitivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.skin_test_last);
 		Bundle bundle = getIntent().getExtras();
 		SkinAnswer sk = (SkinAnswer) bundle.getSerializable("SkinAnswer");
