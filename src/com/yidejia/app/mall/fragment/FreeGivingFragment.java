@@ -117,12 +117,12 @@ public class FreeGivingFragment extends SherlockFragment {
         //// 取得ViewHolder对象，这样就省去了通过层层的findViewById去实例化我们需要的cb实例的步骤    
 //        ViewHolder viewHolder=(ViewHolder)view.getTag();                          
 //        viewHolder.cb.toggle();// 把CheckBox的选中状态改为当前状态的反,gridview确保是单一选中  
-    	Log.i("info", "voucher:" +"adsadasfasfasdf");
-    	Intent  intent = new Intent(getSherlockActivity(), GoodsInfoActivity.class);
-		Bundle bundle = new Bundle();
-		bundle.putString("goodsId", CstmPayActivity.arrayListFree.get(position).getUId());
-		intent.putExtras(bundle);
-		getSherlockActivity().startActivity(intent);
+//    	Log.i("info", "voucher:" +"adsadasfasfasdf");
+//    	Intent  intent = new Intent(getSherlockActivity(), GoodsInfoActivity.class);
+//		Bundle bundle = new Bundle();
+//		bundle.putString("goodsId", CstmPayActivity.arrayListFree.get(position).getUId());
+//		intent.putExtras(bundle);
+//		getSherlockActivity().startActivity(intent);
         
     }  
 };  
