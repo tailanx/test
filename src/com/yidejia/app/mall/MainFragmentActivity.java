@@ -219,6 +219,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 	private Button shoppingCartTopay;// 去结算
 	private boolean isSearch = false;
 	private boolean isMainSearch = false;
+	private ImageView edit1;
 
 	private class NavOnclick implements View.OnClickListener {
 
@@ -356,6 +357,8 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 								.setImageResource(R.drawable.down_my_hover);
 						// down_my_TextView.setTextColor(Color.WHITE);
 						getSupportActionBar().setCustomView(R.layout.login_top);
+						edit1 = (ImageView) findViewById(R.id.config_btn);
+						edit1.setOnClickListener(edit);
 						break;
 					}
 				default:
