@@ -183,6 +183,9 @@ android:uiOptions="splitActionBarWhenNarrow"
         <activity
             android:name="com.yidejia.app.mall.view.HistoryActivity"
             android:screenOrientation="portrait" />
+        <activity 
+            android:name="com.yidejia.app.mall.ActiveGoActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.yidejia.app.mall.view.SkinQuesActivity"
             android:screenOrientation="portrait" />

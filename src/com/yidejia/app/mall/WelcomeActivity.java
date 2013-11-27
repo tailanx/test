@@ -4,13 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.WindowManager;
 
-import com.ant.liao.GifView;
-import com.ant.liao.GifView.GifImageType;
 
 public class WelcomeActivity extends Activity {
 	
-	private GifView gifView;
 //	private Handler mHandler;
 	public static Activity ACTIVITY;
 
@@ -19,10 +17,9 @@ public class WelcomeActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		ACTIVITY = this;
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_welcome);
-		gifView = (GifView) findViewById(R.id.gif1);
-		gifView.setGifImageType(GifImageType.COVER);
-		gifView.setGifImage(R.drawable.welcome);
 		
 		new Handler().postDelayed(new Runnable() {
 			
