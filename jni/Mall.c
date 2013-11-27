@@ -8,10 +8,10 @@
 extern "C" {
 #endif
 
-static char *url = "http://192.168.1.254:802/";
-char *strTemp = "ChunTianfw_mobile123456";
-//char *url = "http://fw1.atido.net/";
-//char *strTemp = "ChunTianfw_mobile@SDF!TD#DF#*CB$GER@";
+//static char *url = "http://192.168.1.254:802/";
+//char *strTemp = "ChunTianfw_mobile123456";
+char *url = "http://fw1.atido.net/";
+char *strTemp = "ChunTianfw_mobile@SDF!TD#DF#*CB$GER@";
 
 char *pHead = "&key=fw_mobile&format=array&ts=";
 
@@ -25,8 +25,28 @@ void addString(char* desc, char* addition) {
 //	strcpy(desc, addition);
 }
 
+void getParam(JNIEnv *env,jobject obj, const char* param){
+	jclass cls = (*env)->GetObjectClass(env, obj);
+//	jclass cls = (*env)->FindClass(env, "com.yidejia.app.mall.net.Param");
+	if(cls != 0){
+//		jmethodID mid = (*env)->GetMethodID(env, cls, "<init>", "()V");
+//		jobject clsobj = (*env)->NewObject(env, cls, mid);
+//		jfieldID fid = (*env)->GetFieldID(env, clsobj, "url", "Ljava/lang/String;");
+//		jstring result = (jstring) (*env) ->GetObjectField(env, clsobj, fid);
+//		param = (*env)->GetStringUTFChars(env, result, NULL);/**/
+
+		jmethodID methodId = (*env)->GetMethodID(env,cls,"hostUrl", "()V");
+		if(methodId != 0){
+			jstring result = (jstring) (*env) ->CallObjectMethod(env, obj, methodId);
+			param = (*env)->GetStringUTFChars(env, result, NULL);
+		}
+		/**/
+	}
+}
+
 jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4PostUrl(JNIEnv* env,
 		jobject thiz){
+//	getParam(env, thiz, url);
 	return (*env)->NewStringUTF(env, url);
 }
 //ͼƬ��ַ get
@@ -969,14 +989,20 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 	int i;
 
 	char encrypt[LEN] , urlString[LEN];
+	char hostUrl[LEN];
 	encrypt[0] = 0;
 	urlString[0] = 0;
+	hostUrl[0] = 0;
 
 //	memset(encrypt, 0, LEN * sizeof(char));
+//	getParam(env, thiz, hostUrl);
 
 	char *api="?api=home.mobile.page";
 
-	addString(urlString, url);
+//	if(hostUrl != NULL)
+//		addString(urlString, hostUrl);
+//	else
+		addString(urlString, url);
 	addString(urlString, api);
 
 //	addString(urlString, "&is_web=n");

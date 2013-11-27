@@ -16,6 +16,14 @@ public class JNICallBack {
 	//获取host Url
 	public native String getHttp4PostUrl();
 	
+	public String hostUrl(){
+		return "http://fw1.atido.net/";
+	}
+	
+	public String getSecretKey(){
+		return "ChunTianfw_mobile@SDF!TD#DF#*CB$GER@";
+	}
+	
 	//图片地址
 	public native String getHttp4ImageUrlPrefix();
 	
