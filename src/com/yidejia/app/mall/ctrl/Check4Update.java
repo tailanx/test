@@ -15,6 +15,8 @@ import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.R;
+
 
 public class Check4Update {
 	private String versionUrl = "http://static.n8n8.cn/apk/version.txt";
@@ -30,6 +32,7 @@ public class Check4Update {
 		this.activity = activity;
 		bar = new ProgressDialog(activity);
 		bar.setCancelable(true);
+		bar.setMessage(activity.getResources().getString(R.string.loading));
 		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 	}
 	

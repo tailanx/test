@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.MyApplication;
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.net.user.Login;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DesUtils;
@@ -72,6 +73,7 @@ public class TaskLoginAct {
 			super.onPreExecute();
 			bar = new ProgressDialog(activity);
 			bar.setCancelable(true);
+			bar.setMessage(activity.getResources().getString(R.string.loading));
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 			bar.show();
 		}

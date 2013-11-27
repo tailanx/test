@@ -730,7 +730,7 @@ public class OrdersUtil {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//			bar.setMessage(context.getResources().getString(R.string.searching));
+			bar.setMessage(context.getResources().getString(R.string.loading));
 			bar.show();
 		}
 		

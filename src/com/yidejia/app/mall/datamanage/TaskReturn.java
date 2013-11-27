@@ -106,6 +106,7 @@ public class TaskReturn {
 			super.onPreExecute();
 			bar = new ProgressDialog(activity);
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			bar.setMessage(activity.getResources().getString(R.string.loading));
 			bar.show();
 		}
 

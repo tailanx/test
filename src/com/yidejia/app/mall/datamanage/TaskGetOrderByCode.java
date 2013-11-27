@@ -85,6 +85,7 @@ public class TaskGetOrderByCode {
 			super.onPreExecute();
 //			if (isFirstIn) {
 				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+				bar.setMessage(activity.getResources().getString(R.string.loading));
 //				bar.setMessage(activity.getResources().getString(
 //						R.string.searching));
 				bar.show();
@@ -270,6 +271,7 @@ public class TaskGetOrderByCode {
 			super.onPreExecute();
 			bar = new ProgressDialog(activity);
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			bar.setMessage(activity.getResources().getString(R.string.loading));
 //			bar.setMessage(activity.getResources().getString(
 //					R.string.searching));
 			bar.show();

@@ -286,6 +286,7 @@ public class LoginFragment extends SherlockFragment implements OnClickListener {
 			super.onPreExecute();
 			bar = new ProgressDialog(getSherlockActivity());
 			bar.setCancelable(true);
+			bar.setMessage(getSherlockActivity().getResources().getString(R.string.loading));
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 			bar.show();
 		}

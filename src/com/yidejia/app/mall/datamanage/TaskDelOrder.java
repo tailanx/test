@@ -83,6 +83,7 @@ public class TaskDelOrder {
 			super.onPreExecute();
 			
 			bar = new ProgressDialog(context);
+			bar.setMessage(context.getResources().getString(R.string.loading));
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 			// bar.setMessage(context.getResources().getString(
 			// R.string.searching));

@@ -316,6 +316,7 @@ public class AddressAdapter extends BaseAdapter {
 			super.onPreExecute();
 			bar.setProgress(ProgressDialog.STYLE_SPINNER);
 			bar.setCancelable(true);
+			bar.setMessage(activity.getResources().getString(R.string.loading));
 			bar.show();
 		}
 
@@ -369,6 +370,7 @@ public class AddressAdapter extends BaseAdapter {
 			super.onPreExecute();
 			bar.setProgress(ProgressDialog.STYLE_SPINNER);
 			bar.setCancelable(true);
+			bar.setMessage(activity.getResources().getString(R.string.loading));
 			bar.show();
 		}
 

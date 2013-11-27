@@ -302,6 +302,7 @@ public class AddressActivity extends SherlockActivity {
 			super.onPreExecute();
 			if (isFirstIn) {
 				bar.setCancelable(true);
+				bar.setMessage(getResources().getString(R.string.loading));
 				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 				bar.show();
 			}

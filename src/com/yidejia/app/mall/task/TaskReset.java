@@ -2,6 +2,7 @@ package com.yidejia.app.mall.task;
 
 import java.io.IOException;
 
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.net.user.ResetPsw;
 
 import android.app.Activity;
@@ -44,6 +45,7 @@ public class TaskReset {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			bar = new ProgressDialog(activity);
+			bar.setMessage(activity.getResources().getString(R.string.loading));
 			bar.setCancelable(true);
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 			bar.show();

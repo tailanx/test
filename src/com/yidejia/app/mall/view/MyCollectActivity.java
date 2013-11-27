@@ -279,7 +279,8 @@ public class MyCollectActivity extends SherlockActivity {
 			super.onPreExecute();
 			if (isFirstIn) {
 				bar = new ProgressDialog(MyCollectActivity.this);
-				bar.setCancelable(false);
+				bar.setCancelable(true);
+				bar.setMessage(getResources().getString(R.string.loading));
 				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 				bar.show();
 			}

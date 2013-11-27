@@ -81,6 +81,7 @@ public class SearchFragment extends SherlockFragment {
 		functions = new ArrayList<Function>();
 		bar = new ProgressDialog(getSherlockActivity());
 		bar.setCancelable(true);
+		bar.setMessage(getSherlockActivity().getResources().getString(R.string.loading));
 		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		
 //		searchEditText.setOnFocusChangeListener(new OnFocusChangeListener() {

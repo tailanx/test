@@ -503,6 +503,7 @@ public class MainPageFragment extends SherlockFragment {
 			bar = new ProgressDialog(getSherlockActivity());
 			bar.setCancelable(true);
 			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			bar.setMessage(getSherlockActivity().getResources().getString(R.string.loading));
 			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
 				
 				@Override

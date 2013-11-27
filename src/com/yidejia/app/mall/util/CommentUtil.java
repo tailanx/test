@@ -51,6 +51,7 @@ public class CommentUtil {
 		getCommentList = new GetProductCommentList();
 		bar = new ProgressDialog(context);
 		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		bar.setMessage(context.getResources().getString(R.string.loading));
 	}
 	
 	public void setRefreshView(PullToRefreshScrollView mPullToRefreshScrollView, RelativeLayout refresh_view){
