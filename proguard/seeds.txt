@@ -4419,8 +4419,14 @@ android.support.v4.widget.ViewDragHelper$Callback: int clampViewPositionHorizont
 android.support.v4.widget.ViewDragHelper$Callback: int clampViewPositionVertical(android.view.View,int,int)
 com.UCMobile.PayPlugin.PayPluginService
 com.UCMobile.PayPlugin.PayResultReceiver
+com.UCMobile.PayPlugin.PayResultReceiver: void native_UCPayResultNotify(java.lang.String)
+com.UCMobile.PayPlugin.PluginSurfaceView
+com.UCMobile.PayPlugin.PluginSurfaceView: void nativeSurfaceCreated(int)
+com.UCMobile.PayPlugin.PluginSurfaceView: void nativeSurfaceChanged(int,int,int,int)
+com.UCMobile.PayPlugin.PluginSurfaceView: void nativeSurfaceDestroyed(int)
 com.UCMobile.PayPluginEx.PayPluginServiceEx
 com.UCMobile.PayPluginEx.PayResultReceiverEx
+com.UCMobile.PayPluginEx.PayResultReceiverEx: void native_UCPayResultNotify(java.lang.String)
 com.actionbarsherlock.ActionBarSherlock
 com.actionbarsherlock.ActionBarSherlock: java.lang.String TAG
 com.actionbarsherlock.ActionBarSherlock: java.lang.Class[] CONSTRUCTOR_ARGS
@@ -9639,14 +9645,78 @@ com.nostra13.universalimageloader.core.assist.ViewScaleType: com.nostra13.univer
 com.nostra13.universalimageloader.core.assist.ViewScaleType: com.nostra13.universalimageloader.core.assist.ViewScaleType valueOf(java.lang.String)
 com.nostra13.universalimageloader.core.download.ImageDownloader$Scheme: com.nostra13.universalimageloader.core.download.ImageDownloader$Scheme[] values()
 com.nostra13.universalimageloader.core.download.ImageDownloader$Scheme: com.nostra13.universalimageloader.core.download.ImageDownloader$Scheme valueOf(java.lang.String)
+com.unionpay.mpay.utils.UPPayEngine
+com.unionpay.mpay.utils.UPPayEngine: int initJNIEnv(android.app.Activity,boolean,boolean)
+com.unionpay.mpay.utils.UPPayEngine: java.lang.String getServerUrl(int)
+com.unionpay.mpay.utils.UPPayEngine: void setSessionKey(int,java.lang.String)
+com.unionpay.mpay.utils.UPPayEngine: java.lang.String decryptResponse(int,java.lang.String)
+com.unionpay.mpay.utils.UPPayEngine: java.lang.String retrieveInitializeKey(int)
+com.unionpay.mpay.utils.UPPayEngine: boolean verifySign(int,java.lang.String,java.lang.String)
+com.unionpay.mpay.utils.UPPayEngine: java.lang.String initMessage(int,java.lang.String)
+com.unionpay.mpay.utils.UPPayEngine: java.lang.String unBoundMessage(int,java.lang.String)
+com.unionpay.mpay.utils.UPPayEngine: java.lang.String ruleMessage(int,java.lang.String)
+com.unionpay.mpay.utils.UPPayEngine: java.lang.String followRulesMessage(int,java.lang.String)
+com.unionpay.mpay.utils.UPPayEngine: java.lang.String openRuleMessage(int,java.lang.String,java.lang.String)
+com.unionpay.mpay.utils.UPPayEngine: java.lang.String openupgradeMessage(int,java.lang.String)
+com.unionpay.mpay.utils.UPPayEngine: java.lang.String queryMessage(int,java.lang.String,java.lang.String)
+com.unionpay.mpay.utils.UPPayEngine: java.lang.String smsCodeMessage(int,java.lang.String,java.lang.String)
+com.unionpay.mpay.utils.UPPayEngine: java.lang.String actEntrustMessage(int,java.lang.String)
+com.unionpay.mpay.utils.UPPayEngine: java.lang.String getloginrules(int)
+com.unionpay.mpay.utils.UPPayEngine: java.lang.String getUserInfo(int,java.lang.String)
+com.unionpay.mpay.utils.UPPayEngine: java.lang.String accountVerifyMessage(int,java.lang.String)
+com.unionpay.mpay.utils.UPPayEngine: java.lang.String payingMessage(int,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.unionpay.mpay.widgets.UPPinWidget
+com.unionpay.mpay.widgets.UPPinWidget: java.lang.String encryptPwdOnce(int,java.lang.String)
+com.unionpay.mpay.widgets.UPPinWidget: java.lang.String decryptPwd(int,java.util.ArrayList)
 com.unionpay.uppay.PayActivity
 com.unionpay.uppay.PayActivity: PayActivity()
 com.unionpay.uppay.PayActivityEx
 com.unionpay.uppay.PayActivityEx: PayActivityEx()
 com.unionpay.uppay.auxutil.b: com.unionpay.uppay.auxutil.b[] values()
 com.unionpay.uppay.auxutil.b: com.unionpay.uppay.auxutil.b valueOf(java.lang.String)
+com.unionpay.uppay.util.PayEngine
+com.unionpay.uppay.util.PayEngine: void initJNIEnv(android.app.Activity,boolean,boolean)
+com.unionpay.uppay.util.PayEngine: void freeNativeData()
+com.unionpay.uppay.util.PayEngine: int init(com.unionpay.uppay.model.PAAInfo,java.lang.String,java.lang.String,java.lang.String,int)
+com.unionpay.uppay.util.PayEngine: java.lang.String encryptPwdOnce(int,int)
+com.unionpay.uppay.util.PayEngine: java.lang.String decryptPwd(int,java.lang.String)
+com.unionpay.uppay.util.PayEngine: boolean powerOn()
+com.unionpay.uppay.util.PayEngine: boolean powerDown()
+com.unionpay.uppay.util.PayEngine: boolean getBankCardList(java.lang.String,java.util.List,com.unionpay.uppay.model.ResponseInfo)
+com.unionpay.uppay.util.PayEngine: boolean balanceEnquiry(java.lang.String,int,java.lang.String,java.lang.String,com.unionpay.uppay.model.ResponseInfo)
+com.unionpay.uppay.util.PayEngine: boolean remotePurchase(com.unionpay.uppay.model.PAAInfo,int,java.lang.String,java.lang.String,com.unionpay.uppay.model.ResponseInfo)
+com.unionpay.uppay.util.PayEngine: boolean remotePreAuth(com.unionpay.uppay.model.PAAInfo,int,java.lang.String,java.lang.String,com.unionpay.uppay.model.ResponseInfo)
+com.unionpay.uppay.util.PayEngine: int requestSupportBankList()
+com.unionpay.uppay.util.PayEngine: int sendMobileVerifyCode(java.lang.String)
+com.unionpay.uppay.util.PayEngine: int verifySmsCode(java.lang.String,java.lang.String)
+com.unionpay.uppay.util.PayEngine: int requestCardInfo(java.lang.String,java.lang.String,java.lang.String)
+com.unionpay.uppay.util.PayEngine: int purchase(int,com.unionpay.uppay.model.PurchaseInfo)
+com.unionpay.uppay.util.PayEngine: byte[] getBankLogo()
+com.unionpay.uppay.util.PayEngine: java.lang.String getBankName()
+com.unionpay.uppay.util.PayEngine: java.lang.String getCardType()
+com.unionpay.uppay.util.PayEngine: java.lang.String getCardNumber()
+com.unionpay.uppay.util.PayEngine: java.lang.String getResponseCode()
+com.unionpay.uppay.util.PayEngine: java.lang.String getResponseMsg(int[])
+com.unionpay.uppay.util.PayEngine: java.lang.String getPayType()
+com.unionpay.uppay.util.PayEngine: java.lang.String getTransSerialNumber()
+com.unionpay.uppay.util.PayEngine: java.lang.String[] getCreditCardBankList()
+com.unionpay.uppay.util.PayEngine: java.lang.String[] getDebitCardBankList()
+com.unionpay.uppay.util.PayEngine: java.lang.String[] getPrepaidCardBankList()
+com.unionpay.uppay.util.PayEngine: java.lang.String getBillAmount()
+com.unionpay.uppay.util.PayEngine: java.lang.String getAccountUniqueID()
+com.unionpay.uppay.util.PayEngine: java.lang.String getSettleDate()
+com.unionpay.uppay.util.PayEngine: java.lang.String getAccountUniqueIDState()
+com.unionpay.uppay.util.PayEngine: java.lang.String getBillconvertRate()
+com.unionpay.uppay.util.PayEngine: java.lang.String getBillcurrency()
+com.unionpay.uppay.util.PayEngine: java.lang.String getLimitedAmout()
+com.unionpay.uppay.util.PayEngine: java.lang.String getMerchantLimitedAmount()
+com.unionpay.uppay.util.PayEngine: java.lang.String getMerchantRemainingAmount()
+com.unionpay.uppay.util.PayEngine: java.lang.String getPhoneNumber()
+com.unionpay.uppay.util.PayEngine: java.lang.String getUpgradeURL()
 com.unionpay.uppay.util.f: com.unionpay.uppay.util.f[] values()
 com.unionpay.uppay.util.f: com.unionpay.uppay.util.f valueOf(java.lang.String)
+com.yidejia.app.mall.ActiveGoActivity
+com.yidejia.app.mall.ActiveGoActivity: ActiveGoActivity()
 com.yidejia.app.mall.ComposeActivity
 com.yidejia.app.mall.ComposeActivity: ComposeActivity()
 com.yidejia.app.mall.GoodsInfoActivity
@@ -9657,6 +9727,7 @@ com.yidejia.app.mall.MainFragmentActivity
 com.yidejia.app.mall.MainFragmentActivity: MainFragmentActivity()
 com.yidejia.app.mall.MyApplication
 com.yidejia.app.mall.MyApplication: MyApplication()
+com.yidejia.app.mall.MyMallActivity$InnerReceiver
 com.yidejia.app.mall.SearchActivity
 com.yidejia.app.mall.SearchActivity: SearchActivity()
 com.yidejia.app.mall.SearchResultActivity
@@ -9672,9 +9743,59 @@ com.yidejia.app.mall.address.WheelView: WheelView(android.content.Context,androi
 com.yidejia.app.mall.address.WheelView: WheelView(android.content.Context)
 com.yidejia.app.mall.fragment.BaseInfoFragment$InnerReceiver
 com.yidejia.app.mall.fragment.CartActivity$InnerReceiver
-com.yidejia.app.mall.fragment.ExchangeAdapter$InnerReciver
-com.yidejia.app.mall.fragment.LoginFragment: void doClick(android.view.View)
+com.yidejia.app.mall.fragment.ExchangeFragment$InnerReciver
 com.yidejia.app.mall.fragment.NoProduceFragment$InnerReceiver
+com.yidejia.app.mall.jni.JNICallBack
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4PostUrl()
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4ImageUrlPrefix()
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4DelAddress(java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4SaveAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4DelComment(java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetComment(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4SaveComment(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetDistribute(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetExpress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetFree(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4CheckFav(java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4DelFav(java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetFav(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4SaveFav(java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetGoods(java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetHome()
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetOrder(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetNoEvaluate(java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetOrderByCode(java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4PayOut(java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4CancelOrder(java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4DelOrder(java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4SignOrder(java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4SaveOrder(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetBrand()
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetEffect(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetSearch(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetPrice()
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetVoucher(java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4Login(java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4Register(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4SetDefAddr(java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetVerify(java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetCount(java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetMessage(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4ChangeRead(java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetReturn(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetReturnList(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetShipLog(java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetTn(java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetCode(java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4SendMsg(java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4CheckCode(java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4ResetPsw(java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4SkinQuestion()
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4SkinAnswer(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4CheckCps(java.lang.String)
+com.yidejia.app.mall.view.AboutActivity
+com.yidejia.app.mall.view.AboutActivity: AboutActivity()
 com.yidejia.app.mall.view.AddressActivity
 com.yidejia.app.mall.view.AddressActivity: AddressActivity()
 com.yidejia.app.mall.view.AllOrderActivity
@@ -9693,7 +9814,6 @@ com.yidejia.app.mall.view.EditNewAddressActivity
 com.yidejia.app.mall.view.EditNewAddressActivity: EditNewAddressActivity()
 com.yidejia.app.mall.view.EditorActivity
 com.yidejia.app.mall.view.EditorActivity: EditorActivity()
-com.yidejia.app.mall.view.EditorActivity: void doClick(android.view.View)
 com.yidejia.app.mall.view.EvaluationActivity
 com.yidejia.app.mall.view.EvaluationActivity: EvaluationActivity()
 com.yidejia.app.mall.view.ExchangeActivity
@@ -9705,6 +9825,8 @@ com.yidejia.app.mall.view.FindPwActivity: FindPwActivity()
 com.yidejia.app.mall.view.GoCartActivity
 com.yidejia.app.mall.view.GoCartActivity: GoCartActivity()
 com.yidejia.app.mall.view.GoCartActivity$InnerReceiver
+com.yidejia.app.mall.view.HistoryActivity
+com.yidejia.app.mall.view.HistoryActivity: HistoryActivity()
 com.yidejia.app.mall.view.IntegeralActivity
 com.yidejia.app.mall.view.IntegeralActivity: IntegeralActivity()
 com.yidejia.app.mall.view.LoginActivity
@@ -9713,8 +9835,6 @@ com.yidejia.app.mall.view.MyCollectActivity
 com.yidejia.app.mall.view.MyCollectActivity: MyCollectActivity()
 com.yidejia.app.mall.view.NOProduceActivity
 com.yidejia.app.mall.view.NOProduceActivity: NOProduceActivity()
-com.yidejia.app.mall.view.NewAddressActivity
-com.yidejia.app.mall.view.NewAddressActivity: NewAddressActivity()
 com.yidejia.app.mall.view.OptionActivity
 com.yidejia.app.mall.view.OptionActivity: OptionActivity()
 com.yidejia.app.mall.view.OrderDetailActivity
@@ -9731,11 +9851,22 @@ com.yidejia.app.mall.view.RegistActivity
 com.yidejia.app.mall.view.RegistActivity: RegistActivity()
 com.yidejia.app.mall.view.ReturnActivity
 com.yidejia.app.mall.view.ReturnActivity: ReturnActivity()
+com.yidejia.app.mall.view.SkinAnswerActivity
+com.yidejia.app.mall.view.SkinAnswerActivity: SkinAnswerActivity(android.widget.RelativeLayout,android.app.Activity,java.lang.String)
+com.yidejia.app.mall.view.SkinHomeActivity
+com.yidejia.app.mall.view.SkinHomeActivity: SkinHomeActivity()
+com.yidejia.app.mall.view.SkinQuesActivity
+com.yidejia.app.mall.view.SkinQuesActivity: SkinQuesActivity()
+com.yidejia.app.mall.view.SkinResultAcitivity
+com.yidejia.app.mall.view.SkinResultAcitivity: SkinResultAcitivity()
 com.yidejia.app.mall.view.WaitDeliverActivity
 com.yidejia.app.mall.view.WaitDeliverActivity: WaitDeliverActivity()
 com.yidejia.app.mall.view.WaitPayActivity
 com.yidejia.app.mall.view.WaitPayActivity: WaitPayActivity()
 com.yidejia.app.mall.view.WaitPayActivity: void doClick(android.view.View)
+com.yidejia.app.mall.widget.RefreshView
+com.yidejia.app.mall.widget.RefreshView: RefreshView(android.content.Context,android.util.AttributeSet)
+com.yidejia.app.mall.widget.RefreshView: RefreshView(android.content.Context,android.util.AttributeSet,int)
 com.yidejia.app.mall.widget.YLImageButton
 com.yidejia.app.mall.widget.YLImageButton: YLImageButton(android.content.Context,android.util.AttributeSet)
 com.yidejia.app.mall.widget.YLImageButton: YLImageButton(android.content.Context,android.util.AttributeSet,int)
