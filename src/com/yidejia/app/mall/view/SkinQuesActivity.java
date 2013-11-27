@@ -63,7 +63,7 @@ public class SkinQuesActivity extends Activity {
 	}
 
 	
-
+	private String cps;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -73,6 +73,8 @@ public class SkinQuesActivity extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		setContentView(R.layout.skin_test_qusetion);
+		
+		cps = getIntent().getExtras().getString("cps");
 
 		haspMap = new HashMap<Integer, String>();
 		setupShow();
@@ -95,7 +97,7 @@ public class SkinQuesActivity extends Activity {
 		next.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.e("info", index+"  next111");
+//				Log.e("info", index+"  next111");
 				// TODO Auto-generated method stub
 				// 获取用户选择的答案
 				// List<Integer> m = getUserAnswers();
@@ -157,7 +159,7 @@ public class SkinQuesActivity extends Activity {
 								nextRelative.setVisibility(View.GONE);
 								scrollView.setVisibility(View.GONE);
 								view.setVisibility(View.VISIBLE);
-								showView(view, SkinQuesActivity.this);
+								showView(view, SkinQuesActivity.this,cps);
 							}
 						}
 						if (!istrue1) {
@@ -210,7 +212,7 @@ public class SkinQuesActivity extends Activity {
 					}
 					if (!skin1.isIs_multiple() && skin1.isNeed()) {
 						
-						Log.e("info", index+"  next");
+//						Log.e("info", index+"  next");
 						boolean istrue1 = false;
 						ArrayList<SkinQOption> options = skin1.getOptions();
 						for (int op = 0; op < options.size(); op++) {
@@ -231,7 +233,7 @@ public class SkinQuesActivity extends Activity {
 						}
 						index++;
 						setQuestionLayout();
-						Log.e("info", index+"  next2");
+//						Log.e("info", index+"  next2");
 						
 					} else if (!skin1.isNeed()) {
 						index++;
@@ -284,7 +286,7 @@ public class SkinQuesActivity extends Activity {
 				}
 				Log.i(SkinQuesActivity.class.getName(), keys.toString()
 						+ "   keys");
-				Log.e("info", index+"  pre");
+//				Log.e("info", index+"  pre");
 			}
 		});
 
@@ -543,8 +545,8 @@ public class SkinQuesActivity extends Activity {
 
 	}
 
-	private void showView(RelativeLayout view, SkinQuesActivity activity) {
-		SkinAnswerActivity sa = new SkinAnswerActivity(view, activity);
+	private void showView(RelativeLayout view, SkinQuesActivity activity,String cps) {
+		SkinAnswerActivity sa = new SkinAnswerActivity(view, activity,cps);
 
 	}
 }
