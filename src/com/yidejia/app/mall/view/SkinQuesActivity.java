@@ -442,12 +442,14 @@ public class SkinQuesActivity extends Activity {
 					LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 							android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
 							80);
-
+//					button.setCompoundDrawablesWithIntrinsicBounds(50, 0, 0, 0);
+				
 					button.setPadding(80, 0, 0, 0);
 
 					// button.setLayoutParams(lp);
 					// button.setCameraDistance(10.0f);
-					button.setGravity(Gravity.CENTER);
+					button.setGravity(Gravity.CENTER_VERTICAL);
+
 					button.setBackgroundResource(R.drawable.listbg);
 					button.setButtonDrawable(R.drawable.checkbox_style);
 					button.setId(i);
