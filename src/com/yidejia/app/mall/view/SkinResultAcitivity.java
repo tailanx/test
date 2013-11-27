@@ -14,6 +14,7 @@ public class SkinResultAcitivity extends Activity {
 	private TextView first;
 	private TextView second;
 	private ImageView back;
+	private String cps;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -21,6 +22,7 @@ public class SkinResultAcitivity extends Activity {
 		setContentView(R.layout.skin_test_last);
 		Bundle bundle = getIntent().getExtras();
 		SkinAnswer sk = (SkinAnswer) bundle.getSerializable("SkinAnswer");
+		
 		first = (TextView) findViewById(R.id.skin_test_last_first);
 		second = (TextView) findViewById(R.id.skin_test_last_second);
 		back = (ImageView) findViewById(R.id.skin_test_last_back);

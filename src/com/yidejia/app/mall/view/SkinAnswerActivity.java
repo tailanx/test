@@ -45,7 +45,7 @@ public class SkinAnswerActivity {
 	private String phoneNumber;
 	private String birth;
 	private String sex;
-
+	private String cps;
 	private void setupShow() {
 		// mButton = (ImageView) view.findViewById(R.id.skin_test_answer_back);
 		nameEditText = (EditText) view.findViewById(R.id.skin_test_name1);
@@ -60,11 +60,13 @@ public class SkinAnswerActivity {
 
 	}
 
-	public SkinAnswerActivity(RelativeLayout view, final Activity activity) {
+	public SkinAnswerActivity(RelativeLayout view, final Activity activity,String cps) {
 		// TODO Auto-generated method stub
 		// super.onCreate(savedInstanceState);
 		ip = new IpAddress();
 		this.activity = activity;
+		this.cps = cps;
+		
 		this.view = view;
 		// setContentView(R.layout.skin_test_answer);
 		setupShow();
@@ -93,20 +95,28 @@ public class SkinAnswerActivity {
 		// }
 		// });
 		//
-
+//		boolean istrue  = true;
 		commitImageView.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-				judgeNull(activity);
-
+				boolean	istrue = judgeNull(activity);
+				if(istrue){
+				
+				
 				Task task = new Task();
 				task.execute();
+			
+				}else{
+					
+//				Toast.makeText(activity, activity.getResources().getString(R.string.no_network), Toast.LENGTH_SHORT).show();
+					return;
+				}
 			}
 
-			private void judgeNull(final Activity activity) {
+			private boolean judgeNull(final Activity activity) {
 				name = nameEditText.getText().toString();
 				qqNumber = qqEditText.getText().toString();
 				phoneNumber = phoneEditText.getText().toString();
@@ -119,7 +129,7 @@ public class SkinAnswerActivity {
 							activity.getResources().getString(
 									R.string.skin_name), Toast.LENGTH_SHORT)
 							.show();
-					return;
+					return false;
 				}
 				if (birth == null || "".equals(birth)) {
 //					Log.i("info", birth + "birth");
@@ -128,35 +138,36 @@ public class SkinAnswerActivity {
 							activity.getResources()
 									.getString(R.string.skin_bir),
 							Toast.LENGTH_SHORT).show();
-					return;
+					return false;
 				}
 				if (qqNumber == null || "".equals(qqNumber)) {
 					Toast.makeText(
 							activity,
 							activity.getResources().getString(R.string.skin_qq),
 							Toast.LENGTH_SHORT).show();
-					return;
+					return false;
 				} else if (qqNumber.length() <= 6 || qqNumber.length() >= 10) {
 					Toast.makeText(
 							activity,
 							activity.getResources().getString(
 									R.string.skin_qq_error), Toast.LENGTH_SHORT)
 							.show();
-					return;
+					return false;
 				}
 				boolean phone = IsPhone.isMobileNO(phoneNumber);
 				if (phoneNumber == null || "".equals(phoneNumber)) {
 					Toast.makeText(activity,
 							activity.getResources().getString(R.string.skin_phone),
 							Toast.LENGTH_LONG).show();
-					return;
+					return false;
 				}
 				if (!phone) {
 					Toast.makeText(activity,
 							activity.getResources().getString(R.string.phone),
 							Toast.LENGTH_SHORT).show();
-					return;
+					return false;
 				}
+				return true;
 			}
 		});
 
@@ -205,7 +216,8 @@ public class SkinAnswerActivity {
 				// TODO Auto-generated method stub
 
 					List<String> keys = SkinQuesActivity.keys;
-					Log.i("info", keys.toString()+"  keys");
+//					Log.i("info", keys.toString()+"  keys");
+//					Log.i("info", cps+"  cps");
 					String a[] = new String[keys.size()];
 					for(int i=0;i<keys.size();i++){
 						a[i] = keys.get(i);
@@ -218,7 +230,7 @@ public class SkinAnswerActivity {
 				Log.i(SkinAnswer.class.getName(), sb+"    http");
 				 String httpresp = answer.getHttpResp(phoneNumber,
 						 phoneNumber ,name , sex, birth, a[0], a[1],
-				 sb.toString(), a[3], a[4], 122 + "", ip.getIpAddress());
+				 sb.toString(), a[3], a[4], cps, ip.getIpAddress());
 				 Log.i(SkinAnswer.class.getName(), httpresp+"    http");
 				 isSucess = answer.analysis(httpresp);
 				 skinAnswer = answer.getAnswer();
@@ -226,6 +238,7 @@ public class SkinAnswerActivity {
 					 Intent  intent = new Intent(activity, SkinResultAcitivity.class);
 					 Bundle bunlder = new Bundle();
 					 bunlder.putSerializable("SkinAnswer", skinAnswer);
+					
 					 intent.putExtras(bunlder);
 					 activity.startActivity(intent);
 					 activity.finish();
