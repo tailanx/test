@@ -146,7 +146,7 @@ public class SkinAnswerActivity {
 							activity.getResources().getString(R.string.skin_qq),
 							Toast.LENGTH_SHORT).show();
 					return false;
-				} else if (qqNumber.length() <3 || qqNumber.length() > 10) {
+				} else if (qqNumber.length() <= 3) {
 					Toast.makeText(
 							activity,
 							activity.getResources().getString(
