@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.R;
@@ -33,18 +34,21 @@ public class TaskGetRetList {
 	private boolean isSuccess = false;
 	
 	private ArrayList<RetOrderInfo> retOrderInfos;
+	private ArrayList<RetOrderInfo> retOrderInfoTemps;
 	
 	private String userId;
 	private String token;
 	private boolean isFirstIn = true;
 	private int fromIndex = 0;
 	private int amount = 10;
+	private boolean isClean = false;
 	
 	public TaskGetRetList(Activity activity, PullToRefreshScrollView mPullToRefreshScrollView){
 		this.activity = activity;
 		this.mPullToRefreshScrollView = mPullToRefreshScrollView;
 		findIds();
 		isFirstIn = true;
+		retOrderInfos = new ArrayList<RetOrderInfo>();
 	}
 	
 	public boolean getRetOrderList(String userId, String token, int fromIndex, int amount){
@@ -52,7 +56,9 @@ public class TaskGetRetList {
 		this.token = token;
 		this.fromIndex = fromIndex;
 		this.amount = amount;
-		if(fromIndex == 0) allOrderLayout.removeAllViews();
+		if(fromIndex == 0) {
+			isClean = true;
+		}
 		if(task != null && task.getStatus().RUNNING == AsyncTask.Status.RUNNING){
 			task.cancel(true);
 		}
@@ -109,12 +115,21 @@ public class TaskGetRetList {
 			if(result){
 //				Toast.makeText(activity, "提交成功!", Toast.LENGTH_LONG).show();
 				isSuccess = true;
-				int length = retOrderInfos.size();
+				if(isClean) {
+					allOrderLayout.removeAllViews();
+					isClean = false;
+				}
+				retOrderInfos.addAll(retOrderInfoTemps);
+				int length = retOrderInfoTemps.size();
 				for (int i = 0; i < length; i++) {
-					add2view(retOrderInfos.get(i));
+					add2view(retOrderInfoTemps.get(i));
 				}
 			}else {
-//				Toast.makeText(activity, "提交失败!", Toast.LENGTH_LONG).show();
+				if(!retOrderInfos.isEmpty() && retOrderInfos != null){
+					Toast.makeText(activity, activity.getResources().getString(R.string.nomore), Toast.LENGTH_LONG).show();
+				} else {
+//					Toast.makeText(activity, "亲，您并无", Toast.LENGTH_LONG).show();
+				}
 				isSuccess = false;
 			}
 			if(isFirstIn){
@@ -134,7 +149,8 @@ public class TaskGetRetList {
 				httpResp = getReturnOrder.getHttpResp(userId, fromIndex + "", amount + "", token);
 				try {
 					if(getReturnOrder.analysisReturn(httpResp)){
-						retOrderInfos = getReturnOrder.getRetOrderInfos();
+//						retOrderInfos = getReturnOrder.getRetOrderInfos();
+						retOrderInfoTemps = getReturnOrder.getRetOrderInfos();
 						return true;
 					}
 				} catch (JSONException e) {

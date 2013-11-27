@@ -31,6 +31,7 @@ public class ReturnActivity extends SherlockActivity {
 	private EditText phoneNumber;
 	private Spinner reason;
 	private EditText describe;
+	private TextView exchange_title;
 	
 	
 	@Override
@@ -74,6 +75,8 @@ public class ReturnActivity extends SherlockActivity {
 			
 			reason.setPrompt(info.getCause());
 			reason.setEnabled(false);
+			
+			exchange_title.setText(info.getStatus());
 		}
 		
 	}
@@ -96,6 +99,7 @@ public class ReturnActivity extends SherlockActivity {
 		phoneNumber = (EditText) findViewById(R.id.exchange_edittext_lianxifangshi);
 		reason = (Spinner) findViewById(R.id.exchange_spinner);
 		describe = (EditText) findViewById(R.id.go_pay_leave_message);
+		exchange_title = (TextView) findViewById(R.id.exchange_title);
 	}
 	
 	/**
