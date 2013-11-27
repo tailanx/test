@@ -298,7 +298,7 @@
     <string name="yanshimei">妍诗美专业皮肤测试</string>
     <string name="yanshimei_number">请输入服务号</string>
     <string name="yanshimei_start">输入服务号立即开启美肌测试</string>
-    <string name="yanshimei_answer_title">     为了方便我们的护肤顾问为您服务，以及免费获取妍诗美的护肤资讯，请您留下您的相关信息</string>
+    <string name="yanshimei_answer_title">\t\t为了方便我们的护肤顾问为您服务，以及免费获取妍诗美的护肤资讯，请您留下您的相关信息</string>
      <string name="skin_check">亲，请先选择一个或多个选项</string>
 
 </resources>
