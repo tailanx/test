@@ -105,6 +105,9 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 				task = new Task();
 				task.execute();
 				
+			} else {
+				goods_framelayout.setVisibility(View.GONE);
+				refresh_view.setVisibility(View.VISIBLE);
 			}
 		}
 //		initView();
@@ -115,6 +118,10 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				if (ConnectionDetector.isConnectingToInternet(GoodsInfoActivity.this)) {
+					Toast.makeText(GoodsInfoActivity.this, getResources().getString(R.string.no_network), Toast.LENGTH_SHORT).show();
+					return;
+				}
 				closeTask();
 				task = new Task();
 				task.execute();

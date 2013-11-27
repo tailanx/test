@@ -60,9 +60,9 @@ public class OrderViewCtrl {
 		Fragment monthFragment = AllOrderFragment.newInstance(orderType, 1);
 		Fragment yearFragment = AllOrderFragment.newInstance(orderType, 2);
 
-		fragmentsList.add(yearFragment);
-		fragmentsList.add(monthFragment);
 		fragmentsList.add(weekfragment);
+		fragmentsList.add(monthFragment);
+		fragmentsList.add(yearFragment);
 
 		/*
 		 * mPager.setAdapter(new

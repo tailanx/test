@@ -108,9 +108,9 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 	     Fragment monthFragment = AllOrderFragment.newInstance(2, 1);
 	     Fragment yearFragment = AllOrderFragment.newInstance(2, 2);
 	     
-	     fragmentsList.add(yearFragment);
-	     fragmentsList.add(monthFragment);
 	     fragmentsList.add(weekfragment);
+	     fragmentsList.add(monthFragment);
+	     fragmentsList.add(yearFragment);
 	     
 	     mPager.setAdapter(new AllOrderFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
 	     mPager.setCurrentItem(0);

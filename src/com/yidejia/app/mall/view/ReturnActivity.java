@@ -51,6 +51,7 @@ public class ReturnActivity extends SherlockActivity {
 			findIds();
 			orderCodeTextView.setText(order_code);
 			orderDateTextView.setText(the_date);
+			exchange_title.setText("退换货详情");
 		} else{
 			
 			submit.setVisibility(View.GONE);
