@@ -141,7 +141,7 @@ public class BrowseHistoryDataManage {
 					productBaseInfo.setPrice(Float.parseFloat(jsonObject.getString("price"))+"");
 					productBaseInfo.setBrief(jsonObject.getString("name"));
 					productBaseInfo.setCommentAmount(jsonObject.getString("comment_sum"));
-					Log.e(TAG, "ts:"+key+" and id"+id);
+//					Log.e(TAG, "ts:"+key+" and id"+id);
 					productBaseInfosArray.add(productBaseInfo);
 				} catch (NumberFormatException  e) {
 					// TODO: handle exception

@@ -32,6 +32,7 @@ import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.SearchActivity;
+import com.yidejia.app.mall.SearchResultActivity;
 import com.yidejia.app.mall.adapter.FavoriteAdapter;
 import com.yidejia.app.mall.datamanage.FavoriteDataManage;
 import com.yidejia.app.mall.model.SearchItem;
@@ -114,8 +115,16 @@ public class MyCollectActivity extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intentOrder = new Intent(MyCollectActivity.this, SearchActivity.class);
-				MyCollectActivity.this.startActivity(intentOrder);
+//				Intent intentOrder = new Intent(MyCollectActivity.this, SearchActivity.class);
+				Intent intent = new Intent (MyCollectActivity.this,SearchResultActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putString("title", "全部");
+				bundle.putString("name", "");
+				bundle.putString("price", "");
+				bundle.putString("brand", "");
+				bundle.putString("fun", "");
+				intent.putExtras(bundle);
+				MyCollectActivity.this.startActivity(intent);
 			}
 		});
 		favList = new ArrayList<SearchItem>();

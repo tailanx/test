@@ -102,7 +102,9 @@ public class GetProductAddress {
 			productBaseInfo.setShowListAmount(shaidan);
 			String pics = responseObject.getString("pics");
 			analysisPicJson(pics, bannerArray);
-			productBaseInfo.setImgUrl(ImageUrl.IMAGEURL+imageUrlString + "!100");
+			if(imageUrlString != null && !"".equals(imageUrlString) && !"null".equals(imageUrlString)){
+				productBaseInfo.setImgUrl(ImageUrl.IMAGEURL+imageUrlString + "!100");
+			}
 			productBaseInfo.setBannerArray(bannerArray);
 			String collects = responseObject.getString("collects");
 			analysisRecmJson(collects, recommendArray);
@@ -132,12 +134,14 @@ public class GetProductAddress {
 				String goodsId = itemObject.getString("goods_id");
 				baseProduct.setUId(goodsId);
 				String imgUrlTemp = itemObject.getString("imgname");
-				String imgUrl = ImageUrl.IMAGEURL + imgUrlTemp + "!150";
-				baseProduct.setImgUrl(imgUrl);
-				baseProduct.setPrice(itemObject.getString("price"));
-				baseProduct.setTitle(itemObject.getString("goods_name"));
-				picList.add(baseProduct);
-				Log.i(TAG, picList.getClass().getName());
+				if (imgUrlTemp != null && !"".equals(imgUrlTemp) && !"null".equals(imgUrlTemp)) {
+					String imgUrl = ImageUrl.IMAGEURL + imgUrlTemp + "!150";
+					baseProduct.setImgUrl(imgUrl);
+					baseProduct.setPrice(itemObject.getString("price"));
+					baseProduct.setTitle(itemObject.getString("goods_name"));
+					picList.add(baseProduct);
+				}
+//				Log.i(TAG, picList.getClass().getName());
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -167,9 +171,13 @@ public class GetProductAddress {
 				JSONObject itemObject = new JSONObject(itemsString);
 				String id = itemObject.getString("goods_id");
 				baseProduct.setUId(id);
-				String imgUrlTemp = ImageUrl.IMAGEURL + itemObject.getString("imgname") + "!200";
-				baseProduct.setImgUrl(imgUrlTemp);
-				picList.add(baseProduct);
+				String imgName = itemObject.optString("imgname");
+				if (imgName != null && !"".equals(imgName) && !"null".equals(imgName)) {
+					String imgUrlTemp = ImageUrl.IMAGEURL
+							+ imgName + "!200";
+					baseProduct.setImgUrl(imgUrlTemp);
+					picList.add(baseProduct);
+				}
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
