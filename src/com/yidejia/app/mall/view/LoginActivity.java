@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -82,7 +83,7 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 //		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.my_mall_login);
+		setContentView(R.layout.login);
 		sp = PreferenceManager.getDefaultSharedPreferences(this);
 		consts = new Consts();
 		ip = new IpAddress();
@@ -101,8 +102,8 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 		stringPassword = (EditText)findViewById(R.id.my_mall_login__edittext_password);
 		mLogin.setOnClickListener(this);
 		//优化登录账号密码焦点获取
-		TableRow login_acount = (TableRow) findViewById(R.id.login_acount);
-		TableRow login_psw = (TableRow) findViewById(R.id.login_psw);
+		LinearLayout login_acount = (LinearLayout) findViewById(R.id.login_acount);
+		LinearLayout login_psw = (LinearLayout) findViewById(R.id.login_psw);
 		login_acount.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
 		login_psw.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
 		login_acount.setOnClickListener(new OnClickListener() {
