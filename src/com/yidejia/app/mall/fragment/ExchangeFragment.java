@@ -137,11 +137,11 @@ public class ExchangeFragment extends SherlockFragment {
 //			ExchangeAdapter.getIsSelected().put(position,
 //					viewHolder.cb.isChecked());// 将CheckBox的选中状况记录下来
 			
-			Intent  intent = new Intent(getSherlockActivity(), GoodsInfoActivity.class);
-			Bundle bundle = new Bundle();
-			bundle.putString("goodsId", CstmPayActivity.arrayListExchange.get(position).getUId());
-			intent.putExtras(bundle);
-			getSherlockActivity().startActivity(intent);
+//			Intent  intent = new Intent(getSherlockActivity(), GoodsInfoActivity.class);
+//			Bundle bundle = new Bundle();
+//			bundle.putString("goodsId", CstmPayActivity.arrayListExchange.get(position).getUId());
+//			intent.putExtras(bundle);
+//			getSherlockActivity().startActivity(intent);
 		}
 	};
 
