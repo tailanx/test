@@ -119,7 +119,7 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if (ConnectionDetector.isConnectingToInternet(GoodsInfoActivity.this)) {
+				if (!ConnectionDetector.isConnectingToInternet(GoodsInfoActivity.this)) {
 					Toast.makeText(GoodsInfoActivity.this, getResources().getString(R.string.no_network), Toast.LENGTH_SHORT).show();
 					return;
 				}
