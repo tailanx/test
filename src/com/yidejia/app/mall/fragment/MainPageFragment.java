@@ -610,8 +610,7 @@ public class MainPageFragment extends SherlockFragment {
 					// Toast.makeText(getSherlockActivity(),
 					// getResources().getString(R.string.bad_network),
 					// Toast.LENGTH_SHORT).show();
-				}
-				else {
+				} else {
 					Toast.makeText(getSherlockActivity(),
 							getResources().getString(R.string.bad_network),
 							Toast.LENGTH_SHORT).show();
