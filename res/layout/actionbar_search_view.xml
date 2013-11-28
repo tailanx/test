@@ -21,7 +21,7 @@
         android:text="@string/searchLabel"
         android:textColor="#ffffff"
         android:textSize="16sp" />
-    <Button 
+    <ImageView 
         android:id="@+id/search_back_btn"
         android:layout_width="56dp"
         android:layout_height="36dp"
@@ -31,7 +31,7 @@
         android:layout_marginBottom="6dp"
         android:layout_marginLeft="3dip"
         android:layout_marginTop="6dp"
-        android:background="@drawable/back"
+       android:src="@drawable/compose_top"
         android:clickable="true"
          />
 

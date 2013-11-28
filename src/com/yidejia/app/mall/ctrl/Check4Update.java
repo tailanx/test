@@ -127,7 +127,6 @@ public class Check4Update {
 								Uri content_url = Uri.parse(apkUrl);
 								intent.setData(content_url);
 								activity.startActivity(intent);
-						
 							}
 						})
 				.setNegativeButton("下次再说", null).create();

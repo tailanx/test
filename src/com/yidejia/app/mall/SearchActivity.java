@@ -15,6 +15,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
@@ -241,7 +242,7 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 			}
 		});
 		
-		Button backBtn = (Button) findViewById(R.id.search_back_btn);
+		ImageView backBtn = (ImageView) findViewById(R.id.search_back_btn);
 		backBtn.setOnClickListener(new OnClickListener() {
 			
 			@Override

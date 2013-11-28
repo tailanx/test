@@ -884,6 +884,7 @@ public class CstmPayActivity extends SherlockActivity {
 	
 	private ArrayList<Addresses> mList;
 	private ArrayList<Addresses> addArray;
+	private AlertDialog addresssDialog;
 	
 	/**
 	 * 地址和快递费用，配送中心
@@ -898,6 +899,21 @@ public class CstmPayActivity extends SherlockActivity {
 //			ArrayList<Addresses> mList = new AddressDataManage()
 //					.getDefAddresses(myApplication.getUserId());
 			Addresses addresses;
+			addresssDialog = new Builder(CstmPayActivity.this).setTitle(getResources().getString(R.string.no_address_title)).setMessage(getResources().getString(R.string.no_address_content))
+					.setPositiveButton(getResources().getString(R.string.sure), new android.content.DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							Intent intent = new Intent(CstmPayActivity.this,
+									EditNewAddressActivity.class);
+							Bundle bundle = new Bundle();
+							bundle.putSerializable("editaddress", null);
+							intent.putExtras(bundle);
+							CstmPayActivity.this.startActivity(intent);
+						}
+					}).setNegativeButton(getResources().getString(R.string.cancel), null).create();
+					
 			// Log.i("info", mList.size() + " mlist");
 			if (mList != null && !mList.isEmpty()) {
 //				ArrayList<Addresses> addArray = addressDataManage
@@ -917,12 +933,7 @@ public class CstmPayActivity extends SherlockActivity {
 				if (addArray != null && !addArray.isEmpty()) { // 无默认地址并且无地址
 					addresses = addArray.get(0);
 				} else {
-					Intent intent = new Intent(CstmPayActivity.this,
-							EditNewAddressActivity.class);
-					Bundle bundle = new Bundle();
-					bundle.putSerializable("editaddress", null);
-					intent.putExtras(bundle);
-					CstmPayActivity.this.startActivity(intent);
+					addresssDialog.show();
 					return;
 				}
 			}
