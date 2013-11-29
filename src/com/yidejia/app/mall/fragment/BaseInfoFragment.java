@@ -13,11 +13,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
+import com.yidejia.app.mall.datamanage.FavoriteDataManage;
 import com.yidejia.app.mall.initview.GoodsView;
 import com.yidejia.app.mall.model.ProductBaseInfo;
 import com.yidejia.app.mall.util.Consts;
@@ -26,6 +29,7 @@ public class BaseInfoFragment extends SherlockFragment {
 	
 	private InnerReceiver receiver;
 	private CartsDataManage dataManage;
+	private MyApplication myApplication;
 	public static BaseInfoFragment newInstance(ProductBaseInfo info) {
 		BaseInfoFragment baseInfoFragment = new BaseInfoFragment();
 		Bundle bundle = new Bundle();
@@ -66,16 +70,20 @@ public class BaseInfoFragment extends SherlockFragment {
 	}
 	
 	private Button mButton;//购物车
+	private ImageView add_favorites;//收藏
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		try {
+			
+			myApplication   = (MyApplication) getSherlockActivity().getApplication();
 			
 			receiver = new InnerReceiver();
 			IntentFilter filter = new IntentFilter();
 			filter.addAction(Consts.UPDATE_CHANGE);
 			filter.addAction(Consts.BROAD_UPDATE_CHANGE);
 			filter.addAction(Consts.DELETE_CART);
+			filter.addAction(Consts.LONGIN_SUCESSES);
 			getSherlockActivity().registerReceiver(receiver, filter);
 			
 			// TODO Auto-generated method stub
@@ -83,7 +91,7 @@ public class BaseInfoFragment extends SherlockFragment {
 			dataManage = new CartsDataManage();
 			view = inflater.inflate(R.layout.item_goods_base_info, container, false);
 			mButton = (Button) view.findViewById(R.id.shopping_cart_button);
-		
+			add_favorites = (ImageView) view.findViewById(R.id.add_favorites);
 //			view.invalidate();
 			/*
 			switch (goodsId) {
@@ -194,6 +202,22 @@ public class BaseInfoFragment extends SherlockFragment {
 					mButton.setVisibility(View.VISIBLE);
 					mButton.setText(number1+"");
 				}
+			}
+			if(Consts.LONGIN_SUCESSES.equals(action)){
+				// 检查是否收藏并且设置收藏按钮的图片
+				FavoriteDataManage favoriteManage = new FavoriteDataManage(getSherlockActivity());
+				if (myApplication.getIsLogin() && !"".equals(myApplication.getUserId())) {
+					if (favoriteManage.checkExists(myApplication.getUserId(), info.getUId(), myApplication.getToken())) {
+						add_favorites.setImageResource(R.drawable.add_favorites2);
+//					Toast.makeText(activity, "yes", Toast.LENGTH_LONG).show();
+					} else {
+						add_favorites.setImageResource(R.drawable.add_favorites1);
+//					Toast.makeText(activity, "no", Toast.LENGTH_LONG).show();
+					}
+				} else {
+					add_favorites.setImageResource(R.drawable.add_favorites1);
+				}
+		
 			}
 		}
 

@@ -27,6 +27,7 @@ public class Consts {
 	public String miStr = "cMq2$jing@zhuan`^8!L"; 
 	
 	public static final String RETURN_BACk = "com.yidejia.exit";
+	public static final String LONGIN_SUCESSES = "com.yidejia.login.sucess";
 }
 
 

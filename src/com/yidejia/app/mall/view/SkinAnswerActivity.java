@@ -1,6 +1,5 @@
 package com.yidejia.app.mall.view;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -21,9 +20,9 @@ import android.widget.Toast;
 
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.IpAddress;
+import com.yidejia.app.mall.model.Qq;
 import com.yidejia.app.mall.model.SkinAnswer;
 import com.yidejia.app.mall.net.skin.Answer;
-import com.yidejia.app.mall.task.TaskCheckCode;
 import com.yidejia.app.mall.util.IsPhone;
 import com.yidejia.app.mall.widget.DateTimePickerDialog;
 
@@ -206,7 +205,8 @@ public class SkinAnswerActivity {
 
 	private ProgressDialog bar;
 	private SkinAnswer skinAnswer;
-
+	private Qq qq;
+	private String skinName;
 	public class Task extends AsyncTask<Void, Void, Boolean> {
 		boolean isSucess = false;
 
@@ -226,7 +226,7 @@ public class SkinAnswerActivity {
 				answer = new Answer();
 				String sb = null;
 				sb = a[2].substring(1, a[2].length()-1);
-				
+				skinName = a[1];
 				Log.i(SkinAnswer.class.getName(), sb+"    http");
 				 String httpresp = answer.getHttpResp(phoneNumber,
 						 phoneNumber ,name , sex, birth, a[0], a[1],
@@ -234,15 +234,9 @@ public class SkinAnswerActivity {
 				 Log.i(SkinAnswer.class.getName(), httpresp+"    http");
 				 isSucess = answer.analysis(httpresp);
 				 skinAnswer = answer.getAnswer();
-				 if(isSucess){
-					 Intent  intent = new Intent(activity, SkinResultAcitivity.class);
-					 Bundle bunlder = new Bundle();
-					 bunlder.putSerializable("SkinAnswer", skinAnswer);
-					 bunlder.putString("skinName", a[1]);
-					 intent.putExtras(bunlder);
-					 activity.startActivity(intent);
-					 activity.finish();
-				 }
+				 qq = answer.getQqName();
+					Log.i("info",qq.getQqName()+"qq.getQqName()1");
+				
 				// Log.i(SkinAnswer.class.getName(), skinAnswer.toString());
 				 return isSucess;
 			} catch (Exception e) {
@@ -257,7 +251,16 @@ public class SkinAnswerActivity {
 			super.onPostExecute(result);
 			bar.dismiss();
 			if (result) {
-
+				 if(isSucess){
+					 Intent  intent = new Intent(activity, SkinResultAcitivity.class);
+					 Bundle bunlder = new Bundle();
+					 bunlder.putSerializable("qq",qq);
+					 bunlder.putSerializable("SkinAnswer", skinAnswer);
+					 bunlder.putString("skinName", skinName);
+					 intent.putExtras(bunlder);
+					 activity.startActivity(intent);
+					 activity.finish();
+				 }
 			}
 
 		}

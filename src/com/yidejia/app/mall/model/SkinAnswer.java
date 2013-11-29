@@ -2,12 +2,12 @@ package com.yidejia.app.mall.model;
 
 import java.io.Serializable;
 
-
-public class SkinAnswer implements Serializable{
-
+public class SkinAnswer implements Serializable {
 	private String desc;
 	private String suggest;
 
+	
+	
 	public String getDesc() {
 		return desc;
 	}
