@@ -5,13 +5,23 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
+import com.yidejia.app.mall.model.Qq;
 import com.yidejia.app.mall.model.SkinAnswer;
 import com.yidejia.app.mall.net.HttpPostConn;
 
 public class Answer {
 	
+	public Qq getQqName() {
+		return qqName;
+	}
+
+	public void setQqName(Qq qqName) {
+		this.qqName = qqName;
+	}
 	private SkinAnswer answer;
 	private String message;
 	
@@ -56,6 +66,8 @@ public class Answer {
 				JSONObject respJsonObject = new JSONObject(resp);
 				answer.setDesc(respJsonObject.getString("desc"));
 				answer.setSuggest(respJsonObject.getString("suggest"));
+				String qq = respJsonObject.optString("qq");
+				analysisQQ(qq);
 				return true;
 			} else if(code == -1) {
 				message = jsonObject.getString("response");
@@ -74,6 +86,21 @@ public class Answer {
 
 	public String getMessage() {
 		return message;
+	}
+	private Qq qqName ;
+	private void analysisQQ(String qq){
+	
+		try {
+			qqName  = new Qq();
+			JSONObject jsonObject = new JSONObject(qq);
+
+			qqName.setQqName(jsonObject.getString("pifufenxi_qq_code"));
+			qqName.setQuenName(jsonObject.getString("pifufenxi_qun_code"));
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

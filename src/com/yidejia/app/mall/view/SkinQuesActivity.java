@@ -157,7 +157,7 @@ public class SkinQuesActivity extends Activity {
 							if (skinQuestions.isSelected()) {
 								istrue1 = true;
 								b = maxLength + 1;
-								index++;
+								
 								textview.setText(b + "/" + b);
 								nextRelative.setVisibility(View.GONE);
 								scrollView.setVisibility(View.GONE);
@@ -173,6 +173,7 @@ public class SkinQuesActivity extends Activity {
 									Toast.LENGTH_SHORT).show();
 							return;
 						}
+						index++;
 					}
 
 					// b = maxLength + 1;

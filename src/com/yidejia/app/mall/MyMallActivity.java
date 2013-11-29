@@ -307,6 +307,7 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 		if (inString == null || "".equals(inString)) {
 			integration.setText(0 + "");
 		} else {
+			Log.e("info", inString);
 			integration.setText(inString);
 		}
 		imageLoader.displayImage(myApplication.getUserHeadImg(), head, options,
@@ -318,7 +319,7 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 			Log.i("info", myApplication.getUserId() + "   name");
 		} else {
 			nick.setText(name);
-		}
+		}   
 
 		String vip1 = myApplication.getVip();
 		if (vip1 == null || "".equals(vip1)) {

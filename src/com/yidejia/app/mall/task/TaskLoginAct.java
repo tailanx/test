@@ -5,9 +5,9 @@ import java.io.IOException;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
@@ -106,6 +106,8 @@ public class TaskLoginAct {
 			if(result){
 				Toast.makeText(activity, "登陆成功！", Toast.LENGTH_LONG).show();
 				((MyApplication) activity.getApplication()).setIsLogin(true);
+				Intent intent = new Intent(Consts.LONGIN_SUCESSES);
+				activity.sendBroadcast(intent);
 				activity.finish();
 				if (mBox.isChecked()) {
 					 sp.edit().putString("DESMI", username).commit();

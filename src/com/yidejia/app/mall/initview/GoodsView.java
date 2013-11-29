@@ -251,9 +251,10 @@ public class GoodsView {
 			// 加入收藏按钮
 			add_favorites = (ImageView) view.findViewById(R.id.add_favorites);
 			add_favorites.setOnClickListener(addFavoriteListener);
+			
 			// 检查是否收藏并且设置收藏按钮的图片
 			FavoriteDataManage favoriteManage = new FavoriteDataManage(activity);
-			if (isLogin && !"".equals(userid)) {
+			if (myApplication.getIsLogin() && !"".equals(userid)) {
 				if (favoriteManage.checkExists(userid, productId, myApplication.getToken())) {
 					add_favorites.setImageResource(R.drawable.add_favorites2);
 //				Toast.makeText(activity, "yes", Toast.LENGTH_LONG).show();
@@ -464,15 +465,17 @@ public class GoodsView {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			FavoriteDataManage manage = new FavoriteDataManage(activity);
-			if (!isLogin) {
+			if (!myApplication.getIsLogin()) {
+			
 				builder.show();
 
-			} else if (isLogin && !"".equals(userid)) {
+			} else if (myApplication.getIsLogin() && !"".equals(userid)) {
+			
 				// 登录状态下
 				if (!manage.checkExists(userid, productId,
 						myApplication.getToken())) {
 					// 未收藏，现在添加收藏
-					if (manage.addFavourite(userid, productId,
+					if (manage.addFavourite(myApplication.getUserId(), productId,
 							myApplication.getToken())) {
 						// 收藏成功
 						Toast.makeText(
@@ -492,6 +495,7 @@ public class GoodsView {
 								.setImageResource(R.drawable.add_favorites1);
 					}
 				} else {
+				
 					// 已收藏，现在删除收藏
 					if (manage.deleteFavourite(userid, productId,
 							myApplication.getToken())) {
@@ -506,6 +510,7 @@ public class GoodsView {
 					}
 				}
 			} else {
+			
 				// 未登录状态下，收藏到本地
 				// 改变图片
 //				flag = !flag;

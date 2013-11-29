@@ -372,7 +372,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 							.show(getCurrFragment(id)).commit();
 				else
 					ft.hide(getCurrFragment(currentIndex))
-							.add(R.id.main_fragment, getCurrFragment(id))
+							.replace(R.id.main_fragment, getCurrFragment(id))
 							.commit();// .addToBackStack(fragmentTag[id])
 				// ft.replace(R.id.main_fragment,
 				// getCurrFragment(id)).commit();
@@ -405,7 +405,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 				Log.e("NoProduceFragment", "noProduce");
 			} else {
 				fragment = cartFragment;
-				Log.e("NoProduceFragment", "cartFragment1");
+				Log.e("NoProduceFragment", "cartFragment");
 			}
 
 			break;
@@ -414,6 +414,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 				fragment = loginFragment;
 			else
 				fragment = myFragment;
+			Log.e("NoProduceFragment", "myFragment");
 			break;
 
 		default:
@@ -617,12 +618,14 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 				number = cartsDataManage.getCartAmount();
 				if (number == 0) {
 					cartImage.setVisibility(View.GONE);
-					getSupportActionBar().setCustomView(
-							R.layout.actionbar_compose);
-					ImageView back = (ImageView) findViewById(R.id.compose_back);
-					back.setVisibility(View.GONE);
-					TextView title = (TextView) findViewById(R.id.compose_title);
-					title.setText(getResources().getString(R.string.no_cart));
+					FragmentTransaction ft = getSupportFragmentManager()
+							.beginTransaction();
+//					getSupportActionBar().setCustomView(
+//							R.layout.actionbar_compose);
+//					ImageView back = (ImageView) findViewById(R.id.compose_back);
+//					back.setVisibility(View.GONE);
+//					TextView title = (TextView) findViewById(R.id.compose_title);
+//					title.setText(getResources().getString(R.string.no_cart));
 				} else {
 					cartImage.setVisibility(View.VISIBLE);
 					cartImage.setText(number + "");

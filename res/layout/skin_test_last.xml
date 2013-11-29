@@ -26,11 +26,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                
                 android:drawableTop="@drawable/skinicon"
                 android:text="肌肤测试结果"
                 android:textColor="@color/price_color"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -41,9 +40,9 @@
                     android:id="@+id/skin_test_last_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="8dp"
                     android:text="您的肌肤属于："
-                    android:layout_centerVertical="true"
                     android:textColor="@color/price_color"
                     android:textSize="15sp" />
 
@@ -51,10 +50,9 @@
                     android:id="@+id/skin_test_last_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="8dp"
                     android:layout_toRightOf="@id/skin_test_last_tip"
-                    android:layout_centerVertical="true"
-       
                     android:textColor="#7492ea"
                     android:textSize="20sp" />
             </RelativeLayout>
@@ -66,7 +64,6 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="4dp"
-            
                 android:textColor="@color/price_color"
                 android:textSize="15sp" />
 
@@ -81,31 +78,33 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="4dp"
                 android:drawableLeft="@drawable/proposal"
-                android:text="护理建议："
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/price_color"
                 android:gravity="center"
+                android:text="护理建议："
+                android:textColor="@color/price_color"
                 android:textSize="15sp" />
-              <TextView
+
+            <TextView
                 android:id="@+id/skin_test_last_second"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="4dp"
-      
                 android:textColor="@color/price_color"
                 android:textSize="15sp" />
-             <ImageView
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="4dp"
                 android:src="@drawable/line1122" />
-              <TextView
+
+            <TextView
                 android:id="@+id/skin_test_last_descir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -115,44 +114,49 @@
                 android:text="       为更好的为您提供专业的护肤服务，我们为您推荐专业的护肤群，专业的护肤导师了解您的护肤情况，提供专人护肤服务。"
                 android:textColor="@color/price_color"
                 android:textSize="15sp" />
-                <ImageView
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="4dp"
                 android:src="@drawable/line1122" />
-                <RelativeLayout 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                <ImageView 
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <ImageView
                     android:id="@+id/skin_test_last_qq"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/qq"
                     android:layout_marginLeft="35dp"
-                    android:layout_marginTop="18dp"/>
-                <TextView android:layout_width="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:src="@drawable/qq" />
+
+                <TextView
                     android:id="@+id/skin_test_last_quen"
-                   
-                   
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/skin_test_last_qq"
                     android:layout_alignTop="@id/skin_test_last_qq"
-                    android:text="QQ群：224881475"
-                    android:textColor="@color/price_color"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="18sp"/>
-                  <TextView android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@id/skin_test_last_qq"
-                    android:layout_alignBottom="@id/skin_test_last_qq"
-                    android:text="QQ：1057878690"
                     android:textColor="@color/price_color"
-					android:layout_alignLeft="@id/skin_test_last_quen"                   
-                    android:textSize="18sp"/>
-                </RelativeLayout>
-                
+                    android:textIsSelectable="true"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/skin_test_last_qqname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/skin_test_last_qq"
+                    android:layout_alignLeft="@id/skin_test_last_quen"
+                    android:layout_toRightOf="@id/skin_test_last_qq"
+                    android:textColor="@color/price_color"
+                    android:textIsSelectable="true"
+                    android:textSize="18sp" />
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 
