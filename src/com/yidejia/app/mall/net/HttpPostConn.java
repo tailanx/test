@@ -20,6 +20,7 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 
 import android.util.Log;
@@ -28,7 +29,7 @@ public class HttpPostConn {
 	private String urlString = "http://fw1.atido.net/";
 //	private String urlString = "http://192.168.1.254:802/";
 	private String TAG = "HttpPostConn";
-	private int TIME_OUT_DELAY = 10000;
+	private int TIME_OUT_DELAY = 1000 * 5;
 	
 	private String[] keys;
 	private String[] values;
@@ -52,10 +53,10 @@ public class HttpPostConn {
 //		Log.i(TAG, urlString);
 		try {
 			HttpClient httpClient = new DefaultHttpClient();
-//			httpClient.getParams().setIntParameter(
-//                    HttpConnectionParams.SO_TIMEOUT, TIME_OUT_DELAY); // ��ȡ��ʱ����
-//			httpClient.getParams().setIntParameter(
-//                    HttpConnectionParams.CONNECTION_TIMEOUT, TIME_OUT_DELAY);// ���ӳ�ʱ
+			httpClient.getParams().setIntParameter(
+                    HttpConnectionParams.SO_TIMEOUT, TIME_OUT_DELAY); // ��ȡ��ʱ����
+			httpClient.getParams().setIntParameter(
+                    HttpConnectionParams.CONNECTION_TIMEOUT, TIME_OUT_DELAY);// ���ӳ�ʱ
 			HttpResponse httpResponse = httpClient.execute(httpRequst);
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				result = EntityUtils.toString(httpResponse.getEntity(), HTTP.UTF_8);
@@ -86,8 +87,9 @@ public class HttpPostConn {
 	/**
 	 * jni post request 
 	 * @return
+	 * @throws TimeOutEx 
 	 */
-	public String getHttpResponse() throws IOException{
+	public String getHttpResponse() throws IOException, TimeOutEx{
 		if(param == null || "".equals(param)){
 			return null;
 		}
@@ -109,10 +111,10 @@ public class HttpPostConn {
 			
 			HttpClient client = new DefaultHttpClient(); 
 			
-//			client.getParams().setIntParameter(
-//					HttpConnectionParams.SO_TIMEOUT, TIME_OUT_DELAY); // ��ȡ��ʱ����
-//			client.getParams().setIntParameter(
-//					HttpConnectionParams.CONNECTION_TIMEOUT, TIME_OUT_DELAY);// ���ӳ�ʱ
+			client.getParams().setIntParameter(
+					HttpConnectionParams.SO_TIMEOUT, TIME_OUT_DELAY); // ��ȡ��ʱ����
+			client.getParams().setIntParameter(
+					HttpConnectionParams.CONNECTION_TIMEOUT, TIME_OUT_DELAY);// ���ӳ�ʱ
 			HttpResponse httpResponse = client.execute(httpPost);
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				result = EntityUtils.toString(httpResponse.getEntity(), HTTP.UTF_8);
@@ -127,8 +129,13 @@ public class HttpPostConn {
 			}
 		} catch (ClientProtocolException e) {
 			// TODO: handle exception
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new TimeOutEx("连接超时");
 		}
-		
+		if(null == result || "".equals(result)) throw new TimeOutEx();
 		return result;
 	}
 	

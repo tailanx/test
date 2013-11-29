@@ -5,11 +5,12 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpPostConn;
 
 public class Register {
-	public String getHttpResponse(String username, String password, String cps, String ip) throws IOException{
+	public String getHttpResponse(String username, String password, String cps, String ip) throws IOException, TimeOutEx{
 		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4Register(username, password, cps, ip));
 		return conn.getHttpResponse();
 	}

@@ -7,12 +7,15 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.commments.SaveProductComment;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class TaskSaveComm {
 
@@ -56,6 +59,8 @@ public class TaskSaveComm {
 		taskSave = new TaskSave(goodsId, userId, nick, title, commentText, commDate);
 		taskSave.execute();
 	}
+	
+	private boolean isTimeout = false;
 
 	private class TaskSave extends AsyncTask<Void, Void, Boolean> {
 
@@ -71,7 +76,7 @@ public class TaskSaveComm {
 			this.experience = experience;
 			this.commentDate = commentDate;
 			
-			bar = new ProgressDialog(activity);
+//			bar = new ProgressDialog(activity);
 		}
 
 		@Override
@@ -79,10 +84,20 @@ public class TaskSaveComm {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			 bar.setMessage(activity.getResources().getString(
-			 R.string.loading));
-			bar.show();
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			 bar.setMessage(activity.getResources().getString(
+//			 R.string.loading));
+//			bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(activity)
+					.createLoadingDialog(activity, null);
+			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					cancel(true);
+				}
+			});
 		}
 
 		@Override
@@ -91,9 +106,16 @@ public class TaskSaveComm {
 			SaveProductComment saveProductComment = new SaveProductComment(
 					activity);
 			try {
-				String httpResp = saveProductComment.saveComment(goods_id, user_id,
-						user_name, title, experience, commentDate);
-				return analysisHttpResp(httpResp);
+				String httpResp;
+				try {
+					httpResp = saveProductComment.saveComment(goods_id, user_id,
+							user_name, title, experience, commentDate);
+					return analysisHttpResp(httpResp);
+				} catch (TimeOutEx e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					isTimeout = true;
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -113,6 +135,14 @@ public class TaskSaveComm {
 				activity.finish();
 			}else {
 				bar.dismiss();
+				if (isTimeout) {
+					Toast.makeText(
+							activity,
+							activity.getResources()
+									.getString(R.string.time_out),
+							Toast.LENGTH_SHORT).show();
+					isTimeout = false;
+				}
 				Toast.makeText(activity, "提交评论失败！", Toast.LENGTH_LONG).show();
 			}
 		}

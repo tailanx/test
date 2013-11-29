@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -33,9 +34,11 @@ import com.yidejia.app.mall.SearchResultActivity;
 import com.yidejia.app.mall.adapter.SelledResultListAdapter;
 import com.yidejia.app.mall.datamanage.SearchDataManage;
 import com.yidejia.app.mall.exception.NullSearchResultEx;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.initview.SRViewWithImage;
 import com.yidejia.app.mall.model.SearchItem;
 import com.yidejia.app.mall.net.search.SearchDataUtil;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class SelledResultFragment extends SherlockFragment {
 	
@@ -305,11 +308,22 @@ public class SelledResultFragment extends SherlockFragment {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			if (isFirstIn) {
-				bar = new ProgressDialog(getSherlockActivity());
-				bar.setCancelable(true);
-				bar.setMessage(getSherlockActivity().getResources().getString(R.string.loading));
-				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-				bar.show();
+//				bar = new ProgressDialog(getSherlockActivity());
+//				bar.setCancelable(true);
+//				bar.setMessage(getSherlockActivity().getResources().getString(R.string.loading));
+//				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//				bar.show();
+				bar = (ProgressDialog) new YLProgressDialog(
+						getSherlockActivity()).createLoadingDialog(
+						getSherlockActivity(), null);
+				bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						// TODO Auto-generated method stub
+						cancel(true);
+					}
+				});
 			}
 		}
 		@Override
@@ -362,6 +376,7 @@ public class SelledResultFragment extends SherlockFragment {
 //					mPullToRefreshScrollView.onRefreshComplete();
 					initWithImageView();
 				}
+				
 			}
 			if(isFirstIn){
 				bar.dismiss();
@@ -382,17 +397,32 @@ public class SelledResultFragment extends SherlockFragment {
 					mPullToRefreshScrollView.onRefreshComplete();
 				}
 			} 
+			if (isTimeout) {
+				Toast.makeText(
+						getSherlockActivity(),
+						getSherlockActivity().getResources()
+								.getString(R.string.time_out),
+						Toast.LENGTH_SHORT).show();
+				isTimeout = false;
+			}
 		}
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 			try {
-				String httpresp = util.getHttpResponseString(name, fun, brand, price, order, fromIndex + "", amount + "");
-				boolean isSuccess = util.analysis(httpresp);
-				searchItemsArray = util.getSearchResults();
-				isHasResult = util.getIsHasRst();
-				isNoMore = util.getIsNomore();
-				return isSuccess;
+				String httpresp;
+				try {
+					httpresp = util.getHttpResponseString(name, fun, brand, price, order, fromIndex + "", amount + "");
+					boolean isSuccess = util.analysis(httpresp);
+					searchItemsArray = util.getSearchResults();
+					isHasResult = util.getIsHasRst();
+					isNoMore = util.getIsNomore();
+					return isSuccess;
+				} catch (TimeOutEx e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					isTimeout = true;
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -403,4 +433,6 @@ public class SelledResultFragment extends SherlockFragment {
 		
 		
 	}
+	
+	private boolean isTimeout = false;
 }

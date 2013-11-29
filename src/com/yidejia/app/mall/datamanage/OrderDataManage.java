@@ -14,6 +14,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.net.ConnectionDetector;
@@ -678,6 +679,7 @@ public class OrderDataManage {
 		return order;
 	}
 
+	private boolean isTimeout = false;
 	
 	private class TaskGOBC extends AsyncTask<Void, Void, Boolean>{
 
@@ -691,7 +693,15 @@ public class OrderDataManage {
 			// TODO Auto-generated method stub
 			GetOrderByCode gobc = new GetOrderByCode();
 			try {
-				String httpResponse = gobc.getHttpResponse(code);
+				String httpResponse = null;
+				try {
+					httpResponse = gobc.getHttpResponse(code);
+				} catch (TimeOutEx e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					isTimeout = true;
+					return false;
+				}
 				try {
 					JSONObject httpJsonObject = new JSONObject(httpResponse);
 					int respCode = httpJsonObject.getInt("code");

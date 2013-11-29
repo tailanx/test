@@ -8,14 +8,17 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.user.Login;
 import com.yidejia.app.mall.net.user.Register;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class UserDatamanage {
 	
@@ -127,6 +130,8 @@ public class UserDatamanage {
 		return state;
 	}
 	
+	private boolean isTimeout = false;
+	
 	private class TaskRegister extends AsyncTask<Void, Void, Boolean>{
 
 		@Override
@@ -134,33 +139,39 @@ public class UserDatamanage {
 			// TODO Auto-generated method stub
 			Register register = new Register();
 			try {
-				String httpResponse = register.getHttpResponse(username, password, cps, ip);
+				String httpResponse;
 				try {
-					int code;
-					JSONObject jsonObject = new JSONObject(httpResponse);
-					code = jsonObject.getInt("code");
+					httpResponse = register.getHttpResponse(username, password, cps, ip);
+					try {
+						int code;
+						JSONObject jsonObject = new JSONObject(httpResponse);
+						code = jsonObject.getInt("code");
 //					String response = jsonObject.getString("response");
-					if(code == 1003){
+						if(code == 1003){
 //						MyApplication myApplication = conte;
 //						String token = responseObject.getString("token");
 //						myApplication.setToken(token);
-						return true;
-					} else{
-						message = jsonObject.getString("msg");
+							return true;
+						} else{
+							message = jsonObject.getString("msg");
+							isSuccess = false;
+						}
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						Log.e(TAG, "login json ex");
+						e.printStackTrace();
 						isSuccess = false;
 					}
-				} catch (JSONException e) {
+				} catch (IOException e) {
 					// TODO Auto-generated catch block
-					Log.e(TAG, "login json ex");
+					Log.e(TAG, "login io ex");
 					e.printStackTrace();
 					isSuccess = false;
 				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				Log.e(TAG, "login io ex");
-				e.printStackTrace();
-				isSuccess = false;
-			}
+				} catch (TimeOutEx e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			return isSuccess;
 		}
 		
@@ -171,12 +182,21 @@ public class UserDatamanage {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			
-			bar = new ProgressDialog(context);
-			bar.setCancelable(true);
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage(context.getResources().getString(R.string.loading));
-			bar.show();
-			
+//			bar = new ProgressDialog(context);
+//			bar.setCancelable(true);
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(context.getResources().getString(R.string.loading));
+//			bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(context)
+					.createLoadingDialog(context, null);
+			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					cancel(true);
+				}
+			});
 		}
 
 		@Override
@@ -189,6 +209,15 @@ public class UserDatamanage {
 						context.getResources().getString(R.string.equal),
 						Toast.LENGTH_LONG).show();
 				context.finish();
+			} else {
+				if (isTimeout) {
+					Toast.makeText(
+							context,
+							context.getResources()
+									.getString(R.string.time_out),
+							Toast.LENGTH_SHORT).show();
+					isTimeout = false;
+				}
 			}
 		}
 		

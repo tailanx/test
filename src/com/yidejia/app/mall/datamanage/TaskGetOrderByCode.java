@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -19,12 +20,14 @@ import android.widget.Toast;
 
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.address.GetUserAddressList;
 import com.yidejia.app.mall.net.order.GetOrderByCode;
 //import android.content.activity;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class TaskGetOrderByCode {
 	
@@ -65,6 +68,9 @@ public class TaskGetOrderByCode {
 		taskGobc.execute();
 	}
 	
+	
+	
+	private boolean isTimeout = false;
 
 	private class TaskGOBC extends AsyncTask<Void, Void, Boolean> {
 
@@ -76,7 +82,7 @@ public class TaskGetOrderByCode {
 			this.code = code;
 //			this.isFirstIn = isFirstIn;
 //			if(isFirstIn)
-				bar = new ProgressDialog(activity);
+//				bar = new ProgressDialog(activity);
 		}
 		
 		@Override
@@ -84,15 +90,25 @@ public class TaskGetOrderByCode {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 //			if (isFirstIn) {
-				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-				bar.setMessage(activity.getResources().getString(R.string.loading));
+//				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//				bar.setMessage(activity.getResources().getString(R.string.loading));
 //				bar.setMessage(activity.getResources().getString(
 //						R.string.searching));
-				bar.show();
+//				bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(activity)
+					.createLoadingDialog(activity, null);
+			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					;
+				}
+			});
 //			}
 		}
 
-
+		
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
@@ -106,7 +122,15 @@ public class TaskGetOrderByCode {
 //			}
 			GetOrderByCode gobc = new GetOrderByCode();
 			try {
-				String httpResp = gobc.getHttpResponse(code);
+				String httpResp = "";
+				try {
+					httpResp = gobc.getHttpResponse(code);
+				} catch (TimeOutEx e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					isTimeout = true;
+					return false;
+				}
 				try {
 					JSONObject httpJsonObject = new JSONObject(httpResp);
 					int respCode = httpJsonObject.getInt("code");
@@ -142,10 +166,19 @@ public class TaskGetOrderByCode {
 			super.onPostExecute(result);
 //			if(isFirstIn)
 				
+			bar.dismiss();
 			if(result){
 				setupShow();
-			}
-			bar.dismiss();
+			} else {
+				if (isTimeout) {
+					Toast.makeText(
+							activity,
+							activity.getResources()
+									.getString(R.string.time_out),
+							Toast.LENGTH_SHORT).show();
+					isTimeout = false;
+				}
+			} 
 		}
 
 		
@@ -269,12 +302,15 @@ public class TaskGetOrderByCode {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar = new ProgressDialog(activity);
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage(activity.getResources().getString(R.string.loading));
-//			bar.setMessage(activity.getResources().getString(
-//					R.string.searching));
-			bar.show();
+//			bar = new ProgressDialog(activity);
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(activity.getResources().getString(R.string.loading));
+////			bar.setMessage(activity.getResources().getString(
+////					R.string.searching));
+//			bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(activity)
+					.createLoadingDialog(activity, null);
+			
 		}
 
 		@Override
@@ -283,10 +319,17 @@ public class TaskGetOrderByCode {
 			if(isCancelled()) return null;
 			GetUserAddressList addressList = new GetUserAddressList(activity);
 			try {
-				String httpresp = addressList.getAddressListJsonString("recipient_id=" + recipient_id, "0", "10", "", "", "");
-				AddressDataManage manage = new AddressDataManage(activity);
-				addresses = manage.analysisGetListJson(httpresp);
-				return true;
+				String httpresp = "";
+				try {
+					httpresp = addressList.getAddressListJsonString("recipient_id=" + recipient_id, "0", "1", "", "", "");
+					AddressDataManage manage = new AddressDataManage(activity);
+					addresses = manage.analysisGetListJson(httpresp);
+					return true;
+				} catch (TimeOutEx e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					isTimeout = true;
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -304,6 +347,15 @@ public class TaskGetOrderByCode {
 					return;
 				}
 				setAddress(addresses.get(0));
+			} else {
+				if (isTimeout) {
+					Toast.makeText(
+							activity,
+							activity.getResources()
+									.getString(R.string.time_out),
+							Toast.LENGTH_SHORT).show();
+					isTimeout = false;
+				}
 			}
 			bar.dismiss();
 		}

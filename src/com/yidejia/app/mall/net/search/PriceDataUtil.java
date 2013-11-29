@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.PriceLevel;
 import com.yidejia.app.mall.net.HttpAddressParam;
@@ -22,7 +23,7 @@ public class PriceDataUtil {
 		pricesArray = new ArrayList<PriceLevel>();
 	}
 	
-	public String getHttpResponseString() throws IOException{
+	public String getHttpResponseString() throws IOException, TimeOutEx{
 //		HttpGetConn httpGetConn = new HttpGetConn(getHttpAddress());
 		HttpGetConn httpGetConn = new HttpGetConn(new JNICallBack().getHttp4GetPrice(), true);
 		return httpGetConn.getJsonResult();

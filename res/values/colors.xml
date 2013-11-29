@@ -28,4 +28,7 @@
     <color name="black">#C5C1AA</color>
     <color name="down_text">#b4b4b4</color>
 	   <color name="skin_test">#fa4d92</color>
-</resources>
+	   
+	   <color name="dialog_color">#80ffffff</color>
+	   <color name="dialog_bg">#00000000</color>
+	   </resources>

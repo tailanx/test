@@ -9,6 +9,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
@@ -79,7 +80,7 @@ public class GetOrderList {
 	private String result = "";
 
 	public String getListJsonString(String user_id, String code, String date,
-			String status, String offset1, String limit1) throws IOException {
+			String status, String offset1, String limit1) throws IOException, TimeOutEx {
 		HttpGetConn conn = new HttpGetConn(getHttpAddress(user_id, code, date,
 				status, offset1, limit1));
 		result = conn.getJsonResult();
@@ -87,7 +88,7 @@ public class GetOrderList {
 	}
 	
 	public String getHttpResponse(String user_id, String code, String date, String status
-			, String offset1, String limit1, String token) throws IOException{
+			, String offset1, String limit1, String token) throws IOException, TimeOutEx{
 		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetOrder(user_id, code, date, status, offset1, limit1, token),true);
 		return result = conn.getJsonResult();
 	}

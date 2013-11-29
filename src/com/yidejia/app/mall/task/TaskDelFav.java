@@ -4,10 +4,13 @@ import java.io.IOException;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.net.favorite.DeleteFavorite;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -24,7 +27,7 @@ public class TaskDelFav {
 	public TaskDelFav(Context context) {
 		delFavorite = new DeleteFavorite();
 		this.context = context;
-		bar = new ProgressDialog(context);
+//		bar = new ProgressDialog(context);
 	}
 
 	public TaskDelFav(Context context,
@@ -45,6 +48,7 @@ public class TaskDelFav {
 
 	private DeleteFavorite delFavorite;
 	private Task task;
+	private boolean isTimeOut = false;
 
 	private class Task extends AsyncTask<Void, Void, Boolean> {
 
@@ -52,10 +56,17 @@ public class TaskDelFav {
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 			try {
-				String httpresp = delFavorite.deleteFavorite(userid, goodsid,
-						token);
-				boolean issuccess = delFavorite.analysicDeleteJson(httpresp);
-				return issuccess;
+				String httpresp;
+				try {
+					httpresp = delFavorite.deleteFavorite(userid, goodsid,
+							token);
+					boolean issuccess = delFavorite.analysicDeleteJson(httpresp);
+					return issuccess;
+				} catch (TimeOutEx e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					isTimeOut = true;
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -67,10 +78,20 @@ public class TaskDelFav {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setCancelable(true);
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage(context.getResources().getString(R.string.loading));
-			bar.show();
+//			bar.setCancelable(true);
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(context.getResources().getString(R.string.loading));
+//			bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(context)
+			.createLoadingDialog(context, null);
+	bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+		@Override
+		public void onCancel(DialogInterface dialog) {
+			// TODO Auto-generated method stub
+			cancel(true);
+		}
+	});
 		}
 
 		@Override
@@ -86,8 +107,16 @@ public class TaskDelFav {
 				Toast.makeText(context,
 						context.getResources().getString(R.string.del_fav_ok),
 						Toast.LENGTH_LONG).show();
+			} else {
+				if(isTimeOut) {
+					Toast.makeText(context,
+							context.getResources().getString(R.string.time_out),
+							Toast.LENGTH_LONG).show();
+					isTimeOut = false;
+				}
 			}
 		}
+		
 
 	}
 

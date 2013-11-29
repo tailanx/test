@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.yidejia.app.mall.net.skin.Answer;
 import com.yidejia.app.mall.task.TaskCheckCode;
 import com.yidejia.app.mall.util.IsPhone;
 import com.yidejia.app.mall.widget.DateTimePickerDialog;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class SkinAnswerActivity {
 	private Activity activity;
@@ -266,11 +268,21 @@ public class SkinAnswerActivity {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar = new ProgressDialog(activity);
-			bar.setCancelable(true);
-			bar.setMessage(activity.getResources().getString(R.string.loading));
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.show();
+//			bar = new ProgressDialog(activity);
+//			bar.setCancelable(true);
+//			bar.setMessage(activity.getResources().getString(R.string.loading));
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(activity)
+					.createLoadingDialog(activity, null);
+			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					cancel(true);
+				}
+			});
 
 		}
 

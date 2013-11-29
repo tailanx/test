@@ -42,6 +42,7 @@ import com.yidejia.app.mall.datamanage.ExpressDataManage;
 import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.datamanage.PreferentialDataManage;
 import com.yidejia.app.mall.datamanage.VoucherDataManage;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.fragment.CartActivity.InnerReceiver;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.Cart;
@@ -55,6 +56,7 @@ import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.Http;
 import com.yidejia.app.mall.util.MessageUtil;
 import com.yidejia.app.mall.util.PayUtil;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class CstmPayActivity extends SherlockActivity {
 	private InnerReceiver receiver;
@@ -436,6 +438,7 @@ public class CstmPayActivity extends SherlockActivity {
 	}
 	
 	private TaskVoucher taskVoucher;
+	private boolean isTimeout = false;
 	
 	private class TaskVoucher extends AsyncTask<Void, Void, Boolean> {
 		@Override
@@ -443,19 +446,26 @@ public class CstmPayActivity extends SherlockActivity {
 			// TODO Auto-generated method stub
 			Voucher voucher = new Voucher();
 			try {
-				String httpResponse = voucher.getHttpResponse(myApplication.getUserId(), myApplication.getToken());
+				String httpResponse;
 				try {
-					JSONObject httpObject = new JSONObject(httpResponse);
-					int code = httpObject.getInt("code");
-					if(code == 1){
-						String response = httpObject.getString("response");
-						JSONObject resObject = new JSONObject(response);
-						voucherString1 = resObject.getString("can_use_score");
-						return true;
+					httpResponse = voucher.getHttpResponse(myApplication.getUserId(), myApplication.getToken());
+					try {
+						JSONObject httpObject = new JSONObject(httpResponse);
+						int code = httpObject.getInt("code");
+						if(code == 1){
+							String response = httpObject.getString("response");
+							JSONObject resObject = new JSONObject(response);
+							voucherString1 = resObject.getString("can_use_score");
+							return true;
+						}
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-				} catch (JSONException e) {
+				} catch (TimeOutEx e1) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					e1.printStackTrace();
+					isTimeout = true;
 				}
 				
 			} catch (IOException e) {
@@ -469,6 +479,17 @@ public class CstmPayActivity extends SherlockActivity {
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
+			if(!result){
+				if (isTimeout) {
+					Toast.makeText(
+							CstmPayActivity.this,
+							CstmPayActivity.this.getResources()
+									.getString(R.string.time_out),
+							Toast.LENGTH_SHORT).show();
+					isTimeout = false;
+					return;
+				}
+			}
 			getVoucher();
 		}
 		
@@ -547,18 +568,18 @@ public class CstmPayActivity extends SherlockActivity {
 		// filter.addAction(Consts.BACK_UPDATE_CHANGE);
 		// registerReceiver(receiver, filter);
 		
-		bar = new ProgressDialog(this);
-		bar.setCancelable(true);
-		bar.setMessage(getResources().getString(R.string.loading));
-		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-		bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
-			
-			@Override
-			public void onCancel(DialogInterface dialog) {
-				// TODO Auto-generated method stub
-				closeTask();
-			}
-		});
+//		bar = new ProgressDialog(this);
+//		bar.setCancelable(true);
+//		bar.setMessage(getResources().getString(R.string.loading));
+//		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//		bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//			
+//			@Override
+//			public void onCancel(DialogInterface dialog) {
+//				// TODO Auto-generated method stub
+//				closeTask();
+//			}
+//		});
 
 //		addressDataManage = new AddressDataManage(this);
 		go_pay_scrollView = (ScrollView) findViewById(R.id.go_pay_scrollView);
@@ -735,15 +756,22 @@ public class CstmPayActivity extends SherlockActivity {
 			// TODO Auto-generated method stub
 			SaveOrder saveOrder = new SaveOrder(CstmPayActivity.this);
 			try {
-				String httpresp = saveOrder.getHttpResponse(myApplication.getUserId(), "0",
-							recipientId, "", jifen + "", expressNum, postMethod,
-							peiSongCenter, goods, comment.getText().toString(),// 这里的comment.getText().toString()很重要
-							pay_type, myApplication.getToken());
-				boolean issuccess = saveOrder.analysisHttpResp(httpresp);
-				orderCode = saveOrder.getOrderCode();
-				resp_code = saveOrder.getResp_code();
-				tn = saveOrder.getTn();
-				return issuccess;
+				String httpresp;
+				try {
+					httpresp = saveOrder.getHttpResponse(myApplication.getUserId(), "0",
+								recipientId, "", jifen + "", expressNum, postMethod,
+								peiSongCenter, goods, comment.getText().toString(),// 这里的comment.getText().toString()很重要
+								pay_type, myApplication.getToken());
+					boolean issuccess = saveOrder.analysisHttpResp(httpresp);
+					orderCode = saveOrder.getOrderCode();
+					resp_code = saveOrder.getResp_code();
+					tn = saveOrder.getTn();
+					return issuccess;
+				} catch (TimeOutEx e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					isTimeout = true;
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -755,7 +783,17 @@ public class CstmPayActivity extends SherlockActivity {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.show();
+//			bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(CstmPayActivity.this)
+			.createLoadingDialog(CstmPayActivity.this, null);
+	bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+		@Override
+		public void onCancel(DialogInterface dialog) {
+			// TODO Auto-generated method stub
+			cancel(true);
+		}
+	});
 		}
 
 		@Override
@@ -766,6 +804,15 @@ public class CstmPayActivity extends SherlockActivity {
 			if(result){
 				go2Pay(mode);
 			} else{
+				if (isTimeout) {
+					Toast.makeText(
+							CstmPayActivity.this,
+							CstmPayActivity.this.getResources()
+									.getString(R.string.time_out),
+							Toast.LENGTH_SHORT).show();
+					isTimeout = false;
+					return;
+				}
 				Toast.makeText(CstmPayActivity.this, "提交订单失败", Toast.LENGTH_LONG).show();
 			}
 		}
@@ -828,24 +875,30 @@ public class CstmPayActivity extends SherlockActivity {
 			String httpresp;
 			try {
 				
-				httpresp = getUserAddressList.getAddressHttpresp("customer_id%3D"+myApplication.getUserId()+"+and+is_default%3D%27y%27+and+valid_flag%3D%27y%27", 0 + "", 1 + "");
-				issuccess = getUserAddressList.analysis(httpresp);
-				mList = getUserAddressList.getAddresses();
-				Addresses addresses;
-				if(issuccess && mList != null && !mList.isEmpty()) {
+				try {
+					httpresp = getUserAddressList.getAddressHttpresp("customer_id%3D"+myApplication.getUserId()+"+and+is_default%3D%27y%27+and+valid_flag%3D%27y%27", 0 + "", 1 + "");
+					issuccess = getUserAddressList.analysis(httpresp);
+					mList = getUserAddressList.getAddresses();
+					Addresses addresses;
+					if(issuccess && mList != null && !mList.isEmpty()) {
 //					return issuccess;
 //					if()
 						addresses = mList.get(0);
 //					else issuccess = false;
-				} else {
-					httpresp = getUserAddressList.getAddressHttpresp(
-							"customer_id%3D" + myApplication.getUserId()
-									+ "+and+valid_flag%3D%27y%27", 0 + "",
-							1 + "");
-					issuccess = getUserAddressList.analysis(httpresp);
-					addArray = getUserAddressList.getAddresses();
-					if(issuccess && addArray != null && !addArray.isEmpty())addresses = addArray.get(0);
-					else return issuccess;
+					} else {
+						httpresp = getUserAddressList.getAddressHttpresp(
+								"customer_id%3D" + myApplication.getUserId()
+								+ "+and+valid_flag%3D%27y%27", 0 + "",
+								1 + "");
+						issuccess = getUserAddressList.analysis(httpresp);
+						addArray = getUserAddressList.getAddresses();
+						if(issuccess && addArray != null && !addArray.isEmpty())addresses = addArray.get(0);
+						else return issuccess;
+					}
+				} catch (TimeOutEx e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					isTimeout = true;
 				}
 				/*// 获取免邮界限
 				ExpressDataManage expressDataManage = new ExpressDataManage(
@@ -867,17 +920,36 @@ public class CstmPayActivity extends SherlockActivity {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.show();
+//			bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(CstmPayActivity.this)
+			.createLoadingDialog(CstmPayActivity.this, null);
+	bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+		@Override
+		public void onCancel(DialogInterface dialog) {
+			// TODO Auto-generated method stub
+			cancel(true);
+		}
+	});
 		}
 
 		@Override
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
+			bar.dismiss();
 			if(result){
 				addAddress();
-			} 
-			bar.dismiss();
+			} else {
+				if (isTimeout) {
+					Toast.makeText(
+							CstmPayActivity.this,
+							CstmPayActivity.this.getResources()
+									.getString(R.string.time_out),
+							Toast.LENGTH_SHORT).show();
+					isTimeout = false;
+				}
+			}
 		}
 		
 	}

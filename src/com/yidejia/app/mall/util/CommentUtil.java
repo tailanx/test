@@ -23,6 +23,7 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.UserComment;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.commments.GetProductCommentList;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class CommentUtil {
 	private Context context;
@@ -49,9 +50,9 @@ public class CommentUtil {
 		// this.view = view;
 		// this.dataManage = dataManage;
 		getCommentList = new GetProductCommentList();
-		bar = new ProgressDialog(context);
-		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-		bar.setMessage(context.getResources().getString(R.string.loading));
+//		bar = new ProgressDialog(context);
+//		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//		bar.setMessage(context.getResources().getString(R.string.loading));
 	}
 	
 	public void setRefreshView(PullToRefreshScrollView mPullToRefreshScrollView, RelativeLayout refresh_view){
@@ -119,7 +120,17 @@ public class CommentUtil {
 			if (isFirstIn) {
 				
 				// bar.setCancelable(false);
-				bar.show();
+//				bar.show();
+				bar = (ProgressDialog) new YLProgressDialog(context)
+						.createLoadingDialog(context, null);
+				bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						// TODO Auto-generated method stub
+						cancel(true);
+					}
+				});
 			}
 		}
 		

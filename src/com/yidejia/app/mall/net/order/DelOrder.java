@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import android.util.Log;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
@@ -104,11 +105,12 @@ public class DelOrder {
 	 * @param ship_entity_name ��������
 	 * @param goods_qty_scr ������ַ���ʽ����Ʒid,����,�Ƿ��ֶһ�;�����硰11,5n��
 	 * @param comments ������ע��Ϣ
+	 * @throws TimeOutEx 
 	 */
 	public String getListJsonString(String customer_id, String ticket_id,
 			String recipient_id, String pingou_id, String goods_ascore,
 			String ship_fee, String ship_type, String ship_entity_name,
-			String goods_qty_scr, String comments) throws IOException {
+			String goods_qty_scr, String comments) throws IOException, TimeOutEx {
 		HttpGetConn conn = new HttpGetConn(getHttpAddress(customer_id,
 				ticket_id, recipient_id, pingou_id, goods_ascore, ship_fee,
 				ship_type, ship_entity_name, goods_qty_scr, comments));
@@ -117,7 +119,7 @@ public class DelOrder {
 	}
 	
 	public String getHttpResponse(String customer_id, String code, String token)
-			throws IOException {
+			throws IOException, TimeOutEx {
 		String url = new JNICallBack().getHttp4DelOrder(customer_id, code, token);
 		
 		HttpPostConn conn = new HttpPostConn(url);

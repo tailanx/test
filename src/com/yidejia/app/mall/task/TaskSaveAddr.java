@@ -3,13 +3,18 @@ package com.yidejia.app.mall.task;
 import java.io.IOException;
 
 
+
+
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.exception.TimeOutEx;
 //import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.net.address.SaveUserAddress;
 import com.yidejia.app.mall.util.DefinalDate;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 //import android.os.Bundle;
@@ -37,10 +42,10 @@ public class TaskSaveAddr {
 	
 	public TaskSaveAddr(Activity activity){
 		this.activity = activity;
-		bar = new ProgressDialog(activity);
-		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-		bar.setMessage(activity.getResources().getString(R.string.loading));
-		bar.setCancelable(true);
+//		bar = new ProgressDialog(activity);
+//		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//		bar.setMessage(activity.getResources().getString(R.string.loading));
+//		bar.setCancelable(true);
 		
 		saveUserAddress = new SaveUserAddress(activity);
 	}
@@ -63,7 +68,7 @@ public class TaskSaveAddr {
 		task.execute();
 	}
 	
-	
+	private boolean isTimeout = false;
 	private Task task;
 	
 	private class Task extends AsyncTask<Void, Void, Boolean> {
@@ -72,12 +77,19 @@ public class TaskSaveAddr {
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 			try {
-				String httpresp = saveUserAddress.saveAddress(userId, nameString, handsetString, shengString, shiString, quString, areaString, recipient_id, token);
-				boolean issuccess = saveUserAddress.analysicSaveJson(httpresp);
-				addressId = saveUserAddress.getRecipient_id();
-				if(addressId == null || "".equals(addressId)) addressId = recipient_id;
-				message = saveUserAddress.getIsSuccessString();
-				return issuccess;
+				String httpresp;
+				try {
+					httpresp = saveUserAddress.saveAddress(userId, nameString, handsetString, shengString, shiString, quString, areaString, recipient_id, token);
+					boolean issuccess = saveUserAddress.analysicSaveJson(httpresp);
+					addressId = saveUserAddress.getRecipient_id();
+					if(addressId == null || "".equals(addressId)) addressId = recipient_id;
+					message = saveUserAddress.getIsSuccessString();
+					return issuccess;
+				} catch (TimeOutEx e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					isTimeout = true;
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -89,7 +101,17 @@ public class TaskSaveAddr {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.show();
+//			bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(activity)
+					.createLoadingDialog(activity, null);
+			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					cancel(true);
+				}
+			});
 		}
 
 		@Override
@@ -100,6 +122,15 @@ public class TaskSaveAddr {
 			if(result) {
 				finishIntent();
 			} else {
+				if (isTimeout) {
+					Toast.makeText(
+							activity,
+							activity.getResources()
+									.getString(R.string.time_out),
+							Toast.LENGTH_SHORT).show();
+					isTimeout = false;
+					return;
+				}
 				Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
 			}
 		}

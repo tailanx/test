@@ -7,6 +7,8 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.net.user.Register;
 
 public class TaskRegister {
@@ -42,6 +44,8 @@ public class TaskRegister {
 		task.execute();
 	}
 	
+	private boolean isTimeout = false;
+	
 	private class Task extends AsyncTask<Void, Void, Boolean>{
 
 		@Override
@@ -49,10 +53,17 @@ public class TaskRegister {
 			// TODO Auto-generated method stub
 			Register register = new Register();
 			try {
-				String httpresp = register.getHttpResponse(name, password, cps, ip);
-				boolean issuccess = register.analysisHttpResp(httpresp);
-				message = register.getMsg();
-				return issuccess;
+				String httpresp;
+				try {
+					httpresp = register.getHttpResponse(name, password, cps, ip);
+					boolean issuccess = register.analysisHttpResp(httpresp);
+					message = register.getMsg();
+					return issuccess;
+				} catch (TimeOutEx e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					isTimeout = true;
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -69,6 +80,15 @@ public class TaskRegister {
 				Toast.makeText(activity, "注册成功!", Toast.LENGTH_LONG).show();
 				activity.finish();
 			} else {
+				if (isTimeout) {
+					Toast.makeText(
+							activity,
+							activity.getResources()
+									.getString(R.string.time_out),
+							Toast.LENGTH_SHORT).show();
+					isTimeout = false;
+					return;
+				}
 				Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
 			}
 		}

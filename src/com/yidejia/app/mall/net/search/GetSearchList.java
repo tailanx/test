@@ -5,6 +5,7 @@ import java.io.IOException;
 import android.content.Context;
 import android.util.Log;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.util.Md5;
@@ -72,7 +73,7 @@ public class GetSearchList {
 	}
 	
 	private String result = "";
-	public String getSearchListJsonString(String where, String offset, String limit, String group, String order, String fields)throws IOException{
+	public String getSearchListJsonString(String where, String offset, String limit, String group, String order, String fields)throws IOException, TimeOutEx{
 		HttpGetConn conn = new HttpGetConn(getHttpAddress(where, offset, limit, group, order, fields));
 		result = conn.getJsonResult();
 		return result;

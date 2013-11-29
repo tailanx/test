@@ -1,6 +1,7 @@
 package com.yidejia.app.mall.ctrl;
 
 import com.yidejia.app.mall.net.HttpGetVersionConn;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -30,10 +31,18 @@ public class Check4Update {
 	
 	public Check4Update(Activity activity){
 		this.activity = activity;
-		bar = new ProgressDialog(activity);
-		bar.setCancelable(true);
-		bar.setMessage(activity.getResources().getString(R.string.loading));
-		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//		bar = new ProgressDialog(activity);
+//		bar.setCancelable(true);
+//		bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//			
+//			@Override
+//			public void onCancel(DialogInterface dialog) {
+//				// TODO Auto-generated method stub
+//				closeTask();
+//			}
+//		});
+//		bar.setMessage(activity.getResources().getString(R.string.loading));
+//		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 	}
 	
 	private String getVersionName(){
@@ -59,7 +68,9 @@ public class Check4Update {
 			// TODO Auto-generated method stub
 //			pd = ProgressDialog.show(WelcomeActivity.this, "", "正在检查更新...",
 //					true);
-			bar.show();
+//			bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(activity)
+			.createLoadingDialog(activity, null);
 			super.onPreExecute();
 		}
 

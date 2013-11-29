@@ -11,6 +11,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpPostConn;
@@ -85,7 +86,7 @@ public class Voucher {
 		return result;
 	}
 	
-	public String getHttpResponse(String id, String token) throws IOException{
+	public String getHttpResponse(String id, String token) throws IOException, TimeOutEx{
 		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4GetVoucher(id, token));
 		return result = conn.getHttpResponse();
 	}

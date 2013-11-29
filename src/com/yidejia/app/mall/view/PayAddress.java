@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.net.address.GetUserAddressList;
 import com.yidejia.app.mall.util.Consts;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class PayAddress extends SherlockActivity {
 //	private AddressDataManage dataManage ;
@@ -65,7 +67,7 @@ public class PayAddress extends SherlockActivity {
 			}
 		});
 		
-		bar = new ProgressDialog(this);
+//		bar = new ProgressDialog(this);
 		getUserAddressList = new GetUserAddressList();
 		
 		closeTask();
@@ -134,10 +136,20 @@ public class PayAddress extends SherlockActivity {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setCancelable(true);
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage(getResources().getString(R.string.loading));
-			bar.show();
+//			bar.setCancelable(true);
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(getResources().getString(R.string.loading));
+//			bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(PayAddress.this)
+					.createLoadingDialog(PayAddress.this, null);
+			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					cancel(true);
+				}
+			});
 		}
 
 		@Override

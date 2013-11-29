@@ -9,6 +9,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
@@ -80,7 +81,7 @@ public class GetExpressList {
 
 	public String getExpressListJsonString(String where, String offset,
 			String limit, String group, String order, String fields)
-			throws IOException {
+			throws IOException, TimeOutEx {
 		// HttpGetConn conn = new HttpGetConn(getHttpAddress(where, offset,
 		// limit, group, order, fields));
 		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetExpress(

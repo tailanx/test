@@ -3,10 +3,13 @@ package com.yidejia.app.mall.task;
 import java.io.IOException;
 
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.net.user.ResetPsw;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -37,6 +40,7 @@ public class TaskReset {
 		task.execute();
 	}
 	
+	private boolean isTimeout = false;
 	
 	private class Task extends AsyncTask<Void, Void, Boolean>{
 		private ProgressDialog bar;
@@ -44,11 +48,21 @@ public class TaskReset {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar = new ProgressDialog(activity);
-			bar.setMessage(activity.getResources().getString(R.string.loading));
-			bar.setCancelable(true);
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.show();
+//			bar = new ProgressDialog(activity);
+//			bar.setMessage(activity.getResources().getString(R.string.loading));
+//			bar.setCancelable(true);
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(activity)
+					.createLoadingDialog(activity, null);
+			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					cancel(true);
+				}
+			});
 		}
 
 		@Override
@@ -59,6 +73,14 @@ public class TaskReset {
 			if(!result){
 				Toast.makeText(activity, "重置密码失败!", Toast.LENGTH_LONG).show();
 			} else{//
+				if (isTimeout) {
+					Toast.makeText(
+							activity,
+							activity.getResources()
+									.getString(R.string.time_out),
+							Toast.LENGTH_SHORT).show();
+					isTimeout = false;
+				}
 				Toast.makeText(activity, "重置密码成功!", Toast.LENGTH_LONG).show();
 				activity.finish();
 			}
@@ -69,10 +91,17 @@ public class TaskReset {
 			// TODO Auto-generated method stub
 			ResetPsw resetPsw = new ResetPsw();
 			try {
-				String httpresp = resetPsw.getHttpResponse(name, psw, code);
-				boolean issuccess = resetPsw.analysisHttp(httpresp);
-				msg = resetPsw.getMsg();
-				return issuccess;
+				String httpresp;
+				try {
+					httpresp = resetPsw.getHttpResponse(name, psw, code);
+					boolean issuccess = resetPsw.analysisHttp(httpresp);
+					msg = resetPsw.getMsg();
+					return issuccess;
+				} catch (TimeOutEx e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					isTimeout = true;
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

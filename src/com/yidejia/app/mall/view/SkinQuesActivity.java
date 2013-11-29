@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils.TruncateAt;
@@ -33,6 +34,7 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.Skin;
 import com.yidejia.app.mall.model.SkinQOption;
 import com.yidejia.app.mall.net.skin.Question;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class SkinQuesActivity extends Activity {
 	private Question question;
@@ -530,11 +532,21 @@ public class SkinQuesActivity extends Activity {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar = new ProgressDialog(SkinQuesActivity.this);
-			bar.setMessage(getResources().getString(R.string.loading));
-			bar.setCancelable(true);
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.show();
+//			bar = new ProgressDialog(SkinQuesActivity.this);
+//			bar.setMessage(getResources().getString(R.string.loading));
+//			bar.setCancelable(true);
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(SkinQuesActivity.this)
+					.createLoadingDialog(SkinQuesActivity.this, null);
+			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					cancel(true);
+				}
+			});
 
 		}
 

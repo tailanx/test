@@ -14,6 +14,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.UserComment;
 import com.yidejia.app.mall.net.ConnectionDetector;
@@ -253,6 +254,7 @@ public class UserCommentDataManage {
 	}
 	
 	private ArrayList<Cart> waitCommGoods;
+	private boolean isTimeout = false;
 	
 	private class TaskWaitComm extends AsyncTask<Void, Void, Boolean>{
 
@@ -267,63 +269,70 @@ public class UserCommentDataManage {
 			// TODO Auto-generated method stub
 			WaitingComment waitingComment = new WaitingComment();
 			try {
-				String httpResp = waitingComment.getHttpResp(userid);
+				String httpResp;
 				try {
-					JSONObject httpObject = new JSONObject(httpResp);
-					int httpCode = httpObject.getInt("code");
-					if(httpCode == 1){
-						String resp = httpObject.getString("response");
-						try {
-							JSONArray respArray = new JSONArray(resp);
-							int length = respArray.length();
-							Cart mCart;
-							JSONObject arrayObject;
-							for (int i = 0; i < length; i++) {
-								mCart = new Cart();
-								arrayObject = respArray.getJSONObject(i);
-								String goodsid = arrayObject.getString("goods_id");
-								String price = arrayObject.getString("price");
-								String quantity = arrayObject.getString("quantity");
-								String evaluate_status = arrayObject.getString("evaluate_status");
-								String dry_status = arrayObject.getString("dry_status");
-								String imageUrl = ImageUrl.IMAGEURL + arrayObject.getString("imgname") + "!100";
-								String goodsname = "";
-								GetProductAddress address = new GetProductAddress();
-								try {
-									String productString = address.getProductJsonString(goodsid);
-									JSONObject productObject = new JSONObject(productString);
-									int productHttpCode = productObject.getInt("code");
-									if(productHttpCode == 1){
-										String productResp = productObject.getString("response");
-										JSONObject productRespObject = new JSONObject(productResp);
-										goodsname = productRespObject.getString("goods_name");
+					httpResp = waitingComment.getHttpResp(userid);
+					try {
+						JSONObject httpObject = new JSONObject(httpResp);
+						int httpCode = httpObject.getInt("code");
+						if(httpCode == 1){
+							String resp = httpObject.getString("response");
+							try {
+								JSONArray respArray = new JSONArray(resp);
+								int length = respArray.length();
+								Cart mCart;
+								JSONObject arrayObject;
+								for (int i = 0; i < length; i++) {
+									mCart = new Cart();
+									arrayObject = respArray.getJSONObject(i);
+									String goodsid = arrayObject.getString("goods_id");
+									String price = arrayObject.getString("price");
+									String quantity = arrayObject.getString("quantity");
+									String evaluate_status = arrayObject.getString("evaluate_status");
+									String dry_status = arrayObject.getString("dry_status");
+									String imageUrl = ImageUrl.IMAGEURL + arrayObject.getString("imgname") + "!100";
+									String goodsname = "";
+									GetProductAddress address = new GetProductAddress();
+									try {
+										String productString = address.getProductJsonString(goodsid);
+										JSONObject productObject = new JSONObject(productString);
+										int productHttpCode = productObject.getInt("code");
+										if(productHttpCode == 1){
+											String productResp = productObject.getString("response");
+											JSONObject productRespObject = new JSONObject(productResp);
+											goodsname = productRespObject.getString("goods_name");
+										}
+									} catch (IOException e){
+										
+									} catch (JSONException e) {
+										// TODO: handle exception
+									}catch (Exception e) {
+										// TODO: handle exception
 									}
-								} catch (IOException e){
-									
-								} catch (JSONException e) {
-									// TODO: handle exception
-								}catch (Exception e) {
-									// TODO: handle exception
+									mCart.setImgUrl(imageUrl);
+									mCart.setProductText(goodsname);
+									mCart.setUId(goodsid);
+									try {
+										mCart.setSalledAmmount(Integer.parseInt(quantity));
+										mCart.setPrice(Float.parseFloat(price));
+									} catch (NumberFormatException e) {
+										// TODO: handle exception
+									}
+									waitCommGoods.add(mCart);
 								}
-								mCart.setImgUrl(imageUrl);
-								mCart.setProductText(goodsname);
-								mCart.setUId(goodsid);
-								try {
-									mCart.setSalledAmmount(Integer.parseInt(quantity));
-									mCart.setPrice(Float.parseFloat(price));
-								} catch (NumberFormatException e) {
-									// TODO: handle exception
-								}
-								waitCommGoods.add(mCart);
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
 							}
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
 						}
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-				} catch (JSONException e) {
+				} catch (TimeOutEx e1) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					e1.printStackTrace();
+					isTimeout = true;
 				}
 				
 			} catch (IOException e) {

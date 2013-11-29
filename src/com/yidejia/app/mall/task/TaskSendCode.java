@@ -7,6 +7,8 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.net.user.SendMsg;
 
 public class TaskSendCode {
@@ -34,6 +36,8 @@ public class TaskSendCode {
 		task = new Task();
 		task.execute();
 	}
+	
+	private boolean isTimeout = false;
 
 	private class Task extends AsyncTask<Void, Void, Boolean> {
 
@@ -42,10 +46,17 @@ public class TaskSendCode {
 			// TODO Auto-generated method stub
 			SendMsg sendMsg = new SendMsg();
 			try {
-				String httpResp = sendMsg.getHttpResp(phone, code);
-				boolean isSuccess = sendMsg.analysisHttpResp(httpResp);
-				response = sendMsg.getResponse();
-				return isSuccess;
+				String httpResp;
+				try {
+					httpResp = sendMsg.getHttpResp(phone, code);
+					boolean isSuccess = sendMsg.analysisHttpResp(httpResp);
+					response = sendMsg.getResponse();
+					return isSuccess;
+				} catch (TimeOutEx e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					isTimeout = true;
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -69,6 +80,15 @@ public class TaskSendCode {
 			if(result){
 				if(response != -1){
 					Toast.makeText(activity, "亲，请在"+response+"秒后重试！", Toast.LENGTH_LONG).show();
+					if (isTimeout) {
+						Toast.makeText(
+								activity,
+								activity.getResources()
+								.getString(R.string.time_out),
+								Toast.LENGTH_SHORT).show();
+						isTimeout = false;
+						return;
+					}
 				} else {
 					Toast.makeText(activity, "验证码已发送到您的手机，请注意查看!", Toast.LENGTH_LONG).show();
 				}

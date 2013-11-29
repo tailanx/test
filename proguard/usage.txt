@@ -1191,8 +1191,8 @@ com.yidejia.app.mall.net.favorite.SaveFavorite:
 ====    66:74:private java.lang.String getHttpAddress(java.lang.String,java.lang.String)
 ====    87:90:public java.lang.String saveFavorite(java.lang.String,java.lang.String)
 com.yidejia.app.mall.net.goodsinfo.GetProductAddress:
-====    183:183:public java.util.ArrayList getBannerProducts()
-====    187:187:public java.util.ArrayList getRecommentProducts()
+====    191:191:public java.util.ArrayList getBannerProducts()
+====    195:195:public java.util.ArrayList getRecommentProducts()
 com.yidejia.app.mall.net.order.CancelOrder:
 ====    29:59:private void setKeysAndValues(java.lang.String,java.lang.String)
 ====    62:67:private java.lang.String getHttpAddress(java.lang.String,java.lang.String)
@@ -1231,7 +1231,7 @@ com.yidejia.app.mall.net.voucher.Voucher:
 ====    82:85:public java.lang.String getResponse(java.lang.String)
 com.yidejia.app.mall.search.SuggestionsAdapter
 com.yidejia.app.mall.task.TaskGetCode:
-====    84:84:public int getRegCode()
+====    86:86:public int getRegCode()
 com.yidejia.app.mall.task.TaskLoginFragment
 com.yidejia.app.mall.task.TaskSearch
 com.yidejia.app.mall.util.AddressUtil
@@ -1305,7 +1305,7 @@ com.yidejia.app.mall.util.CartUtil:
 com.yidejia.app.mall.util.CartUtil1:
     private android.widget.TextView number
 com.yidejia.app.mall.util.CommentUtil:
-====    230:244:private void setupShow(com.yidejia.app.mall.model.UserComment)
+====    231:245:private void setupShow(com.yidejia.app.mall.model.UserComment)
 com.yidejia.app.mall.util.Consts:
     public static final java.lang.String DELETE_CART
     public static final java.lang.String CHECK_UPDATE_CHANGE

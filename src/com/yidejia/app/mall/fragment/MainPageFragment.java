@@ -48,6 +48,7 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.SearchActivity;
 import com.yidejia.app.mall.SlideImageLayout;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.initview.HotSellView;
 import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.model.MainProduct;
@@ -60,6 +61,7 @@ import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.view.MyCollectActivity;
 import com.yidejia.app.mall.view.SkinHomeActivity;
 import com.yidejia.app.mall.view.SkinQuesActivity;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 import com.yidejia.app.mall.widget.YLViewPager;
 
 public class MainPageFragment extends SherlockFragment {
@@ -500,10 +502,11 @@ public class MainPageFragment extends SherlockFragment {
 //			hotSellView.initInerbtyView(inerbtyArray);
 //			intentToView(view);
 //			main_mall_notice_content.setText(ggTitleArray.get(0));
-			bar = new ProgressDialog(getSherlockActivity());
+			bar = new ProgressDialog(getSherlockActivity(), R.style.StyleProgressDialog);
+			
 			bar.setCancelable(true);
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage(getSherlockActivity().getResources().getString(R.string.loading));
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(getSherlockActivity().getResources().getString(R.string.loading));
 			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
 				
 				@Override
@@ -535,9 +538,11 @@ public class MainPageFragment extends SherlockFragment {
 	private boolean isFirstIn = true;
 	private Task task;
 	private ProgressDialog bar;
+	private boolean isTimeOut = false;
 	
 	private class Task extends AsyncTask<Void, Void, Boolean>{
 
+		ProgressDialog bar2;
 		
 		@Override
 		protected Boolean doInBackground(Void... params) {
@@ -545,14 +550,20 @@ public class MainPageFragment extends SherlockFragment {
 			GetHomePage getHomePage = new GetHomePage();
 			String httpresp;
 			try {
-				httpresp = getHomePage.getHomePageJsonString();
-				boolean issuccess = getHomePage.analysisGetHomeJson(httpresp);
-				bannerArray = getHomePage.getBannerArray();
-				acymerArray = getHomePage.getAcymerArray();
-				inerbtyArray = getHomePage.getInerbtyArray();
-				hotsellArray = getHomePage.getHotSellArray();
-				ggTitleArray = getHomePage.getGGTitle();
-				return issuccess;
+				try {
+					httpresp = getHomePage.getHomePageJsonString();
+					boolean issuccess = getHomePage.analysisGetHomeJson(httpresp);
+					bannerArray = getHomePage.getBannerArray();
+					acymerArray = getHomePage.getAcymerArray();
+					inerbtyArray = getHomePage.getInerbtyArray();
+					hotsellArray = getHomePage.getHotSellArray();
+					ggTitleArray = getHomePage.getGGTitle();
+					return issuccess;
+				} catch (TimeOutEx e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					isTimeOut = true;
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -565,8 +576,21 @@ public class MainPageFragment extends SherlockFragment {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			if (isFirstIn) {
-				bar.show();
+//				bar.show();
+				bar2 = (ProgressDialog) new YLProgressDialog(getSherlockActivity())
+						.createLoadingDialog(getSherlockActivity(), null);
+//				bar2.show();
+				bar2.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						// TODO Auto-generated method stub
+						isFirstIn = false;
+						closeTask();
+					}
+				});
 			}
+			
 			if(!bannerArray.isEmpty())bannerArray.clear();
 			if(!inerbtyArray.isEmpty()) inerbtyArray.clear();
 			if(!hotsellArray.isEmpty()) hotsellArray.clear();
@@ -611,14 +635,21 @@ public class MainPageFragment extends SherlockFragment {
 					// getResources().getString(R.string.bad_network),
 					// Toast.LENGTH_SHORT).show();
 				} else {
+					if(isTimeOut) {
+						Toast.makeText(getSherlockActivity(),
+								getResources().getString(R.string.time_out),
+								Toast.LENGTH_SHORT).show();
+						isTimeOut = false;
+						
+					} else
 					Toast.makeText(getSherlockActivity(),
 							getResources().getString(R.string.bad_network),
 							Toast.LENGTH_SHORT).show();
-
 				}
 			} 
 			if (isFirstIn) {
-				bar.dismiss();
+//				bar.dismiss();
+				bar2.dismiss();
 				isFirstIn = false;
 			} else {
 

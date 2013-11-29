@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.net.address.GetUserAddressList;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DefinalDate;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class AddressActivity extends SherlockActivity {
 
@@ -301,10 +303,20 @@ public class AddressActivity extends SherlockActivity {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			if (isFirstIn) {
-				bar.setCancelable(true);
-				bar.setMessage(getResources().getString(R.string.loading));
-				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-				bar.show();
+//				bar.setCancelable(true);
+//				bar.setMessage(getResources().getString(R.string.loading));
+//				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//				bar.show();
+				bar = (ProgressDialog) new YLProgressDialog(AddressActivity.this)
+				.createLoadingDialog(AddressActivity.this, null);
+		bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				// TODO Auto-generated method stub
+				cancel(true);
+			}
+		});
 			}
 		}
 

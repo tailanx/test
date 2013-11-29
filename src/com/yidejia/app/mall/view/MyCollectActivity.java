@@ -35,9 +35,11 @@ import com.yidejia.app.mall.SearchActivity;
 import com.yidejia.app.mall.SearchResultActivity;
 import com.yidejia.app.mall.adapter.FavoriteAdapter;
 import com.yidejia.app.mall.datamanage.FavoriteDataManage;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.model.SearchItem;
 import com.yidejia.app.mall.net.favorite.GetFavoriteList;
 import com.yidejia.app.mall.task.TaskDelFav;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class MyCollectActivity extends SherlockActivity {
 	private FavoriteAdapter fAdapter;
@@ -268,12 +270,19 @@ public class MyCollectActivity extends SherlockActivity {
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 			try {
-				String httpresp = getFavoriteList.getHttpResp(((MyApplication) getApplication()).getUserId(), fromIndex + "", amount + "");
-				boolean issuccess = getFavoriteList.analysisGetListJson(httpresp);
-				isNoMore = getFavoriteList.getIsNoMore();
+				String httpresp;
+				try {
+					httpresp = getFavoriteList.getHttpResp(((MyApplication) getApplication()).getUserId(), fromIndex + "", amount + "");
+					boolean issuccess = getFavoriteList.analysisGetListJson(httpresp);
+					isNoMore = getFavoriteList.getIsNoMore();
 //				if(mList != null && !mList.isEmpty())mList.clear();
-				mList = getFavoriteList.getFavList();
-				return issuccess;
+					mList = getFavoriteList.getFavList();
+					return issuccess;
+				} catch (TimeOutEx e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					isTimeout = true;
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -287,11 +296,22 @@ public class MyCollectActivity extends SherlockActivity {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			if (isFirstIn) {
-				bar = new ProgressDialog(MyCollectActivity.this);
-				bar.setCancelable(true);
-				bar.setMessage(getResources().getString(R.string.loading));
-				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-				bar.show();
+//				bar = new ProgressDialog(MyCollectActivity.this);
+//				bar.setCancelable(true);
+//				bar.setMessage(getResources().getString(R.string.loading));
+//				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//				bar.show();
+				bar = (ProgressDialog) new YLProgressDialog(
+						MyCollectActivity.this).createLoadingDialog(
+						MyCollectActivity.this, null);
+				bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						// TODO Auto-generated method stub
+						cancel(true);
+					}
+				});
 			}
 		}
 
@@ -337,6 +357,15 @@ public class MyCollectActivity extends SherlockActivity {
 				}
 			} else {
 				if(fromIndex != 0)fromIndex -= amount;
+				if (isTimeout) {
+					Toast.makeText(
+							MyCollectActivity.this,
+							MyCollectActivity.this.getResources()
+									.getString(R.string.time_out),
+							Toast.LENGTH_SHORT).show();
+					isTimeout = false;
+					
+				}
 			}
 			if(isFirstIn){
 				bar.dismiss();
@@ -347,6 +376,8 @@ public class MyCollectActivity extends SherlockActivity {
 		}
 		
 	}
+	
+	private boolean isTimeout = false;
 	
 	private void closeTask(){
 		if(task != null && task.getStatus().RUNNING == AsyncTask.Status.RUNNING){

@@ -9,6 +9,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
@@ -22,7 +23,7 @@ public class WaitingComment {
 	private String TAG = WaitingComment.class.getName();
 	
 	private String result = "";
-	public String getHttpResp(String userid)throws IOException{
+	public String getHttpResp(String userid)throws IOException, TimeOutEx{
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress(where, offset, limit, group, order, fields));
 		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetNoEvaluate(userid), true);
 		result = conn.getJsonResult();

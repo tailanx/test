@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpPostConn;
 
@@ -17,8 +18,9 @@ public class GetTn {
 	 * @param token
 	 * @return
 	 * @throws IOException
+	 * @throws TimeOutEx 
 	 */
-	public String getTnHttpResp(String userid, String orderCode, String token) throws IOException{
+	public String getTnHttpResp(String userid, String orderCode, String token) throws IOException, TimeOutEx{
 		String url = new JNICallBack().getHttp4GetTn(userid, orderCode, token);
 		HttpPostConn conn = new HttpPostConn(url);
 		return conn.getHttpResponse();

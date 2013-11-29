@@ -7,12 +7,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
 import android.util.Log;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpPostConn;
@@ -26,7 +28,7 @@ public class DeleteFavorite {
 	
 	private String TAG = DeleteFavorite.class.getName();
 	
-	public String deleteFavorite(String userid, String goodsid, String token) throws IOException{
+	public String deleteFavorite(String userid, String goodsid, String token) throws IOException, TimeOutEx{
 		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4DelFav(userid, goodsid, token));
 		return conn.getHttpResponse();
 	}

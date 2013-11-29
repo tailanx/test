@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.model.MsgCenter;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.user.ChangeRead;
@@ -29,6 +30,8 @@ public class MessageDataManage {
 		this.context = context;
 		msgArrays = new ArrayList<MsgCenter>();
 	}
+	
+	private boolean isTimeout = false;
 	
 	private String userid;
 	private String token;
@@ -79,7 +82,15 @@ public class MessageDataManage {
 			// TODO Auto-generated method stub
 			GetMessage getMessage = new GetMessage();
 			try {
-				String httpResponse = getMessage.getHttpResponse(userid, offset, limit, token);
+				String httpResponse = "";
+				try {
+					httpResponse = getMessage.getHttpResponse(userid, offset, limit, token);
+				} catch (TimeOutEx e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					isTimeout = true;
+					return false;
+				}
 				JSONObject httpObject;
 				try {
 					httpObject = new JSONObject(httpResponse);
@@ -179,7 +190,15 @@ public class MessageDataManage {
 			// TODO Auto-generated method stub
 			ChangeRead changeRead = new ChangeRead();
 			try {
-				String httpResponse = changeRead.getHttpResponse(userId, msgId, token);
+				String httpResponse = null;
+				try {
+					httpResponse = changeRead.getHttpResponse(userId, msgId, token);
+				} catch (TimeOutEx e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					isTimeout = true;
+					return false;
+				}
 				try {
 					JSONObject jsonObject = new JSONObject(httpResponse);
 					int code = jsonObject.getInt("code");

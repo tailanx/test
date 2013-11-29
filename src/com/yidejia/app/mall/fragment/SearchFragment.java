@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
@@ -22,9 +23,11 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.SearchResultActivity;
 import com.yidejia.app.mall.adapter.SearchListAdapter;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.model.Function;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.search.EffectDataUtil;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class SearchFragment extends SherlockFragment {
 	
@@ -79,10 +82,10 @@ public class SearchFragment extends SherlockFragment {
 //		searchEditText = (EditText) getSherlockActivity().findViewById(R.id.search_bar_edittext);
 //		searchEditText.clearFocus();
 		functions = new ArrayList<Function>();
-		bar = new ProgressDialog(getSherlockActivity());
-		bar.setCancelable(true);
-		bar.setMessage(getSherlockActivity().getResources().getString(R.string.loading));
-		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//		bar = new ProgressDialog(getSherlockActivity());
+//		bar.setCancelable(true);
+//		bar.setMessage(getSherlockActivity().getResources().getString(R.string.loading));
+//		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		
 //		searchEditText.setOnFocusChangeListener(new OnFocusChangeListener() {
 //			
@@ -188,17 +191,34 @@ public class SearchFragment extends SherlockFragment {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.show();
+//			bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(getSherlockActivity())
+					.createLoadingDialog(getSherlockActivity(), null);
+			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					cancel(true);
+				}
+			});
 		}
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 			EffectDataUtil util = new EffectDataUtil();
 			try {
-				String httpresp = util.getHttpResponseString();
-				boolean issuccess = util.analysis(httpresp);
-				functions = util.getFunctions();
-				return issuccess;
+				String httpresp;
+				try {
+					httpresp = util.getHttpResponseString();
+					boolean issuccess = util.analysis(httpresp);
+					functions = util.getFunctions();
+					return issuccess;
+				} catch (TimeOutEx e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					isTimeout = true;
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -229,12 +249,22 @@ public class SearchFragment extends SherlockFragment {
 				if(functions.isEmpty()){
 					searchListView.setVisibility(View.GONE);
 					search_item_refresh_view.setVisibility(View.VISIBLE);
+				} 
+				if (isTimeout) {
+					Toast.makeText(
+							getSherlockActivity(),
+							getSherlockActivity().getResources()
+									.getString(R.string.time_out),
+							Toast.LENGTH_SHORT).show();
+					isTimeout = false;
 				}
 			}
 			bar.dismiss();
 		}
 		
 	}
+	
+	private boolean isTimeout = false;
 	
 	/**
 	 * 搜索项的监听函数

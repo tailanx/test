@@ -28,11 +28,13 @@ import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.address.DeleteUserAddress;
 import com.yidejia.app.mall.net.address.SetDefAddr;
 import com.yidejia.app.mall.util.DefinalDate;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -54,7 +56,7 @@ public class AddressAdapter extends BaseAdapter {
 		this.activity = context;
 		this.inflater = LayoutInflater.from(context);
 		setDefAddr = new SetDefAddr();
-		bar = new ProgressDialog(context);
+//		bar = new ProgressDialog(context);
 		
 		delAddress = new DeleteUserAddress(context);
 		
@@ -314,10 +316,20 @@ public class AddressAdapter extends BaseAdapter {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setProgress(ProgressDialog.STYLE_SPINNER);
-			bar.setCancelable(true);
-			bar.setMessage(activity.getResources().getString(R.string.loading));
-			bar.show();
+//			bar.setProgress(ProgressDialog.STYLE_SPINNER);
+//			bar.setCancelable(true);
+//			bar.setMessage(activity.getResources().getString(R.string.loading));
+//			bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(activity)
+					.createLoadingDialog(activity, null);
+			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					cancel(true);
+				}
+			});
 		}
 
 		@Override
@@ -368,10 +380,20 @@ public class AddressAdapter extends BaseAdapter {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setProgress(ProgressDialog.STYLE_SPINNER);
-			bar.setCancelable(true);
-			bar.setMessage(activity.getResources().getString(R.string.loading));
-			bar.show();
+//			bar.setProgress(ProgressDialog.STYLE_SPINNER);
+//			bar.setCancelable(true);
+//			bar.setMessage(activity.getResources().getString(R.string.loading));
+//			bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(activity)
+					.createLoadingDialog(activity, null);
+			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					cancel(true);
+				}
+			});
 		}
 
 		@Override
@@ -382,6 +404,15 @@ public class AddressAdapter extends BaseAdapter {
 			if(result && addresses != null && !mAddresses.isEmpty()){
 				mAddresses.remove(addresses);
 				notifyDataSetChanged();
+			} else {
+				if (isTimeout) {
+					Toast.makeText(
+							activity,
+							activity.getResources()
+									.getString(R.string.time_out),
+							Toast.LENGTH_SHORT).show();
+					isTimeout = false;
+				}
 			}
 		}
 		
@@ -389,9 +420,16 @@ public class AddressAdapter extends BaseAdapter {
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 			try {
-				String httpresp = delAddress.deleteAddress(myApplication.getUserId(),
-							addressId, myApplication.getToken());
-				return delAddress.analysicDeleteJson(httpresp);
+				String httpresp;
+				try {
+					httpresp = delAddress.deleteAddress(myApplication.getUserId(),
+								addressId, myApplication.getToken());
+					return delAddress.analysicDeleteJson(httpresp);
+				} catch (TimeOutEx e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					isTimeout = true;
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -399,4 +437,6 @@ public class AddressAdapter extends BaseAdapter {
 			return false;
 		}
 	}
+	
+	private boolean isTimeout = false;
 }

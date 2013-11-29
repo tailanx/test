@@ -11,6 +11,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
@@ -84,8 +85,9 @@ public class CheckExistsFavorite {
 	 * @param goodsid �ղص���Ʒid
 	 * @return http response string
 	 * @throws IOException
+	 * @throws TimeOutEx 
 	 */
-	public String httpResponse(String userid, String goodsid, String token) throws IOException{
+	public String httpResponse(String userid, String goodsid, String token) throws IOException, TimeOutEx{
 //		getHttpAddress(userid, goodsid);
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress(userid, goodsid));
 //		HttpPostConn conn = new HttpPostConn(keys, values);

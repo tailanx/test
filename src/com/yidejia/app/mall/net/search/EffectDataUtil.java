@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.Function;
 import com.yidejia.app.mall.net.HttpGetConn;
@@ -24,7 +25,7 @@ public class EffectDataUtil {
 		functionsArray = new ArrayList<Function>();
 	}
 	
-	public String getHttpResponseString() throws IOException{
+	public String getHttpResponseString() throws IOException, TimeOutEx{
 //		HttpGetConn httpGetConn = new HttpGetConn(getHttpAddress(where, offset, limit, fields));
 		HttpGetConn httpGetConn = new HttpGetConn(new JNICallBack().getHttp4GetEffect("flag%3D%27y%27", "0", "20", "", "", "%2A"), true);
 		//"flag%3D%27y%27", "0", "20", "%2A"

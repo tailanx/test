@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.yidejia.app.mall.CleanImageCache;
 import com.yidejia.app.mall.DataCleanManager;
 import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
@@ -67,6 +68,7 @@ public class EditorActivity extends SherlockActivity {
 							@Override
 							public void onClick(DialogInterface arg0, int arg1) {
 								DataCleanManager.cleanApplicationData(EditorActivity.this);
+								new CleanImageCache().clearAllCache();
 								Toast.makeText(EditorActivity.this, "清除成功",
 										Toast.LENGTH_LONG).show();
 
@@ -198,7 +200,7 @@ public class EditorActivity extends SherlockActivity {
 			@Override
 			public void onClick(View arg0) {
 				dialogHelp.show();
-
+				
 //				dialogHelp.getWindow().setLayout(width, height / 2);
 			}
 

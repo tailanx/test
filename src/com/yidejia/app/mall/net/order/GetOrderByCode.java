@@ -9,6 +9,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
@@ -33,7 +34,7 @@ public class GetOrderByCode {
 	}
 	
 	private String url = "http://u.yidejia.com/index.php?m=ucenter&c=order&a=testPay&code=";
-	public String getTNCode(String code, String id) throws IOException{
+	public String getTNCode(String code, String id) throws IOException, TimeOutEx{
 		url = url + code + "&user_id="+id;
 		HttpGetConn conn = new HttpGetConn(url, true);
 		return conn.getJsonResult();
@@ -90,14 +91,14 @@ public class GetOrderByCode {
 	private String result = "";
 
 	public String getListJsonString(String user_id, String code, String date,
-			String status, String offset1, String limit1) throws IOException {
+			String status, String offset1, String limit1) throws IOException, TimeOutEx {
 		HttpGetConn conn = new HttpGetConn(getHttpAddress(user_id, code, date,
 				status, offset1, limit1));
 		result = conn.getJsonResult();
 		return result;
 	}
 	
-	public String getHttpResponse(String code) throws IOException{
+	public String getHttpResponse(String code) throws IOException, TimeOutEx{
 		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetOrderByCode(code),true);
 		return result = conn.getJsonResult();
 	}

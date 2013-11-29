@@ -45,6 +45,7 @@ import com.yidejia.app.mall.address.WheelView;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.task.TaskSaveAddr;
 //import com.yidejia.app.mall.util.DefinalDate;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class EditNewAddressActivity extends SherlockActivity {
 	// private DBManager dbm;
@@ -610,12 +611,22 @@ public class EditNewAddressActivity extends SherlockActivity {
 	protected void onPreExecute() {
 		// TODO Auto-generated method stub
 		super.onPreExecute();
-		bar = new ProgressDialog(EditNewAddressActivity.this);
-		bar.setTitle(getResources().getString(R.string.load_addresses1));
-		bar.setMessage(getResources().getString(R.string.load_addresses2));
-		bar.setCancelable(true);
-		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-		bar.show();
+//		bar = new ProgressDialog(EditNewAddressActivity.this);
+//		bar.setTitle(getResources().getString(R.string.load_addresses1));
+//		bar.setMessage(getResources().getString(R.string.load_addresses2));
+//		bar.setCancelable(true);
+//		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//		bar.show();
+		bar = (ProgressDialog) new YLProgressDialog(EditNewAddressActivity.this)
+		.createLoadingDialog(EditNewAddressActivity.this, null);
+bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+	@Override
+	public void onCancel(DialogInterface dialog) {
+		// TODO Auto-generated method stub
+		cancel(true);
+	}
+});
 	}
 	//完成实际的下载
 	@Override

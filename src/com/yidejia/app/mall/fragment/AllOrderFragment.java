@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.DateUtils;
@@ -27,6 +28,7 @@ import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.order.GetOrderList;
 import com.yidejia.app.mall.util.AllOrderUtil;
 import com.yidejia.app.mall.util.OrdersUtil;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class AllOrderFragment extends SherlockFragment {
 
@@ -52,8 +54,11 @@ public class AllOrderFragment extends SherlockFragment {
 	// 通过单例模式，构建对象
 	/**
 	 * 跳转到fragment
-	 * @param orderType 0-4分别表示全部订单，待付款订单，待发货订单，已发货订单，已完成订单
-	 * @param orderTimeType 0-2 分别表示近一周，近一月，近一年
+	 * 
+	 * @param orderType
+	 *            0-4分别表示全部订单，待付款订单，待发货订单，已发货订单，已完成订单
+	 * @param orderTimeType
+	 *            0-2 分别表示近一周，近一月，近一年
 	 * @return
 	 */
 	public static AllOrderFragment newInstance(int orderType, int orderTimeType) {
@@ -81,9 +86,14 @@ public class AllOrderFragment extends SherlockFragment {
 	private OnRefreshListener2<ScrollView> listener = new OnRefreshListener2<ScrollView>() {
 		// 下拉刷新
 		@Override
-		public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-			if(!ConnectionDetector.isConnectingToInternet(getSherlockActivity())) {
-				Toast.makeText(getSherlockActivity(), getSherlockActivity().getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+		public void onPullDownToRefresh(
+				PullToRefreshBase<ScrollView> refreshView) {
+			if (!ConnectionDetector
+					.isConnectingToInternet(getSherlockActivity())) {
+				Toast.makeText(
+						getSherlockActivity(),
+						getSherlockActivity().getResources().getString(
+								R.string.no_network), Toast.LENGTH_LONG).show();
 				return;
 			}
 			String label = getResources().getString(R.string.update_time)
@@ -93,12 +103,13 @@ public class AllOrderFragment extends SherlockFragment {
 									| DateUtils.FORMAT_SHOW_DATE
 									| DateUtils.FORMAT_SHOW_TIME);
 			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-			fromIndex = 0;//刷新的index要改为0
-//			relativeLayout.removeAllViews();//清空数据
-//			setupShow();
-//			isFirstOpen = true;//刷新时改变状态用来显示bar
-//			mPullToRefreshScrollView.onRefreshComplete();
-			if(taskGetOrder != null && taskGetOrder.getStatus() == AsyncTask.Status.RUNNING){
+			fromIndex = 0;// 刷新的index要改为0
+			// relativeLayout.removeAllViews();//清空数据
+			// setupShow();
+			// isFirstOpen = true;//刷新时改变状态用来显示bar
+			// mPullToRefreshScrollView.onRefreshComplete();
+			if (taskGetOrder != null
+					&& taskGetOrder.getStatus() == AsyncTask.Status.RUNNING) {
 				taskGetOrder.cancel(true);
 			}
 			taskGetOrder = new TaskGetOrder();
@@ -109,8 +120,12 @@ public class AllOrderFragment extends SherlockFragment {
 		@Override
 		public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
 			// TODO Auto-generated method stub
-			if(!ConnectionDetector.isConnectingToInternet(getSherlockActivity())) {
-				Toast.makeText(getSherlockActivity(), getSherlockActivity().getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+			if (!ConnectionDetector
+					.isConnectingToInternet(getSherlockActivity())) {
+				Toast.makeText(
+						getSherlockActivity(),
+						getSherlockActivity().getResources().getString(
+								R.string.no_network), Toast.LENGTH_LONG).show();
 				return;
 			}
 			String label = getResources().getString(R.string.update_time)
@@ -121,9 +136,10 @@ public class AllOrderFragment extends SherlockFragment {
 									| DateUtils.FORMAT_SHOW_TIME);
 			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 			fromIndex += amount;
-//			setupShow();
-//			mPullToRefreshScrollView.onRefreshComplete();
-			if(taskGetOrder != null && taskGetOrder.getStatus() == AsyncTask.Status.RUNNING){
+			// setupShow();
+			// mPullToRefreshScrollView.onRefreshComplete();
+			if (taskGetOrder != null
+					&& taskGetOrder.getStatus() == AsyncTask.Status.RUNNING) {
 				taskGetOrder.cancel(true);
 			}
 			taskGetOrder = new TaskGetOrder();
@@ -147,7 +163,8 @@ public class AllOrderFragment extends SherlockFragment {
 						System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
 								| DateUtils.FORMAT_SHOW_DATE
 								| DateUtils.FORMAT_SHOW_DATE);
-		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
+				label);
 		return view;
 	}
 
@@ -155,14 +172,18 @@ public class AllOrderFragment extends SherlockFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-//		setupShow();
-//		mPullToRefreshScrollView.setPullToRefreshEnabled(true);
-//		mPullToRefreshScrollView.setRefreshing();
-		if(!ConnectionDetector.isConnectingToInternet(getSherlockActivity())) {
-			Toast.makeText(getSherlockActivity(), getSherlockActivity().getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+		// setupShow();
+		// mPullToRefreshScrollView.setPullToRefreshEnabled(true);
+		// mPullToRefreshScrollView.setRefreshing();
+		if (!ConnectionDetector.isConnectingToInternet(getSherlockActivity())) {
+			Toast.makeText(
+					getSherlockActivity(),
+					getSherlockActivity().getResources().getString(
+							R.string.no_network), Toast.LENGTH_LONG).show();
 			return;
 		}
-		if(taskGetOrder != null && taskGetOrder.getStatus() == AsyncTask.Status.RUNNING){
+		if (taskGetOrder != null
+				&& taskGetOrder.getStatus() == AsyncTask.Status.RUNNING) {
 			taskGetOrder.cancel(true);
 		}
 		taskGetOrder = new TaskGetOrder();
@@ -173,33 +194,45 @@ public class AllOrderFragment extends SherlockFragment {
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-//		setupShow();
+		// setupShow();
 	}
 
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		if(taskGetOrder != null && taskGetOrder.getStatus() == AsyncTask.Status.RUNNING){
+		if (taskGetOrder != null
+				&& taskGetOrder.getStatus() == AsyncTask.Status.RUNNING) {
 			taskGetOrder.cancel(true);
 		}
-		if(allOrderUtil != null)
+		if (allOrderUtil != null)
 			allOrderUtil.cancelTask();
 	}
-	
-	private boolean isFirstOpen = true;//是否为第一次进入该页面
+
+	private boolean isFirstOpen = true;// 是否为第一次进入该页面
 	private ArrayList<Order> orders;
 	private OrdersUtil allOrderUtil;
-	
-	private class TaskGetOrder extends AsyncTask<Void, Void, Boolean>{
+
+	private class TaskGetOrder extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			if(isFirstOpen){
-				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-				bar.setMessage(getSherlockActivity().getResources().getString(R.string.loading));
-				bar.show();
+			if (isFirstOpen) {
+				// bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+				// bar.setMessage(getSherlockActivity().getResources().getString(R.string.loading));
+				// bar.show();
+				bar = (ProgressDialog) new YLProgressDialog(
+						getSherlockActivity()).createLoadingDialog(
+						getSherlockActivity(), null);
+				bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						// TODO Auto-generated method stub
+						cancel(true);
+					}
+				});
 			}
 		}
 
@@ -209,14 +242,16 @@ public class AllOrderFragment extends SherlockFragment {
 			GetOrderList getList = new GetOrderList(getSherlockActivity());
 			try {
 				AllOrderUtil util = new AllOrderUtil();
-				
-//				String httpResultString = getList.getHttpResponse(userId,
-//						code, the_day, status, offset, limit, token);
-				String httpResultString = getList.getHttpResponse(myApplication.getUserId(), "",
+
+				// String httpResultString = getList.getHttpResponse(userId,
+				// code, the_day, status, offset, limit, token);
+				String httpResultString = getList.getHttpResponse(
+						myApplication.getUserId(), "",
 						String.valueOf(util.getOrderTime(orderTimeType)),
-						util.getOrderTpye(orderType), fromIndex + "", amount + "",
-						myApplication.getToken());
-				AnlsGetOrderData task = new AnlsGetOrderData(getSherlockActivity(), relativeLayout, orderType);
+						util.getOrderTpye(orderType), fromIndex + "", amount
+								+ "", myApplication.getToken());
+				AnlsGetOrderData task = new AnlsGetOrderData(
+						getSherlockActivity(), relativeLayout, orderType);
 				orders = task.analysisGetListJson(httpResultString);
 				return true;
 			} catch (IOException e) {
@@ -227,7 +262,8 @@ public class AllOrderFragment extends SherlockFragment {
 			} catch (NumberFormatException e) {
 				// TODO: handle exception
 				e.printStackTrace();
-				// Toast.makeText(context, "�������", Toast.LENGTH_SHORT).show();
+				// Toast.makeText(context, "�������",
+				// Toast.LENGTH_SHORT).show();
 				return false;
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -241,16 +277,18 @@ public class AllOrderFragment extends SherlockFragment {
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			 if(result){
-				 if(fromIndex == 0) relativeLayout.removeAllViews();//清空数据
-				 allOrderUtil = new OrdersUtil(getSherlockActivity(), relativeLayout);
-				 if(!orders.isEmpty()){
-					 Log.e(TAG, orderType + "type and length" + orders.size());
-					 allOrderUtil.viewCtrl(orders, orderType);
-				 }
-			 }
+			if (result) {
+				if (fromIndex == 0)
+					relativeLayout.removeAllViews();// 清空数据
+				allOrderUtil = new OrdersUtil(getSherlockActivity(),
+						relativeLayout);
+				if (!orders.isEmpty()) {
+					Log.e(TAG, orderType + "type and length" + orders.size());
+					allOrderUtil.viewCtrl(orders, orderType);
+				}
+			}
 			// Toast.makeText(context, "�ɹ�", Toast.LENGTH_SHORT).show();
-			if(isFirstOpen){
+			if (isFirstOpen) {
 				bar.dismiss();
 				isFirstOpen = false;
 			} else {
@@ -258,9 +296,9 @@ public class AllOrderFragment extends SherlockFragment {
 			}
 		}
 
-		private ProgressDialog bar = new ProgressDialog(getSherlockActivity());
+		private ProgressDialog bar;
 	}
-//	}
+	// }
 	// /**
 	// * 用来展示数据的
 	// */
