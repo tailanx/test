@@ -33,7 +33,7 @@ public class GoodsDetailFragment extends SherlockFragment{
 		Bundle bundle = getArguments();
 //		goodsId = (bundle != null) ? bundle.getString("goodsId") : defaultInt;
 		url = bundle.getString("url");
-		Log.d(TAG, "TestFragment-----onCreate---" );
+		Log.e(TAG, "TestFragment-----onCreate---" );
 		
 	}
 	
@@ -41,12 +41,14 @@ public class GoodsDetailFragment extends SherlockFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		Log.d(TAG, "TestFragment-----onCreateView");
+		
+		Log.e(TAG, "TestFragment-----onCreateView");
 		view = inflater.inflate(R.layout.goods_webview, container, false);
-		WebView webView = (WebView) view.findViewById(R.id.webview);
-		WebSettings settings = webView.getSettings(); 
+		WebView webView = (WebView) view.findViewById(R.id.webview); 
+		WebSettings settings = webView.getSettings();
 		settings.setUseWideViewPort(true); 
         settings.setLoadWithOverviewMode(true); 
+        settings.setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient(){
         	@Override
             public void onPageFinished(WebView view, String url) {
