@@ -42,8 +42,8 @@ public class SkinResultAcitivity extends Activity {
 		qqQuen = (TextView) findViewById(R.id.skin_test_last_qqname);
 		
 		Log.i("info",qq.getQqName()+"qq.getQqName()");
-		qqName.setText(qq.getQqName());
-		qqQuen.setText(qq.getQuenName());
+		qqName.setText(getResources().getString(R.string.qq_hao)+qq.getQqName());
+		qqQuen.setText(getResources().getString(R.string.qq_quen)+qq.getQuenName());
 		skinLei.setText(skinName);
 		first.setText("      " + sk.getDesc());
 		second.setText("      " + sk.getSuggest());

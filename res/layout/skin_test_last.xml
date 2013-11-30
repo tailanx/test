@@ -139,23 +139,24 @@
                     android:id="@+id/skin_test_last_quen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/skin_test_last_qq"
+                    android:layout_marginTop="26dp"
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@id/skin_test_last_qq"
                     android:textColor="@color/price_color"
                     android:textIsSelectable="true"
-                    android:textSize="18sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/skin_test_last_qqname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/skin_test_last_qq"
+                  	android:layout_below="@id/skin_test_last_quen"
+                  	android:layout_marginTop="8dp"
                     android:layout_alignLeft="@id/skin_test_last_quen"
                     android:layout_toRightOf="@id/skin_test_last_qq"
                     android:textColor="@color/price_color"
                     android:textIsSelectable="true"
-                    android:textSize="18sp" />
+                    android:textSize="14sp" />
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
