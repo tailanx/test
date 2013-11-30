@@ -12,7 +12,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -278,7 +277,7 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 			// Fragment last = BaseInfoFragment.newInstance("2");
 			Fragment last = GoodsDetailFragment.newInstance(info
 					.getProductDetailUrl());
-			Log.e(goodsId, info.getProductDetailUrl());
+
 			fragmentsList.add(emulate);
 			fragmentsList.add(baseInfo);
 			fragmentsList.add(last);
@@ -310,10 +309,7 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 	private void changeFragment(int index){
 		// 用于切换时保存fragment
 		try {
-			if(fragmentsList.get(index) == null || fragmentsList.get(currIndex) == null) {
-				Log.e(goodsId, "null");
-				return;
-			}
+			if(fragmentsList.get(index) == null || fragmentsList.get(currIndex) == null) return;
 			FragmentTransaction ft = getSupportFragmentManager()
 					.beginTransaction();
 			if (fragmentsList.get(index).isAdded())
@@ -323,11 +319,9 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 				ft.hide(fragmentsList.get(currIndex))
 				.add(R.id.goods_framelayout, fragmentsList.get(index))
 				.commit();
-			Log.e(goodsId, "ok");
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			Log.e(goodsId, "err");
 		}
 	}
 
@@ -447,7 +441,6 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 //			goodsViewPager.setCurrentItem(index);
-			Log.e(goodsId, "index" + index);
 			if(index == currIndex) return;//选中项为当前项（上次选中项） 则跳过
 			setBackgrounDefault(currIndex);//设置上次选中项的字体颜色和背景
 			setNowBackground(index);//设置选中项的字体颜色和背景

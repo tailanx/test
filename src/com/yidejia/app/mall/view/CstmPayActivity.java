@@ -12,8 +12,11 @@ import org.json.JSONObject;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Bundle;
@@ -325,6 +328,11 @@ public class CstmPayActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		try {
 			super.onCreate(savedInstanceState);
+			receiver = new InnerReceiver();
+			IntentFilter filter = new IntentFilter();
+			filter.addAction(Consts.CST_NEWADDRESS);
+			registerReceiver(receiver, filter);
+			
 			Intent intent = getIntent();
 			// final String sum = intent.getStringExtra("price");
 			sum = intent.getStringExtra("price");
@@ -418,6 +426,7 @@ public class CstmPayActivity extends SherlockActivity {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
+		unregisterReceiver(receiver);
 		closeTask();
 		closeVoucherTask();
 	}
@@ -450,18 +459,18 @@ public class CstmPayActivity extends SherlockActivity {
 				try {
 					httpResponse = voucher.getHttpResponse(myApplication.getUserId(), myApplication.getToken());
 					try {
-						JSONObject httpObject = new JSONObject(httpResponse);
-						int code = httpObject.getInt("code");
-						if(code == 1){
-							String response = httpObject.getString("response");
-							JSONObject resObject = new JSONObject(response);
-							voucherString1 = resObject.getString("can_use_score");
-							return true;
-						}
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+					JSONObject httpObject = new JSONObject(httpResponse);
+					int code = httpObject.getInt("code");
+					if(code == 1){
+						String response = httpObject.getString("response");
+						JSONObject resObject = new JSONObject(response);
+						voucherString1 = resObject.getString("can_use_score");
+						return true;
 					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				} catch (TimeOutEx e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -580,7 +589,7 @@ public class CstmPayActivity extends SherlockActivity {
 //				closeTask();
 //			}
 //		});
-
+			
 //		addressDataManage = new AddressDataManage(this);
 		go_pay_scrollView = (ScrollView) findViewById(R.id.go_pay_scrollView);
 		setupShow();
@@ -591,16 +600,19 @@ public class CstmPayActivity extends SherlockActivity {
 
 		reLayout = (RelativeLayout) findViewById(R.id.go_pay_relative);
 		addressRelative = (RelativeLayout) findViewById(R.id.go_pay_relativelayout);
+		
 		// 地址增加监听事件
 		addressRelative.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
+				if(!getUserAddressList.getAddresses().isEmpty()){
 				Intent intent = new Intent(CstmPayActivity.this,
 						AddressActivity.class);
 				CstmPayActivity.this.startActivityForResult(intent,
 						Consts.AddressRequestCode);
+				}
 			}
 		});
 		// PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
@@ -759,14 +771,14 @@ public class CstmPayActivity extends SherlockActivity {
 				String httpresp;
 				try {
 					httpresp = saveOrder.getHttpResponse(myApplication.getUserId(), "0",
-								recipientId, "", jifen + "", expressNum, postMethod,
-								peiSongCenter, goods, comment.getText().toString(),// 这里的comment.getText().toString()很重要
-								pay_type, myApplication.getToken());
-					boolean issuccess = saveOrder.analysisHttpResp(httpresp);
-					orderCode = saveOrder.getOrderCode();
-					resp_code = saveOrder.getResp_code();
-					tn = saveOrder.getTn();
-					return issuccess;
+							recipientId, "", jifen + "", expressNum, postMethod,
+							peiSongCenter, goods, comment.getText().toString(),// 这里的comment.getText().toString()很重要
+							pay_type, myApplication.getToken());
+				boolean issuccess = saveOrder.analysisHttpResp(httpresp);
+				orderCode = saveOrder.getOrderCode();
+				resp_code = saveOrder.getResp_code();
+				tn = saveOrder.getTn();
+				return issuccess;
 				} catch (TimeOutEx e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -876,25 +888,25 @@ public class CstmPayActivity extends SherlockActivity {
 			try {
 				
 				try {
-					httpresp = getUserAddressList.getAddressHttpresp("customer_id%3D"+myApplication.getUserId()+"+and+is_default%3D%27y%27+and+valid_flag%3D%27y%27", 0 + "", 1 + "");
-					issuccess = getUserAddressList.analysis(httpresp);
-					mList = getUserAddressList.getAddresses();
-					Addresses addresses;
-					if(issuccess && mList != null && !mList.isEmpty()) {
+				httpresp = getUserAddressList.getAddressHttpresp("customer_id%3D"+myApplication.getUserId()+"+and+is_default%3D%27y%27+and+valid_flag%3D%27y%27", 0 + "", 1 + "");
+				issuccess = getUserAddressList.analysis(httpresp);
+				mList = getUserAddressList.getAddresses();
+				Addresses addresses;
+				if(issuccess && mList != null && !mList.isEmpty()) {
 //					return issuccess;
 //					if()
 						addresses = mList.get(0);
 //					else issuccess = false;
-					} else {
-						httpresp = getUserAddressList.getAddressHttpresp(
-								"customer_id%3D" + myApplication.getUserId()
-								+ "+and+valid_flag%3D%27y%27", 0 + "",
-								1 + "");
-						issuccess = getUserAddressList.analysis(httpresp);
-						addArray = getUserAddressList.getAddresses();
-						if(issuccess && addArray != null && !addArray.isEmpty())addresses = addArray.get(0);
-						else return issuccess;
-					}
+				} else {
+					httpresp = getUserAddressList.getAddressHttpresp(
+							"customer_id%3D" + myApplication.getUserId()
+									+ "+and+valid_flag%3D%27y%27", 0 + "",
+							1 + "");
+					issuccess = getUserAddressList.analysis(httpresp);
+					addArray = getUserAddressList.getAddresses();
+					if(issuccess && addArray != null && !addArray.isEmpty())addresses = addArray.get(0);
+					else return issuccess;
+				}
 				} catch (TimeOutEx e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -948,8 +960,8 @@ public class CstmPayActivity extends SherlockActivity {
 									.getString(R.string.time_out),
 							Toast.LENGTH_SHORT).show();
 					isTimeout = false;
-				}
-			}
+			} 
+		}
 		}
 		
 	}
@@ -957,7 +969,7 @@ public class CstmPayActivity extends SherlockActivity {
 	private ArrayList<Addresses> mList;
 	private ArrayList<Addresses> addArray;
 	private AlertDialog addresssDialog;
-	
+
 	/**
 	 * 地址和快递费用，配送中心
 	 */
@@ -985,7 +997,7 @@ public class CstmPayActivity extends SherlockActivity {
 //							CstmPayActivity.this.startActivity(intent);
 //						}
 //					}).setNegativeButton(getResources().getString(R.string.cancel), null).create();
-					
+		
 			// Log.i("info", mList.size() + " mlist");
 			if (mList != null && !mList.isEmpty()) {
 //				ArrayList<Addresses> addArray = addressDataManage
@@ -1011,7 +1023,7 @@ public class CstmPayActivity extends SherlockActivity {
 					Bundle bundle = new Bundle();
 					bundle.putSerializable("editaddress", null);
 					intent.putExtras(bundle);
-					CstmPayActivity.this.startActivity(intent);
+					CstmPayActivity.this.startActivityForResult(intent, Consts.NEW_ADDRESS_REQUEST);
 					return;
 				}
 			}
@@ -1175,6 +1187,8 @@ public class CstmPayActivity extends SherlockActivity {
 
 //		Log.i("info", requestCode + "   requestCode");
 //		Log.i("info", resultCode + "   resultCode");
+
+		
 		if (data == null) {
 			return;
 		}
@@ -1204,7 +1218,7 @@ public class CstmPayActivity extends SherlockActivity {
 				&& resultCode == Consts.CstmPayActivity_Response) {
 
 			carts = (ArrayList<Cart>) data.getSerializableExtra("carts");
-			Log.i("voucher", carts.size() + "    carts.size()11");
+			
 
 			voucher = data.getFloatExtra("voucher", -1);
 			Log.i("voucher", jifen + "    jifen");
@@ -1214,7 +1228,10 @@ public class CstmPayActivity extends SherlockActivity {
 			// Log.i("voucher", voucher + "  voucher");
 			// isCartActivity = data.getStringExtra("cartActivity");
 			show(carts, false);
-		} else {
+		} else if(requestCode == Consts.NEW_ADDRESS_REQUEST && resultCode==Consts.NEW_ADDRESS_RESPONSE){
+			
+		
+			show(carts, false);
 			// String msg = "";
 			// /*
 			// * 支付控件返回字符串:success、fail、cancel 分别代表支付成功，支付失败，支付取消
@@ -1252,7 +1269,17 @@ public class CstmPayActivity extends SherlockActivity {
 			// builder.create().show();
 		}
 	}
-
 	private float voucher;
+	public class InnerReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			String action = intent.getAction();
+			Log.i("voucher", action + "    action");
+			if (Consts.CST_NEWADDRESS.equals(action)) {
+				show(carts, false);
+			}
+		}
+	}
 
 }

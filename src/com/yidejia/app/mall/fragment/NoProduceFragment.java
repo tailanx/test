@@ -56,7 +56,7 @@ public class NoProduceFragment extends SherlockFragment {
 		
 		view = inflater.inflate(R.layout.no_produce,container,false);
 		mButton = (Button) view.findViewById(R.id.no_produce_button);
-		Log.e("NoProduceFragment", "NoProduceFragment");
+		Log.e("NoProduceFragment", "NoProduceFragment1");
 		mButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

@@ -295,5 +295,6 @@
     <string name="no_address_title">地址信息</string>
     <string name="no_address_content">亲，您还未填写收货地址，是否新增一个</string>
     <string name="time_out">连接超时,请重试!</string>
-
+    <string name="qq_hao">QQ:</string>
+ <string name="qq_quen">QQ群:</string>
 </resources>

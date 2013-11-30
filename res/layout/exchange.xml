@@ -139,29 +139,31 @@
                         android:prompt="@string/tip" />
                 </TableRow>
             </TableLayout>
-
+<!-- 
             <ScrollView
-                android:id="@+id/go_pay_pinglun_scrollView"
-                android:layout_width="wrap_content"
+                android:id="@+id/go_pay_pinglun_scrollView_exchange"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/forgot_password" >
+               
+                android:background="@drawable/comment" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" >
+                </LinearLayout>
+            </ScrollView>
+ -->
 
                     <EditText
                         android:id="@+id/go_pay_leave_message"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/account_bg"
+                        android:layout_marginTop="8dp"
                         android:editable="true"
-                        android:hint="退货原因描述.........                                                                                                                                             "
+                        android:hint="   退货原因描述.........                                                                                                                                             "
                         android:padding="10dp"
-                        android:textSize="10sp" />
-                </LinearLayout>
-            </ScrollView>
+                        android:textSize="16sp" />
         </LinearLayout>
     </ScrollView>
 

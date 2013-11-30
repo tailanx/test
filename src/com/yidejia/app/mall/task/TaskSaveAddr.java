@@ -4,11 +4,11 @@ import java.io.IOException;
 
 
 
-
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.exception.TimeOutEx;
 //import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.net.address.SaveUserAddress;
+import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DefinalDate;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
@@ -80,11 +80,11 @@ public class TaskSaveAddr {
 				String httpresp;
 				try {
 					httpresp = saveUserAddress.saveAddress(userId, nameString, handsetString, shengString, shiString, quString, areaString, recipient_id, token);
-					boolean issuccess = saveUserAddress.analysicSaveJson(httpresp);
-					addressId = saveUserAddress.getRecipient_id();
-					if(addressId == null || "".equals(addressId)) addressId = recipient_id;
-					message = saveUserAddress.getIsSuccessString();
-					return issuccess;
+				boolean issuccess = saveUserAddress.analysicSaveJson(httpresp);
+				addressId = saveUserAddress.getRecipient_id();
+				if(addressId == null || "".equals(addressId)) addressId = recipient_id;
+				message = saveUserAddress.getIsSuccessString();
+				return issuccess;
 				} catch (TimeOutEx e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -110,7 +110,7 @@ public class TaskSaveAddr {
 				public void onCancel(DialogInterface dialog) {
 					// TODO Auto-generated method stub
 					cancel(true);
-				}
+		}
 			});
 		}
 
@@ -151,7 +151,10 @@ public class TaskSaveAddr {
 //		Bundle bundle = new Bundle();
 //		bundle.putSerializable("newaddress", addresses);
 //		intent.putExtras(bundle);
+//		activity.setResult(Consts.NEW_ADDRESS_RESPONSE,intent);
 		activity.setResult(DefinalDate.responcode, intent);
+		intent.setAction(Consts.CST_NEWADDRESS);
+		activity.sendBroadcast(intent);
 		activity.finish();
 	}
 

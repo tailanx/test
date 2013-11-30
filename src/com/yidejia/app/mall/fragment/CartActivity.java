@@ -542,6 +542,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 					
 				} else {
 					layout.removeAllViews();
+					Log.e("NoProduceFragment", "DELETE_CART2");
 					CartUtil cartUtil = new CartUtil(getSherlockActivity(),
 							layout, counTextView, sumTextView, mBox);
 					cartUtil.AllComment();
@@ -552,6 +553,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 				else if (Consts.UPDATE_CHANGE.equals(action)) {
 					
 				layout.removeAllViews();
+				Log.e("NoProduceFragment", "DELETE_CART1");
 //				CartUtil.list.clear();
 //				sumCart = dataManage.getCartAmount();
 				
