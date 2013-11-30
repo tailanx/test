@@ -67,14 +67,7 @@ public class SearchFragment extends SherlockFragment {
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		View view = inflater.inflate(R.layout.activity_search_item_list, container, false);
-		switch (search) {
-		case 2:		
-			
-			break;
-
-		default:
-			break;
-		}
+		
 //		getSherlockActivity().getSupportActionBar().setCustomView(R.layout.actionbar_search);
 		searchListView = (ListView) view.findViewById(R.id.search_result_list);
 		search_item_refresh_view = (RelativeLayout) view.findViewById(R.id.search_item_refresh_view);
@@ -114,6 +107,17 @@ public class SearchFragment extends SherlockFragment {
 			}
 		});
 		*/
+		
+		if(!ConnectionDetector.isConnectingToInternet(getSherlockActivity())){
+//			Toast.makeText(getSherlockActivity(), getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+			searchListView.setVisibility(View.GONE);
+			search_item_refresh_view.setVisibility(View.VISIBLE);
+		} else {
+			closeTask();
+			task = new Task();
+			task.execute();
+		}
+		
 		return view;
 	}
 
@@ -129,16 +133,15 @@ public class SearchFragment extends SherlockFragment {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		Log.d(TAG, "TestFragment-----onActivityCreated");
-		if(!ConnectionDetector.isConnectingToInternet(getSherlockActivity())){
-//			Toast.makeText(getSherlockActivity(), getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
-			searchListView.setVisibility(View.GONE);
-			search_item_refresh_view.setVisibility(View.VISIBLE);
-		} else {
-			closeTask();
-			task = new Task();
-			task.execute();
-		}
-		bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+		
+	}
+
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		Log.d(TAG, "TestFragment-----onStart");
+bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
 			
 			@Override
 			public void onCancel(DialogInterface dialog) {
@@ -160,13 +163,6 @@ public class SearchFragment extends SherlockFragment {
 				task.execute();
 			}
 		});
-	}
-
-	@Override
-	public void onStart() {
-		// TODO Auto-generated method stub
-		super.onStart();
-		Log.d(TAG, "TestFragment-----onStart");
 //		if(functions == null || functions.isEmpty()){
 //			closeTask();
 //			task = new Task();

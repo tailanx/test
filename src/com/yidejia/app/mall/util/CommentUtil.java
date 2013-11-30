@@ -161,6 +161,8 @@ public class CommentUtil {
 			if(isFirstIn){
 				bar.dismiss();
 				isFirstIn = false;
+			} else {
+				mPullToRefreshScrollView.onRefreshComplete();
 			}
 			issuccess = result;
 			Log.e(CommentUtil.class.getName(), "ishasret:"+isHasRet + "and isnomore"+isNoMore);

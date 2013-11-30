@@ -52,7 +52,7 @@ android:uiOptions="splitActionBarWhenNarrow"
         <activity
             android:name="com.yidejia.app.mall.SearchActivity"
             android:uiOptions="splitActionBarWhenNarrow"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="stateVisible" >
         </activity>
         <activity
             android:name="com.yidejia.app.mall.ComposeActivity"

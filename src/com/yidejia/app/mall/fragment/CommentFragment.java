@@ -131,7 +131,7 @@ public class CommentFragment extends SherlockFragment  {
 			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 			fromIndex += amount;
 			setupShow();
-			mPullToRefreshScrollView.onRefreshComplete();
+//			mPullToRefreshScrollView.onRefreshComplete();
 		}
 		
 	};

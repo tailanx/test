@@ -86,6 +86,7 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 			}
 		});
 		*/
+		autoCompleteTextView.requestFocus();
 		autoCompleteTextView.setOnEditorActionListener(new OnEditorActionListener() {
 			
 			@Override
