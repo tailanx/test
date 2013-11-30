@@ -17,11 +17,13 @@ public class GoodsDetailFragment extends SherlockFragment{
 	private String TAG = GoodsDetailFragment.class.getName();
 	private String url;
 	private View view;
+	private WebView webView;
 	
 	public static GoodsDetailFragment newInstance(String urlString){
 		GoodsDetailFragment goodsDetailFragment = new GoodsDetailFragment();
 		Bundle bundle = new Bundle();
 		bundle.putString("url", urlString);
+		Log.e("GoodsDetailFragment", urlString);
 		goodsDetailFragment.setArguments(bundle);
 		return goodsDetailFragment;
 	}
@@ -31,9 +33,10 @@ public class GoodsDetailFragment extends SherlockFragment{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		Bundle bundle = getArguments();
-//		goodsId = (bundle != null) ? bundle.getString("goodsId") : defaultInt;
-		url = bundle.getString("url");
+		url = (bundle != null) ? bundle.getString("url") : "";
+//		url = bundle.getString("url");
 		Log.d(TAG, "TestFragment-----onCreate---" );
+		Log.d(TAG, url );
 		
 	}
 	
@@ -43,11 +46,20 @@ public class GoodsDetailFragment extends SherlockFragment{
 		// TODO Auto-generated method stub
 		Log.d(TAG, "TestFragment-----onCreateView");
 		view = inflater.inflate(R.layout.goods_webview, container, false);
-		WebView webView = (WebView) view.findViewById(R.id.webview);
+		webView = (WebView) view.findViewById(R.id.webview);
 		WebSettings settings = webView.getSettings(); 
-		settings.setUseWideViewPort(true); 
+		settings.setUseWideViewPort(false); 
         settings.setLoadWithOverviewMode(true); 
-        webView.setWebViewClient(new WebViewClient(){
+        settings.setJavaScriptEnabled(true);
+		return view;
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+		webView.setWebViewClient(new WebViewClient(){
         	@Override
             public void onPageFinished(WebView view, String url) {
             };
@@ -61,6 +73,7 @@ public class GoodsDetailFragment extends SherlockFragment{
         	
         });
 		webView.loadUrl(url);
-		return view;
 	}
+	
+	
 }
