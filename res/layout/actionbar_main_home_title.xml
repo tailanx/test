@@ -5,6 +5,7 @@
     android:layout_gravity="right"
     android:background="@drawable/topbg"
     android:clickable="false"
+    android:focusable="false" 
     android:orientation="horizontal" >
 
     <ImageView
@@ -24,8 +25,9 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_margin="6dp"
-        android:background="@drawable/search_text_bg"
+        android:background="@drawable/search_image_bg"
         android:clickable="true"
+        android:focusable="true"
         />
 
     <!-- <EditText

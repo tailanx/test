@@ -18,8 +18,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
@@ -370,13 +372,18 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 				if (getCurrFragment(id).isAdded())
 					ft.hide(getCurrFragment(currentIndex))
 							.show(getCurrFragment(id)).commit();
-				else
+				else {
+					if(id != 0 && id != 1 && id != 2)
 					ft.hide(getCurrFragment(currentIndex))
 							.replace(R.id.main_fragment, getCurrFragment(id))
 							.commit();// .addToBackStack(fragmentTag[id])
+					else {
+						ft.hide(getCurrFragment(currentIndex)).add(R.id.main_fragment, getCurrFragment(id)).commit();
+					}
 				// ft.replace(R.id.main_fragment,
 				// getCurrFragment(id)).commit();
 				// currFragment = newFragment;
+				}
 			}
 			currentIndex = id;
 		}
@@ -478,10 +485,10 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 
 	private void setActionBarConfig() {
 		getSupportActionBar().setCustomView(R.layout.actionbar_main_home_title);
-		getSupportActionBar().setBackgroundDrawable(
-				getResources().getDrawable(R.drawable.topbg));
+//		getSupportActionBar().setBackgroundDrawable(
+//				getResources().getDrawable(R.drawable.topbg));
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
+//		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		// invalidateOptionsMenu();
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -489,27 +496,23 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		// getSupportActionBar().setDisplayOptions(getSupportActionBar().DISPLAY_SHOW_HOME,
 		// getSupportActionBar().DISPLAY_SHOW_HOME |
 		// getSupportActionBar().DISPLAY_USE_LOGO);
-		getSupportActionBar().setIcon(R.drawable.left_menu);
-		getSupportActionBar().setNavigationMode(
-				ActionBar.NAVIGATION_MODE_STANDARD);
+//		getSupportActionBar().setIcon(R.drawable.left_menu);
+//		getSupportActionBar().setNavigationMode(
+//				ActionBar.NAVIGATION_MODE_STANDARD);
 		// getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		// getSupportActionBar().setHomeButtonEnabled(true);
 		ImageView searchEditText = (ImageView) findViewById(R.id.main_home_title_search);
 		// searchEditText.setSelected(false);
 //		searchEditText.clearFocus();
 //		searchEditText.setCursorVisible(false);
-		// searchEditText.setOnTouchListener(go2searchListener);
+//		 searchEditText.setOnTouchListener(go2searchListener);
+		searchEditText.requestFocus();
 		searchEditText.setOnClickListener(go2SearchListener2);
 	}
 
-	/*
-	 * private OnTouchListener go2searchListener = new OnTouchListener() {
-	 * 
-	 * @Override public boolean onTouch(View v, MotionEvent event) { // TODO
-	 * Auto-generated method stub Intent intent = new
-	 * Intent(MainFragmentActivity.this, SearchActivity.class);
-	 * startActivity(intent); return true; } };
-	 */
+	
+	 
+	 
 	public static ArrayList<Cart> cartList;
 	private OnClickListener goPay = new OnClickListener() {
 		@Override
@@ -563,7 +566,6 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			Log.e("click", "click");
 			Intent intent = new Intent(MainFragmentActivity.this,
 					SearchActivity.class);
 			startActivity(intent);
