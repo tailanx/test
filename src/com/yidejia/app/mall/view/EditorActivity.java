@@ -121,8 +121,10 @@ public class EditorActivity extends SherlockActivity {
 	int width;
 	int height;
 	private TextView phoneNumber;
+	private TextView versionNameTextView;
 	
 	private Check4Update check4Update;
+	private String currVersion = "";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -140,7 +142,7 @@ public class EditorActivity extends SherlockActivity {
 //		option = (RelativeLayout) findViewById(R.id.editor_linearLayout2);
 //		option.setVisibility(View.GONE);
 		clear = (RelativeLayout) findViewById(R.id.editor_linearLayout3);
-
+		
 		about = (RelativeLayout) findViewById(R.id.editor_linearLayout4);
 		phone = (RelativeLayout) findViewById(R.id.editor_linearLayout5);
 		recommended = (RelativeLayout) findViewById(R.id.editor_linearLayout6);
@@ -156,7 +158,12 @@ public class EditorActivity extends SherlockActivity {
 
 		});
 		
+		versionNameTextView = (TextView) findViewById(R.id.editor_current_version);
+		
 		check4Update = new Check4Update(EditorActivity.this);
+		currVersion = check4Update.getVersionName();
+		
+		versionNameTextView.setText(currVersion);
 		
 		check4updateLayout = (RelativeLayout) findViewById(R.id.editor_linearLayout7);
 		check4updateLayout.setOnClickListener(new View.OnClickListener() {
