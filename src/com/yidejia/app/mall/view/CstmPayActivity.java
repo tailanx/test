@@ -1231,7 +1231,7 @@ public class CstmPayActivity extends SherlockActivity {
 		} else if(requestCode == Consts.NEW_ADDRESS_REQUEST && resultCode==Consts.NEW_ADDRESS_RESPONSE){
 			
 		
-			show(carts, false);
+//			show(carts, false);
 			// String msg = "";
 			// /*
 			// * 支付控件返回字符串:success、fail、cancel 分别代表支付成功，支付失败，支付取消

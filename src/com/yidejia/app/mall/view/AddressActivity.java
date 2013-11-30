@@ -36,10 +36,9 @@ import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class AddressActivity extends SherlockActivity {
 
-
 	private String TAG = AddressActivity.class.getName();// log
 	private AddressAdapter adapter;
-//	private AddressDataManage addressDataManage;
+	// private AddressDataManage addressDataManage;
 	private ListView listView;
 	private ArrayList<Addresses> mAddresses;
 	private MyApplication myApplication;
@@ -52,28 +51,33 @@ public class AddressActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setActionbar();
 		setContentView(R.layout.address_management);
-		
+
 		pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.address_item_main_refresh_scrollview111);
-		
+
 		pullToRefreshListView.setOnRefreshListener(listener2);
-		
-		String label = getResources().getString(R.string.update_time)+DateUtils.formatDateTime(this, System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL|DateUtils.FORMAT_SHOW_DATE|DateUtils.FORMAT_SHOW_TIME);
-		pullToRefreshListView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-		
-		
+
+		String label = getResources().getString(R.string.update_time)
+				+ DateUtils.formatDateTime(this, System.currentTimeMillis(),
+						DateUtils.FORMAT_ABBREV_ALL
+								| DateUtils.FORMAT_SHOW_DATE
+								| DateUtils.FORMAT_SHOW_TIME);
+		pullToRefreshListView.getLoadingLayoutProxy()
+				.setLastUpdatedLabel(label);
+
 		listView = pullToRefreshListView.getRefreshableView();
-//		layout = (LinearLayout) findViewById(R.id.address_management_relative2);
-//		addressDataManage = new AddressDataManage(AddressActivity.this);
-		
+		// layout = (LinearLayout)
+		// findViewById(R.id.address_management_relative2);
+		// addressDataManage = new AddressDataManage(AddressActivity.this);
+
 		myApplication = (MyApplication) getApplication();
 		userId = myApplication.getUserId();
 		mAddresses = new ArrayList<Addresses>();
-//		mAddresses = addressDataManage.getAddressesArray(
-//				userId, fromIndex, acount);
+		// mAddresses = addressDataManage.getAddressesArray(
+		// userId, fromIndex, acount);
 		adapter = new AddressAdapter(AddressActivity.this, mAddresses);
 		listView.setAdapter(adapter);
-//		Utility.setListViewHeightBasedOnChildren(listView);
-		
+		// Utility.setListViewHeightBasedOnChildren(listView);
+
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
@@ -90,24 +94,21 @@ public class AddressActivity extends SherlockActivity {
 				AddressActivity.this.finish();
 			}
 		});
-		
+
 		bar = new ProgressDialog(this);
 		getUserAddressList = new GetUserAddressList();
-		
+
 		closeTask();
 		task = new Task();
 		task.execute();
 	}
-	
-	
-	
+
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		closeTask();
 	}
-
 
 	private OnRefreshListener2<ListView> listener2 = new OnRefreshListener2<ListView>() {
 
@@ -129,36 +130,35 @@ public class AddressActivity extends SherlockActivity {
 			task.execute();
 		}
 	};
-	
 
 	private int fromIndex = 0;
 	private int acount = 10;
-	/*private OnRefreshListener<ListView> listener = new OnRefreshListener<ListView>() {
 
-		@Override
-		public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-			// TODO Auto-generated method stub
-			String label = getResources().getString(R.string.update_time)+DateUtils.formatDateTime(AddressActivity.this, System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME|DateUtils.FORMAT_SHOW_DATE|DateUtils.FORMAT_ABBREV_ALL);
-			pullToRefreshListView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-			fromIndex = 0;
-			AddressDataManage dataManage = new AddressDataManage(AddressActivity.this);
-			ArrayList<Addresses> addressesList = dataManage.getAddressesArray(myApplication.getUserId(), fromIndex, acount);
-			pullToRefreshListView.onRefreshComplete();
-			if(addressesList.isEmpty()){
-				if(mAddresses.isEmpty()){
-					Toast.makeText(AddressActivity.this, getResources().getString(R.string.load_addresses), Toast.LENGTH_SHORT).show();
-				}else{
-					Toast.makeText(AddressActivity.this, getResources().getString(R.string.nomore), Toast.LENGTH_SHORT).show();
-				}
-//				Toast.makeText(AddressActivity.this, t, duration).show();
-			}else{
-				mAddresses.clear();
-				mAddresses.addAll(addressesList);
-				adapter.notifyDataSetChanged();
-			}
-//			setupShow();
-		}
-	};*/
+	/*
+	 * private OnRefreshListener<ListView> listener = new
+	 * OnRefreshListener<ListView>() {
+	 * 
+	 * @Override public void onRefresh(PullToRefreshBase<ListView> refreshView)
+	 * { // TODO Auto-generated method stub String label =
+	 * getResources().getString
+	 * (R.string.update_time)+DateUtils.formatDateTime(AddressActivity.this,
+	 * System.currentTimeMillis(),
+	 * DateUtils.FORMAT_SHOW_TIME|DateUtils.FORMAT_SHOW_DATE
+	 * |DateUtils.FORMAT_ABBREV_ALL);
+	 * pullToRefreshListView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+	 * fromIndex = 0; AddressDataManage dataManage = new
+	 * AddressDataManage(AddressActivity.this); ArrayList<Addresses>
+	 * addressesList = dataManage.getAddressesArray(myApplication.getUserId(),
+	 * fromIndex, acount); pullToRefreshListView.onRefreshComplete();
+	 * if(addressesList.isEmpty()){ if(mAddresses.isEmpty()){
+	 * Toast.makeText(AddressActivity.this,
+	 * getResources().getString(R.string.load_addresses),
+	 * Toast.LENGTH_SHORT).show(); }else{ Toast.makeText(AddressActivity.this,
+	 * getResources().getString(R.string.nomore), Toast.LENGTH_SHORT).show(); }
+	 * // Toast.makeText(AddressActivity.this, t, duration).show(); }else{
+	 * mAddresses.clear(); mAddresses.addAll(addressesList);
+	 * adapter.notifyDataSetChanged(); } // setupShow(); } };
+	 */
 
 	private void setActionbar() {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -202,9 +202,9 @@ public class AddressActivity extends SherlockActivity {
 		Log.e(TAG, titleTextView.getText().toString());
 	}
 
-//	public void updateView(ArrayList<Addresses> musics) {
-//		adapter.changeData(musics);
-//	}
+	// public void updateView(ArrayList<Addresses> musics) {
+	// adapter.changeData(musics);
+	// }
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -212,27 +212,30 @@ public class AddressActivity extends SherlockActivity {
 			if (requestCode == DefinalDate.requestcode
 					&& resultCode == DefinalDate.responcode) {
 				try {
-//					Bundle bundle = data.getExtras();
-//					Addresses addresses = (Addresses) bundle
-//							.getSerializable("newaddress");
-					// Log.i(TAG, TAG+"onResume");
-					/*mAddresses.add(addresses);
-					adapter.notifyDataSetChanged();
-					*/
-//					if(fromIndex != 0){ 
-						fromIndex = 0;
+					// Bundle bundle = data.getExtras();
+					// Addresses addresses = (Addresses) bundle
+					// .getSerializable("newaddress");
+					Log.i(TAG, TAG + "onResume");
+					/*
+					 * mAddresses.add(addresses);
+					 * adapter.notifyDataSetChanged();
+					 */
+					// if(fromIndex != 0){
+					fromIndex = 0;
+
 					pullToRefreshListView.setRefreshing();
-					pullToRefreshListView.onRefreshComplete();
-//					}
-					
+//					pullToRefreshListView.onRefreshComplete();
+					// adapter.notifyDataSetChanged();
+					// }
+
 					// adapter.mAddresses.clear();
 					// AddressDataManage addressDataManage1= new
 					// AddressDataManage(AddressActivity.this);
 					// adapter.mAddresses =
 					// addressDataManage1.getAddressesArray(myApplication.getUserId(),
 					// fromIndex, acount);
-//										Utility.setListViewHeightBasedOnChildren(listView);
-//					listView.setAdapter(adapter);
+					// Utility.setListViewHeightBasedOnChildren(listView);
+					// listView.setAdapter(adapter);
 					// new AddressUtil(AddressActivity.this,
 					// layout).addAddresses(data);
 					// layout.invalidate();
@@ -246,15 +249,16 @@ public class AddressActivity extends SherlockActivity {
 
 			} else if (requestCode == DefinalDate.requestcode
 					&& resultCode == DefinalDate.responcode1) {
-//				listView.removeAllViews();
-//				ArrayList<Addresses> addresses =  mAddresses = addressDataManage.getAddressesArray(
-//						myApplication.getUserId(), fromIndex, acount);
-//				adapter.changeData(addresses);
-//				adapter.notifyDataSetChanged();
-//				new AddressUtil(AddressActivity.this, layout)
-//						.updateAddresses(data);
-//				layout.invalidate();
-				
+				// listView.removeAllViews();
+				// ArrayList<Addresses> addresses = mAddresses =
+				// addressDataManage.getAddressesArray(
+				// myApplication.getUserId(), fromIndex, acount);
+				// adapter.changeData(addresses);
+				// adapter.notifyDataSetChanged();
+				// new AddressUtil(AddressActivity.this, layout)
+				// .updateAddresses(data);
+				// layout.invalidate();
+
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -265,26 +269,28 @@ public class AddressActivity extends SherlockActivity {
 
 		}
 	}
-	
-	
+
 	private ProgressDialog bar;
 	private Task task;
 	private GetUserAddressList getUserAddressList;
 	private ArrayList<Addresses> addresses;
 	private boolean isNomore = false;
 	private boolean isFirstIn = true;
-	
-	private class Task extends AsyncTask<Void, Void, Boolean>{
+
+	private class Task extends AsyncTask<Void, Void, Boolean> {
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 			try {
-				String httpresp = getUserAddressList.getAddressHttpresp("customer_id%3D"+userId+"+and+valid_flag%3D%27y%27", fromIndex + "", acount + "");
+				String httpresp = getUserAddressList
+						.getAddressHttpresp("customer_id%3D" + userId
+								+ "+and+valid_flag%3D%27y%27", fromIndex + "",
+								acount + "");
 				boolean issuccess = getUserAddressList.analysis(httpresp);
-//				if(addresses != null && !addresses.isEmpty()){
-//					addresses.clear();
-//				}
+				// if(addresses != null && !addresses.isEmpty()){
+				// addresses.clear();
+				// }
 				addresses = getUserAddressList.getAddresses();
 				isNomore = getUserAddressList.getIsNoMore();
 				return issuccess;
@@ -303,20 +309,21 @@ public class AddressActivity extends SherlockActivity {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			if (isFirstIn) {
-//				bar.setCancelable(true);
-//				bar.setMessage(getResources().getString(R.string.loading));
-//				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//				bar.show();
-				bar = (ProgressDialog) new YLProgressDialog(AddressActivity.this)
-				.createLoadingDialog(AddressActivity.this, null);
-		bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				// bar.setCancelable(true);
+				// bar.setMessage(getResources().getString(R.string.loading));
+				// bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+				// bar.show();
+				bar = (ProgressDialog) new YLProgressDialog(
+						AddressActivity.this).createLoadingDialog(
+						AddressActivity.this, null);
+				bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
-			@Override
-			public void onCancel(DialogInterface dialog) {
-				// TODO Auto-generated method stub
-				cancel(true);
-			}
-		});
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						// TODO Auto-generated method stub
+						cancel(true);
+					}
+				});
 			}
 		}
 
@@ -330,17 +337,20 @@ public class AddressActivity extends SherlockActivity {
 			} else {
 				pullToRefreshListView.onRefreshComplete();
 			}
-			if(!result) {
-				if(fromIndex != 0) {
+			if (!result) {
+				if (fromIndex != 0) {
 					fromIndex -= acount;
 				}
 			} else {
-				if(!mAddresses.isEmpty() && isNomore) {
-					Toast.makeText(AddressActivity.this, getResources().getString(R.string.nomore), Toast.LENGTH_LONG).show();
+				if (!mAddresses.isEmpty() && isNomore) {
+					Toast.makeText(AddressActivity.this,
+							getResources().getString(R.string.nomore),
+							Toast.LENGTH_LONG).show();
 					isNomore = false;
 					return;
 				}
-				if(mAddresses != null && !mAddresses.isEmpty() && fromIndex == 0){
+				if (mAddresses != null && !mAddresses.isEmpty()
+						&& fromIndex == 0) {
 					mAddresses.clear();
 				}
 				Log.e(TAG, "addresses size " + addresses.size());
@@ -349,11 +359,12 @@ public class AddressActivity extends SherlockActivity {
 				adapter.notifyDataSetChanged();
 			}
 		}
-		
+
 	}
-	
-	private void closeTask(){
-		if(task != null && task.getStatus().RUNNING == AsyncTask.Status.RUNNING){
+
+	private void closeTask() {
+		if (task != null
+				&& task.getStatus().RUNNING == AsyncTask.Status.RUNNING) {
 			task.cancel(true);
 		}
 	}

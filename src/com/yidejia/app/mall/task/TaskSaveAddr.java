@@ -147,7 +147,7 @@ public class TaskSaveAddr {
 //		addresses.setAddress(areaString);
 //		addresses.setHandset(handsetString);
 //		addresses.setAddressId(addressId);
-		Intent intent = activity.getIntent();
+		Intent intent = new Intent();
 //		Bundle bundle = new Bundle();
 //		bundle.putSerializable("newaddress", addresses);
 //		intent.putExtras(bundle);

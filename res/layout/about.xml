@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/erweima" />
+                android:src="@drawable/erweima1" />
 
             <TextView
                 android:layout_width="wrap_content"
