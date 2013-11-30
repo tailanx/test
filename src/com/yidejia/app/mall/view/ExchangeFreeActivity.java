@@ -64,6 +64,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 	private ArrayList<Cart> mArrayList;
 	private String isString;
 	private AlertDialog dialog;
+	private float jifen;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +75,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 		// cartActivity = new CartActivity();
 		Intent intent = getIntent();
 		sumprice = intent.getStringExtra("price");
-		float jifen = intent.getFloatExtra("voucher", -1);
+		jifen = intent.getFloatExtra("voucher", -1);
 		isString = intent.getStringExtra("cartActivity");
 //		Log.i("info", jifen +"  jifen");
 		mArrayList = (ArrayList<Cart>) intent.getSerializableExtra("carts");
@@ -249,6 +250,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 
 				Bundle bundle = new Bundle();
 				bundle.putString("price", sumprice);
+				bundle.putFloat("jifen", jifen);
 				intent.putExtra("cartActivity", "E");
 				bundle.putSerializable("carts", mArrayList);
 				intent.putExtras(bundle);
