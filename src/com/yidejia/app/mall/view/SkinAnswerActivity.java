@@ -47,6 +47,7 @@ public class SkinAnswerActivity {
 	private String birth;
 	private String sex;
 	private String cps;
+	private  RelativeLayout layoutBirth;
 	private void setupShow() {
 		// mButton = (ImageView) view.findViewById(R.id.skin_test_answer_back);
 		nameEditText = (EditText) view.findViewById(R.id.skin_test_name1);
@@ -58,6 +59,7 @@ public class SkinAnswerActivity {
 		birTextView = (TextView) view.findViewById(R.id.skin_test_birthday1);
 		commitImageView = (ImageView) view
 				.findViewById(R.id.skin_test_answer_commit1);
+		layoutBirth = (RelativeLayout) view.findViewById(R.id.skin_test_answer1_bir_relative);
 
 	}
 
@@ -172,7 +174,7 @@ public class SkinAnswerActivity {
 			}
 		});
 
-		birTextView.setOnClickListener(new OnClickListener() {
+		layoutBirth.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {

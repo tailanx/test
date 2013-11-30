@@ -158,7 +158,7 @@
                         android:id="@+id/go_pay_leave_message"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/coupon_bg"
+                        android:background="@drawable/account_bg"
                         android:layout_marginTop="8dp"
                         android:editable="true"
                         android:hint="   退货原因描述.........                                                                                                                                             "
