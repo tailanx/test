@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 //import android.content.activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -32,12 +33,14 @@ import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.unionpay.mpay.widgets.p;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.commments.WaitingComment;
 import com.yidejia.app.mall.net.goodsinfo.GetProductAddress;
 import com.yidejia.app.mall.view.PersonEvaluationActivity;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class TaskNoEva {
 	
@@ -72,6 +75,7 @@ public class TaskNoEva {
 	}
 	
 	private ArrayList<Cart> waitCommGoods;
+	private boolean isTimeout = false;
 
 	private class TaskWaitComm extends AsyncTask<Void, Void, Boolean> {
 
@@ -82,8 +86,8 @@ public class TaskNoEva {
 		public TaskWaitComm(String userid, boolean isFirstIn) {
 			this.userid = userid;
 			this.isFirstIn = isFirstIn;
-			if(isFirstIn)
-				bar = new ProgressDialog(activity);
+//			if(isFirstIn)
+//				bar = new ProgressDialog(activity);
 		}
 		
 		@Override
@@ -91,10 +95,20 @@ public class TaskNoEva {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			if (isFirstIn) {
-				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-				bar.setMessage(activity.getResources().getString(
-						R.string.loading));
-				bar.show();
+//				bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//				bar.setMessage(activity.getResources().getString(
+//						R.string.loading));
+//				bar.show();
+				bar = (ProgressDialog) new YLProgressDialog(activity)
+				.createLoadingDialog(activity, null);
+				bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+					
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						// TODO Auto-generated method stub
+						cancel(true);
+					}
+				});
 			}
 		}
 
@@ -112,79 +126,87 @@ public class TaskNoEva {
 //			}
 			WaitingComment waitingComment = new WaitingComment();
 			try {
-				String httpResp = waitingComment.getHttpResp(userid);
+				String httpResp;
 				try {
-					JSONObject httpObject = new JSONObject(httpResp);
-					int httpCode = httpObject.getInt("code");
-					if (httpCode == 1) {
-						String resp = httpObject.getString("response");
-						try {
-							JSONArray respArray = new JSONArray(resp);
-							int length = respArray.length();
-							Cart mCart;
-							JSONObject arrayObject;
-							for (int i = 0; i < length; i++) {
-								mCart = new Cart();
-								arrayObject = respArray.getJSONObject(i);
-								String goodsid = arrayObject
-										.getString("goods_id");
-								String price = arrayObject.getString("price");
+					httpResp = waitingComment.getHttpResp(userid);
+					try {
+						JSONObject httpObject = new JSONObject(httpResp);
+						int httpCode = httpObject.getInt("code");
+						if (httpCode == 1) {
+							String resp = httpObject.getString("response");
+							try {
+								JSONArray respArray = new JSONArray(resp);
+								int length = respArray.length();
+								Cart mCart;
+								JSONObject arrayObject;
+								for (int i = 0; i < length; i++) {
+									mCart = new Cart();
+									arrayObject = respArray.getJSONObject(i);
+									String goodsid = arrayObject
+											.getString("goods_id");
+									String price = arrayObject.getString("price");
 //								if("".equals(price) || null == price || "0.0".equals(price))
 //									break;
-								String quantity = arrayObject
-										.getString("quantity");
-								String evaluate_status = arrayObject
-										.getString("evaluate_status");
-								if("y".equals(evaluate_status)) continue;
-								String dry_status = arrayObject
-										.getString("dry_status");
-								String imageUrl = ImageUrl.IMAGEURL
-										+ arrayObject.getString("imgname") + "!100";
-								String goodsname = "";
-								GetProductAddress address = new GetProductAddress();
-								try {
-									String productString = address
-											.getProductJsonString(goodsid);
-									JSONObject productObject = new JSONObject(
-											productString);
-									int productHttpCode = productObject
-											.getInt("code");
-									if (productHttpCode == 1) {
-										String productResp = productObject
-												.getString("response");
-										JSONObject productRespObject = new JSONObject(
-												productResp);
-										goodsname = productRespObject
-												.getString("goods_name");
+									String quantity = arrayObject
+											.getString("quantity");
+									String evaluate_status = arrayObject
+											.getString("evaluate_status");
+									if("y".equals(evaluate_status)) continue;
+									String dry_status = arrayObject
+											.getString("dry_status");
+									String imageUrl = ImageUrl.IMAGEURL
+											+ arrayObject.getString("imgname") + "!100";
+									String goodsname = "";
+									GetProductAddress address = new GetProductAddress();
+									try {
+										String productString = address
+												.getProductJsonString(goodsid);
+										JSONObject productObject = new JSONObject(
+												productString);
+										int productHttpCode = productObject
+												.getInt("code");
+										if (productHttpCode == 1) {
+											String productResp = productObject
+													.getString("response");
+											JSONObject productRespObject = new JSONObject(
+													productResp);
+											goodsname = productRespObject
+													.getString("goods_name");
+										}
+									} catch (IOException e) {
+										
+									} catch (JSONException e) {
+										// TODO: handle exception
+									} catch (Exception e) {
+										// TODO: handle exception
 									}
-								} catch (IOException e) {
-
-								} catch (JSONException e) {
-									// TODO: handle exception
-								} catch (Exception e) {
-									// TODO: handle exception
+									mCart.setImgUrl(imageUrl);
+									mCart.setProductText(goodsname);
+									mCart.setUId(goodsid);
+									try {
+										mCart.setSalledAmmount(Integer
+												.parseInt(quantity));
+										mCart.setPrice(Float.parseFloat(price));
+									} catch (NumberFormatException e) {
+										// TODO: handle exception
+									}
+									waitCommGoods.add(mCart);
 								}
-								mCart.setImgUrl(imageUrl);
-								mCart.setProductText(goodsname);
-								mCart.setUId(goodsid);
-								try {
-									mCart.setSalledAmmount(Integer
-											.parseInt(quantity));
-									mCart.setPrice(Float.parseFloat(price));
-								} catch (NumberFormatException e) {
-									// TODO: handle exception
-								}
-								waitCommGoods.add(mCart);
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
 							}
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							return true;
 						}
-						return true;
+						
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-				} catch (JSONException e) {
+				} catch (TimeOutEx e1) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					e1.printStackTrace();
+					isTimeout = true;
 				}
 
 			} catch (IOException e) {
@@ -246,6 +268,15 @@ public class TaskNoEva {
 					}
 				}
 			} else {
+				if (isTimeout) {
+					Toast.makeText(
+							activity,
+							activity.getResources()
+									.getString(R.string.time_out),
+							Toast.LENGTH_SHORT).show();
+					isTimeout = false;
+					return;
+				}
 				Toast.makeText(activity, "未搜索到数据", Toast.LENGTH_LONG).show();
 			}
 		}

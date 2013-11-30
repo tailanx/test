@@ -5,17 +5,21 @@ import java.util.ArrayList;
 
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.FilterViewCtrl;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.model.Brand;
 import com.yidejia.app.mall.model.Function;
 import com.yidejia.app.mall.model.PriceLevel;
 import com.yidejia.app.mall.net.search.BrandDataUtil;
 import com.yidejia.app.mall.net.search.EffectDataUtil;
 import com.yidejia.app.mall.net.search.PriceDataUtil;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.view.View;
+import android.widget.Toast;
 
 public class TaskFilter {
 	
@@ -45,17 +49,29 @@ public class TaskFilter {
 		}
 	}
 	
+	private boolean isTimeOut = false;
+	
 	private class Task extends AsyncTask<Void, Void, Boolean>{
 		private ProgressDialog bar;
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar = new ProgressDialog(context);
-			bar.setCancelable(true);
-			bar.setMessage(context.getResources().getString(R.string.loading));
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.show();
+//			bar = new ProgressDialog(context);
+//			bar.setCancelable(true);
+//			bar.setMessage(context.getResources().getString(R.string.loading));
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(context)
+					.createLoadingDialog(context, null);
+			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					cancel(true);
+				}
+			});
 		}
 
 		@Override
@@ -69,7 +85,13 @@ public class TaskFilter {
 				ctrl.setPrices(pricesLevels);
 				ctrl.setFuns(effects);
 				ctrl.getView(view);
+			} else {
+				if(isTimeOut){
+					isTimeOut = false;
+					Toast.makeText(context, context.getResources().getString(R.string.time_out), Toast.LENGTH_SHORT).show();
+				}
 			}
+				
 		}
 		@Override
 		protected Boolean doInBackground(Void... params) {
@@ -96,6 +118,10 @@ public class TaskFilter {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (TimeOutEx e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				isTimeOut = true;
 			}
 			
 			return false;

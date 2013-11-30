@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.model.MainProduct;
@@ -40,7 +41,7 @@ public class GetHomePage {
 	}
 	
 	private String result = "";
-	public String getHomePageJsonString()throws IOException{
+	public String getHomePageJsonString()throws IOException, TimeOutEx{
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress());
 		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetHome(), true);
 		result = conn.getJsonResult();
@@ -92,6 +93,7 @@ public class GetHomePage {
 	 */
 	public boolean analysisGetHomeJson(String httpResultString){
 		JSONObject httpResultObject;
+		if(null == httpResultString || "".equals(httpResultString)) return false;
 		try {
 			httpResultObject = new JSONObject(httpResultString);
 			int code = httpResultObject.getInt("code");

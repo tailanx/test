@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.util.Log;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.Brand;
 import com.yidejia.app.mall.net.HttpAddressParam;
@@ -28,7 +29,7 @@ public class BrandDataUtil {
 		brandsArray = new ArrayList<Brand>();
 	}
 
-	public String getHttpResponseString() throws IOException {
+	public String getHttpResponseString() throws IOException, TimeOutEx {
 		// HttpGetConn httpGetConn = new HttpGetConn(getHttpAddress());
 		HttpGetConn httpGetConn = new HttpGetConn(
 				new JNICallBack().getHttp4GetBrand(), true);

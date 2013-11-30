@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.user.GetCount;
 
@@ -69,7 +70,14 @@ public class PersonCountDataManage {
 //			GetMessage getMessage = new GetMessage();
 			GetCount getCount = new GetCount();
 			try {
-				String httpResponse = getCount.getHttpResponse(userid, token);
+				String httpResponse = null;
+				try {
+					httpResponse = getCount.getHttpResponse(userid, token);
+				} catch (TimeOutEx e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					return false;
+				}
 				JSONObject httpObject;
 				try {
 					httpObject = new JSONObject(httpResponse);

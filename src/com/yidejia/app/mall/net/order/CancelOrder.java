@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import android.util.Log;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
@@ -73,8 +74,9 @@ public class CancelOrder {
 	 * 只有返回 “success取消成功” 才算提交订单成功。
 	 * @param customer_id 客户id
 	 * @param code 订单号
+	 * @throws TimeOutEx 
 	 */
-	public String getHttpResponseString(String customer_id, String code, String token)throws IOException{
+	public String getHttpResponseString(String customer_id, String code, String token)throws IOException, TimeOutEx{
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress(customer_id, code));
 //		result = conn.getJsonResult();
 		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4CancelOrder(customer_id, code, token));

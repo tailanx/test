@@ -727,7 +727,6 @@
                     android:layout_alignLeft="@+id/main_inerbty_down_right_name"
                     android:layout_below="@+id/main_inerbty_down_right_name"
                     android:layout_toLeftOf="@+id/main_inerbty_down_right_image"
-                    android:text="$468.00"
                     android:textColor="@color/price_color" />
 
                 <RelativeLayout

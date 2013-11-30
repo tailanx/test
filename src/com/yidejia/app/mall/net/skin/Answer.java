@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.Qq;
 import com.yidejia.app.mall.model.SkinAnswer;
@@ -39,9 +40,10 @@ public class Answer {
 	 * @param cpsid 员工cps id
 	 * @param ip ip地址
 	 * @return
+	 * @throws TimeOutEx 
 	 */
 	public String getHttpResp(String handset, String qq, String name, String gender, String birthday, String improve_type,
-			String skin_type, String want_type, String brand, String channel, String cpsid, String ip){
+			String skin_type, String want_type, String brand, String channel, String cpsid, String ip) throws TimeOutEx{
 		String url = new JNICallBack().getHttp4SkinAnswer(handset, qq, name, gender, birthday, improve_type, skin_type, want_type, brand, channel, cpsid, ip);
 		HttpPostConn conn = new HttpPostConn(url);
 		String result ="";

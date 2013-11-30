@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.net.skin.CheckCps;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class SkinHomeActivity extends Activity implements OnClickListener {
 
@@ -50,19 +51,19 @@ public class SkinHomeActivity extends Activity implements OnClickListener {
 		startSkin.setOnClickListener(this);
 		cpsNumber = number.getText().toString();
 		
-		bar = new ProgressDialog(this);
-		bar.setCancelable(true);
-		bar.setMessage(getResources().getString(R.string.loading));
-		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-		
-		bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
-			
-			@Override
-			public void onCancel(DialogInterface dialog) {
-				// TODO Auto-generated method stub
-				closeTask();
-			}
-		});
+//		bar = new ProgressDialog(this);
+//		bar.setCancelable(true);
+//		bar.setMessage(getResources().getString(R.string.loading));
+//		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//		
+//		bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//			
+//			@Override
+//			public void onCancel(DialogInterface dialog) {
+//				// TODO Auto-generated method stub
+//				closeTask();
+//			}
+//		});
 	}
 	
 	@Override
@@ -117,7 +118,17 @@ public class SkinHomeActivity extends Activity implements OnClickListener {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.show();
+//			bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(SkinHomeActivity.this)
+			.createLoadingDialog(SkinHomeActivity.this, null);
+	bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+		@Override
+		public void onCancel(DialogInterface dialog) {
+			// TODO Auto-generated method stub
+			cancel(true);
+		}
+	});
 		}
 
 		@Override

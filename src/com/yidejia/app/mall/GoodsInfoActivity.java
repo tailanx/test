@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.yidejia.app.mall.adapter.BaseFragmentPagerAdapter;
 import com.yidejia.app.mall.datamanage.ProductDataManage;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.fragment.BaseInfoFragment;
 import com.yidejia.app.mall.fragment.CommentFragment;
 import com.yidejia.app.mall.fragment.GoodsDetailFragment;
@@ -32,6 +33,7 @@ import com.yidejia.app.mall.model.ProductBaseInfo;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.goodsinfo.GetProductAddress;
 import com.yidejia.app.mall.task.TaskRegister;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 /**
  * 商品基本信息类
@@ -66,21 +68,21 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 		Bundle bundle = getIntent().getExtras();
 		setActionbarConfig();
 		setContentView(R.layout.activity_goods_info_layout);
-		bar = new ProgressDialog(GoodsInfoActivity.this);
-		bar.setCancelable(true);
-		bar.setMessage(getResources().getString(R.string.loading));
-		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-		
-		bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
-			
-			@Override
-			public void onCancel(DialogInterface dialog) {
-				// TODO Auto-generated method stub
-				closeTask();
-				goods_framelayout.setVisibility(View.GONE);
-				refresh_view.setVisibility(View.VISIBLE);
-			}
-		});
+//		bar = new ProgressDialog(GoodsInfoActivity.this);
+//		bar.setCancelable(true);
+//		bar.setMessage(getResources().getString(R.string.loading));
+//		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//		
+//		bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//			
+//			@Override
+//			public void onCancel(DialogInterface dialog) {
+//				// TODO Auto-generated method stub
+//				closeTask();
+//				goods_framelayout.setVisibility(View.GONE);
+//				refresh_view.setVisibility(View.VISIBLE);
+//			}
+//		});
 		
 		goods_framelayout = (FrameLayout) findViewById(R.id.goods_framelayout);
 		refresh_view = (RelativeLayout) findViewById(R.id.good_item_refresh_view);
@@ -119,7 +121,7 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if (ConnectionDetector.isConnectingToInternet(GoodsInfoActivity.this)) {
+				if (!ConnectionDetector.isConnectingToInternet(GoodsInfoActivity.this)) {
 					Toast.makeText(GoodsInfoActivity.this, getResources().getString(R.string.no_network), Toast.LENGTH_SHORT).show();
 					return;
 				}
@@ -137,19 +139,39 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 	}
 	private ProgressDialog bar;
 	
-	
+	private boolean isTimeout = false;
 	private class Task extends AsyncTask<Void, Void, Boolean>{
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.show();
+//			bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(GoodsInfoActivity.this)
+			.createLoadingDialog(GoodsInfoActivity.this, null);
+	bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+		@Override
+		public void onCancel(DialogInterface dialog) {
+			// TODO Auto-generated method stub
+			cancel(true);
+		}
+	});
 		}
 		@Override
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			if(!result){
+				if (isTimeout) {
+					Toast.makeText(
+							GoodsInfoActivity.this,
+							GoodsInfoActivity.this.getResources()
+							.getString(R.string.time_out),
+							Toast.LENGTH_SHORT).show();
+					isTimeout = false;
+					bar.dismiss();
+					return;
+				}
 				Toast.makeText(GoodsInfoActivity.this, getResources().getString(R.string.no_product), Toast.LENGTH_LONG).show();
 			} else{
 				goods_framelayout.setVisibility(View.VISIBLE);
@@ -164,10 +186,17 @@ public class GoodsInfoActivity extends SherlockFragmentActivity implements
 			// TODO Auto-generated method stub
 			GetProductAddress product = new GetProductAddress();
 			try {
-				String httpresp = product.getProductJsonString(goodsId);
-				boolean issuccess = product.analysis(httpresp);
-				info = product.getProductBaseInfo();
-				return issuccess;
+				String httpresp;
+				try {
+					httpresp = product.getProductJsonString(goodsId);
+					boolean issuccess = product.analysis(httpresp);
+					info = product.getProductBaseInfo();
+					return issuccess;
+				} catch (TimeOutEx e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					isTimeout = true;
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

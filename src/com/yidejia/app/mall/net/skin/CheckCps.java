@@ -5,12 +5,13 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpGetConn;
 
 public class CheckCps {
 	
-	public String getHttpResp(String cpsid){
+	public String getHttpResp(String cpsid) throws TimeOutEx{
 		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4CheckCps(cpsid), true);
 		String httpresp = "";
 		try {

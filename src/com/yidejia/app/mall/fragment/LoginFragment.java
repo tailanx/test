@@ -3,6 +3,7 @@ package com.yidejia.app.mall.fragment;
 import java.io.IOException;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -30,6 +31,7 @@ import com.yidejia.app.mall.MyMallActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.IpAddress;
 import com.yidejia.app.mall.datamanage.UserDatamanage;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.net.user.Login;
 import com.yidejia.app.mall.task.TaskLoginAct;
 import com.yidejia.app.mall.util.Consts;
@@ -38,6 +40,7 @@ import com.yidejia.app.mall.util.DesUtils;
 import com.yidejia.app.mall.view.EditorActivity;
 import com.yidejia.app.mall.view.FindPwActivity;
 import com.yidejia.app.mall.view.RegistActivity;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class LoginFragment extends SherlockFragment implements OnClickListener {
 	private RelativeLayout findPwd;// 找回密码
@@ -260,6 +263,7 @@ public class LoginFragment extends SherlockFragment implements OnClickListener {
 	}
 
 	private String message;
+	private boolean isTimeout = false;
 
 	private class Task extends AsyncTask<Void, Void, Boolean> {
 		private ProgressDialog bar;
@@ -269,11 +273,18 @@ public class LoginFragment extends SherlockFragment implements OnClickListener {
 			// TODO Auto-generated method stub
 			Login login = new Login();
 			try {
-				String httpresp = login.getHttpResponse(name, pwd, ip);
-				boolean issuccess = login.analysisHttpResp(
-						getSherlockActivity(), httpresp);
-				message = login.getMsg();
-				return issuccess;
+				String httpresp;
+				try {
+					httpresp = login.getHttpResponse(name, pwd, ip);
+					boolean issuccess = login.analysisHttpResp(
+							getSherlockActivity(), httpresp);
+					message = login.getMsg();
+					return issuccess;
+				} catch (TimeOutEx e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					isTimeout = true;
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -285,17 +296,28 @@ public class LoginFragment extends SherlockFragment implements OnClickListener {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar = new ProgressDialog(getSherlockActivity());
-			bar.setCancelable(true);
-			bar.setMessage(getSherlockActivity().getResources().getString(R.string.loading));
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.show();
+//			bar = new ProgressDialog(getSherlockActivity());
+//			bar.setCancelable(true);
+//			bar.setMessage(getSherlockActivity().getResources().getString(R.string.loading));
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(getSherlockActivity())
+					.createLoadingDialog(getSherlockActivity(), null);
+			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					cancel(true);
+				}
+			});
 		}
 
 		@Override
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
+			bar.dismiss();
 			if (result) {
 				Toast.makeText(getSherlockActivity(), "登陆成功！",
 						Toast.LENGTH_LONG).show();
@@ -330,10 +352,18 @@ public class LoginFragment extends SherlockFragment implements OnClickListener {
 					 sp.edit().remove("DESPWD").commit();
 					 }
 			} else {
+				if (isTimeout) {
+					Toast.makeText(
+							getSherlockActivity(),
+							getSherlockActivity().getResources()
+									.getString(R.string.time_out),
+							Toast.LENGTH_SHORT).show();
+					isTimeout = false;
+					return;
+				}
 				Toast.makeText(getSherlockActivity(), message,
 						Toast.LENGTH_LONG).show();
 			}
-			bar.dismiss();
 		}
 
 	}

@@ -9,14 +9,17 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.util.EntityUtils;
+
+import com.yidejia.app.mall.exception.TimeOutEx;
 
 import android.util.Log;
 
 public class HttpGetConn {
 	private String urlString;
 	private String TAG = "HttpGetConn";
-	private int TIME_OUT_DELAY = 10000;
+	private int TIME_OUT_DELAY = 1000 * 5;
 //	private int count = 0;
 //	public HttpGetConn(){
 //		
@@ -27,7 +30,7 @@ public class HttpGetConn {
 		this.urlString = urlHost + urlString;
 	}
 	
-	public String getJsonResult() throws IOException {
+	public String getJsonResult() throws IOException, TimeOutEx {
 		String result = "";
 //		if(!ConnectionDetector.isConnectingToInternet(WelcomeActivity.ACTIVITY) ){
 //			return result;
@@ -36,10 +39,10 @@ public class HttpGetConn {
 		Log.i(TAG, urlString);
 		try {
 			HttpClient httpClient = new DefaultHttpClient();
-//			httpClient.getParams().setIntParameter(
-//                    HttpConnectionParams.SO_TIMEOUT, TIME_OUT_DELAY); // 读取超时设置
-//			httpClient.getParams().setIntParameter(
-//                    HttpConnectionParams.CONNECTION_TIMEOUT, TIME_OUT_DELAY);// 连接超时
+			httpClient.getParams().setIntParameter(
+                    HttpConnectionParams.SO_TIMEOUT, TIME_OUT_DELAY); // 读取超时设置
+			httpClient.getParams().setIntParameter(
+                    HttpConnectionParams.CONNECTION_TIMEOUT, TIME_OUT_DELAY);// 连接超时
 			HttpResponse httpResponse = httpClient.execute(httpRequst);
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				result = EntityUtils.toString(httpResponse.getEntity());
@@ -57,8 +60,13 @@ public class HttpGetConn {
 		} catch(ClientProtocolException e){
 			Log.i(TAG, "http协议出错" + e.getMessage().toString());
 			
-		} 
-		
+		} catch (Exception e) {
+			// TODO: handle exception
+			Log.i(TAG, "连接超时：");
+			e.printStackTrace();
+			throw new TimeOutEx("连接超时");
+		}
+		if(null == result || "".equals(result)) throw new TimeOutEx();
 		return result;
 	}
 	/**

@@ -31,6 +31,7 @@ import com.yidejia.app.mall.net.order.CancelOrder;
 import com.yidejia.app.mall.view.CheckActivity;
 import com.yidejia.app.mall.view.OrderDetailActivity;
 import com.yidejia.app.mall.view.ReturnActivity;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class OrdersUtil {
 	private Context context;
@@ -722,16 +723,26 @@ public class OrdersUtil {
 			this.mCancelBtn = mCancelBtn;
 			this.mOkBtn = mOkBtn;
 			this.layout1 = layout1;
-			bar = new ProgressDialog(context);
+//			bar = new ProgressDialog(context);
 			unicode = new UnicodeToString();
 		}
 		
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage(context.getResources().getString(R.string.loading));
-			bar.show();
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(context.getResources().getString(R.string.loading));
+//			bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(context)
+					.createLoadingDialog(context, null);
+			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					cancel(true);
+				}
+			});
 		}
 		
 		@Override

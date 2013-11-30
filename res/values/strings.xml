@@ -285,23 +285,15 @@
     <string name="ttkdex">天天</string>
     <string name="qfkd">全峰</string>
     <string name="best_ex">百世</string>
-    <string name="zto">中通</string>
-    <string name="sto">申通</string>
-    <string name="yto">圆通</string>
-    <string name="yunda">韵达</string>
-    <string name="ems_ex">EMS</string>
-    <string name="uc_ex">优速</string>
-    <string name="lbex">龙邦</string>
-    <string name="ttkdex">天天</string>
-    <string name="qfkd">全峰</string>
-    <string name="best_ex">百世</string>
+    
     <string name="yanshimei">妍诗美专业皮肤测试</string>
     <string name="yanshimei_number">请输入服务号</string>
     <string name="yanshimei_start">输入服务号立即开启美肌测试</string>
     <string name="yanshimei_answer_title">\t\t为了方便我们的护肤顾问为您服务，以及免费获取妍诗美的护肤资讯，请您留下您的相关信息</string>
     <string name="skin_check">亲，请先选择一个或多个选项</string>
-    <string name="loading">努力加载中...</string>
+    <string name="loading">努力加载中....</string>
     <string name="no_address_title">地址信息</string>
     <string name="no_address_content">亲，您还未填写收货地址，是否新增一个</string>
+    <string name="time_out">连接超时,请重试!</string>
 
 </resources>

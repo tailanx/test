@@ -142,7 +142,7 @@
 
             <ScrollView
                 android:id="@+id/go_pay_pinglun_scrollView"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/forgot_password" >
@@ -159,7 +159,7 @@
                         android:editable="true"
                         android:hint="退货原因描述.........                                                                                                                                             "
                         android:padding="10dp"
-                        android:textSize="10sp" />
+                        android:textSize="18sp" />
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>

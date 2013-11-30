@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.ShipLog;
 import com.yidejia.app.mall.net.HttpGetConn;
@@ -20,8 +21,9 @@ public class GetShipLog {
 	 * @param code
 	 * @return
 	 * @throws IOException
+	 * @throws TimeOutEx 
 	 */
-	public String getHttpResp(String code) throws IOException{
+	public String getHttpResp(String code) throws IOException, TimeOutEx{
 		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetShipLog(code),true);
 		return conn.getJsonResult();
 	}

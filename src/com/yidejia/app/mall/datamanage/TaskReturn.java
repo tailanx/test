@@ -8,6 +8,7 @@ import org.json.JSONException;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -15,8 +16,10 @@ import android.widget.Toast;
 
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.net.order.SaveReturnOrder;
 import com.yidejia.app.mall.util.IsPhone;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class TaskReturn {
 	
@@ -95,6 +98,7 @@ public class TaskReturn {
 		theDate = sdf.format(new Date()).trim();
 	}
 	
+	private boolean isTimeout = false;
 	
 	private class Task extends AsyncTask<Void, Void, Boolean>{
 
@@ -104,23 +108,41 @@ public class TaskReturn {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar = new ProgressDialog(activity);
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage(activity.getResources().getString(R.string.loading));
-			bar.show();
+//			bar = new ProgressDialog(activity);
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(activity.getResources().getString(R.string.loading));
+//			bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(activity)
+					.createLoadingDialog(activity, null);
+			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					closeTask();
+				}
+			});
 		}
 
 		@Override
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
+			bar.dismiss();
 			if(result){
 				Toast.makeText(activity, "提交成功!", Toast.LENGTH_LONG).show();
 				activity.finish();
 			}else {
+				if (isTimeout) {
+					Toast.makeText(
+							activity,
+							activity.getResources()
+									.getString(R.string.time_out),
+							Toast.LENGTH_SHORT).show();
+					isTimeout = false;
+				}
 				Toast.makeText(activity, "提交失败!", Toast.LENGTH_LONG).show();
 			}
-			bar.dismiss();
 		}
 
 		@Override
@@ -128,12 +150,19 @@ public class TaskReturn {
 			// TODO Auto-generated method stub
 			SaveReturnOrder order = new SaveReturnOrder();
 			try {
-				String httpResp = order.getHttpResp(userId, orderCode, theDate, contact, contact_manner, cause, desc, token);
+				String httpResp;
 				try {
-					return order.analysisReturn(httpResp);
-				} catch (JSONException e) {
+					httpResp = order.getHttpResp(userId, orderCode, theDate, contact, contact_manner, cause, desc, token);
+					try {
+						return order.analysisReturn(httpResp);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} catch (TimeOutEx e1) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					e1.printStackTrace();
+					isTimeout = true;
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

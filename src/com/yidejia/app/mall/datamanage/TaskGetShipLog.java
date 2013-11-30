@@ -7,8 +7,11 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.ShipLogViewCtrl;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.model.ShipLog;
 import com.yidejia.app.mall.net.express.GetShipLog;
 
@@ -40,6 +43,7 @@ public class TaskGetShipLog {
 		return shipLogs;
 	}
 	
+	private boolean isTimeout = false;
 	
 	private class Task extends AsyncTask<Void, Void, Boolean>{
 		
@@ -70,6 +74,15 @@ public class TaskGetShipLog {
 						layout.addView(view);
 					}
 				}
+			}else {
+				if (isTimeout) {
+					Toast.makeText(
+							activity,
+							activity.getResources()
+									.getString(R.string.time_out),
+							Toast.LENGTH_SHORT).show();
+					isTimeout = false;
+				}
 			}
 		}
 
@@ -77,10 +90,17 @@ public class TaskGetShipLog {
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 			GetShipLog getShipLog = new GetShipLog();
-			String httpResp;
+			String httpResp = "";
 			boolean isSuccess = false;
 			try {
-				httpResp = getShipLog.getHttpResp(shipCode);
+				try {
+					httpResp = getShipLog.getHttpResp(shipCode);
+				} catch (TimeOutEx e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					isTimeout = true;
+					return false;
+				}
 				isSuccess = getShipLog.analysisHttpResp(httpResp);
 				shipLogs = getShipLog.getShipLogs();
 			} catch (IOException e) {

@@ -13,6 +13,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpPostConn;
@@ -104,8 +105,9 @@ public class DeleteUserAddress {
 	 * @param token
 	 * @return
 	 * @throws IOException
+	 * @throws TimeOutEx 
 	 */
-	public String deleteAddress(String cid, String aid, String token) throws IOException{
+	public String deleteAddress(String cid, String aid, String token) throws IOException, TimeOutEx{
 		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4DelAddress(cid, aid, token));
 		return result = conn.getHttpResponse();
 	}

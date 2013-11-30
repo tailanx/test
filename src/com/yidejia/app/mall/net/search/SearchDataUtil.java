@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.SearchItem;
 import com.yidejia.app.mall.net.HttpGetConn;
@@ -52,8 +53,9 @@ public class SearchDataUtil {
 	 * @param limit1 ������
 	 * @return
 	 * @throws IOException
+	 * @throws TimeOutEx 
 	 */
-	public String getHttpResponseString(String name, String fun, String brand, String price, String order1, String offset1, String limit1)throws IOException{
+	public String getHttpResponseString(String name, String fun, String brand, String price, String order1, String offset1, String limit1)throws IOException, TimeOutEx{
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress(name, fun, brand, price, order1, offset1, limit1));
 		String url = new JNICallBack().getHttp4GetSearch(name, fun, brand, price, order1, offset1, limit1);
 		Log.e(TAG, "before conn"+url);

@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpPostConn;
 
@@ -12,7 +13,7 @@ public class GetCode {
 
 	private int code;
 	
-	public String getHttpResp(String name) throws IOException{
+	public String getHttpResp(String name) throws IOException, TimeOutEx{
 		String param = new JNICallBack().getHttp4GetCode(name);
 		HttpPostConn conn = new HttpPostConn(param);
 		return conn.getHttpResponse();

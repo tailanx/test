@@ -7,14 +7,17 @@ import org.json.JSONObject;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.order.DelOrder;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class TaskDelOrder {
 	
@@ -82,12 +85,22 @@ public class TaskDelOrder {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			
-			bar = new ProgressDialog(context);
-			bar.setMessage(context.getResources().getString(R.string.loading));
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar = new ProgressDialog(context);
+//			bar.setMessage(context.getResources().getString(R.string.loading));
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 			// bar.setMessage(context.getResources().getString(
 			// R.string.searching));
-			bar.show();
+			// bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(context)
+					.createLoadingDialog(context, null);
+			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					cancelTask();
+				}
+			});
 		}
 
 		@Override
@@ -98,6 +111,15 @@ public class TaskDelOrder {
 				mLinearLayout.removeView(layout1);
 				Toast.makeText(context, "删除订单成功！", Toast.LENGTH_LONG).show();
 			} else {
+				if (isTimeout) {
+					Toast.makeText(
+							context,
+							context.getResources()
+									.getString(R.string.time_out),
+							Toast.LENGTH_SHORT).show();
+					isTimeout = false;
+					return;
+				}
 				Toast.makeText(context, "删除订单失败！", Toast.LENGTH_LONG).show();
 			}
 			bar.dismiss();
@@ -105,12 +127,22 @@ public class TaskDelOrder {
 		
 	}
 	
+	private boolean isTimeout = false;
+	
 	
 	private boolean getAndAnalysisHttpResp(){
 		boolean isSuccess = false;
 		DelOrder delOrder = new DelOrder();
 		try {
-			String httpResp = delOrder.getHttpResponse(customer_id, orderCode, token);
+			String httpResp = "";
+			try {
+				httpResp = delOrder.getHttpResponse(customer_id, orderCode, token);
+			} catch (TimeOutEx e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				isTimeout = true;
+				return false;
+			}
 			return analysisData(httpResp);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

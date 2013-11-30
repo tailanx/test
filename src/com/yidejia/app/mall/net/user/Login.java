@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpPostConn;
 import com.yidejia.app.mall.net.ImageUrl;
@@ -18,7 +19,7 @@ public class Login {
 	
 	private String TAG = Login.class.getName();
 	
-	public String getHttpResponse(String username, String password, String ip) throws IOException{
+	public String getHttpResponse(String username, String password, String ip) throws IOException, TimeOutEx{
 		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4Login(username, password, ip));
 		return conn.getHttpResponse();
 	}

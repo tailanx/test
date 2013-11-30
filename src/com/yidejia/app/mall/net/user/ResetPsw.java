@@ -5,12 +5,13 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpPostConn;
 
 public class ResetPsw {
 	
-	public String getHttpResponse(String username, String password,String code) throws IOException{
+	public String getHttpResponse(String username, String password,String code) throws IOException, TimeOutEx{
 		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4ResetPsw(username, password, code));
 		return conn.getHttpResponse();
 	}

@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import android.util.Log;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.util.Md5;
 
@@ -49,7 +50,7 @@ public class GetImageUrlPrefix {
 	}
 	
 	private String result = "";
-	public String getUrlJsonString()throws IOException{
+	public String getUrlJsonString()throws IOException, TimeOutEx{
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress());
 		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4ImageUrlPrefix(), true);
 		result = conn.getJsonResult();

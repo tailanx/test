@@ -11,6 +11,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpPostConn;
@@ -81,8 +82,9 @@ public class DeleteProductComment {
 	 * @param id
 	 * @return
 	 * @throws IOException
+	 * @throws TimeOutEx 
 	 */
-	public String deleteComment(String id) throws IOException{
+	public String deleteComment(String id) throws IOException, TimeOutEx{
 //		getHttpAddress(id);
 //		HttpPostConn conn = new HttpPostConn(keys, values);
 //		result = conn.getJsonResult();

@@ -11,6 +11,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpPostConn;
@@ -135,11 +136,12 @@ public class SaveUserAddress {
 	 * @param token
 	 * @return
 	 * @throws IOException
+	 * @throws TimeOutEx 
 	 */
 	public String saveAddress(String customer_id, String customer_name,
 			String handset, String province, String city, String district,
 			String address, String recipient_id, String token)
-			throws IOException {
+			throws IOException, TimeOutEx {
 		HttpPostConn conn = new HttpPostConn(new JNICallBack().getHttp4SaveAddress(
 				customer_id, new String(customer_name.getBytes("UTF-8"),
 						"UTF-8"), handset,

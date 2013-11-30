@@ -16,6 +16,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.model.Specials;
 import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.voucher.Verify;
@@ -146,6 +147,7 @@ public class PreferentialDataManage {
 	
 	private String goods;
 	private String userid;
+	private boolean isTimeout = false;
 
 	private class TaskVerify extends AsyncTask<Void, Void, Boolean>{
 		private ProgressDialog dig;
@@ -156,7 +158,18 @@ public class PreferentialDataManage {
 			if(result){
 				Log.e("info", result+"   result");
 				dig.cancel();
+			} else {
+				if (isTimeout) {
+					Toast.makeText(
+							context,
+							context.getResources()
+									.getString(R.string.time_out),
+							Toast.LENGTH_SHORT).show();
+					isTimeout = false;
+					dig.dismiss();
+				}
 			}
+				
 		}
 
 		@Override
@@ -173,7 +186,15 @@ public class PreferentialDataManage {
 			// TODO Auto-generated method stub
 			Verify verify = new Verify();
 			try {
-				String httpResponse = verify.getHttpResponse(goods, userid);
+				String httpResponse = null;
+				try {
+					httpResponse = verify.getHttpResponse(goods, userid);
+				} catch (TimeOutEx e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					isTimeout = true;
+					return false;
+				}
 				try {
 					JSONObject httpJsonObject = new JSONObject(httpResponse);
 					int code = httpJsonObject.getInt("code");

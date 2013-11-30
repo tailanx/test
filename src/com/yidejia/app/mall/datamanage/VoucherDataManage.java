@@ -8,14 +8,17 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.voucher.Voucher;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
 /**
  * 获取用户积分
@@ -120,6 +123,8 @@ public class VoucherDataManage {
 		return voucherNum;
 	};
 	
+	private boolean isTimeout = false;
+	
 	private class TaskVoucher extends AsyncTask<Void, Void, Boolean>{
 		
 		private ProgressDialog bar;
@@ -128,10 +133,20 @@ public class VoucherDataManage {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			bar = new ProgressDialog(activity);
-			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			bar.setMessage(activity.getResources().getString(R.string.loading));
-			bar.show();
+//			bar = new ProgressDialog(activity);
+//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			bar.setMessage(activity.getResources().getString(R.string.loading));
+//			bar.show();
+			bar = (ProgressDialog) new YLProgressDialog(activity)
+					.createLoadingDialog(activity, null);
+			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					cancel(true);
+				}
+			});
 		}
 
 		@Override
@@ -139,19 +154,26 @@ public class VoucherDataManage {
 			// TODO Auto-generated method stub
 			Voucher voucher = new Voucher();
 			try {
-				String httpResponse = voucher.getHttpResponse(id, token);
+				String httpResponse;
 				try {
-					JSONObject httpObject = new JSONObject(httpResponse);
-					int code = httpObject.getInt("code");
-					if(code == 1){
-						String response = httpObject.getString("response");
-						JSONObject resObject = new JSONObject(response);
-						voucherNum = resObject.getString("can_use_score");
-						return true;
+					httpResponse = voucher.getHttpResponse(id, token);
+					try {
+						JSONObject httpObject = new JSONObject(httpResponse);
+						int code = httpObject.getInt("code");
+						if(code == 1){
+							String response = httpObject.getString("response");
+							JSONObject resObject = new JSONObject(response);
+							voucherNum = resObject.getString("can_use_score");
+							return true;
+						}
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-				} catch (JSONException e) {
+				} catch (TimeOutEx e1) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					e1.printStackTrace();
+					isTimeout = true;
 				}
 				
 			} catch (IOException e) {
@@ -165,6 +187,7 @@ public class VoucherDataManage {
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
+			bar.dismiss();
 			if(result && !isFromPay){
 				TextView jiFen = (TextView) activity.findViewById(R.id.jiefen);
 				if(voucherNum==null||"".equals(voucherNum)){
@@ -172,8 +195,17 @@ public class VoucherDataManage {
 				}else{
 					jiFen.setText(voucherNum);
 				}
+			} else{
+				if (isTimeout) {
+					Toast.makeText(
+							activity,
+							activity.getResources()
+									.getString(R.string.time_out),
+							Toast.LENGTH_SHORT).show();
+					isTimeout = false;
+				}
 			}
-			bar.dismiss();
+				
 		}
 		
 	}

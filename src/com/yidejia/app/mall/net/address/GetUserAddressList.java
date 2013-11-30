@@ -13,6 +13,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.net.HttpAddressParam;
@@ -97,7 +98,7 @@ public class GetUserAddressList {
 
 	public String getAddressListJsonString(String where, String offset,
 			String limit, String group, String order, String fields)
-			throws IOException {
+			throws IOException, TimeOutEx {
 		// HttpGetConn conn = new HttpGetConn(getHttpAddress(where, offset,
 		// limit, group, order, fields));
 		HttpGetConn conn = new HttpGetConn(
@@ -107,7 +108,7 @@ public class GetUserAddressList {
 		return result;
 	}
 	
-	public String getAddressHttpresp(String where, String offset, String limit)throws IOException{
+	public String getAddressHttpresp(String where, String offset, String limit)throws IOException, TimeOutEx{
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress(where, offset, limit, group, order, fields));
 		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetAddress(
 				where, offset, limit, "", "", ""), true);

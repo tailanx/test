@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.UserComment;
 import com.yidejia.app.mall.net.HttpGetConn;
@@ -35,7 +36,7 @@ public class GetProductCommentList {
 	
 	
 	private String result = "";
-	public String getCommentsListJsonString(String where, String offset, String limit, String group, String order, String fields)throws IOException{
+	public String getCommentsListJsonString(String where, String offset, String limit, String group, String order, String fields)throws IOException, TimeOutEx{
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress(where, offset, limit, group, order, fields));
 		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetComment(where, offset, limit, group, order, fields), true);
 		result = conn.getJsonResult();
