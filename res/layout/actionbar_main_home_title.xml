@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="right"
     android:background="@drawable/topbg"
-    android:focusable="true"
+    android:clickable="false"
     android:orientation="horizontal" >
 
     <ImageView
@@ -15,8 +15,20 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:src="@drawable/yidejia_logo" />
+    
+    <ImageView 
+        android:id="@+id/main_home_title_search"
+        android:layout_toRightOf="@+id/main_home_title_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="6dp"
+        android:background="@drawable/search_text_bg"
+        android:clickable="true"
+        />
 
-    <EditText
+    <!-- <EditText
         android:id="@+id/main_home_title_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,7 +45,7 @@
         android:focusable="false"
         android:paddingRight="10dp"
         android:singleLine="true" >
-    </EditText>
+    </EditText> -->
 
     <ImageView
         android:id="@+id/main_home_search_right_icon"
@@ -42,6 +54,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="20dp"
+        android:clickable="false"
         android:src="@drawable/top_search_icon" />
 
 </RelativeLayout>
