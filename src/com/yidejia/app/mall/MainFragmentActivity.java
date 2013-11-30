@@ -213,8 +213,8 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		// main_act_pager.setCurrentItem(currentIndex);
 	}
 
-	private TextView searchText;
-	private EditText searchEditText;
+	private ImageView searchText;
+	private ImageView searchEditText;
 	private ImageView imageView;
 	private Button shoppingCartTopay;// 去结算
 	private boolean isSearch = false;
@@ -257,10 +257,10 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 					// down_home_TextView.setTextColor(Color.WHITE);//getResources().getColor(R.color.white)
 					getSupportActionBar().setCustomView(
 							R.layout.actionbar_main_home_title);
-					searchEditText = (EditText) findViewById(R.id.main_home_title_search);
+					ImageView searchEditText = (ImageView) findViewById(R.id.main_home_title_search);
 					// searchEditText.setSelected(false);
-					searchEditText.clearFocus();
-					searchEditText.setCursorVisible(false);
+//					searchEditText.clearFocus();
+//					searchEditText.setCursorVisible(false);
 					// searchEditText.setOnTouchListener(go2searchListener);
 					searchEditText.setOnClickListener(go2SearchListener2);
 					break;
@@ -292,11 +292,11 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 					// down_search_TextView.setTextColor(Color.WHITE);
 					getSupportActionBar().setCustomView(
 							R.layout.actionbar_search);
-					searchText = (EditText) findViewById(R.id.search_bar_edittext);
+					ImageView searchText = (ImageView) findViewById(R.id.search_bar_edittext);
 					// searchText.setSelected(false);
 					// Log.i("info", searchText + " searchText");
-					searchText.clearFocus();
-					searchText.setCursorVisible(false);
+//					searchText.clearFocus();
+//					searchText.setCursorVisible(false);
 					// searchText.setOnTouchListener(go2searchListener);
 					searchText.setOnClickListener(go2SearchListener2);
 					break;
@@ -494,10 +494,10 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 				ActionBar.NAVIGATION_MODE_STANDARD);
 		// getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		// getSupportActionBar().setHomeButtonEnabled(true);
-		searchEditText = (EditText) findViewById(R.id.main_home_title_search);
+		ImageView searchEditText = (ImageView) findViewById(R.id.main_home_title_search);
 		// searchEditText.setSelected(false);
-		searchEditText.clearFocus();
-		searchEditText.setCursorVisible(false);
+//		searchEditText.clearFocus();
+//		searchEditText.setCursorVisible(false);
 		// searchEditText.setOnTouchListener(go2searchListener);
 		searchEditText.setOnClickListener(go2SearchListener2);
 	}
@@ -563,6 +563,7 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
+			Log.e("click", "click");
 			Intent intent = new Intent(MainFragmentActivity.this,
 					SearchActivity.class);
 			startActivity(intent);
