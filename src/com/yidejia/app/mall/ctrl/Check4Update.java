@@ -20,8 +20,8 @@ import com.yidejia.app.mall.R;
 
 
 public class Check4Update {
-	private String versionUrl = "http://static.n8n8.cn/apk/version.txt";
-	private String apkUrl = "http://static.n8n8.cn/apk/neican.apk";
+	private String versionUrl = "http://dl.yidejia.com/yidejia.txt";
+	private String apkUrl = "http://dl.yidejia.com/yidejia.apk";
 	private String version;
 	private String title;
 	private String message;
@@ -45,7 +45,7 @@ public class Check4Update {
 //		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 	}
 	
-	private String getVersionName(){
+	public String getVersionName(){
 		String versionName = "";
 		//int versionCode = 1;
 		try {
@@ -86,7 +86,7 @@ public class Check4Update {
 				if (!getVersionName().equals(version)) {
 					// showDialog();
 					// upgrade = true;
-					title = "发现新版本("+version+")！";
+					title = "发现新版本!("+version+")";
 					if(resultArray.length != 1)
 					message = resultArray[1];
 					// message = "11331";
