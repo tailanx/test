@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -355,6 +356,26 @@ public class SelledResultFragment extends SherlockFragment {
 //						emptyLayout = (RelativeLayout) view.findViewById(R.id.search_empty);
 						emptyLayout.setVisibility(View.VISIBLE);
 					}
+					
+					Button guang_button = (Button) emptyLayout.findViewById(R.id.guang_button);
+					guang_button.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							Intent intent = new Intent (getSherlockActivity(),SearchResultActivity.class);
+							Bundle bundle = new Bundle();
+							bundle.putString("title", "全部");
+							bundle.putString("name", "");
+							bundle.putString("price", "");
+							bundle.putString("brand", "");
+							bundle.putString("fun", "");
+							intent.putExtras(bundle);
+							getSherlockActivity().startActivity(intent);
+							getSherlockActivity().finish();
+						}
+					});
+					
 					if(isFirstIn){
 						bar.dismiss();
 						isFirstIn = false;
@@ -404,6 +425,7 @@ public class SelledResultFragment extends SherlockFragment {
 								.getString(R.string.time_out),
 						Toast.LENGTH_SHORT).show();
 				isTimeout = false;
+				if(bar.isShowing()) bar.dismiss();
 			}
 		}
 		@Override
