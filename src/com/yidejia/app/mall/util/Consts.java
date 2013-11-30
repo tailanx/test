@@ -28,6 +28,10 @@ public class Consts {
 	
 	public static final String RETURN_BACk = "com.yidejia.exit";
 	public static final String LONGIN_SUCESSES = "com.yidejia.login.sucess";
+	
+	public static final int NEW_ADDRESS_REQUEST = 140;
+	public static final int NEW_ADDRESS_RESPONSE = 110;
+	public static final String CST_NEWADDRESS = "com.yidejia.newaddress";
 }
 
 

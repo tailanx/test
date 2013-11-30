@@ -12,8 +12,11 @@ import org.json.JSONObject;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Bundle;
@@ -323,6 +326,11 @@ public class CstmPayActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		try {
 			super.onCreate(savedInstanceState);
+			receiver = new InnerReceiver();
+			IntentFilter filter = new IntentFilter();
+			filter.addAction(Consts.CST_NEWADDRESS);
+			registerReceiver(receiver, filter);
+			
 			Intent intent = getIntent();
 			// final String sum = intent.getStringExtra("price");
 			sum = intent.getStringExtra("price");
@@ -416,6 +424,7 @@ public class CstmPayActivity extends SherlockActivity {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
+		unregisterReceiver(receiver);
 		closeTask();
 		closeVoucherTask();
 	}
@@ -575,16 +584,19 @@ public class CstmPayActivity extends SherlockActivity {
 
 		reLayout = (RelativeLayout) findViewById(R.id.go_pay_relative);
 		addressRelative = (RelativeLayout) findViewById(R.id.go_pay_relativelayout);
+		
 		// 地址增加监听事件
 		addressRelative.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
+				if(!getUserAddressList.getAddresses().isEmpty()){
 				Intent intent = new Intent(CstmPayActivity.this,
 						AddressActivity.class);
 				CstmPayActivity.this.startActivityForResult(intent,
 						Consts.AddressRequestCode);
+				}
 			}
 		});
 		// PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
@@ -929,7 +941,7 @@ public class CstmPayActivity extends SherlockActivity {
 					Bundle bundle = new Bundle();
 					bundle.putSerializable("editaddress", null);
 					intent.putExtras(bundle);
-					CstmPayActivity.this.startActivity(intent);
+					CstmPayActivity.this.startActivityForResult(intent, Consts.NEW_ADDRESS_REQUEST);
 					return;
 				}
 			}
@@ -1093,6 +1105,8 @@ public class CstmPayActivity extends SherlockActivity {
 
 //		Log.i("info", requestCode + "   requestCode");
 //		Log.i("info", resultCode + "   resultCode");
+
+		
 		if (data == null) {
 			return;
 		}
@@ -1122,7 +1136,7 @@ public class CstmPayActivity extends SherlockActivity {
 				&& resultCode == Consts.CstmPayActivity_Response) {
 
 			carts = (ArrayList<Cart>) data.getSerializableExtra("carts");
-			Log.i("voucher", carts.size() + "    carts.size()11");
+			
 
 			voucher = data.getFloatExtra("voucher", -1);
 			Log.i("voucher", jifen + "    jifen");
@@ -1132,7 +1146,10 @@ public class CstmPayActivity extends SherlockActivity {
 			// Log.i("voucher", voucher + "  voucher");
 			// isCartActivity = data.getStringExtra("cartActivity");
 			show(carts, false);
-		} else {
+		} else if(requestCode == Consts.NEW_ADDRESS_REQUEST && resultCode==Consts.NEW_ADDRESS_RESPONSE){
+			
+		
+			show(carts, false);
 			// String msg = "";
 			// /*
 			// * 支付控件返回字符串:success、fail、cancel 分别代表支付成功，支付失败，支付取消
@@ -1170,7 +1187,17 @@ public class CstmPayActivity extends SherlockActivity {
 			// builder.create().show();
 		}
 	}
-
 	private float voucher;
+	public class InnerReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			String action = intent.getAction();
+			Log.i("voucher", action + "    action");
+			if (Consts.CST_NEWADDRESS.equals(action)) {
+				show(carts, false);
+			}
+		}
+	}
 
 }

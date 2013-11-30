@@ -3,9 +3,11 @@ package com.yidejia.app.mall.task;
 import java.io.IOException;
 
 
+
 import com.yidejia.app.mall.R;
 //import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.net.address.SaveUserAddress;
+import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DefinalDate;
 
 import android.app.Activity;
@@ -120,7 +122,10 @@ public class TaskSaveAddr {
 //		Bundle bundle = new Bundle();
 //		bundle.putSerializable("newaddress", addresses);
 //		intent.putExtras(bundle);
+//		activity.setResult(Consts.NEW_ADDRESS_RESPONSE,intent);
 		activity.setResult(DefinalDate.responcode, intent);
+		intent.setAction(Consts.CST_NEWADDRESS);
+		activity.sendBroadcast(intent);
 		activity.finish();
 	}
 
