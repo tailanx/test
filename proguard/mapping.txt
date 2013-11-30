@@ -12504,15 +12504,17 @@ com.yidejia.app.mall.SearchActivity -> com.yidejia.app.mall.SearchActivity:
     android.widget.EditText autoCompleteTextView -> f
     java.util.ArrayList historyArrayList -> g
     com.yidejia.app.mall.datamanage.SchHistoryDataManage historyDataManage -> h
-    android.widget.ArrayAdapter adapter -> i
+    android.view.inputmethod.InputMethodManager inputMethodManager -> i
+    android.widget.ArrayAdapter adapter -> j
     java.lang.String[] COUNTRIES -> a
     void onCreate(android.os.Bundle) -> onCreate
     android.widget.EditText access$0(com.yidejia.app.mall.SearchActivity) -> a
     java.util.ArrayList access$1(com.yidejia.app.mall.SearchActivity) -> b
     com.yidejia.app.mall.datamanage.SchHistoryDataManage access$2(com.yidejia.app.mall.SearchActivity) -> c
-    android.widget.ArrayAdapter access$3(com.yidejia.app.mall.SearchActivity) -> d
-    void access$4(com.yidejia.app.mall.SearchActivity,java.lang.String) -> a
-    android.widget.Button access$5(com.yidejia.app.mall.SearchActivity) -> e
+    android.view.inputmethod.InputMethodManager access$3(com.yidejia.app.mall.SearchActivity) -> d
+    android.widget.ArrayAdapter access$4(com.yidejia.app.mall.SearchActivity) -> e
+    void access$5(com.yidejia.app.mall.SearchActivity,java.lang.String) -> a
+    android.widget.Button access$6(com.yidejia.app.mall.SearchActivity) -> f
 com.yidejia.app.mall.SearchActivity$1 -> com.yidejia.app.mall.u:
     com.yidejia.app.mall.SearchActivity this$0 -> a
     boolean onEditorAction(android.widget.TextView,int,android.view.KeyEvent) -> onEditorAction
@@ -14258,9 +14260,13 @@ com.yidejia.app.mall.fragment.SelledResultFragment$Task -> com.yidejia.app.mall.
     java.lang.Boolean doInBackground$5f8445a4() -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+    com.yidejia.app.mall.fragment.SelledResultFragment access$3(com.yidejia.app.mall.fragment.SelledResultFragment$Task) -> a
 com.yidejia.app.mall.fragment.SelledResultFragment$Task$1 -> com.yidejia.app.mall.fragment.bm:
     com.yidejia.app.mall.fragment.SelledResultFragment$Task this$1 -> a
     void onCancel(android.content.DialogInterface) -> onCancel
+com.yidejia.app.mall.fragment.SelledResultFragment$Task$2 -> com.yidejia.app.mall.fragment.bn:
+    com.yidejia.app.mall.fragment.SelledResultFragment$Task this$1 -> a
+    void onClick(android.view.View) -> onClick
 com.yidejia.app.mall.initview.GoodsView -> com.yidejia.app.mall.e.a:
     android.view.View view -> c
     int width -> d
