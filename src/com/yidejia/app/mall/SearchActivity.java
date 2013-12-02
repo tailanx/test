@@ -2,6 +2,7 @@ package com.yidejia.app.mall;
 
 import java.util.ArrayList;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -37,6 +39,7 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 	
 	private ArrayList<String> historyArrayList = new ArrayList<String>();
 	private SchHistoryDataManage historyDataManage;
+	private InputMethodManager inputMethodManager;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +89,12 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 			}
 		});
 		*/
+		
+		
 		autoCompleteTextView.requestFocus();
+		
+		inputMethodManager =(InputMethodManager)this.getApplicationContext().
+				getSystemService(Context.INPUT_METHOD_SERVICE); 
 		autoCompleteTextView.setOnEditorActionListener(new OnEditorActionListener() {
 			
 			@Override
@@ -101,6 +109,7 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 						historyArrayList.add(name);
 						Log.i("SchHistory", "state:"+state);
 					}
+					inputMethodManager.hideSoftInputFromWindow(autoCompleteTextView.getWindowToken(), 0);
 					adapter.notifyDataSetChanged();
 					goToSchRst(name);
 				}
@@ -130,6 +139,7 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 					long arg3) {
 				// TODO Auto-generated method stub
 				String name = historyArrayList.get(arg2);
+				inputMethodManager.hideSoftInputFromWindow(autoCompleteTextView.getWindowToken(), 0);
 				goToSchRst(name);
 			}
 		});
@@ -238,6 +248,7 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 					historyArrayList.add(name);
 					Log.i("SchHistory", "state:"+state);
 				}
+				inputMethodManager.hideSoftInputFromWindow(autoCompleteTextView.getWindowToken(), 0);
 				adapter.notifyDataSetChanged();
 				goToSchRst(name);
 			}
@@ -250,6 +261,7 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Log.e(SearchActivity.this.getClass().getName(), "finish activity");
+				inputMethodManager.hideSoftInputFromWindow(autoCompleteTextView.getWindowToken(), 0);
 				SearchActivity.this.finish();
 			}
 		});
