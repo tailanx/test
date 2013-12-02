@@ -139,13 +139,13 @@ public class DataCleanManager {
     } 
     
     public static String getTotalSize(Context context){
-    	long size = getPathLegth(context.getCacheDir()) + getPathLegth(new File("/data/data/" 
-                + context.getPackageName() + "/databases")) ;
+    	long size = getPathLegth(context.getCacheDir())
+    			+ getPathLegth(new File("/data/data/" + context.getPackageName() + "/databases")) ;
 //                + getPathLegth(new File("/data/data/" 
 //                + context.getPackageName() + "/shared_prefs"));
     	if (Environment.getExternalStorageState().equals( 
                 Environment.MEDIA_MOUNTED)) { 
-    		size += getPathLegth(context.getExternalCacheDir());
+//    		size += getPathLegth(context.getExternalCacheDir());
     	}
     	return formatFileSizeToString(size);
     }
@@ -234,6 +234,7 @@ public class DataCleanManager {
     private static String formatFileSizeToString(long fileSize) {// 转换文件大小
         String fileSizeString = "";
         DecimalFormat decimalFormat = new DecimalFormat("#.00");
+        if(fileSize == 0) return "0.00B";
         if (fileSize < 1024) {
             fileSizeString = decimalFormat.format((double)fileSize) + "B";
         } else if (fileSize < (1 * 1024 * 1024)) {

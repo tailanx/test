@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yidejia.app.mall.CleanImageCache;
 import com.yidejia.app.mall.DataCleanManager;
 import com.yidejia.app.mall.MainFragmentActivity;
@@ -72,7 +73,10 @@ public class EditorActivity extends SherlockActivity {
 								new CleanImageCache().clearAllCache();
 								Toast.makeText(EditorActivity.this, "清除成功",
 										Toast.LENGTH_LONG).show();
-
+								ImageLoader imageLoader = ImageLoader.getInstance();
+								imageLoader.clearMemoryCache();
+								imageLoader.clearDiscCache();
+								editor_cache_size.setText(DataCleanManager.getTotalSize(EditorActivity.this));
 							}
 						}).setNegativeButton("取消", null).create();
 		dialogHelp = helpbuilder.setTitle("伊的家服务条款")
