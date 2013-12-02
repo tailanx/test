@@ -151,6 +151,16 @@
                     android:layout_centerVertical="true"
                     android:padding="15dp"
                     android:src="@drawable/arrow" />
+                
+                <TextView 
+                    android:id="@+id/editor_cache_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/main2_main2_linearlayout1_imageview2"
+                    android:layout_centerVertical="true"
+                    android:textSize="20sp"
+                    />
+                
             </RelativeLayout>
 
             <RelativeLayout

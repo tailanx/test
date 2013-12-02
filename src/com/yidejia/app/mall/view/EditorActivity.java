@@ -36,6 +36,7 @@ public class EditorActivity extends SherlockActivity {
 	private RelativeLayout phone;
 	private RelativeLayout recommended;
 	private RelativeLayout check4updateLayout;
+	private TextView editor_cache_size;
 
 	private AlertDialog dialogHelp;
 	private AlertDialog dialogAbout;
@@ -138,6 +139,9 @@ public class EditorActivity extends SherlockActivity {
 		setActionbar();
 		setContentView(R.layout.editor);
 		phoneNumber =  (TextView) findViewById(R.id.main2_main2_linearlayout1_imageview22);
+		editor_cache_size = (TextView) findViewById(R.id.editor_cache_size);
+		editor_cache_size.setText(DataCleanManager.getTotalSize(this));
+		
 		help = (RelativeLayout) findViewById(R.id.editor_linearLayout1);
 //		option = (RelativeLayout) findViewById(R.id.editor_linearLayout2);
 //		option.setVisibility(View.GONE);
