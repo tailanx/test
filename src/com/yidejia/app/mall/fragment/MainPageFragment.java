@@ -16,6 +16,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -673,7 +675,78 @@ public class MainPageFragment extends SherlockFragment {
 		// TODO Auto-generated method stub
 		super.onStart();
 		Log.d(TAG, "TestFragment-----onStart");
+		startTimer();
+		timer.schedule(timetask, delay, delay);
 	}
+	
+	
+	
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		stopTimer();
+	}
+
+	private long delay = 5000;
+	
+	private void stopTimer(){  
+        
+        if (timer != null) {  
+        	timer.cancel();  
+        	timer = null;  
+        }  
+  
+        if (timetask != null) {  
+        	timetask.cancel();  
+        	timetask = null;  
+        }     
+  
+    } 
+	
+	private void startTimer(){
+		if (timer == null) { 
+			timer = new Timer();
+		}
+		
+		if(timetask == null) {
+			timetask = new TimerTask(){  
+				  
+		        public void run() {  
+		            Message message = new Message();      
+		            message.what = 1;      
+		            handler.sendMessage(message);    
+		        }  
+		          
+		    }; 
+		}
+	}
+	
+	
+	Timer timer = null;  
+	TimerTask timetask = null; 
+    
+    Handler handler = new Handler(){  
+    	  
+        public void handleMessage(Message msg) {  
+            switch (msg.what) {      
+            case 1:     
+            	setBannerImageShow();
+                break;      
+            }      
+            super.handleMessage(msg);  
+        }  
+          
+    };  
+    
+    private int bannerIndex = 0;
+    private void setBannerImageShow(){
+    	int indexTemp = bannerIndex + 1;
+    	if(length != 0)indexTemp = indexTemp % length;
+    	mViewPager.setCurrentItem(indexTemp);
+    	bannerIndex = indexTemp;
+    }
+	
 
 	private ViewGroup mMainView = null;
 	private YLViewPager mViewPager;
