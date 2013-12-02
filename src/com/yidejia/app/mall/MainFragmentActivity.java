@@ -373,13 +373,13 @@ public class MainFragmentActivity extends SherlockFragmentActivity {
 					ft.hide(getCurrFragment(currentIndex))
 							.show(getCurrFragment(id)).commit();
 				else {
-					if(id != 0 && id != 1 && id != 2)
-					ft.hide(getCurrFragment(currentIndex))
-							.replace(R.id.main_fragment, getCurrFragment(id))
-							.commit();// .addToBackStack(fragmentTag[id])
-					else {
+//					if(id != 0 && id != 1 && id != 2)
+//					ft.hide(getCurrFragment(currentIndex))
+//							.replace(R.id.main_fragment, getCurrFragment(id))
+//							.commit();// .addToBackStack(fragmentTag[id])
+//					else {
 						ft.hide(getCurrFragment(currentIndex)).add(R.id.main_fragment, getCurrFragment(id)).commit();
-					}
+//					}
 				// ft.replace(R.id.main_fragment,
 				// getCurrFragment(id)).commit();
 				// currFragment = newFragment;
