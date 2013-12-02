@@ -38,12 +38,12 @@
                         android:id="@+id/my_mall_regist_account"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:drawableLeft="@drawable/account_icon"
                         android:drawablePadding="4dp"
-                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
                         android:padding="10dp"
                         android:text="账号"
-                        android:gravity="center"
                         android:textColor="#b4b4b4"
                         android:textSize="16sp" />
 
@@ -55,8 +55,8 @@
                         android:background="@null"
                         android:ellipsize="middle"
                         android:hint="请输入手机号码"
-                        android:maxLength="11"
                         android:inputType="phone"
+                        android:maxLength="11"
                         android:singleLine="true"
                         android:textSize="15sp" />
                 </LinearLayout>
@@ -78,11 +78,12 @@
                         android:layout_marginLeft="12dp"
                         android:singleLine="true"
                         android:src="@drawable/obtain_verification" />
+
                     <EditText
                         android:id="@+id/my_mall_regist_obtain"
-                        android:layout_toLeftOf="@id/my_mall_regist_password_validation_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/my_mall_regist_password_validation_button"
                         android:background="@drawable/forgot_password"
                         android:drawableLeft="@drawable/verification"
                         android:drawablePadding="6dp"
@@ -92,7 +93,6 @@
                         android:paddingLeft="10dp"
                         android:singleLine="true"
                         android:textSize="14sp" />
-
                 </RelativeLayout>
 
                 <LinearLayout
@@ -110,9 +110,9 @@
                         android:layout_gravity="center_vertical"
                         android:drawableLeft="@drawable/password_icon"
                         android:drawablePadding="6dp"
+                        android:gravity="center"
                         android:padding="6dp"
                         android:text="密         码"
-                        android:gravity="center"
                         android:textColor="#b4b4b4"
                         android:textSize="16sp" />
 
@@ -143,9 +143,9 @@
                         android:layout_gravity="center_vertical"
                         android:drawableLeft="@drawable/password_icon"
                         android:drawablePadding="6dp"
+                        android:gravity="center"
                         android:padding="6dp"
                         android:text="确认密码"
-                        android:gravity="center"
                         android:textColor="#b4b4b4"
                         android:textSize="16sp" />
 
@@ -155,10 +155,10 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical|left"
                         android:background="@null"
-                        android:textSize="14sp"
                         android:hint="请输入重复密码"
                         android:inputType="textPassword"
-                        android:singleLine="true" />
+                        android:singleLine="true"
+                        android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
 

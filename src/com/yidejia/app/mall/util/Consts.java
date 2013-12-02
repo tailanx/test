@@ -32,6 +32,9 @@ public class Consts {
 	public static final int NEW_ADDRESS_REQUEST = 140;
 	public static final int NEW_ADDRESS_RESPONSE = 110;
 	public static final String CST_NEWADDRESS = "com.yidejia.newaddress";
+	
+	public static final String IMAGES = "com.nostra13.example.universalimageloader.IMAGES";
+	public static final String IMAGE_POSITION = "com.nostra13.example.universalimageloader.IMAGE_POSITION";
 }
 
 

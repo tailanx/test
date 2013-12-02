@@ -84,10 +84,13 @@
 
                 <TextView
                     android:id="@+id/main_mall_notice_content"
-                    android:layout_width="wrap_content"
+                    android:layout_width="240dp"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/main_mall_notice"
-                    android:ellipsize="end"
+                    android:ellipsize="marquee"
+                   	android:marqueeRepeatLimit="marquee_forever"
+					android:focusableInTouchMode="true"
+					android:focusable="true"                   
                     android:singleLine="true"
                     android:textSize="16sp" />
             </RelativeLayout>
