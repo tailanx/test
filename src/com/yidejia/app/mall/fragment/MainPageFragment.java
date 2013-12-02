@@ -636,6 +636,7 @@ public class MainPageFragment extends SherlockFragment {
 					// Toast.makeText(getSherlockActivity(),
 					// getResources().getString(R.string.bad_network),
 					// Toast.LENGTH_SHORT).show();
+					
 				} else {
 					if(isTimeOut) {
 						Toast.makeText(getSherlockActivity(),
@@ -652,6 +653,7 @@ public class MainPageFragment extends SherlockFragment {
 			if (isFirstIn) {
 //				bar.dismiss();
 				bar2.dismiss();
+				if(result) timer.schedule(timetask, delay, delay);
 				isFirstIn = false;
 			} else {
 
@@ -676,11 +678,19 @@ public class MainPageFragment extends SherlockFragment {
 		super.onStart();
 		Log.d(TAG, "TestFragment-----onStart");
 		startTimer();
-		timer.schedule(timetask, delay, delay);
+//		timer.schedule(timetask, delay, delay);
 	}
 	
 	
 	
+	@Override
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		super.onDestroyView();
+		stopTimer();
+	}
+
+
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
@@ -723,8 +733,16 @@ public class MainPageFragment extends SherlockFragment {
 	}
 	
 	
-	Timer timer = null;  
-	TimerTask timetask = null; 
+	Timer timer = new Timer();;  
+	TimerTask timetask = new TimerTask(){  
+		  
+        public void run() {  
+            Message message = new Message();      
+            message.what = 1;      
+            handler.sendMessage(message);    
+        }  
+          
+    }; 
     
     Handler handler = new Handler(){  
     	  
