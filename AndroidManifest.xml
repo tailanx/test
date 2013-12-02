@@ -200,6 +200,9 @@ android:uiOptions="splitActionBarWhenNarrow"
           <activity
             android:name="com.yidejia.app.mall.view.SkinResultAcitivity"
             android:screenOrientation="portrait" />
+           <activity
+            android:name="com.yidejia.app.mall.ImagePagerActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.unionpay.uppay.PayActivityEx"
             android:configChanges="orientation|keyboardHidden"
