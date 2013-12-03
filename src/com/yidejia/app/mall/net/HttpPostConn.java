@@ -115,7 +115,20 @@ public class HttpPostConn {
 					HttpConnectionParams.SO_TIMEOUT, TIME_OUT_DELAY); // ��ȡ��ʱ����
 			client.getParams().setIntParameter(
 					HttpConnectionParams.CONNECTION_TIMEOUT, TIME_OUT_DELAY);// ���ӳ�ʱ
-			HttpResponse httpResponse = client.execute(httpPost);
+//			HttpResponse httpResponse = client.execute(httpPost);
+			HttpResponse httpResponse = null;
+			boolean RetryConnection = true;
+	        int retrycount = 0;
+	      //retry request 5 times
+			while (RetryConnection == true && retrycount < 5) {
+				try {
+					httpResponse = client.execute(httpPost);
+					RetryConnection = false;
+				} catch (IOException e) {
+					System.out.println("caught http io ex");
+					retrycount += 1;
+				}
+			}
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				result = EntityUtils.toString(httpResponse.getEntity(), HTTP.UTF_8);
 				Log.i(TAG, result);

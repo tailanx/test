@@ -3,6 +3,7 @@ package com.yidejia.app.mall.fragment;
 import java.io.IOException;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -57,6 +59,8 @@ public class LoginFragment extends SherlockFragment implements OnClickListener {
 	private SharedPreferences sp;
 	private Consts consts;
 	private Task taskLoginAct;
+	
+	private InputMethodManager inputMethodManager;
 
 	private MyMallActivity newFragment;
 
@@ -79,6 +83,9 @@ public class LoginFragment extends SherlockFragment implements OnClickListener {
 				getSherlockActivity().startActivity(intent);
 			}
 		});
+		
+		inputMethodManager =(InputMethodManager)this.getSherlockActivity().
+				getSystemService(Context.INPUT_METHOD_SERVICE); 
 		
 		ipAddress = new IpAddress();
 		consts = new Consts();
@@ -321,6 +328,9 @@ public class LoginFragment extends SherlockFragment implements OnClickListener {
 			if (result) {
 				Toast.makeText(getSherlockActivity(), "登陆成功！",
 						Toast.LENGTH_LONG).show();
+				//隐藏键盘
+				inputMethodManager.hideSoftInputFromWindow(stringName.getWindowToken(), 0);
+				inputMethodManager.hideSoftInputFromWindow(stringPassword.getWindowToken(), 0);
 				
 				myApplication.setIsLogin(true);
 				fragment = new MyMallActivity();

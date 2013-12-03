@@ -13,7 +13,7 @@
 
     <drawable name="white">#ffffff</drawable>
     <drawable name="green">#009900</drawable>
-    <drawable name="gray">#30000000</drawable>
+    <drawable name="gray">#aa000000</drawable>
     <drawable name="lucency">#00000000</drawable>
     <drawable name="lucency_bg">#30000000</drawable>
     <drawable name="dark_gray">#8F8F8F</drawable>

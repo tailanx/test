@@ -1,12 +1,14 @@
 
 package com.yidejia.app.mall.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -40,6 +42,8 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 	private IpAddress ip;
 	
 	private TaskLoginAct taskLoginAct;
+	
+	private InputMethodManager inputMethodManager;
 	
 //	private void doClick(View v){
 //		switch (v.getId()) {
@@ -88,6 +92,9 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 		consts = new Consts();
 		ip = new IpAddress();
 		setActionbar();
+		
+		inputMethodManager =(InputMethodManager)this.
+				getSystemService(Context.INPUT_METHOD_SERVICE); 
 //		userManage = new UserDatamanage(LoginActivity.this);
 		//默认选中】
 		mBox = (CheckBox)findViewById(R.id.my_login_checkbox);
@@ -170,7 +177,9 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 			taskLoginAct = new TaskLoginAct(LoginActivity.this);
 			
 			taskLoginAct.loginAct(name, pwd, ip.getIpAddress(),mBox,sp,consts);
-			
+			//隐藏键盘
+			inputMethodManager.hideSoftInputFromWindow(stringName.getWindowToken(), 0);
+			inputMethodManager.hideSoftInputFromWindow(stringPassword.getWindowToken(), 0);
 			break;
 //			boolean isSucess = userManage.userLogin(name, pwd,
 //					ip.getIpAddress());
@@ -238,6 +247,8 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 //				Toast.makeText(ComposeActivity.this, "button", Toast.LENGTH_SHORT).show();
+				//隐藏键盘
+				inputMethodManager.hideSoftInputFromWindow(stringName.getWindowToken(), 0);
 				LoginActivity.this.finish();
 			}
 		});

@@ -2,6 +2,7 @@ package com.yidejia.app.mall.net;
 
 
 import java.io.IOException;
+import java.net.URI;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.util.EntityUtils;
 
 import com.yidejia.app.mall.exception.TimeOutEx;
@@ -35,15 +37,29 @@ public class HttpGetConn {
 //		if(!ConnectionDetector.isConnectingToInternet(WelcomeActivity.ACTIVITY) ){
 //			return result;
 //		}
-		HttpGet httpRequst = new HttpGet(urlString);
-		Log.i(TAG, urlString);
+		HttpGet httpRequst = new HttpGet();
+//		Log.i(TAG, urlString);
 		try {
 			HttpClient httpClient = new DefaultHttpClient();
+			HttpProtocolParams.setUseExpectContinue(httpClient.getParams(), false);
+			httpRequst.setURI(new URI(urlString));
 			httpClient.getParams().setIntParameter(
                     HttpConnectionParams.SO_TIMEOUT, TIME_OUT_DELAY); // 读取超时设置
 			httpClient.getParams().setIntParameter(
                     HttpConnectionParams.CONNECTION_TIMEOUT, TIME_OUT_DELAY);// 连接超时
-			HttpResponse httpResponse = httpClient.execute(httpRequst);
+			HttpResponse httpResponse = null;
+			boolean RetryConnection = true;
+	        int retrycount = 0;
+	      //retry request 5 times
+			while (RetryConnection == true && retrycount < 5) {
+				try {
+					httpResponse = httpClient.execute(httpRequst);
+					RetryConnection = false;
+				} catch (IOException e) {
+					System.out.println("caught http io ex");
+					retrycount += 1;
+				}
+			}
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				result = EntityUtils.toString(httpResponse.getEntity());
 				Log.i(TAG, "返回码:"+httpResponse.getStatusLine().getStatusCode());

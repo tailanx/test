@@ -278,8 +278,6 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 		
 		myApplication = (MyApplication) getSherlockActivity().getApplication();
 
-		personCountDataManage = new PersonCountDataManage(getSherlockActivity());
-		personCountDataManage.getCountData(myApplication.getUserId(), myApplication.getToken());
 		Log.i("info", personCountDataManage + "        personCountDataManage");
 		View view = inflater.inflate(R.layout.person_shopping_mall1, container,
 				false);
@@ -288,28 +286,7 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 		// getSherlockActivity().getSupportActionBar().setCustomView(
 		// R.layout.actionbar_mymall);
 
-		String faString = personCountDataManage.getFavoliten();
-		// Log.i("info", faString+"     faString");
-		if (faString == null || "".equals(faString)) {
-			favorites.setText(0 + "");
-		} else {
-			favorites.setText(faString);
-		}
-
-		String msString = personCountDataManage.getMsg();
-		if (msString == null || "".equals(msString)) {
-			message.setText(0 + "");
-		} else {
-			message.setText(msString);
-		}
-
-		String inString = personCountDataManage.getScores();
-		if (inString == null || "".equals(inString)) {
-			integration.setText(0 + "");
-		} else {
-			Log.e("info", inString);
-			integration.setText(inString);
-		}
+		
 		imageLoader.displayImage(myApplication.getUserHeadImg(), head, options,
 				animateFirstListener);
 
@@ -419,6 +396,39 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 		// }
 		// });
 		return view;
+	}
+	
+	
+	
+
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		personCountDataManage = new PersonCountDataManage(getSherlockActivity());
+		personCountDataManage.getCountData(myApplication.getUserId(), myApplication.getToken());
+		String faString = personCountDataManage.getFavoliten();
+		// Log.i("info", faString+"     faString");
+		if (faString == null || "".equals(faString)) {
+			favorites.setText(0 + "");
+		} else {
+			favorites.setText(faString);
+		}
+
+		String msString = personCountDataManage.getMsg();
+		if (msString == null || "".equals(msString)) {
+			message.setText(0 + "");
+		} else {
+			message.setText(msString);
+		}
+
+		String inString = personCountDataManage.getScores();
+		if (inString == null || "".equals(inString)) {
+			integration.setText(0 + "");
+		} else {
+			Log.e("info", inString);
+			integration.setText(inString);
+		}
 	}
 
 	static final List<String> displayedImages = Collections

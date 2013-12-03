@@ -2,12 +2,11 @@
 <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/image"
     android:layout_width="match_parent"
-    android:layout_height="160dip"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:adjustViewBounds="true"
-    android:background="@drawable/banner_bg"
-    android:maxHeight="160dp"
-    android:scaleType="centerCrop" />
+    android:background="@drawable/gray"
+     />
 <!--
 android:adjustViewBounds="true"
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
