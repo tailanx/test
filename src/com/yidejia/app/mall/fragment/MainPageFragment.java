@@ -878,7 +878,12 @@ public class MainPageFragment extends SherlockFragment {
 	private int width;
 
     
-    
+    @Override
+    public void onDestroy() {
+    	// TODO Auto-generated method stub
+    	imageLoader.stop();
+    	super.onDestroy();
+    }
 	private DisplayImageOptions options;
 	protected ImageLoader imageLoader = ImageLoader.getInstance();
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();

@@ -151,7 +151,7 @@ public class TaskGetRetList {
 				if(!retOrderInfos.isEmpty() && retOrderInfos != null){
 					Toast.makeText(activity, activity.getResources().getString(R.string.nomore), Toast.LENGTH_LONG).show();
 				} else {
-//					Toast.makeText(activity, "亲，您并无", Toast.LENGTH_LONG).show();
+					Toast.makeText(activity, activity.getResources().getString(R.string.no_find_data), Toast.LENGTH_LONG).show();
 				}
 				isSuccess = false;
 			}
