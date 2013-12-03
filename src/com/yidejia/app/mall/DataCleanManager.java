@@ -121,7 +121,10 @@ public class DataCleanManager {
     	cleanDatabases(context); 
 //    	cleanSharedPreference(context); 
     	cleanFiles(context); 
-    	
+//    	cleanCustomCache(filePath);
+    	deleteFilesByDirectory(new File("/data/data/" + context.getPackageName() + "/app_cache"));
+    	deleteFilesByDirectory(new File("/data/data/" + context.getPackageName() + "/app_database"));
+    	deleteFilesByDirectory(new File("/data/data/" + context.getPackageName() + "/cache/webviewCacheChromium"));
     } 
 
 
