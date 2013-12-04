@@ -298,4 +298,5 @@
     <string name="qq_hao">QQ:</string>
  <string name="qq_quen">QQ群:</string>
   <string name="no_find_data">亲，未搜索岛数据</string>
+  <string name="err_bir">亲，请输入正确的出生日期</string>
 </resources>
