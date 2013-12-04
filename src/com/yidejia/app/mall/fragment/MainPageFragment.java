@@ -590,7 +590,7 @@ public class MainPageFragment extends SherlockFragment {
 					}
 				});
 			}
-			
+			stopTimer();
 			if(!bannerArray.isEmpty())bannerArray.clear();
 			if(!inerbtyArray.isEmpty()) inerbtyArray.clear();
 			if(!hotsellArray.isEmpty()) hotsellArray.clear();
@@ -606,7 +606,7 @@ public class MainPageFragment extends SherlockFragment {
 
 				if (result) {
 					try {
-
+						stopTimer();
 						bannerIndex = 0;
 						layout.removeAllViews();
 						getMainListFirstItem();
@@ -624,6 +624,8 @@ public class MainPageFragment extends SherlockFragment {
 							// TODO: handle exception
 							e.printStackTrace();
 						}
+						startTimer();
+						timer.schedule(timetask, DELAY, DELAY);
 						main_mall_notice_content.setText(ggTitleArray.get(0));
 					} catch (Exception e) {
 						// TODO: handle exception
@@ -651,7 +653,7 @@ public class MainPageFragment extends SherlockFragment {
 			if (isFirstIn) {
 //				bar.dismiss();
 				bar2.dismiss();
-				if(result) timer.schedule(timetask, DELAY, DELAY);
+//				if(result) timer.schedule(timetask, DELAY, DELAY);
 				isFirstIn = false;
 			} else {
 
