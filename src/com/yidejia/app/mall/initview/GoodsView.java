@@ -1,9 +1,12 @@
 package com.yidejia.app.mall.initview;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -11,6 +14,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -49,6 +53,8 @@ import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.MainProduct;
 import com.yidejia.app.mall.model.ProductBaseInfo;
+import com.yidejia.app.mall.net.ConnectionDetector;
+import com.yidejia.app.mall.net.favorite.CheckExistsFavorite;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.view.GoCartActivity;
@@ -560,48 +566,21 @@ public class GoodsView {
 
 			} else if (myApplication.getIsLogin() && !"".equals(userid)) {
 
-				// 登录状态下
-				if (!manage.checkExists(userid, productId,
-						myApplication.getToken())) {
-					// 未收藏，现在添加收藏
-					if (manage.addFavourite(myApplication.getUserId(),
-							productId, myApplication.getToken())) {
-						// 收藏成功
-						Toast.makeText(
-								activity,
-								activity.getResources().getString(
-										R.string.add_fav_scs),
-								Toast.LENGTH_SHORT).show();
-						add_favorites
-								.setImageResource(R.drawable.add_favorites2);
-					} else {
-						Toast.makeText(
-								activity,
-								activity.getResources().getString(
-										R.string.add_fav_fail),
-								Toast.LENGTH_SHORT).show();
-						add_favorites
-								.setImageResource(R.drawable.add_favorites1);
-					}
-				} else {
-
-					// 已收藏，现在删除收藏
-					if (manage.deleteFavourite(userid, productId,
-							myApplication.getToken())) {
-						// 删除成功
-						add_favorites
-								.setImageResource(R.drawable.add_favorites1);
-						Toast.makeText(
-								activity,
-								activity.getResources().getString(
-										R.string.del_fav_ok), Toast.LENGTH_LONG)
-								.show();
-					} else {
-						// 删除失败
-						add_favorites
-								.setImageResource(R.drawable.add_favorites2);
-					}
+//				// 登录状态下
+//				if (!manage.checkExists(userid, productId,
+//						myApplication.getToken())) {
+//					
+//				} else {
+//
+//					
+//				}
+				if(!ConnectionDetector.isConnectingToInternet(activity)){
+					Toast.makeText(activity, activity.getResources().getString(R.string.no_network), Toast.LENGTH_SHORT).show();
+					return;
 				}
+				closeCheckFavTask();
+				checkFavTask = new CheckFavTask();
+				checkFavTask.execute();
 			} else {
 
 				// 未登录状态下，收藏到本地
@@ -611,6 +590,93 @@ public class GoodsView {
 			}
 		}
 	};
+	
+	
+	private CheckFavTask checkFavTask;
+	
+	private void closeCheckFavTask(){
+		if(null != checkFavTask && AsyncTask.Status.RUNNING == checkFavTask.getStatus().RUNNING) {
+			checkFavTask.cancel(true);
+		}
+	}
+	
+	private class CheckFavTask extends AsyncTask<Void, Void, Boolean> {
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			CheckExistsFavorite check = new CheckExistsFavorite(activity);
+			try {
+				String httpResponse = check.httpResponse(userid, productId, myApplication.getToken());
+				Log.i(TAG, httpResponse);
+				JSONObject httpResponseoObject = new JSONObject(httpResponse);
+				int code = httpResponseoObject.getInt("code");
+				Log.i(TAG, "check exists code" + code);
+				if(code == 1) return true;
+				else {
+					return false;
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				Log.e(TAG, "check favorite exists task io ex");
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO: handle exception
+				Log.e(TAG, "check favorite exists task ex");
+				e.printStackTrace();
+			}
+			return false;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			FavoriteDataManage manage = new FavoriteDataManage(activity);
+			if(!result) {
+				// 未收藏，现在添加收藏
+				if (manage.addFavourite(myApplication.getUserId(),
+						productId, myApplication.getToken())) {
+					// 收藏成功
+					Toast.makeText(
+							activity,
+							activity.getResources().getString(
+									R.string.add_fav_scs),
+							Toast.LENGTH_SHORT).show();
+					add_favorites
+							.setImageResource(R.drawable.add_favorites2);
+				} else {
+					Toast.makeText(
+							activity,
+							activity.getResources().getString(
+									R.string.add_fav_fail),
+							Toast.LENGTH_SHORT).show();
+					add_favorites
+							.setImageResource(R.drawable.add_favorites1);
+				}
+			} else {
+				// 已收藏，现在删除收藏
+				if (manage.deleteFavourite(userid, productId,
+						myApplication.getToken())) {
+					// 删除成功
+					add_favorites
+							.setImageResource(R.drawable.add_favorites1);
+					Toast.makeText(
+							activity,
+							activity.getResources().getString(
+									R.string.del_fav_ok), Toast.LENGTH_LONG)
+							.show();
+				} else {
+					// 删除失败
+					add_favorites
+							.setImageResource(R.drawable.add_favorites2);
+				}
+			}
+		}
+		
+	}
+	
+	private String TAG = GoodsView.class.getName();
 
 	/**
 	 * 改变收藏的图片
