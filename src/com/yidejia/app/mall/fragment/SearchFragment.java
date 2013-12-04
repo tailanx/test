@@ -141,18 +141,20 @@ public class SearchFragment extends SherlockFragment {
 		// TODO Auto-generated method stub
 		super.onStart();
 		Log.d(TAG, "TestFragment-----onStart");
-bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
-			
+		if(null != bar)
+		bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
 			@Override
 			public void onCancel(DialogInterface dialog) {
 				// TODO Auto-generated method stub
 				closeTask();
-				if(functions.isEmpty()){
+				if (functions.isEmpty()) {
 					searchListView.setVisibility(View.GONE);
 					search_item_refresh_view.setVisibility(View.VISIBLE);
 				}
 			}
 		});
+		if(null != refresh_data_btn)
 		refresh_data_btn.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
