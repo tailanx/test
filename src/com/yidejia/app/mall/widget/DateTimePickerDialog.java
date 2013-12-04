@@ -3,6 +3,8 @@ package com.yidejia.app.mall.widget;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import com.yidejia.app.mall.R;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -11,6 +13,7 @@ import android.widget.DatePicker.OnDateChangedListener;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.TimePicker.OnTimeChangedListener;
+import android.widget.Toast;
 
 /**
  * ����ʱ��ѡ��ؼ�
@@ -107,11 +110,16 @@ public class DateTimePickerDialog implements OnDateChangedListener,
 							Calendar calendar = Calendar.getInstance();
 							calendar.set(datePicker.getYear(),
 									datePicker.getMonth(),
-									datePicker.getDayOfMonth());
+									datePicker.getDayOfMonth()-1);
 							SimpleDateFormat sdf = new SimpleDateFormat(
 									"yyyy-MM-dd");
+							if(year>=2013){
+								Toast.makeText(activity, activity.getResources().getString(R.string.err_bir), Toast.LENGTH_SHORT).show();
+								return;
+							}else{
 							dateTime = sdf.format(calendar.getTime());
 							dateTimeTextEdite.setText(dateTime);
+							}
 						}
 					}, c.get(Calendar.YEAR), c.get(Calendar.MONTH),
 					c.get(Calendar.DATE)).show();

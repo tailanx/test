@@ -11,20 +11,24 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +60,9 @@ public class GoodsView {
 	private CartsDataManage manage;
 	private int cart_num = 0;// 购物车内商品个数
 	private Activity activity;
+	private ViewGroup anim_mask_layout;
+	private ImageView imgIcon;
+	private DisplayMetrics displayMetrics;
 
 	private String productId;// 本商品id
 	private String userid;// 本用户id
@@ -74,6 +81,9 @@ public class GoodsView {
 		myApplication = (MyApplication) activity.getApplication();
 		userid = myApplication.getUserId();
 		isLogin = myApplication.getIsLogin();
+		anim_mask_layout = createAnimLayout();
+		displayMetrics = new DisplayMetrics();
+		activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 	}
 
 	/**
@@ -93,6 +103,8 @@ public class GoodsView {
 			productId = info.getUId();
 			cart.setUId(productId);
 			cart.setImgUrl(info.getImgUrl());
+			//
+			imgIcon = (ImageView) view.findViewById(R.id.add_to_cart_press);
 			// 商品名称
 			TextView base_info_content_text = (TextView) view
 					.findViewById(R.id.base_info_content_text);
@@ -180,13 +192,15 @@ public class GoodsView {
 			}
 			// 加入购物车按钮点击事件
 			if (priceNum > 0) {
-				add_to_cart.setOnClickListener(new OnClickListener() {
-
+				imgIcon.setOnClickListener(new OnClickListener() {
+					
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
+					
+						setAnim(imgIcon);
+						
 						cart_num++;
-						setCartNum(cart_num);
 						boolean istrue = manage.addCart(cart);
 						Intent intent = new Intent(Consts.UPDATE_CHANGE);
 						activity.sendBroadcast(intent);
@@ -611,4 +625,117 @@ public class GoodsView {
 
 	}
 
+	/**
+	 * @Description: 创建动画层
+	 * @param
+	 * @return void
+	 * @throws
+	 */
+	private ViewGroup createAnimLayout() {
+		ViewGroup rootView = (ViewGroup) activity.getWindow().getDecorView();
+		LinearLayout animLayout = new LinearLayout(activity);
+		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.FILL_PARENT,
+				LinearLayout.LayoutParams.FILL_PARENT);
+		animLayout.setLayoutParams(lp);
+//		animLayout.setId(R.id.age);
+		animLayout.setBackgroundResource(android.R.color.transparent);
+		rootView.addView(animLayout);
+		return animLayout;
+	}
+	/**
+	 * 
+	 * @param v
+	 */
+	private void setAnim(View v){
+		Animation mScaleAnimation = new ScaleAnimation(0.7f, 0.1f, 0.7f, 0.1f, Animation.RELATIVE_TO_SELF, 0.1f, Animation.RELATIVE_TO_SELF, 0.1f);
+		mScaleAnimation.setDuration(AnimationDuration);
+		mScaleAnimation.setFillAfter(true);
+
+		int[] start_location = new int[2];
+		imgIcon.getLocationInWindow(start_location);
+		int x = imgIcon.getWidth();
+		defaultWidth = displayMetrics.widthPixels;
+		marginRight = defaultWidth - x - start_location[0];
+		ViewGroup vg = (ViewGroup) imgIcon.getParent();
+		vg.removeView(imgIcon);
+		// 将组件添加到我们的动画层上
+		View view = addViewToAnimLayout(anim_mask_layout, imgIcon,start_location);
+		int[] end_location = new int[2];
+		shopping_cart_button.getLocationInWindow(end_location);
+		// 计算位移
+		int endX = end_location[0] - start_location[0];
+		int endY = end_location[1] - start_location[1];
+
+
+		Animation mTranslateAnimation = new TranslateAnimation(0,endX,0,endY);// 移动
+		mTranslateAnimation.setDuration(AnimationDuration);
+		
+		AnimationSet mAnimationSet = new AnimationSet(false);
+		// 这块要注意，必须设为false,不然组件动画结束后，不会归位。
+		mAnimationSet.setFillAfter(false);
+		mAnimationSet.addAnimation(mScaleAnimation);
+		mAnimationSet.addAnimation(mTranslateAnimation);
+		view.startAnimation(mAnimationSet);
+		
+		mTranslateAnimation.setAnimationListener(new AnimationListener() {
+			
+			@Override
+			public void onAnimationStart(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onAnimationEnd(Animation animation) {
+
+				setCartNum(cart_num);
+				
+			}
+		});
+			
+		
+	}
+	/**
+	 * @Description: 添加视图到动画层
+	 * @param @param vg
+	 * @param @param view
+	 * @param @param location
+	 * @param @return
+	 * @return View
+	 * @throws
+	 */
+	private View addViewToAnimLayout(final ViewGroup vg, final View view,
+			int[] location) {
+		int x = location[0];
+		int y = location[1];
+		vg.addView(view);
+		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.WRAP_CONTENT,
+				LinearLayout.LayoutParams.WRAP_CONTENT);
+		lp.leftMargin = x;
+		lp.rightMargin = marginRight;
+		lp.topMargin = y;
+		view.setLayoutParams(lp);
+		return view;
+	}
+	
+	/**
+	 * 动画时间
+	 */
+	private int AnimationDuration = 500;
+	/**
+	 * 手机屏幕的宽度
+	 */
+	private int defaultWidth = 0;
+	/**
+	 * 加入购物车按钮离右边的距离
+	 */
+	private int marginRight = 0;
 }

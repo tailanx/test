@@ -86,7 +86,7 @@
 
             <LinearLayout
                 android:id="@+id/buy_add_layout"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/base_info_content_text"
                 android:layout_alignRight="@+id/base_info_price_layout"
@@ -96,7 +96,7 @@
 
                 <ImageView
                     android:id="@+id/buy_now"
-                    android:layout_width="0px"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|left"
                     android:layout_weight="1"
@@ -104,16 +104,33 @@
                     android:paddingRight="3dp"
                     android:src="@drawable/buy_now1" />
 
-                <ImageView
-                    android:id="@+id/add_to_cart"
-                    android:layout_width="0px"
+                <FrameLayout
+                    android:id="@+id/item_goods_base_info"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|right"
-                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1" >
+
+                <ImageView
+                    android:id="@+id/add_to_cart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
                     android:paddingLeft="3dp"
                     android:src="@drawable/buy_car" />
+                 <ImageView
+                    android:id="@+id/add_to_cart_press"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingLeft="3dp"
+                    android:src="@drawable/buy_car"
+                   />
+                
+                </FrameLayout>
             </LinearLayout>
 
             <TextView
