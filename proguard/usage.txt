@@ -446,7 +446,6 @@ com.nostra13.universalimageloader.core.ImageLoader:
 ====    405:406:public void handleSlowNetwork(boolean)
 ====    413:414:public void pause()
 ====    418:419:public void resume()
-====    426:427:public void stop()
 ====    435:439:public void destroy()
 com.nostra13.universalimageloader.core.ImageLoaderConfiguration:
 ====    134:134:public static com.nostra13.universalimageloader.core.ImageLoaderConfiguration createDefault(android.content.Context)
@@ -477,7 +476,6 @@ com.nostra13.universalimageloader.core.ImageLoaderEngine:
 ====    143:144:void handleSlowNetwork(boolean)
 ====    151:152:void pause()
 ====    156:160:void resume()
-====    164:173:void stop()
 com.nostra13.universalimageloader.core.LoadAndDisplayImageTask:
     private static final java.lang.String LOG_WAITING_FOR_RESUME
     private static final java.lang.String LOG_RESUME_AFTER_PAUSE
@@ -503,7 +501,6 @@ com.nostra13.universalimageloader.core.ProcessAndDisplayImageTask:
     private static final java.lang.String LOG_POSTPROCESS_IMAGE
 com.nostra13.universalimageloader.core.assist.DiscCacheUtil
 com.nostra13.universalimageloader.core.assist.FailReason:
-====    37:37:public com.nostra13.universalimageloader.core.assist.FailReason$FailType getType()
 ====    42:42:public java.lang.Throwable getCause()
 com.nostra13.universalimageloader.core.assist.ImageSize:
     private static final int TO_STRING_MAX_LENGHT
@@ -755,12 +752,16 @@ com.unionpay.uppay.util.PayEngine:
 com.unionpay.uppay.util.h:
 ====    public final android.graphics.drawable.BitmapDrawable a(android.content.Context,java.lang.String)
 com.yidejia.app.mall.BuildConfig
-com.yidejia.app.mall.DBManager
 com.yidejia.app.mall.DataCleanManager:
-====    18:18:public DataCleanManager()
-====    58:59:public static void cleanDatabaseByName(android.content.Context,java.lang.String)
-====    92:93:public static void cleanCustomCache(java.lang.String)
-====    103:111:public static varargs void cleanApplicationData(android.content.Context,java.lang.String[])
+====    19:19:public DataCleanManager()
+====    47:49:public static void cleanSharedPreference(android.content.Context)
+====    59:60:public static void cleanDatabaseByName(android.content.Context,java.lang.String)
+====    93:94:public static void cleanCustomCache(java.lang.String)
+====    104:112:public static varargs void cleanApplicationData(android.content.Context,java.lang.String[])
+====    163:174:public static java.lang.String getPathSize(java.lang.String)
+====    207:218:public static java.lang.String getPathSize(java.io.File)
+com.yidejia.app.mall.ImagePagerActivity:
+    private static final java.lang.String STATE_POSITION
 com.yidejia.app.mall.MainActivity:
     private com.handmark.pulltorefresh.library.PullToRefreshScrollView mPullToRefreshScrollView
     protected android.support.v4.app.ListFragment mFrag
@@ -794,7 +795,6 @@ com.yidejia.app.mall.R$id
 com.yidejia.app.mall.R$integer
 com.yidejia.app.mall.R$layout
 com.yidejia.app.mall.R$menu
-com.yidejia.app.mall.R$raw
 com.yidejia.app.mall.R$string
 com.yidejia.app.mall.R$style
 com.yidejia.app.mall.R$styleable
@@ -1058,7 +1058,11 @@ com.yidejia.app.mall.fragment.WaitDeliverFragment$1
 com.yidejia.app.mall.fragment.WaitPayFragment
 com.yidejia.app.mall.fragment.WaitPayFragment$1
 com.yidejia.app.mall.initview.GoodsView:
-====    527:533:private void changeFravoriteBg()
+====    700:706:private void changeFravoriteBg()
+====    731:784:private void setAnim(android.view.View)
+====    796:806:private android.view.View addViewToAnimLayout(android.view.ViewGroup,android.view.View,int[])
+====    331:331:static synthetic void access$13(com.yidejia.app.mall.initview.GoodsView,int)
+com.yidejia.app.mall.initview.GoodsView$8
 com.yidejia.app.mall.interfacecallback.CallBack
 com.yidejia.app.mall.jni.JNICallBack:
 ====    20:20:public java.lang.String hostUrl()
@@ -1140,7 +1144,7 @@ com.yidejia.app.mall.net.ConnectionDetector:
 com.yidejia.app.mall.net.GetImageUrlPrefix
 com.yidejia.app.mall.net.HttpAddressParam
 com.yidejia.app.mall.net.HttpGetConn:
-====    21:31:public HttpGetConn(java.lang.String)
+====    23:33:public HttpGetConn(java.lang.String)
 com.yidejia.app.mall.net.HttpPostConn:
     private java.lang.String[] keys
     private java.lang.String[] values
@@ -1322,6 +1326,8 @@ com.yidejia.app.mall.util.Consts:
     public static final int NEW_ADDRESS_REQUEST
     public static final int NEW_ADDRESS_RESPONSE
     public static final java.lang.String CST_NEWADDRESS
+    public static final java.lang.String IMAGES
+    public static final java.lang.String IMAGE_POSITION
 ====    9:10:public void setMiStr(java.lang.String)
 com.yidejia.app.mall.util.DESUtil
 com.yidejia.app.mall.util.DPIUtil
@@ -1539,7 +1545,7 @@ com.yidejia.app.mall.view.WaitPayActivity$MyOnClickListener
 com.yidejia.app.mall.view.WaitPayActivity$MyOnPageChangeListener
 com.yidejia.app.mall.widget.DateTimePickerDialog:
     private java.lang.String initDateTime
-====    40:51:public void init(android.widget.DatePicker,android.widget.TimePicker)
+====    43:54:public void init(android.widget.DatePicker,android.widget.TimePicker)
 com.yidejia.app.mall.widget.RefreshView
 com.yidejia.app.mall.widget.YLImageButton:
 ====    36:37:public void setTextColor(int)

@@ -122,11 +122,12 @@
                     android:src="@drawable/buy_car" />
                  <ImageView
                     android:id="@+id/add_to_cart_press"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:clickable="false"
                     android:focusable="true"
                     android:paddingLeft="3dp"
+                    android:visibility="gone"
                     android:src="@drawable/buy_car"
                    />
                 

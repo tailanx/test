@@ -101,7 +101,10 @@ public class GoodsView {
 		try {
 			if (info == null)
 				return;
+			add_to_cart_press = (ImageView) activity.findViewById(R.id.add_to_cart_press);
+			
 			manage = new CartsDataManage();
+			
 			historyDataManage = new BrowseHistoryDataManage();
 			cart_num = manage.getCartAmount();
 			final Cart cart = new Cart();
@@ -110,7 +113,7 @@ public class GoodsView {
 			cart.setUId(productId);
 			cart.setImgUrl(info.getImgUrl());
 			//
-			imgIcon = (ImageView) view.findViewById(R.id.add_to_cart_press);
+			imgIcon = (ImageView) view.findViewById(R.id.add_to_cart);
 			// 商品名称
 			TextView base_info_content_text = (TextView) view
 					.findViewById(R.id.base_info_content_text);
@@ -203,9 +206,9 @@ public class GoodsView {
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
-					
-						setAnim(imgIcon);
-						
+//						add_to_cart_press.setVisibility(View.VISIBLE);
+//						setAnim(add_to_cart_press);
+//						add_to_cart_press.setVisibility(View.GONE);
 						cart_num++;
 						boolean istrue = manage.addCart(cart);
 						Intent intent = new Intent(Consts.UPDATE_CHANGE);
@@ -306,6 +309,9 @@ public class GoodsView {
 			} else {
 				add_favorites.setImageResource(R.drawable.add_favorites1);
 			}
+			
+			
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -316,6 +322,8 @@ public class GoodsView {
 	}
 
 	private ImageView add_favorites;// 加入收藏的按钮
+	
+	private ImageView add_to_cart_press;//加入购物车动画图片
 
 	// 跳转购物车的按钮
 	private Button shopping_cart_button;
@@ -374,6 +382,7 @@ public class GoodsView {
 				// matchchild.setImageResource(R.drawable.product_photo2);
 				// baseInfoImageLayout.addView(child, lp_base);//
 				// matchGoodsImageLayout.addView(matchchild, lp_match);//
+				
 				index = i;
 				LinearLayout.LayoutParams lp_base = new LinearLayout.LayoutParams(
 						(new Float(px)).intValue(), (new Float(px)).intValue());// LayoutParams.WRAP_CONTENT);//(new
@@ -405,6 +414,11 @@ public class GoodsView {
 						activity.startActivity(intent);
 					}
 				});
+				
+				if(i == 0) {
+					imageLoader.displayImage(bannerArray.get(i).getImgUrl(),
+							add_to_cart_press, options, animateFirstListener);
+				}
 				
 //				final Bitmap bm = BitmapFactory.decodeFile(bannerArray.get(i)
 //						.getImgUrl());
@@ -719,14 +733,14 @@ public class GoodsView {
 		mScaleAnimation.setFillAfter(true);
 
 		int[] start_location = new int[2];
-		imgIcon.getLocationInWindow(start_location);
-		int x = imgIcon.getWidth();
+		v.getLocationInWindow(start_location);
+		int x = v.getWidth();
 		defaultWidth = displayMetrics.widthPixels;
 		marginRight = defaultWidth - x - start_location[0];
-		ViewGroup vg = (ViewGroup) imgIcon.getParent();
-		vg.removeView(imgIcon);
+		ViewGroup vg = (ViewGroup) v.getParent();
+		vg.removeView(v);
 		// 将组件添加到我们的动画层上
-		View view = addViewToAnimLayout(anim_mask_layout, imgIcon,start_location);
+		View view = addViewToAnimLayout(anim_mask_layout, v,start_location);
 		int[] end_location = new int[2];
 		shopping_cart_button.getLocationInWindow(end_location);
 		// 计算位移

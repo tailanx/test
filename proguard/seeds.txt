@@ -9721,6 +9721,8 @@ com.yidejia.app.mall.ComposeActivity
 com.yidejia.app.mall.ComposeActivity: ComposeActivity()
 com.yidejia.app.mall.GoodsInfoActivity
 com.yidejia.app.mall.GoodsInfoActivity: GoodsInfoActivity()
+com.yidejia.app.mall.ImagePagerActivity
+com.yidejia.app.mall.ImagePagerActivity: ImagePagerActivity()
 com.yidejia.app.mall.MainActivity
 com.yidejia.app.mall.MainActivity: MainActivity()
 com.yidejia.app.mall.MainFragmentActivity
@@ -9798,6 +9800,8 @@ com.yidejia.app.mall.view.AboutActivity
 com.yidejia.app.mall.view.AboutActivity: AboutActivity()
 com.yidejia.app.mall.view.AddressActivity
 com.yidejia.app.mall.view.AddressActivity: AddressActivity()
+com.yidejia.app.mall.view.AgreementActivity
+com.yidejia.app.mall.view.AgreementActivity: AgreementActivity()
 com.yidejia.app.mall.view.AllOrderActivity
 com.yidejia.app.mall.view.AllOrderActivity: AllOrderActivity()
 com.yidejia.app.mall.view.AllOrderActivity: void doClick(android.view.View)

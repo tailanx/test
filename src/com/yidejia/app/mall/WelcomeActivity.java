@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
@@ -39,9 +40,9 @@ public class WelcomeActivity extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_welcome);
 		
-//		if((getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE) != 0){
-//			android.os.Process.killProcess(android.os.Process.myPid());
-//		}
+		if((getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE) != 0){
+			android.os.Process.killProcess(android.os.Process.myPid());
+		}
 		if(ConnectionDetector.isConnectingToInternet(this)){
 			checkUpdate();
 		} else {
@@ -171,7 +172,7 @@ public class WelcomeActivity extends Activity {
 				startActivity(intent);
 				WelcomeActivity.this.finish();
 			}
-		}, 2 * 1000);
+		}, 1 * 1000);
 	}
 	
 }

@@ -70,19 +70,19 @@ public class TaskReturn {
 		contact = contactEditText.getText().toString().trim();
 		contact_manner = phoneEditText.getText().toString().trim();
 		desc = msgEditText.getText().toString().trim();
-		if(cause.isEmpty()){
+		if(null == cause || "".equals(cause)){
 			Toast.makeText(activity, "请选择退换原因!", Toast.LENGTH_LONG).show();
 			return;
 		}
-		if(contact.isEmpty()){
+		if(null == contact || "".equals(contact)){
 			Toast.makeText(activity, "联系人不能为空!", Toast.LENGTH_LONG).show();
 			return;
 		}
-		if(contact_manner.isEmpty()){
+		if(null == contact_manner || "".equals(contact_manner)){
 			Toast.makeText(activity, "联系方式不能为空!", Toast.LENGTH_LONG).show();
 			return;
 		}
-		if(desc.isEmpty()){
+		if(null == desc || "".equals(desc)){
 			Toast.makeText(activity, "原因描述不能为空!", Toast.LENGTH_LONG).show();
 			return;
 		}
