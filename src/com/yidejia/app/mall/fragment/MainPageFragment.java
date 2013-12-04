@@ -195,8 +195,8 @@ public class MainPageFragment extends SherlockFragment {
 
 		@Override
 		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+			// TODO Auto-generated method stub
 			try {
-				// TODO Auto-generated method stub
 //				String label = getResources().getString(R.string.update_time)
 //						+ DateUtils.formatDateTime(getSherlockActivity()
 //								.getApplicationContext(), System
@@ -218,9 +218,7 @@ public class MainPageFragment extends SherlockFragment {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				Toast.makeText(getSherlockActivity(), getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
-				Toast.makeText(getSherlockActivity(),
-						getResources().getString(R.string.bad_network),
-						Toast.LENGTH_SHORT).show();
+				mPullToRefreshScrollView.onRefreshComplete();
 			}
 		}
 
@@ -609,6 +607,7 @@ public class MainPageFragment extends SherlockFragment {
 				if (result) {
 					try {
 
+						bannerIndex = 0;
 						layout.removeAllViews();
 						getMainListFirstItem();
 						layout.addView(mMainView);
@@ -625,7 +624,6 @@ public class MainPageFragment extends SherlockFragment {
 							// TODO: handle exception
 							e.printStackTrace();
 						}
-
 						main_mall_notice_content.setText(ggTitleArray.get(0));
 					} catch (Exception e) {
 						// TODO: handle exception
@@ -653,7 +651,7 @@ public class MainPageFragment extends SherlockFragment {
 			if (isFirstIn) {
 //				bar.dismiss();
 				bar2.dismiss();
-				if(result) timer.schedule(timetask, delay, delay);
+				if(result) timer.schedule(timetask, DELAY, DELAY);
 				isFirstIn = false;
 			} else {
 
@@ -678,7 +676,7 @@ public class MainPageFragment extends SherlockFragment {
 		super.onStart();
 		Log.d(TAG, "TestFragment-----onStart");
 		startTimer();
-//		timer.schedule(timetask, delay, delay);
+//		timer.schedule(timetask, DELAY, DELAY);
 	}
 	
 	
@@ -698,7 +696,7 @@ public class MainPageFragment extends SherlockFragment {
 		stopTimer();
 	}
 
-	private long delay = 5000;
+	private long DELAY = 5000;
 	
 	private void stopTimer(){  
         
