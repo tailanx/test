@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/main_bg"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/agreement_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="伊的家服务条款"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/agreement_general"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:layout_margin="8dp"
+            android:text="一、总则"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/agreement_general_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:layout_margin="8dp"
+            android:text="\t\t伊的家拥有本站各项电子服务的所有权和运作权。消费者同意所有服务条款并完成注册程序，才能成为本站的用户。用户在本站进行注册的行为即视为同意受本协议的约束。用户承诺在本站注册和交易 时具备完全民事权利能力和行为能力，并对其提供的信息的真实性负责。"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/agreement_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:layout_margin="8dp"
+            android:text="二、用户账户与密码"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/agreement_user_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:layout_margin="8dp"
+            android:text="\t\t用户应妥善保管账户和密码，凡使用用户账户的行为均视为用户的行为。"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/agreement_privacy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:layout_margin="8dp"
+            android:text="三、用户个人隐私"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/agreement_privacy_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:layout_margin="8dp"
+            android:text="\t\t用户确认并同意其提供的个人信息可以在本站被合法使用。本站不会将该信息透露给他人，但用户授权本站向他人提供个人信息或法律法规要求本站提供用户个人资料的情形除外。
+			\n\t\t用户承诺不将在本站的账户借与他人使用或发生买卖账户的行为，若发生此类行为用户自行承担相应法律结果，且在此情况下本站不承诺用户个人隐私安全，并有权对可疑账户进行权限限制，以保障 正常用户的安全使用。
+			\n\t\t用户自主在本站的互动社区发言、商品评论、个人头像上传过程中，承诺已对个人隐私的公开的可能性的充分理解，本站对用户的自主公开活动不负相关责任。"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/agreement_manage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:layout_margin="8dp"
+            android:text="四、用户管理"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/agreement_manage_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:layout_margin="8dp"
+            android:text="\t\t用户同意在本站的一切活动均遵守国家法律、法规和规章，严格遵守以下条款：
+			\n\t\t1、不利用本站从事非法活动；
+			\n\t\t2、不干扰网络服务，遵守网络服务的相关惯例；
+			\n\t\t3、不传输或发布中伤他人的、不文明的信息资料、不发布显失常理的极端性言论；
+			\n\t\t4、不发布涉及恶意竞争的评论、广告和无意义的文字。
+			\n\t\t若用户有上述行为，本站有权独立判断并做出暂停用户账号、屏蔽不当言论的处理。用户若在本站发布违反法律的言论，本站系统记录可作为用户违反法律的证据。"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/agreement_produce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:layout_margin="8dp"
+            android:text="五、商品价格与数量"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/agreement_product_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:layout_margin="8dp"
+            android:text="\t\t本站商品的页面标示价格之外，还有可能根据促销活动和会员级别等的安排有所折扣，用户所购买的商品价格以支付界面的最终价格为准，用户承诺在支付前对商品的价格已充分了解并认可。发生退货时，也以用户实际支付的款项为准。用户所订购的商品，如发生缺货，用户有权取消订单，本站也可全部或部分取消订单并在3日内退回用户所预先支付的款项（不计利息），本站不承担因缺货未能成交而导致的法律义务和责任。"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/agreement_notify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:layout_margin="8dp"
+            android:text="六、通告"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/agreement_notify_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:layout_margin="8dp"
+            android:text="\t\t用户确认，本协议的修改、服务变更等所有发给用户的通告均可通过页面公告、站内短迅或电子邮件的方式传送，送达用户后用户继续使用本站服务的，视为用户同意该变更。
+			\n\t\t本站可根据实际情况随时终止一项或多项网络服务，该终止服务的通告以页面公告、站内短迅或电子邮件的方式送达用户后生效。"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/agreement_duty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:layout_margin="8dp"
+            android:text="七、责任限制"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/agreement_duty_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:layout_margin="8dp"
+            android:text="\t\t如因意外事件、第三方原因或本站无法合理控制的原因使本站系统崩溃或无法正常使用导致网上交易无法完成或丢失有关的信息、记录等，本站不承担责任。但是本站会尽可能合理地协助处理善后事宜，并努力使客户免受经济损失。
+			\n\t\t在法律允许的范围内，本站对用户的间接损失不承担责任，并且本站承担的直接责任以用户发生索赔的商品的价值为限。"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/agreement_property"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:layout_margin="8dp"
+            android:text="八、知识产权"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/agreement_property_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:layout_margin="8dp"
+            android:text="\t\t本站上的所有内容诸如文字、视频、音频、图像、图表、标识、按钮图标的知识产权均为本站或其内容提供者享有。未经本站或者相关内容提供者的书面许可，用户不得对上述内容或其任何部分进行复制、链接、仿造或以其他方式加以利用。
+			\n\t\t用户同意，用户在本站发表的文章版权归用户和本站共同所有。"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/agreement_law"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:layout_margin="8dp"
+            android:text="九、法律管辖和适用"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/agreement_law_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:layout_margin="8dp"
+            android:text="\t\t本协议的订立、执行和解释及争议的解决均适用中国法律。如双方就本协议内容发生争议时，应尽力友好协商解决，协商不成时，任何一方均可向本站所在地的人民法院提起诉讼。"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</ScrollView>

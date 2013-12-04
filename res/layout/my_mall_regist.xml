@@ -177,15 +177,17 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/regist_agreement"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@id/my_mall_regist_checkbox"
                     android:layout_marginLeft="8dp"
                     android:layout_toRightOf="@id/my_mall_regist_checkbox"
                     android:linksClickable="true"
+                    android:background="#00000000"
                     android:text="《服务条款》"
                     android:textColor="#ffee0000"
-                    android:textSize="12sp" />
+                    android:textSize="16sp" />
             </RelativeLayout>
 
             <LinearLayout

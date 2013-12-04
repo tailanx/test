@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yidejia.app.mall"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.1" >
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -202,6 +202,9 @@ android:uiOptions="splitActionBarWhenNarrow"
             android:screenOrientation="portrait" />
            <activity
             android:name="com.yidejia.app.mall.ImagePagerActivity"
+            android:screenOrientation="portrait" />
+          <activity
+            android:name="com.yidejia.app.mall.view.AgreementActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.unionpay.uppay.PayActivityEx"
