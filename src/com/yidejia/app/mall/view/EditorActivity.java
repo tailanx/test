@@ -12,6 +12,7 @@ import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -70,13 +71,14 @@ public class EditorActivity extends SherlockActivity {
 							@Override
 							public void onClick(DialogInterface arg0, int arg1) {
 								DataCleanManager.cleanApplicationData(EditorActivity.this);
+								WebView webView = new WebView(EditorActivity.this);
+								webView.clearCache(true);
+								webView.clearHistory();
+								webView.clearFormData();
 								new CleanImageCache().clearAllCache();
 								Toast.makeText(EditorActivity.this, "清除成功",
 										Toast.LENGTH_LONG).show();
-								ImageLoader imageLoader = ImageLoader.getInstance();
-								imageLoader.clearMemoryCache();
-								imageLoader.clearDiscCache();
-								editor_cache_size.setText(DataCleanManager.getTotalSize(EditorActivity.this));
+								editor_cache_size.setText("0.00B");
 							}
 						}).setNegativeButton("取消", null).create();
 		dialogHelp = helpbuilder.setTitle("伊的家服务条款")

@@ -116,15 +116,14 @@ public class DataCleanManager {
      * @param context 
      */ 
     public static void cleanApplicationData(Context context) { 
+//    	deleteFilesByDirectory(new File("/data/data/" + context.getPackageName() + "/cache/webviewCacheChromium"));
     	cleanInternalCache(context); 
     	cleanExternalCache(context); 
     	cleanDatabases(context); 
 //    	cleanSharedPreference(context); 
     	cleanFiles(context); 
-//    	cleanCustomCache(filePath);
-    	deleteFilesByDirectory(new File("/data/data/" + context.getPackageName() + "/app_cache"));
-    	deleteFilesByDirectory(new File("/data/data/" + context.getPackageName() + "/app_database"));
-    	deleteFilesByDirectory(new File("/data/data/" + context.getPackageName() + "/cache/webviewCacheChromium"));
+//    	deleteFilesByDirectory(new File("/data/data/" + context.getPackageName() + "/app_cache"));
+//    	deleteFilesByDirectory(new File("/data/data/" + context.getPackageName() + "/app_database"));
     } 
 
 
@@ -148,7 +147,7 @@ public class DataCleanManager {
 //                + context.getPackageName() + "/shared_prefs"));
     	if (Environment.getExternalStorageState().equals( 
                 Environment.MEDIA_MOUNTED)) { 
-//    		size += getPathLegth(context.getExternalCacheDir());
+    		size += getPathLegth(context.getExternalCacheDir());
     	}
     	return formatFileSizeToString(size);
     }
