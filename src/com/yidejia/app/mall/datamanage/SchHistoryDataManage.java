@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
+import com.yidejia.app.mall.main.HomeMallActivity;
 /**
  * 搜索历史模块
  * <p>
@@ -34,9 +35,9 @@ public class SchHistoryDataManage {
 	private String TAG = SchHistoryDataManage.class.getName();
 	
 	public SchHistoryDataManage(){
-		sp = MainFragmentActivity.MAINACTIVITY.getSharedPreferences("History", Activity.MODE_APPEND );
+		sp = HomeMallActivity.MAINACTIVITY.getSharedPreferences("History", Activity.MODE_APPEND );
 		historyArray = new ArrayList<String>();
-		myApplication = (MyApplication)MainFragmentActivity.MAINACTIVITY.getApplication();
+		myApplication = (MyApplication)HomeMallActivity.MAINACTIVITY.getApplication();
 //		myApplication = new MyApplication();
 //		schHstryAmount = myApplication.getSchHstryAmount();
 		schHstryAmount = getHistoryAmount();

@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -29,16 +28,20 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.SearchResultActivity;
 import com.yidejia.app.mall.adapter.SelledResultListAdapter;
 import com.yidejia.app.mall.datamanage.SearchDataManage;
-import com.yidejia.app.mall.exception.NullSearchResultEx;
 import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.initview.SRViewWithImage;
 import com.yidejia.app.mall.model.SearchItem;
 import com.yidejia.app.mall.net.search.SearchDataUtil;
+import com.yidejia.app.mall.view.ImageLoaderUtil;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class SelledResultFragment extends SherlockFragment {
@@ -77,6 +80,9 @@ public class SelledResultFragment extends SherlockFragment {
 	
 	private boolean isHasResult = true;//搜索是否有结果
 	private boolean isNoMore = false;//判断是否还有更多数据,true为没有更多了
+	private ImageLoader imageloader;
+	private ImageLoadingListener imageLoadingListener;
+	private DisplayImageOptions options;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -94,6 +100,10 @@ public class SelledResultFragment extends SherlockFragment {
 		Log.e(TAG, "new search");
 //		manage = new SearchDataManage(getSherlockActivity().getApplicationContext());
 		Log.e(TAG, "before search");
+		ImageLoaderUtil loaderUtil = new ImageLoaderUtil();
+		imageloader =  loaderUtil.getImageLoader();
+		imageLoadingListener = loaderUtil.getAnimateFirstListener();
+		options = loaderUtil.getOptions();
 //		try {
 //			searchItemsArray = manage.getSearchArray(name, fun, brand, price, order, ""+fromIndex, ""+amount);
 //			Log.e(TAG, "after search");
@@ -166,7 +176,7 @@ public class SelledResultFragment extends SherlockFragment {
 //		selledListView.setVisibility(View.VISIBLE);
 		if (isFirstIn) {
 			searchListAdapter = new SelledResultListAdapter(getActivity(),
-					searchItemsArray);
+					searchItemsArray,imageloader,imageLoadingListener,options);
 			selledListView.setAdapter(searchListAdapter);
 		} else {
 			searchListAdapter.notifyDataSetChanged();
@@ -278,9 +288,10 @@ public class SelledResultFragment extends SherlockFragment {
 
 	@Override
 	public void onDestroy() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stu
 		super.onDestroy();
 		closeTask();
+		imageloader.destroy();
 	}
 
 	@Override
@@ -457,4 +468,11 @@ public class SelledResultFragment extends SherlockFragment {
 	}
 	
 	private boolean isTimeout = false;
+	@Override
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		super.onDestroyView();
+		imageloader.init(ImageLoaderConfiguration.createDefault(getSherlockActivity()));
+		imageloader.stop();
+	}
 }

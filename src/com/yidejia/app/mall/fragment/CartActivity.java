@@ -324,8 +324,8 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 		ScrollView scrollView = (ScrollView) view
 				.findViewById(R.id.shopping_cart_item_goods_scrollView);
 		
-		cartUtil = new CartUtil(activity, layout,
-				counTextView, sumTextView, mBox);
+//		cartUtil = new CartUtil(activity, layout,
+//				counTextView, sumTextView, mBox);
 
 		cartUtil.AllComment();
 
@@ -524,71 +524,71 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			// TODO Auto-generated method stub
-			String action = intent.getAction();
-//			FragmentTransaction ft = getFragmentManager().beginTransaction();
-
-			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
-				sumCart = dataManage.getCartAmount();
-				Log.i("voucher",sumCart+"    sumCart");
-				
-//				activity = CartActivity.this.getSherlockActivity();
-				if (sumCart == 0) {
-					Log.e("NoProduceFragment", "DELETE_CART");
-					FragmentTransaction ft = getFragmentManager().beginTransaction();
-					if(fragment.isAdded()) ft.hide(CartActivity.this).show(fragment).commitAllowingStateLoss();//.show(fragment).
-					else ft.hide(CartActivity.this).replace(R.id.main_fragment, fragment).commitAllowingStateLoss();
-					shoppingCartTopay.setVisibility(View.GONE);		
-					
-				} else {
-					layout.removeAllViews();
-					Log.e("NoProduceFragment", "DELETE_CART2");
-					CartUtil cartUtil = new CartUtil(getSherlockActivity(),
-							layout, counTextView, sumTextView, mBox);
-					cartUtil.AllComment();
-					sum = Float.parseFloat(sumTextView.getText().toString());
-//					
-				}
-			} 
-				else if (Consts.UPDATE_CHANGE.equals(action)) {
-					
-				layout.removeAllViews();
-				Log.e("NoProduceFragment", "DELETE_CART1");
-//				CartUtil.list.clear();
+//			// TODO Auto-generated method stub
+//			String action = intent.getAction();
+////			FragmentTransaction ft = getFragmentManager().beginTransaction();
+//
+//			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
 //				sumCart = dataManage.getCartAmount();
-				
-				CartUtil cartUtil = new CartUtil(activity, layout,
-						counTextView, sumTextView, mBox);
-				cartUtil.AllComment();
-				
-				sum = Float.parseFloat(sumTextView.getText().toString());
-			}
-				else if (Consts.DELETE_CART.equals(action)) {
-				sumCart = dataManage.getCartAmount();
-				if (sumCart == 0) {
-//					Log.e("NoProduceFragment", "CarActivity");
-					shoppingCartTopay.setVisibility(View.GONE);
-					FragmentTransaction ft = getFragmentManager().beginTransaction();
-					
-					if(fragment.isAdded()) ft.hide(CartActivity.this).show(fragment).commitAllowingStateLoss();//.show(fragment).
-					else ft.replace(R.id.main_fragment, fragment).commitAllowingStateLoss();
-					
-//					if(fragment.isAdded()) ft.hide(CartActivity.this).commitAllowingStateLoss();
+//				Log.i("voucher",sumCart+"    sumCart");
+//				
+////				activity = CartActivity.this.getSherlockActivity();
+//				if (sumCart == 0) {
+//					Log.e("NoProduceFragment", "DELETE_CART");
+//					FragmentTransaction ft = getFragmentManager().beginTransaction();
+//					if(fragment.isAdded()) ft.hide(CartActivity.this).show(fragment).commitAllowingStateLoss();//.show(fragment).
 //					else ft.hide(CartActivity.this).replace(R.id.main_fragment, fragment).commitAllowingStateLoss();
-				} else {
-					layout.removeAllViews();
-//					Log.e("NoProduceFragment", "CarActivity!=0");
-					CartUtil cartUtil = new CartUtil(activity,
-							layout, counTextView, sumTextView, mBox);
-					cartUtil.AllComment();
-					sum = Float.parseFloat(sumTextView.getText().toString());
-				}
-				// sumTextView.setText(""+0.00);
-				// counTextView.setText(""+0);
-			}
+//					shoppingCartTopay.setVisibility(View.GONE);		
+//					
+//				} else {
+//					layout.removeAllViews();
+//					Log.e("NoProduceFragment", "DELETE_CART2");
+//					CartUtil cartUtil = new CartUtil(getSherlockActivity(),
+//							layout, counTextView, sumTextView, mBox);
+//					cartUtil.AllComment();
+//					sum = Float.parseFloat(sumTextView.getText().toString());
+////					
+//				}
+//			} 
+//				else if (Consts.UPDATE_CHANGE.equals(action)) {
+//					
+//				Log.e("NoProduceFragment", "DELETE_CART1");
+////				CartUtil.list.clear();
+////				sumCart = dataManage.getCartAmount();
+//				
+//				layout.removeAllViews();
+//				CartUtil cartUtil = new CartUtil(activity, layout,
+//						counTextView, sumTextView, mBox);
+//				cartUtil.AllComment();
+//				
+//				sum = Float.parseFloat(sumTextView.getText().toString());
+//			}
+//				else if (Consts.DELETE_CART.equals(action)) {
+//				sumCart = dataManage.getCartAmount();
+//				if (sumCart == 0) {
+////					Log.e("NoProduceFragment", "CarActivity");
+//					shoppingCartTopay.setVisibility(View.GONE);
+//					FragmentTransaction ft = getFragmentManager().beginTransaction();
+//					
+//					if(fragment.isAdded()) ft.hide(CartActivity.this).show(fragment).commitAllowingStateLoss();//.show(fragment).
+//					else ft.replace(R.id.main_fragment, fragment).commitAllowingStateLoss();
+//					
+////					if(fragment.isAdded()) ft.hide(CartActivity.this).commitAllowingStateLoss();
+////					else ft.hide(CartActivity.this).replace(R.id.main_fragment, fragment).commitAllowingStateLoss();
+//				} else {
+//					layout.removeAllViews();
+////					Log.e("NoProduceFragment", "CarActivity!=0");
+//					CartUtil cartUtil = new CartUtil(activity,
+//							layout, counTextView, sumTextView, mBox);
+//					cartUtil.AllComment();
+//					sum = Float.parseFloat(sumTextView.getText().toString());
+//				}
+//				// sumTextView.setText(""+0.00);
+//				// counTextView.setText(""+0);
+//			}
 		}
 	}
-	
-	
+//	
+//	
 
 }

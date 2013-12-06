@@ -28,6 +28,8 @@ import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.Check4Update;
+import com.yidejia.app.mall.main.HomeLogActivity;
+import com.yidejia.app.mall.main.HomeMallActivity;
 import com.yidejia.app.mall.util.Consts;
 
 public class EditorActivity extends SherlockActivity {
@@ -108,11 +110,10 @@ public class EditorActivity extends SherlockActivity {
 							public void onClick(DialogInterface arg0, int arg1) {
 								myApplication.setIsLogin(false);
 //								Intent intent = new Intent(EditorActivity.this, MainFragmentActivity.class);
-								Intent  intent = new Intent();
-								intent.setAction(Consts.RETURN_BACk);
-								EditorActivity.this.sendBroadcast(intent);
-//								EditorActivity.this.startActivity(intent);
-								
+								Intent  intent = new Intent(EditorActivity.this,HomeMallActivity.class);
+//								intent.setAction(Consts.RETURN_BACk);
+//								EditorActivity.this.sendBroadcast(intent);
+								EditorActivity.this.startActivity(intent);
 								EditorActivity.this.finish();
 							}
 

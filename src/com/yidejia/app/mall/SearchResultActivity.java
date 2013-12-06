@@ -51,12 +51,17 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 			setTitle(title);
 //			bundle.putString("order", "sells");
 		}
-		setContentView(R.layout.activity_search_result_info_layout);
-		setSlidingMenuConfig();
-		setRightFilterMenu(savedInstanceState);
-		Log.e("SearchResultActivity", "begin initView");
-		initView();
-		Log.e("SearchResultActivity", "finish initView");
+		try {
+			setContentView(R.layout.activity_search_result_info_layout);
+			setSlidingMenuConfig();
+			setRightFilterMenu(savedInstanceState);
+			Log.e("SearchResultActivity", "begin initView");
+			initView();
+			Log.e("SearchResultActivity", "finish initView");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 //		ListView resultList = (ListView) findViewById(R.id.search_listview);
 //		resultList.setAdapter(new SearchResultListAdapter(SearchResultActivity.this));
 		
@@ -168,8 +173,8 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 		if (savedInstanceState == null) {
 			FragmentTransaction t = this.getSupportFragmentManager()
 					.beginTransaction();
-			mFrag = new FilterFragment();
-			t.replace(R.id.menu_frame, mFrag);
+				mFrag = new FilterFragment();
+			t.add(R.id.menu_frame, mFrag);
 			t.commit();
 		} else {
 			mFrag = (Fragment) this.getSupportFragmentManager()

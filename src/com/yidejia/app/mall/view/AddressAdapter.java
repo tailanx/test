@@ -29,6 +29,7 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.exception.TimeOutEx;
+import com.yidejia.app.mall.main.HomeMallActivity;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.address.DeleteUserAddress;
@@ -60,7 +61,7 @@ public class AddressAdapter extends BaseAdapter {
 		
 		delAddress = new DeleteUserAddress(context);
 		
-		sp = MainFragmentActivity.MAINACTIVITY.getSharedPreferences("StateCBId", Activity.MODE_PRIVATE);
+		sp = HomeMallActivity.MAINACTIVITY.getSharedPreferences("StateCBId", Activity.MODE_PRIVATE);
 		Editor editor = sp.edit();
 		editor.putInt("stateCBId", temp);
 		editor.commit();

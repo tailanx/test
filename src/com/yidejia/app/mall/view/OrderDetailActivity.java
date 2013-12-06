@@ -252,4 +252,10 @@ public class OrderDetailActivity extends SherlockFragmentActivity {
 				.showImageForEmptyUri(R.drawable.image_bg)
 				.cacheInMemory(true).cacheOnDisc(true).build();
 	}
+	@Override
+		protected void onDestroy() {
+			// TODO Auto-generated method stub
+			super.onDestroy();
+			imageLoader.destroy();
+		}
 }

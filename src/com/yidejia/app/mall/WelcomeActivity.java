@@ -1,5 +1,6 @@
 package com.yidejia.app.mall;
 
+import com.yidejia.app.mall.main.HomeMallActivity;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.HttpGetVersionConn;
 
@@ -167,7 +168,7 @@ public class WelcomeActivity extends Activity {
 			public void run() {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(WelcomeActivity.this,
-						MainFragmentActivity.class);
+						HomeMallActivity.class);
 				startActivity(intent);
 				WelcomeActivity.this.finish();
 			}

@@ -2,16 +2,13 @@ package com.yidejia.app.mall.view;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.Callable;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -36,17 +33,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.UserPayActivity;
-import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.ExpressDataManage;
-import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.datamanage.PreferentialDataManage;
 import com.yidejia.app.mall.datamanage.VoucherDataManage;
 import com.yidejia.app.mall.exception.TimeOutEx;
-import com.yidejia.app.mall.fragment.CartActivity.InnerReceiver;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Express;
@@ -56,8 +54,6 @@ import com.yidejia.app.mall.net.address.GetUserAddressList;
 import com.yidejia.app.mall.net.order.SaveOrder;
 import com.yidejia.app.mall.net.voucher.Voucher;
 import com.yidejia.app.mall.util.Consts;
-import com.yidejia.app.mall.util.Http;
-import com.yidejia.app.mall.util.MessageUtil;
 import com.yidejia.app.mall.util.PayUtil;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
@@ -333,6 +329,11 @@ public class CstmPayActivity extends SherlockActivity {
 			filter.addAction(Consts.CST_NEWADDRESS);
 			registerReceiver(receiver, filter);
 			
+			ImageLoaderUtil imageLoaderUtil = new ImageLoaderUtil();
+			imageLoader  = imageLoaderUtil.getImageLoader();
+			listener = imageLoaderUtil.getAnimateFirstListener();
+			options = imageLoaderUtil.getOptions();
+			
 			Intent intent = getIntent();
 			// final String sum = intent.getStringExtra("price");
 			sum = intent.getStringExtra("price");
@@ -426,6 +427,9 @@ public class CstmPayActivity extends SherlockActivity {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
+		
+		imageLoader.init(ImageLoaderConfiguration.createDefault(CstmPayActivity.this));
+		imageLoader.stop();
 		unregisterReceiver(receiver);
 		closeTask();
 		closeVoucherTask();
@@ -567,7 +571,9 @@ public class CstmPayActivity extends SherlockActivity {
 			}
 		}
 	}
-
+	private ImageLoader imageLoader;
+	private ImageLoadingListener listener;
+	private DisplayImageOptions options;
 	private void show(final ArrayList<Cart> carts, boolean isHuanGou) {
 		Log.i(TAG, "show sum:" + sum);
 		setContentView(R.layout.go_pay);
@@ -596,7 +602,9 @@ public class CstmPayActivity extends SherlockActivity {
 
 		setActionbar();
 		layout = (LinearLayout) findViewById(R.id.go_pay_relative2);
-		pay = new PayUtil(CstmPayActivity.this, layout);
+		
+	
+		pay = new PayUtil(CstmPayActivity.this, layout,imageLoader,listener,options);
 
 		reLayout = (RelativeLayout) findViewById(R.id.go_pay_relative);
 		addressRelative = (RelativeLayout) findViewById(R.id.go_pay_relativelayout);

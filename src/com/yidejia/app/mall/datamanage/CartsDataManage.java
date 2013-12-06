@@ -14,6 +14,7 @@ import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
 import com.yidejia.app.mall.MainFragmentActivity;
+import com.yidejia.app.mall.main.HomeMallActivity;
 import com.yidejia.app.mall.model.Cart;
 /**
  * 购物车模块
@@ -42,7 +43,7 @@ public class CartsDataManage {
 	private String TAG = CartsDataManage.class.getName();
 	
 	public CartsDataManage(){
-		sp = MainFragmentActivity.MAINACTIVITY.getSharedPreferences("Cart", Activity.MODE_APPEND );
+		sp = HomeMallActivity.MAINACTIVITY.getSharedPreferences("Cart", Activity.MODE_APPEND );
 		cartsArray = new ArrayList<Cart>();
 	}
 	
