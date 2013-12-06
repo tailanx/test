@@ -296,7 +296,8 @@
     <string name="no_address_content">亲，您还未填写收货地址，是否新增一个</string>
     <string name="time_out">连接超时,请重试!</string>
     <string name="qq_hao">QQ:</string>
- <string name="qq_quen">QQ群:</string>
-  <string name="no_find_data">亲，未搜索岛数据</string>
-  <string name="err_bir">亲，请输入正确的出生日期</string>
-</resources>
+    <string name="qq_quen">QQ群:</string>
+    <string name="no_find_data">亲，未搜索岛数据</string>
+    <string name="err_bir">亲，请输入正确的出生日期</string>
+  	<string name="feedback_opinion">请输入您的反馈意见</string>
+  	<string name="feedback_contact">联系方式:邮箱/QQ/手机</string></resources>
