@@ -251,15 +251,25 @@ public class PreferentialDataManage {
 						specials.setUId(listObject.getString("goods_id"));
 						specials.setImgUrl(ImageUrl.IMAGEURL + listObject.getString("imgname") + "!100");
 						specials.setPrice(listObject.getString("price"));
-						specials.setScores(listObject.getString("score_price"));
+						String score_price = listObject.getString("score_price");
+						specials.setScores(score_price);
 						specials.setBrief(listObject.getString("desc"));
 						//还没有完成
-						if("2".equals(activeId)){
-							freeProductArray.add(specials);
-						} else if("3".equals(activeId)){
-							scoresProductArray.add(specials);
-						} else if("27".equals(activeId)){
-							scoresProductArray.add(specials);
+//						if("2".equals(activeId)){
+//							freeProductArray.add(specials);
+//						} else if("3".equals(activeId)){
+//							scoresProductArray.add(specials);
+//						} else if("27".equals(activeId)){
+//							scoresProductArray.add(specials);
+//						}
+						try {
+							if(Float.parseFloat(score_price) > 0.01F){
+								scoresProductArray.add(specials);
+							} else {
+								freeProductArray.add(specials);
+							}
+						} catch (Exception e){
+							e.printStackTrace();
 						}
 					}
 				} catch(Exception e){

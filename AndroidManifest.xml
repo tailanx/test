@@ -20,7 +20,7 @@
     <application
         android:name="com.yidejia.app.mall.MyApplication"
         android:allowBackup="true"
-        android:debuggable="true"
+        android:debuggable="false"
         android:icon="@drawable/ydj_icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
@@ -39,7 +39,8 @@ android:uiOptions="splitActionBarWhenNarrow"
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
             <meta-data android:name="android.app.searchable"  
-                   android:resource="@xml/main_searchable"/>  
+                   android:resource="@xml/main_searchable"/>  
+
         -->
         <activity
             android:name="com.yidejia.app.mall.MainActivity"
@@ -199,6 +200,9 @@ android:uiOptions="splitActionBarWhenNarrow"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.yidejia.app.mall.ImagePagerActivity"
+            android:screenOrientation="portrait" />
+         <activity
+            android:name="com.yidejia.app.mall.view.AgreementActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.unionpay.uppay.PayActivityEx"

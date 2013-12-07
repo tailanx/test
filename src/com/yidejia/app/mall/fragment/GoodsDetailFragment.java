@@ -71,7 +71,8 @@ public class GoodsDetailFragment extends SherlockFragment{
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+		if(android.os.Build.VERSION.SDK_INT >= 11)
+			webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 		webView.setWebViewClient(new WebViewClient(){
         	@Override
             public void onPageFinished(WebView view, String url) {

@@ -1,23 +1,24 @@
 package com.yidejia.app.mall;
 
-import com.yidejia.app.mall.main.HomeMallActivity;
-import com.yidejia.app.mall.net.ConnectionDetector;
-import com.yidejia.app.mall.net.HttpGetVersionConn;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.AsyncTask.Status;
 import android.view.WindowManager;
 import android.widget.Toast;
+
+import com.yidejia.app.mall.main.HomeMallActivity;
+import com.yidejia.app.mall.net.ConnectionDetector;
+import com.yidejia.app.mall.net.HttpGetVersionConn;
 
 
 public class WelcomeActivity extends Activity {
@@ -40,9 +41,9 @@ public class WelcomeActivity extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_welcome);
 		
-//		if((getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE) != 0){
-//			android.os.Process.killProcess(android.os.Process.myPid());
-//		}
+		if((getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE) != 0){
+			android.os.Process.killProcess(android.os.Process.myPid());
+		}
 		if(ConnectionDetector.isConnectingToInternet(this)){
 			checkUpdate();
 		} else {
@@ -172,7 +173,7 @@ public class WelcomeActivity extends Activity {
 				startActivity(intent);
 				WelcomeActivity.this.finish();
 			}
-		}, 2 * 1000);
+		}, 1 * 1000);
 	}
 	
 }

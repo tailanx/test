@@ -339,7 +339,7 @@ public class MainActivity extends SherlockFragmentActivity {//implements ActionB
 		sm.setMode(SlidingMenu.LEFT_RIGHT);
 		setSlidingActionBarEnabled(true);
 	}
-    */
+    
     @Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -352,7 +352,7 @@ public class MainActivity extends SherlockFragmentActivity {//implements ActionB
 		}
 		return super.onOptionsItemSelected(item);
 	}
-    
+    */
     /* If your min SDK version is < 8 you need to trigger the onConfigurationChanged in ViewFlow manually, like this */	
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {

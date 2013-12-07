@@ -3,6 +3,7 @@ package com.yidejia.app.mall.view;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +32,7 @@ public class RegistActivity extends SherlockActivity {
 	private EditText mEditText2;
 	private Button mButton;
 	private ImageView getCodeImgView;
+	private TextView regist_agreement;
 
 	private String account;
 	private String pwd;
@@ -63,6 +65,7 @@ public class RegistActivity extends SherlockActivity {
 		mButton = (Button) findViewById(R.id.find_password_confirm_button);
 		mBox = (CheckBox) findViewById(R.id.my_mall_regist_checkbox);
 		getCodeImgView = (ImageView) findViewById(R.id.my_mall_regist_password_validation_button);
+		regist_agreement = (TextView) findViewById(R.id.regist_agreement);
 	}
 
 	@Override
@@ -99,6 +102,15 @@ public class RegistActivity extends SherlockActivity {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					getCodeListener();
+				}
+			});
+			
+			regist_agreement.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					goToAgreementAct();
 				}
 			});
 
@@ -209,5 +221,11 @@ public class RegistActivity extends SherlockActivity {
 		getCodeTask.getCode(account);
 	}
 	
-	
+	/**
+	 * 跳转到伊的家服务条款页面
+	 */
+	private void goToAgreementAct(){
+		Intent intent = new Intent(this, AgreementActivity.class);
+		startActivity(intent);
+	}
 }
