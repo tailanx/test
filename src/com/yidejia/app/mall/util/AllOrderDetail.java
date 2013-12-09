@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
@@ -107,6 +108,7 @@ public class AllOrderDetail {
 				RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.all_relative);
 				
 				String urlString = cart.getImgUrl();
+				imageLoader.init(ImageLoaderConfiguration.createDefault(context));
 				imageLoader.displayImage(urlString, head, options,
 						animateFirstListener);
 				// Bitmap bm = BitmapFactory.decodeFile(urlString);

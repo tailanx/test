@@ -18,6 +18,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -84,7 +85,9 @@ public class TaskFilter {
 				ctrl.setBrands(brands);
 				ctrl.setPrices(pricesLevels);
 				ctrl.setFuns(effects);
+				Log.e(TaskFilter.class.getName(), view +"=======TaskFilter");
 				ctrl.getView(view);
+				
 			} else {
 				if(isTimeOut){
 					isTimeOut = false;

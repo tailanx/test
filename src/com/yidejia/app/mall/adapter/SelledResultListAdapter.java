@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
@@ -31,11 +32,16 @@ public class SelledResultListAdapter extends BaseAdapter {
 	private TextView search_result_small_price;
 	private TextView search_result_small_sell_num;
 	private TextView search_result_small_em_num;
-	
-	public SelledResultListAdapter(Context mContext, ArrayList<SearchItem> searchItems){
+	private ImageLoader imageLoader;
+	private ImageLoadingListener animateFirstListener;
+	private DisplayImageOptions options;
+	public SelledResultListAdapter(Context mContext, ArrayList<SearchItem> searchItems,ImageLoader imageloader,ImageLoadingListener listener,DisplayImageOptions options){
 		this.mContext = mContext;
 		this.searchItems = searchItems;
-		initDisplayImageOption();
+		this.imageLoader = imageloader;
+		this.animateFirstListener = listener;
+		this.options = options;
+		
 	}
 	
 	@Override
@@ -77,37 +83,11 @@ public class SelledResultListAdapter extends BaseAdapter {
 		search_result_small_price.setText(item.getPrice()+mContext.getResources().getString(R.string.unit));
 		search_result_small_em_num.setText(item.getCommentAmount());
 		search_result_small_sell_num.setText(item.getSelledAmount());
+		imageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
 		imageLoader.displayImage(item.getImgUrl(), search_result_small_image, options,
 				animateFirstListener);
 		return convertView;
 	}
 	
-	private DisplayImageOptions options;
-	protected ImageLoader imageLoader = ImageLoader.getInstance();
-	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
-	private void initDisplayImageOption(){
-		options = new DisplayImageOptions.Builder()
-//			.showStubImage(R.drawable.hot_sell_right_top_image)
-//			.showImageOnFail(R.drawable.hot_sell_right_top_image)
-//			.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
-			.cacheInMemory(true)
-			.cacheOnDisc(true)
-			.build();
-	}
-	static final List<String> displayedImages = Collections.synchronizedList(new LinkedList<String>());
-	private static class AnimateFirstDisplayListener extends SimpleImageLoadingListener {
-
-
-		@Override
-		public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-			if (loadedImage != null) {
-				ImageView imageView = (ImageView) view;
-				boolean firstDisplay = !displayedImages.contains(imageUri);
-				if (firstDisplay) {
-					FadeInBitmapDisplayer.animate(imageView, 500);
-					displayedImages.add(imageUri);
-				}
-			}
-		}
-	}
+	
 }

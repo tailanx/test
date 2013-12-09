@@ -20,6 +20,7 @@ import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.ImageView;
 
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.SearchResultActivity;
 import com.yidejia.app.mall.adapter.FilterExListAdapter;
@@ -33,6 +34,13 @@ import com.yidejia.app.mall.task.TaskFilter;
 
 @SuppressLint("UseSparseArrays")
 public class FilterFragment extends Fragment {
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(outState);
+		
+	}
 	
 	private FilterExListAdapter filterAdapter;
 	private ExpandableListView filterListView;
@@ -55,7 +63,13 @@ public class FilterFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		view = getActivity().getLayoutInflater().inflate(R.layout.activity_filter, null);
+		try {
+			view = inflater.inflate(R.layout.activity_filter, null);
+			((MyApplication)getActivity().getApplication()).setView(view);;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 //		BrandDataManage brandDataManage = new BrandDataManage(getActivity());
 //		brandsArray = brandDataManage.getBrandArray();
@@ -73,10 +87,15 @@ public class FilterFragment extends Fragment {
 	
 	private TaskFilter taskFilter;
 	
+	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
+		if(null == view){
+			view = ((MyApplication)getActivity().getApplication()).getView();
+			return;
+		}
 		taskFilter = new TaskFilter(getActivity(), view);
 		taskFilter.getFilter();
 	}

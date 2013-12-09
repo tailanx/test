@@ -6,6 +6,7 @@ import java.util.Map;
 //import java.util.Map;
 
 
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
@@ -17,6 +18,7 @@ import android.util.Log;
 
 import com.unionpay.mpay.views.u;
 import com.yidejia.app.mall.MainFragmentActivity;
+import com.yidejia.app.mall.main.HomeMallActivity;
 import com.yidejia.app.mall.model.ProductBaseInfo;
 /**
  * 浏览历史模块
@@ -42,7 +44,7 @@ public class BrowseHistoryDataManage {
 	private String TAG = BrowseHistoryDataManage.class.getName();
 	
 	public BrowseHistoryDataManage(){
-		sp = MainFragmentActivity.MAINACTIVITY.getSharedPreferences("BrowseHistory", Activity.MODE_APPEND );
+		sp = HomeMallActivity.MAINACTIVITY.getSharedPreferences("BrowseHistory", Activity.MODE_APPEND );
 		historyArray = new ArrayList<ProductBaseInfo>();
 		keysList = new ArrayList<String>();
 	}

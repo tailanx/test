@@ -1,6 +1,7 @@
 package com.yidejia.app.mall;
 
 import android.app.Application;
+import android.view.View;
 
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -10,6 +11,14 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 public class MyApplication extends Application {
 
 	
+	public View getView() {
+		return view;
+	}
+
+	public void setView(View view) {
+		this.view = view;
+	}
+
 	@Override
 	public void onCreate() {
 		// TODO Auto-generated method stub
@@ -104,5 +113,7 @@ public class MyApplication extends Application {
 	public String getVip() {
 		return vip;
 	}
+	private View view;
+	
 	
 }

@@ -1,8 +1,5 @@
 package com.yidejia.app.mall;
 
-import com.yidejia.app.mall.net.ConnectionDetector;
-import com.yidejia.app.mall.net.HttpGetVersionConn;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -13,11 +10,15 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.AsyncTask.Status;
 import android.view.WindowManager;
 import android.widget.Toast;
+
+import com.yidejia.app.mall.main.HomeMallActivity;
+import com.yidejia.app.mall.net.ConnectionDetector;
+import com.yidejia.app.mall.net.HttpGetVersionConn;
 
 
 public class WelcomeActivity extends Activity {
@@ -168,7 +169,7 @@ public class WelcomeActivity extends Activity {
 			public void run() {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(WelcomeActivity.this,
-						MainFragmentActivity.class);
+						HomeMallActivity.class);
 				startActivity(intent);
 				WelcomeActivity.this.finish();
 			}

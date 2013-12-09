@@ -17,13 +17,12 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
 
-
     <application
         android:name="com.yidejia.app.mall.MyApplication"
         android:allowBackup="true"
+        android:debuggable="true"
         android:icon="@drawable/ydj_icon"
         android:label="@string/app_name"
-        android:debuggable="true"
         android:theme="@style/AppTheme" >
 
         <!--
@@ -41,7 +40,6 @@ android:uiOptions="splitActionBarWhenNarrow"
             </intent-filter>
             <meta-data android:name="android.app.searchable"  
                    android:resource="@xml/main_searchable"/>  
-
         -->
         <activity
             android:name="com.yidejia.app.mall.MainActivity"
@@ -188,7 +186,7 @@ android:uiOptions="splitActionBarWhenNarrow"
         <activity
             android:name="com.yidejia.app.mall.view.HistoryActivity"
             android:screenOrientation="portrait" />
-        <activity 
+        <activity
             android:name="com.yidejia.app.mall.ActiveGoActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -196,18 +194,18 @@ android:uiOptions="splitActionBarWhenNarrow"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.yidejia.app.mall.view.SkinAnswerActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait" />
-         <activity
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name="com.yidejia.app.mall.view.SkinHomeActivity"
             android:screenOrientation="portrait" />
-          <activity
+        <activity
             android:name="com.yidejia.app.mall.view.SkinResultAcitivity"
             android:screenOrientation="portrait" />
-           <activity
+        <activity
             android:name="com.yidejia.app.mall.ImagePagerActivity"
             android:screenOrientation="portrait" />
-          <activity
+        <activity
             android:name="com.yidejia.app.mall.view.AgreementActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -221,8 +219,37 @@ android:uiOptions="splitActionBarWhenNarrow"
             android:name="com.unionpay.uppay.PayActivity"
             android:configChanges="orientation|keyboardHidden|screenLayout"
             android:excludeFromRecents="true"
-       
             android:theme="@style/Theme.UPPay" >
+        </activity>
+        <activity
+            android:name="com.yidejia.app.mall.main.HomeMallActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.yidejia.app.mall.main.HomeCarActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.yidejia.app.mall.main.HomeSearchActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.yidejia.app.mall.main.HomeLogActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.yidejia.app.mall.main.HomeMyMaActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
         </activity>
     </application>
 

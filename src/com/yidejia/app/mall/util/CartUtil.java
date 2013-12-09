@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
@@ -118,7 +119,7 @@ public class CartUtil {
 	 * @param context
 	 */
 	public CartUtil(Context context, LinearLayout linearLayout,
-			TextView mTextView, TextView sumTextView, CheckBox box) {// ,View
+			TextView mTextView, TextView sumTextView, CheckBox box,ImageLoader imageLoader,ImageLoadingListener listener,DisplayImageOptions options) {// ,View
 																		// view
 		this.inflater = LayoutInflater.from(context); // ,UserCommentDataManage
 		favoriteDataManage = new FavoriteDataManage(context);
@@ -128,44 +129,20 @@ public class CartUtil {
 		this.mTextView = mTextView;
 		this.sumTextView = sumTextView;
 		this.mBox = box;
-		initDisplayImageOption();
+		this.imageLoader = imageLoader;
+		this.options = options;
+		this.animateFirstListener = listener;
 		// receiver = new InnerReceiver();
 		// IntentFilter filter = new IntentFilter();
 		// this.context.registerReceiver(receiver, filter);
 		// filter.addAction(Consts.UPDATE_CHANGE);
 	}
 
-	static final List<String> displayedImages = Collections
-			.synchronizedList(new LinkedList<String>());
 
-	private static class AnimateFirstDisplayListener extends
-			SimpleImageLoadingListener {
 
-		@Override
-		public void onLoadingComplete(String imageUri, View view,
-				Bitmap loadedImage) {
-			if (loadedImage != null) {
-				ImageView imageView = (ImageView) view;
-				boolean firstDisplay = !displayedImages.contains(imageUri);
-				if (firstDisplay) {
-					FadeInBitmapDisplayer.animate(imageView, 500);
-					displayedImages.add(imageUri);
-				}
-			}
-		}
-	}
-
-	private void initDisplayImageOption() {
-		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.image_bg)
-				.showImageOnFail(R.drawable.image_bg)
-				.showImageForEmptyUri(R.drawable.image_bg)
-				.cacheInMemory(true).cacheOnDisc(true).build();
-	}
-
-	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+	private ImageLoadingListener animateFirstListener;
 	private DisplayImageOptions options;
-	protected ImageLoader imageLoader = ImageLoader.getInstance();// ����ͼƬ
+	protected ImageLoader imageLoader ;
 
 	/**
 	 * ��ʾȫ�������
@@ -226,6 +203,7 @@ public class CartUtil {
 				mTextView.setText(a + "");
 				sumTextView.setText(b + "");
 				String path = cart.getImgUrl();
+				imageLoader.init(ImageLoaderConfiguration.createDefault(context));
 				imageLoader.displayImage(path, headImageView, options,
 						animateFirstListener);
 				

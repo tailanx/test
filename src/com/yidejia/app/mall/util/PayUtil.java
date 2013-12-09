@@ -17,9 +17,11 @@ import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.unionpay.mpay.views.an;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.Cart;
 
@@ -30,59 +32,31 @@ public class PayUtil {
 
 	private LinearLayout mLinearLayoutLayout;// ���Ĳ���
 	private LinearLayout mLayout;// ���Ĳ���
+	private ImageLoader imageLoader;
+	private ImageLoadingListener animateFirstListener;
+	private DisplayImageOptions options;
 
 //	private CartsDataManage dataManage;// ������ȡ�������
 	private Cart cart;
-	public PayUtil(Context context, LinearLayout mLayout,Cart cart) {
+	public PayUtil(Context context, LinearLayout mLayout,Cart cart,ImageLoader imageLoader,ImageLoadingListener listener,DisplayImageOptions options) {
 		this.cart = cart;
 		this.context = context;
 		this.inflater = LayoutInflater.from(context);
 		this.mLinearLayoutLayout = mLayout;
-		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.image_bg)
-				.showImageOnFail(R.drawable.image_bg)
-				.showImageForEmptyUri(R.drawable.image_bg)
-				.cacheInMemory(true).cacheOnDisc(true).build();
+		this.options = options;
+		this.imageLoader = imageLoader;
+		this.animateFirstListener = listener;
 	
 	}
 
-	public PayUtil(Context context, LinearLayout mLayout) {
+	public PayUtil(Context context, LinearLayout mLayout,ImageLoader imageLoader,ImageLoadingListener listener,DisplayImageOptions option) {
 		this.context = context;
 		this.inflater = LayoutInflater.from(context);
 		this.mLinearLayoutLayout = mLayout;
-		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.image_bg)
-				.showImageOnFail(R.drawable.image_bg)
-				.showImageForEmptyUri(R.drawable.image_bg)
-				.cacheInMemory(true).cacheOnDisc(true).build();
+		this.options = option;
+		this.animateFirstListener = listener;
+		this.imageLoader = imageLoader;
 	}
-
-	static final List<String> displayedImages = Collections
-			.synchronizedList(new LinkedList<String>());
-
-	private static class AnimateFirstDisplayListener extends
-			SimpleImageLoadingListener {
-
-		@Override
-		public void onLoadingComplete(String imageUri, View view,
-				Bitmap loadedImage) {
-			if (loadedImage != null) {
-				ImageView imageView = (ImageView) view;
-				boolean firstDisplay = !displayedImages.contains(imageUri);
-				if (firstDisplay) {
-					FadeInBitmapDisplayer.animate(imageView, 500);
-					displayedImages.add(imageUri);
-				}
-			}
-		}
-	}
-
-	/**
-	 * ������ͼ
-	 */
-	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
-	private DisplayImageOptions options;
-	protected ImageLoader imageLoader = ImageLoader.getInstance();// ����ͼƬ
 
 	public String loadView(ArrayList<Cart> mList, boolean isHuanGou) {//, boolean isHuanGou
 		StringBuffer goods = new StringBuffer();
@@ -114,6 +88,7 @@ public class PayUtil {
 				Log.i("info", cart+" cart");
 				titleTextView.setText(cart.getProductText());
 				String head = cart.getImgUrl();
+				imageLoader.init(ImageLoaderConfiguration.createDefault(context));
 				imageLoader.displayImage(head, headImage, options,
 						animateFirstListener);
 //				// Log.i("info", head+"   head");
