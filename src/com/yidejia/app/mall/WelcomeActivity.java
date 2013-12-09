@@ -40,9 +40,9 @@ public class WelcomeActivity extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_welcome);
 		
-		if((getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE) != 0){
-			android.os.Process.killProcess(android.os.Process.myPid());
-		}
+//		if((getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE) != 0){
+//			android.os.Process.killProcess(android.os.Process.myPid());
+//		}
 		if(ConnectionDetector.isConnectingToInternet(this)){
 			checkUpdate();
 		} else {
