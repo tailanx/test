@@ -544,7 +544,7 @@ public class CstmPayActivity extends SherlockActivity {
 		}
 		if (preferentialDataManage.getFreeGoods().size() == 0
 				&& preferentialDataManage.getScoreGoods().size() != 0) {
-			if (voucher == 0) {
+			if (voucher <= 0.001) {
 				// show(carts, false);
 				return;
 			} else {
@@ -562,7 +562,7 @@ public class CstmPayActivity extends SherlockActivity {
 
 		if (isCartActivity.equals("Y") || isCartActivity.equals("N")) {//
 		// show(carts, false);// sum,
-			if (voucher > 0 || !arrayListFree.isEmpty()) {
+			if (voucher > 0.001 || !arrayListFree.isEmpty()) {
 				dialog.show();
 			}
 		}
