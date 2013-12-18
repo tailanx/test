@@ -201,6 +201,7 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(HomeLogActivity.this, HomeMallActivity.class);
 				startActivity(intent);
+				overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 			}
 		});
 		downSearchLayout.setOnClickListener(new OnClickListener() {
@@ -210,6 +211,7 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(HomeLogActivity.this, HomeSearchActivity.class);
 				startActivity(intent);
+				overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 				
 			}
 		});
@@ -220,7 +222,7 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(HomeLogActivity.this,HomeCarActivity.class);
 				startActivity(intent);
-				
+				overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 			}
 		});
 //		downMyLayout.setOnClickListener(this);
@@ -371,6 +373,7 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 						.show();
 				Intent intent = new Intent(HomeLogActivity.this, HomeMyMaActivity.class);
 				startActivity(intent);
+				overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 				HomeLogActivity.this.finish();
 				// 隐藏键盘
 				inputMethodManager.hideSoftInputFromWindow(

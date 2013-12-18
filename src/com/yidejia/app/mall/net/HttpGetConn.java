@@ -60,7 +60,12 @@ public class HttpGetConn {
 					retrycount += 1;
 				}
 			}
+			if(null == httpResponse){
+				Log.i(TAG, "返回失败!");
+				return result;
+			}
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+				Log.i(TAG, "200返回成功!");
 				result = EntityUtils.toString(httpResponse.getEntity());
 				Log.i(TAG, "返回码:"+httpResponse.getStatusLine().getStatusCode());
 				Log.i(TAG, "返回信息:"+result);

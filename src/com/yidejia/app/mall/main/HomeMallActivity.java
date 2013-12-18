@@ -114,6 +114,8 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 		filter.addAction(Consts.DELETE_CART);
 		registerReceiver(receiver, filter);
 		
+		Log.e(TAG, "home mall oncreate");
+		
 		MAINACTIVITY = this;
 		cartsDataManage = new CartsDataManage();
 		setContentView(R.layout.activity_main_fragment_layout);
@@ -279,7 +281,7 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 			break;
 		}
 		HomeMallActivity.this.startActivity(intent);
-
+		overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 	}
 
 	private class Task extends AsyncTask<Void, Void, Boolean> {

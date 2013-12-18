@@ -79,6 +79,11 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 		filter.addAction(Consts.UPDATE_CHANGE);
 		registerReceiver(receiver, filter);
 		
+		Log.e(TAG, "search onCreate");
+		
+		if(null != arg0) {
+			functions = (ArrayList<Function>) arg0.getSerializable("funs");
+		}
 		
 		cartsDataManage = new CartsDataManage();
 		myApplication = (MyApplication) getApplication();
@@ -92,7 +97,6 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 		search_item_refresh_view = (RelativeLayout) view
 				.findViewById(R.id.search_item_refresh_view);
 		refresh_data_btn = (ImageView) view.findViewById(R.id.refresh_data_btn);
-		functions = new ArrayList<Function>();
 		res = getResources();
 		initNavView();
 		setActionBarConfig();
@@ -101,9 +105,13 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 			searchListView.setVisibility(View.GONE);
 			search_item_refresh_view.setVisibility(View.VISIBLE);
 		} else {
-			closeTask();
-			task = new Task();
-			task.execute();
+			if ((null == functions) || (functions.isEmpty())) {
+				functions = new ArrayList<Function>();
+				Log.e(TAG, "search on create get task");
+				closeTask();
+				task = new Task();
+				task.execute();
+			}
 		}
 	}
 
@@ -191,7 +199,7 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 	public void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		Log.d(TAG, "TestFragment-----onStart");
+		Log.e(TAG, "TestFragment-----onStart");
 		if(null != bar)
 		bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
@@ -250,7 +258,7 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 			break;
 		}
 		HomeSearchActivity.this.startActivity(intent);
-
+		overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 	}
 
 	private ProgressDialog bar;
@@ -307,7 +315,6 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 				searchListAdapter = new SearchListAdapter(
 						HomeSearchActivity.this, functions);
 				searchListView.setAdapter(searchListAdapter);
-				Log.e(TAG, "TestFragment-----onStart1");
 				searchListView
 						.setOnItemClickListener(new OnItemClickListener() {
 
@@ -381,8 +388,11 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 			startActivity(intent);
 		}
 	};
+	
+	@Override
 	protected void onSaveInstanceState(Bundle outState) {
-		
+		super.onSaveInstanceState(outState);
+		outState.putSerializable("funs", functions);
 	};
 	// 双击返回键退出程序
 		private long exitTime = 0;

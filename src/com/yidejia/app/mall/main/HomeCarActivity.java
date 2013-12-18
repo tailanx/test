@@ -278,7 +278,7 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 			break;
 		}
 		HomeCarActivity.this.startActivity(intent);
-
+		overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 	}
 	private void showLoginTips() {
 		new Builder(this)

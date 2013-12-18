@@ -239,6 +239,7 @@ public class HomeMyMaActivity extends SherlockActivity implements
 				Intent intent = new Intent(HomeMyMaActivity.this,
 						HomeMallActivity.class);
 				startActivity(intent);
+				overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 			}
 		});
 		downSearchLayout.setOnClickListener(new OnClickListener() {
@@ -249,7 +250,7 @@ public class HomeMyMaActivity extends SherlockActivity implements
 				Intent intent = new Intent(HomeMyMaActivity.this,
 						HomeSearchActivity.class);
 				startActivity(intent);
-
+				overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 			}
 		});
 		downShoppingLayout.setOnClickListener(new OnClickListener() {
@@ -260,7 +261,7 @@ public class HomeMyMaActivity extends SherlockActivity implements
 				Intent intent = new Intent(HomeMyMaActivity.this,
 						HomeCarActivity.class);
 				startActivity(intent);
-
+				overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 			}
 		});
 		// downMyLayout.setOnClickListener(this);
