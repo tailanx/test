@@ -1,6 +1,7 @@
 package com.yidejia.app.mall.main;
 
 import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -29,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.MyMallActivity;
@@ -416,27 +418,42 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 		}
 
 	}
+
 	// 双击返回键退出程序
-		private long exitTime = 0;
+	private long exitTime = 0;
 
-		@Override
-		public boolean onKeyUp(int keyCode, KeyEvent event) {
-			// TODO Auto-generated method stub
-			if (keyCode == KeyEvent.KEYCODE_BACK) {
-				if ((System.currentTimeMillis() - exitTime) > 2000) {
-					Toast.makeText(getApplicationContext(),
-							getResources().getString(R.string.exit),
-							Toast.LENGTH_SHORT).show();
-					exitTime = System.currentTimeMillis();
-				} else {
-					// ((MyApplication)getApplication()).setUserId("");
-					// ((MyApplication)getApplication()).setToken("");
-					finish();
-					// System.exit(0);
-				}
-				return true;
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if ((System.currentTimeMillis() - exitTime) > 2000) {
+				Toast.makeText(getApplicationContext(),
+						getResources().getString(R.string.exit),
+						Toast.LENGTH_SHORT).show();
+				exitTime = System.currentTimeMillis();
+			} else {
+				// ((MyApplication)getApplication()).setUserId("");
+				// ((MyApplication)getApplication()).setToken("");
+				finish();
+				// System.exit(0);
 			}
-			return super.onKeyUp(keyCode, event);
+			return true;
 		}
+		return super.onKeyUp(keyCode, event);
+	}
 
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		StatService.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		StatService.onResume(this);
+	}
+	
 }

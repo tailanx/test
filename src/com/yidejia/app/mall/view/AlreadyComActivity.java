@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
 import com.yidejia.app.mall.ctrl.OrderViewCtrl;
@@ -123,102 +124,122 @@ public class AlreadyComActivity extends SherlockFragmentActivity {
 
 	
 	private void InitWidth() {
-		ivBottomLine = (ImageView) findViewById(R.id.iv_bottom_line);//滑动
-        bottomLineWidth = ivBottomLine.getLayoutParams().width;
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);//获取当前屏幕的属性
-        int screenW = dm.widthPixels;//屏幕的宽
-        offset = (int) ((screenW / 3 - bottomLineWidth)/2);//起始位置
+		ivBottomLine = (ImageView) findViewById(R.id.iv_bottom_line);// 滑动
+		bottomLineWidth = ivBottomLine.getLayoutParams().width;
+		DisplayMetrics dm = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(dm);// 获取当前屏幕的属性
+		int screenW = dm.widthPixels;// 屏幕的宽
+		offset = (int) ((screenW / 3 - bottomLineWidth) / 2);// 起始位置
 
-        position_one = (int) (screenW / 3);
-        position_two = position_one * 2;
-        
-    }
-	  public class MyOnClickListener implements View.OnClickListener {
-	        private int index = 0;
+		position_one = (int) (screenW / 3);
+		position_two = position_one * 2;
 
-	        public MyOnClickListener(int i) {
-	            index = i;
-	        }
+	}
 
-	        @Override
-	        public void onClick(View v) {
-	            mPager.setCurrentItem(index);
-	        }
-	    };
-	    public class MyOnPageChangeListener implements OnPageChangeListener {
+	public class MyOnClickListener implements View.OnClickListener {
+		private int index = 0;
 
-	        @Override
-	        public void onPageSelected(int arg0) {
-	            Animation animation = null;
-	            switch (arg0) {
-	            case 0://假如是第一个被选中，添加事件
-	                if (currIndex == 1) {//当前是第二个
-	                	mMonth.setPressed(false);
-	                    animation = new TranslateAnimation(position_one, 0, 0, 0);
-	                    mMonth.setBackgroundResource(R.drawable.product_details_bg);
-	                    mMonth.setTextColor(Color.parseColor("#000000"));
-	                } else if (currIndex == 2) {
-	                	mYear.setPressed(false);
-	                    animation = new TranslateAnimation(position_two, 0, 0, 0);
-	                    mYear.setBackgroundResource(R.drawable.product_details_bg);
-	                    mYear.setTextColor(Color.parseColor("#000000"));
-	                } 
-	                mWeek.setPressed(true);
-	                mWeek.setBackgroundResource(R.drawable.product_details_selected);
-	                mWeek.setTextColor(Color.parseColor("#702c91"));
-	                break;
-	            case 1:
-	                if (currIndex == 0) {
-	                	mWeek.setPressed(false);
-	                	mWeek.setBackgroundResource(R.drawable.product_details_bg);
-	                    animation = new TranslateAnimation(offset, position_one, 0, 0);
-	                    mWeek.setTextColor(Color.parseColor("#000000"));
-	                } else if (currIndex == 2) {
-	                    mYear.setPressed(false);
-	                    mYear.setBackgroundResource(R.drawable.product_details_bg);
-	                	animation = new TranslateAnimation(position_two, position_one, 0, 0);
-	                    mYear.setTextColor(Color.parseColor("#000000"));
-	                } 
-	                mMonth.setPressed(true);
-	                mMonth.setBackgroundResource(R.drawable.product_details_selected);
-	                mMonth.setTextColor(Color.parseColor("#702c91"));
-	                break;
-	            case 2:
-	                if (currIndex == 0) {
-	                	mWeek.setPressed(false);
-	                	mWeek.setBackgroundResource(R.drawable.product_details_bg);
-	                    animation = new TranslateAnimation(offset, position_two, 0, 0);
-	                    mWeek.setTextColor(Color.parseColor("#000000"));
-	                } else if (currIndex == 1) {
-	                    mMonth.setPressed(false);
-	                    mMonth.setBackgroundResource(R.drawable.product_details_bg);
-	                	animation = new TranslateAnimation(position_one, position_two, 0, 0);
-	                    mMonth.setTextColor(Color.parseColor("#000000"));
-	                } 
-	                mYear.setPressed(true);
-	                mYear.setBackgroundResource(R.drawable.product_details_selected);
-	                mYear.setTextColor(Color.parseColor("#702c91"));
-	                break;
-	           
-	            }
-	            currIndex = arg0;
-	            animation.setFillAfter(true);
-	            animation.setDuration(300);
-	            ivBottomLine.startAnimation(animation);
-	        }
+		public MyOnClickListener(int i) {
+			index = i;
+		}
 
-			@Override
-			public void onPageScrollStateChanged(int arg0) {
-				// TODO Auto-generated method stub
-				
+		@Override
+		public void onClick(View v) {
+			mPager.setCurrentItem(index);
+		}
+	};
+
+	public class MyOnPageChangeListener implements OnPageChangeListener {
+
+		@Override
+		public void onPageSelected(int arg0) {
+			Animation animation = null;
+			switch (arg0) {
+			case 0:// 假如是第一个被选中，添加事件
+				if (currIndex == 1) {// 当前是第二个
+					mMonth.setPressed(false);
+					animation = new TranslateAnimation(position_one, 0, 0, 0);
+					mMonth.setBackgroundResource(R.drawable.product_details_bg);
+					mMonth.setTextColor(Color.parseColor("#000000"));
+				} else if (currIndex == 2) {
+					mYear.setPressed(false);
+					animation = new TranslateAnimation(position_two, 0, 0, 0);
+					mYear.setBackgroundResource(R.drawable.product_details_bg);
+					mYear.setTextColor(Color.parseColor("#000000"));
+				}
+				mWeek.setPressed(true);
+				mWeek.setBackgroundResource(R.drawable.product_details_selected);
+				mWeek.setTextColor(Color.parseColor("#702c91"));
+				break;
+			case 1:
+				if (currIndex == 0) {
+					mWeek.setPressed(false);
+					mWeek.setBackgroundResource(R.drawable.product_details_bg);
+					animation = new TranslateAnimation(offset, position_one, 0,
+							0);
+					mWeek.setTextColor(Color.parseColor("#000000"));
+				} else if (currIndex == 2) {
+					mYear.setPressed(false);
+					mYear.setBackgroundResource(R.drawable.product_details_bg);
+					animation = new TranslateAnimation(position_two,
+							position_one, 0, 0);
+					mYear.setTextColor(Color.parseColor("#000000"));
+				}
+				mMonth.setPressed(true);
+				mMonth.setBackgroundResource(R.drawable.product_details_selected);
+				mMonth.setTextColor(Color.parseColor("#702c91"));
+				break;
+			case 2:
+				if (currIndex == 0) {
+					mWeek.setPressed(false);
+					mWeek.setBackgroundResource(R.drawable.product_details_bg);
+					animation = new TranslateAnimation(offset, position_two, 0,
+							0);
+					mWeek.setTextColor(Color.parseColor("#000000"));
+				} else if (currIndex == 1) {
+					mMonth.setPressed(false);
+					mMonth.setBackgroundResource(R.drawable.product_details_bg);
+					animation = new TranslateAnimation(position_one,
+							position_two, 0, 0);
+					mMonth.setTextColor(Color.parseColor("#000000"));
+				}
+				mYear.setPressed(true);
+				mYear.setBackgroundResource(R.drawable.product_details_selected);
+				mYear.setTextColor(Color.parseColor("#702c91"));
+				break;
+
 			}
+			currIndex = arg0;
+			animation.setFillAfter(true);
+			animation.setDuration(300);
+			ivBottomLine.startAnimation(animation);
+		}
 
-			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2) {
-				// TODO Auto-generated method stub
-				
-			}
-	    }
+		@Override
+		public void onPageScrollStateChanged(int arg0) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void onPageScrolled(int arg0, float arg1, int arg2) {
+			// TODO Auto-generated method stub
+
+		}
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		StatService.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		StatService.onResume(this);
+	}
 
 }

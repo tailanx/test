@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.baidu.mobstat.StatService;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yidejia.app.mall.CleanImageCache;
 import com.yidejia.app.mall.DataCleanManager;
@@ -161,7 +162,7 @@ public class EditorActivity extends SherlockActivity {
 
 			@Override
 			public void onClick(View arg0) {
-
+				
 				Intent intent = new Intent(EditorActivity.this,
 						RecommendActivity.class);
 				startActivity(intent);
@@ -182,6 +183,9 @@ public class EditorActivity extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				// 事件id（"registered id"）的事件pass，其时长持续100毫秒
+				StatService.onEventDuration(EditorActivity.this,
+						"check for update", "check for update", 100);
 				check4Update.checkUpdate();
 			}
 		});
@@ -288,5 +292,21 @@ public class EditorActivity extends SherlockActivity {
 		titleTextView.setText("设置");
 
 	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		StatService.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		StatService.onResume(this);
+	}
+	
+	
 
 }

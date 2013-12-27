@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.datamanage.SchHistoryDataManage;
 import com.yidejia.app.mall.search.SuggestionsAdapter;
 
@@ -268,6 +269,18 @@ public class SearchActivity extends SherlockFragmentActivity {//implements Searc
 	}
 	
 	private ArrayAdapter<String> adapter;
-	static final String[] COUNTRIES = new String[] {  //这里用一个字符串数组来当数据匹配源
-	     "Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra"};
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		StatService.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		StatService.onResume(this);
+	}
 }

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.ctrl.ActViewCtrl;
 
 public class ActiveGoActivity extends SherlockActivity {
@@ -59,4 +60,18 @@ public class ActiveGoActivity extends SherlockActivity {
 		return super.onKeyDown(keyCode, event);
 	}
 
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		StatService.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		StatService.onResume(this);
+	}
 }

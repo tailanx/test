@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.main.HomeMallActivity;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.HttpGetVersionConn;
@@ -44,6 +45,9 @@ public class WelcomeActivity extends Activity {
 //		if((getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE) != 0){
 //			android.os.Process.killProcess(android.os.Process.myPid());
 //		}
+		StatService.setAppChannel(this, "", false);
+		StatService.setSessionTimeOut(30);
+		StatService.setLogSenderDelayed(0);
 		if(ConnectionDetector.isConnectingToInternet(this)){
 			checkUpdate();
 		} else {
@@ -173,7 +177,22 @@ public class WelcomeActivity extends Activity {
 				startActivity(intent);
 				WelcomeActivity.this.finish();
 			}
-		}, 1 * 1000);
+		}, 1 * 1500);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		StatService.onResume(this);
+	}
+
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		StatService.onPause(this);
 	}
 	
 }

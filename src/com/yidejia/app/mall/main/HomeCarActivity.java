@@ -3,8 +3,10 @@ package com.yidejia.app.mall.main;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.baidu.mobstat.StatService;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -93,7 +95,7 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 		view = inflater.inflate(R.layout.shopping_cart, null);
 		frameLayout.addView(view);
 		setViewCtrl(view);
-		}else{
+		} else{
 			view = inflater.inflate(R.layout.no_produce,null);
 			frameLayout.addView(view);
 			setNoProduce(view);
@@ -335,76 +337,96 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 			}
 		
 	}
-	// 双击返回键退出程序
-		private long exitTime = 0;
 
-		@Override
-		public boolean onKeyUp(int keyCode, KeyEvent event) {
-			// TODO Auto-generated method stub
-			if (keyCode == KeyEvent.KEYCODE_BACK) {
-				if ((System.currentTimeMillis() - exitTime) > 2000) {
-					Toast.makeText(getApplicationContext(),
-							getResources().getString(R.string.exit),
-							Toast.LENGTH_SHORT).show();
-					exitTime = System.currentTimeMillis();
-				} else {
-					// ((MyApplication)getApplication()).setUserId("");
-					// ((MyApplication)getApplication()).setToken("");
-					finish();
-					// System.exit(0);
-				}
-				return true;
+	// 双击返回键退出程序
+	private long exitTime = 0;
+
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if ((System.currentTimeMillis() - exitTime) > 2000) {
+				Toast.makeText(getApplicationContext(),
+						getResources().getString(R.string.exit),
+						Toast.LENGTH_SHORT).show();
+				exitTime = System.currentTimeMillis();
+			} else {
+				// ((MyApplication)getApplication()).setUserId("");
+				// ((MyApplication)getApplication()).setToken("");
+				finish();
+				// System.exit(0);
 			}
-			return super.onKeyUp(keyCode, event);
+			return true;
 		}
-		private class InnerReceiver extends BroadcastReceiver {
-			@Override
-			public void onReceive(Context context, Intent intent) {
-				// TODO Auto-generated method stub
-				String action = intent.getAction();
-				if (Consts.UPDATE_CHANGE.equals(action)) {
-					number = cartsDataManage.getCartAmount();
+		return super.onKeyUp(keyCode, event);
+	}
+
+	private class InnerReceiver extends BroadcastReceiver {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			String action = intent.getAction();
+			if (Consts.UPDATE_CHANGE.equals(action)) {
+				number = cartsDataManage.getCartAmount();
+				frameLayout.removeAllViews();
+				View view = LayoutInflater.from(HomeCarActivity.this).inflate(
+						R.layout.shopping_cart, null);
+				frameLayout.addView(view);
+				setViewCtrl(view);
+
+				sum = Float.parseFloat(sumTextView.getText().toString());
+				cartImage.setVisibility(View.VISIBLE);
+				cartImage.setText(number + "");
+			}
+			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
+				number = cartsDataManage.getCartAmount();
+				if (number == 0) {
 					frameLayout.removeAllViews();
-					View view = LayoutInflater.from(HomeCarActivity.this).inflate(R.layout.shopping_cart, null);
+					View view = LayoutInflater.from(HomeCarActivity.this)
+							.inflate(R.layout.no_produce, null);
 					frameLayout.addView(view);
-					setViewCtrl(view);
-					
-					sum = Float.parseFloat(sumTextView.getText().toString());
-					cartImage.setVisibility(View.VISIBLE);
+					shoppingCartTopay.setVisibility(View.GONE);
+					setNoProduce(view);
+					cartImage.setVisibility(View.GONE);
+				} else {
 					cartImage.setText(number + "");
 				}
-				if(Consts.BROAD_UPDATE_CHANGE.equals(action)){
-					number = cartsDataManage.getCartAmount();
-					if(number == 0){
+			}
+			if (Consts.DELETE_CART.equals(action)) {
+				number = cartsDataManage.getCartAmount();
+				{
+					if (number == 0) {
 						frameLayout.removeAllViews();
-						View view = LayoutInflater.from(HomeCarActivity.this).inflate(R.layout.no_produce, null);
+						View view = LayoutInflater.from(HomeCarActivity.this)
+								.inflate(R.layout.no_produce, null);
 						frameLayout.addView(view);
 						shoppingCartTopay.setVisibility(View.GONE);
 						setNoProduce(view);
 						cartImage.setVisibility(View.GONE);
-					}else{
-						cartImage.setText(number+"");
-					}
-				}
-				if(Consts.DELETE_CART.equals(action)){
-					number = cartsDataManage.getCartAmount();
-					{
-					if(number == 0){
-						frameLayout.removeAllViews();
-						View view = LayoutInflater.from(HomeCarActivity.this).inflate(R.layout.no_produce, null);
-						frameLayout.addView(view);
-						shoppingCartTopay.setVisibility(View.GONE);
-						setNoProduce(view);
-						cartImage.setVisibility(View.GONE);
-					}else{
+					} else {
 						layout.removeAllViews();
-						CartUtil cartUtil = new CartUtil(HomeCarActivity.this, layout,
-								counTextView, sumTextView, mBox,imageLoader,listener,options);
+						CartUtil cartUtil = new CartUtil(HomeCarActivity.this,
+								layout, counTextView, sumTextView, mBox,
+								imageLoader, listener, options);
 						cartUtil.AllComment();
-						cartImage.setText(number+"");
-					}
+						cartImage.setText(number + "");
 					}
 				}
 			}
 		}
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		StatService.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		StatService.onResume(this);
+	}
 }

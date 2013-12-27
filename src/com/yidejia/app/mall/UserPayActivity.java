@@ -15,8 +15,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.tenpay.android.service.TenpayServiceHelper;
 import com.unionpay.UPPayAssistEx;
 import com.unionpay.uppay.PayActivity;
@@ -49,7 +51,8 @@ public class UserPayActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_userpay);
 		
-		
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		
 		Intent getIntent = getIntent();
 		Bundle getBundle = getIntent.getExtras();
@@ -143,12 +146,15 @@ public class UserPayActivity extends Activity{
          */
         String str = data.getExtras().getString("pay_result");
         if (str.equalsIgnoreCase("success")) {
+        	StatService.onEventDuration(UserPayActivity.this, "pay success", "pay success", 100);
             msg = "支付成功！";
             isSuccess = true;
         } else if (str.equalsIgnoreCase("fail")) {
+        	StatService.onEventDuration(UserPayActivity.this, "pay fail", "pay fail", 100);
             msg = "支付失败，是否重试？";
             isSuccess = false;
         } else if (str.equalsIgnoreCase("cancel")) {
+        	StatService.onEventDuration(UserPayActivity.this, "pay cancel", "pay cancel", 100);
             msg = "支付失败，是否重试？";
             isSuccess = false;
         }
@@ -175,6 +181,7 @@ public class UserPayActivity extends Activity{
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.dismiss();
+					StatService.onEventDuration(UserPayActivity.this, "pay again", "pay again", 100);
 //					UserPayActivity.this.finish();
 					if(payMode == 1){
 						UnionPayOrder();

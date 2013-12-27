@@ -1,7 +1,10 @@
 package com.yidejia.app.mall.main;
 
+import java.io.IOException;
+
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -17,12 +20,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.MyMallActivity.InnerReceiver;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.PersonCountDataManage;
+import com.yidejia.app.mall.exception.TimeOutEx;
+import com.yidejia.app.mall.net.user.GetCount;
 import com.yidejia.app.mall.view.AddressActivity;
 import com.yidejia.app.mall.view.AllOrderActivity;
 import com.yidejia.app.mall.view.AlreadyComActivity;
@@ -386,13 +392,52 @@ public class HomeMyMaActivity extends SherlockActivity implements
 		}
 		return super.onKeyUp(keyCode, event);
 	}
+	
 	@Override
 	public void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		personCountDataManage = new PersonCountDataManage(HomeMyMaActivity.this);
-		personCountDataManage.getCountData(myApplication.getUserId(), myApplication.getToken());
-		String faString = personCountDataManage.getFavoliten();
+		closeTask();
+		getNumTask = new GetNumTask();
+		getNumTask.execute();
+	}
+	
+	private GetNumTask getNumTask;
+	private String scores;
+	private String order;
+	private String favoliten;
+	private String msg;
+	
+	private class GetNumTask extends AsyncTask<Void, Void, Boolean> {
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			GetCount getCount = new GetCount();
+			try {
+				boolean issuccess = getCount.analysis(getCount.getHttpResponse(myApplication.getUserId(), myApplication.getToken()));
+				scores = getCount.getScores();
+				favoliten = getCount.getFavoliten();
+				return issuccess;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (TimeOutEx e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return false;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			setCount(favoliten, null, scores);
+		}
+		
+	}
+	
+	private void setCount(String faString, String msString, String inString) {
 		// Log.i("info", faString+"     faString");
 		if (faString == null || "".equals(faString)) {
 			favorites.setText(0 + "");
@@ -400,20 +445,45 @@ public class HomeMyMaActivity extends SherlockActivity implements
 			favorites.setText(faString);
 		}
 
-		String msString = personCountDataManage.getMsg();
 		if (msString == null || "".equals(msString)) {
 			message.setText(0 + "");
 		} else {
 			message.setText(msString);
 		}
 
-		String inString = personCountDataManage.getScores();
 		if (inString == null || "".equals(inString)) {
 			integration.setText(0 + "");
 		} else {
 			Log.e("info", inString);
 			integration.setText(inString);
 		}
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		closeTask();
+	}
+
+	private void closeTask() {
+		if(null != getNumTask && getNumTask.getStatus().RUNNING == AsyncTask.Status.RUNNING) {
+			getNumTask.cancel(true);
+		}
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		StatService.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		StatService.onResume(this);
 	}
 	
 }

@@ -9,13 +9,14 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.baidu.mobstat.StatService;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.util.AlreadyCompleteUtil;
 
-public class AlreadyComFragment extends SherlockFragment {
+public class CompletedOrderFragment extends SherlockFragment {
 	private String hello;
 	private String defaultHello = "default hello";
 	private PullToRefreshScrollView mPullToRefreshScrollView;// 刷新
@@ -66,8 +67,8 @@ public class AlreadyComFragment extends SherlockFragment {
 	}
 
 	// 通过单例模式，构建对象
-	public static AlreadyComFragment newInstance(String s) {
-		AlreadyComFragment waitFragment = new AlreadyComFragment();
+	public static CompletedOrderFragment newInstance(String s) {
+		CompletedOrderFragment waitFragment = new CompletedOrderFragment();
 		Bundle bundle = new Bundle();
 		bundle.putString("Hello", s);
 		waitFragment.setArguments(bundle);
@@ -138,12 +139,19 @@ public class AlreadyComFragment extends SherlockFragment {
 	}
 
 	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		StatService.onPause(this);
+	}
+
+	@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-//		setupShow();
+		StatService.onResume(this);
 	}
-
+	
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
