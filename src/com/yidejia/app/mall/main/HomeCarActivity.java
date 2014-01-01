@@ -46,7 +46,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class HomeCarActivity extends SherlockFragmentActivity implements OnClickListener{
+public class HomeCarActivity extends SherlockFragmentActivity implements
+		OnClickListener {
 	private MyApplication myApplication;
 	private FrameLayout frameLayout;
 	private LayoutInflater inflater;
@@ -64,7 +65,7 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 	private ImageLoader imageLoader;
 	private ImageLoadingListener listener;
 	private DisplayImageOptions options;
-	
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -75,38 +76,45 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 		filter.addAction(Consts.BROAD_UPDATE_CHANGE);
 		filter.addAction(Consts.DELETE_CART);
 		registerReceiver(receiver, filter);
-		
-		cartsDataManage =  new CartsDataManage();
+
+		cartsDataManage = new CartsDataManage();
 		myApplication = (MyApplication) getApplication();
 		setContentView(R.layout.activity_main_fragment_layout);
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
 		inflater = LayoutInflater.from(this);
 		initNavView();
 		setActionBarConfig();
-		
+
 		ImageLoaderUtil imageLoaderUtil = new ImageLoaderUtil();
 		imageLoader = imageLoaderUtil.getImageLoader();
 		listener = imageLoaderUtil.getAnimateFirstListener();
 		options = imageLoaderUtil.getOptions();
-		
-		if(cartsDataManage.getCartAmount() != 0){
-		view = inflater.inflate(R.layout.shopping_cart, null);
-		frameLayout.addView(view);
-		setViewCtrl(view);
-		}else{
-			view = inflater.inflate(R.layout.no_produce,null);
+
+		if (cartsDataManage.getCartAmount() != 0) {
+			view = inflater.inflate(R.layout.shopping_cart, null);
+			frameLayout.addView(view);
+			setViewCtrl(view);
+		} else {
+			view = inflater.inflate(R.layout.no_produce, null);
 			frameLayout.addView(view);
 			setNoProduce(view);
 		}
-		
+
 	}
-	private void setNoProduce(View view){
+
+	/**
+	 * 购物车没有商品时的界面以及展示
+	 * 
+	 * @param view
+	 */
+	private void setNoProduce(View view) {
 		mButton = (Button) view.findViewById(R.id.no_produce_button);
 		mButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent (HomeCarActivity.this,SearchResultActivity.class);
+				Intent intent = new Intent(HomeCarActivity.this,
+						SearchResultActivity.class);
 				Bundle bundle = new Bundle();
 				Log.e("info", "gouwuche");
 				bundle.putString("title", "全部");
@@ -119,16 +127,23 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 			}
 		});
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		imageLoader.init(ImageLoaderConfiguration.createDefault(HomeCarActivity.this));
+		imageLoader.init(ImageLoaderConfiguration
+				.createDefault(HomeCarActivity.this));
 		imageLoader.stop();
 		unregisterReceiver(receiver);
 	}
-	private void setViewCtrl(View view){
+
+	/**
+	 * 购物车有商品时的界面以及展示
+	 * 
+	 * @param view
+	 */
+	private void setViewCtrl(View view) {
 		sumTextView = (TextView) view
 				.findViewById(R.id.shopping_cart_sum_money);// 总的钱数
 
@@ -137,26 +152,24 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 		counTextView = (TextView) view
 				.findViewById(R.id.shopping_cart_sum_number);// 总的数量
 
-		shoppingCartTopay = (Button)findViewById(
-				R.id.shopping_cart_go_pay);
-		try{
+		shoppingCartTopay = (Button) findViewById(R.id.shopping_cart_go_pay);
+		try {
 			shoppingCartTopay.setVisibility(View.VISIBLE);
-		} catch(Exception e){
+		} catch (Exception e) {
 			Log.e(CartActivity.class.getName(), "set visibility err");
 		}
 		layout = new LinearLayout(this);
 		layout.setOrientation(LinearLayout.VERTICAL);
 		ScrollView scrollView = (ScrollView) view
 				.findViewById(R.id.shopping_cart_item_goods_scrollView);
-		
-		cartUtil = new CartUtil(this, layout,
-				counTextView, sumTextView, mBox,imageLoader,listener,options);
+
+		cartUtil = new CartUtil(this, layout, counTextView, sumTextView, mBox,
+				imageLoader, listener, options);
 
 		cartUtil.AllComment();
 
 		scrollView.addView(layout);
-		
-		
+
 		if (shoppingCartTopay == null) {
 			Log.e(CartActivity.class.getName(), "cart act button is null");
 
@@ -181,6 +194,7 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 	}
 
 	private Button shoppingCartTopay;// 去结算
+
 	/**
 	 * 头部
 	 */
@@ -192,14 +206,14 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		shoppingCartTopay = (Button) findViewById(R.id.shopping_cart_go_pay);
 		number = cartsDataManage.getCartsArray().size();
-		if(number == 0){
+		if (number == 0) {
 			shoppingCartTopay.setVisibility(View.GONE);
-		}else{
-			shoppingCartTopay.setVisibility(View.VISIBLE); 
+		} else {
+			shoppingCartTopay.setVisibility(View.VISIBLE);
 		}
-		
 
 	}
+
 	private RelativeLayout downHomeLayout;
 	private RelativeLayout downGuangLayout;
 	private RelativeLayout downSearchLayout;
@@ -256,9 +270,10 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 		down_shopping_textview.setTextColor(res.getColor(R.color.white));
 		downShoppingLayout.setBackgroundResource(R.drawable.down_hover1);
 		down_shopping_imageView
-		.setImageResource(R.drawable.down_shopping_hover);
+				.setImageResource(R.drawable.down_shopping_hover);
 		downGuangLayout.setVisibility(ViewGroup.GONE);
 	}
+
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -280,6 +295,10 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 		HomeCarActivity.this.startActivity(intent);
 
 	}
+
+	/**
+	 * 购买商品时的登陆判断
+	 */
 	private void showLoginTips() {
 		new Builder(this)
 				.setTitle(getResources().getString(R.string.tips))
@@ -301,110 +320,123 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 						}).setNegativeButton(R.string.searchCancel, null)
 				.create().show();
 	}
-	
+
+	/**
+	 * 点击去结算时的数据传递
+	 */
 	private void go2Pay() {
-		 cartList = new ArrayList<Cart>();
-			List<HashMap<String, Object>> orderCarts = CartUtil.list1;
-			for(int i=0;i<orderCarts.size();i++){
-				HashMap<String, Object> map = orderCarts.get(i);
-				float ischeck =  Float.parseFloat(map.get("check").toString());
-				Log.e("voucher", ischeck + "    ischeck");
-				Cart  cart1	= (Cart) map.get("cart");
-				if(ischeck == 1.0){
-					cartList.add(cart1);
+		cartList = new ArrayList<Cart>();
+		List<HashMap<String, Object>> orderCarts = CartUtil.list1;
+		for (int i = 0; i < orderCarts.size(); i++) {
+			HashMap<String, Object> map = orderCarts.get(i);
+			float ischeck = Float.parseFloat(map.get("check").toString());
+			Log.e("voucher", ischeck + "    ischeck");
+			Cart cart1 = (Cart) map.get("cart");
+			if (ischeck == 1.0) {
+				cartList.add(cart1);
 			}
-			}
-			Intent intent1 = new Intent(this,
-					CstmPayActivity.class);
-			Bundle bundle = new Bundle();
-			sum = Float.parseFloat(sumTextView.getText()
-					.toString());
-			intent1.putExtra("carts", cartList);
-	
-			Log.i("voucher", sum + "    sum");
-
-			
-			if (sum > 0) {
-				bundle.putString("cartActivity","Y");
-				bundle.putString("price", sum + "");
-				intent1.putExtras(bundle);
-				HomeCarActivity.this.startActivity(intent1);
-			} else {
-				Toast.makeText(HomeCarActivity.this, getResources().getString(R.string.buy_nothing),
-						Toast.LENGTH_LONG).show();
-			}
-		
-	}
-	// 双击返回键退出程序
-		private long exitTime = 0;
-
-		@Override
-		public boolean onKeyUp(int keyCode, KeyEvent event) {
-			// TODO Auto-generated method stub
-			if (keyCode == KeyEvent.KEYCODE_BACK) {
-				if ((System.currentTimeMillis() - exitTime) > 2000) {
-					Toast.makeText(getApplicationContext(),
-							getResources().getString(R.string.exit),
-							Toast.LENGTH_SHORT).show();
-					exitTime = System.currentTimeMillis();
-				} else {
-					// ((MyApplication)getApplication()).setUserId("");
-					// ((MyApplication)getApplication()).setToken("");
-					finish();
-					// System.exit(0);
-				}
-				return true;
-			}
-			return super.onKeyUp(keyCode, event);
 		}
-		private class InnerReceiver extends BroadcastReceiver {
-			@Override
-			public void onReceive(Context context, Intent intent) {
-				// TODO Auto-generated method stub
-				String action = intent.getAction();
-				if (Consts.UPDATE_CHANGE.equals(action)) {
-					number = cartsDataManage.getCartAmount();
+		Intent intent1 = new Intent(this, CstmPayActivity.class);
+		Bundle bundle = new Bundle();
+		sum = Float.parseFloat(sumTextView.getText().toString());
+		intent1.putExtra("carts", cartList);
+
+		Log.i("voucher", sum + "    sum");
+
+		if (sum > 0) {
+			bundle.putString("cartActivity", "Y");
+			bundle.putString("price", sum + "");
+			intent1.putExtras(bundle);
+			HomeCarActivity.this.startActivity(intent1);
+		} else {
+			Toast.makeText(HomeCarActivity.this,
+					getResources().getString(R.string.buy_nothing),
+					Toast.LENGTH_LONG).show();
+		}
+
+	}
+
+	// 双击返回键退出程序
+	private long exitTime = 0;
+
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if ((System.currentTimeMillis() - exitTime) > 2000) {
+				Toast.makeText(getApplicationContext(),
+						getResources().getString(R.string.exit),
+						Toast.LENGTH_SHORT).show();
+				exitTime = System.currentTimeMillis();
+			} else {
+				// ((MyApplication)getApplication()).setUserId("");
+				// ((MyApplication)getApplication()).setToken("");
+				finish();
+				// System.exit(0);
+			}
+			return true;
+		}
+		return super.onKeyUp(keyCode, event);
+	}
+
+	/**
+	 * 定义一个广播
+	 * 
+	 * @author Administrator
+	 * 
+	 */
+	private class InnerReceiver extends BroadcastReceiver {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			String action = intent.getAction();
+			if (Consts.UPDATE_CHANGE.equals(action)) {
+				number = cartsDataManage.getCartAmount();
+				frameLayout.removeAllViews();
+				View view = LayoutInflater.from(HomeCarActivity.this).inflate(
+						R.layout.shopping_cart, null);
+				frameLayout.addView(view);
+				setViewCtrl(view);
+
+				sum = Float.parseFloat(sumTextView.getText().toString());
+				cartImage.setVisibility(View.VISIBLE);
+				cartImage.setText(number + "");
+			}
+			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
+				number = cartsDataManage.getCartAmount();
+				if (number == 0) {
 					frameLayout.removeAllViews();
-					View view = LayoutInflater.from(HomeCarActivity.this).inflate(R.layout.shopping_cart, null);
+					View view = LayoutInflater.from(HomeCarActivity.this)
+							.inflate(R.layout.no_produce, null);
 					frameLayout.addView(view);
-					setViewCtrl(view);
-					
-					sum = Float.parseFloat(sumTextView.getText().toString());
-					cartImage.setVisibility(View.VISIBLE);
+					shoppingCartTopay.setVisibility(View.GONE);
+					setNoProduce(view);
+					cartImage.setVisibility(View.GONE);
+				} else {
 					cartImage.setText(number + "");
 				}
-				if(Consts.BROAD_UPDATE_CHANGE.equals(action)){
-					number = cartsDataManage.getCartAmount();
-					if(number == 0){
+			}
+			if (Consts.DELETE_CART.equals(action)) {
+				number = cartsDataManage.getCartAmount();
+				{
+					if (number == 0) {
 						frameLayout.removeAllViews();
-						View view = LayoutInflater.from(HomeCarActivity.this).inflate(R.layout.no_produce, null);
+						View view = LayoutInflater.from(HomeCarActivity.this)
+								.inflate(R.layout.no_produce, null);
 						frameLayout.addView(view);
 						shoppingCartTopay.setVisibility(View.GONE);
 						setNoProduce(view);
 						cartImage.setVisibility(View.GONE);
-					}else{
-						cartImage.setText(number+"");
-					}
-				}
-				if(Consts.DELETE_CART.equals(action)){
-					number = cartsDataManage.getCartAmount();
-					{
-					if(number == 0){
-						frameLayout.removeAllViews();
-						View view = LayoutInflater.from(HomeCarActivity.this).inflate(R.layout.no_produce, null);
-						frameLayout.addView(view);
-						shoppingCartTopay.setVisibility(View.GONE);
-						setNoProduce(view);
-						cartImage.setVisibility(View.GONE);
-					}else{
+					} else {
 						layout.removeAllViews();
-						CartUtil cartUtil = new CartUtil(HomeCarActivity.this, layout,
-								counTextView, sumTextView, mBox,imageLoader,listener,options);
+						CartUtil cartUtil = new CartUtil(HomeCarActivity.this,
+								layout, counTextView, sumTextView, mBox,
+								imageLoader, listener, options);
 						cartUtil.AllComment();
-						cartImage.setText(number+"");
-					}
+						cartImage.setText(number + "");
 					}
 				}
 			}
 		}
+	}
 }

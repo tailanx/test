@@ -58,14 +58,22 @@ public class FilterFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 	}
-
+	@Override
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		super.onDestroyView();
+		System.gc();
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		try {
+			Log.e(FilterFragment.class.getName(), "===onCreateView");
 			view = inflater.inflate(R.layout.activity_filter, null);
-			((MyApplication)getActivity().getApplication()).setView(view);;
+			Log.e(FilterFragment.class.getName(), "===="+view.toString());
+//			((MyApplication)getActivity().getApplication()).setView(view);;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,6 +93,12 @@ public class FilterFragment extends Fragment {
 		return view;
 	}
 	
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		Log.e(FilterFragment.class.getName(), "===onStart");
+	}
 	private TaskFilter taskFilter;
 	
 	
@@ -92,10 +106,12 @@ public class FilterFragment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
+		Log.e(FilterFragment.class.getName(), "===onActivityCreated");
 		if(null == view){
 			view = ((MyApplication)getActivity().getApplication()).getView();
 			return;
 		}
+		Log.e(FilterFragment.class.getName(), "===="+view.toString());
 		taskFilter = new TaskFilter(getActivity(), view);
 		taskFilter.getFilter();
 	}
@@ -104,7 +120,9 @@ public class FilterFragment extends Fragment {
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
+		Log.e(FilterFragment.class.getName(), "===onDestroy");
 		if(taskFilter != null) taskFilter.closeTask();
+		System.gc();
 	}
 
 	private void initView(View view){

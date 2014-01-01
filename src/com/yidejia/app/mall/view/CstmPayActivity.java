@@ -429,7 +429,7 @@ public class CstmPayActivity extends SherlockActivity {
 		super.onDestroy();
 		
 		imageLoader.init(ImageLoaderConfiguration.createDefault(CstmPayActivity.this));
-		imageLoader.stop();
+		imageLoader.destroy();
 		unregisterReceiver(receiver);
 		closeTask();
 		closeVoucherTask();

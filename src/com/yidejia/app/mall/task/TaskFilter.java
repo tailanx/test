@@ -85,7 +85,7 @@ public class TaskFilter {
 				ctrl.setBrands(brands);
 				ctrl.setPrices(pricesLevels);
 				ctrl.setFuns(effects);
-				Log.e(TaskFilter.class.getName(), view +"=======TaskFilter");
+				Log.e("com.yidejia.app.mall.fragment.FilterFragment", view +"=======TaskFilter");
 				ctrl.getView(view);
 				
 			} else {

@@ -33,6 +33,7 @@ import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.yidejia.app.mall.R;
@@ -76,7 +77,8 @@ public class ImagePagerActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
-		imageLoader.stop();
+		imageLoader.init(ImageLoaderConfiguration.createDefault(ImagePagerActivity.this));
+		imageLoader.destroy();
 		super.onDestroy();
 	}
 	

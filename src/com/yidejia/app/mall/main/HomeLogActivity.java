@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -135,17 +136,23 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 				stringName.setCursorVisible(false);
 			}
 		});
-		String baseName = sp.getString("DESMI", null);
+		name = sp.getString("DESMI", null);
 		//
 		String basePwd = sp.getString("DESPWD", null);
-		String keyName = baseName + consts.getMiStr();
-		String basepasswrod = DesUtils.decode(keyName, basePwd);
+		String keyName = name + consts.getMiStr();
+		pwd = DesUtils.decode(keyName, basePwd);
 
-		if (baseName != null && basepasswrod != null) {
+		if (name != null && pwd != null) {
 			mBox.setChecked(true);
-			stringName.setText(baseName);
-			stringPassword.setText(basepasswrod);
+			stringName.setText(name);
+			stringPassword.setText(pwd);
 		}
+//		if(sp.getBoolean("mBox", false)){
+//			Log.e("info", sp.getBoolean("mBox", false)+"mBox");
+//			Task task = new Task();
+//			task.execute();
+//		}
+//		Log.e("info", sp.getBoolean("mBox", false)+"mBox");
 	}
 
 	private RelativeLayout downHomeLayout;
@@ -195,35 +202,38 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 		down_my_textview = (TextView) findViewById(R.id.down_my_text);
 
 		downHomeLayout.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(HomeLogActivity.this, HomeMallActivity.class);
+				Intent intent = new Intent(HomeLogActivity.this,
+						HomeMallActivity.class);
 				startActivity(intent);
 			}
 		});
 		downSearchLayout.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(HomeLogActivity.this, HomeSearchActivity.class);
+				Intent intent = new Intent(HomeLogActivity.this,
+						HomeSearchActivity.class);
 				startActivity(intent);
-				
+
 			}
 		});
 		downShoppingLayout.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(HomeLogActivity.this,HomeCarActivity.class);
+				Intent intent = new Intent(HomeLogActivity.this,
+						HomeCarActivity.class);
 				startActivity(intent);
-				
+
 			}
 		});
-//		downMyLayout.setOnClickListener(this);
+		// downMyLayout.setOnClickListener(this);
 
 		down_home_textview.setTextColor(this.getResources().getColor(
 				R.color.white_white));
@@ -232,8 +242,7 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 
 		downMyLayout.setBackgroundResource(R.drawable.down_hover1);
 		down_my_imageView.setImageResource(R.drawable.down_my_hover);
-		down_my_textview.setTextColor(res
-				.getColor(R.color.white));
+		down_my_textview.setTextColor(res.getColor(R.color.white));
 		downGuangLayout.setVisibility(ViewGroup.GONE);
 	}
 
@@ -271,7 +280,7 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		
+
 		case R.id.my_mall_login_retrieve_password:// 找回密码
 			Intent intent1 = new Intent(HomeLogActivity.this,
 					FindPwActivity.class);
@@ -313,6 +322,12 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 	private String message;
 	private boolean isTimeout = false;
 
+	/**
+	 * 异步登陆事件
+	 * 
+	 * @author Administrator
+	 * 
+	 */
 	private class Task extends AsyncTask<Void, Void, Boolean> {
 		private ProgressDialog bar;
 
@@ -369,7 +384,8 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 			if (result) {
 				Toast.makeText(HomeLogActivity.this, "登陆成功！", Toast.LENGTH_LONG)
 						.show();
-				Intent intent = new Intent(HomeLogActivity.this, HomeMyMaActivity.class);
+				Intent intent = new Intent(HomeLogActivity.this,
+						HomeMyMaActivity.class);
 				startActivity(intent);
 				HomeLogActivity.this.finish();
 				// 隐藏键盘
@@ -379,8 +395,9 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 						stringPassword.getWindowToken(), 0);
 
 				myApplication.setIsLogin(true);
-				
+
 				if (mBox.isChecked()) {
+					sp.edit().putBoolean("mBox", true).commit();
 					sp.edit().putString("DESMI", name).commit();
 
 					String keyName = name + consts.getMiStr();
@@ -396,6 +413,7 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 				} else {
 					sp.edit().remove("DESMI").commit();
 					sp.edit().remove("DESPWD").commit();
+					sp.edit().remove("mBox").commit();
 				}
 			} else {
 				if (isTimeout) {
@@ -413,27 +431,28 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 		}
 
 	}
-	// 双击返回键退出程序
-		private long exitTime = 0;
 
-		@Override
-		public boolean onKeyUp(int keyCode, KeyEvent event) {
-			// TODO Auto-generated method stub
-			if (keyCode == KeyEvent.KEYCODE_BACK) {
-				if ((System.currentTimeMillis() - exitTime) > 2000) {
-					Toast.makeText(getApplicationContext(),
-							getResources().getString(R.string.exit),
-							Toast.LENGTH_SHORT).show();
-					exitTime = System.currentTimeMillis();
-				} else {
-					// ((MyApplication)getApplication()).setUserId("");
-					// ((MyApplication)getApplication()).setToken("");
-					finish();
-					// System.exit(0);
-				}
-				return true;
+	// 双击返回键退出程序
+	private long exitTime = 0;
+
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if ((System.currentTimeMillis() - exitTime) > 2000) {
+				Toast.makeText(getApplicationContext(),
+						getResources().getString(R.string.exit),
+						Toast.LENGTH_SHORT).show();
+				exitTime = System.currentTimeMillis();
+			} else {
+				// ((MyApplication)getApplication()).setUserId("");
+				// ((MyApplication)getApplication()).setToken("");
+				finish();
+				// System.exit(0);
 			}
-			return super.onKeyUp(keyCode, event);
+			return true;
 		}
+		return super.onKeyUp(keyCode, event);
+	}
 
 }

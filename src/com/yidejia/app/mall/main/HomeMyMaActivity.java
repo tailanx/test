@@ -385,6 +385,9 @@ public class HomeMyMaActivity extends SherlockActivity implements
 		}
 		return super.onKeyUp(keyCode, event);
 	}
+	/**
+	 * 重新进入界面时的数据展示
+	 */
 	@Override
 	public void onStart() {
 		// TODO Auto-generated method stub
