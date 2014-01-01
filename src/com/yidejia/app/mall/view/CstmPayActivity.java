@@ -33,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.baidu.mobstat.StatService;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -86,7 +87,6 @@ public class CstmPayActivity extends SherlockActivity {
 
 	// private EditText comment;//评论
 	private ScrollView go_pay_scrollView;
-	private VoucherDataManage voucherDataManage;
 
 	// private Myreceiver receiver;
 	// private Addresses addresses;
@@ -344,7 +344,6 @@ public class CstmPayActivity extends SherlockActivity {
 			carts = (ArrayList<Cart>) intent.getSerializableExtra("carts");
 			isCartActivity = intent.getStringExtra("cartActivity");
 			myApplication = (MyApplication) getApplication();
-			voucherDataManage = new VoucherDataManage(CstmPayActivity.this);
 
 			preferentialDataManage = new PreferentialDataManage(
 					CstmPayActivity.this);
@@ -389,7 +388,7 @@ public class CstmPayActivity extends SherlockActivity {
 									// TODO Auto-generated method stub
 									if (isCartActivity.equals("Y")
 											|| isCartActivity.equals("N")) {
-										show(carts, false);
+//										show(carts, false);
 										// voucherDataManage = new
 										// VoucherDataManage(CstmPayActivity.this);
 										// voucher
@@ -429,7 +428,7 @@ public class CstmPayActivity extends SherlockActivity {
 		super.onDestroy();
 		
 		imageLoader.init(ImageLoaderConfiguration.createDefault(CstmPayActivity.this));
-		imageLoader.destroy();
+		imageLoader.stop();
 		unregisterReceiver(receiver);
 		closeTask();
 		closeVoucherTask();
@@ -548,7 +547,7 @@ public class CstmPayActivity extends SherlockActivity {
 		}
 		if (preferentialDataManage.getFreeGoods().size() == 0
 				&& preferentialDataManage.getScoreGoods().size() != 0) {
-			if (voucher == 0) {
+			if (voucher <= 0.001) {
 				// show(carts, false);
 				return;
 			} else {
@@ -566,7 +565,7 @@ public class CstmPayActivity extends SherlockActivity {
 
 		if (isCartActivity.equals("Y") || isCartActivity.equals("N")) {//
 		// show(carts, false);// sum,
-			if (voucher > 0 || !arrayListFree.isEmpty()) {
+			if (voucher > 0.001 || !arrayListFree.isEmpty()) {
 				dialog.show();
 			}
 		}
@@ -574,6 +573,7 @@ public class CstmPayActivity extends SherlockActivity {
 	private ImageLoader imageLoader;
 	private ImageLoadingListener listener;
 	private DisplayImageOptions options;
+	
 	private void show(final ArrayList<Cart> carts, boolean isHuanGou) {
 		Log.i(TAG, "show sum:" + sum);
 		setContentView(R.layout.go_pay);
@@ -803,23 +803,28 @@ public class CstmPayActivity extends SherlockActivity {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-//			bar.show();
+			// bar.show();
 			bar = (ProgressDialog) new YLProgressDialog(CstmPayActivity.this)
-			.createLoadingDialog(CstmPayActivity.this, null);
-	bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+					.createLoadingDialog(CstmPayActivity.this, null);
+			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
-		@Override
-		public void onCancel(DialogInterface dialog) {
-			// TODO Auto-generated method stub
-			cancel(true);
-		}
-	});
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					cancel(true);
+				}
+			});
+			// 事件id（"save order"）的事件save order，其时长持续10毫秒
+			StatService.onEventStart(CstmPayActivity.this, "save order",
+					"save order");// 必须和onEventEnd共用才行
 		}
 
 		@Override
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
+			StatService.onEventEnd(CstmPayActivity.this, "save order",
+					"save order");// 必须和onEventStart共用才行
 			bar.dismiss();
 			if(result){
 				go2Pay(mode);
@@ -1289,5 +1294,21 @@ public class CstmPayActivity extends SherlockActivity {
 			}
 		}
 	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		StatService.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		StatService.onResume(this);
+	}
+	
+	
 
 }

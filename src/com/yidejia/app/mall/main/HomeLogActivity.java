@@ -1,6 +1,7 @@
 package com.yidejia.app.mall.main;
 
 import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -12,7 +13,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.MyMallActivity;
@@ -136,23 +137,17 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 				stringName.setCursorVisible(false);
 			}
 		});
-		name = sp.getString("DESMI", null);
+		String baseName = sp.getString("DESMI", null);
 		//
 		String basePwd = sp.getString("DESPWD", null);
-		String keyName = name + consts.getMiStr();
-		pwd = DesUtils.decode(keyName, basePwd);
+		String keyName = baseName + consts.getMiStr();
+		String basepasswrod = DesUtils.decode(keyName, basePwd);
 
-		if (name != null && pwd != null) {
+		if (baseName != null && basepasswrod != null) {
 			mBox.setChecked(true);
-			stringName.setText(name);
-			stringPassword.setText(pwd);
+			stringName.setText(baseName);
+			stringPassword.setText(basepasswrod);
 		}
-//		if(sp.getBoolean("mBox", false)){
-//			Log.e("info", sp.getBoolean("mBox", false)+"mBox");
-//			Task task = new Task();
-//			task.execute();
-//		}
-//		Log.e("info", sp.getBoolean("mBox", false)+"mBox");
 	}
 
 	private RelativeLayout downHomeLayout;
@@ -202,38 +197,37 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 		down_my_textview = (TextView) findViewById(R.id.down_my_text);
 
 		downHomeLayout.setOnClickListener(new OnClickListener() {
-
+			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(HomeLogActivity.this,
-						HomeMallActivity.class);
+				Intent intent = new Intent(HomeLogActivity.this, HomeMallActivity.class);
 				startActivity(intent);
+				overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 			}
 		});
 		downSearchLayout.setOnClickListener(new OnClickListener() {
-
+			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(HomeLogActivity.this,
-						HomeSearchActivity.class);
+				Intent intent = new Intent(HomeLogActivity.this, HomeSearchActivity.class);
 				startActivity(intent);
-
+				overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+				
 			}
 		});
 		downShoppingLayout.setOnClickListener(new OnClickListener() {
-
+			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(HomeLogActivity.this,
-						HomeCarActivity.class);
+				Intent intent = new Intent(HomeLogActivity.this,HomeCarActivity.class);
 				startActivity(intent);
-
+				overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 			}
 		});
-		// downMyLayout.setOnClickListener(this);
+//		downMyLayout.setOnClickListener(this);
 
 		down_home_textview.setTextColor(this.getResources().getColor(
 				R.color.white_white));
@@ -242,7 +236,8 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 
 		downMyLayout.setBackgroundResource(R.drawable.down_hover1);
 		down_my_imageView.setImageResource(R.drawable.down_my_hover);
-		down_my_textview.setTextColor(res.getColor(R.color.white));
+		down_my_textview.setTextColor(res
+				.getColor(R.color.white));
 		downGuangLayout.setVisibility(ViewGroup.GONE);
 	}
 
@@ -280,7 +275,7 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-
+		
 		case R.id.my_mall_login_retrieve_password:// 找回密码
 			Intent intent1 = new Intent(HomeLogActivity.this,
 					FindPwActivity.class);
@@ -322,12 +317,6 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 	private String message;
 	private boolean isTimeout = false;
 
-	/**
-	 * 异步登陆事件
-	 * 
-	 * @author Administrator
-	 * 
-	 */
 	private class Task extends AsyncTask<Void, Void, Boolean> {
 		private ProgressDialog bar;
 
@@ -384,9 +373,9 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 			if (result) {
 				Toast.makeText(HomeLogActivity.this, "登陆成功！", Toast.LENGTH_LONG)
 						.show();
-				Intent intent = new Intent(HomeLogActivity.this,
-						HomeMyMaActivity.class);
+				Intent intent = new Intent(HomeLogActivity.this, HomeMyMaActivity.class);
 				startActivity(intent);
+				overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 				HomeLogActivity.this.finish();
 				// 隐藏键盘
 				inputMethodManager.hideSoftInputFromWindow(
@@ -395,9 +384,8 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 						stringPassword.getWindowToken(), 0);
 
 				myApplication.setIsLogin(true);
-
+				
 				if (mBox.isChecked()) {
-					sp.edit().putBoolean("mBox", true).commit();
 					sp.edit().putString("DESMI", name).commit();
 
 					String keyName = name + consts.getMiStr();
@@ -413,7 +401,6 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 				} else {
 					sp.edit().remove("DESMI").commit();
 					sp.edit().remove("DESPWD").commit();
-					sp.edit().remove("mBox").commit();
 				}
 			} else {
 				if (isTimeout) {
@@ -455,4 +442,18 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 		return super.onKeyUp(keyCode, event);
 	}
 
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		StatService.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		StatService.onResume(this);
+	}
+	
 }

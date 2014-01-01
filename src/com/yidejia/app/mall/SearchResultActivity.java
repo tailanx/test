@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.baidu.mobstat.StatService;
 import com.jeremyfeinstein.slidingmenu.SlidingFragmentActivity;
 import com.jeremyfeinstein.slidingmenu.SlidingMenu;
 import com.yidejia.app.mall.fragment.FilterFragment;
@@ -302,5 +303,19 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 		this.bundle = bundle;
 		this.bundle.putString("name", name);
 		setFragment(0, isShowWithList);
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		StatService.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		StatService.onResume(this);
 	}
 }

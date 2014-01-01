@@ -32,12 +32,12 @@
             <EditText
                 android:id="@+id/comment_context"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/comment"
-              	android:paddingLeft="8dp"
-                android:hint="   商品评价....                                                                                   "
+                android:layout_height="160dp"
+                android:layout_margin="8dp"
+                android:gravity="top"
+                android:background="@drawable/feedback_opinion_bg_shape"
+                android:padding="8dp"
+                android:hint="商品评价...."
                 android:textSize="16sp" />
 <!-- 
 <LinearLayout

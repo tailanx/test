@@ -13,6 +13,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
 
 public class GoodsDetailFragment extends SherlockFragment{
@@ -112,5 +113,17 @@ public class GoodsDetailFragment extends SherlockFragment{
 		webView.loadUrl(url);
 	}
 	
-	
+	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		StatService.onPause(this);
+	}
+
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		StatService.onResume(this);
+	}
 }

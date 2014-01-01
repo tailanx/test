@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.baidu.mobstat.StatService;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
@@ -260,6 +261,20 @@ public class AllOrderActivity extends SherlockFragmentActivity {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		StatService.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		StatService.onResume(this);
 	}
 
 }

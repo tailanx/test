@@ -29,6 +29,7 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
@@ -79,6 +80,11 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 		filter.addAction(Consts.UPDATE_CHANGE);
 		registerReceiver(receiver, filter);
 		
+		Log.e(TAG, "search onCreate");
+		
+		if(null != arg0) {
+			functions = (ArrayList<Function>) arg0.getSerializable("funs");
+		}
 		
 		cartsDataManage = new CartsDataManage();
 		myApplication = (MyApplication) getApplication();
@@ -92,7 +98,6 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 		search_item_refresh_view = (RelativeLayout) view
 				.findViewById(R.id.search_item_refresh_view);
 		refresh_data_btn = (ImageView) view.findViewById(R.id.refresh_data_btn);
-		functions = new ArrayList<Function>();
 		res = getResources();
 		initNavView();
 		setActionBarConfig();
@@ -101,9 +106,40 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 			searchListView.setVisibility(View.GONE);
 			search_item_refresh_view.setVisibility(View.VISIBLE);
 		} else {
-			closeTask();
-			task = new Task();
-			task.execute();
+			if ((null == functions) || (functions.isEmpty())) {
+				functions = new ArrayList<Function>();
+				Log.e(TAG, "search on create get task");
+				closeTask();
+				task = new Task();
+				task.execute();
+			}
+		}
+
+		if (null != bar) {
+			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					closeTask();
+					if (functions.isEmpty()) {
+						searchListView.setVisibility(View.GONE);
+						search_item_refresh_view.setVisibility(View.VISIBLE);
+					}
+				}
+			});
+		}
+		if (null != refresh_data_btn) {
+			refresh_data_btn.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					closeTask();
+					task = new Task();
+					task.execute();
+				}
+			});
 		}
 	}
 
@@ -126,7 +162,7 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 
 		searchText = (ImageView) findViewById(R.id.search_bar_edittext);
 		searchText.setOnClickListener(go2SearchListener2);
-
+		
 	}
 
 	private RelativeLayout downHomeLayout;
@@ -191,31 +227,7 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 	public void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		Log.d(TAG, "TestFragment-----onStart");
-		if(null != bar)
-		bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-			@Override
-			public void onCancel(DialogInterface dialog) {
-				// TODO Auto-generated method stub
-				closeTask();
-				if (functions.isEmpty()) {
-					searchListView.setVisibility(View.GONE);
-					search_item_refresh_view.setVisibility(View.VISIBLE);
-				}
-			}
-		});
-		if(null != refresh_data_btn)
-		refresh_data_btn.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				closeTask();
-				task = new Task();
-				task.execute();
-			}
-		});
+		Log.e(TAG, "TestFragment-----onStart");
 //		if(functions == null || functions.isEmpty()){
 //			closeTask();
 //			task = new Task();
@@ -250,7 +262,7 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 			break;
 		}
 		HomeSearchActivity.this.startActivity(intent);
-
+		overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 	}
 
 	private ProgressDialog bar;
@@ -307,7 +319,6 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 				searchListAdapter = new SearchListAdapter(
 						HomeSearchActivity.this, functions);
 				searchListView.setAdapter(searchListAdapter);
-				Log.e(TAG, "TestFragment-----onStart1");
 				searchListView
 						.setOnItemClickListener(new OnItemClickListener() {
 
@@ -381,44 +392,61 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 			startActivity(intent);
 		}
 	};
+	
+	@Override
 	protected void onSaveInstanceState(Bundle outState) {
-		
+		super.onSaveInstanceState(outState);
+		outState.putSerializable("funs", functions);
 	};
-	// 双击返回键退出程序
-		private long exitTime = 0;
 
+	// 双击返回键退出程序
+	private long exitTime = 0;
+
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if ((System.currentTimeMillis() - exitTime) > 2000) {
+				Toast.makeText(getApplicationContext(),
+						getResources().getString(R.string.exit),
+						Toast.LENGTH_SHORT).show();
+				exitTime = System.currentTimeMillis();
+			} else {
+				// ((MyApplication)getApplication()).setUserId("");
+				// ((MyApplication)getApplication()).setToken("");
+				finish();
+				// System.exit(0);
+			}
+			return true;
+		}
+		return super.onKeyUp(keyCode, event);
+	}
+
+	private class InnerReceiver extends BroadcastReceiver {
 		@Override
-		public boolean onKeyUp(int keyCode, KeyEvent event) {
+		public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
-			if (keyCode == KeyEvent.KEYCODE_BACK) {
-				if ((System.currentTimeMillis() - exitTime) > 2000) {
-					Toast.makeText(getApplicationContext(),
-							getResources().getString(R.string.exit),
-							Toast.LENGTH_SHORT).show();
-					exitTime = System.currentTimeMillis();
-				} else {
-					// ((MyApplication)getApplication()).setUserId("");
-					// ((MyApplication)getApplication()).setToken("");
-					finish();
-					// System.exit(0);
-				}
-				return true;
-			}
-			return super.onKeyUp(keyCode, event);
-		}
-		
-		
-		private class InnerReceiver extends BroadcastReceiver {
-			@Override
-			public void onReceive(Context context, Intent intent) {
-				// TODO Auto-generated method stub
-				String action = intent.getAction();
-				if (Consts.UPDATE_CHANGE.equals(action)) {
-					number = cartsDataManage.getCartAmount();
-					cartImage.setVisibility(View.VISIBLE);
-					cartImage.setText(number + "");
-				}
+			String action = intent.getAction();
+			if (Consts.UPDATE_CHANGE.equals(action)) {
+				number = cartsDataManage.getCartAmount();
+				cartImage.setVisibility(View.VISIBLE);
+				cartImage.setText(number + "");
 			}
 		}
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		StatService.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		StatService.onResume(this);
+	}
 
 }

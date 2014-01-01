@@ -20,6 +20,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.SearchResultActivity;
 import com.yidejia.app.mall.adapter.SearchListAdapter;
@@ -287,5 +288,19 @@ public class SearchFragment extends SherlockFragment {
 		intent.putExtras(bundle);
 		startActivity(intent);
 		
+	}
+	
+	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		StatService.onPause(this);
+	}
+
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		StatService.onResume(this);
 	}
 }

@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
 
 public class RecommendActivity extends SherlockActivity {
@@ -41,6 +42,9 @@ public class RecommendActivity extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				// 事件id（"registered id"）的事件pass，其时长持续100毫秒
+				StatService.onEventDuration(RecommendActivity.this,
+						"download skincarer", "download skincarer", 100);
 				Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("http://static.yidejia.com/apk/skincare.apk"));
 				startActivity(intent);
 			}
@@ -90,5 +94,20 @@ public class RecommendActivity extends SherlockActivity {
 		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
 		titleTextView.setText(getResources().getString(R.string.recomend));
 	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		StatService.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		StatService.onResume(this);
+	}
+	
 }
 

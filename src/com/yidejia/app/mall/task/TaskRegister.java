@@ -7,9 +7,11 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.net.user.Register;
+import com.yidejia.app.mall.view.RegistActivity;
 
 public class TaskRegister {
 	
@@ -77,6 +79,8 @@ public class TaskRegister {
 			super.onPostExecute(result);
 			bar.dismiss();
 			if(result){
+				StatService.onEventDuration(activity,
+						"registered success", "registered success", 100);
 				Toast.makeText(activity, "注册成功!", Toast.LENGTH_LONG).show();
 				activity.finish();
 			} else {

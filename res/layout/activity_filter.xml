@@ -2,12 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/filter_bg">
+    android:background="@drawable/filter_bg"
+    android:orientation="vertical" >
 
     <RelativeLayout
         android:id="@+id/filter_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:background="@drawable/filter_topbg" >
 
         <Button
@@ -16,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
+            android:layout_margin="6dp"
             android:background="@drawable/complete"
             android:text="完成" />
 
@@ -25,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
+            android:layout_margin="6dp"
             android:layout_toLeftOf="@+id/filter_complete"
             android:background="@drawable/clear_conditions"
             android:text="清除条件" />

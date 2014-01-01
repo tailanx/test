@@ -200,7 +200,7 @@ public class GoodsView {
 				setCartNum(cart_num);
 			}
 			// 加入购物车按钮点击事件
-			if (priceNum > 0) {
+			if (priceNum > 0.01) {
 				imgIcon.setOnClickListener(new OnClickListener() {
 					
 					@Override
@@ -244,7 +244,7 @@ public class GoodsView {
 					Intent intent = new Intent(activity, CstmPayActivity.class);
 					try {
 						float sum = Float.parseFloat(priceString);
-						if (sum <= 0)
+						if (sum <= 0.01)
 							return;// //价格出错
 						if (!myApplication.getIsLogin()) {
 							Toast.makeText(

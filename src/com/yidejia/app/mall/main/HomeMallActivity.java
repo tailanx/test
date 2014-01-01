@@ -45,6 +45,7 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.baidu.mobstat.StatService;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
@@ -113,6 +114,8 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 		filter.addAction(Consts.BROAD_UPDATE_CHANGE);
 		filter.addAction(Consts.DELETE_CART);
 		registerReceiver(receiver, filter);
+		
+		Log.e(TAG, "home mall oncreate");
 		
 		MAINACTIVITY = this;
 		cartsDataManage = new CartsDataManage();
@@ -279,7 +282,7 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 			break;
 		}
 		HomeMallActivity.this.startActivity(intent);
-
+		overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 	}
 
 	private class Task extends AsyncTask<Void, Void, Boolean> {
@@ -1143,6 +1146,20 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 		}
 		return super.onKeyUp(keyCode, event);
 	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		StatService.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		StatService.onResume(this);
+	}
 
 	private class InnerReceiver extends BroadcastReceiver {
 		@Override
@@ -1153,16 +1170,18 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 				number = cartsDataManage.getCartAmount();
 				cartImage.setVisibility(View.VISIBLE);
 				cartImage.setText(number + "");
-			}if(Consts.BROAD_UPDATE_CHANGE.equals(action)){
+			}
+			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
 				cartImage.setVisibility(View.GONE);
-			}if(Consts.DELETE_CART.equals(action)){
+			}
+			if (Consts.DELETE_CART.equals(action)) {
 				number = cartsDataManage.getCartAmount();
-				if(number == 0)
+				if (number == 0)
 					cartImage.setVisibility(View.GONE);
-				else{
-					cartImage.setText(number+"");
+				else {
+					cartImage.setText(number + "");
 				}
-				}
+			}
 		}
 	}
 }

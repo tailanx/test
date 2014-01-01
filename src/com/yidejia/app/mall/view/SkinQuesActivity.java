@@ -30,6 +30,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.Skin;
 import com.yidejia.app.mall.model.SkinQOption;
@@ -582,5 +583,19 @@ public class SkinQuesActivity extends Activity {
 			String cps) {
 		SkinAnswerActivity sa = new SkinAnswerActivity(view, activity, cps);
 
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		StatService.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		StatService.onResume(this);
 	}
 }

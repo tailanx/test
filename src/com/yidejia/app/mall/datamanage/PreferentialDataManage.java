@@ -157,7 +157,7 @@ public class PreferentialDataManage {
 			super.onPostExecute(result);
 			if(result){
 				Log.e("info", result+"   result");
-				dig.cancel();
+//				dig.cancel();
 			} else {
 				if (isTimeout) {
 					Toast.makeText(
@@ -166,7 +166,7 @@ public class PreferentialDataManage {
 									.getString(R.string.time_out),
 							Toast.LENGTH_SHORT).show();
 					isTimeout = false;
-					dig.dismiss();
+//					dig.dismiss();
 				}
 			}
 				
@@ -176,9 +176,9 @@ public class PreferentialDataManage {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			dig = new ProgressDialog(context);
-			dig.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			dig.show();
+//			dig = new ProgressDialog(context);
+//			dig.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			dig.show();
 		}
 
 		@Override

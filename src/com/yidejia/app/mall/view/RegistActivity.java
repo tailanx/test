@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.IpAddress;
 import com.yidejia.app.mall.datamanage.UserDatamanage;
@@ -187,7 +188,9 @@ public class RegistActivity extends SherlockActivity {
 							Toast.LENGTH_SHORT).show();
 				} else {
 					if (pwd.equals(confirmPwd)) {
-						
+						// 事件id（"registered id"）的事件pass，其时长持续100毫秒
+						StatService.onEventDuration(RegistActivity.this,
+								"register", "register", 100);
 						taskCheckCode = new TaskCheckCode(RegistActivity.this);
 						taskCheckCode.checkCode(account, obtain, pwd, ipAddress, "");
 					} else {
@@ -227,5 +230,19 @@ public class RegistActivity extends SherlockActivity {
 	private void goToAgreementAct(){
 		Intent intent = new Intent(this, AgreementActivity.class);
 		startActivity(intent);
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		StatService.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		StatService.onResume(this);
 	}
 }

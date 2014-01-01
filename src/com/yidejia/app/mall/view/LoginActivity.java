@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.IpAddress;
 import com.yidejia.app.mall.datamanage.UserDatamanage;
@@ -255,5 +256,19 @@ public class LoginActivity extends SherlockActivity implements OnClickListener{
 		
 		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
 		titleTextView.setText("登录");
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		StatService.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		StatService.onResume(this);
 	}
 }
