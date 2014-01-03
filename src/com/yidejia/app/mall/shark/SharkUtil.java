@@ -69,7 +69,9 @@ public class SharkUtil {
 			if (Math.abs(x) > medumValue || Math.abs(y) > medumValue || Math.abs(z) > medumValue) {
 //				vibrator.vibrate(200);
 //				handler = new Handler();
-				handler.post(runnable);
+				iShark.onStart();
+				vibrator.vibrate(new long[]{10, 200, 500, 200}, -1);
+				handler.postDelayed(runnable, 3000);
 //				handler.postDelayed(runnable, 800);
 			}
 		}
@@ -88,7 +90,6 @@ public class SharkUtil {
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
-			vibrator.vibrate(new long[]{10, 200, 500, 200}, -1);
 			iShark.onFinish();
 		}
 	};

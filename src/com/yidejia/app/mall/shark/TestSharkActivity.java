@@ -30,9 +30,15 @@ public class TestSharkActivity extends Activity {
 		sharkUtil.registerListener(new IShark() {
 			
 			@Override
+			public void onStart() {
+				// TODO Auto-generated method stub
+				tvTest.setText("on start");
+			}
+			
+			@Override
 			public void onFinish() {
 				// TODO Auto-generated method stub
-				tvTest.setText("ahahahaha");
+				tvTest.setText("on finish");
 			}
 		});
 	}
@@ -43,5 +49,14 @@ public class TestSharkActivity extends Activity {
 		super.onPause();
 		sharkUtil.unregisterListener();
 	}
+
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		sharkUtil.unregisterListener();
+	}
+	
+	
 	
 }
