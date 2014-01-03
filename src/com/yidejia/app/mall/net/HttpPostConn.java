@@ -94,6 +94,7 @@ public class HttpPostConn {
 			return null;
 		}
 		String result = "";
+		HttpClient client = new DefaultHttpClient(); 
 		try {
 //			byte[] paramArrayOfByte = param.getBytes();
 //			ByteArrayEntity arrayEntity = new ByteArrayEntity(paramArrayOfByte); 
@@ -109,7 +110,6 @@ public class HttpPostConn {
 			stringEntity.setContentType("application/x-www-form-urlencoded;charset=UTF-8");
 			httpPost.setEntity(stringEntity);
 			
-			HttpClient client = new DefaultHttpClient(); 
 			
 			client.getParams().setIntParameter(
 					HttpConnectionParams.SO_TIMEOUT, TIME_OUT_DELAY); // ��ȡ��ʱ����
@@ -147,6 +147,8 @@ public class HttpPostConn {
 			// TODO: handle exception
 			e.printStackTrace();
 			throw new TimeOutEx("连接超时");
+		} finally {
+			client.getConnectionManager().shutdown();
 		}
 		if(null == result || "".equals(result)) throw new TimeOutEx();
 		return result;

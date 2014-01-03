@@ -719,14 +719,9 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 			int length = mImageCircleViews.length;
 			mImageCircleViews[index % length]
 					.setBackgroundResource(R.drawable.dot1);
-			mImageCircleViews[index % length]
-					.setBackgroundResource(R.drawable.dot1);
 			for (int i = 0; i < length; i++) {
 				// mSlideTitle.setText(""+i);
-
 				if (index % length != i) {
-					mImageCircleViews[i % length]
-							.setBackgroundResource(R.drawable.dot2);
 					mImageCircleViews[i % length]
 							.setBackgroundResource(R.drawable.dot2);
 				}

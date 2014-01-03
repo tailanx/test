@@ -39,8 +39,8 @@ public class HttpGetConn {
 //		}
 		HttpGet httpRequst = new HttpGet();
 //		Log.i(TAG, urlString);
+		HttpClient httpClient = new DefaultHttpClient();
 		try {
-			HttpClient httpClient = new DefaultHttpClient();
 			HttpProtocolParams.setUseExpectContinue(httpClient.getParams(), false);
 			httpRequst.setURI(new URI(urlString));
 			httpClient.getParams().setIntParameter(
@@ -86,6 +86,8 @@ public class HttpGetConn {
 			Log.i(TAG, "连接超时：");
 			e.printStackTrace();
 			throw new TimeOutEx("连接超时");
+		} finally {
+			httpClient.getConnectionManager().shutdown();
 		}
 		if(null == result || "".equals(result)) throw new TimeOutEx();
 		return result;
