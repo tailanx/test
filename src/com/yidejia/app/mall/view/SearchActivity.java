@@ -1,4 +1,4 @@
-package com.yidejia.app.mall;
+package com.yidejia.app.mall.view;
 
 import java.util.ArrayList;
 
@@ -24,6 +24,9 @@ import android.widget.TextView.OnEditorActionListener;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.R.id;
+import com.yidejia.app.mall.R.layout;
 import com.yidejia.app.mall.datamanage.SchHistoryDataManage;
 import com.yidejia.app.mall.search.SuggestionsAdapter;
 

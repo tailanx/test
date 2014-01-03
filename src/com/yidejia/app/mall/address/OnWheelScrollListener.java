@@ -16,6 +16,8 @@
 
 package com.yidejia.app.mall.address;
 
+import com.yidejia.app.mall.widget.WheelView;
+
 /**
  * Wheel scrolled listener interface.
  */

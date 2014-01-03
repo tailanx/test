@@ -1,4 +1,4 @@
-package com.yidejia.app.mall;
+package com.yidejia.app.mall.view;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,10 +22,11 @@ import com.baidu.mobstat.StatService;
 import com.tenpay.android.service.TenpayServiceHelper;
 import com.unionpay.UPPayAssistEx;
 import com.unionpay.uppay.PayActivity;
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.R.layout;
+import com.yidejia.app.mall.R.string;
 import com.yidejia.app.mall.util.Http;
 import com.yidejia.app.mall.util.MessageUtil;
-import com.yidejia.app.mall.view.AllOrderActivity;
-import com.yidejia.app.mall.view.WaitPayActivity;
 
 public class UserPayActivity extends Activity{
 	private static final String SERVER_URL = "http://202.104.148.76/splugin/interface";

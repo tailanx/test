@@ -7,6 +7,7 @@ import java.util.Map;
 
 
 
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
@@ -17,7 +18,7 @@ import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
 import com.unionpay.mpay.views.u;
-import com.yidejia.app.mall.main.HomeMallActivity;
+import com.yidejia.app.mall.HomeMallActivity;
 import com.yidejia.app.mall.model.ProductBaseInfo;
 /**
  * 浏览历史模块

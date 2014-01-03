@@ -33,16 +33,16 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
-import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.SearchResultActivity;
 import com.yidejia.app.mall.adapter.SelledResultListAdapter;
 import com.yidejia.app.mall.datamanage.SearchDataManage;
 import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.initview.SRViewWithImage;
 import com.yidejia.app.mall.model.SearchItem;
 import com.yidejia.app.mall.net.search.SearchDataUtil;
+import com.yidejia.app.mall.view.GoodsInfoActivity;
 import com.yidejia.app.mall.view.ImageLoaderUtil;
+import com.yidejia.app.mall.view.SearchResultActivity;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class SelledResultFragment extends SherlockFragment {

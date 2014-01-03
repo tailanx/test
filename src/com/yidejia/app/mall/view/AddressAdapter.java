@@ -24,11 +24,11 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.yidejia.app.mall.HomeMallActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.exception.TimeOutEx;
-import com.yidejia.app.mall.main.HomeMallActivity;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.address.DeleteUserAddress;

@@ -20,18 +20,18 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
-import com.yidejia.app.mall.ActiveGoActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.SearchActivity;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.task.MallTask;
 import com.yidejia.app.mall.task.MallTask.Task;
+import com.yidejia.app.mall.view.ActiveGoActivity;
 import com.yidejia.app.mall.view.AllOrderActivity;
 import com.yidejia.app.mall.view.HistoryActivity;
 import com.yidejia.app.mall.view.IntegeralActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.view.MyCollectActivity;
+import com.yidejia.app.mall.view.SearchActivity;
 import com.yidejia.app.mall.view.SkinHomeActivity;
 
 public class MallAction {

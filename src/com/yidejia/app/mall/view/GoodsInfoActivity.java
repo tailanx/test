@@ -1,4 +1,4 @@
-package com.yidejia.app.mall;
+package com.yidejia.app.mall.view;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,6 +24,11 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.R.drawable;
+import com.yidejia.app.mall.R.id;
+import com.yidejia.app.mall.R.layout;
+import com.yidejia.app.mall.R.string;
 import com.yidejia.app.mall.adapter.BaseFragmentPagerAdapter;
 import com.yidejia.app.mall.datamanage.ProductDataManage;
 import com.yidejia.app.mall.exception.TimeOutEx;

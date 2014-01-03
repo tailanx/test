@@ -1,6 +1,6 @@
 package com.yidejia.app.mall.ctrl;
 
-import com.yidejia.app.mall.GoodsInfoActivity;
+import com.yidejia.app.mall.view.GoodsInfoActivity;
 
 import android.app.Activity;
 import android.content.Intent;

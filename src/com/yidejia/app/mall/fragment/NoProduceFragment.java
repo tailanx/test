@@ -16,11 +16,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.yidejia.app.mall.HomeMallActivity;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.SearchResultActivity;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
-import com.yidejia.app.mall.main.HomeMallActivity;
 import com.yidejia.app.mall.util.Consts;
+import com.yidejia.app.mall.view.SearchResultActivity;
 
 public class NoProduceFragment extends SherlockFragment {
 	private View view;

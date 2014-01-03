@@ -13,12 +13,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.PreferentialDataManage;
-
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.CstmPayActivity;
+import com.yidejia.app.mall.view.GoodsInfoActivity;
 
 public class ExchangeFragment extends SherlockFragment {
 	// private TextView titleTextView;//订单的状态

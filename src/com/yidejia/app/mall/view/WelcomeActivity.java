@@ -1,4 +1,4 @@
-package com.yidejia.app.mall;
+package com.yidejia.app.mall.view;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,7 +17,10 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.baidu.mobstat.StatService;
-import com.yidejia.app.mall.main.HomeMallActivity;
+import com.yidejia.app.mall.HomeMallActivity;
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.R.layout;
+import com.yidejia.app.mall.R.string;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.HttpGetVersionConn;
 

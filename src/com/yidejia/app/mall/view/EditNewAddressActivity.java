@@ -40,10 +40,10 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.address.ArrayWheelAdapter;
 import com.yidejia.app.mall.address.OnWheelChangedListener;
-import com.yidejia.app.mall.address.WheelView;
 //import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.task.TaskSaveAddr;
+import com.yidejia.app.mall.widget.WheelView;
 //import com.yidejia.app.mall.util.DefinalDate;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 

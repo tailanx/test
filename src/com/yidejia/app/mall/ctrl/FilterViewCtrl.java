@@ -18,11 +18,11 @@ import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.SearchResultActivity;
 import com.yidejia.app.mall.adapter.FilterExListAdapter;
 import com.yidejia.app.mall.model.Brand;
 import com.yidejia.app.mall.model.Function;
 import com.yidejia.app.mall.model.PriceLevel;
+import com.yidejia.app.mall.view.SearchResultActivity;
 
 public class FilterViewCtrl {
 	private FilterExListAdapter filterAdapter;

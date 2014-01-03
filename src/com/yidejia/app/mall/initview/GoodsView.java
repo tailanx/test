@@ -42,8 +42,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-import com.yidejia.app.mall.GoodsInfoActivity;
-import com.yidejia.app.mall.ImagePagerActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.BrowseHistoryDataManage;
@@ -58,6 +56,8 @@ import com.yidejia.app.mall.net.favorite.CheckExistsFavorite;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.view.GoCartActivity;
+import com.yidejia.app.mall.view.GoodsInfoActivity;
+import com.yidejia.app.mall.view.ImagePagerActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 
 public class GoodsView {

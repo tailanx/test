@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.yidejia.app.mall.address;
+package com.yidejia.app.mall.adapter;
 
 public interface WheelAdapter {
 	/**

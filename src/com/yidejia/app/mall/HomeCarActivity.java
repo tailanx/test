@@ -1,4 +1,4 @@
-package com.yidejia.app.mall.main;
+package com.yidejia.app.mall;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,9 +11,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
-import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.SearchResultActivity;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.fragment.CartActivity;
 import com.yidejia.app.mall.model.Cart;
@@ -23,6 +21,7 @@ import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.view.ImageLoaderUtil;
 import com.yidejia.app.mall.view.LoginActivity;
+import com.yidejia.app.mall.view.SearchResultActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog.Builder;

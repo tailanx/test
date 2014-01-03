@@ -22,12 +22,12 @@ import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.SearchResultActivity;
 import com.yidejia.app.mall.adapter.SearchListAdapter;
 import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.model.Function;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.search.EffectDataUtil;
+import com.yidejia.app.mall.view.SearchResultActivity;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class SearchFragment extends SherlockFragment {

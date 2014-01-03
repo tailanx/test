@@ -1,4 +1,4 @@
-package com.yidejia.app.mall;
+package com.yidejia.app.mall.cache;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 

@@ -12,9 +12,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-	
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -42,29 +41,47 @@ android:uiOptions="splitActionBarWhenNarrow"
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
             <meta-data android:name="android.app.searchable"  
-                   android:resource="@xml/main_searchable"/>  
+                   android:resource="@xml/main_searchable"/>  
         -->
-        
-        <!-- 您从百度网站获取的APP KEY -->
-		<meta-data android:name="BaiduMobAd_STAT_ID" android:value="84216f5a45" /> <!-- abcd1234 -->
-		<!-- 渠道商编号 -->
-		<meta-data android:name="BaiduMobAd_CHANNEL" android:value="Baidu Market" />
 
-		<!-- 是否开启错误日志统计，默认为false -->
-		<meta-data android:name="BaiduMobAd_EXCEPTION_LOG" android:value="true" />
-		<!-- 日志发送策略，可选值：APP_START、ONCE_A_DAY、SET_TIME_INTERVAL，默认为APP_START -->
-		<meta-data android:name="BaiduMobAd_SEND_STRATEGY" android:value="APP_START" />
-		<!-- 日志发送策略 为SET_TIME_INTERVAL时，需设定时间间隔(取消下行注释)。取值为1-24的整数，默认为1 -->
-		<!-- <meta-data android:name="BaiduMobAd_TIME_INTERVAL" android:value="2" />  -->
-		<!-- 日志仅在wifi网络下发送，默认为false -->
-		<meta-data android:name="BaiduMobAd_ONLY_WIFI" android:value="false" />
-		<!-- 是否获取基站位置信息 ,默认为true-->
-		<meta-data android:name="BaiduMobAd_CELL_LOCATION" android:value="true" />
-		<!-- 是否获取GPS位置信息，默认为true -->
-		<meta-data android:name="BaiduMobAd_GPS_LOCATION" android:value="true" />
-		<!-- 是否获取WIFI位置信息，默认为true -->
-		<meta-data android:name="BaiduMobAd_WIFI_LOCATION" android:value="true" />
-        
+
+        <!-- 您从百度网站获取的APP KEY -->
+        <meta-data
+            android:name="BaiduMobAd_STAT_ID"
+            android:value="84216f5a45" />
+ <!-- abcd1234 -->
+        <!-- 渠道商编号 -->
+        <meta-data
+            android:name="BaiduMobAd_CHANNEL"
+            android:value="Baidu Market" />
+
+        <!-- 是否开启错误日志统计，默认为false -->
+        <meta-data
+            android:name="BaiduMobAd_EXCEPTION_LOG"
+            android:value="true" />
+        <!-- 日志发送策略，可选值：APP_START、ONCE_A_DAY、SET_TIME_INTERVAL，默认为APP_START -->
+        <meta-data
+            android:name="BaiduMobAd_SEND_STRATEGY"
+            android:value="APP_START" />
+        <!-- 日志发送策略 为SET_TIME_INTERVAL时，需设定时间间隔(取消下行注释)。取值为1-24的整数，默认为1 -->
+        <!-- <meta-data android:name="BaiduMobAd_TIME_INTERVAL" android:value="2" /> -->
+        <!-- 日志仅在wifi网络下发送，默认为false -->
+        <meta-data
+            android:name="BaiduMobAd_ONLY_WIFI"
+            android:value="false" />
+        <!-- 是否获取基站位置信息 ,默认为true -->
+        <meta-data
+            android:name="BaiduMobAd_CELL_LOCATION"
+            android:value="true" />
+        <!-- 是否获取GPS位置信息，默认为true -->
+        <meta-data
+            android:name="BaiduMobAd_GPS_LOCATION"
+            android:value="true" />
+        <!-- 是否获取WIFI位置信息，默认为true -->
+        <meta-data
+            android:name="BaiduMobAd_WIFI_LOCATION"
+            android:value="true" />
+
         <activity
             android:name="com.yidejia.app.mall.MainActivity"
             android:label="@string/app_name"
@@ -73,7 +90,7 @@ android:uiOptions="splitActionBarWhenNarrow"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="com.yidejia.app.mall.SearchActivity"
+            android:name="com.yidejia.app.mall.view.SearchActivity"
             android:uiOptions="splitActionBarWhenNarrow"
             android:windowSoftInputMode="stateVisible" >
         </activity>
@@ -83,11 +100,11 @@ android:uiOptions="splitActionBarWhenNarrow"
             android:uiOptions="splitActionBarWhenNarrow" >
         </activity>
         <activity
-            android:name="com.yidejia.app.mall.GoodsInfoActivity"
+            android:name="com.yidejia.app.mall.view.GoodsInfoActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.yidejia.app.mall.SearchResultActivity"
+            android:name="com.yidejia.app.mall.view.SearchResultActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -101,17 +118,17 @@ android:uiOptions="splitActionBarWhenNarrow"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.yidejia.app.mall.WelcomeActivity"
+            android:name="com.yidejia.app.mall.view.WelcomeActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
-              <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.yidejia.app.mall.UserPayActivity"
+            android:name="com.yidejia.app.mall.view.UserPayActivityivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -211,7 +228,7 @@ android:uiOptions="splitActionBarWhenNarrow"
             android:name="com.yidejia.app.mall.view.HistoryActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yidejia.app.mall.ActiveGoActivity"
+            android:name="com.yidejia.app.mall.view.ActiveGoActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.yidejia.app.mall.view.SkinQuesActivity"
@@ -227,7 +244,7 @@ android:uiOptions="splitActionBarWhenNarrow"
             android:name="com.yidejia.app.mall.view.SkinResultAcitivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yidejia.app.mall.ImagePagerActivity"
+            android:name="com.yidejia.app.mall.view.ImagePagerActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.yidejia.app.mall.view.AgreementActivity"
@@ -246,39 +263,39 @@ android:uiOptions="splitActionBarWhenNarrow"
             android:theme="@style/Theme.UPPay" >
         </activity>
         <activity
-            android:name="com.yidejia.app.mall.main.HomeMallActivity"
+            android:name="com.yidejia.app.mall.HomeMallActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="com.yidejia.app.mall.main.HomeCarActivity"
+            android:name="com.yidejia.app.mall.HomeCarActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="com.yidejia.app.mall.main.HomeSearchActivity"
+            android:name="com.yidejia.app.mall.HomeSearchActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="com.yidejia.app.mall.main.HomeLogActivity"
+            android:name="com.yidejia.app.mall.HomeLogActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="com.yidejia.app.mall.main.HomeMyMaActivity"
+            android:name="com.yidejia.app.mall.HomeMyMaActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>
-         <activity
+        <activity
             android:name="com.yidejia.app.mall.shark.TestSharkActivity"
             android:screenOrientation="portrait" >
-         </activity>
+        </activity>
     </application>
 
 </manifest>

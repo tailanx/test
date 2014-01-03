@@ -7,12 +7,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.yidejia.app.mall.HomeCarActivity;
+import com.yidejia.app.mall.HomeLogActivity;
+import com.yidejia.app.mall.HomeMyMaActivity;
+import com.yidejia.app.mall.HomeSearchActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.main.HomeCarActivity;
-import com.yidejia.app.mall.main.HomeLogActivity;
-import com.yidejia.app.mall.main.HomeMyMaActivity;
-import com.yidejia.app.mall.main.HomeSearchActivity;
 
 public class BottomChange {
 	private SherlockFragmentActivity activity;

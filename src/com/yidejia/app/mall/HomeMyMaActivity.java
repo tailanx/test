@@ -1,4 +1,4 @@
-package com.yidejia.app.mall.main;
+package com.yidejia.app.mall;
 
 import java.io.IOException;
 
@@ -22,9 +22,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
-import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.MyMallActivity.InnerReceiver;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.PersonCountDataManage;
 import com.yidejia.app.mall.exception.TimeOutEx;
@@ -72,7 +70,6 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 	private TextView vip;
 	private MyApplication myApplication;
 	private PersonCountDataManage personCountDataManage;
-	private InnerReceiver receiver;
 	private Resources res;
 
 	private BottomChange bottomChange;

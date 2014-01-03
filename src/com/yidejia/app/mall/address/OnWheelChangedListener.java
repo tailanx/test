@@ -16,6 +16,8 @@
 
 package com.yidejia.app.mall.address;
 
+import com.yidejia.app.mall.widget.WheelView;
+
 /**
  * Wheel changed listener interface.
  * <p>The currentItemChanged() method is called whenever current wheel positions is changed:

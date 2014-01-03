@@ -1,7 +1,6 @@
 package com.yidejia.app.mall.view;
 
 import com.actionbarsherlock.app.SherlockActivity;
-import com.yidejia.app.mall.ComposeActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.TaskGetShipLog;
 

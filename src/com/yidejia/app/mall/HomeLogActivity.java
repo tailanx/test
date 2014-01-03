@@ -1,4 +1,4 @@
-package com.yidejia.app.mall.main;
+package com.yidejia.app.mall;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -31,13 +31,10 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
-import com.yidejia.app.mall.MyApplication;
-import com.yidejia.app.mall.MyMallActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.IpAddress;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.exception.TimeOutEx;
-import com.yidejia.app.mall.fragment.LoginFragment;
 import com.yidejia.app.mall.net.user.Login;
 import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.util.Consts;
@@ -63,7 +60,6 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 	private ImageView configImageView;
 	// private UserDatamanage userManage;
 	private IpAddress ipAddress;
-	private MyMallActivity fragment;
 	private CheckBox mBox;
 	private SharedPreferences sp;
 	private Consts consts;

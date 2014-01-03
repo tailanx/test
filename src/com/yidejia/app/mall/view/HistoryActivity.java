@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.yidejia.app.mall.GoodsInfoActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.HistoryAdapter;
 import com.yidejia.app.mall.datamanage.BrowseHistoryDataManage;

@@ -15,6 +15,8 @@
  */
 package com.yidejia.app.mall.address;
 
+import com.yidejia.app.mall.adapter.WheelAdapter;
+
 /**
  * The simple Array wheel adapter
  * @param <T> the element type

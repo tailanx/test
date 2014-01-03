@@ -17,7 +17,7 @@
  *  limitations under the License.
  */
 
-package com.yidejia.app.mall.address;
+package com.yidejia.app.mall.widget;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -44,6 +44,9 @@ import android.view.animation.Interpolator;
 import android.widget.Scroller;
 
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.adapter.WheelAdapter;
+import com.yidejia.app.mall.address.OnWheelChangedListener;
+import com.yidejia.app.mall.address.OnWheelScrollListener;
 
 /**
  * Numeric wheel view.

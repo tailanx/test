@@ -1,4 +1,4 @@
-package com.yidejia.app.mall;
+package com.yidejia.app.mall.view;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -10,6 +10,10 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.baidu.mobstat.StatService;
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.R.id;
+import com.yidejia.app.mall.R.layout;
+import com.yidejia.app.mall.R.string;
 import com.yidejia.app.mall.ctrl.ActViewCtrl;
 
 public class ActiveGoActivity extends SherlockActivity {

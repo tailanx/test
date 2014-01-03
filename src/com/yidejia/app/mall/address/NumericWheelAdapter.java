@@ -16,6 +16,8 @@
 
 package com.yidejia.app.mall.address;
 
+import com.yidejia.app.mall.adapter.WheelAdapter;
+
 
 /**
  * Numeric Wheel adapter.

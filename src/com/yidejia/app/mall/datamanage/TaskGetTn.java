@@ -13,9 +13,9 @@ import android.widget.Toast;
 
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.UserPayActivity;
 import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.net.order.GetTn;
+import com.yidejia.app.mall.view.UserPayActivity;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class TaskGetTn {

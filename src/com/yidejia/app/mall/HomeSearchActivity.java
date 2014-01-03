@@ -1,4 +1,4 @@
-package com.yidejia.app.mall.main;
+package com.yidejia.app.mall;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,10 +30,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
-import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.SearchActivity;
-import com.yidejia.app.mall.SearchResultActivity;
 import com.yidejia.app.mall.adapter.SearchListAdapter;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.exception.TimeOutEx;
@@ -42,6 +39,8 @@ import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.search.EffectDataUtil;
 import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.util.Consts;
+import com.yidejia.app.mall.view.SearchActivity;
+import com.yidejia.app.mall.view.SearchResultActivity;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class HomeSearchActivity extends SherlockFragmentActivity implements

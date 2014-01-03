@@ -1,4 +1,4 @@
-package com.yidejia.app.mall;
+package com.yidejia.app.mall.view;
 
 
 import android.graphics.Color;
@@ -17,6 +17,12 @@ import android.widget.TextView;
 import com.baidu.mobstat.StatService;
 import com.jeremyfeinstein.slidingmenu.SlidingFragmentActivity;
 import com.jeremyfeinstein.slidingmenu.SlidingMenu;
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.R.dimen;
+import com.yidejia.app.mall.R.drawable;
+import com.yidejia.app.mall.R.id;
+import com.yidejia.app.mall.R.layout;
+import com.yidejia.app.mall.R.string;
 import com.yidejia.app.mall.fragment.FilterFragment;
 import com.yidejia.app.mall.fragment.SelledResultFragment;
 

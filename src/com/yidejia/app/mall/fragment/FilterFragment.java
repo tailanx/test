@@ -22,7 +22,6 @@ import android.widget.ImageView;
 
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.SearchResultActivity;
 import com.yidejia.app.mall.adapter.FilterExListAdapter;
 import com.yidejia.app.mall.datamanage.BrandDataManage;
 import com.yidejia.app.mall.datamanage.FunctionDataManage;
@@ -31,6 +30,7 @@ import com.yidejia.app.mall.model.Brand;
 import com.yidejia.app.mall.model.Function;
 import com.yidejia.app.mall.model.PriceLevel;
 import com.yidejia.app.mall.task.TaskFilter;
+import com.yidejia.app.mall.view.SearchResultActivity;
 
 @SuppressLint("UseSparseArrays")
 public class FilterFragment extends Fragment {

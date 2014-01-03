@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.yidejia.app.mall;
+package com.yidejia.app.mall.view;
 
 import java.util.ArrayList;
 
@@ -37,6 +37,9 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.R.drawable;
+import com.yidejia.app.mall.R.id;
+import com.yidejia.app.mall.R.layout;
 import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.util.Consts;
 

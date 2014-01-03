@@ -23,13 +23,13 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.baidu.mobstat.StatService;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.yidejia.app.mall.CleanImageCache;
-import com.yidejia.app.mall.DataCleanManager;
+import com.yidejia.app.mall.HomeLogActivity;
+import com.yidejia.app.mall.HomeMallActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.cache.CleanImageCache;
 import com.yidejia.app.mall.ctrl.Check4Update;
-import com.yidejia.app.mall.main.HomeLogActivity;
-import com.yidejia.app.mall.main.HomeMallActivity;
+import com.yidejia.app.mall.datamanage.DataCleanManager;
 import com.yidejia.app.mall.util.Consts;
 
 public class EditorActivity extends SherlockActivity {

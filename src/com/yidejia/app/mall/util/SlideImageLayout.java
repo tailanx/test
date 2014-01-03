@@ -1,6 +1,9 @@
-package com.yidejia.app.mall;
+package com.yidejia.app.mall.util;
 
 import java.util.ArrayList;
+
+import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.R.drawable;
 
 import android.app.Activity;
 import android.content.Context;

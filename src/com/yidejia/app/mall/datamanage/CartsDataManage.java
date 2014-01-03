@@ -13,7 +13,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
-import com.yidejia.app.mall.main.HomeMallActivity;
+import com.yidejia.app.mall.HomeMallActivity;
 import com.yidejia.app.mall.model.Cart;
 /**
  * 购物车模块
