@@ -17,6 +17,7 @@ import com.yidejia.app.mall.SearchResultActivity;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.fragment.CartActivity;
 import com.yidejia.app.mall.model.Cart;
+import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.util.CartUtil;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.CstmPayActivity;
@@ -48,7 +49,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class HomeCarActivity extends SherlockFragmentActivity implements OnClickListener{
+public class HomeCarActivity extends SherlockFragmentActivity implements
+		OnClickListener {
 	private MyApplication myApplication;
 	private FrameLayout frameLayout;
 	private LayoutInflater inflater;
@@ -66,7 +68,10 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 	private ImageLoader imageLoader;
 	private ImageLoadingListener listener;
 	private DisplayImageOptions options;
-	
+
+	private BottomChange bottomChange;
+	private RelativeLayout bottomLayout;
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -77,38 +82,49 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 		filter.addAction(Consts.BROAD_UPDATE_CHANGE);
 		filter.addAction(Consts.DELETE_CART);
 		registerReceiver(receiver, filter);
-		
-		cartsDataManage =  new CartsDataManage();
+
+		int current = getIntent().getIntExtra("current", -1);
+		int next = getIntent().getIntExtra("next", -1);
+
+		cartsDataManage = new CartsDataManage();
 		myApplication = (MyApplication) getApplication();
 		setContentView(R.layout.activity_main_fragment_layout);
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
 		inflater = LayoutInflater.from(this);
+		// 设置底部
+		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
+		bottomChange = new BottomChange(this, bottomLayout);
+		if (current != -1 || next != -1) {
+			bottomChange.initNavView(current, next);
+		}
 		initNavView();
 		setActionBarConfig();
-		
+
 		ImageLoaderUtil imageLoaderUtil = new ImageLoaderUtil();
 		imageLoader = imageLoaderUtil.getImageLoader();
 		listener = imageLoaderUtil.getAnimateFirstListener();
 		options = imageLoaderUtil.getOptions();
-		
-		if(cartsDataManage.getCartAmount() != 0){
-		view = inflater.inflate(R.layout.shopping_cart, null);
-		frameLayout.addView(view);
-		setViewCtrl(view);
-		} else{
-			view = inflater.inflate(R.layout.no_produce,null);
+
+		if (cartsDataManage.getCartAmount() != 0) {
+			view = inflater.inflate(R.layout.shopping_cart, null);
+			frameLayout.addView(view);
+			setViewCtrl(view);
+		} else {
+			view = inflater.inflate(R.layout.no_produce, null);
 			frameLayout.addView(view);
 			setNoProduce(view);
 		}
-		
+
 	}
-	private void setNoProduce(View view){
+
+	private void setNoProduce(View view) {
 		mButton = (Button) view.findViewById(R.id.no_produce_button);
 		mButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent (HomeCarActivity.this,SearchResultActivity.class);
+				Intent intent = new Intent(HomeCarActivity.this,
+						SearchResultActivity.class);
 				Bundle bundle = new Bundle();
 				Log.e("info", "gouwuche");
 				bundle.putString("title", "全部");
@@ -121,16 +137,18 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 			}
 		});
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		imageLoader.init(ImageLoaderConfiguration.createDefault(HomeCarActivity.this));
+		imageLoader.init(ImageLoaderConfiguration
+				.createDefault(HomeCarActivity.this));
 		imageLoader.stop();
 		unregisterReceiver(receiver);
 	}
-	private void setViewCtrl(View view){
+
+	private void setViewCtrl(View view) {
 		sumTextView = (TextView) view
 				.findViewById(R.id.shopping_cart_sum_money);// 总的钱数
 
@@ -139,26 +157,24 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 		counTextView = (TextView) view
 				.findViewById(R.id.shopping_cart_sum_number);// 总的数量
 
-		shoppingCartTopay = (Button)findViewById(
-				R.id.shopping_cart_go_pay);
-		try{
+		shoppingCartTopay = (Button) findViewById(R.id.shopping_cart_go_pay);
+		try {
 			shoppingCartTopay.setVisibility(View.VISIBLE);
-		} catch(Exception e){
+		} catch (Exception e) {
 			Log.e(CartActivity.class.getName(), "set visibility err");
 		}
 		layout = new LinearLayout(this);
 		layout.setOrientation(LinearLayout.VERTICAL);
 		ScrollView scrollView = (ScrollView) view
 				.findViewById(R.id.shopping_cart_item_goods_scrollView);
-		
-		cartUtil = new CartUtil(this, layout,
-				counTextView, sumTextView, mBox,imageLoader,listener,options);
+
+		cartUtil = new CartUtil(this, layout, counTextView, sumTextView, mBox,
+				imageLoader, listener, options);
 
 		cartUtil.AllComment();
 
 		scrollView.addView(layout);
-		
-		
+
 		if (shoppingCartTopay == null) {
 			Log.e(CartActivity.class.getName(), "cart act button is null");
 
@@ -183,6 +199,7 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 	}
 
 	private Button shoppingCartTopay;// 去结算
+
 	/**
 	 * 头部
 	 */
@@ -194,14 +211,14 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		shoppingCartTopay = (Button) findViewById(R.id.shopping_cart_go_pay);
 		number = cartsDataManage.getCartsArray().size();
-		if(number == 0){
+		if (number == 0) {
 			shoppingCartTopay.setVisibility(View.GONE);
-		}else{
-			shoppingCartTopay.setVisibility(View.VISIBLE); 
+		} else {
+			shoppingCartTopay.setVisibility(View.VISIBLE);
 		}
-		
 
 	}
+
 	private RelativeLayout downHomeLayout;
 	private RelativeLayout downGuangLayout;
 	private RelativeLayout downSearchLayout;
@@ -234,12 +251,7 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 			cartImage.setText(number + "");
 		}
 		res = getResources();
-		downGuangLayout = (RelativeLayout) findViewById(R.id.down_guang_layout);
 		downHomeLayout = (RelativeLayout) findViewById(R.id.down_home_layout);
-		down_home_imageView = (ImageView) findViewById(R.id.down_home_icon);
-		down_shopping_imageView = (ImageView) findViewById(R.id.down_shopping_icon);
-		down_home_textview = (TextView) findViewById(R.id.down_home_text);
-		down_shopping_textview = (TextView) findViewById(R.id.down_shopping_text);
 
 		downGuangLayout = (RelativeLayout) findViewById(R.id.down_guang_layout);
 		downSearchLayout = (RelativeLayout) findViewById(R.id.down_search_layout);
@@ -250,17 +262,8 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 		downSearchLayout.setOnClickListener(this);
 		downMyLayout.setOnClickListener(this);
 
-		down_home_textview.setTextColor(this.getResources().getColor(
-				R.color.white_white));
-		downHomeLayout.setBackgroundResource(R.drawable.downbg);
-		down_home_imageView.setImageResource(R.drawable.home_normal);
-
-		down_shopping_textview.setTextColor(res.getColor(R.color.white));
-		downShoppingLayout.setBackgroundResource(R.drawable.down_hover1);
-		down_shopping_imageView
-		.setImageResource(R.drawable.down_shopping_hover);
-		downGuangLayout.setVisibility(ViewGroup.GONE);
 	}
+
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -271,17 +274,25 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 			break;
 		case R.id.down_search_layout:
 			intent.setClass(HomeCarActivity.this, HomeSearchActivity.class);
+			intent.putExtra("current", 2);
+			intent.putExtra("next", 1);
 			break;
 		case R.id.down_my_layout:
-			if (myApplication.getIsLogin())
+			if (myApplication.getIsLogin()){
 				intent.setClass(HomeCarActivity.this, HomeMyMaActivity.class);
-			else
+			}
+			else{
 				intent.setClass(HomeCarActivity.this, HomeLogActivity.class);
+			}
+			intent.putExtra("current", 2);
+			intent.putExtra("next", 3);
 			break;
 		}
 		HomeCarActivity.this.startActivity(intent);
+		this.finish();
 		overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 	}
+
 	private void showLoginTips() {
 		new Builder(this)
 				.setTitle(getResources().getString(R.string.tips))
@@ -303,39 +314,37 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 						}).setNegativeButton(R.string.searchCancel, null)
 				.create().show();
 	}
-	
-	private void go2Pay() {
-		 cartList = new ArrayList<Cart>();
-			List<HashMap<String, Object>> orderCarts = CartUtil.list1;
-			for(int i=0;i<orderCarts.size();i++){
-				HashMap<String, Object> map = orderCarts.get(i);
-				float ischeck =  Float.parseFloat(map.get("check").toString());
-				Log.e("voucher", ischeck + "    ischeck");
-				Cart  cart1	= (Cart) map.get("cart");
-				if(ischeck == 1.0){
-					cartList.add(cart1);
-			}
-			}
-			Intent intent1 = new Intent(this,
-					CstmPayActivity.class);
-			Bundle bundle = new Bundle();
-			sum = Float.parseFloat(sumTextView.getText()
-					.toString());
-			intent1.putExtra("carts", cartList);
-	
-			Log.i("voucher", sum + "    sum");
 
-			
-			if (sum > 0) {
-				bundle.putString("cartActivity","Y");
-				bundle.putString("price", sum + "");
-				intent1.putExtras(bundle);
-				HomeCarActivity.this.startActivity(intent1);
-			} else {
-				Toast.makeText(HomeCarActivity.this, getResources().getString(R.string.buy_nothing),
-						Toast.LENGTH_LONG).show();
+	private void go2Pay() {
+		cartList = new ArrayList<Cart>();
+		List<HashMap<String, Object>> orderCarts = CartUtil.list1;
+		for (int i = 0; i < orderCarts.size(); i++) {
+			HashMap<String, Object> map = orderCarts.get(i);
+			float ischeck = Float.parseFloat(map.get("check").toString());
+			Log.e("voucher", ischeck + "    ischeck");
+			Cart cart1 = (Cart) map.get("cart");
+			if (ischeck == 1.0) {
+				cartList.add(cart1);
 			}
-		
+		}
+		Intent intent1 = new Intent(this, CstmPayActivity.class);
+		Bundle bundle = new Bundle();
+		sum = Float.parseFloat(sumTextView.getText().toString());
+		intent1.putExtra("carts", cartList);
+
+		Log.i("voucher", sum + "    sum");
+
+		if (sum > 0) {
+			bundle.putString("cartActivity", "Y");
+			bundle.putString("price", sum + "");
+			intent1.putExtras(bundle);
+			HomeCarActivity.this.startActivity(intent1);
+		} else {
+			Toast.makeText(HomeCarActivity.this,
+					getResources().getString(R.string.buy_nothing),
+					Toast.LENGTH_LONG).show();
+		}
+
 	}
 
 	// 双击返回键退出程序
@@ -415,7 +424,7 @@ public class HomeCarActivity extends SherlockFragmentActivity implements OnClick
 			}
 		}
 	}
-	
+
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub

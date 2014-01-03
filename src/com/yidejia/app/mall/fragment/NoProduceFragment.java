@@ -16,10 +16,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.SearchResultActivity;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
+import com.yidejia.app.mall.main.HomeMallActivity;
 import com.yidejia.app.mall.util.Consts;
 
 public class NoProduceFragment extends SherlockFragment {
@@ -50,7 +50,7 @@ public class NoProduceFragment extends SherlockFragment {
 		filter.addAction(Consts.BROAD_UPDATE_CHANGE);
 		filter.addAction(Consts.UPDATE_CHANGE);
 		filter.addAction(Consts.DELETE_CART);
-		activity =  MainFragmentActivity.MAINACTIVITY;
+		activity =  HomeMallActivity.MAINACTIVITY;
 		activity.registerReceiver(receiver, filter);
 		
 		

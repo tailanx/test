@@ -31,7 +31,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.yidejia.app.mall.MainFragmentActivity;
 //import com.handmark.pulltorefresh.library.PullToRefreshBase;
 //import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 //import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
@@ -39,6 +38,7 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.PreferentialDataManage;
+import com.yidejia.app.mall.main.HomeMallActivity;
 import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Specials;
@@ -257,7 +257,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 		filter.addAction(Consts.BROAD_UPDATE_CHANGE);
 		filter.addAction(Consts.UPDATE_CHANGE);
 		filter.addAction(Consts.DELETE_CART);
-		activity =  MainFragmentActivity.MAINACTIVITY;
+		activity =  HomeMallActivity.MAINACTIVITY;
 		activity.registerReceiver(receiver, filter);
 		
 //		getSherlockActivity().getSupportActionBar().setCustomView(

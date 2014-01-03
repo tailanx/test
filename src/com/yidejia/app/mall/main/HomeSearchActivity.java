@@ -30,7 +30,6 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
-import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.SearchActivity;
@@ -41,6 +40,7 @@ import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.model.Function;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.search.EffectDataUtil;
+import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
@@ -63,6 +63,8 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 
 	private Task task;
 	private InnerReceiver receiver;
+	private BottomChange bottomChange;
+	private RelativeLayout bottomLayout;
 
 	private void closeTask() {
 		if (task != null
@@ -79,13 +81,16 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Consts.UPDATE_CHANGE);
 		registerReceiver(receiver, filter);
-		
+
 		Log.e(TAG, "search onCreate");
-		
-		if(null != arg0) {
+
+		if (null != arg0) {
 			functions = (ArrayList<Function>) arg0.getSerializable("funs");
 		}
-		
+
+		int current = getIntent().getIntExtra("current", -1);
+		int next = getIntent().getIntExtra("next", -1);
+
 		cartsDataManage = new CartsDataManage();
 		myApplication = (MyApplication) getApplication();
 		setContentView(R.layout.activity_main_fragment_layout);
@@ -99,7 +104,14 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 				.findViewById(R.id.search_item_refresh_view);
 		refresh_data_btn = (ImageView) view.findViewById(R.id.refresh_data_btn);
 		res = getResources();
+		// 设置底部
+		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
+		bottomChange = new BottomChange(HomeSearchActivity.this, bottomLayout);
+		if (current != -1 || next != -1) {
+			bottomChange.initNavView(current, next);
+		}
 		initNavView();
+
 		setActionBarConfig();
 
 		if (!ConnectionDetector.isConnectingToInternet(HomeSearchActivity.this)) {
@@ -149,10 +161,10 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 	 * 头部
 	 */
 	private void setActionBarConfig() {
-		down_search_textview.setTextColor(res.getColor(R.color.white));
-		downSearchLayout.setBackgroundResource(R.drawable.down_hover1);
+		// down_search_textview.setTextColor(res.getColor(R.color.white));
+		// downSearchLayout.setBackgroundResource(R.drawable.down_hover1);
 		// down_search_imageView.setPressed(true);
-		down_search_imageView.setImageResource(R.drawable.down_search_hover);
+		// down_search_imageView.setImageResource(R.drawable.down_search_hover);
 		// down_search_TextView.setTextColor(Color.WHITE);
 		getSupportActionBar().setCustomView(R.layout.actionbar_search);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -162,7 +174,7 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 
 		searchText = (ImageView) findViewById(R.id.search_bar_edittext);
 		searchText.setOnClickListener(go2SearchListener2);
-		
+
 	}
 
 	private RelativeLayout downHomeLayout;
@@ -184,6 +196,7 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 	private Resources res;
 	private int number;
 	private Button cartImage;
+
 	/**
 	 * 初始化底部导航栏
 	 */
@@ -196,11 +209,13 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 		} else {
 			cartImage.setText(number + "");
 		}
-		downGuangLayout = (RelativeLayout) findViewById(R.id.down_guang_layout);
+		// downGuangLayout = (RelativeLayout)
+		// findViewById(R.id.down_guang_layout);
 		downHomeLayout = (RelativeLayout) findViewById(R.id.down_home_layout);
-		down_home_imageView = (ImageView) findViewById(R.id.down_home_icon);
-		down_search_imageView = (ImageView) findViewById(R.id.down_search_icon);
-		down_home_textview = (TextView) findViewById(R.id.down_home_text);
+		// down_home_imageView = (ImageView) findViewById(R.id.down_home_icon);
+		// down_search_imageView = (ImageView)
+		// findViewById(R.id.down_search_icon);
+		// down_home_textview = (TextView) findViewById(R.id.down_home_text);
 		down_search_textview = (TextView) findViewById(R.id.down_search_text);
 
 		downGuangLayout = (RelativeLayout) findViewById(R.id.down_guang_layout);
@@ -209,32 +224,33 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 		downMyLayout = (RelativeLayout) findViewById(R.id.down_my_layout);
 
 		downHomeLayout.setOnClickListener(this);
-//		downSearchLayout.setOnClickListener(this);
+		// downSearchLayout.setOnClickListener(this);
 		downShoppingLayout.setOnClickListener(this);
 		downMyLayout.setOnClickListener(this);
 
-		down_home_textview.setTextColor(this.getResources().getColor(
-				R.color.white_white));
-		downHomeLayout.setBackgroundResource(R.drawable.downbg);
-		down_home_imageView.setImageResource(R.drawable.home_normal);
-
-		down_search_textview.setTextColor(res.getColor(R.color.white));
-		downSearchLayout.setBackgroundResource(R.drawable.down_hover1);
-		down_search_imageView.setImageResource(R.drawable.down_search_hover);
-		downGuangLayout.setVisibility(ViewGroup.GONE);
+		// down_home_textview.setTextColor(this.getResources().getColor(
+		// R.color.white_white));
+		// downHomeLayout.setBackgroundResource(R.drawable.downbg);
+		// down_home_imageView.setImageResource(R.drawable.home_normal);
+		//
+		// down_search_textview.setTextColor(res.getColor(R.color.white));
+		// downSearchLayout.setBackgroundResource(R.drawable.down_hover1);
+		// down_search_imageView.setImageResource(R.drawable.down_search_hover);
+		// downGuangLayout.setVisibility(ViewGroup.GONE);
 	}
+
 	@Override
 	public void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
 		Log.e(TAG, "TestFragment-----onStart");
-//		if(functions == null || functions.isEmpty()){
-//			closeTask();
-//			task = new Task();
-//			task.execute();
-//		}
+		// if(functions == null || functions.isEmpty()){
+		// closeTask();
+		// task = new Task();
+		// task.execute();
+		// }
 	}
-	
+
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
@@ -253,15 +269,21 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 			break;
 		case R.id.down_shopping_layout:
 			intent.setClass(HomeSearchActivity.this, HomeCarActivity.class);
+			intent.putExtra("current", 1);
+			intent.putExtra("next", 2);
 			break;
 		case R.id.down_my_layout:
-			if (myApplication.getIsLogin())
+			if (myApplication.getIsLogin()) {
 				intent.setClass(HomeSearchActivity.this, HomeMyMaActivity.class);
-			else
+			} else {
 				intent.setClass(HomeSearchActivity.this, HomeLogActivity.class);
+			}
+			intent.putExtra("current", 1);
+			intent.putExtra("next", 3);
 			break;
 		}
 		HomeSearchActivity.this.startActivity(intent);
+		this.finish();
 		overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 	}
 
@@ -392,7 +414,7 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 			startActivity(intent);
 		}
 	};
-	
+
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
