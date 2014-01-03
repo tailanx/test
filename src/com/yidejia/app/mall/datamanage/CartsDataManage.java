@@ -43,8 +43,13 @@ public class CartsDataManage {
 	private String TAG = CartsDataManage.class.getName();
 	
 	public CartsDataManage(){
-		sp = HomeMallActivity.MAINACTIVITY.getSharedPreferences("Cart", Activity.MODE_APPEND );
-		cartsArray = new ArrayList<Cart>();
+		try {
+			sp = HomeMallActivity.MAINACTIVITY.getSharedPreferences("Cart", Activity.MODE_APPEND );
+			cartsArray = new ArrayList<Cart>();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**

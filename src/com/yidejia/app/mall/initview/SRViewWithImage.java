@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
@@ -142,6 +143,7 @@ public class SRViewWithImage {
 	}
 	
 	private void loadImage(String imageUrl, ImageView imageView){
+		imageLoader.init(ImageLoaderConfiguration.createDefault(activity));
 		imageLoader.displayImage(imageUrl, imageView, options,
 				animateFirstListener);
 	}
