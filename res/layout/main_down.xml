@@ -44,7 +44,8 @@
         android:layout_weight="1"
         android:background="@drawable/downbg"
         android:clickable="true"
-        android:focusable="true" >
+        android:focusable="true"
+        android:visibility="gone" >
 
         <ImageView
             android:id="@+id/down_guang_icon"
@@ -130,15 +131,6 @@
             android:textColor="#b4b4b4"
             android:textSize="12sp" />
         <!--
-        <com.yidejia.app.mall.widget.YLImageButton
-            android:id="@+id/down_shopping_cart"
-            android:layout_width="26dp"
-            android:layout_height="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:background="@drawable/shop_message" />
         -->
 
         <Button

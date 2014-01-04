@@ -27,7 +27,6 @@ import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.MyMallActivity;
 import com.yidejia.app.mall.R;

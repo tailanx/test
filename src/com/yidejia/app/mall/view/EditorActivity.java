@@ -25,7 +25,6 @@ import com.baidu.mobstat.StatService;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yidejia.app.mall.CleanImageCache;
 import com.yidejia.app.mall.DataCleanManager;
-import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.Check4Update;

@@ -20,8 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
-import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.MyMallActivity.InnerReceiver;
@@ -29,6 +29,7 @@ import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.PersonCountDataManage;
 import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.net.user.GetCount;
+import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.view.AddressActivity;
 import com.yidejia.app.mall.view.AllOrderActivity;
 import com.yidejia.app.mall.view.AlreadyComActivity;
@@ -43,7 +44,7 @@ import com.yidejia.app.mall.view.WaitDeliverActivity;
 import com.yidejia.app.mall.view.WaitPayActivity;
 import com.yidejia.app.mall.widget.YLImageButton;
 
-public class HomeMyMaActivity extends SherlockActivity implements
+public class HomeMyMaActivity extends SherlockFragmentActivity implements
 		OnClickListener {
 	private View view;
 	private FrameLayout frameLayout;
@@ -73,6 +74,9 @@ public class HomeMyMaActivity extends SherlockActivity implements
 	private PersonCountDataManage personCountDataManage;
 	private InnerReceiver receiver;
 	private Resources res;
+
+	private BottomChange bottomChange;
+	private RelativeLayout bottomLayout;
 
 	public void setupView(View view) {
 		// // //实例化组件
@@ -161,18 +165,26 @@ public class HomeMyMaActivity extends SherlockActivity implements
 		inflater = LayoutInflater.from(this);
 		view = inflater.inflate(R.layout.person_shopping_mall1, null);
 		frameLayout.addView(view);
+		int current = getIntent().getIntExtra("current", -1);
+		int next = getIntent().getIntExtra("next", -1);
 
 		setupView(view);
 		res = getResources();
+		// 设置底部
+		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
+		bottomChange = new BottomChange(this, bottomLayout);
+		if (current != -1 || next != -1) {
+			bottomChange.initNavView(current, next);
+		}
 		initNavView();
-		
+
 		String name = myApplication.getNick();
 		if (name == null || "".equals(name)) {
 			nick.setText(myApplication.getUserId());
 			Log.i("info", myApplication.getUserId() + "   name");
 		} else {
 			nick.setText(name);
-		}   
+		}
 
 		String vip1 = myApplication.getVip();
 		if (vip1 == null || "".equals(vip1)) {
@@ -232,10 +244,6 @@ public class HomeMyMaActivity extends SherlockActivity implements
 		downShoppingLayout = (RelativeLayout) findViewById(R.id.down_shopping_layout);
 		downMyLayout = (RelativeLayout) findViewById(R.id.down_my_layout);
 
-		down_home_imageView = (ImageView) findViewById(R.id.down_home_icon);
-		down_home_textview = (TextView) findViewById(R.id.down_home_text);
-		down_my_imageView = (ImageView) findViewById(R.id.down_my_icon);
-		down_my_textview = (TextView) findViewById(R.id.down_my_text);
 
 		downHomeLayout.setOnClickListener(new OnClickListener() {
 
@@ -245,7 +253,9 @@ public class HomeMyMaActivity extends SherlockActivity implements
 				Intent intent = new Intent(HomeMyMaActivity.this,
 						HomeMallActivity.class);
 				startActivity(intent);
-				overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+				HomeMyMaActivity.this.finish();
+				overridePendingTransition(R.anim.activity_in,
+						R.anim.activity_out);
 			}
 		});
 		downSearchLayout.setOnClickListener(new OnClickListener() {
@@ -255,8 +265,13 @@ public class HomeMyMaActivity extends SherlockActivity implements
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(HomeMyMaActivity.this,
 						HomeSearchActivity.class);
+
+				intent.putExtra("current", 3);
+				intent.putExtra("next", 1);
 				startActivity(intent);
-				overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+				HomeMyMaActivity.this.finish();
+				overridePendingTransition(R.anim.activity_in,
+						R.anim.activity_out);
 			}
 		});
 		downShoppingLayout.setOnClickListener(new OnClickListener() {
@@ -266,21 +281,26 @@ public class HomeMyMaActivity extends SherlockActivity implements
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(HomeMyMaActivity.this,
 						HomeCarActivity.class);
+
+				intent.putExtra("current", 3);
+				intent.putExtra("next", 2);
 				startActivity(intent);
-				overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+				HomeMyMaActivity.this.finish();
+				overridePendingTransition(R.anim.activity_in,
+						R.anim.activity_out);
 			}
 		});
 		// downMyLayout.setOnClickListener(this);
 
-		down_home_textview.setTextColor(this.getResources().getColor(
-				R.color.white_white));
-		downHomeLayout.setBackgroundResource(R.drawable.downbg);
-		down_home_imageView.setImageResource(R.drawable.home_normal);
-
-		downMyLayout.setBackgroundResource(R.drawable.down_hover1);
-		down_my_imageView.setImageResource(R.drawable.down_my_hover);
-		down_my_textview.setTextColor(res.getColor(R.color.white));
-		downGuangLayout.setVisibility(ViewGroup.GONE);
+//		down_home_textview.setTextColor(this.getResources().getColor(
+//				R.color.white_white));
+//		downHomeLayout.setBackgroundResource(R.drawable.downbg);
+//		down_home_imageView.setImageResource(R.drawable.home_normal);
+//
+//		downMyLayout.setBackgroundResource(R.drawable.down_hover1);
+//		down_my_imageView.setImageResource(R.drawable.down_my_hover);
+//		down_my_textview.setTextColor(res.getColor(R.color.white));
+//		downGuangLayout.setVisibility(ViewGroup.GONE);
 	}
 
 	@Override
@@ -392,7 +412,7 @@ public class HomeMyMaActivity extends SherlockActivity implements
 		}
 		return super.onKeyUp(keyCode, event);
 	}
-	
+
 	@Override
 	public void onStart() {
 		// TODO Auto-generated method stub
@@ -401,20 +421,21 @@ public class HomeMyMaActivity extends SherlockActivity implements
 		getNumTask = new GetNumTask();
 		getNumTask.execute();
 	}
-	
+
 	private GetNumTask getNumTask;
 	private String scores;
 	private String order;
 	private String favoliten;
 	private String msg;
-	
+
 	private class GetNumTask extends AsyncTask<Void, Void, Boolean> {
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			GetCount getCount = new GetCount();
 			try {
-				boolean issuccess = getCount.analysis(getCount.getHttpResponse(myApplication.getUserId(), myApplication.getToken()));
+				boolean issuccess = getCount.analysis(getCount.getHttpResponse(
+						myApplication.getUserId(), myApplication.getToken()));
 				scores = getCount.getScores();
 				favoliten = getCount.getFavoliten();
 				return issuccess;
@@ -434,9 +455,9 @@ public class HomeMyMaActivity extends SherlockActivity implements
 			super.onPostExecute(result);
 			setCount(favoliten, null, scores);
 		}
-		
+
 	}
-	
+
 	private void setCount(String faString, String msString, String inString) {
 		// Log.i("info", faString+"     faString");
 		if (faString == null || "".equals(faString)) {
@@ -458,7 +479,7 @@ public class HomeMyMaActivity extends SherlockActivity implements
 			integration.setText(inString);
 		}
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
@@ -467,11 +488,12 @@ public class HomeMyMaActivity extends SherlockActivity implements
 	}
 
 	private void closeTask() {
-		if(null != getNumTask && getNumTask.getStatus().RUNNING == AsyncTask.Status.RUNNING) {
+		if (null != getNumTask
+				&& getNumTask.getStatus().RUNNING == AsyncTask.Status.RUNNING) {
 			getNumTask.cancel(true);
 		}
 	}
-	
+
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
@@ -485,5 +507,5 @@ public class HomeMyMaActivity extends SherlockActivity implements
 		super.onResume();
 		StatService.onResume(this);
 	}
-	
+
 }

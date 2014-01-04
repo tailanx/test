@@ -31,7 +31,6 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
-import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.MyMallActivity;
 import com.yidejia.app.mall.R;
@@ -40,6 +39,7 @@ import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.fragment.LoginFragment;
 import com.yidejia.app.mall.net.user.Login;
+import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DesUtils;
 import com.yidejia.app.mall.view.EditorActivity;
@@ -68,7 +68,9 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 	private SharedPreferences sp;
 	private Consts consts;
 	private Task taskLoginAct;
-
+	private BottomChange bottomChange;
+	private RelativeLayout bottomLayout;
+	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -81,7 +83,14 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
 		frameLayout.addView(view);
 		res = getResources();
-		// 底部的事件
+		int current = getIntent().getIntExtra("current", -1);
+		int next = getIntent().getIntExtra("next", -1);
+		// 设置底部
+		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
+		bottomChange = new BottomChange(this, bottomLayout);
+		if (current != -1 || next != -1) {
+			bottomChange.initNavView(current, next);
+		}
 		initNavView();
 		// 添加头部
 		setActionBarConfig();
@@ -191,10 +200,10 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 		downShoppingLayout = (RelativeLayout) findViewById(R.id.down_shopping_layout);
 		downMyLayout = (RelativeLayout) findViewById(R.id.down_my_layout);
 
-		down_home_imageView = (ImageView) findViewById(R.id.down_home_icon);
-		down_home_textview = (TextView) findViewById(R.id.down_home_text);
-		down_my_imageView = (ImageView) findViewById(R.id.down_my_icon);
-		down_my_textview = (TextView) findViewById(R.id.down_my_text);
+//		down_home_imageView = (ImageView) findViewById(R.id.down_home_icon);
+//		down_home_textview = (TextView) findViewById(R.id.down_home_text);
+//		down_my_imageView = (ImageView) findViewById(R.id.down_my_icon);
+//		down_my_textview = (TextView) findViewById(R.id.down_my_text);
 
 		downHomeLayout.setOnClickListener(new OnClickListener() {
 			
@@ -212,7 +221,10 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(HomeLogActivity.this, HomeSearchActivity.class);
+				intent.putExtra("current", 3);
+				intent.putExtra("next", 1);
 				startActivity(intent);
+				HomeLogActivity.this.finish();
 				overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 				
 			}
@@ -223,22 +235,13 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(HomeLogActivity.this,HomeCarActivity.class);
+				intent.putExtra("current", 3);
+				intent.putExtra("next", 2);
 				startActivity(intent);
+				HomeLogActivity.this.finish();
 				overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 			}
 		});
-//		downMyLayout.setOnClickListener(this);
-
-		down_home_textview.setTextColor(this.getResources().getColor(
-				R.color.white_white));
-		downHomeLayout.setBackgroundResource(R.drawable.downbg);
-		down_home_imageView.setImageResource(R.drawable.home_normal);
-
-		downMyLayout.setBackgroundResource(R.drawable.down_hover1);
-		down_my_imageView.setImageResource(R.drawable.down_my_hover);
-		down_my_textview.setTextColor(res
-				.getColor(R.color.white));
-		downGuangLayout.setVisibility(ViewGroup.GONE);
 	}
 
 	/**
@@ -303,10 +306,7 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 						Toast.LENGTH_LONG).show();
 				return;
 			}
-			// if(taskLoginAct != null && taskLoginAct.getStatus().RUNNING ==
-			// AsyncTask.Status.RUNNING){
-			// taskLoginAct.cancel(true);
-			// }
+		
 			taskLoginAct = new Task();
 			taskLoginAct.execute();
 			// taskLoginAct.loginAct(name, pwd, ipAddress.getIpAddress());

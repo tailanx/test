@@ -17,7 +17,6 @@ import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
 import com.unionpay.mpay.views.u;
-import com.yidejia.app.mall.MainFragmentActivity;
 import com.yidejia.app.mall.main.HomeMallActivity;
 import com.yidejia.app.mall.model.ProductBaseInfo;
 /**
