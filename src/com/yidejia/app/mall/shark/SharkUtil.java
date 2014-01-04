@@ -22,12 +22,15 @@ import android.util.Log;
  */
 public class SharkUtil {
 
-//	private Activity activity;
 	private SensorManager sensorManager;
 	private Vibrator vibrator;
 	private IShark iShark;
 	private String TAG = SharkUtil.class.getName();
 	
+	/**
+	 * 封装摇一摇功能的类，需要添加权限<code>android:name="android.permission.VIBRATE" </code>
+	 * @param activity 注册摇一摇功能的activity
+	 */
 	public SharkUtil(Activity activity) {
 //		this.activity = activity;
 		
@@ -35,7 +38,10 @@ public class SharkUtil {
 		vibrator = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
 	}
 	
-	
+	/**
+	 * 注册摇一摇监听
+	 * @param iShark 摇一摇的接口，摇一摇时只需实现onStart() 和 onFinish()方法
+	 */
 	public void registerListener(IShark iShark) {
 		this.iShark = iShark;
 		if (sensorManager != null) {// 注册监听器
@@ -46,6 +52,9 @@ public class SharkUtil {
 		}
 	}
 	
+	/**
+	 * 取消摇一摇监听
+	 */
 	public void unregisterListener() {
 		sensorManager.unregisterListener(sensorEventListener);
 	}
