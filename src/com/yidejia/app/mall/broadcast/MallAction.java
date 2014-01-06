@@ -329,4 +329,4 @@ public class MallAction {
 		mallTask.onPause();
 	}
 }
-}
+

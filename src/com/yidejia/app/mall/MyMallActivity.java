@@ -1,6 +1,7 @@
 package com.yidejia.app.mall;
 
 import java.util.Collections;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,7 +33,6 @@ import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.yidejia.app.mall.datamanage.PersonCountDataManage;
-import com.yidejia.app.mall.fragment.LoginFragment;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.AddressActivity;
 import com.yidejia.app.mall.view.AllOrderActivity;
@@ -273,9 +273,7 @@ public class MyMallActivity extends SherlockFragment implements OnClickListener 
 		filter.addAction(Consts.RETURN_BACk);
 		getSherlockActivity().registerReceiver(receiver, filter);
 		
-		fragment = new LoginFragment();
-		
-		myApplication = (MyApplication) getSherlockActivity().getApplication();
+	
 
 		Log.i("info", personCountDataManage + "        personCountDataManage");
 		View view = inflater.inflate(R.layout.person_shopping_mall1, container,

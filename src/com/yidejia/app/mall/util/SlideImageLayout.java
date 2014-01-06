@@ -1,4 +1,6 @@
-package com.yidejia.app.mall;
+package com.yidejia.app.mall.util;
+
+import com.yidejia.app.mall.R;
 
 import android.content.Context;
 import android.util.Log;
