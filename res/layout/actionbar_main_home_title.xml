@@ -9,6 +9,7 @@
     android:orientation="horizontal" >
 
     <ImageView
+        android:contentDescription="@string/yidejia"
         android:id="@+id/main_home_title_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,6 +19,7 @@
         android:src="@drawable/yidejia_logo" />
     
     <ImageView 
+        android:contentDescription="@string/yidejia"
         android:id="@+id/main_home_title_search"
         android:layout_toRightOf="@+id/main_home_title_logo"
         android:layout_width="wrap_content"
@@ -57,6 +59,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="20dp"
         android:clickable="false"
+        android:contentDescription="@string/yidejia"
         android:src="@drawable/top_search_icon" />
 
 </RelativeLayout>

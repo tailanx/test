@@ -19,6 +19,8 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
 
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:name="com.yidejia.app.mall.MyApplication"
         android:allowBackup="true"
@@ -41,7 +43,7 @@ android:uiOptions="splitActionBarWhenNarrow"
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
             <meta-data android:name="android.app.searchable"  
-                   android:resource="@xml/main_searchable"/>  
+                   android:resource="@xml/main_searchable"/>  
         -->
 
 
@@ -49,7 +51,7 @@ android:uiOptions="splitActionBarWhenNarrow"
         <meta-data
             android:name="BaiduMobAd_STAT_ID"
             android:value="84216f5a45" />
- <!-- abcd1234 -->
+        <!-- abcd1234 -->
         <!-- 渠道商编号 -->
         <meta-data
             android:name="BaiduMobAd_CHANNEL"
@@ -295,6 +297,24 @@ android:uiOptions="splitActionBarWhenNarrow"
         <activity
             android:name="com.yidejia.app.mall.shark.TestSharkActivity"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.yidejia.app.mall.phone.PhoneActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.yidejia.app.mall.phone.PhoneContactActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.yidejia.app.mall.phone.ContactSureActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
         </activity>
     </application>
 

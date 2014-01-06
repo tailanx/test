@@ -16,7 +16,7 @@
     <string name="main_history_text">浏览历史</string>
     <string name="main_voucher_text">积分卡券</string>
     <string name="main_skin_test_text">肌肤测试</string>
-    <string name="main_message_center_text">消息中心</string>
+    <string name="main_message_center_text">充值中心</string>
     <string name="main_mall_notice_text">商城公告：</string>
     <string name="searchLabel">搜索</string>
     <string name="searchHint">搜索商品</string>
@@ -285,7 +285,6 @@
     <string name="ttkdex">天天</string>
     <string name="qfkd">全峰</string>
     <string name="best_ex">百世</string>
-    
     <string name="yanshimei">妍诗美专业皮肤测试</string>
     <string name="yanshimei_number">请输入服务号</string>
     <string name="yanshimei_start">输入服务号立即开启美肌测试</string>
@@ -299,6 +298,31 @@
     <string name="qq_quen">QQ群:</string>
     <string name="no_find_data">亲，未搜索岛数据</string>
     <string name="err_bir">亲，请输入正确的出生日期</string>
-  	<string name="feedback_opinion">请输入您的反馈意见</string>
-  	<string name="feedback_contact">联系方式:邮箱/QQ/手机</string>
-  	<string name="feedback">意见反馈</string></resources>
+    <string name="feedback_opinion">请输入您的反馈意见</string>
+    <string name="feedback_contact">联系方式:邮箱/QQ/手机</string>
+    <string name="feedback">意见反馈</string>
+    <string name="price_30">30元</string>
+    <string name="price_50">50元</string>
+    <string name="price_100">100元</string>
+    <string name="price_contact">单价：</string>
+    <string name="address_contact">归属地：</string>
+    <string name="phone_number"> 联系人</string>
+    <string name="yidejia">伊的家商城</string>
+    <string name="phone_number1">手机号码:</string>
+    <string name="phone_detail">订单信息:</string>
+    <string name="phone_new">产品信息:</string>
+    <string name="phone_news">广东联通话费100元充值</string>
+    <string name="phone_data">充值号码:</string>
+    <string name="phone_sum">应付总金额:</string>
+    <string name="phone_pay">请选择支付方式:</string>
+    <string name="zhifubao_pay">支付宝客户端</string>
+    <string name="zhifubao_wangye_pay">需安装支付宝手机钱包客户端</string>
+    <string name="zhifubao_wangye_pay_list">支付宝网页支付</string>
+    <string name="zhifubao_wangye_pay_list_card">可银行卡支付</string>
+
+    <string name="yinliang_pay">银联支付</string>
+    <string name="yinliang_pay_list">银联支付</string>
+    <string name="caifutong_pay">财付通支付</string>
+    <string name="caifutong_pay_list">可银行卡支付</string>
+    <string name="pay_commit">立即支付</string>
+</resources>

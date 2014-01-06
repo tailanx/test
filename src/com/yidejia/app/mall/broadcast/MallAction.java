@@ -23,6 +23,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.net.ConnectionDetector;
+import com.yidejia.app.mall.phone.PhoneActivity;
 import com.yidejia.app.mall.task.MallTask;
 import com.yidejia.app.mall.task.MallTask.Task;
 import com.yidejia.app.mall.view.ActiveGoActivity;
@@ -49,7 +50,6 @@ public class MallAction {
 
 	public MallAction(SherlockFragmentActivity activity, FrameLayout layout) {
 		this.activity = activity;
-		this.view = view;
 		myApplication = (MyApplication) activity.getApplication();
 		this.frameLayout = layout;
 		this.inflater = LayoutInflater.from(activity);
@@ -268,9 +268,11 @@ public class MallAction {
 
 			@Override
 			public void onClick(View arg0) {
-
+				Intent intent = new Intent(activity,PhoneActivity.class);
+				activity.startActivity(intent);
 			}
 		});
+		
 	}
 
 	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {

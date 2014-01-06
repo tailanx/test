@@ -93,7 +93,6 @@ public class ImagePagerActivity extends Activity {
 
 	private class ImagePagerAdapter extends PagerAdapter {
 
-//		private String[] images;
 		private ArrayList<BaseProduct> images;
 		private LayoutInflater inflater;
 
@@ -121,9 +120,9 @@ public class ImagePagerActivity extends Activity {
 			View imageLayout = inflater.inflate(R.layout.item_pager_image, view, false);
 			ImageView imageView = (ImageView) imageLayout.findViewById(R.id.image);
 //			final ProgressBar spinner = (ProgressBar) imageLayout.findViewById(R.id.loading);
+			imageLoader.init(ImageLoaderConfiguration.createDefault(ImagePagerActivity.this));
 			imageLoader.displayImage(images.get(position).getImgUrl().replace("!200", ""), imageView, options, new SimpleImageLoadingListener() {
 				
-
 				@Override
 				public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
 					String message = null;

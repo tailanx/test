@@ -12,13 +12,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="160dp" >
-            </RelativeLayout>
-
+            android:layout_height="wrap_content" >
             <HorizontalScrollView
                 android:id="@+id/base_info_image_scroll_layout"
                 android:layout_width="wrap_content"
@@ -34,6 +28,14 @@
                     android:orientation="horizontal" >
                 </LinearLayout>
             </HorizontalScrollView>
+<!-- 
+<ImageView
+    android:id="@+id/iv_item_goods_detail"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    
+    />
+ -->
 
             <TextView
                 android:id="@+id/base_info_content_text"

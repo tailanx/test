@@ -9,6 +9,7 @@
         android:id="@+id/function_layout_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="false"
         android:orientation="horizontal"
         android:paddingLeft="2dp"
         android:paddingRight="2dp" >
@@ -26,9 +27,10 @@
                 android:layout_height="55dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
+                android:contentDescription="@string/yidejia"
                 android:src="@drawable/main_my_order" />
 
-<!-- 	            android:drawableTop="@drawable/main_my_order" -->
+            <!-- android:drawableTop="@drawable/main_my_order" -->
 
             <TextView
                 android:id="@+id/main_my_order_text"
@@ -62,8 +64,9 @@
                 android:layout_height="55dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
+                android:contentDescription="@string/yidejia"
                 android:src="@drawable/main_my_favorite" />
-<!-- 	            android:drawableTop="@drawable/main_my_favorite" -->
+            <!-- android:drawableTop="@drawable/main_my_favorite" -->
 
             <TextView
                 android:id="@+id/main_my_favorite_text"
@@ -89,7 +92,6 @@
             android:layout_height="90dp"
             android:layout_weight="1"
             android:background="@drawable/events_pavilion"
-            
             android:orientation="vertical" >
 
             <ImageView
@@ -98,10 +100,12 @@
                 android:layout_height="55dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
+                android:contentDescription="@string/yidejia"
                 android:src="@drawable/main_sport" />
-<!-- 	            android:drawableTop="@drawable/main_sport"
+            <!--
+ 	            android:drawableTop="@drawable/main_sport"
 android:background="@drawable/events_pavilion"                android:background="@drawable/function_events_selector"
- -->
+            -->
 
             <TextView
                 android:id="@+id/main_event_text"
@@ -126,9 +130,9 @@ android:background="@drawable/events_pavilion"                android:backgroun
             android:layout_width="0dp"
             android:layout_height="90dp"
             android:layout_weight="1"
-            android:visibility="gone"
             android:background="@drawable/member_buy"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+           >
 
             <ImageView
                 android:id="@+id/main_vip_icon"
@@ -136,8 +140,9 @@ android:background="@drawable/events_pavilion"                android:backgroun
                 android:layout_height="55dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
+                android:contentDescription="@string/yidejia"
                 android:src="@drawable/main_vip" />
-<!-- 	            android:drawableTop="@drawable/main_vip" -->
+            <!-- android:drawableTop="@drawable/main_vip" -->
 
             <TextView
                 android:id="@+id/main_vip_text"
@@ -165,6 +170,7 @@ android:background="@drawable/events_pavilion"                android:backgroun
         android:layout_height="wrap_content"
         android:layout_below="@+id/function_layout_top"
         android:layout_marginTop="0dp"
+        android:baselineAligned="false"
         android:orientation="horizontal"
         android:paddingLeft="2dp"
         android:paddingRight="2dp" >
@@ -182,8 +188,9 @@ android:background="@drawable/events_pavilion"                android:backgroun
                 android:layout_height="55dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
+                android:contentDescription="@string/yidejia"
                 android:src="@drawable/main_history" />
-<!-- 	            android:drawableTop="@drawable/main_history" -->
+            <!-- android:drawableTop="@drawable/main_history" -->
 
             <TextView
                 android:id="@+id/main_history_text"
@@ -217,8 +224,9 @@ android:background="@drawable/events_pavilion"                android:backgroun
                 android:layout_height="55dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
+                android:contentDescription="@string/yidejia"
                 android:src="@drawable/main_voucher" />
-<!-- 	            android:drawableTop="@drawable/main_voucher" -->
+            <!-- android:drawableTop="@drawable/main_voucher" -->
 
             <TextView
                 android:id="@+id/main_voucher_text"
@@ -252,10 +260,12 @@ android:background="@drawable/events_pavilion"                android:backgroun
                 android:layout_height="55dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
+                android:contentDescription="@string/yidejia"
                 android:src="@drawable/main_skin_test" />
-<!-- 	            android:drawableTop="@drawable/main_skin_test"
+            <!--
+ 	            android:drawableTop="@drawable/main_skin_test"
 android:background="@drawable/skin_test"                android:background="@drawable/function_skin_selector"
- -->
+            -->
 
             <TextView
                 android:id="@+id/main_skin_test_text"
@@ -280,9 +290,9 @@ android:background="@drawable/skin_test"                android:background="@dr
             android:layout_width="0dp"
             android:layout_height="90dp"
             android:layout_weight="1"
-            android:visibility="gone"
             android:background="@drawable/message_center"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            >
 
             <ImageView
                 android:id="@+id/main_message_center_icon"
@@ -290,8 +300,9 @@ android:background="@drawable/skin_test"                android:background="@dr
                 android:layout_height="55dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
+                android:contentDescription="@string/yidejia"
                 android:src="@drawable/main_message_center" />
-<!-- 	            android:drawableTop="@drawable/main_message_center" -->
+            <!-- android:drawableTop="@drawable/main_message_center" -->
 
             <TextView
                 android:id="@+id/main_message_center_text"

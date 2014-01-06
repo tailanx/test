@@ -39,6 +39,7 @@ import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
@@ -395,6 +396,7 @@ public class GoodsView {
 				final ImageView bannerImageView = new ImageView(activity);
 				bannerImageView.setId(i);
 				bannerImageView.setLayoutParams(lp_base);
+				imageLoader.init(ImageLoaderConfiguration.createDefault(activity));
 				imageLoader.displayImage(bannerArray.get(i).getImgUrl(),
 						bannerImageView, options, animateFirstListener);
 				Log.e(GoodsView.class.getName(), bannerArray.get(i).getImgUrl());
