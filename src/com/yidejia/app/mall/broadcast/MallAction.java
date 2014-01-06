@@ -321,4 +321,12 @@ public class MallAction {
 			return false;
 		}
 	}
+	public void onResume() {
+		mallTask.onStart();
+	}
+	
+	public void onPause() {
+		mallTask.onPause();
+	}
+}
 }

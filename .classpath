@@ -2,11 +2,13 @@
 <classpath>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="lib" path="libs/Baidu_Mobstat_Android_SDK.jar"/>
+	<classpathentry kind="lib" path="libs/okhttp-1.2.1-jar-with-dependencies.jar"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="lib" path="libs/UPPayAssistEx.jar"/>
 	<classpathentry kind="lib" path="libs/UPPayPluginEx.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="src" path="asynchttp"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

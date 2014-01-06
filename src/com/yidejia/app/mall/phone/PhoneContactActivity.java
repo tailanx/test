@@ -59,7 +59,7 @@ public class PhoneContactActivity extends Activity {
 		this.context = this;
 		setContentView(R.layout.contacts);
 		getPhoneContacts();
-		getSIMContacts();
+//		getSIMContacts();
 		mlistView = (ListView) findViewById(R.id.lv_contacts);
 		contactAdapter = new ContactAdapter(this, mContactsName, mContactsNumber, mContactsPic);
 		mlistView.setAdapter(contactAdapter);

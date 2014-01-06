@@ -1,24 +1,27 @@
 package com.yidejia.app.mall;
 
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
 import android.app.Application;
+import android.graphics.Bitmap;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 public class MyApplication extends Application {
 
+	static final List<String> displayedImages = Collections.synchronizedList(new LinkedList<String>());
+	private ImageLoadingListener animateFirstListener;
 	
-	public View getView() {
-		return view;
-	}
-
-	public void setView(View view) {
-		this.view = view;
-	}
-
 	@Override
 	public void onCreate() {
 		// TODO Auto-generated method stub
@@ -32,6 +35,7 @@ public class MyApplication extends Application {
 
 		// Initialize ImageLoader with configuration.
 		ImageLoader.getInstance().init(config);
+		animateFirstListener = new AnimateFirstDisplayListener();
 	}
 
 	private boolean isLogin;
@@ -113,7 +117,37 @@ public class MyApplication extends Application {
 	public String getVip() {
 		return vip;
 	}
-	private View view;
 	
+	/**
+	 * 
+	 * 返回图片加载的监听
+	 */
+	public ImageLoadingListener getImageLoadingListener() {
+		return animateFirstListener;
+	}
+	
+	private static class AnimateFirstDisplayListener extends
+			SimpleImageLoadingListener {
+
+		@Override
+		public void onLoadingComplete(String imageUri, View view,
+				Bitmap loadedImage) {
+			if (loadedImage != null) {
+				ImageView imageView = (ImageView) view;
+				boolean firstDisplay = !displayedImages.contains(imageUri);
+				if (firstDisplay) {
+					FadeInBitmapDisplayer.animate(imageView, 100);
+					displayedImages.add(imageUri);
+				}
+			}
+		}
+	}
+
+	@Override
+	public void onLowMemory() {
+		// TODO Auto-generated method stub
+		super.onLowMemory();
+		ImageLoader.getInstance().clearMemoryCache();
+	}
 	
 }

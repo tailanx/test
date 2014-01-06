@@ -1,15 +1,14 @@
 package com.yidejia.app.mall.widget;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -18,18 +17,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
-import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.yidejia.app.mall.GoodsInfoActivity;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.SlideImageLayout;
 import com.yidejia.app.mall.model.BaseProduct;
-import com.yidejia.app.mall.util.SlideImageLayout;
-import com.yidejia.app.mall.view.GoodsInfoActivity;
 
 /**
  * 滑动的控件
@@ -37,33 +35,63 @@ import com.yidejia.app.mall.view.GoodsInfoActivity;
  * @author Administrator
  * 
  */
-public class MallSlip {
+public class BannerView {
 	private ViewGroup mMainView;
 	private ArrayList<BaseProduct> bannerArray;
-	private Context context;
+	private Activity context;
 	private YLViewPager mViewPager;
 	private SlideImageLayout mSlideLayout;
 	private ImageView mImageCircleViews[];
 	private ViewGroup mImageCircleView = null;
+	
+	private int width;	//屏幕宽
+	private int height;	//按比例的图片高
+	private int length = 0;	//图片轮播的数量
+	private int currentIndex = 0;	//轮播的当前位置
+	private long DELAY = 5000;	//轮播图片轮播的毫秒数
+	
+	private DisplayImageOptions options;
+	protected ImageLoader imageLoader = ImageLoader.getInstance();
+	private ImageLoadingListener animateFirstListener;
 
-	public MallSlip(ArrayList<BaseProduct> baseProducts, Context context) {
+	private Timer timer;
+	private TimerTask timetask;
+	private Handler handler;
+	
+	public BannerView(ArrayList<BaseProduct> baseProducts, Activity context) {
 		this.bannerArray = baseProducts;
 		this.context = context;
+		animateFirstListener = ((MyApplication)context.getApplicationContext()).getImageLoadingListener();
+		
+		handler = new Handler() {
+
+			public void handleMessage(Message msg) {
+				switch (msg.what) {
+				case 1:
+					setBannerImageShow();
+					break;
+				}
+				super.handleMessage(msg);
+			}
+
+		};
 	}
 
-	public ViewGroup getViewGroup() {
-		return mMainView;
-	}
-
-	public YLViewPager getYlViewPager(){
-			return mViewPager;
-	}
+//	public ViewGroup getViewGroup() {
+//		return mMainView;
+//	}
+//
+//	public YLViewPager getYlViewPager(){
+//			return mViewPager;
+//	}
 	/**
 	 * 
 	 * @return 首页轮播的控件
 	 */
 	public ViewGroup getMainListFirstItem() {
-		length = bannerArray.size();
+		if(null != bannerArray) {
+			length = bannerArray.size();
+		}
 		LayoutInflater inflater = LayoutInflater.from(context);
 		mMainView = (ViewGroup) inflater.inflate(
 				R.layout.layout_first_item_in_main_listview, null);
@@ -71,30 +99,30 @@ public class MallSlip {
 			return mMainView;
 		mViewPager = (YLViewPager) mMainView
 				.findViewById(R.id.image_slide_page);
-		// if (length == 0)
-		// return mMainView;
-		// mViewPager = (YLViewPager) mMainView
-		// .findViewById(R.id.image_slide_page);
-		mSlideLayout = new SlideImageLayout((Activity) context, context, width);
+		
+		width = context.getWindowManager().getDefaultDisplay().getWidth();
+		height = (int)((width / 320f) * 160f);
+		
+		mSlideLayout = new SlideImageLayout(context, width);
 		mSlideLayout.setCircleImageLayout(length);
 		mImageCircleViews = new ImageView[length];
 		mImageCircleView = (ViewGroup) mMainView
 				.findViewById(R.id.layout_circle_images);
 		for (int i = 0; i < length; i++) {
 
-			// mainImageData.getBitmaps().get(i)
-			// mImagePageViewList.add(mSlideLayout
-			// .getSlideImageLayout((Bitmap)topAdImage.get(i)));//mainImageData.getBitmaps().get(i)
 			mImageCircleViews[i] = mSlideLayout.getCircleImageLayout(i);
 			mImageCircleView.addView(mSlideLayout.getLinearLayout(
 					mImageCircleViews[i], 9, 9));
 		}
 
 		// 设置ViewPager
+		FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(width, height);
+		mViewPager.setLayoutParams(layoutParams);
 		mViewPager.setAdapter(new SlideImageAdapter(bannerArray));
 		mViewPager.setOnPageChangeListener(new ImagePageChangeListener());
 		mViewPager.setCurrentItem(0);
 		mViewPager.setOffscreenPageLimit(2);
+		currentIndex = 0;
 		return mMainView;
 	}
 
@@ -113,10 +141,6 @@ public class MallSlip {
 			initDisplayImageOption();
 		}
 
-		// private int height = (int)((float)width / 320) * 160;
-
-		// public SlideImageAdapter(){
-		// }
 		public int getCount() {
 			return length;// 1000;
 		}
@@ -135,19 +159,14 @@ public class MallSlip {
 		}
 
 		public Object instantiateItem(ViewGroup view, int position) {
-			// ((ViewPager) view).addView(mImagePageViewList.get(position));
 			View imageLayout = inflater.inflate(R.layout.item_pager_image,
 					view, false);
 			final ImageView imageView = (ImageView) imageLayout
 					.findViewById(R.id.image);
-			// Toast.makeText(getSherlockActivity(),
-			// bannerArray.get(position).getImgUrl(),
-			// Toast.LENGTH_SHORT).show();
-			imageLoader.init(ImageLoaderConfiguration
-					.createDefault(context));
+			ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(width, height);
+			imageView.setLayoutParams(layoutParams);
 			imageLoader.displayImage(bannerArray.get(position).getImgUrl(),
 					imageView, options, animateFirstListener);
-			// imageView.setBackgroundResource(ids[position%length]);
 			imageView.setOnClickListener(new ImageOnClickListener(position));
 			((ViewPager) view).addView(imageLayout, 0);
 			return imageLayout;
@@ -167,10 +186,6 @@ public class MallSlip {
 		public void finishUpdate(View arg0) {
 		}
 
-		// public void setPageIndex(int index){
-		// pageIndex = index;
-		// }
-
 		public class ImageOnClickListener implements OnClickListener {
 			private int index;
 
@@ -180,14 +195,8 @@ public class MallSlip {
 
 			@Override
 			public void onClick(View v) {
-				// Toast.makeText(getActivity(),
-				// "我点击了第"+"["+pageIndex%length+"]几个",
-				// Toast.LENGTH_SHORT).show();
 				Intent intent = new Intent(context,
 						GoodsInfoActivity.class);
-				// Toast.makeText(getActivity(),
-				// "我点击了第"+"["+pageIndex%length+"]几个",
-				// Toast.LENGTH_SHORT).show();
 				Bundle bundle = new Bundle();
 				bundle.putString("goodsId", bannerArray.get(index).getUId());
 				intent.putExtras(bundle);
@@ -196,7 +205,6 @@ public class MallSlip {
 		}
 	}
 
-	// private int pageIndex = 0;
 
 	/**
 	 * 滑动页面更改事件监听器
@@ -204,26 +212,15 @@ public class MallSlip {
 	private class ImagePageChangeListener implements OnPageChangeListener {
 		@Override
 		public void onPageScrollStateChanged(int arg0) {
-
 		}
 
 		@Override
 		public void onPageScrolled(int position, float positionOffset,
 				int positionOffsetPixels) {
-
-			// mViewPager.setCurrentItem(pageIndex);
-			// }
 		}
 
 		@Override
 		public void onPageSelected(int index) {
-			// mSlideLayout.setPageIndex(index);
-			// SlideImageAdapter slideImageAdapter = new SlideImageAdapter();
-			// slideImageAdapter.setPageIndex(index);
-			// pageIndex = index;
-			int length = mImageCircleViews.length;
-			mImageCircleViews[index % length]
-					.setBackgroundResource(R.drawable.dot1);
 			mImageCircleViews[index % length]
 					.setBackgroundResource(R.drawable.dot1);
 			for (int i = 0; i < length; i++) {
@@ -232,54 +229,66 @@ public class MallSlip {
 				if (index % length != i) {
 					mImageCircleViews[i % length]
 							.setBackgroundResource(R.drawable.dot2);
-					mImageCircleViews[i % length]
-							.setBackgroundResource(R.drawable.dot2);
 				}
 			}
+			currentIndex = index % length;
 		}
 
 	}
+	
 
-	private int width;
-	private int length = 0;
+	public void startTimer() {
+		if (timer == null) {
+			timer = new Timer();
+		}
 
-	private DisplayImageOptions options;
-	protected ImageLoader imageLoader = ImageLoader.getInstance();
-	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+		if (timetask == null) {
+			timetask = new TimerTask() {
+
+				public void run() {
+					Message message = new Message();
+					message.what = 1;
+					handler.sendMessage(message);
+				}
+
+			};
+		}
+		
+		timer.schedule(timetask, DELAY, DELAY);
+	}
+	
+	public void stopTimer() {
+
+		if (timer != null) {
+			timer.cancel();
+			timer = null;
+		}
+
+		if (timetask != null) {
+			timetask.cancel();
+			timetask = null;
+		}
+
+	}
+	
+
+	
+//	public void 
+
+	private void setBannerImageShow() {
+		int indexTemp = currentIndex + 1;
+		if (length != 0)
+			indexTemp = indexTemp % length;
+		mViewPager.setCurrentItem(indexTemp);
+		currentIndex = indexTemp;
+	}
 
 	private void initDisplayImageOption() {
 		options = new DisplayImageOptions.Builder()
-				// .showStubImage(R.drawable.hot_sell_right_top_image)
-				// .showImageOnFail(R.drawable.hot_sell_right_top_image)
-				// .showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
-				// .cacheInMemory(true)
-				// .cacheOnDisc(true)
-				// .build();
 				.showStubImage(R.drawable.banner_bg)
 				.showImageOnFail(R.drawable.banner_bg)
 				.showImageForEmptyUri(R.drawable.banner_bg).cacheInMemory(true)
 				.cacheOnDisc(true).build();
-	}
-
-	static final List<String> displayedImages = Collections
-			.synchronizedList(new LinkedList<String>());
-
-	private static class AnimateFirstDisplayListener extends
-			SimpleImageLoadingListener {
-
-		@Override
-		public void onLoadingComplete(String imageUri, View view,
-				Bitmap loadedImage) {
-
-			if (loadedImage != null) {
-				ImageView imageView = (ImageView) view;
-				boolean firstDisplay = !displayedImages.contains(imageUri);
-				if (firstDisplay) {
-					FadeInBitmapDisplayer.animate(imageView, 500);
-					displayedImages.add(imageUri);
-				}
-			}
-		}
 	}
 
 }

@@ -51,7 +51,7 @@
             <RelativeLayout
                 android:id="@+id/slide_parent_layout"
                 android:layout_width="match_parent"
-                android:layout_height="160dp" >
+                android:layout_height="wrap_content" >
 
                 <include layout="@layout/main_slide_image" />
             </RelativeLayout>

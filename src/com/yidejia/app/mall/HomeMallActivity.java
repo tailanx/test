@@ -1,4 +1,4 @@
-package com.yidejia.app.mall;
+package com.yidejia.app.mall.main;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,9 +14,11 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.broadcast.MallAction;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
+import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.MallInnerReceiver;
 
@@ -32,11 +34,14 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 	private CartsDataManage cartsDataManage;
 	private int number;
 	private Button cartImage;// 购物车上的按钮
+	private BottomChange bottomChange;
+	private RelativeLayout bottomLayout;
 	private MyApplication myApplication;
+	private MallAction mallAction;
+//	private boolean isFrist = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		myApplication = (MyApplication) getApplication();
 		MAINACTIVITY = this;
@@ -45,7 +50,7 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 		// 实例化组件
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
 		// 设置头部
-		MallAction mallAction = new MallAction(HomeMallActivity.this,
+		mallAction = new MallAction(HomeMallActivity.this,
 				frameLayout);
 
 		mallAction.setActionBarConfig();
@@ -58,6 +63,18 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 		filter.addAction(Consts.BROAD_UPDATE_CHANGE);
 		filter.addAction(Consts.DELETE_CART);
 		registerReceiver(receiver, filter);
+		
+		// 设置底部
+		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
+		bottomChange = new BottomChange(HomeMallActivity.this, bottomLayout);
+//		if(!isFrist){
+//			int currnet = getIntent().getIntExtra("current", -1);
+//			int next = getIntent().getIntExtra("next", -1);
+//			if(currnet !=-1||next !=-1){
+//				bottomChange.initNavView(currnet,next);
+//			}
+//		}
+		
 		initNavView();
 	}
 
@@ -103,9 +120,7 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 		case R.id.down_my_layout:
 			if (myApplication.getIsLogin()){
 				intent.setClass(HomeMallActivity.this, HomeMyMaActivity.class);
-			}
-			else
-			{
+			}else{
 				intent.setClass(HomeMallActivity.this, HomeLogActivity.class);
 			}
 			intent.putExtra("current", 0);
@@ -114,14 +129,8 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 			break;
 		}
 		HomeMallActivity.this.startActivity(intent);
-		HomeMallActivity.this.finish();
+//		HomeMallActivity.this.finish();
 		overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
-	}
-
-	@Override
-	public void onStart() {
-		// TODO Auto-generated method stub
-		super.onStart();
 	}
 
 	@Override
@@ -155,6 +164,7 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
+		mallAction.onPause();
 		StatService.onPause(this);
 	}
 
@@ -164,5 +174,14 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 		super.onResume();
 		StatService.onResume(this);
 	}
+
+	@Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+		super.onRestart();
+		mallAction.onResume();
+	}
+	
+	
 
 }
