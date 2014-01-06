@@ -28,22 +28,6 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 
-        <!--
-android:uiOptions="splitActionBarWhenNarrow"
-<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                
-                
-            </intent-filter>
-            
-            <intent-filter >
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-            <meta-data android:name="android.app.searchable"  
-                   android:resource="@xml/main_searchable"/>  
-        -->
         
         <!-- 您从百度网站获取的APP KEY -->
 		<meta-data android:name="BaiduMobAd_STAT_ID" android:value="84216f5a45" /> <!-- abcd1234 -->
@@ -66,13 +50,6 @@ android:uiOptions="splitActionBarWhenNarrow"
 		<meta-data android:name="BaiduMobAd_WIFI_LOCATION" android:value="true" />
         
         <activity
-            android:name="com.yidejia.app.mall.MainActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:uiOptions="splitActionBarWhenNarrow"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
-        <activity
             android:name="com.yidejia.app.mall.SearchActivity"
             android:uiOptions="splitActionBarWhenNarrow"
             android:windowSoftInputMode="stateVisible" >
@@ -89,12 +66,6 @@ android:uiOptions="splitActionBarWhenNarrow"
         <activity
             android:name="com.yidejia.app.mall.SearchResultActivity"
             android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.yidejia.app.mall.MainFragmentActivity"
-            android:screenOrientation="portrait"
-            android:uiOptions="splitActionBarWhenNarrow"
-            android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name="com.yidejia.app.mall.FeedBackActivity"
@@ -253,25 +224,23 @@ android:uiOptions="splitActionBarWhenNarrow"
         </activity>
         <activity
             android:name="com.yidejia.app.mall.main.HomeCarActivity"
-            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>
+<!--             android:launchMode="singleTask" -->
         <activity
             android:name="com.yidejia.app.mall.main.HomeSearchActivity"
-            android:launchMode="singleTask"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name="com.yidejia.app.mall.main.HomeLogActivity"
-            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name="com.yidejia.app.mall.main.HomeMyMaActivity"
-            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>

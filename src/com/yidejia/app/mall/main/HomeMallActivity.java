@@ -37,11 +37,11 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 	private BottomChange bottomChange;
 	private RelativeLayout bottomLayout;
 	private MyApplication myApplication;
+	private MallAction mallAction;
 //	private boolean isFrist = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		myApplication = (MyApplication) getApplication();
 		MAINACTIVITY = this;
@@ -50,7 +50,7 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 		// 实例化组件
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
 		// 设置头部
-		MallAction mallAction = new MallAction(HomeMallActivity.this,
+		mallAction = new MallAction(HomeMallActivity.this,
 				frameLayout);
 
 		mallAction.setActionBarConfig();
@@ -120,9 +120,7 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 		case R.id.down_my_layout:
 			if (myApplication.getIsLogin()){
 				intent.setClass(HomeMallActivity.this, HomeMyMaActivity.class);
-			}
-			else
-			{
+			}else{
 				intent.setClass(HomeMallActivity.this, HomeLogActivity.class);
 			}
 			intent.putExtra("current", 0);
@@ -131,14 +129,8 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 			break;
 		}
 		HomeMallActivity.this.startActivity(intent);
-		HomeMallActivity.this.finish();
+//		HomeMallActivity.this.finish();
 		overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
-	}
-
-	@Override
-	public void onStart() {
-		// TODO Auto-generated method stub
-		super.onStart();
 	}
 
 	@Override
@@ -172,6 +164,7 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
+		mallAction.onPause();
 		StatService.onPause(this);
 	}
 
@@ -181,5 +174,14 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 		super.onResume();
 		StatService.onResume(this);
 	}
+
+	@Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+		super.onRestart();
+		mallAction.onResume();
+	}
+	
+	
 
 }

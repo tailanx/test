@@ -283,7 +283,7 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 			break;
 		}
 		HomeSearchActivity.this.startActivity(intent);
-		this.finish();
+//		this.finish();
 		overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 	}
 

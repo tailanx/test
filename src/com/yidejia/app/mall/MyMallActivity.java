@@ -33,7 +33,6 @@ import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.yidejia.app.mall.datamanage.PersonCountDataManage;
 import com.yidejia.app.mall.fragment.LoginFragment;
-import com.yidejia.app.mall.fragment.MainPageFragment;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.AddressActivity;
 import com.yidejia.app.mall.view.AllOrderActivity;

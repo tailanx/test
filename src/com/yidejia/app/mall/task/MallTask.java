@@ -26,7 +26,7 @@ import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.model.MainProduct;
 import com.yidejia.app.mall.net.homepage.GetHomePage;
 import com.yidejia.app.mall.view.MallLoadData;
-import com.yidejia.app.mall.widget.MallSlip;
+import com.yidejia.app.mall.widget.BannerView;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 import com.yidejia.app.mall.widget.YLViewPager;
 
@@ -47,18 +47,14 @@ public class MallTask {
 	private ArrayList<MainProduct> hotsellArray = new ArrayList<MainProduct>();
 	private ArrayList<String> ggTitleArray = new ArrayList<String>();
 	private boolean isTimeOut = false;// 链接超时
-	private int bannerIndex = 0;
 	private FrameLayout layout;
 	private ViewGroup viewGroup;
 	private View view;
 	private TextView title;// 商城的公告
-	private long DELAY = 5000;
 	private PullToRefreshScrollView mPullToRefreshScrollView;
-	private int length = 0;
-	private YLViewPager mViewPager;
 	private FrameLayout layoutView;
+	private BannerView mallSlip;
 
-	@SuppressWarnings("static-access")
 	public MallTask(SherlockFragmentActivity context, View view,
 			FrameLayout layout, TextView title,
 			PullToRefreshScrollView mPullToRefreshScrollView) {
@@ -68,11 +64,8 @@ public class MallTask {
 		this.view = view;
 		layoutView = (FrameLayout) view.findViewById(R.id.layout);
 		this.mPullToRefreshScrollView = mPullToRefreshScrollView;
-		startTimer();
-		if (task != null
-				&& task.getStatus().RUNNING == AsyncTask.Status.RUNNING) {
-			task.cancel(true);
-		}
+		
+		closeTask();
 		task = new Task();
 		task.execute();
 		
@@ -102,7 +95,6 @@ public class MallTask {
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			// TODO Auto-generated method stub
 			bar.dismiss();
 			GetHomePage homePage = new GetHomePage();
 			String httpString;
@@ -116,10 +108,8 @@ public class MallTask {
 				ggTitleArray = homePage.getGGTitle();
 				return isSucess;
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (TimeOutEx e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				isTimeOut = true;
 			}
@@ -131,12 +121,10 @@ public class MallTask {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			if (result) {
-				bannerIndex = 0;
 				layoutView.removeAllViews();
 				
-				MallSlip mallSlip = new MallSlip(bannerArray, context);
+				mallSlip = new BannerView(bannerArray, context);
 				viewGroup = mallSlip.getMainListFirstItem();
-				mViewPager = mallSlip.getYlViewPager();
 				layoutView.addView(viewGroup);
 				
 				
@@ -147,6 +135,9 @@ public class MallTask {
 				MallLoadData mallLoadData = new MallLoadData(context, view,acymerArray,inerbtyArray,hotsellArray);// 进行各种界面的跳转和界面的数据加载
 				mallLoadData.intentToView(view);
 				title.setText(ggTitleArray.get(0));
+				
+//					timer.schedule(timetask, DELAY, DELAY);
+				mallSlip.startTimer();
 			} else {
 				if (isTimeOut) {
 					Toast.makeText(
@@ -164,8 +155,6 @@ public class MallTask {
 			}
 			if (MallAction.isFirstIn) {
 				bar.dismiss();
-				if (result)
-					timer.schedule(timetask, DELAY, DELAY);
 				MallAction.isFirstIn = false;
 			} else {
 
@@ -207,11 +196,11 @@ public class MallTask {
 				if (!bannerArray.isEmpty())
 					bannerArray.clear();
 				if (!acymerArray.isEmpty())
-					bannerArray.clear();
+					acymerArray.clear();
 				if (!inerbtyArray.isEmpty())
-					bannerArray.clear();
+					inerbtyArray.clear();
 				if (!hotsellArray.isEmpty())
-					bannerArray.clear();
+					hotsellArray.clear();
 			}
 		}
 	}
@@ -226,55 +215,14 @@ public class MallTask {
 			task.cancel(true);
 		}
 	}
-
-	Timer timer = new Timer();;
-	TimerTask timetask = new TimerTask() {
-
-		public void run() {
-			Message message = new Message();
-			message.what = 1;
-			handler.sendMessage(message);
-		}
-
-	};
-
-	private void startTimer() {
-		if (timer == null) {
-			timer = new Timer();
-		}
-
-		if (timetask == null) {
-			timetask = new TimerTask() {
-
-				public void run() {
-					Message message = new Message();
-					message.what = 1;
-					handler.sendMessage(message);
-				}
-
-			};
-		}
+	
+	public void onStart() {
+		mallSlip.startTimer();
 	}
 
-	@SuppressLint("HandlerLeak")
-	Handler handler = new Handler() {
-
-		public void handleMessage(Message msg) {
-			switch (msg.what) {
-			case 1:
-				setBannerImageShow();
-				break;
-			}
-			super.handleMessage(msg);
-		}
-
-	};
-
-	private void setBannerImageShow() {
-		int indexTemp = bannerIndex + 1;
-		if (length != 0)
-			indexTemp = indexTemp % length;
-		mViewPager.setCurrentItem(indexTemp);
-		bannerIndex = indexTemp;
+	public void onPause() {
+		closeTask();
+		mallSlip.stopTimer();
 	}
+
 }
