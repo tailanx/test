@@ -16,11 +16,9 @@ import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.broadcast.MallAction;
 import com.yidejia.app.mall.exception.TimeOutEx;
-import com.yidejia.app.mall.initview.HotSellView;
 import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.model.MainProduct;
 import com.yidejia.app.mall.net.homepage.GetHomePage;
-import com.yidejia.app.mall.view.MallLoadData;
 import com.yidejia.app.mall.widget.BannerView;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
@@ -122,12 +120,12 @@ public class MallTask {
 				layoutView.addView(viewGroup);
 				
 				
-				HotSellView hotSellView = new HotSellView(view, context);
-				hotSellView.initHotSellView(hotsellArray);
-				hotSellView.initAcymerView(acymerArray);
-				hotSellView.initInerbtyView(inerbtyArray);
-				MallLoadData mallLoadData = new MallLoadData(context, view,acymerArray,inerbtyArray,hotsellArray);// 进行各种界面的跳转和界面的数据加载
-				mallLoadData.intentToView(view);
+//				HotSellView hotSellView = new HotSellView(view, context);
+//				hotSellView.initHotSellView(hotsellArray);
+//				hotSellView.initAcymerView(acymerArray);
+//				hotSellView.initInerbtyView(inerbtyArray);
+//				MallLoadData mallLoadData = new MallLoadData(context, view,acymerArray,inerbtyArray,hotsellArray);// 进行各种界面的跳转和界面的数据加载
+//				mallLoadData.intentToView(view);
 				title.setText(ggTitleArray.get(0));
 				
 //					timer.schedule(timetask, DELAY, DELAY);
