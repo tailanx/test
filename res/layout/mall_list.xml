@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/re_main2_main2_linearlayout4_all_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_selector2" >
+
+        <TextView
+            android:id="@+id/tv_main2_main2_linearlayout4_textview1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:text="@string/all_order"
+            android:textSize="@dimen/textsize_big_big" />
+
+        <ImageView
+            android:id="@+id/tv_main2_main2_linearlayout4_imageview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/mall_list_padding"
+            android:contentDescription="@string/yidejia"
+            android:src="@drawable/arrow" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/re_main2_main2_linearlayout4_integer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_left"
+        android:background="@drawable/layout_selector2" >
+
+        <TextView
+            android:id="@+id/tv_main2_main2_linearlayout4_textview1_integer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:text="@string/main_voucher_text"
+            android:textSize="@dimen/textsize_big_big" />
+
+        <ImageView
+            android:id="@+id/tv_main2_main2_linearlayout4_imageview2_integer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/mall_list_padding"
+            android:contentDescription="@string/yidejia"
+            android:src="@drawable/arrow" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/re_main2_main2_linearlayout4_collect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_selector2" >
+
+        <TextView
+            android:id="@+id/tv_main2_main2_linearlayout4_textview1_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:text="@string/my_collect"
+            android:textSize="@dimen/textsize_big_big" />
+
+        <ImageView
+            android:id="@+id/tv_main2_main2_linearlayout4_imageview2_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/mall_list_padding"
+            android:contentDescription="@string/yidejia"
+            android:src="@drawable/arrow" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/re_main2_main2_linearlayout4_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_selector2" >
+
+        <TextView
+            android:id="@+id/tv_main2_main2_linearlayout4_textview1_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:text="@string/manage_address"
+            android:textSize="@dimen/textsize_big_big" />
+
+        <ImageView
+            android:id="@+id/tv_main2_main2_linearlayout4_imageview2_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/mall_list_padding"
+            android:contentDescription="@string/yidejia"
+            android:src="@drawable/arrow" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/re_main2_main2_linearlayout4_all_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_left"
+        android:background="@drawable/layout_selector2" >
+
+        <TextView
+            android:id="@+id/tv_main2_main2_linearlayout4_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:text="@string/person_message"
+            android:textSize="@dimen/textsize_big_big" />
+
+        <ImageView
+            android:id="@+id/tv_main2_main2_linearlayout4_imageview2_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/mall_list_padding"
+            android:contentDescription="@string/yidejia"
+            android:src="@drawable/arrow" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/re_main2_main2_linearlayout4_all_show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_left"
+        android:background="@drawable/layout_selector2" >
+
+        <TextView
+            android:id="@+id/tv_main2_main2_linearlayout4_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:text="@string/show"
+            android:textSize="@dimen/textsize_big_big" />
+
+        <ImageView
+            android:id="@+id/tv_main2_main2_linearlayout4_imageview2_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/mall_list_padding"
+            android:contentDescription="@string/yidejia"
+            android:src="@drawable/arrow" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/re_main2_main2_linearlayout4_all_return"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_selector2" >
+
+        <TextView
+            android:id="@+id/tv_main2_main2_linearlayout4_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:text="@string/exchanged"
+            android:textSize="@dimen/textsize_big_big" />
+
+        <ImageView
+            android:id="@+id/tv_main2_main2_linearlayout4_imageview2_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/mall_list_padding"
+            android:contentDescription="@string/yidejia"
+            android:src="@drawable/arrow" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -19,11 +19,17 @@
     <dimen name="yirihui">120dp</dimen>
     <dimen name="all_buy_produce_right">80dp</dimen>
     <dimen name="textsize_small">15sp</dimen>
+    <dimen name="textsize_small_small">12sp</dimen>
     <dimen name="textsize_big">18sp</dimen>
+    <dimen name="textsize_big_big">20sp</dimen>
     <dimen name="width">0dp</dimen>
     <dimen name="image_width">590dp</dimen>
     <dimen name="image_height">290dp</dimen>
-    
-    
+    <dimen name="head_height">110dp</dimen>
+    <dimen name="margin_left_more">12dp</dimen>
+    <dimen name="margin_top">40dp</dimen>
+    <dimen name="head_padding">8dp</dimen>
+    <dimen name="mall_list_padding">15dp</dimen>
+    <dimen name="magin_left_add">25dp</dimen>
 
 </resources>

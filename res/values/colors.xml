@@ -31,5 +31,6 @@
     <color name="skin_test">#fa4d92</color>
     <color name="dialog_color">#80ffffff</color>
     <color name="dialog_bg">#00000000</color>
-
+    <color name="order">#695a3d</color>
+	
 </resources>

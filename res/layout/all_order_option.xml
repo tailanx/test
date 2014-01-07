@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:baselineAligned="false"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/menubg_middle_hover">
+
+    <RelativeLayout
+        android:layout_width="@dimen/activity_vertical_margin"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0" >
+
+        <TextView
+            android:id="@+id/wait_pay_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mall_wait_pay"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/textsize_small_small" />
+
+        <TextView
+            android:id="@+id/wait_pay_order_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/wait_pay_order"
+            android:layout_centerHorizontal="true"
+            android:text="@string/hour"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+  <RelativeLayout
+        android:layout_width="@dimen/activity_vertical_margin"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0" >
+
+        <TextView
+            android:id="@+id/wait_pay_deliver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/mall_wait_deliver"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_small_small" />
+
+        <TextView
+            android:id="@+id/wait_pay_deliver_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/wait_pay_deliver"
+            android:text="@string/hour"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+      <RelativeLayout
+        android:layout_width="@dimen/activity_vertical_margin"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0" >
+
+        <TextView
+            android:id="@+id/already_deliver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/already_deliver"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_small_small" />
+
+        <TextView
+            android:id="@+id/already_deliver_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/already_deliver"
+            android:text="@string/hour"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="@dimen/activity_vertical_margin"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0" >
+
+        <TextView
+            android:id="@+id/already_compelte"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:text="@string/already_compelte"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_small_small" />
+
+        <TextView
+            android:id="@+id/already_complete_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/already_compelte"
+            android:text="@string/hour"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+        <RelativeLayout
+        android:layout_width="@dimen/activity_vertical_margin"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0" >
+
+        <TextView
+            android:id="@+id/wait_comment"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:text="@string/wait_coment"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_small_small" />
+
+        <TextView
+            android:id="@+id/wait_commen_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/wait_comment"
+            android:text="@string/hour"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+    
+  
+</LinearLayout>
