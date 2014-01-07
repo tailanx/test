@@ -7,10 +7,23 @@
     <dimen name="shadow_width">0dp</dimen>
     <dimen name="slidingmenu_offset">50dp</dimen>
     <dimen name="above_offset">0dp</dimen>
-
+	<dimen name ="margin_left">10dp</dimen>
+	<dimen name ="padding_left">6dp</dimen>
+	<dimen name ="margin_left_add">4dp</dimen>
+	
     <integer name="num_cols">1</integer>
 
     <dimen name="base_info_image">150dp</dimen>
     <dimen name="base_info_match">90dp</dimen>
+    <dimen name="text_size">24sp</dimen>
+    <dimen name="yirihui">120dp</dimen>
+    <dimen name="all_buy_produce_right">80dp</dimen>
+    <dimen name="textsize_small">15sp</dimen>
+    <dimen name="textsize_big">18sp</dimen>
+    <dimen name="width">0dp</dimen>
+    <dimen name="image_width">590dp</dimen>
+    <dimen name="image_height">290dp</dimen>
+    
+    
 
 </resources>

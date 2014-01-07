@@ -319,10 +319,25 @@
     <string name="zhifubao_wangye_pay">需安装支付宝手机钱包客户端</string>
     <string name="zhifubao_wangye_pay_list">支付宝网页支付</string>
     <string name="zhifubao_wangye_pay_list_card">可银行卡支付</string>
-
     <string name="yinliang_pay">银联支付</string>
     <string name="yinliang_pay_list">银联支付</string>
     <string name="caifutong_pay">财付通支付</string>
     <string name="caifutong_pay_list">可银行卡支付</string>
     <string name="pay_commit">立即支付</string>
+    <string name="yirihui">【 伊日惠 】</string>
+    <string name="yirihui_add">今日优惠价限时抢购，每日限量，先抢先得</string>
+    <string name="produce_price">￥178.00</string>
+    <string name="must_pay">秒抢</string>
+    <string name="produce_detail_add">植物清逗修复精华</string>
+    <string name="hour">01</string>
+    <string name="mint">50</string>
+    <string name="second">30</string>
+    <string name="maohao">:</string>
+    <string name="all_buy">大家都在买</string>
+    <string name="watch_all">查看全部 ></string>
+    <string name="all_buy_detail">时间轴套装</string>
+    <string name="all_buy_detail_add">保养 补水 修护 增加弹性</string>
+    <string name="produce_price_yuan">￥78.00元</string>
+    <string name="free_pay_title">随心逛</string>
+
 </resources>

@@ -2,14 +2,9 @@ package com.yidejia.app.mall.task;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.os.Message;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +23,6 @@ import com.yidejia.app.mall.net.homepage.GetHomePage;
 import com.yidejia.app.mall.view.MallLoadData;
 import com.yidejia.app.mall.widget.BannerView;
 import com.yidejia.app.mall.widget.YLProgressDialog;
-import com.yidejia.app.mall.widget.YLViewPager;
 
 /**
  * 异步任务用来获取首页面的数据

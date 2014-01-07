@@ -18,7 +18,6 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.broadcast.MallAction;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
-import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.MallInnerReceiver;
 
@@ -34,11 +33,8 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 	private CartsDataManage cartsDataManage;
 	private int number;
 	private Button cartImage;// 购物车上的按钮
-	private BottomChange bottomChange;
-	private RelativeLayout bottomLayout;
 	private MyApplication myApplication;
 	private MallAction mallAction;
-//	private boolean isFrist = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,16 +60,6 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 		filter.addAction(Consts.DELETE_CART);
 		registerReceiver(receiver, filter);
 		
-		// 设置底部
-		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
-		bottomChange = new BottomChange(HomeMallActivity.this, bottomLayout);
-//		if(!isFrist){
-//			int currnet = getIntent().getIntExtra("current", -1);
-//			int next = getIntent().getIntExtra("next", -1);
-//			if(currnet !=-1||next !=-1){
-//				bottomChange.initNavView(currnet,next);
-//			}
-//		}
 		
 		initNavView();
 	}

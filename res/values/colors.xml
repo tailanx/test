@@ -10,6 +10,7 @@
     <color name="search_result_top">#702c91</color>
     <color name="white_white">#b4b4b4</color>
     <color name="dark_black">#000000</color>
+    <color name="theme">#ec3587</color>
 
     <drawable name="white">#ffffff</drawable>
     <drawable name="green">#009900</drawable>
