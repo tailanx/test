@@ -60,8 +60,7 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 	private RelativeLayout mMyCollect;
 	private RelativeLayout mAddressManagement;
 	private RelativeLayout mLayout11;
-	private YLImageButton mButton2;
-	private YLImageButton mButton8;
+	private RelativeLayout mWaitComent;
 	private TextView favorites;// 收藏
 	private TextView integration;// 积分
 	private TextView message;// 消息
@@ -77,47 +76,48 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 
 	public void setupView(View view) {
 		// // //实例化组件
-		head = (ImageView) view.findViewById(R.id.person_shopping_image_person);
-		head.setOnClickListener(this);
-		nick = (TextView) view.findViewById(R.id.person_shopping_person_name);
+		head = (ImageView) view
+				.findViewById(R.id.iv_person_shopping_image_person);
+		head.setOnClickListener(this);// 图像
+		nick = (TextView) view
+				.findViewById(R.id.tv_person_shopping_person_name);// 昵称
 
-		// nick.setOnClickListener(this);
-		vip = (TextView) view.findViewById(R.id.person_shopping_person_vip);
+		vip = (TextView) view.findViewById(R.id.tv_person_shopping_person_vip);
 		personMessage = (RelativeLayout) view
-				.findViewById(R.id.main2_main2_linearlayout20);// 个人中心
+				.findViewById(R.id.re_main2_main2_linearlayout4_all_message);// 消息中心
 		personMessage.setOnClickListener(this);
 		personMessage.setVisibility(ViewGroup.GONE);// 这个版本隐藏这个功能
 		mExchange = (RelativeLayout) view
-				.findViewById(R.id.main2_main2_linearlayout10);// 退换货
+				.findViewById(R.id.re_main2_main2_linearlayout4_all_return);// 退换货
 		mExchange.setOnClickListener(this);
 		mAllOrder = (RelativeLayout) view
-				.findViewById(R.id.main2_main2_linearlayout1);// 全部订单
+				.findViewById(R.id.re_main2_main2_linearlayout4_all_order);// 全部订单
 		mAllOrder.setOnClickListener(this);
-		mWaitPay = (RelativeLayout) view
-				.findViewById(R.id.main2_main2_linearlayout2);// 待付快订单
+		mWaitPay = (RelativeLayout) view.findViewById(R.id.rv_wait_pay);// 待付快订单
 		mWaitPay.setOnClickListener(this);
-		mwaitDeliver = (RelativeLayout) view
-				.findViewById(R.id.main2_main2_linearlayout6);// 待发货订单
+		mwaitDeliver = (RelativeLayout) view.findViewById(R.id.re_wait_deliver);// 待发货订单
 		mwaitDeliver.setOnClickListener(this);
 		mAlreadyOrder = (RelativeLayout) view
-				.findViewById(R.id.main2_main2_linearlayout4);// 已发货订单
+				.findViewById(R.id.re_alreay_deliver);// 已发货订单
 		mAlreadyOrder.setOnClickListener(this);
 		mAlreadyCom = (RelativeLayout) view
-				.findViewById(R.id.main2_main2_linearlayout3);// "已完成订单"
+				.findViewById(R.id.re_compelte_oreder);// "已完成订单"
 		mAlreadyCom.setOnClickListener(this);
 		mCardVoucher = (RelativeLayout) view
-				.findViewById(R.id.main2_main2_linearlayout5);// 积分卡券
+				.findViewById(R.id.re_main2_main2_linearlayout4_integer);// 积分卡券
 		mCardVoucher.setOnClickListener(this);
 		mMyCollect = (RelativeLayout) view
-				.findViewById(R.id.main2_main2_linearlayout7);// 我的收藏
+				.findViewById(R.id.re_main2_main2_linearlayout4_collect);// 我的收藏
 		mMyCollect.setOnClickListener(this);
 		mAddressManagement = (RelativeLayout) view
-				.findViewById(R.id.main2_main2_linearlayout9);// 收货地址管理
+				.findViewById(R.id.re_main2_main2_linearlayout4_address);// 收货地址管理
 		mAddressManagement.setOnClickListener(this);
 		mLayout11 = (RelativeLayout) view
-				.findViewById(R.id.main2_main2_linearlayout11);// 评价晒单
+				.findViewById(R.id.re_main2_main2_linearlayout4_all_show);// 评价晒单
 		mLayout11.setOnClickListener(this);
 
+		mWaitComent = (RelativeLayout) view.findViewById(R.id.re_wait_comment);// 待评价
+		mWaitComent.setOnClickListener(this);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
@@ -130,12 +130,12 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 		imageView.setFocusable(true);
 		imageView.setOnClickListener(edit);
 
-		favorites = (TextView) view.findViewById(R.id.favorites);
+		favorites = (TextView) view.findViewById(R.id.tv_favorites);
 
 		favorites.setOnClickListener(this);
-		message = (TextView) view.findViewById(R.id.message);
+		message = (TextView) view.findViewById(R.id.tv_message);
 		message.setOnClickListener(this);
-		integration = (TextView) view.findViewById(R.id.integration);
+		integration = (TextView) view.findViewById(R.id.tv_integration);
 		integration.setOnClickListener(this);
 
 	}
@@ -241,7 +241,6 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 		downShoppingLayout = (RelativeLayout) findViewById(R.id.down_shopping_layout);
 		downMyLayout = (RelativeLayout) findViewById(R.id.down_my_layout);
 
-
 		downHomeLayout.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -287,104 +286,67 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 						R.anim.activity_out);
 			}
 		});
-		// downMyLayout.setOnClickListener(this);
-
-//		down_home_textview.setTextColor(this.getResources().getColor(
-//				R.color.white_white));
-//		downHomeLayout.setBackgroundResource(R.drawable.downbg);
-//		down_home_imageView.setImageResource(R.drawable.home_normal);
-//
-//		downMyLayout.setBackgroundResource(R.drawable.down_hover1);
-//		down_my_imageView.setImageResource(R.drawable.down_my_hover);
-//		down_my_textview.setTextColor(res.getColor(R.color.white));
-//		downGuangLayout.setVisibility(ViewGroup.GONE);
 	}
 
 	@Override
 	public void onClick(View v) {
+		Intent intent = new Intent();
 		switch (v.getId()) {
-		// case R.id.person_shopping_button1:
-		// Intent intent = new Intent(MainActivity.this,EditorActivity.class);
-		// startActivity(intent);
-		// MainActivity.this.finish();
-		// break;
-		case R.id.main2_main2_linearlayout20:// 点击个人中心
-			Intent intent1 = new Intent(this, PersonActivity.class);
-			startActivity(intent1);
-			// getSherlockActivity().finish();
+		case R.id.re_wait_comment:// 待评价
+			break;
+		case R.id.re_main2_main2_linearlayout4_all_message:// 点击消息中心
+			intent.setClass(this, PersonActivity.class);
 			break;
 
-		case R.id.main2_main2_linearlayout10:// 点击退换货
-			Intent intent2 = new Intent(this, ExchangeActivity.class);
-			startActivity(intent2);
-			// getSherlockActivity().finish();
+		case R.id.re_main2_main2_linearlayout4_all_return:// 点击退换货
+			intent.setClass(this, ExchangeActivity.class);
 			break;
-		case R.id.main2_main2_linearlayout1:// 点击全部订单
-			Intent intent3 = new Intent(this, AllOrderActivity.class);
-			startActivity(intent3);
-			// getSherlockActivity().finish();
+		case R.id.re_main2_main2_linearlayout4_all_order:// 点击全部订单
+			intent.setClass(this, AllOrderActivity.class);
 			break;
-		case R.id.main2_main2_linearlayout2:// 待付款订单
-			Intent intent4 = new Intent(this, WaitPayActivity.class);
-			startActivity(intent4);
-			// getSherlockActivity().finish();
+		case R.id.rv_wait_pay:// 待付款订单
+			intent.setClass(this, WaitPayActivity.class);
 			break;
-		case R.id.main2_main2_linearlayout6:// 待发货订单
-			Intent intent5 = new Intent(this, WaitDeliverActivity.class);
-			startActivity(intent5);
-			// getSherlockActivity().finish();
+		case R.id.re_wait_deliver:// 待发货订单
+			intent.setClass(this, WaitDeliverActivity.class);
 			break;
-		case R.id.main2_main2_linearlayout4:// 已发货订单
-			Intent intent6 = new Intent(this, AlreadyOrderActivity.class);
-			startActivity(intent6);
-			// getSherlockActivity().finish();
+		case R.id.re_alreay_deliver:// 已发货订单
+			intent.setClass(this, AlreadyOrderActivity.class);
 			break;
-		case R.id.main2_main2_linearlayout3:// 已完成订单
-			Intent intent7 = new Intent(this, AlreadyComActivity.class);
-			startActivity(intent7);
-			// getSherlockActivity().finish();
+		case R.id.re_compelte_oreder:// 已完成订单
+			intent.setClass(this, AlreadyComActivity.class);
 			break;
-		case R.id.main2_main2_linearlayout5:// 积分卡券
-			Intent intent8 = new Intent(this, IntegeralActivity.class);
-			startActivity(intent8);
-			// getSherlockActivity().finish();
+		case R.id.re_main2_main2_linearlayout4_integer:// 积分卡券
+			intent.setClass(this, IntegeralActivity.class);
 			break;
-		case R.id.main2_main2_linearlayout7:// 我的收藏
-			Intent intent9 = new Intent(this, MyCollectActivity.class);
-			startActivity(intent9);
-			// getSherlockActivity().finish();
+		case R.id.re_main2_main2_linearlayout4_collect:// 我的收藏
+			intent.setClass(this, MyCollectActivity.class);
 			break;
-		case R.id.main2_main2_linearlayout9:// 收货地址管理
-			Intent intent10 = new Intent(this, AddressActivity.class);
-			startActivity(intent10);
-			// getSherlockActivity().finish();
+		case R.id.re_main2_main2_linearlayout4_address:// 收货地址管理
+			intent.setClass(this, AddressActivity.class);
 			break;
-		case R.id.main2_main2_linearlayout11:// 评价晒单
-			Intent intent11 = new Intent(this, EvaluationActivity.class);
-			startActivity(intent11);
-			// getSherlockActivity().finish();
+		case R.id.re_main2_main2_linearlayout4_all_show:// 评价晒单
+			intent.setClass(this, EvaluationActivity.class);
 			break;
-		case R.id.favorites:// 收藏
-			Intent intent12 = new Intent(this, MyCollectActivity.class);
-			startActivity(intent12);
+		case R.id.tv_favorites:// 收藏
+			intent.setClass(this, MyCollectActivity.class);
 			break;
-		case R.id.message:// 收藏
-			Intent intent13 = new Intent(this, PersonActivity.class);
-			startActivity(intent13);
+		case R.id.tv_message:// 收藏
+			intent.setClass(this, PersonActivity.class);
 			break;
-		case R.id.integration:// 收藏
-			Intent intent14 = new Intent(this, IntegeralActivity.class);
-			startActivity(intent14);
+		case R.id.tv_integration:// 收藏
+			intent.setClass(this, IntegeralActivity.class);
 			break;
-		case R.id.person_shopping_person_name:// 昵称
+		case R.id.tv_person_shopping_person_name:// 昵称
 			// Toast.makeText(getSherlockActivity(), "",
 			// Toast.LENGTH_LONG).show();
 			break;
-		case R.id.person_shopping_image_person:// 头像
+		case R.id.iv_person_shopping_image_person:// 头像
 			// Toast.makeText(getSherlockActivity(), "",
 			// Toast.LENGTH_LONG).show();
 			break;
 		}
+		startActivity(intent);
 	}
 
 	// 双击返回键退出程序
