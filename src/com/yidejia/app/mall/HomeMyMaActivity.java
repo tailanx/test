@@ -49,24 +49,12 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 	private LayoutInflater inflater;
 	private ImageView imageView;
 
-	private RelativeLayout personMessage;
-	private RelativeLayout mExchange;
-	private RelativeLayout mAllOrder;
-	private RelativeLayout mWaitPay;
-	private RelativeLayout mwaitDeliver;
-	private RelativeLayout mAlreadyOrder;
-	private RelativeLayout mAlreadyCom;
-	private RelativeLayout mCardVoucher;
-	private RelativeLayout mMyCollect;
-	private RelativeLayout mAddressManagement;
-	private RelativeLayout mLayout11;
-	private RelativeLayout mWaitComent;
-	private TextView favorites;// 收藏
-	private TextView integration;// 积分
-	private TextView message;// 消息
+	private RelativeLayout personMessage, mExchange, mAllOrder, mWaitPay,
+			mwaitDeliver, mAlreadyOrder, mAlreadyCom, mCardVoucher, mMyCollect,
+			mAddressManagement, mLayout11, mWaitComent;
+	private TextView favorites, integration, message, nick, vip;
+
 	private ImageView head;// 头像
-	private TextView nick;// 昵称
-	private TextView vip;
 	private MyApplication myApplication;
 	private PersonCountDataManage personCountDataManage;
 	private Resources res;
@@ -338,12 +326,8 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 			intent.setClass(this, IntegeralActivity.class);
 			break;
 		case R.id.tv_person_shopping_person_name:// 昵称
-			// Toast.makeText(getSherlockActivity(), "",
-			// Toast.LENGTH_LONG).show();
 			break;
 		case R.id.iv_person_shopping_image_person:// 头像
-			// Toast.makeText(getSherlockActivity(), "",
-			// Toast.LENGTH_LONG).show();
 			break;
 		}
 		startActivity(intent);

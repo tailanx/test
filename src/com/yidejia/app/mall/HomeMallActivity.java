@@ -76,8 +76,6 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 		} else {
 			cartImage.setText(number + "");
 		}
-		// downGuangLayout = (RelativeLayout)
-		// findViewById(R.id.down_guang_layout);
 		downSearchLayout = (RelativeLayout) findViewById(R.id.down_search_layout);
 		downShoppingLayout = (RelativeLayout) findViewById(R.id.down_shopping_layout);
 		downMyLayout = (RelativeLayout) findViewById(R.id.down_my_layout);
