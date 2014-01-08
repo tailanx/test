@@ -1,7 +1,6 @@
 package com.yidejia.app.mall;
 
 import java.io.IOException;
-import java.util.concurrent.TimeoutException;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -12,7 +11,6 @@ import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,9 +37,6 @@ import com.yidejia.app.mall.net.user.Login;
 import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DesUtils;
-import com.yidejia.app.mall.view.EditorActivity;
-import com.yidejia.app.mall.view.FindPwActivity;
-import com.yidejia.app.mall.view.RegistActivity;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class HomeLogActivity extends SherlockFragmentActivity implements
@@ -66,10 +61,9 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 	private Task taskLoginAct;
 	private BottomChange bottomChange;
 	private RelativeLayout bottomLayout;
-	
+
 	@Override
 	protected void onCreate(Bundle arg0) {
-		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		cartsDataManage = new CartsDataManage();
 		setContentView(R.layout.activity_main_fragment_layout);
@@ -125,7 +119,6 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				stringName.requestFocus();
 				stringName.setCursorVisible(true);
 				stringPassword.setCursorVisible(false);
@@ -136,7 +129,6 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				stringPassword.requestFocus();
 				stringPassword.setCursorVisible(true);
 				stringName.setCursorVisible(false);
@@ -196,46 +188,52 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 		downShoppingLayout = (RelativeLayout) findViewById(R.id.down_shopping_layout);
 		downMyLayout = (RelativeLayout) findViewById(R.id.down_my_layout);
 
-//		down_home_imageView = (ImageView) findViewById(R.id.down_home_icon);
-//		down_home_textview = (TextView) findViewById(R.id.down_home_text);
-//		down_my_imageView = (ImageView) findViewById(R.id.down_my_icon);
-//		down_my_textview = (TextView) findViewById(R.id.down_my_text);
+		// down_home_imageView = (ImageView) findViewById(R.id.down_home_icon);
+		// down_home_textview = (TextView) findViewById(R.id.down_home_text);
+		// down_my_imageView = (ImageView) findViewById(R.id.down_my_icon);
+		// down_my_textview = (TextView) findViewById(R.id.down_my_text);
 
 		downHomeLayout.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(HomeLogActivity.this, HomeMallActivity.class);
+				Intent intent = new Intent(HomeLogActivity.this,
+						HomeMallActivity.class);
 				startActivity(intent);
-				overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+				overridePendingTransition(R.anim.activity_in,
+						R.anim.activity_out);
 			}
 		});
 		downSearchLayout.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(HomeLogActivity.this, HomeSearchActivity.class);
+				Intent intent = new Intent(HomeLogActivity.this,
+						HomeSearchActivity.class);
 				intent.putExtra("current", 3);
 				intent.putExtra("next", 1);
 				startActivity(intent);
 				HomeLogActivity.this.finish();
-				overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
-				
+				overridePendingTransition(R.anim.activity_in,
+						R.anim.activity_out);
+
 			}
 		});
 		downShoppingLayout.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(HomeLogActivity.this,HomeCarActivity.class);
+				Intent intent = new Intent(HomeLogActivity.this,
+						HomeCarActivity.class);
 				intent.putExtra("current", 3);
 				intent.putExtra("next", 2);
 				startActivity(intent);
 				HomeLogActivity.this.finish();
-				overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+				overridePendingTransition(R.anim.activity_in,
+						R.anim.activity_out);
 			}
 		});
 	}
@@ -274,7 +272,7 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		
+
 		case R.id.my_mall_login_retrieve_password:// 找回密码
 			Intent intent1 = new Intent(HomeLogActivity.this,
 					FindPwActivity.class);
@@ -302,7 +300,7 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 						Toast.LENGTH_LONG).show();
 				return;
 			}
-		
+
 			taskLoginAct = new Task();
 			taskLoginAct.execute();
 			// taskLoginAct.loginAct(name, pwd, ipAddress.getIpAddress());
@@ -369,9 +367,11 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 			if (result) {
 				Toast.makeText(HomeLogActivity.this, "登陆成功！", Toast.LENGTH_LONG)
 						.show();
-				Intent intent = new Intent(HomeLogActivity.this, HomeMyMaActivity.class);
+				Intent intent = new Intent(HomeLogActivity.this,
+						HomeMyMaActivity.class);
 				startActivity(intent);
-				overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+				overridePendingTransition(R.anim.activity_in,
+						R.anim.activity_out);
 				HomeLogActivity.this.finish();
 				// 隐藏键盘
 				inputMethodManager.hideSoftInputFromWindow(
@@ -380,7 +380,7 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 						stringPassword.getWindowToken(), 0);
 
 				myApplication.setIsLogin(true);
-				
+
 				if (mBox.isChecked()) {
 					sp.edit().putString("DESMI", name).commit();
 
@@ -451,5 +451,5 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 		super.onResume();
 		StatService.onResume(this);
 	}
-	
+
 }

@@ -131,6 +131,7 @@ public class AsyncHttpResponse implements Handler.Callback {
 			this.sendFailMessage(e, null);
 		} finally {
 			if(response != null) Util.closeQuietly(response);
+			connection.disconnect();
 		}
 	}
 	

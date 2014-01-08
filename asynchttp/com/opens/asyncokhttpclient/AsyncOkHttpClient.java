@@ -28,6 +28,7 @@ public class AsyncOkHttpClient {
 	private ThreadPoolExecutor mThreadPool;
 	private RequestModel mRequest;
 	private OkHttpClient mClient;
+	private int timeoutMillis = 5000;
 	
 	public AsyncOkHttpClient() {
 		this.mThreadPool = (ThreadPoolExecutor) Executors.newCachedThreadPool();
@@ -47,11 +48,21 @@ public class AsyncOkHttpClient {
 		this.mThreadPool = threadPool;
 	}
 	
+	public void setTimeOut(int timeoutMillis) {
+		this.timeoutMillis = timeoutMillis;
+	}
+	
+	public void closeConn() {
+		mClient.cancel(true);
+	}
+	
 	protected void sendRequest(OkHttpClient client, String url, AsyncHttpResponse response, 
 			String contentType, RequestParams params) {
 		try {
 			this.mRequest.setUrl(new URL(url));
 			HttpURLConnection conn = client.open(this.mRequest.getURL());
+			conn.setConnectTimeout(timeoutMillis);
+			conn.setReadTimeout(timeoutMillis);
 			if(contentType != null) conn.setRequestProperty("Content-Type", contentType);
 			this.mThreadPool.submit(new AsyncHttpRequest(conn, response, params, this.mRequest));
 		} catch(Exception e) {

@@ -20,7 +20,9 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
+import com.yidejia.app.mall.CheckActivity;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.ReturnActivity;
 import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
 import com.yidejia.app.mall.adapter.AlreadyOrderFragmentAdapter;
 import com.yidejia.app.mall.ctrl.OrderViewCtrl;

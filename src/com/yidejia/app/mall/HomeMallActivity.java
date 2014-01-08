@@ -67,13 +67,6 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 		// 设置底部
 		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
 		bottomChange = new BottomChange(HomeMallActivity.this, bottomLayout);
-//		if(!isFrist){
-//			int currnet = getIntent().getIntExtra("current", -1);
-//			int next = getIntent().getIntExtra("next", -1);
-//			if(currnet !=-1||next !=-1){
-//				bottomChange.initNavView(currnet,next);
-//			}
-//		}
 		
 		initNavView();
 	}
@@ -90,8 +83,6 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 		} else {
 			cartImage.setText(number + "");
 		}
-		// downGuangLayout = (RelativeLayout)
-		// findViewById(R.id.down_guang_layout);
 		downSearchLayout = (RelativeLayout) findViewById(R.id.down_search_layout);
 		downShoppingLayout = (RelativeLayout) findViewById(R.id.down_shopping_layout);
 		downMyLayout = (RelativeLayout) findViewById(R.id.down_my_layout);
@@ -103,19 +94,16 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		Intent intent = new Intent();
 		switch (v.getId()) {
 		case R.id.down_search_layout:
 			intent.setClass(HomeMallActivity.this, HomeSearchActivity.class);
 			intent.putExtra("current", 0);
 			intent.putExtra("next", 1);
-//			bottomChange.initNavView(0,1);
 			break;
 		case R.id.down_shopping_layout:
 			intent.setClass(HomeMallActivity.this, HomeCarActivity.class);
 			intent.putExtra("next", 2);
-//			bottomChange.initNavView(0,2);
 			break;
 		case R.id.down_my_layout:
 			if (myApplication.getIsLogin()){
@@ -125,17 +113,14 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 			}
 			intent.putExtra("current", 0);
 			intent.putExtra("next", 3);
-//			bottomChange.initNavView(0,3);
 			break;
 		}
 		HomeMallActivity.this.startActivity(intent);
-//		HomeMallActivity.this.finish();
 		overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 	}
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		unregisterReceiver(receiver);
 	}
@@ -145,7 +130,6 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if ((System.currentTimeMillis() - exitTime) > 2000) {
 				Toast.makeText(getApplicationContext(),
@@ -162,7 +146,6 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 		mallAction.onPause();
 		StatService.onPause(this);
@@ -170,14 +153,12 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		StatService.onResume(this);
 	}
 
 	@Override
 	protected void onRestart() {
-		// TODO Auto-generated method stub
 		super.onRestart();
 		mallAction.onResume();
 	}

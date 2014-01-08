@@ -13,9 +13,9 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.address.ModelAddresses;
 import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
-import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.net.HttpAddressParam;
 import com.yidejia.app.mall.net.HttpGetConn;
 import com.yidejia.app.mall.util.Md5;
@@ -32,7 +32,7 @@ public class GetUserAddressList {
 	private Context context;
 	
 	private boolean isNoMore = false;//判断是否还有更多数据,true为没有更多了
-	private ArrayList<Addresses> addressesArray;
+	private ArrayList<ModelAddresses> addressesArray;
 	private UnicodeToString unicode;
 	
 	public GetUserAddressList(Context context){
@@ -41,7 +41,7 @@ public class GetUserAddressList {
 	
 	public GetUserAddressList(){
 		unicode = new UnicodeToString();
-		addressesArray = new ArrayList<Addresses>();
+		addressesArray = new ArrayList<ModelAddresses>();
 	}
 	
 	private void setKeysAndValues(String where, String offset, String limit, String group, String order, String fields){
@@ -130,7 +130,7 @@ public class GetUserAddressList {
 				addressesArray.clear();
 				isNoMore = false;
 				for (int i = 0; i < length; i++) {
-					Addresses addresses = new Addresses();
+					ModelAddresses addresses = new ModelAddresses();
 					addressItem = responseArray.optJSONObject(i);
 //					if("n".equals(addressItem.getString("valid_flag"))) continue;
 					String recipient_id = addressItem.optString("recipient_id");
@@ -165,7 +165,7 @@ public class GetUserAddressList {
 		return false;
 	}
 	
-	public ArrayList<Addresses> getAddresses(){
+	public ArrayList<ModelAddresses> getAddresses(){
 		return addressesArray;
 	}
 	

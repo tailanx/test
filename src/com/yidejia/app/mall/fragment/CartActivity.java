@@ -37,9 +37,9 @@ import com.yidejia.app.mall.HomeMallActivity;
 //import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.address.ModelAddresses;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.PreferentialDataManage;
-import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Specials;
 //import com.yidejia.app.mall.model.UserComment;
@@ -478,7 +478,7 @@ public class CartActivity extends SherlockFragment implements OnClickListener {
 
 	}
 
-	Addresses address = null;
+	ModelAddresses address = null;
 
 //	@Override
 //	public void onStart() {

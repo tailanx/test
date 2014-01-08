@@ -8,7 +8,6 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,7 +15,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -39,9 +37,13 @@ import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Specials;
 import com.yidejia.app.mall.util.Consts;
 
+/**
+ * 免费送和积分换购
+ * @author LiuYong
+ *
+ */
 public class ExchangeFreeActivity extends SherlockFragmentActivity {
 
-	private static final String TAG = "MainActivity";
 	private ViewPager mPager;
 	private ArrayList<Fragment> fragmentsList;
 
@@ -51,98 +53,65 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 	private int bottomLineWidth;
 	private int offset = 0;
 	private int position_one;
-	private int position_two;
-	private int position_three;
-	private Resources resources;
+//	private int position_two;
+//	private int position_three;
 	private String sumprice;
 	private List<HashMap<String, Float>> exchange;// 换购商品
 	private List<HashMap<String, Object>> cart;// 换购商品
 	private VoucherDataManage dataManage;// 用户积分
 	private float voucher;// 用户积分
 	private MyApplication myApplication;
-	// private CartActivity cartActivity;
 	private ArrayList<Cart> mArrayList;
-	private String isString;
+//	private String isString;
 	private AlertDialog dialog;
 	private float jifen;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		// this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-		// WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		// cartActivity = new CartActivity();
 		Intent intent = getIntent();
 		sumprice = intent.getStringExtra("price");
 		jifen = intent.getFloatExtra("voucher", -1);
-		isString = intent.getStringExtra("cartActivity");
-//		Log.i("info", jifen +"  jifen");
-		mArrayList = (ArrayList<Cart>) intent.getSerializableExtra("carts");
+//		isString = intent.getStringExtra("cartActivity");
+		try {
+			mArrayList = (ArrayList<Cart>) intent.getSerializableExtra("carts");
+		} catch (Exception e) {
+		}
 		setContentView(R.layout.pay_free);
-		resources = getResources();
 		dialog = new Builder(this).setIcon(R.drawable.ic_launcher).setTitle(getResources()
 				.getString(R.string.tips)).setMessage(getResources().getString(R.string.sure_commit))
 				.setPositiveButton(getResources().getString(R.string.sure),new android.content.DialogInterface.OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
-
 
 						Intent intent = new Intent(ExchangeFreeActivity.this,
 								CstmPayActivity.class);
-//						intent.setClass(ExchangeFreeActivity.this,
-//								CstmPayActivity.class);
-//						Bundle bundle = new Bundle();
-
-						// TODO Auto-generated method stub
-//						ExchangeFreeActivity.this.finish();
 						exchange = ExchangeAdapter.mlist1;
 						cart = ExchangeAdapter.mlist2;
 
-						// "    exchange.toString()");
 					
 						float sum = 0;
 
 						float sum1 = 0;
 						for (int i = 0; i < exchange.size(); i++) {
 							HashMap<String, Float> map = exchange.get(i);
-							// HashMap<String, Object> map1 = cart.get(i);
 
 							Float isSelelct = map.get("isCheck");
 							Float price = map.get("price");
 							Float count = map.get("count");
-
-							// Float isSelelct1 = Float.parseFloat(map1.get("isCheck1")
-							// .toString());
-							// Specials specials = (Specials) map1.get("cart");
-							// Cart cart = new Cart();
-							//
-							// cart.setImgUrl(specials.getImgUrl());
-							// cart.setPrice(0);
-							// cart.setProductText(specials.getBrief());
-							// cart.setUId(specials.getUId());
-							// cart.setSalledAmmount(count.intValue());
-							// Log.i("info", count+"    count");
-							// Log.i("info", isSelelct1+"    isSelelct1");
-							// Log.i("info", price+"    price");
-							// Log.i("info", cart+"    cart");
 							if (isSelelct == 0.0) {
 								sum = price * count;
-								// Log.i("info", sum + "   sum");
 
 								sum1 += sum;
 							}
 
-//							 Log.i("info", sum1+"    sum1");
-							// sum1 =sum1/exchange.size()+1;
 						}
 						if (sum1 > voucher) {
 							Toast.makeText(ExchangeFreeActivity.this,
 									getResources().getString(R.string.my_voucher),
 									Toast.LENGTH_SHORT).show();
-//							for (int i = 0; i < cart.size(); i++) {
 							Intent intent1  = new Intent(Consts.EXCHANG_FREE);
 							sendBroadcast(intent1);
 							return;
@@ -167,20 +136,11 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 								cart.setProductText(specials.getBrief());
 								cart.setUId(specials.getUId());
 								cart.setSalledAmmount(count1.intValue());
-								// if(mArrayList==null){
-								// Toast.makeText(ExchangeFreeActivity.this,
-								// getResources().getString(R.string.no_network),
-								// Toast.LENGTH_SHORT).show();
-								// }
 								if (isSelelct1 == 0.0 && count1>0) {
 									mArrayList.add(cart);
 									voucher = (int) (voucher - sum1);
 								}
 							}
-//							Log.i("info", voucher+"   vouche1r");
-							
-//							Log.i("voucher", cart1+"   cart1");
-//							Log.i("voucher", cart1.getUId()+"   cart1.getUId()");
 						}
 						Cart cart1 = FreeGivingAdapter.carts;
 						Log.i("voucher", cart1+"   cart1");
@@ -188,11 +148,9 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 							mArrayList.add(cart1);
 						}
 						intent.putExtra("price", sumprice);
-//							Log.i("info", voucher+"   voucher");
 						intent.putExtra("voucher", voucher);
 						intent.putExtra("jifen", sum1);
 						
-//							Log.i("info", mArrayList.size()+"   mArrayList");
 						intent.putExtra("carts", mArrayList);
 						intent.putExtra("cartActivity", "E");
 						setResult(Consts.CstmPayActivity_Response, intent);
@@ -201,16 +159,11 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 					}
 				})
 				.setNegativeButton(getResources().getString(R.string.cancel), null).create();				
-		//		if (isString.equals("Y")) {
-//		} else {
-//			mArrayList = (ArrayList<Cart>) intent.getSerializableExtra("carts");
-//		}
 		if (mArrayList == null) {
 			Toast.makeText(ExchangeFreeActivity.this,
 					getResources().getString(R.string.no_network),
 					Toast.LENGTH_SHORT).show();
 		}
-		// Log.i("info", jifen + "jifen");
 		dataManage = new VoucherDataManage(ExchangeFreeActivity.this);
 		myApplication = (MyApplication) getApplication();
 		if (jifen == -1) {
@@ -244,7 +197,6 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				Intent intent = new Intent(ExchangeFreeActivity.this,
 						CstmPayActivity.class);
 
@@ -255,7 +207,6 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 				bundle.putSerializable("carts", mArrayList);
 				intent.putExtras(bundle);
 				ExchangeFreeActivity.this.setResult(Consts.CstmPayActivity_Response, intent);
-//				ExchangeFreeActivity.this.startActivity(intent);
 				ExchangeFreeActivity.this.finish();
 			}
 		});
@@ -267,50 +218,6 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 				dialog.show();
 				}
 		});
-
-		// confirm.setOnClickListener(new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// //将免费赠送和换购商品加入购物车
-		// float sum = 0;
-		// for(int i=0;i<exchange.size();i++){
-		// HashMap<String,Float> map = exchange.get(i);
-		// Float isSelelct= map.get("isCheck");
-		// Float price= map.get("price");
-		// Float count =map.get("count");
-		// // Log.i("info", count+"    count");
-		// // Log.i("info", isSelelct+"    isCheck");
-		// // Log.i("info", price+"    price");
-		//
-		// if(isSelelct == 0.0){
-		// sum = price*count;
-		//
-		// }
-		// sum1 += sum;
-		// if(sum1<voucher){
-		// Toast.makeText(ExchangeFreeActivity.this,
-		// getResources().getString(R.string.my_voucher),
-		// Toast.LENGTH_SHORT).show();
-		// Toast.makeText(ExchangeFreeActivity.this,
-		// getResources().getString(R.string.show_voucher)+voucher,
-		// Toast.LENGTH_SHORT).show();
-		//
-		// }else{
-		// // Log.i("info", sum1+"    sum1");
-		//
-		// Intent intent = new Intent(ExchangeFreeActivity.this,
-		// CstmPayActivity.class);
-		// Bundle bundle = new Bundle();
-		// bundle.putString("price", price + "");
-		// intent.putExtras(bundle);
-		// ExchangeFreeActivity.this.startActivity(intent);
-		// ExchangeFreeActivity.this.finish();
-		// }
-		// }
-		//
-		// }
-		// });
 
 	}
 
@@ -324,7 +231,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 	private void InitViewPager() {
 		mPager = (ViewPager) findViewById(R.id.avPager);
 		fragmentsList = new ArrayList<Fragment>();
-		LayoutInflater mInflater = getLayoutInflater();
+//		LayoutInflater mInflater = getLayoutInflater();
 
 		Fragment freeGivingFragment = FreeGivingFragment
 				.newInstance("zengsong");
@@ -348,8 +255,8 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 		int screenW = dm.widthPixels;// 屏幕的宽
 		offset = (int) ((screenW / 3 - bottomLineWidth) / 2);// 起始位置
 
-		position_one = (int) (screenW / 3);
-		position_two = position_one * 2;
+//		position_one = (int) (screenW / 3);
+//		position_two = position_one * 2;
 
 	}
 
@@ -406,13 +313,11 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 
 		@Override
 		public void onPageScrollStateChanged(int arg0) {
-			// TODO Auto-generated method stub
 
 		}
 
 		@Override
 		public void onPageScrolled(int arg0, float arg1, int arg2) {
-			// TODO Auto-generated method stub
 
 		}
 	}

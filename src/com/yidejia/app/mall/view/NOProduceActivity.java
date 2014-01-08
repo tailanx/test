@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.search.SearchResultActivity;
 
 public class NOProduceActivity extends SherlockActivity {
 	private Button mButton;

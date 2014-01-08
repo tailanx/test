@@ -21,16 +21,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.yidejia.app.mall.CheckActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.ReturnActivity;
 import com.yidejia.app.mall.datamanage.TaskDelOrder;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.order.CancelOrder;
-import com.yidejia.app.mall.view.CheckActivity;
 import com.yidejia.app.mall.view.OrderDetailActivity;
-import com.yidejia.app.mall.view.ReturnActivity;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class OrdersUtil {

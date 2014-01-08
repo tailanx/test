@@ -15,9 +15,9 @@ import android.widget.Toast;
 
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.ReturnActivity;
 import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.model.Order;
-import com.yidejia.app.mall.view.ReturnActivity;
 
 public class WaitDeliverUtil {
 	private Context context;

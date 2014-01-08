@@ -22,8 +22,8 @@ import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.address.ModelAddresses;
 import com.yidejia.app.mall.datamanage.TaskGetOrderByCode;
-import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.util.Consts;
 
@@ -139,7 +139,7 @@ public class OrderDetailActivity extends SherlockFragmentActivity {
 		}
 		if (requestCode == Consts.AddressRequestCode
 				&& resultCode == Consts.AddressResponseCode) {
-			Addresses addresses1 = (Addresses) data.getExtras()
+			ModelAddresses addresses1 = (ModelAddresses) data.getExtras()
 					.getSerializable("addresses1");
 			taskOrderByCode.setAddress(addresses1);
 		}

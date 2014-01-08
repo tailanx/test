@@ -17,7 +17,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -37,10 +36,10 @@ import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.model.Function;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.search.EffectDataUtil;
+import com.yidejia.app.mall.search.SearchActivity;
+import com.yidejia.app.mall.search.SearchResultActivity;
 import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.util.Consts;
-import com.yidejia.app.mall.view.SearchActivity;
-import com.yidejia.app.mall.view.SearchResultActivity;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class HomeSearchActivity extends SherlockFragmentActivity implements
@@ -74,7 +73,6 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 
 	@Override
 	protected void onCreate(Bundle arg0) {
-		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		receiver = new InnerReceiver();
 		IntentFilter filter = new IntentFilter();
@@ -131,7 +129,6 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 
 				@Override
 				public void onCancel(DialogInterface dialog) {
-					// TODO Auto-generated method stub
 					closeTask();
 					if (functions.isEmpty()) {
 						searchListView.setVisibility(View.GONE);
@@ -145,7 +142,6 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 
 				@Override
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
 					closeTask();
 					task = new Task();
 					task.execute();
@@ -208,13 +204,7 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 		} else {
 			cartImage.setText(number + "");
 		}
-		// downGuangLayout = (RelativeLayout)
-		// findViewById(R.id.down_guang_layout);
 		downHomeLayout = (RelativeLayout) findViewById(R.id.down_home_layout);
-		// down_home_imageView = (ImageView) findViewById(R.id.down_home_icon);
-		// down_search_imageView = (ImageView)
-		// findViewById(R.id.down_search_icon);
-		// down_home_textview = (TextView) findViewById(R.id.down_home_text);
 		down_search_textview = (TextView) findViewById(R.id.down_search_text);
 
 		downGuangLayout = (RelativeLayout) findViewById(R.id.down_guang_layout);
@@ -223,36 +213,19 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 		downMyLayout = (RelativeLayout) findViewById(R.id.down_my_layout);
 
 		downHomeLayout.setOnClickListener(this);
-		// downSearchLayout.setOnClickListener(this);
 		downShoppingLayout.setOnClickListener(this);
 		downMyLayout.setOnClickListener(this);
 
-		// down_home_textview.setTextColor(this.getResources().getColor(
-		// R.color.white_white));
-		// downHomeLayout.setBackgroundResource(R.drawable.downbg);
-		// down_home_imageView.setImageResource(R.drawable.home_normal);
-		//
-		// down_search_textview.setTextColor(res.getColor(R.color.white));
-		// downSearchLayout.setBackgroundResource(R.drawable.down_hover1);
-		// down_search_imageView.setImageResource(R.drawable.down_search_hover);
-		// downGuangLayout.setVisibility(ViewGroup.GONE);
 	}
 
 	@Override
 	public void onStart() {
-		// TODO Auto-generated method stub
 		super.onStart();
 		Log.e(TAG, "TestFragment-----onStart");
-		// if(functions == null || functions.isEmpty()){
-		// closeTask();
-		// task = new Task();
-		// task.execute();
-		// }
 	}
 
 	@Override
 	public void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		closeTask();
 		unregisterReceiver(receiver);
@@ -260,7 +233,6 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		Intent intent = new Intent();
 		switch (v.getId()) {
 		case R.id.down_home_layout:
@@ -291,7 +263,6 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 	private class Task extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 			// bar.show();
 			bar = (ProgressDialog) new YLProgressDialog(HomeSearchActivity.this)
@@ -300,7 +271,6 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 
 				@Override
 				public void onCancel(DialogInterface dialog) {
-					// TODO Auto-generated method stub
 					cancel(true);
 				}
 			});
@@ -308,7 +278,6 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			// TODO Auto-generated method stub
 			EffectDataUtil util = new EffectDataUtil();
 			try {
 				String httpresp;
@@ -318,12 +287,10 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 					functions = util.getFunctions();
 					return issuccess;
 				} catch (TimeOutEx e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 					isTimeout = true;
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -332,7 +299,6 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			if (result) {
 				searchListView.setVisibility(View.VISIBLE);
@@ -346,8 +312,6 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 							@Override
 							public void onItemClick(AdapterView<?> arg0,
 									View arg1, int arg2, long arg3) {
-								// TODO Auto-generated method stub
-								// getSherlockActivity().getSupportActionBar().setCustomView(R.layout.actionbar_common);
 								listener(arg2);
 							}
 						});
@@ -407,7 +371,6 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 	private OnClickListener go2SearchListener2 = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
 			Intent intent = new Intent(HomeSearchActivity.this,
 					SearchActivity.class);
 			startActivity(intent);
@@ -425,7 +388,6 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if ((System.currentTimeMillis() - exitTime) > 2000) {
 				Toast.makeText(getApplicationContext(),
@@ -433,8 +395,6 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 						Toast.LENGTH_SHORT).show();
 				exitTime = System.currentTimeMillis();
 			} else {
-				// ((MyApplication)getApplication()).setUserId("");
-				// ((MyApplication)getApplication()).setToken("");
 				finish();
 				// System.exit(0);
 			}
@@ -446,7 +406,6 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 	private class InnerReceiver extends BroadcastReceiver {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			// TODO Auto-generated method stub
 			String action = intent.getAction();
 			if (Consts.UPDATE_CHANGE.equals(action)) {
 				number = cartsDataManage.getCartAmount();
@@ -458,14 +417,12 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 		StatService.onPause(this);
 	}
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		StatService.onResume(this);
 	}

@@ -16,13 +16,13 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.fragment.CartActivity;
 import com.yidejia.app.mall.model.Cart;
+import com.yidejia.app.mall.search.SearchResultActivity;
 import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.util.CartUtil;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.view.ImageLoaderUtil;
 import com.yidejia.app.mall.view.LoginActivity;
-import com.yidejia.app.mall.view.SearchResultActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog.Builder;
