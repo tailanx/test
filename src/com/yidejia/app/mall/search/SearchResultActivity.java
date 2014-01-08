@@ -61,11 +61,11 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 	}
 	
 	private void initView(){
-		selledTextView = (TextView) findViewById(R.id.search_result_selled);
-		priceLayout = (LinearLayout) findViewById(R.id.search_result_price_layout);
-		priceTextView = (TextView) findViewById(R.id.search_result_price);
-		popularityTextView = (TextView) findViewById(R.id.search_result_popularity);
-		showWithImage = (ImageView) findViewById(R.id.search_with_image);
+		selledTextView = (TextView) findViewById(R.id.tv_search_result_selled);
+		priceLayout = (LinearLayout) findViewById(R.id.ll_search_result_price_layout);
+		priceTextView = (TextView) findViewById(R.id.tv_search_result_price);
+		popularityTextView = (TextView) findViewById(R.id.tv_search_result_popularity);
+//		showWithImage = (ImageView) findViewById(R.id.search_with_image);
 		showWithList = (ImageView) findViewById(R.id.search_with_list);
 		
 		setFragment(0, isShowWithList);
@@ -108,7 +108,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 //		if(newFragment.isAdded()) ft.hide(currFragment).show(newFragment).commit();
 //		else ft.hide(currFragment).replace(R.id.search_result_fragment, newFragment).commit();
-		ft.replace(R.id.search_result_fragment, newFragment).commit();
+		ft.replace(R.id.fl_search_result_fragment, newFragment).commit();
         newBundle = null;
 //        currindex = index;
 //        currFragment = newFragment;

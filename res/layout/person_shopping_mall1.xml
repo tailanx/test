@@ -5,24 +5,11 @@
     android:background="@drawable/bg"
     android:orientation="vertical" >
 
-    <!--
-          <include 
-   	    android:id="@+id/main2_main2_top"
-   	    layout="@layout/my_shopping"
-      	android:layout_alignParentTop="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        />
-        android:layout_below="@id/main2_main2_top"
-    -->
-
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none"
-         >
+        android:scrollbars="none" >
 
         <LinearLayout
             android:id="@+id/person_main2_main2_linearlayout1"
@@ -39,63 +26,63 @@
 
                 <ImageView
                     android:id="@+id/person_shopping_image_person"
-                    android:layout_width="110dp"
-                    android:layout_height="110dp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_width="@dimen/head_height"
+                    android:layout_height="@dimen/head_height"
+                    android:layout_marginLeft="@dimen/margin_left_more"
+                    android:layout_marginTop="@dimen/margin_top"
                     android:background="@drawable/user_head_bg"
-                    android:padding="8dp"
+                    android:contentDescription="@string/yidejia"
+                    android:padding="@dimen/head_padding"
                     android:src="@drawable/user_head" />
-
-                <TextView
-                    android:id="@+id/favorites"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/person_shopping_image_person"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_toRightOf="@id/person_shopping_image_person"
-                    android:drawableLeft="@drawable/favorites"
-                    android:gravity="center"
-                    android:text="0"
-                    android:textColor="#FFeeeeee"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/message"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/person_shopping_image_person"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_toRightOf="@id/favorites"
-                    android:drawableLeft="@drawable/message"
-                    android:gravity="center"
-                    android:visibility="gone"
-                    android:text="0"
-                    android:textColor="#FFeeeeee"
-                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/integration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@id/person_shopping_image_person"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_toRightOf="@id/message"
+                    android:layout_marginBottom="@dimen/head_padding"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:layout_toRightOf="@id/person_shopping_image_person"
                     android:drawableLeft="@drawable/integration"
                     android:gravity="center"
-                    android:text="0"
+                    android:text="@string/mint"
                     android:textColor="#FFeeeeee"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/textsize_small" />
+
+                <TextView
+                    android:id="@+id/favorites"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/person_shopping_image_person"
+                    android:layout_marginBottom="@dimen/head_padding"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:layout_toRightOf="@id/integration"
+                    android:drawableLeft="@drawable/favorites"
+                    android:gravity="center"
+                    android:text="@string/hour"
+                    android:textColor="#FFeeeeee"
+                    android:textSize="@dimen/textsize_small" />
+
+                <TextView
+                    android:id="@+id/message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/person_shopping_image_person"
+                    android:layout_marginBottom="@dimen/head_padding"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:layout_toRightOf="@id/favorites"
+                    android:drawableLeft="@drawable/message"
+                    android:gravity="center"
+                    android:text="@string/second"
+                    android:textColor="#FFeeeeee"
+                    android:textSize="@dimen/textsize_small" />
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_above="@id/integration"
-                    android:layout_marginBottom="6dp"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="@dimen/head_padding"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
                     android:layout_toRightOf="@id/person_shopping_image_person" >
 
                     <TextView
@@ -104,9 +91,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:shadowRadius="6.0"
-                        android:text=" "
+                        android:text="@string/free_pay_title"
                         android:textColor="#FFeeeeee"
-                        android:textSize="20sp" />
+                        android:textSize="@dimen/text_size" />
 
                     <TextView
                         android:id="@+id/person_shopping_person_vip"
@@ -114,571 +101,33 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="15dp"
+                        android:layout_marginLeft="@dimen/activity_vertical_margin"
                         android:layout_toRightOf="@id/person_shopping_person_name"
-                        android:text="VIP0"
+                        android:drawableLeft="@drawable/message"
+                        android:text="@string/VIP"
                         android:textColor="#FFeeeeee"
-                        android:textSize="20sp" />
+                        android:textSize="@dimen/text_size" />
                 </RelativeLayout>
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/main2_main2_linearlayout1"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:id="@+id/wait_pay_order_linearlayout1"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="6dp"
-                android:background="@drawable/layout_selector1"
-                android:clickable="true" >
+                android:orientation="horizontal" >
 
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout1_imageview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="10dp"
-                    android:src="@drawable/all_orders" />
+                <include layout="@layout/all_order_option" />
+            </LinearLayout>
 
-                <TextView
-                    android:id="@+id/main2_main2_linearlayout1_textview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/main2_main2_linearlayout1_imageview1"
-                    android:padding="4dp"
-                    android:text="@string/all_order"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout1_imageview2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="15dp"
-                    android:src="@drawable/arrow" />
-
-                <!--
-                     <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview1"
-                         android:background="@drawable/message_bg"
-                          android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/main2_main2_linearlayout1_imageview2"
-                    
-                         />
-                -->
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/main2_main2_linearlayout2"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:id="@+id/wait_pay_order_linearlayout_list"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:background="@drawable/layout_selector2" >
+                android:orientation="horizontal" >
 
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout2_imageview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="10dp"
-                    android:src="@drawable/unpaid_orders" />
+                <include layout="@layout/mall_list" />
+            </LinearLayout>
 
-                <TextView
-                    android:id="@+id/main2_main2_linearlayout2_textview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/main2_main2_linearlayout2_imageview1"
-                    android:padding="4dp"
-                    android:text="@string/wait_pay"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout2_imageview2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="15dp"
-                    android:src="@drawable/arrow" />
-                <!--
-                <TextView
-                    android:id="@+id/main2_main2_linearlayout2_textview2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/main2_main2_linearlayout2_imageview2"
-                    android:background="@drawable/message_bg"
-                    android:gravity="center_horizontal"
-                    android:text="1"
-                    android:textColor="#FFeeeeee"
-                    android:textSize="20dp"
-                    android:visibility="visible" />
-                -->
-
-                <com.yidejia.app.mall.widget.YLImageButton
-                    android:id="@+id/main2_main2_linearlayout2_textview2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/main2_main2_linearlayout2_imageview2"
-                    android:visibility="gone"
-                    android:background="@drawable/message_bg" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/main2_main2_linearlayout6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:background="@drawable/layout_selector2" >
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout6_imageview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="10dp"
-                    android:src="@drawable/unfilled_orders" />
-
-                <TextView
-                    android:id="@+id/main2_main2_linearlayout6_textview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/main2_main2_linearlayout6_imageview1"
-                    android:padding="4dp"
-                    android:text="@string/wait_deliver"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout6_imageview2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="15dp"
-                    android:src="@drawable/arrow" />
-
-                <!--
-                  <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview3"
-                         android:background="@drawable/message_bg"
-                          android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/main2_main2_linearlayout6_imageview2"
-                    
-                         />
-                -->
-  --> 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/main2_main2_linearlayout4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:background="@drawable/layout_selector2" >
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout4_imageview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="10dp"
-                    android:src="@drawable/shipped_orders" />
-
-                <TextView
-                    android:id="@+id/main2_main2_linearlayout4_textview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/main2_main2_linearlayout4_imageview1"
-                    android:padding="4dp"
-                    android:text="@string/deliver_order"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout4_imageview2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="15dp"
-                    android:src="@drawable/arrow" />
-
-                <!--
-                  <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview4"
-                         android:background="@drawable/message_bg"
-                          android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/main2_main2_linearlayout4_imageview2"
-                    
-                         />
-                -->
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/main2_main2_linearlayout3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:background="@drawable/layout_selector3" >
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout3_imageview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="10dp"
-                    android:src="@drawable/completed_orders" />
-
-                <TextView
-                    android:id="@+id/main2_main2_linearlayout3_textview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/main2_main2_linearlayout3_imageview1"
-                    android:padding="4dp"
-                    android:text="@string/complete_order"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout3_imageview2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="15dp"
-                    android:src="@drawable/arrow" />
-
-                <!--
-                 <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview5"
-                         android:background="@drawable/message_bg"
-                          android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/main2_main2_linearlayout3_imageview2"
-                    
-                         />
-                -->
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/main2_main2_linearlayout5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/layout_selector1" >
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout5_imageview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="10dp"
-                    android:src="@drawable/integration_coupon" />
-
-                <TextView
-                    android:id="@+id/main2_main2_linearlayout5_textview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/main2_main2_linearlayout5_imageview1"
-                    android:padding="4dp"
-                    android:text="@string/main_voucher_text"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout5_imageview2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="15dp"
-                    android:src="@drawable/arrow" />
-                <!--
-       <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview6"
-                         android:background="@drawable/message_bg"
-                          android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/main2_main2_linearlayout5_imageview2"
-                    
-                         />
-                -->
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/main2_main2_linearlayout7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:background="@drawable/layout_selector2" >
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout7_imageview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="10dp"
-                    android:src="@drawable/favorites2" />
-
-                <TextView
-                    android:id="@+id/main2_main2_linearlayout7_textview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/main2_main2_linearlayout7_imageview1"
-                    android:padding="4dp"
-                    android:text="@string/my_collect"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout7_imageview2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="15dp"
-                    android:src="@drawable/arrow" />
-
-                <!--
-                     <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview7"
-                         android:background="@drawable/message_bg"
-                          android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/main2_main2_linearlayout7_imageview2"
-                    
-                         />
-                -->
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/main2_main2_linearlayout20"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/layout_selector1"
-                android:clickable="true"
-                android:focusable="true" >
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout8_imageview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="10dp"
-                    android:src="@drawable/message2" />
-
-                <TextView
-                    android:id="@+id/main2_main2_linearlayout8_textview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/main2_main2_linearlayout8_imageview1"
-                    android:padding="4dp"
-                    android:text="@string/person_message"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout8_imageview2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="15dp"
-                    android:src="@drawable/arrow" />
-
-                <com.yidejia.app.mall.widget.YLImageButton
-                    android:id="@+id/main2_main2_linearlayout2_textview8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:visibility="gone"
-                    android:layout_toLeftOf="@id/main2_main2_linearlayout8_imageview2"
-                    android:background="@drawable/message_bg" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/main2_main2_linearlayout9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:background="@drawable/layout_selector3" >
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout9_imageview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="10dp"
-                    android:src="@drawable/delivery_address" />
-
-                <TextView
-                    android:id="@+id/main2_main2_linearlayout9_textview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/main2_main2_linearlayout9_imageview1"
-                    android:padding="4dp"
-                    android:text="@string/manage_address"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout9_imageview2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="15dp"
-                    android:src="@drawable/arrow" />
-
-                <!--
-             <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview9"
-                         android:background="@drawable/message_bg"
-                          android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/main2_main2_linearlayout9_imageview2"
-                    
-                         />
-                -->
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/main2_main2_linearlayout10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/layout_selector1" >
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout10_imageview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="10dp"
-                    android:src="@drawable/returns" />
-
-                <TextView
-                    android:id="@+id/main2_main2_linearlayout10_textview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/main2_main2_linearlayout10_imageview1"
-                    android:padding="4dp"
-                    android:text="@string/exchanged"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout10_imageview2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="15dp"
-                    android:src="@drawable/arrow" />
-
-                <!--
-                    <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview10"
-                         android:background="@drawable/message_bg"
-                          android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/main2_main2_linearlayout10_imageview2"
-                    
-                         />
-                -->
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/main2_main2_linearlayout11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:background="@drawable/layout_selector3" >
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout11_imageview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="10dp"
-                    android:src="@drawable/evaluate" />
-
-                <TextView
-                    android:id="@+id/main2_main2_linearlayout11_textview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/main2_main2_linearlayout11_imageview1"
-                    android:padding="4dp"
-                    android:text="@string/evaluation"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout11_imageview2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="15dp"
-                    android:src="@drawable/arrow" />
-
-                <!--
-                 <com.yidejia.app.mall.widget.YLImageButton android:id="@+id/main2_main2_linearlayout2_textview11"
-                         android:background="@drawable/message_bg"
-                          android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/main2_main2_linearlayout11_imageview2"
-                    
-                         />
-                -->
-            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 

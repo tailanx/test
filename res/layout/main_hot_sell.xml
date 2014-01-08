@@ -1,744 +1,667 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
 
     <RelativeLayout
-        android:id="@+id/hot_sell_parent_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="1dp"
-        android:shadowColor="@color/shadowColor"
-        android:shadowDx="0"
-        android:shadowDy="2"
-        android:shadowRadius="0.1" >
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
 
         <RelativeLayout
-            android:id="@+id/main_hot_sell_top"
+            android:id="@+id/rv_main_hot_sell_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/hotsell_bg_top" >
+            android:background="@drawable/hotsell_bg_top"
+            android:gravity="center_vertical" >
 
             <TextView
-                android:id="@+id/main_hot_sell_text"
+                android:id="@+id/tv_main_hot_sell_yirihui"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:drawableLeft="@drawable/hot_mall_left_icon"
-                android:gravity="center|left"
-                android:paddingLeft="10dp"
-                android:text="   商城热卖"
-                android:textSize="16sp" />
+                android:layout_marginLeft="@dimen/margin_left"
+                android:text="@string/yirihui"
+                android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/main_hot_sell_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/main_hot_sell_text"
-                android:text="Hot Sell"
-                android:textColor="#ed217c"
-                android:textSize="16sp" />
+                android:layout_marginLeft="@dimen/margin_left_add"
+                android:layout_toRightOf="@id/tv_main_hot_sell_yirihui"
+                android:singleLine="true"
+                android:text="@string/yirihui_add"
+                android:textSize="15sp" />
         </RelativeLayout>
 
         <LinearLayout
-            android:id="@+id/main_hot_sell_down"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/main_hot_sell_top"
+            android:layout_below="@id/rv_main_hot_sell_title"
             android:baselineAligned="false"
             android:orientation="horizontal" >
 
             <RelativeLayout
-                android:id="@+id/main_hot_sell_left_info"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="302"
-                android:background="@drawable/hotsell_bg1" >
-
-                <TextView
-                    android:id="@+id/main_hot_sell_goods_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="15dp"
-                    android:gravity="center_horizontal"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/main_hot_sell_goods_details"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/main_hot_sell_goods_title"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_horizontal"
-                    android:maxEms="7"
-                    android:textColor="@color/price_color"
-                    android:textSize="14sp" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
 
                 <ImageView
-                    android:id="@+id/main_hot_sell_left_image"
+                    android:id="@+id/iv_main_hot_sell_imageview_frist"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/main_hot_sell_goods_details"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/image_bg" />
+                    android:layout_height="@dimen/yirihui"
+                    android:contentDescription="@string/yidejia"
+                    android:src="@drawable/user_head" />
 
                 <RelativeLayout
-                    android:id="@+id/main_hot_sell_left"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/hot_sell_left_selector"
-                    android:clickable="true"
-                    android:focusable="true" >
+                    android:id="@+id/rl_main_hot_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_main_hot_sell_imageview_frist"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_left_add" >
+
+                    <TextView
+                        android:id="@+id/tv_main_produce_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/produce_price"
+                        android:textColor="@color/theme" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_left_add"
+                        android:layout_toRightOf="@id/tv_main_produce_price"
+                        android:background="@drawable/theme_textview_background"
+                        android:text="@string/must_pay"
+                        android:textColor="@color/white" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_main_produce_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rl_main_hot_price"
+                    android:layout_centerInParent="true"
+                    android:text="@string/produce_detail_add"
+                    android:textSize="15sp" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_main_produce_detail"
+                    android:layout_centerHorizontal="true" >
+
+                    <TextView
+                        android:id="@+id/tv_main_hot_hour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:background="@drawable/theme_textview_background"
+                        android:text="@string/hour"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_main_hot_hour_add"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/tv_main_hot_hour"
+                        android:text="@string/maohao"
+                        android:textColor="@color/theme"
+                        android:textSize="@dimen/text_size" />
+
+                    <TextView
+                        android:id="@+id/tv_main_hot_mini"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/tv_main_hot_hour_add"
+                        android:background="@drawable/theme_textview_background"
+                        android:text="@string/mint"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_main_hot_hour_add_add"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/tv_main_hot_mini"
+                        android:text="@string/maohao"
+                        android:textColor="@color/theme"
+                        android:textSize="@dimen/text_size" />
+
+                    <TextView
+                        android:id="@+id/tv_main_hot_second"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/tv_main_hot_hour_add_add"
+                        android:background="@drawable/theme_textview_background"
+                        android:text="@string/second"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
                 </RelativeLayout>
             </RelativeLayout>
 
-            <LinearLayout
-                android:id="@+id/main_hot_sell_right_info"
+            <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="324"
-                android:orientation="vertical" >
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <ImageView
+                    android:id="@+id/iv_main_hot_sell_imageview_sec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/yirihui"
+                    android:contentDescription="@string/yidejia"
+                    android:src="@drawable/user_head" />
 
                 <RelativeLayout
-                    android:id="@+id/main_hot_sell_right_top_info"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/hotsell_bg2" >
+                    android:id="@+id/rl_main_hot_price_sec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_main_hot_sell_imageview_sec"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_left_add"
+                    android:gravity="center_horizontal" >
 
-                    <ImageView
-                        android:id="@+id/main_hot_sell_right_top_image"
+                    <TextView
+                        android:id="@+id/tv_main_produce_price_sex"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="2dp"
-                        android:src="@drawable/image_bg" />
+                        android:text="@string/produce_price"
+                        android:textColor="@color/theme" />
 
                     <TextView
-                        android:id="@+id/main_hot_sell_right_top_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_toLeftOf="@+id/main_hot_sell_right_top_image"
-                        android:maxEms="5"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/main_hot_sell_right_top_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@id/main_hot_sell_right_top_title"
-                        android:layout_below="@id/main_hot_sell_right_top_title"
-                        android:layout_marginTop="5dp"
-                        android:layout_toLeftOf="@id/main_hot_sell_right_top_image"
-                        android:textColor="@color/price_color"
-                        android:textSize="14sp" />
-
-                    <RelativeLayout
-                        android:id="@+id/main_hot_sell_right_top"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/hot_sell_right_top_selector"
-                        android:clickable="true" >
-                    </RelativeLayout>
+                        android:layout_marginLeft="@dimen/margin_left_add"
+                        android:layout_toRightOf="@id/tv_main_produce_price_sex"
+                        android:background="@drawable/theme_textview_background"
+                        android:text="@string/must_pay"
+                        android:textColor="@color/white" />
                 </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_main_produce_detail_sec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rl_main_hot_price_sec"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/produce_detail_add"
+                    android:textSize="15sp" />
 
                 <RelativeLayout
-                    android:id="@+id/main_hot_sell_right_down_info"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/hotsell_bg3" >
-
-                    <ImageView
-                        android:id="@+id/main_hot_sell_right_down_image"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="2dp"
-                        android:src="@drawable/image_bg" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_main_produce_detail_sec"
+                    android:layout_centerHorizontal="true" >
 
                     <TextView
-                        android:id="@+id/main_hot_sell_right_down_title"
+                        android:id="@+id/tv_main_hot_hour_sec"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_toLeftOf="@+id/main_hot_sell_right_down_image"
-                        android:maxEms="5"
-                        android:textSize="16sp" />
+                        android:layout_alignParentLeft="true"
+                        android:background="@drawable/theme_textview_background"
+                        android:text="@string/hour"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/main_hot_sell_right_down_price"
+                        android:id="@+id/tv_main_hot_hour_add_sec"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignLeft="@id/main_hot_sell_right_down_title"
-                        android:layout_below="@id/main_hot_sell_right_down_title"
-                        android:layout_marginTop="5dp"
-                        android:layout_toLeftOf="@id/main_hot_sell_right_down_image"
-                        android:textColor="@color/price_color"
-                        android:textSize="14sp" />
+                        android:layout_toRightOf="@id/tv_main_hot_hour_sec"
+                        android:text="@string/maohao"
+                        android:textColor="@color/theme"
+                        android:textSize="@dimen/text_size" />
 
-                    <RelativeLayout
-                        android:id="@+id/main_hot_sell_right_down"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/hot_sell_right_down_selector"
-                        android:clickable="true" >
-                    </RelativeLayout>
+                    <TextView
+                        android:id="@+id/tv_main_hot_mini_sec"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/tv_main_hot_hour_add_sec"
+                        android:background="@drawable/theme_textview_background"
+                        android:text="@string/mint"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_main_hot_hour_add_add_sec"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/tv_main_hot_mini_sec"
+                        android:text="@string/maohao"
+                        android:textColor="@color/theme"
+                        android:textSize="@dimen/text_size" />
+
+                    <TextView
+                        android:id="@+id/tv_main_hot_second_sec"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/tv_main_hot_hour_add_add_sec"
+                        android:background="@drawable/theme_textview_background"
+                        android:text="@string/second"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
                 </RelativeLayout>
-            </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <ImageView
+                    android:id="@+id/iv_main_hot_sell_imageview_third"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/yirihui"
+                    android:contentDescription="@string/yidejia"
+                    android:src="@drawable/user_head" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_main_hot_price_third"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_main_hot_sell_imageview_third"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_left_add"
+                    android:gravity="center_horizontal" >
+
+                    <TextView
+                        android:id="@+id/tv_main_produce_price_third"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/produce_price"
+                        android:textColor="@color/theme" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_left_add"
+                        android:layout_toRightOf="@id/tv_main_produce_price_third"
+                        android:background="@drawable/theme_textview_background"
+                        android:text="@string/must_pay"
+                        android:textColor="@color/white" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_main_produce_detail_third"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rl_main_hot_price_third"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/produce_detail_add"
+                    android:textSize="15sp" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_main_produce_detail_third"
+                    android:layout_centerHorizontal="true" >
+
+                    <TextView
+                        android:id="@+id/tv_main_hot_hour_third"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:background="@drawable/theme_textview_background"
+                        android:text="@string/hour"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_main_hot_hour_add_third"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/tv_main_hot_hour_third"
+                        android:text="@string/maohao"
+                        android:textColor="@color/theme"
+                        android:textSize="@dimen/text_size" />
+
+                    <TextView
+                        android:id="@+id/tv_main_hot_mini_third"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/tv_main_hot_hour_add_third"
+                        android:background="@drawable/theme_textview_background"
+                        android:text="@string/mint"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_main_hot_hour_add_add_third"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/tv_main_hot_mini_third"
+                        android:text="@string/maohao"
+                        android:textColor="@color/theme"
+                        android:textSize="@dimen/text_size" />
+
+                    <TextView
+                        android:id="@+id/tv_main_hot_second_third"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/tv_main_hot_hour_add_add_third"
+                        android:background="@drawable/theme_textview_background"
+                        android:text="@string/second"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+                </RelativeLayout>
+            </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
-    <!-- acymer -->
 
     <RelativeLayout
-        android:id="@+id/acymei_parent_layout"
+        android:id="@+id/rv_main_hot_sell_title_all_buy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/hot_sell_parent_layout"
-        android:layout_marginTop="10dp"
-        android:padding="1dp" >
+        android:layout_marginTop="@dimen/margin_left"
+        android:background="@drawable/hotsell_bg_top"
+        android:gravity="center_vertical" >
 
-        <RelativeLayout
-            android:id="@+id/main_acymei_top"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/hotsell_bg_top" >
-
-            <TextView
-                android:id="@+id/main_acymei_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:drawableLeft="@drawable/hot_mall_left_icon"
-                android:gravity="center|left"
-                android:paddingLeft="10dp"
-                android:text="   美容护肤"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/main_acymei_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/main_acymei_text"
-                android:text="ACYMER"
-                android:textColor="#ed217c"
-                android:textSize="16sp" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/main_acymei_down"
+        <TextView
+            android:id="@+id/tv_main_hot_sell_all_buy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/main_acymei_top"
-            android:orientation="horizontal" >
+            android:layout_marginLeft="@dimen/margin_left"
+            android:text="@string/all_buy"
+            android:textSize="@dimen/textsize_big" />
 
-            <RelativeLayout
-                android:id="@+id/main_acymei_left_info"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="302"
-                android:background="@drawable/hotsell_bg1" >
-
-                <TextView
-                    android:id="@+id/main_acymei_goods_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_horizontal"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/main_acymei_goods_details"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/main_acymei_goods_title"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_horizontal"
-                    android:maxEms="7"
-                    android:textColor="@color/price_color"
-                    android:textSize="14sp" />
-
-                <ImageView
-                    android:id="@+id/main_acymei_left_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/main_acymei_goods_details"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="15dp"
-                    android:src="@drawable/image_bg" />
-
-                <RelativeLayout
-                    android:id="@+id/main_acymei_left"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/hot_sell_left_selector"
-                    android:clickable="true" >
-                </RelativeLayout>
-            </RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/main_acymei_right_info"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="324"
-                android:orientation="vertical" >
-
-                <RelativeLayout
-                    android:id="@+id/main_acymei_right_top_info"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/hotsell_bg2" >
-
-                    <ImageView
-                        android:id="@+id/main_acymei_right_top_image"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="2dp"
-                        android:src="@drawable/image_bg" />
-
-                    <TextView
-                        android:id="@+id/main_acymei_right_top_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_toLeftOf="@+id/main_acymei_right_top_image"
-                        android:maxEms="5"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/main_acymei_right_top_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@id/main_acymei_right_top_title"
-                        android:layout_below="@id/main_acymei_right_top_title"
-                        android:layout_marginTop="5dp"
-                        android:layout_toLeftOf="@id/main_acymei_right_top_image"
-                        android:textColor="@color/price_color"
-                        android:textSize="14sp" />
-
-                    <RelativeLayout
-                        android:id="@+id/main_acymei_right_top"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/hot_sell_right_top_selector"
-                        android:clickable="true" >
-                    </RelativeLayout>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/main_acymei_right_down_info"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/hotsell_bg3" >
-
-                    <ImageView
-                        android:id="@+id/main_acymei_right_down_image"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="2dp"
-                        android:src="@drawable/image_bg" />
-
-                    <TextView
-                        android:id="@+id/main_acymei_right_down_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_toLeftOf="@+id/main_acymei_right_down_image"
-                        android:maxEms="5"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/main_acymei_right_down_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/main_acymei_right_down_title"
-                        android:layout_below="@+id/main_acymei_right_down_title"
-                        android:layout_marginTop="10dp"
-                        android:textColor="@color/price_color"
-                        android:textSize="14sp" />
-
-                    <RelativeLayout
-                        android:id="@+id/main_acymei_right_down"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/hot_sell_right_down_selector"
-                        android:clickable="true" >
-                    </RelativeLayout>
-                </RelativeLayout>
-            </LinearLayout>
-        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin_left"
+            android:singleLine="true"
+            android:text="@string/watch_all"
+            android:textSize="@dimen/textsize_small" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/inerbty_parent_layout"
+    <LinearLayout
+        android:baselineAligned="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/acymei_parent_layout"
-        android:layout_marginTop="10dp"
-        android:padding="1dp" >
+        android:orientation="horizontal" >
 
         <RelativeLayout
-            android:id="@+id/main_inerbty_top_ad"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/hotsell_bg_top" >
+            android:layout_weight="1" >
 
             <TextView
-                android:id="@+id/main_inerbty_text"
+                android:id="@+id/tv_main_all_buy_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:drawableLeft="@drawable/hot_mall_left_icon"
-                android:gravity="center|left"
-                android:paddingLeft="10dp"
-                android:text="   内调养护"
-                android:textSize="16sp" />
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_left"
+                android:text="@string/all_buy_detail"
+                android:textSize="@dimen/textsize_big" />
 
             <TextView
-                android:id="@+id/main_inerbty_icon"
+                android:id="@+id/tv_main_all_buy_detail_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/main_inerbty_text"
-                android:text="INERBTY"
-                android:textColor="#ed217c"
-                android:textSize="16sp" />
+                android:layout_below="@id/tv_main_all_buy_detail"
+                android:layout_centerHorizontal="true"
+                
+                android:layout_marginTop="@dimen/margin_left"
+                android:text="@string/all_buy_detail_add"
+                android:textSize="@dimen/textsize_small" />
+
+            <ImageView
+                android:id="@+id/iv_main_all_buy_left_image"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/yirihui"
+                android:layout_below="@id/tv_main_all_buy_detail_add"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/yidejia"
+                android:src="@drawable/user_head" />
         </RelativeLayout>
-        <!-- top -->
 
         <LinearLayout
-            android:id="@+id/main_inerbty_top"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/width"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/main_inerbty_top_ad" >
+            android:layout_weight="1"
+            android:orientation="vertical" >
 
             <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/yy_bg1" >
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+               <TextView
+                    android:id="@+id/tv_main_all_buy_right_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_left"
+                    android:text="@string/all_buy_detail"
+                    android:textSize="@dimen/textsize_big" />
+
+                <TextView
+                    android:id="@+id/tv_main_all_buy_detail_right_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_main_all_buy_right_detail"
+                    android:layout_marginTop="@dimen/margin_left"
+                    android:text="@string/all_buy_detail_add"
+                    android:textSize="@dimen/textsize_small" />
+
+                <TextView
+                    android:id="@+id/tv_main_all_buy_detail_right_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_main_all_buy_detail_right_add"
+                    android:layout_marginTop="@dimen/margin_left"
+                    android:text="@string/produce_price_yuan"
+                    android:textColor="@color/theme"
+                    android:textSize="@dimen/textsize_big" />
 
                 <ImageView
-                    android:id="@+id/main_inerbty_top_left_image"
+                    android:id="@+id/iv_main_all_buy_left_right_image"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="2dp"
-                    android:src="@drawable/image_bg" />
-
-                <TextView
-                    android:id="@+id/main_inerbty_top_left_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_gravity="center|left"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_toLeftOf="@+id/main_inerbty_top_left_image"
-                    android:gravity="center|left"
-                    android:minEms="5"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/main_inerbty_top_left_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/main_inerbty_top_left_name"
-                    android:layout_below="@+id/main_inerbty_top_left_name"
-                    android:layout_toLeftOf="@+id/main_inerbty_top_left_image"
-                    android:textColor="@color/price_color" />
-
-                <RelativeLayout
-                    android:id="@+id/main_inerbty_top_left"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/inerbty_top_left_selector"
-                    android:clickable="true"
-                    android:focusable="true" >
-                </RelativeLayout>
+                    android:layout_height="@dimen/all_buy_produce_right"
+                    android:layout_alignTop="@id/tv_main_all_buy_right_detail"
+                    android:layout_toRightOf="@id/tv_main_all_buy_right_detail"
+                    android:contentDescription="@string/yidejia"
+                    android:src="@drawable/user_head" />
             </RelativeLayout>
+             <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/yy_bg2" >
+                <TextView
+                    android:id="@+id/tv_main_all_buy_right_down_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_left"
+                    android:text="@string/all_buy_detail"
+                    android:textSize="@dimen/textsize_big" />
+
+                <TextView
+                    android:id="@+id/tv_main_all_buy_detail_right_down_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_main_all_buy_right_down_detail"
+                    android:layout_marginTop="@dimen/margin_left"
+                    android:text="@string/all_buy_detail_add"
+                    android:textSize="@dimen/textsize_small" />
+
+                <TextView
+                    android:id="@+id/tv_main_all_buy_detail_right_down_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_main_all_buy_detail_right_down_add"
+                    android:layout_marginTop="@dimen/margin_left"
+                    android:text="@string/produce_price_yuan"
+                    android:textColor="@color/theme"
+                    android:textSize="@dimen/textsize_big" />
 
                 <ImageView
-                    android:id="@+id/main_inerbty_top_right_image"
+                    android:id="@+id/iv_main_all_buy_left_right_down_image"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="2dp"
-                    android:src="@drawable/image_bg" />
-
-                <TextView
-                    android:id="@+id/main_inerbty_top_right_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_gravity="center|left"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_toLeftOf="@+id/main_inerbty_top_right_image"
-                    android:gravity="center|left"
-                    android:minEms="5"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/main_inerbty_top_right_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/main_inerbty_top_right_name"
-                    android:layout_below="@+id/main_inerbty_top_right_name"
-                    android:layout_toLeftOf="@+id/main_inerbty_top_right_image"
-                    android:textColor="@color/price_color" />
-
-                <RelativeLayout
-                    android:id="@+id/main_inerbty_top_right"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/inerbty_top_right_selector"
-                    android:clickable="true"
-                    android:focusable="true" >
-                </RelativeLayout>
+                    android:layout_height="@dimen/all_buy_produce_right"
+                    android:layout_alignTop="@id/tv_main_all_buy_right_down_detail"
+                    android:layout_toRightOf="@id/tv_main_all_buy_right_down_detail"
+                    android:contentDescription="@string/yidejia"
+                    android:src="@drawable/user_head" />
             </RelativeLayout>
         </LinearLayout>
-        <!-- mid -->
+    </LinearLayout>
+        
+    <RelativeLayout
+        android:id="@+id/rv_main_hot_sell_title_free_pay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_left"
+        android:background="@drawable/hotsell_bg_top"
+        android:gravity="center_vertical" >
 
-        <LinearLayout
-            android:id="@+id/main_inerbty_mid"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/main_inerbty_top" >
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/yy_bg1" >
-
-                <ImageView
-                    android:id="@+id/main_inerbty_mid_left_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="2dp"
-                    android:src="@drawable/image_bg" />
-
-                <TextView
-                    android:id="@+id/main_inerbty_mid_left_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_gravity="center|left"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_toLeftOf="@+id/main_inerbty_mid_left_image"
-                    android:gravity="center|left"
-                    android:minEms="5"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/main_inerbty_mid_left_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/main_inerbty_mid_left_name"
-                    android:layout_below="@+id/main_inerbty_mid_left_name"
-                    android:layout_toLeftOf="@+id/main_inerbty_mid_left_image"
-                    android:textColor="@color/price_color" />
-
-                <RelativeLayout
-                    android:id="@+id/main_inerbty_mid_left"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/inerbty_top_left_selector"
-                    android:clickable="true"
-                    android:focusable="true" >
-                </RelativeLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/yy_bg2" >
-
-                <ImageView
-                    android:id="@+id/main_inerbty_mid_right_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="2dp"
-                    android:src="@drawable/image_bg" />
-
-                <TextView
-                    android:id="@+id/main_inerbty_mid_right_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_gravity="center|left"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_toLeftOf="@+id/main_inerbty_mid_right_image"
-                    android:gravity="center|left"
-                    android:minEms="5"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/main_inerbty_mid_right_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/main_inerbty_mid_right_name"
-                    android:layout_below="@+id/main_inerbty_mid_right_name"
-                    android:layout_toLeftOf="@+id/main_inerbty_mid_right_image"
-                    android:textColor="@color/price_color" />
-
-                <RelativeLayout
-                    android:id="@+id/main_inerbty_mid_right"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/inerbty_top_right_selector"
-                    android:clickable="true"
-                    android:focusable="true" >
-                </RelativeLayout>
-            </RelativeLayout>
-        </LinearLayout>
-        <!-- down -->
-
-        <LinearLayout
-            android:id="@+id/main_inerbty_down"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_main_hot_sell_free_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/main_inerbty_mid" >
+            android:layout_marginLeft="@dimen/margin_left"
+            android:text="@string/free_pay_title"
+            android:textSize="@dimen/textsize_big" />
 
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/yy_downbg_left" >
-
-                <ImageView
-                    android:id="@+id/main_inerbty_down_left_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="2dp"
-                    android:src="@drawable/image_bg" />
-
-                <TextView
-                    android:id="@+id/main_inerbty_down_left_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_gravity="center|left"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_toLeftOf="@+id/main_inerbty_down_left_image"
-                    android:gravity="center|left"
-                    android:minEms="5"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/main_inerbty_down_left_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/main_inerbty_down_left_name"
-                    android:layout_below="@+id/main_inerbty_down_left_name"
-                    android:layout_toLeftOf="@+id/main_inerbty_down_left_image"
-                    android:textColor="@color/price_color" />
-
-                <RelativeLayout
-                    android:id="@+id/main_inerbty_down_left"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/inerbty_down_left_selector"
-                    android:clickable="true"
-                    android:focusable="true" >
-                </RelativeLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/yy_downbg_right" >
-
-                <ImageView
-                    android:id="@+id/main_inerbty_down_right_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="2dp"
-                    android:src="@drawable/image_bg" />
-
-                <TextView
-                    android:id="@+id/main_inerbty_down_right_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_gravity="center|left"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_toLeftOf="@+id/main_inerbty_down_right_image"
-                    android:gravity="center|left"
-                    android:minEms="5"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/main_inerbty_down_right_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/main_inerbty_down_right_name"
-                    android:layout_below="@+id/main_inerbty_down_right_name"
-                    android:layout_toLeftOf="@+id/main_inerbty_down_right_image"
-                    android:textColor="@color/price_color" />
-
-                <RelativeLayout
-                    android:id="@+id/main_inerbty_down_right"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/inerbty_down_right_selector"
-                    android:clickable="true"
-                    android:focusable="true" >
-                </RelativeLayout>
-            </RelativeLayout>
-        </LinearLayout>
+      
     </RelativeLayout>
+        <ImageView 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/yidejia"
+            android:src="@drawable/user_head"
+            android:id="@+id/iv_main_hot_sell_free_pay_image"/>
+        <LinearLayout
+        android:baselineAligned="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
-</RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tv_main_all_buy_detail_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_left"
+                android:text="@string/all_buy_detail"
+                android:textSize="@dimen/textsize_big" />
+
+            <TextView
+                android:id="@+id/tv_main_all_buy_detail_add_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_main_all_buy_detail_down"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_left"
+                android:text="@string/all_buy_detail_add"
+                android:textSize="@dimen/textsize_small" />
+
+            <ImageView
+                android:id="@+id/iv_main_all_buy_left_image_down"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/yirihui"
+                android:layout_below="@id/tv_main_all_buy_detail_add_down"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/yidejia"
+                android:src="@drawable/user_head" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/width"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tv_main_all_buy_right_detail_right_up"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_left"
+                    android:text="@string/all_buy_detail"
+                    android:textSize="@dimen/textsize_big" />
+
+                <TextView
+                    android:id="@+id/tv_main_all_buy_detail_right_add_right_up"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_main_all_buy_right_detail_right_up"
+                    android:layout_marginTop="@dimen/margin_left"
+                    android:text="@string/all_buy_detail_add"
+                    android:textSize="@dimen/textsize_small" />
+
+                <TextView
+                    android:id="@+id/tv_main_all_buy_detail_right_price_right_up"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_main_all_buy_detail_right_add_right_up"
+                    android:layout_marginTop="@dimen/margin_left"
+                    android:text="@string/produce_price_yuan"
+                    android:textColor="@color/theme"
+                    android:textSize="@dimen/textsize_big" />
+
+                <ImageView
+                    android:id="@+id/iv_main_all_buy_left_right_image_right_up"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/all_buy_produce_right"
+                    android:layout_alignTop="@id/tv_main_all_buy_right_detail_right_up"
+                    android:layout_toRightOf="@id/tv_main_all_buy_right_detail_right_up"
+                    android:contentDescription="@string/yidejia"
+                    android:src="@drawable/user_head" />
+            </RelativeLayout>
+             <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tv_main_all_buy_right_down_detail_right_down"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_left"
+                    android:text="@string/all_buy_detail"
+                    android:textSize="@dimen/textsize_big" />
+
+                <TextView
+                    android:id="@+id/tv_main_all_buy_detail_right_down_add_right_down"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_main_all_buy_right_down_detail_right_down"
+                    android:layout_marginTop="@dimen/margin_left"
+                    android:text="@string/all_buy_detail_add"
+                    android:textSize="@dimen/textsize_small" />
+
+                <TextView
+                    android:id="@+id/tv_main_all_buy_detail_right_down_price_right_down"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_main_all_buy_detail_right_down_add_right_down"
+                    android:layout_marginTop="@dimen/margin_left"
+                    android:text="@string/produce_price_yuan"
+                    android:textColor="@color/theme"
+                    android:textSize="@dimen/textsize_big" />
+
+                <ImageView
+                    android:id="@+id/iv_main_all_buy_left_right_down_image_right_down"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/all_buy_produce_right"
+                    android:layout_alignTop="@id/tv_main_all_buy_right_down_detail_right_down"
+                    android:layout_toRightOf="@id/tv_main_all_buy_right_down_detail_right_down"
+                    android:contentDescription="@string/yidejia"
+                    android:src="@drawable/user_head" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+        
+
+</LinearLayout>

@@ -100,9 +100,7 @@
     <string name="add_cart_scs">登录账户</string>
     <string name="add_cart_scs_title">登录</string>
     <string name="new_address">新增</string>
-    <string name="manage_address">收货地址管理</string>
     <string name="wrong_input">您的输入有问题</string>
-    <string name="all_order">全部订单</string>
     <string name="complete_order">已完成订单</string>
     <string name="deliver_order">已发货订单</string>
     <string name="wait_deliver">待发货订单</string>
@@ -143,9 +141,7 @@
     <string name="add_cart_scs">商品已成功加入购物车</string>
     <string name="add_cart_scs_title">添加成功</string>
     <string name="new_address">新增</string>
-    <string name="manage_address">收货地址管理</string>
     <string name="wrong_input">您的输入有问题</string>
-    <string name="all_order">全部订单</string>
     <string name="complete_order">已完成订单</string>
     <string name="deliver_order">已发货订单</string>
     <string name="wait_deliver">待发货订单</string>
@@ -182,9 +178,7 @@
     <string name="add_cart_scs">商品已成功加入购物车</string>
     <string name="add_cart_scs_title">添加成功</string>
     <string name="new_address">新增</string>
-    <string name="manage_address">收货地址管理</string>
     <string name="wrong_input">您的输入有问题</string>
-    <string name="all_order">全部订单</string>
     <string name="complete_order">已完成订单</string>
     <string name="deliver_order">已发货订单</string>
     <string name="order_time_week">近一周</string>
@@ -319,10 +313,44 @@
     <string name="zhifubao_wangye_pay">需安装支付宝手机钱包客户端</string>
     <string name="zhifubao_wangye_pay_list">支付宝网页支付</string>
     <string name="zhifubao_wangye_pay_list_card">可银行卡支付</string>
-
     <string name="yinliang_pay">银联支付</string>
     <string name="yinliang_pay_list">银联支付</string>
     <string name="caifutong_pay">财付通支付</string>
     <string name="caifutong_pay_list">可银行卡支付</string>
     <string name="pay_commit">立即支付</string>
+    <string name="yirihui">【 伊日惠 】</string>
+    <string name="yirihui_add">今日优惠价限时抢购，每日限量，先抢先得</string>
+    <string name="produce_price">￥178.00</string>
+    <string name="must_pay">秒抢</string>
+    <string name="produce_detail_add">植物清逗修复精华</string>
+    <string name="hour">01</string>
+    <string name="mint">50</string>
+    <string name="second">30</string>
+    <string name="maohao">:</string>
+    <string name="all_buy">大家都在买</string>
+    <string name="watch_all">查看全部 ></string>
+    <string name="all_buy_detail">时间轴套装</string>
+    <string name="all_buy_detail_add">保养 补水 修护 增加弹性</string>
+    <string name="produce_price_yuan">￥78.00元</string>
+    <string name="free_pay_title">随心逛</string>
+    <string name="VIP">VIP0</string>
+    <string name="mall_wait_pay">待付款</string>
+    <string name="mall_wait_deliver">待发货</string>
+    <string name="already_deliver">已发货</string>
+    <string name="already_compelte">已完成</string>
+    <string name="wait_coment">待评价</string>
+    <string name="show">晒单</string>
+    <string name="shell">已出售：</string>
+    <string name="comment">评价：</string>
+    <string name="show_order">晒单：</string>
+    <string name="brand">品牌：</string>
+    <string name="product_id">商品编号：</string>
+    <string name="standard_text">规格：</string>
+    <string name="match_goods">推荐搭配</string>
+    <string name="produce_comment">商品评论</string>
+    <string name="produce_imagecomment">商品图文详情</string>
+    <string name="back">返回</string>
+    <string name="go_pay">去结算</string>
+    
+
 </resources>
