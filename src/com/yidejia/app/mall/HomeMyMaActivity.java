@@ -223,11 +223,11 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 		} else {
 			cartImage.setText(number + "");
 		}
-		downGuangLayout = (RelativeLayout) findViewById(R.id.down_guang_layout);
-		downHomeLayout = (RelativeLayout) findViewById(R.id.down_home_layout);
-		downSearchLayout = (RelativeLayout) findViewById(R.id.down_search_layout);
-		downShoppingLayout = (RelativeLayout) findViewById(R.id.down_shopping_layout);
-		downMyLayout = (RelativeLayout) findViewById(R.id.down_my_layout);
+		downGuangLayout = (RelativeLayout) findViewById(R.id.re_down_guang_layout);
+		downHomeLayout = (RelativeLayout) findViewById(R.id.re_down_home_layout);
+		downSearchLayout = (RelativeLayout) findViewById(R.id.re_down_search_layout);
+		downShoppingLayout = (RelativeLayout) findViewById(R.id.re_down_shopping_layout);
+		downMyLayout = (RelativeLayout) findViewById(R.id.re_down_my_layout);
 
 		downHomeLayout.setOnClickListener(new OnClickListener() {
 

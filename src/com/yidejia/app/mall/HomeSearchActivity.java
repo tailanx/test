@@ -210,17 +210,17 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 		}
 		// downGuangLayout = (RelativeLayout)
 		// findViewById(R.id.down_guang_layout);
-		downHomeLayout = (RelativeLayout) findViewById(R.id.down_home_layout);
+		downHomeLayout = (RelativeLayout) findViewById(R.id.re_down_home_layout);
 		// down_home_imageView = (ImageView) findViewById(R.id.down_home_icon);
 		// down_search_imageView = (ImageView)
 		// findViewById(R.id.down_search_icon);
 		// down_home_textview = (TextView) findViewById(R.id.down_home_text);
-		down_search_textview = (TextView) findViewById(R.id.down_search_text);
+		down_search_textview = (TextView) findViewById(R.id.tv_down_search_text);
 
-		downGuangLayout = (RelativeLayout) findViewById(R.id.down_guang_layout);
-		downSearchLayout = (RelativeLayout) findViewById(R.id.down_search_layout);
-		downShoppingLayout = (RelativeLayout) findViewById(R.id.down_shopping_layout);
-		downMyLayout = (RelativeLayout) findViewById(R.id.down_my_layout);
+		downGuangLayout = (RelativeLayout) findViewById(R.id.re_down_guang_layout);
+		downSearchLayout = (RelativeLayout) findViewById(R.id.re_down_search_layout);
+		downShoppingLayout = (RelativeLayout) findViewById(R.id.re_down_shopping_layout);
+		downMyLayout = (RelativeLayout) findViewById(R.id.re_down_my_layout);
 
 		downHomeLayout.setOnClickListener(this);
 		// downSearchLayout.setOnClickListener(this);
@@ -263,15 +263,15 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 		// TODO Auto-generated method stub
 		Intent intent = new Intent();
 		switch (v.getId()) {
-		case R.id.down_home_layout:
+		case R.id.re_down_home_layout:
 			intent.setClass(HomeSearchActivity.this, HomeMallActivity.class);
 			break;
-		case R.id.down_shopping_layout:
+		case R.id.re_down_shopping_layout:
 			intent.setClass(HomeSearchActivity.this, HomeCarActivity.class);
 			intent.putExtra("current", 1);
 			intent.putExtra("next", 2);
 			break;
-		case R.id.down_my_layout:
+		case R.id.re_down_my_layout:
 			if (myApplication.getIsLogin()) {
 				intent.setClass(HomeSearchActivity.this, HomeMyMaActivity.class);
 			} else {

@@ -14,7 +14,6 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
-import com.yidejia.app.mall.fragment.CartActivity;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.util.CartUtil;
@@ -161,7 +160,7 @@ public class HomeCarActivity extends SherlockFragmentActivity implements
 		try {
 			shoppingCartTopay.setVisibility(View.VISIBLE);
 		} catch (Exception e) {
-			Log.e(CartActivity.class.getName(), "set visibility err");
+			
 		}
 		layout = new LinearLayout(this);
 		layout.setOrientation(LinearLayout.VERTICAL);
@@ -176,7 +175,7 @@ public class HomeCarActivity extends SherlockFragmentActivity implements
 		scrollView.addView(layout);
 
 		if (shoppingCartTopay == null) {
-			Log.e(CartActivity.class.getName(), "cart act button is null");
+			
 
 		} else {
 			shoppingCartTopay.setOnClickListener(new OnClickListener() {
@@ -251,12 +250,12 @@ public class HomeCarActivity extends SherlockFragmentActivity implements
 			cartImage.setText(number + "");
 		}
 		res = getResources();
-		downHomeLayout = (RelativeLayout) findViewById(R.id.down_home_layout);
+		downHomeLayout = (RelativeLayout) findViewById(R.id.re_down_home_layout);
 
-		downGuangLayout = (RelativeLayout) findViewById(R.id.down_guang_layout);
-		downSearchLayout = (RelativeLayout) findViewById(R.id.down_search_layout);
-		downShoppingLayout = (RelativeLayout) findViewById(R.id.down_shopping_layout);
-		downMyLayout = (RelativeLayout) findViewById(R.id.down_my_layout);
+		downGuangLayout = (RelativeLayout) findViewById(R.id.re_down_guang_layout);
+		downSearchLayout = (RelativeLayout) findViewById(R.id.re_down_search_layout);
+		downShoppingLayout = (RelativeLayout) findViewById(R.id.re_down_shopping_layout);
+		downMyLayout = (RelativeLayout) findViewById(R.id.re_down_my_layout);
 
 		downHomeLayout.setOnClickListener(this);
 		downSearchLayout.setOnClickListener(this);
@@ -269,15 +268,15 @@ public class HomeCarActivity extends SherlockFragmentActivity implements
 		// TODO Auto-generated method stub
 		Intent intent = new Intent();
 		switch (v.getId()) {
-		case R.id.down_home_layout:
+		case R.id.re_down_home_layout:
 			intent.setClass(HomeCarActivity.this, HomeMallActivity.class);
 			break;
-		case R.id.down_search_layout:
+		case R.id.re_down_search_layout:
 			intent.setClass(HomeCarActivity.this, HomeSearchActivity.class);
 			intent.putExtra("current", 2);
 			intent.putExtra("next", 1);
 			break;
-		case R.id.down_my_layout:
+		case R.id.re_down_my_layout:
 			if (myApplication.getIsLogin()){
 				intent.setClass(HomeCarActivity.this, HomeMyMaActivity.class);
 			}
