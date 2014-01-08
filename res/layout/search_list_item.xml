@@ -4,28 +4,43 @@
     android:layout_height="wrap_content"
     android:background="@drawable/layout_selector2" >
 
-    <TextView
-        android:id="@+id/search_list_item_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/iv_search_list_item_text"
+        android:layout_width="@dimen/head_height"
+        android:layout_height="@dimen/head_height"
         android:layout_alignParentLeft="true"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_gravity="center"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:contentDescription="@string/yidejia"
         android:gravity="center"
-        android:textSize="20sp" />
+        android:paddingBottom="@dimen/margin_left"
+        android:paddingTop="@dimen/margin_left"
+        android:src="@drawable/user_head" />
 
-    <ImageView
-        android:id="@+id/search_list_item_icon"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:src="@drawable/search_arrow" />
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_toRightOf="@id/iv_search_list_item_text"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_search_list_item_icon"
+            android:layout_width="wrap_content"
+            android:textSize="@dimen/textsize_big"
+            android:layout_height="wrap_content"
+            android:text="@string/all_buy_detail" />
+
+        <TextView
+            android:id="@+id/tv_search_list_item_icon_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_left_add"
+            android:textSize="@dimen/textsize_small"
+            android:singleLine="true"
+            android:text="@string/all_buy_detail_add" />
+    </LinearLayout>
 
 </RelativeLayout>

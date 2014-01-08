@@ -349,6 +349,8 @@
     <string name="match_goods">推荐搭配</string>
     <string name="produce_comment">商品评论</string>
     <string name="produce_imagecomment">商品图文详情</string>
+    <string name="back">返回</string>
+    <string name="go_pay">去结算</string>
     
 
 </resources>

@@ -49,14 +49,9 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 		setActionBarConfig();
 		bundle = getIntent().getExtras();
 		if(bundle != null){
-//			String fun = bundle.getString("fun");
-//			SearchDataManage manage = new SearchDataManage(this);
-//			searchResults = manage.getSearchArray("", fun, "", "", "", "0", "1");
-//			if(searchResults.size() != 0){
-//			}
+
 			title = bundle.getString("title");
 			setTitle(title);
-//			bundle.putString("order", "sells");
 		}
 		try {
 			setContentView(R.layout.activity_search_result_info_layout);
@@ -75,12 +70,10 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 	}
 	
 	private void initView(){
-		selledTextView = (TextView) findViewById(R.id.search_result_selled);
-		priceLayout = (LinearLayout) findViewById(R.id.search_result_price_layout);
-		priceTextView = (TextView) findViewById(R.id.search_result_price);
-		popularityTextView = (TextView) findViewById(R.id.search_result_popularity);
-		showWithImage = (ImageView) findViewById(R.id.search_with_image);
-		showWithList = (ImageView) findViewById(R.id.search_with_list);
+		selledTextView = (TextView) findViewById(R.id.tv_search_result_selled);
+		priceLayout = (LinearLayout) findViewById(R.id.ll_search_result_price_layout);
+		priceTextView = (TextView) findViewById(R.id.tv_search_result_price);
+		popularityTextView = (TextView) findViewById(R.id.tv_search_result_popularity);
 		
 		Log.e("SearchResultActivity", "begin setFragment");
 //		setFragment(0, isShowWithList);
@@ -88,7 +81,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 		Bundle newBundle = (Bundle) bundle.clone();
 		newBundle.putString("order", "sells+desc");
 		sellFragment = SelledResultFragment.newInstance(newBundle, isShowWithList);
-		ft.replace(R.id.search_result_fragment, sellFragment).commit();
+		ft.replace(R.id.fl_search_result_fragment, sellFragment).commit();
 		currFragment = sellFragment;
 		Log.e("SearchResultActivity", "finish setFragment");
 		
@@ -131,7 +124,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 //		if(newFragment.isAdded()) ft.hide(currFragment).show(newFragment).commit();
 //		else ft.hide(currFragment).replace(R.id.search_result_fragment, newFragment).commit();
-		ft.replace(R.id.search_result_fragment, newFragment).commit();
+		ft.replace(R.id.fl_search_result_fragment, newFragment).commit();
         newBundle = null;
         currindex = index;
         currFragment = newFragment;

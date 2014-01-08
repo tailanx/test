@@ -71,7 +71,7 @@ public class SearchListAdapter extends BaseAdapter {
 		// TODO Auto-generated method stub
 //		convertView = (View) mLayoutInflater.inflate(R.layout.search_list_item, null);
 		convertView = (View) LayoutInflater.from(mContext).inflate(R.layout.search_list_item, null);
-		TextView search_list_text = (TextView) convertView.findViewById(R.id.search_list_item_text);
+		TextView search_list_text = (TextView) convertView.findViewById(R.id.tv_search_list_item_icon);
 		if(position == 0) {
 			search_list_text.setText(mContext.getResources().getString(R.string.filter_all));
 			return convertView;

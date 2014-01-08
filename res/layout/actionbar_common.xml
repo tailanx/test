@@ -5,51 +5,50 @@
     android:background="@drawable/topbg"
     android:orientation="horizontal" >
 
-    <!--
-    <Button android:id="@+id/actionbar_left"
-        android:layout_centerVertical="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:background="@drawable/actionbar_selector"
-        />
-        android:background="@drawable/actionbar_selector"
-    -->
-
-    <ImageView
+    <TextView
         android:id="@+id/actionbar_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginBottom="6dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginTop="6dp"
-        android:background="#00000000"
+        android:layout_marginBottom="@dimen/actiobar_margin_top"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/actiobar_margin_top"
         android:clickable="true"
-        android:src="@drawable/compose_top" />
+        android:text="@string/back"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textsize_big_big" />
 
     <TextView
         android:id="@+id/actionbar_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="common title"
+        android:text="@string/yunda"
         android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:textSize="@dimen/textsize_big_big" />
 
-    <Button
+    <TextView
         android:id="@+id/actionbar_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
-        android:layout_marginBottom="6dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="6dp"
-        android:background="@drawable/edit"
-        android:text="去结算"
+        android:layout_marginBottom="@dimen/actiobar_margin_top"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/actiobar_margin_top"
+        android:text="@string/go_pay"
         android:textColor="#ffeeeeee"
-        android:textSize="16sp" />
+        android:textSize="@dimen/textsize_big_big" />
+
+    <ImageView
+        android:id="@+id/search_with_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/margin_left"
+        android:layout_toLeftOf="@id/actionbar_right"
+        android:contentDescription="@string/yidejia"
+        android:src="@drawable/list_hover" />
 
 </RelativeLayout>
