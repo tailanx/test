@@ -1,198 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/my_mall_login_scrollView"
+    android:id="@+id/sc_my_mall_login_scrollView"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg" >
 
-        <LinearLayout
-            android:id="@+id/person_main2_main2_linearlayout1"
+    <LinearLayout
+        android:id="@+id/ll_person_main2_main2_linearlayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/re_my_mall_login_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/magin_left_add" >
+
+            <LinearLayout
+                android:id="@+id/ll_login_acount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/main_theme_textview_bg"
+                android:descendantFocusability="blocksDescendants"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_my_mall_login_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:drawableLeft="@drawable/account"
+                    android:drawablePadding="@dimen/margin_left"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_left"
+                    android:text="@string/account"
+                    android:textColor="#b4b4b4"
+                    android:textSize="@dimen/textsize_big_big" />
+
+                <EditText
+                    android:id="@+id/et_my_mall_login__edittext_account"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|left"
+                    android:layout_marginRight="3dp"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:inputType="text"
+                    android:maxLength="20"
+                    android:paddingRight="@dimen/width_add"
+                    android:singleLine="true"
+                    android:textSize="@dimen/textsize_big" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_login_psw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll_login_acount"
+                android:layout_marginTop="@dimen/width_add"
+                android:background="@drawable/main_theme_textview_bg"
+                android:descendantFocusability="blocksDescendants" >
+
+                <TextView
+                    android:id="@+id/tv_my_mall_login_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:drawableLeft="@drawable/password_icon"
+                    android:drawablePadding="@dimen/margin_left"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_left"
+                    android:text="@string/login_password"
+                    android:textColor="#b4b4b4"
+                    android:textSize="@dimen/textsize_big_big" />
+
+                <EditText
+                    android:id="@+id/et_my_mall_login__edittext_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|left"
+                    android:layout_marginRight="3dp"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:inputType="textPassword"
+                    android:maxLength="20"
+                    android:singleLine="true"
+                    android:textSize="@dimen/textsize_big" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll_login_psw"
+                android:layout_marginTop="@dimen/width_add"
+                android:background="@drawable/main_theme_textview_bg" >
+
+                <TextView
+                    android:id="@+id/tv_my_mall_login_account_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:drawablePadding="@dimen/margin_left"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_left"
+                    android:text="@string/login_keep_state"
+                    android:textColor="#b4b4b4"
+                    android:textSize="@dimen/textsize_small" />
+
+                <CheckBox
+                    android:id="@+id/cb_my_login_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/margin_left_more"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="#b4b4b4"
+                    android:textSize="@dimen/textsize_small" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/re_my_mall_login_retrieve_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/magin_left_add"
+            android:background="@drawable/main_theme_textview_bg" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/margin_left"
+                android:text="@string/login_find_psw"
+                android:textColor="#b4b4b4"
+                android:textSize="@dimen/textsize_big" />
+
+            <ImageView
+                android:contentDescription="@string/yidejia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="@dimen/margin_left"
+                android:src="@drawable/arrow" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/re_my_mall_login_retrieve_regist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:orientation="vertical" >
+            android:layout_marginTop="@dimen/width_add"
+            android:background="@drawable/main_theme_textview_bg"
+            android:clickable="true"
+            android:focusable="true" >
 
-            <RelativeLayout
-                android:id="@+id/my_mall_login_background"
-                android:layout_width="match_parent"
-                android:layout_height="220dp"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/registration_bg"
-                android:padding="8dp"
-                >
-
-                <LinearLayout
-                    android:id="@+id/login_acount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/account_bg"
-                    android:descendantFocusability="blocksDescendants" >
-
-                    <TextView
-                        android:id="@+id/my_mall_login_account"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:drawableLeft="@drawable/account_icon"
-                        android:drawablePadding="8dp"
-                        android:gravity="center"
-                        android:padding="8dp"
-                        android:text="账号:"
-                        android:textColor="#b4b4b4"
-                        android:textSize="20sp" />
-
-                    <EditText
-                        android:id="@+id/my_mall_login__edittext_account"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical|left"
-                        android:layout_marginRight="3dp"
-                        android:inputType="text"
-                        android:background="@null"
-                        android:clickable="false"
-                        android:maxLength="20"
-                        android:paddingRight="1dp"
-                        android:singleLine="true"
-                        android:textSize="18sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/login_psw"
-                    android:layout_below="@id/login_acount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/account_bg"
-                    android:descendantFocusability="blocksDescendants" >
-
-                    <TextView
-                        android:id="@+id/my_mall_login_password"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:drawableLeft="@drawable/password_icon"
-                        android:drawablePadding="8dp"
-                        android:gravity="center"
-                        android:padding="8dp"
-                        android:text="密码:"
-                        android:textColor="#b4b4b4"
-                        android:textSize="20sp" />
-
-                    <EditText
-                        android:id="@+id/my_mall_login__edittext_password"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical|left"
-                        android:layout_marginRight="3dp"
-                        android:background="@null"
-                        android:clickable="false"
-                        android:inputType="textPassword"
-                        android:maxLength="20"
-                        android:singleLine="true"
-                        android:textSize="18sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_below="@id/login_psw"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="15dp" >
-
-                    <TextView
-                        android:id="@+id/my_mall_login_account"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:drawablePadding="8dp"
-                        android:gravity="center"
-                        android:padding="8dp"
-                        android:text="记住密码"
-                        android:textColor="#b4b4b4"
-                        android:textSize="16sp" />
-
-                    <CheckBox
-                        android:id="@+id/my_login_checkbox"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:checked="true"
-                        android:gravity="center|left"
-                        android:text="默认选中"
-                        android:textColor="#b4b4b4"
-                        android:textSize="16sp" />
-                </LinearLayout>
-            </RelativeLayout>
-
-            <Button
-                android:id="@+id/my_mall_login_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/login_background"
-                android:text="登录"
-                android:textColor="#ffeeeeee"
-                android:textSize="18sp" />
-
-            <RelativeLayout
-                android:id="@+id/my_mall_login_retrieve_password"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/forgot_password" >
+                android:layout_centerVertical="true"
+                android:padding="@dimen/margin_left"
+                android:text="@string/login_find_regist"
+                android:textColor="#b4b4b4"
+                android:textSize="@dimen/textsize_big" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="25dp"
-                    android:text="找回密码"
-                    android:textColor="#b4b4b4"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="10dp"
-                    android:src="@drawable/arrow" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/my_mall_login_retrieve_regist"
+            <ImageView
+                android:contentDescription="@string/yidejia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/forgot_password"
-                android:clickable="true"
-                android:focusable="true" >
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="@dimen/margin_left"
+                android:src="@drawable/arrow" />
+        </RelativeLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="25dp"
-                    android:text="快速注册"
-                    android:textColor="#b4b4b4"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="10dp"
-                    android:src="@drawable/arrow" />
-            </RelativeLayout>
+        <Button
+            android:id="@+id/bt_my_mall_login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_marginRight="@dimen/margin_left"
+            android:layout_marginTop="@dimen/magin_left_add"
+            android:background="@drawable/theme_textview_background"
+            android:text="@string/login_must"
+            android:textColor="#ffeeeeee"
+            android:textSize="@dimen/textsize_big" />
     </LinearLayout>
 
 </ScrollView>

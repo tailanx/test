@@ -18,21 +18,27 @@
 
     <dimen name="image_width">590dp</dimen>
     <dimen name="image_height">290dp</dimen>
+    <dimen name="login_height">220dp</dimen>
+    <dimen name="main_bg_head">180dp</dimen>
     <dimen name="base_info_image">150dp</dimen>
     <dimen name="yirihui">120dp</dimen>
     <dimen name="head_height">110dp</dimen>
     <dimen name="base_info_match">90dp</dimen>
     <dimen name="all_buy_produce_right">80dp</dimen>
     <dimen name="margin_top">40dp</dimen>
+    
     <dimen name="magin_left_add">25dp</dimen>
+    
+    
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="mall_list_padding">15dp</dimen>
     <dimen name="margin_left_more">12dp</dimen>
 	<dimen name ="margin_left">10dp</dimen>
     <dimen name="head_padding">8dp</dimen>
     <dimen name="actiobar_margin_top">6dp</dimen>
+ 	<dimen name ="margin_left_add">4dp</dimen>
     <dimen name="actiobar_margin_left">2dp</dimen>
-	<dimen name ="margin_left_add">4dp</dimen>
+    <dimen name="width_add">1dp</dimen>
     <dimen name="width">0dp</dimen>
 
 </resources>

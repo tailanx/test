@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:background="@drawable/bg"
     android:orientation="vertical" >
 
@@ -21,14 +21,14 @@
             <RelativeLayout
                 android:id="@+id/re_person_shopping_background"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_img" >
+                android:layout_height="@dimen/main_bg_head"
+                android:background="@drawable/mymallbg" >
 
                 <ImageView
                     android:id="@+id/iv_person_shopping_image_person"
                     android:layout_width="@dimen/head_height"
                     android:layout_height="@dimen/head_height"
-                    android:layout_marginLeft="@dimen/margin_left_more"
+                    android:layout_marginLeft="@dimen/mall_list_padding"
                     android:layout_marginTop="@dimen/margin_top"
                     android:background="@drawable/user_head_bg"
                     android:contentDescription="@string/yidejia"
@@ -43,7 +43,7 @@
                     android:layout_marginBottom="@dimen/head_padding"
                     android:layout_marginLeft="@dimen/activity_vertical_margin"
                     android:layout_toRightOf="@id/iv_person_shopping_image_person"
-                    android:drawableLeft="@drawable/integration"
+                    android:drawableLeft="@drawable/jifen"
                     android:gravity="center"
                     android:text="@string/mint"
                     android:textColor="#FFeeeeee"
@@ -57,7 +57,7 @@
                     android:layout_marginBottom="@dimen/head_padding"
                     android:layout_marginLeft="@dimen/activity_vertical_margin"
                     android:layout_toRightOf="@id/tv_integration"
-                    android:drawableLeft="@drawable/favorites"
+                    android:drawableLeft="@drawable/favorites2"
                     android:gravity="center"
                     android:text="@string/hour"
                     android:textColor="#FFeeeeee"
@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_above="@id/tv_integration"
                     android:layout_marginBottom="@dimen/head_padding"
-                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:layout_marginLeft="@dimen/mall_list_padding"
                     android:layout_toRightOf="@id/iv_person_shopping_image_person" >
 
                     <TextView
@@ -103,7 +103,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/activity_vertical_margin"
                         android:layout_toRightOf="@id/tv_person_shopping_person_name"
-                        android:drawableLeft="@drawable/message"
+                        android:drawableLeft="@drawable/vip"
                         android:text="@string/VIP"
                         android:textColor="#FFeeeeee"
                         android:textSize="@dimen/text_size" />

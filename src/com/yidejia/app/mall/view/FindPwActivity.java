@@ -52,12 +52,12 @@ public class FindPwActivity extends SherlockActivity {
 	}
 	
 	private void findIds(){
-		acount_textview = (EditText) findViewById(R.id.my_mall_find_edittext_account);
-		obtain_textView = (EditText) findViewById(R.id.my_mall_find_obtain);
-		obtain_imageView = (ImageView) findViewById(R.id.my_mall_find_password_validation_button);
-		psw_textview = (EditText) findViewById(R.id.my_mall_find_password);
-		psw_again_textview = (EditText) findViewById(R.id.my_mall_find_confirm_password);
-		okButton = (Button) findViewById(R.id.find_find_confirm_button);
+		acount_textview = (EditText) findViewById(R.id.et_my_mall_find_edittext_account);
+		obtain_textView = (EditText) findViewById(R.id.et_my_mall_find_obtain);
+		obtain_imageView = (ImageView) findViewById(R.id.iv_my_mall_find_password_validation_button);
+		psw_textview = (EditText) findViewById(R.id.et_my_mall_find_password);
+		psw_again_textview = (EditText) findViewById(R.id.et_my_mall_find_confirm_password);
+		okButton = (Button) findViewById(R.id.bt_find_find_confirm_button);
 	}
 	
 	private OnClickListener okListener = new View.OnClickListener() {

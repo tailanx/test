@@ -334,11 +334,11 @@
     <string name="produce_price_yuan">￥78.00元</string>
     <string name="free_pay_title">随心逛</string>
     <string name="VIP">VIP0</string>
-    <string name="mall_wait_pay">待付款</string>
-    <string name="mall_wait_deliver">待发货</string>
-    <string name="already_deliver">已发货</string>
-    <string name="already_compelte">已完成</string>
-    <string name="wait_coment">待评价</string>
+    <string name="mall_wait_pay">待付款   |</string>
+    <string name="mall_wait_deliver">待发货   |</string>
+    <string name="already_deliver">已发货   |</string>
+    <string name="already_compelte">已完成   |</string>
+    <string name="wait_coment">待评价   |</string>
     <string name="show">晒单</string>
     <string name="shell">已出售：</string>
     <string name="comment">评价：</string>
@@ -352,6 +352,20 @@
     <string name="back">返回</string>
     <string name="go_pay">去结算</string>
     <string name="main_yirihui">伊日惠</string>
+    <string name="account">账号</string>
+    <string name="login_password">密码</string>
+    <string name="login_keep_state">保持登陆状态</string>
+    <string name="login_find_psw">找回密码</string>
+    <string name="login_find_regist">快速注册</string>
+    <string name="login_must">立即登陆</string>
+    <string name="find_hint_account">请输入您要找回的账号</string>
+    <string name="find_hint_pwd">输入短信验证码</string>
+    <string name="find_new_pwd">设置新密码</string>
+    <string name="find_new_pwd_sure">确认新密码</string>
+    <string name="find_complete">完成</string>
+    <string name="regist_complete">确认密码</string> 
+    <string name="regist_service">《服务条款》</string> 
+    <string name="regist_must">立即注册</string> 
     
 
 </resources>
