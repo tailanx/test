@@ -9,8 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/tab_bg3" >
+        android:layout_marginTop="@dimen/margin_left"
+        android:background="@drawable/total_bg" >
 
         <TextView
             android:id="@+id/go_pay_sum_money"
@@ -18,7 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
-            android:text="应付总额："
+            android:text="@string/go_pay_show_pay"
+            android:textColor="@color/white"
             android:textSize="15sp" />
 
         <TextView
@@ -27,8 +28,8 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/go_pay_sum_money"
             android:layout_toRightOf="@+id/go_pay_sum_money"
-            android:text="￥"
-            android:textColor="#ed217c"
+            android:text="@string/go_pay_show_pay_money"
+            android:textColor="@color/theme"
             android:textSize="15sp" />
 
         <TextView
@@ -37,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/go_pay_sum_money"
             android:layout_toRightOf="@+id/go_pay_show_pay_money_price"
-            android:textColor="#ed217c"
+            android:textColor="@color/theme"
             android:textSize="15sp" />
 
         <TextView
@@ -45,18 +46,19 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/go_pay_sum_money"
             android:layout_below="@id/go_pay_sum_money"
-            android:text="(包含快递费用)"
+            android:textColor="@color/white"
+            android:text="@string/go_pay_show_pay_money_add"
             android:textSize="10sp" />
 
-        <Button
+        <TextView
             android:id="@+id/save_order_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="8dp"
-            android:background="@drawable/submit_order"
-            android:text="提交订单"
+            android:background="@drawable/theme_textview_background"
+            android:text="@string/go_pay_show_pay_commit"
             android:textColor="#eeeeee" />
     </RelativeLayout>
 
@@ -71,23 +73,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="8dp"
             android:gravity="center"
             android:orientation="vertical" >
 
             <RelativeLayout
                 android:id="@+id/go_pay_relativelayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                 >
+                android:layout_height="wrap_content" >
 
                 <RelativeLayout
                     android:id="@+id/go_pay_relativelayout1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/new_delivery_address_up" >
+                    android:background="@drawable/main_theme_textview_bg"
+                    android:padding="@dimen/margin_left" >
 
                     <TextView
                         android:id="@+id/go_pay_consignee"
@@ -95,7 +94,6 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="4dp"
-                        android:drawableLeft="@drawable/addressee_headicon"
                         android:drawablePadding="4dp"
                         android:gravity="center_vertical"
                         android:text="收货人:"
@@ -117,38 +115,51 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="4dp"
-                        android:drawableLeft="@drawable/phone_iocn"
-                        android:drawablePadding="4dp"
-                        android:gravity="center_vertical"
+                        android:text="@string/phone_number_add"
                         android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/re_go_pay_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/go_pay_relativelayout1"
+                    android:background="@drawable/main_theme_textview_bg" >
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/width_add"
+                        android:layout_marginLeft="@dimen/margin_left_more"
+                        android:background="@drawable/filter_line"
+                        android:contentDescription="@string/yidejia" />
                 </RelativeLayout>
 
                 <TextView
                     android:id="@+id/go_pay_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/go_pay_relativelayout1"
-                    android:background="@drawable/delivery_address_down"
-                    android:padding="10dp"
-                    android:text="收货地址:"
-                    android:textSize="16sp" />
+                    android:layout_below="@id/re_go_pay_iv"
+                    android:background="@drawable/main_theme_textview_bg"
+                    android:padding="@dimen/margin_left_more"
+                    android:text="@string/address_produce"
+                    android:textSize="14sp" />
             </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/new_menubg_up" >
+                android:layout_marginBottom="@dimen/margin_left"
+                android:layout_marginTop="@dimen/magin_left_add" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
-                    android:drawableLeft="@drawable/payment_icon"
                     android:drawablePadding="8dp"
                     android:gravity="center_vertical"
-                    android:text="支付方式:"
+                    android:text="@string/pay_way"
+                    android:textColor="@color/white_white"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -156,8 +167,8 @@
                 android:id="@+id/go_pay_zhifubao_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:background="@drawable/new_menubg_middle" >
+                android:background="@drawable/main_theme_textview_bg"
+                android:padding="@dimen/margin_left" >
 
                 <ImageView
                     android:id="@+id/go_pay_zhifubao_image"
@@ -193,19 +204,32 @@
                     android:id="@+id/zhifubao_checkbox"
                     style="@style/CustomCheckboxTheme"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/magin_left_add"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="4dp"
                     android:clickable="false" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/re_go_pay_iv_zhifubao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/main_theme_textview_bg" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/width_add"
+                    android:layout_marginLeft="@dimen/all_buy_produce_right"
+                    android:background="@drawable/filter_line"
+                    android:contentDescription="@string/yidejia" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/go_pay_zhifubao_wangyezhifu_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:background="@drawable/new_menubg_middle" >
+                android:background="@drawable/main_theme_textview_bg"
+                android:padding="@dimen/margin_left" >
 
                 <ImageView
                     android:id="@+id/go_pay_zhifubao_wangyezhifu"
@@ -213,6 +237,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
+                    android:contentDescription="@string/yidejia"
                     android:src="@drawable/alipay" />
 
                 <LinearLayout
@@ -241,18 +266,32 @@
                     android:id="@+id/zhufubaowangye_checkbox"
                     style="@style/CustomCheckboxTheme"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/magin_left_add"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="4dp"
                     android:clickable="false" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/re_go_pay_iv_zhifubao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/main_theme_textview_bg" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/width_add"
+                    android:layout_marginLeft="@dimen/all_buy_produce_right"
+                    android:background="@drawable/filter_line"
+                    android:contentDescription="@string/yidejia" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/go_pay_zhifubao_yinlian_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/delivery_address_down" >
+                android:background="@drawable/main_theme_textview_bg"
+                android:padding="@dimen/margin_left" >
 
                 <ImageView
                     android:id="@+id/go_pay_zhifubao_yinlian"
@@ -288,19 +327,32 @@
                     android:id="@+id/yinlian_checkbox"
                     style="@style/CustomCheckboxTheme"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/magin_left_add"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="6dp"
                     android:clickable="false" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/re_go_pay_iv_zhifubao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/main_theme_textview_bg" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/width_add"
+                    android:layout_marginLeft="@dimen/all_buy_produce_right"
+                    android:background="@drawable/filter_line"
+                    android:contentDescription="@string/yidejia" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/go_pay_zhifubao_caifutong_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:background="@drawable/commentbg_down" >
+                android:background="@drawable/main_theme_textview_bg"
+                android:padding="@dimen/margin_left" >
 
                 <ImageView
                     android:id="@+id/go_pay_zhifubao_caifutong"
@@ -336,10 +388,9 @@
                     android:id="@+id/caifutong_checkbox"
                     style="@style/CustomCheckboxTheme"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/magin_left_add"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="4dp"
                     android:clickable="false" />
             </RelativeLayout>
 
@@ -347,15 +398,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/forgot_password" >
-
-                <ImageView
-                    android:id="@+id/go_pay_image_fahuo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="8dp"
-                    android:src="@drawable/ship_location_icon" />
+                android:background="@drawable/main_theme_textview_bg"
+                android:padding="@dimen/margin_left" >
 
                 <TextView
                     android:id="@+id/go_pay_addresss"
@@ -363,7 +407,6 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="8dp"
-                    android:layout_toRightOf="@+id/go_pay_image_fahuo"
                     android:text="发货地点："
                     android:textSize="15sp" />
 
@@ -381,6 +424,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
+                    android:contentDescription="@string/yidejia"
                     android:paddingRight="20dp"
                     android:src="@drawable/arrow" />
             </RelativeLayout>
@@ -388,18 +432,17 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/new_menubg_up" >
+                android:layout_marginBottom="@dimen/margin_left_add"
+                android:layout_marginTop="@dimen/mall_list_padding" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:drawableLeft="@drawable/express_icon"
                     android:drawablePadding="8dp"
                     android:gravity="center_vertical"
-                    android:text="快递方式："
+                    android:text="@string/pay_way_sf"
                     android:textSize="15sp" />
             </RelativeLayout>
 
@@ -407,7 +450,7 @@
                 android:id="@+id/go_pay_general_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/new_menubg_middle" >
+                android:background="@drawable/main_theme_textview_bg" >
 
                 <TextView
                     android:id="@+id/go_pay_pay_money"
@@ -461,10 +504,24 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/re_go_pay_iv_zhifubao1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/main_theme_textview_bg" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/width_add"
+                    android:layout_marginLeft="@dimen/margin_left_more"
+                    android:background="@drawable/filter_line"
+                    android:contentDescription="@string/yidejia" />
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/go_pay_payEMS_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/delivery_address_down" >
+                android:background="@drawable/main_theme_textview_bg" >
 
                 <TextView
                     android:id="@+id/go_pay_payEMS_money"
@@ -513,25 +570,18 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
-                    android:clickable="false"
-                     />
+                    android:clickable="false" />
             </RelativeLayout>
 
-            <RelativeLayout
+           <RelativeLayout
                 android:id="@+id/go_shopping_use_evalution"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:visibility="gone"
-                android:background="@drawable/forgot_password" >
+                android:layout_marginTop="@dimen/margin_left"
+                android:padding="@dimen/margin_left"
+                android:background="@drawable/main_theme_textview_bg" >
 
-                <ImageView
-                    android:id="@+id/go_pay_image_fahuo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="8dp"
-                    android:src="@drawable/preferential_icon" />
+              
 
                 <TextView
                     android:id="@+id/go_pay_addresss"
@@ -539,7 +589,6 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="8dp"
-                    android:layout_toRightOf="@+id/go_pay_image_fahuo"
                     android:text="使用优惠折扣"
                     android:textSize="15sp" />
 
@@ -555,13 +604,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/new_menubg_up"
-                android:drawableLeft="@drawable/shopping_list_icon"
+                android:layout_marginTop="@dimen/magin_left_add"
                 android:drawablePadding="8dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
-                android:text="购物清单"
+                android:text="@string/buy_kind"
                 android:textSize="15sp" />
 
             <LinearLayout
@@ -575,8 +622,8 @@
                 android:id="@+id/go_pay_pinglun_scrollView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/forgot_password" >
+                android:layout_marginTop="@dimen/margin_left"
+                android:background="@drawable/main_theme_textview_bg" >
 
                 <LinearLayout
                     android:layout_width="match_parent"

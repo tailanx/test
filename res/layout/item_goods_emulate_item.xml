@@ -3,13 +3,14 @@
     android:id="@+id/item_goods_emulate"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="3dp" >
+    android:background="@drawable/bg"
+    android:layout_margin="@dimen/margin_left_add" >
 
     <RelativeLayout
         android:id="@+id/emulate_user_layout"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="25dp"
+        android:layout_height="@dimen/margin_top"
+        android:layout_marginTop="@dimen/magin_left_add"
         android:background="@drawable/commentbg_up" >
 
         <TextView
@@ -18,8 +19,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="18dp"
-            android:textSize="18sp" />
+            android:layout_marginRight="@dimen/magin_left_add_add"
+            android:textSize="@dimen/textsize_big" />
 
         <TextView
             android:id="@+id/user_name"
@@ -27,23 +28,24 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="85dp"
+            android:layout_marginLeft="@dimen/base_info_match_add"
             android:layout_toLeftOf="@+id/user_level"
-            android:textSize="18sp" />
+            android:textSize="@dimen/textsize_big" />
     </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/user_icon_bg"
-        android:layout_width="57dp"
-        android:layout_height="57dp"
-        android:layout_margin="10dp"
+        android:layout_width="@dimen/item_goods_emulate"
+        android:layout_height="@dimen/item_goods_emulate"
+        android:layout_margin="@dimen/margin_left"
         android:background="@drawable/user_head_bg" >
 
         <ImageView
             android:id="@+id/user_icon"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:padding="3dp"
+            android:layout_width="@dimen/item_goods_emulate_add"
+            android:layout_height="@dimen/item_goods_emulate_add"
+            android:contentDescription="@string/yidejia"
+            android:padding="@dimen/margin_left_add_add"
             android:background="@drawable/user_head_bg"
             android:src="@drawable/user_head" />
     </LinearLayout>
@@ -54,19 +56,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/emulate_user_layout"
         android:background="@drawable/commentbg_middle"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="6dp"
-        android:textSize="14sp" />
-    <!--
-        <ScrollView android:layout_below="@+id/emulate_user_layout"
-            android:id="@+id/emulate_text_layout"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            <！这里原来是上面的textview >
-            android:background="@drawable/commentbg_middle">
-        </ScrollView>
-    -->
+        android:paddingLeft="@dimen/margin_left"
+        android:paddingRight="@dimen/margin_left"
+        android:paddingTop="@dimen/actiobar_margin_top"
+        android:textSize="@dimen/textsize_small" />
+
 
     <RelativeLayout
         android:id="@+id/emulate_down"
@@ -82,9 +76,9 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_gravity="center|left"
-            android:layout_marginLeft="10dp"
-            android:text="评分"
-            android:textSize="16sp" />
+            android:layout_marginLeft="@dimen/textsize_small"
+            android:text="@string/comment_score"
+            android:textSize="@dimen/textsize_small" />
 
         <LinearLayout
             android:id="@+id/emulate_grade_star"
@@ -92,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_gravity="center|left"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="@dimen/mall_list_padding"
             android:layout_toRightOf="@+id/emulate_grade"
             android:orientation="horizontal" >
         </LinearLayout>
@@ -104,7 +98,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center|right"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="@dimen/margin_left"
             android:gravity="right"
             />
     </RelativeLayout>

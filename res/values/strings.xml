@@ -366,6 +366,23 @@
     <string name="regist_complete">确认密码</string> 
     <string name="regist_service">《服务条款》</string> 
     <string name="regist_must">立即注册</string> 
+    <string name="comment_score">评分</string> 
+    <string name="phone_number_add">13412333354</string> 
+    <string name="address_produce">收货地址:</string> 
+    <string name="pay_way">请选择支付方式:</string> 
+    <string name="pay_way_sf">请选择配送方式:</string> 
+    <string name="buy_kind">购物清单</string> 
+    <string name="go_pay_show_pay">应付总额：</string> 
+    <string name="go_pay_show_pay_money">￥</string> 
+    <string name="go_pay_show_pay_money_add">(包含快递费用)</string> 
+    <string name="go_pay_show_pay_commit">提交订单</string> 
+    <string name="addresss_edit">编辑</string> 
+    <string name="addresss_default">设为默认</string> 
+    <string name="addresss_default_name">收货人:</string> 
+    <string name="addresss_default_name_add">收货人姓名:</string> 
+    <string name="addresss_detail">详细地址:</string> 
+    <string name="addresss_detail_add">所在地区：</string> 
+    <string name="addresss_default_address">收货地址:法撒旦放大 倒萨范德萨发生地方的所发生的松岛枫松岛枫法撒旦放大的说法都是第三方</string> 
     
 
 </resources>

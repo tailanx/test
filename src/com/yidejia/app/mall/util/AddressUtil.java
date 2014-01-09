@@ -67,8 +67,8 @@ public class AddressUtil {
 		delete = (ImageView) view
 				.findViewById(R.id.address_management_item_relative1_textview1);
 
-		areaTextView = (TextView) view
-				.findViewById(R.id.address_management_item_address1);
+//		areaTextView = (TextView) view
+//				.findViewById(R.id.address_management_item_address1);
 		addressTextView = (TextView) view
 				.findViewById(R.id.address_management_item_address2);
 		nameTextView = (TextView) view
@@ -251,8 +251,8 @@ public class AddressUtil {
 				// delete = (ImageView) view
 				// .findViewById(R.id.address_management_item_relative1_textview1);
 				final LinearLayout layout1 = (LinearLayout) view.findViewById(R.id.address_management_item_linearlayout);
-				areaTextView = (TextView) view
-						.findViewById(R.id.address_management_item_address1);
+//				areaTextView = (TextView) view
+//						.findViewById(R.id.address_management_item_address1);
 				addressTextView = (TextView) view
 						.findViewById(R.id.address_management_item_address2);
 				nameTextView = (TextView) view
