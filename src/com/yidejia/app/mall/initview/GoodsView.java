@@ -176,9 +176,8 @@ public class GoodsView {
 			standard_content_text.setText(info.getProductSpecifications());
 			// 推荐购物view group
 			matchGoodsImageLayout = (LinearLayout) view
-					.findViewById(R.id.match_goods_image);
+					.findViewById(R.id.ll_match_goods_image);
 			bannerArray = info.getBannerArray();
-			addBaseImage(view, bannerArray);
 			recommendArray = info.getRecommendArray();
 			if (recommendArray.isEmpty()) {
 				// 推荐搭配不可见
@@ -301,88 +300,6 @@ public class GoodsView {
 	private ArrayList<BaseProduct> bannerArray;
 	private ArrayList<MainProduct> recommendArray;
 	private int index;
-
-	private void addBaseImage(View view,
-			final ArrayList<BaseProduct> bannerArray) {
-		try {
-			baseInfoImageLayout = (LinearLayout) view
-					.findViewById(R.id.base_info_image_linear_layout);
-		
-			int lenght = bannerArray.size();
-			Resources r = activity.getResources();
-			float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-					150, r.getDisplayMetrics());
-			for (int i = 0; i < lenght; i++) {
-				index = i;
-				LinearLayout.LayoutParams lp_base = new LinearLayout.LayoutParams(
-						(new Float(px)).intValue(), (new Float(px)).intValue());// LayoutParams.WRAP_CONTENT);//(new
-																				// Float(px)).intValue()
-				lp_base.gravity = Gravity.CENTER;
-				// View imageViewLayout = LayoutInflater.from(view.getContext())
-				// .inflate(R.layout.goods_banner_imageview, null);
-				// ImageView bannerImageView = (ImageView) imageViewLayout
-				// .findViewById(R.id.banner_imageview);
-				final ImageView bannerImageView = new ImageView(activity);
-				bannerImageView.setId(i);
-				bannerImageView.setLayoutParams(lp_base);
-				imageLoader.init(ImageLoaderConfiguration.createDefault(activity));
-				imageLoader.displayImage(bannerArray.get(i).getImgUrl(),
-						bannerImageView, options, animateFirstListener);
-				Log.e(GoodsView.class.getName(), bannerArray.get(i).getImgUrl());
-				baseInfoImageLayout.setPadding(20, 0, 20, 0);
-
-				// imageViewLayout.setPadding(10, 0, 10, 0);
-				bannerImageView.setPadding(20, 0, 20, 0);
-				baseInfoImageLayout.addView(bannerImageView, lp_base);
-				bannerImageView.setOnClickListener(new OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						Intent intent = new Intent(activity,ImagePagerActivity.class);
-						intent.putExtra(Consts.IMAGES, bannerArray);
-						intent.putExtra(Consts.IMAGE_POSITION, v.getId());
-						activity.startActivity(intent);
-					}
-				});
-				
-//				if(i == 0) {
-//					imageLoader.displayImage(bannerArray.get(i).getImgUrl(),
-//							add_to_cart_press, options, animateFirstListener);
-//				}
-//				
-//				final Bitmap bm = BitmapFactory.decodeFile(bannerArray.get(i)
-//						.getImgUrl());
-//				Log.e("info", bm + "BM");
-//				bannerImageView.setOnClickListener(new OnClickListener() {
-////
-////					@Override
-//					public void onClick(View v) {
-//						// TODO Auto-generated method stub
-//						int width = bm.getWidth();
-//						int height = bm.getHeight();
-//						int newWidth = 300;
-//						int newHeight = 300;
-//						float scaleWidth = ((float) newWidth) / width;
-//						float scaleHeight = ((float) newHeight) / height;
-//						Matrix matrix = new Matrix();
-//						matrix.postScale(scaleWidth, scaleHeight);
-//						Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0,
-//								width, height, matrix, true);
-//						BitmapDrawable bmd = new BitmapDrawable(resizedBitmap);
-//						bannerImageView.setImageDrawable(bmd);
-//					}
-//				});
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Toast.makeText(activity,
-					activity.getResources().getString(R.string.bad_network),
-					Toast.LENGTH_LONG).show();
-		}
-	}
-
 	private void addMatchImage(View view,
 			final ArrayList<MainProduct> bannerArray) {
 		try {

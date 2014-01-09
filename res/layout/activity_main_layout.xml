@@ -4,8 +4,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
-    <!--  -->
-
     <com.handmark.pulltorefresh.library.PullToRefreshScrollView
         xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/main_pull_refresh_scrollview"
@@ -17,36 +15,10 @@
         ptr:ptrAnimationStyle="flip"
         ptr:ptrMode="pullDownFromTop" >
 
-        <!--
-       <ScrollView android:id="@+id/pull_refresh_scrollview"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@drawable/main_bg"
-        android:layout_above="@+id/down_parent_layout"
-           >
-        -->
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-
-            <!--
-             <FrameLayout 
-            android:id="@+id/layout"
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            />
-             <ImageSwitcher android:id="@+id/imageSwitcher"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 ></ImageSwitcher>
-            <RelativeLayout android:id="@+id/main_function"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="2dp"
-                android:background="@drawable/main_function"
-                ></RelativeLayout>
-            -->
 
             <RelativeLayout
                 android:id="@+id/slide_parent_layout"
@@ -55,7 +27,6 @@
 
                 <include layout="@layout/main_slide_image" />
             </RelativeLayout>
-<!--             <include layout="@layout/main_function" /> -->
 
             <RelativeLayout
                 android:id="@+id/function_parent_layout"
@@ -123,129 +94,7 @@
             </RelativeLayout>
         </RelativeLayout>
 
-        <!--
-                <FrameLayout 
-            android:id="@+id/layout"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            />
-                
-                <FrameLayout 
-	    		android:paddingTop="0dp"
-                android:id="@+id/banner_layout"
-                android:layout_gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="180dp" >
-
-                <org.taptwo.android.widget.ViewFlow
-                    android:id="@+id/viewflow"
-                    android:paddingTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    app:sidebuffer="3" >
-                </org.taptwo.android.widget.ViewFlow>
-
-                <org.taptwo.android.widget.CircleFlowIndicator
-                    android:id="@+id/viewflowindic"
-                    android:paddingBottom="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:padding="10dip"
-                    app:fadeOut="1000"
-                    app:inactiveType="fill" >
-                </org.taptwo.android.widget.CircleFlowIndicator>
-            </FrameLayout>
-        -->
-        <!--
-         <RelativeLayout android:id="@+id/viewflipper_layout"
-		    android:layout_width="match_parent"
-		    android:layout_height="160dp" >
-
-		    <ViewFlipper
-		        android:id="@+id/viewFlipper"
-		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content" >
-		    </ViewFlipper>
-
-		    <LinearLayout
-		        android:id="@+id/layout_circle_images"
-		        android:layout_width="wrap_content"
-		        android:layout_height="15dip"
-		        android:layout_alignParentRight="true"
-		        android:layout_marginRight="10dip"
-		        android:layout_marginBottom="10dip"
-		        android:gravity="right|center"
-		        android:orientation="horizontal" />
-		</RelativeLayout>
-        -->
-        <!--
-		<fragment
-		    android:id="@+id/frag_ptr_list"
-		    android:name="com.yidejia.mall.pullToRefreshFragment.PullToRefreshListFragment"
-		    android:layout_width="match_parent"
-		    android:layout_height="match_parent" >
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            
-
-            
-        </FrameLayout>
-        </fragment>
-        
-        
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <Button
-                    android:id="@+id/jrzy_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="44dp"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:gravity="left|center"
-                    android:paddingLeft="40dp"
-                    android:text="string/jrzy"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-
-                <Button
-                    android:id="@+id/jrzy_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="44dp"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:gravity="center|right"
-                    android:paddingRight="10dp"
-                    android:text="2012-12-12"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:id="@+id/jrzy_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:ellipsize="end"
-                    android:lines="3"
-                    android:maxLines="3"
-                    android:padding="10dp"
-                    android:text="ghjkgahsdfahkdjfakjherqfaksdfakhsf"
-                    android:textSize="18sp" />
-            </LinearLayout>
-	 </ScrollView>
-        -->
     </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
-<!--  <include android:id="@+id/home_down" layout="@layout/main_down" android:paddingBottom="0dp" android:layout_alignParentBottom="true"/> -->
+
 
 </RelativeLayout>

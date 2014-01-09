@@ -270,7 +270,7 @@
                 android:scrollbars="none" >
 
                 <LinearLayout
-                    android:id="@+id/match_goods_image"
+                    android:id="@+id/ll_match_goods_image"
                     android:layout_width="wrap_content"
                     android:layout_height="90dp"
                     android:orientation="horizontal" >
