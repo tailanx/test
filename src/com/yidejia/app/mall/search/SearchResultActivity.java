@@ -122,24 +122,24 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		
-		Button rightBtn = (Button) findViewById(R.id.actionbar_right);
-		rightBtn.setText(getResources().getString(R.string.filter));
-		rightBtn.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				showMenu();
-			}
-		});
+//		Button rightBtn = (Button) findViewById(R.id.actionbar_right);
+//		rightBtn.setText(getResources().getString(R.string.filter));
+//		rightBtn.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				showMenu();
+//			}
+//		});
 		
-		ImageView actionbar_left = (ImageView) findViewById(R.id.actionbar_left);
-		actionbar_left.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				SearchResultActivity.this.finish();
-			}
-		});
+//		ImageView actionbar_left = (ImageView) findViewById(R.id.actionbar_left);
+//		actionbar_left.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				SearchResultActivity.this.finish();
+//			}
+//		});
 		
 		titleTextView = (TextView) findViewById(R.id.actionbar_title);
 	}
