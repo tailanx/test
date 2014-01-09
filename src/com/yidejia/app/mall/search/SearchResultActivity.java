@@ -25,7 +25,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 	private TextView priceTextView;
 	private TextView popularityTextView;
 	private ImageView showWithList;
-	private ImageView showWithImage;
+//	private ImageView showWithImage;
 //	private SelledResultFragment newFragment;
 	
 	private int lastIndex = 0;
@@ -62,12 +62,11 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 	
 	private void initView(){
 		selledTextView = (TextView) findViewById(R.id.tv_search_result_selled);
-		priceLayout = (LinearLayout) findViewById(R.id.ll_search_result_price_layout);
+//		priceLayout = (LinearLayout) findViewById(R.id.ll_search_result_price_layout);
 		priceTextView = (TextView) findViewById(R.id.tv_search_result_price);
 		popularityTextView = (TextView) findViewById(R.id.tv_search_result_popularity);
 //		showWithImage = (ImageView) findViewById(R.id.search_with_image);
-		showWithList = (ImageView) findViewById(R.id.search_with_list);
-		
+		selledTextView.setSelected(true);
 		setFragment(0, isShowWithList);
 //		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 //		Bundle newBundle = (Bundle) bundle.clone();
@@ -76,10 +75,9 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 //		currFragment = sellFragment;
 		
 		selledTextView.setOnClickListener(new AddFragmentListener(0));
-		priceLayout.setOnClickListener(new AddFragmentListener(1));
+		priceTextView.setOnClickListener(new AddFragmentListener(1));
 		popularityTextView.setOnClickListener(new AddFragmentListener(2));
-		showWithList.setOnClickListener(new AddFragmentListener(3));
-		showWithImage.setOnClickListener(new AddFragmentListener(4));
+//		showWithImage.setOnClickListener(new AddFragmentListener(4));
 	}
 	
 	
@@ -122,26 +120,29 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		
-//		Button rightBtn = (Button) findViewById(R.id.actionbar_right);
-//		rightBtn.setText(getResources().getString(R.string.filter));
-//		rightBtn.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				showMenu();
-//			}
-//		});
+		TextView rightBtn = (TextView) findViewById(R.id.actionbar_right);
+		rightBtn.setText(getResources().getString(R.string.filter));
+		rightBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				showMenu();
+			}
+		});
 		
-//		ImageView actionbar_left = (ImageView) findViewById(R.id.actionbar_left);
-//		actionbar_left.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				SearchResultActivity.this.finish();
-//			}
-//		});
+		TextView actionbar_left = (TextView) findViewById(R.id.actionbar_left);
+		actionbar_left.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				SearchResultActivity.this.finish();
+			}
+		});
 		
 		titleTextView = (TextView) findViewById(R.id.actionbar_title);
+		
+		showWithList = (ImageView) findViewById(R.id.search_with_list);
+		showWithList.setOnClickListener(new AddFragmentListener(3));
 	}
 	
 	private void setTitle(String title){
@@ -190,11 +191,16 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 		public void onClick(View v) {
 			switch (clickIndex) {
 			case 0: //考虑settag
-				if(clickIndex != lastIndex)
-					setTabBackground(lastIndex);
+				if(clickIndex == lastIndex) return;
+//					setTabBackground(lastIndex);
 				lastIndex = 0;
-				selledTextView.setTextColor(Color.rgb(112, 44, 145));
-				selledTextView.setBackgroundResource(R.drawable.product_details_selected);
+//				selledTextView.setTextColor(Color.rgb(112, 44, 145));
+//				selledTextView.setBackgroundResource(R.drawable.product_details_selected);
+				selledTextView.setSelected(true);
+				priceTextView.setSelected(false);
+				priceTextView.setText(getResources().getString(R.string.price));
+				popularityTextView.setSelected(false);
+				
 				setFragment(0, isShowWithList);
 //				priceClickCount = 0;
 				isDesc = false;
@@ -202,43 +208,51 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 			case 1: //考虑settag
 				if(clickIndex != lastIndex){
 					isDesc = true;
-					setTabBackground(lastIndex);
-					priceTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.price_sort_down, 0);
+//					setTabBackground(lastIndex);
+//					priceTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.price_sort_down, 0);
 				} else {
 //					priceClickCount++;
 					isDesc = !isDesc;
-					if(isDesc){
-						priceTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.price_sort_down, 0);
-					} else {
-						priceTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.price_sort_up, 0);
-					}
+				}
+				if(isDesc){
+//					priceTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.price_sort_down, 0);
+					priceTextView.setText(getResources().getString(R.string.price) + "↓");
+				} else {
+//					priceTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.price_sort_up, 0);
+					priceTextView.setText(getResources().getString(R.string.price) + "↑");
 				}
 				lastIndex = 1;
-				priceTextView.setTextColor(Color.rgb(112, 44, 145));
-				priceLayout.setBackgroundResource(R.drawable.product_details_selected);
+				selledTextView.setSelected(false);
+				priceTextView.setSelected(true);
+				popularityTextView.setSelected(false);
+//				priceLayout.setBackgroundResource(R.drawable.product_details_selected);
 				setFragment(1, isShowWithList);
 				break;
 			case 2: //考虑settag
-				if(clickIndex != lastIndex)
-					setTabBackground(lastIndex);
+				if(clickIndex == lastIndex) return;
+//					setTabBackground(lastIndex);
 				lastIndex = 2;
-				popularityTextView.setTextColor(Color.rgb(112, 44, 145));
-				popularityTextView.setBackgroundResource(R.drawable.product_details_selected);
+				selledTextView.setSelected(false);
+				priceTextView.setSelected(false);
+				priceTextView.setText(getResources().getString(R.string.price));
+				popularityTextView.setSelected(true);
+//				popularityTextView.setBackgroundResource(R.drawable.product_details_selected);
 				setFragment(2, isShowWithList);
 //				priceClickCount = 0;
 				isDesc = false;
 				break;
 			case 3:
-				if(isShowWithList) break;
-				isShowWithList = true;
-				showWithList.setImageResource(R.drawable.list_hover);
-				showWithImage.setImageResource(R.drawable.thumbnails_normal);
+//				if(isShowWithList) break;
+				
+				isShowWithList = !isShowWithList;
+//				showWithList.setImageResource(R.drawable.list_hover);
+//				showWithImage.setImageResource(R.drawable.thumbnails_normal);
 				setFragment(lastIndex, isShowWithList);
 				break;
 			case 4:
 				if(!isShowWithList) break;
 				isShowWithList = false;
-				showWithImage.setImageResource(R.drawable.thumbnails_hover);
+//				showWithImage.setImageResource(R.drawable.thumbnails_hover);
 				showWithList.setImageResource(R.drawable.list_normal);
 				setFragment(lastIndex, isShowWithList);
 				break;

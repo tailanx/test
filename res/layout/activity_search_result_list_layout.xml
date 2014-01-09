@@ -9,15 +9,14 @@
         android:id="@+id/pull_refresh_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginLeft="6dp"
-        android:layout_marginRight="6dp"
-        android:layout_marginTop="4dp"
         android:cacheColorHint="#00000000"
+        android:dividerPadding="0dp"
         android:fadingEdge="none"
         android:fastScrollEnabled="false"
         android:footerDividersEnabled="false"
         android:headerDividersEnabled="false"
         android:smoothScrollbar="true"
+        android:overScrollMode="ifContentScrolls"
         ptr:ptrAnimationStyle="flip"
         ptr:ptrMode="pullUpFromBottom" />
 

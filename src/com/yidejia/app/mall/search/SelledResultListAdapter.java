@@ -36,7 +36,7 @@ public class SelledResultListAdapter extends BaseAdapter {
 		this.searchItems = searchItems;
 		initDisplayImageOption();
 		imageLoader = ImageLoader.getInstance();
-		animateFirstListener = ((MyApplication) this.mContext.getApplicationContext()).getImageLoadingListener();
+		animateFirstListener = ((MyApplication) mContext.getApplicationContext()).getImageLoadingListener();
 	}
 	
 	@Override

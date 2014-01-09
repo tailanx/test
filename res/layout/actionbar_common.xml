@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="@string/yunda"
+        android:text="@string/filter_all"
         android:textColor="@color/white"
         android:textSize="@dimen/textsize_big_big" />
 
