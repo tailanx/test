@@ -27,11 +27,12 @@ public class FilterExListAdapter extends BaseExpandableListAdapter {
 	private String TAG = "FilterExListAdapter";
 	
 	private String[] filterGroup = new String[] { "品牌：全部", "功效：全部功效", "价格：0-∞" };
-	private String[][] filterChild = new String[][] {
-			{ "全部", "妍诗美", "妍膳美" },
-			{ "全部", "眼部护理", "活肌抗衰", "美白淡斑", "保湿锁水", "控油抗痘", "特别护理", "周期护理" },
-			{ "全部", "0-100元", "100-200元", "200-400元", "400-800元", "800-1000元",
-					"1000以上" } };
+	private String[][] filterChild = new String[][] {{},{},{}
+			 };
+	/*{ "全部", "妍诗美", "妍膳美" },
+	{ "全部", "眼部护理", "活肌抗衰", "美白淡斑", "保湿锁水", "控油抗痘", "特别护理", "周期护理" },
+	{ "全部", "0-100元", "100-200元", "200-400元", "400-800元", "800-1000元",
+			"1000以上" }*/
 	
 	private HashMap<Integer, ArrayList<String>> filterHashMap = new HashMap<Integer, ArrayList<String>>();
 	
@@ -139,8 +140,8 @@ public class FilterExListAdapter extends BaseExpandableListAdapter {
 	public void setBrands(ArrayList<Brand> brandsArray){
 //		this.brandsArray = brandsArray;
 		if(brandsArray.size() == 0){
-			isDefault = true;
-			return;
+//			isDefault = true;
+//			return;
 		}
 		ArrayList<String> brandStrings = new ArrayList<String>();
 		brandStrings.add(mContext.getResources().getString(R.string.filter_all));
@@ -152,8 +153,8 @@ public class FilterExListAdapter extends BaseExpandableListAdapter {
 	public void setFuns(ArrayList<Function> funsArray){
 //		this.funsArray = funsArray;
 		if(funsArray.size() == 0){
-			isDefault = true;
-			return;
+//			isDefault = true;
+//			return;
 		}
 		ArrayList<String> funStrings = new ArrayList<String>();
 		funStrings.add(mContext.getResources().getString(R.string.filter_all));
@@ -165,8 +166,8 @@ public class FilterExListAdapter extends BaseExpandableListAdapter {
 	public void setPrices(ArrayList<PriceLevel> pricesArray){
 //		this.pricesArray = pricesArray;
 		if(pricesArray.size() == 0){
-			isDefault = true;
-			return;
+//			isDefault = true;
+//			return;
 		}
 		ArrayList<String> priceStrings = new ArrayList<String>();
 		priceStrings.add(mContext.getResources().getString(R.string.filter_all));

@@ -22,9 +22,9 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.HistoryAdapter;
 import com.yidejia.app.mall.datamanage.BrowseHistoryDataManage;
+import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.ProductBaseInfo;
-import com.yidejia.app.mall.view.GoodsInfoActivity;
 
 public class HistoryActivity extends SherlockFragmentActivity {
 	private BrowseHistoryDataManage historyDataManage;

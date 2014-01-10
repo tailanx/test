@@ -17,7 +17,7 @@
             <RelativeLayout
                 android:id="@+id/re_top_relativelayout"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/image_height" >
+                android:layout_height="wrap_content" >
 
                 <ImageView
                     android:id="@+id/iv_item_goods_detail"
@@ -36,7 +36,7 @@
                     android:layout_marginBottom="@dimen/margin_left"
                     android:layout_marginRight="@dimen/margin_left"
                     android:contentDescription="@string/yidejia"
-                    android:src="@drawable/add_favorites1" />
+                    android:src="@drawable/selector_bg_fav" />
             </RelativeLayout>
 
             <TextView
@@ -45,58 +45,58 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/re_top_relativelayout"
                 android:layout_marginLeft="@dimen/head_padding"
+                android:layout_marginRight="@dimen/head_padding"
+                android:layout_marginTop="@dimen/head_padding"
                 android:ellipsize="end"
                 android:lines="2"
                 android:text="@string/exchange_produce"
                 android:textSize="@dimen/textsize_small" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/base_info_price_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_below="@id/tv_item_goods_base_produce_detail"
-                android:layout_marginLeft="@dimen/magin_left_add"
-                android:layout_marginTop="@dimen/margin_left" >
+                android:layout_margin="@dimen/margin_add_cart" >
 
                 <TextView
                     android:id="@+id/price"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:text="@string/produce_price"
                     android:textColor="@color/theme"
                     android:textSize="@dimen/textsize_big_big" />
 
                 <ImageView
                     android:id="@+id/iv_add_to_cart"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/margin_left_add"
                     android:clickable="true"
                     android:contentDescription="@string/yidejia"
+                    
                     android:focusable="true"
                     android:src="@drawable/buy_car" />
-            </RelativeLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/buy_add_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignRight="@+id/base_info_price_layout"
                 android:layout_below="@+id/base_info_price_layout"
                 android:layout_marginTop="@dimen/margin_left"
-                android:background="@drawable/layout_selector2"
-                android:baselineAligned="false"
+                android:padding="@dimen/mall_list_padding"
+                android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal" >
 
                 <TextView
                     android:id="@+id/tv_selled_text"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_left"
-                    android:layout_weight="1"
                     android:text="@string/shell" />
 
                 <TextView
@@ -104,13 +104,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/hour" />
+                    android:gravity="left"
+                     />
 
                 <TextView
                     android:id="@+id/tv_emulate_text"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="@string/comment" />
 
                 <TextView
@@ -118,7 +118,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/mint" />
+                    android:gravity="left"
+                     />
 
                 <TextView
                     android:id="@+id/tv_show_text"
@@ -128,19 +129,21 @@
 
                 <TextView
                     android:id="@+id/tv_show_num_text"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/second" />
+                    android:layout_weight="1"
+                    android:gravity="left"
+                     />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/li_buy_add_layout_second"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignRight="@+id/base_info_price_layout"
                 android:layout_below="@+id/buy_add_layout"
-                android:background="@drawable/layout_selector2"
-                android:baselineAligned="false"
+                android:layout_marginTop="1dp"
+                android:padding="@dimen/mall_list_padding"
+                android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal" >
 
@@ -148,14 +151,14 @@
                     android:id="@+id/tv_brand_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_left"
                     android:text="@string/brand" />
 
                 <TextView
                     android:id="@+id/tv_brand_name_text"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/brand" />
+                    android:layout_weight="1"
+                     />
 
                 <TextView
                     android:id="@+id/tv_product_id_text"
@@ -166,19 +169,20 @@
 
                 <TextView
                     android:id="@+id/tv_product_id_num_text"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/product_id" />
+                    android:layout_weight="1"
+                     />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/li_buy_add_layout_third"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignRight="@+id/base_info_price_layout"
                 android:layout_below="@+id/li_buy_add_layout_second"
-                android:background="@drawable/layout_selector2"
-                android:baselineAligned="false"
+                android:layout_marginTop="1dp"
+                android:padding="@dimen/mall_list_padding"
+                android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal" >
 
@@ -186,7 +190,6 @@
                     android:id="@+id/standard_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_left"
                     android:text="@string/standard_text" />
 
                 <TextView
@@ -208,6 +211,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/product_comment"
+                    android:gravity="center_vertical"
                     android:layout_marginLeft="@dimen/margin_left"
                     android:text="@string/produce_comment"
                     android:textSize="@dimen/textsize_big_big" />
@@ -235,6 +240,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:drawableLeft="@drawable/product_detail"
                     android:layout_marginLeft="@dimen/margin_left"
                     android:text="@string/produce_imagecomment"
                     android:textSize="@dimen/textsize_big_big" />
@@ -304,7 +311,7 @@
             android:layout_alignRight="@+id/shopping_cart_image"
             android:layout_marginRight="4dp"
             android:layout_marginTop="4dp"
-            android:background="@drawable/cart_num_bg"
+            android:background="@drawable/shape_bg_cart_num"
             android:textColor="@color/white"
             android:textSize="10sp" />
     </RelativeLayout>

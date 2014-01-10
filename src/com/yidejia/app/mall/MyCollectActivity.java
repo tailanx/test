@@ -31,11 +31,11 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.FavoriteAdapter;
 import com.yidejia.app.mall.exception.TimeOutEx;
+import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.model.SearchItem;
 import com.yidejia.app.mall.net.favorite.GetFavoriteList;
 import com.yidejia.app.mall.search.SearchResultActivity;
 import com.yidejia.app.mall.task.TaskDelFav;
-import com.yidejia.app.mall.view.GoodsInfoActivity;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 /**

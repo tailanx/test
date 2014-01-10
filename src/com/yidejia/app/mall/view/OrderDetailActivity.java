@@ -24,6 +24,7 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.address.ModelAddresses;
 import com.yidejia.app.mall.datamanage.TaskGetOrderByCode;
+import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.util.Consts;
 

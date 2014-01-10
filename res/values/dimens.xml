@@ -29,6 +29,7 @@
     <dimen name="mall_list_padding">15dp</dimen>
     <dimen name="margin_left_more">12dp</dimen>
 	<dimen name ="margin_left">10dp</dimen>
+	<dimen name ="margin_add_cart">10dp</dimen>
     <dimen name="head_padding">8dp</dimen>
     <dimen name="actiobar_margin_top">6dp</dimen>
     <dimen name="actiobar_margin_left">2dp</dimen>

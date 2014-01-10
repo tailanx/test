@@ -51,18 +51,18 @@ public class TaskFilter {
 		String urlBrand = jniCallBack.getHttp4GetBrand();
 		String urlEffect = jniCallBack.getHttp4GetEffect("flag%3D%27y%27", "0", "20", "", "", "%2A");
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
-//		client.get(urlBrand, new AsyncHttpResponse(){
-//
-//			@Override
-//			public void onSuccess(int statusCode, String content) {
-//				super.onSuccess(statusCode, content);
-//				ParseSearchJson parseSearchJson = new ParseSearchJson();
-//				parseSearchJson.parseBrandJson(content);
-//				brands = parseSearchJson.getBrands();
-//				ctrl.update();
-//			}
-//			
-//		});
+		client.get(urlBrand, new AsyncHttpResponse(){
+
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				super.onSuccess(statusCode, content);
+				ParseSearchJson parseSearchJson = new ParseSearchJson();
+				parseSearchJson.parseBrandJson(content);
+				brands = parseSearchJson.getBrands();
+				ctrl.update();
+			}
+			
+		});
 		client.get(urlPrice, new AsyncHttpResponse(){
 			
 			@Override
@@ -75,18 +75,18 @@ public class TaskFilter {
 			}
 			
 		});
-//		client.get(urlEffect, new AsyncHttpResponse(){
-//			
-//			@Override
-//			public void onSuccess(int statusCode, String content) {
-//				super.onSuccess(statusCode, content);
-//				ParseSearchJson parseSearchJson = new ParseSearchJson();
-//				parseSearchJson.parseFunJson(content);
-//				effects = parseSearchJson.getFunctions();
-//				ctrl.update();
-//			}
-//			
-//		});
+		client.get(urlEffect, new AsyncHttpResponse(){
+			
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				super.onSuccess(statusCode, content);
+				ParseSearchJson parseSearchJson = new ParseSearchJson();
+				parseSearchJson.parseFunJson(content);
+				effects = parseSearchJson.getFunctions();
+				ctrl.update();
+			}
+			
+		});
 	}
 	
 	private void showFilterView() {

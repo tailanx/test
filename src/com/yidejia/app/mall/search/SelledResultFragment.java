@@ -29,10 +29,10 @@ import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.opens.asyncokhttpclient.AsyncHttpResponse;
 import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.initview.SRViewWithImage;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.SearchItem;
-import com.yidejia.app.mall.view.GoodsInfoActivity;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class SelledResultFragment extends SherlockFragment {
