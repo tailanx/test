@@ -20,8 +20,8 @@ import android.widget.Toast;
 
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.address.ModelAddresses;
 import com.yidejia.app.mall.exception.TimeOutEx;
-import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.address.GetUserAddressList;
@@ -203,7 +203,7 @@ public class TaskGetOrderByCode {
 	private String orderCode;//传递过来的订单号
 	private String orderPrice;//传递过来的价格总数
 //	private String orderTn;//传递过来的流水号
-	private ArrayList<Addresses> addresses ;
+	private ArrayList<ModelAddresses> addresses ;
 	private TaskGetUserAddress taskGetUserAddress;
 	
 	private void findIds(){
@@ -225,7 +225,7 @@ public class TaskGetOrderByCode {
 	private void setupShow(){
 		
 		myApplication = (MyApplication) activity.getApplication();
-		addresses  = new ArrayList<Addresses>();
+		addresses  = new ArrayList<ModelAddresses>();
 		
 		priceTextView.setText(orderPrice);
 		String expressNum = order.getShipFee();
@@ -362,7 +362,7 @@ public class TaskGetOrderByCode {
 		
 	}
 	
-	public void setAddress(Addresses address){
+	public void setAddress(ModelAddresses address){
 		StringBuffer sb = new StringBuffer();
 //		Addresses address = addresses.get(0);
 		nameTextView.setText(address.getName());

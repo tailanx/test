@@ -87,7 +87,6 @@ public class SharkUtil {
 
 		@Override
 		public void onAccuracyChanged(Sensor sensor, int accuracy) {
-			// TODO Auto-generated method stub
 			
 		}
 		
@@ -98,7 +97,6 @@ public class SharkUtil {
 		
 		@Override
 		public void run() {
-			// TODO Auto-generated method stub
 			iShark.onFinish();
 		}
 	};

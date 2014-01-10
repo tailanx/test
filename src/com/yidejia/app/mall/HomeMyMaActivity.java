@@ -3,7 +3,6 @@ package com.yidejia.app.mall;
 import java.io.IOException;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,28 +18,20 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.address.AddressActivity;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
-import com.yidejia.app.mall.datamanage.PersonCountDataManage;
 import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.net.user.GetCount;
 import com.yidejia.app.mall.util.BottomChange;
-import com.yidejia.app.mall.view.AddressActivity;
 import com.yidejia.app.mall.view.AllOrderActivity;
 import com.yidejia.app.mall.view.AlreadyComActivity;
 import com.yidejia.app.mall.view.AlreadyOrderActivity;
-import com.yidejia.app.mall.view.EditorActivity;
-import com.yidejia.app.mall.view.EvaluationActivity;
-import com.yidejia.app.mall.view.ExchangeActivity;
 import com.yidejia.app.mall.view.IntegeralActivity;
-import com.yidejia.app.mall.view.MyCollectActivity;
-import com.yidejia.app.mall.view.PersonActivity;
 import com.yidejia.app.mall.view.WaitDeliverActivity;
 import com.yidejia.app.mall.view.WaitPayActivity;
-import com.yidejia.app.mall.widget.YLImageButton;
 
 public class HomeMyMaActivity extends SherlockFragmentActivity implements
 		OnClickListener {
@@ -56,8 +47,6 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 
 	private ImageView head;// 头像
 	private MyApplication myApplication;
-	private PersonCountDataManage personCountDataManage;
-	private Resources res;
 
 	private BottomChange bottomChange;
 	private RelativeLayout bottomLayout;
@@ -154,7 +143,6 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 		int next = getIntent().getIntExtra("next", -1);
 
 		setupView(view);
-		res = getResources();
 		// 设置底部
 		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
 		bottomChange = new BottomChange(this, bottomLayout);
@@ -194,17 +182,7 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 	private RelativeLayout downSearchLayout;
 	private RelativeLayout downShoppingLayout;
 	private RelativeLayout downMyLayout;
-	private ImageView down_home_imageView;// 首页按钮图片
-	private ImageView down_guang_imageView;// 逛按钮图片
-	private ImageView down_search_imageView;// 搜索按钮图片
-	private ImageView down_shopping_imageView; // 购物车按钮图片
-	private ImageView down_my_imageView; // 我的商城按钮图片
 	private CartsDataManage cartsDataManage;
-	private TextView down_home_textview;
-	private TextView down_guang_textview;
-	private TextView down_search_textview;
-	private TextView down_shopping_textview;
-	private TextView down_my_textview;
 	private int number;
 	private Button cartImage;
 
@@ -233,7 +211,6 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				Intent intent = new Intent(HomeMyMaActivity.this,
 						HomeMallActivity.class);
 				startActivity(intent);
@@ -246,7 +223,6 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				Intent intent = new Intent(HomeMyMaActivity.this,
 						HomeSearchActivity.class);
 
@@ -262,7 +238,6 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				Intent intent = new Intent(HomeMyMaActivity.this,
 						HomeCarActivity.class);
 
@@ -338,7 +313,6 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if ((System.currentTimeMillis() - exitTime) > 2000) {
 				Toast.makeText(getApplicationContext(),
@@ -358,7 +332,6 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 
 	@Override
 	public void onStart() {
-		// TODO Auto-generated method stub
 		super.onStart();
 		closeTask();
 		getNumTask = new GetNumTask();
@@ -367,9 +340,7 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 
 	private GetNumTask getNumTask;
 	private String scores;
-	private String order;
 	private String favoliten;
-	private String msg;
 
 	private class GetNumTask extends AsyncTask<Void, Void, Boolean> {
 
@@ -383,10 +354,8 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 				favoliten = getCount.getFavoliten();
 				return issuccess;
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (TimeOutEx e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return false;
@@ -394,7 +363,6 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			setCount(favoliten, null, scores);
 		}
@@ -425,7 +393,6 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		closeTask();
 	}
@@ -439,14 +406,12 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 		StatService.onPause(this);
 	}
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		StatService.onResume(this);
 	}

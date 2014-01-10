@@ -8,8 +8,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@drawable/new_menubg_middle"
-        android:layout_margin="@dimen/margin_left"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginRight="@dimen/margin_left"
+        android:layout_marginTop="@dimen/actiobar_margin_top"
+        android:layout_marginBottom="@dimen/actiobar_margin_top"
         android:gravity="center_horizontal" >
 
         <TextView
@@ -18,42 +20,50 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="@drawable/product_details_selected"
+            android:background="@drawable/selecter_bg_sort_sell"
             android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
             android:text="@string/selled_num"
-            android:textColor="@color/search_result_top"
+            android:textColor="@color/color_sort_text_color"
             android:textSize="@dimen/textsize_small" />
-<!--   -->
 
-        <LinearLayout
-            android:id="@+id/ll_search_result_price_layout"
-            android:layout_width="@dimen/width"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="@drawable/product_details_bg"
-            android:gravity="center" >
+        
 
             <TextView
                 android:id="@+id/tv_search_result_price"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/width"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:drawableRight="@drawable/price_normal"
+                android:background="@drawable/selecter_bg_sort_price"
                 android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
                 android:text="@string/price"
+                android:textColor="@color/color_sort_text_color"
                 android:textSize="@dimen/textsize_small" />
-        </LinearLayout>
-
+<!-- 
+        </LinearLayout> <LinearLayout
+            android:id="@+id/ll_search_result_price_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center" >
+  -->
         <TextView
             android:id="@+id/tv_search_result_popularity"
             android:layout_width="@dimen/width"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="@drawable/product_details_bg"
+            android:background="@drawable/selecter_bg_sort_popular"
             android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
             android:text="@string/popularity"
+            android:textColor="@color/color_sort_text_color"
             android:textSize="@dimen/textsize_small" />
 <!-- 
         <LinearLayout
@@ -85,6 +95,6 @@
         android:id="@+id/fl_search_result_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/search_result_tabhost" />
+        android:layout_below="@+id/ll_search_result_tabhost" />
 
 </RelativeLayout>

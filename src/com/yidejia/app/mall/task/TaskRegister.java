@@ -9,9 +9,9 @@ import android.widget.Toast;
 
 import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.RegistActivity;
 import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.net.user.Register;
-import com.yidejia.app.mall.view.RegistActivity;
 
 public class TaskRegister {
 	

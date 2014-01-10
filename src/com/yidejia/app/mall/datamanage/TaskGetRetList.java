@@ -17,12 +17,12 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+import com.yidejia.app.mall.ExchangeActivity;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.ReturnActivity;
 import com.yidejia.app.mall.ctrl.RetViewCtrl;
 import com.yidejia.app.mall.model.RetOrderInfo;
 import com.yidejia.app.mall.net.order.GetReturnOrder;
-import com.yidejia.app.mall.view.ExchangeActivity;
-import com.yidejia.app.mall.view.ReturnActivity;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class TaskGetRetList {

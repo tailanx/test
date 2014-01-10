@@ -24,21 +24,13 @@
             android:scaleType="centerCrop" />
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/search_result_small_arrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/search_result_arrow" />
 
     <TextView
         android:id="@+id/search_result_small_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:layout_toLeftOf="@+id/search_result_small_arrow"
+        android:layout_marginRight="10dp"
         android:layout_toRightOf="@+id/search_result_small_img_layout"
         android:ellipsize="end"
         android:maxLines="2"
@@ -50,9 +42,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/search_result_small_title"
         android:layout_marginTop="10dp"
-        android:layout_toLeftOf="@+id/search_result_small_arrow"
         android:layout_toRightOf="@+id/search_result_small_img_layout"
-        android:textColor="@color/price_color"
+        android:textColor="@color/theme"
         android:textSize="16sp" />
 
     <TextView

@@ -20,20 +20,20 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.yidejia.app.mall.ActiveGoActivity;
+import com.yidejia.app.mall.HistoryActivity;
 import com.yidejia.app.mall.MyApplication;
+import com.yidejia.app.mall.MyCollectActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.phone.PhoneActivity;
+import com.yidejia.app.mall.search.SearchActivity;
+import com.yidejia.app.mall.skintest.SkinHomeActivity;
 import com.yidejia.app.mall.task.MallTask;
 import com.yidejia.app.mall.task.MallTask.Task;
-import com.yidejia.app.mall.view.ActiveGoActivity;
 import com.yidejia.app.mall.view.AllOrderActivity;
-import com.yidejia.app.mall.view.HistoryActivity;
 import com.yidejia.app.mall.view.IntegeralActivity;
 import com.yidejia.app.mall.view.LoginActivity;
-import com.yidejia.app.mall.view.MyCollectActivity;
-import com.yidejia.app.mall.view.SearchActivity;
-import com.yidejia.app.mall.view.SkinHomeActivity;
 
 public class MallAction {
 	private SherlockFragmentActivity activity;
@@ -82,7 +82,6 @@ public class MallAction {
 	private OnClickListener go2SearchListener2 = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
 			Intent intent = new Intent(activity, SearchActivity.class);
 			activity.startActivity(intent);
 		}
@@ -100,7 +99,6 @@ public class MallAction {
 
 			@Override
 			public void onCancel(DialogInterface dialog) {
-				// TODO Auto-generated method stub
 				isFirstIn = false;
 				closeTask(task);
 			}
@@ -279,7 +277,6 @@ public class MallAction {
 
 		@Override
 		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-			// TODO Auto-generated method stub
 			try {
 				if (!ConnectionDetector.isConnectingToInternet(activity)) {
 					Toast.makeText(
@@ -295,7 +292,6 @@ public class MallAction {
 				MallTask mall = new MallTask(activity, view, frameLayout,
 						main_mall_notice_content, mPullToRefreshScrollView);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				Toast.makeText(
 						activity,

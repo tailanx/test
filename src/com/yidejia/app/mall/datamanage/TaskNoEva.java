@@ -32,6 +32,7 @@ import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.unionpay.mpay.widgets.p;
+import com.yidejia.app.mall.PersonEvaluationActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.model.Cart;
@@ -39,7 +40,6 @@ import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.commments.WaitingComment;
 import com.yidejia.app.mall.net.goodsinfo.GetProductAddress;
-import com.yidejia.app.mall.view.PersonEvaluationActivity;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class TaskNoEva {

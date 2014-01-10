@@ -48,6 +48,7 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.BrowseHistoryDataManage;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.FavoriteDataManage;
+import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.MainProduct;
@@ -57,7 +58,6 @@ import com.yidejia.app.mall.net.favorite.CheckExistsFavorite;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.view.GoCartActivity;
-import com.yidejia.app.mall.view.GoodsInfoActivity;
 import com.yidejia.app.mall.view.ImagePagerActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 

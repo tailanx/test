@@ -39,8 +39,8 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.FavoriteDataManage;
+import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.model.Cart;
-import com.yidejia.app.mall.view.GoodsInfoActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 
 public class CartUtil1 {
@@ -63,52 +63,6 @@ public class CartUtil1 {
 
 	private TextView number;
 
-	// private void setupShow() {
-	// Builder builder = new Builder(context);
-	// dialog = builder
-	// .setIcon(android.R.drawable.alert_dark_frame)
-	// .setTitle("���ﳵ����")
-	// .setSingleChoiceItems(items, 0,
-	// new android.content.DialogInterface.OnClickListener() {
-	//
-	// @Override
-	// public void onClick(DialogInterface dialog,
-	// int which) {
-	// switch (which) {
-	// case 0:
-	// dataManage = new CartsDataManage();
-	// boolean isDel = dataManage.delCart(cart
-	// .getUId());
-	//
-	// dialog.dismiss();
-	// break;
-	//
-	// case 1:
-	// Intent intent = new Intent(context,
-	// GoodsInfoActivity.class);
-	// Bundle bundle = new Bundle();
-	// bundle.putSerializable("goodsId",
-	// cart.getUId());
-	// intent.putExtras(bundle);
-	// context.startActivity(intent);
-	// dialog.dismiss();
-	// break;
-	// case 2:
-	// Toast.makeText(context, "�ղسɹ�",
-	// Toast.LENGTH_LONG).show();
-	// dialog.dismiss();
-	// break;
-	// }
-	//
-	// }
-	// }).create();
-	// }
-
-	// private HashMap<String, Boolean> checkmMap;
-
-	/**
-	 * 
-	 */
 	public CartUtil1() {
 
 	}
@@ -243,7 +197,7 @@ public class CartUtil1 {
 					public void onClick(View v) {
 
 						Intent intent = new Intent(context,
-								GoodsInfoActivity.class);
+								com.yidejia.app.mall.goodinfo.GoodsInfoActivity.class);
 
 						Bundle bundle = new Bundle();
 						bundle.putString("goodsId", cart.getUId());

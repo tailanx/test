@@ -40,12 +40,14 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.address.AddressActivity;
+import com.yidejia.app.mall.address.ModelAddresses;
+import com.yidejia.app.mall.address.EditNewAddressActivity;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.ExpressDataManage;
 import com.yidejia.app.mall.datamanage.PreferentialDataManage;
 import com.yidejia.app.mall.datamanage.VoucherDataManage;
 import com.yidejia.app.mall.exception.TimeOutEx;
-import com.yidejia.app.mall.model.Addresses;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Express;
 import com.yidejia.app.mall.model.FreePost;
@@ -903,7 +905,7 @@ public class CstmPayActivity extends SherlockActivity {
 				httpresp = getUserAddressList.getAddressHttpresp("customer_id%3D"+myApplication.getUserId()+"+and+is_default%3D%27y%27+and+valid_flag%3D%27y%27", 0 + "", 1 + "");
 				issuccess = getUserAddressList.analysis(httpresp);
 				mList = getUserAddressList.getAddresses();
-				Addresses addresses;
+				ModelAddresses addresses;
 				if(issuccess && mList != null && !mList.isEmpty()) {
 //					return issuccess;
 //					if()
@@ -978,8 +980,8 @@ public class CstmPayActivity extends SherlockActivity {
 		
 	}
 	
-	private ArrayList<Addresses> mList;
-	private ArrayList<Addresses> addArray;
+	private ArrayList<ModelAddresses> mList;
+	private ArrayList<ModelAddresses> addArray;
 	private AlertDialog addresssDialog;
 
 	/**
@@ -994,7 +996,7 @@ public class CstmPayActivity extends SherlockActivity {
 			// myApplication.getUserId(), 0, 10);
 //			ArrayList<Addresses> mList = new AddressDataManage()
 //					.getDefAddresses(myApplication.getUserId());
-			Addresses addresses;
+			ModelAddresses addresses;
 //			addresssDialog = new Builder(CstmPayActivity.this).setTitle(getResources().getString(R.string.no_address_title)).setMessage(getResources().getString(R.string.no_address_content))
 //					.setPositiveButton(getResources().getString(R.string.sure), new android.content.DialogInterface.OnClickListener() {
 //						
@@ -1059,7 +1061,7 @@ public class CstmPayActivity extends SherlockActivity {
 	 * 
 	 * @param addresses
 	 */
-	private void setAdd(Addresses addresses) {
+	private void setAdd(ModelAddresses addresses) {
 		// Log.i(TAG, "show sum:"+sum);
 		 Log.e(TAG, "add address");
 		userName.setText(addresses.getName());
@@ -1080,7 +1082,7 @@ public class CstmPayActivity extends SherlockActivity {
 	 * 
 	 * @param addresses
 	 */
-	private void setKuaiDi(Addresses addresses) {
+	private void setKuaiDi(ModelAddresses addresses) {
 		Express express;
 		expressArray = new ExpressDataManage(CstmPayActivity.this)
 		.getExpressesExpenses(addresses.getProvice(), "y");
@@ -1206,7 +1208,7 @@ public class CstmPayActivity extends SherlockActivity {
 		}
 		if (requestCode == Consts.AddressRequestCode
 				&& resultCode == Consts.AddressResponseCode) {
-			Addresses addresses1 = (Addresses) data.getExtras()
+			ModelAddresses addresses1 = (ModelAddresses) data.getExtras()
 					.getSerializable("addresses1");
 			Log.i("info", addresses1.getAddress() + "str");
 			if (addresses1 != null) {

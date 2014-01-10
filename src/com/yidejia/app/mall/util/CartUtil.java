@@ -40,8 +40,8 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.FavoriteDataManage;
+import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.model.Cart;
-import com.yidejia.app.mall.view.GoodsInfoActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 
 public class CartUtil {
@@ -221,7 +221,7 @@ public class CartUtil {
 					public void onClick(View v) {
 
 						Intent intent = new Intent(context,
-								GoodsInfoActivity.class);
+								com.yidejia.app.mall.goodinfo.GoodsInfoActivity.class);
 
 						Bundle bundle = new Bundle();
 						bundle.putString("goodsId", cart.getUId());

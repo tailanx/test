@@ -4,7 +4,7 @@ package com.yidejia.app.mall;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.TimeoutException;
+//import java.util.concurrent.TimeoutException;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
@@ -15,33 +15,33 @@ import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.model.Cart;
+import com.yidejia.app.mall.search.SearchResultActivity;
 import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.util.CartUtil;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.view.ImageLoaderUtil;
 import com.yidejia.app.mall.view.LoginActivity;
-import com.yidejia.app.mall.view.SearchResultActivity;
 
-import android.app.Activity;
+//import android.app.Activity;
 import android.app.AlertDialog.Builder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Resources;
+//import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
+//import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
+//import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -73,7 +73,6 @@ public class HomeCarActivity extends SherlockFragmentActivity implements
 
 	@Override
 	protected void onCreate(Bundle arg0) {
-		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		receiver = new InnerReceiver();
 		IntentFilter filter = new IntentFilter();
@@ -121,7 +120,6 @@ public class HomeCarActivity extends SherlockFragmentActivity implements
 		mButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				Intent intent = new Intent(HomeCarActivity.this,
 						SearchResultActivity.class);
 				Bundle bundle = new Bundle();
@@ -139,7 +137,6 @@ public class HomeCarActivity extends SherlockFragmentActivity implements
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		imageLoader.init(ImageLoaderConfiguration
 				.createDefault(HomeCarActivity.this));
@@ -160,7 +157,7 @@ public class HomeCarActivity extends SherlockFragmentActivity implements
 		try {
 			shoppingCartTopay.setVisibility(View.VISIBLE);
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 		layout = new LinearLayout(this);
 		layout.setOrientation(LinearLayout.VERTICAL);
@@ -175,7 +172,6 @@ public class HomeCarActivity extends SherlockFragmentActivity implements
 		scrollView.addView(layout);
 
 		if (shoppingCartTopay == null) {
-			
 
 		} else {
 			shoppingCartTopay.setOnClickListener(new OnClickListener() {
@@ -223,18 +219,18 @@ public class HomeCarActivity extends SherlockFragmentActivity implements
 	private RelativeLayout downSearchLayout;
 	private RelativeLayout downShoppingLayout;
 	private RelativeLayout downMyLayout;
-	private ImageView down_home_imageView;// 首页按钮图片
-	private ImageView down_guang_imageView;// 逛按钮图片
-	private ImageView down_search_imageView;// 搜索按钮图片
-	private ImageView down_shopping_imageView; // 购物车按钮图片
-	private ImageView down_my_imageView; // 我的商城按钮图片
+//	private ImageView down_home_imageView;// 首页按钮图片
+//	private ImageView down_guang_imageView;// 逛按钮图片
+//	private ImageView down_search_imageView;// 搜索按钮图片
+//	private ImageView down_shopping_imageView; // 购物车按钮图片
+//	private ImageView down_my_imageView; // 我的商城按钮图片
 	private CartsDataManage cartsDataManage;
-	private TextView down_home_textview;
-	private TextView down_guang_textview;
-	private TextView down_search_textview;
-	private TextView down_shopping_textview;
-	private TextView down_my_textview;
-	private Resources res;
+//	private TextView down_home_textview;
+//	private TextView down_guang_textview;
+//	private TextView down_search_textview;
+//	private TextView down_shopping_textview;
+//	private TextView down_my_textview;
+//	private Resources res;
 	private Button cartImage;
 
 	/**
@@ -249,9 +245,8 @@ public class HomeCarActivity extends SherlockFragmentActivity implements
 		} else {
 			cartImage.setText(number + "");
 		}
-		res = getResources();
+//		res = getResources();
 		downHomeLayout = (RelativeLayout) findViewById(R.id.re_down_home_layout);
-
 		downGuangLayout = (RelativeLayout) findViewById(R.id.re_down_guang_layout);
 		downSearchLayout = (RelativeLayout) findViewById(R.id.re_down_search_layout);
 		downShoppingLayout = (RelativeLayout) findViewById(R.id.re_down_shopping_layout);

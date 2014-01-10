@@ -18,6 +18,7 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.broadcast.MallAction;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
+import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.MallInnerReceiver;
 
@@ -33,8 +34,11 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 	private CartsDataManage cartsDataManage;
 	private int number;
 	private Button cartImage;// 购物车上的按钮
+	private BottomChange bottomChange;
+	private RelativeLayout bottomLayout;
 	private MyApplication myApplication;
 	private MallAction mallAction;
+//	private boolean isFrist = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,9 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 		filter.addAction(Consts.DELETE_CART);
 		registerReceiver(receiver, filter);
 		
+		// 设置底部
+		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
+		bottomChange = new BottomChange(HomeMallActivity.this, bottomLayout);
 		
 		initNavView();
 	}
@@ -87,19 +94,16 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		Intent intent = new Intent();
 		switch (v.getId()) {
 		case R.id.re_down_search_layout:
 			intent.setClass(HomeMallActivity.this, HomeSearchActivity.class);
 			intent.putExtra("current", 0);
 			intent.putExtra("next", 1);
-//			bottomChange.initNavView(0,1);
 			break;
 		case R.id.re_down_shopping_layout:
 			intent.setClass(HomeMallActivity.this, HomeCarActivity.class);
 			intent.putExtra("next", 2);
-//			bottomChange.initNavView(0,2);
 			break;
 		case R.id.re_down_my_layout:
 			if (myApplication.getIsLogin()){
@@ -109,17 +113,14 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 			}
 			intent.putExtra("current", 0);
 			intent.putExtra("next", 3);
-//			bottomChange.initNavView(0,3);
 			break;
 		}
 		HomeMallActivity.this.startActivity(intent);
-//		HomeMallActivity.this.finish();
 		overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
 	}
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		unregisterReceiver(receiver);
 	}
@@ -129,7 +130,6 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if ((System.currentTimeMillis() - exitTime) > 2000) {
 				Toast.makeText(getApplicationContext(),
@@ -146,7 +146,6 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 		mallAction.onPause();
 		StatService.onPause(this);
@@ -154,14 +153,12 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		StatService.onResume(this);
 	}
 
 	@Override
 	protected void onRestart() {
-		// TODO Auto-generated method stub
 		super.onRestart();
 		mallAction.onResume();
 	}

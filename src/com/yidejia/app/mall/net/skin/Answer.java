@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
 
 import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;

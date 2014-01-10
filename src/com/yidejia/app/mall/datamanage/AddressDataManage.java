@@ -14,7 +14,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.model.Addresses;
+import com.yidejia.app.mall.address.ModelAddresses;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.address.DeleteUserAddress;
 import com.yidejia.app.mall.net.address.GetUserAddressList;
@@ -24,7 +24,7 @@ import com.yidejia.app.mall.util.UnicodeToString;
 
 public class AddressDataManage {
 	
-	private ArrayList<Addresses> addressesArray;
+	private ArrayList<ModelAddresses> addressesArray;
 	private Context context;
 	private String TAG = "AddressDataManage";
 	
@@ -38,7 +38,7 @@ public class AddressDataManage {
 	public AddressDataManage(Context context){
 		this.context = context;
 		unicode = new UnicodeToString();
-		addressesArray = new ArrayList<Addresses>();
+		addressesArray = new ArrayList<ModelAddresses>();
 	}
 	
 	/**添加收货地址
@@ -170,7 +170,7 @@ public class AddressDataManage {
 	 * @param acount 获取个数
 	 * @return
 	 */
-	public ArrayList<Addresses> getAddressesArray(String userId, int fromIndex, int acount){
+	public ArrayList<ModelAddresses> getAddressesArray(String userId, int fromIndex, int acount){
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
 			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return addressesArray;
@@ -207,7 +207,7 @@ public class AddressDataManage {
 	 * @param userId 用户id
 	 * @return
 	 */
-	public ArrayList<Addresses> getDefAddresses(String userId){
+	public ArrayList<ModelAddresses> getDefAddresses(String userId){
 		if(!ConnectionDetector.isConnectingToInternet(context)) {
 			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
 			return addressesArray;
@@ -279,7 +279,7 @@ public class AddressDataManage {
 	 * @param httpResultString
 	 * @return
 	 */
-	public ArrayList<Addresses> analysisGetListJson(String httpResultString){
+	public ArrayList<ModelAddresses> analysisGetListJson(String httpResultString){
 		JSONObject httpResultObject;
 		try {
 			httpResultObject = new JSONObject(httpResultString);
@@ -291,7 +291,7 @@ public class AddressDataManage {
 				int length = responseArray.length();
 				JSONObject addressItem ;
 				for (int i = 0; i < length; i++) {
-					Addresses addresses = new Addresses();
+					ModelAddresses addresses = new ModelAddresses();
 					addressItem = responseArray.getJSONObject(i);
 //					if("n".equals(addressItem.getString("valid_flag"))) continue;
 					String recipient_id = addressItem.getString("recipient_id");

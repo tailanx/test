@@ -25,14 +25,13 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.model.BaseProduct;
-import com.yidejia.app.mall.util.SlideImageLayout;
-import com.yidejia.app.mall.view.GoodsInfoActivity;
 
 /**
  * 滑动的控件
  * 
- * @author Administrator
+ * @author LiuYong
  * 
  */
 public class BannerView {
@@ -77,13 +76,6 @@ public class BannerView {
 		};
 	}
 
-//	public ViewGroup getViewGroup() {
-//		return mMainView;
-//	}
-//
-//	public YLViewPager getYlViewPager(){
-//			return mViewPager;
-//	}
 	/**
 	 * 
 	 * @return 首页轮播的控件

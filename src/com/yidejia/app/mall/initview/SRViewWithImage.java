@@ -21,8 +21,8 @@ import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.model.SearchItem;
-import com.yidejia.app.mall.view.GoodsInfoActivity;
 
 public class SRViewWithImage {
 	private Activity activity;
