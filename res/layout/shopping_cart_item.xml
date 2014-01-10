@@ -6,119 +6,112 @@
     android:background="@drawable/productlist_bg" >
 
     <CheckBox
-        android:id="@+id/shopping_cart_item_checkbox"
+        android:id="@+id/ck_shopping_cart_item_checkbox"
         style="@style/CustomCheckboxTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="12dp" />
+        android:layout_marginLeft="@dimen/margin_left_more" />
 
     <ImageView
-        android:id="@+id/shopping_cart_item__imageview1"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:id="@+id/iv_shopping_cart_item__imageview1"
+        android:layout_width="@dimen/yirihui"
+        android:layout_height="@dimen/yirihui"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/shopping_cart_item_checkbox"
+        android:layout_toRightOf="@id/ck_shopping_cart_item_checkbox"
         android:background="@drawable/product_image_bg"
-        android:padding="10dp"
-         />
+        android:contentDescription="@string/yidejia"
+        android:padding="@dimen/margin_left" />
 
     <TextView
-        android:id="@+id/shopping_cart_item_text"
+        android:id="@+id/tv_shopping_cart_item_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="10dp"
-        android:layout_toLeftOf="@+id/shopping_cart_item_delete"
-        android:layout_toRightOf="@id/shopping_cart_item__imageview1"
+        android:layout_marginLeft="@dimen/head_padding"
+        android:layout_marginTop="@dimen/margin_left"
+        android:layout_toRightOf="@id/iv_shopping_cart_item__imageview1"
         android:ellipsize="end"
         android:lines="2"
-        android:textSize="15sp" />
+        android:textSize="@dimen/textsize_small" />
 
     <TextView
-        android:id="@+id/shopping_cart_item_money_price"
+        android:id="@+id/tv_shopping_cart_item_money_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/shopping_cart_item_text"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_toRightOf="@id/shopping_cart_item__imageview1"
-        android:text="￥"
-        android:textColor="#ed217c"
-        android:textSize="20sp" />
+        android:layout_below="@id/tv_shopping_cart_item_text"
+        android:layout_marginLeft="@dimen/head_padding"
+        android:layout_marginTop="@dimen/margin_left_add"
+        android:layout_toRightOf="@id/iv_shopping_cart_item__imageview1"
+        android:text="@string/go_pay_show_pay_money"
+        android:textColor="@color/theme"
+        android:textSize="@dimen/textsize_big_big" />
 
     <TextView
-        android:id="@+id/shopping_cart_item_money"
+        android:id="@+id/tv_shopping_cart_item_money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/shopping_cart_item_text"
-        android:layout_marginTop="4dp"
-        android:layout_toRightOf="@id/shopping_cart_item_money_price"
-        android:textColor="#ed217c"
-        android:textSize="20sp" /><!--
-         <TextView
-        android:id="@+id/shopping_cart_item_right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="6dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/arrow" />
-        android:layout_alignBottom="@id/shopping_cart_item_relative"
-        android:layout_toRightOf="@id/shopping_cart_item_relative"
-    -->
-
-    <ImageView
-        android:id="@+id/shopping_cart_item_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="5dp"
-        android:src="@drawable/shopdelete" />
+        android:layout_below="@id/tv_shopping_cart_item_text"
+        android:layout_marginTop="@dimen/margin_left_add"
+        android:layout_toRightOf="@id/tv_shopping_cart_item_money_price"
+        android:textColor="@color/theme"
+        android:textSize="@dimen/textsize_big_big" />
 
     <RelativeLayout
-        android:id="@+id/shopping_cart_item_relative"
-        android:layout_width="wrap_content"
+        android:id="@+id/re_shopping_cart_item_relative"
+        android:layout_width="@dimen/yirihui"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/shopping_cart_item_text"
-        android:layout_below="@id/shopping_cart_item_money"
-        android:layout_toLeftOf="@id/shopping_cart_item_delete" >
+        android:layout_alignLeft="@id/tv_shopping_cart_item_text"
+        android:layout_below="@id/tv_shopping_cart_item_money" >
 
         <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:clickable="false"
-            android:src="@drawable/quantity_bg" />
-
-        <ImageView
-            android:id="@+id/shopping_cart_item_subtract"
+            android:id="@+id/iv_shopping_cart_item_subtract"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/reduction" />
-
-        <ImageView
-            android:id="@+id/shopping_cart_item_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/imageView1"
-            android:src="@drawable/addition" />
+            android:contentDescription="@string/yidejia"
+            android:src="@drawable/car_reduction" />
 
         <TextView
-            android:id="@+id/shopping_cart_item_edit_number"
+            android:id="@+id/tv_shopping_cart_item_edit_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/shopping_cart_item_add"
-            android:layout_toRightOf="@id/shopping_cart_item_subtract"
-            android:gravity="center" />
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_toRightOf="@id/iv_shopping_cart_item_subtract"
+            android:background="@drawable/main_cart_textview_bg"
+            android:text="@string/hour" />
+
+        <ImageView
+            android:id="@+id/iv_shopping_cart_item_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:contentDescription="@string/yidejia"
+            android:src="@drawable/car_add" />
     </RelativeLayout>
 
-    
+    <TextView
+        android:id="@+id/tv_shopping_cart_item_money_price_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/re_shopping_cart_item_relative"
+        android:layout_below="@id/tv_shopping_cart_item_money"
+        android:layout_marginLeft="@dimen/head_padding"
+        android:layout_marginTop="@dimen/margin_left_add"
+        android:layout_toRightOf="@id/re_shopping_cart_item_relative"
+        android:text="@string/go_pay_show_pay_money"
+        android:textColor="@color/theme"
+        android:textSize="@dimen/textsize_big_big" />
+
+    <TextView
+        android:id="@+id/tv_shopping_cart_item_money_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_shopping_cart_item_text"
+        android:layout_marginTop="@dimen/margin_left_add"
+        android:layout_toRightOf="@id/tv_shopping_cart_item_money_price"
+        android:textColor="@color/theme"
+        android:textSize="@dimen/textsize_big_big" />
 
 </RelativeLayout>

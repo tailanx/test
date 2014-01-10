@@ -1,21 +1,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
-     >
+    android:background="@drawable/bg" >
 
     <LinearLayout
         android:id="@+id/shopping_cart_sum"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/shopping_cart_top"
-        android:background="@drawable/total_bg"
+        android:background="@drawable/theme_textview_background_no_comment"
         android:orientation="horizontal" >
 
         <CheckBox
             android:id="@+id/shopping_cart_checkbox"
-            style="@style/CustomCheckboxTheme"
+            style="@style/CustomCheckboxTheme_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -60,18 +58,27 @@
             android:text="0"
             android:textColor="#ed217c"
             android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_shopping_cart_gopay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/magin_left_add"
+            android:layout_marginTop="@dimen/mall_list_padding"
+            android:background="@drawable/theme_textview_background"
+            android:text="@string/go_pay"
+            android:textColor="@color/white" />
     </LinearLayout>
-<!-- 
-     <com.handmark.pulltorefresh.library.PullToRefreshScrollView
- -->
-       	<ScrollView
-         android:id="@+id/shopping_cart_item_goods_scrollView"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_marginBottom="1dp"
-         android:layout_below="@id/shopping_cart_sum"
-         >
-<!-- 
+<!--      <com.handmark.pulltorefresh.library.PullToRefreshScrollView -->
+
+    <ScrollView
+        android:id="@+id/shopping_cart_item_goods_scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shopping_cart_sum"
+        android:layout_marginBottom="1dp" >
+
+        <!--
         <LinearLayout
             
             android:id="@+id/shopping_cart_relative2"
@@ -82,10 +89,9 @@
             android:layout_marginRight="8dp"
             android:layout_marginTop="12dp"
             android:orientation="vertical" >
-        </LinearLayout>
-         -->
-        </ScrollView>
-        <!-- 
-   </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
- -->
+        </LinearLayout>
+        -->
+    </ScrollView>
+<!--    </com.handmark.pulltorefresh.library.PullToRefreshScrollView> -->
+
 </RelativeLayout>

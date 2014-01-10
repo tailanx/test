@@ -175,27 +175,27 @@ public class CartUtil {
 				view.setTag(i);
 				final RelativeLayout layout = (RelativeLayout) view
 						.findViewById(R.id.rela);
-				ImageView  cartDelete = (ImageView) view.findViewById(R.id.shopping_cart_item_delete);
+
 				
 				ImageView headImageView = (ImageView) view
-						.findViewById(R.id.shopping_cart_item__imageview1);
+						.findViewById(R.id.iv_shopping_cart_item__imageview1);
 				TextView detailTextView = (TextView) view
-						.findViewById(R.id.shopping_cart_item_text);
+						.findViewById(R.id.tv_shopping_cart_item_text);
 				final TextView priceTextView = (TextView) view
-						.findViewById(R.id.shopping_cart_item_money);
+						.findViewById(R.id.tv_shopping_cart_item_money);
 
 				final CheckBox checkBox = (CheckBox) view
-						.findViewById(R.id.shopping_cart_item_checkbox);
+						.findViewById(R.id.ck_shopping_cart_item_checkbox);
 
 				checkBox.setChecked(true);
 
 				final ImageView subtract = (ImageView) view
-						.findViewById(R.id.shopping_cart_item_subtract);// ��
+						.findViewById(R.id.iv_shopping_cart_item_subtract);// ��
 				final ImageView addImageView = (ImageView) view
-						.findViewById(R.id.shopping_cart_item_add);// ��
+						.findViewById(R.id.iv_shopping_cart_item_add);// ��
 
 				final TextView number = (TextView) view
-						.findViewById(R.id.shopping_cart_item_edit_number);// ����ĸ���
+						.findViewById(R.id.tv_shopping_cart_item_edit_number);// ����ĸ���
 				number.setText(cart.getAmount() + "");
 				a += cart.getAmount();
 				b += cart.getPrice() * cart.getAmount();
@@ -677,14 +677,7 @@ public class CartUtil {
 						}
 						context.sendBroadcast(intent1);
 					}}).setNegativeButton(context.getResources().getString(R.string.cancel), null).create();
-				cartDelete.setOnClickListener(new OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-					dialog1.show();
-					}
-				});
+			
 				// ���ü���
 				// mBox.setOnCheckedChangeListener(new OnCheckedChangeListener()
 				// {
