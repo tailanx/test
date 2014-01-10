@@ -42,31 +42,31 @@ public class BottomChange {
 		res = activity.getResources();
 		myApplication = (MyApplication) context.getApplication();
 		downHomeLayout = (RelativeLayout) view
-				.findViewById(R.id.down_home_layout);
+				.findViewById(R.id.re_down_home_layout);
 		downGuangLayout = (RelativeLayout) view
-				.findViewById(R.id.down_guang_layout);
+				.findViewById(R.id.re_down_guang_layout);
 		downSearchLayout = (RelativeLayout) view
-				.findViewById(R.id.down_search_layout);
+				.findViewById(R.id.re_down_search_layout);
 		downShoppingLayout = (RelativeLayout) view
-				.findViewById(R.id.down_shopping_layout);
-		downMyLayout = (RelativeLayout) view.findViewById(R.id.down_my_layout);
+				.findViewById(R.id.re_down_shopping_layout);
+		downMyLayout = (RelativeLayout) view.findViewById(R.id.re_down_my_layout);
 		down_guang_imageView = (ImageView) view
-				.findViewById(R.id.down_guang_icon);
+				.findViewById(R.id.iv_down_guang_icon);
 		down_search_imageView = (ImageView) view
-				.findViewById(R.id.down_search_icon);
+				.findViewById(R.id.iv_down_search_icon);
 		down_shopping_imageView = (ImageView) view
-				.findViewById(R.id.down_shopping_icon);
-		down_my_imageView = (ImageView) view.findViewById(R.id.down_my_icon);
+				.findViewById(R.id.iv_down_shopping_icon);
+		down_my_imageView = (ImageView) view.findViewById(R.id.iv_down_my_icon);
 		down_home_imageView = (ImageView) view
-				.findViewById(R.id.down_home_icon);
-		down_home_textview = (TextView) view.findViewById(R.id.down_home_text);
+				.findViewById(R.id.iv_down_home_icon);
+		down_home_textview = (TextView) view.findViewById(R.id.tv_down_home_text);
 		down_guang_textview = (TextView) view
-				.findViewById(R.id.down_guang_text);
+				.findViewById(R.id.tv_down_guang_text);
 		down_search_textview = (TextView) view
-				.findViewById(R.id.down_search_text);
+				.findViewById(R.id.tv_down_search_text);
 		down_shopping_textview = (TextView) view
-				.findViewById(R.id.down_shopping_text);
-		down_my_textview = (TextView) view.findViewById(R.id.down_my_text);
+				.findViewById(R.id.tv_down_shopping_text);
+		down_my_textview = (TextView) view.findViewById(R.id.tv_down_my_text);
 
 	}
 

@@ -59,14 +59,14 @@ public class RegistActivity extends SherlockActivity {
 	// this.finish();
 	// }
 	private void setupShow() {
-		mZhanghao = (EditText) findViewById(R.id.my_mall_regist_edittext_account);
-		mPws = (EditText) findViewById(R.id.my_mall_regist_password);
-		mEditText = (EditText) findViewById(R.id.my_mall_regist_confirm_password);
-		mEditText2 = (EditText) findViewById(R.id.my_mall_regist_obtain);
-		mButton = (Button) findViewById(R.id.find_password_confirm_button);
-		mBox = (CheckBox) findViewById(R.id.my_mall_regist_checkbox);
-		getCodeImgView = (ImageView) findViewById(R.id.my_mall_regist_password_validation_button);
-		regist_agreement = (TextView) findViewById(R.id.regist_agreement);
+		mZhanghao = (EditText) findViewById(R.id.et_my_mall_regist_edittext_account);
+		mPws = (EditText) findViewById(R.id.et_my_mall_regist_password);
+		mEditText = (EditText) findViewById(R.id.et_my_mall_regist_confirm_password);
+		mEditText2 = (EditText) findViewById(R.id.et_my_mall_regist_obtain);
+		mButton = (Button) findViewById(R.id.bt_find_password_confirm_button);
+		mBox = (CheckBox) findViewById(R.id.ck_my_mall_regist_checkbox);
+		getCodeImgView = (ImageView) findViewById(R.id.iv_my_mall_regist_password_validation_button);
+		regist_agreement = (TextView) findViewById(R.id.tv_regist_agreement);
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package com.yidejia.app.mall;
 
 import com.actionbarsherlock.app.SherlockActivity;
-import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.task.TaskGetCode;
 import com.yidejia.app.mall.task.TaskReset;
@@ -36,7 +35,6 @@ public class FindPwActivity extends SherlockActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 //		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -52,19 +50,18 @@ public class FindPwActivity extends SherlockActivity {
 	}
 	
 	private void findIds(){
-		acount_textview = (EditText) findViewById(R.id.my_mall_find_edittext_account);
-		obtain_textView = (EditText) findViewById(R.id.my_mall_find_obtain);
-		obtain_imageView = (ImageView) findViewById(R.id.my_mall_find_password_validation_button);
-		psw_textview = (EditText) findViewById(R.id.my_mall_find_password);
-		psw_again_textview = (EditText) findViewById(R.id.my_mall_find_confirm_password);
-		okButton = (Button) findViewById(R.id.find_find_confirm_button);
+		acount_textview = (EditText) findViewById(R.id.et_my_mall_find_edittext_account);
+		obtain_textView = (EditText) findViewById(R.id.et_my_mall_find_obtain);
+		obtain_imageView = (ImageView) findViewById(R.id.iv_my_mall_find_password_validation_button);
+		psw_textview = (EditText) findViewById(R.id.et_my_mall_find_password);
+		psw_again_textview = (EditText) findViewById(R.id.et_my_mall_find_confirm_password);
+		okButton = (Button) findViewById(R.id.bt_find_find_confirm_button);
 	}
 	
 	private OnClickListener okListener = new View.OnClickListener() {
 		
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
 			resetListener();
 		}
 	};
@@ -76,7 +73,6 @@ public class FindPwActivity extends SherlockActivity {
 		
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
 			getCodeListener();
 		}
 	};
@@ -143,7 +139,6 @@ public class FindPwActivity extends SherlockActivity {
 	
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		if(taskReset != null) taskReset.closeTask();
 		if(getCodeTask != null) getCodeTask.closeTask();
@@ -163,7 +158,6 @@ public class FindPwActivity extends SherlockActivity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 //				Toast.makeText(ComposeActivity.this, "button", Toast.LENGTH_SHORT).show();
 				FindPwActivity.this.finish();
 			}

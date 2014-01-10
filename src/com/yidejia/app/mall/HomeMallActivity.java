@@ -83,9 +83,9 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 		} else {
 			cartImage.setText(number + "");
 		}
-		downSearchLayout = (RelativeLayout) findViewById(R.id.down_search_layout);
-		downShoppingLayout = (RelativeLayout) findViewById(R.id.down_shopping_layout);
-		downMyLayout = (RelativeLayout) findViewById(R.id.down_my_layout);
+		downSearchLayout = (RelativeLayout) findViewById(R.id.re_down_search_layout);
+		downShoppingLayout = (RelativeLayout) findViewById(R.id.re_down_shopping_layout);
+		downMyLayout = (RelativeLayout) findViewById(R.id.re_down_my_layout);
 
 		downShoppingLayout.setOnClickListener(this);
 		downSearchLayout.setOnClickListener(this);
@@ -96,16 +96,16 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 	public void onClick(View v) {
 		Intent intent = new Intent();
 		switch (v.getId()) {
-		case R.id.down_search_layout:
+		case R.id.re_down_search_layout:
 			intent.setClass(HomeMallActivity.this, HomeSearchActivity.class);
 			intent.putExtra("current", 0);
 			intent.putExtra("next", 1);
 			break;
-		case R.id.down_shopping_layout:
+		case R.id.re_down_shopping_layout:
 			intent.setClass(HomeMallActivity.this, HomeCarActivity.class);
 			intent.putExtra("next", 2);
 			break;
-		case R.id.down_my_layout:
+		case R.id.re_down_my_layout:
 			if (myApplication.getIsLogin()){
 				intent.setClass(HomeMallActivity.this, HomeMyMaActivity.class);
 			}else{

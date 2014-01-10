@@ -83,25 +83,21 @@ public class AddressAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return mAddresses.size();
 	}
 
 	@Override
 	public ModelAddresses getItem(int arg0) {
-		// TODO Auto-generated method stub
 		return mAddresses.get(arg0);
 	}
 
 	@Override
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
 		return position;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup arg2) {
-		// TODO Auto-generated method stub
 		temp = sp.getInt("stateCBId", -1);
 		Log.e("info", temp + "  get  temp");
 		final ViewHolder holder;
@@ -110,8 +106,8 @@ public class AddressAdapter extends BaseAdapter {
 			convertView = inflater.inflate(R.layout.address_management_item,
 					null);
 			holder = new ViewHolder();
-			holder.ctTextView = (TextView) convertView
-					.findViewById(R.id.address_management_item_address1);
+//			holder.ctTextView = (TextView) convertView
+//					.findViewById(R.id.address_management_item_address1);
 			holder.detailTextView = (TextView) convertView
 					.findViewById(R.id.address_management_item_address2);
 			holder.nameTextView = (TextView) convertView
@@ -145,7 +141,6 @@ public class AddressAdapter extends BaseAdapter {
 							@Override
 							public void onClick(DialogInterface dialog,
 									int which) {
-								// TODO Auto-generated method stub
 								/*dataManage.deleteAddress(
 										myApplication.getUserId(),
 										addresses.getAddressId(),
@@ -180,7 +175,6 @@ public class AddressAdapter extends BaseAdapter {
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				Intent intent = new Intent(activity,
 						EditNewAddressActivity.class);
 				Bundle bundle = new Bundle();
@@ -201,7 +195,6 @@ public class AddressAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 
-				// TODO Auto-generated method stub
 				Log.i("info", addresses.getAddressId());
 				dialog.show();
 			}
@@ -296,16 +289,13 @@ public class AddressAdapter extends BaseAdapter {
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			// TODO Auto-generated method stub
 			try {
 				String httpresp = setDefAddr.getHttpResponse(myApplication.getUserId(),
 						addressId, myApplication.getToken());
 				return setDefAddr.analysicSetDefJson(httpresp);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (Exception e) {
-				// TODO: handle exception
 				e.printStackTrace();
 			}
 			return false;
@@ -313,7 +303,6 @@ public class AddressAdapter extends BaseAdapter {
 
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 //			bar.setProgress(ProgressDialog.STYLE_SPINNER);
 //			bar.setCancelable(true);
@@ -325,7 +314,6 @@ public class AddressAdapter extends BaseAdapter {
 
 				@Override
 				public void onCancel(DialogInterface dialog) {
-					// TODO Auto-generated method stub
 					cancel(true);
 				}
 			});
@@ -333,7 +321,6 @@ public class AddressAdapter extends BaseAdapter {
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			bar.dismiss();
 			if(result){
@@ -377,7 +364,6 @@ public class AddressAdapter extends BaseAdapter {
 		
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 //			bar.setProgress(ProgressDialog.STYLE_SPINNER);
 //			bar.setCancelable(true);
@@ -389,7 +375,6 @@ public class AddressAdapter extends BaseAdapter {
 
 				@Override
 				public void onCancel(DialogInterface dialog) {
-					// TODO Auto-generated method stub
 					cancel(true);
 				}
 			});
@@ -397,7 +382,6 @@ public class AddressAdapter extends BaseAdapter {
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			bar.dismiss();
 			if(result && addresses != null && !mAddresses.isEmpty()){
@@ -417,7 +401,6 @@ public class AddressAdapter extends BaseAdapter {
 		
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			// TODO Auto-generated method stub
 			try {
 				String httpresp;
 				try {
@@ -425,12 +408,10 @@ public class AddressAdapter extends BaseAdapter {
 								addressId, myApplication.getToken());
 					return delAddress.analysicDeleteJson(httpresp);
 				} catch (TimeOutEx e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 					isTimeout = true;
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return false;

@@ -55,7 +55,7 @@ public class AddressUtil {
 	public AddressUtil(Context context, LinearLayout linearLayout) {
 		this.context = context;
 		this.linearLayout = linearLayout;
-		this.dataManage = dataManage;
+//		this.dataManage = dataManage;
 		this.inflater = LayoutInflater.from(context);
 		myApplication = (MyApplication) context.getApplicationContext();
 	}
@@ -66,8 +66,8 @@ public class AddressUtil {
 		delete = (ImageView) view
 				.findViewById(R.id.address_management_item_relative1_textview1);
 
-		areaTextView = (TextView) view
-				.findViewById(R.id.address_management_item_address1);
+//		areaTextView = (TextView) view
+//				.findViewById(R.id.address_management_item_address1);
 		addressTextView = (TextView) view
 				.findViewById(R.id.address_management_item_address2);
 		nameTextView = (TextView) view
@@ -138,7 +138,6 @@ public class AddressUtil {
 					
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						// TODO Auto-generated method stub
 						if(isChecked) return;
 						boolean isSucess = dataManage.setDefaultAddress(myApplication.getUserId(), addresses.getAddressId(), myApplication.getToken());
 						Log.i("info", isSucess +"");
@@ -149,7 +148,6 @@ public class AddressUtil {
 			// ???view
 			this.linearLayout.addView(view);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
@@ -210,7 +208,6 @@ public class AddressUtil {
 				
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					// TODO Auto-generated method stub
 					if(isChecked) return;
 					boolean isSucess = dataManage.setDefaultAddress(myApplication.getUserId(), addresses.getAddressId(), myApplication.getToken());
 					Log.i("info", isSucess +"");
@@ -220,7 +217,6 @@ public class AddressUtil {
 			// ???view
 			this.linearLayout.addView(view);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 		}
@@ -250,8 +246,8 @@ public class AddressUtil {
 				// delete = (ImageView) view
 				// .findViewById(R.id.address_management_item_relative1_textview1);
 				final LinearLayout layout1 = (LinearLayout) view.findViewById(R.id.address_management_item_linearlayout);
-				areaTextView = (TextView) view
-						.findViewById(R.id.address_management_item_address1);
+//				areaTextView = (TextView) view
+//						.findViewById(R.id.address_management_item_address1);
 				addressTextView = (TextView) view
 						.findViewById(R.id.address_management_item_address2);
 				nameTextView = (TextView) view

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/bg"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -12,7 +13,7 @@
             android:id="@+id/rv_main_hot_sell_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/hotsell_bg_top"
+            android:background="@drawable/yirihui_bg"
             android:gravity="center_vertical" >
 
             <TextView
@@ -37,8 +38,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/rv_main_hot_sell_title"
+            android:background="@drawable/product_bg"
             android:baselineAligned="false"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/margin_left"
+            android:paddingTop="@dimen/margin_left" >
 
             <RelativeLayout
                 android:layout_width="0dp"
@@ -357,8 +361,8 @@
         android:id="@+id/rv_main_hot_sell_title_all_buy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_left"
-        android:background="@drawable/hotsell_bg_top"
+        android:layout_marginTop="@dimen/magin_left_add"
+        android:background="@drawable/yirihui_bg"
         android:gravity="center_vertical" >
 
         <TextView
@@ -380,15 +384,17 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:baselineAligned="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="false"
         android:orientation="horizontal" >
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:background="@drawable/main_theme_textview_bg"
+            android:paddingBottom="@dimen/actiobar_margin_top" >
 
             <TextView
                 android:id="@+id/tv_main_all_buy_detail"
@@ -405,7 +411,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_main_all_buy_detail"
                 android:layout_centerHorizontal="true"
-                
                 android:layout_marginTop="@dimen/margin_left"
                 android:text="@string/all_buy_detail_add"
                 android:textSize="@dimen/textsize_small" />
@@ -423,18 +428,20 @@
         <LinearLayout
             android:layout_width="@dimen/width"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/width_add"
             android:layout_weight="1"
             android:orientation="vertical" >
 
             <RelativeLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                >
+                android:background="@drawable/main_theme_textview_bg" >
 
-               <TextView
+                <TextView
                     android:id="@+id/tv_main_all_buy_right_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left_add"
                     android:layout_marginTop="@dimen/margin_left"
                     android:text="@string/all_buy_detail"
                     android:textSize="@dimen/textsize_big" />
@@ -444,6 +451,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_main_all_buy_right_detail"
+                    android:layout_marginLeft="@dimen/margin_left_add"
                     android:layout_marginTop="@dimen/margin_left"
                     android:text="@string/all_buy_detail_add"
                     android:textSize="@dimen/textsize_small" />
@@ -453,6 +461,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_main_all_buy_detail_right_add"
+                    android:layout_marginLeft="@dimen/margin_left_add"
                     android:layout_marginTop="@dimen/margin_left"
                     android:text="@string/produce_price_yuan"
                     android:textColor="@color/theme"
@@ -467,14 +476,18 @@
                     android:contentDescription="@string/yidejia"
                     android:src="@drawable/user_head" />
             </RelativeLayout>
-             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/width_add"
+                android:background="@drawable/main_theme_textview_bg" >
 
                 <TextView
                     android:id="@+id/tv_main_all_buy_right_down_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left_add"
                     android:layout_marginTop="@dimen/margin_left"
                     android:text="@string/all_buy_detail"
                     android:textSize="@dimen/textsize_big" />
@@ -484,6 +497,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_main_all_buy_right_down_detail"
+                    android:layout_marginLeft="@dimen/margin_left_add"
                     android:layout_marginTop="@dimen/margin_left"
                     android:text="@string/all_buy_detail_add"
                     android:textSize="@dimen/textsize_small" />
@@ -493,6 +507,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_main_all_buy_detail_right_down_add"
+                    android:layout_marginLeft="@dimen/margin_left_add"
                     android:layout_marginTop="@dimen/margin_left"
                     android:text="@string/produce_price_yuan"
                     android:textColor="@color/theme"
@@ -509,13 +524,13 @@
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
-        
+
     <RelativeLayout
         android:id="@+id/rv_main_hot_sell_title_free_pay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_left"
-        android:background="@drawable/hotsell_bg_top"
+        android:layout_marginTop="@dimen/magin_left_add"
+        android:background="@drawable/yirihui_bg"
         android:gravity="center_vertical" >
 
         <TextView
@@ -525,25 +540,37 @@
             android:layout_marginLeft="@dimen/margin_left"
             android:text="@string/free_pay_title"
             android:textSize="@dimen/textsize_big" />
-
-      
     </RelativeLayout>
-        <ImageView 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/yidejia"
-            android:src="@drawable/user_head"
-            android:id="@+id/iv_main_hot_sell_free_pay_image"/>
-        <LinearLayout
-        android:baselineAligned="false"
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/main_theme_textview_bg" >
+
+        <ImageView
+            android:id="@+id/iv_main_hot_sell_free_pay_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_marginRight="@dimen/margin_left"
+            android:layout_marginTop="@dimen/margin_left_add"
+            android:background="@drawable/adbanner"
+            android:contentDescription="@string/yidejia" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_top"
+        android:baselineAligned="false"
         android:orientation="horizontal" >
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:background="@drawable/main_theme_textview_bg"
+            android:padding="@dimen/margin_left" >
 
             <TextView
                 android:id="@+id/tv_main_all_buy_detail_down"
@@ -577,12 +604,16 @@
         <LinearLayout
             android:layout_width="@dimen/width"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/width_add"
             android:layout_weight="1"
             android:orientation="vertical" >
 
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/width_add"
+                android:background="@drawable/main_theme_textview_bg"
+                android:padding="@dimen/margin_left_add" >
 
                 <TextView
                     android:id="@+id/tv_main_all_buy_right_detail_right_up"
@@ -620,9 +651,13 @@
                     android:contentDescription="@string/yidejia"
                     android:src="@drawable/user_head" />
             </RelativeLayout>
-             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/width_add"
+                android:background="@drawable/main_theme_textview_bg"
+                android:padding="@dimen/margin_left_add" >
 
                 <TextView
                     android:id="@+id/tv_main_all_buy_right_down_detail_right_down"
@@ -662,6 +697,5 @@
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
-        
 
 </LinearLayout>

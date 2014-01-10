@@ -9,7 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Resources;
+//import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,8 +54,8 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 	private SearchListAdapter searchListAdapter;
 
 	private ArrayList<Function> functions;
-	private int search;
-	private int defaultInt = -1;
+//	private int search;
+//	private int defaultInt = -1;
 	private String TAG = "SearchFragment";
 	private FrameLayout frameLayout;
 
@@ -100,7 +100,7 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 		search_item_refresh_view = (RelativeLayout) view
 				.findViewById(R.id.search_item_refresh_view);
 		refresh_data_btn = (ImageView) view.findViewById(R.id.refresh_data_btn);
-		res = getResources();
+//		res = getResources();
 		// 设置底部
 		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
 		bottomChange = new BottomChange(HomeSearchActivity.this, bottomLayout);
@@ -177,18 +177,18 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 	private RelativeLayout downSearchLayout;
 	private RelativeLayout downShoppingLayout;
 	private RelativeLayout downMyLayout;
-	private ImageView down_home_imageView;// 首页按钮图片
-	private ImageView down_guang_imageView;// 逛按钮图片
-	private ImageView down_search_imageView;// 搜索按钮图片
-	private ImageView down_shopping_imageView; // 购物车按钮图片
-	private ImageView down_my_imageView; // 我的商城按钮图片
+//	private ImageView down_home_imageView;// 首页按钮图片
+//	private ImageView down_guang_imageView;// 逛按钮图片
+//	private ImageView down_search_imageView;// 搜索按钮图片
+//	private ImageView down_shopping_imageView; // 购物车按钮图片
+//	private ImageView down_my_imageView; // 我的商城按钮图片
 	private CartsDataManage cartsDataManage;
-	private TextView down_home_textview;
-	private TextView down_guang_textview;
+//	private TextView down_home_textview;
+//	private TextView down_guang_textview;
 	private TextView down_search_textview;
-	private TextView down_shopping_textview;
-	private TextView down_my_textview;
-	private Resources res;
+//	private TextView down_shopping_textview;
+//	private TextView down_my_textview;
+//	private Resources res;
 	private int number;
 	private Button cartImage;
 
@@ -204,13 +204,13 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 		} else {
 			cartImage.setText(number + "");
 		}
-		downHomeLayout = (RelativeLayout) findViewById(R.id.down_home_layout);
-		down_search_textview = (TextView) findViewById(R.id.down_search_text);
+		downHomeLayout = (RelativeLayout) findViewById(R.id.re_down_home_layout);
+		down_search_textview = (TextView) findViewById(R.id.tv_down_search_text);
 
-		downGuangLayout = (RelativeLayout) findViewById(R.id.down_guang_layout);
-		downSearchLayout = (RelativeLayout) findViewById(R.id.down_search_layout);
-		downShoppingLayout = (RelativeLayout) findViewById(R.id.down_shopping_layout);
-		downMyLayout = (RelativeLayout) findViewById(R.id.down_my_layout);
+		downGuangLayout = (RelativeLayout) findViewById(R.id.re_down_guang_layout);
+		downSearchLayout = (RelativeLayout) findViewById(R.id.re_down_search_layout);
+		downShoppingLayout = (RelativeLayout) findViewById(R.id.re_down_shopping_layout);
+		downMyLayout = (RelativeLayout) findViewById(R.id.re_down_my_layout);
 
 		downHomeLayout.setOnClickListener(this);
 		downShoppingLayout.setOnClickListener(this);
@@ -235,15 +235,15 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 	public void onClick(View v) {
 		Intent intent = new Intent();
 		switch (v.getId()) {
-		case R.id.down_home_layout:
+		case R.id.re_down_home_layout:
 			intent.setClass(HomeSearchActivity.this, HomeMallActivity.class);
 			break;
-		case R.id.down_shopping_layout:
+		case R.id.re_down_shopping_layout:
 			intent.setClass(HomeSearchActivity.this, HomeCarActivity.class);
 			intent.putExtra("current", 1);
 			intent.putExtra("next", 2);
 			break;
-		case R.id.down_my_layout:
+		case R.id.re_down_my_layout:
 			if (myApplication.getIsLogin()) {
 				intent.setClass(HomeSearchActivity.this, HomeMyMaActivity.class);
 			} else {
