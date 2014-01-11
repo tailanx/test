@@ -101,13 +101,13 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 				.findViewById(R.id.search_item_refresh_view);
 		refresh_data_btn = (ImageView) view.findViewById(R.id.refresh_data_btn);
 //		res = getResources();
+		initNavView();
 		// 设置底部
 		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
 		bottomChange = new BottomChange(HomeSearchActivity.this, bottomLayout);
 		if (current != -1 || next != -1) {
 			bottomChange.initNavView(current, next);
 		}
-		initNavView();
 
 		setActionBarConfig();
 
@@ -215,6 +215,7 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 		downHomeLayout.setOnClickListener(this);
 		downShoppingLayout.setOnClickListener(this);
 		downMyLayout.setOnClickListener(this);
+		downGuangLayout.setOnClickListener(this);
 
 	}
 
@@ -242,6 +243,11 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 			intent.setClass(HomeSearchActivity.this, HomeCarActivity.class);
 			intent.putExtra("current", 1);
 			intent.putExtra("next", 2);
+			break;
+		case R.id.re_down_guang_layout:
+			intent.setClass(HomeSearchActivity.this, HomeGuangActivity.class);
+			intent.putExtra("current", 1);
+			intent.putExtra("next", 5);
 			break;
 		case R.id.re_down_my_layout:
 			if (myApplication.getIsLogin()) {

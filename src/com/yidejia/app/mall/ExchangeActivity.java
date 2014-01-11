@@ -78,7 +78,7 @@ public class ExchangeActivity extends SherlockFragmentActivity implements
 		getSupportActionBar().setIcon(R.drawable.back1);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
-		ImageView button = (ImageView) findViewById(R.id.compose_back);
+		TextView button = (TextView) findViewById(R.id.compose_back);
 		button.setOnClickListener(new OnClickListener() {
 
 			@Override

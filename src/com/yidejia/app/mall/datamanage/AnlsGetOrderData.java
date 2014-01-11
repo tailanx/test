@@ -242,8 +242,14 @@ public class AnlsGetOrderData {
 			cart.setProductText(unicode.revert(goods_name));
 			String img_name = jObject.getString("img_name");
 			cart.setImgUrl(ImageUrl.IMAGEURL + img_name + "!100");
-			cart.setPrice(Float.parseFloat(jObject.getString("price")));
-			cartsArray.add(cart);
+			String prcie =  jObject.getString("price");
+			if(prcie != null){
+				Log.e("info", prcie);
+				cart.setPrice(Float.parseFloat(prcie));
+				cartsArray.add(cart);
+			}else{
+				continue;
+			}
 		}
 
 		return cartsArray;

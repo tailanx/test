@@ -8,7 +8,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/shopping_cart_top"
-        android:background="@drawable/theme_textview_background_no_comment"
         android:orientation="horizontal" >
 
         <CheckBox
@@ -17,9 +16,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="12dp"
-            android:text="总计:"
-            android:textSize="16sp" />
+            android:layout_marginLeft="@dimen/actiobar_margin_top"
+            android:text="@string/cart_sum"
+            android:textSize="@dimen/textsize_small_add" />
 
         <TextView
             android:id="@+id/shopping_cart_sum_money_price"
@@ -27,8 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="2dp"
-            android:text="￥"
-            android:textColor="#ed217c"
+            android:text="@string/go_pay_show_pay_money"
+            android:textColor="@color/theme"
             android:textSize="14sp" />
 
         <TextView
@@ -37,16 +36,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="2dp"
-            android:text="0.0"
-            android:textColor="#ed217c"
+            android:text="@string/hour"
+            android:textColor="@color/theme"
             android:textSize="14sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:text="数量："
+            android:layout_marginLeft="@dimen/mall_list_padding"
+            android:text="@string/cart_count"
             android:textSize="16sp" />
 
         <TextView
@@ -55,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="2dp"
-            android:text="0"
+            android:text="@string/hour"
             android:textColor="#ed217c"
             android:textSize="16sp" />
 
@@ -66,10 +65,11 @@
             android:layout_marginLeft="@dimen/magin_left_add"
             android:layout_marginTop="@dimen/mall_list_padding"
             android:background="@drawable/theme_textview_background"
+            android:singleLine="true"
             android:text="@string/go_pay"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_small_small" />
     </LinearLayout>
-<!--      <com.handmark.pulltorefresh.library.PullToRefreshScrollView -->
 
     <ScrollView
         android:id="@+id/shopping_cart_item_goods_scrollView"
@@ -77,21 +77,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/shopping_cart_sum"
         android:layout_marginBottom="1dp" >
-
-        <!--
-        <LinearLayout
-            
-            android:id="@+id/shopping_cart_relative2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="12dp"
-            android:orientation="vertical" >
-        </LinearLayout>
-        -->
     </ScrollView>
-<!--    </com.handmark.pulltorefresh.library.PullToRefreshScrollView> -->
 
 </RelativeLayout>

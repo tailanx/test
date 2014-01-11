@@ -39,10 +39,6 @@
                     android:layout_marginRight="@dimen/margin_left"
                     android:contentDescription="@string/yidejia"
                     android:src="@drawable/selector_bg_fav" />
-                <RelativeLayout android:id="@+id/re_top_relativelayout" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/main_theme_textview_bg" android:layout_alignParentLeft="true" android:layout_alignParentTop="true">
-                    <ImageView android:id="@+id/iv_item_goods_detail" android:layout_width="@dimen/head_height" android:layout_height="@dimen/head_height" android:layout_centerInParent="true" android:contentDescription="@string/yidejia" android:src="@drawable/user_head"/>
-                    <ImageView android:id="@+id/add_favorites" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:layout_marginBottom="@dimen/margin_left" android:layout_marginRight="@dimen/margin_left" android:contentDescription="@string/yidejia" android:src="@drawable/selector_bg_fav"/>
-                </RelativeLayout>
             </RelativeLayout>
 
             <TextView

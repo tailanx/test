@@ -2,9 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main2_main2_top"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentTop="true"
-    android:background="@drawable/topbg" >
+    android:layout_height="@dimen/action_height"
+    android:background="@drawable/theme_textview_background_no_corners" >
 
     <ImageView
         android:id="@+id/person_shopping_button1"
@@ -12,10 +11,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="@dimen/margin_left"
         android:clickable="true"
-        android:src="@drawable/edit_background"
-        android:textColor="#FFeeeeee" />
+        android:contentDescription="@string/yidejia"
+        android:src="@drawable/setting" />
 
     <TextView
         android:id="@+id/already_complete_textview1"
@@ -23,8 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="我的商城"
-        android:textColor="#ffeeeeee"
-        android:textSize="24dp" />
+        android:text="@string/my_mall"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textsize_big_big" />
 
 </RelativeLayout>

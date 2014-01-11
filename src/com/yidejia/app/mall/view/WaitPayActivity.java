@@ -83,7 +83,7 @@ public class WaitPayActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		getSupportActionBar().setIcon(R.drawable.back);
 		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
-		ImageView back = (ImageView) findViewById(R.id.compose_back);
+		TextView back = (TextView) findViewById(R.id.compose_back);
 		TextView  titleTextView = (TextView) findViewById(R.id.compose_title);
 		titleTextView.setText(getResources().getString(R.string.wait_pay));
 		

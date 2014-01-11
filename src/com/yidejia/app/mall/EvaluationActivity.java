@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,7 +14,6 @@ import com.yidejia.app.mall.datamanage.TaskNoEva;
 public class EvaluationActivity extends SherlockActivity {
 	private LinearLayout layout;
 	private MyApplication myApplication;
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +26,6 @@ public class EvaluationActivity extends SherlockActivity {
 		taskNoEva.getWaitingComment(myApplication.getUserId(), true);
 	}
 
-
 	private void setActionbar() {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
@@ -36,7 +33,7 @@ public class EvaluationActivity extends SherlockActivity {
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
-		ImageView button = (ImageView) findViewById(R.id.compose_back);// 返回
+		TextView button = (TextView) findViewById(R.id.compose_back);// 返回
 		button.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -51,12 +48,11 @@ public class EvaluationActivity extends SherlockActivity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if(requestCode == 4001 && resultCode == 4002){
+		if (requestCode == 4001 && resultCode == 4002) {
 			layout.removeAllViews();
 			TaskNoEva taskNoEva = new TaskNoEva(EvaluationActivity.this, layout);
 			taskNoEva.getWaitingComment(myApplication.getUserId(), true);
 		}
 	}
-	
-	
+
 }

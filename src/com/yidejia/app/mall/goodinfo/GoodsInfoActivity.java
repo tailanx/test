@@ -177,7 +177,7 @@ public class GoodsInfoActivity extends SherlockActivity implements
 		titleTextView = (TextView) findViewById(R.id.compose_title);
 		// titleTextView.setText("商品展示") ;
 		setTitle("商品展示");
-		ImageView leftImageView = (ImageView) findViewById(R.id.compose_back);
+TextView leftImageView = (TextView) findViewById(R.id.compose_back);
 
 		leftImageView.setOnClickListener(new OnClickListener() {
 

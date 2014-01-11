@@ -1,300 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg" >
-    <!--
-<RelativeLayout 
-    android:id="@+id/editor_relative"
-    android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/edit_scrollView"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/topbg" >
+    android:background="@drawable/bg" >
 
-    <ImageView
-        android:id="@+id/editor_compose_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:background="#00000000"
-        android:clickable="true"
-        android:padding="6dp"
-        android:src="@drawable/compose_top" />
-
-    <TextView
-        android:id="@+id/editor_compose_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        android:text="设置"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
-
-</RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/editor_relative1"
+    <LinearLayout
+        android:id="@+id/edit_scrollView_linearlayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/topbg" >
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/editor_button1"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/editor_linearLayout1"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/back1"
-            android:onClick="doClick" />
+            android:background="@drawable/main_theme_textview_bg" >
 
-        <TextView
-            android:id="@+id/editor_textview1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:onClick="doClick"
-            android:text="设置"
-            android:textColor="#ffeeeeee"
-            android:textSize="24dp" />
-    </RelativeLayout>
-    android:layout_below="@id/editor_relative1"
-    -->
+            <TextView
+                android:id="@+id/editor_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="@dimen/margin_left_more"
+                android:text="@string/edit_help"
+                android:textSize="@dimen/textsize_big" />
 
-    <ScrollView
-        android:id="@+id/edit_scrollView"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+            <ImageView
+                android:id="@+id/main2_main2_linearlayout1_imageview2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/yidejia"
+                android:padding="@dimen/margin_add_cart"
+                android:src="@drawable/arrow" />
+        </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/edit_scrollView_linearlayout1"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical" >
+            android:background="@drawable/main_theme_textview_bg" >
 
-            <RelativeLayout
-                android:id="@+id/editor_linearLayout1"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/layout_selector1" >
-
-                <TextView
-                    android:id="@+id/editor_help"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="12dp"
-                    android:text="帮助"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout1_imageview2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="15dp"
-                    android:src="@drawable/arrow" />
-            </RelativeLayout>
-<!-- 
-            <RelativeLayout
-                android:id="@+id/editor_linearLayout2"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/layout_selector2" >
-
-                <TextView
-                    android:id="@+id/editor_option"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="12dp"
-                    android:text="意见反馈"
-                    android:textSize="24dp" />
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout1_imageview2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="15dp"
-                    android:src="@drawable/arrow" />
-            </RelativeLayout>
- -->
-            <RelativeLayout
-                android:id="@+id/editor_linearLayout3"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/layout_selector3" >
-
-                <TextView
-                    android:id="@+id/editor_clear_cache"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="12dp"
-                    android:text="清空缓存"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout1_imageview2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="15dp"
-                    android:src="@drawable/arrow" />
-                
-                <TextView 
-                    android:id="@+id/editor_cache_size"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@+id/main2_main2_linearlayout1_imageview2"
-                    android:layout_centerVertical="true"
-                    android:textSize="20sp"
-                    />
-                
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/editor_linearLayout4"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/layout_selector1" >
-
-                <TextView
-                    android:id="@+id/editor_about"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="12dp"
-                    android:text="关于伊的家商城"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout1_imageview2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="15dp"
-                    android:src="@drawable/arrow" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/editor_linearLayout5"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/layout_selector3" >
-
-                <TextView
-                    android:id="@+id/editor_hotline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="12dp"
-                    android:text="客服热线"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/main2_main2_linearlayout1_imageview22"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="10dp"
-                    android:text="400-886-7898"
-                    android:textSize="15sp" />
-            </RelativeLayout>
-              <RelativeLayout
-                android:id="@+id/editor_linearLayout7"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/layout_selector2" >
-
-                <TextView
-                    android:id="@+id/editor_gengxin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="12dp"
-                    android:text="检测更新"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout1_imageview2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="15dp"
-                    android:src="@drawable/arrow" />
-                <TextView 
-                    android:id="@+id/editor_current_version"
-                    android:layout_toLeftOf="@id/main2_main2_linearlayout1_imageview2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:textSize="20sp"
-                    />
-                <TextView 
-                    android:id="@+id/editor_current_version_text"
-                    android:layout_toLeftOf="@id/editor_current_version"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:textSize="20sp"
-                    android:text="当前版本"
-                    />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/editor_linearLayout6"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/layout_selector2" >
-
-                <TextView
-                    android:id="@+id/editor_recommended"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="12dp"
-                    android:text="应用推荐"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:id="@+id/main2_main2_linearlayout1_imageview2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="15dp"
-                    android:src="@drawable/arrow" />
-            </RelativeLayout>
-
-            <Button
-                android:id="@+id/editor_exit"
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/clear_search"
-                android:text="退出登录"
-                android:textColor="#ffeeeeee"
-                android:textSize="20sp" />
-        </LinearLayout>
-    </ScrollView>
+                android:layout_height="@dimen/width_add"
+                android:background="@drawable/filter_line"
+                android:contentDescription="@string/yidejia" />
+        </RelativeLayout>
 
-</RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/editor_linearLayout3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/main_theme_textview_bg" >
+
+            <TextView
+                android:id="@+id/editor_clear_cache"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="@dimen/margin_left_more"
+                android:text="@string/edit_cache"
+                android:textSize="@dimen/textsize_big" />
+
+            <ImageView
+                android:id="@+id/main2_main2_linearlayout1_imageview2_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/yidejia"
+                android:padding="@dimen/margin_add_cart"
+                android:src="@drawable/arrow" />
+
+            <TextView
+                android:id="@+id/editor_cache_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/main2_main2_linearlayout1_imageview2_add"
+                android:textSize="@dimen/textsize_big" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/editor_linearLayout4"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@drawable/main_theme_textview_bg" >
+
+            <TextView
+                android:id="@+id/editor_about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="@dimen/margin_left_more"
+                android:text="@string/edit_about_add"
+                android:textSize="@dimen/textsize_big" />
+
+            <ImageView
+                android:id="@+id/iv_main2_main2_linearlayout1_imageview2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/yidejia"
+                android:padding="@dimen/margin_add_cart"
+                android:src="@drawable/arrow" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/main_theme_textview_bg" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/width_add"
+                android:background="@drawable/filter_line"
+                android:contentDescription="@string/yidejia" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/editor_linearLayout5"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/main_theme_textview_bg" >
+
+            <TextView
+                android:id="@+id/editor_hotline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="@dimen/margin_left_more"
+                android:text="@string/edit_phone"
+                android:textSize="@dimen/textsize_big" />
+
+            <TextView
+                android:id="@+id/main2_main2_linearlayout1_imageview22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/margin_left_more"
+                android:text="@string/edit_number"
+                android:textSize="@dimen/mall_list_padding" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/editor_linearLayout7"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@drawable/main_theme_textview_bg" >
+
+            <TextView
+                android:id="@+id/editor_gengxin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="@dimen/margin_left_more"
+                android:text="@string/edit_gengxin"
+                android:textSize="@dimen/textsize_big" />
+
+            <ImageView
+                android:id="@+id/main2_main2_linearlayout1_imagevi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/yidejia"
+                android:padding="@dimen/margin_add_cart"
+                android:src="@drawable/arrow" />
+
+            <TextView
+                android:id="@+id/editor_current_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/main2_main2_linearlayout1_imagevi"
+                android:textSize="@dimen/textsize_big" />
+
+            <TextView
+                android:id="@+id/editor_current_version_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/editor_current_version"
+                android:text="@string/edit_version"
+                android:textSize="@dimen/textsize_big" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/editor_linearLayout6"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@drawable/main_theme_textview_bg" >
+
+            <TextView
+                android:id="@+id/editor_recommended"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="@dimen/margin_left_more"
+                android:text="@string/edit_tuijian"
+                android:textSize="@dimen/textsize_big" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/yidejia"
+                android:padding="@dimen/margin_add_cart"
+                android:src="@drawable/arrow" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/editor_exit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/magin_left_add"
+            android:background="@drawable/theme_textview_background"
+            android:gravity="center"
+            android:text="@string/edit_exit"
+            android:textColor="@color/color_sort_text_color_press"
+            android:textSize="@dimen/textsize_big" />
+    </LinearLayout>
+
+</ScrollView>

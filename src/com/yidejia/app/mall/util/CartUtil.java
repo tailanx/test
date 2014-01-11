@@ -123,7 +123,6 @@ public class CartUtil {
 																		// view
 		this.inflater = LayoutInflater.from(context); // ,UserCommentDataManage
 		favoriteDataManage = new FavoriteDataManage(context);
-		// myApplication = (MyApplication) context.getApplicationContext();
 		this.linearLayout = linearLayout;
 		this.context = context;
 		this.mTextView = mTextView;
@@ -132,10 +131,6 @@ public class CartUtil {
 		this.imageLoader = imageLoader;
 		this.options = options;
 		this.animateFirstListener = listener;
-		// receiver = new InnerReceiver();
-		// IntentFilter filter = new IntentFilter();
-		// this.context.registerReceiver(receiver, filter);
-		// filter.addAction(Consts.UPDATE_CHANGE);
 	}
 
 
@@ -206,14 +201,7 @@ public class CartUtil {
 				imageLoader.init(ImageLoaderConfiguration.createDefault(context));
 				imageLoader.displayImage(path, headImageView, options,
 						animateFirstListener);
-				
-				// Bitmap bm = BitmapFactory.decodeFile(path);
-				// if (bm != null) {
-				// headImageView.setImageBitmap(bm);
-				// } else {
-				// headImageView.setImageResource(R.drawable.ic_launcher);
-				// }
-				//
+	
 				detailTextView.setText(cart.getProductText());// ��Ʒ�Ľ���
 				layout.setOnClickListener(new OnClickListener() {
 
@@ -227,12 +215,8 @@ public class CartUtil {
 						bundle.putString("goodsId", cart.getUId());
 						intent.putExtras(bundle);
 						context.startActivity(intent);
-
-						// context.startActivity(intent);
 					}
 				});
-
-				// �����ӿؼ����Ȼ�ȡ���㣬��ϸ��setDescendantFocusability
 				layout.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
 				priceTextView.setText(cart.getPrice() + "");
 
@@ -243,9 +227,6 @@ public class CartUtil {
 						
 						if (msg.what == 123) {
 
-							// map.put("check",checkBox.isChecked()==false?0:1);
-
-							// Log.i("info", 123+"");
 							map.put("count", Float.parseFloat(number.getText()
 									.toString()));
 							// map.put(Integer.parseInt(number.getText().toString()),Integer.parseInt(priceTextView.getText().toString()));

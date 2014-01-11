@@ -8,6 +8,9 @@
         android:id="@+id/all_order_linearlayout1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_left"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginRight="@dimen/margin_left"
         android:orientation="horizontal" >
 
         <TextView
@@ -15,9 +18,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1.0"
-            android:background="@drawable/product_details_selected"
+            android:background="@drawable/selecter_bg_sort_sell"
             android:gravity="center"
-            android:text="近一周"
+            android:text="@string/order_time_week"
             android:textColor="@color/search_result_top" />
 
         <TextView
@@ -26,9 +29,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="0sp"
             android:layout_weight="1.0"
-            android:background="@drawable/product_details_bg"
+            android:background="@drawable/selecter_bg_sort_price"
             android:gravity="center"
-            android:text="近一月"
+            android:text="@string/order_time_month"
             android:textColor="@color/dark_black" />
 
         <TextView
@@ -36,9 +39,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1.0"
-            android:background="@drawable/product_details_bg"
+            android:background="@drawable/selecter_bg_sort_popular"
             android:gravity="center"
-            android:text="近一年"
+            android:text="@string/order_time_year"
             android:textColor="@color/dark_black" />
     </LinearLayout>
 
@@ -52,21 +55,12 @@
             android:id="@+id/iv_bottom_line"
             android:layout_width="40dp"
             android:layout_height="0dip"
+            android:contentDescription="@string/yidejia"
             android:scaleType="matrix"
             android:src="#fff" />
     </RelativeLayout>
 
-    <!-- <android.support.v4.view.ViewPager
-        android:id="@+id/all_order_vPager"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/all_order_relative_line"
-        android:layout_gravity="center"
-        android:layout_weight="1.0"
-        android:descendantFocusability="afterDescendants"
-        android:flipInterval="30"
-        android:persistentDrawingCache="animation" /> -->
-        <FrameLayout
+    <FrameLayout
         android:id="@+id/order_framelayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

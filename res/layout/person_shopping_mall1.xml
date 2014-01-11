@@ -123,11 +123,11 @@
                 android:id="@+id/ll_wait_pay_order_linearlayout_list"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mall_list_padding"
                 android:orientation="horizontal" >
 
                 <include layout="@layout/mall_list" />
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 

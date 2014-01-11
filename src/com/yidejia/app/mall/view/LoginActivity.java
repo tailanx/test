@@ -47,7 +47,7 @@ public class LoginActivity extends SherlockActivity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.login);
+		setContentView(R.layout.my_mall_login);
 		sp = PreferenceManager.getDefaultSharedPreferences(this);
 		consts = new Consts();
 		ip = new IpAddress();
@@ -56,20 +56,20 @@ public class LoginActivity extends SherlockActivity implements OnClickListener {
 		inputMethodManager = (InputMethodManager) this
 				.getSystemService(Context.INPUT_METHOD_SERVICE);
 		// 默认选中
-		mBox = (CheckBox) findViewById(R.id.my_login_checkbox);
+		mBox = (CheckBox) findViewById(R.id.cb_my_login_checkbox);
 
-		findPwd = (RelativeLayout) findViewById(R.id.my_mall_login_retrieve_password);
+		findPwd = (RelativeLayout) findViewById(R.id.re_my_mall_login_retrieve_password);
 		// 设置监听
 		findPwd.setOnClickListener(this);
-		rapidRegist = (RelativeLayout) findViewById(R.id.my_mall_login_retrieve_regist);
+		rapidRegist = (RelativeLayout) findViewById(R.id.re_my_mall_login_retrieve_regist);
 		rapidRegist.setOnClickListener(this);
-		mLogin = (Button) findViewById(R.id.my_mall_login_button);
-		stringName = (EditText) findViewById(R.id.my_mall_login__edittext_account);
-		stringPassword = (EditText) findViewById(R.id.my_mall_login__edittext_password);
+		mLogin = (Button) findViewById(R.id.bt_my_mall_login_button);
+		stringName = (EditText) findViewById(R.id.et_my_mall_login__edittext_account);
+		stringPassword = (EditText) findViewById(R.id.et_my_mall_login__edittext_password);
 		mLogin.setOnClickListener(this);
 		// 优化登录账号密码焦点获取
-		LinearLayout login_acount = (LinearLayout) findViewById(R.id.login_acount);
-		LinearLayout login_psw = (LinearLayout) findViewById(R.id.login_psw);
+		LinearLayout login_acount = (LinearLayout) findViewById(R.id.ll_login_acount);
+		LinearLayout login_psw = (LinearLayout) findViewById(R.id.ll_login_psw);
 		login_acount
 				.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
 		login_psw.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
@@ -108,18 +108,18 @@ public class LoginActivity extends SherlockActivity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 
-		case R.id.my_mall_login_retrieve_password:// 找回密码
+		case R.id.re_my_mall_login_retrieve_password:// 找回密码
 			Intent intent1 = new Intent(this, FindPwActivity.class);
 			LoginActivity.this.startActivity(intent1);
 
 			break;
 
-		case R.id.my_mall_login_retrieve_regist:// 快速注册
+		case R.id.re_my_mall_login_retrieve_regist:// 快速注册
 			Intent registIntent = new Intent(this, RegistActivity.class);
 			LoginActivity.this.startActivity(registIntent);
 
 			break;
-		case R.id.my_mall_login_button:// 登录
+		case R.id.bt_my_mall_login_button:// 登录
 			String name = stringName.getText().toString().trim();
 			String pwd = stringPassword.getText().toString().trim();
 

@@ -81,7 +81,7 @@ public class AlreadyOrderActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
 //		startActionMode(new AnActionModeOfEpicProportions(ComposeActivity.this));
-		ImageView button = (ImageView) findViewById(R.id.compose_back);//����
+		TextView button = (TextView) findViewById(R.id.compose_back);//����
 //		button.setText("����");
 //		button.setTextSize(16);
 //		button.setImageResource(R.drawable.filter);

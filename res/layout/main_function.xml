@@ -2,17 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main_function_layout"
     android:layout_width="match_parent"
-    android:layout_height="184dp"
-    android:padding="2dp" >
+    android:layout_height="184dp">
 
     <LinearLayout
         android:id="@+id/function_layout_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:baselineAligned="false"
-        android:orientation="horizontal"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp" >
+        android:orientation="horizontal" >
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -166,9 +163,7 @@
         android:layout_below="@+id/function_layout_top"
         android:layout_marginTop="0dp"
         android:baselineAligned="false"
-        android:orientation="horizontal"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp" >
+        android:orientation="horizontal" >
 
         <RelativeLayout
             android:layout_width="0dp"

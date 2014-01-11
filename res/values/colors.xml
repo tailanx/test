@@ -33,6 +33,7 @@
     <color name="dialog_bg">#00000000</color>
     <color name="order">#695a3d</color>
     <color name="order_cor">#68573b</color>
+    <color name="press">#216197</color>
 	
 	
 </resources>

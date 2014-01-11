@@ -95,6 +95,20 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 
 		mWaitComent = (RelativeLayout) view.findViewById(R.id.re_wait_comment);// 待评价
 		mWaitComent.setOnClickListener(this);
+
+		favorites = (TextView) view.findViewById(R.id.tv_favorites);
+
+		favorites.setOnClickListener(this);
+		message = (TextView) view.findViewById(R.id.tv_message);
+		message.setOnClickListener(this);
+		integration = (TextView) view.findViewById(R.id.tv_integration);
+		integration.setOnClickListener(this);
+		//头部实例化
+		getActionbar();
+
+	}
+
+	private void getActionbar() {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
@@ -106,15 +120,6 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 		imageView.clearFocus();
 		imageView.setFocusable(true);
 		imageView.setOnClickListener(edit);
-
-		favorites = (TextView) view.findViewById(R.id.tv_favorites);
-
-		favorites.setOnClickListener(this);
-		message = (TextView) view.findViewById(R.id.tv_message);
-		message.setOnClickListener(this);
-		integration = (TextView) view.findViewById(R.id.tv_integration);
-		integration.setOnClickListener(this);
-
 	}
 
 	private OnClickListener edit = new OnClickListener() {
@@ -143,13 +148,13 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 		int next = getIntent().getIntExtra("next", -1);
 
 		setupView(view);
+		initNavView();
 		// 设置底部
 		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
 		bottomChange = new BottomChange(this, bottomLayout);
 		if (current != -1 || next != -1) {
 			bottomChange.initNavView(current, next);
 		}
-		initNavView();
 
 		String name = myApplication.getNick();
 		if (name == null || "".equals(name)) {
@@ -207,6 +212,20 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 		downShoppingLayout = (RelativeLayout) findViewById(R.id.re_down_shopping_layout);
 		downMyLayout = (RelativeLayout) findViewById(R.id.re_down_my_layout);
 
+		downGuangLayout.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(HomeMyMaActivity.this,
+						HomeGuangActivity.class);
+				intent.putExtra("current", 3);
+				intent.putExtra("next", 5);
+				startActivity(intent);
+				HomeMyMaActivity.this.finish();
+				overridePendingTransition(R.anim.activity_in,
+						R.anim.activity_out);
+			}
+		});
 		downHomeLayout.setOnClickListener(new OnClickListener() {
 
 			@Override

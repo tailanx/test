@@ -28,7 +28,7 @@ public class AboutActivity extends SherlockFragmentActivity{
 		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
 		TextView title = (TextView) findViewById(R.id.compose_title);
 		title.setText(getResources().getString(R.string.edit_about));
-		ImageView back = (ImageView) findViewById(R.id.compose_back);
+		TextView back = (TextView) findViewById(R.id.compose_back);
 		back.setOnClickListener(new OnClickListener() {
 			
 			@Override

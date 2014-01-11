@@ -146,7 +146,7 @@
             android:name="com.yidejia.app.mall.address.AddressActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.ycom.yidejia.app.mall.EvaluationActivity"
+            android:name="com.yidejia.app.mall.EvaluationActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.yidejia.app.mall.view.NewAddressActivity"
@@ -158,7 +158,7 @@
             android:name="com.yidejia.app.mall.view.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yidejia.app.mall.view.RegistActivity"
+            android:name="com.yidejia.app.mall.RegistActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.yidejia.app.mall.FindPwActivity"
@@ -189,7 +189,7 @@
             android:name="com.yidejia.app.mall.view.OptionActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yidejia.app.mall.view.RecommendActivity"
+            android:name="com.yidejia.app.mall.RecommendActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.yidejia.app.mall.view.ReturnActivity"
@@ -289,6 +289,12 @@
         </activity>
         <activity
             android:name="com.yidejia.app.mall.phone.ContactSureActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.yidejia.app.mall.HomeGuangActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >

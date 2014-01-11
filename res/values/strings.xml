@@ -105,9 +105,6 @@
     <string name="deliver_order">已发货订单</string>
     <string name="wait_deliver">待发货订单</string>
     <string name="wait_pay">待付款订单</string>
-    <string name="order_time_week">近一周</string>
-    <string name="order_time_month">近一月</string>
-    <string name="order_time_year">近一年</string>
     <string name="check_logistics">查看物流</string>
     <string name="ship_post">快递</string>
     <string name="please_login">您还未登陆，请先登陆!</string>
@@ -146,9 +143,6 @@
     <string name="deliver_order">已发货订单</string>
     <string name="wait_deliver">待发货订单</string>
     <string name="wait_pay">待付款订单</string>
-    <string name="order_time_week">近一周</string>
-    <string name="order_time_month">近一月</string>
-    <string name="order_time_year">近一年</string>
     <string name="check_logistics">查看物流</string>
     <string name="ship_post">快递</string>
     <string name="please_login">您还未登陆，请先登陆!</string>
@@ -181,9 +175,6 @@
     <string name="wrong_input">您的输入有问题</string>
     <string name="complete_order">已完成订单</string>
     <string name="deliver_order">已发货订单</string>
-    <string name="order_time_week">近一周</string>
-    <string name="order_time_month">近一月</string>
-    <string name="order_time_year">近一年</string>
     <string name="check_logistics">查看物流</string>
     <string name="ship_post">快递</string>
     <string name="please_login">您还未登陆，请先登陆!</string>
@@ -382,7 +373,29 @@
     <string name="addresss_default_name_add">收货人姓名:</string> 
     <string name="addresss_detail">详细地址:</string> 
     <string name="addresss_detail_add">所在地区：</string> 
-    <string name="addresss_default_address">收货地址:法撒旦放大 倒萨范德萨发生地方的所发生的松岛枫松岛枫法撒旦放大的说法都是第三方</string> 
+    <string name="addresss_default_address">收货地址:</string> 
+    <string name="cart_sum">总计:</string> 
+    <string name="cart_count">数量：</string> 
+    <string name="cart_guang">去逛一下</string> 
+    <string name="cart_no_produce">购物车是空的</string> 
+    <string name="login_find_pwd">找回密码</string> 
+    <string name="login_fast_regist">快速注册</string> 
+    <string name="login_title_add">账户登录</string> 
+    <string name="qiandao">签到</string> 
+    <string name="yaoyiyao">摇一摇</string> 
+    <string name="guang">逛发现</string> 
+    <string name="my_mall">我的商城</string> 
+    <string name="edit_help">帮助</string> 
+    <string name="edit_exit">退出登录</string> 
+    <string name="edit_cache">清空缓存</string> 
+    <string name="edit_about_add">关于伊的家</string> 
+    <string name="edit_phone">客服热线</string> 
+    <string name="edit_number">400-886-7898</string> 
+    <string name="edit_gengxin">检测更新</string> 
+    <string name="edit_version">当前版本</string> 
+    <string name="edit_tuijian">当前应用推荐本</string> 
+    <string name="order_state">订单状态：</string> 
+    <string name="order_pay">付款</string> 
     
 
 </resources>
