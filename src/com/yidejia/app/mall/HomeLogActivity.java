@@ -94,7 +94,7 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 		findPwd = (RelativeLayout) view
 				.findViewById(R.id.my_mall_login_retrieve_password);
 		// 设置监听
-		findPwd.setOnClickListener(this);
+//		findPwd.setOnClickListener(this);
 		rapidRegist = (RelativeLayout) view
 				.findViewById(R.id.my_mall_login_retrieve_regist);
 		rapidRegist.setOnClickListener(this);
@@ -291,6 +291,8 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 			taskLoginAct = new Task();
 			taskLoginAct.execute();
 			// taskLoginAct.loginAct(name, pwd, ipAddress.getIpAddress());
+			break;
+		default:
 			break;
 		}
 	}

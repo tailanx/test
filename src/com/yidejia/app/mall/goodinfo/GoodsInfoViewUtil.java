@@ -231,12 +231,45 @@ public class GoodsInfoViewUtil {
 			// add_favorites.setImageResource(R.drawable.add_favorites1);
 			// }
 
+			go2Comments();
+			
+			go2Details(info.getProductDetailUrl());
 		} catch (Exception e) {
 			e.printStackTrace();
 			Toast.makeText(activity,
 					activity.getResources().getString(R.string.bad_network),
 					Toast.LENGTH_LONG).show();
 		}
+	}
+	
+	/**
+	 * 跳转到评论页面
+	 */
+	private void go2Comments() {
+		RelativeLayout re_produce_comments = (RelativeLayout) activity.findViewById(R.id.re_produce_comments);
+		re_produce_comments.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(activity, CommentActivity.class);
+				intent.putExtra("goodsId", productId);
+				activity.startActivity(intent);
+			}
+		});
+	}
+	
+	/**跳转到商品图文详情**/
+	private void go2Details(final String url) {
+		RelativeLayout re_produce_details = (RelativeLayout) activity.findViewById(R.id.re_produce_image_detail);
+		re_produce_details.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(activity, GoodsDetailActivity.class);
+				intent.putExtra("url", url);
+				activity.startActivity(intent);
+			}
+		});
 	}
 
 	/**

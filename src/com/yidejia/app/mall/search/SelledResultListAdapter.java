@@ -27,16 +27,14 @@ public class SelledResultListAdapter extends BaseAdapter {
 	private TextView search_result_small_price;
 	private TextView search_result_small_sell_num;
 	private TextView search_result_small_em_num;
-	private ImageLoader imageLoader;
-	private ImageLoadingListener animateFirstListener;
+//	private ImageLoadingListener animateFirstListener;
 	private DisplayImageOptions options;
 
 	public SelledResultListAdapter(Context mContext, ArrayList<SearchItem> searchItems){
 		this.mContext = mContext;
 		this.searchItems = searchItems;
 		initDisplayImageOption();
-		imageLoader = ImageLoader.getInstance();
-		animateFirstListener = ((MyApplication) mContext.getApplicationContext()).getImageLoadingListener();
+//		animateFirstListener = ((MyApplication) mContext.getApplicationContext()).getImageLoadingListener();
 	}
 	
 	@Override
@@ -70,9 +68,8 @@ public class SelledResultListAdapter extends BaseAdapter {
 		search_result_small_price.setText( mContext.getResources().getString(R.string.unit)+item.getPrice());
 		search_result_small_em_num.setText(item.getCommentAmount());
 		search_result_small_sell_num.setText(item.getSelledAmount());
-		imageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
-		imageLoader.displayImage(item.getImgUrl(), search_result_small_image, options,
-				animateFirstListener);
+		ImageLoader.getInstance().displayImage(item.getImgUrl(), search_result_small_image, options,
+				MyApplication.getInstance().getImageLoadingListener());
 		return convertView;
 	}
 	

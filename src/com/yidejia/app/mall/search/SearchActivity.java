@@ -159,7 +159,7 @@ public class SearchActivity extends SherlockFragmentActivity {
 			}
 		});
 
-		ImageView backBtn = (ImageView) findViewById(R.id.search_back_btn);
+		TextView backBtn = (TextView) findViewById(R.id.search_back_btn);
 		backBtn.setOnClickListener(new OnClickListener() {
 
 			@Override

@@ -83,6 +83,14 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.yidejia.app.mall.goodinfo.CommentActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.yidejia.app.mall.goodinfo.GoodsDetailActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.yidejia.app.mall.search.SearchResultActivity"
             android:screenOrientation="portrait" >
         </activity>

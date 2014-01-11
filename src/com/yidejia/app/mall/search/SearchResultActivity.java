@@ -150,9 +150,9 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 		showWithList.setOnClickListener(new AddFragmentListener(3));
 	}
 	
-//	private void setTitle(String title){
-//		titleTextView.setText(title);
-//	}
+	private void setTitle(String title){
+		titleTextView.setText(title);
+	}
 	
 	private Fragment mFrag;
 	private void setRightFilterMenu(Bundle savedInstanceState){
@@ -253,7 +253,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 				break;
 			case 3:
 //				if(isShowWithList) break;
-				
+				showWithList.setSelected(isShowWithList);
 				isShowWithList = !isShowWithList;
 //				showWithList.setImageResource(R.drawable.list_hover);
 //				showWithImage.setImageResource(R.drawable.thumbnails_normal);

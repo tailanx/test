@@ -267,7 +267,7 @@ public class ParseSearchJson {
 			searchItem.setCommentAmount(temp);
 			Log.i(TAG, "remarks:" + temp);
 			temp = ImageUrl.IMAGEURL + responseObject.optString("imgname")
-					+ "!100";
+					;
 			searchItem.setImgUrl(temp);
 			Log.i(TAG, "imageUrl:" + temp);
 

@@ -211,15 +211,16 @@
             </LinearLayout>
 
             <RelativeLayout
-                android:id="@+id/re_produce_detail"
+                android:id="@+id/re_produce_comments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/li_buy_add_layout_third"
                 android:layout_marginTop="@dimen/margin_left"
+                android:clickable="true"
                 android:background="@drawable/p_bg" >
 
                 <TextView
-                    android:id="@+id/tv_main2_main2_linearlayout4_textview1_integer"
+                    android:id="@+id/tv_produce_comments"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -231,7 +232,7 @@
                     android:textSize="@dimen/textsize_big_big" />
 
                 <ImageView
-                    android:id="@+id/tv_main2_main2_linearlayout4_imageview2_integer"
+                    android:id="@+id/iv_produce_comments_arrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -245,12 +246,13 @@
                 android:id="@+id/re_produce_image_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/re_produce_detail"
+                android:layout_below="@id/re_produce_comments"
                 android:layout_marginTop="-1dp"
+                android:clickable="true"
                 android:background="@drawable/p_bg" >
 
                 <TextView
-                    android:id="@+id/tv_main2_main2_linearlayout4_textview1_integer_image"
+                    android:id="@+id/tv_produce_image_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -262,7 +264,7 @@
                     android:textSize="@dimen/textsize_big_big" />
 
                 <ImageView
-                    android:id="@+id/tv_main2_main2_linearlayout4_imageview2_integer_image"
+                    android:id="@+id/tv_produce_image_detail_arrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
