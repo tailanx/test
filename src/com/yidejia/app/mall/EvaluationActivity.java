@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ import com.yidejia.app.mall.datamanage.TaskNoEva;
 public class EvaluationActivity extends SherlockActivity {
 	private LinearLayout layout;
 	private MyApplication myApplication;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,14 +28,15 @@ public class EvaluationActivity extends SherlockActivity {
 		taskNoEva.getWaitingComment(myApplication.getUserId(), true);
 	}
 
+
 	private void setActionbar() {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
-		TextView button = (TextView) findViewById(R.id.compose_back);// 返回
+		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+		TextView button = (TextView) findViewById(R.id.ab_common_back);// 返回
 		button.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -42,17 +45,18 @@ public class EvaluationActivity extends SherlockActivity {
 			}
 		});
 
-		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
+		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
 		titleTextView.setText(getResources().getString(R.string.evaluation));
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == 4001 && resultCode == 4002) {
+		if(requestCode == 4001 && resultCode == 4002){
 			layout.removeAllViews();
 			TaskNoEva taskNoEva = new TaskNoEva(EvaluationActivity.this, layout);
 			taskNoEva.getWaitingComment(myApplication.getUserId(), true);
 		}
 	}
-
+	
+	
 }

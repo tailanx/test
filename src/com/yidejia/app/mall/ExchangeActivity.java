@@ -77,8 +77,8 @@ public class ExchangeActivity extends SherlockFragmentActivity implements
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		getSupportActionBar().setIcon(R.drawable.back1);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
-		TextView button = (TextView) findViewById(R.id.compose_back);
+		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+		TextView button = (TextView) findViewById(R.id.ab_common_back);
 		button.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -87,7 +87,7 @@ public class ExchangeActivity extends SherlockFragmentActivity implements
 			}
 		});
 
-		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
+		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
 		titleTextView.setText(getResources().getString(R.string.exchanged));
 	}
 

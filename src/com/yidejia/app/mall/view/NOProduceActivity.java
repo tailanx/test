@@ -45,9 +45,9 @@ public class NOProduceActivity extends SherlockActivity {
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
+		getSupportActionBar().setCustomView(R.layout.actionbar_common);
 
-		ImageView button = (ImageView) findViewById(R.id.compose_back);
+		TextView button = (TextView) findViewById(R.id.ab_common_back);
 		button.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -57,8 +57,8 @@ public class NOProduceActivity extends SherlockActivity {
 			}
 		});
 		
-		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
-		titleTextView.setText(getResources().getString(R.string.no_cart));
+		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
+		titleTextView.setText(getResources().getString(R.string.cart));
 	}
 	
 }

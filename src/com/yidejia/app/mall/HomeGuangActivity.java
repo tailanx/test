@@ -132,10 +132,10 @@ public class HomeGuangActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
-		TextView back = (TextView) findViewById(R.id.compose_back);
+		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+		TextView back = (TextView) findViewById(R.id.ab_common_back);
 		back.setVisibility(View.GONE);
-		TextView title = (TextView) findViewById(R.id.compose_title);
+		TextView title = (TextView) findViewById(R.id.ab_common_title);
 		title.setText(getResources().getString(R.string.guang));
 	}
 }

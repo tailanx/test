@@ -143,9 +143,9 @@ public class MyCollectActivity extends SherlockActivity {
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
+		getSupportActionBar().setCustomView(R.layout.actionbar_common);
 
-		TextView button = (TextView) findViewById(R.id.compose_back);
+		TextView button = (TextView) findViewById(R.id.ab_common_back);
 		button.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -155,7 +155,7 @@ public class MyCollectActivity extends SherlockActivity {
 			}
 		});
 
-		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
+		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
 		titleTextView.setText("我的收藏");
 	}
 

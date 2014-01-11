@@ -115,7 +115,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/margin_left"
             android:background="@drawable/theme_textview_background"
-            android:text="@string/delete_produce"
+            android:text="@string/delete"
             android:textColor="@color/color_sort_text_color_press" />
 
         <TextView

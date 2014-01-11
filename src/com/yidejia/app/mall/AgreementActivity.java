@@ -3,7 +3,6 @@ package com.yidejia.app.mall;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -28,10 +27,10 @@ public class AgreementActivity extends SherlockFragmentActivity{
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
-		TextView title = (TextView) findViewById(R.id.compose_title);
+		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+		TextView title = (TextView) findViewById(R.id.ab_common_title);
 		title.setText("伊的家服务条款");
-		ImageView back = (ImageView) findViewById(R.id.compose_back);
+		TextView back = (TextView) findViewById(R.id.ab_common_back);
 		back.setOnClickListener(new OnClickListener() {
 			
 			@Override

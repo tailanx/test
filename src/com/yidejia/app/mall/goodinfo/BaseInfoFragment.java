@@ -202,14 +202,14 @@ public class BaseInfoFragment extends SherlockFragment {
 				FavoriteDataManage favoriteManage = new FavoriteDataManage(getSherlockActivity());
 				if (myApplication.getIsLogin() && !"".equals(myApplication.getUserId())) {
 					if (favoriteManage.checkExists(myApplication.getUserId(), info.getUId(), myApplication.getToken())) {
-						add_favorites.setImageResource(R.drawable.add_favorites2);
+						add_favorites.setImageResource(R.drawable.favorites);
 //					Toast.makeText(activity, "yes", Toast.LENGTH_LONG).show();
 					} else {
-						add_favorites.setImageResource(R.drawable.add_favorites1);
+						add_favorites.setImageResource(R.drawable.unfavorites);
 //					Toast.makeText(activity, "no", Toast.LENGTH_LONG).show();
 					}
 				} else {
-					add_favorites.setImageResource(R.drawable.add_favorites1);
+					add_favorites.setImageResource(R.drawable.unfavorites);
 				}
 		
 			}

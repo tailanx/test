@@ -11,6 +11,7 @@
     <color name="white_white">#b4b4b4</color>
     <color name="dark_black">#000000</color>
     <color name="theme">#ec3587</color>
+    <color name="main_bg">#f0f0f0</color>
 
     <drawable name="white">#ffffff</drawable>
     <drawable name="green">#009900</drawable>
@@ -33,7 +34,7 @@
     <color name="dialog_bg">#00000000</color>
     <color name="order">#695a3d</color>
     <color name="order_cor">#68573b</color>
-    <color name="press">#216197</color>
+    <color name="text_color">#505050</color>
 	
 	
 </resources>

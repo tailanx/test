@@ -20,12 +20,23 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 public class MyApplication extends Application {
 
 	static final List<String> displayedImages = Collections.synchronizedList(new LinkedList<String>());
+	
+	private static MyApplication instance;
+	
+	
 	private ImageLoadingListener animateFirstListener;
+	
+	public static MyApplication getInstance() {
+		return instance;
+	}
+	
 	
 	@Override
 	public void onCreate() {
-		// TODO Auto-generated method stub
 		super.onCreate();
+		
+		instance = this;
+		
 		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
 				getApplicationContext())
 				.threadPriority(Thread.NORM_PRIORITY - 2)

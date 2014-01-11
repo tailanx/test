@@ -861,14 +861,16 @@ public class CstmPayActivity extends SherlockActivity {
 			getSupportActionBar().setDisplayShowTitleEnabled(false);
 			getSupportActionBar().setDisplayUseLogoEnabled(false);
 			getSupportActionBar().setDisplayShowCustomEnabled(true);
-			getSupportActionBar().setCustomView(R.layout.actionbar_compose);
-			ImageView button = (ImageView) findViewById(R.id.compose_back);
+			getSupportActionBar().setCustomView(R.layout.actionbar_common);
+			TextView button = (TextView) findViewById(R.id.ab_common_back);
 			button.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					CstmPayActivity.this.finish();
 				}
 			});
+			TextView title = (TextView) findViewById(R.id.ab_common_title);
+			title.setText(R.string.comfirm_order);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

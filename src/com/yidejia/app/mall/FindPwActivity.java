@@ -36,6 +36,8 @@ public class FindPwActivity extends SherlockActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+//		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setActionbar();
 		
 		setContentView(R.layout.find_password);
@@ -149,9 +151,9 @@ public class FindPwActivity extends SherlockActivity {
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 //		getSupportActionBar().setLogo(R.drawable.back);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
+		getSupportActionBar().setCustomView(R.layout.actionbar_common);
 //		startActionMode(new AnActionModeOfEpicProportions(ComposeActivity.this));
-		TextView button = (TextView) findViewById(R.id.compose_back);
+		TextView button = (TextView) findViewById(R.id.ab_common_back);
 		button.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -161,7 +163,7 @@ public class FindPwActivity extends SherlockActivity {
 			}
 		});
 		
-		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
+		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
 		titleTextView.setText("找回密码");
 	}
 	

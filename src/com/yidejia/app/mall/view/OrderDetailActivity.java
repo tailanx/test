@@ -154,8 +154,8 @@ public class OrderDetailActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
-		ImageView back = (ImageView) findViewById(R.id.compose_back);
+		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+		TextView back = (TextView) findViewById(R.id.ab_common_back);
 		back.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -165,7 +165,7 @@ public class OrderDetailActivity extends SherlockFragmentActivity {
 			}
 		});
 		getSupportActionBar().setIcon(R.drawable.back);
-		TextView title = (TextView) findViewById(R.id.compose_title);
+		TextView title = (TextView) findViewById(R.id.ab_common_title);
 		title.setText(getResources().getString(R.string.order_detail));
 	}
 	int fromIndex = 0;
@@ -216,7 +216,7 @@ public class OrderDetailActivity extends SherlockFragmentActivity {
 		imageLoader.displayImage(cart.getImgUrl(),
 				order_detail_item_image, options, animateFirstListener);
 		TextView order_detail_item_sum = (TextView) view.findViewById(R.id.order_detail_item_sum);
-		order_detail_item_sum.setText(cart.getPrice() + getResources().getString(R.string.unit));
+		order_detail_item_sum.setText( getResources().getString(R.string.unit) + cart.getPrice());
 		TextView order_detail_item_count = (TextView) view.findViewById(R.id.order_detail_item_count);
 		order_detail_item_count.setText(getResources().getString(R.string.amount) + cart.getAmount());
 	}

@@ -114,7 +114,7 @@ public class GoodsView {
 			cart.setUId(productId);
 			cart.setImgUrl(info.getImgUrl());
 			//
-			imgIcon = (ImageView) view.findViewById(R.id.iv_item_goods_detail);
+//			imgIcon = (ImageView) view.findViewById(R.id.iv_item_goods_detail);
 			// 商品名称
 			TextView base_info_content_text = (TextView) view
 					.findViewById(R.id.tv_item_goods_base_produce_detail);
@@ -229,7 +229,7 @@ public class GoodsView {
 			} else {
 				Toast.makeText(activity, "这是赠品，不能够购买", Toast.LENGTH_LONG)
 						.show();
-				add_to_cart.setImageResource(R.drawable.add_to_cart_hover);
+//				add_to_cart.setImageResource(R.drawable.add_to_cart_hover);
 				add_to_cart.setClickable(false);
 			
 			}
@@ -257,20 +257,20 @@ public class GoodsView {
 			add_favorites.setOnClickListener(addFavoriteListener);
 
 			// 检查是否收藏并且设置收藏按钮的图片
-			FavoriteDataManage favoriteManage = new FavoriteDataManage(activity);
-			if (myApplication.getIsLogin() && !"".equals(userid)) {
-				if (favoriteManage.checkExists(userid, productId,
-						myApplication.getToken())) {
-					add_favorites.setImageResource(R.drawable.add_favorites2);
-					// Toast.makeText(activity, "yes",
-					// Toast.LENGTH_LONG).show();
-				} else {
-					add_favorites.setImageResource(R.drawable.add_favorites1);
-					// Toast.makeText(activity, "no", Toast.LENGTH_LONG).show();
-				}
-			} else {
-				add_favorites.setImageResource(R.drawable.add_favorites1);
-			}
+//			FavoriteDataManage favoriteManage = new FavoriteDataManage(activity);
+//			if (myApplication.getIsLogin() && !"".equals(userid)) {
+//				if (favoriteManage.checkExists(userid, productId,
+//						myApplication.getToken())) {
+//					add_favorites.setImageResource(R.drawable.add_favorites2);
+//					// Toast.makeText(activity, "yes",
+//					// Toast.LENGTH_LONG).show();
+//				} else {
+//					add_favorites.setImageResource(R.drawable.add_favorites1);
+//					// Toast.makeText(activity, "no", Toast.LENGTH_LONG).show();
+//				}
+//			} else {
+//				add_favorites.setImageResource(R.drawable.add_favorites1);
+//			}
 			
 			
 			
@@ -284,11 +284,11 @@ public class GoodsView {
 	}
 
 	private ImageView add_favorites;// 加入收藏的按钮
+	private Button shopping_cart_button;	// 跳转购物车的按钮
 	
 //	private ImageView add_to_cart_press;//加入购物车动画图片
 
-	// 跳转购物车的按钮
-	private Button shopping_cart_button;
+	
 
 	private void setCartNum(int crat_num) {
 		shopping_cart_button.setVisibility(view.VISIBLE);
@@ -505,24 +505,24 @@ public class GoodsView {
 							activity.getResources().getString(
 									R.string.add_fav_scs),
 							Toast.LENGTH_SHORT).show();
-					add_favorites
-							.setImageResource(R.drawable.add_favorites2);
+//					add_favorites
+//							.setImageResource(R.drawable.add_favorites2);
 				} else {
 					Toast.makeText(
 							activity,
 							activity.getResources().getString(
 									R.string.add_fav_fail),
 							Toast.LENGTH_SHORT).show();
-					add_favorites
-							.setImageResource(R.drawable.add_favorites1);
+//					add_favorites
+//							.setImageResource(R.drawable.add_favorites1);
 				}
 			} else {
 				// 已收藏，现在删除收藏
 				if (manage.deleteFavourite(userid, productId,
 						myApplication.getToken())) {
 					// 删除成功
-					add_favorites
-							.setImageResource(R.drawable.add_favorites1);
+//					add_favorites
+//							.setImageResource(R.drawable.add_favorites1);
 					Toast.makeText(
 							activity,
 							activity.getResources().getString(
@@ -530,8 +530,8 @@ public class GoodsView {
 							.show();
 				} else {
 					// 删除失败
-					add_favorites
-							.setImageResource(R.drawable.add_favorites2);
+//					add_favorites
+//							.setImageResource(R.drawable.add_favorites2);
 				}
 			}
 		}
@@ -545,11 +545,11 @@ public class GoodsView {
 	 */
 	private void changeFravoriteBg() {
 		// 改变图片
-		if (flag) {
-			add_favorites.setImageResource(R.drawable.add_favorites2);
-		} else {
-			add_favorites.setImageResource(R.drawable.add_favorites1);
-		}
+//		if (flag) {
+//			add_favorites.setImageResource(R.drawable.add_favorites2);
+//		} else {
+//			add_favorites.setImageResource(R.drawable.add_favorites1);
+//		}
 
 	}
 

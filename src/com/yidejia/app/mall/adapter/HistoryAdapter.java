@@ -120,7 +120,7 @@ public class HistoryAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		final ProductBaseInfo ProductBaseInfo = mArrayList.get(id);
-		final AlertDialog dialog = new Builder(context).setIcon(R.drawable.ic_launcher).setMessage("是否确认删除").setTitle(context.getResources().getString(R.string.all_delete)).setPositiveButton(context.getResources().getString(R.string.sure), new android.content.DialogInterface.OnClickListener() {
+		final AlertDialog dialog = new Builder(context).setIcon(R.drawable.ic_launcher).setMessage("是否确认删除").setTitle(context.getResources().getString(R.string.delete)).setPositiveButton(context.getResources().getString(R.string.sure), new android.content.DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

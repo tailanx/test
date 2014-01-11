@@ -25,83 +25,104 @@ import com.yidejia.app.mall.ctrl.OrderViewCtrl;
 import com.yidejia.app.mall.fragment.AllOrderFragment;
 
 public class AlreadyComActivity extends SherlockFragmentActivity {
-	private static final String TAG = "MainActivity";
-	private ViewPager mPager;
-	private ArrayList<Fragment> fragmentsList;
-
-	private TextView mWeek, mMonth, mYear;
-	private ImageView ivBottomLine;
-	private int currIndex = 0;
-	private int bottomLineWidth;
-	private int offset = 0;
-	private int position_one;
-	private int position_two;
-	private int position_three;
-	private Resources resources;
-
+	    private static final String TAG = "MainActivity";
+	    private ViewPager mPager;
+	    private ArrayList<Fragment> fragmentsList;
+	 
+	    private TextView mWeek,mMonth,mYear;
+	    private ImageView ivBottomLine;
+	    private int currIndex = 0;
+	    private int bottomLineWidth;
+	    private int offset = 0;
+	    private int position_one;
+	    private int position_two;
+	    private int position_three;
+	    private Resources resources;
+	    
+//	    public void doClick(View v){
+//			Intent intent = new Intent(AlreadyComActivity.this,MyMallActivity.class);
+//			switch (v.getId()) {
+////			case R.id.already_complete_button1://返回
+////				intent.setClass(this, MyMallActivity.class);
+////				break;
+//			case R.id.already_complete_item_main_item_comment://评价
+//				intent.setClass(this, PersonEvaluationActivity.class);
+//				break;
+//			}
+//			startActivity(intent);
+//			//结束当前Activity；
+//			finish();
+//		}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setActionBar();
+//		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//		setContentView(R.layout.already_complete);
+//		
+//		resources = getResources();
+//		InitWidth();
+//		InitTextView();
+//		InitViewPager();
 		setContentView(R.layout.all_order);
 		OrderViewCtrl viewCtrl = new OrderViewCtrl(this);
 		viewCtrl.viewCtrl(4);
 	}
 
-	private void setActionBar() {
+	private void setActionBar(){
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		getSupportActionBar().setIcon(R.drawable.back1);
-		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
-		TextView backImageView = (TextView) findViewById(R.id.compose_back);
-		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
-		titleTextView
-				.setText(getResources().getString(R.string.complete_order));
+		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+		TextView backImageView = (TextView) findViewById(R.id.ab_common_back); 
+		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
+		titleTextView.setText(getResources().getString(R.string.complete_order));
 		backImageView.setOnClickListener(new OnClickListener() {
-
+			
 			@Override
 			public void onClick(View arg0) {
 				AlreadyComActivity.this.finish();
-
+				
 			}
 		});
-
+		
 	}
-
-	private void InitTextView() {
-		mWeek = (TextView) findViewById(R.id.already_complete_week);
-		mMonth = (TextView) findViewById(R.id.already_complete_moonth);
-		mYear = (TextView) findViewById(R.id.already_completer_year);
-
+	private void InitTextView(){
+		mWeek = (TextView)findViewById(R.id.already_complete_week);
+		mMonth = (TextView)findViewById(R.id.already_complete_moonth);
+		mYear = (TextView)findViewById(R.id.already_completer_year);
+		
 		mWeek.setOnClickListener(new MyOnClickListener(0));
-		mMonth.setOnClickListener(new MyOnClickListener(1));
-		mYear.setOnClickListener(new MyOnClickListener(2));
+        mMonth.setOnClickListener(new MyOnClickListener(1));
+        mYear.setOnClickListener(new MyOnClickListener(2));
+	}
+	private void InitViewPager(){
+		 mPager = (ViewPager) findViewById(R.id.vPager);
+		 fragmentsList = new ArrayList<Fragment>();
+		 LayoutInflater mInflater = getLayoutInflater();
+	   
+	     
+		 Fragment weekfragment = AllOrderFragment.newInstance(4, 0);
+	     Fragment monthFragment = AllOrderFragment.newInstance(4, 1);
+	     Fragment yearFragment = AllOrderFragment.newInstance(4, 2);
+	     
+	     fragmentsList.add(weekfragment);
+	     fragmentsList.add(monthFragment);
+	     fragmentsList.add(yearFragment);
+	     
+	     mPager.setAdapter(new AllOrderFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
+	     mPager.setCurrentItem(0);
+	     mPager.setOffscreenPageLimit(2);
+	     mPager.setOnPageChangeListener(new MyOnPageChangeListener());
+			
+	     
 	}
 
-	private void InitViewPager() {
-		mPager = (ViewPager) findViewById(R.id.vPager);
-		fragmentsList = new ArrayList<Fragment>();
-		LayoutInflater mInflater = getLayoutInflater();
-
-		Fragment weekfragment = AllOrderFragment.newInstance(4, 0);
-		Fragment monthFragment = AllOrderFragment.newInstance(4, 1);
-		Fragment yearFragment = AllOrderFragment.newInstance(4, 2);
-
-		fragmentsList.add(weekfragment);
-		fragmentsList.add(monthFragment);
-		fragmentsList.add(yearFragment);
-
-		mPager.setAdapter(new AllOrderFragmentAdapter(this
-				.getSupportFragmentManager(), fragmentsList));
-		mPager.setCurrentItem(0);
-		mPager.setOffscreenPageLimit(2);
-		mPager.setOnPageChangeListener(new MyOnPageChangeListener());
-
-	}
-
+	
 	private void InitWidth() {
 		ivBottomLine = (ImageView) findViewById(R.id.iv_bottom_line);// 滑动
 		bottomLineWidth = ivBottomLine.getLayoutParams().width;
@@ -138,6 +159,7 @@ public class AlreadyComActivity extends SherlockFragmentActivity {
 				if (currIndex == 1) {// 当前是第二个
 					mMonth.setPressed(false);
 					animation = new TranslateAnimation(position_one, 0, 0, 0);
+					mMonth.setBackgroundResource(R.drawable.product_details_bg);
 					mMonth.setTextColor(Color.parseColor("#000000"));
 				} else if (currIndex == 2) {
 					mYear.setPressed(false);
@@ -205,7 +227,7 @@ public class AlreadyComActivity extends SherlockFragmentActivity {
 
 		}
 	}
-
+	
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub

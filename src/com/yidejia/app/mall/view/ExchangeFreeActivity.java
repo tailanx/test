@@ -186,7 +186,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+		getSupportActionBar().setCustomView(R.layout.actionbar_search_result);
 		ImageView back = (ImageView) findViewById(R.id.actionbar_left);
 		Button confirm = (Button) findViewById(R.id.actionbar_right);
 		confirm.setText(getResources().getString(R.string.complete));

@@ -77,9 +77,9 @@ public class IntegeralActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
-		TextView back = (TextView) findViewById(R.id.compose_back);
-		TextView  titleTextView = (TextView) findViewById(R.id.compose_title);
+		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+		TextView back = (TextView) findViewById(R.id.ab_common_back);
+		TextView  titleTextView = (TextView) findViewById(R.id.ab_common_title);
 		titleTextView.setText("积分卡券");
 		
 		back.setOnClickListener(new OnClickListener() {

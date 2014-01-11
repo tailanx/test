@@ -96,7 +96,7 @@
             android:layout_marginRight="@dimen/margin_left"
             android:layout_toLeftOf="@+id/all_order_item_main_pay"
             android:background="@drawable/theme_textview_background_no_comment"
-            android:text="@string/delete_produce"
+            android:text="@string/delete"
             android:textColor="@color/color_sort_text_color_press_add"
             android:textSize="14sp" />
 

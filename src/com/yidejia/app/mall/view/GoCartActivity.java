@@ -114,7 +114,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		GoCartActivity.this.getSupportActionBar().setCustomView(
-				R.layout.actionbar_common);
+				R.layout.actionbar_search_result);
 		cartUtil1 = new CartUtil1(GoCartActivity.this, layout, counTextView,
 				sumTextView, mBox);
 		cartUtil1.AllComment();
@@ -124,7 +124,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 		mbutton = (Button) findViewById(R.id.actionbar_right);
 		mTextView = (TextView) findViewById(R.id.actionbar_title);
 		mImageView = (ImageView) findViewById(R.id.actionbar_left);
-		mTextView.setText(getResources().getString(R.string.gocart));
+		mTextView.setText(getResources().getString(R.string.cart));
 
 		try {
 			mImageView.setOnClickListener(new OnClickListener() {

@@ -25,7 +25,7 @@ import com.yidejia.app.mall.task.TaskGetCode;
 import com.yidejia.app.mall.util.IsPhone;
 
 public class RegistActivity extends SherlockActivity {
-	public Button mback;// 
+	public Button mback;// ����
 	private UserDatamanage userManage;
 	private EditText mZhanghao;
 	private EditText mPws;
@@ -48,6 +48,16 @@ public class RegistActivity extends SherlockActivity {
 	
 	private TaskCheckCode taskCheckCode ;
 	
+	// public void doClick(View v){
+	// Intent intent = new Intent();
+	// switch (v.getId()) {
+	// case R.id.my_mall_regist_cancel:
+	// intent.setClass(this, LoginActivity.class);
+	// break;
+	// }
+	// startActivity(intent);
+	// this.finish();
+	// }
 	private void setupShow() {
 		mZhanghao = (EditText) findViewById(R.id.et_my_mall_regist_edittext_account);
 		mPws = (EditText) findViewById(R.id.et_my_mall_regist_password);
@@ -64,6 +74,9 @@ public class RegistActivity extends SherlockActivity {
 		// TODO Auto-generated method stub
 		try {
 			super.onCreate(savedInstanceState);
+			// this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			// this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+			// WindowManager.LayoutParams.FLAG_FULLSCREEN);
 			setActionbar();
 			userManage = new UserDatamanage(RegistActivity.this);
 			ip = new IpAddress();
@@ -115,7 +128,6 @@ public class RegistActivity extends SherlockActivity {
 	
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		if(taskCheckCode != null) taskCheckCode.closeTask();
 		if(getCodeTask != null) getCodeTask.closeTask();
@@ -126,20 +138,25 @@ public class RegistActivity extends SherlockActivity {
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
+		// getSupportActionBar().setLogo(R.drawable.back);
 		getSupportActionBar().setIcon(R.drawable.back);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
-		TextView button = (TextView) findViewById(R.id.compose_back);
+		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+		// startActionMode(new
+		// AnActionModeOfEpicProportions(ComposeActivity.this));
+		TextView button = (TextView) findViewById(R.id.ab_common_back);
 
 		button.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
+				// Toast.makeText(ComposeActivity.this, "button",
+				// Toast.LENGTH_SHORT).show();
 				RegistActivity.this.finish();
 			}
 		});
 
-		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
+		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
 		titleTextView.setText(getResources().getString(R.string.regist));
 	}
 	

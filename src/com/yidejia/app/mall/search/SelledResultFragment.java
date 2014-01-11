@@ -216,7 +216,6 @@ public class SelledResultFragment extends SherlockFragment {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Log.e(TAG, url + "test:url:");
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
 		client.get(url, new AsyncHttpResponse() {
 

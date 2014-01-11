@@ -79,9 +79,9 @@ public class AlreadyOrderActivity extends SherlockFragmentActivity {
 //		getSupportActionBar().setLogo(R.drawable.back);
 		getSupportActionBar().setIcon(R.drawable.back);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
+		getSupportActionBar().setCustomView(R.layout.actionbar_common);
 //		startActionMode(new AnActionModeOfEpicProportions(ComposeActivity.this));
-		TextView button = (TextView) findViewById(R.id.compose_back);//����
+		TextView button = (TextView) findViewById(R.id.ab_common_back);//����
 //		button.setText("����");
 //		button.setTextSize(16);
 //		button.setImageResource(R.drawable.filter);
@@ -95,7 +95,7 @@ public class AlreadyOrderActivity extends SherlockFragmentActivity {
 			}
 		});
 		
-		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
+		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
 		titleTextView.setText(getResources().getString(R.string.deliver_order));
 	}
 
