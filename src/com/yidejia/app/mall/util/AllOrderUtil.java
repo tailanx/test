@@ -465,7 +465,7 @@ public class AllOrderUtil {
 								if(mOkBtn == null) return;
 								mOkBtn.setOnClickListener(new OkClickListener(5, orderCode, orderPrice, carts));
 				            	mCancelBtn.setVisibility(View.GONE);
-								mOkBtn.setText(context.getResources().getString(R.string.delete_produce));
+								mOkBtn.setText(context.getResources().getString(R.string.delete));
 								titleTextView.setText("已取消");
 							}
 						}

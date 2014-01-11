@@ -242,7 +242,7 @@ public class TaskNoEva {
 								animateFirstListener);
 						Button evaluation_item_evaluation = (Button) view.findViewById(R.id.evaluation_item_evaluation);
 						evaluation_item_text.setText(mCart.getProductText());
-						evaluation_item_sum.setText(mCart.getPrice() + activity.getResources().getString(R.string.unit));
+						evaluation_item_sum.setText(activity.getResources().getString(R.string.unit) + mCart.getPrice());
 						evaluation_item_count.setText("数量:" + mCart.getAmount());
 						evaluation_sum_money.setText((mCart.getPrice() * mCart.getAmount()) + "");
 						evaluation_item_total_num.setText("数量:" + mCart.getAmount() + "");

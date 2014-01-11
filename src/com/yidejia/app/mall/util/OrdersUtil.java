@@ -808,7 +808,7 @@ public class OrdersUtil {
 		if(mOkBtn == null) return;
 		mOkBtn.setOnClickListener(new OkClickListener(5, orderCode, myApplication.getUserId(), myApplication.getToken(), layout1));
     	mCancelBtn.setVisibility(View.GONE);
-		mOkBtn.setText(context.getResources().getString(R.string.delete_produce));
+		mOkBtn.setText(context.getResources().getString(R.string.delete));
 		titleTextView.setText("已取消");
 	}
 	

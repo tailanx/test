@@ -69,7 +69,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/produce_price"
                         android:textColor="@color/theme" />
 
                     <TextView
@@ -173,7 +172,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/produce_price"
                         android:textColor="@color/theme" />
 
                     <TextView
@@ -277,7 +275,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/produce_price"
                         android:textColor="@color/theme" />
 
                     <TextView
@@ -463,7 +460,6 @@
                     android:layout_below="@id/tv_main_all_buy_detail_right_add"
                     android:layout_marginLeft="@dimen/margin_left_add"
                     android:layout_marginTop="@dimen/margin_left"
-                    android:text="@string/produce_price_yuan"
                     android:textColor="@color/theme"
                     android:textSize="@dimen/textsize_big" />
 
@@ -509,7 +505,6 @@
                     android:layout_below="@id/tv_main_all_buy_detail_right_down_add"
                     android:layout_marginLeft="@dimen/margin_left_add"
                     android:layout_marginTop="@dimen/margin_left"
-                    android:text="@string/produce_price_yuan"
                     android:textColor="@color/theme"
                     android:textSize="@dimen/textsize_big" />
 
@@ -638,7 +633,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_main_all_buy_detail_right_add_right_up"
                     android:layout_marginTop="@dimen/margin_left"
-                    android:text="@string/produce_price_yuan"
                     android:textColor="@color/theme"
                     android:textSize="@dimen/textsize_big" />
 
@@ -682,7 +676,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_main_all_buy_detail_right_down_add_right_down"
                     android:layout_marginTop="@dimen/margin_left"
-                    android:text="@string/produce_price_yuan"
                     android:textColor="@color/theme"
                     android:textSize="@dimen/textsize_big" />
 

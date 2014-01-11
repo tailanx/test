@@ -77,9 +77,9 @@ public class AlreadyComActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		getSupportActionBar().setIcon(R.drawable.back1);
-		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
-		ImageView backImageView = (ImageView) findViewById(R.id.compose_back); 
-		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
+		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+		TextView backImageView = (TextView) findViewById(R.id.ab_common_back); 
+		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
 		titleTextView.setText(getResources().getString(R.string.complete_order));
 		backImageView.setOnClickListener(new OnClickListener() {
 			

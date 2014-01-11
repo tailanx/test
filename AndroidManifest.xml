@@ -87,6 +87,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.yidejia.app.mall.search.SearchActivity"
+            android:uiOptions="splitActionBarWhenNarrow"
+            android:windowSoftInputMode="stateVisible" >
+        </activity>
+        <activity
             android:name="com.yidejia.app.mall.MainFragmentActivity"
             android:screenOrientation="portrait"
             android:uiOptions="splitActionBarWhenNarrow"

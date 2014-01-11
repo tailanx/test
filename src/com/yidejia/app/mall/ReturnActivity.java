@@ -116,7 +116,7 @@ public class ReturnActivity extends SherlockActivity {
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		getSupportActionBar().setIcon(R.drawable.back);
-		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+		getSupportActionBar().setCustomView(R.layout.actionbar_search_result);
 		ImageView back = (ImageView) findViewById(R.id.actionbar_left);//����
 		submit = (Button) findViewById(R.id.actionbar_right);//�ύ
 		submit.setText(getResources().getString(R.string.commit));

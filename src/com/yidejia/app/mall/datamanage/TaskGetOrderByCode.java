@@ -230,7 +230,7 @@ public class TaskGetOrderByCode {
 		priceTextView.setText(orderPrice);
 		String expressNum = order.getShipFee();
 		orderNumber.setText(orderCode);
-		emsTextView.setText(expressNum+activity.getResources().getString(R.string.unit));
+		emsTextView.setText(activity.getResources().getString(R.string.unit)+expressNum);
 		orderTime.setText(order.getDate());
 		//录入状态时才显示付款和修改支付方式的按钮
 		if("录入".equals(order.getStatus())){
@@ -265,7 +265,7 @@ public class TaskGetOrderByCode {
 			float odprice = Float.parseFloat(orderPrice);
 			float exprice = Float.parseFloat(expressNum);
 
-			sumTextView.setText((odprice + exprice) + activity.getResources().getString(R.string.unit));
+			sumTextView.setText(activity.getResources().getString(R.string.unit) + (odprice + exprice));
 		} catch (NumberFormatException e) {
 			// TODO: handle exception
 			sumTextView.setText(R.string.price_error);

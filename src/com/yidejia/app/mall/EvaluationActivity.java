@@ -35,8 +35,8 @@ public class EvaluationActivity extends SherlockActivity {
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
-		ImageView button = (ImageView) findViewById(R.id.compose_back);// 返回
+		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+		TextView button = (TextView) findViewById(R.id.ab_common_back);// 返回
 		button.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -45,7 +45,7 @@ public class EvaluationActivity extends SherlockActivity {
 			}
 		});
 
-		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
+		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
 		titleTextView.setText(getResources().getString(R.string.evaluation));
 	}
 

@@ -2,52 +2,49 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/theme"
-    android:orientation="horizontal" >
+    android:background="@color/theme" >
 
     <TextView
-        android:id="@+id/actionbar_left"
+        android:id="@+id/ab_common_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginBottom="@dimen/actiobar_margin_top"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/actiobar_margin_top"
+        android:background="#00000000"
         android:clickable="true"
+        android:padding="6dp"
         android:text="@string/back"
         android:textColor="@color/white"
-        android:textSize="@dimen/textsize_big_big" />
+        android:textSize="@dimen/textsize_big" />
 
     <TextView
-        android:id="@+id/actionbar_title"
+        android:id="@+id/ab_common_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/filter_all"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="@dimen/textsize_big_big" />
+        android:textSize="@dimen/textsize_big" />
 
     <TextView
-        android:id="@+id/actionbar_right"
+        android:id="@+id/ab_common_tv_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginBottom="@dimen/actiobar_margin_top"
-        android:layout_marginTop="@dimen/actiobar_margin_top"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:text="@string/filter"
+        android:layout_marginRight="6dp"
         android:textColor="@color/white"
-        android:textSize="@dimen/textsize_big_big" />
-
-    <ImageView
-        android:id="@+id/search_with_list"
+        android:textSize="@dimen/textsize_big"
+        android:visibility="gone" />
+    
+    <ImageView android:id="@+id/ab_common_iv_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/margin_left"
-        android:layout_toLeftOf="@id/actionbar_right"
-        android:contentDescription="@string/yidejia"
-        android:src="@drawable/list_hover" />
+        android:layout_marginRight="6dp"
+        android:src="@drawable/share"
+        android:visibility="gone"
+        />
 
 </RelativeLayout>

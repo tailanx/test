@@ -489,7 +489,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 		// getSupportActionBar().setLogo(R.drawable.back);
 		getSupportActionBar().setIcon(R.drawable.back);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+		getSupportActionBar().setCustomView(R.layout.actionbar_search_result);
 		// startActionMode(new
 		// AnActionModeOfEpicProportions(ComposeActivity.this));
 		ImageView leftButton = (ImageView) findViewById(R.id.actionbar_left);

@@ -48,7 +48,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class HomeCarActivity extends SherlockFragmentActivity implements
+public class HomeCarActivity extends BaseActivity implements
 		OnClickListener {
 	private MyApplication myApplication;
 	private FrameLayout frameLayout;
@@ -96,8 +96,9 @@ public class HomeCarActivity extends SherlockFragmentActivity implements
 			bottomChange.initNavView(current, next);
 		}
 		initNavView();
-		setActionBarConfig();
-
+//		setActionBarConfig();
+		setActionbarConfig();
+		setTitle(R.string.cart);
 		ImageLoaderUtil imageLoaderUtil = new ImageLoaderUtil();
 		imageLoader = imageLoaderUtil.getImageLoader();
 		listener = imageLoaderUtil.getAnimateFirstListener();

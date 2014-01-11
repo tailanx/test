@@ -12,7 +12,6 @@ import com.yidejia.app.mall.R;
 public class AboutActivity extends SherlockFragmentActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.about);
 		setActionbar();
@@ -22,18 +21,15 @@ public class AboutActivity extends SherlockFragmentActivity{
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		// getSupportActionBar().setLogo(R.drawable.back);
-//		getSupportActionBar().setIcon(R.drawable.back);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
-		TextView title = (TextView) findViewById(R.id.compose_title);
+		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+		TextView title = (TextView) findViewById(R.id.ab_common_title);
 		title.setText(getResources().getString(R.string.edit_about));
-		ImageView back = (ImageView) findViewById(R.id.compose_back);
+		TextView back = (TextView) findViewById(R.id.ab_common_back);
 		back.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				AboutActivity.this.finish();
 			}
 		});

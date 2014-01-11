@@ -656,7 +656,7 @@ public class CartUtil {
 						}
 					}
 				});
-				final AlertDialog dialog1 = new Builder(context).setTitle(context.getResources().getString(R.string.delete_produce)).setIcon(R.drawable.ic_launcher).setMessage(context.getResources().getString(R.string.sure_delete_produce)).setPositiveButton(context.getResources().getString(R.string.sure),new android.content.DialogInterface.OnClickListener() {
+				final AlertDialog dialog1 = new Builder(context).setTitle(context.getResources().getString(R.string.delete)).setIcon(R.drawable.ic_launcher).setMessage(context.getResources().getString(R.string.sure_delete_produce)).setPositiveButton(context.getResources().getString(R.string.sure),new android.content.DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {

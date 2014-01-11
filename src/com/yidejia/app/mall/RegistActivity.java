@@ -128,7 +128,6 @@ public class RegistActivity extends SherlockActivity {
 	
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		if(taskCheckCode != null) taskCheckCode.closeTask();
 		if(getCodeTask != null) getCodeTask.closeTask();
@@ -142,23 +141,22 @@ public class RegistActivity extends SherlockActivity {
 		// getSupportActionBar().setLogo(R.drawable.back);
 		getSupportActionBar().setIcon(R.drawable.back);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
+		getSupportActionBar().setCustomView(R.layout.actionbar_common);
 		// startActionMode(new
 		// AnActionModeOfEpicProportions(ComposeActivity.this));
-		ImageView button = (ImageView) findViewById(R.id.compose_back);
+		TextView button = (TextView) findViewById(R.id.ab_common_back);
 
 		button.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				// Toast.makeText(ComposeActivity.this, "button",
 				// Toast.LENGTH_SHORT).show();
 				RegistActivity.this.finish();
 			}
 		});
 
-		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
+		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
 		titleTextView.setText(getResources().getString(R.string.regist));
 	}
 	

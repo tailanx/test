@@ -45,7 +45,7 @@ public class PersonEvaluationActivity extends SherlockActivity {
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		getSupportActionBar().setIcon(R.drawable.back);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+		getSupportActionBar().setCustomView(R.layout.actionbar_search_result);
 		ImageView leftButton = (ImageView) findViewById(R.id.actionbar_left);
 		leftButton.setOnClickListener(new OnClickListener() {
 			

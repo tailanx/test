@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/theme"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/actionbar_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="@dimen/actiobar_margin_top"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/actiobar_margin_top"
+        android:clickable="true"
+        android:text="@string/back"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textsize_big_big" />
+
+    <TextView
+        android:id="@+id/actionbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/filter_all"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textsize_big_big" />
+
+    <TextView
+        android:id="@+id/actionbar_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="@dimen/actiobar_margin_top"
+        android:layout_marginTop="@dimen/actiobar_margin_top"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:text="@string/filter"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textsize_big_big" />
+
+    <ImageView
+        android:id="@+id/search_with_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/margin_left"
+        android:layout_toLeftOf="@id/actionbar_right"
+        android:contentDescription="@string/yidejia"
+        android:src="@drawable/selecter_bg_list_grid" />
+
+</RelativeLayout>

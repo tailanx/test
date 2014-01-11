@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.baidu.mobstat.StatService;
 import com.jeremyfeinstein.slidingmenu.SlidingFragmentActivity;
 import com.jeremyfeinstein.slidingmenu.SlidingMenu;
+import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
 
 public class SearchResultActivity extends SlidingFragmentActivity {
@@ -25,6 +26,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 	private TextView priceTextView;
 	private TextView popularityTextView;
 	private ImageView showWithList;
+	private ImageView ivPriceUpDown;
 //	private ImageView showWithImage;
 //	private SelledResultFragment newFragment;
 	
@@ -43,6 +45,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setActionBarConfig();
+//		setActionbarConfig();
 		bundle = getIntent().getExtras();
 		if(bundle != null){
 			title = bundle.getString("title");
@@ -62,9 +65,11 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 	
 	private void initView(){
 		selledTextView = (TextView) findViewById(R.id.tv_search_result_selled);
-//		priceLayout = (LinearLayout) findViewById(R.id.ll_search_result_price_layout);
+		priceLayout = (LinearLayout) findViewById(R.id.ll_search_result_price_layout);
 		priceTextView = (TextView) findViewById(R.id.tv_search_result_price);
 		popularityTextView = (TextView) findViewById(R.id.tv_search_result_popularity);
+		ivPriceUpDown = (ImageView) findViewById(R.id.iv_search_result_price);
+		ivPriceUpDown.setEnabled(false);
 //		showWithImage = (ImageView) findViewById(R.id.search_with_image);
 		selledTextView.setSelected(true);
 		setFragment(0, isShowWithList);
@@ -75,7 +80,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 //		currFragment = sellFragment;
 		
 		selledTextView.setOnClickListener(new AddFragmentListener(0));
-		priceTextView.setOnClickListener(new AddFragmentListener(1));
+		priceLayout.setOnClickListener(new AddFragmentListener(1));
 		popularityTextView.setOnClickListener(new AddFragmentListener(2));
 //		showWithImage.setOnClickListener(new AddFragmentListener(4));
 	}
@@ -114,7 +119,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 	
 	private TextView titleTextView;
 	private void setActionBarConfig(){
-		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+		getSupportActionBar().setCustomView(R.layout.actionbar_search_result);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -145,9 +150,9 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 		showWithList.setOnClickListener(new AddFragmentListener(3));
 	}
 	
-	private void setTitle(String title){
-		titleTextView.setText(title);
-	}
+//	private void setTitle(String title){
+//		titleTextView.setText(title);
+//	}
 	
 	private Fragment mFrag;
 	private void setRightFilterMenu(Bundle savedInstanceState){
@@ -198,8 +203,9 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 //				selledTextView.setBackgroundResource(R.drawable.product_details_selected);
 				selledTextView.setSelected(true);
 				priceTextView.setSelected(false);
-				priceTextView.setText(getResources().getString(R.string.price));
 				popularityTextView.setSelected(false);
+				priceLayout.setSelected(false);
+				ivPriceUpDown.setEnabled(false);
 				
 				setFragment(0, isShowWithList);
 //				priceClickCount = 0;
@@ -216,15 +222,18 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 				}
 				if(isDesc){
 //					priceTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.price_sort_down, 0);
-					priceTextView.setText(getResources().getString(R.string.price) + "↓");
+//					priceTextView.setText(getResources().getString(R.string.price) + "↓");
 				} else {
 //					priceTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.price_sort_up, 0);
-					priceTextView.setText(getResources().getString(R.string.price) + "↑");
+//					priceTextView.setText(getResources().getString(R.string.price) + "↑");
 				}
+				ivPriceUpDown.setEnabled(true);
+				ivPriceUpDown.setSelected(isDesc);
 				lastIndex = 1;
 				selledTextView.setSelected(false);
 				priceTextView.setSelected(true);
 				popularityTextView.setSelected(false);
+				priceLayout.setSelected(true);
 //				priceLayout.setBackgroundResource(R.drawable.product_details_selected);
 				setFragment(1, isShowWithList);
 				break;
@@ -234,8 +243,9 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 				lastIndex = 2;
 				selledTextView.setSelected(false);
 				priceTextView.setSelected(false);
-				priceTextView.setText(getResources().getString(R.string.price));
 				popularityTextView.setSelected(true);
+				priceLayout.setSelected(false);
+				ivPriceUpDown.setEnabled(false);
 //				popularityTextView.setBackgroundResource(R.drawable.product_details_selected);
 				setFragment(2, isShowWithList);
 //				priceClickCount = 0;

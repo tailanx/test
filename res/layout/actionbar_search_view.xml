@@ -3,7 +3,7 @@
     android:id="@+id/search_view_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/topbg" >
+    android:background="@color/theme" >
 
     <Button
         android:id="@+id/search_btn"
@@ -15,23 +15,25 @@
         android:layout_marginBottom="6dp"
         android:layout_marginRight="8dip"
         android:layout_marginTop="6dp"
-        android:background="@drawable/filter"
         android:clickable="true"
-        
+        android:background="@color/theme"
         android:text="@string/searchLabel"
-        android:textColor="#ffffff"
+        android:textColor="@color/white"
         android:textSize="16sp" />
-    <ImageView 
+    <TextView 
         android:id="@+id/search_back_btn"
-        android:layout_width="56dp"
-        android:layout_height="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
+        android:gravity="center"
         android:layout_marginBottom="6dp"
         android:layout_marginLeft="3dip"
         android:layout_marginTop="6dp"
-       android:src="@drawable/compose_top"
+       	android:text="@string/back"
+       	android:textColor="@color/white"
+       	android:textSize="@dimen/textsize_big"
         android:clickable="true"
          />
 

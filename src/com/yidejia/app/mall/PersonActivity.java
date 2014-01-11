@@ -76,8 +76,8 @@ public class PersonActivity extends SherlockActivity {
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		getSupportActionBar().setIcon(R.drawable.back);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
-		ImageView button = (ImageView) findViewById(R.id.compose_back);
+		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+		TextView button = (TextView) findViewById(R.id.ab_common_back);
 		button.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -86,7 +86,7 @@ public class PersonActivity extends SherlockActivity {
 			}
 		});
 
-		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
+		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
 		titleTextView.setText(getResources().getString(R.string.person_message));
 	}
 }

@@ -119,7 +119,6 @@
             android:layout_marginRight="@dimen/margin_left"
             android:layout_toLeftOf="@id/address_management_item_relative1_textview1"
             android:background="@drawable/theme_textview_background_no_comment"
-            android:text="@string/delete_produce"
             android:textColor="@color/theme" />
 
         <TextView
@@ -128,7 +127,6 @@
             android:layout_alignBaseline="@+id/address_management_item_relative1_checkBox1"
             android:layout_alignBottom="@+id/address_management_item_relative1_checkBox1"
             android:layout_toRightOf="@+id/address_management_item_relative1_checkBox1"
-            android:text="@string/addresss_default"
             android:textSize="@dimen/textsize_small" />
     </RelativeLayout>
 

@@ -56,7 +56,6 @@ public class CheckActivity extends SherlockActivity {
 	
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		if(task != null) task.closeTask();
 	}
@@ -78,8 +77,8 @@ public class CheckActivity extends SherlockActivity {
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		getSupportActionBar().setIcon(R.drawable.back);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
-		ImageView leftButton = (ImageView) findViewById(R.id.compose_back);
+		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+		TextView leftButton = (TextView) findViewById(R.id.ab_common_back);
 		leftButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -88,7 +87,7 @@ public class CheckActivity extends SherlockActivity {
 			}
 		});
 		
-		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
+		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
 		titleTextView.setText(getResources().getString(R.string.check_logistics));
 	}
 	

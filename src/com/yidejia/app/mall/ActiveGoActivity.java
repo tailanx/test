@@ -32,15 +32,15 @@ public class ActiveGoActivity extends SherlockActivity {
 	}
 	
 	private void setActionbarConfig() {
-		getSupportActionBar().setCustomView(R.layout.actionbar_compose);
+		getSupportActionBar().setCustomView(R.layout.actionbar_common);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		TextView titleTextView = (TextView) findViewById(R.id.compose_title);
+		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
 		// titleTextView.setText("商品展示") ;
 		titleTextView.setText(getResources().getString(R.string.main_event_text));
-		ImageView leftImageView = (ImageView) findViewById(R.id.compose_back);
+		TextView leftImageView = (TextView) findViewById(R.id.ab_common_back);
 
 		leftImageView.setOnClickListener(new OnClickListener() {
 
