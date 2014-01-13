@@ -60,7 +60,7 @@ import com.yidejia.app.mall.util.PayUtil;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class CstmPayActivity extends SherlockActivity {
-	private InnerReceiver receiver;
+//	private InnerReceiver receiver;
 	private TextView userName;// 用户名
 	private TextView phoneName;// 电话号码
 	private TextView address;// 收货地址
@@ -124,6 +124,110 @@ public class CstmPayActivity extends SherlockActivity {
 	public static void setArrayListExchange(
 			ArrayList<Specials> arrayListExchange) {
 		CstmPayActivity.arrayListExchange = arrayListExchange;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		try {
+			super.onCreate(savedInstanceState);
+//			receiver = new InnerReceiver();
+//			IntentFilter filter = new IntentFilter();
+//			filter.addAction(Consts.CST_NEWADDRESS);
+//			registerReceiver(receiver, filter);
+			
+			ImageLoaderUtil imageLoaderUtil = new ImageLoaderUtil();
+//			imageLoader  = imageLoaderUtil.getImageLoader();
+//			listener = imageLoaderUtil.getAnimateFirstListener();
+			options = imageLoaderUtil.getOptions();
+			
+			Intent intent = getIntent();
+			// final String sum = intent.getStringExtra("price");
+			sum = intent.getStringExtra("price");
+			maxPay = Float.parseFloat(sum);
+			// carts = new ArrayList<Cart>();
+			// cartList = new ArrayList<Cart>();
+			Log.i(TAG, "sum:" + sum);
+			carts = (ArrayList<Cart>) intent.getSerializableExtra("carts");
+			isCartActivity = intent.getStringExtra("cartActivity");
+			myApplication = (MyApplication) getApplication();
+
+			preferentialDataManage = new PreferentialDataManage(
+					CstmPayActivity.this);
+			dialog = new Builder(CstmPayActivity.this)
+					.setTitle(
+							getResources().getString(R.string.produce_exchange))
+					.setIcon(android.R.drawable.dialog_frame)
+					.setMessage(
+							getResources().getString(R.string.exchange_produce))
+					.setPositiveButton(
+							getResources().getString(R.string.sure),
+							new android.content.DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface arg0,
+										int arg1) {
+									// TODO Auto-generated method stub
+									Intent intent = new Intent(
+											CstmPayActivity.this,
+											ExchangeFreeActivity.class);
+									Bundle bundle = new Bundle();
+									bundle.putString("cartActivity",
+											isCartActivity);
+									bundle.putString("price", sum + "");
+									intent.putExtras(bundle);
+									intent.putExtra("carts", carts);
+									// Log.i("info", "voucher:" + voucher);
+									intent.putExtra("voucher", voucher);
+									CstmPayActivity.this
+											.startActivityForResult(
+													intent,
+													Consts.CstmPayActivity_Request);
+								}
+							})
+					.setNegativeButton(
+							getResources().getString(R.string.cancel),
+							new android.content.DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// TODO Auto-generated method stub
+									if (isCartActivity.equals("Y")
+											|| isCartActivity.equals("N")) {
+//										show(carts, false);
+										// voucherDataManage = new
+										// VoucherDataManage(CstmPayActivity.this);
+										// voucher
+										// =Float.parseFloat(voucherDataManage.getUserVoucher(myApplication.getUserId(),
+										// myApplication.getToken()));
+									}
+								}
+							}).create();
+			
+			// 付款之前先判断用户是否登陆
+			if (!myApplication.getIsLogin()) {
+				Toast.makeText(this,
+						getResources().getString(R.string.please_login),
+						Toast.LENGTH_LONG).show();
+				Intent intent1 = new Intent(this, LoginActivity.class);
+				startActivity(intent1);
+				this.finish();
+			} else {
+				show(carts, false);
+				
+//				getVoucher();
+				getPreferential();
+			}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Toast.makeText(CstmPayActivity.this,
+					getResources().getString(R.string.bad_network),
+					Toast.LENGTH_SHORT).show();
+		}
+
 	}
 
 	/**
@@ -320,117 +424,16 @@ public class CstmPayActivity extends SherlockActivity {
 	private PayUtil pay;
 	private float maxPay;
 
-	@SuppressWarnings("unchecked")
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		try {
-			super.onCreate(savedInstanceState);
-			receiver = new InnerReceiver();
-			IntentFilter filter = new IntentFilter();
-			filter.addAction(Consts.CST_NEWADDRESS);
-			registerReceiver(receiver, filter);
-			
-			ImageLoaderUtil imageLoaderUtil = new ImageLoaderUtil();
-			imageLoader  = imageLoaderUtil.getImageLoader();
-			listener = imageLoaderUtil.getAnimateFirstListener();
-			options = imageLoaderUtil.getOptions();
-			
-			Intent intent = getIntent();
-			// final String sum = intent.getStringExtra("price");
-			sum = intent.getStringExtra("price");
-			maxPay = Float.parseFloat(sum);
-			// carts = new ArrayList<Cart>();
-			// cartList = new ArrayList<Cart>();
-			Log.i(TAG, "sum:" + sum);
-			carts = (ArrayList<Cart>) intent.getSerializableExtra("carts");
-			isCartActivity = intent.getStringExtra("cartActivity");
-			myApplication = (MyApplication) getApplication();
-
-			preferentialDataManage = new PreferentialDataManage(
-					CstmPayActivity.this);
-			dialog = new Builder(CstmPayActivity.this)
-					.setTitle(
-							getResources().getString(R.string.produce_exchange))
-					.setIcon(android.R.drawable.dialog_frame)
-					.setMessage(
-							getResources().getString(R.string.exchange_produce))
-					.setPositiveButton(
-							getResources().getString(R.string.sure),
-							new android.content.DialogInterface.OnClickListener() {
-
-								@Override
-								public void onClick(DialogInterface arg0,
-										int arg1) {
-									// TODO Auto-generated method stub
-									Intent intent = new Intent(
-											CstmPayActivity.this,
-											ExchangeFreeActivity.class);
-									Bundle bundle = new Bundle();
-									bundle.putString("cartActivity",
-											isCartActivity);
-									bundle.putString("price", sum + "");
-									intent.putExtras(bundle);
-									intent.putExtra("carts", carts);
-									// Log.i("info", "voucher:" + voucher);
-									intent.putExtra("voucher", voucher);
-									CstmPayActivity.this
-											.startActivityForResult(
-													intent,
-													Consts.CstmPayActivity_Request);
-								}
-							})
-					.setNegativeButton(
-							getResources().getString(R.string.cancel),
-							new android.content.DialogInterface.OnClickListener() {
-
-								@Override
-								public void onClick(DialogInterface dialog,
-										int which) {
-									// TODO Auto-generated method stub
-									if (isCartActivity.equals("Y")
-											|| isCartActivity.equals("N")) {
-//										show(carts, false);
-										// voucherDataManage = new
-										// VoucherDataManage(CstmPayActivity.this);
-										// voucher
-										// =Float.parseFloat(voucherDataManage.getUserVoucher(myApplication.getUserId(),
-										// myApplication.getToken()));
-									}
-								}
-							}).create();
-			
-			// 付款之前先判断用户是否登陆
-			if (!myApplication.getIsLogin()) {
-				Toast.makeText(this,
-						getResources().getString(R.string.please_login),
-						Toast.LENGTH_LONG).show();
-				Intent intent1 = new Intent(this, LoginActivity.class);
-				startActivity(intent1);
-				this.finish();
-			} else {
-				show(carts, false);
-				
-//				getVoucher();
-				getPreferential();
-			}
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Toast.makeText(CstmPayActivity.this,
-					getResources().getString(R.string.bad_network),
-					Toast.LENGTH_SHORT).show();
-		}
-
-	}
+	
 	
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		
-		imageLoader.init(ImageLoaderConfiguration.createDefault(CstmPayActivity.this));
-		imageLoader.stop();
-		unregisterReceiver(receiver);
+//		imageLoader.init(ImageLoaderConfiguration.createDefault(CstmPayActivity.this));
+//		imageLoader.stop();
+//		unregisterReceiver(receiver);
 		closeTask();
 		closeVoucherTask();
 	}
@@ -571,8 +574,8 @@ public class CstmPayActivity extends SherlockActivity {
 			}
 		}
 	}
-	private ImageLoader imageLoader;
-	private ImageLoadingListener listener;
+//	private ImageLoader imageLoader;
+//	private ImageLoadingListener listener;
 	private DisplayImageOptions options;
 	
 	private void show(final ArrayList<Cart> carts, boolean isHuanGou) {
@@ -605,7 +608,7 @@ public class CstmPayActivity extends SherlockActivity {
 		layout = (LinearLayout) findViewById(R.id.go_pay_relative2);
 		
 	
-		pay = new PayUtil(CstmPayActivity.this, layout,imageLoader,listener,options);
+//		pay = new PayUtil(CstmPayActivity.this, layout,imageLoader,listener,options);
 
 		reLayout = (RelativeLayout) findViewById(R.id.go_pay_relative);
 		addressRelative = (RelativeLayout) findViewById(R.id.go_pay_relativelayout);
@@ -660,7 +663,7 @@ public class CstmPayActivity extends SherlockActivity {
 		};
 		
 		// 提交订单
-		saveOrderBtn.setOnClickListener(new OnClickListener() {
+		/*saveOrderBtn.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -699,7 +702,7 @@ public class CstmPayActivity extends SherlockActivity {
 							Toast.LENGTH_LONG).show();
 					return;
 				}
-				/*OrderDataManage orderDataManage = new OrderDataManage(
+				OrderDataManage orderDataManage = new OrderDataManage(
 						CstmPayActivity.this);
 				orderDataManage.saveOrder(myApplication.getUserId(), "0",
 						recipientId, "", jifen + "", expressNum, postMethod,
@@ -712,12 +715,12 @@ public class CstmPayActivity extends SherlockActivity {
 				resp_code = orderDataManage.getRespCode();
 				tn = orderDataManage.getTN();
 				// Log.e("OrderCode", orderCode);
-				*/
+				
 				closeTask();
 				taskSaveOrder = new TaskSaveOrder();
 				taskSaveOrder.execute();
 			}
-		});
+		});*/
 	
 		// 添加地址、快递费用、配送中心
 //		addAddress();

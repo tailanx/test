@@ -58,22 +58,31 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/margin_left"
-        android:background="@drawable/main_theme_textview_bg">
+        android:background="@drawable/main_theme_textview_bg"
+        android:padding="@dimen/margin_left" >
 
-     
+        <TextView
+            android:id="@+id/tv_address_management_item_address1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:padding="@dimen/margin_left"
+            android:text="@string/addresss_default_address" />
+
         <TextView
             android:id="@+id/address_management_item_address2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:lines="2"
-            android:text="@string/addresss_default_address"
+            android:layout_below="@id/tv_address_management_item_address1"
             android:layout_centerVertical="true"
+            android:ellipsize="end"
+            android:lines="1"
             android:paddingLeft="@dimen/margin_left"
+            android:text="@string/addresss_default_address"
             android:textSize="@dimen/textsize_small" />
     </RelativeLayout>
- <RelativeLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/main_theme_textview_bg" >
@@ -84,6 +93,7 @@
             android:background="@drawable/filter_line"
             android:contentDescription="@string/yidejia" />
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/address_management_item_relative1"
         android:layout_width="match_parent"
@@ -95,9 +105,7 @@
             style="@style/CustomCheckboxTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/margin_left"
-            android:focusable="false" />
+            android:layout_centerVertical="true"/>
 
         <TextView
             android:id="@+id/address_management_item_relative1_textview1"
@@ -107,9 +115,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/margin_left"
             android:background="@drawable/theme_textview_background"
-            android:src="@drawable/delete"
-            android:text="@string/addresss_edit"
-            android:textColor="@color/white" />
+            android:textColor="@color/color_sort_text_color_press" />
 
         <TextView
             android:id="@+id/address_management_item_relative1_textview2"
@@ -119,14 +125,16 @@
             android:layout_marginRight="@dimen/margin_left"
             android:layout_toLeftOf="@id/address_management_item_relative1_textview1"
             android:background="@drawable/theme_textview_background_no_comment"
-            android:textColor="@color/theme" />
+            android:text="@string/addresss_edit"
+            android:textColor="@color/color_sort_text_color_press_add" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/address_management_item_relative1_checkBox1"
-            android:layout_alignBottom="@+id/address_management_item_relative1_checkBox1"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/address_management_item_relative1_checkBox1"
+            android:text="@string/addresss_default"
+            android:layout_marginLeft="@dimen/margin_top"
             android:textSize="@dimen/textsize_small" />
     </RelativeLayout>
 

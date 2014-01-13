@@ -4,7 +4,6 @@ package com.yidejia.app.mall;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-//import java.util.concurrent.TimeoutException;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
@@ -37,19 +36,23 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-//import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
-//import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class HomeCarActivity extends BaseActivity implements
+/**
+ * 购物车的界面
+ * @author Administrator
+ *
+ */
+public class HomeCarActivity extends SherlockFragmentActivity implements
 		OnClickListener {
+	private TextView shoppingCartTopay;// 编辑
 	private MyApplication myApplication;
 	private FrameLayout frameLayout;
 	private LayoutInflater inflater;
@@ -74,6 +77,7 @@ public class HomeCarActivity extends BaseActivity implements
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
+		//设置一个广播
 		receiver = new InnerReceiver();
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Consts.UPDATE_CHANGE);
@@ -81,24 +85,24 @@ public class HomeCarActivity extends BaseActivity implements
 		filter.addAction(Consts.DELETE_CART);
 		registerReceiver(receiver, filter);
 
-		int current = getIntent().getIntExtra("current", -1);
-		int next = getIntent().getIntExtra("next", -1);
-
 		cartsDataManage = new CartsDataManage();
 		myApplication = (MyApplication) getApplication();
 		setContentView(R.layout.activity_main_fragment_layout);
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
 		inflater = LayoutInflater.from(this);
-		// 设置底部
+		
+		initNavView();
+		//设置底部,获取当前的界面的id
+		int current = getIntent().getIntExtra("current", -1);
+		int next = getIntent().getIntExtra("next", -1);
 		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
 		bottomChange = new BottomChange(this, bottomLayout);
 		if (current != -1 || next != -1) {
 			bottomChange.initNavView(current, next);
 		}
-		initNavView();
-//		setActionBarConfig();
-		setActionbarConfig();
-		setTitle(R.string.cart);
+		
+		setActionBarConfig();
+		//初始imageloader
 		ImageLoaderUtil imageLoaderUtil = new ImageLoaderUtil();
 		imageLoader = imageLoaderUtil.getImageLoader();
 		listener = imageLoaderUtil.getAnimateFirstListener();
@@ -109,6 +113,7 @@ public class HomeCarActivity extends BaseActivity implements
 			frameLayout.addView(view);
 			setViewCtrl(view);
 		} else {
+			shoppingCartTopay.setVisibility(View.GONE);
 			view = inflater.inflate(R.layout.no_produce, null);
 			frameLayout.addView(view);
 			setNoProduce(view);
@@ -118,9 +123,11 @@ public class HomeCarActivity extends BaseActivity implements
 
 	private void setNoProduce(View view) {
 		mButton = (Button) view.findViewById(R.id.no_produce_button);
+		mButton.setSelected(true);
 		mButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				
 				Intent intent = new Intent(HomeCarActivity.this,
 						SearchResultActivity.class);
 				Bundle bundle = new Bundle();
@@ -153,8 +160,6 @@ public class HomeCarActivity extends BaseActivity implements
 
 		counTextView = (TextView) view
 				.findViewById(R.id.shopping_cart_sum_number);// 总的数量
-
-		shoppingCartTopay = (Button) findViewById(R.id.shopping_cart_go_pay);
 		try {
 			shoppingCartTopay.setVisibility(View.VISIBLE);
 		} catch (Exception e) {
@@ -194,7 +199,6 @@ public class HomeCarActivity extends BaseActivity implements
 		}
 	}
 
-	private Button shoppingCartTopay;// 去结算
 
 	/**
 	 * 头部
@@ -205,14 +209,7 @@ public class HomeCarActivity extends BaseActivity implements
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		shoppingCartTopay = (Button) findViewById(R.id.shopping_cart_go_pay);
-		number = cartsDataManage.getCartsArray().size();
-		if (number == 0) {
-			shoppingCartTopay.setVisibility(View.GONE);
-		} else {
-			shoppingCartTopay.setVisibility(View.VISIBLE);
-		}
-
+		shoppingCartTopay = (TextView) findViewById(R.id.tv_shopping_cart_go_pay);
 	}
 
 	private RelativeLayout downHomeLayout;
@@ -220,18 +217,7 @@ public class HomeCarActivity extends BaseActivity implements
 	private RelativeLayout downSearchLayout;
 	private RelativeLayout downShoppingLayout;
 	private RelativeLayout downMyLayout;
-//	private ImageView down_home_imageView;// 首页按钮图片
-//	private ImageView down_guang_imageView;// 逛按钮图片
-//	private ImageView down_search_imageView;// 搜索按钮图片
-//	private ImageView down_shopping_imageView; // 购物车按钮图片
-//	private ImageView down_my_imageView; // 我的商城按钮图片
 	private CartsDataManage cartsDataManage;
-//	private TextView down_home_textview;
-//	private TextView down_guang_textview;
-//	private TextView down_search_textview;
-//	private TextView down_shopping_textview;
-//	private TextView down_my_textview;
-//	private Resources res;
 	private Button cartImage;
 
 	/**
@@ -246,7 +232,6 @@ public class HomeCarActivity extends BaseActivity implements
 		} else {
 			cartImage.setText(number + "");
 		}
-//		res = getResources();
 		downHomeLayout = (RelativeLayout) findViewById(R.id.re_down_home_layout);
 		downGuangLayout = (RelativeLayout) findViewById(R.id.re_down_guang_layout);
 		downSearchLayout = (RelativeLayout) findViewById(R.id.re_down_search_layout);
@@ -355,10 +340,7 @@ public class HomeCarActivity extends BaseActivity implements
 						Toast.LENGTH_SHORT).show();
 				exitTime = System.currentTimeMillis();
 			} else {
-				// ((MyApplication)getApplication()).setUserId("");
-				// ((MyApplication)getApplication()).setToken("");
 				finish();
-				// System.exit(0);
 			}
 			return true;
 		}

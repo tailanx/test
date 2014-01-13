@@ -123,7 +123,6 @@ public class CartUtil {
 																		// view
 		this.inflater = LayoutInflater.from(context); // ,UserCommentDataManage
 		favoriteDataManage = new FavoriteDataManage(context);
-		// myApplication = (MyApplication) context.getApplicationContext();
 		this.linearLayout = linearLayout;
 		this.context = context;
 		this.mTextView = mTextView;
@@ -132,10 +131,6 @@ public class CartUtil {
 		this.imageLoader = imageLoader;
 		this.options = options;
 		this.animateFirstListener = listener;
-		// receiver = new InnerReceiver();
-		// IntentFilter filter = new IntentFilter();
-		// this.context.registerReceiver(receiver, filter);
-		// filter.addAction(Consts.UPDATE_CHANGE);
 	}
 
 
@@ -175,27 +170,27 @@ public class CartUtil {
 				view.setTag(i);
 				final RelativeLayout layout = (RelativeLayout) view
 						.findViewById(R.id.rela);
-				ImageView  cartDelete = (ImageView) view.findViewById(R.id.shopping_cart_item_delete);
+
 				
 				ImageView headImageView = (ImageView) view
-						.findViewById(R.id.shopping_cart_item__imageview1);
+						.findViewById(R.id.iv_shopping_cart_item__imageview1);
 				TextView detailTextView = (TextView) view
-						.findViewById(R.id.shopping_cart_item_text);
+						.findViewById(R.id.tv_shopping_cart_item_text);
 				final TextView priceTextView = (TextView) view
-						.findViewById(R.id.shopping_cart_item_money);
+						.findViewById(R.id.tv_shopping_cart_item_money);
 
 				final CheckBox checkBox = (CheckBox) view
-						.findViewById(R.id.shopping_cart_item_checkbox);
+						.findViewById(R.id.ck_shopping_cart_item_checkbox);
 
 				checkBox.setChecked(true);
 
 				final ImageView subtract = (ImageView) view
-						.findViewById(R.id.shopping_cart_item_subtract);// ��
+						.findViewById(R.id.iv_shopping_cart_item_subtract);// ��
 				final ImageView addImageView = (ImageView) view
-						.findViewById(R.id.shopping_cart_item_add);// ��
+						.findViewById(R.id.iv_shopping_cart_item_add);// ��
 
 				final TextView number = (TextView) view
-						.findViewById(R.id.shopping_cart_item_edit_number);// ����ĸ���
+						.findViewById(R.id.tv_shopping_cart_item_edit_number);// ����ĸ���
 				number.setText(cart.getAmount() + "");
 				a += cart.getAmount();
 				b += cart.getPrice() * cart.getAmount();
@@ -206,14 +201,7 @@ public class CartUtil {
 				imageLoader.init(ImageLoaderConfiguration.createDefault(context));
 				imageLoader.displayImage(path, headImageView, options,
 						animateFirstListener);
-				
-				// Bitmap bm = BitmapFactory.decodeFile(path);
-				// if (bm != null) {
-				// headImageView.setImageBitmap(bm);
-				// } else {
-				// headImageView.setImageResource(R.drawable.ic_launcher);
-				// }
-				//
+	
 				detailTextView.setText(cart.getProductText());// ��Ʒ�Ľ���
 				layout.setOnClickListener(new OnClickListener() {
 
@@ -221,18 +209,14 @@ public class CartUtil {
 					public void onClick(View v) {
 
 						Intent intent = new Intent(context,
-								GoodsInfoActivity.class);
+								com.yidejia.app.mall.goodinfo.GoodsInfoActivity.class);
 
 						Bundle bundle = new Bundle();
 						bundle.putString("goodsId", cart.getUId());
 						intent.putExtras(bundle);
 						context.startActivity(intent);
-
-						// context.startActivity(intent);
 					}
 				});
-
-				// �����ӿؼ����Ȼ�ȡ���㣬��ϸ��setDescendantFocusability
 				layout.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
 				priceTextView.setText(cart.getPrice() + "");
 
@@ -243,9 +227,6 @@ public class CartUtil {
 						
 						if (msg.what == 123) {
 
-							// map.put("check",checkBox.isChecked()==false?0:1);
-
-							// Log.i("info", 123+"");
 							map.put("count", Float.parseFloat(number.getText()
 									.toString()));
 							// map.put(Integer.parseInt(number.getText().toString()),Integer.parseInt(priceTextView.getText().toString()));
@@ -677,14 +658,7 @@ public class CartUtil {
 						}
 						context.sendBroadcast(intent1);
 					}}).setNegativeButton(context.getResources().getString(R.string.cancel), null).create();
-				cartDelete.setOnClickListener(new OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-					dialog1.show();
-					}
-				});
+			
 				// ���ü���
 				// mBox.setOnCheckedChangeListener(new OnCheckedChangeListener()
 				// {

@@ -5,30 +5,30 @@
     android:layout_height="wrap_content"
     android:layout_alignParentLeft="true"
     android:layout_alignParentTop="true"
-    android:background="@drawable/topbg" >
+    android:background="@drawable/theme_textview_background_no_corners" >
 
-    <Button
-        android:id="@+id/shopping_cart_go_pay"
+    <TextView 
+        android:id="@+id/tv_shopping_cart_go_pay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="6dp"
-        android:background="@drawable/edit"
-        android:text="去结算"
+        android:layout_marginRight="@dimen/margin_left"
+        android:layout_marginTop="@dimen/actiobar_margin_top"
+        android:background="@null"
+        android:text="@string/addresss_edit"
         android:textColor="#ffeeeeee"
-        android:textSize="16sp" />
+        android:textSize="@dimen/textsize_small_add" />
 
     <TextView
-        android:id="@+id/wait_pay_order_textview1"
+        android:id="@+id/tv_wait_pay_order_textview1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:onClick="doClick"
-        android:text="购物车"
+        android:text="@string/down_shopping_text"
         android:textColor="#ffeeeeee"
-        android:textSize="24dp" />
+        android:textSize="@dimen/text_size" />
 
 </RelativeLayout>

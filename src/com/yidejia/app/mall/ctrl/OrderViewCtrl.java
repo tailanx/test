@@ -109,55 +109,55 @@ public class OrderViewCtrl {
 		case 0:// �����ǵ�һ����ѡ�У�����¼�
 			if (currIndex == 1) {// ��ǰ�ǵڶ���
 			// animation = new TranslateAnimation(position_one, 0, 0, 0);
-				mMonth.setPressed(false);
-				mMonth.setBackgroundResource(R.drawable.product_details_bg);
-				mMonth.setTextColor(Color.parseColor("#000000"));
+				mMonth.setSelected(false);
+//				mMonth.setBackgroundResource(R.drawable.product_details_bg);
+				mMonth.setTextColor(Color.parseColor("#ec3587"));
 			} else if (currIndex == 2) {
 				// animation = new TranslateAnimation(position_two, 0, 0, 0);
-				mYear.setPressed(false);
-				mYear.setBackgroundResource(R.drawable.product_details_bg);
-				mYear.setTextColor(Color.parseColor("#000000"));
+				mYear.setSelected(false);
+//				mYear.setBackgroundResource(R.drawable.product_details_bg);
+				mYear.setTextColor(Color.parseColor("#ec3587"));
 			}
-			mWeek.setPressed(true);
-			mWeek.setTextColor(Color.parseColor("#702c91"));
-			mWeek.setBackgroundResource(R.drawable.product_details_selected);
+			mWeek.setSelected(true);
+			mWeek.setTextColor(Color.parseColor("#ffffff"));
+//			mWeek.setBackgroundResource(R.drawable.product_details_selected);
 			break;
 		case 1:
 			if (currIndex == 0) {
 				// animation = new TranslateAnimation(offset, position_one, 0,
 				// 0);
-				mWeek.setPressed(false);
-				mWeek.setBackgroundResource(R.drawable.product_details_bg);
-				mWeek.setTextColor(Color.parseColor("#000000"));
+				mWeek.setSelected(false);
+//				mWeek.setBackgroundResource(R.drawable.product_details_bg);
+				mWeek.setTextColor(Color.parseColor("#ec3587"));
 			} else if (currIndex == 2) {
 				// animation = new TranslateAnimation(position_two,
 				// position_one, 0, 0);
-				mYear.setPressed(false);
-				mYear.setBackgroundResource(R.drawable.product_details_bg);
-				mYear.setTextColor(Color.parseColor("#000000"));
+				mYear.setSelected(false);
+//				mYear.setBackgroundResource(R.drawable.product_details_bg);
+				mYear.setTextColor(Color.parseColor("#ec3587"));
 			}
-			mMonth.setPressed(true);
-			mMonth.setBackgroundResource(R.drawable.product_details_selected);
-			mMonth.setTextColor(Color.parseColor("#702c91"));
+			mMonth.setSelected(true);
+//			mMonth.setBackgroundResource(R.drawable.product_details_selected);
+			mMonth.setTextColor(Color.parseColor("#ffffff"));
 			break;
 		case 2:
 			if (currIndex == 0) {
 				// animation = new TranslateAnimation(offset, position_two, 0,
 				// 0);
-				mWeek.setPressed(false);
-				mWeek.setBackgroundResource(R.drawable.product_details_bg);
-				mWeek.setTextColor(Color.parseColor("#000000"));
+				mWeek.setSelected(false);
+//				mWeek.setBackgroundResource(R.drawable.product_details_bg);
+				mWeek.setTextColor(Color.parseColor("#ec3587"));
 			} else if (currIndex == 1) {
-				mMonth.setPressed(false);
-				mMonth.setBackgroundResource(R.drawable.product_details_bg);
+				mMonth.setSelected(false);
+//				mMonth.setBackgroundResource(R.drawable.product_details_bg);
 				// animation = new TranslateAnimation(position_one,
 				// position_two, 0, 0);
-				mMonth.setTextColor(Color.parseColor("#000000"));
+				mMonth.setTextColor(Color.parseColor("#ec3587"));
 			}
-			mYear.setPressed(true);
+			mYear.setSelected(true);
 
-			mYear.setTextColor(Color.parseColor("#702c91"));
-			mYear.setBackgroundResource(R.drawable.product_details_selected);
+			mYear.setTextColor(Color.parseColor("#ffffff"));
+//			mYear.setBackgroundResource(R.drawable.product_details_selected);
 			break;
 
 		}

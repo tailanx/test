@@ -14,7 +14,7 @@
             android:id="@+id/ll_my_mall_regist_linearlayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/mall_list_padding"
+            android:layout_marginTop="@dimen/magin_left_add"
             android:orientation="vertical" >
 
             <LinearLayout
@@ -50,10 +50,23 @@
                     android:textSize="@dimen/textsize_small" />
             </LinearLayout>
 
+            <RelativeLayout
+                android:id="@+id/re_mymall_regist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/main_theme_textview_bg" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/width_add"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:background="@drawable/filter_line"
+                    android:contentDescription="@string/yidejia" />
+            </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/width_add"
                 android:background="@drawable/main_theme_textview_bg"
                 android:gravity="center_vertical"
                 android:orientation="horizontal" >
@@ -68,7 +81,8 @@
                     android:hint="@string/find_hint_pwd"
                     android:padding="@dimen/margin_left"
                     android:singleLine="true"
-                    android:textSize="@dimen/textsize_small" />
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/textsize_small_small" />
 
                 <ImageView
                     android:id="@+id/iv_my_mall_regist_password_validation_button"
@@ -83,10 +97,22 @@
                     android:src="@drawable/obtain_verification" />
             </LinearLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/main_theme_textview_bg" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/width_add"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:background="@drawable/filter_line"
+                    android:contentDescription="@string/yidejia" />
+            </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/width_add"
                 android:background="@drawable/main_theme_textview_bg"
                 android:orientation="horizontal" >
 
@@ -114,10 +140,22 @@
                     android:textSize="@dimen/textsize_small" />
             </LinearLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/main_theme_textview_bg" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/width_add"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:background="@drawable/filter_line"
+                    android:contentDescription="@string/yidejia" />
+            </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/width_add"
                 android:background="@drawable/main_theme_textview_bg"
                 android:orientation="horizontal" >
 
@@ -157,6 +195,7 @@
                 style="@style/CustomCheckboxTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/margin_top"
                 android:text="@string/regist_must"
                 android:textSize="@dimen/textsize_small" />
 
@@ -165,7 +204,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@id/ck_my_mall_regist_checkbox"
-                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_marginLeft="@dimen/margin_left_add"
                 android:layout_toRightOf="@id/ck_my_mall_regist_checkbox"
                 android:background="#00000000"
                 android:linksClickable="true"

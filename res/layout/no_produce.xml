@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:contentDescription="@string/yidejia"
         android:src="@drawable/gouwuche" />
 
     <TextView
@@ -18,21 +19,23 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/no_produce_image"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="购物车是空的"
-        android:textColor="#b4b4b4"
-        android:textSize="15sp" />
+        android:layout_marginTop="@dimen/margin_left"
+        android:text="@string/cart_no_produce"
+        android:textColor="@color/theme"
+        android:textSize="@dimen/textsize_small" />
 
     <Button
         android:id="@+id/no_produce_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+		android:layout_marginLeft="@dimen/margin_left"
+		android:layout_marginRight="@dimen/margin_left"
         android:layout_height="wrap_content"
         android:layout_below="@+id/no_produce_textview"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/clear_search"
-        android:text="去逛一下"
-        android:textColor="#eeeeee"
-        android:textSize="15sp" />
+        android:layout_marginTop="@dimen/margin_left"
+        android:background="@drawable/theme_selector_text"
+        android:text="@string/cart_guang"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textsize_small" />
 
 </RelativeLayout>

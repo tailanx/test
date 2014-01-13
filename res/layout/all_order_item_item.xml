@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/all_order_item_main_linerar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/all_order_item_main_linerar" >
+    android:background="@drawable/bg"
+    android:orientation="vertical" >
 
     <RelativeLayout
         android:id="@+id/all_order_item_main_produce"
@@ -17,8 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:layout_marginTop="12dp"
-            android:drawableLeft="@drawable/unpaid_orders_icon"
-            android:text="订单状态："
+            android:text="@string/order_state"
             android:textSize="13sp" />
 
         <TextView
@@ -53,19 +53,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
-	<!-- 
-        <ListView
-            android:id="@+id/all_order_item_main_listview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </ListView>
-         -->
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="75dp"
-        android:background="@drawable/new_order_statusbg_down" >
+        android:background="@drawable/main_theme_textview_bg" >
 
         <TextView
             android:id="@+id/all_order_item_main_sum"
@@ -95,28 +88,28 @@
             android:textColor="#ed217c"
             android:textSize="15sp" />
 
-        <Button
+        <TextView
             android:id="@+id/all_order_item_main_cancal"
-            android:layout_width="70dp"
-            android:layout_height="40dp"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="@dimen/margin_left"
             android:layout_toLeftOf="@+id/all_order_item_main_pay"
-            android:background="@drawable/clear_conditions"
-            android:text="取消"
+            android:background="@drawable/theme_textview_background_no_comment"
+            android:text="@string/delete"
+            android:textColor="@color/color_sort_text_color_press_add"
             android:textSize="14sp" />
 
-        <Button
+        <TextView
             android:id="@id/all_order_item_main_pay"
-            android:layout_width="75dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@drawable/complete"
-         
-            android:text="查看物流"
-            android:textColor="#eeeeee"
+            android:background="@drawable/theme_textview_background"
+            android:text="@string/order_pay"
+            android:textColor="@color/color_sort_text_color_press"
             android:textSize="14sp" />
 
         <TextView

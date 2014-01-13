@@ -260,5 +260,27 @@
     <string name="addresss_default_address">收货地址:</string> 
     <string name="comfirm_order">确认订单</string>
     <string name="goods_info">商品展示</string>
+    <string name="cart_sum">总计:</string> 
+    <string name="cart_count">数量：</string> 
+    <string name="cart_guang">去逛一下</string> 
+    <string name="cart_no_produce">购物车是空的</string> 
+    <string name="login_find_pwd">找回密码</string> 
+    <string name="login_fast_regist">快速注册</string> 
+    <string name="login_title_add">账户登录</string> 
+    <string name="qiandao">签到</string> 
+    <string name="yaoyiyao">摇一摇</string> 
+    <string name="guang">逛发现</string> 
+    <string name="my_mall">我的商城</string> 
+    <string name="edit_help">帮助</string> 
+    <string name="edit_exit">退出登录</string> 
+    <string name="edit_cache">清空缓存</string> 
+    <string name="edit_about_add">关于伊的家</string> 
+    <string name="edit_phone">客服热线</string> 
+    <string name="edit_number">400-886-7898</string> 
+    <string name="edit_gengxin">检测更新</string> 
+    <string name="edit_version">当前版本</string> 
+    <string name="edit_tuijian">当前应用推荐本</string> 
+    <string name="order_state">订单状态：</string> 
+    <string name="order_pay">付款</string> 
 
 </resources>

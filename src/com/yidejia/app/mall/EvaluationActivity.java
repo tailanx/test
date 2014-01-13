@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,7 +15,6 @@ public class EvaluationActivity extends SherlockActivity {
 	private LinearLayout layout;
 	private MyApplication myApplication;
 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -27,7 +25,6 @@ public class EvaluationActivity extends SherlockActivity {
 		TaskNoEva taskNoEva = new TaskNoEva(EvaluationActivity.this, layout);
 		taskNoEva.getWaitingComment(myApplication.getUserId(), true);
 	}
-
 
 	private void setActionbar() {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -57,6 +54,5 @@ public class EvaluationActivity extends SherlockActivity {
 			taskNoEva.getWaitingComment(myApplication.getUserId(), true);
 		}
 	}
-	
 	
 }

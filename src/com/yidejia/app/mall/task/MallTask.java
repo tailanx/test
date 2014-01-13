@@ -56,11 +56,11 @@ public class MallTask {
 		this.view = view;
 		layoutView = (FrameLayout) view.findViewById(R.id.layout);
 		this.mPullToRefreshScrollView = mPullToRefreshScrollView;
-		
+
 		closeTask();
 		task = new Task();
 		task.execute();
-		
+
 	}
 
 	public MallTask() {
@@ -114,21 +114,22 @@ public class MallTask {
 			super.onPostExecute(result);
 			if (result) {
 				layoutView.removeAllViews();
-				
+
 				mallSlip = new BannerView(bannerArray, context);
 				viewGroup = mallSlip.getMainListFirstItem();
 				layoutView.addView(viewGroup);
-				
-				
-//				HotSellView hotSellView = new HotSellView(view, context);
-//				hotSellView.initHotSellView(hotsellArray);
-//				hotSellView.initAcymerView(acymerArray);
-//				hotSellView.initInerbtyView(inerbtyArray);
-//				MallLoadData mallLoadData = new MallLoadData(context, view,acymerArray,inerbtyArray,hotsellArray);// 进行各种界面的跳转和界面的数据加载
-//				mallLoadData.intentToView(view);
+
+				// HotSellView hotSellView = new HotSellView(view, context);
+				// hotSellView.initHotSellView(hotsellArray);
+				// hotSellView.initAcymerView(acymerArray);
+				// hotSellView.initInerbtyView(inerbtyArray);
+				// MallLoadData mallLoadData = new MallLoadData(context,
+				// view,acymerArray,inerbtyArray,hotsellArray);//
+				// 进行各种界面的跳转和界面的数据加载
+				// mallLoadData.intentToView(view);
 				title.setText(ggTitleArray.get(0));
-				
-//					timer.schedule(timetask, DELAY, DELAY);
+
+				// timer.schedule(timetask, DELAY, DELAY);
 				mallSlip.startTimer();
 			} else {
 				if (isTimeOut) {
@@ -207,14 +208,18 @@ public class MallTask {
 			task.cancel(true);
 		}
 	}
-	
+
 	public void onStart() {
-		mallSlip.startTimer();
+		if (mallSlip != null) {
+			mallSlip.startTimer();
+		}
 	}
 
 	public void onPause() {
+		if (mallSlip != null) {
+			mallSlip.stopTimer();
+		}
 		closeTask();
-		mallSlip.stopTimer();
 	}
 
 }

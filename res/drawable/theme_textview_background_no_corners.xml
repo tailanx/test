@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android" 
     android:shape="rectangle">
-    <corners 
-        android:radius="@dimen/margin_left_add"/>
-    
+   
 	<padding 
 	    android:left="@dimen/padding_left"
 	    android:top="@dimen/padding_left"
@@ -11,9 +9,8 @@
 	    android:bottom="@dimen/padding_left"
 	    />
 	<stroke 
-	    android:width="@dimen/width_add"
+	    android:width="@dimen/above_offset"
 	    android:color="@color/theme"
 	    />
-	
-	<solid android:color="@color/white"/>
+	<solid android:color="@color/theme"/>
 </shape>

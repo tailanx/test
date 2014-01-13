@@ -18,7 +18,7 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.broadcast.MallAction;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
-import com.yidejia.app.mall.util.BottomChange;
+//import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.MallInnerReceiver;
 
@@ -31,11 +31,12 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 	private RelativeLayout downSearchLayout;
 	private RelativeLayout downShoppingLayout;
 	private RelativeLayout downMyLayout;
+	private RelativeLayout downGuang;
 	private CartsDataManage cartsDataManage;
 	private int number;
 	private Button cartImage;// 购物车上的按钮
-	private BottomChange bottomChange;
-	private RelativeLayout bottomLayout;
+//	private BottomChange bottomChange;
+//	private RelativeLayout bottomLayout;
 	private MyApplication myApplication;
 	private MallAction mallAction;
 //	private boolean isFrist = true;
@@ -65,8 +66,8 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 		registerReceiver(receiver, filter);
 		
 		// 设置底部
-		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
-		bottomChange = new BottomChange(HomeMallActivity.this, bottomLayout);
+//		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
+//		bottomChange = new BottomChange(HomeMallActivity.this, bottomLayout);
 		
 		initNavView();
 	}
@@ -83,6 +84,7 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 		} else {
 			cartImage.setText(number + "");
 		}
+		downGuang = (RelativeLayout) findViewById(R.id.re_down_guang_layout);
 		downSearchLayout = (RelativeLayout) findViewById(R.id.re_down_search_layout);
 		downShoppingLayout = (RelativeLayout) findViewById(R.id.re_down_shopping_layout);
 		downMyLayout = (RelativeLayout) findViewById(R.id.re_down_my_layout);
@@ -90,6 +92,7 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 		downShoppingLayout.setOnClickListener(this);
 		downSearchLayout.setOnClickListener(this);
 		downMyLayout.setOnClickListener(this);
+		downGuang.setOnClickListener(this);
 	}
 
 	@Override
@@ -103,7 +106,13 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 			break;
 		case R.id.re_down_shopping_layout:
 			intent.setClass(HomeMallActivity.this, HomeCarActivity.class);
+			intent.putExtra("current", 0);
 			intent.putExtra("next", 2);
+			break;
+		case R.id.re_down_guang_layout:
+			intent.setClass(HomeMallActivity.this, HomeGuangActivity.class);
+			intent.putExtra("current", 0);
+			intent.putExtra("next", 5);
 			break;
 		case R.id.re_down_my_layout:
 			if (myApplication.getIsLogin()){
