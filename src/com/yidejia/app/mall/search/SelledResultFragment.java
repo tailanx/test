@@ -224,7 +224,7 @@ public class SelledResultFragment extends SherlockFragment {
 				super.onStart();
 				if (isFirstIn) {
 					bar = (ProgressDialog) new YLProgressDialog(
-							getSherlockActivity()).createLoadingDialog(
+							getSherlockActivity().getApplicationContext()).createLoadingDialog(
 							getSherlockActivity(), null);
 				}
 			}

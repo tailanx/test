@@ -7,9 +7,12 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.BaseProduct;
+import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DPIUtil;
+import com.yidejia.app.mall.view.ImagePagerActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -63,6 +66,17 @@ public class PicImageAdapter extends PagerAdapter {
 				productPics.get(position).getImgUrl(), imageView, options,
 				MyApplication.getInstance().getImageLoadingListener());
 		container.addView(imageView);
+		imageView.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(activity,ImagePagerActivity.class);
+				intent.putExtra(Consts.IMAGES, productPics);
+				intent.putExtra(Consts.IMAGE_POSITION, v.getId());
+				activity.startActivity(intent);
+			}
+		});
 		return imageView;
 	}
 

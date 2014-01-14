@@ -212,7 +212,7 @@
     <string name="mall_wait_deliver">待发货   |</string>
     <string name="already_deliver">已发货   |</string>
     <string name="already_compelte">已完成   |</string>
-    <string name="wait_coment">待评价   |</string>
+    <string name="wait_coment">待评价   </string>
     <string name="show">晒单</string>
     <string name="shell">已售:</string>
     <string name="comment">评价:</string>

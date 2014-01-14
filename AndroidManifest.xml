@@ -128,7 +128,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.yidejia.app.mall.view.PersonActivity"
+            android:name="com.yidejia.app.mall.PersonActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.yidejia.app.mall.ExchangeActivity"
