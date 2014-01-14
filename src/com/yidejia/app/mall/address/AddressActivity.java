@@ -49,27 +49,26 @@ public class AddressActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		//设置头部
+		// 设置头部
 		setActionbarConfig();
 		setTitle(getResources().getString(R.string.manage_address));
 		TextView rightButton = (TextView) findViewById(R.id.ab_common_tv_right);
 		rightButton.setVisibility(View.VISIBLE);
-		 rightButton.setText(getResources().getString(R.string.new_address));
-		 rightButton.setOnClickListener(new OnClickListener() {
+		rightButton.setText(getResources().getString(R.string.new_address));
+		rightButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent intent2 = new Intent(AddressActivity.this,
-						 EditNewAddressActivity.class);
-						 Bundle bundle = new Bundle();
-						 bundle.putSerializable("editaddress", null);
-						 intent2.putExtras(bundle);
-						 startActivityForResult(intent2, DefinalDate.requestcode);//
+						EditNewAddressActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putSerializable("editaddress", null);
+				intent2.putExtras(bundle);
+				startActivityForResult(intent2, DefinalDate.requestcode);//
 			}
-		 });
-		 
-		 
+		});
+
 		setContentView(R.layout.address_management);
 
 		pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.address_item_main_refresh_scrollview111);
@@ -89,6 +88,7 @@ public class AddressActivity extends BaseActivity {
 		myApplication = (MyApplication) getApplication();
 		userId = myApplication.getUserId();
 		mAddresses = new ArrayList<ModelAddresses>();
+		Log.e("info", mAddresses.size()+"info");
 		adapter = new AddressAdapter(AddressActivity.this, mAddresses);
 		listView.setAdapter(adapter);
 
@@ -147,55 +147,12 @@ public class AddressActivity extends BaseActivity {
 	private int fromIndex = 0;
 	private int acount = 10;
 
-	//
-	// private void setActionbar() {
-	// getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-	// getSupportActionBar().setDisplayShowHomeEnabled(false);
-	// getSupportActionBar().setDisplayShowTitleEnabled(false);
-	// getSupportActionBar().setDisplayUseLogoEnabled(false);
-	// getSupportActionBar().setDisplayShowCustomEnabled(true);
-//	 getSupportActionBar().setCustomView(R.layout.actionbar_common);
-	// TextView leftButton = (TextView) findViewById(R.id.actionbar_left);
-	// TextView list = (TextView) findViewById(R.id.search_with_list);
-	// leftButton.setOnClickListener(new OnClickListener() {
-	//
-	// @Override
-	// public void onClick(View v) {
-	//
-	// AddressActivity.this.finish();
-	// }
-	// });
-	// TextView rightButton = (TextView) findViewById(R.id.actionbar_right);
-	// rightButton.setText(getResources().getString(R.string.new_address));
-	// rightButton.setOnClickListener(new OnClickListener() {
-	//
-	// @Override
-	// public void onClick(View v) {
-	// // TODO Auto-generated method stub
-	// Intent intent2 = new Intent(AddressActivity.this,
-	// EditNewAddressActivity.class);
-	// Bundle bundle = new Bundle();
-	// bundle.putSerializable("editaddress", null);
-	// intent2.putExtras(bundle);
-	// startActivityForResult(intent2, DefinalDate.requestcode);//
-	// 发送Intent,并设置请求码
-	//
-	// }
-	// });
-	//
-	// TextView titleTextView = (TextView) findViewById(R.id.actionbar_title);
-	// titleTextView
-	// .setText(getResources().getString(R.string.manage_address));
-	// Log.e(TAG, titleTextView.getText().toString());
-	// }
-
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		try {
 			if (requestCode == DefinalDate.requestcode
 					&& resultCode == DefinalDate.responcode) {
 				try {
-					Log.i(TAG, TAG + "onResume");
 
 					fromIndex = 0;
 

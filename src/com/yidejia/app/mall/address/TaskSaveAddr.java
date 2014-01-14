@@ -2,8 +2,6 @@ package com.yidejia.app.mall.address;
 
 import java.io.IOException;
 
-
-
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.exception.TimeOutEx;
 //import com.yidejia.app.mall.model.Addresses;
@@ -21,12 +19,12 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 public class TaskSaveAddr {
-	
+
 	private Activity activity;
 	private ProgressDialog bar;
-	
+
 	private SaveUserAddress saveUserAddress;
-	
+
 	private String shengString;
 	private String shiString;
 	private String quString;
@@ -36,23 +34,24 @@ public class TaskSaveAddr {
 	private String recipient_id;
 	private String userId;
 	private String token;
-	
+
 	private String addressId;
 	private String message;
-	
-	public TaskSaveAddr(Activity activity){
+
+	public TaskSaveAddr(Activity activity) {
 		this.activity = activity;
-//		bar = new ProgressDialog(activity);
-//		bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//		bar.setMessage(activity.getResources().getString(R.string.loading));
-//		bar.setCancelable(true);
-		
+		// bar = new ProgressDialog(activity);
+		// bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		// bar.setMessage(activity.getResources().getString(R.string.loading));
+		// bar.setCancelable(true);
+
 		saveUserAddress = new SaveUserAddress(activity);
 	}
-	
-	public void saveAddr(String userId, String nameString, String handsetString, 
-			String shengString, String shiString, String quString, String areaString,
-			String recipient_id, String token) {
+
+	public void saveAddr(String userId, String nameString,
+			String handsetString, String shengString, String shiString,
+			String quString, String areaString, String recipient_id,
+			String token) {
 		this.userId = userId;
 		this.shengString = shengString;
 		this.shiString = shiString;
@@ -62,15 +61,15 @@ public class TaskSaveAddr {
 		this.handsetString = handsetString;
 		this.recipient_id = recipient_id;
 		this.token = token;
-		
+
 		closeTask();
 		task = new Task();
 		task.execute();
 	}
-	
+
 	private boolean isTimeout = false;
 	private Task task;
-	
+
 	private class Task extends AsyncTask<Void, Void, Boolean> {
 
 		@Override
@@ -79,12 +78,16 @@ public class TaskSaveAddr {
 			try {
 				String httpresp;
 				try {
-					httpresp = saveUserAddress.saveAddress(userId, nameString, handsetString, shengString, shiString, quString, areaString, recipient_id, token);
-				boolean issuccess = saveUserAddress.analysicSaveJson(httpresp);
-				addressId = saveUserAddress.getRecipient_id();
-				if(addressId == null || "".equals(addressId)) addressId = recipient_id;
-				message = saveUserAddress.getIsSuccessString();
-				return issuccess;
+					httpresp = saveUserAddress.saveAddress(userId, nameString,
+							handsetString, shengString, shiString, quString,
+							areaString, recipient_id, token);
+					boolean issuccess = saveUserAddress
+							.analysicSaveJson(httpresp);
+					addressId = saveUserAddress.getRecipient_id();
+					if (addressId == null || "".equals(addressId))
+						addressId = recipient_id;
+					message = saveUserAddress.getIsSuccessString();
+					return issuccess;
 				} catch (TimeOutEx e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -101,7 +104,7 @@ public class TaskSaveAddr {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-//			bar.show();
+			// bar.show();
 			bar = (ProgressDialog) new YLProgressDialog(activity)
 					.createLoadingDialog(activity, null);
 			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -110,7 +113,7 @@ public class TaskSaveAddr {
 				public void onCancel(DialogInterface dialog) {
 					// TODO Auto-generated method stub
 					cancel(true);
-		}
+				}
 			});
 		}
 
@@ -119,7 +122,7 @@ public class TaskSaveAddr {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			bar.dismiss();
-			if(result) {
+			if (result) {
 				finishIntent();
 			} else {
 				if (isTimeout) {
@@ -134,33 +137,20 @@ public class TaskSaveAddr {
 				Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
 			}
 		}
-		
+
 	}
-	
-	
-	private void finishIntent(){
-//		Addresses addresses = new Addresses();
-//		addresses.setProvince(shengString);
-//		addresses.setCity(shiString);
-//		addresses.setArea(quString);
-//		addresses.setName(nameString);
-//		addresses.setAddress(areaString);
-//		addresses.setHandset(handsetString);
-//		addresses.setAddressId(addressId);
+
+	private void finishIntent() {
 		Intent intent = new Intent();
-//		Bundle bundle = new Bundle();
-//		bundle.putSerializable("newaddress", addresses);
-//		intent.putExtras(bundle);
-//		activity.setResult(Consts.NEW_ADDRESS_RESPONSE,intent);
-		activity.setResult(DefinalDate.responcode, intent);
 		intent.setAction(Consts.CST_NEWADDRESS);
+		activity.setResult(DefinalDate.responcode, intent);
 		activity.sendBroadcast(intent);
 		activity.finish();
 	}
 
-	
-	public void closeTask(){
-		if(null != task && AsyncTask.Status.RUNNING == task.getStatus().RUNNING){
+	public void closeTask() {
+		if (null != task
+				&& AsyncTask.Status.RUNNING == task.getStatus().RUNNING) {
 			task.cancel(true);
 		}
 	}
