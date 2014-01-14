@@ -230,6 +230,7 @@
     <string name="login_password">密码</string>
     <string name="login_keep_state">保持登陆状态</string>
     <string name="login_find_psw">找回密码</string>
+    <string name="login_find_psw_add">账户注册</string>
     <string name="login_find_regist">快速注册</string>
     <string name="login_must">立即登陆</string>
     <string name="find_hint_account">请输入您要找回的账号</string>
@@ -281,5 +282,6 @@
     <string name="edit_tuijian">当前应用推荐本</string>
     <string name="order_state">订单状态：</string>
     <string name="order_pay">付款</string>
+    <string name="order_set">设置</string>
 
 </resources>

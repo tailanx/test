@@ -33,7 +33,7 @@ public class OrderViewCtrl {
 		mWeek = (TextView) activity.findViewById(R.id.all_order_week);
 		mMonth = (TextView) activity.findViewById(R.id.all_order_moonth);
 		mYear = (TextView) activity.findViewById(R.id.all_order_year);
-
+		mWeek.setSelected(true);
 		mWeek.setOnClickListener(new MyOnClickListener(0));
 		mMonth.setOnClickListener(new MyOnClickListener(1));
 		mYear.setOnClickListener(new MyOnClickListener(2));

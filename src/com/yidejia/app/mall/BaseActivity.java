@@ -8,10 +8,10 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.jeremyfeinstein.slidingmenu.SlidingFragmentActivity;
 
-public class BaseActivity extends SherlockFragmentActivity{
-	
+public class BaseActivity extends SherlockFragmentActivity {
+
 	private TextView tvTitle;
-	
+
 	public void setActionbarConfig() {
 		getSupportActionBar().setCustomView(R.layout.actionbar_common);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -30,11 +30,11 @@ public class BaseActivity extends SherlockFragmentActivity{
 			}
 		});
 	}
-	
+
 	public void setTitle(String text) {
 		tvTitle.setText(text);
 	}
-	
+
 	public void setTitle(int resid) {
 		tvTitle.setText(resid);
 	}

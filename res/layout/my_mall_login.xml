@@ -135,18 +135,14 @@
                     android:text="@string/login_keep_state"
                     android:textColor="#b4b4b4"
                     android:textSize="@dimen/textsize_small" />
-
-                <CheckBox
+             
+                <com.yidejia.app.mall.widget.WiperSwitch
                     android:id="@+id/cb_my_login_checkbox"
-                    android:layout_width="wrap_content"
+                    android:layout_width="30dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/margin_left_more"
-                    android:checked="true"
-                    android:gravity="center"
-                    android:text=""
-                    android:textColor="#b4b4b4"
-                    android:textSize="@dimen/textsize_small" />
+                    android:layout_marginRight="@dimen/margin_left"
+                    android:layout_marginTop="@dimen/margin_left"
+                    android:layout_alignParentRight="true"/>
             </RelativeLayout>
         </RelativeLayout>
 

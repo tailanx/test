@@ -18,75 +18,60 @@ import com.yidejia.app.mall.util.MsgUtil;
 
 /**
  * 前消息中心
+ * 
  * @author Administrator
- *
+ * 
  */
-public class PersonActivity extends SherlockActivity {
-	
+public class PersonActivity extends BaseActivity {
+
 	private int fromIndex = 0;
 	private int amount = 5;
 	PullToRefreshScrollView mPullToRefreshScrollView;
 	LinearLayout layout;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setActionbar();
+		setActionbarConfig();
+		setTitle(getResources().getString(R.string.person_message));
 		setContentView(R.layout.message_center);
 		layout = (LinearLayout) findViewById(R.id.message_scrollView_linearlayout1);
-	    mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.message_scrollView);
-		
-	    mPullToRefreshScrollView.setOnRefreshListener(listener);
-		String label = getResources().getString(R.string.update_time)	+ DateUtils.formatDateTime(
-				PersonActivity.this.getApplicationContext(),
-				System.currentTimeMillis(),
-				DateUtils.FORMAT_SHOW_TIME
-					| DateUtils.FORMAT_SHOW_DATE
-					| DateUtils.FORMAT_ABBREV_ALL);
-		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(label);;
-		new MsgUtil(PersonActivity.this, layout,fromIndex,amount).loadView();;
+		mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.message_scrollView);
+
+		mPullToRefreshScrollView.setOnRefreshListener(listener);
+		String label = getResources().getString(R.string.update_time)
+				+ DateUtils.formatDateTime(
+						PersonActivity.this.getApplicationContext(),
+						System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
+								| DateUtils.FORMAT_SHOW_DATE
+								| DateUtils.FORMAT_ABBREV_ALL);
+		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
+				label);
+		;
+		new MsgUtil(PersonActivity.this, layout, fromIndex, amount).loadView();
+		;
 	}
-	
-	private void setupShow(){
-		new MsgUtil(PersonActivity.this, layout,fromIndex,amount);
+
+	private void setupShow() {
+		new MsgUtil(PersonActivity.this, layout, fromIndex, amount);
 	}
-	
+
 	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
 
 		@Override
 		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-			String label = getResources().getString(R.string.update_time)	+ DateUtils.formatDateTime(
-					PersonActivity.this.getApplicationContext(),
-					System.currentTimeMillis(),
-					DateUtils.FORMAT_SHOW_TIME
-						| DateUtils.FORMAT_SHOW_DATE
-						| DateUtils.FORMAT_ABBREV_ALL);
+			String label = getResources().getString(R.string.update_time)
+					+ DateUtils.formatDateTime(
+							PersonActivity.this.getApplicationContext(),
+							System.currentTimeMillis(),
+							DateUtils.FORMAT_SHOW_TIME
+									| DateUtils.FORMAT_SHOW_DATE
+									| DateUtils.FORMAT_ABBREV_ALL);
 			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 			fromIndex += amount;
 			setupShow();
 			mPullToRefreshScrollView.onRefreshComplete();
 		}
-		
+
 	};
-
-	private void setActionbar() {
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setIcon(R.drawable.back);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_common);
-		TextView button = (TextView) findViewById(R.id.ab_common_back);
-		button.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				PersonActivity.this.finish();
-			}
-		});
-
-		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
-		titleTextView.setText(getResources().getString(R.string.person_message));
-	}
 }

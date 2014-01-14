@@ -22,12 +22,13 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
 import com.yidejia.app.mall.ctrl.OrderViewCtrl;
 import com.yidejia.app.mall.fragment.AllOrderFragment;
 
-public class AllOrderActivity extends SherlockFragmentActivity {
+public class AllOrderActivity extends BaseActivity {
 	private static final String TAG = AllOrderActivity.class.getName();
 	// private ViewPager mPager;
 	private ArrayList<Fragment> fragmentsList;
@@ -63,41 +64,16 @@ public class AllOrderActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		// this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-		// WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setActionBar();
+//		setActionBar();
+		setActionbarConfig();
+		setTitle(getResources().getString(R.string.all_order));
 		setContentView(R.layout.all_order);
 		OrderViewCtrl viewCtrl = new OrderViewCtrl(AllOrderActivity.this);
 		viewCtrl.viewCtrl(0);
 
-		// resources = getResources();
-		// InitWidth();
-		// InitTextView();
-		// InitViewPager();
 	}
 
-	private void setActionBar() {
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setIcon(R.drawable.back1);
-		getSupportActionBar().setCustomView(R.layout.actionbar_common);
-		TextView back = (TextView) findViewById(R.id.ab_common_back);
-		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
-		titleTextView.setText(getResources().getString(R.string.all_order));
 
-		back.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				AllOrderActivity.this.finish();
-			}
-		});
-	}
 
 	private void InitTextView() {
 		mWeek = (TextView) findViewById(R.id.all_order_week);

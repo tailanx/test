@@ -1,4 +1,3 @@
-
 package com.yidejia.app.mall;
 
 import java.util.ArrayList;
@@ -47,11 +46,11 @@ import android.widget.Toast;
 
 /**
  * 购物车的界面
+ * 
  * @author Administrator
- *
+ * 
  */
-public class HomeCarActivity extends SherlockFragmentActivity implements
-		OnClickListener {
+public class HomeCarActivity extends BaseActivity implements OnClickListener {
 	private TextView shoppingCartTopay;// 编辑
 	private MyApplication myApplication;
 	private FrameLayout frameLayout;
@@ -77,7 +76,7 @@ public class HomeCarActivity extends SherlockFragmentActivity implements
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		//设置一个广播
+		// 设置一个广播
 		receiver = new InnerReceiver();
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Consts.UPDATE_CHANGE);
@@ -90,9 +89,9 @@ public class HomeCarActivity extends SherlockFragmentActivity implements
 		setContentView(R.layout.activity_main_fragment_layout);
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
 		inflater = LayoutInflater.from(this);
-		
+
 		initNavView();
-		//设置底部,获取当前的界面的id
+		// 设置底部,获取当前的界面的id
 		int current = getIntent().getIntExtra("current", -1);
 		int next = getIntent().getIntExtra("next", -1);
 		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
@@ -100,9 +99,9 @@ public class HomeCarActivity extends SherlockFragmentActivity implements
 		if (current != -1 || next != -1) {
 			bottomChange.initNavView(current, next);
 		}
-		
+
 		setActionBarConfig();
-		//初始imageloader
+		// 初始imageloader
 		ImageLoaderUtil imageLoaderUtil = new ImageLoaderUtil();
 		imageLoader = imageLoaderUtil.getImageLoader();
 		listener = imageLoaderUtil.getAnimateFirstListener();
@@ -127,7 +126,7 @@ public class HomeCarActivity extends SherlockFragmentActivity implements
 		mButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
+
 				Intent intent = new Intent(HomeCarActivity.this,
 						SearchResultActivity.class);
 				Bundle bundle = new Bundle();
@@ -199,17 +198,16 @@ public class HomeCarActivity extends SherlockFragmentActivity implements
 		}
 	}
 
-
 	/**
 	 * 头部
 	 */
 	private void setActionBarConfig() {
-		getSupportActionBar().setCustomView(R.layout.actionbar_cart);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		shoppingCartTopay = (TextView) findViewById(R.id.tv_shopping_cart_go_pay);
+		setActionbarConfig();
+		TextView leftButton = (TextView) findViewById(R.id.ab_common_back);
+		leftButton.setVisibility(View.GONE);
+		shoppingCartTopay = (TextView) findViewById(R.id.ab_common_tv_right);
+		shoppingCartTopay.setVisibility(View.VISIBLE);
+		setTitle(getResources().getString(R.string.down_shopping_text));
 	}
 
 	private RelativeLayout downHomeLayout;
@@ -258,10 +256,9 @@ public class HomeCarActivity extends SherlockFragmentActivity implements
 			intent.putExtra("next", 1);
 			break;
 		case R.id.re_down_my_layout:
-			if (myApplication.getIsLogin()){
+			if (myApplication.getIsLogin()) {
 				intent.setClass(HomeCarActivity.this, HomeMyMaActivity.class);
-			}
-			else{
+			} else {
 				intent.setClass(HomeCarActivity.this, HomeLogActivity.class);
 			}
 			intent.putExtra("current", 2);

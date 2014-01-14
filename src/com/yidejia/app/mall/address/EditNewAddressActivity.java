@@ -36,6 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 //import com.yidejia.app.mall.datamanage.AddressDataManage;
@@ -45,7 +46,7 @@ import com.yidejia.app.mall.wheelview.WheelView;
 //import com.yidejia.app.mall.util.DefinalDate;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
-public class EditNewAddressActivity extends SherlockActivity {
+public class EditNewAddressActivity extends BaseActivity {
 	private static HashMap<String, Object> valueMap;
 	private HashMap<Integer, String> valueMap3;
 	private ArrayList<String> list;
@@ -373,26 +374,12 @@ public class EditNewAddressActivity extends SherlockActivity {
 	}
 
 	private void setActionbar() {
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setIcon(R.drawable.back);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_common);
-		ImageView icon = (ImageView) findViewById(R.id.search_with_list);
-		icon.setVisibility(View.GONE);
-		TextView leftButton = (TextView) findViewById(R.id.actionbar_left);
-		leftButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				EditNewAddressActivity.this.finish();
-			}
-		});
+		setActionbarConfig();
 
 		taskSaveAddr = new TaskSaveAddr(EditNewAddressActivity.this);
 
-		TextView rightButton = (TextView) findViewById(R.id.actionbar_right);
+		TextView rightButton = (TextView) findViewById(R.id.ab_common_tv_right);
+		rightButton.setVisibility(View.VISIBLE);
 		rightButton.setText("完成");
 		rightButton.setOnClickListener(new android.view.View.OnClickListener() {
 
@@ -426,7 +413,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 
 		});
 
-		TextView titleTextView = (TextView) findViewById(R.id.actionbar_title);
+		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
 		titleTextView.setText("编辑收货地址");
 	}
 

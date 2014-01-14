@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FindPwActivity extends SherlockActivity {
+public class FindPwActivity extends BaseActivity {
 
 	private EditText acount_textview;
 	private EditText obtain_textView;
@@ -23,33 +23,32 @@ public class FindPwActivity extends SherlockActivity {
 	private EditText psw_again_textview;
 	private ImageView obtain_imageView;
 	private Button okButton;
-	
+
 	private String account;
 	private String pwd;
 	private String confirmPwd;
 	private String obtain;
-	
+
 	private TaskGetCode getCodeTask;
-	
+
 	private TaskReset taskReset;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setActionbar();
-		
+		setActionbarConfig();
+		setTitle(getResources().getString(R.string.login_find_psw));
+
 		setContentView(R.layout.find_password);
-		
+
 		findIds();
-		
+
 		obtain_imageView.setOnClickListener(obtainListener);
-		
+
 		okButton.setOnClickListener(okListener);
 	}
-	
-	private void findIds(){
+
+	private void findIds() {
 		acount_textview = (EditText) findViewById(R.id.et_my_mall_find_edittext_account);
 		obtain_textView = (EditText) findViewById(R.id.et_my_mall_find_obtain);
 		obtain_imageView = (ImageView) findViewById(R.id.iv_my_mall_find_password_validation_button);
@@ -57,34 +56,33 @@ public class FindPwActivity extends SherlockActivity {
 		psw_again_textview = (EditText) findViewById(R.id.et_my_mall_find_confirm_password);
 		okButton = (Button) findViewById(R.id.bt_find_find_confirm_button);
 	}
-	
+
 	private OnClickListener okListener = new View.OnClickListener() {
-		
+
 		@Override
 		public void onClick(View v) {
 			resetListener();
 		}
 	};
-	
+
 	/**
 	 * 验证码事件
 	 */
 	private OnClickListener obtainListener = new View.OnClickListener() {
-		
+
 		@Override
 		public void onClick(View v) {
 			getCodeListener();
 		}
 	};
-	
-	
+
 	/**
 	 * 获取验证码的事件监听
 	 */
-	private void getCodeListener(){
-		account = acount_textview.getText().toString().trim();//账号
+	private void getCodeListener() {
+		account = acount_textview.getText().toString().trim();// 账号
 		boolean isphone = IsPhone.isMobileNO(account);
-		if(!isphone){
+		if (!isphone) {
 			Toast.makeText(FindPwActivity.this,
 					getResources().getString(R.string.phone),
 					Toast.LENGTH_SHORT).show();
@@ -93,35 +91,35 @@ public class FindPwActivity extends SherlockActivity {
 		getCodeTask = new TaskGetCode(FindPwActivity.this);
 		getCodeTask.getCode(account);
 	}
-	
-	
+
 	/**
 	 * 注册按钮点击事件监听
 	 */
-	private void resetListener(){
-		account = acount_textview.getText().toString().trim();//账号
-		pwd = psw_textview.getText().toString().trim();//密码
-		confirmPwd = psw_again_textview.getText().toString().trim();//重复密码
-		obtain = obtain_textView.getText().toString().trim();//验证码
-		
+	private void resetListener() {
+		account = acount_textview.getText().toString().trim();// 账号
+		pwd = psw_textview.getText().toString().trim();// 密码
+		confirmPwd = psw_again_textview.getText().toString().trim();// 重复密码
+		obtain = obtain_textView.getText().toString().trim();// 验证码
+
 		boolean phone = IsPhone.isMobileNO(account);
 		if (phone) {
-			if (obtain == null || "".equals(obtain)) {//验证码为空
+			if (obtain == null || "".equals(obtain)) {// 验证码为空
 				Toast.makeText(FindPwActivity.this,
 						getResources().getString(R.string.obtain),
 						Toast.LENGTH_LONG).show();
 			} else {
-				if (pwd.length() < 6) {//密码小于6位
+				if (pwd.length() < 6) {// 密码小于6位
 					Toast.makeText(FindPwActivity.this,
 							getResources().getString(R.string.pwd_length),
 							Toast.LENGTH_SHORT).show();
 				} else {
 					if (pwd.equals(confirmPwd)) {
-						
+
 						taskReset = new TaskReset(FindPwActivity.this);
 						taskReset.resetPsw(account, pwd, obtain);
-//						taskCheckCode.checkCode(account, obtain, pwd, ipAddress, "");
-					} else {//两次密码不一致
+						// taskCheckCode.checkCode(account, obtain, pwd,
+						// ipAddress, "");
+					} else {// 两次密码不一致
 						Toast.makeText(
 								FindPwActivity.this,
 								getResources().getString(R.string.regist_false),
@@ -135,49 +133,21 @@ public class FindPwActivity extends SherlockActivity {
 					Toast.LENGTH_SHORT).show();
 		}
 	}
-	
-	
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		if(taskReset != null) taskReset.closeTask();
-		if(getCodeTask != null) getCodeTask.closeTask();
-	}
-	
-	private void setActionbar(){
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-//		getSupportActionBar().setLogo(R.drawable.back);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_common);
-//		startActionMode(new AnActionModeOfEpicProportions(ComposeActivity.this));
-		TextView button = (TextView) findViewById(R.id.ab_common_back);
-		button.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-//				Toast.makeText(ComposeActivity.this, "button", Toast.LENGTH_SHORT).show();
-				FindPwActivity.this.finish();
-			}
-		});
-		
-		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
-		titleTextView.setText("找回密码");
-	}
-	
-	/*@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		StatService.onPause(this);
+		if (taskReset != null)
+			taskReset.closeTask();
+		if (getCodeTask != null)
+			getCodeTask.closeTask();
 	}
 
-	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		StatService.onResume(this);
-	}*/
+	/*
+	 * @Override protected void onPause() { // TODO Auto-generated method stub
+	 * super.onPause(); StatService.onPause(this); }
+	 * 
+	 * @Override protected void onResume() { // TODO Auto-generated method stub
+	 * super.onResume(); StatService.onResume(this); }
+	 */
 }

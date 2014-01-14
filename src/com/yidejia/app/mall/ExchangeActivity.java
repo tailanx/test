@@ -20,7 +20,7 @@ import com.yidejia.app.mall.datamanage.TaskGetRetList;
  * @author Administrator
  *
  */
-public class ExchangeActivity extends SherlockFragmentActivity implements
+public class ExchangeActivity extends BaseActivity implements
 		OnClickListener {
 
 	private PullToRefreshScrollView mPullToRefreshScrollView;
@@ -35,7 +35,9 @@ public class ExchangeActivity extends SherlockFragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		setActionbar();
+//		setActionbar();
+		setActionbarConfig();
+		setTitle(getResources().getString(R.string.exchanged));
 		setContentView(R.layout.all_order_item_main);
 
 		mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.all_order_item_main_refresh_scrollview11);
@@ -70,26 +72,26 @@ public class ExchangeActivity extends SherlockFragmentActivity implements
 
 	}
 
-	private void setActionbar() {
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setIcon(R.drawable.back1);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_common);
-		TextView button = (TextView) findViewById(R.id.ab_common_back);
-		button.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				ExchangeActivity.this.finish();
-			}
-		});
-
-		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
-		titleTextView.setText(getResources().getString(R.string.exchanged));
-	}
+//	private void setActionbar() {
+//		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//		getSupportActionBar().setDisplayShowHomeEnabled(false);
+//		getSupportActionBar().setDisplayShowTitleEnabled(false);
+//		getSupportActionBar().setDisplayUseLogoEnabled(false);
+//		getSupportActionBar().setIcon(R.drawable.back1);
+//		getSupportActionBar().setDisplayShowCustomEnabled(true);
+//		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+//		TextView button = (TextView) findViewById(R.id.ab_common_back);
+//		button.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				ExchangeActivity.this.finish();
+//			}
+//		});
+//
+//		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
+//		titleTextView.setText(getResources().getString(R.string.exchanged));
+//	}
 
 	private OnRefreshListener2<ScrollView> listener2 = new OnRefreshListener2<ScrollView>() {
 

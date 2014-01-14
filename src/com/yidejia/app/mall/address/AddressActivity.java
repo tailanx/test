@@ -25,6 +25,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.AddressDataManage;
@@ -34,7 +35,7 @@ import com.yidejia.app.mall.util.DefinalDate;
 import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
-public class AddressActivity extends SherlockActivity {
+public class AddressActivity extends BaseActivity {
 
 	private String TAG = AddressActivity.class.getName();// log
 	private AddressAdapter adapter;
@@ -48,7 +49,27 @@ public class AddressActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setActionbar();
+		//设置头部
+		setActionbarConfig();
+		setTitle(getResources().getString(R.string.manage_address));
+		TextView rightButton = (TextView) findViewById(R.id.ab_common_tv_right);
+		rightButton.setVisibility(View.VISIBLE);
+		 rightButton.setText(getResources().getString(R.string.new_address));
+		 rightButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent2 = new Intent(AddressActivity.this,
+						 EditNewAddressActivity.class);
+						 Bundle bundle = new Bundle();
+						 bundle.putSerializable("editaddress", null);
+						 intent2.putExtras(bundle);
+						 startActivityForResult(intent2, DefinalDate.requestcode);//
+			}
+		 });
+		 
+		 
 		setContentView(R.layout.address_management);
 
 		pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.address_item_main_refresh_scrollview111);
@@ -75,7 +96,6 @@ public class AddressActivity extends SherlockActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Log.i("info", "   OnItemClickListener");
 				ModelAddresses addresses = mAddresses.get(position - 1);
 				Intent intent = new Intent(AddressActivity.this,
 						CstmPayActivity.class);
@@ -127,45 +147,47 @@ public class AddressActivity extends SherlockActivity {
 	private int fromIndex = 0;
 	private int acount = 10;
 
-	private void setActionbar() {
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_common);
-		TextView leftButton = (TextView) findViewById(R.id.actionbar_left);
-		TextView list = (TextView) findViewById(R.id.search_with_list);
-		leftButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-
-				AddressActivity.this.finish();
-			}
-		});
-		TextView rightButton = (TextView) findViewById(R.id.actionbar_right);
-		rightButton.setText(getResources().getString(R.string.new_address));
-		rightButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent intent2 = new Intent(AddressActivity.this,
-						EditNewAddressActivity.class);
-				Bundle bundle = new Bundle();
-				bundle.putSerializable("editaddress", null);
-				intent2.putExtras(bundle);
-				startActivityForResult(intent2, DefinalDate.requestcode);// 发送Intent,并设置请求码
-
-			}
-		});
-
-		TextView titleTextView = (TextView) findViewById(R.id.actionbar_title);
-		titleTextView
-				.setText(getResources().getString(R.string.manage_address));
-		Log.e(TAG, titleTextView.getText().toString());
-	}
+	//
+	// private void setActionbar() {
+	// getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+	// getSupportActionBar().setDisplayShowHomeEnabled(false);
+	// getSupportActionBar().setDisplayShowTitleEnabled(false);
+	// getSupportActionBar().setDisplayUseLogoEnabled(false);
+	// getSupportActionBar().setDisplayShowCustomEnabled(true);
+//	 getSupportActionBar().setCustomView(R.layout.actionbar_common);
+	// TextView leftButton = (TextView) findViewById(R.id.actionbar_left);
+	// TextView list = (TextView) findViewById(R.id.search_with_list);
+	// leftButton.setOnClickListener(new OnClickListener() {
+	//
+	// @Override
+	// public void onClick(View v) {
+	//
+	// AddressActivity.this.finish();
+	// }
+	// });
+	// TextView rightButton = (TextView) findViewById(R.id.actionbar_right);
+	// rightButton.setText(getResources().getString(R.string.new_address));
+	// rightButton.setOnClickListener(new OnClickListener() {
+	//
+	// @Override
+	// public void onClick(View v) {
+	// // TODO Auto-generated method stub
+	// Intent intent2 = new Intent(AddressActivity.this,
+	// EditNewAddressActivity.class);
+	// Bundle bundle = new Bundle();
+	// bundle.putSerializable("editaddress", null);
+	// intent2.putExtras(bundle);
+	// startActivityForResult(intent2, DefinalDate.requestcode);//
+	// 发送Intent,并设置请求码
+	//
+	// }
+	// });
+	//
+	// TextView titleTextView = (TextView) findViewById(R.id.actionbar_title);
+	// titleTextView
+	// .setText(getResources().getString(R.string.manage_address));
+	// Log.e(TAG, titleTextView.getText().toString());
+	// }
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
