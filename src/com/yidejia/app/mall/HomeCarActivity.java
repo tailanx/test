@@ -313,10 +313,11 @@ public class HomeCarActivity extends SherlockFragmentActivity implements
 		intent1.putExtra("carts", cartList);
 
 		Log.i("voucher", sum + "    sum");
+//		Toast.makeText(this, "sum:"+sum, Toast.LENGTH_LONG).show();
 
 		if (sum > 0) {
 			bundle.putString("cartActivity", "Y");
-			bundle.putString("price", sum + "");
+			bundle.putFloat("price", sum);
 			intent1.putExtras(bundle);
 			HomeCarActivity.this.startActivity(intent1);
 		} else {

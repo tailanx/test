@@ -120,7 +120,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.yidejia.app.mall.view.UserPayActivityivity"
+            android:name="com.yidejia.app.mall.view.UserPayActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

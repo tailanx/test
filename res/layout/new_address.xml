@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/margin_left"
-                android:text="@string/addresss_default_name_add"
+                android:text="@string/address_produce"
                 android:textSize="@dimen/textsize_small" />
 
             <EditText

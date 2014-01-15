@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.IntegeralFragmentAdapter;
@@ -42,7 +43,7 @@ import com.yidejia.app.mall.util.Consts;
  * @author LiuYong
  *
  */
-public class ExchangeFreeActivity extends SherlockFragmentActivity {
+public class ExchangeFreeActivity extends BaseActivity {
 
 	private ViewPager mPager;
 	private ArrayList<Fragment> fragmentsList;
@@ -144,7 +145,7 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 						}
 						Cart cart1 = FreeGivingAdapter.carts;
 						Log.i("voucher", cart1+"   cart1");
-						if (cart1.getUId() != null) {
+						if (null != cart1 && cart1.getUId() != null) {
 							mArrayList.add(cart1);
 						}
 						intent.putExtra("price", sumprice);
@@ -176,8 +177,20 @@ public class ExchangeFreeActivity extends SherlockFragmentActivity {
 		InitWidth();
 		InitTextView();
 		InitViewPager();
-		setActionBar();
-
+//		setActionBar();
+		setActionbarConfig();
+		setTitle(getResources().getString(R.string.produce_exchange));
+		
+		TextView tvComplete = (TextView) findViewById(R.id.ab_common_tv_right);
+		tvComplete.setVisibility(View.VISIBLE);
+		tvComplete.setText(R.string.complete);
+		tvComplete.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				dialog.show();
+			}
+		});
 	}
 
 	private void setActionBar() {

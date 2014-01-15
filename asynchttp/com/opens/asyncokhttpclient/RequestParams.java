@@ -21,6 +21,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class RequestParams {
 	
 	private final ConcurrentHashMap<String, String> params;
+	private boolean isStringParams = false;
+	private String paramStr;
 	
 	public RequestParams() {
 		this.params = new ConcurrentHashMap<String, String>();
@@ -38,8 +40,17 @@ public class RequestParams {
 		}
 	}
 	
+	public void put(String param) {
+		isStringParams = true;
+		paramStr = param;
+	}
+	
 	@Override
 	public String toString() {
+		if(isStringParams) {
+			return paramStr;
+		}
+		
 		StringBuilder result = new StringBuilder();
 		for(ConcurrentHashMap.Entry<String, String> entry : this.params.entrySet()) {
 			if(result.length() > 0) result.append("&");

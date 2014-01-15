@@ -22,12 +22,13 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
 import com.yidejia.app.mall.ctrl.OrderViewCtrl;
 import com.yidejia.app.mall.fragment.AllOrderFragment;
 
-public class AllOrderActivity extends SherlockFragmentActivity {
+public class AllOrderActivity extends BaseActivity {
 	private static final String TAG = AllOrderActivity.class.getName();
 	// private ViewPager mPager;
 	private ArrayList<Fragment> fragmentsList;
@@ -66,7 +67,9 @@ public class AllOrderActivity extends SherlockFragmentActivity {
 		// this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 		// WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setActionBar();
+//		setActionBar();
+		setActionbarConfig();
+		setTitle(R.string.all_order);
 		setContentView(R.layout.all_order);
 		OrderViewCtrl viewCtrl = new OrderViewCtrl(AllOrderActivity.this);
 		viewCtrl.viewCtrl(0);
