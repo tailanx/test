@@ -205,7 +205,7 @@
             android:name="com.yidejia.app.mall.RecommendActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yidejia.app.mall.view.ReturnActivity"
+            android:name="com.yidejia.app.mall.ReturnActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.yidejia.app.mall.address.PayAddressActivity"
@@ -312,6 +312,9 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>
+        
+        <service android:name="com.yidejia.app.mall.log.LogService" >
+        </service>
     </application>
 
 </manifest>
