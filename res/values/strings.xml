@@ -261,7 +261,7 @@
     <string name="comfirm_order">确认订单</string>
     <string name="goods_info">商品展示</string>
     <string name="cart_sum">总计:</string>
-    <string name="cart_count">数量：</string>
+    <string name="cart_count">数量  : </string>
     <string name="cart_guang">去逛一下</string>
     <string name="cart_no_produce">购物车是空的</string>
     <string name="login_find_pwd">找回密码</string>
@@ -292,5 +292,6 @@
     <string name="yirihui_min_add">分</string>
     <string name="yirihui_second_add">秒</string>
     <string name="yirihui_must_pay">马上抢购</string>
+    <string name="produce_price_yuan">:</string>
 
 </resources>

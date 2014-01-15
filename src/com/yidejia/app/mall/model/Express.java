@@ -12,6 +12,8 @@ public class Express {
 	private String disName;// 配送中心
 	private String disDesc;// 配送中心介绍
 
+	private boolean isDefault;// 是否为默认
+	private String pre_id;// 配送中心id
 	/**
 	 * 
 	 * @param ems
@@ -80,8 +82,7 @@ public class Express {
 		return disDesc;
 	}
 
-	private boolean isDefault;// 是否为默认
-	private String pre_id;// 配送中心id
+	
 
 	public String getPreId() {
 		return pre_id;

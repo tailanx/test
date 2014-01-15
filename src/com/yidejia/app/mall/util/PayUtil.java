@@ -22,6 +22,7 @@ import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.unionpay.mpay.views.an;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.Cart;
 
@@ -38,15 +39,17 @@ public class PayUtil {
 
 //	private CartsDataManage dataManage;// ������ȡ�������
 	private Cart cart;
-	public PayUtil(Context context, LinearLayout mLayout,Cart cart,ImageLoader imageLoader,ImageLoadingListener listener,DisplayImageOptions options) {
-		this.cart = cart;
+	public PayUtil(Context context, LinearLayout mLayout) {
+//		this.cart = cart;
 		this.context = context;
 		this.inflater = LayoutInflater.from(context);
 		this.mLinearLayoutLayout = mLayout;
-		this.options = options;
-		this.imageLoader = imageLoader;
-		this.animateFirstListener = listener;
-	
+//		this.options = options;
+//		this.imageLoader = imageLoader;
+//		this.animateFirstListener = listener;
+		imageLoader = ImageLoader.getInstance();
+		animateFirstListener = MyApplication.getInstance().getImageLoadingListener();
+		options = MyApplication.getInstance().initGoodsImageOption();
 	}
 
 	public PayUtil(Context context, LinearLayout mLayout,ImageLoader imageLoader,ImageLoadingListener listener,DisplayImageOptions option) {

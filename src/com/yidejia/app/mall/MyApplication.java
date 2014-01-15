@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
@@ -159,6 +160,32 @@ public class MyApplication extends Application {
 		// TODO Auto-generated method stub
 		super.onLowMemory();
 		ImageLoader.getInstance().clearMemoryCache();
+	}
+	
+	
+	private DisplayImageOptions options;
+	public DisplayImageOptions initGoodsImageOption(){
+		options = new DisplayImageOptions.Builder()
+			.showStubImage(R.drawable.image_bg)
+			.showImageOnFail(R.drawable.image_bg)
+			.showImageForEmptyUri(R.drawable.image_bg)
+			.cacheInMemory(true)
+			.cacheOnDisc(true)
+			.build();
+		
+		return options;
+	}
+	
+	public DisplayImageOptions initBannerImageOption(){
+		options = new DisplayImageOptions.Builder()
+		.showStubImage(R.drawable.image_bg)
+		.showImageOnFail(R.drawable.image_bg)
+		.showImageForEmptyUri(R.drawable.image_bg)
+		.cacheInMemory(true)
+		.cacheOnDisc(true)
+		.build();
+		
+		return options;
 	}
 	
 }
