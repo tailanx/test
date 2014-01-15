@@ -12,4 +12,6 @@
         android:right="@dimen/margin_left_add"
         android:top="@dimen/margin_left_add" />
 
+    <solid android:color="@color/white" />
+
 </shape>

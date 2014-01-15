@@ -64,43 +64,16 @@ public class AllOrderActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		// this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-		// WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //		setActionBar();
 		setActionbarConfig();
-		setTitle(R.string.all_order);
+		setTitle(getResources().getString(R.string.all_order));
 		setContentView(R.layout.all_order);
 		OrderViewCtrl viewCtrl = new OrderViewCtrl(AllOrderActivity.this);
 		viewCtrl.viewCtrl(0);
 
-		// resources = getResources();
-		// InitWidth();
-		// InitTextView();
-		// InitViewPager();
 	}
 
-	private void setActionBar() {
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setIcon(R.drawable.back1);
-		getSupportActionBar().setCustomView(R.layout.actionbar_common);
-		TextView back = (TextView) findViewById(R.id.ab_common_back);
-		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
-		titleTextView.setText(getResources().getString(R.string.all_order));
 
-		back.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				AllOrderActivity.this.finish();
-			}
-		});
-	}
 
 	private void InitTextView() {
 		mWeek = (TextView) findViewById(R.id.all_order_week);

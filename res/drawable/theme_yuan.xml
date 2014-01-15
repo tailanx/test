@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval" >
+
+    <padding
+        android:bottom="@dimen/margin_left_add_add"
+        android:left="@dimen/margin_left_add_add"
+        android:right="@dimen/margin_left_add_add"
+        android:top="@dimen/margin_left_add_add" />
+
+    <stroke
+        android:width="@dimen/above_offset"
+        android:color="@color/theme" />
+
+    <solid android:color="@color/theme" />
+
+</shape>

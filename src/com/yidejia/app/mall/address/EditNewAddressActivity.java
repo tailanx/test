@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -27,6 +28,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,6 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 //import com.yidejia.app.mall.datamanage.AddressDataManage;
@@ -43,7 +46,7 @@ import com.yidejia.app.mall.wheelview.WheelView;
 //import com.yidejia.app.mall.util.DefinalDate;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
-public class EditNewAddressActivity extends SherlockActivity {
+public class EditNewAddressActivity extends BaseActivity {
 	private static HashMap<String, Object> valueMap;
 	private HashMap<Integer, String> valueMap3;
 	private ArrayList<String> list;
@@ -57,7 +60,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 	private String districtString = "";
 	public static String addressId;
 
-//	private Map<String, Object> valueMap2;
+	private Map<String, Object> valueMap2;
 	private String key2;
 	// private Object value2;
 	private String value2;
@@ -66,7 +69,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 	private Object value;
 	private int a;
 	private int b;
-//	private String keyString[] = null;
+	private String keyString[] = null;
 
 	Object districts[] = null;
 	private EditText nameTextView;// 收货人姓名
@@ -76,7 +79,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 	private TextView shi;
 	private TextView qu;
 	private MyApplication myApplication;
-//	private boolean isUpdate;
+	private boolean isUpdate;
 	private boolean isDefauteUpdate;
 	private String id;
 
@@ -97,6 +100,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 							@Override
 							public void onClick(DialogInterface dialog,
 									int which) {
+								// TODO Auto-generated method stub
 								sheng.setText(conutryString);
 								shi.setText(cityString);
 								qu.setText(districtString);
@@ -108,6 +112,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 
 		myApplication = (MyApplication) getApplication();
@@ -156,6 +161,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 
 			@Override
 			public void onClick(View v) {
+				// TODO Auto-generated method stub
 				dialog.show();
 				TaskNew editAddresss = new TaskNew();
 				editAddresss.execute();
@@ -329,6 +335,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 					@Override
 					public void onChanged(WheelView wheel, int oldValue,
 							int newValue) {
+						// TODO Auto-generated method stub
 						ArrayList<String> mArrayList = list1.get(a);
 						String cityName = mArrayList.get(b);
 						HashMap<String, Object> mArrayList2 = list5
@@ -349,6 +356,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 				district.setCurrentItem(0);
 
 			} catch (JSONException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -366,26 +374,11 @@ public class EditNewAddressActivity extends SherlockActivity {
 	}
 
 	private void setActionbar() {
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setIcon(R.drawable.back);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_common);
-		ImageView icon = (ImageView) findViewById(R.id.search_with_list);
-		icon.setVisibility(View.GONE);
-		TextView leftButton = (TextView) findViewById(R.id.actionbar_left);
-		leftButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				EditNewAddressActivity.this.finish();
-			}
-		});
+		setActionbarConfig();
 
 		taskSaveAddr = new TaskSaveAddr(EditNewAddressActivity.this);
 
-		TextView rightButton = (TextView) findViewById(R.id.actionbar_right);
+		TextView rightButton = (TextView) findViewById(R.id.ab_common_tv_right);
 		rightButton.setVisibility(View.VISIBLE);
 		rightButton.setText("完成");
 		rightButton.setOnClickListener(new android.view.View.OnClickListener() {
@@ -420,7 +413,7 @@ public class EditNewAddressActivity extends SherlockActivity {
 
 		});
 
-		TextView titleTextView = (TextView) findViewById(R.id.actionbar_title);
+		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
 		titleTextView.setText("编辑收货地址");
 	}
 

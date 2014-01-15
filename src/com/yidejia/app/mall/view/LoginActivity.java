@@ -163,7 +163,7 @@ public class LoginActivity extends SherlockActivity implements OnClickListener {
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setCustomView(R.layout.actionbar_common);
-		ImageView button = (ImageView) findViewById(R.id.ab_common_back);
+		TextView button = (TextView) findViewById(R.id.ab_common_title);
 
 		button.setOnClickListener(new OnClickListener() {
 

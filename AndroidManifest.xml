@@ -66,23 +66,27 @@
             android:name="BaiduMobAd_WIFI_LOCATION"
             android:value="true" />
 
-        <!-- <activity
+        <!--
+        <activity
             android:name="com.yidejia.app.mall.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:uiOptions="splitActionBarWhenNarrow"
             android:windowSoftInputMode="adjustPan" >
-        </activity> -->
-       <!--  <activity
+        </activity>
+        -->
+        <!--
+        <activity
             android:name="com.yidejia.app.mall.ComposeActivity"
             android:screenOrientation="portrait"
             android:uiOptions="splitActionBarWhenNarrow" >
-        </activity> -->
+        </activity>
+        -->
         <activity
             android:name="com.yidejia.app.mall.goodinfo.GoodsInfoActivity"
             android:screenOrientation="portrait" >
         </activity>
-         <activity
+        <activity
             android:name="com.yidejia.app.mall.goodinfo.CommentActivity"
             android:screenOrientation="portrait" >
         </activity>
@@ -124,7 +128,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.yidejia.app.mall.view.PersonActivity"
+            android:name="com.yidejia.app.mall.PersonActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.yidejia.app.mall.ExchangeActivity"
@@ -312,7 +316,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>
-        
+
         <service android:name="com.yidejia.app.mall.log.LogService" >
         </service>
     </application>

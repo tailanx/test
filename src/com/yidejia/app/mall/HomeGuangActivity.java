@@ -31,6 +31,7 @@ public class HomeGuangActivity extends SherlockFragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		cartsDataManage = new CartsDataManage();
 		setContentView(R.layout.activity_main_fragment_layout);
@@ -135,6 +136,6 @@ public class HomeGuangActivity extends SherlockFragmentActivity {
 		TextView back = (TextView) findViewById(R.id.ab_common_back);
 		back.setVisibility(View.GONE);
 		TextView title = (TextView) findViewById(R.id.ab_common_title);
-		title.setText(getResources().getString(R.string.down_guang_text));
+		title.setText(getResources().getString(R.string.guang));
 	}
 }

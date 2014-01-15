@@ -90,8 +90,8 @@ public class AddressAdapter extends BaseAdapter {
 			convertView = inflater.inflate(R.layout.address_management_item,
 					null);
 			holder = new ViewHolder();
-//			holder.ctTextView = (TextView) convertView
-//					.findViewById(R.id.tv_address_management_item_address1);
+			holder.ctTextView = (TextView) convertView
+					.findViewById(R.id.tv_address_management_item_address1);
 			holder.detailTextView = (TextView) convertView
 					.findViewById(R.id.address_management_item_address2);
 			holder.nameTextView = (TextView) convertView
