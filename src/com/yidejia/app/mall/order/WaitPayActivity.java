@@ -20,12 +20,13 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
+import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
 import com.yidejia.app.mall.fragment.AllOrderFragment;
 import com.yidejia.app.mall.view.CstmPayActivity;
 
-public class WaitPayActivity extends SherlockFragmentActivity {
+public class WaitPayActivity extends BaseActivity {
 	    private static final String TAG = "MainActivity";
 	    private ViewPager mPager;
 	    private ArrayList<Fragment> fragmentsList;
@@ -61,13 +62,8 @@ public class WaitPayActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setActionBar();
-//		setContentView(R.layout.wait_pay_order);
-//		resources = getResources();
-//		InitWidth();
-//		InitTextView();
+		setActionbarConfig();
+		setTitle(getResources().getString(R.string.wait_pay));
 //		InitViewPager();
 		setContentView(R.layout.all_order);
 		OrderViewCtrl viewCtrl = new OrderViewCtrl(this);
@@ -75,27 +71,27 @@ public class WaitPayActivity extends SherlockFragmentActivity {
 		
 	}
 
-	private void setActionBar(){
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setIcon(R.drawable.back);
-		getSupportActionBar().setCustomView(R.layout.actionbar_common);
-		TextView back = (TextView) findViewById(R.id.ab_common_back);
-		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
-		titleTextView.setText(getResources().getString(R.string.wait_pay));
-		
-		back.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-			WaitPayActivity.this.finish();	
-			}
-		});
-	}
+//	private void setActionBar(){
+//		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//		getSupportActionBar().setDisplayShowCustomEnabled(true);
+//		getSupportActionBar().setDisplayShowHomeEnabled(false);
+//		getSupportActionBar().setDisplayShowTitleEnabled(false);
+//		getSupportActionBar().setDisplayUseLogoEnabled(false);
+//		getSupportActionBar().setIcon(R.drawable.back);
+//		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+//		TextView back = (TextView) findViewById(R.id.ab_common_back);
+//		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
+//		titleTextView.setText(getResources().getString(R.string.wait_pay));
+//		
+//		back.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View arg0) {
+//				// TODO Auto-generated method stub
+//			WaitPayActivity.this.finish();	
+//			}
+//		});
+//	}
 	private void InitTextView(){
 		mWeek = (TextView)findViewById(R.id.wait_pay_order_week);
 		mMonth = (TextView)findViewById(R.id.wait_pay_order_moonth);

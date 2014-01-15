@@ -4,8 +4,5 @@
 
     <solid android:color="@color/white" />
 
-    <padding 
-        android:bottom="@dimen/white_bg_padding"
-        android:top="@dimen/white_bg_padding" />
 
 </shape>

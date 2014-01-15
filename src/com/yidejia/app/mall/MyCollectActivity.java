@@ -43,7 +43,7 @@ import com.yidejia.app.mall.widget.YLProgressDialog;
  * @author LongBin
  *
  */
-public class MyCollectActivity extends SherlockActivity {
+public class MyCollectActivity extends BaseActivity {
 	private FavoriteAdapter fAdapter;
 	private ListView mListView;
 	private PullToRefreshListView mPullRefreshListView;
@@ -103,11 +103,13 @@ public class MyCollectActivity extends SherlockActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setActionbar();
 		setContentView(R.layout.my_collect);
 		mPullRefreshListView = (PullToRefreshListView) findViewById(R.id.my_collect_listview);
 		emptyLayout = (RelativeLayout) findViewById(R.id.empty_fav);
 		Button search = (Button) findViewById(R.id.favorite_empty_button);
+		setActionbarConfig();
+		setTitle(getResources().getString(R.string.my_collect));
+		
 		search.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -137,27 +139,27 @@ public class MyCollectActivity extends SherlockActivity {
 		closeTask();
 	}
 
-	private void setActionbar() {
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_common);
-
-		TextView button = (TextView) findViewById(R.id.ab_common_back);
-		button.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-
-				MyCollectActivity.this.finish();
-			}
-		});
-
-		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
-		titleTextView.setText("我的收藏");
-	}
+//	private void setActionbar() {
+//		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//		getSupportActionBar().setDisplayShowHomeEnabled(false);
+//		getSupportActionBar().setDisplayShowTitleEnabled(false);
+//		getSupportActionBar().setDisplayUseLogoEnabled(false);
+//		getSupportActionBar().setDisplayShowCustomEnabled(true);
+//		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+//
+//		TextView button = (TextView) findViewById(R.id.ab_common_back);
+//		button.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//
+//				MyCollectActivity.this.finish();
+//			}
+//		});
+//
+//		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
+//		titleTextView.setText("我的收藏");
+//	}
 
 	private boolean isDownRefresh = false;
 

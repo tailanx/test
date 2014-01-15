@@ -1,21 +1,23 @@
 package com.yidejia.app.mall;
 
-//import java.io.IOException;
-//
-//import android.app.ProgressDialog;
-//import android.content.Context;
-//import android.content.DialogInterface;
+import java.io.IOException;
+
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-//import android.os.AsyncTask;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.SpanWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-//import android.view.inputmethod.InputMethodManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -23,6 +25,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -30,68 +33,73 @@ import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.IpAddress;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
-//import com.yidejia.app.mall.exception.TimeOutEx;
+import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.log.LoginTask;
-//import com.yidejia.app.mall.net.user.Login;
+import com.yidejia.app.mall.net.user.Login;
 import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DesUtils;
-//import com.yidejia.app.mall.widget.YLProgressDialog;
+import com.yidejia.app.mall.widget.WiperSwitch;
+import com.yidejia.app.mall.widget.WiperSwitch.OnChangedListener;
+import com.yidejia.app.mall.widget.YLProgressDialog;
 
-public class HomeLogActivity extends SherlockFragmentActivity implements
-		OnClickListener {
-//	private MyApplication myApplication;
+public class HomeLogActivity extends BaseActivity implements OnClickListener,
+		OnChangedListener {
+	private MyApplication myApplication;
 	private View view;
 	private LayoutInflater inflater;
 	private FrameLayout frameLayout;
 	private ImageView edit1;
-//	private InputMethodManager inputMethodManager;
+	private InputMethodManager inputMethodManager;
 	private RelativeLayout findPwd;// 找回密码
 	private RelativeLayout rapidRegist;// 快速注册
 	private Button mLogin;
 	private EditText stringName;
 	private EditText stringPassword;
 	private IpAddress ipAddress;
-	private CheckBox mBox;
+	private WiperSwitch mBox;
 	private SharedPreferences sp;
 	private Consts consts;
 	private LoginTask taskLoginAct;
 	private BottomChange bottomChange;
 	private RelativeLayout bottomLayout;
+	public static boolean isCheck;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		cartsDataManage = new CartsDataManage();
 		setContentView(R.layout.activity_main_fragment_layout);
-//		myApplication = (MyApplication) getApplication();
+		myApplication = (MyApplication) getApplication();
 		inflater = LayoutInflater.from(this);
 		view = inflater.inflate(R.layout.my_mall_login, null);
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
 		frameLayout.addView(view);
 		int current = getIntent().getIntExtra("current", -1);
 		int next = getIntent().getIntExtra("next", -1);
-		initNavView();
 		// 设置底部
 		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
 		bottomChange = new BottomChange(this, bottomLayout);
 		if (current != -1 || next != -1) {
 			bottomChange.initNavView(current, next);
 		}
+		initNavView();
 		// 添加头部
-		setActionBarConfig();
+		setActionBarConfigView();
 
-//		inputMethodManager = (InputMethodManager) HomeLogActivity.this
-//				.getSystemService(Context.INPUT_METHOD_SERVICE);
+		inputMethodManager = (InputMethodManager) HomeLogActivity.this
+				.getSystemService(Context.INPUT_METHOD_SERVICE);
 
 		ipAddress = new IpAddress();
 		consts = new Consts();
 		sp = PreferenceManager
 				.getDefaultSharedPreferences(HomeLogActivity.this);
 		// 设置默认选中
-		mBox = (CheckBox) view.findViewById(R.id.cb_my_login_checkbox);
+		mBox = (WiperSwitch) view.findViewById(R.id.cb_my_login_checkbox);
+		mBox.setOnChangedListener(this);
 		findPwd = (RelativeLayout) view
 				.findViewById(R.id.re_my_mall_login_retrieve_password);
+
 		// 设置监听
 		findPwd.setOnClickListener(this);
 		rapidRegist = (RelativeLayout) view
@@ -130,27 +138,33 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 				stringName.setCursorVisible(false);
 			}
 		});
-		String baseName = sp.getString("DESMI", null);
-		//
-		String basePwd = sp.getString("DESPWD", null);
-		String keyName = baseName + consts.getMiStr();
-		String basepasswrod = DesUtils.decode(keyName, basePwd);
-
-		if (baseName != null && basepasswrod != null) {
-			mBox.setChecked(true);
-			stringName.setText(baseName);
-			stringPassword.setText(basepasswrod);
-		}
+//		String baseName = sp.getString("DESMI", null);
+//		//
+//		String basePwd = sp.getString("DESPWD", null);
+//		Boolean isCheck = sp.getBoolean("CHECK", false);
+//		String keyName = baseName + consts.getMiStr();
+//		String basepasswrod = DesUtils.decode(keyName, basePwd);
+//		if (isCheck) {
+//			mBox.setChecked(true);
+//			stringName.setText(baseName);
+//			stringPassword.setText(basepasswrod);
+//			taskLoginAct = new LoginTask(this, baseName, basepasswrod,
+//					ipAddress.getIpAddress());
+//		}
 	}
 
 	private RelativeLayout downHomeLayout;
 	private RelativeLayout downGuangLayout;
 	private RelativeLayout downSearchLayout;
 	private RelativeLayout downShoppingLayout;
+	private RelativeLayout downMyLayout;
 	private CartsDataManage cartsDataManage;
 	private int number;
 	private Button cartImage;
 
+	/**
+	 * 底部事件
+	 */
 	/**
 	 * 初始化底部导航栏
 	 */
@@ -167,21 +181,8 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 		downHomeLayout = (RelativeLayout) findViewById(R.id.re_down_home_layout);
 		downSearchLayout = (RelativeLayout) findViewById(R.id.re_down_search_layout);
 		downShoppingLayout = (RelativeLayout) findViewById(R.id.re_down_shopping_layout);
-//		downMyLayout = (RelativeLayout) findViewById(R.id.re_down_my_layout);
+		downMyLayout = (RelativeLayout) findViewById(R.id.re_down_my_layout);
 
-		downGuangLayout.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(HomeLogActivity.this,
-						HomeGuangActivity.class);
-				intent.putExtra("current", 3);
-				intent.putExtra("next", 5);
-				startActivity(intent);
-				overridePendingTransition(R.anim.activity_in,
-						R.anim.activity_out);
-			}
-		});
 		downHomeLayout.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -227,13 +228,14 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 	/**
 	 * 头部
 	 */
-	private void setActionBarConfig() {
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setCustomView(R.layout.login_top);
-		edit1 = (ImageView) findViewById(R.id.config_btn);
+	private void setActionBarConfigView() {
+		setActionbarConfig();
+		setTitle(getResources().getString(R.string.login_title_add));
+		TextView leftView = (TextView) findViewById(R.id.ab_common_back);
+		leftView.setVisibility(View.GONE);
+		edit1 = (ImageView) findViewById(R.id.ab_common_iv_share);
+		edit1.setImageDrawable(getResources().getDrawable(R.drawable.setting));
+		edit1.setVisibility(View.VISIBLE);
 		edit1.setOnClickListener(edit);
 	}
 
@@ -285,14 +287,14 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 						Toast.LENGTH_LONG).show();
 				return;
 			}
-
-			taskLoginAct = new LoginTask(this,name,pwd,ip,mBox);
-			
+			taskLoginAct = new LoginTask(this, name, pwd,
+					ipAddress.getIpAddress());
+			break;
+		default:
 			break;
 		}
 	}
 
-	
 	// 双击返回键退出程序
 	private long exitTime = 0;
 
@@ -316,9 +318,11 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 	}
 
 	@Override
-	protected void onPause() {	
+	protected void onPause() {
 		super.onPause();
 		StatService.onPause(this);
+		
+		
 	}
 
 	@Override
@@ -326,5 +330,30 @@ public class HomeLogActivity extends SherlockFragmentActivity implements
 		super.onResume();
 		StatService.onResume(this);
 	}
+
+	@Override
+	public void OnChanged(WiperSwitch wiperSwitch, boolean checkState) {
+		// TODO Auto-generated method stub
+		Log.e("info", checkState + "state");
+		isCheck = checkState;
+		// if (checkState) {
+		// Log.e("info", checkState + "state");
+		// sp.edit().putString("DESMI", name).commit();
+		// sp.edit().putBoolean("CHECK", checkState);
+		// String keyName = name + consts.getMiStr();
+		//
+		// try {
+		// String demi = DesUtils.encode(keyName, pwd);
+		// sp.edit().putString("DESPWD", demi).commit();
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+		//
+		// } else {
+		// sp.edit().remove("DESMI").commit();
+		// sp.edit().remove("CHECK").commit();
+		// sp.edit().remove("DESPWD").commit();
+	}
+	// }
 
 }

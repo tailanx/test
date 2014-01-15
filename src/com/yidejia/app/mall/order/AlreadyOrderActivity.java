@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
+import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.CheckActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ReturnActivity;
@@ -27,108 +28,77 @@ import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
 import com.yidejia.app.mall.adapter.AlreadyOrderFragmentAdapter;
 import com.yidejia.app.mall.fragment.AllOrderFragment;
 
-public class AlreadyOrderActivity extends SherlockFragmentActivity {
-	    private static final String TAG = "MainActivity";
-	    private ViewPager mPager;
-	    private ArrayList<Fragment> fragmentsList;
-	 
-	    private TextView mWeek,mMonth,mYear;
-	    private ImageView ivBottomLine;
-	    private int currIndex = 0;
-	    private int bottomLineWidth;
-	    private int offset = 0;
-	    private int position_one;
-	    private int position_two;
-	    private int position_three;
-	    private Resources resources;
-	    public void doClick(View v){
-	    	Intent intent = new Intent();
-			switch (v.getId()){
-			case R.id.already_oreder_item_main_exchange://�˻���
-				intent.setClass(this, ReturnActivity.class);
-				break;
-			case R.id.already_oreder_item_main_search://�鿴����
-				intent.setClass(this, CheckActivity.class);
-				break;
+public class AlreadyOrderActivity extends BaseActivity {
+	private static final String TAG = "MainActivity";
+	private ViewPager mPager;
+	private ArrayList<Fragment> fragmentsList;
 
-			}
-			startActivity(intent);
+	private TextView mWeek, mMonth, mYear;
+	private ImageView ivBottomLine;
+	private int currIndex = 0;
+	private int bottomLineWidth;
+	private int offset = 0;
+	private int position_one;
+	private int position_two;
+	private int position_three;
+	private Resources resources;
+
+	public void doClick(View v) {
+		Intent intent = new Intent();
+		switch (v.getId()) {
+		case R.id.already_oreder_item_main_exchange:// �˻���
+			intent.setClass(this, ReturnActivity.class);
+			break;
+		case R.id.already_oreder_item_main_search:// �鿴����
+			intent.setClass(this, CheckActivity.class);
+			break;
+
 		}
+		startActivity(intent);
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setActionBar();
-//		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.already_oreder);
-//		resources = getResources();
-//		InitWidth();
-//		InitTextView();
-//		InitViewPager();
 		setContentView(R.layout.all_order);
+		setActionbarConfig();
+		setTitle(getResources().getString(R.string.complete_order));
 		OrderViewCtrl viewCtrl = new OrderViewCtrl(this);
 		viewCtrl.viewCtrl(3);
-		
-	}
-	private void setActionBar(){
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-//		getSupportActionBar().setLogo(R.drawable.back);
-		getSupportActionBar().setIcon(R.drawable.back);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_common);
-//		startActionMode(new AnActionModeOfEpicProportions(ComposeActivity.this));
-		TextView button = (TextView) findViewById(R.id.ab_common_back);//����
-//		button.setText("����");
-//		button.setTextSize(16);
-//		button.setImageResource(R.drawable.filter);
-		button.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-//				Toast.makeText(ComposeActivity.this, "button", Toast.LENGTH_SHORT).show();
-				AlreadyOrderActivity.this.finish();
-			}
-		});
-		
-		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
-		titleTextView.setText(getResources().getString(R.string.deliver_order));
+
 	}
 
+	private void InitTextView() {
+		mWeek = (TextView) findViewById(R.id.already_oreder_week);
+		mMonth = (TextView) findViewById(R.id.already_oreder_moonth);
+		mYear = (TextView) findViewById(R.id.already_oreder_year);
 
-	private void InitTextView(){
-		mWeek = (TextView)findViewById(R.id.already_oreder_week);
-		mMonth = (TextView)findViewById(R.id.already_oreder_moonth);
-		mYear = (TextView)findViewById(R.id.already_oreder_year);
-		
 		mWeek.setOnClickListener(new MyOnClickListener(0));
-        mMonth.setOnClickListener(new MyOnClickListener(1));
-        mYear.setOnClickListener(new MyOnClickListener(2));
+		mMonth.setOnClickListener(new MyOnClickListener(1));
+		mYear.setOnClickListener(new MyOnClickListener(2));
 	}
-	private void InitViewPager(){
-		 mPager = (ViewPager) findViewById(R.id.vPager);
-		 fragmentsList = new ArrayList<Fragment>();
-		 LayoutInflater mInflater = getLayoutInflater();
-	  
-	     
-		 Fragment weekfragment = AllOrderFragment.newInstance(3, 0);
-	     Fragment monthFragment = AllOrderFragment.newInstance(3, 1);
-	     Fragment yearFragment = AllOrderFragment.newInstance(3, 2);
-	     
-	     fragmentsList.add(yearFragment);
-	     fragmentsList.add(monthFragment);
-	     fragmentsList.add(weekfragment);
-	     
-	     mPager.setAdapter(new AllOrderFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
-	     mPager.setAdapter(new AlreadyOrderFragmentAdapter(this.getSupportFragmentManager(), fragmentsList));
-	     mPager.setCurrentItem(0);
-	     mPager.setOffscreenPageLimit(2);
-	     mPager.setOnPageChangeListener(new MyOnPageChangeListener());
-			
-	     
+
+	private void InitViewPager() {
+		mPager = (ViewPager) findViewById(R.id.vPager);
+		fragmentsList = new ArrayList<Fragment>();
+		LayoutInflater mInflater = getLayoutInflater();
+
+		Fragment weekfragment = AllOrderFragment.newInstance(3, 0);
+		Fragment monthFragment = AllOrderFragment.newInstance(3, 1);
+		Fragment yearFragment = AllOrderFragment.newInstance(3, 2);
+
+		fragmentsList.add(yearFragment);
+		fragmentsList.add(monthFragment);
+		fragmentsList.add(weekfragment);
+
+		mPager.setAdapter(new AllOrderFragmentAdapter(this
+				.getSupportFragmentManager(), fragmentsList));
+		mPager.setAdapter(new AlreadyOrderFragmentAdapter(this
+				.getSupportFragmentManager(), fragmentsList));
+		mPager.setCurrentItem(0);
+		mPager.setOffscreenPageLimit(2);
+		mPager.setOnPageChangeListener(new MyOnPageChangeListener());
+
 	}
 
 	private void InitWidth() {

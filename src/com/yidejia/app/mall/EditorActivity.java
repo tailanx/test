@@ -22,7 +22,7 @@ import com.yidejia.app.mall.cache.CleanImageCache;
 import com.yidejia.app.mall.ctrl.Check4Update;
 import com.yidejia.app.mall.datamanage.DataCleanManager;
 
-public class EditorActivity extends SherlockActivity {
+public class EditorActivity extends BaseActivity {
 	private RelativeLayout help;
 	private RelativeLayout clear;
 	private RelativeLayout about;
@@ -75,7 +75,7 @@ public class EditorActivity extends SherlockActivity {
 
 							public void onClick(DialogInterface arg0, int arg1) {
 								myApplication.setIsLogin(false);
-								Intent  intent = new Intent(EditorActivity.this,HomeMallActivity.class);
+								Intent  intent = new Intent(EditorActivity.this,HomeLogActivity.class);
 								EditorActivity.this.startActivity(intent);
 								EditorActivity.this.finish();
 							}
@@ -96,7 +96,9 @@ public class EditorActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		myApplication = (MyApplication) getApplication();
-		setActionbar();
+//		setActionbar();
+		setActionbarConfig();
+		setTitle(getResources().getString(R.string.order_set));
 		setContentView(R.layout.editor);
 		phoneNumber =  (TextView) findViewById(R.id.main2_main2_linearlayout1_imageview22);
 		editor_cache_size = (TextView) findViewById(R.id.editor_cache_size);
@@ -196,28 +198,28 @@ public class EditorActivity extends SherlockActivity {
 
 	}
 
-	private void setActionbar() {
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setIcon(R.drawable.back);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_common);
-		TextView button = (TextView) findViewById(R.id.ab_common_back);
-
-		button.setOnClickListener(new android.view.View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				EditorActivity.this.finish();
-			}
-		});
-
-		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
-		titleTextView.setText("设置");
-
-	}
+//	private void setActionbar() {
+//		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//		getSupportActionBar().setDisplayShowHomeEnabled(false);
+//		getSupportActionBar().setDisplayShowTitleEnabled(false);
+//		getSupportActionBar().setDisplayUseLogoEnabled(false);
+//		getSupportActionBar().setIcon(R.drawable.back);
+//		getSupportActionBar().setDisplayShowCustomEnabled(true);
+//		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+//		TextView button = (TextView) findViewById(R.id.ab_common_back);
+//
+//		button.setOnClickListener(new android.view.View.OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				EditorActivity.this.finish();
+//			}
+//		});
+//
+//		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
+//		titleTextView.setText("设置");
+//
+//	}
 
 	@Override
 	protected void onPause() {

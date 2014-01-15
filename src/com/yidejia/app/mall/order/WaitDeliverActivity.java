@@ -19,11 +19,12 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
+import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
 import com.yidejia.app.mall.fragment.AllOrderFragment;
 
-public class WaitDeliverActivity extends SherlockFragmentActivity {
+public class WaitDeliverActivity extends BaseActivity {
 	    private static final String TAG = "MainActivity";
 	    private ViewPager mPager;
 	    private ArrayList<Fragment> fragmentsList;
@@ -56,39 +57,13 @@ public class WaitDeliverActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setActionBar();
-//		setContentView(R.layout.wait_deliver_order);
-//		resources = getResources();
-//		InitWidth();
-//		InitTextView();
-//		InitViewPager();
+		setActionbarConfig();
+		setTitle(getResources().getString(R.string.wait_deliver));
 		setContentView(R.layout.all_order);
 		OrderViewCtrl viewCtrl = new OrderViewCtrl(this);
 		viewCtrl.viewCtrl(2);
 	}
 
-	private void setActionBar(){
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setIcon(R.drawable.back);
-		getSupportActionBar().setCustomView(R.layout.actionbar_common);
-		TextView back = (TextView) findViewById(R.id.ab_common_back);
-		TextView titleTextView =  (TextView) findViewById(R.id.ab_common_title);
-		titleTextView.setText(getResources().getString(R.string.wait_deliver));
-		back.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				WaitDeliverActivity.this.finish();
-			}
-		});
-	}
 	private void InitTextView(){
 		mWeek = (TextView)findViewById(R.id.wait_deliver_week);
 		mMonth = (TextView)findViewById(R.id.wait_deliver_moonth);

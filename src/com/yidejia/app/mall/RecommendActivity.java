@@ -19,13 +19,15 @@ import com.yidejia.app.mall.R;
  *
  */
 
-public class RecommendActivity extends SherlockActivity {
+public class RecommendActivity extends BaseActivity {
 	
 	private Button xiazai ;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setActionbar();
+//		setActionbar();
+		setActionbarConfig();
+		setTitle(getResources().getString(R.string.recomend));
 		setContentView(R.layout.recommend_item);
 		
 		xiazai = (Button) findViewById(R.id.xiazai);
@@ -43,26 +45,26 @@ public class RecommendActivity extends SherlockActivity {
 
 	}
 	
-	private void setActionbar(){
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setIcon(R.drawable.back);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_common);
-		TextView button = (TextView) findViewById(R.id.ab_common_back);
-		button.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				RecommendActivity.this.finish();
-			}
-		});
-		
-		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
-		titleTextView.setText(getResources().getString(R.string.recomend));
-	}
+//	private void setActionbar(){
+//		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//		getSupportActionBar().setDisplayShowHomeEnabled(false);
+//		getSupportActionBar().setDisplayShowTitleEnabled(false);
+//		getSupportActionBar().setDisplayUseLogoEnabled(false);
+//		getSupportActionBar().setIcon(R.drawable.back);
+//		getSupportActionBar().setDisplayShowCustomEnabled(true);
+//		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+//		TextView button = (TextView) findViewById(R.id.ab_common_back);
+//		button.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				RecommendActivity.this.finish();
+//			}
+//		});
+//		
+//		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
+//		titleTextView.setText(getResources().getString(R.string.recomend));
+//	}
 	
 	@Override
 	protected void onPause() {

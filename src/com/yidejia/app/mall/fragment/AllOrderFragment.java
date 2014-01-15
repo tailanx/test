@@ -106,6 +106,7 @@ public class AllOrderFragment extends SherlockFragment {
 							R.string.no_network), Toast.LENGTH_LONG).show();
 			return;
 		}
+		fromIndex = 0;
 		getOrderData();
 	}
 	
