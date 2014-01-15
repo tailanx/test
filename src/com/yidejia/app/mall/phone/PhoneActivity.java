@@ -23,7 +23,7 @@ public class PhoneActivity extends SherlockFragmentActivity implements
 	private EditText etPhoneNumber;
 	private ImageView ivPhoneContact;
 	private Button bt30, bt50, bt100, btCommito;
-	private TextView tvRealPrice, tvAddress;
+	private TextView tvRealPrice;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -46,7 +46,7 @@ public class PhoneActivity extends SherlockFragmentActivity implements
 		bt100 = (Button) findViewById(R.id.bt_price_100);
 		btCommito = (Button) findViewById(R.id.iv_commit_phone_contace);
 		tvRealPrice = (TextView) findViewById(R.id.tv_price_contact);
-		tvAddress = (TextView) findViewById(R.id.tv_address_contact);
+		
 	}
 
 	@Override
