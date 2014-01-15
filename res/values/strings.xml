@@ -283,5 +283,14 @@
     <string name="order_state">订单状态：</string>
     <string name="order_pay">付款</string>
     <string name="order_set">设置</string>
+    <string name="yirihui_order">规则</string>
+    <string name="yirihui_now">正在进行</string>
+    <string name="yirihui_later">即将开始</string>
+    <string name="yirihui_complete">已经结束</string>
+    <string name="yirihui_delay">距离结束:  </string>
+    <string name="yirihui_hour_add">时</string>
+    <string name="yirihui_min_add">分</string>
+    <string name="yirihui_second_add">秒</string>
+    <string name="yirihui_must_pay">马上抢购</string>
 
 </resources>

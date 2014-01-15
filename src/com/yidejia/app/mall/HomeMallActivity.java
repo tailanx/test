@@ -36,8 +36,6 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 	private CartsDataManage cartsDataManage;
 	private int number;
 	private Button cartImage;// 购物车上的按钮
-	// private BottomChange bottomChange;
-	// private RelativeLayout bottomLayout;
 	private MyApplication myApplication;
 	private MallAction mallAction;
 
