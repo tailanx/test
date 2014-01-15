@@ -21,7 +21,7 @@
             android:background="@drawable/selecter_bg_sort_sell"
             android:gravity="center"
             android:text="@string/order_time_week"
-            android:textColor="@color/search_result_top" />
+            android:textColor="@color/color_sort_text_color" />
 
         <TextView
             android:id="@+id/all_order_moonth"
@@ -32,7 +32,7 @@
             android:background="@drawable/selecter_bg_sort_price"
             android:gravity="center"
             android:text="@string/order_time_month"
-            android:textColor="@color/dark_black" />
+            android:textColor="@color/color_sort_text_color" />
 
         <TextView
             android:id="@+id/all_order_year"
@@ -42,7 +42,7 @@
             android:background="@drawable/selecter_bg_sort_popular"
             android:gravity="center"
             android:text="@string/order_time_year"
-            android:textColor="@color/dark_black" />
+            android:textColor="@color/color_sort_text_color" />
     </LinearLayout>
 
     <RelativeLayout

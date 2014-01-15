@@ -1,4 +1,4 @@
-package com.yidejia.app.mall.view;
+package com.yidejia.app.mall.order;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,6 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ReturnActivity;
 import com.yidejia.app.mall.adapter.AllOrderFragmentAdapter;
 import com.yidejia.app.mall.adapter.AlreadyOrderFragmentAdapter;
-import com.yidejia.app.mall.ctrl.OrderViewCtrl;
 import com.yidejia.app.mall.fragment.AllOrderFragment;
 
 public class AlreadyOrderActivity extends SherlockFragmentActivity {

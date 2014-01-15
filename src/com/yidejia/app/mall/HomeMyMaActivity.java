@@ -25,13 +25,13 @@ import com.yidejia.app.mall.address.AddressActivity;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.net.user.GetCount;
+import com.yidejia.app.mall.order.AllOrderActivity;
+import com.yidejia.app.mall.order.AlreadyComActivity;
+import com.yidejia.app.mall.order.AlreadyOrderActivity;
+import com.yidejia.app.mall.order.WaitDeliverActivity;
+import com.yidejia.app.mall.order.WaitPayActivity;
 import com.yidejia.app.mall.util.BottomChange;
-import com.yidejia.app.mall.view.AllOrderActivity;
-import com.yidejia.app.mall.view.AlreadyComActivity;
-import com.yidejia.app.mall.view.AlreadyOrderActivity;
 import com.yidejia.app.mall.view.IntegeralActivity;
-import com.yidejia.app.mall.view.WaitDeliverActivity;
-import com.yidejia.app.mall.view.WaitPayActivity;
 
 public class HomeMyMaActivity extends SherlockFragmentActivity implements
 		OnClickListener {

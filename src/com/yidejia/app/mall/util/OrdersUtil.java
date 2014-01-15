@@ -114,8 +114,8 @@ public class OrdersUtil {
 			
 			final View view = inflater.inflate(R.layout.all_order_item_item, null);
 			// Log.i("info", view+"");
-			final Button mCancelBtn = (Button) view.findViewById(R.id.all_order_item_main_cancal);
-			final Button mOkBtn = (Button) view
+			final TextView mCancelBtn = (TextView) view.findViewById(R.id.all_order_item_main_cancal);
+			final TextView mOkBtn = (TextView) view
 					.findViewById(R.id.all_order_item_main_pay);
 			final LinearLayout layout1= (LinearLayout) view.findViewById(R.id.all_order_item_main_linerar);
 			LinearLayout mLayout = (LinearLayout) view
@@ -508,7 +508,7 @@ public class OrdersUtil {
 		private int mOrderType;
 		private LinearLayout layout1;
 		private TextView titleTextView;
-		private Button mOkBtn;
+		private TextView mOkBtn;
 		private String orderPrice;
 		private ArrayList<Cart> carts;
 		
@@ -529,7 +529,7 @@ public class OrdersUtil {
 		 */
 		public CancelClickListener(int mOrderType, String orderCode,
 				String orderPrice, ArrayList<Cart> carts,
-				LinearLayout layout1, TextView titleTextView, Button okButton) {
+				LinearLayout layout1, TextView titleTextView, TextView okButton) {
 			this.orderCode = orderCode;
 			this.mOrderType = mOrderType;
 			this.layout1 = layout1;
@@ -693,7 +693,7 @@ public class OrdersUtil {
 		private String orderPrice;
 		private ArrayList<Cart> carts;
 		private TextView titleTextView;
-		private Button mOkBtn;
+		private TextView mOkBtn;
 		private View mCancelBtn;
 		private LinearLayout layout1;
 		
@@ -713,7 +713,7 @@ public class OrdersUtil {
 		 * @param mCancelBtn 取消按钮
 		 */
 		public TaskCancelOrder(String customer_id, String code, String token, String orderPrice, ArrayList<Cart> carts,
-				TextView titleTextView, Button mOkBtn, View mCancelBtn, LinearLayout layout1){
+				TextView titleTextView, TextView mOkBtn, View mCancelBtn, LinearLayout layout1){
 			this.customer_id = customer_id;
 			this.code = code;
 			this.token = token;
@@ -803,7 +803,7 @@ public class OrdersUtil {
 	 */
 	private void setAfterCancelView(String orderCode,
 //			String orderPrice, ArrayList<Cart> carts,
-			TextView titleTextView, Button mOkBtn, View mCancelBtn,
+			TextView titleTextView, TextView mOkBtn, View mCancelBtn,
 			LinearLayout layout1){
 		if(mOkBtn == null) return;
 		mOkBtn.setOnClickListener(new OkClickListener(5, orderCode, myApplication.getUserId(), myApplication.getToken(), layout1));

@@ -130,23 +130,23 @@
             android:name="com.yidejia.app.mall.ExchangeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yidejia.app.mall.view.AllOrderActivity"
+            android:name="com.yidejia.app.mall.order.AllOrderActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yidejia.app.mall.view.WaitPayActivity"
+            android:name="com.yidejia.app.mall.order.WaitPayActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yidejia.app.mall.view.WaitDeliverActivity"
+            android:name="com.yidejia.app.mall.order.WaitDeliverActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yidejia.app.mall.view.AlreadyOrderActivity"
+            android:name="com.yidejia.app.mall.order.AlreadyOrderActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yidejia.app.mall.view.AlreadyComActivity"
+            android:name="com.yidejia.app.mall.order.AlreadyComActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity

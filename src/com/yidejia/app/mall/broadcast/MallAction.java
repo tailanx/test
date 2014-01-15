@@ -26,12 +26,12 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.MyCollectActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.net.ConnectionDetector;
+import com.yidejia.app.mall.order.AllOrderActivity;
 import com.yidejia.app.mall.phone.PhoneActivity;
 import com.yidejia.app.mall.search.SearchActivity;
 import com.yidejia.app.mall.skintest.SkinHomeActivity;
 import com.yidejia.app.mall.task.MallTask;
 import com.yidejia.app.mall.task.MallTask.Task;
-import com.yidejia.app.mall.view.AllOrderActivity;
 import com.yidejia.app.mall.view.IntegeralActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 

@@ -25,6 +25,8 @@ import com.unionpay.uppay.PayActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.R.layout;
 import com.yidejia.app.mall.R.string;
+import com.yidejia.app.mall.order.AllOrderActivity;
+import com.yidejia.app.mall.order.WaitPayActivity;
 import com.yidejia.app.mall.util.Http;
 import com.yidejia.app.mall.util.MessageUtil;
 
