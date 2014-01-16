@@ -91,7 +91,15 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/tv_price_danjia"
             android:layout_marginLeft="4dp"
+            android:textColor="@color/theme"
             android:layout_toRightOf="@id/tv_price_danjia" />
+           <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_price_danjia"
+            android:layout_marginLeft="4dp"
+            android:text="@string/price_yuan"
+            android:layout_toRightOf="@id/tv_price_contact" />
     </RelativeLayout>
 
     <Button

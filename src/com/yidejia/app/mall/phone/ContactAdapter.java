@@ -61,7 +61,7 @@ public class ContactAdapter extends BaseAdapter {
 	@Override
 	public Object getItem(int arg0) {
 		// TODO Auto-generated method stub
-		return mContactName.get(arg0);
+		return mContactNumber.get(arg0);
 	}
 
 	@Override

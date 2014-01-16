@@ -173,6 +173,7 @@
     <string name="feedback">意见反馈</string>
     <string name="price_30">30元</string>
     <string name="price_50">50元</string>
+    <string name="price_yuan">元</string>
     <string name="price_100">100元</string>
     <string name="price_contact">单价:</string>
     <string name="address_contact">归属地:</string>
