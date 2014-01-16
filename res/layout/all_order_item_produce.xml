@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/all_relative"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/new_order_statusbg_midle" >
+    android:background="@color/white" >
 
     <ImageView
         android:id="@+id/all_order_item_image"
@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
         android:layout_toRightOf="@id/all_order_item_image"
         android:ellipsize="end"
         android:lines="2"
@@ -31,8 +32,8 @@
         android:layout_below="@id/all_order_item_text"
         android:layout_marginLeft="8dp"
         android:layout_toRightOf="@id/all_order_item_image"
-        android:text="￥"
-        android:textColor="#ed217c"
+        android:text="@string/unit"
+        android:textColor="@color/theme"
         android:textSize="15sp" />
 
     <TextView
@@ -41,27 +42,35 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/all_order_item_text"
         android:layout_toRightOf="@id/all_order_item_sum"
-        android:textColor="#ed217c"
+        android:textColor="@color/theme"
         android:textSize="15sp" />
 
     <TextView
         android:id="@+id/all_order_item_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/all_order_item_text"
-        android:layout_marginLeft="12sp"
-        android:layout_toRightOf="@id/all_order_item_sum_detail"
-        android:text="数量："
-        android:textColor="#ed217c"
+        android:layout_below="@id/all_order_item_sum"
+        android:layout_toRightOf="@id/all_order_item_image"
+        android:layout_marginLeft="8dp"
+        android:text="@string/amount"
+        android:textColor="@color/text_color"
         android:textSize="15sp" />
 
     <TextView
         android:id="@+id/all_order_item_count_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/all_order_item_text"
+        android:layout_below="@id/all_order_item_sum"
         android:layout_toRightOf="@id/all_order_item_count"
-        android:textColor="#ed217c"
+        android:textColor="@color/text_color"
         android:textSize="15sp" />
+    
+    <ImageView android:layout_marginLeft="128dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@drawable/filter_line"
+        android:background="@color/white"
+        />
 
 </RelativeLayout>

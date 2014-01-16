@@ -185,9 +185,6 @@ public class AllOrderFragment extends SherlockFragment {
 	
 	private void showBar() {
 		if (isFirstOpen) {
-			// bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			// bar.setMessage(getSherlockActivity().getResources().getString(R.string.loading));
-			// bar.show();
 			bar = (ProgressDialog) new YLProgressDialog(
 					getSherlockActivity()).createLoadingDialog(
 					getSherlockActivity(), null);
@@ -239,9 +236,9 @@ public class AllOrderFragment extends SherlockFragment {
 	};
 
 	private void dealOrder() {
-		if (fromIndex == 0)
-			relativeLayout.removeAllViews();// 清空数据
 		if (orders != null && !orders.isEmpty()) {
+			if (fromIndex == 0)
+				relativeLayout.removeAllViews();// 清空数据
 			Log.e(TAG, orderType + "type and length" + orders.size());
 			allOrderUtil = new OrdersUtil(getSherlockActivity(),
 					relativeLayout);

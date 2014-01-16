@@ -5,10 +5,10 @@
         android:radius="@dimen/margin_left_add"/>
     
 	<padding 
-	    android:left="@dimen/margin_left_add_add"
-	    android:top="@dimen/margin_left_add_add"
-	    android:right="@dimen/margin_left_add_add"
-	    android:bottom="@dimen/margin_left_add_add"
+	    android:left="@dimen/padding_left"
+	    android:top="@dimen/padding_left"
+	    android:right="@dimen/padding_left"
+	    android:bottom="@dimen/padding_left"
 	    />
 	<stroke 
 	    android:width="@dimen/above_offset"

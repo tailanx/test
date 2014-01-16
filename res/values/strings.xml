@@ -75,6 +75,7 @@
     <string name="success_cancel_order1">检查订单失败</string>
     <string name="produce_collect">收藏</string>
     <string name="my_collect">我的收藏</string>
+    <string name="my_aidou">我的爱豆</string>
     <string name="alreay_collect">该商品已经在您的收藏夹里了</string>
     <string name="cart_contorl">购物车操作</string>
     <string name="login_success">登陆成功</string>
@@ -261,7 +262,7 @@
     <string name="comfirm_order">确认订单</string>
     <string name="goods_info">商品展示</string>
     <string name="cart_sum">总计:</string>
-    <string name="cart_count">数量  : </string>
+    <string name="cart_count">数量 :</string>
     <string name="cart_guang">去逛一下</string>
     <string name="cart_no_produce">购物车是空的</string>
     <string name="login_find_pwd">找回密码</string>

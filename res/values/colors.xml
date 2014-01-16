@@ -35,6 +35,6 @@
     <color name="order">#695a3d</color>
     <color name="order_cor">#68573b</color>
     <color name="text_color">#505050</color>
-	
+	<color name="text_press_color">#ffb4c8</color>
 	
 </resources>

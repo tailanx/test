@@ -135,7 +135,6 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		cartsDataManage = new CartsDataManage();
 		myApplication = (MyApplication) getApplication();
@@ -156,20 +155,7 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 			bottomChange.initNavView(current, next);
 		}
 
-		String name = myApplication.getNick();
-		if (name == null || "".equals(name)) {
-			nick.setText(myApplication.getUserId());
-			Log.i("info", myApplication.getUserId() + "   name");
-		} else {
-			nick.setText(name);
-		}
-
-		String vip1 = myApplication.getVip();
-		if (vip1 == null || "".equals(vip1)) {
-			vip.setText("VIP0");
-		} else {
-			vip.setText(vip1);
-		}
+		
 		imageView.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -355,6 +341,21 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 		closeTask();
 		getNumTask = new GetNumTask();
 		getNumTask.execute();
+		
+		String name = myApplication.getNick();
+		if (name == null || "".equals(name)) {
+			nick.setText(myApplication.getUserId());
+			Log.i("info", myApplication.getUserId() + "   name");
+		} else {
+			nick.setText(name);
+		}
+
+		String vip1 = myApplication.getVip();
+		if (vip1 == null || "".equals(vip1)) {
+			vip.setText("VIP0");
+		} else {
+			vip.setText(vip1);
+		}
 	}
 
 	private GetNumTask getNumTask;
