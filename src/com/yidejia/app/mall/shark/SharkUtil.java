@@ -80,7 +80,7 @@ public class SharkUtil {
 //				handler = new Handler();
 				iShark.onStart();
 				vibrator.vibrate(new long[]{10, 200, 500, 200}, -1);
-				handler.postDelayed(runnable, 3000);
+//				handler.postDelayed(runnable, 3000);
 //				handler.postDelayed(runnable, 800);
 			}
 		}

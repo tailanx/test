@@ -8,14 +8,17 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
+import com.yidejia.app.mall.qiandao.QiandaoActivity;
+import com.yidejia.app.mall.shark.TestSharkActivity;
 import com.yidejia.app.mall.util.BottomChange;
 
-public class HomeGuangActivity extends BaseActivity {
+public class HomeGuangActivity extends BaseActivity implements OnClickListener {
 	private BottomChange bottomChange;
 	private RelativeLayout bottomLayout;
 	private int number;// 商品的个数
@@ -23,11 +26,13 @@ public class HomeGuangActivity extends BaseActivity {
 	private LayoutInflater inflater;
 	private FrameLayout frameLayout;
 	private View view;
-	private Button cartImage;//购物车
+	private Button cartImage;// 购物车
 	private RelativeLayout downHomeLayout;
 	private RelativeLayout downSearchLayout;
 	private RelativeLayout downShoppingLayout;
 	private RelativeLayout downMyLayout;
+	private LinearLayout qiandao;
+	private LinearLayout yaoyiyao;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +73,6 @@ public class HomeGuangActivity extends BaseActivity {
 		downSearchLayout = (RelativeLayout) findViewById(R.id.re_down_search_layout);
 		downShoppingLayout = (RelativeLayout) findViewById(R.id.re_down_shopping_layout);
 		downMyLayout = (RelativeLayout) findViewById(R.id.re_down_my_layout);
-
 
 		downHomeLayout.setOnClickListener(new OnClickListener() {
 
@@ -111,7 +115,7 @@ public class HomeGuangActivity extends BaseActivity {
 			}
 		});
 		downMyLayout.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -126,11 +130,32 @@ public class HomeGuangActivity extends BaseActivity {
 			}
 		});
 	}
-	private void setActionbar(){
+
+	private void setActionbar() {
 		setActionbarConfig();
 		TextView back = (TextView) findViewById(R.id.ab_common_back);
 		back.setVisibility(View.GONE);
 		TextView title = (TextView) findViewById(R.id.ab_common_title);
 		title.setText(getResources().getString(R.string.guang));
+		qiandao = (LinearLayout) findViewById(R.id.iv_guang_qiandao);
+		yaoyiyao = (LinearLayout) findViewById(R.id.iv_guang_yaoyiyao);
+		qiandao.setOnClickListener(this);
+		yaoyiyao.setOnClickListener(this);
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		Intent intent = new Intent();
+		switch (v.getId()) {
+		case R.id.iv_guang_qiandao:
+			intent.setClass(this, QiandaoActivity.class);
+			break;
+
+		case R.id.iv_guang_yaoyiyao:
+			intent.setClass(this, TestSharkActivity.class);
+			break;
+		}
+		startActivity(intent);
 	}
 }

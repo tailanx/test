@@ -296,5 +296,13 @@
     <string name="yirihui_must_pay">马上抢购</string>
     <string name="produce_price_yuan">:</string>
     <string name="contact_must">立即充值</string>
+    <string name="qiandao_leiji">已累计签到</string>
+    <string name="qiandao_order">签到规则:</string>
+    <string name="qiandao_order_1">1.每日签到，马上获得5颗爱豆；</string>
+    <string name="qiandao_order_2">2.连续签到7天，在第7天当天将一次性送您50颗爱豆作为坚持的奖励；</string>
+    <string name="qiandao_order_3">3.签到7天为一个周期，前6天签到每天均可获得5颗爱豆，第7天50颗，7天签到满后，则从第一天开始结算：</string>
+    <string name="yaoyao_guize">规则</string>
+    <string name="yaoyao_text">囧 ！神马都木有</string>
+    <string name="yaoyao_next">再摇一次</string>
 
 </resources>
