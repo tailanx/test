@@ -34,7 +34,7 @@ public class EditorActivity extends BaseActivity {
 	private AlertDialog dialogHelp;
 	private AlertDialog dialogClear;
 	private AlertDialog exit;
-	
+
 	private MyApplication myApplication;
 
 	private void setupShow() {
@@ -52,8 +52,10 @@ public class EditorActivity extends BaseActivity {
 
 							@Override
 							public void onClick(DialogInterface arg0, int arg1) {
-								DataCleanManager.cleanApplicationData(EditorActivity.this);
-								WebView webView = new WebView(EditorActivity.this);
+								DataCleanManager
+										.cleanApplicationData(EditorActivity.this);
+								WebView webView = new WebView(
+										EditorActivity.this);
 								webView.clearCache(true);
 								webView.clearHistory();
 								webView.clearFormData();
@@ -65,9 +67,11 @@ public class EditorActivity extends BaseActivity {
 						}).setNegativeButton("取消", null).create();
 		dialogHelp = helpbuilder.setTitle("伊的家服务条款")
 				.setIcon(android.R.drawable.menu_frame).setView(mLayout1)
-				.setPositiveButton("确定", null).setNegativeButton("取消", null).create();
-		
-		exit = exitbuilder.setTitle("伊的家")
+				.setPositiveButton("确定", null).setNegativeButton("取消", null)
+				.create();
+
+		exit = exitbuilder
+				.setTitle("伊的家")
 				.setIcon(android.R.drawable.divider_horizontal_dim_dark)
 				.setMessage(getResources().getString(R.string.retrun_back))
 				.setPositiveButton("确定",
@@ -75,7 +79,8 @@ public class EditorActivity extends BaseActivity {
 
 							public void onClick(DialogInterface arg0, int arg1) {
 								myApplication.setIsLogin(false);
-								Intent  intent = new Intent(EditorActivity.this,HomeLogActivity.class);
+								Intent intent = new Intent(EditorActivity.this,
+										HomeLogActivity.class);
 								EditorActivity.this.startActivity(intent);
 								EditorActivity.this.finish();
 							}
@@ -88,25 +93,24 @@ public class EditorActivity extends BaseActivity {
 	int height;
 	private TextView phoneNumber;
 	private TextView versionNameTextView;
-	
+
 	private Check4Update check4Update;
 	private String currVersion = "";
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		myApplication = (MyApplication) getApplication();
-//		setActionbar();
 		setActionbarConfig();
 		setTitle(getResources().getString(R.string.order_set));
 		setContentView(R.layout.editor);
-		phoneNumber =  (TextView) findViewById(R.id.main2_main2_linearlayout1_imageview22);
+		phoneNumber = (TextView) findViewById(R.id.main2_main2_linearlayout1_imageview22);
 		editor_cache_size = (TextView) findViewById(R.id.editor_cache_size);
 		editor_cache_size.setText(DataCleanManager.getTotalSize(this));
-		
+
 		help = (RelativeLayout) findViewById(R.id.editor_linearLayout1);
 		clear = (RelativeLayout) findViewById(R.id.editor_linearLayout3);
-		
+
 		about = (RelativeLayout) findViewById(R.id.editor_linearLayout4);
 		phone = (RelativeLayout) findViewById(R.id.editor_linearLayout5);
 		recommended = (RelativeLayout) findViewById(R.id.editor_linearLayout6);
@@ -114,24 +118,24 @@ public class EditorActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				
+
 				Intent intent = new Intent(EditorActivity.this,
 						RecommendActivity.class);
 				startActivity(intent);
 			}
 
 		});
-		
+
 		versionNameTextView = (TextView) findViewById(R.id.editor_current_version);
-		
+
 		check4Update = new Check4Update(EditorActivity.this);
 		currVersion = check4Update.getVersionName();
-		
+
 		versionNameTextView.setText(currVersion);
-		
+
 		check4updateLayout = (RelativeLayout) findViewById(R.id.editor_linearLayout7);
 		check4updateLayout.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// 事件id（"registered id"）的事件pass，其时长持续100毫秒
@@ -140,15 +144,15 @@ public class EditorActivity extends BaseActivity {
 				check4Update.checkUpdate();
 			}
 		});
-		
+
 		Button editor_exit = (Button) findViewById(R.id.editor_exit);
-		
-		if(!myApplication.getIsLogin()){
+
+		if (!myApplication.getIsLogin()) {
 			editor_exit.setVisibility(View.GONE);
 		}
-		
+
 		editor_exit.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				exit.show();
@@ -176,7 +180,8 @@ public class EditorActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(EditorActivity.this,AboutActivity.class);
+				Intent intent = new Intent(EditorActivity.this,
+						AboutActivity.class);
 				EditorActivity.this.startActivity(intent);
 			}
 
@@ -186,10 +191,11 @@ public class EditorActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				String  number = phoneNumber.getText().toString();
-				Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+number));
+				String number = phoneNumber.getText().toString();
+				Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"
+						+ number));
 				startActivity(intent);
-				
+
 			}
 
 		});
@@ -198,28 +204,28 @@ public class EditorActivity extends BaseActivity {
 
 	}
 
-//	private void setActionbar() {
-//		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-//		getSupportActionBar().setDisplayShowHomeEnabled(false);
-//		getSupportActionBar().setDisplayShowTitleEnabled(false);
-//		getSupportActionBar().setDisplayUseLogoEnabled(false);
-//		getSupportActionBar().setIcon(R.drawable.back);
-//		getSupportActionBar().setDisplayShowCustomEnabled(true);
-//		getSupportActionBar().setCustomView(R.layout.actionbar_common);
-//		TextView button = (TextView) findViewById(R.id.ab_common_back);
-//
-//		button.setOnClickListener(new android.view.View.OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				EditorActivity.this.finish();
-//			}
-//		});
-//
-//		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
-//		titleTextView.setText("设置");
-//
-//	}
+	// private void setActionbar() {
+	// getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+	// getSupportActionBar().setDisplayShowHomeEnabled(false);
+	// getSupportActionBar().setDisplayShowTitleEnabled(false);
+	// getSupportActionBar().setDisplayUseLogoEnabled(false);
+	// getSupportActionBar().setIcon(R.drawable.back);
+	// getSupportActionBar().setDisplayShowCustomEnabled(true);
+	// getSupportActionBar().setCustomView(R.layout.actionbar_common);
+	// TextView button = (TextView) findViewById(R.id.ab_common_back);
+	//
+	// button.setOnClickListener(new android.view.View.OnClickListener() {
+	//
+	// @Override
+	// public void onClick(View v) {
+	// EditorActivity.this.finish();
+	// }
+	// });
+	//
+	// TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
+	// titleTextView.setText("设置");
+	//
+	// }
 
 	@Override
 	protected void onPause() {
@@ -232,5 +238,5 @@ public class EditorActivity extends BaseActivity {
 		super.onResume();
 		StatService.onResume(this);
 	}
-	
+
 }

@@ -73,14 +73,14 @@
             android:screenOrientation="portrait"
             android:uiOptions="splitActionBarWhenNarrow"
             android:windowSoftInputMode="adjustPan" >
-        </activity>
+        </activity>
         -->
         <!--
         <activity
             android:name="com.yidejia.app.mall.ComposeActivity"
             android:screenOrientation="portrait"
             android:uiOptions="splitActionBarWhenNarrow" >
-        </activity>
+        </activity>
         -->
         <activity
             android:name="com.yidejia.app.mall.goodinfo.GoodsInfoActivity"
@@ -221,7 +221,7 @@
             android:name="com.yidejia.app.mall.AboutActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yidejia.app.mallcom.yidejia.app.mall.HistoryActivity"
+            android:name="com.yidejia.app.mall.HistoryActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.yidejia.app.mall.ActiveGoActivity"
@@ -316,6 +316,12 @@
         </activity>
         <activity
             android:name="com.yidejia.app.mall.HomeGuangActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.yidejia.app.mall.yirihui.YirihuiActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >

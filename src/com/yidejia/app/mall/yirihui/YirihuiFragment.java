@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yidejia.app.mall.R;
 
 public class YirihuiFragment extends Fragment {
 	private int index;
+//	private PullToRefreshListView refreshListView;
 
 	public static YirihuiFragment newInstance(int num) {
 		YirihuiFragment now = new YirihuiFragment();
@@ -30,8 +32,9 @@ public class YirihuiFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View view = inflater.inflate(R.layout.yirihui, null);
-
+		View view = inflater.inflate(R.layout.yirihui_item, null);
+//		refreshListView = (PullToRefreshListView) view
+//				.findViewById(R.id.pull_refresh_list);
 		return view;
 	}
 

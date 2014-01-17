@@ -13,7 +13,7 @@
     <string name="main_favorite_text">收藏夹</string>
     <string name="main_event_text">活动馆</string>
     <string name="main_vip_text">会员购</string>
-    <string name="main_history_text">浏览历史</string>
+    <string name="main_history_text">体验中心</string>
     <string name="main_voucher_text">积分卡券</string>
     <string name="main_skin_test_text">肌肤测试</string>
     <string name="main_message_center_text">充值中心</string>
@@ -280,7 +280,7 @@
     <string name="edit_number">400-886-7898</string>
     <string name="edit_gengxin">检测更新</string>
     <string name="edit_version">当前版本</string>
-    <string name="edit_tuijian">当前应用推荐本</string>
+    <string name="edit_tuijian">应用推荐</string>
     <string name="order_state">订单状态：</string>
     <string name="order_pay">付款</string>
     <string name="order_set">设置</string>

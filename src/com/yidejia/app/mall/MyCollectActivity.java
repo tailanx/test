@@ -40,8 +40,9 @@ import com.yidejia.app.mall.widget.YLProgressDialog;
 
 /**
  * 我的收藏
+ * 
  * @author LongBin
- *
+ * 
  */
 public class MyCollectActivity extends BaseActivity {
 	private FavoriteAdapter fAdapter;
@@ -109,7 +110,7 @@ public class MyCollectActivity extends BaseActivity {
 		Button search = (Button) findViewById(R.id.favorite_empty_button);
 		setActionbarConfig();
 		setTitle(getResources().getString(R.string.my_collect));
-		
+
 		search.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -138,28 +139,6 @@ public class MyCollectActivity extends BaseActivity {
 		super.onDestroy();
 		closeTask();
 	}
-
-//	private void setActionbar() {
-//		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-//		getSupportActionBar().setDisplayShowHomeEnabled(false);
-//		getSupportActionBar().setDisplayShowTitleEnabled(false);
-//		getSupportActionBar().setDisplayUseLogoEnabled(false);
-//		getSupportActionBar().setDisplayShowCustomEnabled(true);
-//		getSupportActionBar().setCustomView(R.layout.actionbar_common);
-//
-//		TextView button = (TextView) findViewById(R.id.ab_common_back);
-//		button.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//
-//				MyCollectActivity.this.finish();
-//			}
-//		});
-//
-//		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
-//		titleTextView.setText("我的收藏");
-//	}
 
 	private boolean isDownRefresh = false;
 
@@ -220,6 +199,7 @@ public class MyCollectActivity extends BaseActivity {
 			return false;
 		}
 
+		@SuppressWarnings("static-access")
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();

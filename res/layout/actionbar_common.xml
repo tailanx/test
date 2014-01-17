@@ -15,7 +15,7 @@
         android:padding="6dp"
         android:text="@string/back"
         android:textColor="@color/color_sort_text_color_press"
-        android:textSize="@dimen/textsize_big" />
+        android:textSize="@dimen/textsize_small" />
 
     <TextView
         android:id="@+id/ab_common_title"
@@ -35,7 +35,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/margin_left"
         android:textColor="@color/color_sort_text_color_press"
-        android:textSize="@dimen/textsize_big"
+        android:textSize="@dimen/textsize_small"
         android:visibility="gone" />
 
     <ImageView
@@ -45,6 +45,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="6dp"
+        android:contentDescription="@string/yidejia"
         android:src="@drawable/share"
         android:visibility="gone" />
 

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.baidu.mobstat.StatActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
@@ -34,6 +35,7 @@ import com.yidejia.app.mall.task.MallTask.Task;
 import com.yidejia.app.mall.view.AllOrderActivity;
 import com.yidejia.app.mall.view.IntegeralActivity;
 import com.yidejia.app.mall.view.LoginActivity;
+import com.yidejia.app.mall.yirihui.YirihuiActivity;
 
 public class MallAction {
 	private SherlockFragmentActivity activity;
@@ -218,6 +220,8 @@ public class MallAction {
 
 			@Override
 			public void onClick(View arg0) {
+				Intent intent = new Intent(activity, PhoneActivity.class);
+				activity.startActivity(intent);
 			}
 		});
 		RelativeLayout myHistory = (RelativeLayout) child
@@ -238,12 +242,9 @@ public class MallAction {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intentOrder = new Intent(activity,
-						IntegeralActivity.class);
-				if (!isLogin()) {
+				Intent intent = new Intent(activity, YirihuiActivity.class);
+				activity.startActivity(intent);
 
-					activity.startActivity(intentOrder);
-				}
 			}
 		});
 		RelativeLayout mySkin = (RelativeLayout) child
@@ -254,8 +255,11 @@ public class MallAction {
 			@Override
 			public void onClick(View arg0) {
 				Intent intentOrder = new Intent(activity,
-						SkinHomeActivity.class);
-				activity.startActivity(intentOrder);
+						IntegeralActivity.class);
+				if (!isLogin()) {
+
+					activity.startActivity(intentOrder);
+				}
 
 			}
 		});
@@ -266,11 +270,12 @@ public class MallAction {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(activity,PhoneActivity.class);
-				activity.startActivity(intent);
+				Intent intentOrder = new Intent(activity,
+						SkinHomeActivity.class);
+				activity.startActivity(intentOrder);
 			}
 		});
-		
+
 	}
 
 	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
@@ -317,12 +322,12 @@ public class MallAction {
 			return false;
 		}
 	}
+
 	public void onResume() {
 		mallTask.onStart();
 	}
-	
+
 	public void onPause() {
 		mallTask.onPause();
 	}
 }
-
