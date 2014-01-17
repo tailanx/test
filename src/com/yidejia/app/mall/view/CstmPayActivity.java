@@ -26,6 +26,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alipay.android.appDemo4.AlixDemo;
+import com.alipay.android.appDemo4.AlixId;
+import com.alipay.android.appDemo4.BaseHelper;
+import com.alipay.android.appDemo4.MobileSecurePayHelper;
+import com.alipay.android.appDemo4.MobileSecurePayer;
+import com.alipay.android.appDemo4.PartnerConfig;
 import com.baidu.mobstat.StatService;
 import com.opens.asyncokhttpclient.AsyncHttpResponse;
 import com.opens.asyncokhttpclient.AsyncOkHttpClient;
@@ -526,6 +532,8 @@ public class CstmPayActivity extends BaseActivity {
 						} else if(mode == 3) {	//支付宝网页
 							//http://u.yidejia.com/index.php?m=ucenter&c=order&a=onlineWap&code=d0200114011626&type=alipay
 							go2Pay(mode);
+						} else if(mode == 2) {
+							performPay();
 						}
 					}
 				}
@@ -538,6 +546,75 @@ public class CstmPayActivity extends BaseActivity {
 			}
 			
 		});
+	}
+	
+	/**alipay支付宝客户端支付**/
+	private void performPay() {
+		//
+		// check to see if the MobileSecurePay is already installed.
+
+		// check some info.
+		// 检测配置信息
+		if (!checkInfo()) {
+			BaseHelper
+					.showDialog(
+							AlixDemo.this,
+							"提示",
+							"缺少partner或者seller，请在PartnerConfig.java中增加。",
+							R.drawable.infoicon);
+			return;
+		}
+
+		// start pay for this order.
+		// 根据订单信息开始进行支付
+		try {
+			// prepare the order info.
+			// 准备订单信息
+			String orderInfo = getOrderInfo(position);
+			// 这里根据签名方式对订单信息进行签名
+			String signType = getSignType();
+			String strsign = sign(signType, orderInfo);
+			Log.v("sign:", strsign);
+			// 对签名进行编码
+			strsign = URLEncoder.encode(strsign, "UTF-8");
+			// 组装好参数
+			String info = orderInfo + "&sign=" + "\"" + strsign + "\"" + "&"
+					+ getSignType();
+			Log.v("orderInfo:", info);
+			// start the pay.
+			// 调用pay方法进行支付
+			MobileSecurePayer msp = new MobileSecurePayer();
+			boolean bRet = msp.pay(info, mHandler, AlixId.RQF_PAY, this);
+
+			if (bRet) {
+				// show the progress bar to indicate that we have started
+				// paying.
+				// 显示“正在支付”进度条
+				closeProgress();
+				mProgress = BaseHelper.showProgress(this, null, "正在支付", false,
+						true);
+			} else
+				;
+		} catch (Exception ex) {
+			Toast.makeText(AlixDemo.this, R.string.remote_call_failed,
+					Toast.LENGTH_SHORT).show();
+		}
+	}
+	
+	/**
+	 * check some info.the partner,seller etc. 检测配置信息
+	 * partnerid商户id，seller收款帐号不能为空
+	 * 
+	 * @return
+	 */
+	private boolean checkInfo() {
+		String partner = PartnerConfig.PARTNER;
+		String seller = PartnerConfig.SELLER;
+		if (partner == null || partner.length() <= 0 || seller == null
+				|| seller.length() <= 0)
+			return false;
+
+		return true;
 	}
 	
 	private String getAddressUrl(boolean isDefault) {
