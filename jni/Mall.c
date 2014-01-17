@@ -12,6 +12,7 @@ extern "C" {
 //char *strTemp = "ChunTianfw_mobile123456";
 char *url = "http://fw1.atido.net/";
 char *strTemp = "ChunTianfw_mobile@SDF!TD#DF#*CB$GER@";
+char *urlTemp = "";
 
 char *pHead = "&key=fw_mobile&format=array&ts=";
 
@@ -25,20 +26,22 @@ void addString(char* desc, char* addition) {
 //	strcpy(desc, addition);
 }
 
-void getParam(JNIEnv *env,jobject obj, const char* param){
-	jclass cls = (*env)->GetObjectClass(env, obj);
-//	jclass cls = (*env)->FindClass(env, "com.yidejia.app.mall.net.Param");
+void getParam(JNIEnv *env, jobject obj, const char* param){
+//	jclass cls = (*env)->GetObjectClass(env, obj);
+	jclass cls = (*env)->FindClass(env, "com/yidejia/app/mall/net/Param");
 	if(cls != 0){
-//		jmethodID mid = (*env)->GetMethodID(env, cls, "<init>", "()V");
-//		jobject clsobj = (*env)->NewObject(env, cls, mid);
+		jmethodID mid = (*env)->GetMethodID(env, cls, "<init>", "()V");
+		jobject clsobj = (*env)->NewObject(env, cls, mid);
 //		jfieldID fid = (*env)->GetFieldID(env, clsobj, "url", "Ljava/lang/String;");
 //		jstring result = (jstring) (*env) ->GetObjectField(env, clsobj, fid);
 //		param = (*env)->GetStringUTFChars(env, result, NULL);/**/
-
-		jmethodID methodId = (*env)->GetMethodID(env,cls,"hostUrl", "()V");
+		if(clsobj == 0) return;
+		jmethodID methodId = (*env)->GetMethodID(env,clsobj,"hosturl", "()Ljava/lang/String;");
 		if(methodId != 0){
-			jstring result = (jstring) (*env) ->CallObjectMethod(env, obj, methodId);
-			param = (*env)->GetStringUTFChars(env, result, NULL);
+			jstring result = (jstring) (*env)->CallObjectMethod(env, clsobj, methodId);
+			urlTemp = (*env)->GetStringUTFChars(env, result, NULL);
+
+//			if(param == NULL) param = "hello";
 		}
 		/**/
 	}
@@ -46,7 +49,7 @@ void getParam(JNIEnv *env,jobject obj, const char* param){
 
 jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4PostUrl(JNIEnv* env,
 		jobject thiz){
-//	getParam(env, thiz, url);
+//	getParam(env, thiz, urlTemp);
 	return (*env)->NewStringUTF(env, url);
 }
 //ͼƬ��ַ get
@@ -989,10 +992,10 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 	int i;
 
 	char encrypt[LEN] , urlString[LEN];
-	char hostUrl[LEN];
+	char *hostUrl;
 	encrypt[0] = 0;
 	urlString[0] = 0;
-	hostUrl[0] = 0;
+//	hostUrl[0] = 0;
 
 //	memset(encrypt, 0, LEN * sizeof(char));
 //	getParam(env, thiz, hostUrl);
@@ -2925,6 +2928,56 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 	addString(urlString, "&sign=");
 	addString(encrypt, strTemp);
 	addString(encrypt, "user.info.checkCpsId");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
+
+//获取tn
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SignUp(JNIEnv* env,
+		jobject thiz, jstring userid, jstring token){//
+
+	char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
+	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+	char *api="api=ucenter.gold.singCount";
+	addString(urlString, api);
+
+	addString(urlString, "&customer_id=");
+	if(chuid != NULL)addString(urlString, chuid);
+	addString(urlString, "&token=");
+	if(chtoken != NULL)addString(urlString, chtoken);
+
+	addString(urlString, pHead);
+
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
+
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "ucenter.gold.singCount");
 	addString(encrypt, chtime);
 
 	MD5_CTX md5;

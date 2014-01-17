@@ -29,9 +29,10 @@ public class HttpGetVersionConn {
 			Log.e(TAG,"MalformedURLException in get version");
 		}
 		if(url != null){
+			HttpURLConnection conn = null;
 			try {
 				Log.e(TAG, "before open");
-				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+				conn = (HttpURLConnection) url.openConnection();
 				conn.connect();
 				Log.e(TAG, "open"+conn);
 				//�õ���ȡ��������
@@ -58,6 +59,7 @@ public class HttpGetVersionConn {
 			} catch (IOException e) {
 				// TODO: handle exception
 				Log.e(TAG, "IOException in get version");
+				if(null != conn) conn.disconnect();
 			}
 		} else {
 			Log.e(TAG, "url == null");

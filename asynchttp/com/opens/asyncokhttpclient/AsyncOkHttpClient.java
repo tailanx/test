@@ -53,14 +53,17 @@ public class AsyncOkHttpClient {
 	}
 	
 	public void closeConn() {
-		mClient.cancel(true);
+//		mClient.cancel(true);
+		if(null != conn) conn.disconnect();
 	}
+	
+	private HttpURLConnection conn;
 	
 	protected void sendRequest(OkHttpClient client, String url, AsyncHttpResponse response, 
 			String contentType, RequestParams params) {
 		try {
 			this.mRequest.setUrl(new URL(url));
-			HttpURLConnection conn = client.open(this.mRequest.getURL());
+			conn = client.open(this.mRequest.getURL());
 			conn.setConnectTimeout(timeoutMillis);
 			conn.setReadTimeout(timeoutMillis);
 			if(contentType != null) conn.setRequestProperty("Content-Type", contentType);

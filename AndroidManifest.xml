@@ -317,8 +317,8 @@
             android:windowSoftInputMode="adjustPan" >
         </activity>
 
-        <service android:name="com.yidejia.app.mall.log.LogService" >
-        </service>
+       <!--  <service android:name="com.yidejia.app.mall.log.LogService" >
+        </service> -->
     </application>
 
 </manifest>

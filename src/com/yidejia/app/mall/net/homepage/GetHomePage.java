@@ -43,7 +43,9 @@ public class GetHomePage {
 	private String result = "";
 	public String getHomePageJsonString()throws IOException, TimeOutEx{
 //		HttpGetConn conn = new HttpGetConn(getHttpAddress());
-		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetHome(), true);
+		String url = new JNICallBack().getHttp4GetHome();
+		Log.e("system.out", url);
+		HttpGetConn conn = new HttpGetConn(url, true);
 		result = conn.getJsonResult();
 		return result;
 	}
