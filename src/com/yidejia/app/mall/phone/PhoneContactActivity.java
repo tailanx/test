@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,9 +19,15 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts.Photo;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ListView;
 
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.util.Consts;
 
 /**
  * 用来获取手机的联系人和sd卡上的联系ren
@@ -51,7 +58,8 @@ public class PhoneContactActivity extends Activity {
 	// 联系人头像
 	private List<Bitmap> mContactsPic = new ArrayList<Bitmap>();
 	private ListView mlistView;
-	private ContactAdapter contactAdapter ;
+	private ContactAdapter contactAdapter;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -59,11 +67,12 @@ public class PhoneContactActivity extends Activity {
 		this.context = this;
 		setContentView(R.layout.contacts);
 		getPhoneContacts();
-//		getSIMContacts();
+		// getSIMContacts();
 		mlistView = (ListView) findViewById(R.id.lv_contacts);
-		contactAdapter = new ContactAdapter(this, mContactsName, mContactsNumber, mContactsPic);
+		contactAdapter = new ContactAdapter(this, mContactsName,
+				mContactsNumber, mContactsPic);
 		mlistView.setAdapter(contactAdapter);
-		
+		mlistView.setOnItemClickListener(new MySelect());
 	}
 
 	/**
@@ -131,5 +140,24 @@ public class PhoneContactActivity extends Activity {
 			}
 			cursorContacts.close();
 		}
+	}
+
+	private class MySelect implements OnItemClickListener {
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			// TODO Auto-generated method stub
+			String number = (String) contactAdapter.getItem(position);
+			Intent intent = new Intent(PhoneContactActivity.this,
+					PhoneActivity.class);
+			Bundle bundle = new Bundle();
+			bundle.putString("number", number);
+			intent.putExtras(bundle);
+			PhoneContactActivity.this.setResult(Consts.CONSTACT_RESPONSE,
+					intent);
+			PhoneContactActivity.this.finish();
+		}
+
 	}
 }
