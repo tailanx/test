@@ -12,9 +12,9 @@ public class DPIUtil {
 	private static Display defaultDisplay;
 	private static float mDensity = 160.0F;
 
-	public static int dip2px(float paramFloat) {
-		return (int) (0.5F + paramFloat * mDensity);
-	}
+//	public static int dip2px(float paramFloat) {
+//		return (int) (0.5F + paramFloat * mDensity);
+//	}
 
 	public static Display getDefaultDisplay() {
 		 if (defaultDisplay == null)
@@ -42,9 +42,9 @@ public class DPIUtil {
 		return (int) (paramFloat * getWidth());
 	}
 
-	public static int px2dip(Context paramContext, float paramFloat) {
-		return (int) (0.5F + paramFloat / mDensity);
-	}
+//	public static int px2dip(Context paramContext, float paramFloat) {
+//		return (int) (0.5F + paramFloat / mDensity);
+//	}
 
 	public static int px2sp(Context paramContext, float paramFloat) {
 		return (int) (0.5F + paramFloat
@@ -67,7 +67,7 @@ public class DPIUtil {
 	 * @return A float value to represent px equivalent to dp depending on
 	 *         device density
 	 */
-	public static float convertDpToPixel(float dp, Context context) {
+	public static float dpToPixel(float dp, Context context) {
 		Resources resources = context.getResources();
 		DisplayMetrics metrics = resources.getDisplayMetrics();
 		float px = dp * (metrics.densityDpi / 160f);
@@ -84,7 +84,7 @@ public class DPIUtil {
 	 *            Context to get resources and device specific display metrics
 	 * @return A float value to represent dp equivalent to px value
 	 */
-	public static float convertPixelsToDp(float px, Context context) {
+	public static float pixelsToDp(float px, Context context) {
 		Resources resources = context.getResources();
 		DisplayMetrics metrics = resources.getDisplayMetrics();
 		float dp = px / (metrics.densityDpi / 160f);

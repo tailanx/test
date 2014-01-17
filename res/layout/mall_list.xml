@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -26,8 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:padding="@dimen/mall_list_padding"
             android:contentDescription="@string/yidejia"
+            android:padding="@dimen/mall_list_padding"
             android:src="@drawable/arrow" />
     </RelativeLayout>
 
@@ -53,12 +52,42 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:padding="@dimen/mall_list_padding"
             android:contentDescription="@string/yidejia"
+            android:padding="@dimen/mall_list_padding"
+            android:src="@drawable/arrow" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/re_my_aidou"
+        android:layout_marginTop="-1dp"
+        android:layout_marginBottom="-1dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_selector2" >
+
+        <TextView
+            android:id="@+id/tv_my_aidou_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:text="@string/my_aidou"
+            android:textSize="@dimen/textsize_big_big" />
+
+        <ImageView
+            android:id="@+id/tv_my_aidou_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/yidejia"
+            android:padding="@dimen/mall_list_padding"
             android:src="@drawable/arrow" />
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/re_main2_main2_linearlayout4_collect"
+        android:layout_marginTop="-1dp"
+        android:layout_marginBottom="-1dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/layout_selector2" >
@@ -78,14 +107,16 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:padding="@dimen/mall_list_padding"
             android:contentDescription="@string/yidejia"
+            android:padding="@dimen/mall_list_padding"
             android:src="@drawable/arrow" />
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/re_main2_main2_linearlayout4_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        
         android:background="@drawable/layout_selector2" >
 
         <TextView
@@ -103,11 +134,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:padding="@dimen/mall_list_padding"
             android:contentDescription="@string/yidejia"
+            android:padding="@dimen/mall_list_padding"
             android:src="@drawable/arrow" />
     </RelativeLayout>
-    
+
     <RelativeLayout
         android:id="@+id/re_main2_main2_linearlayout4_all_message"
         android:layout_width="match_parent"
@@ -130,10 +161,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:padding="@dimen/mall_list_padding"
             android:contentDescription="@string/yidejia"
+            android:padding="@dimen/mall_list_padding"
             android:src="@drawable/arrow" />
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/re_main2_main2_linearlayout4_all_show"
         android:layout_width="match_parent"
@@ -156,10 +188,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:padding="@dimen/mall_list_padding"
             android:contentDescription="@string/yidejia"
+            android:padding="@dimen/mall_list_padding"
             android:src="@drawable/arrow" />
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/re_main2_main2_linearlayout4_all_return"
         android:layout_width="match_parent"
@@ -181,8 +214,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:padding="@dimen/mall_list_padding"
             android:contentDescription="@string/yidejia"
+            android:padding="@dimen/mall_list_padding"
             android:src="@drawable/arrow" />
     </RelativeLayout>
 

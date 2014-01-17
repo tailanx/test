@@ -214,7 +214,8 @@ public class GoodsInfoViewUtil {
 			add_favorites = (ImageView) activity
 					.findViewById(R.id.add_favorites);
 			// TODO
-			// 加入收藏按钮点击事件add_favorites.setOnClickListener(addFavoriteListener);
+			// 加入收藏按钮点击事件
+			add_favorites.setOnClickListener(addFavoriteListener);
 
 			// // 检查是否收藏并且设置收藏按钮的图片
 			// FavoriteDataManage favoriteManage = new
@@ -282,7 +283,17 @@ public class GoodsInfoViewUtil {
 		shopping_cart_button.setVisibility(View.VISIBLE);
 		shopping_cart_button.setText("" + cart_num);
 	}
+	
+	private OnClickListener addFavoriteListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			
+		}
+	};
 
+	/**设置商品图片**/
 	private void setPicImage() {
 		vpImage.setAdapter(new PicImageAdapter(activity, bannerArray));
 		vpImage.setCurrentItem(0);
@@ -300,8 +311,8 @@ public class GoodsInfoViewUtil {
 			float dp = 120f;
 			for (int i = 0; i < lenght; i++) {
 				LinearLayout.LayoutParams lp_base = new LinearLayout.LayoutParams(
-						(int) DPIUtil.convertDpToPixel(dp, activity),
-						(int) DPIUtil.convertDpToPixel(dp, activity));// LayoutParams.WRAP_CONTENT);
+						(int) DPIUtil.dpToPixel(dp, activity),
+						(int) DPIUtil.dpToPixel(dp, activity));// LayoutParams.WRAP_CONTENT);
 				lp_base.gravity = Gravity.CENTER;
 				ImageView bannerImageView = new ImageView(activity);
 				bannerImageView.setLayoutParams(lp_base);

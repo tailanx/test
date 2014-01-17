@@ -2,32 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/all_order_item_main_linerar"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:layout_height="wrap_content"
     android:orientation="vertical" >
 
     <RelativeLayout
         android:id="@+id/all_order_item_main_produce"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/new_order_statusbg_top" >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/p_bg" >
 
         <TextView
             android:id="@+id/all_order_item_main_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
-            android:layout_marginTop="12dp"
+            android:layout_centerVertical="true"
             android:text="@string/order_state"
-            android:textSize="13sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/all_order_item_main_item_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@id/all_order_item_main_item"
-            android:textSize="13sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/all_order_item_main_item_number"
@@ -35,17 +34,19 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/all_order_item_main_item"
             android:layout_alignParentRight="true"
-            android:paddingRight="8dp"
-            android:textSize="11sp" />
+            android:layout_marginRight="8dp"
+            android:layout_centerVertical="true"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/all_order_item_main_item_textview2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/all_order_item_main_item"
+            android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/all_order_item_main_item_number"
             android:text="订单号："
-            android:textSize="11sp" />
+            android:textSize="12sp" />
     </RelativeLayout>
 
     <LinearLayout
@@ -54,10 +55,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
     </LinearLayout>
+    
+    <ImageView 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="-1dp"
+        android:src="@drawable/filter_line"
+        android:background="@color/white"
+        />
 
     <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="75dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/main_theme_textview_bg" >
 
         <TextView
@@ -73,26 +82,26 @@
             android:id="@+id/all_order_item_main_sum_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_alignBaseline="@id/all_order_item_main_sum"
             android:layout_toRightOf="@id/all_order_item_main_sum"
-            android:text="￥"
-            android:textColor="#ed217c"
+            android:text="@string/unit"
+            android:textColor="@color/theme"
             android:textSize="15sp" />
 
         <TextView
             android:id="@+id/all_order_item_main_sum_money_deatil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_alignBaseline="@id/all_order_item_main_sum"
             android:layout_toRightOf="@id/all_order_item_main_sum_money"
-            android:textColor="#ed217c"
+            android:textColor="@color/theme"
             android:textSize="15sp" />
 
         <TextView
             android:id="@+id/all_order_item_main_cancal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/margin_left"
             android:layout_toLeftOf="@+id/all_order_item_main_pay"
             android:background="@drawable/theme_textview_background_no_comment"
@@ -101,7 +110,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@id/all_order_item_main_pay"
+            android:id="@+id/all_order_item_main_pay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -118,7 +127,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/all_order_item_main_sum"
             android:layout_marginLeft="8dp"
-            android:text="数量："
+            android:paddingBottom="12dp"
+            android:text="@string/amount"
             android:textSize="15sp" />
 
         <TextView
@@ -126,6 +136,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/all_order_item_main_sum"
+            android:layout_alignBaseline="@id/all_order_item_main_item_textview7"
             android:layout_marginLeft="8dp"
             android:layout_toRightOf="@id/all_order_item_main_item_textview7"
             android:textSize="15sp" />

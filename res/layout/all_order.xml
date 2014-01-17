@@ -8,9 +8,7 @@
         android:id="@+id/all_order_linearlayout1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_left"
-        android:layout_marginLeft="@dimen/margin_left"
-        android:layout_marginRight="@dimen/margin_left"
+        android:layout_margin="@dimen/margin_left"
         android:orientation="horizontal" >
 
         <TextView
@@ -21,7 +19,7 @@
             android:background="@drawable/selecter_bg_sort_sell"
             android:gravity="center"
             android:text="@string/order_time_week"
-            android:textColor="@color/white" />
+            android:textColor="@color/color_sort_text_color" />
 
         <TextView
             android:id="@+id/all_order_moonth"
@@ -32,7 +30,7 @@
             android:background="@drawable/selecter_bg_sort_price"
             android:gravity="center"
             android:text="@string/order_time_month"
-            android:textColor="@color/theme" />
+            android:textColor="@color/color_sort_text_color" />
 
         <TextView
             android:id="@+id/all_order_year"
@@ -42,7 +40,7 @@
             android:background="@drawable/selecter_bg_sort_popular"
             android:gravity="center"
             android:text="@string/order_time_year"
-            android:textColor="@color/theme" />
+            android:textColor="@color/color_sort_text_color" />
     </LinearLayout>
 
     <RelativeLayout

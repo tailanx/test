@@ -38,7 +38,7 @@ public class HttpGetConn {
 //			return result;
 //		}
 		HttpGet httpRequst = new HttpGet();
-//		Log.i(TAG, urlString);
+		Log.i(TAG, urlString);
 		HttpClient httpClient = new DefaultHttpClient();
 		try {
 			HttpProtocolParams.setUseExpectContinue(httpClient.getParams(), false);

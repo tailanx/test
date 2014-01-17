@@ -156,6 +156,7 @@ public class HomeCarActivity extends BaseActivity implements OnClickListener {
 				.findViewById(R.id.shopping_cart_sum_money);// 总的钱数
 
 		mBox = (CheckBox) view.findViewById(R.id.shopping_cart_checkbox);// 选择框
+		shoppingCartTopay = (TextView) findViewById(R.id.tv_shopping_cart_gopay);
 
 		counTextView = (TextView) view
 				.findViewById(R.id.shopping_cart_sum_number);// 总的数量

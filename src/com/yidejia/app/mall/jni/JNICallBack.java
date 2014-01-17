@@ -171,5 +171,8 @@ public class JNICallBack {
 	
 	public native String getHttp4CheckCps(String cpsid);
 	
+	/**签到**/
+	public native String getHttp4SignUp(String userId, String token);
+	
 }	
 	

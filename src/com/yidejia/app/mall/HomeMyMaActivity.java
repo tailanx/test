@@ -25,13 +25,13 @@ import com.yidejia.app.mall.address.AddressActivity;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.net.user.GetCount;
+import com.yidejia.app.mall.order.AllOrderActivity;
+import com.yidejia.app.mall.order.AlreadyComActivity;
+import com.yidejia.app.mall.order.AlreadyOrderActivity;
+import com.yidejia.app.mall.order.WaitDeliverActivity;
+import com.yidejia.app.mall.order.WaitPayActivity;
 import com.yidejia.app.mall.util.BottomChange;
-import com.yidejia.app.mall.view.AllOrderActivity;
-import com.yidejia.app.mall.view.AlreadyComActivity;
-import com.yidejia.app.mall.view.AlreadyOrderActivity;
 import com.yidejia.app.mall.view.IntegeralActivity;
-import com.yidejia.app.mall.view.WaitDeliverActivity;
-import com.yidejia.app.mall.view.WaitPayActivity;
 
 public class HomeMyMaActivity extends SherlockFragmentActivity implements
 		OnClickListener {
@@ -135,7 +135,6 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		cartsDataManage = new CartsDataManage();
 		myApplication = (MyApplication) getApplication();
@@ -156,20 +155,7 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 			bottomChange.initNavView(current, next);
 		}
 
-		String name = myApplication.getNick();
-		if (name == null || "".equals(name)) {
-			nick.setText(myApplication.getUserId());
-			Log.i("info", myApplication.getUserId() + "   name");
-		} else {
-			nick.setText(name);
-		}
-
-		String vip1 = myApplication.getVip();
-		if (vip1 == null || "".equals(vip1)) {
-			vip.setText("VIP0");
-		} else {
-			vip.setText(vip1);
-		}
+		
 		imageView.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -355,6 +341,21 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 		closeTask();
 		getNumTask = new GetNumTask();
 		getNumTask.execute();
+		
+		String name = myApplication.getNick();
+		if (name == null || "".equals(name)) {
+			nick.setText(myApplication.getUserId());
+			Log.i("info", myApplication.getUserId() + "   name");
+		} else {
+			nick.setText(name);
+		}
+
+		String vip1 = myApplication.getVip();
+		if (vip1 == null || "".equals(vip1)) {
+			vip.setText("VIP0");
+		} else {
+			vip.setText(vip1);
+		}
 	}
 
 	private GetNumTask getNumTask;
