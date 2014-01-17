@@ -168,8 +168,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tv_main_hot_yirihui_detail"
                         android:layout_marginTop="@dimen/head_padding"
-                        android:layout_marginLeft="@dimen/head_padding"
-                        android:layout_toRightOf="@id/re_time" >
+                        android:layout_marginRight="@dimen/head_padding"
+                        android:layout_alignParentRight="true" >
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -224,50 +224,30 @@
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/main_bg_head"
             android:layout_weight="1"
             android:background="@drawable/main_theme_textview_bg"
             android:paddingBottom="@dimen/actiobar_margin_top" >
-
-            <TextView
-                android:id="@+id/tv_main_all_buy_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/margin_left"
-                android:text="@string/all_buy_detail"
-                android:textSize="@dimen/textsize_big" />
-
-            <TextView
-                android:id="@+id/tv_main_all_buy_detail_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_main_all_buy_detail"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/margin_left"
-                android:text="@string/all_buy_detail_add"
-                android:textSize="@dimen/textsize_small" />
 
             <ImageView
                 android:id="@+id/iv_main_all_buy_left_image"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/yirihui"
-                android:layout_below="@id/tv_main_all_buy_detail_add"
-                android:layout_centerHorizontal="true"
+			    android:layout_centerVertical="true"
                 android:contentDescription="@string/yidejia"
                 android:src="@drawable/user_head" />
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="@dimen/width"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/main_bg_head"
             android:layout_marginLeft="@dimen/width_add"
             android:layout_weight="1"
             android:orientation="vertical" >
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/base_info_match"
                 android:background="@drawable/main_theme_textview_bg" >
 
                 <TextView
@@ -312,7 +292,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/base_info_match"
                 android:layout_marginTop="@dimen/width_add"
                 android:background="@drawable/main_theme_textview_bg" >
 
@@ -400,50 +380,31 @@
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/main_bg_head"
             android:layout_weight="1"
             android:background="@drawable/main_theme_textview_bg"
             android:padding="@dimen/margin_left" >
 
-            <TextView
-                android:id="@+id/tv_main_all_buy_detail_down"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/margin_left"
-                android:text="@string/all_buy_detail"
-                android:textSize="@dimen/textsize_big" />
-
-            <TextView
-                android:id="@+id/tv_main_all_buy_detail_add_down"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_main_all_buy_detail_down"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/margin_left"
-                android:text="@string/all_buy_detail_add"
-                android:textSize="@dimen/textsize_small" />
 
             <ImageView
                 android:id="@+id/iv_main_all_buy_left_image_down"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/yirihui"
-                android:layout_below="@id/tv_main_all_buy_detail_add_down"
-                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:contentDescription="@string/yidejia"
                 android:src="@drawable/user_head" />
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="@dimen/width"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/main_bg_head"
             android:layout_marginLeft="@dimen/width_add"
             android:layout_weight="1"
             android:orientation="vertical" >
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/base_info_match"
                 android:layout_marginTop="@dimen/width_add"
                 android:background="@drawable/main_theme_textview_bg"
                 android:padding="@dimen/margin_left_add" >
@@ -487,7 +448,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/base_info_match"
                 android:layout_marginTop="@dimen/width_add"
                 android:background="@drawable/main_theme_textview_bg"
                 android:padding="@dimen/margin_left_add" >

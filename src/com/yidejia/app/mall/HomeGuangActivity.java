@@ -15,7 +15,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.util.BottomChange;
 
-public class HomeGuangActivity extends SherlockFragmentActivity {
+public class HomeGuangActivity extends BaseActivity {
 	private BottomChange bottomChange;
 	private RelativeLayout bottomLayout;
 	private int number;// 商品的个数
@@ -127,12 +127,7 @@ public class HomeGuangActivity extends SherlockFragmentActivity {
 		});
 	}
 	private void setActionbar(){
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_common);
+		setActionbarConfig();
 		TextView back = (TextView) findViewById(R.id.ab_common_back);
 		back.setVisibility(View.GONE);
 		TextView title = (TextView) findViewById(R.id.ab_common_title);

@@ -26,6 +26,7 @@
     <dimen name="base_info_match">90dp</dimen>
     <dimen name="base_info_match_add">85dp</dimen>
     <dimen name="all_buy_produce_right">80dp</dimen>
+    <dimen name="all_buy_produce_right_half">75dp</dimen>
     <dimen name="action_height">70dp</dimen>
     <dimen name="item_goods_emulate">57dp</dimen>
     <dimen name="item_goods_emulate_add">55dp</dimen>

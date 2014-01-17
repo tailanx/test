@@ -17,7 +17,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/margin_top"
             android:drawablePadding="@dimen/margin_left"
             android:drawableTop="@drawable/qiandao"
             android:text="@string/qiandao"
@@ -36,10 +35,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/margin_top"
             android:drawablePadding="@dimen/margin_left"
             android:drawableTop="@drawable/yaoyiyao"
-            android:text="@string/qiandao"
+            android:text="@string/yaoyiyao"
             android:textSize="@dimen/textsize_big" />
     </LinearLayout>
 
