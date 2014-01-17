@@ -419,21 +419,22 @@ public class CstmPayActivity extends BaseActivity {
 				} else if (cb_caifutong.isChecked()) {
 					mode = 0;
 					pay_type = "tenpay";
-					Toast.makeText(CstmPayActivity.this, "亲，暂时只支持银联的支付方式哦！",
-							Toast.LENGTH_LONG).show();
-					return;
+//					Toast.makeText(CstmPayActivity.this, "亲，暂时只支持银联的支付方式哦！",
+//							Toast.LENGTH_LONG).show();
+//					return;
 				} else if (cb_zhifubao.isChecked()) {
 					mode = 2;
 					pay_type = "alipay";
-					Toast.makeText(CstmPayActivity.this, "亲，暂时只支持银联的支付方式哦！",
-							Toast.LENGTH_LONG).show();
-					return;
+//					Toast.makeText(CstmPayActivity.this, "亲，暂时只支持银联的支付方式哦！",
+//							Toast.LENGTH_LONG).show();
+//					return;
 				} else {
 					mode = 3;
-					pay_type = "aliwappay";
-					Toast.makeText(CstmPayActivity.this, "亲，暂时只支持银联的支付方式哦！",
-							Toast.LENGTH_LONG).show();
-					return;
+//					pay_type = "aliwappay";
+					pay_type = "alipay";
+//					Toast.makeText(CstmPayActivity.this, "亲，暂时只支持银联的支付方式哦！",
+//							Toast.LENGTH_LONG).show();
+//					return;
 				}
 				saveOrder();
 			}
@@ -462,12 +463,18 @@ public class CstmPayActivity extends BaseActivity {
 		Intent userpayintent = new Intent(CstmPayActivity.this,
 				UserPayActivity.class);
 		Bundle bundle = new Bundle();
+		
 		bundle.putInt("mode", mode);
 		bundle.putString("code", orderCode);
-		bundle.putString("uid", userId);
-		bundle.putString("resp_code", resp_code);
-		bundle.putString("tn", tn);
-
+		if (mode == 1) {
+			bundle.putString("uid", userId);
+			bundle.putString("resp_code", resp_code);
+			bundle.putString("tn", tn);
+		} else if(mode == 0) {
+			bundle.putString("payurl", "http://u.yidejia.com/index.php?m=ucenter&c=order&a=onlineWap&code="+orderCode+"&type=tenpay");
+		} else if(mode == 3) {
+			bundle.putString("payurl", "http://u.yidejia.com/index.php?m=ucenter&c=order&a=onlineWap&code="+orderCode+"&type=alipay");
+		}
 		userpayintent.putExtras(bundle);
 		startActivity(userpayintent);
 		CstmPayActivity.this.finish();
@@ -511,7 +518,15 @@ public class CstmPayActivity extends BaseActivity {
 						orderCode = parseOrder.getOrderCode();
 						tn = parseOrder.getTn();
 						resp_code = parseOrder.getResp_code();
-						go2Pay(mode);
+						if(mode == 1) {
+							go2Pay(mode);
+						} else if(mode == 0){	//财付通网页
+							//http://u.yidejia.com/index.php?m=ucenter&c=order&a=onlineWap&code=d0200114011626&type=tenpay
+							go2Pay(mode);
+						} else if(mode == 3) {	//支付宝网页
+							//http://u.yidejia.com/index.php?m=ucenter&c=order&a=onlineWap&code=d0200114011626&type=alipay
+							go2Pay(mode);
+						}
 					}
 				}
 			}

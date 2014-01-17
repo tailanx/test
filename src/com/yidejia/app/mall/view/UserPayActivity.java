@@ -16,6 +16,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.WindowManager;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.baidu.mobstat.StatService;
@@ -47,15 +50,11 @@ public class UserPayActivity extends Activity{
 	final static int MSG_PAY_RESULT = 1990;//返回接口
 	
 	private int payMode;
+	private String payUrl;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_userpay);
-		
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		
 		Intent getIntent = getIntent();
 		Bundle getBundle = getIntent.getExtras();
@@ -67,11 +66,18 @@ public class UserPayActivity extends Activity{
 			upayTn = getBundle.getString("tn");
 			code = getBundle.getString("code");
 			uid = getBundle.getString("uid");
+			setContentView(R.layout.activity_userpay);
 			UnionPayOrder();
 //			UPPay();
 //			new OrderCode().execute();
 		} else if(payMode == 0){//财付通支付
+			code = getBundle.getString("code");
+			payUrl = getBundle.getString("payurl");
 			TenPay();
+		} else if(payMode == 3) {
+			code = getBundle.getString("code");
+			payUrl = getBundle.getString("payurl");
+			aliwapPay();
 		}
 		
 	}
@@ -316,36 +322,45 @@ public class UserPayActivity extends Activity{
 	// 财付通支付
 	private void TenPay(){
 		//先得到财付通订单号
-		mTokenId = getTokenID();
-		
-		if (mTokenId == null || mTokenId.length() <  32) {
-			Toast.makeText(UserPayActivity.this, R.string.no_token_id, Toast.LENGTH_SHORT).show();
-			return;
-		}
-		
-		TenpayServiceHelper tenpayHelper = new TenpayServiceHelper(UserPayActivity.this);
-		tenpayHelper.setLogEnabled(true); //打开log 方便debug, 发布时不需要打开。
-		//判断并安装财付通安全支付服务应用
-		if (!tenpayHelper.isTenpayServiceInstalled(9)) {
-			tenpayHelper.installTenpayService(new DialogInterface.OnCancelListener() {
-				
-				@Override
-				public void onCancel(DialogInterface dialog) {
-					Toast.makeText(UserPayActivity.this, "用户取消了安装，可以在这里做一些想做的逻辑！", Toast.LENGTH_LONG).show();
-					
-				}
-			}, "/sdcard/test");
-			return;
-		}			
-		//构造支付参数
-		HashMap<String, String> payInfo = new HashMap<String, String>();
-		payInfo.put("token_id", mTokenId);         //财付通订单号token_id
-		payInfo.put("bargainor_id", "1234567890"); //财付通合作商户ID,此为演示示例
-//		payInfo.put("order_type", "1");
-		payInfo.put("caller", "com.yidejia.app.mall.UserPayActivity");
-		
-		//去支付
-		tenpayHelper.pay(payInfo, mHandler, MSG_PAY_RESULT);
+		WebView webView = new WebView(this);
+		setContentView(webView);
+		webView.loadUrl(payUrl);
+		WebSettings settings = webView.getSettings();
+		settings.setJavaScriptEnabled(true);
+		webView.setWebViewClient(new WebViewClient() {
+			@Override
+			public void onPageFinished(WebView view, String url) {
+			};
+
+			@Override
+			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				view.loadUrl(url);
+				return true;
+			}
+
+		});
+	}
+	
+	// 财付通支付
+	private void aliwapPay(){
+		//先得到财付通订单号
+		WebView webView = new WebView(this);
+		setContentView(webView);
+		webView.loadUrl(payUrl);
+		WebSettings settings = webView.getSettings();
+		settings.setJavaScriptEnabled(true);
+		webView.setWebViewClient(new WebViewClient() {
+			@Override
+			public void onPageFinished(WebView view, String url) {
+			};
+
+			@Override
+			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				view.loadUrl(url);
+				return true;
+			}
+
+		});
 	}
 	
 	protected String getTokenID() {
