@@ -153,7 +153,8 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 	protected void onPause() {
 		super.onPause();
 		mallAction.onPause();
-		StatService.onPause(this);
+//		StatService.onPause(this);
+		StatService.onPageEnd(this, "首页");
 	}
 
 	@Override
@@ -161,7 +162,8 @@ public class HomeMallActivity extends SherlockFragmentActivity implements
 		Intent intent = new Intent(HomeMallActivity.this, LogService.class);
 		startService(intent);
 		super.onResume();
-		StatService.onResume(this);
+//		StatService.onResume(this);
+		StatService.onPageStart(this, "首页");
 	}
 
 	@Override
