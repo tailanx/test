@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:scrollbars="none" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/qdbg1" >
+
+            <ImageView
+                android:id="@+id/iv_qiandao_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:contentDescription="@string/yidejia"
+                android:src="@drawable/yao_back" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/qdbg2" >
+
+            <ImageView
+                android:id="@+id/iv_qiandao_button"
+                android:layout_width="@dimen/base_info_image"
+                android:layout_height="@dimen/all_buy_produce_right"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_left"
+                android:layout_marginTop="@dimen/margin_top"
+                android:contentDescription="@string/yidejia"
+                android:src="@drawable/qiandao_selector" />
+
+            <RelativeLayout
+                android:id="@+id/iv_qiandao_button_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_marginRight="@dimen/margin_left"
+                android:layout_marginTop="@dimen/margin_top_add"
+                android:layout_toLeftOf="@id/iv_qiandao_button"
+                android:background="@drawable/daysbg"
+                android:contentDescription="@string/yidejia" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/magin_left_add_add"
+                    android:text="@string/hour"
+                    android:textColor="@color/theme"
+                    android:textSize="@dimen/textsize_big_big" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/actiobar_margin_top"
+                android:layout_marginLeft="@dimen/magin_left_add"
+                android:layout_marginTop="@dimen/mall_list_padding"
+                android:text="@string/qiandao_leiji"
+                android:textColor="@color/white_white"
+                android:textSize="@dimen/textsize_big_big" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/qdbg3"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/mall_list_padding"
+                android:text="@string/qiandao_order"
+                android:textColor="@color/white_white"
+                android:textSize="@dimen/textsize_big_big" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/mall_list_padding"
+                android:layout_marginTop="@dimen/margin_left"
+                android:text="@string/qiandao_order_1"
+                android:textColor="@color/white_white"
+                android:textSize="@dimen/textsize_small" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/mall_list_padding"
+                android:layout_marginTop="@dimen/margin_left"
+                android:text="@string/qiandao_order_2"
+                android:textColor="@color/white_white"
+                android:textSize="@dimen/textsize_small" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/mall_list_padding"
+                android:layout_marginTop="@dimen/margin_left"
+                android:text="@string/qiandao_order_3"
+                android:textColor="@color/white_white"
+                android:textSize="@dimen/textsize_small" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

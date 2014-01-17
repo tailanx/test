@@ -54,25 +54,22 @@ public class ContactAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return mContactName.size();
 	}
 
 	@Override
 	public Object getItem(int arg0) {
-		// TODO Auto-generated method stub
 		return mContactNumber.get(arg0);
 	}
 
 	@Override
 	public long getItemId(int arg0) {
-		// TODO Auto-generated method stub
 		return arg0;
 	}
 
 	@Override
 	public View getView(int arg0, View contentview, ViewGroup arg2) {
-		// TODO Auto-generated method stub
+		
 		ViewHolder holder;
 		if (contentview == null) {
 			contentview = inflater.inflate(R.layout.contact_item, null);
