@@ -18,8 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
         android:layout_toRightOf="@id/all_order_item_image"
         android:ellipsize="end"
         android:lines="2"
@@ -50,8 +50,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/all_order_item_sum"
-        android:layout_toRightOf="@id/all_order_item_image"
         android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/all_order_item_image"
         android:text="@string/amount"
         android:textColor="@color/text_color"
         android:textSize="15sp" />
@@ -64,13 +64,13 @@
         android:layout_toRightOf="@id/all_order_item_count"
         android:textColor="@color/text_color"
         android:textSize="15sp" />
-    
-    <ImageView android:layout_marginLeft="128dp"
-        android:layout_alignParentBottom="true"
+
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:src="@drawable/filter_line"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="128dp"
         android:background="@color/white"
-        />
+        android:src="@drawable/filter_line" />
 
 </RelativeLayout>

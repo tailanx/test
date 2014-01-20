@@ -17,10 +17,24 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/magin_left_add" >
 
+            <RelativeLayout
+                android:id="@+id/re_mymall_acount_add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/main_theme_textview_bg" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/width_add"
+                    android:background="@drawable/filter_line"
+                    android:contentDescription="@string/yidejia" />
+            </RelativeLayout>
+
             <LinearLayout
                 android:id="@+id/ll_login_acount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/re_mymall_acount_add"
                 android:background="@drawable/main_theme_textview_bg"
                 android:descendantFocusability="blocksDescendants"
                 android:orientation="horizontal" >
@@ -122,6 +136,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/re_mymall_pwd"
+                android:id="@+id/re_my_mall_relative"
                 android:background="@drawable/main_theme_textview_bg" >
 
                 <TextView
@@ -135,14 +150,25 @@
                     android:text="@string/login_keep_state"
                     android:textColor="#b4b4b4"
                     android:textSize="@dimen/textsize_small" />
-             
+
                 <com.yidejia.app.mall.widget.WiperSwitch
                     android:id="@+id/cb_my_login_checkbox"
                     android:layout_width="30dp"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/margin_left"
-                    android:layout_marginTop="@dimen/margin_left"
-                    android:layout_alignParentRight="true"/>
+                    android:layout_marginTop="@dimen/margin_left" />
+            </RelativeLayout>
+             <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/re_my_mall_relative" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/width_add"
+                    android:background="@drawable/filter_line"
+                    android:contentDescription="@string/yidejia" />
             </RelativeLayout>
         </RelativeLayout>
 

@@ -41,11 +41,6 @@ public class WelcomeActivity extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_welcome);
-
-		// if((getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE) !=
-		// 0){
-		// android.os.Process.killProcess(android.os.Process.myPid());
-		// }
 		StatService.setAppChannel(this, "", false);
 		StatService.setSessionTimeOut(30);
 		StatService.setLogSenderDelayed(10);
@@ -60,9 +55,9 @@ public class WelcomeActivity extends Activity {
 	}
 
 	public void checkUpdate() {
-//		closeTask();
-//		task = new GetVersionTask();
-//		task.execute();
+		// closeTask();
+		// task = new GetVersionTask();
+		// task.execute();
 		check();
 	}
 
@@ -95,17 +90,17 @@ public class WelcomeActivity extends Activity {
 			if (length != 1) {
 				for (int i = 1; i < length; i++) {
 					message += resultArray[1];
-					if(i != length - 1){
+					if (i != length - 1) {
 						message += "\n";
 					}
 				}
-				
+
 			}
 			showUpdateDialog(title, message);
 		} else {
 			go2MainAct();
 		}
-			
+
 	}
 
 	private class GetVersionTask extends AsyncTask<Void, Void, Boolean> {

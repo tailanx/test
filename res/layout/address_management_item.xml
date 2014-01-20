@@ -3,6 +3,7 @@
     android:id="@+id/address_management_item_linearlayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingTop="@dimen/magin_left_add_add"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -101,9 +102,9 @@
         <CheckBox
             android:id="@+id/address_management_item_relative1_checkBox1"
             style="@style/CustomCheckboxTheme"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true" />
 
         <TextView
             android:id="@+id/address_management_item_relative1_textview1"
@@ -131,9 +132,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/action_height"
             android:layout_toRightOf="@+id/address_management_item_relative1_checkBox1"
             android:text="@string/addresss_default"
-            android:layout_marginLeft="@dimen/margin_top"
             android:textSize="@dimen/textsize_small" />
     </RelativeLayout>
 

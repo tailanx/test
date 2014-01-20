@@ -14,21 +14,24 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
-import android.widget.ImageView;
+//import android.widget.Button;
+//import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockActivity;
+//import com.actionbarsherlock.app.SherlockActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+//import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.opens.asyncokhttpclient.AsyncHttpResponse;
+import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.datamanage.AddressDataManage;
+//import com.yidejia.app.mall.datamanage.AddressDataManage;
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.address.GetUserAddressList;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DefinalDate;
@@ -37,13 +40,16 @@ import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class AddressActivity extends BaseActivity {
 
-	private String TAG = AddressActivity.class.getName();// log
+	// private String TAG = AddressActivity.class.getName();// log
 	private AddressAdapter adapter;
 	private ListView listView;
 	private ArrayList<ModelAddresses> mAddresses;
 	private MyApplication myApplication;
 	private String userId;
 	private PullToRefreshListView pullToRefreshListView;
+	private String TAG = "AddressActivity";
+
+	// private String message;// 发生错误时候的报错信息
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +94,6 @@ public class AddressActivity extends BaseActivity {
 		myApplication = (MyApplication) getApplication();
 		userId = myApplication.getUserId();
 		mAddresses = new ArrayList<ModelAddresses>();
-		Log.e("info", mAddresses.size()+"info");
 		adapter = new AddressAdapter(AddressActivity.this, mAddresses);
 		listView.setAdapter(adapter);
 
@@ -108,39 +113,48 @@ public class AddressActivity extends BaseActivity {
 			}
 		});
 
-		bar = new ProgressDialog(this);
-		getUserAddressList = new GetUserAddressList();
-
-		closeTask();
-		task = new Task();
-		task.execute();
+		// bar = new ProgressDialog(this);
+		// getUserAddressList = new GetUserAddressList();
+		getAddressData();
+		//
+		// closeTask();
+		// task = new Task();
+		// task.execute();
 	}
 
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		closeTask();
+		// closeTask();
 	}
 
 	private OnRefreshListener2<ListView> listener2 = new OnRefreshListener2<ListView>() {
 
 		@Override
 		public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-			// TODO Auto-generated method stub
+			// // TODO Auto-generated method stub
 			fromIndex = 0;
-			closeTask();
-			task = new Task();
-			task.execute();
+			getAddressData();
+			// closeTask();
+			// task = new Task();
+			// task.execute();
 		}
 
 		@Override
 		public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
 			// TODO Auto-generated method stub
 			fromIndex += acount;
-			closeTask();
-			task = new Task();
-			task.execute();
+			getAddressData();
+			// if (isNomore) {
+			// refreshView.onRefreshComplete();
+			// Toast.makeText(AddressActivity.this,
+			// getResources().getString(R.string.nomore),
+			// Toast.LENGTH_SHORT).show();
+			// }
+			// closeTask();
+			// task = new Task();
+			// task.execute();
 		}
 	};
 
@@ -180,6 +194,82 @@ public class AddressActivity extends BaseActivity {
 		}
 	}
 
+	private void getAddressData() {
+		String url = new JNICallBack().getHttp4GetAddress("customer_id%3D"
+				+ userId + "+and+valid_flag%3D%27y%27", fromIndex + "", acount
+				+ "", "", "", "");
+		AsyncOkHttpClient client = new AsyncOkHttpClient();
+		client.get(url, new AsyncHttpResponse() {
+
+			@SuppressWarnings("static-access")
+			@Override
+			public void onStart() {
+				super.onStart();
+				// pullToRefreshListView.onRefreshComplete();
+				if (isFirstIn) {
+					bar = new YLProgressDialog(AddressActivity.this)
+							.createLoadingDialog(AddressActivity.this, null);
+					bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+						@Override
+						public void onCancel(DialogInterface dialog) {
+							bar.dismiss();
+						}
+					});
+				}
+			}
+
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				if (!isFirstIn)
+					pullToRefreshListView.onRefreshComplete();
+				else
+					bar.dismiss();
+				isFirstIn = false;
+			}
+
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				super.onSuccess(statusCode, content);
+				// 如果返回成功，则停止dialogbar
+				if (statusCode == AsyncHttpResponse.SUCCESS) {
+					bar.cancel();
+				}
+				ParseAddressJson parseAddressJson = new ParseAddressJson();
+				boolean issuccess = parseAddressJson
+						.parseAddressListJson(content);
+				if (issuccess) {
+					ArrayList<ModelAddresses> modelAddresses = parseAddressJson
+							.getAddresses();
+					if (null != modelAddresses && !modelAddresses.isEmpty()
+							&& fromIndex == 0) {
+						mAddresses.clear();
+					}
+
+					mAddresses.addAll(modelAddresses);
+					adapter.notifyDataSetChanged();
+
+				} else {
+					isNomore = true;
+					Toast.makeText(AddressActivity.this, getResources().getString(R.string.nomore), Toast.LENGTH_SHORT).show();
+				}
+
+			}
+
+			@Override
+			public void onError(Throwable error, String content) {
+				super.onError(error, content);
+				Toast.makeText(
+						AddressActivity.this,
+						AddressActivity.this.getResources().getString(
+								R.string.no_network), Toast.LENGTH_SHORT)
+						.show();
+			}
+
+		});
+	}
+
 	private ProgressDialog bar;
 	private Task task;
 	private GetUserAddressList getUserAddressList;
@@ -214,6 +304,7 @@ public class AddressActivity extends BaseActivity {
 			return false;
 		}
 
+		@SuppressWarnings("static-access")
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
@@ -272,6 +363,7 @@ public class AddressActivity extends BaseActivity {
 
 	}
 
+	@SuppressWarnings({ "static-access", "unused" })
 	private void closeTask() {
 		if (task != null
 				&& task.getStatus().RUNNING == AsyncTask.Status.RUNNING) {
