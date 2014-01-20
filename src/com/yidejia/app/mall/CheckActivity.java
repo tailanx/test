@@ -1,13 +1,10 @@
 package com.yidejia.app.mall;
 
-import com.actionbarsherlock.app.SherlockActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.TaskGetShipLog;
 
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,7 +14,7 @@ import android.widget.TextView;
  * @author LongBin
  *
  */
-public class CheckActivity extends SherlockActivity {
+public class CheckActivity extends BaseActivity {
 
 	private String shipCode;//快递单号
 	private String shipCompany;//快递公司
@@ -32,7 +29,9 @@ public class CheckActivity extends SherlockActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setActionbar();
+//		setActionbar();
+		setActionbarConfig();
+		setTitle(R.string.check_logistics);
 		//这里父布局要用scrollview
 		setContentView(R.layout.check_logistics);
 		
@@ -70,26 +69,6 @@ public class CheckActivity extends SherlockActivity {
 		check_logistics_image = (ImageView) findViewById(R.id.check_logistics_image);
 	}
 	
-	private void setActionbar(){
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setIcon(R.drawable.back);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_common);
-		TextView leftButton = (TextView) findViewById(R.id.ab_common_back);
-		leftButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				CheckActivity.this.finish();
-			}
-		});
-		
-		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
-		titleTextView.setText(getResources().getString(R.string.check_logistics));
-	}
 	
 	/**
 	 * 根据公司名称 获取公司图片的id

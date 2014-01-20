@@ -272,7 +272,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 		}
 	}
 	
-	private void setTabBackground(int lastIndex){
+	/*private void setTabBackground(int lastIndex){
 		switch (lastIndex) {
 		case 0:
 			selledTextView.setBackgroundResource(R.drawable.product_details_bg);
@@ -290,7 +290,7 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 		default:
 			break;
 		}
-	}
+	}*/
 	
 	public void selectContent(Bundle bundle){
 		Handler h = new Handler();

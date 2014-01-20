@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main_function_layout"
     android:layout_width="match_parent"
-    android:layout_height="184dp">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/function_layout_top"
@@ -15,7 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="90dp"
             android:layout_weight="1"
-            android:background="@drawable/functionmyorders"
+            android:background="@drawable/drawable_bg_main_fun"
             android:orientation="vertical" >
 
             <ImageView
@@ -43,7 +43,7 @@
                 android:id="@+id/function_my_order"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/function_myorders_selector"
+                android:background="@drawable/selecter_main_function"
                 android:clickable="true" >
             </RelativeLayout>
         </RelativeLayout>
@@ -51,7 +51,7 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="90dp"
-            android:background="@drawable/functionmyfavorites"
+            android:background="@drawable/drawable_bg_main_fun"
             android:layout_weight="1"
             android:orientation="vertical" >
 
@@ -79,7 +79,7 @@
                 android:id="@+id/function_my_favorite"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/function_myfavorites_selector"
+                android:background="@drawable/selecter_main_function"
                 android:clickable="true" >
             </RelativeLayout>
         </RelativeLayout>
@@ -88,7 +88,7 @@
             android:layout_width="0dp"
             android:layout_height="90dp"
             android:layout_weight="1"
-            android:background="@drawable/functionmyfavorites"
+            android:background="@drawable/drawable_bg_main_fun"
             android:orientation="vertical" >
 
             <ImageView
@@ -114,7 +114,7 @@
                 android:id="@+id/function_event"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/function_events_selector"
+                android:background="@drawable/selecter_main_function"
                 android:clickable="true" >
             </RelativeLayout>
         </RelativeLayout>
@@ -123,7 +123,7 @@
             android:layout_width="0dp"
             android:layout_height="90dp"
             android:layout_weight="1"
-            android:background="@drawable/member_buy"
+            android:background="@drawable/drawable_fun_right"
             android:orientation="vertical" >
 
             <ImageView
@@ -150,7 +150,7 @@
                 android:id="@+id/function_member"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/function_member_selector"
+                android:background="@drawable/selecter_main_function"
                 android:clickable="true" >
             </RelativeLayout>
         </RelativeLayout>
@@ -169,7 +169,7 @@
             android:layout_width="0dp"
             android:layout_height="90dp"
             android:layout_weight="1"
-            android:background="@drawable/history"
+            android:background="@drawable/drawable_bg_main_fun"
             android:orientation="vertical" >
 
             <ImageView
@@ -196,7 +196,7 @@
                 android:id="@+id/function_history"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/function_history_selector"
+                android:background="@drawable/selecter_main_function"
                 android:clickable="true" >
             </RelativeLayout>
         </RelativeLayout>
@@ -205,7 +205,7 @@
             android:layout_width="0dp"
             android:layout_height="90dp"
             android:layout_weight="1"
-            android:background="@drawable/functioncoupon"
+            android:background="@drawable/drawable_bg_main_fun"
             android:orientation="vertical" >
 
             <ImageView
@@ -216,7 +216,6 @@
                 android:layout_marginTop="8dp"
                 android:contentDescription="@string/yidejia"
                 android:src="@drawable/yirihui" />
-            <!-- android:drawableTop="@drawable/main_voucher" -->
 
             <TextView
                 android:id="@+id/main_voucher_text"
@@ -232,7 +231,7 @@
                 android:id="@+id/function_coupon"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/function_coupon_selector"
+                android:background="@drawable/selecter_main_function"
                 android:clickable="true" >
             </RelativeLayout>
         </RelativeLayout>
@@ -241,7 +240,7 @@
             android:layout_width="0dp"
             android:layout_height="90dp"
             android:layout_weight="1"
-            android:background="@drawable/functioncoupon"
+            android:background="@drawable/drawable_bg_main_fun"
             android:orientation="vertical" >
 
             <ImageView
@@ -271,7 +270,7 @@ android:background="@drawable/skin_test"                android:background="@dr
                 android:id="@+id/function_skin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/function_skin_selector"
+                android:background="@drawable/selecter_main_function"
                 android:clickable="true" >
             </RelativeLayout>
         </RelativeLayout>
@@ -280,7 +279,7 @@ android:background="@drawable/skin_test"                android:background="@dr
             android:layout_width="0dp"
             android:layout_height="90dp"
             android:layout_weight="1"
-            android:background="@drawable/function_message_center"
+            android:background="@drawable/drawable_fun_right"
             android:orientation="vertical" >
 
             <ImageView
@@ -307,7 +306,7 @@ android:background="@drawable/skin_test"                android:background="@dr
                 android:id="@+id/function_message"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/function_message_selector"
+                android:background="@drawable/selecter_main_function"
                 android:clickable="true" >
             </RelativeLayout>
         </RelativeLayout>

@@ -17,7 +17,7 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.TaskSaveComm;
 
-public class PersonEvaluationActivity extends SherlockActivity {
+public class PersonEvaluationActivity extends BaseActivity {
 	private MyApplication myApplication;
 	private TextView commentContext;
 	private RatingBar commRate;
@@ -27,7 +27,10 @@ public class PersonEvaluationActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		myApplication = (MyApplication) getApplication();
-		setActionbar();
+//		setActionbar();
+		setActionbarConfig();
+		setTitle(R.string.person_evaluation);
+		setRightMenu();
 		setContentView(R.layout.evaluation_person);
 		goodsId = getIntent().getStringExtra("goodsId");
 		findIds();
@@ -38,23 +41,9 @@ public class PersonEvaluationActivity extends SherlockActivity {
 		commentContext = (TextView) findViewById(R.id.comment_context);
 	}
 	
-	private void setActionbar(){
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setIcon(R.drawable.back);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(R.layout.actionbar_search_result);
-		ImageView leftButton = (ImageView) findViewById(R.id.actionbar_left);
-		leftButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				PersonEvaluationActivity.this.finish();
-			}
-		});
-		Button rightButton = (Button) findViewById(R.id.actionbar_right);
+	private void setRightMenu(){
+		TextView rightButton = (TextView)findViewById(R.id.ab_common_tv_right);
+		rightButton.setVisibility(View.VISIBLE);
 		rightButton.setText(getResources().getString(R.string.commit));
 		rightButton.setOnClickListener(new OnClickListener() {
 			
@@ -74,10 +63,8 @@ public class PersonEvaluationActivity extends SherlockActivity {
 				taskSaveComm.saveComm(goodsId, uid, nick, getRateTitle(rate), commentText, dateString);
 			}
 		});
-		
-		TextView titleTextView = (TextView) findViewById(R.id.actionbar_title);
-		titleTextView.setText(getResources().getString(R.string.person_evaluation));
 	}
+	
 	
 	private String getRateTitle(int rate){
 		String[] titleStrings = {"不满意","一般般","还可以","满意","很满意"};

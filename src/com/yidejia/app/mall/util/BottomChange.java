@@ -92,7 +92,7 @@ public class BottomChange {
 		switch (next) {
 		case 0:
 			down_my_imageView.setBackgroundResource(R.drawable.shouye_hover);
-			downHomeLayout.setBackgroundResource(R.drawable.down_hover1);
+//			downHomeLayout.setBackgroundResource(R.drawable.down_hover1);
 			down_my_textview.setTextColor(res.getColor(R.color.white));
 			break;
 		case 1:

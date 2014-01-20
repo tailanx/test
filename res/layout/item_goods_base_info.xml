@@ -2,12 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
-    android:background="@drawable/bg">
+    android:background="@color/main_bg">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/main_bg"
+        android:background="@color/main_bg"
         android:orientation="vertical"
         android:scrollbars="none" >
 
@@ -97,7 +97,7 @@
                     android:id="@+id/tv_selled_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-	                android:textColor="@color/text_color"
+	                android:textColor="@color/text_color_80"
                     android:text="@string/shell" />
 
                 <TextView
@@ -105,7 +105,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-	                android:textColor="@color/text_color"
+	                android:textColor="@color/text_color_80"
                     android:gravity="left"
                      />
 
@@ -113,7 +113,7 @@
                     android:id="@+id/tv_emulate_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-	                android:textColor="@color/text_color"
+	                android:textColor="@color/text_color_80"
                     android:text="@string/comment" />
 
                 <TextView
@@ -121,7 +121,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-	                android:textColor="@color/text_color"
+	                android:textColor="@color/text_color_80"
                     android:gravity="left"
                      />
 
@@ -129,7 +129,7 @@
                     android:id="@+id/tv_show_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-	                android:textColor="@color/text_color"
+	                android:textColor="@color/text_color_80"
                     android:text="@string/show_order" />
 
                 <TextView
@@ -137,7 +137,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-	                android:textColor="@color/text_color"
+	                android:textColor="@color/text_color_80"
                     android:gravity="left"
                      />
             </LinearLayout>
@@ -157,7 +157,7 @@
                     android:id="@+id/tv_brand_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-	                android:textColor="@color/text_color"
+	                android:textColor="@color/text_color_80"
                     android:text="@string/brand" />
 
                 <TextView
@@ -165,7 +165,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-	                android:textColor="@color/text_color"
+	                android:textColor="@color/text_color_80"
                      />
 
                 <TextView
@@ -173,14 +173,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_top"
-	                android:textColor="@color/text_color"
+	                android:textColor="@color/text_color_80"
                     android:text="@string/product_id" />
 
                 <TextView
                     android:id="@+id/tv_product_id_num_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-	                android:textColor="@color/text_color"
+	                android:textColor="@color/text_color_80"
                     android:layout_weight="1"
                      />
             </LinearLayout>
@@ -200,12 +200,12 @@
                     android:id="@+id/standard_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-	                android:textColor="@color/text_color"
+	                android:textColor="@color/text_color_80"
                     android:text="@string/standard_text" />
 
                 <TextView
                     android:id="@+id/standard_content_text"
-	                android:textColor="@color/text_color"
+	                android:textColor="@color/text_color_80"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -228,7 +228,7 @@
                     android:gravity="center_vertical"
                     android:layout_marginLeft="@dimen/margin_left"
                     android:text="@string/produce_comment"
-	                android:textColor="@color/text_color"
+	                android:textColor="@color/text_color_80"
                     android:textSize="@dimen/textsize_big_big" />
 
                 <ImageView
@@ -260,7 +260,7 @@
                     android:drawableLeft="@drawable/product_detail"
                     android:layout_marginLeft="@dimen/margin_left"
                     android:text="@string/produce_imagecomment"
-	                android:textColor="@color/text_color"
+	                android:textColor="@color/text_color_80"
                     android:textSize="@dimen/textsize_big_big" />
 
                 <ImageView
@@ -282,7 +282,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="@dimen/mall_list_padding"
                 android:text="@string/match_goods"
-	            android:textColor="@color/text_color"
+	            android:textColor="@color/text_color_80"
                 android:textSize="@dimen/textsize_big_big" />
 
             <HorizontalScrollView

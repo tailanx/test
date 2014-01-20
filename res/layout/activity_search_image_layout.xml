@@ -9,7 +9,7 @@
         android:id="@+id/pull_refresh_scrollview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@drawable/main_bg"
+        android:background="@color/main_bg"
         android:descendantFocusability="afterDescendants"
         ptr:ptrAnimationStyle="flip"
         ptr:ptrMode="pullUpFromBottom" >
@@ -18,7 +18,7 @@
             android:id="@+id/search_result_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/main_bg"
+            android:background="@color/main_bg"
             android:orientation="vertical" >
 
             <ListView
@@ -32,7 +32,7 @@
         android:id="@+id/search_empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg"
+        android:background="@color/main_bg"
         android:orientation="vertical"
         android:visibility="gone" >
 

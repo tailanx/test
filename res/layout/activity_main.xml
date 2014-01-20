@@ -20,7 +20,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_above="@+id/down_parent_layout"
-        android:background="@drawable/main_bg" >
+        android:background="@color/main_bg" >
 
         <RelativeLayout
             android:layout_width="match_parent"

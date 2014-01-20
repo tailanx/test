@@ -61,5 +61,9 @@
         <item name="android:windowIsFloating">true</item>
         <item name="android:gravity">center</item>
     </style>
+    
+    <style name="Loading" parent="@android:style/Theme.NoTitleBar">
+        <item name="android:windowBackground">@drawable/welcome</item>
+    </style>
 
 </resources>

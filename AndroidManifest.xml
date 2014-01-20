@@ -117,7 +117,7 @@
         <activity
             android:name="com.yidejia.app.mall.WelcomeActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" >
+            android:theme="@style/Loading" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -204,9 +204,7 @@
         <activity
             android:name="com.yidejia.app.mall.view.ExchangeFreeActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name="com.yidejia.app.mall.view.OptionActivity"
-            android:screenOrientation="portrait" />
+       
         <activity
             android:name="com.yidejia.app.mall.RecommendActivity"
             android:screenOrientation="portrait" />
