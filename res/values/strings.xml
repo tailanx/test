@@ -13,7 +13,7 @@
     <string name="main_favorite_text">收藏夹</string>
     <string name="main_event_text">活动馆</string>
     <string name="main_vip_text">会员购</string>
-    <string name="main_history_text">浏览历史</string>
+    <string name="main_history_text">体验中心</string>
     <string name="main_voucher_text">积分卡券</string>
     <string name="main_skin_test_text">肌肤测试</string>
     <string name="main_message_center_text">充值中心</string>
@@ -263,7 +263,7 @@
     <string name="comfirm_order">确认订单</string>
     <string name="goods_info">商品展示</string>
     <string name="cart_sum">总计:</string>
-    <string name="cart_count">数量 :</string>
+    <string name="cart_count">数量  : </string>
     <string name="cart_guang">去逛一下</string>
     <string name="cart_no_produce">购物车是空的</string>
     <string name="login_find_pwd">找回密码</string>
@@ -281,7 +281,7 @@
     <string name="edit_number">400-886-7898</string>
     <string name="edit_gengxin">检测更新</string>
     <string name="edit_version">当前版本</string>
-    <string name="edit_tuijian">当前应用推荐本</string>
+    <string name="edit_tuijian">应用推荐</string>
     <string name="order_state">订单状态：</string>
     <string name="order_pay">付款</string>
     <string name="order_set">设置</string>
@@ -304,6 +304,7 @@
     <string name="yaoyao_guize">规则</string>
     <string name="yaoyao_text">囧 ！神马都木有</string>
     <string name="yaoyao_next">再摇一次</string>
+    
     <!-- 支付宝客户端 -->
     <string name="remote_call_failed">Failure calling remote service</string>
     <string name="confirm_install_hint">"安装提示"</string>

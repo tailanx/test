@@ -1,7 +1,9 @@
 package com.yidejia.app.mall.shark;
 
 import android.app.Activity;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.provider.MediaStore.Video.Media;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -21,6 +23,7 @@ public class TestSharkActivity extends Activity implements OnClickListener {
 	private Animation animation;
 	private ImageView backImageView;
 	private Animation quanAnimation;
+	private MediaPlayer mediaPlayer;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,7 @@ public class TestSharkActivity extends Activity implements OnClickListener {
 		quanImageView = (ImageView) findViewById(R.id.iv_yaoyiyao_shou);
 		backImageView = (ImageView) findViewById(R.id.iv_shark_back);
 		backImageView.setOnClickListener(this);
-
+		mediaPlayer = MediaPlayer.create(this, R.raw.a);
 		quanAnimation = AnimationUtils.loadAnimation(this,
 				R.anim.my_translate_action);
 		quanImageView.startAnimation(quanAnimation);
@@ -50,6 +53,7 @@ public class TestSharkActivity extends Activity implements OnClickListener {
 				quanAnimation.setRepeatCount(0);
 				relativeLayout.setVisibility(View.VISIBLE);
 				quanImageView.setVisibility(View.GONE);
+				mediaPlayer.start();
 				startAnimaton();
 			}
 
