@@ -3,7 +3,7 @@
     android:id="@+id/sc_my_mall_login_scrollView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg" >
+    android:background="@color/main_bg" >
 
     <LinearLayout
         android:id="@+id/ll_person_main2_main2_linearlayout1"

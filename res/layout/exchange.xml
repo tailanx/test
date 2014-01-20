@@ -1,170 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/exchang_scrollView1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
-    android:orientation="vertical" >
+    android:background="@color/main_bg"
+    android:scrollbars="none" >
 
-    <ScrollView
-        android:id="@+id/exchang_scrollView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scrollbars="none" >
+    <LinearLayout
+        android:id="@+id/exchange_scrollView_linearlayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical" >
 
-        <LinearLayout
-            android:id="@+id/exchange_scrollView_linearlayout1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="8dp"
-            android:orientation="vertical" >
+        <TextView
+            android:id="@+id/exchange_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/order_detailsbg_top"
+            android:gravity="center"
+            android:textSize="15sp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/order_statusbg_down"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp" >
 
             <TextView
-                android:id="@+id/exchange_title"
+                android:id="@+id/exchange_biaohao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/order_detailsbg_top"
-                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:text="订单编号："
+                android:textColor="@color/text_color_40"
                 android:textSize="15sp" />
 
-            <RelativeLayout
+            <TextView
+                android:id="@+id/exchange_biaohao_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/order_statusbg_down"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp" >
+                android:layout_toRightOf="@id/exchange_biaohao"
+                android:textColor="@color/text_color_80"
+                android:textSize="15sp" />
 
-                <TextView
-                    android:id="@+id/exchange_biaohao"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="订单编号："
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/exchange_biaohao_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/exchange_biaohao"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/exchange_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/exchange_biaohao"
-                    android:layout_below="@id/exchange_biaohao"
-                    android:layout_marginTop="4dp"
-                    android:text="下单时间："
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/exchange_time_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/exchange_biaohao"
-                    android:layout_marginTop="4dp"
-                    android:layout_toRightOf="@id/exchange_time"
-                    android:textSize="15sp" />
-            </RelativeLayout>
-
-            <TableLayout
-                android:id="@+id/exchange_background"
-                android:layout_width="fill_parent"
+            <TextView
+                android:id="@+id/exchange_time"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="8dp"
-                android:stretchColumns="1" >
+                android:layout_alignLeft="@id/exchange_biaohao"
+                android:layout_below="@id/exchange_biaohao"
+                android:layout_marginTop="4dp"
+                android:text="下单时间："
+                android:textColor="@color/text_color_40"
+                android:textSize="15sp" />
 
-                <TableRow android:background="@drawable/new_menubg_up" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:paddingLeft="20dp"
-                        android:text="联系人:"
-                        android:textSize="16sp" />
-
-                    <EditText
-                        android:id="@+id/exchange_edittext_lianxiren"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:background="@null"
-                        android:maxLength="5"
-                        android:singleLine="true" />
-                </TableRow>
-
-                <TableRow android:background="@drawable/new_menubg_middle" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:paddingLeft="20dp"
-                        android:text="联系方式:"
-                        android:textSize="16sp" />
-
-                    <EditText
-                        android:id="@+id/exchange_edittext_lianxifangshi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:background="@null"
-                        android:maxLength="20"
-                        android:inputType="phone"
-                        android:singleLine="true" />
-                </TableRow>
-
-                <TableRow android:background="@drawable/menubg_down" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:paddingLeft="20dp"
-                        android:text="退货原因："
-                        android:textSize="16sp" />
-
-                    <Spinner 
-                        android:id="@+id/exchange_spinner"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:background="@null"
-                        android:entries="@array/reason"
-                        android:prompt="@string/tip" />
-                </TableRow>
-            </TableLayout>
-<!-- 
-            <ScrollView
-                android:id="@+id/go_pay_pinglun_scrollView_exchange"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/exchange_time_number"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-               
-                android:background="@drawable/comment" >
+                android:layout_below="@id/exchange_biaohao"
+                android:layout_marginTop="4dp"
+                android:layout_toRightOf="@id/exchange_time"
+                android:textColor="@color/text_color_80"
+                android:textSize="15sp" />
+        </RelativeLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
-                </LinearLayout>
-            </ScrollView>
- -->
+        <TableLayout
+            android:id="@+id/exchange_background"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:stretchColumns="1" >
 
-                    <EditText
-                        android:id="@+id/go_pay_leave_message"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/account_bg"
-                        android:layout_marginTop="8dp"
-                        android:editable="true"
-                        android:hint="   退货原因描述.........                                                                                                                                             "
-                        android:padding="10dp"
-                        android:textSize="16sp" />
-        </LinearLayout>
-    </ScrollView>
+            <TableRow android:background="@drawable/new_menubg_up" >
 
-</LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="联系人:"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/exchange_edittext_lianxiren"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@null"
+                    android:maxLength="5"
+                    android:textColor="@color/text_color_80"
+                    android:singleLine="true" />
+            </TableRow>
+
+            <TableRow android:background="@drawable/new_menubg_middle" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="联系方式:"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/exchange_edittext_lianxifangshi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@null"
+                    android:inputType="phone"
+                    android:maxLength="20"
+                    android:textColor="@color/text_color_80"
+                    android:singleLine="true" />
+            </TableRow>
+
+            <TableRow android:background="@drawable/menubg_down" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="退货原因："
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/exchange_spinner"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@null"
+                    android:entries="@array/reason"
+                    android:prompt="@string/tip" />
+            </TableRow>
+        </TableLayout>
+
+        <EditText
+            android:id="@+id/go_pay_leave_message"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/drawable_textbg"
+            android:editable="true"
+            android:hint="退货原因描述........."
+            android:textColor="@color/text_color_120"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</ScrollView>

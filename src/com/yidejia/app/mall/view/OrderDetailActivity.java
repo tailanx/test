@@ -21,6 +21,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.address.ModelAddresses;
 import com.yidejia.app.mall.datamanage.TaskGetOrderByCode;
@@ -28,7 +29,7 @@ import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.util.Consts;
 
-public class OrderDetailActivity extends SherlockFragmentActivity {
+public class OrderDetailActivity extends BaseActivity {
 //	private TextView nameTextView;//收件人姓名
 //	private TextView phoneTextView;//收件人电话
 //	private TextView detailTextView;//收件人地址
@@ -52,7 +53,9 @@ public class OrderDetailActivity extends SherlockFragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setActionBar();
+//		setActionBar();
+		setActionbarConfig();
+		setTitle(R.string.order_detail);
 		setContentView(R.layout.order_detail);
 		initDisplayImageOption();
 //		addressDataManage = new AddressDataManage(OrderDetailActivity.this);
@@ -147,27 +150,6 @@ public class OrderDetailActivity extends SherlockFragmentActivity {
 	}
 
 
-
-	private void setActionBar() {
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setCustomView(R.layout.actionbar_common);
-		TextView back = (TextView) findViewById(R.id.ab_common_back);
-		back.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				OrderDetailActivity.this.finish();
-			}
-		});
-		getSupportActionBar().setIcon(R.drawable.back);
-		TextView title = (TextView) findViewById(R.id.ab_common_title);
-		title.setText(getResources().getString(R.string.order_detail));
-	}
 	int fromIndex = 0;
 	int acount = 10;
 	StringBuffer sb = new StringBuffer();

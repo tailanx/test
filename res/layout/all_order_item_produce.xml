@@ -53,7 +53,7 @@
         android:layout_marginLeft="8dp"
         android:layout_toRightOf="@id/all_order_item_image"
         android:text="@string/amount"
-        android:textColor="@color/text_color"
+        android:textColor="@color/text_color_80"
         android:textSize="15sp" />
 
     <TextView
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/all_order_item_sum"
         android:layout_toRightOf="@id/all_order_item_count"
-        android:textColor="@color/text_color"
+        android:textColor="@color/text_color_80"
         android:textSize="15sp" />
 
     <ImageView

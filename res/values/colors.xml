@@ -34,7 +34,14 @@
     <color name="dialog_bg">#00000000</color>
     <color name="order">#695a3d</color>
     <color name="order_cor">#68573b</color>
-    <color name="text_color">#505050</color>
+    <!-- 80文字色值 -->
+    <color name="text_color_80">#505050</color>
 	<color name="text_press_color">#ffb4c8</color>
+	<!-- 200色值 -->
+	<color name="line_color">#c8c8c8</color>
+	<!-- 120文字色值 -->
+	<color name="text_color_120">#787878</color>
+	<!-- 40色值 -->
+	<color name="text_color_40">#282828</color>
 	
 </resources>

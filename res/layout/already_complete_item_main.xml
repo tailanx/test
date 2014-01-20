@@ -8,7 +8,7 @@
         android:id="@+id/already_complete_item_main_refresh_scrollview11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/main_bg"
+        android:background="@color/main_bg"
         android:descendantFocusability="afterDescendants"
         android:scrollbars="none"
         ptr:ptrAnimationStyle="flip"

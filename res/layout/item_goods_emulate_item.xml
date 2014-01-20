@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/margin_top"
         android:layout_marginTop="@dimen/magin_left_add"
-        android:background="@drawable/commentbg_up" >
+        android:background="@color/white" >
 
         <TextView
             android:id="@+id/user_level"
@@ -54,7 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/emulate_user_layout"
-        android:background="@drawable/commentbg_middle"
+        android:background="@color/white"
         android:paddingLeft="@dimen/margin_left"
         android:paddingRight="@dimen/margin_left"
         android:paddingTop="@dimen/actiobar_margin_top"
@@ -66,7 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/emulate_text"
-        android:background="@drawable/commentbg_down"
+        android:background="@color/white"
         android:orientation="horizontal" >
 
         <TextView

@@ -9,7 +9,7 @@
         android:id="@+id/main_pull_refresh_scrollview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@drawable/main_bg"
+        android:background="@color/main_bg"
         android:descendantFocusability="afterDescendants"
         android:scrollbars="none"
         ptr:ptrAnimationStyle="flip"

@@ -139,7 +139,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginRight="4dp"
             android:layout_marginTop="4dp"
-            android:background="@drawable/shop_message"
+            android:background="@color/theme"
             android:text="@string/hour"
             android:textColor="@color/white"
             android:textSize="@dimen/textsize_small_small" />

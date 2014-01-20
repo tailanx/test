@@ -15,19 +15,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.baidu.mobstat.StatService;
-import com.tenpay.android.service.TenpayServiceHelper;
 import com.unionpay.UPPayAssistEx;
 import com.unionpay.uppay.PayActivity;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.R.layout;
-import com.yidejia.app.mall.R.string;
 import com.yidejia.app.mall.order.AllOrderActivity;
 import com.yidejia.app.mall.order.WaitPayActivity;
 import com.yidejia.app.mall.util.Http;
@@ -82,61 +78,9 @@ public class UserPayActivity extends Activity{
 		
 	}
 	
-//	private class OrderCode extends AsyncTask<Void, Void, Boolean>{
-//
-//		@Override
-//		protected Boolean doInBackground(Void... params) {
-//			// TODO Auto-generated method stub
-//			GetOrderCode getOrderCode = new GetOrderCode(UserPayActivity.this);
-//			try {
-//				String httpresponse = getOrderCode.getTNCode(code, uid);
-//				int httpcode;
-//				try {
-//					JSONObject httpObject = new JSONObject(httpresponse);
-//					httpcode = httpObject.getInt("code");
-//					if(httpcode == 1){
-//						String response = httpObject.getString("response");
-//						try {
-//							JSONObject itemObject = new JSONObject(response);
-//							respCode = itemObject.getString("respCode");
-//							upayTn = itemObject.getString("tn");
-//						} catch (Exception e) {
-//							// TODO: handle exception
-//						}
-//						return true;
-//					}
-//				} catch (JSONException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			return false;
-//		}
-//
-//		@Override
-//		protected void onPostExecute(Boolean result) {
-//			// TODO Auto-generated method stub
-//			super.onPostExecute(result);
-//			if(result){
-//				if (null != respCode && "00".equals(respCode) && null != upayTn) {
-//					
-//					UPPayAssistEx.startPayByJAR(UserPayActivity.this,
-//							PayActivity.class, null, null, upayTn, "01");
-//					
-//				} else {
-//					
-//				}
-//			}
-//		}
-//		
-//	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
 //		super.onActivityResult(requestCode, resultCode, data);
 		/************************************************* 
          * 
@@ -244,36 +188,6 @@ public class UserPayActivity extends Activity{
 		}
 	};
 	
-	/**
-	//银联支付
-	private void UPPay(){
-
-		FutureTask<Map<String, String>> task = new FutureTask<Map<String, String>>(call);
-		Thread th = new Thread(task);
-		th.start();
-		Map<String, String> resp;
-		try {
-			resp = task.get();
-			Log.d(TAG, "task status: " + task.isDone());
-			
-			if (null != resp && null != resp.get("code") && "0000".equals(resp.get("code"))) {
-				String tn = resp.get("tn");
-				UPPayAssistEx.startPayByJAR(this,
-						PayActivity.class, null, null, tn, "00");
-				
-			} else {
-				
-			}
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-	*/
 	
 	// 接收财付通支付返回值的Handler
 	protected Handler mHandler = new Handler() {
@@ -363,12 +277,4 @@ public class UserPayActivity extends Activity{
 		});
 	}
 	
-	protected String getTokenID() {
-		// 注意：按协议文档要求，商户应用可前端直接或通过自己后台与财付通后台支付初始化cgi接口通信得到财付通订单token_id
-		// .....
-
-		// 此固定串仅为演示示例,是一个假订单号，支付会出错，商户需要通过上述操作获得正确的订单号
-		return "41aaa2651c9477544cbe6bfe41ddd1bd".toString();
-
-	}
 }
