@@ -25,6 +25,14 @@
             android:textSize="@dimen/textsize_small_small" />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/main_mall"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_small_small" />
+
+        <TextView
             android:id="@+id/tv_wait_pay_order_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,6 +56,14 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="@string/mall_wait_deliver"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_small_small" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/main_mall"
             android:textColor="@color/white"
             android:textSize="@dimen/textsize_small_small" />
 
@@ -79,6 +95,14 @@
             android:textSize="@dimen/textsize_small_small" />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/main_mall"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_small_small" />
+
+        <TextView
             android:id="@+id/tv_already_deliver_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -102,6 +126,14 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="@string/already_compelte"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_small_small" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/main_mall"
             android:textColor="@color/white"
             android:textSize="@dimen/textsize_small_small" />
 

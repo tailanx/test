@@ -2,12 +2,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main_function_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:id="@+id/main_function_imageview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/main_theme_textview_bg" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/width_add"
+            android:background="@color/line_color"
+            android:contentDescription="@string/yidejia" />
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/function_layout_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/main_function_imageview"
         android:baselineAligned="false"
         android:orientation="horizontal" >
 
@@ -26,8 +40,6 @@
                 android:layout_marginTop="8dp"
                 android:contentDescription="@string/yidejia"
                 android:src="@drawable/myorders" />
-
-            <!-- android:drawableTop="@drawable/main_my_order" -->
 
             <TextView
                 android:id="@+id/main_my_order_text"
@@ -51,8 +63,8 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="90dp"
-            android:background="@drawable/drawable_bg_main_fun"
             android:layout_weight="1"
+            android:background="@drawable/drawable_bg_main_fun"
             android:orientation="vertical" >
 
             <ImageView
@@ -123,7 +135,7 @@
             android:layout_width="0dp"
             android:layout_height="90dp"
             android:layout_weight="1"
-            android:background="@drawable/drawable_fun_right"
+            android:background="@drawable/drawable_bg_main_fun"
             android:orientation="vertical" >
 
             <ImageView
@@ -179,7 +191,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
                 android:contentDescription="@string/yidejia"
-                android:src="@drawable/experience" />
+                android:src="@drawable/message_center" />
             <!-- android:drawableTop="@drawable/main_history" -->
 
             <TextView
@@ -279,7 +291,7 @@ android:background="@drawable/skin_test"                android:background="@dr
             android:layout_width="0dp"
             android:layout_height="90dp"
             android:layout_weight="1"
-            android:background="@drawable/drawable_fun_right"
+            android:background="@drawable/drawable_bg_main_fun"
             android:orientation="vertical" >
 
             <ImageView

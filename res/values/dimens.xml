@@ -32,10 +32,12 @@
     <dimen name="item_goods_emulate_add">55dp</dimen>
     <dimen name="margin_top_add">45dp</dimen>
     <dimen name="margin_top">40dp</dimen>
+    <dimen name="magin_left_add_add">30dp</dimen>
     <dimen name="magin_left_add">25dp</dimen>
     <dimen name="magin_left_add_add">18dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="mall_list_padding">15dp</dimen>
+    <dimen name="mall_list_padding_add">13dp</dimen>
     <dimen name="margin_left_more">12dp</dimen>
     <dimen name="margin_left">10dp</dimen>
     <dimen name="white_bg_padding">10dp</dimen>
@@ -47,5 +49,7 @@
     <dimen name="actiobar_margin_left">2dp</dimen>
     <dimen name="width_add">1dp</dimen>
     <dimen name="width">0dp</dimen>
+    <dimen name="width_fu_add">-25dp</dimen>
+    <dimen name="width_fu">-45dp</dimen>
 
 </resources>

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_bg"
+    android:background="@color/white_white"
     tools:context=".view.CstmPayActivity" >
 
     <ScrollView
@@ -16,50 +16,65 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginTop="12dp"
             android:orientation="vertical" >
 
             <RelativeLayout
                 android:id="@+id/coupons_relative2"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/integration_upbg" >
+                android:background="@drawable/layout_selector2" >
 
                 <TextView
                     android:id="@+id/coupons_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="30dp"
-                    android:text="您当前的积分："
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:text="@string/mall_integer"
                     android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/jiefen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/coupons_text"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="40dp"
                     android:layout_toRightOf="@id/coupons_text"
-                    android:paddingTop="20dp"
-                    android:textColor="#ed217c"
+                    android:textColor="@color/theme"
                     android:textSize="35sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/coupons_relative2_ad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_left"
+                android:background="@drawable/layout_selector2" >
 
                 <TextView
+                    android:id="@+id/aidu_guize"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_left"
                     android:paddingBottom="8dp"
-                    android:text="积分获取及使用常见问题"
+                    android:text="@string/mall_problem"
                     android:textSize="18sp" />
             </RelativeLayout>
 
-            <WebView
-                android:id="@+id/wb_webView"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
+            <RelativeLayout
+                android:id="@+id/coupons_relative2_add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/theme_backgound_mall" >
+
+                <WebView
+                    android:id="@+id/wb_webView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 

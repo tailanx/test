@@ -113,6 +113,7 @@ public class GetUserAddressList {
 		HttpGetConn conn = new HttpGetConn(new JNICallBack().getHttp4GetAddress(
 				where, offset, limit, "", "", ""), true);
 		result = conn.getJsonResult();
+		
 		return result;
 	}
 

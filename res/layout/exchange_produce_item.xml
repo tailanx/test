@@ -8,11 +8,11 @@
     <CheckBox
         android:id="@+id/exchange_produce_item_checkbox"
         style="@style/CustomCheckboxTheme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/margin_top_add"
+        android:layout_height="@dimen/margin_top"
         android:layout_centerVertical="true"
-        android:focusable= "true"
-        android:layout_marginLeft="12dp" />
+        android:layout_marginLeft="12dp"
+        android:focusable="true" />
 
     <ImageView
         android:id="@+id/exchange_produce_item__imageview1"
@@ -21,8 +21,7 @@
         android:layout_centerVertical="true"
         android:layout_toRightOf="@id/exchange_produce_item_checkbox"
         android:background="@drawable/product_image_bg"
-        android:padding="10dp"
-         />
+        android:padding="10dp" />
 
     <TextView
         android:id="@+id/exchange_produce_item_text"
@@ -35,19 +34,7 @@
         android:ellipsize="end"
         android:lines="2"
         android:textSize="15sp" />
-<!--  
-    <TextView
-        android:id="@+id/exchange_produce_item_money_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/exchange_produce_item_text"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_toRightOf="@id/exchange_produce_item__imageview1"
-        android:text="￥"
-        android:textColor="#ed217c"
-        android:textSize="20sp" />
--->
+
     <TextView
         android:id="@+id/exchange_produce_item_money"
         android:layout_width="wrap_content"
@@ -63,6 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/exchange_produce_item_text"
+        android:layout_marginLeft="@dimen/margin_left_add"
         android:layout_marginTop="4dp"
         android:layout_toRightOf="@id/exchange_produce_item_money"
         android:text="积分"
@@ -81,19 +69,12 @@
 
     <RelativeLayout
         android:id="@+id/exchange_produce_item_relative"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/yirihui"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/exchange_produce_item_text"
-        android:layout_below="@id/exchange_produce_item_money"
-        android:layout_toLeftOf="@id/exchange_produce_item_right"
+        android:layout_below="@id/exchange_produce_item_money_text"
+        android:layout_marginBottom="@dimen/actiobar_margin_top"
+        android:layout_marginLeft="@dimen/margin_left_add"
         android:layout_toRightOf="@id/exchange_produce_item__imageview1" >
-
-        <ImageView
-            android:id="@+id/imageView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@drawable/quantity_bg" />
 
         <ImageView
             android:id="@+id/exchange_produce_item_subtract"
@@ -101,24 +82,30 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/reduction" />
+            android:contentDescription="@string/yidejia"
+            android:src="@drawable/car_reduction" />
 
         <ImageView
             android:id="@+id/exchange_produce_item_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/imageView11"
-            android:src="@drawable/addition" />
+            android:layout_alignParentRight="true"
+            android:contentDescription="@string/yidejia"
+            android:src="@drawable/car_add" />
 
         <TextView
             android:id="@+id/exchange_produce_item_edit_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/exchange_produce_item_add"
+            android:layout_alignBottom="@id/exchange_produce_item_subtract"
+            android:layout_alignTop="@id/exchange_produce_item_subtract"
+            android:layout_marginLeft="@dimen/white_bg_padding"
             android:layout_toRightOf="@id/exchange_produce_item_subtract"
-            android:gravity="center"
-            android:text="1" />
+            android:background="@drawable/main_cart_textview_bg"
+            android:paddingBottom="@dimen/margin_left_add"
+            android:paddingLeft="@dimen/margin_left"
+            android:paddingRight="@dimen/margin_left"
+            android:text="@string/hour" />
     </RelativeLayout>
 
 </RelativeLayout>

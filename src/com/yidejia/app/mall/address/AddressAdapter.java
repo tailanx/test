@@ -3,11 +3,15 @@ package com.yidejia.app.mall.address;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,14 +25,18 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ImageView;
+//import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.opens.asyncokhttpclient.AsyncHttpResponse;
+import com.opens.asyncokhttpclient.AsyncOkHttpClient;
+import com.opens.asyncokhttpclient.RequestParams;
 import com.yidejia.app.mall.HomeMallActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.datamanage.AddressDataManage;
+//import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.exception.TimeOutEx;
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.address.DeleteUserAddress;
 import com.yidejia.app.mall.net.address.SetDefAddr;
@@ -44,8 +52,12 @@ public class AddressAdapter extends BaseAdapter {
 	private LayoutInflater inflater;
 	private MyApplication myApplication;
 	private int temp = -1;
-	private boolean isSelect;
+	// private boolean isSelect;
 	private SharedPreferences sp;
+	private RequestParams requestParams;
+	private String contentType;
+	private String hosturl;
+	private AsyncOkHttpClient client;
 
 	public AddressAdapter(Activity context, ArrayList<ModelAddresses> mAddresses) {
 		this.mAddresses = mAddresses;
@@ -63,15 +75,24 @@ public class AddressAdapter extends BaseAdapter {
 		Editor editor = sp.edit();
 		editor.putInt("stateCBId", temp);
 		editor.commit();
+
+		requestParams = new RequestParams();
+		hosturl = new JNICallBack().HTTPURL;
+		contentType = "application/x-www-form-urlencoded;charset=UTF-8";
+		client = new AsyncOkHttpClient();
 	}
 
 	@Override
 	public int getCount() {
+		if (null == mAddresses)
+			return 0;
 		return mAddresses.size();
 	}
 
 	@Override
 	public ModelAddresses getItem(int arg0) {
+		if (null == mAddresses)
+			return null;
 		return mAddresses.get(arg0);
 	}
 
@@ -125,10 +146,11 @@ public class AddressAdapter extends BaseAdapter {
 									int which) {
 
 								addressId = addresses.getAddressId();
-								closeTask();
-								delTask = new DelTask();
-								delTask.setAddresses(addresses);
-								delTask.execute();
+								deleDate(addresses);
+								// closeTask();
+								// delTask = new DelTask();
+								// delTask.setAddresses(addresses);
+								// delTask.execute();
 							}
 						})
 				.setNegativeButton(
@@ -194,12 +216,13 @@ public class AddressAdapter extends BaseAdapter {
 						return;
 					}
 
-					addressId = addresses.getAddressId();
-					closeTask();
-					task = new Task();
-					task.setButtonView(buttonView);
-					task.execute();
-					// }
+					 addressId = addresses.getAddressId();
+					 closeTask();
+					 task = new Task();
+					 task.setButtonView(buttonView);
+					 task.execute();
+					 // }
+//					editAddress(buttonView, addresses);
 				} else {
 				}
 			}
@@ -252,6 +275,7 @@ public class AddressAdapter extends BaseAdapter {
 			return false;
 		}
 
+		@SuppressWarnings("static-access")
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
@@ -280,7 +304,6 @@ public class AddressAdapter extends BaseAdapter {
 				}
 				if (buttonView != null) {
 					temp = buttonView.getId();// 保存当前选中的checkbox的id值
-
 				}
 			}
 		}
@@ -363,4 +386,136 @@ public class AddressAdapter extends BaseAdapter {
 	}
 
 	private boolean isTimeout = false;
+
+	private void deleDate(final ModelAddresses addresses) {
+
+		String url = new JNICallBack().getHttp4DelAddress(
+				myApplication.getUserId(), addresses.getAddressId(),
+				myApplication.getToken());
+		requestParams.put(url);
+
+		client.post(hosturl, contentType, requestParams,
+				new AsyncHttpResponse() {
+					@Override
+					public void onStart() {
+						super.onStart();
+
+						new YLProgressDialog(activity);
+						bar = YLProgressDialog.createLoadingDialog(activity,
+								null);
+						bar.setOnCancelListener(new OnCancelListener() {
+
+							@Override
+							public void onCancel(DialogInterface dialog) {
+								bar.dismiss();
+							}
+
+						});
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						bar.dismiss();
+						if (isTimeout) {
+							Toast.makeText(
+									activity,
+									activity.getResources().getString(
+											R.string.no_network),
+									Toast.LENGTH_SHORT).show();
+						}
+					}
+
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						JSONObject httpResultObject;
+						if (content != null && !"".equals(content)) {
+							try {
+								httpResultObject = new JSONObject(content);
+								int deleResult = httpResultObject
+										.getInt("code");
+								Log.e("info", "-------->onStart" + deleResult);
+								if (deleResult == 1) {
+
+									mAddresses.remove(addresses);
+									notifyDataSetChanged();
+									isTimeout = false;
+								} else {
+									isTimeout = true;
+								}
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+								isTimeout = true;
+							}
+
+						} else {
+							return;
+						}
+
+					}
+
+					@Override
+					public void onError(Throwable error, String content) {
+						super.onError(error, content);
+						isTimeout = true;
+					}
+
+				});
+	}
+
+	private void editAddress(final CompoundButton buttonView,
+			ModelAddresses addresses) {
+		String url = new JNICallBack().getHttp4SetDefAddr(
+				myApplication.getUserId(), addresses.getAddressId(),
+				myApplication.getToken());
+		requestParams.put(url);
+		client.post(url, contentType, requestParams, new AsyncHttpResponse() {
+			@Override
+			public void onError(Throwable error, String content) {
+				super.onError(error, content);
+				isTimeout = true;
+			}
+
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				bar.dismiss();
+			}
+
+			@Override
+			public void onStart() {
+				super.onStart();
+				bar = new YLProgressDialog(activity).createLoadingDialog(
+						activity, null);
+				bar.setOnCancelListener(new OnCancelListener() {
+
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						bar.dismiss();
+					}
+				});
+			}
+
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				super.onSuccess(statusCode, content);
+				if (statusCode == AsyncHttpResponse.SUCCESS) {
+					if (temp != -1) {
+						// 找到上次点击的checkbox,并把它设置为false,对重新选择时可以将以前的关掉
+						Log.e("info", temp+"temp");
+						CheckBox tempCheckBox = (CheckBox) activity
+								.findViewById(temp);
+						if (tempCheckBox != null)
+							tempCheckBox.setChecked(false);
+					}
+					if (buttonView != null) {
+						temp = buttonView.getId();// 保存当前选中的checkbox的id值
+
+					}
+				}
+			}
+		});
+	}
 }

@@ -3,11 +3,10 @@
     android:layout_height="match_parent"
     android:background="@color/main_bg" >
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/shopping_cart_sum"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_height="wrap_content" >
 
         <CheckBox
             android:id="@+id/shopping_cart_checkbox"
@@ -15,16 +14,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/actiobar_margin_top"
+            android:layout_marginLeft="@dimen/margin_left"
             android:text="@string/cart_sum"
-            android:textSize="@dimen/textsize_small_add" />
+            android:textColor="@color/text_color_80"
+            android:textSize="@dimen/textsize_small" />
 
         <TextView
             android:id="@+id/shopping_cart_sum_money_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/shopping_cart_checkbox"
             android:layout_gravity="center"
             android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@id/shopping_cart_checkbox"
             android:text="@string/go_pay_show_pay_money"
             android:textColor="@color/theme"
             android:textSize="14sp" />
@@ -33,17 +35,22 @@
             android:id="@+id/shopping_cart_sum_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/shopping_cart_checkbox"
             android:layout_gravity="center"
             android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@id/shopping_cart_sum_money_price"
             android:text="@string/hour"
             android:textColor="@color/theme"
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/shopping_cart_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/shopping_cart_checkbox"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/mall_list_padding"
+            android:layout_toRightOf="@id/shopping_cart_sum_money"
             android:text="@string/cart_count"
             android:textSize="16sp" />
 
@@ -51,8 +58,10 @@
             android:id="@+id/shopping_cart_sum_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/shopping_cart_checkbox"
             android:layout_gravity="center"
             android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@id/shopping_cart_count"
             android:text="@string/hour"
             android:textColor="#ed217c"
             android:textSize="16sp" />
@@ -61,14 +70,18 @@
             android:id="@+id/tv_shopping_cart_gopay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/shopping_cart_checkbox"
+            android:layout_alignParentRight="true"
             android:layout_marginLeft="@dimen/magin_left_add"
+            android:layout_marginRight="@dimen/margin_left"
             android:layout_marginTop="@dimen/mall_list_padding"
             android:background="@drawable/theme_textview_background"
+            android:padding="@dimen/actiobar_margin_top"
             android:singleLine="true"
             android:text="@string/go_pay"
-            android:textColor="@color/white"
+            android:textColor="@color/color_sort_text_color_press"
             android:textSize="@dimen/textsize_small_small" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <ScrollView
         android:id="@+id/shopping_cart_item_goods_scrollView"

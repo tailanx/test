@@ -8,8 +8,8 @@
     <CheckBox
         android:id="@+id/ck_shopping_cart_item_checkbox"
         style="@style/CustomCheckboxTheme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/base_info_match_add"
+        android:layout_height="@dimen/base_info_match_add"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/width" />
 
@@ -18,7 +18,7 @@
         android:layout_width="@dimen/yirihui"
         android:layout_height="@dimen/yirihui"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/magin_left_add"
+        android:layout_marginLeft="@dimen/width_fu"
         android:layout_toRightOf="@id/ck_shopping_cart_item_checkbox"
         android:background="@drawable/product_image_bg"
         android:contentDescription="@string/yidejia"
@@ -79,12 +79,12 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/iv_shopping_cart_item_subtract"
             android:layout_alignTop="@id/iv_shopping_cart_item_subtract"
-            android:layout_marginLeft="@dimen/head_padding"
+            android:layout_marginLeft="@dimen/white_bg_padding"
             android:layout_toRightOf="@id/iv_shopping_cart_item_subtract"
             android:background="@drawable/main_cart_textview_bg"
             android:paddingLeft="@dimen/margin_left"
             android:paddingRight="@dimen/margin_left"
-            android:paddingBottom="@dimen/margin_left_add"
+            android:paddingBottom="@dimen/white_bg_padding"
             android:text="@string/hour" />
 
         <ImageView

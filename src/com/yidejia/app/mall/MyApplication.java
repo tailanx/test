@@ -20,24 +20,23 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 public class MyApplication extends Application {
 
-	static final List<String> displayedImages = Collections.synchronizedList(new LinkedList<String>());
-	
+	static final List<String> displayedImages = Collections
+			.synchronizedList(new LinkedList<String>());
+
 	private static MyApplication instance;
-	
-	
+
 	private ImageLoadingListener animateFirstListener;
-	
+
 	public static MyApplication getInstance() {
 		return instance;
 	}
-	
-	
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		
+
 		instance = this;
-		
+
 		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
 				getApplicationContext())
 				.threadPriority(Thread.NORM_PRIORITY - 2)
@@ -129,7 +128,17 @@ public class MyApplication extends Application {
 	public String getVip() {
 		return vip;
 	}
-	
+
+	private String aidou;
+
+	public void setAidou(String aidou) {
+		this.aidou = aidou;
+	}
+
+	public String getAidou() {
+		return aidou;
+	}
+
 	/**
 	 * 
 	 * 返回图片加载的监听
@@ -137,7 +146,7 @@ public class MyApplication extends Application {
 	public ImageLoadingListener getImageLoadingListener() {
 		return animateFirstListener;
 	}
-	
+
 	private static class AnimateFirstDisplayListener extends
 			SimpleImageLoadingListener {
 
@@ -161,31 +170,27 @@ public class MyApplication extends Application {
 		super.onLowMemory();
 		ImageLoader.getInstance().clearMemoryCache();
 	}
-	
-	
+
 	private DisplayImageOptions options;
-	public DisplayImageOptions initGoodsImageOption(){
+
+	public DisplayImageOptions initGoodsImageOption() {
 		options = new DisplayImageOptions.Builder()
-			.showStubImage(R.drawable.image_bg)
-			.showImageOnFail(R.drawable.image_bg)
-			.showImageForEmptyUri(R.drawable.image_bg)
-			.cacheInMemory(true)
-			.cacheOnDisc(true)
-			.build();
-		
+				.showStubImage(R.drawable.image_bg)
+				.showImageOnFail(R.drawable.image_bg)
+				.showImageForEmptyUri(R.drawable.image_bg).cacheInMemory(true)
+				.cacheOnDisc(true).build();
+
 		return options;
 	}
-	
-	public DisplayImageOptions initBannerImageOption(){
+
+	public DisplayImageOptions initBannerImageOption() {
 		options = new DisplayImageOptions.Builder()
-		.showStubImage(R.drawable.image_bg)
-		.showImageOnFail(R.drawable.image_bg)
-		.showImageForEmptyUri(R.drawable.image_bg)
-		.cacheInMemory(true)
-		.cacheOnDisc(true)
-		.build();
-		
+				.showStubImage(R.drawable.image_bg)
+				.showImageOnFail(R.drawable.image_bg)
+				.showImageForEmptyUri(R.drawable.image_bg).cacheInMemory(true)
+				.cacheOnDisc(true).build();
+
 		return options;
 	}
-	
+
 }

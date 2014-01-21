@@ -31,8 +31,8 @@ public class HomeGuangActivity extends BaseActivity implements OnClickListener {
 	private RelativeLayout downSearchLayout;
 	private RelativeLayout downShoppingLayout;
 	private RelativeLayout downMyLayout;
-	private LinearLayout qiandao;
-	private LinearLayout yaoyiyao;
+	private RelativeLayout qiandao;
+	private RelativeLayout yaoyiyao;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -137,8 +137,8 @@ public class HomeGuangActivity extends BaseActivity implements OnClickListener {
 		back.setVisibility(View.GONE);
 		TextView title = (TextView) findViewById(R.id.ab_common_title);
 		title.setText(getResources().getString(R.string.guang));
-		qiandao = (LinearLayout) findViewById(R.id.iv_guang_qiandao);
-		yaoyiyao = (LinearLayout) findViewById(R.id.iv_guang_yaoyiyao);
+		qiandao = (RelativeLayout) findViewById(R.id.iv_guang_qiandao);
+		yaoyiyao = (RelativeLayout) findViewById(R.id.iv_guang_yaoyiyao);
 		qiandao.setOnClickListener(this);
 		yaoyiyao.setOnClickListener(this);
 	}

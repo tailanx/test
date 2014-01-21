@@ -5,14 +5,15 @@
         android:radius="@dimen/margin_left_add"/>
     
 	<padding 
-	    android:left="@dimen/margin_left_add"
-	    android:top="@dimen/actiobar_margin_left"
-	    android:right="@dimen/margin_left_add"
-	    android:bottom="@dimen/actiobar_margin_left"
+	    android:left="@dimen/head_padding"
+	    android:top="@dimen/padding_left"
+	    android:right="@dimen/head_padding"
+	    android:bottom="@dimen/padding_left"
 	    />
 	<stroke 
-	    android:width="@dimen/above_offset"
+	    android:width="@dimen/width_add"
 	    android:color="@color/theme"
 	    />
+	
 	<solid android:color="@color/theme"/>
 </shape>

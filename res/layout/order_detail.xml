@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="8dp"
-        android:background="@drawable/tab_bg3" >
+        android:background="@drawable/total_bg" >
 
         <TextView
             android:id="@+id/order_detail_sum_money"
@@ -18,6 +18,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
             android:text="应付总额："
+            android:textColor="@color/white"
             android:textSize="16sp" />
 
         <TextView
@@ -26,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/order_detail_sum_money"
             android:layout_toRightOf="@+id/order_detail_sum_money"
-            android:textColor="#ed217c"
+            android:text="@string/hour"
             android:textSize="16sp" />
 
         <TextView
@@ -35,23 +36,24 @@
             android:layout_alignLeft="@id/order_detail_sum_money"
             android:layout_below="@id/order_detail_sum_money"
             android:text="(包含快递费用)"
+            android:textColor="@color/white"
             android:textSize="10sp" />
 
-        <Button
+        <TextView
             android:id="@+id/order_detail_pay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="8dp"
-            android:background="@drawable/submit_order"
-            android:text="付款"
-            android:textColor="#eeeeee" />
+            android:background="@drawable/theme_textview_background"
+            android:text="@string/go_pay_show_pay_commit"
+            android:textColor="@color/white" />
     </RelativeLayout>
 
     <ScrollView
         android:id="@+id/order_detail_scrollView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/order_detail"
         android:layout_alignParentTop="true" >
@@ -60,26 +62,21 @@
             android:id="@+id/order_detail_crollView_linearlayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
             android:layout_marginTop="8dp"
             android:orientation="vertical" >
 
-            <RelativeLayout 
+            <RelativeLayout
                 android:id="@+id/order_address_layout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/new_delivery_address_up" >
+                android:background="@drawable/main_theme_textview_bg"
+                android:padding="@dimen/margin_left" >
 
                 <TextView
                     android:id="@+id/go_pay_consignee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="4dp"
-                    android:drawableLeft="@drawable/addressee_headicon"
-                    android:drawablePadding="4dp"
-                    android:gravity="center_vertical"
                     android:text="收货人:"
                     android:textSize="14sp" />
 
@@ -98,67 +95,122 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="4dp"
-                    android:drawableLeft="@drawable/phone_iocn"
-                    android:drawablePadding="4dp"
+                    android:layout_marginRight="@dimen/margin_left"
                     android:gravity="center_vertical"
                     android:textSize="14sp" />
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/order_detail_position"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/re_go_pay_iv"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/delivery_address_down"
-                android:padding="10dp"
-                android:textSize="16sp" />
-            
+                android:layout_below="@id/go_pay_relativelayout1"
+                android:background="@color/white" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/width_add"
+                    android:layout_marginLeft="@dimen/margin_left_more"
+                    android:background="@drawable/filter_line"
+                    android:contentDescription="@string/yidejia" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/main_theme_textview_bg" >
+
+                <TextView
+                    android:id="@+id/go_pay_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/margin_left_more"
+                    android:text="@string/address_produce"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/order_detail_position"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/go_pay_address"
+                    android:paddingBottom="@dimen/margin_left_more"
+                    android:paddingTop="@dimen/margin_left_more"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_left"
+                android:background="@drawable/layout_selector2" >
+
+                <TextView
+                    android:id="@+id/go_pay_address_way"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:text="@string/change_pay_way"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/order_detail_position"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true" 
+                    android:src="@drawable/arrow"
+                    android:layout_marginRight="@dimen/margin_left"/>
+            </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/change_pay_type_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:background="@color/white"
                 android:orientation="horizontal"
-                android:visibility="gone"
-                android:background="@color/white" >
+                android:visibility="gone" >
 
                 <TextView
                     android:id="@+id/pay_type_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:drawableLeft="@drawable/payment_icon"
                     android:drawablePadding="6dp"
                     android:gravity="center_vertical"
                     android:text="支付方式:"
                     android:textSize="15sp" />
+
                 <TextView
                     android:id="@+id/order_pay_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
-                    android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/pay_type_text"
                     android:gravity="center_vertical"
                     android:text="银联支付"
                     android:textSize="15sp" />
-                
+
                 <TextView
                     android:id="@+id/change_pay_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|right"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="center_vertical|right"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:drawableRight="@drawable/arrow"
                     android:drawablePadding="3dp"
+                    android:drawableRight="@drawable/arrow"
+                    android:gravity="center_vertical|right"
                     android:text="修改"
                     android:textSize="15sp" />
             </RelativeLayout>
@@ -166,15 +218,16 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp" >
+                android:layout_marginTop="@dimen/margin_left"
+                android:background="@drawable/layout_selector2" >
 
                 <TextView
                     android:id="@+id/order_detail_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/order_detailsbg_top"
-                    android:gravity="center"
-                    android:text="订单详情"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:text="@string/buy_kind"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -183,14 +236,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
-
-             
             </LinearLayout>
 
-            <RelativeLayout android:id="@+id/order_detail_data_layout"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/order_detail_data_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/order_statusbg_down" >
+                android:background="@drawable/main_theme_textview_bg" >
 
                 <TextView
                     android:id="@+id/order_detail_dingdan"
@@ -268,11 +320,23 @@
                     android:id="@+id/order_detail_time_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/order_detail_time"
                     android:layout_below="@id/order_detail_biaohao"
                     android:layout_toRightOf="@id/order_detail_time"
-                    android:layout_alignBaseline="@id/order_detail_time"
                     android:textColor="#b4b4b4"
                     android:textSize="16sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/main_theme_textview_bg" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/width_add"
+                    android:background="@color/dark"
+                    android:contentDescription="@string/yidejia" />
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

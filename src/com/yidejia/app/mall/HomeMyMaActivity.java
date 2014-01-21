@@ -1,5 +1,6 @@
 package com.yidejia.app.mall;
 
+
 import org.apache.http.HttpStatus;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,7 +13,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -48,13 +48,14 @@ public class HomeMyMaActivity extends BaseActivity implements
 			mwaitDeliver, mAlreadyOrder, mAlreadyCom, mCardVoucher, mMyCollect,
 			mAddressManagement, mLayout11, mWaitComent;
 	private TextView favorites, integration, message, nick, vip;
+	private RelativeLayout aidouRelative;
 
 	private ImageView head;// 头像
 	private MyApplication myApplication;
 
 	private BottomChange bottomChange;
 	private RelativeLayout bottomLayout;
-
+	
 	private RelativeLayout downHomeLayout;
 	private RelativeLayout downGuangLayout;
 	private RelativeLayout downSearchLayout;
@@ -63,27 +64,22 @@ public class HomeMyMaActivity extends BaseActivity implements
 	private CartsDataManage cartsDataManage;
 	private int number;
 	private Button cartImage;
-	
+
 	private String scoresNum;	//积分
 	private String favolitenNum;	//收藏
 	private String orderNum;	//订单
 	private String msgNum;	//消息中心
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		cartsDataManage = new CartsDataManage();
 		myApplication = MyApplication.getInstance();
-		
-		getActionbar();
-		
 		setContentView(R.layout.activity_main_fragment_layout);
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
 		inflater = LayoutInflater.from(this);
 		view = inflater.inflate(R.layout.person_shopping_mall1, null);
 		frameLayout.addView(view);
-//		setContentView(R.layout.person_shopping_mall1);
 		int current = getIntent().getIntExtra("current", -1);
 		int next = getIntent().getIntExtra("next", -1);
 
@@ -173,8 +169,73 @@ public class HomeMyMaActivity extends BaseActivity implements
 			}
 		});
 	}
-	//实例化组件
+
+	@Override
+	public void onClick(View v) {
+		Intent intent = new Intent();
+		switch (v.getId()) {
+		case R.id.re_wait_comment:// 待评价
+			intent.setClass(this, EvaluationActivity.class);
+			break;
+		case R.id.re_main2_main2_linearlayout4_all_message:// 点击消息中心
+			intent.setClass(this, PersonActivity.class);
+			break;
+
+		case R.id.re_main2_main2_linearlayout4_all_return:// 点击退换货
+			intent.setClass(this, ExchangeActivity.class);
+			break;
+		case R.id.re_main2_main2_linearlayout4_all_order:// 点击全部订单
+			intent.setClass(this, AllOrderActivity.class);
+			break;
+		case R.id.rv_wait_pay:// 待付款订单
+			intent.setClass(this, WaitPayActivity.class);
+			break;
+		case R.id.re_wait_deliver:// 待发货订单
+			intent.setClass(this, WaitDeliverActivity.class);
+			break;
+		case R.id.re_alreay_deliver:// 已发货订单
+			intent.setClass(this, AlreadyOrderActivity.class);
+			break;
+		case R.id.re_compelte_oreder:// 已完成订单
+			intent.setClass(this, AlreadyComActivity.class);
+			break;
+		case R.id.re_main2_main2_linearlayout4_integer:// 积分卡券
+			intent.setClass(this, IntegeralActivity.class);
+			break;
+		case R.id.re_main2_main2_linearlayout4_collect:// 我的收藏
+			intent.setClass(this, MyCollectActivity.class);
+			break;
+		case R.id.re_main2_main2_linearlayout4_address:// 收货地址管理
+			intent.setClass(this, AddressActivity.class);
+			break;
+		case R.id.re_main2_main2_linearlayout4_all_show:// 评价晒单
+			intent.setClass(this, EvaluationActivity.class);
+			break;
+		case R.id.tv_favorites:// 收藏
+			intent.setClass(this, MyCollectActivity.class);
+			break;
+		case R.id.tv_message:// 收藏
+			intent.setClass(this, PersonActivity.class);
+			break;
+		case R.id.tv_integration:// 收藏
+			intent.setClass(this, IntegeralActivity.class);
+			break;
+		case R.id.tv_person_shopping_person_name:// 昵称
+			break;
+		case R.id.iv_person_shopping_image_person:// 头像
+			break;
+		case R.id.re_my_aidou:
+			intent = new Intent(this, AidouActivity.class);
+			break;
+		
+		}
+		startActivity(intent);
+	}
+	
 	public void setupView(View view) {
+		// // //实例化组件
+		aidouRelative = (RelativeLayout) view.findViewById(R.id.re_my_aidou);
+		aidouRelative.setOnClickListener(this);
 		head = (ImageView) view
 				.findViewById(R.id.iv_person_shopping_image_person);
 		head.setOnClickListener(this);// 图像
@@ -185,7 +246,6 @@ public class HomeMyMaActivity extends BaseActivity implements
 		personMessage = (RelativeLayout) view
 				.findViewById(R.id.re_main2_main2_linearlayout4_all_message);// 消息中心
 		personMessage.setOnClickListener(this);
-		personMessage.setVisibility(ViewGroup.GONE);// 这个版本隐藏这个功能
 		mExchange = (RelativeLayout) view
 				.findViewById(R.id.re_main2_main2_linearlayout4_all_return);// 退换货
 		mExchange.setOnClickListener(this);
@@ -226,10 +286,10 @@ public class HomeMyMaActivity extends BaseActivity implements
 		integration = (TextView) view.findViewById(R.id.tv_integration);
 		integration.setOnClickListener(this);
 		//头部实例化
-//		getActionbar();
+		getActionbar();
 
 	}
-	
+
 	//头部实例化
 	private void getActionbar() {
 		setActionbarConfig();
@@ -256,65 +316,9 @@ public class HomeMyMaActivity extends BaseActivity implements
 			Intent intent = new Intent(HomeMyMaActivity.this,
 					EditorActivity.class);
 			startActivity(intent);
+
 		}
 	};
-
-	@Override
-	public void onClick(View v) {
-		Intent intent = new Intent();
-		switch (v.getId()) {
-		case R.id.re_wait_comment:// 待评价
-			break;
-		case R.id.re_main2_main2_linearlayout4_all_message:// 点击消息中心
-			intent.setClass(this, PersonActivity.class);
-			break;
-
-		case R.id.re_main2_main2_linearlayout4_all_return:// 点击退换货
-			intent.setClass(this, ExchangeActivity.class);
-			break;
-		case R.id.re_main2_main2_linearlayout4_all_order:// 点击全部订单
-			intent.setClass(this, AllOrderActivity.class);
-			break;
-		case R.id.rv_wait_pay:// 待付款订单
-			intent.setClass(this, WaitPayActivity.class);
-			break;
-		case R.id.re_wait_deliver:// 待发货订单
-			intent.setClass(this, WaitDeliverActivity.class);
-			break;
-		case R.id.re_alreay_deliver:// 已发货订单
-			intent.setClass(this, AlreadyOrderActivity.class);
-			break;
-		case R.id.re_compelte_oreder:// 已完成订单
-			intent.setClass(this, AlreadyComActivity.class);
-			break;
-		case R.id.re_main2_main2_linearlayout4_integer:// 积分卡券
-			intent.setClass(this, IntegeralActivity.class);
-			break;
-		case R.id.re_main2_main2_linearlayout4_collect:// 我的收藏
-			intent.setClass(this, MyCollectActivity.class);
-			break;
-		case R.id.re_main2_main2_linearlayout4_address:// 收货地址管理
-			intent.setClass(this, AddressActivity.class);
-			break;
-		case R.id.re_main2_main2_linearlayout4_all_show:// 评价晒单
-			intent.setClass(this, EvaluationActivity.class);
-			break;
-		case R.id.tv_favorites:// 收藏
-			intent.setClass(this, MyCollectActivity.class);
-			break;
-		case R.id.tv_message:// 消息中心
-			intent.setClass(this, PersonActivity.class);
-			break;
-		case R.id.tv_integration:// 积分
-			intent.setClass(this, IntegeralActivity.class);
-			break;
-		case R.id.tv_person_shopping_person_name:// 昵称
-			break;
-		case R.id.iv_person_shopping_image_person:// 头像
-			break;
-		}
-		startActivity(intent);
-	}
 
 	// 双击返回键退出程序
 	private long exitTime = 0;
@@ -328,7 +332,10 @@ public class HomeMyMaActivity extends BaseActivity implements
 						Toast.LENGTH_SHORT).show();
 				exitTime = System.currentTimeMillis();
 			} else {
+				// ((MyApplication)getApplication()).setUserId("");
+				// ((MyApplication)getApplication()).setToken("");
 				finish();
+				// System.exit(0);
 			}
 			return true;
 		}
@@ -356,7 +363,7 @@ public class HomeMyMaActivity extends BaseActivity implements
 			vip.setText(vip1);
 		}
 	}
-	
+
 	/**获取收藏，积分，消息中心数字**/
 	private void getNumData(){
 		String url = new JNICallBack().getHttp4GetCount(myApplication.getUserId(), myApplication.getToken());
@@ -414,12 +421,6 @@ public class HomeMyMaActivity extends BaseActivity implements
 			integration.setText(inString);
 		}
 	}
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-	}
-
 
 	@Override
 	public void onResume() {

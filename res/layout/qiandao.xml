@@ -37,6 +37,8 @@
                 android:layout_marginRight="@dimen/margin_left"
                 android:layout_marginTop="@dimen/margin_top"
                 android:contentDescription="@string/yidejia"
+                android:clickable="true"
+               
                 android:src="@drawable/qiandao_selector" />
 
             <RelativeLayout
@@ -55,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/magin_left_add_add"
+                    android:layout_marginRight="@dimen/mall_list_padding_add"
                     android:text="@string/hour"
                     android:textColor="@color/theme"
                     android:textSize="@dimen/textsize_big_big" />
@@ -66,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/actiobar_margin_top"
                 android:layout_marginLeft="@dimen/magin_left_add"
-                android:layout_marginTop="@dimen/mall_list_padding"
+                android:layout_marginTop="@dimen/head_padding"
                 android:text="@string/qiandao_leiji"
                 android:textColor="@color/white_white"
                 android:textSize="@dimen/textsize_big_big" />

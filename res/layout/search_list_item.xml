@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/layout_selector2" >
+    android:layout_height="wrap_content" >
 
     <ImageView
         android:id="@+id/iv_search_list_item_text"
-        android:layout_width="@dimen/head_height"
-        android:layout_height="@dimen/head_height"
+        android:layout_width="@dimen/base_info_match"
+        android:layout_height="@dimen/base_info_match"
         android:layout_alignParentLeft="true"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
@@ -29,18 +28,20 @@
         <TextView
             android:id="@+id/tv_search_list_item_icon"
             android:layout_width="wrap_content"
-            android:textSize="@dimen/textsize_big"
             android:layout_height="wrap_content"
-            android:text="@string/all_buy_detail" />
+            android:text="@string/all_buy_detail"
+            android:textColor="@color/text_color_80"
+            android:textSize="@dimen/textsize_big" />
 
         <TextView
             android:id="@+id/tv_search_list_item_icon_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_left_add"
-            android:textSize="@dimen/textsize_small"
             android:singleLine="true"
-            android:text="@string/all_buy_detail_add" />
+            android:text="@string/all_buy_detail_add"
+            android:textColor="@color/text_color_80"
+            android:textSize="@dimen/textsize_small" />
     </LinearLayout>
 
 </RelativeLayout>

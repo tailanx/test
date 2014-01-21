@@ -129,17 +129,16 @@
             android:text="@string/down_shopping_text"
             android:textColor="#b4b4b4"
             android:textSize="@dimen/textsize_small_small" />
-<!--   -->
+        <!--  -->
 
         <Button
             android:id="@+id/down_shopping_cart"
             android:layout_width="26dp"
-            android:layout_height="16dp"
+            android:layout_height="18dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="4dp"
-            android:background="@color/theme"
+            android:background="@drawable/shape_bg_cart_num"
+            android:gravity="center"
             android:text="@string/hour"
             android:textColor="@color/white"
             android:textSize="@dimen/textsize_small_small" />

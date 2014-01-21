@@ -13,6 +13,18 @@
         android:orientation="vertical" >
 
         <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/main_theme_textview_bg" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/width_add"
+                android:background="@color/white_white"
+                android:contentDescription="@string/yidejia" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/editor_linearLayout1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -85,10 +97,34 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/main_theme_textview_bg" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/width_add"
+                android:background="@color/white_white"
+                android:contentDescription="@string/yidejia" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@drawable/main_theme_textview_bg" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/width_add"
+                android:background="@color/white_white"
+                android:contentDescription="@string/yidejia" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/editor_linearLayout4"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:background="@drawable/main_theme_textview_bg" >
 
             <TextView
@@ -150,10 +186,34 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/main_theme_textview_bg" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/width_add"
+                android:background="@drawable/filter_line"
+                android:contentDescription="@string/yidejia" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@drawable/main_theme_textview_bg" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/width_add"
+                android:background="@drawable/filter_line"
+                android:contentDescription="@string/yidejia" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/editor_linearLayout7"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:background="@drawable/main_theme_textview_bg" >
 
             <TextView
@@ -194,10 +254,34 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/main_theme_textview_bg" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/width_add"
+                android:background="@drawable/filter_line"
+                android:contentDescription="@string/yidejia" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@drawable/main_theme_textview_bg" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/width_add"
+                android:background="@drawable/filter_line"
+                android:contentDescription="@string/yidejia" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/editor_linearLayout6"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:background="@drawable/main_theme_textview_bg" >
 
             <TextView
@@ -219,10 +303,24 @@
                 android:src="@drawable/arrow" />
         </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/main_theme_textview_bg" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/width_add"
+                android:background="@drawable/filter_line"
+                android:contentDescription="@string/yidejia" />
+        </RelativeLayout>
+
         <Button
             android:id="@+id/editor_exit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_marginRight="@dimen/margin_left"
             android:layout_marginTop="@dimen/magin_left_add"
             android:background="@drawable/theme_textview_background"
             android:gravity="center"
