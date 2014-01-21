@@ -6,10 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.actionbarsherlock.app.SherlockActivity;
 import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
 
@@ -45,37 +41,18 @@ public class RecommendActivity extends BaseActivity {
 
 	}
 	
-//	private void setActionbar(){
-//		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-//		getSupportActionBar().setDisplayShowHomeEnabled(false);
-//		getSupportActionBar().setDisplayShowTitleEnabled(false);
-//		getSupportActionBar().setDisplayUseLogoEnabled(false);
-//		getSupportActionBar().setIcon(R.drawable.back);
-//		getSupportActionBar().setDisplayShowCustomEnabled(true);
-//		getSupportActionBar().setCustomView(R.layout.actionbar_common);
-//		TextView button = (TextView) findViewById(R.id.ab_common_back);
-//		button.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				RecommendActivity.this.finish();
-//			}
-//		});
-//		
-//		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
-//		titleTextView.setText(getResources().getString(R.string.recomend));
-//	}
-	
-	@Override
-	protected void onPause() {
-		super.onPause();
-		StatService.onPause(this);
-	}
-
 	@Override
 	protected void onResume() {
 		super.onResume();
-		StatService.onResume(this);
+//		StatService.onResume(this);
+		StatService.onPageStart(this, "应用推荐页面");
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+//		StatService.onPause(this);
+		StatService.onPageEnd(this, "应用推荐页面");
 	}
 	
 }
