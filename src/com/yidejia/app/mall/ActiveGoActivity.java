@@ -5,15 +5,11 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.R.id;
-import com.yidejia.app.mall.R.layout;
-import com.yidejia.app.mall.R.string;
 import com.yidejia.app.mall.ctrl.ActViewCtrl;
 
 public class ActiveGoActivity extends SherlockActivity {
@@ -23,7 +19,6 @@ public class ActiveGoActivity extends SherlockActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		ActViewCtrl viewCtrl = new ActViewCtrl(this);
 		mWebView = viewCtrl.getWebView(url);
@@ -66,16 +61,16 @@ public class ActiveGoActivity extends SherlockActivity {
 
 	
 	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		StatService.onPause(this);
+	protected void onResume() {
+		super.onResume();
+//		StatService.onResume(this);
+		StatService.onPageStart(this, "活动馆页面");
 	}
 
 	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		StatService.onResume(this);
+	protected void onPause() {
+		super.onPause();
+//		StatService.onPause(this);
+		StatService.onPageEnd(this, "活动馆页面");
 	}
 }

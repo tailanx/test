@@ -7,8 +7,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.ReturnActivity;
-import com.yidejia.app.mall.model.RetOrderInfo;
+import com.yidejia.app.mall.order.RetOrderInfo;
+import com.yidejia.app.mall.order.ReturnActivity;
 
 public class RetViewCtrl {
 

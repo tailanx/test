@@ -24,7 +24,7 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.model.Cart;
-import com.yidejia.app.mall.model.Order;
+import com.yidejia.app.mall.order.Order;
 
 public class WaitPayOrderDetail {
 	private Context context;

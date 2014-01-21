@@ -6,8 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.yidejia.app.mall.model.ShipLog;
-
 /**
  * 解析快递信息数据
  * @author LongBin

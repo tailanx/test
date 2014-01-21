@@ -1,4 +1,4 @@
-package com.yidejia.app.mall.fragment;
+package com.yidejia.app.mall.order;
 
 import java.util.ArrayList;
 
@@ -26,9 +26,7 @@ import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.jni.JNICallBack;
-import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.net.ConnectionDetector;
-import com.yidejia.app.mall.order.ParseOrder;
 import com.yidejia.app.mall.util.AllOrderUtil;
 import com.yidejia.app.mall.util.OrdersUtil;
 import com.yidejia.app.mall.widget.YLProgressDialog;

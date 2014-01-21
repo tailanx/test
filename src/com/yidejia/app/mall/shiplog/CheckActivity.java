@@ -10,7 +10,6 @@ import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.jni.JNICallBack;
-import com.yidejia.app.mall.model.ShipLog;
 
 import android.content.res.Resources;
 import android.os.Bundle;

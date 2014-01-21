@@ -21,7 +21,7 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.AnlsGetOrderData;
 import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.model.Cart;
-import com.yidejia.app.mall.model.Order;
+import com.yidejia.app.mall.order.Order;
 import com.yidejia.app.mall.view.OrderDetailActivity;
 
 public class AllOrderUtil {

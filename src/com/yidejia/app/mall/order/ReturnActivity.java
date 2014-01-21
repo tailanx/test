@@ -1,4 +1,4 @@
-package com.yidejia.app.mall;
+package com.yidejia.app.mall.order;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,9 +11,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.baidu.mobstat.StatService;
+import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.R.id;
+import com.yidejia.app.mall.R.layout;
+import com.yidejia.app.mall.R.string;
 import com.yidejia.app.mall.datamanage.TaskReturn;
-import com.yidejia.app.mall.model.RetOrderInfo;
 
 /**
  * 退换货详情
@@ -40,14 +44,13 @@ public class ReturnActivity extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setActionbarConfig();
-		setTitle(getResources().getString(R.string.retrun_produce));
+		setTitle(getResources().getString(R.string.return_order_detail));
 		setContentView(R.layout.exchange);
 		TextView submit = (TextView) findViewById(R.id.ab_common_tv_right);
 		submit.setText(getResources().getString(R.string.commit));
-		submit.setVisibility(View.VISIBLE);
+		submit.setVisibility(View.GONE);
 		submit.setOnClickListener(listener);
 
 		Bundle bundle = getIntent().getExtras();
@@ -109,31 +112,6 @@ public class ReturnActivity extends BaseActivity {
 		exchange_title = (TextView) findViewById(R.id.exchange_title);
 	}
 
-	// /**
-	// * 设置头部
-	// */
-	// private void setActionbar(){
-	// getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-	// getSupportActionBar().setDisplayShowCustomEnabled(true);
-	// getSupportActionBar().setDisplayShowHomeEnabled(false);
-	// getSupportActionBar().setDisplayShowTitleEnabled(false);
-	// getSupportActionBar().setDisplayUseLogoEnabled(false);
-	// getSupportActionBar().setIcon(R.drawable.back);
-	// getSupportActionBar().setCustomView(R.layout.actionbar_search_result);
-	// ImageView back = (TextView) findViewById(R.id.actionbar_left);//����
-	// submit = (Button) findViewById(R.id.actionbar_right);//�ύ
-	// submit.setText(getResources().getString(R.string.commit));
-	// submit.setOnClickListener(listener);
-	// back.setOnClickListener(new OnClickListener() {
-	//
-	// @Override
-	// public void onClick(View arg0) {
-	// ReturnActivity.this.finish();
-	// }
-	// });
-	// TextView title = (TextView) findViewById(R.id.actionbar_title);//����
-	// title.setText(getResources().getString(R.string.retrun_produce));
-	// }
 
 	/**
 	 * 提交按钮点击事件
@@ -146,5 +124,19 @@ public class ReturnActivity extends BaseActivity {
 			taskReturn.returnOrder(order_code);
 		}
 	};
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+//		StatService.onResume(this);
+		StatService.onPageStart(this, "退换货详情页面");
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+//		StatService.onPause(this);
+		StatService.onPageEnd(this, "退换货详情页面");
+	}
 
 }

@@ -28,7 +28,7 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.OrderDataManage;
 import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.model.Cart;
-import com.yidejia.app.mall.model.Order;
+import com.yidejia.app.mall.order.Order;
 
 public class WaitDeliverDetail {
 	private Context context;

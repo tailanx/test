@@ -1,4 +1,4 @@
-package com.yidejia.app.mall.model;
+package com.yidejia.app.mall.order;
 
 import java.io.Serializable;
 

@@ -24,9 +24,6 @@ import com.opens.asyncokhttpclient.RequestParams;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.R.id;
-import com.yidejia.app.mall.R.layout;
-import com.yidejia.app.mall.R.string;
 //import com.yidejia.app.mall.datamanage.TaskSaveComm;
 import com.yidejia.app.mall.jni.JNICallBack;
 

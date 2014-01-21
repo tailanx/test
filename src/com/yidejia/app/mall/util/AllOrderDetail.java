@@ -18,7 +18,7 @@ import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.Cart;
-import com.yidejia.app.mall.model.Order;
+import com.yidejia.app.mall.order.Order;
 
 public class AllOrderDetail {
 	private Context context;

@@ -22,10 +22,10 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.address.ModelAddresses;
 import com.yidejia.app.mall.exception.TimeOutEx;
-import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.address.GetUserAddressList;
 import com.yidejia.app.mall.net.order.GetOrderByCode;
+import com.yidejia.app.mall.order.Order;
 //import android.content.activity;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 

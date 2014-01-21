@@ -11,7 +11,6 @@ import android.text.TextUtils;
 
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.Cart;
-import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.util.UnicodeToString;
 

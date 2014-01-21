@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.fragment.AllOrderFragment;
 
 public class OrderViewCtrl {
 	

@@ -1,5 +1,6 @@
 package com.yidejia.app.mall.goodinfo;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -9,15 +10,13 @@ import android.webkit.WebSettings;
 import android.webkit.WebStorage.QuotaUpdater;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
-
 import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
 
 public class GoodsDetailActivity extends BaseActivity{
 	
-	private String TAG = GoodsDetailActivity.class.getName();
+//	private String TAG = GoodsDetailActivity.class.getName();
 	private String url;
 	private WebView webView;
 	
@@ -39,9 +38,9 @@ public class GoodsDetailActivity extends BaseActivity{
 		bar.show();
 		showView();
 		
-		Toast.makeText(this, url, Toast.LENGTH_SHORT).show();
 	}
 	
+	@SuppressLint("SetJavaScriptEnabled")
 	private void showView() {
 		webView = (WebView) findViewById(R.id.webview);
 		WebSettings settings = webView.getSettings(); 

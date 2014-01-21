@@ -1,6 +1,8 @@
-package com.yidejia.app.mall.model;
+package com.yidejia.app.mall.order;
 
 import java.util.ArrayList;
+
+import com.yidejia.app.mall.model.Cart;
 
 /**
  * 订单模块，包括订单号，订单状态（已付款，待确认等），订单内商品（{@link Cart} 请参考购物车模块）,订单总额,订单商品总数量

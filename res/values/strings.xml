@@ -67,6 +67,7 @@
     <string name="ship_post">快递</string>
     <string name="please_login">您还没登录，现在去登录？</string>
     <string name="del_fav_ok">删除收藏成功!</string>
+    <string name="del_fav_fail">删除收藏失败!</string>
     <string name="none_comment">暂无评论</string>
     <string name="select_pay_type">请选择支付方式</string>
     <string name="exit">再按一次返回键退出应用</string>
@@ -95,6 +96,7 @@
     <string name="pwd_length">密码长度不能小于6</string>
     <string name="phone">请输入正确的手机号码</string>
     <string name="retrun_produce">申请退换货</string>
+    <string name="return_order_detail">退换货详情</string>
     <string name="order_detail">订单详情</string>
     <string name="mix">已经是最小值了</string>
     <string name="exchanged">退换货</string>
