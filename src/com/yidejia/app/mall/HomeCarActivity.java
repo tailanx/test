@@ -208,6 +208,8 @@ public class HomeCarActivity extends BaseActivity implements OnClickListener {
 		leftButton.setVisibility(View.GONE);
 		shoppingCartTopay = (TextView) findViewById(R.id.ab_common_tv_right);
 		shoppingCartTopay.setVisibility(View.VISIBLE);
+		shoppingCartTopay.setText(getResources().getString(
+				R.string.addresss_edit));
 		setTitle(getResources().getString(R.string.down_shopping_text));
 	}
 

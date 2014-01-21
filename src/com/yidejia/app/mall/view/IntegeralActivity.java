@@ -53,6 +53,8 @@ public class IntegeralActivity extends BaseActivity {
 		voucherDataManage.getUserVoucher(myApplication.getUserId(),
 				myApplication.getToken());
 		webView = (WebView) findViewById(R.id.wb_webView);
+		webView.setBackgroundColor(0);
+		webView.setBackgroundColor(getResources().getColor(R.color.white));
 		webView.loadUrl("http://m.yidejia.com/regterms.html");
 		// String ji =
 		// voucherDataManage.getUserVoucher(myApplication.getUserId(),

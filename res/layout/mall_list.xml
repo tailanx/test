@@ -17,7 +17,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_left"
             android:text="@string/all_order"
-            android:textSize="@dimen/textsize_big_big" />
+            android:textColor="@color/text_color_80"
+            android:textSize="@dimen/textsize_big" />
 
         <ImageView
             android:id="@+id/tv_main2_main2_linearlayout4_imageview2"
@@ -44,7 +45,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_left"
             android:text="@string/main_voucher_text"
-            android:textSize="@dimen/textsize_big_big" />
+            android:textColor="@color/text_color_80"
+            android:textSize="@dimen/textsize_big" />
 
         <ImageView
             android:id="@+id/tv_main2_main2_linearlayout4_imageview2_integer"
@@ -59,10 +61,10 @@
 
     <RelativeLayout
         android:id="@+id/re_my_aidou"
-        android:layout_marginTop="-1dp"
-        android:layout_marginBottom="-1dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="-1dp"
+        android:layout_marginTop="-1dp"
         android:background="@drawable/layout_selector2" >
 
         <TextView
@@ -72,7 +74,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_left"
             android:text="@string/my_aidou"
-            android:textSize="@dimen/textsize_big_big" />
+            android:textColor="@color/text_color_80"
+            android:textSize="@dimen/textsize_big" />
 
         <ImageView
             android:id="@+id/tv_my_aidou_arrow"
@@ -84,12 +87,13 @@
             android:padding="@dimen/mall_list_padding"
             android:src="@drawable/arrow" />
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/re_main2_main2_linearlayout4_collect"
-        android:layout_marginTop="-1dp"
-        android:layout_marginBottom="-1dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="-1dp"
+        android:layout_marginTop="-1dp"
         android:background="@drawable/layout_selector2" >
 
         <TextView
@@ -99,7 +103,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_left"
             android:text="@string/my_collect"
-            android:textSize="@dimen/textsize_big_big" />
+            android:textColor="@color/text_color_80"
+            android:textSize="@dimen/textsize_big" />
 
         <ImageView
             android:id="@+id/tv_main2_main2_linearlayout4_imageview2_collect"
@@ -116,7 +121,6 @@
         android:id="@+id/re_main2_main2_linearlayout4_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        
         android:background="@drawable/layout_selector2" >
 
         <TextView
@@ -126,7 +130,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_left"
             android:text="@string/manage_address"
-            android:textSize="@dimen/textsize_big_big" />
+            android:textColor="@color/text_color_80"
+            android:textSize="@dimen/textsize_big" />
 
         <ImageView
             android:id="@+id/tv_main2_main2_linearlayout4_imageview2_address"
@@ -153,7 +158,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_left"
             android:text="@string/person_message"
-            android:textSize="@dimen/textsize_big_big" />
+            android:textColor="@color/text_color_80"
+            android:textSize="@dimen/textsize_big" />
 
         <ImageView
             android:id="@+id/tv_main2_main2_linearlayout4_imageview2_message"
@@ -180,7 +186,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_left"
             android:text="@string/show"
-            android:textSize="@dimen/textsize_big_big" />
+            android:textColor="@color/text_color_80"
+            android:textSize="@dimen/textsize_big" />
 
         <ImageView
             android:id="@+id/tv_main2_main2_linearlayout4_imageview2_show"
@@ -206,7 +213,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_left"
             android:text="@string/exchanged"
-            android:textSize="@dimen/textsize_big_big" />
+            android:textColor="@color/text_color_80"
+            android:textSize="@dimen/textsize_big" />
 
         <ImageView
             android:id="@+id/tv_main2_main2_linearlayout4_imageview2_return"

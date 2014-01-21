@@ -89,7 +89,7 @@
                     android:shadowRadius="6.0"
                     android:text="@string/free_pay_title"
                     android:textColor="#FFeeeeee"
-                    android:textSize="@dimen/text_size" />
+                    android:textSize="@dimen/textsize_big_big" />
 
                 <TextView
                     android:id="@+id/tv_person_shopping_person_vip"
@@ -102,7 +102,7 @@
                     android:drawableLeft="@drawable/vip"
                     android:text="@string/VIP"
                     android:textColor="#FFeeeeee"
-                    android:textSize="@dimen/text_size" />
+                    android:textSize="@dimen/textsize_big_big" />
             </RelativeLayout>
         </RelativeLayout>
 

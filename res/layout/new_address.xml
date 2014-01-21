@@ -94,6 +94,7 @@
             android:id="@+id/new_address_tablerow3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="@dimen/margin_left"
             android:background="@drawable/main_theme_textview_bg" >
 
             <TextView
@@ -101,8 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/margin_left"
-                android:gravity="left"
+                android:layout_marginLeft="@dimen/mall_list_padding_add"
                 android:text="@string/addresss_detail_add"
                 android:textSize="@dimen/textsize_small" />
 

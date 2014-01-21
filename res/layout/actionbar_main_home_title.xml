@@ -3,97 +3,53 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="right"
-    android:background="@drawable/topbg"
+    android:background="@drawable/theme_textview_background_no_corners"
     android:clickable="false"
-    android:focusable="false" 
+    android:focusable="false"
     android:orientation="horizontal" >
 
     <ImageView
-        android:contentDescription="@string/yidejia"
         android:id="@+id/main_home_title_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
-        android:src="@drawable/yidejia_logo" />
-    
-    <ImageView 
         android:contentDescription="@string/yidejia"
+        android:src="@drawable/yidejia_logo" />
+
+    <ImageView
         android:id="@+id/main_home_title_search"
-        android:layout_toRightOf="@+id/main_home_title_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_margin="6dp"
+        android:layout_toRightOf="@+id/main_home_title_logo"
         android:background="@drawable/search_image_bg"
         android:clickable="true"
-        android:focusable="true"
-        />
+        android:contentDescription="@string/yidejia"
+        android:focusable="true" />
 
-    <!-- <EditText
-        android:id="@+id/main_home_title_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="6dp"
-        
-        android:layout_toRightOf="@+id/main_home_title_logo"
-        android:background="@drawable/search_text_bg"
-        android:ems="16"
-        android:inputType="none"
-        android:editable="false"
-        android:imeOptions="actionSearch"
-        android:focusable="false"
-        android:paddingRight="10dp"
-        android:singleLine="true" >
-    </EditText> -->
 
     <ImageView
         android:id="@+id/main_home_search_right_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="100dp"
         android:clickable="false"
         android:contentDescription="@string/yidejia"
         android:src="@drawable/top_search_icon" />
-
-</RelativeLayout>
-<!--
-android:drawableRight="@drawable/main_home_search_icon"
-<Button 
-        android:id="@+id/left_menu" 
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="0dp"
-        android:paddingLeft="0dp"
-        android:layout_alignParentStart="true"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:background="@drawable/left_menu_bg" 
-        android:visibility="visible" />
     <TextView 
-        android:id="@+id/title" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_weight="1" 
-        android:gravity="center_horizontal" 
-        android:singleLine="true" 
-        android:text="Loading" 
-        android:layout_centerInParent="true"
-        android:textAppearance="?android:attr/textAppearanceLarge" 
-        android:textColor="@color/white" />
-
-    <Button
-        android:id="@+id/right_menu"
+        android:hint="@string/my_ser_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/right_icon"
-        android:gravity="center|right"
-        android:longClickable="false"
-        android:visibility="visible" />
--->
+        android:layout_centerVertical="true"
+        
+        android:layout_toRightOf="@id/main_home_search_right_icon"
+        android:layout_marginLeft="@dimen/mall_list_padding"
+        />
+
+</RelativeLayout>
+

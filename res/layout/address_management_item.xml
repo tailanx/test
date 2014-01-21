@@ -3,8 +3,8 @@
     android:id="@+id/address_management_item_linearlayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/magin_left_add_add"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:paddingTop="@dimen/magin_left_add_add" >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -82,22 +82,10 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/main_theme_textview_bg" >
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/width_add"
-            android:background="@drawable/filter_line"
-            android:contentDescription="@string/yidejia" />
-    </RelativeLayout>
-
-    <RelativeLayout
         android:id="@+id/address_management_item_relative1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/order_statusbg_down" >
+        android:background="@drawable/layout_selector2" >
 
         <CheckBox
             android:id="@+id/address_management_item_relative1_checkBox1"
@@ -113,7 +101,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/margin_left"
-            android:background="@drawable/theme_textview_background"
+            android:background="@drawable/theme_textview_background_solid"
             android:text="@string/delete"
             android:textColor="@color/color_sort_text_color_press" />
 

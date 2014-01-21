@@ -196,7 +196,7 @@ public class TaskGetOrderByCode {
 	private TextView phoneTextView;//收件人电话
 	private TextView detailTextView;//收件人地址
 	private TextView priceTextView;//订单物品价格
-	private Button payButton;//立即付款
+	private TextView payButton;//立即付款
 	private TextView orderNumber;//订单的编号
 	private TextView changePayTypeTextView;//支付方式修改
 	private RelativeLayout orderAddressLayout;//收件人地址的布局
@@ -215,7 +215,7 @@ public class TaskGetOrderByCode {
 		priceTextView = (TextView) activity.findViewById(R.id.order_detail_dingdan_sum);
 		emsTextView = (TextView) activity.findViewById(R.id.order_detail_yunhui_sum);
 		sumTextView = (TextView) activity.findViewById(R.id.order_detail_go_pay_show_pay_money);
-		payButton = (Button) activity.findViewById(R.id.order_detail_pay);
+		payButton = (TextView) activity.findViewById(R.id.order_detail_pay);
 		orderNumber = (TextView) activity.findViewById(R.id.order_detail_biaohao_number);
 		orderTime = (TextView) activity.findViewById(R.id.order_detail_time_number);
 		changePayTypeTextView = (TextView) activity.findViewById(R.id.change_pay_type);

@@ -44,6 +44,7 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 			mwaitDeliver, mAlreadyOrder, mAlreadyCom, mCardVoucher, mMyCollect,
 			mAddressManagement, mLayout11, mWaitComent;
 	private TextView favorites, integration, message, nick, vip;
+	private RelativeLayout aidouRelative;
 
 	private ImageView head;// 头像
 	private MyApplication myApplication;
@@ -53,6 +54,8 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 
 	public void setupView(View view) {
 		// // //实例化组件
+		aidouRelative = (RelativeLayout) view.findViewById(R.id.re_my_aidou);
+		aidouRelative.setOnClickListener(this);
 		head = (ImageView) view
 				.findViewById(R.id.iv_person_shopping_image_person);
 		head.setOnClickListener(this);// 图像
@@ -63,7 +66,6 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 		personMessage = (RelativeLayout) view
 				.findViewById(R.id.re_main2_main2_linearlayout4_all_message);// 消息中心
 		personMessage.setOnClickListener(this);
-		personMessage.setVisibility(ViewGroup.GONE);// 这个版本隐藏这个功能
 		mExchange = (RelativeLayout) view
 				.findViewById(R.id.re_main2_main2_linearlayout4_all_return);// 退换货
 		mExchange.setOnClickListener(this);
@@ -261,6 +263,7 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 		Intent intent = new Intent();
 		switch (v.getId()) {
 		case R.id.re_wait_comment:// 待评价
+			intent.setClass(this, EvaluationActivity.class);
 			break;
 		case R.id.re_main2_main2_linearlayout4_all_message:// 点击消息中心
 			intent.setClass(this, PersonActivity.class);
@@ -309,6 +312,10 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 			break;
 		case R.id.iv_person_shopping_image_person:// 头像
 			break;
+		case R.id.re_my_aidou:
+			intent = new Intent(this, AidouActivity.class);
+			break;
+		
 		}
 		startActivity(intent);
 	}

@@ -13,11 +13,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
+//import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.baidu.mobstat.StatActivity;
+//import com.baidu.mobstat.StatActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
@@ -44,7 +44,7 @@ public class MallAction {
 	private View view;
 	private LayoutInflater inflater;
 	private MallTask mallTask;// 开启一个异步任务用来加载数据
-	private TextView main_mall_notice_content;// 公告
+//	private TextView main_mall_notice_content;// 公告
 	private PullToRefreshScrollView mPullToRefreshScrollView;
 	private FrameLayout frameLayout;
 	private Task task;// 异步任务
@@ -114,8 +114,7 @@ public class MallAction {
 			return;
 		}
 		closeTask(task);
-		mallTask = new MallTask(activity, view, frameLayout,
-				main_mall_notice_content, mPullToRefreshScrollView);
+		mallTask = new MallTask(activity, view, frameLayout,mPullToRefreshScrollView);
 		task = mallTask.getTask();
 	}
 
@@ -160,8 +159,8 @@ public class MallAction {
 				label);
 		mPullToRefreshScrollView.setOnRefreshListener(listener);
 
-		main_mall_notice_content = (TextView) view
-				.findViewById(R.id.main_mall_notice_content);
+//		main_mall_notice_content = (TextView) view
+//				.findViewById(R.id.main_mall_notice_content);
 	}
 
 	/**
@@ -293,8 +292,7 @@ public class MallAction {
 				}
 				// closeTask();
 				@SuppressWarnings("unused")
-				MallTask mall = new MallTask(activity, view, frameLayout,
-						main_mall_notice_content, mPullToRefreshScrollView);
+				MallTask mall = new MallTask(activity, view, frameLayout, mPullToRefreshScrollView);
 			} catch (Exception e) {
 				e.printStackTrace();
 				Toast.makeText(

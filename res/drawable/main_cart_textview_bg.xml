@@ -7,10 +7,10 @@
         android:color="@color/white_white" />
 
     <padding
-        android:bottom="@dimen/margin_left_add"
-        android:left="@dimen/margin_left_add"
-        android:right="@dimen/margin_left_add"
-        android:top="@dimen/margin_left_add" />
+        android:bottom="@dimen/margin_left_add_add"
+        android:left="@dimen/margin_left_add_add"
+        android:right="@dimen/margin_left_add_add"
+        android:top="@dimen/margin_left_add_add" />
 
     <solid android:color="@color/white" />
 

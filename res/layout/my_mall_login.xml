@@ -133,10 +133,10 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/re_my_mall_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/re_mymall_pwd"
-                android:id="@+id/re_my_mall_relative"
                 android:background="@drawable/main_theme_textview_bg" >
 
                 <TextView
@@ -159,7 +159,8 @@
                     android:layout_marginRight="@dimen/margin_left"
                     android:layout_marginTop="@dimen/margin_left" />
             </RelativeLayout>
-             <RelativeLayout
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/re_my_mall_relative" >
@@ -185,6 +186,7 @@
                 android:layout_centerVertical="true"
                 android:padding="@dimen/margin_left"
                 android:text="@string/login_find_psw"
+                android:textColor="@color/white_white"
                 android:textSize="@dimen/textsize_big" />
 
             <ImageView
@@ -225,6 +227,7 @@
                 android:layout_centerVertical="true"
                 android:padding="@dimen/margin_left"
                 android:text="@string/login_find_regist"
+                android:textColor="@color/white_white"
                 android:textSize="@dimen/textsize_big" />
 
             <ImageView

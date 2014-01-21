@@ -42,16 +42,16 @@ public class MallTask {
 	private FrameLayout layout;
 	private ViewGroup viewGroup;
 	private View view;
-	private TextView title;// 商城的公告
+//	private TextView title;// 商城的公告
 	private PullToRefreshScrollView mPullToRefreshScrollView;
 	private FrameLayout layoutView;
 	private BannerView mallSlip;
 
 	public MallTask(SherlockFragmentActivity context, View view,
-			FrameLayout layout, TextView title,
+			FrameLayout layout, 
 			PullToRefreshScrollView mPullToRefreshScrollView) {
 		this.context = context;
-		this.title = title;
+//		this.title = title;
 		this.layout = layout;
 		this.view = view;
 		layoutView = (FrameLayout) view.findViewById(R.id.layout);
@@ -127,7 +127,7 @@ public class MallTask {
 				// view,acymerArray,inerbtyArray,hotsellArray);//
 				// 进行各种界面的跳转和界面的数据加载
 				// mallLoadData.intentToView(view);
-				title.setText(ggTitleArray.get(0));
+//				title.setText(ggTitleArray.get(0));
 
 				// timer.schedule(timetask, DELAY, DELAY);
 				mallSlip.startTimer();
