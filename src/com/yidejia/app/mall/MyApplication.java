@@ -36,16 +36,9 @@ public class MyApplication extends Application {
 		super.onCreate();
 
 		instance = this;
-
-		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
-				getApplicationContext())
-				.threadPriority(Thread.NORM_PRIORITY - 2)
-				.denyCacheImageMultipleSizesInMemory()
-				.discCacheFileNameGenerator(new Md5FileNameGenerator())
-				.tasksProcessingOrder(QueueProcessingType.LIFO).build();
-
+		
 		// Initialize ImageLoader with configuration.
-		ImageLoader.getInstance().init(config);
+		ImageLoader.getInstance().init(initConfig());
 		animateFirstListener = new AnimateFirstDisplayListener();
 	}
 
@@ -177,7 +170,8 @@ public class MyApplication extends Application {
 		options = new DisplayImageOptions.Builder()
 				.showStubImage(R.drawable.image_bg)
 				.showImageOnFail(R.drawable.image_bg)
-				.showImageForEmptyUri(R.drawable.image_bg).cacheInMemory(true)
+				.showImageForEmptyUri(R.drawable.image_bg)
+//				.cacheInMemory(true)
 				.cacheOnDisc(true).build();
 
 		return options;
@@ -191,6 +185,17 @@ public class MyApplication extends Application {
 				.cacheOnDisc(true).build();
 
 		return options;
+	}
+	
+	public ImageLoaderConfiguration initConfig(){
+		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
+				getApplicationContext())
+				.defaultDisplayImageOptions(initGoodsImageOption())
+				.threadPriority(Thread.NORM_PRIORITY - 2)
+				.denyCacheImageMultipleSizesInMemory()
+				.discCacheFileNameGenerator(new Md5FileNameGenerator())
+				.tasksProcessingOrder(QueueProcessingType.LIFO).build();
+		return config;
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.yidejia.app.mall.model;
+package com.yidejia.app.mall.shiplog;
 
 /**
  * 物流信息

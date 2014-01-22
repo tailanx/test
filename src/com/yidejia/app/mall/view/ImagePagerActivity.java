@@ -42,6 +42,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.R.drawable;
 import com.yidejia.app.mall.R.id;
@@ -83,11 +84,7 @@ public class ImagePagerActivity extends Activity {
 		if (savedInstanceState != null) {
 			pagerPosition = savedInstanceState.getInt(STATE_POSITION);
 		}
-		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.image_bg)
-				.showImageOnFail(R.drawable.image_bg)
-				.showImageForEmptyUri(R.drawable.image_bg).cacheInMemory(true)
-				.cacheOnDisc(true).build();
+		options = MyApplication.getInstance().initGoodsImageOption();
 
 		pager = (ViewPager) findViewById(R.id.pager);
 		pager.setAdapter(new ImagePagerAdapter(imageUrls));
@@ -143,6 +140,8 @@ public class ImagePagerActivity extends Activity {
 			ImageView imageView = (ImageView) imageLayout
 					.findViewById(R.id.image);
 			imageView.setScaleType(ScaleType.MATRIX);
+			
+			ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
 			imageLoader.displayImage(
 					images.get(position).getImgUrl().replace("!200", ""),
 					imageView, options, new SimpleImageLoadingListener() {

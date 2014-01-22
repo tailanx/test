@@ -68,18 +68,14 @@ public class SelledResultListAdapter extends BaseAdapter {
 		search_result_small_price.setText( mContext.getResources().getString(R.string.unit)+item.getPrice());
 		search_result_small_em_num.setText(item.getCommentAmount());
 		search_result_small_sell_num.setText(item.getSelledAmount());
+		
+		ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
 		ImageLoader.getInstance().displayImage(item.getImgUrl(), search_result_small_image, options,
 				MyApplication.getInstance().getImageLoadingListener());
 		return convertView;
 	}
 	
 	private void initDisplayImageOption(){
-		options = new DisplayImageOptions.Builder()
-			.showStubImage(R.drawable.image_bg)
-			.showImageOnFail(R.drawable.image_bg)
-			.showImageForEmptyUri(R.drawable.image_bg)
-			.cacheInMemory(true)
-			.cacheOnDisc(true)
-			.build();
+		options = MyApplication.getInstance().initGoodsImageOption();
 	}
 }

@@ -15,11 +15,12 @@ import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.search.SearchResultActivity;
 import com.yidejia.app.mall.util.BottomChange;
-import com.yidejia.app.mall.util.CartUtil;
+import com.yidejia.app.mall.util.CartUtil1;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.view.ImageLoaderUtil;
 import com.yidejia.app.mall.view.LoginActivity;
+
 
 //import android.app.Activity;
 import android.app.AlertDialog.Builder;
@@ -60,15 +61,15 @@ public class HomeCarActivity extends BaseActivity implements OnClickListener {
 	private TextView sumTextView;// 总的钱数
 	private TextView counTextView;// 总的数量
 	private CheckBox mBox;
-	private CartUtil cartUtil;
+	private CartUtil1 cartUtil;
 	private LinearLayout layout;
 	public static ArrayList<Cart> cartList;
 	public static float sum;
 	private Button mButton;
 	private InnerReceiver receiver;
-	private ImageLoader imageLoader;
-	private ImageLoadingListener listener;
-	private DisplayImageOptions options;
+//	private ImageLoader imageLoader;
+//	private ImageLoadingListener listener;
+//	private DisplayImageOptions options;
 
 	private BottomChange bottomChange;
 	private RelativeLayout bottomLayout;
@@ -102,10 +103,10 @@ public class HomeCarActivity extends BaseActivity implements OnClickListener {
 
 		setActionBarConfig();
 		// 初始imageloader
-		ImageLoaderUtil imageLoaderUtil = new ImageLoaderUtil();
-		imageLoader = imageLoaderUtil.getImageLoader();
-		listener = imageLoaderUtil.getAnimateFirstListener();
-		options = imageLoaderUtil.getOptions();
+//		ImageLoaderUtil imageLoaderUtil = new ImageLoaderUtil();
+//		imageLoader = imageLoaderUtil.getImageLoader();
+//		listener = imageLoaderUtil.getAnimateFirstListener();
+//		options = imageLoaderUtil.getOptions();
 
 		if (cartsDataManage.getCartAmount() != 0) {
 			view = inflater.inflate(R.layout.shopping_cart, null);
@@ -145,9 +146,9 @@ public class HomeCarActivity extends BaseActivity implements OnClickListener {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		imageLoader.init(ImageLoaderConfiguration
-				.createDefault(HomeCarActivity.this));
-		imageLoader.stop();
+//		imageLoader.init(ImageLoaderConfiguration
+//				.createDefault(HomeCarActivity.this));
+//		imageLoader.stop();
 		unregisterReceiver(receiver);
 	}
 
@@ -170,8 +171,7 @@ public class HomeCarActivity extends BaseActivity implements OnClickListener {
 		ScrollView scrollView = (ScrollView) view
 				.findViewById(R.id.shopping_cart_item_goods_scrollView);
 
-		cartUtil = new CartUtil(this, layout, counTextView, sumTextView, mBox,
-				imageLoader, listener, options);
+		cartUtil = new CartUtil1(this, layout, counTextView, sumTextView, mBox);
 
 		cartUtil.AllComment();
 
@@ -297,7 +297,7 @@ public class HomeCarActivity extends BaseActivity implements OnClickListener {
 
 	private void go2Pay() {
 		cartList = new ArrayList<Cart>();
-		List<HashMap<String, Object>> orderCarts = CartUtil.list1;
+		List<HashMap<String, Object>> orderCarts = CartUtil1.list1;
 		for (int i = 0; i < orderCarts.size(); i++) {
 			HashMap<String, Object> map = orderCarts.get(i);
 			float ischeck = Float.parseFloat(map.get("check").toString());
@@ -391,9 +391,9 @@ public class HomeCarActivity extends BaseActivity implements OnClickListener {
 						cartImage.setVisibility(View.GONE);
 					} else {
 						layout.removeAllViews();
-						CartUtil cartUtil = new CartUtil(HomeCarActivity.this,
-								layout, counTextView, sumTextView, mBox,
-								imageLoader, listener, options);
+						CartUtil1 cartUtil = new CartUtil1(
+								HomeCarActivity.this, layout, counTextView,
+								sumTextView, mBox);
 						cartUtil.AllComment();
 						cartImage.setText(number + "");
 					}

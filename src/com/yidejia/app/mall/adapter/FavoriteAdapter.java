@@ -101,6 +101,7 @@ public class FavoriteAdapter extends BaseAdapter {
 		holder.sellCount.setText(searchItem.getSelledAmount());
 		holder.commentCount.setText(searchItem.getCommentAmount());
 		String path = searchItem.getImgUrl();
+		ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
 		imageLoader.displayImage(path, holder.head, options, animateFirstListener);
 
 		return convertView;

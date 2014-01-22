@@ -96,24 +96,6 @@ public class GoodsInfoActivity extends BaseActivity {
 		});
 	}
 
-//	/** 设置界面的头部 **/
-//	private void setActionbarConfig() {
-//		getSupportActionBar().setCustomView(R.layout.actionbar_common);
-//		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-//		getSupportActionBar().setDisplayShowCustomEnabled(true);
-//		getSupportActionBar().setDisplayShowTitleEnabled(false);
-//		getSupportActionBar().setDisplayShowHomeEnabled(false);
-//		((TextView) findViewById(R.id.ab_common_title)).setText("商品展示");
-//
-//		TextView tvBack = (TextView) findViewById(R.id.ab_common_back);
-//
-//		tvBack.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				GoodsInfoActivity.this.finish();
-//			}
-//		});
-//	}
+
 
 }

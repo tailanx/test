@@ -62,6 +62,8 @@ public class PicImageAdapter extends PagerAdapter {
 		ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(width,
 				width);
 		imageView.setLayoutParams(layoutParams);
+		
+		ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
 		ImageLoader.getInstance().displayImage(
 				productPics.get(position).getImgUrl(), imageView, options,
 				MyApplication.getInstance().getImageLoadingListener());
@@ -81,11 +83,7 @@ public class PicImageAdapter extends PagerAdapter {
 	}
 
 	private void initDisplayImageOption() {
-		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.image_bg)
-				.showImageOnFail(R.drawable.image_bg)
-				.showImageForEmptyUri(R.drawable.image_bg).cacheInMemory(true)
-				.cacheOnDisc(true).build();
+		options = MyApplication.getInstance().initGoodsImageOption();
 	}
 
 }

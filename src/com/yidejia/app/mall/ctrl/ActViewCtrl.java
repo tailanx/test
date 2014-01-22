@@ -29,12 +29,11 @@ public class ActViewCtrl {
             };
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				// TODO Auto-generated method stub
-				if(isNeed2Jump(url))
+				if (isNeed2Jump(url)) {
 					view.loadUrl(url);
-				else {
-					
-					Intent intent = new Intent(activity, GoodsInfoActivity.class);
+				} else {
+					Intent intent = new Intent(activity,
+							GoodsInfoActivity.class);
 					Bundle bundle = new Bundle();
 					bundle.putString("goodsId", getId(url));
 					intent.putExtras(bundle);

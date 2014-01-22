@@ -1,13 +1,23 @@
-package com.yidejia.app.mall;
+package com.yidejia.app.mall.shiplog;
 
+import java.util.ArrayList;
+
+import org.apache.http.HttpStatus;
+
+import com.baidu.mobstat.StatService;
+import com.opens.asyncokhttpclient.AsyncHttpResponse;
+import com.opens.asyncokhttpclient.AsyncOkHttpClient;
+import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.datamanage.TaskGetShipLog;
+import com.yidejia.app.mall.jni.JNICallBack;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * 快递查询activity
@@ -24,7 +34,6 @@ public class CheckActivity extends BaseActivity {
 	private LinearLayout logistics_details_layout;
 	private ImageView check_logistics_image;
 	
-	private TaskGetShipLog task;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,20 +55,83 @@ public class CheckActivity extends BaseActivity {
 		if(id != -1)
 			check_logistics_image.setImageResource(id);
 		
-		task = new TaskGetShipLog(CheckActivity.this, logistics_details_layout);
-		task.getShipLogs(shipCode);
+		getShipLog();
 	}
 	
-	
-	
+	/**获取快递信息**/
+	private void getShipLog(){
+		String url = new JNICallBack().getHttp4GetShipLog(shipCode);
+		
+		AsyncOkHttpClient client = new AsyncOkHttpClient();
+		client.get(url, new AsyncHttpResponse(){
+
+			@Override
+			public void onStart() {
+				// TODO Auto-generated method stub
+				super.onStart();
+			}
+
+			@Override
+			public void onFinish() {
+				// TODO Auto-generated method stub
+				super.onFinish();
+			}
+
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				super.onSuccess(statusCode, content);
+				if(HttpStatus.SC_OK == statusCode){
+					ParseLogJson parseLogJson = new ParseLogJson();
+					boolean isSuccess = parseLogJson.parseShipLog(content);
+					ArrayList<ShipLog> shipLogs = parseLogJson.getShipLogs();
+					if(isSuccess && null != shipLogs) {
+						int length = shipLogs.size();
+						for (int i = 0; i < length; i++) {
+							ShipLogViewCtrl viewCtrl = new ShipLogViewCtrl(CheckActivity.this);
+							View view = viewCtrl.addView();
+							viewCtrl.setText(shipLogs.get(length - 1- i).getContext(), shipLogs.get(length - 1- i).getTime());
+							if(i == 0){
+								viewCtrl.setTextColor("#ed217c");
+							} else {
+								viewCtrl.setTextColor("#000000");
+							}
+							logistics_details_layout.addView(view);
+						}
+					} else {
+						Toast.makeText(CheckActivity.this, "暂无快递信息", Toast.LENGTH_SHORT).show();
+					}
+				}
+			}
+
+			@Override
+			public void onError(Throwable error, String content) {
+				// TODO Auto-generated method stub
+				super.onError(error, content);
+				Toast.makeText(CheckActivity.this, getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
+			}
+			
+		});
+	}
 	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		if(task != null) task.closeTask();
 	}
 
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+//		StatService.onResume(this);
+		StatService.onPageStart(this, "查看物流页面");
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+//		StatService.onPause(this);
+		StatService.onPageEnd(this, "查看物流页面");
+	}
 
 
 	private void findIds(){

@@ -112,5 +112,30 @@ public class ParseFavJson {
 			return false;
 		}
 	}
+	
+	/**
+	 * 解析保存收藏的数据
+	 */
+	private boolean parseSaveJson(String resultJson) {
+		if ("".equals(resultJson))
+			return false;
+		
+		JSONObject httpResultObject;
+		try {
+			httpResultObject = new JSONObject(resultJson);
+			int code = httpResultObject.optInt("code");
+			if (code == 1){
+				return true;
+			} else return false;
+		} catch (JSONException e) {
+			Log.e(TAG, "save address analysis json jsonexception error");
+			e.printStackTrace();
+			return false;
+		} catch (Exception e) {
+			Log.e(TAG, "save address analysis json exception error");
+			e.printStackTrace();
+			return false;
+		}
+	}
 
 }

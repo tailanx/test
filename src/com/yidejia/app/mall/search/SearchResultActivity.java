@@ -1,14 +1,12 @@
 package com.yidejia.app.mall.search;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,7 +14,6 @@ import android.widget.TextView;
 import com.baidu.mobstat.StatService;
 import com.jeremyfeinstein.slidingmenu.SlidingFragmentActivity;
 import com.jeremyfeinstein.slidingmenu.SlidingMenu;
-import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
 
 public class SearchResultActivity extends SlidingFragmentActivity {

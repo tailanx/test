@@ -99,7 +99,7 @@ public class AsyncOkHttpClient {
 	}
 	
 	public void post(String url, RequestParams params, AsyncHttpResponse response) {
-		this.post(url, null, params, response);
+		this.post(url, "application/x-www-form-urlencoded;charset=UTF-8", params, response);
 	}
 	
 	public void post(String url, String contentType, RequestParams params, AsyncHttpResponse response) {

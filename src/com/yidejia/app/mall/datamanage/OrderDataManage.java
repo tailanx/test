@@ -16,15 +16,14 @@ import android.widget.Toast;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.model.Cart;
-import com.yidejia.app.mall.model.Order;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.order.CancelOrder;
 import com.yidejia.app.mall.net.order.GetOrderByCode;
 import com.yidejia.app.mall.net.order.GetOrderList;
-import com.yidejia.app.mall.net.order.PayOutOrder;
 import com.yidejia.app.mall.net.order.SaveOrder;
 import com.yidejia.app.mall.net.order.SignOrder;
+import com.yidejia.app.mall.order.Order;
 import com.yidejia.app.mall.util.UnicodeToString;
 
 /**
@@ -394,92 +393,9 @@ public class OrderDataManage {
 	public String getTN(){
 		return tn;
 	}
-	/**
-	 * 修改订单支付状态
-	 * @param customer_id
-	 * @param code
-	 * @return
-	 */
-	public boolean changeOrder(String customer_id, String code) {
-		if(!ConnectionDetector.isConnectingToInternet(context)) {
-			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
-			return false;
-		}
-		TaskChange taskChange = new TaskChange(customer_id, code);
-		boolean state = false;
-		try {
-			state = taskChange.execute().get();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			Log.e(TAG, "TaskGetList() InterruptedException");
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			Log.e(TAG, "TaskGetList() ExecutionException");
-			e.printStackTrace();
-		} catch(Exception e){
-			
-		}
-		if (!state) {
-			Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
-		}
-		return state;
-	}
 	
-	private class TaskChange extends AsyncTask<Void, Void, Boolean>{
-		private String customer_id;
-		private String code;
-		public TaskChange(String customer_id, String code){
-			this.customer_id = customer_id;
-			this.code = code;
-		}
-		
-//		private ProgressDialog bar = new ProgressDialog(context);
-
-		@Override
-		protected void onPreExecute() {
-			// TODO Auto-generated method stub
-			super.onPreExecute();
-//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//			bar.setMessage(context.getResources().getString(R.string.searching));
-//			bar.show();
-		}
-		@Override
-		protected Boolean doInBackground(Void... params) {
-			// TODO Auto-generated method stub
-			PayOutOrder payOutOrder = new PayOutOrder();
-			try {
-				String httpResponse = payOutOrder.getHttpResponseString(customer_id, code);
-				JSONObject jsonObject = new JSONObject(httpResponse);
-				int responseCode = jsonObject.getInt("code");
-				if(responseCode == 1){
-					String response = jsonObject.getString("response");
-					JSONObject responseObject = new JSONObject(response);
-					String result = responseObject.getString("@p_result");
-					if(unicode.revert(result).equals(context.getResources().getString(R.string.success_pay_order))){
-						return true;
-					}
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				Log.e(TAG, "payout order task io ex");
-				e.printStackTrace();
-			} catch (Exception e) {
-				// TODO: handle exception
-				Log.e(TAG, "payout order task other ex");
-				e.printStackTrace();
-			}
-			return false;
-		}
-		
-
-		@Override
-		protected void onPostExecute(Boolean result) {
-			// TODO Auto-generated method stub
-			super.onPostExecute(result);
-//			bar.dismiss();
-		}
-	}
+	
+	
 	
 	/**
 	 * ȡ��

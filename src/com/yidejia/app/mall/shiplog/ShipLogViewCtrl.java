@@ -1,4 +1,4 @@
-package com.yidejia.app.mall.ctrl;
+package com.yidejia.app.mall.shiplog;
 
 import android.app.Activity;
 import android.graphics.Color;

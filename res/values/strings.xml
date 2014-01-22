@@ -321,5 +321,7 @@
     <string name="integeral">积分</string>
     <string name="integeral_produce">说明</string>
     <string name="integeral_youhui">优惠券</string>
+    <string name="del_fav_fail">删除收藏失败!</string>
+    <string name="return_order_detail">退换货详情</string>
 
 </resources>

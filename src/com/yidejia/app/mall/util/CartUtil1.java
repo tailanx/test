@@ -38,7 +38,6 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
-import com.yidejia.app.mall.datamanage.FavoriteDataManage;
 import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.view.LoginActivity;
@@ -53,7 +52,6 @@ public class CartUtil1 {
 	private CheckBox mBox;
 	private CartsDataManage dataManage;
 	private List<Object> mList;
-	private FavoriteDataManage favoriteDataManage;
 	public static List<HashMap<String, Object>> list1;
 
 	// private MyApplication myApplication;
@@ -75,7 +73,6 @@ public class CartUtil1 {
 			TextView mTextView, TextView sumTextView, CheckBox box) {// ,View
 																		// view
 		this.inflater = LayoutInflater.from(context); // ,UserCommentDataManage
-		favoriteDataManage = new FavoriteDataManage(context);
 		// myApplication = (MyApplication) context.getApplicationContext();
 		this.linearLayout = linearLayout;
 		this.context = context;
@@ -89,35 +86,14 @@ public class CartUtil1 {
 		// filter.addAction(Consts.UPDATE_CHANGE);
 	}
 
-	static final List<String> displayedImages = Collections
-			.synchronizedList(new LinkedList<String>());
-
-	private static class AnimateFirstDisplayListener extends
-			SimpleImageLoadingListener {
-
-		@Override
-		public void onLoadingComplete(String imageUri, View view,
-				Bitmap loadedImage) {
-			if (loadedImage != null) {
-				ImageView imageView = (ImageView) view;
-				boolean firstDisplay = !displayedImages.contains(imageUri);
-				if (firstDisplay) {
-					FadeInBitmapDisplayer.animate(imageView, 500);
-					displayedImages.add(imageUri);
-				}
-			}
-		}
-	}
+	
 
 	private void initDisplayImageOption() {
-		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.image_bg)
-				.showImageOnFail(R.drawable.image_bg)
-				.showImageForEmptyUri(R.drawable.image_bg).cacheInMemory(true)
-				.cacheOnDisc(true).build();
+		options = MyApplication.getInstance().initBannerImageOption();
+		animateFirstListener = MyApplication.getInstance().getImageLoadingListener();
 	}
 
-	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+	private ImageLoadingListener animateFirstListener;
 	private DisplayImageOptions options;
 	protected ImageLoader imageLoader = ImageLoader.getInstance();// ����ͼƬ
 
@@ -179,6 +155,8 @@ public class CartUtil1 {
 				mTextView.setText(a + "");
 				sumTextView.setText(b + "");
 				String path = cart.getImgUrl();
+				
+				ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
 				imageLoader.displayImage(path, headImageView, options,
 						animateFirstListener);
 
@@ -437,50 +415,8 @@ public class CartUtil1 {
 													.getApplicationContext();
 											if (myApplication.getIsLogin()) {
 												// 已经登录
-												FavoriteDataManage manage = new FavoriteDataManage(
-														context);
-												if (!manage.checkExists(
-														myApplication
-																.getUserId(),
-														cart.getUId(),
-														myApplication
-																.getToken())) {
-													// 未收藏，现在添加收藏
-
-													if (manage.addFavourite(
-															myApplication
-																	.getUserId(),
-															cart.getUId(),
-															myApplication
-																	.getToken())) {
-														// 收藏成功
-														Toast.makeText(
-																context,
-																context.getResources()
-																		.getString(
-																				R.string.add_fav_scs),
-																Toast.LENGTH_SHORT)
-																.show();
-													} else {
-														// 收藏失败
-														Toast.makeText(
-																context,
-																context.getResources()
-																		.getString(
-																				R.string.add_fav_fail),
-																Toast.LENGTH_SHORT)
-																.show();
-													}
-												} else {
-													// 已经收藏了
-													Toast.makeText(
-															context,
-															context.getResources()
-																	.getString(
-																			R.string.alreay_collect),
-															Toast.LENGTH_LONG)
-															.show();
-												}
+												//TODO 添加收藏
+												
 
 											} else {
 												new Builder(context)

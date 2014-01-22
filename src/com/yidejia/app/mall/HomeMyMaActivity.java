@@ -1,16 +1,18 @@
 package com.yidejia.app.mall;
 
-import java.io.IOException;
+
+import org.apache.http.HttpStatus;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -18,22 +20,24 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
+import com.opens.asyncokhttpclient.AsyncHttpResponse;
+import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.address.AddressActivity;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
-import com.yidejia.app.mall.exception.TimeOutEx;
-import com.yidejia.app.mall.net.user.GetCount;
+import com.yidejia.app.mall.evaluation.EvaluationActivity;
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.order.AllOrderActivity;
 import com.yidejia.app.mall.order.AlreadyComActivity;
 import com.yidejia.app.mall.order.AlreadyOrderActivity;
+import com.yidejia.app.mall.order.ExchangeActivity;
 import com.yidejia.app.mall.order.WaitDeliverActivity;
 import com.yidejia.app.mall.order.WaitPayActivity;
 import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.view.IntegeralActivity;
 
-public class HomeMyMaActivity extends SherlockFragmentActivity implements
+public class HomeMyMaActivity extends BaseActivity implements
 		OnClickListener {
 	private View view;
 	private FrameLayout frameLayout;
@@ -51,95 +55,26 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 
 	private BottomChange bottomChange;
 	private RelativeLayout bottomLayout;
+	
+	private RelativeLayout downHomeLayout;
+	private RelativeLayout downGuangLayout;
+	private RelativeLayout downSearchLayout;
+	private RelativeLayout downShoppingLayout;
+	private RelativeLayout downMyLayout;
+	private CartsDataManage cartsDataManage;
+	private int number;
+	private Button cartImage;
 
-	public void setupView(View view) {
-		// // //实例化组件
-		aidouRelative = (RelativeLayout) view.findViewById(R.id.re_my_aidou);
-		aidouRelative.setOnClickListener(this);
-		head = (ImageView) view
-				.findViewById(R.id.iv_person_shopping_image_person);
-		head.setOnClickListener(this);// 图像
-		nick = (TextView) view
-				.findViewById(R.id.tv_person_shopping_person_name);// 昵称
-
-		vip = (TextView) view.findViewById(R.id.tv_person_shopping_person_vip);
-		personMessage = (RelativeLayout) view
-				.findViewById(R.id.re_main2_main2_linearlayout4_all_message);// 消息中心
-		personMessage.setOnClickListener(this);
-		mExchange = (RelativeLayout) view
-				.findViewById(R.id.re_main2_main2_linearlayout4_all_return);// 退换货
-		mExchange.setOnClickListener(this);
-		mAllOrder = (RelativeLayout) view
-				.findViewById(R.id.re_main2_main2_linearlayout4_all_order);// 全部订单
-		mAllOrder.setOnClickListener(this);
-		mWaitPay = (RelativeLayout) view.findViewById(R.id.rv_wait_pay);// 待付快订单
-		mWaitPay.setOnClickListener(this);
-		mwaitDeliver = (RelativeLayout) view.findViewById(R.id.re_wait_deliver);// 待发货订单
-		mwaitDeliver.setOnClickListener(this);
-		mAlreadyOrder = (RelativeLayout) view
-				.findViewById(R.id.re_alreay_deliver);// 已发货订单
-		mAlreadyOrder.setOnClickListener(this);
-		mAlreadyCom = (RelativeLayout) view
-				.findViewById(R.id.re_compelte_oreder);// "已完成订单"
-		mAlreadyCom.setOnClickListener(this);
-		mCardVoucher = (RelativeLayout) view
-				.findViewById(R.id.re_main2_main2_linearlayout4_integer);// 积分卡券
-		mCardVoucher.setOnClickListener(this);
-		mMyCollect = (RelativeLayout) view
-				.findViewById(R.id.re_main2_main2_linearlayout4_collect);// 我的收藏
-		mMyCollect.setOnClickListener(this);
-		mAddressManagement = (RelativeLayout) view
-				.findViewById(R.id.re_main2_main2_linearlayout4_address);// 收货地址管理
-		mAddressManagement.setOnClickListener(this);
-		mLayout11 = (RelativeLayout) view
-				.findViewById(R.id.re_main2_main2_linearlayout4_all_show);// 评价晒单
-		mLayout11.setOnClickListener(this);
-
-		mWaitComent = (RelativeLayout) view.findViewById(R.id.re_wait_comment);// 待评价
-		mWaitComent.setOnClickListener(this);
-
-		favorites = (TextView) view.findViewById(R.id.tv_favorites);
-
-		favorites.setOnClickListener(this);
-		message = (TextView) view.findViewById(R.id.tv_message);
-		message.setOnClickListener(this);
-		integration = (TextView) view.findViewById(R.id.tv_integration);
-		integration.setOnClickListener(this);
-		//头部实例化
-		getActionbar();
-
-	}
-
-	private void getActionbar() {
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		// 实例化组件
-		getSupportActionBar().setCustomView(R.layout.actionbar_mymall);
-		imageView = (ImageView) findViewById(R.id.person_shopping_button1);
-		imageView.clearFocus();
-		imageView.setFocusable(true);
-		imageView.setOnClickListener(edit);
-	}
-
-	private OnClickListener edit = new OnClickListener() {
-
-		@Override
-		public void onClick(View arg0) {
-			Intent intent = new Intent(HomeMyMaActivity.this,
-					EditorActivity.class);
-			startActivity(intent);
-
-		}
-	};
+	private String scoresNum;	//积分
+	private String favolitenNum;	//收藏
+	private String orderNum;	//订单
+	private String msgNum;	//消息中心
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		cartsDataManage = new CartsDataManage();
-		myApplication = (MyApplication) getApplication();
+		myApplication = MyApplication.getInstance();
 		setContentView(R.layout.activity_main_fragment_layout);
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
 		inflater = LayoutInflater.from(this);
@@ -157,31 +92,8 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 			bottomChange.initNavView(current, next);
 		}
 
-		
-		imageView.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				Intent intent = new Intent(HomeMyMaActivity.this,
-						EditorActivity.class);
-				HomeMyMaActivity.this.startActivity(intent);
-			}
-		});
-
 	}
 
-	private RelativeLayout downHomeLayout;
-	private RelativeLayout downGuangLayout;
-	private RelativeLayout downSearchLayout;
-	private RelativeLayout downShoppingLayout;
-	private RelativeLayout downMyLayout;
-	private CartsDataManage cartsDataManage;
-	private int number;
-	private Button cartImage;
-
-	/**
-	 * 底部事件
-	 */
 	/**
 	 * 初始化底部导航栏
 	 */
@@ -319,6 +231,94 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 		}
 		startActivity(intent);
 	}
+	
+	public void setupView(View view) {
+		// // //实例化组件
+		aidouRelative = (RelativeLayout) view.findViewById(R.id.re_my_aidou);
+		aidouRelative.setOnClickListener(this);
+		head = (ImageView) view
+				.findViewById(R.id.iv_person_shopping_image_person);
+		head.setOnClickListener(this);// 图像
+		nick = (TextView) view
+				.findViewById(R.id.tv_person_shopping_person_name);// 昵称
+
+		vip = (TextView) view.findViewById(R.id.tv_person_shopping_person_vip);
+		personMessage = (RelativeLayout) view
+				.findViewById(R.id.re_main2_main2_linearlayout4_all_message);// 消息中心
+		personMessage.setOnClickListener(this);
+		mExchange = (RelativeLayout) view
+				.findViewById(R.id.re_main2_main2_linearlayout4_all_return);// 退换货
+		mExchange.setOnClickListener(this);
+		mAllOrder = (RelativeLayout) view
+				.findViewById(R.id.re_main2_main2_linearlayout4_all_order);// 全部订单
+		mAllOrder.setOnClickListener(this);
+		mWaitPay = (RelativeLayout) view.findViewById(R.id.rv_wait_pay);// 待付快订单
+		mWaitPay.setOnClickListener(this);
+		mwaitDeliver = (RelativeLayout) view.findViewById(R.id.re_wait_deliver);// 待发货订单
+		mwaitDeliver.setOnClickListener(this);
+		mAlreadyOrder = (RelativeLayout) view
+				.findViewById(R.id.re_alreay_deliver);// 已发货订单
+		mAlreadyOrder.setOnClickListener(this);
+		mAlreadyCom = (RelativeLayout) view
+				.findViewById(R.id.re_compelte_oreder);// "已完成订单"
+		mAlreadyCom.setOnClickListener(this);
+		mCardVoucher = (RelativeLayout) view
+				.findViewById(R.id.re_main2_main2_linearlayout4_integer);// 积分卡券
+		mCardVoucher.setOnClickListener(this);
+		mMyCollect = (RelativeLayout) view
+				.findViewById(R.id.re_main2_main2_linearlayout4_collect);// 我的收藏
+		mMyCollect.setOnClickListener(this);
+		mAddressManagement = (RelativeLayout) view
+				.findViewById(R.id.re_main2_main2_linearlayout4_address);// 收货地址管理
+		mAddressManagement.setOnClickListener(this);
+		mLayout11 = (RelativeLayout) view
+				.findViewById(R.id.re_main2_main2_linearlayout4_all_show);// 评价晒单
+		mLayout11.setOnClickListener(this);
+
+		mWaitComent = (RelativeLayout) view.findViewById(R.id.re_wait_comment);// 待评价
+		mWaitComent.setOnClickListener(this);
+
+		favorites = (TextView) view.findViewById(R.id.tv_favorites);
+
+		favorites.setOnClickListener(this);
+		message = (TextView) view.findViewById(R.id.tv_message);
+		message.setOnClickListener(this);
+		integration = (TextView) view.findViewById(R.id.tv_integration);
+		integration.setOnClickListener(this);
+		//头部实例化
+		getActionbar();
+
+	}
+
+	//头部实例化
+	private void getActionbar() {
+		setActionbarConfig();
+		
+		setTitle(R.string.my_mall);
+		
+		TextView tvBack = (TextView) findViewById(R.id.ab_common_back);
+		tvBack.setVisibility(View.GONE);
+		
+		// 实例化组件
+//		getSupportActionBar().setCustomView(R.layout.actionbar_mymall);
+		imageView = (ImageView) findViewById(R.id.ab_common_iv_share);
+		imageView.setVisibility(View.VISIBLE);
+		imageView.setImageResource(R.drawable.setting);
+		imageView.clearFocus();
+		imageView.setFocusable(true);
+		imageView.setOnClickListener(editListener);
+	}
+
+	private OnClickListener editListener = new OnClickListener() {
+
+		@Override
+		public void onClick(View arg0) {
+			Intent intent = new Intent(HomeMyMaActivity.this,
+					EditorActivity.class);
+			startActivity(intent);
+
+		}
+	};
 
 	// 双击返回键退出程序
 	private long exitTime = 0;
@@ -345,9 +345,8 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 	@Override
 	public void onStart() {
 		super.onStart();
-		closeTask();
-		getNumTask = new GetNumTask();
-		getNumTask.execute();
+		
+		getNumData();
 		
 		String name = myApplication.getNick();
 		if (name == null || "".equals(name)) {
@@ -365,82 +364,76 @@ public class HomeMyMaActivity extends SherlockFragmentActivity implements
 		}
 	}
 
-	private GetNumTask getNumTask;
-	private String scores;
-	private String favoliten;
+	/**获取收藏，积分，消息中心数字**/
+	private void getNumData(){
+		String url = new JNICallBack().getHttp4GetCount(myApplication.getUserId(), myApplication.getToken());
+		AsyncOkHttpClient client = new AsyncOkHttpClient();
+		client.get(url, new AsyncHttpResponse(){
 
-	private class GetNumTask extends AsyncTask<Void, Void, Boolean> {
-
-		@Override
-		protected Boolean doInBackground(Void... params) {
-			GetCount getCount = new GetCount();
-			try {
-				boolean issuccess = getCount.analysis(getCount.getHttpResponse(
-						myApplication.getUserId(), myApplication.getToken()));
-				scores = getCount.getScores();
-				favoliten = getCount.getFavoliten();
-				return issuccess;
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (TimeOutEx e) {
-				e.printStackTrace();
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				super.onSuccess(statusCode, content);
+				if(HttpStatus.SC_OK == statusCode){
+					parseCountJson(content);
+					setCount(favolitenNum, msgNum, scoresNum);
+				}
 			}
-			return false;
+			
+		});
+	}
+	
+	/**解析收藏，积分，消息中心数字数据**/
+	private void parseCountJson(String content){
+		JSONObject httpObject;
+		try {
+			httpObject = new JSONObject(content);
+			int code = httpObject.getInt("code");
+			if(code == 1){
+				String response = httpObject.getString("response");
+				JSONObject resObject = new JSONObject(response);
+				scoresNum = resObject.optString("scores");
+				orderNum = resObject.optString("order");
+				favolitenNum = resObject.optString("favoliten");
+				msgNum = resObject.optString("msg");
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
-
-		@Override
-		protected void onPostExecute(Boolean result) {
-			super.onPostExecute(result);
-			setCount(favoliten, null, scores);
-		}
-
 	}
 
+	/**设置收藏，消息中心，积分的个数**/
 	private void setCount(String faString, String msString, String inString) {
-		// Log.i("info", faString+"     faString");
-		if (faString == null || "".equals(faString)) {
+		if (TextUtils.isEmpty(faString)) {
 			favorites.setText(0 + "");
 		} else {
 			favorites.setText(faString);
 		}
 
-		if (msString == null || "".equals(msString)) {
+		if (TextUtils.isEmpty(msString)) {
 			message.setText(0 + "");
 		} else {
 			message.setText(msString);
 		}
 
-		if (inString == null || "".equals(inString)) {
+		if (TextUtils.isEmpty(inString)) {
 			integration.setText(0 + "");
 		} else {
-			Log.e("info", inString);
 			integration.setText(inString);
 		}
 	}
 
 	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		closeTask();
-	}
-
-	private void closeTask() {
-		if (null != getNumTask
-				&& getNumTask.getStatus().RUNNING == AsyncTask.Status.RUNNING) {
-			getNumTask.cancel(true);
-		}
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		StatService.onPause(this);
-	}
-
-	@Override
-	protected void onResume() {
+	public void onResume() {
 		super.onResume();
-		StatService.onResume(this);
+//		StatService.onResume(this);
+		StatService.onPageStart(this, "我的商城页面");
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+//		StatService.onPause(this);
+		StatService.onPageEnd(this, "我的商城页面");
 	}
 
 }

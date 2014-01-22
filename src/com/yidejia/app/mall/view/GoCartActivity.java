@@ -34,7 +34,6 @@ import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.datamanage.PreferentialDataManage;
 import com.yidejia.app.mall.model.Cart;
-import com.yidejia.app.mall.util.CartUtil;
 import com.yidejia.app.mall.util.CartUtil1;
 import com.yidejia.app.mall.util.Consts;
 
