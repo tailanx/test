@@ -226,5 +226,51 @@ public class ParseOrder {
 		return recipient_id;
 	}
 	
+	/**
+	 * 解析服务器返回删除订单数据
+	 * @param httpResp 待解析的字符串
+	 * @return 只有返回"success删除成功"才算删除成功
+	 */
+	public boolean parseDelOrder(String httpResp){
+		try {
+			JSONObject httpObject = new JSONObject(httpResp);
+			int code = httpObject.optInt("code");
+			String response = httpObject.optString("response");
+			if(code == 1){
+				JSONObject respObject = new JSONObject(response);
+				String result = respObject.optString("@p_result");
+				if("success删除成功".equals(result)){
+					return true;
+				}
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
 	
+	/**
+	 * 解析服务器返回取消订单数据
+	 * @param httpResp 待解析的字符串
+	 * @return 只有返回"success取消成功"才算取消成功
+	 */
+	public boolean parseCancelOrder(String content){
+		JSONObject jsonObject;
+		try {
+			jsonObject = new JSONObject(content);
+			int responseCode = jsonObject.getInt("code");
+			if (responseCode == 1) {
+				String response = jsonObject.getString("response");
+				JSONObject responseObject = new JSONObject(response);
+				String result = responseObject.getString("@p_result");
+				if (unicode.revert(result).equals("success取消成功")) {
+					return true;
+				}
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }
