@@ -41,11 +41,11 @@ public class SelledResultFragment extends SherlockFragment {
 			boolean title) {
 
 		SelledResultFragment fragment = new SelledResultFragment();
-		Bundle bundle = new Bundle();
-		bundle.putBoolean("isShowWithList", title);
-		bundle.putBundle("bundle", searchBundle);
-		fragment.setArguments(bundle);
-		bundle = null;
+//		Bundle bundle = new Bundle();
+		searchBundle.putBoolean("isShowWithList", title);
+//		bundle.putBundle("bundle", searchBundle);
+		fragment.setArguments(searchBundle);
+//		bundle = null;
 		return fragment;
 	}
 
@@ -76,10 +76,10 @@ public class SelledResultFragment extends SherlockFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Bundle bundle = getArguments();
-		isShowWithList = (bundle != null) ? bundle.getBoolean("isShowWithList")
+		Bundle searchBundle = getArguments();
+		isShowWithList = (searchBundle != null) ? searchBundle.getBoolean("isShowWithList")
 				: defaultInt;
-		Bundle searchBundle = bundle.getBundle("bundle");
+//		Bundle searchBundle = bundle.getBundle("bundle");
 		name = searchBundle.getString("name");
 		fun = searchBundle.getString("fun");
 		price = searchBundle.getString("price");
