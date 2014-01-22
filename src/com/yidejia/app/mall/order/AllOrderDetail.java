@@ -1,4 +1,4 @@
-package com.yidejia.app.mall.util;
+package com.yidejia.app.mall.order;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +18,6 @@ import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.Cart;
-import com.yidejia.app.mall.order.Order;
 
 public class AllOrderDetail {
 	private Context context;
@@ -33,7 +32,7 @@ public class AllOrderDetail {
 	
 	private ImageLoadingListener animateFirstListener;
 	private DisplayImageOptions options;
-	protected ImageLoader imageLoader = ImageLoader.getInstance();
+//	protected ImageLoader imageLoader = ImageLoader.getInstance();
 
 	public AllOrderDetail(Context context, Order order, LinearLayout layout) {// ,TextView
 		this.context = context;
@@ -66,8 +65,10 @@ public class AllOrderDetail {
 				
 				String urlString = cart.getImgUrl();
 				
-				imageLoader.displayImage(urlString, head, options,
+				ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
+				ImageLoader.getInstance().displayImage(urlString, head, options,
 						animateFirstListener);
+				
 				detail.setText(cart.getProductText());
 				price.setText(cart.getPrice() + "");
 				count.setText(cart.getAmount() + "");

@@ -50,6 +50,7 @@ public class PayUtil {
 		imageLoader = ImageLoader.getInstance();
 		animateFirstListener = MyApplication.getInstance().getImageLoadingListener();
 		options = MyApplication.getInstance().initGoodsImageOption();
+		ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
 	}
 
 	public PayUtil(Context context, LinearLayout mLayout,ImageLoader imageLoader,ImageLoadingListener listener,DisplayImageOptions option) {

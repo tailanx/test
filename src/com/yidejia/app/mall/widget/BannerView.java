@@ -47,7 +47,7 @@ public class BannerView {
 	private int height;	//按比例的图片高
 	private int length = 0;	//图片轮播的数量
 	private int currentIndex = 0;	//轮播的当前位置
-	private long DELAY = 5000;	//轮播图片轮播的毫秒数
+	private long DELAY = 10000;	//轮播图片轮播的毫秒数
 	
 	private DisplayImageOptions options;
 	protected ImageLoader imageLoader = ImageLoader.getInstance();
@@ -60,7 +60,7 @@ public class BannerView {
 	public BannerView(ArrayList<BaseProduct> baseProducts, Activity context) {
 		this.bannerArray = baseProducts;
 		this.context = context;
-		animateFirstListener = ((MyApplication)context.getApplicationContext()).getImageLoadingListener();
+		animateFirstListener = MyApplication.getInstance().getImageLoadingListener();
 		
 		handler = new Handler() {
 
@@ -157,6 +157,7 @@ public class BannerView {
 					.findViewById(R.id.image);
 			ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(width, height);
 			imageView.setLayoutParams(layoutParams);
+			ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
 			imageLoader.displayImage(bannerArray.get(position).getImgUrl(),
 					imageView, options, animateFirstListener);
 			imageView.setOnClickListener(new ImageOnClickListener(position));
@@ -276,11 +277,7 @@ public class BannerView {
 	}
 
 	private void initDisplayImageOption() {
-		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.banner_bg)
-				.showImageOnFail(R.drawable.banner_bg)
-				.showImageForEmptyUri(R.drawable.banner_bg).cacheInMemory(true)
-				.cacheOnDisc(true).build();
+		options = MyApplication.getInstance().initGoodsImageOption();
 	}
 
 }

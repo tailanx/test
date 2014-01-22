@@ -25,6 +25,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Specials;
@@ -44,11 +45,10 @@ public class FreeGivingAdapter extends BaseAdapter {
 		this.mList = mList;
 		if(mList.isEmpty()) length = 0;
 		else length = mList.size();
-		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.image_bg)
-				.showImageOnFail(R.drawable.image_bg)
-				.showImageForEmptyUri(R.drawable.image_bg)
-				.cacheInMemory(true).cacheOnDisc(true).build();
+		
+		options = MyApplication.getInstance().initGoodsImageOption();
+		animateFirstListener = MyApplication.getInstance().getImageLoadingListener();
+		
 		list  = new ArrayList<HashMap<String,Object>>();
 		// init();
 		// sp = context.getSharedPreferences("CHECK",0);
@@ -86,30 +86,11 @@ public class FreeGivingAdapter extends BaseAdapter {
 		return Long.parseLong(mList.get(position).getUId());
 	}
 
-	static final List<String> displayedImages = Collections
-			.synchronizedList(new LinkedList<String>());
-
-	private static class AnimateFirstDisplayListener extends
-			SimpleImageLoadingListener {
-
-		@Override
-		public void onLoadingComplete(String imageUri, View view,
-				Bitmap loadedImage) {
-			if (loadedImage != null) {
-				ImageView imageView = (ImageView) view;
-				boolean firstDisplay = !displayedImages.contains(imageUri);
-				if (firstDisplay) {
-					FadeInBitmapDisplayer.animate(imageView, 500);
-					displayedImages.add(imageUri);
-				}
-			}
-		}
-	}
 
 	/**
 	 * ������ͼ
 	 */
-	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+	private ImageLoadingListener animateFirstListener;
 	private DisplayImageOptions options;
 	protected ImageLoader imageLoader = ImageLoader.getInstance();// ����ͼƬ
 
@@ -144,6 +125,8 @@ public class FreeGivingAdapter extends BaseAdapter {
 		// �������ʾ��item��
 		holder.title.setText(specials.getBrief());
 		holder.price.setText(specials.getPrice());
+		
+		ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
 		imageLoader.displayImage(specials.getImgUrl(), holder.mImageView,
 				options, animateFirstListener);
 

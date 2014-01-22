@@ -69,7 +69,7 @@ public class ExchangeAdapter extends BaseAdapter {
 //		context.registerReceiver(receiver, filter);
 		
 		voucherDataManage = new VoucherDataManage(context);
-		myApplication = (MyApplication) activity.getApplication();
+		myApplication = MyApplication.getInstance();
 		
 		Log.e("voucher",CstmPayActivity.voucherString1+"");
 		userVoucher = Double.parseDouble(CstmPayActivity.voucherString1);//用户的积分
@@ -77,11 +77,10 @@ public class ExchangeAdapter extends BaseAdapter {
 //		userVoucher = Double.parseDouble(voucherDataManage.getUserVoucher(
 //				myApplication.getUserId(), myApplication.getToken()));
 		
-		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.image_bg)
-				.showImageOnFail(R.drawable.image_bg)
-				.showImageForEmptyUri(R.drawable.image_bg).cacheInMemory(true)
-				.cacheOnDisc(true).build();
+		
+		options = myApplication.initGoodsImageOption();
+		animateFirstListener = myApplication.getImageLoadingListener();
+		
 		isSelected = new HashMap<Integer, Boolean>();
 		mlist1 = new ArrayList<HashMap<String, Float>>();
 		mlist2 = new ArrayList<HashMap<String, Object>>();
@@ -130,37 +129,17 @@ public class ExchangeAdapter extends BaseAdapter {
 		return Long.parseLong(mlist.get(arg0).getUId());
 	}
 
-	static final List<String> displayedImages = Collections
-			.synchronizedList(new LinkedList<String>());
-
-	private static class AnimateFirstDisplayListener extends
-			SimpleImageLoadingListener {
-
-		@Override
-		public void onLoadingComplete(String imageUri, View view,
-				Bitmap loadedImage) {
-			if (loadedImage != null) {
-				ImageView imageView = (ImageView) view;
-				boolean firstDisplay = !displayedImages.contains(imageUri);
-				if (firstDisplay) {
-					FadeInBitmapDisplayer.animate(imageView, 500);
-					displayedImages.add(imageUri);
-				}
-			}
-		}
-	}
 
 	/**
 	 * ������ͼ
 	 */
-	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+	private ImageLoadingListener animateFirstListener;
 	private DisplayImageOptions options;
 	protected ImageLoader imageLoader = ImageLoader.getInstance();// ����ͼƬ
 	int i = 0;
 	
 	@Override
 	public View getView(final int postion, View covertView, ViewGroup arg2) {
-		// TODO Auto-generated method stub
 		final HashMap<String, Float> map = new HashMap<String, Float>();
 		final HashMap<String, Object> map1 = new HashMap<String, Object>();
 		 final ViewHolder holder;
@@ -205,6 +184,8 @@ public class ExchangeAdapter extends BaseAdapter {
 			};
 		};
 		Specials s = mlist.get(postion);
+		
+		ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
 		imageLoader.displayImage(s.getImgUrl(), holder.iv, options,
 				animateFirstListener);
 		holder.tvContent.setText(s.getBrief());
@@ -217,7 +198,6 @@ public class ExchangeAdapter extends BaseAdapter {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
-				// TODO Auto-generated method stub
 				if (isChecked) {
 					isSelected.put(postion, true);
 					map.put("isCheck", (float) 0);
@@ -262,7 +242,6 @@ public class ExchangeAdapter extends BaseAdapter {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				int sum = Integer.parseInt(holder.count.getText().toString());
 				if (sum <= 1) {
 					Toast.makeText(activity,
@@ -305,20 +284,5 @@ public class ExchangeAdapter extends BaseAdapter {
 
 	}
 
-//	public class InnerReciver extends BroadcastReceiver{
-//
-//		@Override
-//		public void onReceive(Context context, Intent intent) {
-//			// TODO Auto-generated method stub
-//			String  action = intent.getAction();
-//			if(Consts.EXCHANG_FREE.equals(action)){
-//				 initData();
-//				 notifyDataSetChanged();
-//			}
-//			context.unregisterReceiver(receiver);
-//		}
-//		
-//	}
-	
 	
 }

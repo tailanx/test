@@ -67,9 +67,9 @@ public class HomeCarActivity extends BaseActivity implements OnClickListener {
 	public static float sum;
 	private Button mButton;
 	private InnerReceiver receiver;
-	private ImageLoader imageLoader;
-	private ImageLoadingListener listener;
-	private DisplayImageOptions options;
+//	private ImageLoader imageLoader;
+//	private ImageLoadingListener listener;
+//	private DisplayImageOptions options;
 
 	private BottomChange bottomChange;
 	private RelativeLayout bottomLayout;
@@ -103,10 +103,10 @@ public class HomeCarActivity extends BaseActivity implements OnClickListener {
 
 		setActionBarConfig();
 		// 初始imageloader
-		ImageLoaderUtil imageLoaderUtil = new ImageLoaderUtil();
-		imageLoader = imageLoaderUtil.getImageLoader();
-		listener = imageLoaderUtil.getAnimateFirstListener();
-		options = imageLoaderUtil.getOptions();
+//		ImageLoaderUtil imageLoaderUtil = new ImageLoaderUtil();
+//		imageLoader = imageLoaderUtil.getImageLoader();
+//		listener = imageLoaderUtil.getAnimateFirstListener();
+//		options = imageLoaderUtil.getOptions();
 
 		if (cartsDataManage.getCartAmount() != 0) {
 			view = inflater.inflate(R.layout.shopping_cart, null);
@@ -146,9 +146,9 @@ public class HomeCarActivity extends BaseActivity implements OnClickListener {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		imageLoader.init(ImageLoaderConfiguration
-				.createDefault(HomeCarActivity.this));
-		imageLoader.stop();
+//		imageLoader.init(ImageLoaderConfiguration
+//				.createDefault(HomeCarActivity.this));
+//		imageLoader.stop();
 		unregisterReceiver(receiver);
 	}
 

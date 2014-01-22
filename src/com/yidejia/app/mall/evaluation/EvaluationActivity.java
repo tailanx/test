@@ -110,6 +110,8 @@ public class EvaluationActivity extends BaseActivity {
 			TextView evaluation_item_total_num = (TextView) view.findViewById(R.id.evaluation_item_total_num);
 			
 			ImageView evaluation_item_image = (ImageView) view.findViewById(R.id.evaluation_item_image);
+			
+			ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
 			imageLoader.displayImage(mCart.getImgUrl(), evaluation_item_image, myApplication.initGoodsImageOption(),
 					myApplication.getImageLoadingListener());
 			Button evaluation_item_evaluation = (Button) view.findViewById(R.id.evaluation_item_evaluation);

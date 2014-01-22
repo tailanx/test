@@ -155,6 +155,8 @@ public class CartUtil1 {
 				mTextView.setText(a + "");
 				sumTextView.setText(b + "");
 				String path = cart.getImgUrl();
+				
+				ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
 				imageLoader.displayImage(path, headImageView, options,
 						animateFirstListener);
 

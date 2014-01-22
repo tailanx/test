@@ -26,6 +26,7 @@ import com.yidejia.app.mall.datamanage.TaskDelOrder;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.order.CancelOrder;
+import com.yidejia.app.mall.order.AllOrderDetail;
 import com.yidejia.app.mall.order.Order;
 import com.yidejia.app.mall.order.ReturnActivity;
 import com.yidejia.app.mall.shiplog.CheckActivity;

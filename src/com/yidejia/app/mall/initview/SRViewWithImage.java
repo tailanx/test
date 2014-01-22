@@ -20,6 +20,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.model.SearchItem;
@@ -103,7 +104,6 @@ public class SRViewWithImage {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				intentToGoodsInfo(item.getUId());
 			}
 		});
@@ -143,38 +143,17 @@ public class SRViewWithImage {
 	}
 	
 	private void loadImage(String imageUrl, ImageView imageView){
-		imageLoader.init(ImageLoaderConfiguration.createDefault(activity));
+		ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
 		imageLoader.displayImage(imageUrl, imageView, options,
 				animateFirstListener);
 	}
 	
-	static final List<String> displayedImages = Collections.synchronizedList(new LinkedList<String>());
-	private static class AnimateFirstDisplayListener extends SimpleImageLoadingListener {
-
-
-		@Override
-		public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-			if (loadedImage != null) {
-				ImageView imageView = (ImageView) view;
-				boolean firstDisplay = !displayedImages.contains(imageUri);
-				if (firstDisplay) {
-					FadeInBitmapDisplayer.animate(imageView, 500);
-					displayedImages.add(imageUri);
-				}
-			}
-		}
-	}
 	
 	private DisplayImageOptions options;
 	protected ImageLoader imageLoader = ImageLoader.getInstance();
-	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+	private ImageLoadingListener animateFirstListener;
 	private void initDisplayImageOption(){
-		options = new DisplayImageOptions.Builder()
-//			.showStubImage(R.drawable.hot_sell_right_top_image)
-//			.showImageOnFail(R.drawable.hot_sell_right_top_image)
-//			.showImageForEmptyUri(R.drawable.hot_sell_right_top_image)
-			.cacheInMemory(true)
-			.cacheOnDisc(true)
-			.build();
+		options = MyApplication.getInstance().initGoodsImageOption();
+		animateFirstListener = MyApplication.getInstance().getImageLoadingListener();
 	}
 }

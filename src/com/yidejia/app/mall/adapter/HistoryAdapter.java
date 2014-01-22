@@ -1,15 +1,11 @@
 package com.yidejia.app.mall.adapter;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 
 import android.app.AlertDialog.Builder;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,12 +17,10 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
-import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.BrowseHistoryDataManage;
 import com.yidejia.app.mall.model.ProductBaseInfo;
-import com.yidejia.app.mall.net.user.ChangeRead;
 
 public class HistoryAdapter extends BaseAdapter {
 	private Context context;
@@ -38,7 +32,7 @@ public class HistoryAdapter extends BaseAdapter {
 		this.inflater = LayoutInflater.from(context);
 		this.mArrayList = mArrayList;
 		historyDataManage = new BrowseHistoryDataManage();
-		
+		initDisplayImageOption();
 	}
 	public void setmArrayList(ArrayList<ProductBaseInfo> mArrayList) {
 		if (mArrayList  != null)
@@ -49,55 +43,30 @@ public class HistoryAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
+		if(null == mArrayList) return 0;
 		return mArrayList.size();
 	}
 
 	@Override
 	public ProductBaseInfo getItem(int arg0) {
-		// TODO Auto-generated method stub
 		return mArrayList.get(arg0);
 	}
 
 	@Override
 	public long getItemId(int arg0) {
-		// TODO Auto-generated method stub
 		return arg0;
 	}
 	protected ImageLoader imageLoader = ImageLoader.getInstance();// 加载图片
 	private DisplayImageOptions options;
-	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+	private ImageLoadingListener animateFirstListener;
+	
 	private void initDisplayImageOption() {
-		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.image_bg)
-				.showImageOnFail(R.drawable.image_bg)
-				.showImageForEmptyUri(R.drawable.image_bg)
-				.cacheInMemory(true).cacheOnDisc(true).build();
-	}
-
-	static final List<String> displayedImages = Collections
-			.synchronizedList(new LinkedList<String>());
-
-	private static class AnimateFirstDisplayListener extends
-			SimpleImageLoadingListener {
-
-		@Override
-		public void onLoadingComplete(String imageUri, View view,
-				Bitmap loadedImage) {
-			if (loadedImage != null) {
-				ImageView imageView = (ImageView) view;
-				boolean firstDisplay = !displayedImages.contains(imageUri);
-				if (firstDisplay) {
-					FadeInBitmapDisplayer.animate(imageView, 500);
-					displayedImages.add(imageUri);
-				}
-			}
-		}
+		options = MyApplication.getInstance().initGoodsImageOption();
+		animateFirstListener = MyApplication.getInstance().getImageLoadingListener();
 	}
 
 	@Override
 	public View getView(int id, View convertView, ViewGroup arg2) {
-		// TODO Auto-generated method stub
 		
 		ViewHolder holder = null ;
 		if(convertView == null){
@@ -124,7 +93,6 @@ public class HistoryAdapter extends BaseAdapter {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
 				historyDataManage.delHistory(ProductBaseInfo.getUId()+"");
 				mArrayList.remove(ProductBaseInfo);
 				notifyDataSetChanged();
@@ -139,12 +107,11 @@ public class HistoryAdapter extends BaseAdapter {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				dialog.show();
-				
 			}
 				
 		});
+		ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
 		imageLoader.displayImage(ProductBaseInfo.getImgUrl(), holder.head, options, animateFirstListener);
 	
 		return convertView;

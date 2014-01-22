@@ -521,6 +521,8 @@ public class GoodsInfoViewUtil {
 				lp_base.gravity = Gravity.CENTER;
 				ImageView bannerImageView = new ImageView(activity);
 				bannerImageView.setLayoutParams(lp_base);
+				
+				ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
 				ImageLoader.getInstance().displayImage(
 						bannerArray.get(i).getImgUrl(), bannerImageView,
 						options,
