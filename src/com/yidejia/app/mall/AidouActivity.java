@@ -15,8 +15,6 @@ public class AidouActivity extends BaseActivity {
 		setActionbarConfig();
 		setTitle(getResources().getString(R.string.my_aidu));
 		TextView mtextview = (TextView) findViewById(R.id.coupons_text);
-		TextView order  = (TextView) findViewById(R.id.aidu_guize);
-		order.setText(getResources().getString(R.string.my_aidu_order));
 		mtextview.setText(getResources().getString(R.string.my_aidu_sum));
 		TextView sum = (TextView) findViewById(R.id.jiefen);
 		if (null == myApplication.getAidou()

@@ -16,6 +16,7 @@
     <dimen name="textsize_small">15sp</dimen>
     <dimen name="textsize_small_add">16sp</dimen>
     <dimen name="textsize_small_small">12sp</dimen>
+    <dimen name="textsize_small_small_small">11sp</dimen>
     <dimen name="image_width">590dp</dimen>
     <dimen name="image_height">290dp</dimen>
     <dimen name="login_height">220dp</dimen>

@@ -34,8 +34,9 @@ public class IntegeralActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setActionbarConfig();
-		setTitle(getResources().getString(R.string.main_voucher_text));
+//		setActionbarConfig();
+//		setTitle(getResources().getString(R.string.main_voucher_text));
+		setActionBar();
 		// this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 		// WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -79,26 +80,27 @@ public class IntegeralActivity extends BaseActivity {
 	// /**
 	// * 设置头部
 	// */
-	// private void setActionBar(){
-	// getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-	// getSupportActionBar().setDisplayShowCustomEnabled(true);
-	// getSupportActionBar().setDisplayShowHomeEnabled(false);
-	// getSupportActionBar().setDisplayShowTitleEnabled(false);
-	// getSupportActionBar().setDisplayUseLogoEnabled(false);
-	// getSupportActionBar().setCustomView(R.layout.actionbar_common);
-	// TextView back = (TextView) findViewById(R.id.ab_common_back);
-	// TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
-	// titleTextView.setText("积分卡券");
-	//
-	// back.setOnClickListener(new OnClickListener() {
-	//
-	// @Override
-	// public void onClick(View arg0) {
-	// // TODO Auto-generated method stub
-	// IntegeralActivity.this.finish();
-	// }
-	// });
-	// }
+	 private void setActionBar(){
+	 getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+	 getSupportActionBar().setDisplayShowCustomEnabled(true);
+	 getSupportActionBar().setDisplayShowHomeEnabled(false);
+	 getSupportActionBar().setDisplayShowTitleEnabled(false);
+	 getSupportActionBar().setDisplayUseLogoEnabled(false);
+	 getSupportActionBar().setCustomView(R.layout.integeraltop);
+	 TextView back = (TextView) findViewById(R.id.integeral_back);
+	 TextView titleTextView = (TextView) findViewById(R.id.tv_search_result_selled);
+//	 titleTextView.setText("积分卡券");
+	 titleTextView.setSelected(true);
+	
+	 back.setOnClickListener(new OnClickListener() {
+	
+	 @Override
+	 public void onClick(View arg0) {
+	 // TODO Auto-generated method stub
+	 IntegeralActivity.this.finish();
+	 }
+	 });
+	 }
 
 	/*
 	 * private void InitTextView(){ mCoupons =

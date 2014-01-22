@@ -46,23 +46,6 @@
                     android:textSize="35sp" />
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/coupons_relative2_ad"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_left"
-                android:background="@drawable/layout_selector2" >
-
-                <TextView
-                    android:id="@+id/aidu_guize"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/margin_left"
-                    android:paddingBottom="8dp"
-                    android:text="@string/mall_problem"
-                    android:textSize="18sp" />
-            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/coupons_relative2_add"

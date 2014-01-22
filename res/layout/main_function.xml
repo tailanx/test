@@ -47,9 +47,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/main_my_order_icon"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="2dp"
                 android:gravity="center"
-                android:text="@string/main_order_text" />
+                android:text="@string/main_order_text"
+                android:textColor="@color/text_color_80" />
 
             <RelativeLayout
                 android:id="@+id/function_my_order"
@@ -83,9 +83,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/main_my_favorite_icon"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="2dp"
                 android:gravity="center"
-                android:text="@string/main_favorite_text" />
+                android:text="@string/main_favorite_text"
+                android:textColor="@color/text_color_80" />
 
             <RelativeLayout
                 android:id="@+id/function_my_favorite"
@@ -118,9 +118,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/main_event_icon"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="2dp"
                 android:gravity="center"
-                android:text="@string/main_event_text" />
+                android:text="@string/main_event_text"
+                android:textColor="@color/text_color_80" />
 
             <RelativeLayout
                 android:id="@+id/function_event"
@@ -154,9 +154,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/main_vip_icon"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="2dp"
                 android:gravity="center"
-                android:text="@string/main_message_center_text" />
+                android:text="@string/main_message_center_text"
+                android:textColor="@color/text_color_80" />
 
             <RelativeLayout
                 android:id="@+id/function_member"
@@ -200,9 +200,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/main_history_icon"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="2dp"
                 android:gravity="center"
-                android:text="@string/main_history_text" />
+                android:text="@string/main_history_text"
+                android:textColor="@color/text_color_80" />
 
             <RelativeLayout
                 android:id="@+id/function_history"
@@ -235,9 +235,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/main_voucher_icon"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="2dp"
                 android:gravity="center"
-                android:text="@string/main_yirihui" />
+                android:text="@string/main_yirihui"
+                android:textColor="@color/text_color_80" />
 
             <RelativeLayout
                 android:id="@+id/function_coupon"
@@ -274,9 +274,9 @@ android:background="@drawable/skin_test"                android:background="@dr
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/main_skin_test_icon"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="2dp"
                 android:gravity="center"
-                android:text="@string/main_voucher_text" />
+                android:text="@string/main_voucher_text"
+                android:textColor="@color/text_color_80" />
 
             <RelativeLayout
                 android:id="@+id/function_skin"
@@ -302,7 +302,6 @@ android:background="@drawable/skin_test"                android:background="@dr
                 android:layout_marginTop="8dp"
                 android:contentDescription="@string/yidejia"
                 android:src="@drawable/skin_test" />
-            <!-- android:drawableTop="@drawable/main_message_center" -->
 
             <TextView
                 android:id="@+id/main_message_center_text"
@@ -310,9 +309,9 @@ android:background="@drawable/skin_test"                android:background="@dr
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/main_message_center_icon"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="2dp"
                 android:gravity="center"
-                android:text="@string/main_skin_test_text" />
+                android:text="@string/main_skin_test_text"
+                android:textColor="@color/text_color_80" />
 
             <RelativeLayout
                 android:id="@+id/function_message"
