@@ -199,6 +199,7 @@ public class GoodsInfoViewUtil {
 											R.string.add_cart_scs),
 									Toast.LENGTH_SHORT).show();
 						}
+						setCartNum(cart_num);
 					}
 
 				});
@@ -227,28 +228,16 @@ public class GoodsInfoViewUtil {
 			// 加入收藏按钮
 			add_favorites = (ImageView) activity
 					.findViewById(R.id.add_favorites);
-			// TODO
+			
 			// 加入收藏按钮点击事件
 			add_favorites.setOnClickListener(addFavoriteListener);
 
-			// // 检查是否收藏并且设置收藏按钮的图片
-			// FavoriteDataManage favoriteManage = new
-			// FavoriteDataManage(activity);
-			// if (MyApplication.getInstance().getIsLogin() &&
-			// !"".equals(userid)) {
-			// if (favoriteManage.checkExists(userid, productId,
-			// MyApplication.getInstance().getToken())) {
-			// add_favorites.setImageResource(R.drawable.add_favorites2);
-			// } else {
-			// add_favorites.setImageResource(R.drawable.add_favorites1);
-			// }
-			// } else {
-			// add_favorites.setImageResource(R.drawable.add_favorites1);
-			// }
+			// 检查是否收藏并且设置收藏按钮的图片
 			checkFavIsExsist();
-
+			
+			//点击评论跳转到评论页面
 			go2Comments();
-
+			//点击详情跳转到商品图文详情页面
 			go2Details(info.getProductDetailUrl());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -464,7 +453,7 @@ public class GoodsInfoViewUtil {
 					try {
 						httpResultObject = new JSONObject(content);
 						int code = httpResultObject.optInt("code");
-						setFavBg(1 == code);
+						setFavBg(1 != code);
 						if (1 == code) {
 							Toast.makeText(
 									activity,
