@@ -232,8 +232,8 @@ public class CartUtil1 {
 								// Log.i("info",mBox.isChecked()+"");
 							}
 							sumTextView.setText(sum + "");
-							Intent intent = new Intent(Consts.UPDATE_CHANGE);
-							context.sendBroadcast(intent);
+//							Intent intent = new Intent(Consts.UPDATE_CHANGE);
+//							context.sendBroadcast(intent);
 							mTextView.setText(count + "");
 							// Log.i("info", list.toString());
 						} else if (msg.what == 113) {
@@ -381,15 +381,15 @@ public class CartUtil1 {
 											ms1.what = 125;
 											mList.remove(checkBox);
 											handler.sendMessage(ms1);
-											Intent intent1 = null;
-											if (dataManage.getCartAmount() == 0) {
-												intent1 = new Intent(
-														Consts.BROAD_UPDATE_CHANGE);
-											} else {
-												intent1 = new Intent(
-														Consts.UPDATE_CHANGE);
-											}
-											context.sendBroadcast(intent1);
+//											Intent intent1 = null;
+//											if (dataManage.getCartAmount() == 0) {
+//												intent1 = new Intent(
+//														Consts.BROAD_UPDATE_CHANGE);
+//											} else {
+//												intent1 = new Intent(
+//														Consts.UPDATE_CHANGE);
+//											}
+//											context.sendBroadcast(intent1);
 
 											break;
 
@@ -614,15 +614,15 @@ public class CartUtil1 {
 										ms1.what = 125;
 										mList.remove(checkBox);
 										handler.sendMessage(ms1);
-										Intent intent1 = null;
-										if (dataManage.getCartAmount() == 0) {
-											intent1 = new Intent(
-													Consts.BROAD_UPDATE_CHANGE);
-										} else {
-											intent1 = new Intent(
-													Consts.UPDATE_CHANGE);
-										}
-										context.sendBroadcast(intent1);
+//										Intent intent1 = null;
+//										if (dataManage.getCartAmount() == 0) {
+//											intent1 = new Intent(
+//													Consts.BROAD_UPDATE_CHANGE);
+//										} else {
+//											intent1 = new Intent(
+//													Consts.UPDATE_CHANGE);
+//										}
+//										context.sendBroadcast(intent1);
 									}
 								})
 						.setNegativeButton(

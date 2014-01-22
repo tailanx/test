@@ -17,16 +17,23 @@ import com.yidejia.app.mall.util.UnicodeToString;
 public class ParseOrder {
 
 	private Context context;
-	private String orderCode;
-	private String resp_code;
-	private String tn;
+	private String orderCode;	//订单号
+	private String resp_code;	//银联支付状态码， 00为正式支付码
+	private String tn;	//银联流水号
 	private UnicodeToString unicode;
-	private ArrayList<Order> orders;
+	private ArrayList<Order> orders;	//订单列表
+	
+	private Order orderDetail;	//订单详细的具体订单信息
+	private String recipient_id;	//收件人id
 
 	public ParseOrder(Context context) {
 		this.context = context;
 		unicode = new UnicodeToString();
 	}
+	
+//	public ParseOrder(){
+//		unicode = new UnicodeToString();
+//	}
 
 	/**
 	 * 解析提交订单数据
@@ -184,4 +191,40 @@ public class ParseOrder {
 
 		return cartsArray;
 	}
+	
+	public boolean parseOrderDetail(String content){
+		JSONObject httpJsonObject;
+		try {
+			httpJsonObject = new JSONObject(content);
+			int respCode = httpJsonObject.optInt("code");
+			if(respCode == 1){
+				orderDetail = new Order();
+				String respString = httpJsonObject.optString("response");
+				JSONObject respObject = new JSONObject(respString);
+				orderDetail.setId(respObject.optString("order_id"));
+				orderDetail.setOrderCode(respObject.optString("order_code"));
+				orderDetail.setDate(respObject.optString("the_date"));
+				orderDetail.setStatus(respObject.optString("status_ex"));
+				orderDetail.setCore(respObject.optString("goods_ascore"));
+				orderDetail.setShipFee(respObject.optString("ship_fee"));
+				recipient_id = (respObject.optString("recipient_id"));
+				return true;
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	/**获取订单详细信息**/
+	public Order getOrderDetail() {
+		return orderDetail;
+	}
+
+	/**收件人id**/
+	public String getRecipient_id() {
+		return recipient_id;
+	}
+	
+	
 }

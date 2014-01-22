@@ -3,14 +3,9 @@ package com.yidejia.app.mall.goodinfo;
 import java.io.IOException;
 
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockActivity;
 import com.opens.asyncokhttpclient.AsyncHttpResponse;
 import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.yidejia.app.mall.BaseActivity;
@@ -31,7 +26,7 @@ public class GoodsInfoActivity extends BaseActivity {
 	private YLViewPager vpImage;	//商品图片容器
 	private int width;	//屏幕宽
 	private ProductBaseInfo productInfo;	//商品信息类实例
-	private Button btnCartNum;	//商品信息页购物车按钮的数字
+//	private Button btnCartNum;	//商品信息页购物车按钮的数字
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -80,6 +75,8 @@ public class GoodsInfoActivity extends BaseActivity {
 					productInfo = parseGoodsJson.getProductBaseInfo();
 					GoodsInfoViewUtil viewUtil = new GoodsInfoViewUtil(GoodsInfoActivity.this);
 					viewUtil.initGoodsView(productInfo);
+				} else {
+					Toast.makeText(GoodsInfoActivity.this, getResources().getString(R.string.no_product), Toast.LENGTH_SHORT).show();
 				}
 			}
 

@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
-            android:text="应付总额："
+            android:text="订单总额："
             android:textColor="@color/white"
             android:textSize="16sp" />
 
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/order_detail_sum_money"
             android:layout_toRightOf="@+id/order_detail_sum_money"
-            android:text="@string/hour"
+            android:textColor="@color/theme"
             android:textSize="16sp" />
 
         <TextView
@@ -46,7 +46,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="8dp"
-            android:background="@drawable/theme_textview_background"
+            android:padding="10dp"
+            android:background="@color/theme"
             android:text="@string/go_pay_show_pay_commit"
             android:textColor="@color/white" />
     </RelativeLayout>
@@ -104,7 +105,6 @@
                 android:id="@+id/re_go_pay_iv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/go_pay_relativelayout1"
                 android:background="@color/white" >
 
                 <ImageView
@@ -140,7 +140,7 @@
                     android:textSize="14sp" />
             </RelativeLayout>
 
-            <RelativeLayout
+            <!-- <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_left"
@@ -156,13 +156,14 @@
                     android:textSize="16sp" />
 
                 <ImageView
-                    android:id="@+id/order_detail_position"
+                    android:id="@+id/order_detail_pay_arrow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true" 
+                    android:layout_alignParentRight="true"
                     android:src="@drawable/arrow"
                     android:layout_marginRight="@dimen/margin_left"/>
-            </RelativeLayout>
+            </RelativeLayout> -->
 
             <RelativeLayout
                 android:id="@+id/change_pay_type_layout"
@@ -206,7 +207,6 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center_vertical|right"
-                    android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:drawablePadding="3dp"
                     android:drawableRight="@drawable/arrow"
