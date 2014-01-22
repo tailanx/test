@@ -178,7 +178,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/width_fu_add"
-                    android:clickable="true" />
+                    android:clickable="false" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -241,7 +241,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/width_fu_add"
-                    android:clickable="true" />
+                    android:clickable="false" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -302,7 +302,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/width_fu_add"
-                    android:clickable="true" />
+                    android:clickable="false" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -363,7 +363,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/width_fu_add"
-                    android:clickable="true" />
+                    android:clickable="false" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -729,6 +729,7 @@
             android:layout_alignBaseline="@id/save_order_btn"
             android:layout_toRightOf="@+id/go_pay_show_pay_money_price"
             android:textColor="@color/theme"
+            android:textStyle="bold"
             android:textSize="15sp" />
 
         <TextView
@@ -736,7 +737,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/go_pay_sum_money"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="5dp"
             android:text="@string/go_pay_show_pay_money_add"
             android:textColor="@color/white"
             android:textSize="10sp" />
