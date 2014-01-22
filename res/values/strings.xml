@@ -196,7 +196,7 @@
     <string name="caifutong_pay">财付通支付</string>
     <string name="caifutong_pay_list">可银行卡支付</string>
     <string name="pay_commit">立即支付</string>
-    <string name="yirihui">【 伊日惠 】</string>
+    <string name="yirihui">伊日惠</string>
     <string name="yirihui_add">今日优惠价限时抢购，每日限量，先抢先得</string>
     <string name="must_pay">秒抢</string>
     <string name="produce_detail_add">植物清逗修复精华</string>
@@ -318,5 +318,8 @@
     <string name="my_aidu_order">爱豆获取及使用常见问题</string>
     <string name="my_ser_top">搜索伊的家的商品</string>
     <string name="change_pay_way">更改支付方式</string>
+    <string name="integeral">积分</string>
+    <string name="integeral_produce">说明</string>
+    <string name="integeral_youhui">优惠券</string>
 
 </resources>
