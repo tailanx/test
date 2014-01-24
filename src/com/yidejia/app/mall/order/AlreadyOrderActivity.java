@@ -20,14 +20,16 @@ public class AlreadyOrderActivity extends BaseActivity {
 
 
 	@Override
-	protected void onPause() {
-		super.onPause();
-		StatService.onPause(this);
+	protected void onResume() {
+		super.onResume();
+//		StatService.onResume(this);
+		StatService.onPageStart(this, "已发货订单容器页面");
 	}
 
 	@Override
-	protected void onResume() {
-		super.onResume();
-		StatService.onResume(this);
+	protected void onPause() {
+		super.onPause();
+//		StatService.onPause(this);
+		StatService.onPageEnd(this, "已发货订单容器页面");
 	}
 }

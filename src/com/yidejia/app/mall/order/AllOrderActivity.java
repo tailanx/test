@@ -21,15 +21,17 @@ public class AllOrderActivity extends BaseActivity {
 	}
 
 	@Override
-	protected void onPause() {
-		super.onPause();
-		StatService.onPause(this);
+	protected void onResume() {
+		super.onResume();
+//		StatService.onResume(this);
+		StatService.onPageStart(this, "全部订单容器页面");
 	}
 
 	@Override
-	protected void onResume() {
-		super.onResume();
-		StatService.onResume(this);
+	protected void onPause() {
+		super.onPause();
+//		StatService.onPause(this);
+		StatService.onPageEnd(this, "全部订单容器页面");
 	}
 
 }

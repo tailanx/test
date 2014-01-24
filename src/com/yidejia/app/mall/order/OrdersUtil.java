@@ -660,7 +660,7 @@ public class OrdersUtil {
 						Toast.makeText(
 								context,
 								context.getResources().getString(
-										R.string.success_cancel_order),
+										R.string.scs_cancel_order),
 								Toast.LENGTH_SHORT).show();
 					}
 				} else {

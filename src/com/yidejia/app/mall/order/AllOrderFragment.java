@@ -137,9 +137,11 @@ public class AllOrderFragment extends SherlockFragment {
 			@Override
 			public void onSuccess(int statusCode, String content) {
 				super.onSuccess(statusCode, content);
+				
 				if(statusCode == HttpStatus.SC_OK){
 					ParseOrder parseOrder = new ParseOrder(getSherlockActivity());
 					boolean isSuccess = parseOrder.parseGetOrders(content);
+					
 					if(isSuccess) {
 						orders = parseOrder.getOrders();
 						dealOrder();

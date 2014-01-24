@@ -108,6 +108,7 @@
     <string name="del_order">确定删除订单?</string>
     <string name="cancel_order">确定取消订单?</string>
     <string name="fail_cancel_order">抱歉，取消订单失败！</string>
+    <string name="scs_cancel_order">取消成功!</string>
 
     <!-- 订单号 -->
     <string name="no_token_id">订单号为空或位数不对，请检查输入的订单号！</string>

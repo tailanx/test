@@ -1,5 +1,8 @@
 package com.yidejia.app.mall.order;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 public class AllOrderUtil {
 
 	/**
@@ -29,7 +32,12 @@ public class AllOrderUtil {
 		default:
 			break;
 		}
-		return orderTypeStr;
+		try {
+			return URLEncoder.encode(orderTypeStr, "UTF-8").toString();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 	
 	/**
