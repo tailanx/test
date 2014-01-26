@@ -17,16 +17,23 @@ import com.yidejia.app.mall.util.UnicodeToString;
 public class ParseOrder {
 
 	private Context context;
-	private String orderCode;
-	private String resp_code;
-	private String tn;
+	private String orderCode;	//订单号
+	private String resp_code;	//银联支付状态码， 00为正式支付码
+	private String tn;	//银联流水号
 	private UnicodeToString unicode;
-	private ArrayList<Order> orders;
+	private ArrayList<Order> orders;	//订单列表
+	
+	private Order orderDetail;	//订单详细的具体订单信息
+	private String recipient_id;	//收件人id
 
 	public ParseOrder(Context context) {
 		this.context = context;
 		unicode = new UnicodeToString();
 	}
+	
+//	public ParseOrder(){
+//		unicode = new UnicodeToString();
+//	}
 
 	/**
 	 * 解析提交订单数据
@@ -183,5 +190,87 @@ public class ParseOrder {
 		}
 
 		return cartsArray;
+	}
+	
+	public boolean parseOrderDetail(String content){
+		JSONObject httpJsonObject;
+		try {
+			httpJsonObject = new JSONObject(content);
+			int respCode = httpJsonObject.optInt("code");
+			if(respCode == 1){
+				orderDetail = new Order();
+				String respString = httpJsonObject.optString("response");
+				JSONObject respObject = new JSONObject(respString);
+				orderDetail.setId(respObject.optString("order_id"));
+				orderDetail.setOrderCode(respObject.optString("order_code"));
+				orderDetail.setDate(respObject.optString("the_date"));
+				orderDetail.setStatus(respObject.optString("status_ex"));
+				orderDetail.setCore(respObject.optString("goods_ascore"));
+				orderDetail.setShipFee(respObject.optString("ship_fee"));
+				recipient_id = (respObject.optString("recipient_id"));
+				return true;
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	/**获取订单详细信息**/
+	public Order getOrderDetail() {
+		return orderDetail;
+	}
+
+	/**收件人id**/
+	public String getRecipient_id() {
+		return recipient_id;
+	}
+	
+	/**
+	 * 解析服务器返回删除订单数据
+	 * @param httpResp 待解析的字符串
+	 * @return 只有返回"success删除成功"才算删除成功
+	 */
+	public boolean parseDelOrder(String httpResp){
+		try {
+			JSONObject httpObject = new JSONObject(httpResp);
+			int code = httpObject.optInt("code");
+			String response = httpObject.optString("response");
+			if(code == 1){
+				JSONObject respObject = new JSONObject(response);
+				String result = respObject.optString("@p_result");
+				if("success删除成功".equals(result)){
+					return true;
+				}
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * 解析服务器返回取消订单数据
+	 * @param httpResp 待解析的字符串
+	 * @return 只有返回"success取消成功"才算取消成功
+	 */
+	public boolean parseCancelOrder(String content){
+		JSONObject jsonObject;
+		try {
+			jsonObject = new JSONObject(content);
+			int responseCode = jsonObject.getInt("code");
+			if (responseCode == 1) {
+				String response = jsonObject.getString("response");
+				JSONObject responseObject = new JSONObject(response);
+				String result = responseObject.getString("@p_result");
+				if (unicode.revert(result).equals("success取消成功")) {
+					return true;
+				}
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

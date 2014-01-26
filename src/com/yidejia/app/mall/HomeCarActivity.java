@@ -316,7 +316,7 @@ public class HomeCarActivity extends BaseActivity implements OnClickListener {
 
 		if (sum > 0) {
 			bundle.putString("cartActivity", "Y");
-			bundle.putString("price", sum + "");
+			bundle.putFloat("price", sum);
 			intent1.putExtras(bundle);
 			HomeCarActivity.this.startActivity(intent1);
 		} else {

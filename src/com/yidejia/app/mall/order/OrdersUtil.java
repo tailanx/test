@@ -1,16 +1,13 @@
-package com.yidejia.app.mall.util;
+package com.yidejia.app.mall.order;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-import org.json.JSONObject;
+import org.apache.http.HttpStatus;
 
 import android.app.AlertDialog.Builder;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,18 +17,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.opens.asyncokhttpclient.AsyncHttpResponse;
+import com.opens.asyncokhttpclient.AsyncOkHttpClient;
+import com.opens.asyncokhttpclient.RequestParams;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.datamanage.TaskDelOrder;
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.net.ConnectionDetector;
-import com.yidejia.app.mall.net.order.CancelOrder;
-import com.yidejia.app.mall.order.AllOrderDetail;
-import com.yidejia.app.mall.order.Order;
-import com.yidejia.app.mall.order.ReturnActivity;
 import com.yidejia.app.mall.shiplog.CheckActivity;
 import com.yidejia.app.mall.view.OrderDetailActivity;
-import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class OrdersUtil {
 	private Context context;
@@ -40,6 +35,8 @@ public class OrdersUtil {
 
 	private LinearLayout mLinearLayoutLayout;// ���Ĳ���
 	private int orderType;// 0-4分别表示全部订单，待付款订单，待发货订单，已发货订单，已完成订单
+	
+//	private String TAG = OrdersUtil.class.getName();
 
 	public OrdersUtil(Context context, LinearLayout mLayout) {
 		this.context = context;
@@ -242,7 +239,7 @@ public class OrdersUtil {
 		return code;
 	}
 
-	private TaskDelOrder taskDelOrder;
+//	private TaskDelOrder taskDelOrder;
 
 	/**
 	 * 
@@ -362,11 +359,7 @@ public class OrdersUtil {
 									@Override
 									public void onClick(DialogInterface dialog,
 											int which) {
-										taskDelOrder = new TaskDelOrder(
-												context, mLinearLayoutLayout,
-												layout1);
-										taskDelOrder.delOrder(userId,
-												orderCode, token);
+										delOrder(userId, orderCode, token, layout1);
 									}
 								})
 						.setNegativeButton(
@@ -380,6 +373,65 @@ public class OrdersUtil {
 		}
 
 	};
+	
+	/**删除订单**/
+	private void delOrder(String userId, String code, String token, final LinearLayout layout1){
+		if(!ConnectionDetector.isConnectingToInternet(context)) {//没网络时的提示
+			Toast.makeText(context, context.getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+			return;
+		}
+		
+		String param = new JNICallBack().getHttp4DelOrder(userId, code, token);
+		String url = new JNICallBack().HTTPURL;
+		
+		RequestParams requestParams = new RequestParams();
+		requestParams.put(param);
+		
+		AsyncOkHttpClient client = new AsyncOkHttpClient();
+		client.post(url, requestParams, new AsyncHttpResponse(){
+
+			@Override
+			public void onStart() {
+				// TODO Auto-generated method stub
+				super.onStart();
+			}
+
+			@Override
+			public void onFinish() {
+				// TODO Auto-generated method stub
+				super.onFinish();
+			}
+
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				// TODO Auto-generated method stub
+				super.onSuccess(statusCode, content);
+				
+				if(HttpStatus.SC_OK == statusCode){
+					ParseOrder parseOrder = new ParseOrder(context);
+					if(parseOrder.parseDelOrder(content)){
+						mLinearLayoutLayout.removeView(layout1);
+						Toast.makeText(context, "删除订单成功！", Toast.LENGTH_LONG).show();
+					} else {
+						Toast.makeText(context, "删除订单失败！", Toast.LENGTH_LONG).show();
+					}
+				}
+			}
+
+			@Override
+			public void onError(Throwable error, String content) {
+				// TODO Auto-generated method stub
+				super.onError(error, content);
+				Toast.makeText(
+						context,
+						context.getResources()
+								.getString(R.string.time_out),
+						Toast.LENGTH_SHORT).show();
+			}
+			
+		});
+		
+	}
 
 	/**
 	 * 
@@ -471,18 +523,19 @@ public class OrdersUtil {
 													Toast.LENGTH_LONG).show();
 											return;
 										}
-										if (taskCancelOrder != null
-												&& taskCancelOrder.getStatus() == AsyncTask.Status.RUNNING) {
-											taskCancelOrder.cancel(true);
-										}
-										taskCancelOrder = new TaskCancelOrder(
-												myApplication.getUserId(),
-												orderCode, myApplication
-														.getToken(),
-												orderPrice, carts,
-												titleTextView, mOkBtn,
-												mCancelBtn, layout1);
-										taskCancelOrder.execute();
+//										if (taskCancelOrder != null
+//												&& taskCancelOrder.getStatus() == AsyncTask.Status.RUNNING) {
+//											taskCancelOrder.cancel(true);
+//										}
+//										taskCancelOrder = new TaskCancelOrder(
+//												myApplication.getUserId(),
+//												orderCode, myApplication
+//														.getToken(),
+//												orderPrice, carts,
+//												titleTextView, mOkBtn,
+//												mCancelBtn, layout1);
+//										taskCancelOrder.execute();
+										canelOrder(myApplication.getUserId(), orderCode, myApplication.getToken(), titleTextView, mOkBtn, layout1, mCancelBtn);
 									}
 								})
 						.setNegativeButton(
@@ -544,10 +597,6 @@ public class OrdersUtil {
 		context.startActivity(intent);
 	}
 
-	private String TAG = OrdersUtil.class.getName();
-
-	private TaskCancelOrder taskCancelOrder;
-
 	/**
 	 * 
 	 * @param customer_id
@@ -566,121 +615,75 @@ public class OrdersUtil {
 	 * @param mCancelBtn
 	 *            取消按钮
 	 */
-	private class TaskCancelOrder extends AsyncTask<Void, Void, Boolean> {
-		private String customer_id;
-		private String code;
-		private String token;
-		private String orderPrice;
-		private ArrayList<Cart> carts;
-		private TextView titleTextView;
-		private TextView mOkBtn;
-		private View mCancelBtn;
-		private LinearLayout layout1;
+	private void canelOrder(String userId, final String code, String token,
+			final TextView titleTextView, final TextView mOkBtn,
+			final LinearLayout layout1, final View mCancelBtn) {
+		String param = new JNICallBack().getHttp4CancelOrder(userId, code,
+				token);
 
-		private ProgressDialog bar;
+		String url = new JNICallBack().HTTPURL;
 
-		private UnicodeToString unicode;
+		RequestParams requestParams = new RequestParams();
+		requestParams.put(param);
 
-		/**
-		 * 
-		 * @param customer_id
-		 *            用户id
-		 * @param code
-		 *            订单号
-		 * @param token
-		 * @param orderPrice
-		 *            订单价格
-		 * @param carts
-		 *            订单商品
-		 * @param titleTextView
-		 *            标题状态的textview
-		 * @param mOkBtn
-		 *            支付按钮
-		 * @param mCancelBtn
-		 *            取消按钮
-		 */
-		public TaskCancelOrder(String customer_id, String code, String token,
-				String orderPrice, ArrayList<Cart> carts,
-				TextView titleTextView, TextView mOkBtn, View mCancelBtn,
-				LinearLayout layout1) {
-			this.customer_id = customer_id;
-			this.code = code;
-			this.token = token;
-			this.orderPrice = orderPrice;
-			this.carts = carts;
-			this.titleTextView = titleTextView;
-			this.mCancelBtn = mCancelBtn;
-			this.mOkBtn = mOkBtn;
-			this.layout1 = layout1;
-			// bar = new ProgressDialog(context);
-			unicode = new UnicodeToString();
-		}
+		AsyncOkHttpClient client = new AsyncOkHttpClient();
 
-		protected void onPreExecute() {
-			super.onPreExecute();
-			bar = (ProgressDialog) new YLProgressDialog(context)
-					.createLoadingDialog(context, null);
-			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+		client.post(url, requestParams, new AsyncHttpResponse() {
 
-				@Override
-				public void onCancel(DialogInterface dialog) {
-					// TODO Auto-generated method stub
-					cancel(true);
-				}
-			});
-		}
+			@Override
+			public void onStart() {
+				// TODO Auto-generated method stub
+				super.onStart();
+			}
 
-		@Override
-		protected Boolean doInBackground(Void... params) {
-			try {
-				CancelOrder cancelOrder = new CancelOrder();
-				String httpResponse = cancelOrder.getHttpResponseString(
-						customer_id, code, token);
-				JSONObject jsonObject = new JSONObject(httpResponse);
-				int responseCode = jsonObject.getInt("code");
-				if (responseCode == 1) {
-					String response = jsonObject.getString("response");
-					JSONObject responseObject = new JSONObject(response);
-					String result = responseObject.getString("@p_result");
-					if (unicode.revert(result).equals("success取消成功")) {
-						return true;
+			@Override
+			public void onFinish() {
+				// TODO Auto-generated method stub
+				super.onFinish();
+			}
+
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				// TODO Auto-generated method stub
+				super.onSuccess(statusCode, content);
+
+				if (HttpStatus.SC_OK == statusCode) {
+					ParseOrder parseOrder = new ParseOrder(context);
+					if (parseOrder.parseCancelOrder(content)) {
+						if (orderType == 0) {// 取消订单后支付按钮变成删除按钮，标题变成已取消状态，
+												// 取消按钮不可见
+							setAfterCancelView(code, titleTextView, mOkBtn,
+									mCancelBtn, layout1);
+						} else if (orderType == 1) {// 待付款订单页remove掉该订单
+							mLinearLayoutLayout.removeView(layout1);
+						}
+						Toast.makeText(
+								context,
+								context.getResources().getString(
+										R.string.scs_cancel_order),
+								Toast.LENGTH_SHORT).show();
 					}
+				} else {
+					Toast.makeText(
+							context,
+							context.getResources().getString(
+									R.string.fail_cancel_order),
+							Toast.LENGTH_SHORT).show();
 				}
-			} catch (IOException e) {
-				Log.e(TAG, "cancel order task io ex");
-				e.printStackTrace();
-			} catch (Exception e) {
-				Log.e(TAG, "cancel order task other ex");
-				e.printStackTrace();
-			}
-			return false;
-		}
 
-		@Override
-		protected void onPostExecute(Boolean result) {
-			super.onPostExecute(result);
-			if (result) {
-				if (orderType == 0) {// 取消订单后支付按钮变成删除按钮，标题变成已取消状态， 取消按钮不可见
-					setAfterCancelView(code, titleTextView, mOkBtn, mCancelBtn,
-							layout1);
-				} else if (orderType == 1) {// 待付款订单页remove掉该订单
-					mLinearLayoutLayout.removeView(layout1);
-				}
-				Toast.makeText(
-						context,
-						context.getResources().getString(
-								R.string.success_cancel_order),
-						Toast.LENGTH_SHORT).show();
-			} else {
-				Toast.makeText(
-						context,
-						context.getResources().getString(
-								R.string.fail_cancel_order), Toast.LENGTH_SHORT)
-						.show();
 			}
-			bar.dismiss();
-		}
+
+			@Override
+			public void onError(Throwable error, String content) {
+				// TODO Auto-generated method stub
+				super.onError(error, content);
+			}
+
+		});
 	}
+
+//	private TaskCancelOrder taskCancelOrder;
+
 
 	/**
 	 * 取消订单后支付按钮变成删除按钮，标题变成已取消状态， 取消按钮不可见
@@ -709,17 +712,6 @@ public class OrdersUtil {
 		titleTextView.setText("已取消");
 	}
 
-	/**
-	 * 取消运行的task
-	 */
-	public void cancelTask() {
-		if (taskCancelOrder != null
-				&& taskCancelOrder.getStatus() == AsyncTask.Status.RUNNING) {
-			taskCancelOrder.cancel(true);
-		}
-		if (taskDelOrder != null)
-			taskDelOrder.cancelTask();
-	}
 
 	/**
 	 * 去到查看物流页面

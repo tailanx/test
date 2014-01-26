@@ -98,16 +98,19 @@ public class GetHomePage {
 		if(null == httpResultString || "".equals(httpResultString)) return false;
 		try {
 			httpResultObject = new JSONObject(httpResultString);
-			int code = httpResultObject.getInt("code");
-			Log.i(TAG, "code"+code);
+			int code = httpResultObject.optInt("code");
 			if(code == 1){
-				String responseString = httpResultObject.getString("response");
+				String responseString = httpResultObject.optString("response");
 				JSONObject itemObject = new JSONObject(responseString);
-				String bannerString = itemObject.getString("lb");
-				String hotsellString = itemObject.getString("rm");
-				String acymerString = itemObject.getString("mrhf");
-				String inerbtyString = itemObject.getString("ntyh");
-				String ggString = itemObject.getString("gg");
+				String bannerString = itemObject.optString("lb");	//轮播
+				String hotsellString = itemObject.optString("rm");	//热卖
+				String acymerString = itemObject.optString("mrhf");	//妍诗美
+				String inerbtyString = itemObject.optString("ntyh");	//妍膳美
+				String ggString = itemObject.optString("gg");	//公告
+				
+				String djdzmString = itemObject.optString("djdzm");	//大家都在买
+				String sjk = itemObject.optString("sjk");	//随心逛
+				
 //				Log.e(TAG, ggString);
 				analysisGGJson(ggString);
 				analysisBannerJson(bannerString);
@@ -117,15 +120,12 @@ public class GetHomePage {
 				return true;
 			}
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			Log.e(TAG, "get home page json error");
 			e.printStackTrace();
 		} catch (Exception e) {
-			// TODO: handle exception
 			Log.e(TAG, "get home page json other error");
 			e.printStackTrace();
 		}
-//		return favoriteArray;
 		return false;
 	}
 	
@@ -138,9 +138,9 @@ public class GetHomePage {
 		for (int i = 0; i < length; i++) {
 			baseProduct = new BaseProduct();
 			itemObject = bannerJsonArray.getJSONObject(i);
-			String goodsId = itemObject.getString("goods_id");
+			String goodsId = itemObject.optString("goods_id");
 			baseProduct.setUId(goodsId);
-			String imgUrl = itemObject.getString("img_name");
+			String imgUrl = itemObject.optString("img_name");
 			Log.i(TAG, imgUrl);
 			baseProduct.setImgUrl(ImageUrl.IMAGEURL+imgUrl);
 			bannerArray.add(baseProduct);
@@ -160,42 +160,37 @@ public class GetHomePage {
 					itemObject = hotsellJsonArray.getJSONObject(i);
 					String goodsId;
 					try {
-						goodsId = itemObject.getString("goods_id");
+						goodsId = itemObject.optString("goods_id");
 						baseProduct.setUId(goodsId);
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
+					} catch (Exception e) {
 						e.printStackTrace();
 					}
 					String imgUrl = "";
 					if(i==0 && index != 2)
 						try {
-							imgUrl = ImageUrl.IMAGEURL + itemObject.getString("img_name");
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
+							imgUrl = ImageUrl.IMAGEURL + itemObject.optString("img_name");
+						} catch (Exception e) {
 							e.printStackTrace();
 						}
 					else
 						try {
-							imgUrl = ImageUrl.IMAGEURL + itemObject.getString("img_name");
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
+							imgUrl = ImageUrl.IMAGEURL + itemObject.optString("img_name");
+						} catch (Exception e) {
 							e.printStackTrace();
 						}
 					baseProduct.setImgUrl(imgUrl);
 					String title = "";
 					try {
-						title = itemObject.getString("name");
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
+						title = itemObject.optString("name");
+					} catch (Exception e) {
 						e.printStackTrace();
 					}
 					baseProduct.setTitle(unicode.revert(title));
 					Log.i(TAG, title);
-//			String subTitle = itemObject.getString(name)
 					String price = "";
 					try {
-						price = itemObject.getString("price");
-					} catch (JSONException e) {
+						price = itemObject.optString("price");
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
@@ -216,10 +211,8 @@ public class GetHomePage {
 						break;
 					}
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-//			Log.i(TAG, mainArray.get(i).getTitle());
 			}
 			if(index == 0){
 				for (int i = 0; i < hotSellArray.size(); i++) {
@@ -227,13 +220,11 @@ public class GetHomePage {
 				}
 			}
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 	private void analysisGGJson(String ggString){
-//		JSONArray ggJsonArray;
 		try {
 			JSONArray ggJsonArray = new JSONArray(ggString);
 			int length = ggJsonArray.length();
@@ -243,18 +234,15 @@ public class GetHomePage {
 				try {
 					jsonObject = ggJsonArray.getJSONObject(i);
 					try {
-						ggTitle.add(jsonObject.getString("title"));
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
+						ggTitle.add(jsonObject.optString("title"));
+					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

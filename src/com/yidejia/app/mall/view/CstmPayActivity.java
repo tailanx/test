@@ -852,9 +852,9 @@ public class CstmPayActivity extends BaseActivity {
 	/**
 	 * 获取发货地点
 	 */
-	private void getDeliveryPoint(){
+	private void getDeliveryPoint(boolean isDefault){
 //		String url = new JNICallBack().getHttp4GetDistribute("flag%3D%27y%27", "0", "20", "", "", "%2A");
-		String url = getDeliveryUrl(true);
+		String url = getDeliveryUrl(isDefault);
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
 		client.get(url, new AsyncHttpResponse(){
 
@@ -922,7 +922,6 @@ public class CstmPayActivity extends BaseActivity {
 		
 		url = new JNICallBack().getHttp4GetExpress(
 				where.toString(), "0", "20", "", "", "%2A");
-		Log.e("system.out", url);
 		return url;
 	}
 	
@@ -930,7 +929,7 @@ public class CstmPayActivity extends BaseActivity {
 	 * 根据省份获取配送中心id和获取快递费用
 	 * @param province 省份
 	 */
-	private void getExpressData(String province) {
+	private void getExpressData(String province, final boolean isDefault) {
 		
 		String url = getExpressUrl(province, true);
 		
@@ -948,7 +947,9 @@ public class CstmPayActivity extends BaseActivity {
 						if(null != expressArray && 0 != expressArray.size()) {
 							showExpressNum(expressArray.get(0).getExpress(), expressArray.get(0).getEms());
 							preId = expressArray.get(0).getPreId();
-							getDeliveryPoint();
+							if(isDefault){
+								getDeliveryPoint(isDefault);
+							}
 						}  else {
 							// TODO 
 							Toast.makeText(CstmPayActivity.this, "Express is null", Toast.LENGTH_LONG).show();
@@ -997,7 +998,7 @@ public class CstmPayActivity extends BaseActivity {
 						freePosts = parseExpressJson.getFreePosts();
 						if (null != freePosts && 0 != freePosts.size()) {
 							canFreePost();
-							getExpressData(province);
+							getExpressData(province, true);
 						} else {
 							// TODO 提示用户获取免邮信息出错？
 							Toast.makeText(CstmPayActivity.this, "can free is null", Toast.LENGTH_LONG).show();
@@ -1197,7 +1198,6 @@ public class CstmPayActivity extends BaseActivity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
 		// super.onActivityResult(requestCode, resultCode, data);
 		/*************************************************
 		 * 
@@ -1221,7 +1221,9 @@ public class CstmPayActivity extends BaseActivity {
 				setAdd(addresses1);
 				// 判断是否免邮
 //				canFree(sum);
-				getDeliveryPoint();
+				
+//				getDeliveryPoint(true);
+				getExpressData(addresses1.getProvice(), true);
 				// 设置快递费用和配送中心
 //				setKuaiDi(addresses1);
 			}
@@ -1245,19 +1247,17 @@ public class CstmPayActivity extends BaseActivity {
 	
 
 	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		StatService.onPause(this);
+	protected void onResume() {
+		super.onResume();
+//		StatService.onResume(this);
+		StatService.onPageStart(this, "支付页面");
 	}
 
 	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		StatService.onResume(this);
+	protected void onPause() {
+		super.onPause();
+//		StatService.onPause(this);
+		StatService.onPageEnd(this, "支付页面");
 	}
 	
-	
-
 }

@@ -159,7 +159,6 @@ public class MyApplication extends Application {
 
 	@Override
 	public void onLowMemory() {
-		// TODO Auto-generated method stub
 		super.onLowMemory();
 		ImageLoader.getInstance().clearMemoryCache();
 	}

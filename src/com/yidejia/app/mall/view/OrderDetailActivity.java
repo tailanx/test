@@ -2,45 +2,56 @@ package com.yidejia.app.mall.view;
 
 import java.util.ArrayList;
 
+import org.apache.http.HttpStatus;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
+import com.opens.asyncokhttpclient.AsyncHttpResponse;
+import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.address.ModelAddresses;
-import com.yidejia.app.mall.datamanage.TaskGetOrderByCode;
+import com.yidejia.app.mall.address.ParseAddressJson;
 import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.Cart;
+import com.yidejia.app.mall.net.ConnectionDetector;
+import com.yidejia.app.mall.order.Order;
+import com.yidejia.app.mall.order.ParseOrder;
 import com.yidejia.app.mall.util.Consts;
 
 public class OrderDetailActivity extends BaseActivity {
-	// private TextView nameTextView;//收件人姓名
-	// private TextView phoneTextView;//收件人电话
-	// private TextView detailTextView;//收件人地址
 	private LinearLayout layout;// 订单内容
-	// private TextView priceTextView;//订单物品价格
-	// private TextView emsTextView;//快递费
-	// private TextView sumTextView;//总共的价格
-	// private Button payButton;//立即付款
-	// private TextView orderNumber;//订单的编号
-	// private TextView orderTime;//下单时间
-	// private AddressDataManage addressDataManage ;//地址管理
-	// private MyApplication myApplication;
+	private TextView emsTextView;//快递费
+	private TextView sumTextView;//总共的价格
+	private TextView orderTime;//下单时间
+	private TextView nameTextView;//收件人姓名
+	private TextView phoneTextView;//收件人电话
+	private TextView detailTextView;//收件人地址
+	private TextView priceTextView;//订单物品价格
+	private TextView payButton;//立即付款
+	private TextView orderNumber;//订单的编号
+	private TextView changePayTypeTextView;//支付方式修改
+	private RelativeLayout orderAddressLayout;//收件人地址的布局
 	private String orderCode;// 传递过来的订单号
 	private String orderPrice;// 传递过来的价格总数
-	private String orderTn;// 传递过来的流水号
 
-	private String TAG = OrderDetailActivity.class.getName();
+	private String TAG = getClass().getName();
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -50,66 +61,29 @@ public class OrderDetailActivity extends BaseActivity {
 		setActionbarConfig();
 		setTitle(R.string.order_detail);
 		setContentView(R.layout.order_detail);
+		
+		findIds();
+		
 		initDisplayImageOption();
-		// addressDataManage = new AddressDataManage(OrderDetailActivity.this);
-		// myApplication = (MyApplication) getApplication();
+
 		Intent intent = getIntent();
 		orderCode = intent.getExtras().getString("OrderCode");
 		orderPrice = intent.getExtras().getString("OrderPrice");
 		ArrayList<Cart> carts = (ArrayList<Cart>) intent
 				.getSerializableExtra("carts");
-		// try {
-		// orderTn = intent.getExtras().getString("OrderTn");
-		// } catch (Exception e) {
-		// // TODO: handle exception
-		// Log.e(TAG, "tn is null");
-		// e.printStackTrace();
-		// }
+		
 		Log.i("info", orderCode + "   orderCode");
-		// nameTextView = (TextView) findViewById(R.id.order_detail_name);
-		// phoneTextView = (TextView) findViewById(R.id.order_detail_number);
-		// detailTextView = (TextView) findViewById(R.id.order_detail_position);
-		// priceTextView = (TextView)
-		// findViewById(R.id.order_detail_dingdan_sum);
-		// emsTextView = (TextView) findViewById(R.id.order_detail_yunhui_sum);
-		// sumTextView = (TextView) findViewById(R.id.go_pay_show_pay_money);
-		// Button payButton = (Button) findViewById(R.id.order_detail_pay);
-		// payButton.setClickable(true);
-		// payButton.setOnClickListener(new View.OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// // TODO Auto-generated method stub
-		// if("".equals(orderTn) || null == orderTn) {
-		// Log.e(TAG, "tn is null");
-		// return;
-		// }
-		// Log.e(TAG, "tn is not null");
-		// Intent intent = new Intent(OrderDetailActivity.this,
-		// UserPayActivity.class);
-		// Bundle bundle = new Bundle();
-		// bundle.putInt("mode", 1);
-		// bundle.putString("tn", orderTn);
-		// bundle.putString("resp_code", "00");
-		// bundle.putString("code", orderCode);
-		// bundle.putString("uid",
-		// ((MyApplication)getApplication()).getUserId());
-		// intent.putExtras(bundle);
-		// startActivity(intent);
-		// OrderDetailActivity.this.finish();
-		// }
-		// });
-		// orderNumber = (TextView)
-		// findViewById(R.id.order_detail_biaohao_number);
-		// orderTime = (TextView) findViewById(R.id.order_detail_time_number);
+		
 
 		layout = (LinearLayout) findViewById(R.id.order_detail_relative2);
 
-		// RelativeLayout relativeLayout = (RelativeLayout)
-		// findViewById(R.id.order_detail_data_layout);
-
+		if(null == carts) {
+			Toast.makeText(OrderDetailActivity.this, "购物清单为空", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		
 		int length = carts.size();
-		for (int i = 0; i < length; i++) {
+		for (int i = 0; i < length; i++) {	//加载购物清单界面
 			View view = getLayoutInflater().inflate(R.layout.order_detail_item,
 					null);
 			final Cart cart = carts.get(i);
@@ -128,7 +102,23 @@ public class OrderDetailActivity extends BaseActivity {
 			});
 			layout.addView(view);
 		}
-		setupShow();
+		getData();
+	}
+	
+	private void findIds(){
+		orderTime = (TextView) findViewById(R.id.order_detail_time_number);
+		emsTextView = (TextView) findViewById(R.id.order_detail_yunhui_sum);
+		nameTextView = (TextView) findViewById(R.id.order_detail_name);
+		phoneTextView = (TextView) findViewById(R.id.order_detail_number);
+		detailTextView = (TextView) findViewById(R.id.order_detail_position);
+		priceTextView = (TextView) findViewById(R.id.order_detail_dingdan_sum);
+		emsTextView = (TextView) findViewById(R.id.order_detail_yunhui_sum);
+		sumTextView = (TextView) findViewById(R.id.order_detail_go_pay_show_pay_money);
+		payButton = (TextView) findViewById(R.id.order_detail_pay);
+		orderNumber = (TextView) findViewById(R.id.order_detail_biaohao_number);
+		orderTime = (TextView) findViewById(R.id.order_detail_time_number);
+		changePayTypeTextView = (TextView) findViewById(R.id.change_pay_type);
+//		orderAddressLayout = (RelativeLayout) findViewById(R.id.order_address_layout);
 	}
 
 	@Override
@@ -140,18 +130,168 @@ public class OrderDetailActivity extends BaseActivity {
 				&& resultCode == Consts.AddressResponseCode) {
 			ModelAddresses addresses1 = (ModelAddresses) data.getExtras()
 					.getSerializable("addresses1");
-			taskOrderByCode.setAddress(addresses1);
+			setAddress(addresses1);
 		}
 	}
+	
+	/**根据订单号获取订单信息**/
+	private void getData() {
+		if(!ConnectionDetector.isConnectingToInternet(this)) {
+			Toast.makeText(this, getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+			return;
+		}
+		
+		String url = new JNICallBack().getHttp4GetOrderByCode(orderCode);
+		
+		AsyncOkHttpClient client = new AsyncOkHttpClient();
+		client.get(url, new AsyncHttpResponse(){
 
-	int fromIndex = 0;
-	int acount = 10;
-	StringBuffer sb = new StringBuffer();
-	TaskGetOrderByCode taskOrderByCode;
+			@Override
+			public void onStart() {
+				// TODO Auto-generated method stub
+				super.onStart();
+			}
 
-	private void setupShow() {
-		taskOrderByCode = new TaskGetOrderByCode(this);
-		taskOrderByCode.getOderBC(orderCode, orderPrice);// TN , orderTn
+			@Override
+			public void onFinish() {
+				// TODO Auto-generated method stub
+				super.onFinish();
+			}
+
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				// TODO Auto-generated method stub
+				super.onSuccess(statusCode, content);
+				if(HttpStatus.SC_OK == statusCode) {
+					ParseOrder parseOrder = new ParseOrder(OrderDetailActivity.this);
+					boolean isSuccess = parseOrder.parseOrderDetail(content);
+					if(isSuccess){
+						Order order = parseOrder.getOrderDetail();
+						showDetailView(order);
+						
+						String recipient_id = parseOrder.getRecipient_id();
+						getAddressData(recipient_id);
+					}
+				}
+			}
+
+			@Override
+			public void onError(Throwable error, String content) {
+				// TODO Auto-generated method stub
+				super.onError(error, content);
+			}
+			
+		});
+	}
+
+	private void showDetailView(Order order){
+		
+//		addresses  = new ArrayList<ModelAddresses>();
+		
+		priceTextView.setText(orderPrice);
+		String expressNum = order.getShipFee();
+		orderNumber.setText(orderCode);
+		emsTextView.setText(getResources().getString(R.string.unit) + expressNum);
+		orderTime.setText(order.getDate());
+		//录入状态时才显示付款和修改支付方式的按钮
+		if("录入".equals(order.getStatus())){
+			payButton.setVisibility(View.VISIBLE);
+			payButton.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO 提交订单
+//					TaskGetTn task = new TaskGetTn(activity);
+//					task.getOrderTn(orderCode);
+				}
+			});
+			changePayTypeTextView.setVisibility(View.VISIBLE);
+//			orderAddressLayout.setOnClickListener(new OnClickListener() {
+//				
+//				@Override
+//				public void onClick(View v) {
+//					Intent intent = new Intent(activity,
+//							PayAddress.class);
+//					activity.startActivityForResult(intent,
+//							Consts.AddressRequestCode);
+//				}
+//			});
+		} else{
+			payButton.setVisibility(View.GONE);
+			changePayTypeTextView.setVisibility(View.GONE);
+		}
+		try {
+			
+			float odprice = Float.parseFloat(orderPrice);
+			float exprice = Float.parseFloat(expressNum);
+
+			sumTextView.setText(getResources().getString(R.string.unit) + (odprice + exprice));
+		} catch (NumberFormatException e) {
+			sumTextView.setText(R.string.price_error);
+		}
+		
+		
+		
+	}
+
+	/**获取收件人地址信息**/
+	private void getAddressData(String recipient_id){
+		if(TextUtils.isEmpty(recipient_id)){
+			toastAddressError();
+			return;
+		}
+		
+		if(!ConnectionDetector.isConnectingToInternet(OrderDetailActivity.this)){
+			Toast.makeText(this, getResources().getString(R.string.no_network), Toast.LENGTH_SHORT).show();
+			return;
+		}
+		String url = new JNICallBack().getHttp4GetAddress("recipient_id=" + recipient_id, "0", "1", "", "", "");
+		
+		AsyncOkHttpClient client = new AsyncOkHttpClient();
+		client.get(url, new AsyncHttpResponse(){
+
+			@Override
+			public void onStart() {
+				// TODO Auto-generated method stub
+				super.onStart();
+			}
+
+			@Override
+			public void onFinish() {
+				// TODO Auto-generated method stub
+				super.onFinish();
+			}
+
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				// TODO Auto-generated method stub
+				super.onSuccess(statusCode, content);
+				if(HttpStatus.SC_OK == statusCode){
+					ParseAddressJson parseAddressJson = new ParseAddressJson();
+					boolean isSuccess = parseAddressJson.parseAddressListJson(content);
+					ArrayList<ModelAddresses> addressList = parseAddressJson.getAddresses();
+					if (isSuccess && null != addressList
+							&& !addressList.isEmpty()) {
+						ModelAddresses addresses = addressList.get(0);
+						setAddress(addresses);
+					} else {
+						toastAddressError();
+					}
+				}
+			}
+
+			@Override
+			public void onError(Throwable error, String content) {
+				// TODO Auto-generated method stub
+				super.onError(error, content);
+			}
+			
+		});
+	}
+	
+	/**提示收件人地址出错**/
+	private void toastAddressError(){
+		Toast.makeText(OrderDetailActivity.this, "获取收件人出错!", Toast.LENGTH_SHORT).show();
 	}
 
 	/**
@@ -181,6 +321,22 @@ public class OrderDetailActivity extends BaseActivity {
 				R.string.amount)
 				+ cart.getAmount());
 	}
+	
+	/**设置收件人地址信息**/
+	private void setAddress(ModelAddresses address){
+		
+		if(null == address) return;
+		
+		StringBuffer sb = new StringBuffer();
+//		Addresses address = addresses.get(0);
+		nameTextView.setText(address.getName());
+		phoneTextView.setText(address.getHandset());
+		sb.append(address.getProvice());
+		sb.append(address.getCity());
+		sb.append(address.getArea());
+		sb.append(address.getAddress());
+		detailTextView.setText(sb.toString());
+	}
 
 
 	private DisplayImageOptions options;
@@ -194,8 +350,16 @@ public class OrderDetailActivity extends BaseActivity {
 	}
 
 	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-//		imageLoader.destroy();
+	protected void onResume() {
+		super.onResume();
+//		StatService.onResume(this);
+		StatService.onPageStart(this, "订单详情页面");
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+//		StatService.onPause(this);
+		StatService.onPageEnd(this, "订单详情页面");
 	}
 }

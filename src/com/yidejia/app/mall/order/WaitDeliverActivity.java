@@ -18,16 +18,17 @@ public class WaitDeliverActivity extends BaseActivity {
 		viewCtrl.viewCtrl(2);
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+//		StatService.onResume(this);
+		StatService.onPageStart(this, "待发货订单容器页面");
+	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		StatService.onPause(this);
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		StatService.onResume(this);
+//		StatService.onPause(this);
+		StatService.onPageEnd(this, "待发货订单容器页面");
 	}
 }
