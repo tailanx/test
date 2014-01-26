@@ -43,5 +43,9 @@
 	<color name="text_color_120">#787878</color>
 	<!-- 40色值 -->
 	<color name="text_color_40">#282828</color>
+	<color name="integer_bule">#1987DC</color>
+	<color name="integer_green">#4aae32</color>
+	<color name="integer_orange">#FB6A00</color>
+	<color name="bg">#EEEEEE</color>
 	
 </resources>

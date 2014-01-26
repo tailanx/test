@@ -75,8 +75,8 @@ public class HomeLogActivity extends HomeBaseActivity implements OnClickListener
 		view = inflater.inflate(R.layout.my_mall_login, null);
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
 		frameLayout.addView(view);
-		int current = getIntent().getIntExtra("current", -1);
-		int next = getIntent().getIntExtra("next", -1);
+//		int current = getIntent().getIntExtra("current", -1);
+//		int next = getIntent().getIntExtra("next", -1);
 		// 设置底部
 		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
 //		bottomChange = new BottomChange(this, bottomLayout);
@@ -85,6 +85,7 @@ public class HomeLogActivity extends HomeBaseActivity implements OnClickListener
 //		}
 		// 添加头部
 		setActionBarConfigView();
+		setCurrentActivityId(5);
 
 		inputMethodManager = (InputMethodManager) HomeLogActivity.this
 				.getSystemService(Context.INPUT_METHOD_SERVICE);

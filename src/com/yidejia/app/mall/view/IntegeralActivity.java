@@ -1,42 +1,43 @@
 package com.yidejia.app.mall.view;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
-import android.webkit.WebView;
-import android.widget.ImageView;
+//import android.webkit.WebView;
+//import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
+
+//import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.yidejia.app.mall.BaseActivity;
-import com.yidejia.app.mall.MyApplication;
+//import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.VoucherDataManage;
+import com.yidejia.app.mall.fragment.IntegeralFragment;
 
-public class IntegeralActivity extends BaseActivity {
-	private static final String TAG = "MainActivity";
-	// private ViewPager mPager;
-	// private ArrayList<Fragment> fragmentsList;
-	//
-	// private TextView mCoupons,mIntegeral;
-	// private ImageView ivBottomLine;
-	// private int currIndex = 0;
-	// private int bottomLineWidth;
-	// private int offset = 0;
-	// private int position_one;
-	// private int position_two;
-	// private int position_three;
-	// private Resources resources;
-	private VoucherDataManage voucherDataManage;// 积分
-	private MyApplication myApplication;
-	private WebView webView;
+public class IntegeralActivity extends BaseActivity implements OnClickListener {
+	// private static final String TAG = "MainActivity";
+	private FragmentManager manager;
+	private FragmentTransaction ft;
+	private int currentId;// 设置当前id；
+	private TextView integeralTextView;// 积分
+	private TextView youhuiquanTexView;// 优惠券
+	private VoucherDataManage voucherDataManage;// 积分接口
+	// private MyApplication myApplication;
+	// private WebView webView;
+	private Fragment fragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		setActionbarConfig();
-//		setTitle(getResources().getString(R.string.main_voucher_text));
-		setActionBar();
+		// setActionbarConfig();
+		// setTitle(getResources().getString(R.string.main_voucher_text));
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		manager = getSupportFragmentManager();
 		// this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 		// WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -47,16 +48,16 @@ public class IntegeralActivity extends BaseActivity {
 		// InitViewPager();
 
 		// 已取消优惠券只显示积分
-		setContentView(R.layout.coupons);
+		setContentView(R.layout.integeraltop);
+		setActionBar();
+		fragment = IntegeralFragment.newInstance(0);
+		ft = manager.beginTransaction();
+		ft.add(R.id.fl_search_result_fragment, fragment);
+//		ft.addToBackStack("jifen");
+		ft.commit();
 
-		voucherDataManage = new VoucherDataManage(IntegeralActivity.this);
-		myApplication = (MyApplication) getApplication();
-		voucherDataManage.getUserVoucher(myApplication.getUserId(),
-				myApplication.getToken());
-		webView = (WebView) findViewById(R.id.wb_webView);
-		webView.setBackgroundColor(0);
-		webView.setBackgroundColor(getResources().getColor(R.color.white));
-		webView.loadUrl("http://m.yidejia.com/regterms.html");
+		// myApplication = (MyApplication) getApplication();
+
 		// String ji =
 		// voucherDataManage.getUserVoucher(myApplication.getUserId(),
 		// myApplication.getToken());
@@ -70,7 +71,6 @@ public class IntegeralActivity extends BaseActivity {
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		if (voucherDataManage != null) {
 			voucherDataManage.cancelTask();
@@ -80,28 +80,63 @@ public class IntegeralActivity extends BaseActivity {
 	// /**
 	// * 设置头部
 	// */
-	 private void setActionBar(){
-	 getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-	 getSupportActionBar().setDisplayShowCustomEnabled(true);
-	 getSupportActionBar().setDisplayShowHomeEnabled(false);
-	 getSupportActionBar().setDisplayShowTitleEnabled(false);
-	 getSupportActionBar().setDisplayUseLogoEnabled(false);
-	 getSupportActionBar().setCustomView(R.layout.integeraltop);
-	 TextView back = (TextView) findViewById(R.id.integeral_back);
-	 TextView titleTextView = (TextView) findViewById(R.id.tv_search_result_selled);
-//	 titleTextView.setText("积分卡券");
-	 titleTextView.setSelected(true);
-	
-	 back.setOnClickListener(new OnClickListener() {
-	
-	 @Override
-	 public void onClick(View arg0) {
-	 // TODO Auto-generated method stub
-	 IntegeralActivity.this.finish();
-	 }
-	 });
-	 }
+	private void setActionBar() {
+		// getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+		// getSupportActionBar().setDisplayShowCustomEnabled(true);
+		// getSupportActionBar().setDisplayShowHomeEnabled(false);
+		// getSupportActionBar().setDisplayShowTitleEnabled(false);
+		// getSupportActionBar().setDisplayUseLogoEnabled(false);
+		// getSupportActionBar().setCustomView(R.layout.integeraltop);
+		TextView back = (TextView) findViewById(R.id.integeral_back);
+		integeralTextView = (TextView) findViewById(R.id.tv_search_result_selled);
+		// titleTextView.setText("积分卡券");
+		integeralTextView.setSelected(true);
+		currentId = 0;
+		back.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View arg0) {
+				IntegeralActivity.this.finish();
+			}
+		});
+		youhuiquanTexView = (TextView) findViewById(R.id.tv_search_result_popularity);// 积分劵
+		youhuiquanTexView.setOnClickListener(this);
+		integeralTextView.setOnClickListener(this);// 积分
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.tv_search_result_popularity:// 优惠券
+			fragment = IntegeralFragment.newInstance(1);
+			if (currentId == 1) {
+				return;
+			} else {
+				integeralTextView.setSelected(false);
+				youhuiquanTexView.setSelected(true);
+				ft = manager.beginTransaction();
+				ft.add(R.id.fl_search_result_fragment, fragment);
+//				ft.addToBackStack("youhuiquan");
+				ft.commit();
+				currentId = 1;
+				break;
+			}
+		case R.id.tv_search_result_selled:// 积分
+			fragment = IntegeralFragment.newInstance(0);//
+			if (currentId == 0) {
+				return;
+			} else {
+				integeralTextView.setSelected(true);
+				youhuiquanTexView.setSelected(false);
+				ft = manager.beginTransaction();
+				ft.add(R.id.fl_search_result_fragment, fragment);
+//				ft.addToBackStack("jiefen");
+				ft.commit();
+				currentId = 0;
+			}
+			break;
+		}
+	}
 	/*
 	 * private void InitTextView(){ mCoupons =
 	 * (TextView)findViewById(R.id.my_card_voucher_Coupons); mIntegeral =

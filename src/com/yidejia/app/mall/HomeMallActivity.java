@@ -68,6 +68,7 @@ public class HomeMallActivity extends HomeBaseActivity implements
 		initFunView();
 		
 		setActionBar();
+		setCurrentActivityId(0);
 
 		getMainData();
 	}

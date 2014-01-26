@@ -80,8 +80,8 @@ public class HomeCarActivity extends HomeBaseActivity implements OnClickListener
 		inflater = LayoutInflater.from(this);
 
 		// 设置底部,获取当前的界面的id
-		int current = getIntent().getIntExtra("current", -1);
-		int next = getIntent().getIntExtra("next", -1);
+//		int current = getIntent().getIntExtra("current", -1);
+//		int next = getIntent().getIntExtra("next", -1);
 //		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
 //		bottomChange = new BottomChange(this, bottomLayout);
 //		if (current != -1 || next != -1) {
@@ -89,6 +89,7 @@ public class HomeCarActivity extends HomeBaseActivity implements OnClickListener
 //		}
 
 		setActionBarConfig();
+		setCurrentActivityId(3);
 
 		cartsDataManage = new CartsDataManage();
 		

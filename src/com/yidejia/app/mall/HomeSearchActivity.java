@@ -85,8 +85,10 @@ public class HomeSearchActivity extends HomeBaseActivity implements
 			functions = (ArrayList<Function>) arg0.getSerializable("funs");
 		}
 
-		int current = getIntent().getIntExtra("current", -1);
-		int next = getIntent().getIntExtra("next", -1);
+//		int current = getIntent().getIntExtra("current", -1);
+//		int next = getIntent().getIntExtra("next", -1);
+		
+		setCurrentActivityId(2);
 
 		cartsDataManage = new CartsDataManage();
 		myApplication = (MyApplication) getApplication();
@@ -101,7 +103,6 @@ public class HomeSearchActivity extends HomeBaseActivity implements
 				.findViewById(R.id.search_item_refresh_view);
 		refresh_data_btn = (ImageView) view.findViewById(R.id.refresh_data_btn);
 //		res = getResources();
-		initNavView();
 		// 设置底部
 //		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
 //		bottomChange = new BottomChange(HomeSearchActivity.this, bottomLayout);
@@ -172,11 +173,11 @@ public class HomeSearchActivity extends HomeBaseActivity implements
 
 	}
 
-	private RelativeLayout downHomeLayout;
-	private RelativeLayout downGuangLayout;
-	private RelativeLayout downSearchLayout;
-	private RelativeLayout downShoppingLayout;
-	private RelativeLayout downMyLayout;
+//	private RelativeLayout downHomeLayout;
+//	private RelativeLayout downGuangLayout;
+//	private RelativeLayout downSearchLayout;
+//	private RelativeLayout downShoppingLayout;
+//	private RelativeLayout downMyLayout;
 //	private ImageView down_home_imageView;// 首页按钮图片
 //	private ImageView down_guang_imageView;// 逛按钮图片
 //	private ImageView down_search_imageView;// 搜索按钮图片
@@ -192,32 +193,6 @@ public class HomeSearchActivity extends HomeBaseActivity implements
 	private int number;
 	private Button cartImage;
 
-	/**
-	 * 初始化底部导航栏
-	 */
-	private void initNavView() {
-		// 改变底部首页背景，有按下去的效果的背景
-		number = cartsDataManage.getCartAmount();
-		cartImage = (Button) findViewById(R.id.down_shopping_cart);
-		if (number == 0) {
-			cartImage.setVisibility(View.GONE);
-		} else {
-			cartImage.setText(number + "");
-		}
-		downHomeLayout = (RelativeLayout) findViewById(R.id.re_down_home_layout);
-		down_search_textview = (TextView) findViewById(R.id.tv_down_search_text);
-
-		downGuangLayout = (RelativeLayout) findViewById(R.id.re_down_guang_layout);
-		downSearchLayout = (RelativeLayout) findViewById(R.id.re_down_search_layout);
-		downShoppingLayout = (RelativeLayout) findViewById(R.id.re_down_shopping_layout);
-		downMyLayout = (RelativeLayout) findViewById(R.id.re_down_my_layout);
-
-		downHomeLayout.setOnClickListener(this);
-		downShoppingLayout.setOnClickListener(this);
-		downMyLayout.setOnClickListener(this);
-		downGuangLayout.setOnClickListener(this);
-
-	}
 
 	@Override
 	public void onStart() {

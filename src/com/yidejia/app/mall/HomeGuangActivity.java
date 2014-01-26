@@ -35,8 +35,8 @@ public class HomeGuangActivity extends HomeBaseActivity implements OnClickListen
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
 		frameLayout.addView(view);
 
-		int current = getIntent().getIntExtra("current", -1);
-		int next = getIntent().getIntExtra("next", -1);
+//		int current = getIntent().getIntExtra("current", -1);
+//		int next = getIntent().getIntExtra("next", -1);
 		// 设置底部
 //		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
 //		bottomChange = new BottomChange(this, bottomLayout);
@@ -44,6 +44,8 @@ public class HomeGuangActivity extends HomeBaseActivity implements OnClickListen
 //			bottomChange.initNavView(current, next);
 //		}
 		setActionbar();
+		
+		setCurrentActivityId(1);
 	}
 
 
@@ -61,16 +63,19 @@ public class HomeGuangActivity extends HomeBaseActivity implements OnClickListen
 
 	@Override
 	public void onClick(View v) {
-		Intent intent = new Intent();
+		Intent intent = null;
 		switch (v.getId()) {
 		case R.id.iv_guang_qiandao:
+			intent = new Intent();
 			intent.setClass(this, QiandaoActivity.class);
 			break;
 
 		case R.id.iv_guang_yaoyiyao:
+			intent = new Intent();
 			intent.setClass(this, TestSharkActivity.class);
 			break;
 		}
+		if(null == intent)return;
 		startActivity(intent);
 	}
 }

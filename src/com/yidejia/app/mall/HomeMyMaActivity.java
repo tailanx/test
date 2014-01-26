@@ -80,10 +80,13 @@ public class HomeMyMaActivity extends HomeBaseActivity implements
 		inflater = LayoutInflater.from(this);
 		view = inflater.inflate(R.layout.person_shopping_mall1, null);
 		frameLayout.addView(view);
-		int current = getIntent().getIntExtra("current", -1);
-		int next = getIntent().getIntExtra("next", -1);
+//		int current = getIntent().getIntExtra("current", -1);
+//		int next = getIntent().getIntExtra("next", -1);
 
 		setupView(view);
+		
+		setCurrentActivityId(4);
+		
 		// 设置底部
 //		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
 //		bottomChange = new BottomChange(this, bottomLayout);
@@ -97,52 +100,67 @@ public class HomeMyMaActivity extends HomeBaseActivity implements
 
 	@Override
 	public void onClick(View v) {
-		Intent intent = new Intent();
+		Intent intent = null;
 		switch (v.getId()) {
 		case R.id.re_wait_comment:// 待评价
+			intent = new Intent();
 			intent.setClass(this, EvaluationActivity.class);
 			break;
 		case R.id.re_main2_main2_linearlayout4_all_message:// 点击消息中心
+			intent = new Intent();
 			intent.setClass(this, PersonActivity.class);
 			break;
 
 		case R.id.re_main2_main2_linearlayout4_all_return:// 点击退换货
+			intent = new Intent();
 			intent.setClass(this, ExchangeActivity.class);
 			break;
 		case R.id.re_main2_main2_linearlayout4_all_order:// 点击全部订单
+			intent = new Intent();
 			intent.setClass(this, AllOrderActivity.class);
 			break;
 		case R.id.rv_wait_pay:// 待付款订单
+			intent = new Intent();
 			intent.setClass(this, WaitPayActivity.class);
 			break;
 		case R.id.re_wait_deliver:// 待发货订单
+			intent = new Intent();
 			intent.setClass(this, WaitDeliverActivity.class);
 			break;
 		case R.id.re_alreay_deliver:// 已发货订单
+			intent = new Intent();
 			intent.setClass(this, AlreadyOrderActivity.class);
 			break;
 		case R.id.re_compelte_oreder:// 已完成订单
+			intent = new Intent();
 			intent.setClass(this, AlreadyComActivity.class);
 			break;
 		case R.id.re_main2_main2_linearlayout4_integer:// 积分卡券
+			intent = new Intent();
 			intent.setClass(this, IntegeralActivity.class);
 			break;
 		case R.id.re_main2_main2_linearlayout4_collect:// 我的收藏
+			intent = new Intent();
 			intent.setClass(this, MyCollectActivity.class);
 			break;
 		case R.id.re_main2_main2_linearlayout4_address:// 收货地址管理
+			intent = new Intent();
 			intent.setClass(this, AddressActivity.class);
 			break;
 		case R.id.re_main2_main2_linearlayout4_all_show:// 评价晒单
+			intent = new Intent();
 			intent.setClass(this, EvaluationActivity.class);
 			break;
 		case R.id.tv_favorites:// 收藏
+			intent = new Intent();
 			intent.setClass(this, MyCollectActivity.class);
 			break;
 		case R.id.tv_message:// 收藏
+			intent = new Intent();
 			intent.setClass(this, PersonActivity.class);
 			break;
 		case R.id.tv_integration:// 收藏
+			intent = new Intent();
 			intent.setClass(this, IntegeralActivity.class);
 			break;
 		case R.id.tv_person_shopping_person_name:// 昵称
@@ -154,6 +172,7 @@ public class HomeMyMaActivity extends HomeBaseActivity implements
 			break;
 		
 		}
+		if(intent == null) return;
 		startActivity(intent);
 	}
 	
