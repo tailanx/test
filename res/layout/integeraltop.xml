@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/theme" >
 
     <TextView
         android:id="@+id/integeral_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/margin_left"
         android:text="@string/back"
+        
+        android:layout_marginTop="@dimen/mall_list_padding_add"
         android:textColor="@color/color_sort_text_color_press"
         android:textSize="@dimen/textsize_small" />
 
@@ -19,7 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
+        
+        android:layout_marginTop="@dimen/mall_list_padding_add"
         android:layout_marginRight="@dimen/margin_left"
         android:text="@string/integeral_produce"
         android:textColor="@color/color_sort_text_color_press"
@@ -29,7 +31,6 @@
         android:id="@+id/ll_search_result_tabhost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_marginBottom="@dimen/actiobar_margin_top"
         android:layout_marginLeft="@dimen/margin_left"
         android:layout_marginRight="@dimen/margin_left"

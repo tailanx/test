@@ -323,5 +323,12 @@
     <string name="integeral_youhui">优惠券</string>
     <string name="del_fav_fail">删除收藏失败!</string>
     <string name="return_order_detail">退换货详情</string>
+    <string name="integeral_price">￥ %1$s</string>
+    <string name="integeral_rule">仅限伊的家商城购物使用(购物满630元使用)</string>
+    <string name="integeral_way_rule">摇一摇赠送</string>
+    <string name="integeral_time_long">使用期限</string>
+    <string name="integeral_start_time">2012-11-28</string>
+    <string name="integeral_end_time">2012-01-28</string>
+    <string name="integeral_must">立即使用</string>
 
 </resources>

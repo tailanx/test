@@ -20,7 +20,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/actiobar_margin_top"
+                android:layout_marginLeft="@dimen/white_bg_padding"
                 android:text="@string/yirihui"
                 android:textSize="@dimen/textsize_small_add" />
 
@@ -225,7 +225,7 @@
             android:id="@+id/tv_main_hot_sell_all_buy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/head_padding"
+            android:layout_marginLeft="@dimen/white_bg_padding"
             android:text="@string/all_buy"
             android:textSize="@dimen/textsize_small_add" />
 
@@ -323,7 +323,7 @@
             android:id="@+id/tv_main_hot_sell_free_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/head_padding"
+            android:layout_marginLeft="@dimen/white_bg_padding"
             android:text="@string/free_pay_title"
             android:textSize="@dimen/textsize_small_add" />
     </RelativeLayout>
