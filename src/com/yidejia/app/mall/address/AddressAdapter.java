@@ -61,7 +61,7 @@ public class AddressAdapter extends BaseAdapter {
 
 	public AddressAdapter(Activity context, ArrayList<ModelAddresses> mAddresses) {
 		this.mAddresses = mAddresses;
-		myApplication = (MyApplication) context.getApplication();
+		myApplication = MyApplication.getInstance();
 		// dataManage = new AddressDataManage(context);
 		this.activity = context;
 		this.inflater = LayoutInflater.from(context);
@@ -70,7 +70,7 @@ public class AddressAdapter extends BaseAdapter {
 
 		delAddress = new DeleteUserAddress(context);
 
-		sp = HomeMallActivity.MAINACTIVITY.getSharedPreferences("StateCBId",
+		sp = myApplication.getSharedPreferences("StateCBId",
 				Activity.MODE_PRIVATE);
 		Editor editor = sp.edit();
 		editor.putInt("stateCBId", temp);

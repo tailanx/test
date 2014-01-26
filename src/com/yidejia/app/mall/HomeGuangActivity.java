@@ -7,38 +7,28 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.qiandao.QiandaoActivity;
 import com.yidejia.app.mall.shark.TestSharkActivity;
 import com.yidejia.app.mall.util.BottomChange;
 
-public class HomeGuangActivity extends BaseActivity implements OnClickListener {
-	private BottomChange bottomChange;
+public class HomeGuangActivity extends HomeBaseActivity implements OnClickListener {
+//	private BottomChange bottomChange;
 	private RelativeLayout bottomLayout;
-	private int number;// 商品的个数
-	private CartsDataManage cartsDataManage;
+//	private CartsDataManage cartsDataManage;
 	private LayoutInflater inflater;
 	private FrameLayout frameLayout;
 	private View view;
-	private Button cartImage;// 购物车
-	private RelativeLayout downHomeLayout;
-	private RelativeLayout downSearchLayout;
-	private RelativeLayout downShoppingLayout;
-	private RelativeLayout downMyLayout;
 	private RelativeLayout qiandao;
 	private RelativeLayout yaoyiyao;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		cartsDataManage = new CartsDataManage();
+//		cartsDataManage = new CartsDataManage();
 		setContentView(R.layout.activity_main_fragment_layout);
 		inflater = LayoutInflater.from(this);
 		view = inflater.inflate(R.layout.guang, null);
@@ -48,88 +38,14 @@ public class HomeGuangActivity extends BaseActivity implements OnClickListener {
 		int current = getIntent().getIntExtra("current", -1);
 		int next = getIntent().getIntExtra("next", -1);
 		// 设置底部
-		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
-		bottomChange = new BottomChange(this, bottomLayout);
-		if (current != -1 || next != -1) {
-			bottomChange.initNavView(current, next);
-		}
-		initNavView();
+//		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
+//		bottomChange = new BottomChange(this, bottomLayout);
+//		if (current != -1 || next != -1) {
+//			bottomChange.initNavView(current, next);
+//		}
 		setActionbar();
 	}
 
-	/**
-	 * 初始化底部导航栏
-	 */
-	private void initNavView() {
-		// 改变底部首页背景，有按下去的效果的背景
-		number = cartsDataManage.getCartAmount();
-		cartImage = (Button) findViewById(R.id.down_shopping_cart);
-		if (number == 0) {
-			cartImage.setVisibility(View.GONE);
-		} else {
-			cartImage.setText(number + "");
-		}
-		downHomeLayout = (RelativeLayout) findViewById(R.id.re_down_home_layout);
-		downSearchLayout = (RelativeLayout) findViewById(R.id.re_down_search_layout);
-		downShoppingLayout = (RelativeLayout) findViewById(R.id.re_down_shopping_layout);
-		downMyLayout = (RelativeLayout) findViewById(R.id.re_down_my_layout);
-
-		downHomeLayout.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(HomeGuangActivity.this,
-						HomeMallActivity.class);
-				startActivity(intent);
-				overridePendingTransition(R.anim.activity_in,
-						R.anim.activity_out);
-			}
-		});
-		downSearchLayout.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(HomeGuangActivity.this,
-						HomeSearchActivity.class);
-				intent.putExtra("current", 5);
-				intent.putExtra("next", 1);
-				startActivity(intent);
-				HomeGuangActivity.this.finish();
-				overridePendingTransition(R.anim.activity_in,
-						R.anim.activity_out);
-
-			}
-		});
-		downShoppingLayout.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(HomeGuangActivity.this,
-						HomeCarActivity.class);
-				intent.putExtra("current", 5);
-				intent.putExtra("next", 2);
-				startActivity(intent);
-				HomeGuangActivity.this.finish();
-				overridePendingTransition(R.anim.activity_in,
-						R.anim.activity_out);
-			}
-		});
-		downMyLayout.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(HomeGuangActivity.this,
-						HomeCarActivity.class);
-				intent.putExtra("current", 5);
-				intent.putExtra("next", 3);
-				startActivity(intent);
-				HomeGuangActivity.this.finish();
-				overridePendingTransition(R.anim.activity_in,
-						R.anim.activity_out);
-			}
-		});
-	}
 
 	private void setActionbar() {
 		setActionbarConfig();
@@ -145,7 +61,6 @@ public class HomeGuangActivity extends BaseActivity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		Intent intent = new Intent();
 		switch (v.getId()) {
 		case R.id.iv_guang_qiandao:

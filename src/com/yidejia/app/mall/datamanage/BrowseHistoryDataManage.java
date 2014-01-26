@@ -8,6 +8,7 @@ import java.util.Map;
 
 
 
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
@@ -17,8 +18,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
-import com.unionpay.mpay.views.u;
-import com.yidejia.app.mall.HomeMallActivity;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.model.ProductBaseInfo;
 /**
  * 浏览历史模块
@@ -44,7 +44,7 @@ public class BrowseHistoryDataManage {
 	private String TAG = BrowseHistoryDataManage.class.getName();
 	
 	public BrowseHistoryDataManage(){
-		sp = HomeMallActivity.MAINACTIVITY.getSharedPreferences("BrowseHistory", Activity.MODE_APPEND );
+		sp = MyApplication.getInstance().getSharedPreferences("BrowseHistory", Activity.MODE_APPEND );
 		historyArray = new ArrayList<ProductBaseInfo>();
 		keysList = new ArrayList<String>();
 	}
@@ -80,11 +80,9 @@ public class BrowseHistoryDataManage {
 			editor.commit();
 			flag = true;
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			Log.e(TAG, "addHistory Json err");
 			e.printStackTrace();
 		} catch (Exception e) {
-			// TODO: handle exception
 			Log.e(TAG, "addHistory err");
 			e.printStackTrace();
 		}
@@ -112,7 +110,6 @@ public class BrowseHistoryDataManage {
 			editor.commit();
 			flag = true;
 		} catch (Exception e) {
-			// TODO: handle exception
 			Log.e(TAG, "delHistory err");
 			e.printStackTrace();
 		}
@@ -146,11 +143,9 @@ public class BrowseHistoryDataManage {
 //					Log.e(TAG, "ts:"+key+" and id"+id);
 					productBaseInfosArray.add(productBaseInfo);
 				} catch (NumberFormatException  e) {
-					// TODO: handle exception
 					Log.e(TAG, "get ProductBaseInfo array NumberFormatException ");
 					e.printStackTrace();
 				} catch (Exception e) {
-					// TODO: handle exception
 					Log.e(TAG, "get ProductBaseInfo array json err ");
 					e.printStackTrace();
 				}
@@ -205,7 +200,6 @@ public class BrowseHistoryDataManage {
 				}
 			}*/
 		} catch (Exception e) {
-			// TODO: handle exception
 			Log.e(TAG, "get ProductBaseInfo array err ");
 			e.printStackTrace();
 		}
@@ -228,7 +222,6 @@ public class BrowseHistoryDataManage {
 			editor.commit();
 			return true;
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 		return false;
 	}
@@ -244,7 +237,6 @@ public class BrowseHistoryDataManage {
 			Map<String, ?>spMap = sp.getAll();
 			count = spMap.size();
 		} catch (Exception e) {
-			// TODO: handle exception
 			Log.e(TAG, "get ProductBaseInfo type count err");
 			e.printStackTrace();
 		}

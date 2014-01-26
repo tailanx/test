@@ -43,7 +43,7 @@ import com.yidejia.app.mall.widget.WiperSwitch;
 import com.yidejia.app.mall.widget.WiperSwitch.OnChangedListener;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
-public class HomeLogActivity extends BaseActivity implements OnClickListener,
+public class HomeLogActivity extends HomeBaseActivity implements OnClickListener,
 		OnChangedListener {
 	private MyApplication myApplication;
 	private View view;
@@ -61,14 +61,14 @@ public class HomeLogActivity extends BaseActivity implements OnClickListener,
 	private SharedPreferences sp;
 	private Consts consts;
 	private LoginTask taskLoginAct;
-	private BottomChange bottomChange;
+//	private BottomChange bottomChange;
 	private RelativeLayout bottomLayout;
 	public static boolean isCheck;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		cartsDataManage = new CartsDataManage();
+//		cartsDataManage = new CartsDataManage();
 		setContentView(R.layout.activity_main_fragment_layout);
 		myApplication = (MyApplication) getApplication();
 		inflater = LayoutInflater.from(this);
@@ -79,11 +79,10 @@ public class HomeLogActivity extends BaseActivity implements OnClickListener,
 		int next = getIntent().getIntExtra("next", -1);
 		// 设置底部
 		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
-		bottomChange = new BottomChange(this, bottomLayout);
-		if (current != -1 || next != -1) {
-			bottomChange.initNavView(current, next);
-		}
-		initNavView();
+//		bottomChange = new BottomChange(this, bottomLayout);
+//		if (current != -1 || next != -1) {
+//			bottomChange.initNavView(current, next);
+//		}
 		// 添加头部
 		setActionBarConfigView();
 
@@ -153,77 +152,18 @@ public class HomeLogActivity extends BaseActivity implements OnClickListener,
 //		}
 	}
 
-	private RelativeLayout downHomeLayout;
-	private RelativeLayout downGuangLayout;
-	private RelativeLayout downSearchLayout;
-	private RelativeLayout downShoppingLayout;
-	private RelativeLayout downMyLayout;
-	private CartsDataManage cartsDataManage;
-	private int number;
-	private Button cartImage;
+//	private RelativeLayout downHomeLayout;
+//	private RelativeLayout downGuangLayout;
+//	private RelativeLayout downSearchLayout;
+//	private RelativeLayout downShoppingLayout;
+//	private RelativeLayout downMyLayout;
+//	private CartsDataManage cartsDataManage;
+//	private int number;
+//	private Button cartImage;
 
 	/**
 	 * 底部事件
 	 */
-	/**
-	 * 初始化底部导航栏
-	 */
-	private void initNavView() {
-		// 改变底部首页背景，有按下去的效果的背景
-		number = cartsDataManage.getCartAmount();
-		cartImage = (Button) findViewById(R.id.down_shopping_cart);
-		if (number == 0) {
-			cartImage.setVisibility(View.GONE);
-		} else {
-			cartImage.setText(number + "");
-		}
-		downGuangLayout = (RelativeLayout) findViewById(R.id.re_down_guang_layout);
-		downHomeLayout = (RelativeLayout) findViewById(R.id.re_down_home_layout);
-		downSearchLayout = (RelativeLayout) findViewById(R.id.re_down_search_layout);
-		downShoppingLayout = (RelativeLayout) findViewById(R.id.re_down_shopping_layout);
-		downMyLayout = (RelativeLayout) findViewById(R.id.re_down_my_layout);
-
-		downHomeLayout.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(HomeLogActivity.this,
-						HomeMallActivity.class);
-				startActivity(intent);
-				overridePendingTransition(R.anim.activity_in,
-						R.anim.activity_out);
-			}
-		});
-		downSearchLayout.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(HomeLogActivity.this,
-						HomeSearchActivity.class);
-				intent.putExtra("current", 3);
-				intent.putExtra("next", 1);
-				startActivity(intent);
-				HomeLogActivity.this.finish();
-				overridePendingTransition(R.anim.activity_in,
-						R.anim.activity_out);
-
-			}
-		});
-		downShoppingLayout.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(HomeLogActivity.this,
-						HomeCarActivity.class);
-				intent.putExtra("current", 3);
-				intent.putExtra("next", 2);
-				startActivity(intent);
-				HomeLogActivity.this.finish();
-				overridePendingTransition(R.anim.activity_in,
-						R.anim.activity_out);
-			}
-		});
-	}
 
 	/**
 	 * 头部
@@ -295,27 +235,6 @@ public class HomeLogActivity extends BaseActivity implements OnClickListener,
 		}
 	}
 
-	// 双击返回键退出程序
-	private long exitTime = 0;
-
-	@Override
-	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if ((System.currentTimeMillis() - exitTime) > 2000) {
-				Toast.makeText(getApplicationContext(),
-						getResources().getString(R.string.exit),
-						Toast.LENGTH_SHORT).show();
-				exitTime = System.currentTimeMillis();
-			} else {
-				// ((MyApplication)getApplication()).setUserId("");
-				// ((MyApplication)getApplication()).setToken("");
-				finish();
-				// System.exit(0);
-			}
-			return true;
-		}
-		return super.onKeyUp(keyCode, event);
-	}
 
 	@Override
 	protected void onPause() {

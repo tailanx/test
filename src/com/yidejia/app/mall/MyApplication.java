@@ -178,9 +178,9 @@ public class MyApplication extends Application {
 
 	public DisplayImageOptions initBannerImageOption() {
 		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.image_bg)
-				.showImageOnFail(R.drawable.image_bg)
-				.showImageForEmptyUri(R.drawable.image_bg).cacheInMemory(true)
+				.showStubImage(R.drawable.banner_bg)
+				.showImageOnFail(R.drawable.banner_bg)
+				.showImageForEmptyUri(R.drawable.banner_bg).cacheInMemory(true)
 				.cacheOnDisc(true).build();
 
 		return options;

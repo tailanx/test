@@ -42,7 +42,7 @@ import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
-public class HomeSearchActivity extends SherlockFragmentActivity implements
+public class HomeSearchActivity extends HomeBaseActivity implements
 		OnClickListener {
 	private LayoutInflater inflater;
 	private View view;
@@ -59,25 +59,25 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 	private String TAG = "SearchFragment";
 	private FrameLayout frameLayout;
 
-	private Task task;
-	private InnerReceiver receiver;
-	private BottomChange bottomChange;
+//	private Task task;
+//	private InnerReceiver receiver;
+//	private BottomChange bottomChange;
 	private RelativeLayout bottomLayout;
 
-	private void closeTask() {
-		if (task != null
-				&& task.getStatus().RUNNING == AsyncTask.Status.RUNNING) {
-			task.cancel(true);
-		}
-	}
+//	private void closeTask() {
+//		if (task != null
+//				&& task.getStatus().RUNNING == AsyncTask.Status.RUNNING) {
+//			task.cancel(true);
+//		}
+//	}
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		receiver = new InnerReceiver();
-		IntentFilter filter = new IntentFilter();
-		filter.addAction(Consts.UPDATE_CHANGE);
-		registerReceiver(receiver, filter);
+//		receiver = new InnerReceiver();
+//		IntentFilter filter = new IntentFilter();
+//		filter.addAction(Consts.UPDATE_CHANGE);
+//		registerReceiver(receiver, filter);
 
 		Log.e(TAG, "search onCreate");
 
@@ -103,11 +103,11 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 //		res = getResources();
 		initNavView();
 		// 设置底部
-		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
-		bottomChange = new BottomChange(HomeSearchActivity.this, bottomLayout);
-		if (current != -1 || next != -1) {
-			bottomChange.initNavView(current, next);
-		}
+//		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
+//		bottomChange = new BottomChange(HomeSearchActivity.this, bottomLayout);
+//		if (current != -1 || next != -1) {
+//			bottomChange.initNavView(current, next);
+//		}
 
 		setActionBarConfig();
 
@@ -118,9 +118,9 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 			if ((null == functions) || (functions.isEmpty())) {
 				functions = new ArrayList<Function>();
 				Log.e(TAG, "search on create get task");
-				closeTask();
-				task = new Task();
-				task.execute();
+//				closeTask();
+//				task = new Task();
+//				task.execute();
 			}
 		}
 
@@ -129,7 +129,7 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 
 				@Override
 				public void onCancel(DialogInterface dialog) {
-					closeTask();
+//					closeTask();
 					if (functions.isEmpty()) {
 						searchListView.setVisibility(View.GONE);
 						search_item_refresh_view.setVisibility(View.VISIBLE);
@@ -142,9 +142,9 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 
 				@Override
 				public void onClick(View v) {
-					closeTask();
-					task = new Task();
-					task.execute();
+//					closeTask();
+//					task = new Task();
+//					task.execute();
 				}
 			});
 		}
@@ -228,8 +228,7 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		closeTask();
-		unregisterReceiver(receiver);
+//		closeTask();
 	}
 
 	@Override
@@ -389,37 +388,6 @@ public class HomeSearchActivity extends SherlockFragmentActivity implements
 		outState.putSerializable("funs", functions);
 	};
 
-	// 双击返回键退出程序
-	private long exitTime = 0;
-
-	@Override
-	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if ((System.currentTimeMillis() - exitTime) > 2000) {
-				Toast.makeText(getApplicationContext(),
-						getResources().getString(R.string.exit),
-						Toast.LENGTH_SHORT).show();
-				exitTime = System.currentTimeMillis();
-			} else {
-				finish();
-				// System.exit(0);
-			}
-			return true;
-		}
-		return super.onKeyUp(keyCode, event);
-	}
-
-	private class InnerReceiver extends BroadcastReceiver {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			String action = intent.getAction();
-			if (Consts.UPDATE_CHANGE.equals(action)) {
-				number = cartsDataManage.getCartAmount();
-				cartImage.setVisibility(View.VISIBLE);
-				cartImage.setText(number + "");
-			}
-		}
-	}
 
 	@Override
 	protected void onPause() {

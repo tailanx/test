@@ -4,9 +4,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.jeremyfeinstein.slidingmenu.SlidingFragmentActivity;
 
 public class BaseActivity extends SherlockFragmentActivity {
 

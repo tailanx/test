@@ -31,8 +31,6 @@ import com.yidejia.app.mall.order.AllOrderActivity;
 import com.yidejia.app.mall.phone.PhoneActivity;
 import com.yidejia.app.mall.search.SearchActivity;
 import com.yidejia.app.mall.skintest.SkinHomeActivity;
-import com.yidejia.app.mall.task.MallTask;
-import com.yidejia.app.mall.task.MallTask.Task;
 import com.yidejia.app.mall.view.IntegeralActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.yirihui.YirihuiActivity;
@@ -43,11 +41,10 @@ public class MallAction {
 	public static boolean isFirstIn = true;
 	private View view;
 	private LayoutInflater inflater;
-	private MallTask mallTask;// 开启一个异步任务用来加载数据
 //	private TextView main_mall_notice_content;// 公告
 	private PullToRefreshScrollView mPullToRefreshScrollView;
 	private FrameLayout frameLayout;
-	private Task task;// 异步任务
+//	private Task task;// 异步任务
 	private MyApplication myApplication;
 
 	public MallAction(SherlockFragmentActivity activity, FrameLayout layout) {
@@ -57,37 +54,14 @@ public class MallAction {
 		this.inflater = LayoutInflater.from(activity);
 		view = inflater.inflate(R.layout.activity_main_layout, null);// 加载主界面
 		frameLayout.addView(view);
+		
+		RelativeLayout shorcutLayout = (RelativeLayout) view
+				.findViewById(R.id.function_parent_layout);
+
+		View child = inflater.inflate(R.layout.main_function, null);
+		shorcutLayout.addView(child);
+		functionIntent(child);
 	}
-
-	/**
-	 * 设置头部
-	 */
-	public void setActionBarConfig() {
-		activity.getSupportActionBar().setCustomView(
-				R.layout.actionbar_main_home_title);
-
-		activity.getSupportActionBar().setDisplayShowCustomEnabled(true);
-		activity.getSupportActionBar().setDisplayUseLogoEnabled(false);
-		activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		activity.getSupportActionBar().setDisplayShowHomeEnabled(false);
-
-		ImageView searchEditText = (ImageView) activity
-				.findViewById(R.id.main_home_title_search);
-		// 头部事件监听
-		searchEditText.setOnClickListener(go2SearchListener2);
-
-	}
-
-	/**
-	 * 头部的点击事件
-	 */
-	private OnClickListener go2SearchListener2 = new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			Intent intent = new Intent(activity, SearchActivity.class);
-			activity.startActivity(intent);
-		}
-	};
 
 	/**
 	 * 创建界面的数据加载
@@ -102,10 +76,10 @@ public class MallAction {
 			@Override
 			public void onCancel(DialogInterface dialog) {
 				isFirstIn = false;
-				closeTask(task);
+//				closeTask(task);
 			}
 		});
-		createView(view, inflater);
+		createView();
 		if (!ConnectionDetector.isConnectingToInternet(activity)) {
 			Toast.makeText(activity.getApplicationContext(),
 					activity.getResources().getString(R.string.no_network),
@@ -113,33 +87,23 @@ public class MallAction {
 			isFirstIn = false;
 			return;
 		}
-		closeTask(task);
-		mallTask = new MallTask(activity, view, frameLayout,mPullToRefreshScrollView);
-		task = mallTask.getTask();
+//		closeTask(task);
+//		mallTask = new MallTask(activity, view, frameLayout,mPullToRefreshScrollView);
+//		task = mallTask.getTask();
 	}
 
-	@SuppressWarnings("static-access")
-	private void closeTask(Task task) {
-		if (task != null && task.getStatus().RUNNING == Status.RUNNING) {
-			task.cancel(true);
-		}
-	}
+//	@SuppressWarnings("static-access")
+//	private void closeTask(Task task) {
+//		if (task != null && task.getStatus().RUNNING == Status.RUNNING) {
+//			task.cancel(true);
+//		}
+//	}
 
 	/**
 	 * activity启动时调用这个方法显示界面
-	 * 
-	 * @param view
-	 * @param inflater
 	 */
-	private void createView(View view, LayoutInflater inflater) {
-
-		RelativeLayout shorcutLayout = (RelativeLayout) view
-				.findViewById(R.id.function_parent_layout);
-
-		View child = inflater.inflate(R.layout.main_function, null);
-		shorcutLayout.addView(child);
-		functionIntent(child);
-
+	public void createView() {
+		
 		mPullToRefreshScrollView = (PullToRefreshScrollView) view
 				.findViewById(R.id.main_pull_refresh_scrollview);
 		mPullToRefreshScrollView.setScrollingWhileRefreshingEnabled(true);
@@ -153,8 +117,6 @@ public class MallAction {
 						System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
 								| DateUtils.FORMAT_SHOW_DATE
 								| DateUtils.FORMAT_ABBREV_ALL);
-		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
-				label);
 		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
 				label);
 		mPullToRefreshScrollView.setOnRefreshListener(listener);
@@ -291,8 +253,8 @@ public class MallAction {
 					return;
 				}
 				// closeTask();
-				@SuppressWarnings("unused")
-				MallTask mall = new MallTask(activity, view, frameLayout, mPullToRefreshScrollView);
+//				@SuppressWarnings("unused")
+//				MallTask mall = new MallTask(activity, view, frameLayout, mPullToRefreshScrollView);
 			} catch (Exception e) {
 				e.printStackTrace();
 				Toast.makeText(
@@ -320,11 +282,4 @@ public class MallAction {
 		}
 	}
 
-	public void onResume() {
-		mallTask.onStart();
-	}
-
-	public void onPause() {
-		mallTask.onPause();
-	}
 }

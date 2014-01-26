@@ -1,4 +1,4 @@
-package com.yidejia.app.mall.view;
+package com.yidejia.app.mall.order;
 
 import java.util.ArrayList;
 
@@ -31,8 +31,6 @@ import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.net.ConnectionDetector;
-import com.yidejia.app.mall.order.Order;
-import com.yidejia.app.mall.order.ParseOrder;
 import com.yidejia.app.mall.util.Consts;
 
 public class OrderDetailActivity extends BaseActivity {

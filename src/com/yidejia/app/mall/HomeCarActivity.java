@@ -4,31 +4,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.search.SearchResultActivity;
 import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.util.CartUtil1;
-import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.CstmPayActivity;
-import com.yidejia.app.mall.view.ImageLoaderUtil;
 import com.yidejia.app.mall.view.LoginActivity;
+
 
 
 //import android.app.Activity;
 import android.app.AlertDialog.Builder;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 //import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,12 +42,11 @@ import android.widget.Toast;
  * @author Administrator
  * 
  */
-public class HomeCarActivity extends BaseActivity implements OnClickListener {
+public class HomeCarActivity extends HomeBaseActivity implements OnClickListener {
 	private TextView shoppingCartTopay;// 编辑
 	private MyApplication myApplication;
 	private FrameLayout frameLayout;
 	private LayoutInflater inflater;
-	private int number;
 	private View view;
 	private TextView sumTextView;// 总的钱数
 	private TextView counTextView;// 总的数量
@@ -66,48 +56,42 @@ public class HomeCarActivity extends BaseActivity implements OnClickListener {
 	public static ArrayList<Cart> cartList;
 	public static float sum;
 	private Button mButton;
-	private InnerReceiver receiver;
 //	private ImageLoader imageLoader;
 //	private ImageLoadingListener listener;
 //	private DisplayImageOptions options;
 
-	private BottomChange bottomChange;
+//	private BottomChange bottomChange;
 	private RelativeLayout bottomLayout;
+	
+//	private RelativeLayout downHomeLayout;
+//	private RelativeLayout downGuangLayout;
+//	private RelativeLayout downSearchLayout;
+//	private RelativeLayout downShoppingLayout;
+//	private RelativeLayout downMyLayout;
+	private CartsDataManage cartsDataManage;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		// 设置一个广播
-		receiver = new InnerReceiver();
-		IntentFilter filter = new IntentFilter();
-		filter.addAction(Consts.UPDATE_CHANGE);
-		filter.addAction(Consts.BROAD_UPDATE_CHANGE);
-		filter.addAction(Consts.DELETE_CART);
-		registerReceiver(receiver, filter);
 
-		cartsDataManage = new CartsDataManage();
-		myApplication = (MyApplication) getApplication();
+		myApplication = MyApplication.getInstance();
 		setContentView(R.layout.activity_main_fragment_layout);
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
 		inflater = LayoutInflater.from(this);
 
-		initNavView();
 		// 设置底部,获取当前的界面的id
 		int current = getIntent().getIntExtra("current", -1);
 		int next = getIntent().getIntExtra("next", -1);
-		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
-		bottomChange = new BottomChange(this, bottomLayout);
-		if (current != -1 || next != -1) {
-			bottomChange.initNavView(current, next);
-		}
+//		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
+//		bottomChange = new BottomChange(this, bottomLayout);
+//		if (current != -1 || next != -1) {
+//			bottomChange.initNavView(current, next);
+//		}
 
 		setActionBarConfig();
-		// 初始imageloader
-//		ImageLoaderUtil imageLoaderUtil = new ImageLoaderUtil();
-//		imageLoader = imageLoaderUtil.getImageLoader();
-//		listener = imageLoaderUtil.getAnimateFirstListener();
-//		options = imageLoaderUtil.getOptions();
 
+		cartsDataManage = new CartsDataManage();
+		
 		if (cartsDataManage.getCartAmount() != 0) {
 			view = inflater.inflate(R.layout.shopping_cart, null);
 			frameLayout.addView(view);
@@ -149,7 +133,6 @@ public class HomeCarActivity extends BaseActivity implements OnClickListener {
 //		imageLoader.init(ImageLoaderConfiguration
 //				.createDefault(HomeCarActivity.this));
 //		imageLoader.stop();
-		unregisterReceiver(receiver);
 	}
 
 	private void setViewCtrl(View view) {
@@ -213,65 +196,6 @@ public class HomeCarActivity extends BaseActivity implements OnClickListener {
 		setTitle(getResources().getString(R.string.down_shopping_text));
 	}
 
-	private RelativeLayout downHomeLayout;
-	private RelativeLayout downGuangLayout;
-	private RelativeLayout downSearchLayout;
-	private RelativeLayout downShoppingLayout;
-	private RelativeLayout downMyLayout;
-	private CartsDataManage cartsDataManage;
-	private Button cartImage;
-
-	/**
-	 * 初始化底部导航栏
-	 */
-	private void initNavView() {
-		// 改变底部首页背景，有按下去的效果的背景
-		number = cartsDataManage.getCartAmount();
-		cartImage = (Button) findViewById(R.id.down_shopping_cart);
-		if (number == 0) {
-			cartImage.setVisibility(View.GONE);
-		} else {
-			cartImage.setText(number + "");
-		}
-		downHomeLayout = (RelativeLayout) findViewById(R.id.re_down_home_layout);
-		downGuangLayout = (RelativeLayout) findViewById(R.id.re_down_guang_layout);
-		downSearchLayout = (RelativeLayout) findViewById(R.id.re_down_search_layout);
-		downShoppingLayout = (RelativeLayout) findViewById(R.id.re_down_shopping_layout);
-		downMyLayout = (RelativeLayout) findViewById(R.id.re_down_my_layout);
-
-		downHomeLayout.setOnClickListener(this);
-		downSearchLayout.setOnClickListener(this);
-		downMyLayout.setOnClickListener(this);
-
-	}
-
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		Intent intent = new Intent();
-		switch (v.getId()) {
-		case R.id.re_down_home_layout:
-			intent.setClass(HomeCarActivity.this, HomeMallActivity.class);
-			break;
-		case R.id.re_down_search_layout:
-			intent.setClass(HomeCarActivity.this, HomeSearchActivity.class);
-			intent.putExtra("current", 2);
-			intent.putExtra("next", 1);
-			break;
-		case R.id.re_down_my_layout:
-			if (myApplication.getIsLogin()) {
-				intent.setClass(HomeCarActivity.this, HomeMyMaActivity.class);
-			} else {
-				intent.setClass(HomeCarActivity.this, HomeLogActivity.class);
-			}
-			intent.putExtra("current", 2);
-			intent.putExtra("next", 3);
-			break;
-		}
-		HomeCarActivity.this.startActivity(intent);
-		this.finish();
-		overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
-	}
 
 	private void showLoginTips() {
 		new Builder(this)
@@ -325,81 +249,6 @@ public class HomeCarActivity extends BaseActivity implements OnClickListener {
 					Toast.LENGTH_LONG).show();
 		}
 
-	}
-
-	// 双击返回键退出程序
-	private long exitTime = 0;
-
-	@Override
-	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if ((System.currentTimeMillis() - exitTime) > 2000) {
-				Toast.makeText(getApplicationContext(),
-						getResources().getString(R.string.exit),
-						Toast.LENGTH_SHORT).show();
-				exitTime = System.currentTimeMillis();
-			} else {
-				finish();
-			}
-			return true;
-		}
-		return super.onKeyUp(keyCode, event);
-	}
-
-	private class InnerReceiver extends BroadcastReceiver {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			// TODO Auto-generated method stub
-			String action = intent.getAction();
-			if (Consts.UPDATE_CHANGE.equals(action)) {
-				number = cartsDataManage.getCartAmount();
-				frameLayout.removeAllViews();
-				View view = LayoutInflater.from(HomeCarActivity.this).inflate(
-						R.layout.shopping_cart, null);
-				frameLayout.addView(view);
-				setViewCtrl(view);
-
-				sum = Float.parseFloat(sumTextView.getText().toString());
-				cartImage.setVisibility(View.VISIBLE);
-				cartImage.setText(number + "");
-			}
-			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
-				number = cartsDataManage.getCartAmount();
-				if (number == 0) {
-					frameLayout.removeAllViews();
-					View view = LayoutInflater.from(HomeCarActivity.this)
-							.inflate(R.layout.no_produce, null);
-					frameLayout.addView(view);
-					shoppingCartTopay.setVisibility(View.GONE);
-					setNoProduce(view);
-					cartImage.setVisibility(View.GONE);
-				} else {
-					cartImage.setText(number + "");
-				}
-			}
-			if (Consts.DELETE_CART.equals(action)) {
-				number = cartsDataManage.getCartAmount();
-				{
-					if (number == 0) {
-						frameLayout.removeAllViews();
-						View view = LayoutInflater.from(HomeCarActivity.this)
-								.inflate(R.layout.no_produce, null);
-						frameLayout.addView(view);
-						shoppingCartTopay.setVisibility(View.GONE);
-						setNoProduce(view);
-						cartImage.setVisibility(View.GONE);
-					} else {
-						layout.removeAllViews();
-						CartUtil1 cartUtil = new CartUtil1(
-								HomeCarActivity.this, layout, counTextView,
-								sumTextView, mBox);
-						cartUtil.AllComment();
-						cartImage.setText(number + "");
-					}
-				}
-			}
-		}
 	}
 
 	@Override

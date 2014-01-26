@@ -10,13 +10,13 @@
         android:layout_height="wrap_content" >
 
         <RelativeLayout
-            android:id="@+id/rv_main_hot_sell_title"
+            android:id="@+id/rv_yrh_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/yirihui_bg" >
 
             <TextView
-                android:id="@+id/tv_main_hot_sell_yirihui"
+                android:id="@+id/tv_yirihui_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/margin_left_add"
-                android:layout_toRightOf="@id/tv_main_hot_sell_yirihui"
+                android:layout_toRightOf="@id/tv_yirihui_text"
                 android:ellipsize="marquee"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
@@ -43,7 +43,7 @@
             android:id="@+id/ll_main_hot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/rv_main_hot_sell_title"
+            android:layout_below="@id/rv_yrh_title"
             android:layout_marginTop="@dimen/width_add"
             android:background="#ffffff"
             android:baselineAligned="false"
@@ -253,7 +253,7 @@
             android:paddingBottom="@dimen/actiobar_margin_top" >
 
             <ImageView
-                android:id="@+id/iv_main_all_buy_left_image"
+                android:id="@+id/iv_djdzm_left"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/yirihui"
                 android:layout_centerVertical="true"
@@ -274,7 +274,7 @@
                 android:background="@drawable/main_theme_textview_bg" >
 
                 <ImageView
-                    android:id="@+id/iv_main_all_buy_left_right_image"
+                    android:id="@+id/iv_djdzm_left_right"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/all_buy_produce_right"
                     android:layout_centerInParent="true"
@@ -289,7 +289,7 @@
                 android:background="@drawable/main_theme_textview_bg" >
 
                 <ImageView
-                    android:id="@+id/iv_main_all_buy_left_right_down_image"
+                    android:id="@+id/iv_djdzm_right_right"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/all_buy_produce_right"
                     android:layout_centerInParent="true"
@@ -334,13 +334,9 @@
         android:background="@drawable/main_theme_textview_bg" >
 
         <ImageView
-            android:id="@+id/iv_main_hot_sell_free_pay_image"
+            android:id="@+id/iv_sxg_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_left"
-            android:layout_marginRight="@dimen/margin_left"
-            android:layout_marginTop="@dimen/margin_left_add"
-            android:background="@drawable/adbanner"
             android:contentDescription="@string/yidejia" />
     </RelativeLayout>
 
@@ -358,7 +354,7 @@
             android:padding="@dimen/margin_left" >
 
             <ImageView
-                android:id="@+id/iv_main_all_buy_left_image_down"
+                android:id="@+id/iv_sxg_left"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/yirihui"
                 android:layout_centerVertical="true"
@@ -381,7 +377,7 @@
                 android:padding="@dimen/margin_left_add" >
 
                 <ImageView
-                    android:id="@+id/iv_main_all_buy_left_right_image_right_up"
+                    android:id="@+id/iv_sxg_right_up"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/all_buy_produce_right"
                     android:layout_centerInParent="true"
@@ -397,7 +393,7 @@
                 android:padding="@dimen/margin_left_add" >
 
                 <ImageView
-                    android:id="@+id/iv_main_all_buy_left_right_down_image_right_down"
+                    android:id="@+id/iv_sxg_right_down"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/all_buy_produce_right"
                     android:layout_centerInParent="true"

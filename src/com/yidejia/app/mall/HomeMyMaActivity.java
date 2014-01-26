@@ -37,7 +37,7 @@ import com.yidejia.app.mall.order.WaitPayActivity;
 import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.view.IntegeralActivity;
 
-public class HomeMyMaActivity extends BaseActivity implements
+public class HomeMyMaActivity extends HomeBaseActivity implements
 		OnClickListener {
 	private View view;
 	private FrameLayout frameLayout;
@@ -53,17 +53,17 @@ public class HomeMyMaActivity extends BaseActivity implements
 	private ImageView head;// 头像
 	private MyApplication myApplication;
 
-	private BottomChange bottomChange;
+//	private BottomChange bottomChange;
 	private RelativeLayout bottomLayout;
 	
-	private RelativeLayout downHomeLayout;
-	private RelativeLayout downGuangLayout;
-	private RelativeLayout downSearchLayout;
-	private RelativeLayout downShoppingLayout;
-	private RelativeLayout downMyLayout;
-	private CartsDataManage cartsDataManage;
-	private int number;
-	private Button cartImage;
+//	private RelativeLayout downHomeLayout;
+//	private RelativeLayout downGuangLayout;
+//	private RelativeLayout downSearchLayout;
+//	private RelativeLayout downShoppingLayout;
+//	private RelativeLayout downMyLayout;
+//	private CartsDataManage cartsDataManage;
+//	private int number;
+//	private Button cartImage;
 
 	private String scoresNum;	//积分
 	private String favolitenNum;	//收藏
@@ -73,7 +73,7 @@ public class HomeMyMaActivity extends BaseActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		cartsDataManage = new CartsDataManage();
+//		cartsDataManage = new CartsDataManage();
 		myApplication = MyApplication.getInstance();
 		setContentView(R.layout.activity_main_fragment_layout);
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
@@ -84,91 +84,16 @@ public class HomeMyMaActivity extends BaseActivity implements
 		int next = getIntent().getIntExtra("next", -1);
 
 		setupView(view);
-		initNavView();
 		// 设置底部
-		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
-		bottomChange = new BottomChange(this, bottomLayout);
-		if (current != -1 || next != -1) {
-			bottomChange.initNavView(current, next);
-		}
+//		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
+//		bottomChange = new BottomChange(this, bottomLayout);
+//		if (current != -1 || next != -1) {
+//			bottomChange.initNavView(current, next);
+//		}
 
 	}
 
-	/**
-	 * 初始化底部导航栏
-	 */
-	private void initNavView() {
-		// 改变底部首页背景，有按下去的效果的背景
-		number = cartsDataManage.getCartAmount();
-		cartImage = (Button) findViewById(R.id.down_shopping_cart);
-		if (0 == number) {
-			cartImage.setVisibility(View.GONE);
-		} else {
-			cartImage.setText(number + "");
-		}
-		downGuangLayout = (RelativeLayout) findViewById(R.id.re_down_guang_layout);
-		downHomeLayout = (RelativeLayout) findViewById(R.id.re_down_home_layout);
-		downSearchLayout = (RelativeLayout) findViewById(R.id.re_down_search_layout);
-		downShoppingLayout = (RelativeLayout) findViewById(R.id.re_down_shopping_layout);
-		downMyLayout = (RelativeLayout) findViewById(R.id.re_down_my_layout);
-
-		downGuangLayout.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(HomeMyMaActivity.this,
-						HomeGuangActivity.class);
-				intent.putExtra("current", 3);
-				intent.putExtra("next", 5);
-				startActivity(intent);
-				HomeMyMaActivity.this.finish();
-				overridePendingTransition(R.anim.activity_in,
-						R.anim.activity_out);
-			}
-		});
-		downHomeLayout.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(HomeMyMaActivity.this,
-						HomeMallActivity.class);
-				startActivity(intent);
-				HomeMyMaActivity.this.finish();
-				overridePendingTransition(R.anim.activity_in,
-						R.anim.activity_out);
-			}
-		});
-		downSearchLayout.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(HomeMyMaActivity.this,
-						HomeSearchActivity.class);
-
-				intent.putExtra("current", 3);
-				intent.putExtra("next", 1);
-				startActivity(intent);
-				HomeMyMaActivity.this.finish();
-				overridePendingTransition(R.anim.activity_in,
-						R.anim.activity_out);
-			}
-		});
-		downShoppingLayout.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(HomeMyMaActivity.this,
-						HomeCarActivity.class);
-
-				intent.putExtra("current", 3);
-				intent.putExtra("next", 2);
-				startActivity(intent);
-				HomeMyMaActivity.this.finish();
-				overridePendingTransition(R.anim.activity_in,
-						R.anim.activity_out);
-			}
-		});
-	}
+	
 
 	@Override
 	public void onClick(View v) {
@@ -320,27 +245,6 @@ public class HomeMyMaActivity extends BaseActivity implements
 		}
 	};
 
-	// 双击返回键退出程序
-	private long exitTime = 0;
-
-	@Override
-	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if ((System.currentTimeMillis() - exitTime) > 2000) {
-				Toast.makeText(getApplicationContext(),
-						getResources().getString(R.string.exit),
-						Toast.LENGTH_SHORT).show();
-				exitTime = System.currentTimeMillis();
-			} else {
-				// ((MyApplication)getApplication()).setUserId("");
-				// ((MyApplication)getApplication()).setToken("");
-				finish();
-				// System.exit(0);
-			}
-			return true;
-		}
-		return super.onKeyUp(keyCode, event);
-	}
 
 	@Override
 	public void onStart() {

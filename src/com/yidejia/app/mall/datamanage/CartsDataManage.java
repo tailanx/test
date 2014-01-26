@@ -13,7 +13,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
-import com.yidejia.app.mall.HomeMallActivity;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.model.Cart;
 /**
  * 购物车模块
@@ -36,15 +36,15 @@ import com.yidejia.app.mall.model.Cart;
  */
 public class CartsDataManage {
 	
-	private ArrayList<Cart> cartsArray; 
+//	private ArrayList<Cart> cartsArray; 
 	private SharedPreferences sp;
 	
 	private String TAG = CartsDataManage.class.getName();
 	
 	public CartsDataManage(){
 		try {
-			sp = HomeMallActivity.MAINACTIVITY.getSharedPreferences("Cart", Activity.MODE_APPEND );
-			cartsArray = new ArrayList<Cart>();
+			sp = MyApplication.getInstance().getSharedPreferences("Cart", Activity.MODE_APPEND );
+//			cartsArray = new ArrayList<Cart>();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

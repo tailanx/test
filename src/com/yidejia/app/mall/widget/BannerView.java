@@ -80,6 +80,7 @@ public class BannerView {
 	 * 
 	 * @return 首页轮播的控件
 	 */
+	@SuppressWarnings("deprecation")
 	public ViewGroup getMainListFirstItem() {
 		if(null != bannerArray) {
 			length = bannerArray.size();
@@ -277,7 +278,7 @@ public class BannerView {
 	}
 
 	private void initDisplayImageOption() {
-		options = MyApplication.getInstance().initGoodsImageOption();
+		options = MyApplication.getInstance().initBannerImageOption();
 	}
 
 }

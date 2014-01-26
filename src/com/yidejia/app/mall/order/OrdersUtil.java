@@ -26,7 +26,6 @@ import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.shiplog.CheckActivity;
-import com.yidejia.app.mall.view.OrderDetailActivity;
 
 public class OrdersUtil {
 	private Context context;
