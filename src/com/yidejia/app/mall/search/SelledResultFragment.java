@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,7 +21,6 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.baidu.mobstat.StatService;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
@@ -35,7 +35,7 @@ import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.SearchItem;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
-public class SelledResultFragment extends SherlockFragment {
+public class SelledResultFragment extends Fragment {
 
 	public static SelledResultFragment newInstance(Bundle searchBundle,
 			boolean title) {
@@ -150,13 +150,13 @@ public class SelledResultFragment extends SherlockFragment {
 			if (isOdd && i == count - 1) {
 				child = getActivity().getLayoutInflater().inflate(
 						R.layout.item_search_result_image_odd, null);
-				srViewWithImage = new SRViewWithImage(getSherlockActivity(),
+				srViewWithImage = new SRViewWithImage(getActivity(),
 						child);
 				srViewWithImage.initView(searchItemsArray.get(i));
 			} else {
 				child = getActivity().getLayoutInflater().inflate(
 						R.layout.item_search_result_image_even, null);
-				srViewWithImage = new SRViewWithImage(getSherlockActivity(),
+				srViewWithImage = new SRViewWithImage(getActivity(),
 						child);
 				srViewWithImage.initView(searchItemsArray.get(i),
 						searchItemsArray.get(i + 1));
@@ -224,8 +224,8 @@ public class SelledResultFragment extends SherlockFragment {
 				super.onStart();
 				if (isFirstIn) {
 					bar = (ProgressDialog) new YLProgressDialog(
-							getSherlockActivity()).createLoadingDialog(
-							getSherlockActivity(), null);
+							getActivity()).createLoadingDialog(
+							getActivity(), null);
 				}
 			}
 
@@ -236,7 +236,7 @@ public class SelledResultFragment extends SherlockFragment {
 					bar.dismiss();
 				}
 				String label = getResources().getString(R.string.update_time)
-						+ DateUtils.formatDateTime(getSherlockActivity()
+						+ DateUtils.formatDateTime(getActivity()
 								.getApplicationContext(), System
 								.currentTimeMillis(),
 								DateUtils.FORMAT_SHOW_TIME
@@ -268,7 +268,7 @@ public class SelledResultFragment extends SherlockFragment {
 				ParseSearchJson parseSearchJson = new ParseSearchJson();
 				isHasResult = parseSearchJson.parseSearchJson(content);
 				if(!isHasResult) {
-					Toast.makeText(getSherlockActivity(),
+					Toast.makeText(getActivity(),
 							getResources().getString(R.string.nomore),
 							Toast.LENGTH_SHORT).show();
 					return;
@@ -278,7 +278,7 @@ public class SelledResultFragment extends SherlockFragment {
 				}
 				ArrayList<SearchItem> tmpItems = parseSearchJson.getSearchResults();
 				if(null == tmpItems || tmpItems.isEmpty()) {
-					Toast.makeText(getSherlockActivity(), getResources().getString(R.string.nomore), Toast.LENGTH_SHORT).show();
+					Toast.makeText(getActivity(), getResources().getString(R.string.nomore), Toast.LENGTH_SHORT).show();
 					return;
 				}
 				searchItemsArray.addAll(tmpItems);
@@ -302,7 +302,7 @@ public class SelledResultFragment extends SherlockFragment {
 				}
 				
 				if(error instanceof IOException) {
-					Toast.makeText(getSherlockActivity(), getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
+					Toast.makeText(getActivity(), getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 				}
 				if(isFirstIn){
 					emptyLayout.setVisibility(View.VISIBLE);
@@ -317,7 +317,7 @@ public class SelledResultFragment extends SherlockFragment {
 						
 						@Override
 						public void onClick(View v) {
-							Intent intent = new Intent (getSherlockActivity(),SearchResultActivity.class);
+							Intent intent = new Intent (getActivity(),SearchResultActivity.class);
 							Bundle bundle = new Bundle();
 							bundle.putString("title", "全部");
 							bundle.putString("name", "");
@@ -326,8 +326,8 @@ public class SelledResultFragment extends SherlockFragment {
 							bundle.putString("fun", "");
 							bundle.putBoolean("isShowWithList", isShowWithList);
 							intent.putExtras(bundle);
-							getSherlockActivity().startActivity(intent);
-							getSherlockActivity().finish();
+							getActivity().startActivity(intent);
+							getActivity().finish();
 						}
 					});
 				}

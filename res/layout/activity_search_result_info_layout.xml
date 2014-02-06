@@ -3,12 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_bg" >
+    
+    <include 
+        android:id="@+id/abs_search"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        layout="@layout/actionbar_search_result"/>
 
     <LinearLayout
         android:id="@+id/ll_search_result_tabhost"
+        android:layout_below="@id/abs_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/margin_left"
         android:layout_marginRight="@dimen/margin_left"
         android:layout_marginTop="@dimen/actiobar_margin_top"

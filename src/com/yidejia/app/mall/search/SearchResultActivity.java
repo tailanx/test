@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,23 +42,25 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setActionBarConfig();
-//		setActionbarConfig();
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		
+		try {
+			setContentView(R.layout.activity_search_result_info_layout);
+			setActionBarConfig();
+			setSlidingMenuConfig();
+			setRightFilterMenu(savedInstanceState);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		bundle = getIntent().getExtras();
 		if(bundle != null){
 			title = bundle.getString("title");
 			isShowWithList = bundle.getBoolean("isShowWithList", true);
 			setTitle(title);
 		}
-		try {
-			setContentView(R.layout.activity_search_result_info_layout);
-			setSlidingMenuConfig();
-			setRightFilterMenu(savedInstanceState);
-			initView();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
+		initView();
 	}
 	
 	private void initView(){
@@ -116,11 +119,11 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 	
 	private TextView titleTextView;
 	private void setActionBarConfig(){
-		getSupportActionBar().setCustomView(R.layout.actionbar_search_result);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
+//		getSupportActionBar().setCustomView(R.layout.actionbar_search_result);
+//		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//		getSupportActionBar().setDisplayShowCustomEnabled(true);
+//		getSupportActionBar().setDisplayShowTitleEnabled(false);
+//		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		
 		TextView rightBtn = (TextView) findViewById(R.id.actionbar_right);
 		rightBtn.setText(getResources().getString(R.string.filter));

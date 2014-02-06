@@ -295,6 +295,11 @@ public class GoodsInfoViewUtil {
 
 		@Override
 		public void onClick(View v) {
+			if(!MyApplication.getInstance().getIsLogin()){
+//				Toast.makeText(activity, activity.getString(R.string.please_login), Toast.LENGTH_SHORT).show();
+				Toast.makeText(activity, "请先登录！", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			isFavClick = true;
 			checkFavIsExsist();
 		}
@@ -302,6 +307,9 @@ public class GoodsInfoViewUtil {
 
 	/**检查是否已收藏**/
 	private void checkFavIsExsist() {
+		if(!MyApplication.getInstance().getIsLogin()){
+			return;
+		}
 		String param = new JNICallBack().getHttp4CheckFav(userid, productId,
 				token);
 		String url = new JNICallBack().HTTPURL;
