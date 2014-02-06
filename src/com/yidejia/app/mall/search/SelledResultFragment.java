@@ -1,6 +1,7 @@
 package com.yidejia.app.mall.search;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import android.app.ProgressDialog;
@@ -210,7 +211,7 @@ public class SelledResultFragment extends Fragment {
 //					URLEncoder.encode(fromIndex + "", "UTF-8"),
 //					URLEncoder.encode(amount + "", "UTF-8"));
 			
-			url = new JNICallBack().getHttp4GetSearch(name, fun, brand, price, order, fromIndex + "", amount + "");
+			url = new JNICallBack().getHttp4GetSearch(URLEncoder.encode(name, "UTF-8"), fun, brand, price, order, fromIndex + "", amount + "");
 //		} catch (UnsupportedEncodingException e1) {
 //			e1.printStackTrace();
 		} catch (Exception e) {
