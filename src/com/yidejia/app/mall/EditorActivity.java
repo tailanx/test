@@ -80,7 +80,7 @@ public class EditorActivity extends BaseActivity {
 							public void onClick(DialogInterface arg0, int arg1) {
 								myApplication.setIsLogin(false);
 								Intent intent = new Intent(EditorActivity.this,
-										HomeLogActivity.class);
+										HomeLoginActivity.class);
 								EditorActivity.this.startActivity(intent);
 								EditorActivity.this.finish();
 							}

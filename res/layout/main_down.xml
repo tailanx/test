@@ -23,7 +23,7 @@
             android:layout_marginTop="@dimen/actiobar_margin_left"
             android:clickable="false"
             android:contentDescription="@string/yidejia"
-            android:src="@drawable/shouye_hover" />
+            android:src="@drawable/bg_down_home" />
 
         <TextView
             android:id="@+id/tv_down_home_text"
@@ -32,7 +32,7 @@
             android:layout_below="@+id/iv_down_home_icon"
             android:layout_centerHorizontal="true"
             android:text="@string/down_home_text"
-            android:textColor="#ffffff"
+            android:textColor="@color/color_down_text"
             android:textSize="@dimen/textsize_small_small" />
     </RelativeLayout>
 
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="2dp"
-            android:background="@drawable/faxian_normal"
+            android:background="@drawable/bg_down_guang"
             android:clickable="false"
             android:contentDescription="@string/yidejia" />
 
@@ -63,7 +63,7 @@
             android:layout_below="@+id/iv_down_guang_icon"
             android:layout_centerHorizontal="true"
             android:text="@string/down_guang_text"
-            android:textColor="#b4b4b4"
+            android:textColor="@color/color_down_text"
             android:textSize="@dimen/textsize_small_small" />
     </RelativeLayout>
 
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="2dp"
-            android:background="@drawable/search_normal"
+            android:background="@drawable/bg_down_search"
             android:clickable="false"
             android:contentDescription="@string/yidejia" />
 
@@ -94,7 +94,7 @@
             android:layout_below="@+id/iv_down_search_icon"
             android:layout_centerHorizontal="true"
             android:text="@string/down_search_text"
-            android:textColor="#b4b4b4"
+            android:textColor="@color/color_down_text"
             android:textSize="@dimen/textsize_small_small" />
     </RelativeLayout>
 
@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="2dp"
-            android:background="@drawable/shoppingcart_normal"
+            android:background="@drawable/bg_down_cart"
             android:clickable="false"
             android:contentDescription="@string/yidejia" />
 
@@ -127,16 +127,18 @@
             android:layout_below="@+id/iv_down_shopping_icon"
             android:layout_centerHorizontal="true"
             android:text="@string/down_shopping_text"
-            android:textColor="#b4b4b4"
+            android:textColor="@color/color_down_text"
             android:textSize="@dimen/textsize_small_small" />
         <!--  -->
 
-        <Button
+        <TextView
             android:id="@+id/down_shopping_cart"
-            android:layout_width="26dp"
-            android:layout_height="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="6dp"
             android:background="@drawable/shape_bg_cart_num"
             android:gravity="center"
             android:text="@string/hour"
@@ -160,7 +162,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="2dp"
-            android:background="@drawable/mymall_normal"
+            android:background="@drawable/bg_down_mall"
             android:clickable="false"
             android:contentDescription="@string/yidejia" />
 
@@ -171,7 +173,7 @@
             android:layout_below="@+id/iv_down_my_icon"
             android:layout_centerHorizontal="true"
             android:text="@string/down_my_text"
-            android:textColor="#b4b4b4"
+            android:textColor="@color/color_down_text"
             android:textSize="@dimen/textsize_small_small" />
     </RelativeLayout>
 

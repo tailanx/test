@@ -9,23 +9,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.baidu.mobstat.StatService;
 import com.opens.asyncokhttpclient.AsyncHttpResponse;
 import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.address.AddressActivity;
-import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.evaluation.EvaluationActivity;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.order.AllOrderActivity;
@@ -34,10 +30,9 @@ import com.yidejia.app.mall.order.AlreadyOrderActivity;
 import com.yidejia.app.mall.order.ExchangeActivity;
 import com.yidejia.app.mall.order.WaitDeliverActivity;
 import com.yidejia.app.mall.order.WaitPayActivity;
-import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.view.IntegeralActivity;
 
-public class HomeMyMaActivity extends HomeBaseActivity implements
+public class HomeMyMallActivity extends HomeBaseActivity implements
 		OnClickListener {
 	private View view;
 	private FrameLayout frameLayout;
@@ -54,7 +49,6 @@ public class HomeMyMaActivity extends HomeBaseActivity implements
 	private MyApplication myApplication;
 
 //	private BottomChange bottomChange;
-	private RelativeLayout bottomLayout;
 	
 //	private RelativeLayout downHomeLayout;
 //	private RelativeLayout downGuangLayout;
@@ -257,7 +251,7 @@ public class HomeMyMaActivity extends HomeBaseActivity implements
 
 		@Override
 		public void onClick(View arg0) {
-			Intent intent = new Intent(HomeMyMaActivity.this,
+			Intent intent = new Intent(HomeMyMallActivity.this,
 					EditorActivity.class);
 			startActivity(intent);
 

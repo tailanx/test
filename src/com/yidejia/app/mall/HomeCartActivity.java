@@ -9,7 +9,6 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.search.SearchResultActivity;
-import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.util.CartUtil1;
 import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.view.LoginActivity;
@@ -23,7 +22,6 @@ import android.content.Intent;
 //import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,7 +29,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,7 +39,7 @@ import android.widget.Toast;
  * @author Administrator
  * 
  */
-public class HomeCarActivity extends HomeBaseActivity implements OnClickListener {
+public class HomeCartActivity extends HomeBaseActivity {
 	private TextView shoppingCartTopay;// 编辑
 	private MyApplication myApplication;
 	private FrameLayout frameLayout;
@@ -61,7 +58,6 @@ public class HomeCarActivity extends HomeBaseActivity implements OnClickListener
 //	private DisplayImageOptions options;
 
 //	private BottomChange bottomChange;
-	private RelativeLayout bottomLayout;
 	
 //	private RelativeLayout downHomeLayout;
 //	private RelativeLayout downGuangLayout;
@@ -113,7 +109,7 @@ public class HomeCarActivity extends HomeBaseActivity implements OnClickListener
 			@Override
 			public void onClick(View v) {
 
-				Intent intent = new Intent(HomeCarActivity.this,
+				Intent intent = new Intent(HomeCartActivity.this,
 						SearchResultActivity.class);
 				Bundle bundle = new Bundle();
 				Log.e("info", "gouwuche");
@@ -123,7 +119,7 @@ public class HomeCarActivity extends HomeBaseActivity implements OnClickListener
 				bundle.putString("brand", "");
 				bundle.putString("fun", "");
 				intent.putExtras(bundle);
-				HomeCarActivity.this.startActivity(intent);
+				HomeCartActivity.this.startActivity(intent);
 			}
 		});
 	}
@@ -211,7 +207,7 @@ public class HomeCarActivity extends HomeBaseActivity implements OnClickListener
 								// TODO Auto-generated
 								// method stub
 								Intent intent = new Intent(
-										HomeCarActivity.this,
+										HomeCartActivity.this,
 										LoginActivity.class);
 								startActivity(intent);
 							}
@@ -243,9 +239,9 @@ public class HomeCarActivity extends HomeBaseActivity implements OnClickListener
 			bundle.putString("cartActivity", "Y");
 			bundle.putFloat("price", sum);
 			intent1.putExtras(bundle);
-			HomeCarActivity.this.startActivity(intent1);
+			HomeCartActivity.this.startActivity(intent1);
 		} else {
-			Toast.makeText(HomeCarActivity.this,
+			Toast.makeText(HomeCartActivity.this,
 					getResources().getString(R.string.buy_nothing),
 					Toast.LENGTH_LONG).show();
 		}

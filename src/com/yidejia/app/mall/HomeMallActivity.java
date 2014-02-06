@@ -41,8 +41,7 @@ import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.widget.BannerView;
 import com.yidejia.app.mall.yirihui.YirihuiActivity;
 
-public class HomeMallActivity extends HomeBaseActivity implements
-		OnClickListener {
+public class HomeMallActivity extends HomeBaseActivity {
 
 	private FrameLayout frameLayout;// 填充activity的界面用的
 	

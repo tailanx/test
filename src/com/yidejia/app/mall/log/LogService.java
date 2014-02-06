@@ -2,7 +2,7 @@ package com.yidejia.app.mall.log;
 
 import java.io.IOException;
 
-import com.yidejia.app.mall.HomeMyMaActivity;
+import com.yidejia.app.mall.HomeMyMallActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.IpAddress;
 import com.yidejia.app.mall.exception.TimeOutEx;

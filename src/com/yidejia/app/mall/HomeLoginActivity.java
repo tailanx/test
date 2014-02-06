@@ -43,7 +43,7 @@ import com.yidejia.app.mall.widget.WiperSwitch;
 import com.yidejia.app.mall.widget.WiperSwitch.OnChangedListener;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
-public class HomeLogActivity extends HomeBaseActivity implements OnClickListener,
+public class HomeLoginActivity extends HomeBaseActivity implements OnClickListener,
 		OnChangedListener {
 	private MyApplication myApplication;
 	private View view;
@@ -87,13 +87,13 @@ public class HomeLogActivity extends HomeBaseActivity implements OnClickListener
 		setActionBarConfigView();
 		setCurrentActivityId(5);
 
-		inputMethodManager = (InputMethodManager) HomeLogActivity.this
+		inputMethodManager = (InputMethodManager) HomeLoginActivity.this
 				.getSystemService(Context.INPUT_METHOD_SERVICE);
 
 		ipAddress = new IpAddress();
 		consts = new Consts();
 		sp = PreferenceManager
-				.getDefaultSharedPreferences(HomeLogActivity.this);
+				.getDefaultSharedPreferences(HomeLoginActivity.this);
 		// 设置默认选中
 		mBox = (WiperSwitch) view.findViewById(R.id.cb_my_login_checkbox);
 		mBox.setOnChangedListener(this);
@@ -187,7 +187,7 @@ public class HomeLogActivity extends HomeBaseActivity implements OnClickListener
 
 		@Override
 		public void onClick(View arg0) {
-			Intent intent = new Intent(HomeLogActivity.this,
+			Intent intent = new Intent(HomeLoginActivity.this,
 					EditorActivity.class);
 			startActivity(intent);
 
@@ -202,16 +202,16 @@ public class HomeLogActivity extends HomeBaseActivity implements OnClickListener
 		switch (v.getId()) {
 
 		case R.id.re_my_mall_login_retrieve_password:// 找回密码
-			Intent intent1 = new Intent(HomeLogActivity.this,
+			Intent intent1 = new Intent(HomeLoginActivity.this,
 					FindPwActivity.class);
-			HomeLogActivity.this.startActivity(intent1);
+			HomeLoginActivity.this.startActivity(intent1);
 
 			break;
 
 		case R.id.re_my_mall_login_retrieve_regist:// 快速注册
-			Intent registIntent = new Intent(HomeLogActivity.this,
+			Intent registIntent = new Intent(HomeLoginActivity.this,
 					RegistActivity.class);
-			HomeLogActivity.this.startActivity(registIntent);
+			HomeLoginActivity.this.startActivity(registIntent);
 
 			break;
 		case R.id.bt_my_mall_login_button:// 登录
@@ -219,12 +219,12 @@ public class HomeLogActivity extends HomeBaseActivity implements OnClickListener
 			pwd = stringPassword.getText().toString();
 			ip = ipAddress.getIpAddress();
 			if (name == null || "".equals(name)) {
-				Toast.makeText(HomeLogActivity.this, "账号不能为空!",
+				Toast.makeText(HomeLoginActivity.this, "账号不能为空!",
 						Toast.LENGTH_LONG).show();
 				return;
 			}
 			if (pwd == null || "".equals(pwd)) {
-				Toast.makeText(HomeLogActivity.this, "密码不能为空!",
+				Toast.makeText(HomeLoginActivity.this, "密码不能为空!",
 						Toast.LENGTH_LONG).show();
 				return;
 			}

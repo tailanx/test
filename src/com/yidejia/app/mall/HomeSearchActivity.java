@@ -1,52 +1,39 @@
 package com.yidejia.app.mall;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
+import org.apache.http.HttpStatus;
+
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
-//import android.content.res.Resources;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
+import com.opens.asyncokhttpclient.AsyncHttpResponse;
+import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.SearchListAdapter;
-import com.yidejia.app.mall.datamanage.CartsDataManage;
-import com.yidejia.app.mall.exception.TimeOutEx;
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.Function;
 import com.yidejia.app.mall.net.ConnectionDetector;
-import com.yidejia.app.mall.net.search.EffectDataUtil;
+import com.yidejia.app.mall.search.ParseSearchJson;
 import com.yidejia.app.mall.search.SearchActivity;
 import com.yidejia.app.mall.search.SearchResultActivity;
-import com.yidejia.app.mall.util.BottomChange;
-import com.yidejia.app.mall.util.Consts;
-import com.yidejia.app.mall.widget.YLProgressDialog;
 
-public class HomeSearchActivity extends HomeBaseActivity implements
-		OnClickListener {
+public class HomeSearchActivity extends HomeBaseActivity {
 	private LayoutInflater inflater;
 	private View view;
-	private MyApplication myApplication;
 
 	private ListView searchListView;
 	private RelativeLayout search_item_refresh_view;
@@ -54,30 +41,13 @@ public class HomeSearchActivity extends HomeBaseActivity implements
 	private SearchListAdapter searchListAdapter;
 
 	private ArrayList<Function> functions;
-//	private int search;
-//	private int defaultInt = -1;
 	private String TAG = "SearchFragment";
 	private FrameLayout frameLayout;
 
-//	private Task task;
-//	private InnerReceiver receiver;
-//	private BottomChange bottomChange;
-	private RelativeLayout bottomLayout;
-
-//	private void closeTask() {
-//		if (task != null
-//				&& task.getStatus().RUNNING == AsyncTask.Status.RUNNING) {
-//			task.cancel(true);
-//		}
-//	}
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-//		receiver = new InnerReceiver();
-//		IntentFilter filter = new IntentFilter();
-//		filter.addAction(Consts.UPDATE_CHANGE);
-//		registerReceiver(receiver, filter);
 
 		Log.e(TAG, "search onCreate");
 
@@ -85,13 +55,8 @@ public class HomeSearchActivity extends HomeBaseActivity implements
 			functions = (ArrayList<Function>) arg0.getSerializable("funs");
 		}
 
-//		int current = getIntent().getIntExtra("current", -1);
-//		int next = getIntent().getIntExtra("next", -1);
-		
 		setCurrentActivityId(2);
 
-		cartsDataManage = new CartsDataManage();
-		myApplication = (MyApplication) getApplication();
 		setContentView(R.layout.activity_main_fragment_layout);
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
 		inflater = LayoutInflater.from(this);
@@ -102,28 +67,9 @@ public class HomeSearchActivity extends HomeBaseActivity implements
 		search_item_refresh_view = (RelativeLayout) view
 				.findViewById(R.id.search_item_refresh_view);
 		refresh_data_btn = (ImageView) view.findViewById(R.id.refresh_data_btn);
-//		res = getResources();
-		// 设置底部
-//		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
-//		bottomChange = new BottomChange(HomeSearchActivity.this, bottomLayout);
-//		if (current != -1 || next != -1) {
-//			bottomChange.initNavView(current, next);
-//		}
 
 		setActionBarConfig();
 
-		if (!ConnectionDetector.isConnectingToInternet(HomeSearchActivity.this)) {
-			searchListView.setVisibility(View.GONE);
-			search_item_refresh_view.setVisibility(View.VISIBLE);
-		} else {
-			if ((null == functions) || (functions.isEmpty())) {
-				functions = new ArrayList<Function>();
-				Log.e(TAG, "search on create get task");
-//				closeTask();
-//				task = new Task();
-//				task.execute();
-			}
-		}
 
 		if (null != bar) {
 			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -143,12 +89,11 @@ public class HomeSearchActivity extends HomeBaseActivity implements
 
 				@Override
 				public void onClick(View v) {
-//					closeTask();
-//					task = new Task();
-//					task.execute();
+					getData();
 				}
 			});
 		}
+		getData();
 	}
 
 	private ImageView searchText;
@@ -157,11 +102,6 @@ public class HomeSearchActivity extends HomeBaseActivity implements
 	 * 头部
 	 */
 	private void setActionBarConfig() {
-		// down_search_textview.setTextColor(res.getColor(R.color.white));
-		// downSearchLayout.setBackgroundResource(R.drawable.down_hover1);
-		// down_search_imageView.setPressed(true);
-		// down_search_imageView.setImageResource(R.drawable.down_search_hover);
-		// down_search_TextView.setTextColor(Color.WHITE);
 		getSupportActionBar().setCustomView(R.layout.actionbar_search);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
@@ -170,124 +110,47 @@ public class HomeSearchActivity extends HomeBaseActivity implements
 
 		searchText = (ImageView) findViewById(R.id.search_bar_edittext);
 		searchText.setOnClickListener(go2SearchListener2);
-
 	}
 
-//	private RelativeLayout downHomeLayout;
-//	private RelativeLayout downGuangLayout;
-//	private RelativeLayout downSearchLayout;
-//	private RelativeLayout downShoppingLayout;
-//	private RelativeLayout downMyLayout;
-//	private ImageView down_home_imageView;// 首页按钮图片
-//	private ImageView down_guang_imageView;// 逛按钮图片
-//	private ImageView down_search_imageView;// 搜索按钮图片
-//	private ImageView down_shopping_imageView; // 购物车按钮图片
-//	private ImageView down_my_imageView; // 我的商城按钮图片
-	private CartsDataManage cartsDataManage;
-//	private TextView down_home_textview;
-//	private TextView down_guang_textview;
-	private TextView down_search_textview;
-//	private TextView down_shopping_textview;
-//	private TextView down_my_textview;
-//	private Resources res;
-	private int number;
-	private Button cartImage;
+	private void getData(){
+		
+		if (!ConnectionDetector.isConnectingToInternet(HomeSearchActivity.this)) {
+			searchListView.setVisibility(View.GONE);
+			search_item_refresh_view.setVisibility(View.VISIBLE);
+			return;
+		} 
+		
+		String url = new JNICallBack().getHttp4GetEffect("flag%3D%27y%27", "0", "20", "", "", "%2A");
+		
+		AsyncOkHttpClient client = new AsyncOkHttpClient();
+		client.get(url, new AsyncHttpResponse(){
 
-
-	@Override
-	public void onStart() {
-		super.onStart();
-		Log.e(TAG, "TestFragment-----onStart");
-	}
-
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-//		closeTask();
-	}
-
-	@Override
-	public void onClick(View v) {
-		Intent intent = new Intent();
-		switch (v.getId()) {
-		case R.id.re_down_home_layout:
-			intent.setClass(HomeSearchActivity.this, HomeMallActivity.class);
-			break;
-		case R.id.re_down_shopping_layout:
-			intent.setClass(HomeSearchActivity.this, HomeCarActivity.class);
-			intent.putExtra("current", 1);
-			intent.putExtra("next", 2);
-			break;
-		case R.id.re_down_guang_layout:
-			intent.setClass(HomeSearchActivity.this, HomeGuangActivity.class);
-			intent.putExtra("current", 1);
-			intent.putExtra("next", 5);
-			break;
-		case R.id.re_down_my_layout:
-			if (myApplication.getIsLogin()) {
-				intent.setClass(HomeSearchActivity.this, HomeMyMaActivity.class);
-			} else {
-				intent.setClass(HomeSearchActivity.this, HomeLogActivity.class);
-			}
-			intent.putExtra("current", 1);
-			intent.putExtra("next", 3);
-			break;
-		}
-		HomeSearchActivity.this.startActivity(intent);
-		this.finish();
-		overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
-	}
-
-	private ProgressDialog bar;
-
-	private class Task extends AsyncTask<Void, Void, Boolean> {
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			// bar.show();
-			bar = (ProgressDialog) new YLProgressDialog(HomeSearchActivity.this)
-					.createLoadingDialog(HomeSearchActivity.this, null);
-			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-				@Override
-				public void onCancel(DialogInterface dialog) {
-					cancel(true);
-				}
-			});
-		}
-
-		@Override
-		protected Boolean doInBackground(Void... params) {
-			EffectDataUtil util = new EffectDataUtil();
-			try {
-				String httpresp;
-				try {
-					httpresp = util.getHttpResponseString();
-					boolean issuccess = util.analysis(httpresp);
-					functions = util.getFunctions();
-					return issuccess;
-				} catch (TimeOutEx e) {
-					e.printStackTrace();
-					isTimeout = true;
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
+			@Override
+			public void onStart() {
+				// TODO Auto-generated method stub
+				super.onStart();
 			}
 
-			return false;
-		}
+			@Override
+			public void onFinish() {
+				// TODO Auto-generated method stub
+				super.onFinish();
+			}
 
-		@Override
-		protected void onPostExecute(Boolean result) {
-			super.onPostExecute(result);
-			if (result) {
-				searchListView.setVisibility(View.VISIBLE);
-				search_item_refresh_view.setVisibility(View.GONE);
-				searchListAdapter = new SearchListAdapter(
-						HomeSearchActivity.this, functions);
-				searchListView.setAdapter(searchListAdapter);
-				searchListView
-						.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				super.onSuccess(statusCode, content);
+				if(HttpStatus.SC_OK == statusCode){
+					ParseSearchJson parseSearchJson = new ParseSearchJson();
+					boolean isSuccess = parseSearchJson.parseFunJson(content);
+					if(isSuccess){
+						searchListView.setVisibility(View.VISIBLE);
+						search_item_refresh_view.setVisibility(View.GONE);
+						functions = parseSearchJson.getFunctions();
+						searchListAdapter = new SearchListAdapter(
+								HomeSearchActivity.this, functions);
+						searchListView.setAdapter(searchListAdapter);
+						searchListView.setOnItemClickListener(new OnItemClickListener() {
 
 							@Override
 							public void onItemClick(AdapterView<?> arg0,
@@ -295,26 +158,26 @@ public class HomeSearchActivity extends HomeBaseActivity implements
 								listener(arg2);
 							}
 						});
-			} else {
-				if (functions.isEmpty()) {
-					searchListView.setVisibility(View.GONE);
-					search_item_refresh_view.setVisibility(View.VISIBLE);
-				}
-				if (isTimeout) {
-					Toast.makeText(
-							HomeSearchActivity.this,
-							HomeSearchActivity.this.getResources().getString(
-									R.string.time_out), Toast.LENGTH_SHORT)
-							.show();
-					isTimeout = false;
+					} else {
+						//TODO
+					}
+				} else {
+					//TODO
 				}
 			}
-			bar.dismiss();
-		}
 
+			@Override
+			public void onError(Throwable error, String content) {
+				// TODO Auto-generated method stub
+				super.onError(error, content);
+			}
+			
+		});
+		
 	}
 
-	private boolean isTimeout = false;
+	private ProgressDialog bar;
+
 
 	/**
 	 * 搜索项的监听函数
@@ -325,7 +188,6 @@ public class HomeSearchActivity extends HomeBaseActivity implements
 		Intent intent = new Intent(HomeSearchActivity.this,
 				SearchResultActivity.class);
 		Bundle bundle = new Bundle();
-		// bundle.putString("fun", arg0.getItemAtPosition(arg2).toString());
 		if (!functions.isEmpty()) {
 			if (position == 0) {
 				bundle.putString("fun", "");
@@ -363,17 +225,16 @@ public class HomeSearchActivity extends HomeBaseActivity implements
 		outState.putSerializable("funs", functions);
 	};
 
-
 	@Override
 	protected void onPause() {
 		super.onPause();
-		StatService.onPause(this);
+		StatService.onPageEnd(this, getString(R.string.searchLabel));
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		StatService.onResume(this);
+		StatService.onPageStart(this, getString(R.string.searchLabel));
 	}
 
 }

@@ -19,9 +19,9 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.yidejia.app.mall.HomeLogActivity;
+import com.yidejia.app.mall.HomeLoginActivity;
 //import com.yidejia.app.mall.HomeLogActivity;
-import com.yidejia.app.mall.HomeMyMaActivity;
+import com.yidejia.app.mall.HomeMyMallActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.exception.TimeOutEx;
@@ -116,7 +116,7 @@ public class LoginTask{
 						context.getResources()
 								.getString(R.string.login_success),
 						Toast.LENGTH_LONG).show();
-				Intent intent = new Intent(context, HomeMyMaActivity.class);
+				Intent intent = new Intent(context, HomeMyMallActivity.class);
 				intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
 				intent.putExtra("current", 3);
 				intent.putExtra("next", 3);
