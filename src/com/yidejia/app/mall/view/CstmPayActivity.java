@@ -240,17 +240,9 @@ public class CstmPayActivity extends BaseActivity {
 			cb_yinlian = (CheckBox) findViewById(R.id.yinlian_checkbox);
 			cb_caifutong = (CheckBox) findViewById(R.id.caifutong_checkbox);
 
-			// //支付宝和财付通暂时不可选
-			// cb_zhifubao.setClickable(false);
-			// cb_zhifubaowangye.setClickable(false);
-			// cb_caifutong.setClickable(false);
 			// 默认选择银联支付
-			cb_yinlian.setChecked(true);
+			cb_caifutong.setChecked(true);
 
-			// 支付宝和财付通暂时不可见
-			// zhifubao.setVisibility(ViewGroup.GONE);
-			// zhifubaowangye.setVisibility(ViewGroup.GONE);
-			// cafutong.setVisibility(ViewGroup.GONE);
 
 			generalRelative.setOnClickListener(new OnClickListener() {
 
@@ -345,7 +337,6 @@ public class CstmPayActivity extends BaseActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		
 	}
 	
 	private void getVoucher() {
@@ -457,6 +448,10 @@ public class CstmPayActivity extends BaseActivity {
 	String pay_type = "";
 	int mode = 1;
 	
+	/**
+	 * 支付事件操作
+	 * @param mode 0
+	 */
 	private void go2Pay(int mode){
 		if (TextUtils.isEmpty(orderCode))
 			return;
@@ -547,6 +542,7 @@ public class CstmPayActivity extends BaseActivity {
 			public void onError(Throwable error, String content) {
 				// TODO Auto-generated method stub
 				super.onError(error, content);
+				Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 			}
 			
 		});
@@ -792,6 +788,7 @@ public class CstmPayActivity extends BaseActivity {
 			public void onError(Throwable error, String content) {
 				super.onError(error, content);
 				// TODO Auto-generated method stub
+				Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 			}
 			
 		});
@@ -829,6 +826,7 @@ public class CstmPayActivity extends BaseActivity {
 			public void onError(Throwable error, String content) {
 				super.onError(error, content);
 				// TODO Auto-generated method stub
+				Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 			}
 			
 		});
@@ -871,15 +869,15 @@ public class CstmPayActivity extends BaseActivity {
 							tv_peiSong.setText(peiSongCenter);
 						} else {
 							// TODO 
-							Toast.makeText(CstmPayActivity.this, "dis is null", Toast.LENGTH_LONG).show();
+							Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 						}
 					} else {
 						//TODO 解析出错或服务器返回-1
-						Toast.makeText(CstmPayActivity.this, "dis is not 1", Toast.LENGTH_LONG).show();
+						Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 					}
 				} else {
 					//TODO 返回失败
-					Toast.makeText(CstmPayActivity.this, "dis is ok", Toast.LENGTH_LONG).show();
+					Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 				}
 			}
 
@@ -887,7 +885,7 @@ public class CstmPayActivity extends BaseActivity {
 			public void onError(Throwable error, String content) {
 				super.onError(error, content);
 				// TODO 
-				Toast.makeText(CstmPayActivity.this, "dis is error", Toast.LENGTH_LONG).show();
+				Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 			}
 			
 		});
@@ -952,16 +950,16 @@ public class CstmPayActivity extends BaseActivity {
 							}
 						}  else {
 							// TODO 
-							Toast.makeText(CstmPayActivity.this, "Express is null", Toast.LENGTH_LONG).show();
+							Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 						}
 					} else {
 						// TODO 
 						Log.e("system.out", content);
-						Toast.makeText(CstmPayActivity.this, "Express is not success", Toast.LENGTH_LONG).show();
+						Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 					}
 				} else {
 					//TODO 返回失败
-					Toast.makeText(CstmPayActivity.this, "Express is ok", Toast.LENGTH_LONG).show();
+					Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 				}
 			}
 
@@ -969,7 +967,7 @@ public class CstmPayActivity extends BaseActivity {
 			public void onError(Throwable error, String content) {
 				super.onError(error, content);
 				// TODO 
-				Toast.makeText(CstmPayActivity.this, "Express is error", Toast.LENGTH_LONG).show();
+				Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 			}
 			
 		});
@@ -1001,15 +999,15 @@ public class CstmPayActivity extends BaseActivity {
 							getExpressData(province, true);
 						} else {
 							// TODO 提示用户获取免邮信息出错？
-							Toast.makeText(CstmPayActivity.this, "can free is null", Toast.LENGTH_LONG).show();
+							Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 						}
 					} else {
 						// TODO 返回-1
-						Toast.makeText(CstmPayActivity.this, "can free is not 1", Toast.LENGTH_LONG).show();
+						Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 					}
 				} else {
 					// TODO 返回失败
-					Toast.makeText(CstmPayActivity.this, "can free statusCode is not ok", Toast.LENGTH_LONG).show();
+					Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 				}
 			}
 
@@ -1017,7 +1015,7 @@ public class CstmPayActivity extends BaseActivity {
 			public void onError(Throwable error, String content) {
 				super.onError(error, content);
 				// TODO 返回失败
-				Toast.makeText(CstmPayActivity.this, "can free error", Toast.LENGTH_LONG).show();
+				Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 			}
 			
 		});
@@ -1072,15 +1070,15 @@ public class CstmPayActivity extends BaseActivity {
 							getVoucher();
 						} else {
 							// TODO
-							Toast.makeText(CstmPayActivity.this, "get credit null", Toast.LENGTH_LONG).show();
+							Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 						}
 					} else {
 						//TODO
-						Toast.makeText(CstmPayActivity.this, "get credit no success", Toast.LENGTH_LONG).show();
+						Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 					}
 				} else{
 					//TODO
-					Toast.makeText(CstmPayActivity.this, "get credit no ok", Toast.LENGTH_LONG).show();
+					Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 				}
 			}
 
@@ -1088,12 +1086,13 @@ public class CstmPayActivity extends BaseActivity {
 			public void onError(Throwable error, String content) {
 				// TODO Auto-generated method stub
 				super.onError(error, content);
-				Toast.makeText(CstmPayActivity.this, "get credit error", Toast.LENGTH_LONG).show();
+				Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 			}
 			
 		});
 	}
 	
+	/**获取免费送和积分换购的商品**/
 	private void getFreeGoods() {
 		JNICallBack jniCallBack = new JNICallBack();
 		String url = jniCallBack.HTTPURL;
@@ -1122,20 +1121,13 @@ public class CstmPayActivity extends BaseActivity {
 						if(!isFreeEmpty || (!isEchageEmpty && voucher > 0.001)) {
 							dialog.show();
 						}
-//						if ((null != arrayListFree && !arrayListFree.isEmpty())
-//								|| (null != arrayListExchange && !arrayListExchange
-//										.isEmpty())) {
-//							dialog.show();
-//						} else {
-//							Toast.makeText(CstmPayActivity.this, "get free goods null", Toast.LENGTH_LONG).show();
-//						}
 					} else {
 						// TODO
-						Toast.makeText(CstmPayActivity.this, "get free goods not success", Toast.LENGTH_LONG).show();
+						Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 					}
 				} else {
 					//TODO
-					Toast.makeText(CstmPayActivity.this, "get free goods not ok", Toast.LENGTH_LONG).show();
+					Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 				}
 			}
 
@@ -1143,7 +1135,7 @@ public class CstmPayActivity extends BaseActivity {
 			public void onError(Throwable error, String content) {
 				// TODO Auto-generated method stub
 				super.onError(error, content);
-				Toast.makeText(CstmPayActivity.this, "get free goods error", Toast.LENGTH_LONG).show();
+				Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_LONG).show();
 			}
 			
 		});
