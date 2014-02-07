@@ -119,7 +119,7 @@ public class AllOrderFragment extends SherlockFragment {
 				+ "", myApplication.getToken());
 		
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		
+		Log.e("system.out", url);
 		client.get(url, new AsyncHttpResponse(){
 
 			@Override

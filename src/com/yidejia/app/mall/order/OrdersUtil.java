@@ -78,13 +78,17 @@ public class OrdersUtil {
 			final AllOrderDetail allOrderDetail = new AllOrderDetail(context,
 					mOrder, mLayout);
 			allOrderDetail.addView();// ������Ʒ
-			for (int j = 0; j < allOrderDetail.map.size(); j++) {
-
-				sumPrice.setText(allOrderDetail.map.get("price") + "");// 设置订单总价格
-				// 设置订单商品总数
-				countTextView.setText(allOrderDetail.map.get("count")
-						.intValue() + "");
+			float sum = mList.get(i).getOrderSummary();
+			try {
+				sum += Float.parseFloat(mList.get(i).getShipFee());
+			} catch (NumberFormatException e) {
+				Log.e(getClass().getName(), "get order ship fee format err");
+				e.printStackTrace();
 			}
+			sumPrice.setText(sum + "");// 设置订单总价格
+			// 设置订单商品总数
+			countTextView.setText(allOrderDetail.map.get("count").intValue()
+					+ "");
 
 			mOkBtn.setText(setOkBtnText(mOrderType));// 设置右边按钮的显示
 			mCancelBtn.setText(setCancelBtnText(mOrderType));// 设置左边按钮的显示
