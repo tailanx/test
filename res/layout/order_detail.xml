@@ -48,7 +48,7 @@
             android:layout_marginRight="8dp"
             android:padding="10dp"
             android:background="@color/theme"
-            android:text="@string/go_pay_show_pay_commit"
+            android:text="@string/order_pay"
             android:textColor="@color/white" />
     </RelativeLayout>
 

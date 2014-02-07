@@ -5,8 +5,8 @@
     android:background="@drawable/main_order_textview_bg"
     android:baselineAligned="false"
     android:orientation="horizontal"
-    android:paddingBottom="@dimen/margin_left"
-    android:paddingTop="@dimen/margin_left" >
+    android:paddingBottom="@dimen/margin_left_add"
+    android:paddingTop="@dimen/margin_left_add" >
 
     <RelativeLayout
         android:id="@+id/rv_wait_pay"

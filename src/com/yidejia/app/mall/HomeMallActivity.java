@@ -384,7 +384,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 		super.onPause();
 //		StatService.onPause(this);
 		StatService.onPageEnd(this, "首页");
-		if(null != bannerView)
+		if(null != bannerView || "".equals(bannerView))
 			bannerView.stopTimer();
 	}
 
@@ -400,14 +400,23 @@ public class HomeMallActivity extends HomeBaseActivity {
 	@Override
 	protected void onStop(){
 		super.onStop();
-		if(null != bannerView)
+		if(null != bannerView || "".equals(bannerView))
 			bannerView.stopTimer();
 	}
 	
 	@Override
 	protected void onRestart() {
 		super.onRestart();
-		bannerView.startTimer();
+		if(null != bannerView || "".equals(bannerView))
+			bannerView.startTimer();
+	}
+	
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		if((Intent.FLAG_ACTIVITY_CLEAR_TOP & intent.getFlags()) !=0){
+			finish();
+		}
 	}
 
 }

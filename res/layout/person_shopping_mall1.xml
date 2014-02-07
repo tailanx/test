@@ -11,13 +11,12 @@
         android:id="@+id/ll_person_main2_main2_linearlayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/main_bg"
         android:orientation="vertical" >
 
         <RelativeLayout
             android:id="@+id/re_person_shopping_background"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/main_bg_head"
+            android:layout_height="wrap_content"
             android:background="@drawable/mymallbg" >
 
             <ImageView
@@ -104,16 +103,18 @@
                     android:textColor="#FFeeeeee"
                     android:textSize="@dimen/textsize_big_big" />
             </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_wait_pay_order_linearlayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+              
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal" >
+
+                <include layout="@layout/all_order_option" />
+            </LinearLayout>
         </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_wait_pay_order_linearlayout1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <include layout="@layout/all_order_option" />
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_wait_pay_order_linearlayout_list"
