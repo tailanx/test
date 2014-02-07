@@ -52,16 +52,20 @@
             android:id="@+id/bt_price_30"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_sort_text_color_press"
             android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:background="@drawable/selecter_bg_recharge_price"
+            android:textColor="@color/color_recharge_price"
             android:text="@string/price_30" />
 
         <Button
             android:id="@+id/bt_price_50"
-            android:textColor="@color/color_sort_text_color_press"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:background="@drawable/selecter_bg_recharge_price"
+            android:textColor="@color/color_recharge_price"
             android:text="@string/price_50" />
 
         <Button
@@ -69,7 +73,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/color_sort_text_color_press"
+            android:layout_margin="10dp"
+            android:background="@drawable/selecter_bg_recharge_price"
+            android:textColor="@color/color_recharge_price"
             android:text="@string/price_100" />
     </LinearLayout>
 

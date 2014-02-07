@@ -20,6 +20,7 @@
         android:id="@+id/main_home_title_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="6dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/main_home_title_logo"
