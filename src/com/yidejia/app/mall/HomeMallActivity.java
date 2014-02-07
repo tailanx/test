@@ -7,6 +7,7 @@ import org.apache.http.HttpStatus;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -96,6 +97,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 				super.onSuccess(statusCode, content);
 				if (HttpStatus.SC_OK == statusCode) {
 					GetHomePage getHomePage = new GetHomePage();
+					Log.e("info", content);
 					if (getHomePage.parseGetHomeJson(content)) {
 						// 设置轮播的组
 						ArrayList<BaseProduct> bannerProducts = getHomePage

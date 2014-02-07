@@ -335,6 +335,7 @@
 
         <ImageView
             android:id="@+id/iv_sxg_top"
+            android:layout_marginTop="@dimen/margin_left_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/yidejia" />
