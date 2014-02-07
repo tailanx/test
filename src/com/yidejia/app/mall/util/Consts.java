@@ -10,6 +10,7 @@ public class Consts {
 	}
 
 	public static final String DELETE_CART = "com.yidejia.delete";
+	public static final String EXIT_APP = "com.yidejia.exit.app";
 	public static final String CHECK_UPDATE_CHANGE = "com.yidejia.check";
 	public static final String BACK_UPDATE_CHANGE = "com.yidejia.back";
 	public static final String UPDATE_CHANGE = "com.yidejia.UPDATE";

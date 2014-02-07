@@ -1,6 +1,5 @@
 package com.yidejia.app.mall;
 
-
 import org.apache.http.HttpStatus;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,49 +47,48 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 	private ImageView head;// 头像
 	private MyApplication myApplication;
 
-//	private BottomChange bottomChange;
-	
-//	private RelativeLayout downHomeLayout;
-//	private RelativeLayout downGuangLayout;
-//	private RelativeLayout downSearchLayout;
-//	private RelativeLayout downShoppingLayout;
-//	private RelativeLayout downMyLayout;
-//	private CartsDataManage cartsDataManage;
-//	private int number;
-//	private Button cartImage;
+	// private BottomChange bottomChange;
 
-	private String scoresNum;	//积分
-	private String favolitenNum;	//收藏
-	private String orderNum;	//订单
-	private String msgNum;	//消息中心
+	// private RelativeLayout downHomeLayout;
+	// private RelativeLayout downGuangLayout;
+	// private RelativeLayout downSearchLayout;
+	// private RelativeLayout downShoppingLayout;
+	// private RelativeLayout downMyLayout;
+	// private CartsDataManage cartsDataManage;
+	// private int number;
+	// private Button cartImage;
+
+	private String scoresNum; // 积分
+	private String favolitenNum; // 收藏
+	private String orderNum; // 订单
+	private String msgNum; // 消息中心
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		cartsDataManage = new CartsDataManage();
+		// cartsDataManage = new CartsDataManage();
 		myApplication = MyApplication.getInstance();
 		setContentView(R.layout.activity_main_fragment_layout);
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
 		inflater = LayoutInflater.from(this);
 		view = inflater.inflate(R.layout.person_shopping_mall1, null);
 		frameLayout.addView(view);
-//		int current = getIntent().getIntExtra("current", -1);
-//		int next = getIntent().getIntExtra("next", -1);
+		// int current = getIntent().getIntExtra("current", -1);
+		// int next = getIntent().getIntExtra("next", -1);
 
 		setupView(view);
-		
+
 		setCurrentActivityId(4);
-		
+
 		// 设置底部
-//		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
-//		bottomChange = new BottomChange(this, bottomLayout);
-//		if (current != -1 || next != -1) {
-//			bottomChange.initNavView(current, next);
-//		}
+		// bottomLayout = (RelativeLayout)
+		// findViewById(R.id.down_parent_layout);
+		// bottomChange = new BottomChange(this, bottomLayout);
+		// if (current != -1 || next != -1) {
+		// bottomChange.initNavView(current, next);
+		// }
 
 	}
-
-	
 
 	@Override
 	public void onClick(View v) {
@@ -164,12 +162,13 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 		case R.id.re_my_aidou:
 			intent = new Intent(this, AidouActivity.class);
 			break;
-		
+
 		}
-		if(intent == null) return;
+		if (intent == null)
+			return;
 		startActivity(intent);
 	}
-	
+
 	public void setupView(View view) {
 		// // //实例化组件
 		aidouRelative = (RelativeLayout) view.findViewById(R.id.re_my_aidou);
@@ -223,22 +222,22 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 		message.setOnClickListener(this);
 		integration = (TextView) view.findViewById(R.id.tv_integration);
 		integration.setOnClickListener(this);
-		//头部实例化
+		// 头部实例化
 		getActionbar();
 
 	}
 
-	//头部实例化
+	// 头部实例化
 	private void getActionbar() {
 		setActionbarConfig();
-		
+
 		setTitle(R.string.my_mall);
-		
+
 		TextView tvBack = (TextView) findViewById(R.id.ab_common_back);
 		tvBack.setVisibility(View.GONE);
-		
+
 		// 实例化组件
-//		getSupportActionBar().setCustomView(R.layout.actionbar_mymall);
+		// getSupportActionBar().setCustomView(R.layout.actionbar_mymall);
 		imageView = (ImageView) findViewById(R.id.ab_common_iv_share);
 		imageView.setVisibility(View.VISIBLE);
 		imageView.setImageResource(R.drawable.setting);
@@ -258,13 +257,12 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 		}
 	};
 
-
 	@Override
 	public void onStart() {
 		super.onStart();
-		
+
 		getNumData();
-		
+
 		String name = myApplication.getNick();
 		if (name == null || "".equals(name)) {
 			nick.setText(myApplication.getUserId());
@@ -281,31 +279,32 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 		}
 	}
 
-	/**获取收藏，积分，消息中心数字**/
-	private void getNumData(){
-		String url = new JNICallBack().getHttp4GetCount(myApplication.getUserId(), myApplication.getToken());
+	/** 获取收藏，积分，消息中心数字 **/
+	private void getNumData() {
+		String url = new JNICallBack().getHttp4GetCount(
+				myApplication.getUserId(), myApplication.getToken());
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(url, new AsyncHttpResponse(){
+		client.get(url, new AsyncHttpResponse() {
 
 			@Override
 			public void onSuccess(int statusCode, String content) {
 				super.onSuccess(statusCode, content);
-				if(HttpStatus.SC_OK == statusCode){
+				if (HttpStatus.SC_OK == statusCode) {
 					parseCountJson(content);
 					setCount(favolitenNum, msgNum, scoresNum);
 				}
 			}
-			
+
 		});
 	}
-	
-	/**解析收藏，积分，消息中心数字数据**/
-	private void parseCountJson(String content){
+
+	/** 解析收藏，积分，消息中心数字数据 **/
+	private void parseCountJson(String content) {
 		JSONObject httpObject;
 		try {
 			httpObject = new JSONObject(content);
 			int code = httpObject.getInt("code");
-			if(code == 1){
+			if (code == 1) {
 				String response = httpObject.getString("response");
 				JSONObject resObject = new JSONObject(response);
 				scoresNum = resObject.optString("scores");
@@ -318,7 +317,7 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 		}
 	}
 
-	/**设置收藏，消息中心，积分的个数**/
+	/** 设置收藏，消息中心，积分的个数 **/
 	private void setCount(String faString, String msString, String inString) {
 		if (TextUtils.isEmpty(faString)) {
 			favorites.setText(0 + "");
@@ -342,15 +341,15 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 	@Override
 	public void onResume() {
 		super.onResume();
-//		StatService.onResume(this);
+		// StatService.onResume(this);
 		StatService.onPageStart(this, "我的商城页面");
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-//		StatService.onPause(this);
 		StatService.onPageEnd(this, "我的商城页面");
 	}
 
+	
 }

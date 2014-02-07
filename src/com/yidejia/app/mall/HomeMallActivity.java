@@ -44,11 +44,11 @@ import com.yidejia.app.mall.yirihui.YirihuiActivity;
 public class HomeMallActivity extends HomeBaseActivity {
 
 	private FrameLayout frameLayout;// 填充activity的界面用的
-	
+
 	private View view;
 	private FrameLayout bannerViewGroup;
 	private BannerView bannerView;
-	
+
 	private PullToRefreshScrollView mPullToRefreshScrollView;
 
 	// private boolean isFrist = true;
@@ -62,21 +62,21 @@ public class HomeMallActivity extends HomeBaseActivity {
 		view = getLayoutInflater().inflate(R.layout.activity_main_layout, null);// 加载主界面
 		frameLayout.addView(view);
 		bannerViewGroup = (FrameLayout) view.findViewById(R.id.layout);
-		
+
 		initRefreshView();
 		initFunView();
-		
+
 		setActionBar();
 		setCurrentActivityId(0);
 
 		getMainData();
 	}
-	
-	private void getMainData(){
+
+	private void getMainData() {
 		String url = new JNICallBack().getHttp4GetHome();
-		
+
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(url, new AsyncHttpResponse(){
+		client.get(url, new AsyncHttpResponse() {
 
 			@Override
 			public void onStart() {
@@ -94,32 +94,41 @@ public class HomeMallActivity extends HomeBaseActivity {
 			@Override
 			public void onSuccess(int statusCode, String content) {
 				super.onSuccess(statusCode, content);
-				if(HttpStatus.SC_OK == statusCode){
+				if (HttpStatus.SC_OK == statusCode) {
 					GetHomePage getHomePage = new GetHomePage();
-					if(getHomePage.parseGetHomeJson(content)){
-						//设置轮播的组
-						ArrayList<BaseProduct> bannerProducts = getHomePage.getBannerArray();
-						bannerView = new BannerView(bannerProducts, HomeMallActivity.this);
+					if (getHomePage.parseGetHomeJson(content)) {
+						// 设置轮播的组
+						ArrayList<BaseProduct> bannerProducts = getHomePage
+								.getBannerArray();
+						bannerView = new BannerView(bannerProducts,
+								HomeMallActivity.this);
 						bannerViewGroup.removeAllViews();
-						bannerViewGroup.addView(bannerView.getMainListFirstItem());
+						bannerViewGroup.addView(bannerView
+								.getMainListFirstItem());
 						bannerView.startTimer();
-						//设置大家都在买组
-						ArrayList<MainProduct> djdzmProducts = getHomePage.getDjdzmArray();
+						// 设置大家都在买组
+						ArrayList<MainProduct> djdzmProducts = getHomePage
+								.getDjdzmArray();
 						setDjdzmView(djdzmProducts);
-						//设置随心逛组
-						ArrayList<MainProduct> sxgProducts = getHomePage.getSxgArray();
+						// 设置随心逛组
+						ArrayList<MainProduct> sxgProducts = getHomePage
+								.getSxgArray();
 						setSxgView(sxgProducts);
 					} else {
-						Toast.makeText(HomeMallActivity.this, getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
+						Toast.makeText(HomeMallActivity.this,
+								getString(R.string.bad_network),
+								Toast.LENGTH_SHORT).show();
 					}
-					
-					String label = getResources().getString(R.string.update_time)
+
+					String label = getResources().getString(
+							R.string.update_time)
 							+ DateUtils.formatDateTime(HomeMallActivity.this,
-									System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
+									System.currentTimeMillis(),
+									DateUtils.FORMAT_SHOW_TIME
 											| DateUtils.FORMAT_SHOW_DATE
 											| DateUtils.FORMAT_ABBREV_ALL);
-					mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
-							label);
+					mPullToRefreshScrollView.getLoadingLayoutProxy()
+							.setLastUpdatedLabel(label);
 				}
 			}
 
@@ -127,12 +136,14 @@ public class HomeMallActivity extends HomeBaseActivity {
 			public void onError(Throwable error, String content) {
 				// TODO Auto-generated method stub
 				super.onError(error, content);
-				Toast.makeText(HomeMallActivity.this, getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
+				Toast.makeText(HomeMallActivity.this,
+						getString(R.string.bad_network), Toast.LENGTH_SHORT)
+						.show();
 			}
-			
+
 		});
 	}
-	
+
 	/**
 	 * activity启动时调用这个方法显示界面
 	 */
@@ -147,9 +158,9 @@ public class HomeMallActivity extends HomeBaseActivity {
 
 		mPullToRefreshScrollView.setOnRefreshListener(listener);
 	}
-	
-	/**初始化快捷功能区**/
-	private void initFunView(){
+
+	/** 初始化快捷功能区 **/
+	private void initFunView() {
 		RelativeLayout shorcutLayout = (RelativeLayout) view
 				.findViewById(R.id.function_parent_layout);
 
@@ -157,7 +168,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 		shorcutLayout.addView(child);
 		functionIntent(child);
 	}
-	
+
 	/**
 	 * 快捷功能那块跳到相应界面
 	 * 
@@ -170,7 +181,8 @@ public class HomeMallActivity extends HomeBaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intentOrder1 = new Intent(HomeMallActivity.this,AllOrderActivity.class);
+				Intent intentOrder1 = new Intent(HomeMallActivity.this,
+						AllOrderActivity.class);
 				if (isLogin()) {
 					HomeMallActivity.this.startActivity(intentOrder1);
 				}
@@ -197,7 +209,8 @@ public class HomeMallActivity extends HomeBaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(HomeMallActivity.this, ActiveGoActivity.class);
+				Intent intent = new Intent(HomeMallActivity.this,
+						ActiveGoActivity.class);
 				startActivity(intent);
 			}
 		});
@@ -207,7 +220,8 @@ public class HomeMallActivity extends HomeBaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(HomeMallActivity.this, PhoneActivity.class);
+				Intent intent = new Intent(HomeMallActivity.this,
+						PhoneActivity.class);
 				HomeMallActivity.this.startActivity(intent);
 			}
 		});
@@ -217,7 +231,8 @@ public class HomeMallActivity extends HomeBaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intentOrder = new Intent(HomeMallActivity.this, HistoryActivity.class);
+				Intent intentOrder = new Intent(HomeMallActivity.this,
+						HistoryActivity.class);
 				HomeMallActivity.this.startActivity(intentOrder);
 			}
 		});
@@ -227,7 +242,8 @@ public class HomeMallActivity extends HomeBaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(HomeMallActivity.this, YirihuiActivity.class);
+				Intent intent = new Intent(HomeMallActivity.this,
+						YirihuiActivity.class);
 				HomeMallActivity.this.startActivity(intent);
 
 			}
@@ -259,26 +275,24 @@ public class HomeMallActivity extends HomeBaseActivity {
 		});
 
 	}
-	
+
 	private OnRefreshListener<ScrollView> listener = new OnRefreshListener<ScrollView>() {
 
 		@Override
 		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
 			try {
-				if (!ConnectionDetector.isConnectingToInternet(HomeMallActivity.this)) {
-					Toast.makeText(
-							HomeMallActivity.this,
-							getResources().getString(
-									R.string.no_network), Toast.LENGTH_LONG)
-							.show();
+				if (!ConnectionDetector
+						.isConnectingToInternet(HomeMallActivity.this)) {
+					Toast.makeText(HomeMallActivity.this,
+							getResources().getString(R.string.no_network),
+							Toast.LENGTH_LONG).show();
 					mPullToRefreshScrollView.onRefreshComplete();
 					return;
 				}
 				getMainData();
 			} catch (Exception e) {
 				e.printStackTrace();
-				Toast.makeText(
-						HomeMallActivity.this,
+				Toast.makeText(HomeMallActivity.this,
 						getResources().getString(R.string.bad_network),
 						Toast.LENGTH_SHORT).show();
 				mPullToRefreshScrollView.onRefreshComplete();
@@ -286,14 +300,12 @@ public class HomeMallActivity extends HomeBaseActivity {
 		}
 
 	};
-	
 
 	/**
 	 * 设置头部
 	 */
 	private void setActionBar() {
-		getSupportActionBar().setCustomView(
-				R.layout.actionbar_main_home_title);
+		getSupportActionBar().setCustomView(R.layout.actionbar_main_home_title);
 
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setDisplayUseLogoEnabled(false);
@@ -305,19 +317,20 @@ public class HomeMallActivity extends HomeBaseActivity {
 		searchEditText.setOnClickListener(go2SearchListener2);
 
 	}
-	
+
 	/**
 	 * 头部的点击事件
 	 */
 	private OnClickListener go2SearchListener2 = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent(HomeMallActivity.this, SearchActivity.class);
+			Intent intent = new Intent(HomeMallActivity.this,
+					SearchActivity.class);
 			startActivity(intent);
 		}
 	};
-	
-	/**检查是否已登录**/
+
+	/** 检查是否已登录 **/
 	private boolean isLogin() {
 		if (!MyApplication.getInstance().getIsLogin()) {
 			Toast.makeText(this,
@@ -331,49 +344,58 @@ public class HomeMallActivity extends HomeBaseActivity {
 
 		return true;
 	}
-	
-	/**设置大家都在买的组**/
-	private void setDjdzmView(ArrayList<MainProduct> products){
-		if(null == products) return;
-		
+
+	/** 设置大家都在买的组 **/
+	private void setDjdzmView(ArrayList<MainProduct> products) {
+		if (null == products)
+			return;
+
 		ImageView ivDjdzmLeft = (ImageView) findViewById(R.id.iv_djdzm_left);
 		ImageView ivDjdzmRLeft = (ImageView) findViewById(R.id.iv_djdzm_left_right);
 		ImageView ivDjdzmRRight = (ImageView) findViewById(R.id.iv_djdzm_right_right);
-		
-		ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
+
+		ImageLoader.getInstance()
+				.init(MyApplication.getInstance().initConfig());
 
 		int length = products.size();
-		if(length > 0) imageload(products.get(0).getImgUrl(), ivDjdzmLeft);
-		if(length > 1) imageload(products.get(1).getImgUrl(), ivDjdzmRLeft);
-		if(length > 2) imageload(products.get(2).getImgUrl(), ivDjdzmRRight);
-		
+		if (length > 0)
+			imageload(products.get(0).getImgUrl(), ivDjdzmLeft);
+		if (length > 1)
+			imageload(products.get(1).getImgUrl(), ivDjdzmRLeft);
+		if (length > 2)
+			imageload(products.get(2).getImgUrl(), ivDjdzmRRight);
+
 	}
-	
-	/**设置随心逛的组**/
+
+	/** 设置随心逛的组 **/
 	private void setSxgView(ArrayList<MainProduct> products) {
-		if(null == products) return;
-		
+		if (null == products)
+			return;
+
 		ImageView ivSxgTop = (ImageView) findViewById(R.id.iv_sxg_top);
 		ImageView ivSxgLeft = (ImageView) findViewById(R.id.iv_sxg_left);
 		ImageView ivSxgRUp = (ImageView) findViewById(R.id.iv_sxg_right_up);
 		ImageView ivSxgRDown = (ImageView) findViewById(R.id.iv_sxg_right_down);
-		
+
 		int length = products.size();
-		if(length > 0) imageload(products.get(0).getImgUrl(), ivSxgTop);
-		if(length > 1) imageload(products.get(1).getImgUrl(), ivSxgLeft);
-		if(length > 2) imageload(products.get(2).getImgUrl(), ivSxgRUp);
-		if(length > 3) imageload(products.get(3).getImgUrl(), ivSxgRDown);
-		
-		
+		if (length > 0)
+			imageload(products.get(0).getImgUrl(), ivSxgTop);
+		if (length > 1)
+			imageload(products.get(1).getImgUrl(), ivSxgLeft);
+		if (length > 2)
+			imageload(products.get(2).getImgUrl(), ivSxgRUp);
+		if (length > 3)
+			imageload(products.get(3).getImgUrl(), ivSxgRDown);
+
 	}
-	
-	/**显示图片到指定的view**/
-	private void imageload(String url, ImageView iv){
+
+	/** 显示图片到指定的view **/
+	private void imageload(String url, ImageView iv) {
 		ImageLoader.getInstance().displayImage(url, iv,
 				MyApplication.getInstance().initGoodsImageOption(),
 				MyApplication.getInstance().getImageLoadingListener());
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
@@ -382,30 +404,45 @@ public class HomeMallActivity extends HomeBaseActivity {
 	@Override
 	protected void onPause() {
 		super.onPause();
-//		StatService.onPause(this);
+		// StatService.onPause(this);
 		StatService.onPageEnd(this, "首页");
-		bannerView.stopTimer();
+		if (null != bannerView || "".equals(bannerView)) {
+			bannerView.stopTimer();
+		}
 	}
 
 	@Override
 	protected void onResume() {
+
 		Intent intent = new Intent(HomeMallActivity.this, LogService.class);
 		startService(intent);
 		super.onResume();
-//		StatService.onResume(this);
+		// StatService.onResume(this);
 		StatService.onPageStart(this, "首页");
 	}
 
 	@Override
-	protected void onStop(){
+	protected void onStop() {
 		super.onStop();
-		bannerView.stopTimer();
+		if (null != bannerView || "".equals(bannerView)) {
+			bannerView.stopTimer();
+		}
 	}
-	
+
 	@Override
 	protected void onRestart() {
 		super.onRestart();
-		bannerView.startTimer();
+		if (null != bannerView || "".equals(bannerView)) {
+			bannerView.stopTimer();
+		}
+	}
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		if((Intent.FLAG_ACTIVITY_CLEAR_TOP & intent.getFlags()) !=0){
+			finish();
+		}
 	}
 
 }

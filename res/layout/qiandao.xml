@@ -45,7 +45,7 @@
                 android:id="@+id/iv_qiandao_button_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_marginLeft="@dimen/mall_list_padding"
                 android:layout_marginRight="@dimen/margin_left"
                 android:layout_marginTop="@dimen/margin_top_add"
                 android:layout_toLeftOf="@id/iv_qiandao_button"

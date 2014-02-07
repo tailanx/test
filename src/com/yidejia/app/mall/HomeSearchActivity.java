@@ -44,7 +44,6 @@ public class HomeSearchActivity extends HomeBaseActivity {
 	private String TAG = "SearchFragment";
 	private FrameLayout frameLayout;
 
-
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -70,13 +69,12 @@ public class HomeSearchActivity extends HomeBaseActivity {
 
 		setActionBarConfig();
 
-
 		if (null != bar) {
 			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
 				@Override
 				public void onCancel(DialogInterface dialog) {
-//					closeTask();
+					// closeTask();
 					if (functions.isEmpty()) {
 						searchListView.setVisibility(View.GONE);
 						search_item_refresh_view.setVisibility(View.VISIBLE);
@@ -112,18 +110,19 @@ public class HomeSearchActivity extends HomeBaseActivity {
 		searchText.setOnClickListener(go2SearchListener2);
 	}
 
-	private void getData(){
-		
+	private void getData() {
+
 		if (!ConnectionDetector.isConnectingToInternet(HomeSearchActivity.this)) {
 			searchListView.setVisibility(View.GONE);
 			search_item_refresh_view.setVisibility(View.VISIBLE);
 			return;
-		} 
-		
-		String url = new JNICallBack().getHttp4GetEffect("flag%3D%27y%27", "0", "20", "", "", "%2A");
-		
+		}
+
+		String url = new JNICallBack().getHttp4GetEffect("flag%3D%27y%27", "0",
+				"20", "", "", "%2A");
+
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(url, new AsyncHttpResponse(){
+		client.get(url, new AsyncHttpResponse() {
 
 			@Override
 			public void onStart() {
@@ -140,29 +139,31 @@ public class HomeSearchActivity extends HomeBaseActivity {
 			@Override
 			public void onSuccess(int statusCode, String content) {
 				super.onSuccess(statusCode, content);
-				if(HttpStatus.SC_OK == statusCode){
+				if (HttpStatus.SC_OK == statusCode) {
 					ParseSearchJson parseSearchJson = new ParseSearchJson();
 					boolean isSuccess = parseSearchJson.parseFunJson(content);
-					if(isSuccess){
+					if (isSuccess) {
 						searchListView.setVisibility(View.VISIBLE);
 						search_item_refresh_view.setVisibility(View.GONE);
 						functions = parseSearchJson.getFunctions();
 						searchListAdapter = new SearchListAdapter(
 								HomeSearchActivity.this, functions);
 						searchListView.setAdapter(searchListAdapter);
-						searchListView.setOnItemClickListener(new OnItemClickListener() {
+						searchListView
+								.setOnItemClickListener(new OnItemClickListener() {
 
-							@Override
-							public void onItemClick(AdapterView<?> arg0,
-									View arg1, int arg2, long arg3) {
-								listener(arg2);
-							}
-						});
+									@Override
+									public void onItemClick(
+											AdapterView<?> arg0, View arg1,
+											int arg2, long arg3) {
+										listener(arg2);
+									}
+								});
 					} else {
-						//TODO
+						// TODO
 					}
 				} else {
-					//TODO
+					// TODO
 				}
 			}
 
@@ -171,13 +172,12 @@ public class HomeSearchActivity extends HomeBaseActivity {
 				// TODO Auto-generated method stub
 				super.onError(error, content);
 			}
-			
+
 		});
-		
+
 	}
 
 	private ProgressDialog bar;
-
 
 	/**
 	 * 搜索项的监听函数

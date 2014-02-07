@@ -12,7 +12,8 @@ import android.widget.TextView;
 import com.yidejia.app.mall.qiandao.QiandaoActivity;
 import com.yidejia.app.mall.shark.TestSharkActivity;
 
-public class HomeGuangActivity extends HomeBaseActivity implements OnClickListener {
+public class HomeGuangActivity extends HomeBaseActivity implements
+		OnClickListener {
 	private LayoutInflater inflater;
 	private FrameLayout frameLayout;
 	private View view;
@@ -29,10 +30,9 @@ public class HomeGuangActivity extends HomeBaseActivity implements OnClickListen
 		frameLayout.addView(view);
 
 		setActionbar();
-		
+
 		setCurrentActivityId(1);
 	}
-
 
 	private void setActionbar() {
 		setActionbarConfig();
@@ -60,7 +60,18 @@ public class HomeGuangActivity extends HomeBaseActivity implements OnClickListen
 			intent.setClass(this, TestSharkActivity.class);
 			break;
 		}
-		if(null == intent)return;
+		if (null == intent)
+			return;
 		startActivity(intent);
+	}
+
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+	}
+	@Override
+	protected void onPause() {
+		super.onPause();
 	}
 }
