@@ -33,6 +33,7 @@
     <dimen name="item_goods_emulate_add">55dp</dimen>
     <dimen name="margin_top_add">45dp</dimen>
     <dimen name="margin_top">40dp</dimen>
+    <dimen name="margin_top_car">35dp</dimen>
     <dimen name="magin_left_add_add">30dp</dimen>
     <dimen name="magin_left_add">25dp</dimen>
     <dimen name="magin_left_add_add">18dp</dimen>

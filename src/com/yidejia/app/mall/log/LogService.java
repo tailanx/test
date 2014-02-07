@@ -2,10 +2,14 @@ package com.yidejia.app.mall.log;
 
 import java.io.IOException;
 
-import com.yidejia.app.mall.HomeMyMallActivity;
+import com.opens.asyncokhttpclient.AsyncHttpResponse;
+import com.opens.asyncokhttpclient.AsyncOkHttpClient;
+import com.opens.asyncokhttpclient.RequestParams;
+import com.squareup.okhttp.OkHttpClient;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.IpAddress;
 import com.yidejia.app.mall.exception.TimeOutEx;
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.user.Login;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DesUtils;
@@ -16,17 +20,23 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.Toast;
 
 public class LogService extends Service {
 	private SharedPreferences sp;
 	private Consts consts;
-	private LoginTask task;
+	// private LoginTask task;
 	private IpAddress ipAddress;
-	private Login login;
+	// private Login login;
 	private String baseName;
 	private String basepasswrod;
 	private boolean isTimeout;
+	private AsyncOkHttpClient client;
+	private RequestParams params;
+	private String hosturl;
+	private String contentType;
+
 	@Override
 	public IBinder onBind(Intent intent) {
 		// TODO Auto-generated method stub
@@ -42,7 +52,12 @@ public class LogService extends Service {
 		sp = PreferenceManager
 				.getDefaultSharedPreferences(getApplicationContext());
 		ipAddress = new IpAddress();
-		login = new Login();
+		params = new RequestParams();
+		hosturl = new JNICallBack().HTTPURL;
+		contentType = "application/x-www-form-urlencoded;charset=UTF-8";
+		client = new AsyncOkHttpClient();
+		// login = new Login();
+
 	}
 
 	@Override
@@ -53,8 +68,12 @@ public class LogService extends Service {
 		String basePwd = sp.getString("DESPWD", null);
 		String keyName = baseName + consts.getMiStr();
 		basepasswrod = DesUtils.decode(keyName, basePwd);
-		Task task = new Task();
-		task.execute();
+		// Task task = new Task();
+		// task.execute();
+		String url = new JNICallBack().getHttp4Login(baseName, basepasswrod,
+				ipAddress.getIpAddress());
+		params.put(url);
+		loginService();
 		return super.onStartCommand(intent, flags, startId);
 	}
 
@@ -74,10 +93,15 @@ public class LogService extends Service {
 			try {
 				String httpresp;
 				try {
-					httpresp = login.getHttpResponse(baseName, basepasswrod, ipAddress.getIpAddress());
-					boolean issuccess = login.analysisHttpResp(getApplicationContext(),
-							httpresp);
-					return issuccess;
+					httpresp = login.getHttpResponse(baseName, basepasswrod,
+							ipAddress.getIpAddress());
+					if (httpresp != null) {
+						boolean issuccess = login.analysisHttpResp(
+								getApplicationContext(), httpresp);
+						return issuccess;
+					} else {
+						stopSelf();
+					}
 				} catch (TimeOutEx e) {
 					e.printStackTrace();
 					isTimeout = true;
@@ -103,15 +127,51 @@ public class LogService extends Service {
 
 			} else {
 				if (isTimeout) {
-					Toast.makeText(
-							getApplicationContext(),
-							getApplicationContext().getResources().getString(R.string.time_out),
-							Toast.LENGTH_SHORT).show();
+					// Toast.makeText(
+					// getApplicationContext(),
+					// getApplicationContext().getResources().getString(
+					// R.string.time_out), Toast.LENGTH_SHORT)
+					// .show();
+					stopSelf();
 					isTimeout = false;
 					return;
 				}
 
 			}
 		}
+	}
+
+	private void loginService() {
+		client.post(hosturl, contentType, params, new AsyncHttpResponse() {
+			@Override
+			public void onStart() {
+				super.onStart();
+			}
+
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				stopSelf();
+			}
+
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				super.onSuccess(statusCode, content);
+				if (null != content && !"".equals(content)) {
+					Login login = new Login();
+					login.analysisHttpResp(getApplicationContext(), content);
+					stopSelf();
+				} else {
+					stopSelf();
+				}
+
+			}
+
+			@Override
+			public void onError(Throwable error, String content) {
+				super.onError(error, content);
+				stopSelf();
+			}
+		});
 	}
 }

@@ -17,12 +17,13 @@ import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.net.user.Login;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DesUtils;
+import com.yidejia.app.mall.widget.WiperSwitch;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class TaskLoginAct {
 	
 	private String username , password, ip;
-	private CheckBox mBox;
+	private WiperSwitch mBox;
 	private String message;
 	private SharedPreferences sp ;
 	private Consts consts;
@@ -35,7 +36,7 @@ public class TaskLoginAct {
 		this.activity = activity;
 	}
 	
-	public void loginAct(String username, String password, String ip,CheckBox mBox,SharedPreferences sp ,Consts consts){
+	public void loginAct(String username, String password, String ip,WiperSwitch mBox,SharedPreferences sp ,Consts consts){
 		this.username = username;
 		this.sp = sp;
 		this.consts = consts;
@@ -109,7 +110,7 @@ public class TaskLoginAct {
 				Intent intent = new Intent(Consts.LONGIN_SUCESSES);
 				activity.sendBroadcast(intent);
 				activity.finish();
-				if (mBox.isChecked()) {
+				if (mBox.isSelected()) {
 					 sp.edit().putString("DESMI", username).commit();
 					
 					 String keyName = username+consts.getMiStr();

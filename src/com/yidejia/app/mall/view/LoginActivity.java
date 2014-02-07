@@ -27,6 +27,7 @@ import com.yidejia.app.mall.ctrl.IpAddress;
 import com.yidejia.app.mall.task.TaskLoginAct;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DesUtils;
+import com.yidejia.app.mall.widget.WiperSwitch;
 
 public class LoginActivity extends SherlockActivity implements OnClickListener {
 	private RelativeLayout findPwd;// 找回密码
@@ -34,7 +35,7 @@ public class LoginActivity extends SherlockActivity implements OnClickListener {
 	private Button mLogin;
 	private EditText stringName;
 	private EditText stringPassword;
-	private CheckBox mBox;
+	private WiperSwitch mBox;
 	private SharedPreferences sp;
 	private Consts consts;
 
@@ -56,7 +57,7 @@ public class LoginActivity extends SherlockActivity implements OnClickListener {
 		inputMethodManager = (InputMethodManager) this
 				.getSystemService(Context.INPUT_METHOD_SERVICE);
 		// 默认选中
-		mBox = (CheckBox) findViewById(R.id.cb_my_login_checkbox);
+		mBox = (WiperSwitch) findViewById(R.id.cb_my_login_checkbox);
 
 		findPwd = (RelativeLayout) findViewById(R.id.re_my_mall_login_retrieve_password);
 		// 设置监听
