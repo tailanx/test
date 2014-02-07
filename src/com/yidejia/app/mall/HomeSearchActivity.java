@@ -93,6 +93,7 @@ public class HomeSearchActivity extends HomeBaseActivity {
 				}
 			});
 		}
+		if(null == functions || functions.isEmpty())
 		getData();
 	}
 

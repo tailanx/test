@@ -384,7 +384,8 @@ public class HomeMallActivity extends HomeBaseActivity {
 		super.onPause();
 //		StatService.onPause(this);
 		StatService.onPageEnd(this, "首页");
-		bannerView.stopTimer();
+		if(null != bannerView)
+			bannerView.stopTimer();
 	}
 
 	@Override
@@ -399,7 +400,8 @@ public class HomeMallActivity extends HomeBaseActivity {
 	@Override
 	protected void onStop(){
 		super.onStop();
-		bannerView.stopTimer();
+		if(null != bannerView)
+			bannerView.stopTimer();
 	}
 	
 	@Override
