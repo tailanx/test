@@ -295,9 +295,9 @@ public class HomeMallActivity extends HomeBaseActivity {
 		getSupportActionBar().setCustomView(
 				R.layout.actionbar_main_home_title);
 
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+		getSupportActionBar().setDisplayShowCustomEnabled(true);
+		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 
 		ImageView searchEditText = (ImageView) findViewById(R.id.main_home_title_search);

@@ -1,25 +1,18 @@
 package com.yidejia.app.mall;
 
-import java.io.IOException;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.SpanWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -28,20 +21,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.IpAddress;
-import com.yidejia.app.mall.datamanage.CartsDataManage;
-import com.yidejia.app.mall.exception.TimeOutEx;
-import com.yidejia.app.mall.log.LoginTask;
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.user.Login;
-import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DesUtils;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.widget.WiperSwitch;
 import com.yidejia.app.mall.widget.WiperSwitch.OnChangedListener;
-import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class HomeLoginActivity extends HomeBaseActivity implements OnClickListener,
 		OnChangedListener {
@@ -60,29 +50,27 @@ public class HomeLoginActivity extends HomeBaseActivity implements OnClickListen
 	private WiperSwitch mBox;
 	private SharedPreferences sp;
 	private Consts consts;
-	private LoginTask taskLoginAct;
-//	private BottomChange bottomChange;
 	private RelativeLayout bottomLayout;
 	public static boolean isCheck;
 
+	private String name;
+	private String pwd;
+	private String ip;
+	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-//		cartsDataManage = new CartsDataManage();
 		setContentView(R.layout.activity_main_fragment_layout);
+		
 		myApplication = (MyApplication) getApplication();
 		inflater = LayoutInflater.from(this);
 		view = inflater.inflate(R.layout.my_mall_login, null);
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
 		frameLayout.addView(view);
-//		int current = getIntent().getIntExtra("current", -1);
-//		int next = getIntent().getIntExtra("next", -1);
+		
 		// 设置底部
 		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
-//		bottomChange = new BottomChange(this, bottomLayout);
-//		if (current != -1 || next != -1) {
-//			bottomChange.initNavView(current, next);
-//		}
+		
 		// 添加头部
 		setActionBarConfigView();
 		setCurrentActivityId(5);
@@ -138,33 +126,9 @@ public class HomeLoginActivity extends HomeBaseActivity implements OnClickListen
 				stringName.setCursorVisible(false);
 			}
 		});
-//		String baseName = sp.getString("DESMI", null);
-//		//
-//		String basePwd = sp.getString("DESPWD", null);
-//		Boolean isCheck = sp.getBoolean("CHECK", false);
-//		String keyName = baseName + consts.getMiStr();
-//		String basepasswrod = DesUtils.decode(keyName, basePwd);
-//		if (isCheck) {
-//			mBox.setChecked(true);
-//			stringName.setText(baseName);
-//			stringPassword.setText(basepasswrod);
-//			taskLoginAct = new LoginTask(this, baseName, basepasswrod,
-//					ipAddress.getIpAddress());
-//		}
 	}
 
-//	private RelativeLayout downHomeLayout;
-//	private RelativeLayout downGuangLayout;
-//	private RelativeLayout downSearchLayout;
-//	private RelativeLayout downShoppingLayout;
-//	private RelativeLayout downMyLayout;
-//	private CartsDataManage cartsDataManage;
-//	private int number;
-//	private Button cartImage;
 
-	/**
-	 * 底部事件
-	 */
 
 	/**
 	 * 头部
@@ -193,9 +157,6 @@ public class HomeLoginActivity extends HomeBaseActivity implements OnClickListen
 
 		}
 	};
-	private String name;
-	private String pwd;
-	private String ip;
 
 	@Override
 	public void onClick(View v) {
@@ -228,27 +189,66 @@ public class HomeLoginActivity extends HomeBaseActivity implements OnClickListen
 						Toast.LENGTH_LONG).show();
 				return;
 			}
-			taskLoginAct = new LoginTask(this, name, pwd,
-					ipAddress.getIpAddress());
+			//登录
+			login();
 			break;
 		default:
 			break;
 		}
 	}
 
+	/**登录操作，向服务器发送登录请求**/
+	private void login(){
+		String param = new JNICallBack().getHttp4Login(name, pwd, ip);
+		String url = new JNICallBack().HTTPURL;
+		HttpClientUtil httpClientUtil = new HttpClientUtil();
+		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
+			
+			@Override
+			public void success(String content) {
+				Login login = new Login();
+				boolean issuccess = login.parseLogin(content);
+				if(issuccess){	//登录成功
+					Toast.makeText(
+							HomeLoginActivity.this,
+							getResources()
+									.getString(R.string.login_success),
+							Toast.LENGTH_LONG).show();
+					Intent intent = new Intent(HomeLoginActivity.this, HomeMyMallActivity.class);
+					intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(intent);
+					finish();
+					
+					sp.edit().putString("DESMI", name).commit();
+					sp.edit().putBoolean("CHECK", true).commit();
+					String keyName = name + consts.getMiStr();
+
+					try {
+						String demi = DesUtils.encode(keyName, pwd);
+						sp.edit().putString("DESPWD", demi).commit();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				} else {
+					Toast.makeText(HomeLoginActivity.this, login.getMsg(), Toast.LENGTH_LONG).show();
+					sp.edit().remove("CHECK").commit();
+					sp.edit().remove("DESMI").commit();
+					sp.edit().remove("DESPWD").commit();
+				}
+			}
+		});
+	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		StatService.onPause(this);
-		
-		
+		StatService.onPageEnd(this, getString(R.string.login_title));
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		StatService.onResume(this);
+		StatService.onPageStart(this, getString(R.string.login_title));
 	}
 
 	@Override
@@ -256,24 +256,6 @@ public class HomeLoginActivity extends HomeBaseActivity implements OnClickListen
 		// TODO Auto-generated method stub
 		Log.e("info", checkState + "state");
 		isCheck = checkState;
-		// if (checkState) {
-		// Log.e("info", checkState + "state");
-		// sp.edit().putString("DESMI", name).commit();
-		// sp.edit().putBoolean("CHECK", checkState);
-		// String keyName = name + consts.getMiStr();
-		//
-		// try {
-		// String demi = DesUtils.encode(keyName, pwd);
-		// sp.edit().putString("DESPWD", demi).commit();
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
-		//
-		// } else {
-		// sp.edit().remove("DESMI").commit();
-		// sp.edit().remove("CHECK").commit();
-		// sp.edit().remove("DESPWD").commit();
 	}
-	// }
 
 }

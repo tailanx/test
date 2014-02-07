@@ -103,9 +103,9 @@ public class HomeSearchActivity extends HomeBaseActivity {
 	 */
 	private void setActionBarConfig() {
 		getSupportActionBar().setCustomView(R.layout.actionbar_search);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+		getSupportActionBar().setDisplayShowCustomEnabled(true);
+		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 
 		searchText = (ImageView) findViewById(R.id.search_bar_edittext);
