@@ -10,16 +10,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:background="@drawable/bg_abs_text"
         android:clickable="true"
         android:text="@string/back"
         android:textColor="@color/color_sort_text_color_press"
-        android:textSize="@dimen/textsize_small" />
+        android:textSize="@dimen/textsize_big" />
 
     <TextView
         android:id="@+id/actionbar_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_abs_text"
         android:layout_centerInParent="true"
         android:text="@string/filter_all"
         android:textColor="@color/white"
@@ -29,12 +30,12 @@
         android:id="@+id/actionbar_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_abs_text"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:text="@string/filter"
         android:textColor="@color/color_sort_text_color_press"
-        android:textSize="@dimen/textsize_small" />
+        android:textSize="@dimen/textsize_big" />
 
     <ImageView
         android:id="@+id/search_with_list"

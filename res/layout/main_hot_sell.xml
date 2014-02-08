@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/rv_yrh_title"
-            android:layout_marginTop="@dimen/width_add"
+            android:layout_marginTop="@dimen/width"
             android:background="#ffffff"
             android:baselineAligned="false"
             android:orientation="horizontal"
@@ -331,13 +331,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/width_add"
         android:background="@drawable/main_theme_textview_bg" >
 
         <ImageView
             android:id="@+id/iv_sxg_top"
-            android:layout_marginTop="@dimen/margin_left_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_left_add"
             android:contentDescription="@string/yidejia" />
     </RelativeLayout>
 
@@ -373,7 +374,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/base_info_match"
-                android:layout_marginTop="@dimen/width_add"
+                android:layout_marginTop="-1dp"
                 android:background="@drawable/main_theme_textview_bg"
                 android:padding="@dimen/margin_left_add" >
 

@@ -9,12 +9,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/margin_left"
-        android:background="#00000000"
+        android:background="@drawable/bg_abs_text"
         android:clickable="true"
         android:text="@string/back"
         android:textColor="@color/color_sort_text_color_press"
-        android:textSize="@dimen/textsize_small" />
+        android:textSize="@dimen/textsize_big" />
 
     <TextView
         android:id="@+id/ab_common_title"
@@ -30,11 +29,11 @@
         android:id="@+id/ab_common_tv_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_abs_text"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/margin_left"
         android:textColor="@color/color_sort_text_color_press"
-        android:textSize="@dimen/textsize_small"
+        android:textSize="@dimen/textsize_big"
         android:visibility="gone" />
 
     <ImageView

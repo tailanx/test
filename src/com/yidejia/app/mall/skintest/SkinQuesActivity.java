@@ -32,9 +32,12 @@ import android.widget.Toast;
 
 import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.Skin;
 import com.yidejia.app.mall.model.SkinQOption;
 import com.yidejia.app.mall.net.skin.Question;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class SkinQuesActivity extends Activity {
@@ -94,8 +97,9 @@ public class SkinQuesActivity extends Activity {
 
 		// skin = new Skin();
 
-		Task task = new Task();
-		task.execute();
+//		Task task = new Task();
+//		task.execute();
+		getData();
 
 		final List<Integer> userAns = new ArrayList<Integer>();
 		next.setOnClickListener(new OnClickListener() {
@@ -510,6 +514,26 @@ public class SkinQuesActivity extends Activity {
 	private void save(String object) {// 填写第四题的品牌时
 		btnId.set(index, -1);
 		keys.set(index, object);
+	}
+	
+	private void getData(){
+		String url = new JNICallBack().getHttp4SkinQuestion();
+		HttpClientUtil clientUtil = new HttpClientUtil();
+		clientUtil.getHttpResp(url, new IHttpResp() {
+			
+			@Override
+			public void success(String content) {
+				question = new Question();
+				question.analysis(content);
+				skinQuestions = question.getSkinQs();
+				maxLength = skinQuestions.size();
+				for (int i = 0; i < maxLength; i++) {
+					keys.add(i + "");
+					btnId.add(-1);
+				}
+				setQuestionLayout();
+			}
+		});
 	}
 
 	private int index = 0;

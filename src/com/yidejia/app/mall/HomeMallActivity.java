@@ -8,24 +8,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.baidu.mobstat.StatService;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.opens.asyncokhttpclient.AsyncHttpResponse;
 import com.opens.asyncokhttpclient.AsyncOkHttpClient;
-import com.yidejia.app.mall.MyApplication;
-import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.log.LogService;
 import com.yidejia.app.mall.model.BaseProduct;
@@ -51,6 +53,13 @@ public class HomeMallActivity extends HomeBaseActivity {
 	private BannerView bannerView;
 
 	private PullToRefreshScrollView mPullToRefreshScrollView;
+	private static int screenWidth;
+	private static int screenHeight;
+
+	// 设置大家都在买组
+	private ArrayList<MainProduct> djdzmProducts;
+	// 设置随心逛组
+	private ArrayList<MainProduct> sxgProducts;
 
 	// private boolean isFrist = true;
 
@@ -71,6 +80,10 @@ public class HomeMallActivity extends HomeBaseActivity {
 		setCurrentActivityId(0);
 
 		getMainData();
+		WindowManager manager = getWindowManager();
+		Display display = manager.getDefaultDisplay();
+		screenWidth = display.getHeight();
+		screenHeight = (int) ((screenWidth / 320f) * 160f) - 250;
 	}
 
 	private void getMainData() {
@@ -97,7 +110,6 @@ public class HomeMallActivity extends HomeBaseActivity {
 				super.onSuccess(statusCode, content);
 				if (HttpStatus.SC_OK == statusCode) {
 					GetHomePage getHomePage = new GetHomePage();
-					Log.e("info", content);
 					if (getHomePage.parseGetHomeJson(content)) {
 						// 设置轮播的组
 						ArrayList<BaseProduct> bannerProducts = getHomePage
@@ -108,13 +120,9 @@ public class HomeMallActivity extends HomeBaseActivity {
 						bannerViewGroup.addView(bannerView
 								.getMainListFirstItem());
 						bannerView.startTimer();
-						// 设置大家都在买组
-						ArrayList<MainProduct> djdzmProducts = getHomePage
-								.getDjdzmArray();
+						djdzmProducts = getHomePage.getDjdzmArray();
 						setDjdzmView(djdzmProducts);
-						// 设置随心逛组
-						ArrayList<MainProduct> sxgProducts = getHomePage
-								.getSxgArray();
+						sxgProducts = getHomePage.getSxgArray();
 						setSxgView(sxgProducts);
 					} else {
 						Toast.makeText(HomeMallActivity.this,
@@ -355,7 +363,9 @@ public class HomeMallActivity extends HomeBaseActivity {
 		ImageView ivDjdzmLeft = (ImageView) findViewById(R.id.iv_djdzm_left);
 		ImageView ivDjdzmRLeft = (ImageView) findViewById(R.id.iv_djdzm_left_right);
 		ImageView ivDjdzmRRight = (ImageView) findViewById(R.id.iv_djdzm_right_right);
-
+		ivDjdzmLeft.setOnClickListener(new ToucheOnclick(0, 0));
+		ivDjdzmRLeft.setOnClickListener(new ToucheOnclick(0, 1));
+		ivDjdzmRRight.setOnClickListener(new ToucheOnclick(0, 2));
 		ImageLoader.getInstance()
 				.init(MyApplication.getInstance().initConfig());
 
@@ -378,10 +388,22 @@ public class HomeMallActivity extends HomeBaseActivity {
 		ImageView ivSxgLeft = (ImageView) findViewById(R.id.iv_sxg_left);
 		ImageView ivSxgRUp = (ImageView) findViewById(R.id.iv_sxg_right_up);
 		ImageView ivSxgRDown = (ImageView) findViewById(R.id.iv_sxg_right_down);
+		
+		ivSxgTop.setOnClickListener(new ToucheOnclick(1, 0));
+		ivSxgLeft.setOnClickListener(new ToucheOnclick(1, 1));
+		ivSxgRUp.setOnClickListener(new ToucheOnclick(1, 2));
+		ivSxgRDown.setOnClickListener(new ToucheOnclick(1, 3));
 
 		int length = products.size();
+
+		LayoutParams layoutParams = new LayoutParams(screenWidth, screenHeight);
+		layoutParams.setMargins(5, 4, 5, 0);
+		ivSxgTop.setLayoutParams(layoutParams);
+
 		if (length > 0)
-			imageload(products.get(0).getImgUrl(), ivSxgTop);
+			Log.e("info", products.get(0).getImgUrl());
+		imageload(products.get(0).getImgUrl(), ivSxgTop);
+
 		if (length > 1)
 			imageload(products.get(1).getImgUrl(), ivSxgLeft);
 		if (length > 2)
@@ -442,9 +464,39 @@ public class HomeMallActivity extends HomeBaseActivity {
 	@Override
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
-		if((Intent.FLAG_ACTIVITY_CLEAR_TOP & intent.getFlags()) !=0){
+		if ((Intent.FLAG_ACTIVITY_CLEAR_TOP & intent.getFlags()) != 0) {
 			finish();
 		}
 	}
 
+	public class ToucheOnclick implements OnClickListener {
+		private int type;// 大家都在买，或者是随心逛,o代表大家都在买，1代表随心逛
+		private int index;// 点击的第几个
+
+		public ToucheOnclick(int type, int index) {
+			this.type = type;
+			this.index = index;
+		}
+
+		@Override
+		public void onClick(View v) {
+			Intent intent = new Intent(HomeMallActivity.this,
+					GoodsInfoActivity.class);
+			Bundle bundle = new Bundle();
+			switch (type) {
+			case 0:// 大家都在买
+				bundle.putString("goodsId", djdzmProducts.get(index)
+						.getUId());
+				break;
+
+			case 1:// 1代表随心逛
+				bundle.putString("goodsId", sxgProducts.get(index).getUId());
+				break;
+			}
+			intent.putExtras(bundle);
+			startActivity(intent);
+		}
+	}
+	
+	
 }

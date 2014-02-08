@@ -1,7 +1,12 @@
 package com.yidejia.app.mall.phone;
 
+import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,16 +16,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.util.Consts;
 
 /**
  * 用来展示充值界面的
  * 
- * @author Administrator
+ * @author LiuYong
  * 
  */
-public class PhoneActivity extends SherlockFragmentActivity implements
+public class PhoneActivity extends BaseActivity implements
 		OnClickListener {
 	private EditText etPhoneNumber;
 	private ImageView ivPhoneContact;
@@ -30,9 +36,12 @@ public class PhoneActivity extends SherlockFragmentActivity implements
 
 	@Override
 	protected void onCreate(Bundle arg0) {
-		// TODO Auto-generated method stub
 		super.onCreate(arg0);
+		setActionbarConfig();
+		setTitle(R.string.main_message_center_text);
+		
 		setContentView(R.layout.phone_contact);
+		
 		initview();
 		ivPhoneContact.setOnClickListener(this);
 		btCommito.setOnClickListener(this);
@@ -47,6 +56,11 @@ public class PhoneActivity extends SherlockFragmentActivity implements
 		bt30 = (Button) findViewById(R.id.bt_price_30);
 		bt50 = (Button) findViewById(R.id.bt_price_50);
 		bt100 = (Button) findViewById(R.id.bt_price_100);
+		
+		bt100.setOnClickListener(this);
+		bt30.setOnClickListener(this);
+		bt50.setOnClickListener(this);
+		
 		btCommito = (Button) findViewById(R.id.iv_commit_phone_contace);
 		tvRealPrice = (TextView) findViewById(R.id.tv_price_contact);
 
@@ -54,31 +68,64 @@ public class PhoneActivity extends SherlockFragmentActivity implements
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		Intent intent = new Intent();
+		Intent intent = null;
 		switch (v.getId()) {
 		case R.id.iv_bottom_contact:// 点击获取通讯录
-			intent.setClass(PhoneActivity.this, PhoneContactActivity.class);
-			PhoneActivity.this.startActivityForResult(intent,
-					Consts.CONSTACT_REQUEST);
+			intent = new Intent(Intent.ACTION_PICK);
+			intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
+			startActivityForResult(intent, Consts.CONSTACT_REQUEST);
 			break;
 
 		case R.id.iv_commit_phone_contace:
+			intent = new Intent();
 			intent.setClass(this, ContactSureActivity.class);
 			startActivity(intent);
+			break;
+		case R.id.bt_price_30:
+			bt30.setSelected(true);
+			bt50.setSelected(false);
+			bt100.setSelected(false);
+			break;
+		case R.id.bt_price_50:
+			bt30.setSelected(false);
+			bt50.setSelected(true);
+			bt100.setSelected(false);
+			break;
+		case R.id.bt_price_100:
+			bt30.setSelected(false);
+			bt50.setSelected(false);
+			bt100.setSelected(true);
 			break;
 		}
 	}
 
 	@Override
-	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
-		// TODO Auto-generated method stub
-		Log.e("info", arg0 + "number");
-		Log.e("info", arg1 + "number");
-		if (arg0 == Consts.CONSTACT_REQUEST && arg1 == Consts.CONSTACT_RESPONSE) {
-			Bundle bundle = arg2.getExtras();
-			numberContact = bundle.getString("number");
-			Log.e("info", numberContact + "number");
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == Consts.CONSTACT_REQUEST && resultCode == Activity.RESULT_OK) {
+			Uri contactData = data.getData(); 
+			getContactNum(contactData);
+		}
+	}
+	
+	/**
+	 * 获取选中联系人的号码并显示到界面
+	 * @param contactData
+	 */
+	@SuppressWarnings("deprecation")
+	private void getContactNum(Uri contactData) {
+		ContentResolver reContentResolverol = getContentResolver();
+		Cursor cursor = managedQuery(contactData, null, null, null, null);
+		cursor.moveToFirst();
+		String contactId = cursor.getString(cursor
+				.getColumnIndex(ContactsContract.Contacts._ID));
+		Cursor phone = reContentResolverol.query(
+				ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+				ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = "
+						+ contactId, null, null);
+		while (phone.moveToNext()) {
+			numberContact = phone
+					.getString(phone
+							.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 			if (numberContact != null) {
 				etPhoneNumber.setText(numberContact);
 			}

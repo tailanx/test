@@ -63,6 +63,40 @@ public class Login {
 		return isSuccess;
 	}
 	
+	public boolean parseLogin(String httpResp){
+		boolean isSuccess = false;
+		try {
+			int code;
+			JSONObject jsonObject = new JSONObject(httpResp);
+			code = jsonObject.optInt("code");
+			String response = jsonObject.optString("response");
+			MyApplication myApplication = MyApplication.getInstance();
+			if(code == 1000){
+				JSONObject responseObject = new JSONObject(response);
+				String customer_id = responseObject.optString("customer_id");
+				myApplication.setUserId(customer_id);
+				myApplication.setPassword(responseObject.optString("password"));
+				myApplication.setVip(responseObject.optString("customer_grade"));
+				myApplication.setNick(responseObject.optString("customer_nick"));
+				String imgUrl = responseObject.optString("avatar_path");
+				myApplication.setUserHeadImg(ImageUrl.IMAGEURL + imgUrl + "!100");
+				String token = responseObject.optString("token");
+				myApplication.setToken(token);
+				message = myApplication.getResources().getString(R.string.login_success);
+				myApplication.setIsLogin(true);
+				return true;
+			} else{
+				message = jsonObject.optString("msg");
+				isSuccess = false;
+			}
+		} catch (JSONException e) {
+			Log.e(TAG, "login json ex");
+			e.printStackTrace();
+			isSuccess = false;
+		}
+		return isSuccess;
+	}
+	
 	private String message;
 	
 	public String getMsg(){

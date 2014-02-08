@@ -6,16 +6,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockActivity;
 import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.cache.CleanImageCache;
@@ -36,71 +36,20 @@ public class EditorActivity extends BaseActivity {
 	private AlertDialog exit;
 
 	private MyApplication myApplication;
-
-	private void setupShow() {
-		LinearLayout mLayout1 = (LinearLayout) getLayoutInflater().inflate(
-				R.layout.help, null);
-
-		Builder builder = new Builder(this);
-		Builder helpbuilder = new Builder(this);
-		Builder exitbuilder = new Builder(this);
-		dialogClear = builder
-				.setTitle("提示")
-				.setMessage("您确认清除缓存图片吗？")
-				.setPositiveButton("确定",
-						new android.content.DialogInterface.OnClickListener() {
-
-							@Override
-							public void onClick(DialogInterface arg0, int arg1) {
-								DataCleanManager
-										.cleanApplicationData(EditorActivity.this);
-								WebView webView = new WebView(
-										EditorActivity.this);
-								webView.clearCache(true);
-								webView.clearHistory();
-								webView.clearFormData();
-								new CleanImageCache().clearAllCache();
-								Toast.makeText(EditorActivity.this, "清除成功",
-										Toast.LENGTH_LONG).show();
-								editor_cache_size.setText("0.00B");
-							}
-						}).setNegativeButton("取消", null).create();
-		dialogHelp = helpbuilder.setTitle("伊的家服务条款")
-				.setIcon(android.R.drawable.menu_frame).setView(mLayout1)
-				.setPositiveButton("确定", null).setNegativeButton("取消", null)
-				.create();
-
-		exit = exitbuilder
-				.setTitle("伊的家")
-				.setIcon(android.R.drawable.divider_horizontal_dim_dark)
-				.setMessage(getResources().getString(R.string.retrun_back))
-				.setPositiveButton("确定",
-						new android.content.DialogInterface.OnClickListener() {
-
-							public void onClick(DialogInterface arg0, int arg1) {
-								myApplication.setIsLogin(false);
-								Intent intent = new Intent(EditorActivity.this,
-										HomeLoginActivity.class);
-								EditorActivity.this.startActivity(intent);
-								EditorActivity.this.finish();
-							}
-
-						}).setNegativeButton("取消", null).create();
-
-	}
-
+	
 	int width;
 	int height;
 	private TextView phoneNumber;
 	private TextView versionNameTextView;
-
+	
 	private Check4Update check4Update;
 	private String currVersion = "";
+	private int isCleanFinish = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		myApplication = (MyApplication) getApplication();
+		myApplication = MyApplication.getInstance();
 		setActionbarConfig();
 		setTitle(getResources().getString(R.string.order_set));
 		setContentView(R.layout.editor);
@@ -108,11 +57,6 @@ public class EditorActivity extends BaseActivity {
 		editor_cache_size = (TextView) findViewById(R.id.editor_cache_size);
 		editor_cache_size.setText(DataCleanManager.getTotalSize(this));
 
-		help = (RelativeLayout) findViewById(R.id.editor_linearLayout1);
-		clear = (RelativeLayout) findViewById(R.id.editor_linearLayout3);
-
-		about = (RelativeLayout) findViewById(R.id.editor_linearLayout4);
-		phone = (RelativeLayout) findViewById(R.id.editor_linearLayout5);
 		recommended = (RelativeLayout) findViewById(R.id.editor_linearLayout6);
 		recommended.setOnClickListener(new android.view.View.OnClickListener() {
 
@@ -132,7 +76,7 @@ public class EditorActivity extends BaseActivity {
 		currVersion = check4Update.getVersionName();
 
 		versionNameTextView.setText(currVersion);
-
+		//检查更新
 		check4updateLayout = (RelativeLayout) findViewById(R.id.editor_linearLayout7);
 		check4updateLayout.setOnClickListener(new View.OnClickListener() {
 
@@ -144,7 +88,7 @@ public class EditorActivity extends BaseActivity {
 				check4Update.checkUpdate();
 			}
 		});
-
+		//退出登录
 		Button editor_exit = (Button) findViewById(R.id.editor_exit);
 
 		if (!myApplication.getIsLogin()) {
@@ -158,7 +102,8 @@ public class EditorActivity extends BaseActivity {
 				exit.show();
 			}
 		});
-
+		//帮助
+		help = (RelativeLayout) findViewById(R.id.editor_linearLayout1);
 		help.setOnClickListener(new android.view.View.OnClickListener() {
 
 			@Override
@@ -167,15 +112,18 @@ public class EditorActivity extends BaseActivity {
 			}
 
 		});
+		//清除缓存
+		clear = (RelativeLayout) findViewById(R.id.editor_linearLayout3);
 		clear.setOnClickListener(new android.view.View.OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
 				dialogClear.show();
-
 			}
 
 		});
+		//关于
+		about = (RelativeLayout) findViewById(R.id.editor_linearLayout4);
 		about.setOnClickListener(new android.view.View.OnClickListener() {
 
 			@Override
@@ -186,7 +134,8 @@ public class EditorActivity extends BaseActivity {
 			}
 
 		});
-
+		//联系客服
+		phone = (RelativeLayout) findViewById(R.id.editor_linearLayout5);
 		phone.setOnClickListener(new android.view.View.OnClickListener() {
 
 			@Override
@@ -203,40 +152,105 @@ public class EditorActivity extends BaseActivity {
 		setupShow();
 
 	}
+	
+	private void setupShow() {
+		LinearLayout mLayout1 = (LinearLayout) getLayoutInflater().inflate(
+				R.layout.help, null);
+		
+		Builder builder = new Builder(this);
+		Builder helpbuilder = new Builder(this);
+		Builder exitbuilder = new Builder(this);
+		dialogClear = builder
+				.setTitle("提示")
+				.setMessage("您确认清除缓存图片吗？")
+				.setPositiveButton("确定",
+						new android.content.DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface arg0, int arg1) {
+						cleanData();
+					}
+				}).setNegativeButton("取消", null).create();
+		dialogHelp = helpbuilder.setTitle("伊的家服务条款")
+				.setIcon(android.R.drawable.menu_frame).setView(mLayout1)
+				.setPositiveButton("确定", null).setNegativeButton("取消", null)
+				.create();
+		
+		exit = exitbuilder
+				.setTitle("伊的家")
+				.setIcon(android.R.drawable.divider_horizontal_dim_dark)
+				.setMessage(getResources().getString(R.string.retrun_back))
+				.setPositiveButton("确定",
+						new android.content.DialogInterface.OnClickListener() {
+					
+					public void onClick(DialogInterface arg0, int arg1) {
+						myApplication.setIsLogin(false);
+						myApplication.setUserId("");
+						myApplication.setToken("");
+						myApplication.setNick("");
+						myApplication.setPassword("");
+						myApplication.setAidou("");
+						myApplication.setUserHeadImg("");
+						myApplication.setVip("");
+						
+						Intent intent = new Intent(EditorActivity.this,
+								HomeLoginActivity.class);
+						EditorActivity.this.startActivity(intent);
+						EditorActivity.this.finish();
+					}
+					
+				}).setNegativeButton("取消", null).create();
+		
+	}
+	
+	/**清除数据**/
+	private void cleanData() {
+		thread.start();
+	}
+	
+	private Thread thread = new Thread(new Runnable() {
+		
+		@Override
+		public void run() {
+			//清除数据
+			DataCleanManager.cleanApplicationData(EditorActivity.this);
+			new CleanImageCache().clearAllCache();
+			
+			Message msg = Message.obtain();
+			msg.what = isCleanFinish;
+			handler.sendMessage(msg);
+		}
+	});
+	
+	private Handler handler = new Handler(){
 
-	// private void setActionbar() {
-	// getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-	// getSupportActionBar().setDisplayShowHomeEnabled(false);
-	// getSupportActionBar().setDisplayShowTitleEnabled(false);
-	// getSupportActionBar().setDisplayUseLogoEnabled(false);
-	// getSupportActionBar().setIcon(R.drawable.back);
-	// getSupportActionBar().setDisplayShowCustomEnabled(true);
-	// getSupportActionBar().setCustomView(R.layout.actionbar_common);
-	// TextView button = (TextView) findViewById(R.id.ab_common_back);
-	//
-	// button.setOnClickListener(new android.view.View.OnClickListener() {
-	//
-	// @Override
-	// public void onClick(View v) {
-	// EditorActivity.this.finish();
-	// }
-	// });
-	//
-	// TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
-	// titleTextView.setText("设置");
-	//
-	// }
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			if(msg.what == isCleanFinish){
+				WebView webView = new WebView(EditorActivity.this);
+				webView.clearCache(true);
+				webView.clearHistory();
+				webView.clearFormData();
+				webView = null;
+				Toast.makeText(EditorActivity.this, "清除成功", Toast.LENGTH_LONG).show();
+				editor_cache_size.setText("0.00B");
+			}
+		}
+		
+	};
+	
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		StatService.onPause(this);
+		StatService.onPageEnd(this, getString(R.string.order_set));
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		StatService.onResume(this);
+		StatService.onPageStart(this, getString(R.string.order_set));
 	}
 
 }
