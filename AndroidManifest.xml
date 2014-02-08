@@ -74,14 +74,14 @@
             android:screenOrientation="portrait"
             android:uiOptions="splitActionBarWhenNarrow"
             android:windowSoftInputMode="adjustPan" >
-        </activity>
+        </activity>
         -->
         <!--
         <activity
             android:name="com.yidejia.app.mall.ComposeActivity"
             android:screenOrientation="portrait"
             android:uiOptions="splitActionBarWhenNarrow" >
-        </activity>
+        </activity>
         -->
         <activity
             android:name="com.yidejia.app.mall.goodinfo.GoodsInfoActivity"
@@ -102,6 +102,7 @@
         <activity
             android:name="com.yidejia.app.mall.search.SearchActivity"
             android:uiOptions="splitActionBarWhenNarrow"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible" >
         </activity>
         <activity
@@ -334,6 +335,9 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>
+        <activity
+            android:name="com.yidejia.app.mall.pay.DeliveryActivity"
+            android:screenOrientation="portrait" />
 
         <service android:name="com.yidejia.app.mall.log.LogService" >
         </service>
