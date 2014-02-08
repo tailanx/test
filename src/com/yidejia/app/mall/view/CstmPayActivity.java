@@ -50,6 +50,7 @@ import com.yidejia.app.mall.model.Specials;
 import com.yidejia.app.mall.order.ParseOrder;
 import com.yidejia.app.mall.pay.AlixId;
 import com.yidejia.app.mall.pay.BaseHelper;
+import com.yidejia.app.mall.pay.DeliveryActivity;
 import com.yidejia.app.mall.pay.MobileSecurePayer;
 import com.yidejia.app.mall.pay.PartnerConfig;
 import com.yidejia.app.mall.pay.ResultChecker;
@@ -75,6 +76,9 @@ public class CstmPayActivity extends BaseActivity {
 	private EditText et_comment;// 评论
 	private AlertDialog dialog;
 	private RelativeLayout addressRelative;
+	
+	private RelativeLayout rl_peisong;	//选择配送中心的layout
+	
 	public static ArrayList<Specials> arrayListFree;
 	public static ArrayList<Specials> arrayListExchange;
 
@@ -102,7 +106,7 @@ public class CstmPayActivity extends BaseActivity {
 	private String userId;
 	private String token;
 	private ArrayList<Cart> carts;// 购物车的数据，非换购的数据
-	private RelativeLayout reLayout;
+//	private RelativeLayout reLayout;
 	private String isCartActivity;
 	private String sum;
 	private String contentType;
@@ -376,7 +380,15 @@ public class CstmPayActivity extends BaseActivity {
 
 		layout = (LinearLayout) findViewById(R.id.go_pay_relative2);
 		
-		reLayout = (RelativeLayout) findViewById(R.id.go_pay_relative);
+		rl_peisong = (RelativeLayout) findViewById(R.id.rl_peisong);
+		rl_peisong.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				go2Delivery();
+			}
+		});
+//		reLayout = (RelativeLayout) findViewById(R.id.go_pay_relative);
 		addressRelative = (RelativeLayout) findViewById(R.id.go_pay_relativelayout);
 		
 		// 地址增加监听事件
@@ -387,6 +399,7 @@ public class CstmPayActivity extends BaseActivity {
 				if (null != showAddress) {
 					Intent intent = new Intent(CstmPayActivity.this,
 							AddressActivity.class);
+					intent.putExtra("requestCode", Consts.AddressRequestCode);
 					CstmPayActivity.this.startActivityForResult(intent,
 							Consts.AddressRequestCode);
 				}
@@ -840,9 +853,9 @@ public class CstmPayActivity extends BaseActivity {
 	private String getDeliveryUrl(boolean isDefault) {
 		String url = "";
 		if(isDefault) {
-			url = new JNICallBack().getHttp4GetDistribute("id%3D" + preId, "0", "20", "", "", "%2A");
+			url = new JNICallBack().getHttp4GetDistribute("id%3D" + preId, "0", "100", "", "", "%2A");
 		} else {
-			url = new JNICallBack().getHttp4GetDistribute("flag%3D%27y%27", "0", "20", "", "", "%2A");
+			url = new JNICallBack().getHttp4GetDistribute("flag%3D%27y%27", "0", "100", "", "", "%2A");
 		}
 		return url;
 	}
@@ -929,7 +942,7 @@ public class CstmPayActivity extends BaseActivity {
 	 */
 	private void getExpressData(String province, final boolean isDefault) {
 		
-		String url = getExpressUrl(province, true);
+		String url = getExpressUrl(province, isDefault);
 		
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
 		client.get(url, new AsyncHttpResponse(){
@@ -1187,6 +1200,14 @@ public class CstmPayActivity extends BaseActivity {
 		}
 	}
 
+	/**跳转到修改配送中心页面**/
+	private void go2Delivery(){
+		Intent intent = new Intent(CstmPayActivity.this,
+				DeliveryActivity.class);
+		intent.putExtra("preId", preId);
+		CstmPayActivity.this.startActivityForResult(intent,
+				Consts.DELIVERY_REQUEST);
+	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -1234,7 +1255,13 @@ public class CstmPayActivity extends BaseActivity {
 			layout.removeAllViews();
 			PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
 			goods = pay.loadView(carts, false);
-		} 
+		} else if(Consts.DELIVERY_REQUEST == requestCode && Consts.DELIVERY_RESULT == resultCode){
+			Express delivery = (Express) data.getExtras().getSerializable("delivery");
+			tv_peiSong.setText(delivery.getDisName());
+			preId = delivery.getPreId();
+			if(isFree) return;
+			getExpressData(province, false);
+		}
 	}
 	
 

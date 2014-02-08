@@ -138,7 +138,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:padding="@dimen/actiobar_margin_top" >
+                 >
 
                 <ImageView
                     android:id="@+id/go_pay_zhifubao_image"
@@ -173,11 +173,11 @@
                 <CheckBox
                     android:id="@+id/zhifubao_checkbox"
                     style="@style/CustomCheckboxTheme"
-                    android:layout_width="@dimen/base_info_match_add"
-                    android:layout_height="@dimen/margin_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/actiobar_margin_top"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/width_fu_add"
                     android:clickable="false" />
             </RelativeLayout>
 
@@ -199,8 +199,7 @@
                 android:id="@+id/go_pay_zhifubao_wangyezhifu_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:padding="@dimen/actiobar_margin_top" >
+                android:background="@color/white">
 
                 <ImageView
                     android:id="@+id/go_pay_zhifubao_wangyezhifu"
@@ -236,11 +235,11 @@
                 <CheckBox
                     android:id="@+id/zhufubaowangye_checkbox"
                     style="@style/CustomCheckboxTheme"
-                    android:layout_width="@dimen/base_info_match_add"
-                    android:layout_height="@dimen/margin_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/actiobar_margin_top"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/width_fu_add"
                     android:clickable="false" />
             </RelativeLayout>
 
@@ -262,7 +261,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:padding="@dimen/actiobar_margin_top" >
+                 >
 
                 <ImageView
                     android:id="@+id/go_pay_zhifubao_caifutong"
@@ -297,11 +296,11 @@
                 <CheckBox
                     android:id="@+id/caifutong_checkbox"
                     style="@style/CustomCheckboxTheme"
-                    android:layout_width="@dimen/base_info_match_add"
-                    android:layout_height="@dimen/margin_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/actiobar_margin_top"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/width_fu_add"
                     android:clickable="false" />
             </RelativeLayout>
 
@@ -323,7 +322,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:padding="@dimen/actiobar_margin_top" >
+                 >
 
                 <ImageView
                     android:id="@+id/go_pay_zhifubao_yinlian"
@@ -358,11 +357,11 @@
                 <CheckBox
                     android:id="@+id/yinlian_checkbox"
                     style="@style/CustomCheckboxTheme"
-                    android:layout_width="@dimen/base_info_match_add"
-                    android:layout_height="@dimen/margin_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/actiobar_margin_top"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/width_fu_add"
                     android:clickable="false" />
             </RelativeLayout>
 
@@ -392,6 +391,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_peisong"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/main_theme_textview_bg"
@@ -509,11 +509,11 @@
                 <CheckBox
                     android:id="@+id/go_pay_check"
                     style="@style/CustomCheckboxTheme"
-                    android:layout_width="@dimen/base_info_match_add"
-                    android:layout_height="@dimen/margin_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/width_fu_add"
+                    android:layout_marginRight="@dimen/actiobar_margin_top"
                     android:checked="true"
                     android:clickable="false" />
             </RelativeLayout>
@@ -582,11 +582,11 @@
                 <CheckBox
                     android:id="@+id/go_pay_ems"
                     style="@style/CustomCheckboxTheme"
-                    android:layout_width="@dimen/base_info_match_add"
-                    android:layout_height="@dimen/margin_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/width_fu_add"
+                    android:layout_marginRight="@dimen/actiobar_margin_top"
                     android:clickable="false" />
             </RelativeLayout>
 

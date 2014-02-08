@@ -1,12 +1,17 @@
 package com.yidejia.app.mall.model;
 
+import java.io.Serializable;
+
 /**
  * 快递,配送中心
  * 
  * @author long bin
  * 
  */
-public class Express {
+public class Express implements Serializable {
+	/**
+	 * 
+	 */
 	private String ems; // ems快递
 	private String express; // 快递
 	private String disName;// 配送中心
