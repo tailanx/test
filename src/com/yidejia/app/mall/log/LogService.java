@@ -36,6 +36,7 @@ public class LogService extends Service {
 	private RequestParams params;
 	private String hosturl;
 	private String contentType;
+	private Boolean isCheck;
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -67,10 +68,12 @@ public class LogService extends Service {
 		//
 		String basePwd = sp.getString("DESPWD", null);
 		String keyName = baseName + consts.getMiStr();
+
 		basepasswrod = DesUtils.decode(keyName, basePwd);
+		isCheck = sp.getBoolean("CHECK", false);
 		// Task task = new Task();
 		// task.execute();
-		if (null == basePwd || null == basepasswrod) {
+		if (null == basePwd || null == basepasswrod || !isCheck) {
 			stopSelf();
 		} else {
 			String url = new JNICallBack().getHttp4Login(baseName,
