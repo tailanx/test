@@ -1,25 +1,29 @@
 package com.yidejia.app.mall.yirihui;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
 
-public class YirihuiActivity extends BaseActivity {
+public class YirihuiActivity extends SherlockFragmentActivity {
 	private TextView rightText;// 规则
 	private int lastIndex;
-	private TextView nowText;//正在进行
+	private TextView nowText;// 正在进行
 	private LinearLayout laterLinear;
-	private TextView laterText;//即将开始
-	private TextView completeText;//已经结束
-	private ImageView imagePrice;//将一个图标隐藏
+	private TextView laterText;// 即将开始
+	private TextView completeText;// 已经结束
+	private ImageView imagePrice;// 将一个图标隐藏
 	private FragmentManager manager;
 	private FragmentTransaction ft;
 	private YirihuiFragment mFragment;
@@ -28,17 +32,31 @@ public class YirihuiActivity extends BaseActivity {
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
-		setActionbarConfig();
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_search_result_info_layout);
 		manager = getSupportFragmentManager();
 		initView();
 	}
 
 	private void initView() {
-		setTitle(getResources().getString(R.string.main_yirihui));
-		rightText = (TextView) findViewById(R.id.ab_common_tv_right);
+		((TextView) findViewById(R.id.actionbar_title)).setText(getResources()
+				.getString(R.string.main_yirihui));
+
+		rightText = (TextView) findViewById(R.id.actionbar_right);
 		rightText.setVisibility(View.VISIBLE);
 		rightText.setText(getResources().getString(R.string.yirihui_order));
+		((TextView) findViewById(R.id.actionbar_left))
+				.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						YirihuiActivity.this.finish();
+					}
+				});
+
+		((ImageView) findViewById(R.id.search_with_list))
+				.setVisibility(View.GONE);
+
 		nowText = (TextView) findViewById(R.id.tv_search_result_selled);
 		nowText.setText(getResources().getString(R.string.yirihui_now));
 

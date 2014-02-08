@@ -3,22 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_bg" >
-    
-    <include 
+
+    <include
         android:id="@+id/abs_search"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        layout="@layout/actionbar_search_result"/>
+        layout="@layout/actionbar_search_result" />
 
     <LinearLayout
         android:id="@+id/ll_search_result_tabhost"
-        android:layout_below="@id/abs_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/abs_search"
+        android:layout_marginBottom="@dimen/actiobar_margin_top"
         android:layout_marginLeft="@dimen/margin_left"
         android:layout_marginRight="@dimen/margin_left"
         android:layout_marginTop="@dimen/actiobar_margin_top"
-        android:layout_marginBottom="@dimen/actiobar_margin_top"
         android:gravity="center_horizontal" >
 
         <TextView
@@ -28,9 +28,9 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:background="@drawable/selecter_bg_sort_sell"
-            android:gravity="center"
             android:clickable="true"
             android:focusable="true"
+            android:gravity="center"
             android:text="@string/selled_num"
             android:textColor="@color/color_sort_text_color"
             android:textSize="@dimen/textsize_small" />
@@ -49,23 +49,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center"
                 android:clickable="true"
                 android:focusable="true"
+                android:gravity="center"
                 android:text="@string/price"
                 android:textColor="@color/color_sort_text_color"
                 android:textSize="@dimen/textsize_small" />
-            <ImageView 
+
+            <ImageView
                 android:id="@+id/iv_search_result_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:src="@drawable/ic_price_up_down"
-                />
-            
- 
-        </LinearLayout> 
+                android:src="@drawable/ic_price_up_down" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_search_result_popularity"
@@ -74,36 +72,13 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:background="@drawable/selecter_bg_sort_popular"
-            android:gravity="center"
             android:clickable="true"
             android:focusable="true"
+            android:gravity="center"
             android:text="@string/popularity"
             android:textColor="@color/color_sort_text_color"
             android:textSize="@dimen/textsize_small" />
-<!-- 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="@drawable/product_details_bg"
-            android:gravity="center" >
-
-            <ImageView
-                android:id="@+id/search_with_list"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/list_hover" />
-
-            <ImageView
-                android:id="@+id/search_with_image"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/thumbnails_normal" />
-        </LinearLayout>
-  -->
+    
     </LinearLayout>
 
     <FrameLayout
