@@ -28,7 +28,6 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/address_name"
             android:layout_toRightOf="@id/address_name"
-            android:text="@string/addresss_default_name"
             android:textSize="@dimen/textsize_small" />
 
         <TextView
@@ -38,7 +37,6 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/margin_left"
             android:gravity="bottom"
-            android:text="@string/phone_number_add"
             android:textSize="@dimen/textsize_small" />
     </RelativeLayout>
 
@@ -66,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:lines="1"
-            android:padding="@dimen/margin_left"
+            android:paddingLeft="@dimen/margin_left"
             android:text="@string/addresss_default_address" />
 
         <TextView
@@ -78,7 +76,7 @@
             android:ellipsize="end"
             android:lines="1"
             android:paddingLeft="@dimen/margin_left"
-            android:text="@string/addresss_default_address"
+            android:paddingTop="@dimen/margin_left"
             android:textSize="@dimen/textsize_small" />
     </RelativeLayout>
 
@@ -86,14 +84,19 @@
         android:id="@+id/address_management_item_relative1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="left"
         android:background="@drawable/layout_selector2" >
-
+        
+<!--             android:layout_toLeftOf="@id/tv_text_set_default"
+ -->
         <CheckBox
             android:id="@+id/address_management_item_relative1_checkBox1"
             style="@style/CustomCheckboxTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="10dp"
+            android:text="@string/addresss_default"
+            android:textSize="@dimen/textsize_small"
+            android:textColor="@color/text_color_80"
             android:layout_centerVertical="true" />
 
         <TextView
@@ -118,13 +121,6 @@
             android:text="@string/addresss_edit"
             android:textColor="@color/color_sort_text_color_press_add" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/address_management_item_relative1_checkBox1"
-            android:text="@string/addresss_default"
-            android:textSize="@dimen/textsize_small" />
     </RelativeLayout>
 
 </LinearLayout>
