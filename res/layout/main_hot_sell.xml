@@ -217,7 +217,7 @@
         android:id="@+id/rv_main_hot_sell_title_all_buy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/magin_left_add"
+        android:layout_marginTop="@dimen/magin_left_add_add"
         android:background="@drawable/yirihui_bg"
         android:gravity="center_vertical" >
 
@@ -315,7 +315,7 @@
         android:id="@+id/rv_main_hot_sell_title_free_pay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/magin_left_add"
+        android:layout_marginTop="@dimen/magin_left_add_add"
         android:background="@drawable/yirihui_bg"
         android:gravity="center_vertical" >
 
@@ -408,7 +408,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/magin_left_add"
+        android:layout_marginBottom="@dimen/magin_left_add_add"
         android:background="@drawable/main_theme_textview_bg" >
 
         <ImageView

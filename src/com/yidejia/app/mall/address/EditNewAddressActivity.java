@@ -139,6 +139,7 @@ public class EditNewAddressActivity extends BaseActivity {
 		if (addresses != null) {
 			name = addresses.getName();
 			phone = addresses.getHandset();
+			dString = addresses.getAddress();
 			isDefauteUpdate = addresses.getDefaultAddress();
 			id = addresses.getAddressId();
 			conutryString = addresses.getProvice();// 省

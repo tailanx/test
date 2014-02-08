@@ -120,7 +120,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/action_height"
+            android:layout_marginLeft="@dimen/item_goods_emulate"
             android:layout_toRightOf="@+id/address_management_item_relative1_checkBox1"
             android:text="@string/addresss_default"
             android:textSize="@dimen/textsize_small" />

@@ -70,10 +70,14 @@ public class LogService extends Service {
 		basepasswrod = DesUtils.decode(keyName, basePwd);
 		// Task task = new Task();
 		// task.execute();
-		String url = new JNICallBack().getHttp4Login(baseName, basepasswrod,
-				ipAddress.getIpAddress());
-		params.put(url);
-		loginService();
+		if (null == basePwd || null == basepasswrod) {
+			stopSelf();
+		} else {
+			String url = new JNICallBack().getHttp4Login(baseName,
+					basepasswrod, ipAddress.getIpAddress());
+			params.put(url);
+			loginService();
+		}
 		return super.onStartCommand(intent, flags, startId);
 	}
 
