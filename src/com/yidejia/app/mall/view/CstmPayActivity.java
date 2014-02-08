@@ -387,6 +387,7 @@ public class CstmPayActivity extends BaseActivity {
 				if (null != showAddress) {
 					Intent intent = new Intent(CstmPayActivity.this,
 							AddressActivity.class);
+					intent.putExtra("requestCode", Consts.AddressRequestCode);
 					CstmPayActivity.this.startActivityForResult(intent,
 							Consts.AddressRequestCode);
 				}

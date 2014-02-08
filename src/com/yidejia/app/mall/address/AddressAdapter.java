@@ -23,11 +23,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 //import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.baidu.a.a.a.a.a;
 import com.opens.asyncokhttpclient.AsyncHttpResponse;
 import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.opens.asyncokhttpclient.RequestParams;
@@ -40,7 +42,9 @@ import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.address.DeleteUserAddress;
 import com.yidejia.app.mall.net.address.SetDefAddr;
+import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DefinalDate;
+import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 import android.content.SharedPreferences;
@@ -103,6 +107,7 @@ public class AddressAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup arg2) {
+		final int positionId = position;
 		temp = sp.getInt("stateCBId", -1);
 		Log.e("info", temp + "  get  temp");
 		final ViewHolder holder;
@@ -125,6 +130,8 @@ public class AddressAdapter extends BaseAdapter {
 					.findViewById(R.id.address_management_item_relative1_textview1);
 			holder.editImageView = (TextView) convertView
 					.findViewById(R.id.address_management_item_relative1_textview2);
+			
+//			holder.llAddress = (LinearLayout) convertView.findViewById(R.id.address_management_item_linearlayout);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -199,6 +206,7 @@ public class AddressAdapter extends BaseAdapter {
 			position = temp;
 		} else {
 		}
+//		if(!holder.cb.isChecked())
 		holder.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			// 把上次被选中的checkbox设为false
@@ -232,6 +240,15 @@ public class AddressAdapter extends BaseAdapter {
 			holder.cb.setChecked(true);
 		else
 			holder.cb.setChecked(false);
+		if(requestCode == Consts.AddressRequestCode) {
+			convertView.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					selectPayAdds(positionId);
+				}
+			});
+		}
 
 		return convertView;
 	}
@@ -244,9 +261,35 @@ public class AddressAdapter extends BaseAdapter {
 		private TextView deteleImageView;// 删除
 		private TextView editImageView;// 编辑
 		public CheckBox cb;
-
+//		private LinearLayout llAddress;	//该地址的大布局
 	}
-
+	
+	/**
+	 * 确认订单跳转过来时，选择地址的事件
+	 * @param position
+	 */
+	private void selectPayAdds(int position){
+		ModelAddresses addresses = mAddresses.get(position);
+		Intent intent = new Intent(activity,
+				CstmPayActivity.class);
+		Bundle bundle = new Bundle();
+		bundle.putSerializable("addresses1", addresses);
+		intent.putExtras(bundle);
+		activity.setResult(Consts.AddressResponseCode,
+				intent);
+		activity.finish();
+	}
+	
+	/**
+	 * 默认为-1，如果是从确认订单页跳转过来的值为Consts.AddressRequestCode
+	 * @param requestCode
+	 */
+	public void setRequestCode(int requestCode){
+		this.requestCode = requestCode;
+	}
+	
+	private int requestCode = -1;
+	
 	private SetDefAddr setDefAddr;
 	private ProgressDialog bar;
 	private String addressId;
