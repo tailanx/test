@@ -63,9 +63,9 @@ public class LogService extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// TODO Auto-generated method stub
-		baseName = sp.getString("DESMI", null);
+		baseName = sp.getString("DESMI", "");
 		//
-		String basePwd = sp.getString("DESPWD", null);
+		String basePwd = sp.getString("DESPWD", "");
 		String keyName = baseName + consts.getMiStr();
 		basepasswrod = DesUtils.decode(keyName, basePwd);
 		// Task task = new Task();

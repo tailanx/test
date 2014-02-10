@@ -53,9 +53,9 @@ public class HomeLoginActivity extends HomeBaseActivity implements OnClickListen
 	private RelativeLayout bottomLayout;
 	public static boolean isCheck;
 
-	private String name;
-	private String pwd;
-	private String ip;
+	private String name = "";
+	private String pwd = "";
+	private String ip = "";
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -128,7 +128,12 @@ public class HomeLoginActivity extends HomeBaseActivity implements OnClickListen
 		});
 	}
 
-
+	/**隐藏底部和显示返回键**/
+	public void hideBottomView(){
+		bottomLayout.setVisibility(View.GONE);
+		TextView leftView = (TextView) findViewById(R.id.ab_common_back);
+		leftView.setVisibility(View.VISIBLE);
+	}
 
 	/**
 	 * 头部

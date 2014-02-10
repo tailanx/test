@@ -87,6 +87,9 @@ public class HomeMallActivity extends HomeBaseActivity {
 	}
 
 	private void getMainData() {
+		
+		if(!ConnectionDetector.isConnectingToInternet(this)) return;
+		
 		String url = new JNICallBack().getHttp4GetHome();
 
 		AsyncOkHttpClient client = new AsyncOkHttpClient();

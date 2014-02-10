@@ -1,8 +1,5 @@
 package com.yidejia.app.mall;
 
-import java.util.ArrayList;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.view.KeyEvent;
 import android.view.View;
