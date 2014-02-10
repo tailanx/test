@@ -23,6 +23,9 @@ public class Consts {
 	public static final int PayResponseCode = 225;
 	public static final int CstmPayActivity_Request = 226;
 	public static final int CstmPayActivity_Response = 227;
+	public static final int DELIVERY_REQUEST = 1001;
+	public static final int DELIVERY_RESULT = 1002;
+	
 	public static final int CONSTACT_REQUEST = 110;
 	public static final int CONSTACT_RESPONSE = 120;
 	public static final String ADD_SUBSTARCT_UPDATE_ = "com.yidejia.add.substarct";

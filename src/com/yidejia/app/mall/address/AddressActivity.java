@@ -48,12 +48,12 @@ public class AddressActivity extends BaseActivity {
 	private String userId;
 	private PullToRefreshListView pullToRefreshListView;
 	private String TAG = "AddressActivity";
+	private int requestCode = -1;
 
 	// private String message;// 发生错误时候的报错信息
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		// 设置头部
 		setActionbarConfig();
@@ -65,7 +65,6 @@ public class AddressActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				Intent intent2 = new Intent(AddressActivity.this,
 						EditNewAddressActivity.class);
 				Bundle bundle = new Bundle();
@@ -75,32 +74,33 @@ public class AddressActivity extends BaseActivity {
 			}
 		});
 
+		Intent intent = getIntent();
+		if(null != intent){
+			requestCode = intent.getIntExtra("requestCode", -1);
+		}
+		
 		setContentView(R.layout.address_management);
 
 		pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.address_item_main_refresh_scrollview111);
 
 		pullToRefreshListView.setOnRefreshListener(listener2);
 
-		String label = getResources().getString(R.string.update_time)
-				+ DateUtils.formatDateTime(this, System.currentTimeMillis(),
-						DateUtils.FORMAT_ABBREV_ALL
-								| DateUtils.FORMAT_SHOW_DATE
-								| DateUtils.FORMAT_SHOW_TIME);
-		pullToRefreshListView.getLoadingLayoutProxy()
-				.setLastUpdatedLabel(label);
-
 		listView = pullToRefreshListView.getRefreshableView();
 
-		myApplication = (MyApplication) getApplication();
+		myApplication = MyApplication.getInstance();
 		userId = myApplication.getUserId();
 		mAddresses = new ArrayList<ModelAddresses>();
 		adapter = new AddressAdapter(AddressActivity.this, mAddresses);
+		
+		adapter.setRequestCode(requestCode);
+		
 		listView.setAdapter(adapter);
 
-		listView.setOnItemClickListener(new OnItemClickListener() {
+		/*listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				Toast.makeText(AddressActivity.this, "test click", Toast.LENGTH_SHORT).show();
 				ModelAddresses addresses = mAddresses.get(position - 1);
 				Intent intent = new Intent(AddressActivity.this,
 						CstmPayActivity.class);
@@ -111,50 +111,31 @@ public class AddressActivity extends BaseActivity {
 						intent);
 				AddressActivity.this.finish();
 			}
-		});
-
-		// bar = new ProgressDialog(this);
-		// getUserAddressList = new GetUserAddressList();
+		});*/
+		// load data
 		getAddressData();
-		//
-		// closeTask();
-		// task = new Task();
-		// task.execute();
 	}
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
-		// closeTask();
+		mAddresses.clear();
+		mAddresses = null;
+		adapter = null;
 	}
 
 	private OnRefreshListener2<ListView> listener2 = new OnRefreshListener2<ListView>() {
 
 		@Override
 		public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-			// // TODO Auto-generated method stub
 			fromIndex = 0;
 			getAddressData();
-			// closeTask();
-			// task = new Task();
-			// task.execute();
 		}
 
 		@Override
 		public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-			// TODO Auto-generated method stub
 			fromIndex += acount;
 			getAddressData();
-			// if (isNomore) {
-			// refreshView.onRefreshComplete();
-			// Toast.makeText(AddressActivity.this,
-			// getResources().getString(R.string.nomore),
-			// Toast.LENGTH_SHORT).show();
-			// }
-			// closeTask();
-			// task = new Task();
-			// task.execute();
 		}
 	};
 
@@ -249,9 +230,16 @@ public class AddressActivity extends BaseActivity {
 
 					mAddresses.addAll(modelAddresses);
 					adapter.notifyDataSetChanged();
-
+					
+					String label = getResources().getString(R.string.update_time)
+							+ DateUtils.formatDateTime(AddressActivity.this, System.currentTimeMillis(),
+									DateUtils.FORMAT_ABBREV_ALL
+											| DateUtils.FORMAT_SHOW_DATE
+											| DateUtils.FORMAT_SHOW_TIME);
+					pullToRefreshListView.getLoadingLayoutProxy()
+							.setLastUpdatedLabel(label);
 				} else {
-					isNomore = true;
+//					isNomore = true;
 					Toast.makeText(AddressActivity.this, getResources().getString(R.string.nomore), Toast.LENGTH_SHORT).show();
 				}
 
@@ -271,104 +259,7 @@ public class AddressActivity extends BaseActivity {
 	}
 
 	private ProgressDialog bar;
-	private Task task;
-	private GetUserAddressList getUserAddressList;
-	private ArrayList<ModelAddresses> addresses;
-	private boolean isNomore = false;
+//	private boolean isNomore = false;
 	private boolean isFirstIn = true;
-
-	private class Task extends AsyncTask<Void, Void, Boolean> {
-
-		@Override
-		protected Boolean doInBackground(Void... params) {
-			// TODO Auto-generated method stub
-			try {
-				String httpresp = getUserAddressList
-						.getAddressHttpresp("customer_id%3D" + userId
-								+ "+and+valid_flag%3D%27y%27", fromIndex + "",
-								acount + "");
-				boolean issuccess = getUserAddressList.analysis(httpresp);
-				// if(addresses != null && !addresses.isEmpty()){
-				// addresses.clear();
-				// }
-				addresses = getUserAddressList.getAddresses();
-				isNomore = getUserAddressList.getIsNoMore();
-				return issuccess;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			}
-			return false;
-		}
-
-		@SuppressWarnings("static-access")
-		@Override
-		protected void onPreExecute() {
-			// TODO Auto-generated method stub
-			super.onPreExecute();
-			if (isFirstIn) {
-				// bar.setCancelable(true);
-				// bar.setMessage(getResources().getString(R.string.loading));
-				// bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-				// bar.show();
-				bar = (ProgressDialog) new YLProgressDialog(
-						AddressActivity.this).createLoadingDialog(
-						AddressActivity.this, null);
-				bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-					@Override
-					public void onCancel(DialogInterface dialog) {
-						// TODO Auto-generated method stub
-						cancel(true);
-					}
-				});
-			}
-		}
-
-		@Override
-		protected void onPostExecute(Boolean result) {
-			// TODO Auto-generated method stub
-			super.onPostExecute(result);
-			if (isFirstIn) {
-				bar.dismiss();
-				isFirstIn = false;
-			} else {
-				pullToRefreshListView.onRefreshComplete();
-			}
-			if (!result) {
-				if (fromIndex != 0) {
-					fromIndex -= acount;
-				}
-			} else {
-				if (!mAddresses.isEmpty() && isNomore) {
-					Toast.makeText(AddressActivity.this,
-							getResources().getString(R.string.nomore),
-							Toast.LENGTH_LONG).show();
-					isNomore = false;
-					return;
-				}
-				if (mAddresses != null && !mAddresses.isEmpty()
-						&& fromIndex == 0) {
-					mAddresses.clear();
-				}
-				Log.e(TAG, "addresses size " + addresses.size());
-				mAddresses.addAll(addresses);
-				Log.e(TAG, "maddresses size " + mAddresses.size());
-				adapter.notifyDataSetChanged();
-			}
-		}
-
-	}
-
-	@SuppressWarnings({ "static-access", "unused" })
-	private void closeTask() {
-		if (task != null
-				&& task.getStatus().RUNNING == AsyncTask.Status.RUNNING) {
-			task.cancel(true);
-		}
-	}
 
 }
