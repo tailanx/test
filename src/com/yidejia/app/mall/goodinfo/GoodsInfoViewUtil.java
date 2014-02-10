@@ -127,6 +127,13 @@ public class GoodsInfoViewUtil {
 			// 加入购物车
 			ImageView add_to_cart = (ImageView) activity
 					.findViewById(R.id.iv_add_to_cart);
+			final boolean isShowFlag = info.isShow_flag();
+			if(!isShowFlag){
+				add_to_cart.setClickable(false);
+				add_to_cart.setImageResource(R.drawable.pause_sales);
+				add_to_cart.setFocusable(false);
+			}
+			
 			// 销售额
 			TextView selled_num_text = (TextView) activity
 					.findViewById(R.id.tv_selled_num_text);
@@ -189,6 +196,9 @@ public class GoodsInfoViewUtil {
 
 					@Override
 					public void onClick(View v) {
+						if(!isShowFlag){
+							return;
+						}
 						cart_num++;
 						boolean istrue = manage.addCart(cart);
 						if (istrue) {

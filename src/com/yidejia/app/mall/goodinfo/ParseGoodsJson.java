@@ -91,6 +91,8 @@ public class ParseGoodsJson {
 			productBaseInfo.setProductSpecifications(responseObject.optString("sepc"));
 			productBaseInfo.setProductDetailUrl(responseObject.optString("info"));
 			productBaseInfo.setShowListAmount(responseObject.optString("shaidan"));
+			productBaseInfo.setShow_flag(responseObject.optString("show_flag").equals("y"));
+			
 			
 			String pics = responseObject.optString("pics");
 			analysisPicJson(pics, bannerArray);
