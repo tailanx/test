@@ -1,19 +1,14 @@
 package com.yidejia.app.mall.address;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 //import android.widget.Button;
 //import android.widget.ImageView;
 import android.widget.ListView;
@@ -32,10 +27,7 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 //import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.jni.JNICallBack;
-import com.yidejia.app.mall.net.address.GetUserAddressList;
-import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DefinalDate;
-import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class AddressActivity extends BaseActivity {
@@ -154,7 +146,6 @@ public class AddressActivity extends BaseActivity {
 					pullToRefreshListView.setRefreshing();
 
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 					Toast.makeText(AddressActivity.this,
 							getResources().getString(R.string.wrong_input),
@@ -166,7 +157,6 @@ public class AddressActivity extends BaseActivity {
 
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Toast.makeText(AddressActivity.this,
 					getResources().getString(R.string.bad_network),
