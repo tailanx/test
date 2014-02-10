@@ -16,19 +16,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="8dp"
             android:layout_centerVertical="true"
-            android:textSize="18sp"
+            android:layout_marginLeft="8dp"
+            android:text="@string/phone_number1"
             android:textColor="@color/white_white"
-            android:text="@string/phone_number1" />
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/et_inputnumber"
             android:layout_width="210dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
             android:layout_centerVertical="true"
-            android:maxLength="11"
+            android:layout_marginLeft="4dp"
             android:layout_toRightOf="@id/tv_phone_contact_phone_number"
             android:background="@null"
             android:inputType="number" />
@@ -52,31 +51,31 @@
             android:id="@+id/bt_price_30"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_margin="10dp"
+            android:layout_weight="1"
             android:background="@drawable/selecter_bg_recharge_price"
-            android:textColor="@color/color_recharge_price"
-            android:text="@string/price_30" />
+            android:text="@string/price_30"
+            android:textColor="@color/color_recharge_price" />
 
         <Button
             android:id="@+id/bt_price_50"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_margin="10dp"
+            android:layout_weight="1"
             android:background="@drawable/selecter_bg_recharge_price"
-            android:textColor="@color/color_recharge_price"
-            android:text="@string/price_50" />
+            android:text="@string/price_50"
+            android:textColor="@color/color_recharge_price" />
 
         <Button
             android:id="@+id/bt_price_100"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_margin="10dp"
+            android:layout_weight="1"
             android:background="@drawable/selecter_bg_recharge_price"
-            android:textColor="@color/color_recharge_price"
-            android:text="@string/price_100" />
+            android:text="@string/price_100"
+            android:textColor="@color/color_recharge_price" />
     </LinearLayout>
 
     <RelativeLayout
@@ -97,24 +96,25 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/tv_price_danjia"
             android:layout_marginLeft="4dp"
-            android:textColor="@color/theme"
-            android:layout_toRightOf="@id/tv_price_danjia" />
-           <TextView
+            android:layout_toRightOf="@id/tv_price_danjia"
+            android:textColor="@color/theme" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/tv_price_danjia"
             android:layout_marginLeft="4dp"
-            android:text="@string/price_yuan"
-            android:layout_toRightOf="@id/tv_price_contact" />
+            android:layout_toRightOf="@id/tv_price_contact"
+            android:text="@string/price_yuan" />
     </RelativeLayout>
 
     <Button
         android:id="@+id/iv_commit_phone_contace"
         android:layout_width="match_parent"
-        android:layout_marginLeft="@dimen/margin_left"
-        android:layout_marginRight="@dimen/margin_left"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginRight="@dimen/margin_left"
         android:layout_marginTop="@dimen/yirihui"
         android:background="@drawable/theme_selector_text"
         android:contentDescription="@string/phone_number"

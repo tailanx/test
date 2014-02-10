@@ -14,11 +14,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.util.Consts;
+import com.yidejia.app.mall.util.IsPhone;
 
 /**
  * 用来展示充值界面的
@@ -26,8 +28,7 @@ import com.yidejia.app.mall.util.Consts;
  * @author LiuYong
  * 
  */
-public class PhoneActivity extends BaseActivity implements
-		OnClickListener {
+public class PhoneActivity extends BaseActivity implements OnClickListener {
 	private EditText etPhoneNumber;
 	private ImageView ivPhoneContact;
 	private Button bt30, bt50, bt100, btCommito;
@@ -39,9 +40,9 @@ public class PhoneActivity extends BaseActivity implements
 		super.onCreate(arg0);
 		setActionbarConfig();
 		setTitle(R.string.main_message_center_text);
-		
+
 		setContentView(R.layout.phone_contact);
-		
+
 		initview();
 		ivPhoneContact.setOnClickListener(this);
 		btCommito.setOnClickListener(this);
@@ -56,11 +57,12 @@ public class PhoneActivity extends BaseActivity implements
 		bt30 = (Button) findViewById(R.id.bt_price_30);
 		bt50 = (Button) findViewById(R.id.bt_price_50);
 		bt100 = (Button) findViewById(R.id.bt_price_100);
-		
-		bt100.setOnClickListener(this);
-		bt30.setOnClickListener(this);
-		bt50.setOnClickListener(this);
-		
+
+		bt100.setOnClickListener(this);// 30元点击事件
+		bt30.setOnClickListener(this);// 50元点击事件
+		bt50.setOnClickListener(this);// 100元点击事件
+		bt30.setSelected(true);
+
 		btCommito = (Button) findViewById(R.id.iv_commit_phone_contace);
 		tvRealPrice = (TextView) findViewById(R.id.tv_price_contact);
 
@@ -77,9 +79,20 @@ public class PhoneActivity extends BaseActivity implements
 			break;
 
 		case R.id.iv_commit_phone_contace:
-			intent = new Intent();
-			intent.setClass(this, ContactSureActivity.class);
-			startActivity(intent);
+			String phoneNumber = etPhoneNumber.getText().toString().trim().replace(" ", "");
+			
+			Log.e("info", phoneNumber);
+			//判断是不是手机号码，和非空判断
+			if (null == phoneNumber || "".equals(phoneNumber)||!IsPhone.isMobileNO(phoneNumber)) {
+				Toast.makeText(this,
+						getResources().getString(R.string.no_phone_number),
+						Toast.LENGTH_SHORT).show();
+				return;
+			} else {
+				intent = new Intent();
+				intent.setClass(this, ContactSureActivity.class);
+				startActivity(intent);
+			}
 			break;
 		case R.id.bt_price_30:
 			bt30.setSelected(true);
@@ -101,14 +114,16 @@ public class PhoneActivity extends BaseActivity implements
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == Consts.CONSTACT_REQUEST && resultCode == Activity.RESULT_OK) {
-			Uri contactData = data.getData(); 
+		if (requestCode == Consts.CONSTACT_REQUEST
+				&& resultCode == Activity.RESULT_OK) {
+			Uri contactData = data.getData();
 			getContactNum(contactData);
 		}
 	}
-	
+
 	/**
 	 * 获取选中联系人的号码并显示到界面
+	 * 
 	 * @param contactData
 	 */
 	@SuppressWarnings("deprecation")
