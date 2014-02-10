@@ -136,6 +136,7 @@ public class ParseSearchJson {
 				function.setFunId(jsonObject.optString("id"));
 				function.setFunName(unicode.revert(jsonObject.optString("name")));
 				function.setDesc(unicode.revert(jsonObject.optString("desc")));
+				function.setImgUrl(ImageUrl.IMAGEURL + jsonObject.optString("imgname") + "!200");
 				functionsArray.add(function);
 			}
 		} catch (JSONException e) {
