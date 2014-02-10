@@ -115,7 +115,7 @@ public class HistoryActivity extends SherlockFragmentActivity {
 
 			}
 		});
-		Button right = (Button) findViewById(R.id.actionbar_right);
+		TextView right = (TextView) findViewById(R.id.actionbar_right);
 		right.setText(getResources().getString(R.string.clean));
 		right.setOnClickListener(onClickListener);
 	}

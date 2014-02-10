@@ -47,7 +47,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="8dp"
             android:padding="10dp"
-            android:background="@color/theme"
+            android:background="@drawable/theme_textview_background"
             android:text="@string/order_pay"
             android:textColor="@color/white" />
     </RelativeLayout>

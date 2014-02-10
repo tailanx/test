@@ -242,7 +242,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 			@Override
 			public void onClick(View arg0) {
 				Intent intentOrder = new Intent(HomeMallActivity.this,
-						HistoryActivity.class);
+						PersonActivity.class);
 				HomeMallActivity.this.startActivity(intentOrder);
 			}
 		});
