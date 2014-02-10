@@ -37,9 +37,13 @@ public class HomeBaseActivity extends BaseActivity {
 	private TextView tv_search;
 	private TextView tv_cart;
 	private TextView tv_mymall;
+	
+	private RelativeLayout bottomLayout;
 
 	private int currentActivityId = 0; // 设置当前activity的id，0-5分别表示首页，逛，搜索，购物车，商城，登录
 	private int intentId = 0; // 目的界面的id，0-5分别表示首页，逛，搜索，购物车，商城，登录
+	
+	
 	@Override
 	protected void onStart() {
 		super.onStart();
@@ -95,6 +99,10 @@ public class HomeBaseActivity extends BaseActivity {
 	 * 初始化底部导航栏
 	 */
 	private void initNavView() {
+		
+		// 设置底部
+		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
+
 		downHomeLayout = (RelativeLayout) findViewById(R.id.re_down_home_layout);
 		downGuangLayout = (RelativeLayout) findViewById(R.id.re_down_guang_layout);
 		downSearchLayout = (RelativeLayout) findViewById(R.id.re_down_search_layout);
@@ -120,6 +128,14 @@ public class HomeBaseActivity extends BaseActivity {
 		tv_mymall = (TextView) findViewById(R.id.tv_down_my_text);
 
 		setNavBackground();
+	}
+	
+
+	/**隐藏底部和显示返回键**/
+	public void hideBottomView(){
+		bottomLayout.setVisibility(View.GONE);
+		TextView leftView = (TextView) findViewById(R.id.ab_common_back);
+		leftView.setVisibility(View.VISIBLE);
 	}
 
 	private View.OnClickListener homeListener = new View.OnClickListener() {

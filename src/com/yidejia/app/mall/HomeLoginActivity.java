@@ -128,12 +128,6 @@ public class HomeLoginActivity extends HomeBaseActivity implements OnClickListen
 		});
 	}
 
-	/**隐藏底部和显示返回键**/
-	public void hideBottomView(){
-		bottomLayout.setVisibility(View.GONE);
-		TextView leftView = (TextView) findViewById(R.id.ab_common_back);
-		leftView.setVisibility(View.VISIBLE);
-	}
 
 	/**
 	 * 头部
