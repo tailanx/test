@@ -228,7 +228,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 			}
 		});
 		RelativeLayout myMember = (RelativeLayout) child
-				.findViewById(R.id.function_member);// 会员购
+				.findViewById(R.id.function_member);// 充值中心
 		myMember.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -250,7 +250,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 			}
 		});
 		RelativeLayout myCoupon = (RelativeLayout) child
-				.findViewById(R.id.function_coupon);// 积分卡券
+				.findViewById(R.id.function_coupon);// 伊日惠
 		myCoupon.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -262,7 +262,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 			}
 		});
 		RelativeLayout mySkin = (RelativeLayout) child
-				.findViewById(R.id.function_skin);// 肌肤测试
+				.findViewById(R.id.function_skin);// 积分卡券
 		mySkin.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -276,7 +276,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 			}
 		});
 		RelativeLayout myMessage = (RelativeLayout) child
-				.findViewById(R.id.function_message);// 消息中心
+				.findViewById(R.id.function_message);// 皮肤测试
 		myMessage.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -320,9 +320,9 @@ public class HomeMallActivity extends HomeBaseActivity {
 	private void setActionBar() {
 		getSupportActionBar().setCustomView(R.layout.actionbar_main_home_title);
 
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+		getSupportActionBar().setDisplayShowCustomEnabled(true);
+		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 
 		ImageView searchEditText = (ImageView) findViewById(R.id.main_home_title_search);
