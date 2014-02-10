@@ -36,7 +36,7 @@ public class TestSharkActivity extends Activity implements OnClickListener {
 		quanImageView = (ImageView) findViewById(R.id.iv_yaoyiyao_shou);
 		backImageView = (ImageView) findViewById(R.id.iv_shark_back);
 		backImageView.setOnClickListener(this);
-		mediaPlayer = MediaPlayer.create(this, R.raw.a);
+		mediaPlayer = MediaPlayer.create(this, R.raw.yao);
 		quanAnimation = AnimationUtils.loadAnimation(this,
 				R.anim.my_translate_action);
 		quanImageView.startAnimation(quanAnimation);

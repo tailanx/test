@@ -14,8 +14,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/margin_left"
             android:text="@string/cart_sum"
+            android:layout_marginLeft="@dimen/margin_left_add"
             android:textColor="@color/text_color_80"
             android:textSize="@dimen/textsize_small" />
 
@@ -80,7 +80,7 @@
             android:singleLine="true"
             android:text="@string/go_pay"
             android:textColor="@color/color_sort_text_color_press"
-            android:textSize="@dimen/textsize_small_small" />
+            android:textSize="@dimen/textsize_small" />
     </RelativeLayout>
 
     <ScrollView

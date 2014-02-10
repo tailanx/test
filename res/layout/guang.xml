@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_left"
+        android:layout_marginTop="@dimen/magin_left_add_add"
         android:background="@drawable/main_theme_textview_bg" >
 
         <ImageView
@@ -57,21 +57,10 @@
             android:contentDescription="@string/yidejia" />
     </RelativeLayout>
     
-     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_left"
-        android:background="@drawable/main_theme_textview_bg" >
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/width_add"
-            android:background="@color/line_color"
-            android:contentDescription="@string/yidejia" />
-    </RelativeLayout>
     <RelativeLayout
         android:id="@+id/iv_guang_yaoyiyao"
         android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/width_add_fun"
         android:layout_height="wrap_content"
         android:background="@drawable/main_theme_textview_bg" >
 

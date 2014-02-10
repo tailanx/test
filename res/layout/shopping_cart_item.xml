@@ -3,7 +3,9 @@
     android:id="@+id/rela"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/productlist_bg" >
+    android:layout_marginTop="@dimen/magin_left_add_add_add"
+    android:padding="@dimen/margin_left"
+    android:background="@drawable/main_cart_textview_bg" >
 
     <CheckBox
         android:id="@+id/ck_shopping_cart_item_checkbox"
@@ -29,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/head_padding"
-        android:layout_marginTop="@dimen/margin_left"
+        android:layout_marginTop="@dimen/actiobar_margin_left"
         android:layout_toRightOf="@id/iv_shopping_cart_item__imageview1"
         android:ellipsize="end"
         android:lines="2"
@@ -41,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_shopping_cart_item_text"
         android:layout_marginLeft="@dimen/head_padding"
-        android:layout_marginTop="@dimen/margin_left_add"
+        android:layout_marginTop="@dimen/width_add"
         android:layout_toRightOf="@id/iv_shopping_cart_item__imageview1"
         android:text="@string/go_pay_show_pay_money"
         android:textColor="@color/theme"
@@ -52,17 +54,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_shopping_cart_item_text"
-        android:layout_marginTop="@dimen/margin_left_add"
+        android:layout_marginTop="@dimen/actiobar_margin_left"
         android:layout_toRightOf="@id/tv_shopping_cart_item_money_price"
         android:textColor="@color/theme"
-        android:textSize="@dimen/textsize_big_big" />
+        android:textSize="@dimen/textsize_big" />
 
     <RelativeLayout
         android:id="@+id/re_shopping_cart_item_relative"
-        android:layout_width="@dimen/yirihui"
+        android:layout_width="@dimen/head_height"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/tv_shopping_cart_item_text"
-        android:layout_below="@id/tv_shopping_cart_item_money" >
+        android:layout_below="@id/tv_shopping_cart_item_money"
+        android:layout_marginBottom="@dimen/margin_left" >
 
         <ImageView
             android:id="@+id/iv_shopping_cart_item_subtract"
@@ -79,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/iv_shopping_cart_item_subtract"
             android:layout_alignTop="@id/iv_shopping_cart_item_subtract"
-            android:layout_marginLeft="@dimen/white_bg_padding"
+            android:layout_marginLeft="@dimen/margin_left_add"
             android:layout_toRightOf="@id/iv_shopping_cart_item_subtract"
             android:background="@drawable/main_cart_textview_bg"
             android:gravity="center"
@@ -100,12 +103,12 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/re_shopping_cart_item_relative"
         android:layout_below="@id/tv_shopping_cart_item_money"
-        android:layout_marginLeft="@dimen/head_padding"
+        android:layout_marginLeft="@dimen/actiobar_margin_top"
         android:layout_marginTop="@dimen/margin_left_add"
         android:layout_toRightOf="@id/re_shopping_cart_item_relative"
-        android:text="@string/go_pay_show_pay_money"
-        android:textColor="@color/theme"
-        android:textSize="@dimen/textsize_big_big" />
+        android:text="@string/cart_sum"
+        android:textColor="@color/white_white"
+        android:textSize="@dimen/textsize_small_small" />
 
     <TextView
         android:id="@+id/tv_shopping_cart_item_money_add"
@@ -115,6 +118,6 @@
         android:layout_marginTop="@dimen/margin_left_add"
         android:layout_toRightOf="@id/tv_shopping_cart_item_money_price"
         android:textColor="@color/theme"
-        android:textSize="@dimen/textsize_big_big" />
+        android:textSize="@dimen/textsize_small_small" />
 
 </RelativeLayout>

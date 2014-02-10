@@ -87,7 +87,19 @@
             android:background="@drawable/theme_textview_background"
             android:text="@string/yirihui_must_pay"
             android:textColor="@color/color_sort_text_color_press"
-            android:textSize="@dimen/textsize_big" />
+            android:textSize="@dimen/textsize_small" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/main_theme_textview_bg" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/width_add"
+            android:background="@color/line_color"
+            android:contentDescription="@string/yidejia" />
     </RelativeLayout>
 
     <LinearLayout
@@ -157,17 +169,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@id/tv_yirihui_count"
+                        android:background="@drawable/theme_yuan"
                         android:text="@string/hour"
-                        android:textColor="@color/white"
-                        android:background="@drawable/theme_yuan" />
+                        android:textColor="@color/white" />
                 </RelativeLayout>
-
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_main_hot_yirihui_detail"
-                    android:layout_alignParentRight="true" >
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/tv_main_hot_yirihui_detail" >
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -185,5 +196,17 @@
             </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/main_theme_textview_bg" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/width_add"
+            android:background="@color/line_color"
+            android:contentDescription="@string/yidejia" />
+    </RelativeLayout>
 
 </LinearLayout>

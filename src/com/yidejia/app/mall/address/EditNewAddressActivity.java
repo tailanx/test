@@ -139,12 +139,12 @@ public class EditNewAddressActivity extends BaseActivity {
 		if (addresses != null) {
 			name = addresses.getName();
 			phone = addresses.getHandset();
+			dString = addresses.getAddress();
 			isDefauteUpdate = addresses.getDefaultAddress();
 			id = addresses.getAddressId();
 			conutryString = addresses.getProvice();// 省
 			cityString = addresses.getCity();// 市
 			districtString = addresses.getArea();// 区
-			dString = addresses.getAddress();//详细地址
 		}
 		setupShow();
 		LinearLayout linear = (LinearLayout) findViewById(R.id.new_address_linear);
@@ -162,6 +162,7 @@ public class EditNewAddressActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
+				// TODO Auto-generated method stub
 				dialog.show();
 				TaskNew editAddresss = new TaskNew();
 				editAddresss.execute();
