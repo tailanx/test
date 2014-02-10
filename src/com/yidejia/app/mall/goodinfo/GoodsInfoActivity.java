@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.opens.asyncokhttpclient.AsyncHttpResponse;
 import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.yidejia.app.mall.BaseActivity;
@@ -26,7 +27,7 @@ public class GoodsInfoActivity extends BaseActivity {
 	private YLViewPager vpImage;	//商品图片容器
 	private int width;	//屏幕宽
 	private ProductBaseInfo productInfo;	//商品信息类实例
-//	private Button btnCartNum;	//商品信息页购物车按钮的数字
+	private GoodsInfoViewUtil viewUtil;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,7 @@ public class GoodsInfoActivity extends BaseActivity {
 				boolean issucess = parseGoodsJson.parseGoodsInfo(content);
 				if(issucess) {
 					productInfo = parseGoodsJson.getProductBaseInfo();
-					GoodsInfoViewUtil viewUtil = new GoodsInfoViewUtil(GoodsInfoActivity.this);
+					viewUtil = new GoodsInfoViewUtil(GoodsInfoActivity.this);
 					viewUtil.initGoodsView(productInfo);
 				} else {
 					Toast.makeText(GoodsInfoActivity.this, getResources().getString(R.string.no_product), Toast.LENGTH_SHORT).show();
@@ -91,6 +92,19 @@ public class GoodsInfoActivity extends BaseActivity {
 			}
 
 		});
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		StatService.onPageEnd(this, getString(R.string.goods_info));
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		StatService.onPageStart(this, getString(R.string.goods_info));
+		if(null != viewUtil) viewUtil.setCartNumber();
 	}
 
 

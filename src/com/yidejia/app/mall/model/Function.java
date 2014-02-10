@@ -15,8 +15,17 @@ public class Function implements Serializable{
 	private String funId;            //商品功效Id 
     private String funName;   //功效名称
     private String desc; 	//描述
+    private String imgUrl;	//图片的url
     
-    public String getFunName(){
+    public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
+	public String getFunName(){
     	return funName;
     }
 

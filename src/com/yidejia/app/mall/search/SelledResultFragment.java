@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.SherlockFragment;
 import com.baidu.mobstat.StatService;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
@@ -36,7 +36,7 @@ import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.SearchItem;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
-public class SelledResultFragment extends Fragment {
+public class SelledResultFragment extends SherlockFragment {
 
 	public static SelledResultFragment newInstance(Bundle searchBundle,
 			boolean title) {
@@ -199,6 +199,8 @@ public class SelledResultFragment extends Fragment {
 	
 	private ProgressDialog bar;
 	
+	private AsyncOkHttpClient client;
+	
 	private void getSearchListData() {
 		String url = "";
 		try {
@@ -217,13 +219,13 @@ public class SelledResultFragment extends Fragment {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
+		client = new AsyncOkHttpClient();
 		client.get(url, new AsyncHttpResponse() {
 
 			@Override
 			public void onStart() {
 				super.onStart();
-				if (isFirstIn) {
+				if (isFirstIn && isAdded()) {
 					bar = (ProgressDialog) new YLProgressDialog(
 							getActivity()).createLoadingDialog(
 							getActivity(), null);
@@ -236,6 +238,9 @@ public class SelledResultFragment extends Fragment {
 				if (null != bar) {
 					bar.dismiss();
 				}
+				
+				if(!isAdded())return;
+				
 				String label = getResources().getString(R.string.update_time)
 						+ DateUtils.formatDateTime(getActivity()
 								.getApplicationContext(), System
@@ -259,7 +264,8 @@ public class SelledResultFragment extends Fragment {
 			@Override
 			public void onSuccess(int statusCode, String content) {
 				super.onSuccess(statusCode, content);
-				Log.e(TAG, content);
+//				Log.e(TAG, content);
+				if(!isAdded()) return;
 				if(isShowWithList){
 					mPullToRefreshListView.setVisibility(View.VISIBLE);
 				} else {
@@ -297,6 +303,7 @@ public class SelledResultFragment extends Fragment {
 			public void onError(Throwable error, String content) {
 				super.onError(error, content);
 //				Log.e(TAG, content);
+				if(!isAdded()) return;
 				fromIndex -= amount;
 				if(fromIndex < 0) {
 					fromIndex = 0;
@@ -355,6 +362,8 @@ public class SelledResultFragment extends Fragment {
 			searchItemsArray.clear();
 			searchItemsArray = null;
 		}
+		if(null != client)
+		client.closeConn();
 	}
 
 

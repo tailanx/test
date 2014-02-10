@@ -53,9 +53,9 @@ public class HomeLoginActivity extends HomeBaseActivity implements OnClickListen
 	private RelativeLayout bottomLayout;
 	public static boolean isCheck;
 
-	private String name;
-	private String pwd;
-	private String ip;
+	private String name = "";
+	private String pwd = "";
+	private String ip = "";
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -127,7 +127,6 @@ public class HomeLoginActivity extends HomeBaseActivity implements OnClickListen
 			}
 		});
 	}
-
 
 
 	/**

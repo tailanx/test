@@ -420,7 +420,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/mall_list_padding"
+                    android:layout_marginRight="@dimen/white_bg_padding"
                     android:contentDescription="@string/yidejia"
                     android:src="@drawable/arrow" />
             </RelativeLayout>
@@ -638,7 +638,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/mall_list_padding"
+                    android:layout_marginRight="@dimen/white_bg_padding"
                     android:src="@drawable/arrow" />
             </RelativeLayout>
 

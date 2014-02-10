@@ -52,7 +52,7 @@
     <dimen name="width_add">1dp</dimen>
     <dimen name="width">0dp</dimen>
     <dimen name="width_add_fun">-1dp</dimen>
-    <dimen name="width_fu_add">-25dp</dimen>
+    <dimen name="width_fu_add">-35dp</dimen>
     <dimen name="width_fu">-45dp</dimen>
 
 </resources>

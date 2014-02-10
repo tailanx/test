@@ -87,7 +87,9 @@ public class HomeCartActivity extends HomeBaseActivity {
 		setCurrentActivityId(3);
 
 		cartsDataManage = new CartsDataManage();
-
+	}
+	
+	private void refreshView(){
 		if (cartsDataManage.getCartAmount() != 0) {
 			view = inflater.inflate(R.layout.shopping_cart, null);
 			frameLayout.addView(view);
@@ -248,15 +250,14 @@ public class HomeCartActivity extends HomeBaseActivity {
 
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
-		StatService.onPause(this);
+		StatService.onPageEnd(this, getString(R.string.down_shopping_text));
 	}
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
-		StatService.onResume(this);
+		StatService.onPageStart(this, getString(R.string.down_shopping_text));
+		refreshView();
 	}
 }

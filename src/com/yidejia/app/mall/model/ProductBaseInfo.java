@@ -23,7 +23,15 @@ public class ProductBaseInfo implements Serializable{
 	private String brands;                      //品牌
 	private ArrayList<BaseProduct> bannerArray;  //轮播商品（个数不固定，<=5?)
 	private String imgUrl; // 小图地址
+	private boolean show_flag;	//是否能购买
 	
+	public boolean isShow_flag() {
+		return show_flag;
+	}
+	
+	public void setShow_flag(boolean show_flag) {
+		this.show_flag = show_flag;
+	}
 	/**
 	 * 
 	 * @param uId 设置product id

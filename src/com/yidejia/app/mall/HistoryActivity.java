@@ -7,26 +7,21 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.HistoryAdapter;
 import com.yidejia.app.mall.datamanage.BrowseHistoryDataManage;
 import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
-import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.ProductBaseInfo;
 
-public class HistoryActivity extends SherlockFragmentActivity {
+public class HistoryActivity extends BaseActivity {
 	private BrowseHistoryDataManage historyDataManage;
 	private HistoryAdapter adapter;
 	private PullToRefreshListView listview;
@@ -35,7 +30,6 @@ public class HistoryActivity extends SherlockFragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle arg0) {
-		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		dialog = new Builder(HistoryActivity.this)
 				.setMessage(
@@ -47,7 +41,6 @@ public class HistoryActivity extends SherlockFragmentActivity {
 							@Override
 							public void onClick(DialogInterface dialog,
 									int which) {
-								// TODO Auto-generated method stub
 								if (mCarts.isEmpty()) {
 									Toast.makeText(
 											HistoryActivity.this,
@@ -64,7 +57,7 @@ public class HistoryActivity extends SherlockFragmentActivity {
 				.setNegativeButton(getResources().getString(R.string.cancel),
 						null).create();
 		historyDataManage = new BrowseHistoryDataManage();
-		setActionBarConfig();
+		setActionBar();
 		mCarts = historyDataManage.getHistoryArray();
 		// Log.i("info", mCarts.size()+"");
 		// if(mCarts.size() ==0){
@@ -87,7 +80,6 @@ public class HistoryActivity extends SherlockFragmentActivity {
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
-			// TODO Auto-generated method stub
 			ProductBaseInfo cart = mCarts.get(arg2 - 1);
 			Intent intent = new Intent(HistoryActivity.this,
 					GoodsInfoActivity.class);
@@ -98,33 +90,20 @@ public class HistoryActivity extends SherlockFragmentActivity {
 		}
 	};
 
-	private void setActionBarConfig() {
-		getSupportActionBar().setCustomView(R.layout.actionbar_search_result);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		TextView title = (TextView) findViewById(R.id.actionbar_title);
-		title.setText(getResources().getString(R.string.history_watch));
-		TextView left = (TextView) findViewById(R.id.actionbar_left);
-		left.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				HistoryActivity.this.finish();
-
-			}
-		});
-		TextView right = (TextView) findViewById(R.id.actionbar_right);
-		right.setText(getResources().getString(R.string.clean));
-		right.setOnClickListener(onClickListener);
+	private void setActionBar() {
+		
+		setActionbarConfig();
+		setTitle(R.string.history_watch);
+		
+		TextView tv_right = (TextView) findViewById(R.id.ab_common_tv_right);
+		tv_right.setVisibility(View.VISIBLE);
+		tv_right.setOnClickListener(onClickListener);
 	}
 
-	OnClickListener onClickListener = new OnClickListener() {
+	private OnClickListener onClickListener = new OnClickListener() {
 
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
 			dialog.show();
 		}
 	};

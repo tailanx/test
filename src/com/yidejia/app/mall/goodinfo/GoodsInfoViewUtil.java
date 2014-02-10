@@ -13,7 +13,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -49,7 +48,7 @@ public class GoodsInfoViewUtil {
 	private Activity activity;
 	// private ImageView imgIcon;
 	private ImageView add_favorites; // 加入收藏的按钮
-	private Button shopping_cart_button; // 跳转购物车的按钮
+	private TextView shopping_cart_button; // 跳转购物车的按钮
 	private LinearLayout matchGoodsImageLayout;
 	private ArrayList<BaseProduct> bannerArray;
 	private ArrayList<MainProduct> recommendArray;
@@ -128,6 +127,13 @@ public class GoodsInfoViewUtil {
 			// 加入购物车
 			ImageView add_to_cart = (ImageView) activity
 					.findViewById(R.id.iv_add_to_cart);
+			final boolean isShowFlag = info.isShow_flag();
+			if(!isShowFlag){
+				add_to_cart.setClickable(false);
+				add_to_cart.setImageResource(R.drawable.pause_sales);
+				add_to_cart.setFocusable(false);
+			}
+			
 			// 销售额
 			TextView selled_num_text = (TextView) activity
 					.findViewById(R.id.tv_selled_num_text);
@@ -175,14 +181,14 @@ public class GoodsInfoViewUtil {
 			bannerArray = info.getBannerArray();
 			setPicImage();
 			// 购物车个数
-			shopping_cart_button = (Button) activity
-					.findViewById(R.id.shopping_cart_button);
+			shopping_cart_button = (TextView) activity
+					.findViewById(R.id.btn_cart);
 			// CartsDataManage cartsDataManage = new CartsDataManage();
 			cart_num = manage.getCartAmount();
 			if (cart_num == 0) {
 				shopping_cart_button.setVisibility(View.GONE);
 			} else {
-				setCartNum(cart_num);
+				setCartNum();
 			}
 			// 加入购物车按钮点击事件
 			if (priceNum > 0.01) {
@@ -190,6 +196,9 @@ public class GoodsInfoViewUtil {
 
 					@Override
 					public void onClick(View v) {
+						if(!isShowFlag){
+							return;
+						}
 						cart_num++;
 						boolean istrue = manage.addCart(cart);
 						if (istrue) {
@@ -199,7 +208,7 @@ public class GoodsInfoViewUtil {
 											R.string.add_cart_scs),
 									Toast.LENGTH_SHORT).show();
 						}
-						setCartNum(cart_num);
+						setCartNum();
 					}
 
 				});
@@ -278,6 +287,16 @@ public class GoodsInfoViewUtil {
 			}
 		});
 	}
+	
+	/**
+	 * 设置购物车个数<br>
+	 * 每次重新进入页面时设置购物车个数,在onResume中调用
+	 * 
+	 */
+	public void setCartNumber(){
+		cart_num = manage.getCartAmount();
+		setCartNum();
+	}
 
 	/**
 	 * 设置购物车的个数
@@ -285,7 +304,11 @@ public class GoodsInfoViewUtil {
 	 * @param crat_num
 	 *            个数
 	 */
-	private void setCartNum(int crat_num) {
+	private void setCartNum() {
+		if (cart_num == 0) {
+			shopping_cart_button.setVisibility(View.GONE);
+			return;
+		} 
 		shopping_cart_button.setVisibility(View.VISIBLE);
 		shopping_cart_button.setText("" + cart_num);
 	}
