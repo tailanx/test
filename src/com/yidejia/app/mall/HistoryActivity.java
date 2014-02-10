@@ -106,7 +106,7 @@ public class HistoryActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		TextView title = (TextView) findViewById(R.id.actionbar_title);
 		title.setText(getResources().getString(R.string.history_watch));
-		ImageView left = (ImageView) findViewById(R.id.actionbar_left);
+		TextView left = (TextView) findViewById(R.id.actionbar_left);
 		left.setOnClickListener(new OnClickListener() {
 
 			@Override

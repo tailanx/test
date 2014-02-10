@@ -14,7 +14,7 @@
         android:clickable="true"
         android:text="@string/back"
         android:textColor="@color/color_sort_text_color_press"
-        android:textSize="@dimen/textsize_big" />
+        android:textSize="@dimen/textsize_small_add" />
 
     <TextView
         android:id="@+id/actionbar_title"
@@ -35,7 +35,7 @@
         android:layout_centerVertical="true"
         android:text="@string/filter"
         android:textColor="@color/color_sort_text_color_press"
-        android:textSize="@dimen/textsize_big" />
+        android:textSize="@dimen/textsize_small_add" />
 
     <ImageView
         android:id="@+id/search_with_list"

@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -125,6 +126,9 @@ public class CartUtil1 {
 				Log.i("mBox", mBox.isChecked() + "    mBox");
 				final View view = LayoutInflater.from(context).inflate(
 						R.layout.shopping_cart_item, null);
+				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+				lp.setMargins(0, 2, 0, 0);
+				view.setLayoutParams(lp);
 				view.setTag(i);
 				final RelativeLayout layout = (RelativeLayout) view
 						.findViewById(R.id.rela);

@@ -80,7 +80,7 @@
             android:singleLine="true"
             android:text="@string/go_pay"
             android:textColor="@color/color_sort_text_color_press"
-            android:textSize="@dimen/textsize_small_small" />
+            android:textSize="@dimen/textsize_small" />
     </RelativeLayout>
 
     <ScrollView

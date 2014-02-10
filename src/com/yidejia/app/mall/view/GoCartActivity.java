@@ -43,31 +43,34 @@ public class GoCartActivity extends SherlockActivity {// implements
 	private TextView sumTextView;// �ܵ�Ǯ��
 	private TextView counTextView;// �ܵ�����
 	private CheckBox mBox;// ѡ���
-	private Button mbutton;// ȥ����
+	private TextView mbutton;// ȥ����
 	private CartUtil1 cartUtil1;
 	private AddressDataManage addressManage;// ��ַ�������
 	private PullToRefreshScrollView mPullToRefreshScrollView;// ����ˢ��
-	private ImageView mImageView;// ����
+	private TextView mImageView;// ����
 	private TextView mTextView;// title
 	private MyApplication myApplication;
 	private CartsDataManage dataManage;
-	private PreferentialDataManage preferentialDataManage ;
-	private   ArrayList<Cart> cartList;
-	private LinearLayout layout ;
-	public static float sum ;
+	private PreferentialDataManage preferentialDataManage;
+	private ArrayList<Cart> cartList;
+	private LinearLayout layout;
+	public static float sum;
 	private InnerReceiver receiver;
 	private int sumCart;
+
 	@Override
-		protected void onDestroy() {
-			// TODO Auto-generated method stub
-			super.onDestroy();
-			unregisterReceiver(receiver);
-		}
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		unregisterReceiver(receiver);
+	}
+
 	@Override
-		protected void onStart() {
-			// TODO Auto-generated method stub
-			super.onStart();
-		}
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -76,221 +79,238 @@ public class GoCartActivity extends SherlockActivity {// implements
 		preferentialDataManage = new PreferentialDataManage(GoCartActivity.this);
 		dataManage = new CartsDataManage();
 		sumCart = dataManage.getCartAmount();
-		
+
 		receiver = new InnerReceiver();
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Consts.BROAD_UPDATE_CHANGE);
 		filter.addAction(Consts.UPDATE_CHANGE);
 		filter.addAction(Consts.DELETE_CART);
 		GoCartActivity.this.registerReceiver(receiver, filter);
-		if(sumCart == 0){
-			Intent intent = new Intent(GoCartActivity.this,NOProduceActivity.class);
+		if (sumCart == 0) {
+			Intent intent = new Intent(GoCartActivity.this,
+					NOProduceActivity.class);
 			this.startActivity(intent);
 			this.finish();
-		}else{
-		setContentView(R.layout.shopping_cart);
-		mBox = (CheckBox) findViewById(R.id.shopping_cart_checkbox);// ѡ���
+		} else {
+			setContentView(R.layout.shopping_cart);
+			mBox = (CheckBox) findViewById(R.id.shopping_cart_checkbox);// ѡ���
 
-		sumTextView = (TextView) findViewById(R.id.shopping_cart_sum_money);// �ܵ�Ǯ��
+			sumTextView = (TextView) findViewById(R.id.shopping_cart_sum_money);// �ܵ�Ǯ��
 
-		counTextView = (TextView) findViewById(R.id.shopping_cart_sum_number);// �ܵ�����
+			counTextView = (TextView) findViewById(R.id.shopping_cart_sum_number);// �ܵ�����
 
-//		mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.shopping_cart_item_goods_scrollView);
-//		String label = getResources().getString(R.string.update_time)
-//				+ DateUtils.formatDateTime(GoCartActivity.this,
-//						System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
-//								| DateUtils.FORMAT_SHOW_DATE
-//								| DateUtils.FORMAT_SHOW_TIME);
-//		mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
-//				label);
-//		mPullToRefreshScrollView.setOnRefreshListener(listener);
+			// mPullToRefreshScrollView = (PullToRefreshScrollView)
+			// findViewById(R.id.shopping_cart_item_goods_scrollView);
+			// String label = getResources().getString(R.string.update_time)
+			// + DateUtils.formatDateTime(GoCartActivity.this,
+			// System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
+			// | DateUtils.FORMAT_SHOW_DATE
+			// | DateUtils.FORMAT_SHOW_TIME);
+			// mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
+			// label);
+			// mPullToRefreshScrollView.setOnRefreshListener(listener);
 
-//		LinearLayout layout = (LinearLayout) findViewById(R.id.shopping_cart_relative2);
-		layout = new LinearLayout(this);
-		layout.setOrientation(LinearLayout.VERTICAL);
-		ScrollView scrollView = (ScrollView) findViewById(R.id.shopping_cart_item_goods_scrollView);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		GoCartActivity.this.getSupportActionBar().setCustomView(
-				R.layout.actionbar_search_result);
-		cartUtil1 = new CartUtil1(GoCartActivity.this, layout, counTextView,
-				sumTextView, mBox);
-		cartUtil1.AllComment();
-		
-	
-		
-		mbutton = (Button) findViewById(R.id.actionbar_right);
-		mTextView = (TextView) findViewById(R.id.actionbar_title);
-		mImageView = (ImageView) findViewById(R.id.actionbar_left);
-		mTextView.setText(getResources().getString(R.string.cart));
+			// LinearLayout layout = (LinearLayout)
+			// findViewById(R.id.shopping_cart_relative2);
+			layout = new LinearLayout(this);
+			layout.setOrientation(LinearLayout.VERTICAL);
+			ScrollView scrollView = (ScrollView) findViewById(R.id.shopping_cart_item_goods_scrollView);
+			getSupportActionBar().setDisplayShowCustomEnabled(true);
+			getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+			getSupportActionBar().setDisplayShowHomeEnabled(false);
+			GoCartActivity.this.getSupportActionBar().setCustomView(
+					R.layout.actionbar_search_result);
+			cartUtil1 = new CartUtil1(GoCartActivity.this, layout,
+					counTextView, sumTextView, mBox);
+			cartUtil1.AllComment();
 
-		try {
-			mImageView.setOnClickListener(new OnClickListener() {
+			mbutton = (TextView) findViewById(R.id.actionbar_right);// 删除
+			mbutton.setText(getResources().getString(R.string.delete));
 
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					GoCartActivity.this.finish();
-				}
-			});
-//			dialog = new Builder(GoCartActivity.this)
-//			.setTitle("换购商品")
-//			.setIcon(android.R.drawable.dialog_frame)
-//			.setMessage(
-//					getResources().getString(R.string.exchange_produce))
-//			.setPositiveButton(
-//					"确定",
-//					new android.content.DialogInterface.OnClickListener() {
-//
-//						@Override
-//						public void onClick(DialogInterface arg0,
-//								int arg1) {
-//							Intent intent = new Intent(
-//									GoCartActivity.this,
-//									ExchangeFreeActivity.class);
-//							Bundle bundle = new Bundle();
-//							float sum = Float.parseFloat(sumTextView
-//									.getText().toString());
-//							bundle.putString("price", sum + "");
-//							intent.putExtras(bundle);
-//							GoCartActivity.this.startActivity(intent);
-//
-//						}
-//					})
-//			.setNegativeButton(
-//					"取消",
-//					new android.content.DialogInterface.OnClickListener() {
-//
-//						@Override
-//						public void onClick(DialogInterface dialog,
-//								int which) {
-//							// TODO Auto-generated method stub
-//							Intent intent = new Intent(
-//									GoCartActivity.this,
-//									CstmPayActivity.class);
-//							Bundle bundle = new Bundle();
-//							float sum = Float.parseFloat(sumTextView
-//									.getText().toString());
-//							bundle.putString("price", sum + "");
-//							intent.putExtras(bundle);
-//							GoCartActivity.this.startActivity(intent);
-//
-//						}
-//					}).create();
+			mTextView = (TextView) findViewById(R.id.actionbar_title);// title
+			mImageView = (TextView) findViewById(R.id.actionbar_left);// 返回
 
-	if (mbutton == null) {
-//		Log.e(GoCartActivity.class.getName(), "go cart act btn is null");
-//		Toast.makeText(
-//				GoCartActivity.this,
-//				GoCartActivity.this.getResources().getString(
-//						R.string.no_network), Toast.LENGTH_SHORT)
-//				.show();
-	} else {
-		mbutton.setOnClickListener(new OnClickListener() {
+			mTextView.setText(getResources().getString(R.string.cart));// title
+			((ImageView) findViewById(R.id.search_with_list))
+					.setVisibility(View.GONE);//隐藏图标
+			try {
+				mImageView.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				// getAddresses();
-				if (!myApplication.getIsLogin()) {
-					new Builder(GoCartActivity.this)
-							.setTitle(
-									getResources().getString(
-											R.string.tips))
-							.setMessage(R.string.please_login)
-							.setPositiveButton(
-									R.string.sure,
-									new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						GoCartActivity.this.finish();
+					}
+				});
+				// dialog = new Builder(GoCartActivity.this)
+				// .setTitle("换购商品")
+				// .setIcon(android.R.drawable.dialog_frame)
+				// .setMessage(
+				// getResources().getString(R.string.exchange_produce))
+				// .setPositiveButton(
+				// "确定",
+				// new android.content.DialogInterface.OnClickListener() {
+				//
+				// @Override
+				// public void onClick(DialogInterface arg0,
+				// int arg1) {
+				// Intent intent = new Intent(
+				// GoCartActivity.this,
+				// ExchangeFreeActivity.class);
+				// Bundle bundle = new Bundle();
+				// float sum = Float.parseFloat(sumTextView
+				// .getText().toString());
+				// bundle.putString("price", sum + "");
+				// intent.putExtras(bundle);
+				// GoCartActivity.this.startActivity(intent);
+				//
+				// }
+				// })
+				// .setNegativeButton(
+				// "取消",
+				// new android.content.DialogInterface.OnClickListener() {
+				//
+				// @Override
+				// public void onClick(DialogInterface dialog,
+				// int which) {
+				// // TODO Auto-generated method stub
+				// Intent intent = new Intent(
+				// GoCartActivity.this,
+				// CstmPayActivity.class);
+				// Bundle bundle = new Bundle();
+				// float sum = Float.parseFloat(sumTextView
+				// .getText().toString());
+				// bundle.putString("price", sum + "");
+				// intent.putExtras(bundle);
+				// GoCartActivity.this.startActivity(intent);
+				//
+				// }
+				// }).create();
 
-										@Override
-										public void onClick(
-												DialogInterface dialog,
-												int which) {
-											// TODO Auto-generated
-											// method stub
-											Intent intent = new Intent(
-													GoCartActivity.this,
-													LoginActivity.class);
-											startActivity(intent);
-										}
-										//
-									})
-							.setNegativeButton(
-									R.string.searchCancel,
-									new DialogInterface.OnClickListener() {
-
-										@Override
-										public void onClick(
-												DialogInterface dialog,
-												int which) {
-											// TODO Auto-generated
-											// method stub
-
-										}
-										//
-									}).create().show();
-					//
-					return;
+				if (mbutton == null) {
+					// Log.e(GoCartActivity.class.getName(),
+					// "go cart act btn is null");
+					// Toast.makeText(
+					// GoCartActivity.this,
+					// GoCartActivity.this.getResources().getString(
+					// R.string.no_network), Toast.LENGTH_SHORT)
+					// .show();
 				} else {
-					 cartList = new ArrayList<Cart>();
-					List<HashMap<String, Object>> orderCarts = CartUtil1.list1;
-					for(int i=0;i<orderCarts.size();i++){
-						HashMap<String, Object> map = orderCarts.get(i);
-						float ischeck =  Float.parseFloat(map.get("check").toString());
-//						Log.i("info", ischeck + "    ischeck");
-						Cart  cart1	= (Cart) map.get("cart");
-						if(ischeck == 1.0){
-							cartList.add(cart1);
-					}
-					}
-					Intent intent1 = new Intent(GoCartActivity.this,
-							CstmPayActivity.class);
-					Bundle bundle = new Bundle();
-					float sum = Float.parseFloat(sumTextView.getText()
-							.toString());
-					intent1.putExtra("carts", cartList);
-			
-					
-//						for(int i = 0; i<mList.size();i++){
-//							Cart cart = new Cart();
-//							sb.append(cart.getUId());
-//							sb.append(",");
-//							sb.append(cart.getAmount());
-//							sb.append("n");
-//							sb.append(";");
-//						}
-//						preferentialDataManage.getPreferential(sb.toString(),myApplication.getUserId());
-//						if (preferentialDataManage.getFreeGoods().size() != 0
-//								|| preferentialDataManage.getScoreGoods().size() != 0) {
-//							Intent intent = new Intent(GoCartActivity.this,
-//									ExchangeFreeActivity.class);
-//							
-//						}else{
-					
-					if (sum > 0) {
-						bundle.putString("cartActivity","Y");
-						bundle.putString("price", sum + "");
-						intent1.putExtras(bundle);
-						GoCartActivity.this.startActivity(intent1);
-					} else {
-						Toast.makeText(GoCartActivity.this, getResources().getString(R.string.buy_nothing),
-								Toast.LENGTH_LONG).show();
-					}
+					mbutton.setOnClickListener(new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							// getAddresses();
+							if (!myApplication.getIsLogin()) {
+								new Builder(GoCartActivity.this)
+										.setTitle(
+												getResources().getString(
+														R.string.tips))
+										.setMessage(R.string.please_login)
+										.setPositiveButton(
+												R.string.sure,
+												new DialogInterface.OnClickListener() {
+
+													@Override
+													public void onClick(
+															DialogInterface dialog,
+															int which) {
+														// TODO Auto-generated
+														// method stub
+														Intent intent = new Intent(
+																GoCartActivity.this,
+																LoginActivity.class);
+														startActivity(intent);
+													}
+													//
+												})
+										.setNegativeButton(
+												R.string.searchCancel,
+												new DialogInterface.OnClickListener() {
+
+													@Override
+													public void onClick(
+															DialogInterface dialog,
+															int which) {
+														// TODO Auto-generated
+														// method stub
+
+													}
+													//
+												}).create().show();
+								//
+								return;
+							} else {
+								cartList = new ArrayList<Cart>();
+								List<HashMap<String, Object>> orderCarts = CartUtil1.list1;
+								for (int i = 0; i < orderCarts.size(); i++) {
+									HashMap<String, Object> map = orderCarts
+											.get(i);
+									float ischeck = Float.parseFloat(map.get(
+											"check").toString());
+									// Log.i("info", ischeck + "    ischeck");
+									Cart cart1 = (Cart) map.get("cart");
+									if (ischeck == 1.0) {
+										cartList.add(cart1);
+									}
+								}
+								Intent intent1 = new Intent(
+										GoCartActivity.this,
+										CstmPayActivity.class);
+								Bundle bundle = new Bundle();
+								float sum = Float.parseFloat(sumTextView
+										.getText().toString());
+								intent1.putExtra("carts", cartList);
+
+								// for(int i = 0; i<mList.size();i++){
+								// Cart cart = new Cart();
+								// sb.append(cart.getUId());
+								// sb.append(",");
+								// sb.append(cart.getAmount());
+								// sb.append("n");
+								// sb.append(";");
+								// }
+								// preferentialDataManage.getPreferential(sb.toString(),myApplication.getUserId());
+								// if
+								// (preferentialDataManage.getFreeGoods().size()
+								// != 0
+								// ||
+								// preferentialDataManage.getScoreGoods().size()
+								// != 0) {
+								// Intent intent = new
+								// Intent(GoCartActivity.this,
+								// ExchangeFreeActivity.class);
+								//
+								// }else{
+
+								if (sum > 0) {
+									bundle.putString("cartActivity", "Y");
+									bundle.putString("price", sum + "");
+									intent1.putExtras(bundle);
+									GoCartActivity.this.startActivity(intent1);
+								} else {
+									Toast.makeText(
+											GoCartActivity.this,
+											getResources().getString(
+													R.string.buy_nothing),
+											Toast.LENGTH_LONG).show();
+								}
+							}
+						}
+						// }
+					});
 				}
-					}
-//				}
-			});
-	}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Toast.makeText(GoCartActivity.this, getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT)
-					.show();
-		}
-		//
-		//
-		scrollView.addView(layout);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Toast.makeText(GoCartActivity.this,
+						getResources().getString(R.string.bad_network),
+						Toast.LENGTH_SHORT).show();
+			}
+			//
+			//
+			scrollView.addView(layout);
 		}
 	}
 
@@ -299,7 +319,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 		@Override
 		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
 			// TODO Auto-generated method stub
-			String label =getResources().getString(R.string.update_time)
+			String label = getResources().getString(R.string.update_time)
 					+ DateUtils.formatDateTime(GoCartActivity.this,
 							System.currentTimeMillis(),
 							DateUtils.FORMAT_ABBREV_ALL
@@ -309,6 +329,7 @@ public class GoCartActivity extends SherlockActivity {// implements
 			mPullToRefreshScrollView.onRefreshComplete();
 		}
 	};
+
 	public class InnerReceiver extends BroadcastReceiver {
 
 		@Override
@@ -316,47 +337,46 @@ public class GoCartActivity extends SherlockActivity {// implements
 			// TODO Auto-generated method stub
 			String action = intent.getAction();
 			NOProduceActivity noProduceActivity = new NOProduceActivity();
-			Intent intent1 = new Intent(GoCartActivity.this, NOProduceActivity.class);
+			Intent intent1 = new Intent(GoCartActivity.this,
+					NOProduceActivity.class);
 			if (Consts.BROAD_UPDATE_CHANGE.equals(action)) {
 				// Log.i("info", action + "action");
 				layout.removeAllViews();
-//				sumTextView.setText(""+0.00);
-//				counTextView.setText(""+0);
+				// sumTextView.setText(""+0.00);
+				// counTextView.setText(""+0);
 				sumCart = dataManage.getCartAmount();
-				if(sumCart==0){
+				if (sumCart == 0) {
 					GoCartActivity.this.startActivity(intent1);
 					GoCartActivity.this.finish();
-				}else{
-				CartUtil1 cartUtil = new CartUtil1(GoCartActivity.this, layout,
-						counTextView, sumTextView, mBox);
-				cartUtil.AllComment();
-				sum = Float.parseFloat(sumTextView.getText()
-						.toString());
+				} else {
+					CartUtil1 cartUtil = new CartUtil1(GoCartActivity.this,
+							layout, counTextView, sumTextView, mBox);
+					cartUtil.AllComment();
+					sum = Float.parseFloat(sumTextView.getText().toString());
 				}
-			}else if(Consts.UPDATE_CHANGE.equals(action)){
-				layout.removeAllViews();	
+			} else if (Consts.UPDATE_CHANGE.equals(action)) {
+				layout.removeAllViews();
 				CartUtil1 cartUtil = new CartUtil1(GoCartActivity.this, layout,
 						counTextView, sumTextView, mBox);
 				cartUtil.AllComment();
-				sum = Float.parseFloat(sumTextView.getText()
-						.toString());
-			}else if(Consts.DELETE_CART.equals(action)){
+				sum = Float.parseFloat(sumTextView.getText().toString());
+			} else if (Consts.DELETE_CART.equals(action)) {
 				layout.removeAllViews();
 				sumCart = dataManage.getCartAmount();
-				if(sumCart==0){
-//					Log.e("NoProduceFragment", "GoCarActivity");
+				if (sumCart == 0) {
+					// Log.e("NoProduceFragment", "GoCarActivity");
 					GoCartActivity.this.finish();
-//					startActivity(intent1);
-				}else{
-				CartUtil1 cartUtil = new CartUtil1(GoCartActivity.this, layout,
-						counTextView, sumTextView, mBox);
-				cartUtil.AllComment();
-				sum = Float.parseFloat(sumTextView.getText()
-						.toString());
+					// startActivity(intent1);
+				} else {
+					CartUtil1 cartUtil = new CartUtil1(GoCartActivity.this,
+							layout, counTextView, sumTextView, mBox);
+					cartUtil.AllComment();
+					sum = Float.parseFloat(sumTextView.getText().toString());
 				}
 			}
 		}
 	}
+
 	// try {
 	// TODO Auto-generated method stub
 	// requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -380,7 +400,8 @@ public class GoCartActivity extends SherlockActivity {// implements
 	// } catch (Exception e) {
 	// // TODO Auto-generated catch block
 	// e.printStackTrace();
-	// Toast.makeText(GoCartActivity.this, "���粻������", Toast.LENGTH_SHORT).show();
+	// Toast.makeText(GoCartActivity.this, "���粻������",
+	// Toast.LENGTH_SHORT).show();
 	//
 	// }
 	//
