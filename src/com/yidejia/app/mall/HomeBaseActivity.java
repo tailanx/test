@@ -48,6 +48,19 @@ public class HomeBaseActivity extends BaseActivity {
 	protected void onStart() {
 		super.onStart();
 		initNavView();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		setNum();
+	}
+
+
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
 		setNum();
 	}
 
