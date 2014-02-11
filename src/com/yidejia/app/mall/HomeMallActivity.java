@@ -42,7 +42,6 @@ import com.yidejia.app.mall.phone.PhoneActivity;
 import com.yidejia.app.mall.search.SearchActivity;
 import com.yidejia.app.mall.skintest.SkinHomeActivity;
 import com.yidejia.app.mall.view.IntegeralActivity;
-import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.widget.BannerView;
 import com.yidejia.app.mall.yirihui.YirihuiActivity;
 
@@ -236,13 +235,15 @@ public class HomeMallActivity extends HomeBaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(HomeMallActivity.this,
-						PhoneActivity.class);
-				HomeMallActivity.this.startActivity(intent);
+				if(isLogin()) {
+					Intent intent = new Intent(HomeMallActivity.this,
+							PhoneActivity.class);
+					HomeMallActivity.this.startActivity(intent);
+				}
 			}
 		});
 		RelativeLayout myHistory = (RelativeLayout) child
-				.findViewById(R.id.function_history);// 浏览历史
+				.findViewById(R.id.function_history);// 消息中心
 		myHistory.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -345,21 +346,6 @@ public class HomeMallActivity extends HomeBaseActivity {
 			startActivity(intent);
 		}
 	};
-
-	/** 检查是否已登录 **/
-	private boolean isLogin() {
-		if (!MyApplication.getInstance().getIsLogin()) {
-			Toast.makeText(this,
-					getResources().getString(R.string.please_login),
-					Toast.LENGTH_LONG).show();
-			Intent intent1 = new Intent(HomeMallActivity.this,
-					LoginActivity.class);
-			startActivity(intent1);
-			return false;
-		}
-
-		return true;
-	}
 
 	/** 设置大家都在买的组 **/
 	private void setDjdzmView(ArrayList<MainProduct> products) {

@@ -138,6 +138,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:clickable="true"
                 android:padding="@dimen/head_padding" >
 
                 <ImageView
@@ -178,7 +179,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/width_fu_add"
-                    android:clickable="true" />
+                    android:clickable="false" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -200,6 +201,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:clickable="true"
                 android:padding="@dimen/head_padding" >
 
                 <ImageView
@@ -241,7 +243,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/width_fu_add"
-                    android:clickable="true" />
+                    android:clickable="false" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -262,6 +264,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:clickable="true"
                 android:padding="@dimen/head_padding" >
 
                 <ImageView
@@ -302,7 +305,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/width_fu_add"
-                    android:clickable="true" />
+                    android:clickable="false" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -323,6 +326,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:clickable="true"
                 android:padding="@dimen/head_padding" >
 
                 <ImageView
@@ -363,7 +367,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/width_fu_add"
-                    android:clickable="true" />
+                    android:clickable="false" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -517,7 +521,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/width_fu_add"
                     android:checked="true"
-                    android:clickable="true" />
+                    android:clickable="false" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -590,7 +594,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/width_fu_add"
-                    android:clickable="true" />
+                    android:clickable="false" />
             </RelativeLayout>
 
             <RelativeLayout

@@ -6,16 +6,14 @@
 
     <ImageView
         android:id="@+id/iv_search_icon"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignParentLeft="true"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/margin_left"
         android:contentDescription="@string/yidejia"
         android:gravity="center"
-        android:paddingBottom="@dimen/margin_left"
-        android:paddingTop="@dimen/margin_left"
         android:src="@drawable/all_category" />
 
     <LinearLayout

@@ -116,10 +116,13 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener {
 			public void success(String content) {
 				// TODO Auto-generated method stub
 				Log.e("system.out", content);
+				String showMsg ;
 				if(parseSignAdd(content)){
-					
+					showMsg = "获得" + respMsg + "个爱豆";
+				} else {
+					showMsg = respMsg;
 				}
-				Toast.makeText(QiandaoActivity.this, respMsg, Toast.LENGTH_SHORT).show();
+				Toast.makeText(QiandaoActivity.this, showMsg, Toast.LENGTH_SHORT).show();
 			}
 		});
 	}

@@ -124,7 +124,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="8dp"
-                    android:background="@drawable/complete"
+                    android:background="@drawable/theme_selector_text"
                     android:text="申请"
                     android:textColor="#eeeeee"
                     android:textSize="15sp" />

@@ -30,7 +30,7 @@
         android:layout_below="@+id/favorite_empty_textview"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:background="@drawable/clear_search"
+        android:background="@drawable/theme_selector_text"
         android:text="去逛一下"
         android:textColor="#eeeeee"
         android:textSize="15sp" />

@@ -117,7 +117,8 @@ public class HomeCartActivity extends HomeBaseActivity implements
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		cartList.clear();
+		if(null != cartList)
+			cartList.clear();
 	}
 
 	private void setViewCtrl(View view) {

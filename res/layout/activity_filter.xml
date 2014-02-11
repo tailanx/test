@@ -11,14 +11,14 @@
         android:layout_height="48dp"
         android:background="@drawable/filter_topbg" >
 
-        <Button
+        <TextView
             android:id="@+id/filter_complete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_margin="6dp"
-            android:background="@drawable/complete"
+            android:background="@drawable/theme_selector_text"
             android:text="完成" />
 
         <Button

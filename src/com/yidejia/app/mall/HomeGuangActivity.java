@@ -51,11 +51,13 @@ public class HomeGuangActivity extends HomeBaseActivity implements
 		Intent intent = null;
 		switch (v.getId()) {
 		case R.id.iv_guang_qiandao:
+			if(!isLogin()) return; 
 			intent = new Intent();
 			intent.setClass(this, QiandaoActivity.class);
 			break;
 
 		case R.id.iv_guang_yaoyiyao:
+			if(!isLogin()) return;
 			intent = new Intent();
 			intent.setClass(this, TestSharkActivity.class);
 			break;
