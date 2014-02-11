@@ -1,25 +1,32 @@
 package com.yidejia.app.mall.phone;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.util.Consts;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.util.IsPhone;
 
 /**
@@ -31,9 +38,17 @@ import com.yidejia.app.mall.util.IsPhone;
 public class PhoneActivity extends BaseActivity implements OnClickListener {
 	private EditText etPhoneNumber;
 	private ImageView ivPhoneContact;
-	private Button bt30, bt50, bt100, btCommito;
+	private Button bt30, bt50, bt100, btCommit;
+	private RelativeLayout rlPhonePrice;
 	private TextView tvRealPrice;
 	private String numberContact;
+	
+	private String cardid;	//卡类id
+	private String inprice;	//所需面额
+	private String game_area;	//运营商
+	private String details;	//商品信息
+	
+	private boolean isCanClick = false;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -45,7 +60,7 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 
 		initview();
 		ivPhoneContact.setOnClickListener(this);
-		btCommito.setOnClickListener(this);
+		btCommit.setOnClickListener(this);
 	}
 
 	/**
@@ -57,15 +72,20 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 		bt30 = (Button) findViewById(R.id.bt_price_30);
 		bt50 = (Button) findViewById(R.id.bt_price_50);
 		bt100 = (Button) findViewById(R.id.bt_price_100);
+		
+		rlPhonePrice = (RelativeLayout) findViewById(R.id.rl_phone_price);
 
 		bt100.setOnClickListener(this);// 30元点击事件
 		bt30.setOnClickListener(this);// 50元点击事件
 		bt50.setOnClickListener(this);// 100元点击事件
-		bt30.setSelected(true);
+		bt100.setSelected(true);
 
-		btCommito = (Button) findViewById(R.id.iv_commit_phone_contace);
+		btCommit = (Button) findViewById(R.id.iv_commit_phone_contace);
 		tvRealPrice = (TextView) findViewById(R.id.tv_price_contact);
-
+		
+		TelephonyManager phoneMgr=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+		etPhoneNumber.setText(phoneMgr.getLine1Number());
+		showPrice();
 	}
 
 	@Override
@@ -91,6 +111,9 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 			} else {
 				intent = new Intent();
 				intent.setClass(this, ContactSureActivity.class);
+				intent.putExtra("details", details);
+				intent.putExtra("price", inprice);
+				intent.putExtra("phone", phoneNumber);
 				startActivity(intent);
 			}
 			break;
@@ -98,18 +121,77 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 			bt30.setSelected(true);
 			bt50.setSelected(false);
 			bt100.setSelected(false);
+			showPrice();
 			break;
 		case R.id.bt_price_50:
 			bt30.setSelected(false);
 			bt50.setSelected(true);
 			bt100.setSelected(false);
+			showPrice();
 			break;
 		case R.id.bt_price_100:
 			bt30.setSelected(false);
 			bt50.setSelected(false);
 			bt100.setSelected(true);
+			showPrice();
 			break;
 		}
+	}
+	
+	private void showPrice(){
+		isCanClick = false;
+		rlPhonePrice.setVisibility(View.INVISIBLE);
+		String handset = etPhoneNumber.getText().toString().trim();
+		String amount = getAmount();
+		if(IsPhone.isMobileNO(handset))
+			getSimData(handset, amount);
+	}
+	
+	private String getAmount(){
+		return (bt30.isSelected())?"30":(bt50.isSelected()?"50":"100");
+	}
+	
+	/**
+	 * 获取手机号码handset的sim情况和充值面值amount所需的价格
+	 * @param handset 手机号码
+	 * @param amount 面值
+	 */
+	private void getSimData(String handset, String amount){
+		String url = "http://u.yidejia.com/index.php?m=of&c=index&a=telquery&handset="+handset + "&amount=" + amount;
+		HttpClientUtil httpClientUtil = new HttpClientUtil();
+		httpClientUtil.getHttpResp(url, new IHttpResp() {
+			
+			@Override
+			public void success(String content) {
+				if(parseSim(content)){
+					rlPhonePrice.setVisibility(View.VISIBLE);
+					isCanClick = true;
+					tvRealPrice.setText(game_area + inprice);
+				}
+			}
+		});
+	}
+	
+	/**
+	 * 解析Sim信息数据
+	 * @param content
+	 */
+	private boolean parseSim(String content){
+		try {
+			JSONObject simObject = new JSONObject(content);
+			if(!"1".equals(simObject.opt("retcode"))){
+				Toast.makeText(this, simObject.optString("err_msg"), Toast.LENGTH_SHORT).show();
+			} else {
+				cardid = simObject.optString("cardid");
+				inprice = simObject.optString("inprice");
+				game_area = simObject.optString("game_area");
+				details = simObject.optString("cardname");
+				return true;
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		 return false;
 	}
 
 	@Override
@@ -118,6 +200,7 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 				&& resultCode == Activity.RESULT_OK) {
 			Uri contactData = data.getData();
 			getContactNum(contactData);
+			showPrice();
 		}
 	}
 
