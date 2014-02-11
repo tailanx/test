@@ -65,6 +65,7 @@ public class HomeCartActivity extends HomeBaseActivity implements
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
+		cartList = new ArrayList<Cart>();
 		setActionBarConfig();// 头部
 		rightTextView = (TextView) findViewById(R.id.ab_common_tv_right);
 		myApplication = MyApplication.getInstance();
@@ -117,7 +118,8 @@ public class HomeCartActivity extends HomeBaseActivity implements
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		cartList.clear();
+		if (!cartList.isEmpty())
+			cartList.clear();
 	}
 
 	private void setViewCtrl(View view) {
@@ -204,7 +206,6 @@ public class HomeCartActivity extends HomeBaseActivity implements
 	}
 
 	private void go2Pay() {
-		cartList = new ArrayList<Cart>();
 		List<HashMap<String, Object>> orderCarts = CartUtil1.list1;
 		for (int i = 0; i < orderCarts.size(); i++) {
 			HashMap<String, Object> map = orderCarts.get(i);

@@ -82,25 +82,28 @@
 
             <TextView
                 android:layout_width="wrap_content"
+                android:layout_marginRight="@dimen/white_bg_padding"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/mall_list_padding"
+                android:layout_marginLeft="@dimen/magin_left_add_add"
                 android:text="@string/qiandao_order"
                 android:textColor="@color/white_white"
                 android:textSize="@dimen/textsize_big_big" />
 
             <TextView
                 android:layout_width="wrap_content"
+                android:layout_marginRight="@dimen/white_bg_padding"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/mall_list_padding"
+                android:layout_marginLeft="@dimen/magin_left_add_add"
                 android:layout_marginTop="@dimen/margin_left"
                 android:text="@string/qiandao_order_1"
                 android:textColor="@color/white_white"
                 android:textSize="@dimen/textsize_small" />
 
             <TextView
+                android:layout_marginRight="@dimen/white_bg_padding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/mall_list_padding"
+                android:layout_marginLeft="@dimen/magin_left_add_add"
                 android:layout_marginTop="@dimen/margin_left"
                 android:text="@string/qiandao_order_2"
                 android:textColor="@color/white_white"
@@ -109,11 +112,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/mall_list_padding"
+                android:layout_marginLeft="@dimen/magin_left_add_add"
+                android:layout_marginRight="@dimen/white_bg_padding"
                 android:layout_marginTop="@dimen/margin_left"
                 android:text="@string/qiandao_order_3"
                 android:textColor="@color/white_white"
                 android:textSize="@dimen/textsize_small" />
+
         </LinearLayout>
     </LinearLayout>
 

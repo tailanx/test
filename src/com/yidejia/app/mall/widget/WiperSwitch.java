@@ -62,9 +62,9 @@ public class WiperSwitch extends View implements OnTouchListener{
       
     public void init(){  
         //����ͼƬ��Դ  
-        bg_on = BitmapFactory.decodeResource(getResources(), R.drawable.a);  
-        bg_off = BitmapFactory.decodeResource(getResources(), R.drawable.b);  
-        slipper_btn = BitmapFactory.decodeResource(getResources(), R.drawable.c);  
+        bg_on = BitmapFactory.decodeResource(getResources(), R.drawable.switch_bg);  
+        bg_off = BitmapFactory.decodeResource(getResources(), R.drawable.switch_bgoff);  
+        slipper_btn = BitmapFactory.decodeResource(getResources(), R.drawable.switch_on);  
           
         setOnTouchListener(this);  
     }  
@@ -76,7 +76,7 @@ public class WiperSwitch extends View implements OnTouchListener{
         float x = 0;  
           
         //���nowX���ñ����������߹�״̬  
-        if (nowX < (bg_on.getWidth()/2)){  
+        if (nowX < (bg_on.getWidth()/3)){  
             canvas.drawBitmap(bg_off, matrix, paint);//�����ر�ʱ�ı���  
         }else{  
             canvas.drawBitmap(bg_on, matrix, paint);//������ʱ�ı���   

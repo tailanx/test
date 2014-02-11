@@ -2,6 +2,7 @@ package com.yidejia.app.mall;
 
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -27,6 +28,7 @@ public class BaseActivity extends SherlockFragmentActivity {
 				BaseActivity.this.finish();
 			}
 		});
+		
 	}
 
 	public void setTitle(String text) {
