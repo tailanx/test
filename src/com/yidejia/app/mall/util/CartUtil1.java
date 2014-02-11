@@ -281,7 +281,6 @@ public class CartUtil1 {
 								mBox.setChecked(false);
 							}
 							if (dele != 0) {
-								Log.e("info", dele+"dele");
 								deleTextView.setVisibility(View.VISIBLE);
 							} else {
 								deleTextView.setVisibility(View.GONE);
@@ -377,7 +376,9 @@ public class CartUtil1 {
 											map.put("count", (float) 0);
 											boolean isDel = dataManage
 													.delCart(cart.getUId());
+											list1.remove(which);
 											dialog.dismiss();
+											
 											Message ms1 = new Message();
 											ms1.what = 125;
 											mList.remove(checkBox);

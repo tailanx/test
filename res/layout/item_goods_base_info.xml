@@ -341,6 +341,7 @@
             android:background="@drawable/shape_bg_cart_num"
             android:gravity="center"
             android:textColor="@color/white"
+            android:visibility="gone"
             android:textSize="@dimen/textsize_small_small" />
     </RelativeLayout>
 

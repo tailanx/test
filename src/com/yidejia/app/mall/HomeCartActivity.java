@@ -56,6 +56,7 @@ public class HomeCartActivity extends HomeBaseActivity implements
 	private CartsDataManage cartsDataManage;
 	private TextView rightTextView;// 删除
 	private AlertDialog dialog;// 对话框
+	private TextView cartImage;// 购物车图标
 
 	// private int i;// 购物车中商品的数目
 
@@ -68,6 +69,7 @@ public class HomeCartActivity extends HomeBaseActivity implements
 		rightTextView = (TextView) findViewById(R.id.ab_common_tv_right);
 		myApplication = MyApplication.getInstance();
 		setContentView(R.layout.activity_main_fragment_layout);
+		cartImage = (TextView) findViewById(R.id.down_shopping_cart); // 购物车上的按钮
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
 		inflater = LayoutInflater.from(this);
 		setCurrentActivityId(3);
@@ -115,6 +117,7 @@ public class HomeCartActivity extends HomeBaseActivity implements
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		cartList.clear();
 	}
 
 	private void setViewCtrl(View view) {
@@ -256,7 +259,7 @@ public class HomeCartActivity extends HomeBaseActivity implements
 		super.setNum();
 		CartsDataManage cartsDataManage = new CartsDataManage();
 		int number = cartsDataManage.getCartAmount();
-		TextView cartImage = (TextView) findViewById(R.id.down_shopping_cart); // 购物车上的按钮
+
 		if (number == 0) {
 			rightTextView.setVisibility(View.GONE);
 			view = inflater.inflate(R.layout.no_produce, null);
@@ -312,18 +315,21 @@ public class HomeCartActivity extends HomeBaseActivity implements
 										if (number == 0) {
 											rightTextView
 													.setVisibility(View.GONE);
+											cartImage.setVisibility(View.GONE);
 											view = inflater.inflate(
 													R.layout.no_produce, null);
 											frameLayout.addView(view);
 
 											setNoProduce(view);
 										} else {
+											cartImage.setText(number + "");
 											view = inflater.inflate(
 													// 重新加载购物车
 													R.layout.shopping_cart,
 													null);
 											frameLayout.addView(view);
 											setViewCtrl(view);
+
 										}
 
 									}
