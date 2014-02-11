@@ -13,6 +13,7 @@ import com.yidejia.app.mall.util.CartUtil1;
 import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 
+import android.app.AlertDialog;
 //import android.app.Activity;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -37,7 +38,8 @@ import android.widget.Toast;
  * @author Administrator
  * 
  */
-public class HomeCartActivity extends HomeBaseActivity {
+public class HomeCartActivity extends HomeBaseActivity implements
+		OnClickListener {
 	private TextView shoppingCartTopay;// 编辑
 	private MyApplication myApplication;
 	private FrameLayout frameLayout;
@@ -51,45 +53,32 @@ public class HomeCartActivity extends HomeBaseActivity {
 	public static ArrayList<Cart> cartList;
 	public static float sum;
 	private Button mButton;
-	// private ImageLoader imageLoader;
-	// private ImageLoadingListener listener;
-	// private DisplayImageOptions options;
-
-	// private BottomChange bottomChange;
-
-	// private RelativeLayout downHomeLayout;
-	// private RelativeLayout downGuangLayout;
-	// private RelativeLayout downSearchLayout;
-	// private RelativeLayout downShoppingLayout;
-	// private RelativeLayout downMyLayout;
 	private CartsDataManage cartsDataManage;
+	private TextView rightTextView;// 删除
+	private AlertDialog dialog;// 对话框
+	private TextView cartImage;// 购物车图标
+
+	// private int i;// 购物车中商品的数目
+
+	// private CartD
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-
+		setActionBarConfig();// 头部
+		rightTextView = (TextView) findViewById(R.id.ab_common_tv_right);
 		myApplication = MyApplication.getInstance();
 		setContentView(R.layout.activity_main_fragment_layout);
+		cartImage = (TextView) findViewById(R.id.down_shopping_cart); // 购物车上的按钮
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
 		inflater = LayoutInflater.from(this);
-
-		// 设置底部,获取当前的界面的id
-		// int current = getIntent().getIntExtra("current", -1);
-		// int next = getIntent().getIntExtra("next", -1);
-		// bottomLayout = (RelativeLayout)
-		// findViewById(R.id.down_parent_layout);
-		// bottomChange = new BottomChange(this, bottomLayout);
-		// if (current != -1 || next != -1) {
-		// bottomChange.initNavView(current, next);
-		// }
-
-		setActionBarConfig();
 		setCurrentActivityId(3);
 
 		cartsDataManage = new CartsDataManage();
+		rightTextView.setOnClickListener(this);
 	}
-	
-	private void refreshView(){
+
+	private void refreshView() {
 		if (cartsDataManage.getCartAmount() != 0) {
 			view = inflater.inflate(R.layout.shopping_cart, null);
 			frameLayout.addView(view);
@@ -128,9 +117,7 @@ public class HomeCartActivity extends HomeBaseActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		// imageLoader.init(ImageLoaderConfiguration
-		// .createDefault(HomeCarActivity.this));
-		// imageLoader.stop();
+		cartList.clear();
 	}
 
 	private void setViewCtrl(View view) {
@@ -152,7 +139,8 @@ public class HomeCartActivity extends HomeBaseActivity {
 		ScrollView scrollView = (ScrollView) view
 				.findViewById(R.id.shopping_cart_item_goods_scrollView);
 
-		cartUtil = new CartUtil1(this, layout, counTextView, sumTextView, mBox);
+		cartUtil = new CartUtil1(this, layout, counTextView, sumTextView, mBox,
+				rightTextView);
 
 		cartUtil.AllComment();
 
@@ -189,8 +177,7 @@ public class HomeCartActivity extends HomeBaseActivity {
 		leftButton.setVisibility(View.GONE);
 		shoppingCartTopay = (TextView) findViewById(R.id.ab_common_tv_right);
 		shoppingCartTopay.setVisibility(View.VISIBLE);
-		shoppingCartTopay.setText(getResources().getString(
-				R.string.addresss_edit));
+		shoppingCartTopay.setText(getResources().getString(R.string.delete));
 		setTitle(getResources().getString(R.string.down_shopping_text));
 	}
 
@@ -225,8 +212,14 @@ public class HomeCartActivity extends HomeBaseActivity {
 			Log.e("voucher", ischeck + "    ischeck");
 			Cart cart1 = (Cart) map.get("cart");
 			if (ischeck == 1.0) {
+				// i++;
 				cartList.add(cart1);
 			}
+			// if(i != 0){
+			// rightTextView.setVisibility(View.VISIBLE);
+			// }else{
+			// rightTextView.setVisibility(View.GONE);
+			// }
 		}
 		Intent intent1 = new Intent(this, CstmPayActivity.class);
 		Bundle bundle = new Bundle();
@@ -259,5 +252,91 @@ public class HomeCartActivity extends HomeBaseActivity {
 		super.onResume();
 		StatService.onPageStart(this, getString(R.string.down_shopping_text));
 		refreshView();
+	}
+
+	@Override
+	public void setNum() {
+		super.setNum();
+		CartsDataManage cartsDataManage = new CartsDataManage();
+		int number = cartsDataManage.getCartAmount();
+
+		if (number == 0) {
+			rightTextView.setVisibility(View.GONE);
+			view = inflater.inflate(R.layout.no_produce, null);
+			frameLayout.addView(view);
+			setNoProduce(view);
+		} else {
+			rightTextView.setVisibility(View.VISIBLE);
+			cartImage.setVisibility(View.VISIBLE);
+			cartImage.setText(number + "");
+
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.ab_common_tv_right:// 删除
+			getDialog().show();
+			break;
+		}
+	}
+
+	/**
+	 * 创建一个对话框
+	 * 
+	 * @return
+	 */
+	private AlertDialog getDialog() {
+		dialog = new AlertDialog.Builder(this)
+				.setTitle(getResources().getString(R.string.delete))
+				.setIcon(R.drawable.ic_launcher)
+				.setMessage(getResources().getString(R.string.sure_delete))
+				.setNegativeButton(
+						getResources().getString(R.string.searchCancel), null)
+				.setPositiveButton(getResources().getString(R.string.sure),
+						new android.content.DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								List<HashMap<String, Object>> orderCarts = CartUtil1.list1;
+								for (int i = 0; i < orderCarts.size(); i++) {
+									HashMap<String, Object> map = orderCarts
+											.get(i);
+									float ischeck = Float.parseFloat(map.get(
+											"check").toString());
+									Cart cart1 = (Cart) map.get("cart");
+									if (ischeck == 1.0) {
+										cartsDataManage.delCart(cart1.getUId());// 删除选中的商品
+										frameLayout.removeAllViews();// 移除所有的商品
+										int number = cartsDataManage
+												.getCartAmount();
+										if (number == 0) {
+											rightTextView
+													.setVisibility(View.GONE);
+											cartImage.setVisibility(View.GONE);
+											view = inflater.inflate(
+													R.layout.no_produce, null);
+											frameLayout.addView(view);
+
+											setNoProduce(view);
+										} else {
+											cartImage.setText(number + "");
+											view = inflater.inflate(
+													// 重新加载购物车
+													R.layout.shopping_cart,
+													null);
+											frameLayout.addView(view);
+											setViewCtrl(view);
+
+										}
+
+									}
+
+								}
+							}
+						}).create();
+		return dialog;
 	}
 }

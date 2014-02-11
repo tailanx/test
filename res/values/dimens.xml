@@ -17,6 +17,7 @@
     <dimen name="textsize_small_add">16sp</dimen>
     <dimen name="textsize_small_small">12sp</dimen>
     <dimen name="textsize_small_small_small">11sp</dimen>
+    <dimen name="textsize_small_small_small_small">9sp</dimen>
     <dimen name="image_width">590dp</dimen>
     <dimen name="image_height">290dp</dimen>
     <dimen name="login_height">220dp</dimen>
@@ -51,8 +52,9 @@
     <dimen name="actiobar_margin_left">2dp</dimen>
     <dimen name="width_add">1dp</dimen>
     <dimen name="width">0dp</dimen>
+    <dimen name="width_ad">-12dp</dimen>
     <dimen name="width_add_fun">-1dp</dimen>
-    <dimen name="width_fu_add">-25dp</dimen>
+    <dimen name="width_fu_add">-35dp</dimen>
     <dimen name="width_fu">-45dp</dimen>
 
 </resources>

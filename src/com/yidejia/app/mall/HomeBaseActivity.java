@@ -1,6 +1,7 @@
 package com.yidejia.app.mall;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -97,9 +98,10 @@ public class HomeBaseActivity extends BaseActivity {
 	}
 
 	/** 设置底部数字 **/
-	private void setNum() {
+	public void setNum() {
 		CartsDataManage cartsDataManage = new CartsDataManage();
 		int number = cartsDataManage.getCartAmount();
+		Log.e("info", number+"");
 		TextView cartImage = (TextView) findViewById(R.id.down_shopping_cart); // 购物车上的按钮
 		if (number == 0) {
 			cartImage.setVisibility(View.GONE);

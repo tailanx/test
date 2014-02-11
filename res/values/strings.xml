@@ -332,5 +332,6 @@
     <string name="integeral_must">立即使用</string>
     <string name="home_searche_yidejia">搜索伊的家的商品</string>
     <string name="no_phone_number">请输入正确的手机号码</string>
+    <string name="sure_delete">请问是否要删除商品</string>
 
 </resources>

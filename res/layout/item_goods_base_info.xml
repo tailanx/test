@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:background="@color/main_bg">
+    android:layout_height="match_parent"
+    android:background="@color/main_bg" >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             <RelativeLayout
                 android:id="@+id/re_top_relativelayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" 
+                android:layout_height="wrap_content"
                 android:background="@drawable/main_theme_textview_bg" >
 
                 <com.yidejia.app.mall.widget.YLViewPager
@@ -57,26 +57,26 @@
                 android:id="@+id/base_info_price_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
                 android:layout_below="@id/tv_item_goods_base_produce_detail"
-                android:layout_margin="@dimen/margin_left" >
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_left"
+                android:gravity="center" >
 
                 <TextView
                     android:id="@+id/price"
                     android:layout_width="0dip"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_left"
+                    android:layout_weight="1"
                     android:textColor="@color/theme"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/text_size" />
+                    android:textSize="@dimen/text_size"
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/iv_add_to_cart"
                     android:layout_width="0dip"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:clickable="true"
                     android:contentDescription="@string/yidejia"
                     android:focusable="true"
@@ -88,58 +88,55 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/base_info_price_layout"
-                android:padding="@dimen/mall_list_padding"
                 android:background="@drawable/p_bg"
                 android:gravity="center_vertical"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:padding="@dimen/mall_list_padding" >
 
                 <TextView
                     android:id="@+id/tv_selled_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-	                android:textColor="@color/text_color_80"
-                    android:text="@string/shell" />
+                    android:text="@string/shell"
+                    android:textColor="@color/text_color_80" />
 
                 <TextView
                     android:id="@+id/tv_selled_num_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-	                android:textColor="@color/text_color_80"
                     android:gravity="left"
-                     />
+                    android:textColor="@color/text_color_80" />
 
                 <TextView
                     android:id="@+id/tv_emulate_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-	                android:textColor="@color/text_color_80"
-                    android:text="@string/comment" />
+                    android:text="@string/comment"
+                    android:textColor="@color/text_color_80" />
 
                 <TextView
                     android:id="@+id/tv_emulate_num_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-	                android:textColor="@color/text_color_80"
                     android:gravity="left"
-                     />
+                    android:textColor="@color/text_color_80" />
 
                 <TextView
                     android:id="@+id/tv_show_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-	                android:textColor="@color/text_color_80"
-                    android:text="@string/show_order" />
+                    android:text="@string/show_order"
+                    android:textColor="@color/text_color_80" />
 
                 <TextView
                     android:id="@+id/tv_show_num_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-	                android:textColor="@color/text_color_80"
                     android:gravity="left"
-                     />
+                    android:textColor="@color/text_color_80" />
             </LinearLayout>
 
             <LinearLayout
@@ -147,42 +144,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/buy_add_layout"
-                android:padding="@dimen/mall_list_padding"
                 android:layout_marginTop="-1dp"
                 android:background="@drawable/p_bg"
                 android:gravity="center_vertical"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:padding="@dimen/mall_list_padding" >
 
                 <TextView
                     android:id="@+id/tv_brand_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-	                android:textColor="@color/text_color_80"
-                    android:text="@string/brand" />
+                    android:text="@string/brand"
+                    android:textColor="@color/text_color_80" />
 
                 <TextView
                     android:id="@+id/tv_brand_name_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-	                android:textColor="@color/text_color_80"
-                     />
+                    android:textColor="@color/text_color_80" />
 
                 <TextView
                     android:id="@+id/tv_product_id_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_top"
-	                android:textColor="@color/text_color_80"
-                    android:text="@string/product_id" />
+                    android:text="@string/product_id"
+                    android:textColor="@color/text_color_80" />
 
                 <TextView
                     android:id="@+id/tv_product_id_num_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-	                android:textColor="@color/text_color_80"
                     android:layout_weight="1"
-                     />
+                    android:textColor="@color/text_color_80" />
             </LinearLayout>
 
             <LinearLayout
@@ -190,24 +185,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/li_buy_add_layout_second"
-                android:padding="@dimen/mall_list_padding"
-                android:background="@drawable/p_bg"
                 android:layout_marginTop="-1dp"
+                android:background="@drawable/p_bg"
                 android:gravity="center_vertical"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:padding="@dimen/mall_list_padding" >
 
                 <TextView
                     android:id="@+id/standard_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-	                android:textColor="@color/text_color_80"
-                    android:text="@string/standard_text" />
+                    android:text="@string/standard_text"
+                    android:textColor="@color/text_color_80" />
 
                 <TextView
                     android:id="@+id/standard_content_text"
-	                android:textColor="@color/text_color_80"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color_80" />
             </LinearLayout>
 
             <RelativeLayout
@@ -216,19 +211,19 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/li_buy_add_layout_third"
                 android:layout_marginTop="@dimen/margin_left"
-                android:clickable="true"
-                android:background="@drawable/p_bg" >
+                android:background="@drawable/p_bg"
+                android:clickable="true" >
 
                 <TextView
                     android:id="@+id/tv_produce_comments"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_left"
                     android:drawableLeft="@drawable/product_comment"
                     android:gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/margin_left"
                     android:text="@string/produce_comment"
-	                android:textColor="@color/text_color_80"
+                    android:textColor="@color/text_color_80"
                     android:textSize="@dimen/textsize_big_big" />
 
                 <ImageView
@@ -248,19 +243,19 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/re_produce_comments"
                 android:layout_marginTop="-1dp"
-                android:clickable="true"
-                android:background="@drawable/p_bg" >
+                android:background="@drawable/p_bg"
+                android:clickable="true" >
 
                 <TextView
                     android:id="@+id/tv_produce_image_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:gravity="center_vertical"
-                    android:drawableLeft="@drawable/product_detail"
                     android:layout_marginLeft="@dimen/margin_left"
+                    android:drawableLeft="@drawable/product_detail"
+                    android:gravity="center_vertical"
                     android:text="@string/produce_imagecomment"
-	                android:textColor="@color/text_color_80"
+                    android:textColor="@color/text_color_80"
                     android:textSize="@dimen/textsize_big_big" />
 
                 <ImageView
@@ -279,10 +274,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/re_produce_image_detail"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="@dimen/mall_list_padding"
+                android:layout_marginTop="10dp"
                 android:text="@string/match_goods"
-	            android:textColor="@color/text_color_80"
+                android:textColor="@color/text_color_80"
                 android:textSize="@dimen/textsize_big_big" />
 
             <HorizontalScrollView
@@ -321,7 +316,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/shoppingcart_mask" />
 
-        <!-- <Button
+        <!--
+             <Button
             android:id="@+id/shopping_cart_button"
             android:layout_width="24dp"
             android:layout_height="14dp"
@@ -331,19 +327,21 @@
             android:layout_marginTop="4dp"
             android:background="@drawable/shape_bg_cart_num"
             android:textColor="@color/white"
-            android:textSize="12sp" /> -->
+            android:textSize="12sp" />
+        -->
+
         <TextView
             android:id="@+id/btn_cart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignRight="@+id/shopping_cart_image"
-            android:layout_marginTop="4dp"
             android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp"
             android:background="@drawable/shape_bg_cart_num"
             android:gravity="center"
-            android:text="@string/hour"
             android:textColor="@color/white"
+            android:visibility="gone"
             android:textSize="@dimen/textsize_small_small" />
     </RelativeLayout>
 

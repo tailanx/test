@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -36,6 +37,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.yidejia.app.mall.HomeCartActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
@@ -44,7 +46,7 @@ import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.view.LoginActivity;
 
 public class CartUtil1 {
-	private Context context;
+	private Activity activity;
 	private LayoutInflater inflater;
 	private LinearLayout linearLayout;
 	public static List<HashMap<String, Float>> list;// ������Ŀ��ֵ�Ǽ۸�
@@ -54,6 +56,7 @@ public class CartUtil1 {
 	private CartsDataManage dataManage;
 	private List<Object> mList;
 	public static List<HashMap<String, Object>> list1;
+	private TextView deleTextView;// 删除
 
 	// private MyApplication myApplication;
 	// private InnerReceiver receiver;
@@ -68,30 +71,27 @@ public class CartUtil1 {
 
 	/**
 	 * 
-	 * @param context
+	 * @param activity
 	 */
-	public CartUtil1(Context context, LinearLayout linearLayout,
-			TextView mTextView, TextView sumTextView, CheckBox box) {// ,View
-																		// view
-		this.inflater = LayoutInflater.from(context); // ,UserCommentDataManage
-		// myApplication = (MyApplication) context.getApplicationContext();
+	public CartUtil1(Activity activity, LinearLayout linearLayout,
+			TextView mTextView, TextView sumTextView, CheckBox box,
+			TextView rightTextView) {// ,View
+		// view
+		this.inflater = LayoutInflater.from(activity); // ,UserCommentDataManage
+		// myApplication = (MyApplication) activity.getApplicationContext();
 		this.linearLayout = linearLayout;
-		this.context = context;
+		this.activity = activity;
+		this.deleTextView = rightTextView;
 		this.mTextView = mTextView;
 		this.sumTextView = sumTextView;
 		this.mBox = box;
 		initDisplayImageOption();
-		// receiver = new InnerReceiver();
-		// IntentFilter filter = new IntentFilter();
-		// this.context.registerReceiver(receiver, filter);
-		// filter.addAction(Consts.UPDATE_CHANGE);
 	}
-
-	
 
 	private void initDisplayImageOption() {
 		options = MyApplication.getInstance().initBannerImageOption();
-		animateFirstListener = MyApplication.getInstance().getImageLoadingListener();
+		animateFirstListener = MyApplication.getInstance()
+				.getImageLoadingListener();
 	}
 
 	private ImageLoadingListener animateFirstListener;
@@ -117,21 +117,26 @@ public class CartUtil1 {
 			list1 = new ArrayList<HashMap<String, Object>>();
 			int a = 0;
 			float b = 0;
+			float c = 0;
+
 			for (int i = 0; i < userList.size(); i++) {
-				Log.e("info", userList.size() + "  +userList");
 				// checkmMap = new HashMap<String, Boolean>();
 
 				final Cart cart = userList.get(i);
 				mBox.setChecked(true);
-				Log.i("mBox", mBox.isChecked() + "    mBox");
-				final View view = LayoutInflater.from(context).inflate(
+				final View view = LayoutInflater.from(activity).inflate(
 						R.layout.shopping_cart_item, null);
-				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+						LinearLayout.LayoutParams.MATCH_PARENT,
+						LinearLayout.LayoutParams.WRAP_CONTENT);
 				lp.setMargins(0, 2, 0, 0);
 				view.setLayoutParams(lp);
 				view.setTag(i);
 				final RelativeLayout layout = (RelativeLayout) view
 						.findViewById(R.id.rela);
+
+				final TextView singProduce = (TextView) view
+						.findViewById(R.id.tv_shopping_cart_item_money_add);// 单个商品的总的价格
 
 				ImageView headImageView = (ImageView) view
 						.findViewById(R.id.iv_shopping_cart_item__imageview1);
@@ -154,13 +159,16 @@ public class CartUtil1 {
 						.findViewById(R.id.tv_shopping_cart_item_edit_number);// ����ĸ���
 				number.setText(cart.getAmount() + "");
 				a += cart.getAmount();
+				c = cart.getAmount() * cart.getPrice();
 				b += cart.getPrice() * cart.getAmount();
 
+				singProduce.setText(c + "");
 				mTextView.setText(a + "");
 				sumTextView.setText(b + "");
 				String path = cart.getImgUrl();
-				
-				ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
+
+				ImageLoader.getInstance().init(
+						MyApplication.getInstance().initConfig());
 				imageLoader.displayImage(path, headImageView, options,
 						animateFirstListener);
 
@@ -178,15 +186,15 @@ public class CartUtil1 {
 					public void onClick(View v) {
 
 						Intent intent = new Intent(
-								context,
+								activity,
 								com.yidejia.app.mall.goodinfo.GoodsInfoActivity.class);
 
 						Bundle bundle = new Bundle();
 						bundle.putString("goodsId", cart.getUId());
 						intent.putExtras(bundle);
-						context.startActivity(intent);
+						activity.startActivity(intent);
 
-						// context.startActivity(intent);
+						// activity.startActivity(intent);
 					}
 				});
 
@@ -199,52 +207,50 @@ public class CartUtil1 {
 				final Handler handler = new Handler() {
 					public void handleMessage(Message msg) {
 
-						if (msg.what == 123) {
+						if (msg.what == 123) {// 添加或者减少
 
-							// map.put("check",checkBox.isChecked()==false?0:1);
-
-							// Log.i("info", 123+"");
 							map.put("count", Float.parseFloat(number.getText()
 									.toString()));
 							// map.put(Integer.parseInt(number.getText().toString()),Integer.parseInt(priceTextView.getText().toString()));
 							dataManage.mdfCartAmount(cart.getUId(), Integer
 									.parseInt(number.getText().toString()));
+
+							if (activity instanceof HomeCartActivity) {
+								((HomeCartActivity) activity).setNum();
+
+							}
+
 							int count = 0;
 							double sum = 0;
 							float price = 0;
 							int j = 0;
 							for (int i = 0; i < list.size(); i++) {
+								// double sumSingle = 0;
 								HashMap<String, Float> map = list.get(i);
 								float ischeck = map.get("check");
 								j += ischeck;
-								if (ischeck == 1) {
-									float count1 = map.get("count");
-									count += map.get("count");
-									price = map.get("price");
-									sum += count1 * price;
+								// if (ischeck == 1) {
+								float count1 = map.get("count");
+								count += map.get("count");
+								price = map.get("price");
 
-								} else {
+								// sumSingle = count1 * price;
+								sum += count1 * price;
+								// singProduce.setText(sumSingle + "");
+								// } else {
+								if (ischeck == 0) {
 									mBox.setChecked(false);
 								}
 
 							}
-							// Log.i("info", j+"+j");
 							if (j == list.size()) {
 
-								// Log.i("info", list.size()+"+list.size");
 								mBox.setChecked(true);
-								// Log.i("info",mBox.isChecked()+"");
 							}
 							sumTextView.setText(sum + "");
-//							Intent intent = new Intent(Consts.UPDATE_CHANGE);
-//							context.sendBroadcast(intent);
 							mTextView.setText(count + "");
-							// Log.i("info", list.toString());
 						} else if (msg.what == 113) {
 
-							// map.put("check",checkBox.isChecked()==false?0:1);
-
-							// Log.i("info", 123+"");
 							map.put("count", Float.parseFloat(number.getText()
 									.toString()));
 							// map.put(Integer.parseInt(number.getText().toString()),Integer.parseInt(priceTextView.getText().toString()));
@@ -254,38 +260,33 @@ public class CartUtil1 {
 							double sum = 0;
 							float price = 0;
 							int j = 0;
+							int dele = 0;// 购物车中商品的数目
 							for (int i = 0; i < list.size(); i++) {
 								HashMap<String, Float> map = list.get(i);
 								float ischeck = map.get("check");
 								j += ischeck;
 								if (ischeck == 1) {
+									dele++;
 									float count1 = map.get("count");
 									count += map.get("count");
 									price = map.get("price");
 									sum += count1 * price;
 
 								}
-								// else {
-								// mBox.setChecked(false);
-								// }
 
 							}
-							// Log.i("info", j+"+j");
 							if (j == list.size()) {
-
-								// Log.i("info", list.size()+"+list.size");
 								mBox.setChecked(true);
-								Log.i("info", mBox.isChecked() + "   mBox6");
-								// Log.i("info",mBox.isChecked()+"");
 							} else {
 								mBox.setChecked(false);
-								Log.i("info", mBox.isChecked() + "   mBox7");
 							}
-							Log.i("info", count + "        afafafas");
-							Log.i("info", sum + "        afafafas");
+							if (dele != 0) {
+								deleTextView.setVisibility(View.VISIBLE);
+							} else {
+								deleTextView.setVisibility(View.GONE);
+							}
 							sumTextView.setText(sum + "");
 							mTextView.setText(count + "");
-							// Log.i("info", list.toString());
 						}
 
 						else if (msg.what == 124) {
@@ -296,34 +297,34 @@ public class CartUtil1 {
 							for (int i = 0; i < list.size(); i++) {
 								HashMap<String, Float> map = list.get(i);
 
-								// map.put("check",1);
-								Log.i("info", map + "");
 								float ischeck = map.get("check");
 								if (ischeck == 1) {
+
 									checkBox.setChecked(true);
 								} else {
 									checkBox.setChecked(false);
 								}
 
-								Log.i("info", checkBox.isChecked() + "+j");
 								float count1 = map.get("count");
 								count += map.get("count");
 								price = map.get("price");
 								sum += count1 * price;
 
 							}
-							Log.i("info", count + "        afafafas");
-							Log.i("info", sum + "        afafafas");
 							sumTextView.setText(sum + "");
 							// Intent intent = new
 							// Intent(Consts.CHECK_UPDATE_CHANGE);
-							// context.sendBroadcast(intent);
+							// activity.sendBroadcast(intent);
 							mTextView.setText(count + "");
-						} else if (msg.what == 125) {
+						} else if (msg.what == 125) { // 删除
 							linearLayout.removeView(layout);
 							view.invalidate();
-							Log.i("info", "        afafafas");
 							dataManage.delCart(cart.getUId());
+
+							if (activity instanceof HomeCartActivity) {
+								((HomeCartActivity) activity).setNum();
+							}
+
 							map.put("count", (float) 0.0);
 							// dataManage.mdfCartAmount(cart.getUId(),0);//
 							int count = 0;
@@ -345,26 +346,21 @@ public class CartUtil1 {
 								}
 
 							}
-							// Log.i("info", j+"+j");
 							if (j == list.size()) {
 
-								// Log.i("info", list.size()+"+list.size");
 								mBox.setChecked(true);
-								// Log.i("info",mBox.isChecked()+"");
 							}
 							sumTextView.setText(sum + "");
-							// Intent intent = new Intent(Consts.UPDATE_CHANGE);
-							// context.sendBroadcast(intent);
 							mTextView.setText(count + "");
 						}
 					}
 
 				};
-				Builder builder = new Builder(context);
+				Builder builder = new Builder(activity);
 				final AlertDialog dialog = builder
 						.setIcon(android.R.drawable.alert_dark_frame)
 						.setTitle(
-								context.getResources().getString(
+								activity.getResources().getString(
 										R.string.cart_contorl))
 						.setSingleChoiceItems(
 								items,
@@ -380,52 +376,56 @@ public class CartUtil1 {
 											map.put("count", (float) 0);
 											boolean isDel = dataManage
 													.delCart(cart.getUId());
+											list1.remove(which);
 											dialog.dismiss();
+											
 											Message ms1 = new Message();
 											ms1.what = 125;
 											mList.remove(checkBox);
 											handler.sendMessage(ms1);
-//											Intent intent1 = null;
-//											if (dataManage.getCartAmount() == 0) {
-//												intent1 = new Intent(
-//														Consts.BROAD_UPDATE_CHANGE);
-//											} else {
-//												intent1 = new Intent(
-//														Consts.UPDATE_CHANGE);
-//											}
-//											context.sendBroadcast(intent1);
+
+											// Intent intent1 = null;
+											// if (dataManage.getCartAmount() ==
+											// 0) {
+											// intent1 = new Intent(
+											// Consts.BROAD_UPDATE_CHANGE);
+											// } else {
+											// intent1 = new Intent(
+											// Consts.UPDATE_CHANGE);
+											// }
+											// activity.sendBroadcast(intent1);
 
 											break;
 
 										case 1:
-											Intent intent = new Intent(context,
+											Intent intent = new Intent(
+													activity,
 													GoodsInfoActivity.class);
 											Bundle bundle = new Bundle();
 											bundle.putString("goodsId",
 													cart.getUId());
 											intent.putExtras(bundle);
 											dialog.dismiss();
-											context.startActivity(intent);
+											activity.startActivity(intent);
 											break;
 										case 2:
 											Toast.makeText(
-													context,
-													context.getResources()
+													activity,
+													activity.getResources()
 															.getString(
 																	R.string.alreay_collect),
 													Toast.LENGTH_LONG).show();
 											dialog.dismiss();
-											MyApplication myApplication = (MyApplication) context
+											MyApplication myApplication = (MyApplication) activity
 													.getApplicationContext();
 											if (myApplication.getIsLogin()) {
 												// 已经登录
-												//TODO 添加收藏
-												
+												// TODO 添加收藏
 
 											} else {
-												new Builder(context)
+												new Builder(activity)
 														.setTitle(
-																context.getResources()
+																activity.getResources()
 																		.getString(
 																				R.string.tips))
 														.setMessage(
@@ -443,9 +443,9 @@ public class CartUtil1 {
 																		// method
 																		// stub
 																		Intent loginIntent = new Intent(
-																				context,
+																				activity,
 																				LoginActivity.class);
-																		context.startActivity(loginIntent);
+																		activity.startActivity(loginIntent);
 																	}
 
 																})
@@ -480,17 +480,20 @@ public class CartUtil1 {
 						int sum = Integer.parseInt(number.getText().toString());
 						if (sum <= 1) {
 							Toast.makeText(
-									context,
-									context.getResources().getString(
+									activity,
+									activity.getResources().getString(
 											R.string.mix), Toast.LENGTH_LONG)
 									.show();
 						} else {
 							sum--;
 							number.setText(sum + "");
+
 							// mTextView.setText(Integer.parseInt(number.getText()
 							// .toString()) + "");
 						}
-
+						singProduce.setText(sum
+								* (Float.parseFloat(priceTextView.getText()
+										.toString())) + "");
 						Message ms = new Message();
 						ms.what = 123;
 						handler.sendMessage(ms);
@@ -505,17 +508,17 @@ public class CartUtil1 {
 						int sum = Integer.parseInt(number.getText().toString());
 						if (sum >= 9999) {
 							Toast.makeText(
-									context,
-									context.getResources().getString(
+									activity,
+									activity.getResources().getString(
 											R.string.price_error),
 									Toast.LENGTH_LONG).show();
 						} else {
 							sum++;
 							number.setText(sum + "");
-							// mTextView.setText(Integer.parseInt(number.getText()
-							// .toString())+"");
 						}
-						// dataManage.mdfCartAmount(cart.getUId(),sum);
+						singProduce.setText(sum
+								* (Float.parseFloat(priceTextView.getText()
+										.toString())) + "");
 						Message ms = new Message();
 						ms.what = 123;
 						handler.sendMessage(ms);
@@ -530,9 +533,6 @@ public class CartUtil1 {
 						return true;
 					}
 				});
-				// mTextView.setText(Integer.parseInt(number.getText()
-				// .toString())+"");
-				// Log.i("info", view.getTag()+"");
 				checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 					@Override
@@ -540,14 +540,11 @@ public class CartUtil1 {
 							boolean isChecked) {
 
 						if (checkBox.isChecked()) {
-							Log.i("info", mBox.isChecked() + "   mBox2");
 							map.put("check", (float) 1.0);
 							map1.put("check", (float) 1.0);
 						} else {
-							Log.i("info", mBox.isChecked() + "   mBox3");
 							map.put("check", (float) 0.0);
 							map1.put("check", (float) 0.0);
-							// mBox.setChecked(false);
 						}
 						Message ms = new Message();
 						ms.what = 113;
@@ -572,21 +569,17 @@ public class CartUtil1 {
 
 					@Override
 					public void onClick(View v) {
-						Log.i("info", mBox.isChecked() + "   mBox");
 						if (mBox.isChecked()) {
 							mBox.setChecked(true);
-							Log.i("info", mBox.isChecked() + "   mBox5");
 							Message msg = new Message();
 							msg.what = 124;
 							handler.sendMessage(msg);
 							for (int i = 0; i < mList.size(); i++) {
 								CheckBox checkBox = (CheckBox) mList.get(i);
 								checkBox.setChecked(true);
-								Log.i("info", checkBox.isChecked() + "+j");
 							}
 						} else {
 							mBox.setChecked(false);
-							Log.i("info", mBox.isChecked() + "   mBox1");
 							for (int i = 0; i < mList.size(); i++) {
 								CheckBox checkBox = (CheckBox) mList.get(i);
 								checkBox.setChecked(false);
@@ -595,16 +588,17 @@ public class CartUtil1 {
 						}
 					}
 				});
-				final AlertDialog dialog1 = new Builder(context)
+				final AlertDialog dialog1 = new Builder(activity)
 						.setTitle(
-								context.getResources().getString(
+								activity.getResources().getString(
 										R.string.delete))
 						.setIcon(R.drawable.ic_launcher)
 						.setMessage(
-								context.getResources().getString(
+								activity.getResources().getString(
 										R.string.sure_delete_produce))
 						.setPositiveButton(
-								context.getResources().getString(R.string.sure),
+								activity.getResources()
+										.getString(R.string.sure),
 								new android.content.DialogInterface.OnClickListener() {
 
 									@Override
@@ -618,28 +612,17 @@ public class CartUtil1 {
 										ms1.what = 125;
 										mList.remove(checkBox);
 										handler.sendMessage(ms1);
-//										Intent intent1 = null;
-//										if (dataManage.getCartAmount() == 0) {
-//											intent1 = new Intent(
-//													Consts.BROAD_UPDATE_CHANGE);
-//										} else {
-//											intent1 = new Intent(
-//													Consts.UPDATE_CHANGE);
-//										}
-//										context.sendBroadcast(intent1);
 									}
 								})
 						.setNegativeButton(
-								context.getResources().getString(
+								activity.getResources().getString(
 										R.string.cancel), null).create();
 
-				Log.i("info", mBox.isChecked() + "   mBox");
 				linearLayout.addView(view);
 
 			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-			Log.e(CartUtil1.class.getName(), "类型转换出错");
 			e.printStackTrace();
 
 		}

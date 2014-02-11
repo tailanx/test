@@ -33,7 +33,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:textColor="@color/color_sort_text_color_press"
-        android:textSize="@dimen/textsize_big"
+        android:textSize="@dimen/textsize_small"
         android:visibility="gone" />
 
     <ImageView

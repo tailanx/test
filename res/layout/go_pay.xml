@@ -27,7 +27,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/main_theme_textview_bg"
                     android:gravity="center_vertical"
-                    android:padding="@dimen/margin_left_more" >
+                    android:padding="@dimen/activity_vertical_margin" >
 
                     <TextView
                         android:id="@+id/go_pay_consignee"
@@ -113,9 +113,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginBottom="@dimen/margin_left"
+                android:layout_marginBottom="@dimen/margin_left_add"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="@dimen/margin_left"
+                android:layout_marginTop="@dimen/mall_list_padding"
                 android:gravity="center_vertical"
                 android:text="@string/pay_way"
                 android:textColor="@color/white_white"
@@ -138,7 +138,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                 >
+                android:padding="@dimen/head_padding" >
 
                 <ImageView
                     android:id="@+id/go_pay_zhifubao_image"
@@ -173,12 +173,12 @@
                 <CheckBox
                     android:id="@+id/zhifubao_checkbox"
                     style="@style/CustomCheckboxTheme"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/actiobar_margin_top"
+                    android:layout_width="@dimen/base_info_match_add"
+                    android:layout_height="@dimen/margin_top"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:clickable="false" />
+                    android:layout_marginRight="@dimen/width_fu_add"
+                    android:clickable="true" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -199,7 +199,8 @@
                 android:id="@+id/go_pay_zhifubao_wangyezhifu_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:padding="@dimen/head_padding" >
 
                 <ImageView
                     android:id="@+id/go_pay_zhifubao_wangyezhifu"
@@ -235,12 +236,12 @@
                 <CheckBox
                     android:id="@+id/zhufubaowangye_checkbox"
                     style="@style/CustomCheckboxTheme"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/actiobar_margin_top"
+                    android:layout_width="@dimen/base_info_match_add"
+                    android:layout_height="@dimen/margin_top"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:clickable="false" />
+                    android:layout_marginRight="@dimen/width_fu_add"
+                    android:clickable="true" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -261,7 +262,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                 >
+                android:padding="@dimen/head_padding" >
 
                 <ImageView
                     android:id="@+id/go_pay_zhifubao_caifutong"
@@ -296,12 +297,12 @@
                 <CheckBox
                     android:id="@+id/caifutong_checkbox"
                     style="@style/CustomCheckboxTheme"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/actiobar_margin_top"
+                    android:layout_width="@dimen/base_info_match_add"
+                    android:layout_height="@dimen/margin_top"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:clickable="false" />
+                    android:layout_marginRight="@dimen/width_fu_add"
+                    android:clickable="true" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -322,7 +323,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                 >
+                android:padding="@dimen/head_padding" >
 
                 <ImageView
                     android:id="@+id/go_pay_zhifubao_yinlian"
@@ -357,12 +358,12 @@
                 <CheckBox
                     android:id="@+id/yinlian_checkbox"
                     style="@style/CustomCheckboxTheme"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/actiobar_margin_top"
+                    android:layout_width="@dimen/base_info_match_add"
+                    android:layout_height="@dimen/margin_top"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:clickable="false" />
+                    android:layout_marginRight="@dimen/width_fu_add"
+                    android:clickable="true" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -380,7 +381,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/margin_left"
                 android:background="@drawable/main_theme_textview_bg" >
 
                 <ImageView
@@ -395,7 +396,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/main_theme_textview_bg"
-                android:padding="@dimen/margin_left" >
+                android:padding="@dimen/activity_vertical_margin" >
 
                 <TextView
                     android:id="@+id/go_pay_addresss"
@@ -419,7 +420,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/mall_list_padding"
+                    android:layout_marginRight="@dimen/white_bg_padding"
                     android:contentDescription="@string/yidejia"
                     android:src="@drawable/arrow" />
             </RelativeLayout>
@@ -439,9 +440,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/head_padding"
+                android:layout_marginBottom="@dimen/margin_left_add"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="@dimen/mall_list_padding_add"
+                android:layout_marginTop="@dimen/margin_add_cart"
                 android:gravity="center_vertical|left"
                 android:text="@string/pay_way_sf"
                 android:textColor="@color/white_white"
@@ -464,7 +465,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:clickable="true" >
+                android:clickable="true"
+                android:padding="@dimen/head_padding" >
 
                 <TextView
                     android:id="@+id/go_pay_pay_money"
@@ -509,13 +511,13 @@
                 <CheckBox
                     android:id="@+id/go_pay_check"
                     style="@style/CustomCheckboxTheme"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/base_info_match_add"
+                    android:layout_height="@dimen/margin_top"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/actiobar_margin_top"
+                    android:layout_marginRight="@dimen/width_fu_add"
                     android:checked="true"
-                    android:clickable="false" />
+                    android:clickable="true" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -537,7 +539,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:clickable="true" >
+                android:clickable="true"
+                android:padding="@dimen/head_padding" >
 
                 <TextView
                     android:id="@+id/go_pay_payEMS_money"
@@ -582,12 +585,12 @@
                 <CheckBox
                     android:id="@+id/go_pay_ems"
                     style="@style/CustomCheckboxTheme"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/base_info_match_add"
+                    android:layout_height="@dimen/margin_top"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/actiobar_margin_top"
-                    android:clickable="false" />
+                    android:layout_marginRight="@dimen/width_fu_add"
+                    android:clickable="true" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -620,7 +623,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/main_theme_textview_bg"
-                android:padding="@dimen/margin_left" >
+                android:padding="@dimen/activity_vertical_margin" >
 
                 <TextView
                     android:id="@+id/go_pay_addresss"
@@ -635,7 +638,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/mall_list_padding"
+                    android:layout_marginRight="@dimen/white_bg_padding"
                     android:src="@drawable/arrow" />
             </RelativeLayout>
 
@@ -654,7 +657,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/magin_left_add"
+                android:layout_marginBottom="@dimen/margin_left_add"
+                android:layout_marginTop="@dimen/mall_list_padding"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:text="@string/buy_kind"
@@ -729,8 +733,8 @@
             android:layout_alignBaseline="@id/save_order_btn"
             android:layout_toRightOf="@+id/go_pay_show_pay_money_price"
             android:textColor="@color/theme"
-            android:textStyle="bold"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"

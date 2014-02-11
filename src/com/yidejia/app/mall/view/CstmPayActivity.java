@@ -341,6 +341,8 @@ public class CstmPayActivity extends BaseActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		if(!carts.isEmpty())
+		carts.clear();
 	}
 	
 	private void getVoucher() {

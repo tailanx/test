@@ -33,6 +33,7 @@ import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.log.LogService;
 import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.model.MainProduct;
+import com.yidejia.app.mall.msg.MsgActivity;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.homepage.GetHomePage;
 import com.yidejia.app.mall.order.AllOrderActivity;
@@ -247,7 +248,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 			@Override
 			public void onClick(View arg0) {
 				Intent intentOrder = new Intent(HomeMallActivity.this,
-						HistoryActivity.class);
+						MsgActivity.class);
 				HomeMallActivity.this.startActivity(intentOrder);
 			}
 		});
