@@ -83,6 +83,7 @@ public class SearchListAdapter extends BaseAdapter {
 		if(position == 0) {
 			holder.tv_title.setText(mContext.getResources().getString(R.string.filter_all));
 			holder.tv_desc.setText("全类目/妍诗美/妍膳美");
+			holder.iv_icon.setImageResource(R.drawable.all_category);
 			return convertView;
 		}
 		if(isEmpty);

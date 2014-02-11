@@ -136,7 +136,7 @@ public class ParseSearchJson {
 				function.setFunId(jsonObject.optString("id"));
 				function.setFunName(unicode.revert(jsonObject.optString("name")));
 				function.setDesc(unicode.revert(jsonObject.optString("desc")));
-				function.setImgUrl(ImageUrl.IMAGEURL + jsonObject.optString("imgname") + "!200");
+				function.setImgUrl(ImageUrl.IMAGEURL + jsonObject.optString("imgname"));
 				functionsArray.add(function);
 			}
 		} catch (JSONException e) {
@@ -254,38 +254,25 @@ public class ParseSearchJson {
 			responseObject = responseArray.getJSONObject(i);
 			String temp = responseObject.optString("goods_id");
 			searchItem.setUId(temp);
-			Log.i(TAG, "goods_id:" + temp);
 			temp = responseObject.optString("price");
 			searchItem.setPrice(temp);
-			Log.i(TAG, "price:" + temp);
 			temp = responseObject.optString("goods_name");
 			searchItem.setName(unicode.revert(temp));
-			Log.i(TAG, "goods_name:" + temp);
 			temp = responseObject.optString("sells");
 			searchItem.setSelledAmount(temp);
-			Log.i(TAG, "sells:" + temp);
 			temp = responseObject.optString("remarks");
 			searchItem.setCommentAmount(temp);
-			Log.i(TAG, "remarks:" + temp);
 			temp = ImageUrl.IMAGEURL + responseObject.optString("imgname")
 					;
 			searchItem.setImgUrl(temp);
-			Log.i(TAG, "imageUrl:" + temp);
 
 			searchItem.setTheCode(responseObject.optString("the_code"));
-			Log.i(TAG, "thecode:" + responseObject.optString("the_code"));
 			searchItem.setModule(unicode.revert(responseObject
 					.optString("module")));
-			Log.i(TAG,
-					"module:"
-							+ unicode.revert(responseObject.optString("module")));
 			searchItem.setBrand(responseObject.optString("brand"));
-			Log.i(TAG, "brand:" + responseObject.optString("brand"));
 			searchItem.setSpec(responseObject.optString("spec"));
-			Log.i(TAG, "spec:" + responseObject.optString("spec"));
 			searchItem
 					.setDesc(unicode.revert(responseObject.optString("desc")));
-			Log.i(TAG, "desc:" + responseObject.optString("desc"));
 			searchArray.add(searchItem);
 		}
 	}
