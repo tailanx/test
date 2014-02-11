@@ -27,6 +27,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.opens.asyncokhttpclient.AsyncHttpResponse;
 import com.opens.asyncokhttpclient.AsyncOkHttpClient;
+import com.yidejia.app.mall.favorite.MyCollectActivity;
 import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.log.LogService;
@@ -63,6 +64,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 
 	// private boolean isFrist = true;
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

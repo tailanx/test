@@ -22,7 +22,9 @@ import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.address.AddressActivity;
 import com.yidejia.app.mall.evaluation.EvaluationActivity;
+import com.yidejia.app.mall.favorite.MyCollectActivity;
 import com.yidejia.app.mall.jni.JNICallBack;
+import com.yidejia.app.mall.msg.MsgActivity;
 import com.yidejia.app.mall.order.AllOrderActivity;
 import com.yidejia.app.mall.order.AlreadyComActivity;
 import com.yidejia.app.mall.order.AlreadyOrderActivity;
@@ -100,7 +102,7 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 			break;
 		case R.id.re_main2_main2_linearlayout4_all_message:// 点击消息中心
 			intent = new Intent();
-			intent.setClass(this, PersonActivity.class);
+			intent.setClass(this, MsgActivity.class);
 			break;
 
 		case R.id.re_main2_main2_linearlayout4_all_return:// 点击退换货
@@ -149,7 +151,7 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 			break;
 		case R.id.tv_message:// 收藏
 			intent = new Intent();
-			intent.setClass(this, PersonActivity.class);
+			intent.setClass(this, MsgActivity.class);
 			break;
 		case R.id.tv_integration:// 收藏
 			intent = new Intent();
