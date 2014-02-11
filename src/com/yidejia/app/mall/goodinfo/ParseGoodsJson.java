@@ -205,7 +205,7 @@ public class ParseGoodsJson {
 						String user_id = commentItem.optString("user_id");
 						comments.setUserId(user_id);
 						String name = commentItem.optString("user_name");
-						if(TextUtils.isEmpty(name)) comments.setUserName(user_id);
+						if(TextUtils.isEmpty(name) || "null".equals(name)) comments.setUserName("商城用户");
 						else comments.setUserName(unicode.revert(name));
 						String title = commentItem.optString("title");
 						comments.setTitle(unicode.revert(title));
