@@ -2175,7 +2175,7 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 	encrypt[0] = 0;
 	urlString[0] = 0;
 
-	char *api="?api=ucenter.message.getByUserId";
+	char *api="?api=announcement.article.getMobile";
 
 	addString(urlString, url);
 	addString(urlString, api);
@@ -2201,7 +2201,56 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 	addString(urlString, chtime);
 	addString(urlString, "&sign=");
 	addString(encrypt, strTemp);
-	addString(encrypt, "ucenter.message.getByUserId");
+	addString(encrypt, "announcement.article.getMobile");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4MsgDetails(JNIEnv* env,
+		jobject thiz, jstring msgId){
+
+	char *chMsgId = (*env)->GetStringUTFChars(env, msgId, NULL);
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+	char *api="?api=announcement.article.get";
+
+	addString(urlString, url);
+	addString(urlString, api);
+
+	addString(urlString, "&id=");
+	if(chMsgId != NULL)addString(urlString, chMsgId);
+
+
+	addString(urlString, pHead);
+
+
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
+
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "announcement.article.get");
 	addString(encrypt, chtime);
 
 	MD5_CTX md5;
@@ -2950,6 +2999,54 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 
 //获取tn
 jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SignUp(JNIEnv* env,
+		jobject thiz, jstring userid, jstring token){//
+
+	char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
+	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+	char *api="api=ucenter.gold.add";
+	addString(urlString, api);
+
+	addString(urlString, "&customer_id=");
+	if(chuid != NULL)addString(urlString, chuid);
+	addString(urlString, "&token=");
+	if(chtoken != NULL)addString(urlString, chtoken);
+
+	addString(urlString, pHead);
+
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
+
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "ucenter.gold.add");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SignCount(JNIEnv* env,
 		jobject thiz, jstring userid, jstring token){//
 
 	char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);

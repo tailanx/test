@@ -139,6 +139,8 @@ public class JNICallBack {
 	//标记消息未已读状态
 	public native String getHttp4ChangeRead(String userId, String msgId, String token);
 	
+	public native String getHttp4MsgDetails(String msgId);
+	
 	//申请退换货
 	public native String getHttp4GetReturn(String user_id, String order_code, String the_date, String contact, String phone, String cause, String desc, String token);
 	
@@ -173,6 +175,8 @@ public class JNICallBack {
 	
 	/**签到**/
 	public native String getHttp4SignUp(String userId, String token);
+	/**签到次数**/
+	public native String getHttp4SignCount(String userId, String token);
 	
 }	
 	
