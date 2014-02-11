@@ -8,7 +8,7 @@
     android:layout_marginTop="@dimen/margin_left_more"
         android:id="@+id/iv_youhuiquan_image"
         android:layout_width="@dimen/main_bg_head"
-        android:layout_height="@dimen/main_bg_head"
+        android:layout_height="@dimen/base_info_image"
         android:background="@color/integer_bule"
         android:orientation="vertical" >
 
@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_left"
-            android:layout_marginTop="@dimen/margin_left"
+            android:layout_marginTop="@dimen/margin_left_add"
             android:text="@string/integeral_price"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size" />
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_left"
-            android:layout_marginTop="@dimen/margin_left"
+            android:layout_marginTop="@dimen/margin_left_add"
             android:text="@string/integeral_rule"
             android:textColor="@color/white" />
 
@@ -36,8 +36,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_left"
-            android:layout_marginTop="@dimen/margin_left"
+            android:layout_marginTop="@dimen/margin_left_add"
             android:text="@string/integeral_way_rule"
+            android:layout_marginBottom="@dimen/margin_left_add"
             android:textColor="@color/white" />
     </LinearLayout>
 
@@ -90,7 +91,7 @@
     <LinearLayout
         android:id="@+id/iv_youhuiquan_image_add"
         android:layout_width="@dimen/main_bg_head"
-        android:layout_height="@dimen/main_bg_head"
+        android:layout_height="@dimen/base_info_image"
         android:layout_below="@id/iv_youhuiquan_image"
         android:layout_marginTop="@dimen/magin_left_add"
         android:background="@color/integer_green"
@@ -101,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_left"
-            android:layout_marginTop="@dimen/margin_left"
+            android:layout_marginTop="@dimen/margin_left_add"
             android:text="@string/integeral_price"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size" />
@@ -111,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_left"
-            android:layout_marginTop="@dimen/margin_left"
+            android:layout_marginTop="@dimen/margin_left_add"
             android:text="@string/integeral_rule"
             android:textColor="@color/white" />
 
@@ -120,7 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_left"
-            android:layout_marginTop="@dimen/margin_left"
+            android:layout_marginTop="@dimen/margin_left_add"
             android:text="@string/integeral_way_rule"
             android:textColor="@color/white" />
     </LinearLayout>
@@ -175,7 +176,7 @@
     <LinearLayout
         android:id="@+id/iv_youhuiquan_image_add_add"
         android:layout_width="@dimen/main_bg_head"
-        android:layout_height="@dimen/main_bg_head"
+        android:layout_height="@dimen/base_info_image"
         android:layout_below="@id/iv_youhuiquan_image_add"
         android:layout_marginTop="@dimen/magin_left_add"
         android:background="@color/integer_orange"
@@ -186,7 +187,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_left"
-            android:layout_marginTop="@dimen/margin_left"
+            android:layout_marginTop="@dimen/margin_left_add"
             android:text="@string/integeral_price"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size" />
@@ -196,7 +197,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_left"
-            android:layout_marginTop="@dimen/margin_left"
+            android:layout_marginTop="@dimen/margin_left_add"
             android:text="@string/integeral_rule"
             android:textColor="@color/white" />
 
@@ -205,7 +206,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_left"
-            android:layout_marginTop="@dimen/margin_left"
+            android:layout_marginTop="@dimen/margin_left_add"
             android:text="@string/integeral_way_rule"
             android:textColor="@color/white" />
     </LinearLayout>

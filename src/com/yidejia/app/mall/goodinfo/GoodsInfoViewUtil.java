@@ -24,6 +24,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.opens.asyncokhttpclient.AsyncHttpResponse;
 import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.opens.asyncokhttpclient.RequestParams;
+import com.yidejia.app.mall.HomeCartActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.BrowseHistoryDataManage;
@@ -55,8 +56,8 @@ public class GoodsInfoViewUtil {
 	private DisplayImageOptions options;
 
 	private YLViewPager vpImage; // 商品图片容器
-	
-	private boolean isFavClick = false;	//收藏按钮是否被点击
+
+	private boolean isFavClick = false; // 收藏按钮是否被点击
 
 	/**
 	 * 只能是商品详情页的activity调用{@link GoodsInfoActivity}
@@ -128,12 +129,12 @@ public class GoodsInfoViewUtil {
 			ImageView add_to_cart = (ImageView) activity
 					.findViewById(R.id.iv_add_to_cart);
 			final boolean isShowFlag = info.isShow_flag();
-			if(!isShowFlag){
+			if (!isShowFlag) {
 				add_to_cart.setClickable(false);
 				add_to_cart.setImageResource(R.drawable.pause_sales);
 				add_to_cart.setFocusable(false);
 			}
-			
+
 			// 销售额
 			TextView selled_num_text = (TextView) activity
 					.findViewById(R.id.tv_selled_num_text);
@@ -196,10 +197,13 @@ public class GoodsInfoViewUtil {
 
 					@Override
 					public void onClick(View v) {
-						if(!isShowFlag){
+						if (!isShowFlag) {
 							return;
 						}
 						cart_num++;
+						if (activity instanceof HomeCartActivity) {
+							((HomeCartActivity) activity).setNum();
+						}
 						boolean istrue = manage.addCart(cart);
 						if (istrue) {
 							Toast.makeText(
@@ -237,16 +241,16 @@ public class GoodsInfoViewUtil {
 			// 加入收藏按钮
 			add_favorites = (ImageView) activity
 					.findViewById(R.id.add_favorites);
-			
+
 			// 加入收藏按钮点击事件
 			add_favorites.setOnClickListener(addFavoriteListener);
 
 			// 检查是否收藏并且设置收藏按钮的图片
 			checkFavIsExsist();
-			
-			//点击评论跳转到评论页面
+
+			// 点击评论跳转到评论页面
 			go2Comments();
-			//点击详情跳转到商品图文详情页面
+			// 点击详情跳转到商品图文详情页面
 			go2Details(info.getProductDetailUrl());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -287,13 +291,13 @@ public class GoodsInfoViewUtil {
 			}
 		});
 	}
-	
+
 	/**
 	 * 设置购物车个数<br>
 	 * 每次重新进入页面时设置购物车个数,在onResume中调用
 	 * 
 	 */
-	public void setCartNumber(){
+	public void setCartNumber() {
 		cart_num = manage.getCartAmount();
 		setCartNum();
 	}
@@ -308,18 +312,21 @@ public class GoodsInfoViewUtil {
 		if (cart_num == 0) {
 			shopping_cart_button.setVisibility(View.GONE);
 			return;
-		} 
+		}
+
 		shopping_cart_button.setVisibility(View.VISIBLE);
 		shopping_cart_button.setText("" + cart_num);
 	}
 
-	/**添加到收藏夹点击事件**/
+	/** 添加到收藏夹点击事件 **/
 	private OnClickListener addFavoriteListener = new OnClickListener() {
 
 		@Override
 		public void onClick(View v) {
-			if(!MyApplication.getInstance().getIsLogin()){
-//				Toast.makeText(activity, activity.getString(R.string.please_login), Toast.LENGTH_SHORT).show();
+			if (!MyApplication.getInstance().getIsLogin()) {
+				// Toast.makeText(activity,
+				// activity.getString(R.string.please_login),
+				// Toast.LENGTH_SHORT).show();
 				Toast.makeText(activity, "请先登录！", Toast.LENGTH_SHORT).show();
 				return;
 			}
@@ -328,9 +335,9 @@ public class GoodsInfoViewUtil {
 		}
 	};
 
-	/**检查是否已收藏**/
+	/** 检查是否已收藏 **/
 	private void checkFavIsExsist() {
-		if(!MyApplication.getInstance().getIsLogin()){
+		if (!MyApplication.getInstance().getIsLogin()) {
 			return;
 		}
 		String param = new JNICallBack().getHttp4CheckFav(userid, productId,
@@ -364,10 +371,11 @@ public class GoodsInfoViewUtil {
 					httpResponseoObject = new JSONObject(content);
 					int code = httpResponseoObject.optInt("code");
 					setFavBg(1 == code);
-					if(!isFavClick) return;
-					if(-1 == code){
+					if (!isFavClick)
+						return;
+					if (-1 == code) {
 						saveFav();
-					} else if(1 == code){
+					} else if (1 == code) {
 						delFav();
 					}
 				} catch (JSONException e) {
@@ -385,16 +393,17 @@ public class GoodsInfoViewUtil {
 
 		});
 	}
-	
-	/**加入收藏**/
-	private void saveFav(){
-		String param = new JNICallBack().getHttp4SaveFav(userid, productId, token);
+
+	/** 加入收藏 **/
+	private void saveFav() {
+		String param = new JNICallBack().getHttp4SaveFav(userid, productId,
+				token);
 		String url = new JNICallBack().HTTPURL;
-		
+
 		RequestParams requestParams = new RequestParams();
 		requestParams.put(param);
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.post(url, requestParams, new AsyncHttpResponse(){
+		client.post(url, requestParams, new AsyncHttpResponse() {
 
 			@Override
 			public void onStart() {
@@ -412,7 +421,7 @@ public class GoodsInfoViewUtil {
 			@Override
 			public void onSuccess(int statusCode, String content) {
 				super.onSuccess(statusCode, content);
-				if(HttpStatus.SC_OK == statusCode){
+				if (HttpStatus.SC_OK == statusCode) {
 					JSONObject httpResultObject;
 					try {
 						httpResultObject = new JSONObject(content);
@@ -445,23 +454,24 @@ public class GoodsInfoViewUtil {
 				super.onError(error, content);
 				Toast.makeText(
 						activity,
-						activity.getResources().getString(
-								R.string.add_fav_fail),
+						activity.getResources()
+								.getString(R.string.add_fav_fail),
 						Toast.LENGTH_SHORT).show();
 			}
-			
+
 		});
 	}
-	
-	/**删除收藏**/
-	private void delFav(){
-		String param = new JNICallBack().getHttp4DelFav(userid, productId, token);
+
+	/** 删除收藏 **/
+	private void delFav() {
+		String param = new JNICallBack().getHttp4DelFav(userid, productId,
+				token);
 		String url = new JNICallBack().HTTPURL;
-		
+
 		RequestParams requestParams = new RequestParams();
 		requestParams.put(param);
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.post(url, requestParams, new AsyncHttpResponse(){
+		client.post(url, requestParams, new AsyncHttpResponse() {
 
 			@Override
 			public void onStart() {
@@ -479,7 +489,7 @@ public class GoodsInfoViewUtil {
 			@Override
 			public void onSuccess(int statusCode, String content) {
 				super.onSuccess(statusCode, content);
-				if(HttpStatus.SC_OK == statusCode){
+				if (HttpStatus.SC_OK == statusCode) {
 					JSONObject httpResultObject;
 					try {
 						httpResultObject = new JSONObject(content);
@@ -512,15 +522,15 @@ public class GoodsInfoViewUtil {
 				super.onError(error, content);
 				Toast.makeText(
 						activity,
-						activity.getResources().getString(
-								R.string.del_fav_fail),
+						activity.getResources()
+								.getString(R.string.del_fav_fail),
 						Toast.LENGTH_SHORT).show();
 			}
-			
+
 		});
 	}
 
-	/**设置收藏按钮背景**/
+	/** 设置收藏按钮背景 **/
 	private void setFavBg(boolean isExsist) {
 		if (isExsist) {
 			add_favorites.setImageResource(R.drawable.favorites);
@@ -552,8 +562,9 @@ public class GoodsInfoViewUtil {
 				lp_base.gravity = Gravity.CENTER;
 				ImageView bannerImageView = new ImageView(activity);
 				bannerImageView.setLayoutParams(lp_base);
-				
-				ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
+
+				ImageLoader.getInstance().init(
+						MyApplication.getInstance().initConfig());
 				ImageLoader.getInstance().displayImage(
 						bannerArray.get(i).getImgUrl(), bannerImageView,
 						options,
