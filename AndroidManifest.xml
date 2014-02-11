@@ -74,14 +74,14 @@
             android:screenOrientation="portrait"
             android:uiOptions="splitActionBarWhenNarrow"
             android:windowSoftInputMode="adjustPan" >
-        </activity>
+        </activity>
         -->
         <!--
         <activity
             android:name="com.yidejia.app.mall.ComposeActivity"
             android:screenOrientation="portrait"
             android:uiOptions="splitActionBarWhenNarrow" >
-        </activity>
+        </activity>
         -->
         <activity
             android:name="com.yidejia.app.mall.goodinfo.GoodsInfoActivity"
