@@ -145,25 +145,27 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 		OnekeyShare oks = new OnekeyShare();
 
 		// 分享时Notification的图标和文字
-		oks.setNotification(R.drawable.ic_launcher,
-		getResources().getString(R.string.app_name));
+		oks.setNotification(R.drawable.ydj_icon72,
+				getResources().getString(R.string.app_name));
 		// address是接收人地址，仅在信息和邮件使用
 		oks.setAddress("12345678901");
 		// title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
 		oks.setTitle(getResources().getString(R.string.share));
 		// titleUrl是标题的网络链接，仅在人人网和QQ空间使用
-		oks.setTitleUrl("http://sharesdk.cn");
+		oks.setTitleUrl("http://app.yidejia.com/android.html");
 		// text是分享文本，所有平台都需要这个字段
-		oks.setText(getResources().getString(R.string.share_content)+"http://www.yidejia.com/acymer_"+productInfo.getUId()+".html");
+		oks.setText(getResources().getString(R.string.share_content)
+				+ "http://www.yidejia.com/acymer_" + productInfo.getUId()
+				+ ".html");
 		// imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-//		oks.setImagePath(MainActivity.TEST_IMAGE);
+		// oks.setImagePath(MainActivity.TEST_IMAGE);
 		// imageUrl是图片的网络路径，新浪微博、人人网、QQ空间、
 		// 微信的两个平台、Linked-In支持此字段
-//		oks.setImageUrl("http://img.appgo.cn/imgs/sharesdk/content/2013/07/25/1374723172663.jpg");
+		oks.setImageUrl(productInfo.getImgUrl());
 		// url仅在微信（包括好友和朋友圈）中使用
 		oks.setUrl("http://app.yidejia.com/android.html");
-//		 appPath是待分享应用程序的本地路劲，仅在微信中使用
-//		oks.setAppPath(MainActivity.TEST_IMAGE);
+		// appPath是待分享应用程序的本地路劲，仅在微信中使用
+		// oks.setAppPath(MainActivity.TEST_IMAGE);
 		// comment是我对这条分享的评论，仅在人人网和QQ空间使用
 		oks.setComment(getResources().getString(R.string.share));
 		// site是分享此内容的网站名称，仅在QQ空间使用
@@ -181,15 +183,14 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 		// 是否直接分享（true则直接分享）
 		oks.setSilent(false);
 		// 指定分享平台，和slient一起使用可以直接分享到指定的平台
-//		if (platform != null) {
-//		        oks.setPlatform(platform);
-//		}
+		// if (platform != null) {
+		// oks.setPlatform(platform);
+		// }
 		// 去除注释可通过OneKeyShareCallback来捕获快捷分享的处理结果
 		// oks.setCallback(new OneKeyShareCallback());
-		//通过OneKeyShareCallback来修改不同平台分享的内容
-		oks.setShareContentCustomizeCallback(
-		new ShareContentCustomizeCallback() {
-			
+		// 通过OneKeyShareCallback来修改不同平台分享的内容
+		oks.setShareContentCustomizeCallback(new ShareContentCustomizeCallback() {
+
 			@Override
 			public void onShare(Platform platform, ShareParams paramsToShare) {
 			}
