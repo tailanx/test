@@ -118,8 +118,9 @@ public class HomeCartActivity extends HomeBaseActivity implements
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		if (!cartList.isEmpty())
+		if (!cartList.isEmpty()){
 			cartList.clear();
+		}
 	}
 
 	private void setViewCtrl(View view) {
@@ -210,8 +211,8 @@ public class HomeCartActivity extends HomeBaseActivity implements
 		for (int i = 0; i < orderCarts.size(); i++) {
 			HashMap<String, Object> map = orderCarts.get(i);
 			float ischeck = Float.parseFloat(map.get("check").toString());
-			Log.e("voucher", ischeck + "    ischeck");
 			Cart cart1 = (Cart) map.get("cart");
+			
 			if (ischeck == 1.0) {
 				// i++;
 				cartList.add(cart1);
@@ -227,13 +228,13 @@ public class HomeCartActivity extends HomeBaseActivity implements
 		sum = Float.parseFloat(sumTextView.getText().toString());
 		intent1.putExtra("carts", cartList);
 
-		Log.i("voucher", sum + "    sum");
 
 		if (sum > 0) {
 			bundle.putString("cartActivity", "Y");
 			bundle.putFloat("price", sum);
 			intent1.putExtras(bundle);
-			HomeCartActivity.this.startActivity(intent1);
+			HomeCartActivity.this.startActivity(intent1);	
+				cartList.clear();
 		} else {
 			Toast.makeText(HomeCartActivity.this,
 					getResources().getString(R.string.buy_nothing),
@@ -282,6 +283,7 @@ public class HomeCartActivity extends HomeBaseActivity implements
 			break;
 		}
 	}
+	
 
 	/**
 	 * 创建一个对话框

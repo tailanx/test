@@ -209,11 +209,11 @@ public class CartUtil1 {
 
 						if (msg.what == 123) {// 添加或者减少
 
-							map.put("count", Float.parseFloat(number.getText()
-									.toString()));
 							// map.put(Integer.parseInt(number.getText().toString()),Integer.parseInt(priceTextView.getText().toString()));
 							dataManage.mdfCartAmount(cart.getUId(), Integer
 									.parseInt(number.getText().toString()));
+							map.put("count", Float.parseFloat(number.getText()
+									.toString()));
 
 							if (activity instanceof HomeCartActivity) {
 								((HomeCartActivity) activity).setNum();
@@ -485,6 +485,7 @@ public class CartUtil1 {
 											R.string.mix), Toast.LENGTH_LONG)
 									.show();
 						} else {
+							cart.setSalledAmmount(cart.getAmount()-1);
 							sum--;
 							number.setText(sum + "");
 
@@ -513,6 +514,7 @@ public class CartUtil1 {
 											R.string.price_error),
 									Toast.LENGTH_LONG).show();
 						} else {
+							cart.setSalledAmmount(cart.getAmount()+1);
 							sum++;
 							number.setText(sum + "");
 						}

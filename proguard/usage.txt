@@ -1,37 +1,630 @@
+cn.sharesdk.R
+cn.sharesdk.R$drawable
+cn.sharesdk.R$string
+cn.sharesdk.framework.FakeActivity:
+    public void startActivity(android.content.Intent)
+    public void startActivityForResult(android.content.Intent,int)
+    public cn.sharesdk.framework.FakeActivity getParent()
+    public final void setResult(java.util.HashMap)
+cn.sharesdk.framework.Platform:
+    public static final int ACTION_AUTHORIZING
+    public static final int ACTION_GETTING_FRIEND_LIST
+    public static final int ACTION_SENDING_DIRECT_MESSAGE
+    public static final int ACTION_FOLLOWING_USER
+    public static final int ACTION_TIMELINE
+    public static final int ACTION_USER_INFOR
+    public static final int ACTION_SHARE
+    public static final int CUSTOMER_ACTION_MASK
+    public static final int SHARE_TEXT
+    public static final int SHARE_IMAGE
+    public static final int SHARE_WEBPAGE
+    public static final int SHARE_MUSIC
+    public static final int SHARE_VIDEO
+    public static final int SHARE_APPS
+    public static final int SHARE_FILE
+    public static final int SHARE_EMOJI
+    public Platform(android.content.Context)
+    public void setDevInfoParam(java.lang.String,java.lang.String)
+    public abstract int getVersion()
+    public int getId()
+    public cn.sharesdk.framework.PlatformActionListener getPlatformActionListener()
+    public boolean isSSODisable()
+    public void authorize()
+    public void authorize(java.lang.String[])
+    protected abstract void a(java.lang.String[])
+    protected void b(int,java.lang.Object)
+    public void followFriend(java.lang.String)
+    public void getTimeLine(java.lang.String,int,int)
+    public void customerProtocol(java.lang.String,java.lang.String,short,java.util.HashMap,java.util.HashMap)
+    public void removeAccount()
+    public java.lang.String getShortLintk(java.lang.String,boolean)
+    private java.lang.String d()
+cn.sharesdk.framework.Platform$ShareParams:
+    public java.lang.String text
+    public java.lang.String imagePath
+cn.sharesdk.framework.PlatformDb:
+    private static final java.lang.String DB_NAME
+    private java.lang.String platformNname
+    private int platformVersion
+    public PlatformDb(android.content.Context,java.lang.String,int)
+    public void put(java.lang.String,java.lang.String)
+    public void putToken(java.lang.String)
+    public java.lang.String getTokenSecret()
+    public void putTokenSecret(java.lang.String)
+    public void putExpiresIn(long)
+    public int getPlatformVersion()
+    public java.lang.String getPlatformNname()
+    public void putUserId(java.lang.String)
+    public java.lang.String getUserName()
+    public java.lang.String getUserIcon()
+    public void removeAccount()
+    public java.lang.String exportData()
+    public void importData(java.lang.String)
+    public java.lang.String getUserGender()
+cn.sharesdk.framework.Service:
+    private android.content.Context a
+    private java.lang.String b
+    private cn.sharesdk.framework.utils.b c
+    public Service(android.content.Context)
+    public android.content.Context getContext()
+    void a(java.lang.String)
+    public java.lang.String getAppKey()
+    public java.lang.String getDeviceKey()
+    protected abstract int getServiceVersionInt()
+    public abstract java.lang.String getServiceVersionName()
+    public void onBind()
+    protected java.util.HashMap filterShareContent(int,cn.sharesdk.framework.Platform$ShareParams,java.util.HashMap)
+    static synthetic cn.sharesdk.framework.utils.b a(cn.sharesdk.framework.Service)
+cn.sharesdk.framework.Service$ServiceEvent
+cn.sharesdk.framework.ShareSDK:
+    public ShareSDK()
+    public static void initSDK(android.content.Context,boolean)
+    public static void initSDK(android.content.Context,java.lang.String)
+    public static void registerService(java.lang.Class)
+    public static void unregisterService(java.lang.Class)
+    public static cn.sharesdk.framework.Service getService(java.lang.Class)
+    public static java.lang.String getSDKVersionName()
+    public static int getSDKVersionCode()
+    public static void setConnTimeout(int)
+    public static void setReadTimeout(int)
+    public static void setNetworkDevInfoEnable(boolean)
+    public static void setDoubanDevInfo(android.content.Context,java.lang.String,java.lang.String,java.lang.String,int,int,boolean)
+    public static void setEvernoteDevInfo(android.content.Context,java.lang.String,java.lang.String,java.lang.String,int,int,boolean,boolean)
+    public static void setFacebookDevInfo(android.content.Context,java.lang.String,int,int,boolean)
+    public static void setFourSquareDevInfo(android.content.Context,java.lang.String,java.lang.String,int,int,boolean)
+    public static void setGooglePlusDevInfo(android.content.Context,int,int,boolean)
+    public static void setKaixinDevInfo(android.content.Context,java.lang.String,java.lang.String,int,int,boolean)
+    public static void setLinkedinDevInfo(android.content.Context,java.lang.String,java.lang.String,java.lang.String,int,int,boolean)
+    public static void setNetEaseMicroBlogDevInfo(android.content.Context,java.lang.String,java.lang.String,int,int,boolean)
+    public static void setRenrenDevInfo(android.content.Context,java.lang.String,java.lang.String,int,int,boolean)
+    public static void setSinaWeiboDevInfo(android.content.Context,java.lang.String,java.lang.String,java.lang.String,int,int,boolean)
+    public static void setSohuMicroBlogDevInfo(android.content.Context,java.lang.String,java.lang.String,int,int,boolean)
+    public static void setSohuSuishenkanDevInfo(android.content.Context,java.lang.String,java.lang.String,java.lang.String,int,int,boolean)
+    public static void setEmailDevInfo(android.content.Context,int,int,boolean)
+    public static void setShortMessageDevInfo(android.content.Context,int,int,boolean)
+    public static void setQQDevInfo(android.content.Context,java.lang.String,int,int,boolean)
+    public static void setQZoneDevInfo(android.content.Context,java.lang.String,int,int,boolean)
+    public static void setTencentWeiboDevInfo(android.content.Context,java.lang.String,java.lang.String,java.lang.String,int,int,boolean)
+    public static void setTwitterDevInfo(android.content.Context,java.lang.String,java.lang.String,java.lang.String,int,int,boolean)
+    public static void setWechatDevInfo(android.content.Context,java.lang.String,int,int,boolean)
+    public static void setWechatMomentsDevInfo(android.content.Context,java.lang.String,int,int,boolean)
+    public static void setWechatFavoriteDevInfo(android.content.Context,java.lang.String,int,int,boolean)
+    public static void setYoudaoDevInfo(android.content.Context,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,int,boolean)
+    public static void setPinterestDevInfo(android.content.Context,java.lang.String,int,int,boolean)
+    public static void setFlickrDevInfo(android.content.Context,java.lang.String,java.lang.String,java.lang.String,int,int,boolean)
+    public static void setTumblrDevInfo(android.content.Context,java.lang.String,java.lang.String,java.lang.String,int,int,boolean)
+    public static void setDropboxDevInfo(android.content.Context,java.lang.String,java.lang.String,int,int,boolean)
+    public static void setVKontakteDevInfo(android.content.Context,java.lang.String,int,int,boolean)
+    public static void setInstagramDevInfo(android.content.Context,java.lang.String,java.lang.String,java.lang.String,int,int,boolean)
+    public static java.lang.String platformIdToName(android.content.Context,int)
+    public static int platformNameToId(android.content.Context,java.lang.String)
+cn.sharesdk.framework.TitleLayout:
+    public TitleLayout(android.content.Context,android.util.AttributeSet)
+cn.sharesdk.framework.a.a
+cn.sharesdk.framework.a.b:
+    public void a(java.io.File)
+cn.sharesdk.framework.a.g:
+    public void a(java.lang.String,java.io.File)
+    public java.io.InputStream a(java.lang.String,java.util.ArrayList,cn.sharesdk.framework.a.c)
+    public java.lang.String b(java.lang.String,java.util.ArrayList,cn.sharesdk.framework.a.d,java.util.ArrayList,java.util.ArrayList)
+cn.sharesdk.framework.a.h
+cn.sharesdk.framework.authorize.AuthorizeAdapter
+cn.sharesdk.framework.authorize.AuthorizeHelper
+cn.sharesdk.framework.authorize.RegisterView
+cn.sharesdk.framework.authorize.ResizeLayout
+cn.sharesdk.framework.authorize.ResizeLayout$OnResizeListener
+cn.sharesdk.framework.authorize.SSOListener
+cn.sharesdk.framework.authorize.a
+cn.sharesdk.framework.authorize.b
+cn.sharesdk.framework.authorize.c
+cn.sharesdk.framework.authorize.d
+cn.sharesdk.framework.authorize.e
+cn.sharesdk.framework.authorize.f
+cn.sharesdk.framework.authorize.g
+cn.sharesdk.framework.authorize.g$a
+cn.sharesdk.framework.authorize.h
+cn.sharesdk.framework.authorize.i
+cn.sharesdk.framework.authorize.j
+cn.sharesdk.framework.b:
+    b()
+    cn.sharesdk.framework.PlatformActionListener a()
+    void a(cn.sharesdk.framework.Platform,int,java.lang.Object)
+cn.sharesdk.framework.b.a:
+    public java.lang.String a(java.lang.String,byte[])
+    public java.lang.String a(java.lang.String,java.lang.String,int,boolean,java.lang.String)
+    private java.lang.String a(java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
+    private java.lang.String d(java.lang.String,java.lang.String)
+cn.sharesdk.framework.b.b:
+    public java.lang.String a(java.lang.String,boolean,int,java.lang.String)
+cn.sharesdk.framework.b.b.a
+cn.sharesdk.framework.d
+cn.sharesdk.framework.e
+cn.sharesdk.framework.g
+cn.sharesdk.framework.h:
+    void a(java.util.HashMap,java.lang.String)
+    public void a(android.content.Context,java.lang.String,java.lang.String,java.lang.String)
+    public java.lang.String b()
+cn.sharesdk.framework.i
+cn.sharesdk.framework.utils.Escaper
+cn.sharesdk.framework.utils.R:
+    public R()
+    public static int pxToDip(android.content.Context,int)
+    public static java.lang.String getCachePath(android.content.Context,java.lang.String)
+    public static java.lang.String toWordText(java.lang.String,int)
+    public static android.net.Uri pathToContentUri(android.content.Context,java.lang.String)
+    public static long strToDate(java.lang.String)
+    public static long dateStrToLong(java.lang.String)
+    public static long parseTwitterDate(java.lang.String)
+    public static java.lang.String encodeUrl(android.os.Bundle)
+    public static java.lang.String encodeUrl(java.util.ArrayList)
+    public static android.os.Bundle urlToBundle(java.lang.String)
+    public static android.os.Bundle decodeUrl(java.lang.String)
+cn.sharesdk.framework.utils.UIHandler:
+    public UIHandler()
+    public static boolean sendMessageAtTime(android.os.Message,long,android.os.Handler$Callback)
+    public static boolean sendMessageAtFrontOfQueue(android.os.Message,android.os.Handler$Callback)
+    public static boolean sendEmptyMessageAtTime(int,long,android.os.Handler$Callback)
+cn.sharesdk.framework.utils.a:
+    public static byte[] a(byte[],java.lang.String)
+    public static java.lang.String b(java.lang.String)
+cn.sharesdk.framework.utils.b:
+    public java.lang.String f()
+    public java.lang.String h()
+    public java.lang.String q()
+    public java.lang.String t()
+    public boolean v()
+    public java.lang.String w()
+cn.sharesdk.framework.utils.c
+cn.sharesdk.framework.utils.f
+cn.sharesdk.framework.utils.f$1
+cn.sharesdk.framework.utils.f$a
+cn.sharesdk.framework.utils.f$b
+cn.sharesdk.framework.utils.g
+cn.sharesdk.framework.utils.h
+cn.sharesdk.framework.utils.j
+cn.sharesdk.framework.utils.k
+cn.sharesdk.framework.utils.l
+cn.sharesdk.framework.utils.m
+cn.sharesdk.framework.utils.m$a
+cn.sharesdk.onekeyshare.EditPage:
+    private static final int MAX_TEXT_COUNT
+    private static final int MSG_PLATFORM_LIST_GOT
+cn.sharesdk.onekeyshare.OnekeyShare:
+    private static final int MSG_TOAST
+    private static final int MSG_ACTION_CCALLBACK
+    private static final int MSG_CANCEL_NOTIFY
+    121:121:public java.lang.String getText()
+    126:128:public void setImagePath(java.lang.String)
+    132:134:public void setImageUrl(java.lang.String)
+    143:144:public void setFilePath(java.lang.String)
+    188:189:public void setPlatform(java.lang.String)
+    193:194:public void setCallback(cn.sharesdk.framework.PlatformActionListener)
+    198:198:public cn.sharesdk.framework.PlatformActionListener getCallback()
+    208:208:public cn.sharesdk.onekeyshare.ShareContentCustomizeCallback getShareContentCustomizeCallback()
+    213:218:public void setCustomerLogo(android.graphics.Bitmap,java.lang.String,android.view.View$OnClickListener)
+    222:223:public void disableSSOWhenAuthorize()
+    227:229:public void setDialogMode()
+cn.sharesdk.onekeyshare.PlatformGridView:
+    private static final int MSG_PLATFORM_LIST_GOT
+    71:73:public PlatformGridView(android.content.Context,android.util.AttributeSet)
+cn.sharesdk.onekeyshare.R
+cn.sharesdk.onekeyshare.R$drawable
+cn.sharesdk.onekeyshare.R$string
+cn.sharesdk.onekeyshare.ShareCore:
+    119:126:public static boolean canAuthorize(android.content.Context,java.lang.String)
+cn.sharesdk.sina.weibo.SinaWeibo
+cn.sharesdk.sina.weibo.SinaWeibo$ShareParams
+cn.sharesdk.sina.weibo.a
+cn.sharesdk.sina.weibo.b
+cn.sharesdk.sina.weibo.c
+cn.sharesdk.sina.weibo.d
+cn.sharesdk.sina.weibo.e
+cn.sharesdk.sina.weibo.f
+cn.sharesdk.tencent.qq.QQ
+cn.sharesdk.tencent.qq.QQ$ShareParams
+cn.sharesdk.tencent.qq.QQClientNotExistException
+cn.sharesdk.tencent.qq.TencentSSOClientNotInstalledException
+cn.sharesdk.tencent.qq.a
+cn.sharesdk.tencent.qq.b
+cn.sharesdk.tencent.qq.c
+cn.sharesdk.tencent.qzone.QZone
+cn.sharesdk.tencent.qzone.QZone$ShareParams
+cn.sharesdk.tencent.qzone.TencentSSOClientNotInstalledException
+cn.sharesdk.tencent.qzone.a
+cn.sharesdk.tencent.qzone.b
+cn.sharesdk.tencent.qzone.c
+cn.sharesdk.tencent.qzone.d
+cn.sharesdk.tencent.qzone.e
+cn.sharesdk.tencent.qzone.f
+cn.sharesdk.tencent.qzone.g
+cn.sharesdk.tencent.qzone.h
+cn.sharesdk.tencent.qzone.i
+cn.sharesdk.tencent.qzone.j
+cn.sharesdk.tencent.qzone.k
+cn.sharesdk.wechat.favorite.WechatFavorite
+cn.sharesdk.wechat.favorite.WechatFavorite$ShareParams
+cn.sharesdk.wechat.favorite.a
+cn.sharesdk.wechat.friends.Wechat
+cn.sharesdk.wechat.friends.Wechat$ShareParams
+cn.sharesdk.wechat.friends.a
+cn.sharesdk.wechat.moments.WechatMoments
+cn.sharesdk.wechat.moments.WechatMoments$ShareParams
+cn.sharesdk.wechat.moments.a
+cn.sharesdk.wechat.utils.WXAppExtendObject:
+    public WXAppExtendObject(java.lang.String,byte[])
+    public WXAppExtendObject(java.lang.String,java.lang.String)
+    public int type()
+    public boolean checkArgs()
+cn.sharesdk.wechat.utils.WXEmojiObject
+cn.sharesdk.wechat.utils.WXFileObject
+cn.sharesdk.wechat.utils.WXImageObject
+cn.sharesdk.wechat.utils.WXMediaMessage:
+    public static final java.lang.String ACTION_WXAPPMESSAGE
+    public final int getType()
+    public final void setThumbImage(android.graphics.Bitmap)
+cn.sharesdk.wechat.utils.WXMediaMessage$IMediaObject:
+    public static final int TYPE_UNKNOWN
+    public static final int TYPE_TEXT
+    public static final int TYPE_IMAGE
+    public static final int TYPE_MUSIC
+    public static final int TYPE_VIDEO
+    public static final int TYPE_URL
+    public static final int TYPE_FILE
+    public static final int TYPE_APPDATA
+    public static final int TYPE_EMOJI
+    public abstract int type()
+    public abstract boolean checkArgs()
+cn.sharesdk.wechat.utils.WXMusicObject
+cn.sharesdk.wechat.utils.WXTextObject
+cn.sharesdk.wechat.utils.WXVideoObject
+cn.sharesdk.wechat.utils.WXWebpageObject
+cn.sharesdk.wechat.utils.WechatClientNotExistException
+cn.sharesdk.wechat.utils.WechatFavoriteNotSupportedException
+cn.sharesdk.wechat.utils.WechatHelper:
+    public void a(cn.sharesdk.wechat.utils.h)
+    public void b(cn.sharesdk.wechat.utils.h)
+    private void a(java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
+    private void a(java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
+    private void a(java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.wechat.utils.h)
+    private void a(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
+    private void a(java.lang.String,java.lang.String,java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.wechat.utils.h)
+    private void a(java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
+    private void a(java.lang.String,java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.wechat.utils.h)
+    private void b(java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
+    private void b(java.lang.String,java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.wechat.utils.h)
+    private void b(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
+    private void b(java.lang.String,java.lang.String,java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.wechat.utils.h)
+    private void c(java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
+    private void c(java.lang.String,java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.wechat.utils.h)
+    private void b(java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
+    private void b(java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.wechat.utils.h)
+    private byte[] a(java.lang.String)
+    private byte[] a(byte[])
+    private java.lang.String b(java.lang.String)
+    public boolean a(android.content.Context,java.lang.String)
+    public boolean b()
+    public boolean c()
+    private void a(cn.sharesdk.wechat.utils.WXMediaMessage,java.lang.String,int,cn.sharesdk.wechat.utils.h)
+cn.sharesdk.wechat.utils.WechatHelper$ShareParams:
+    public int shareType
+    public java.lang.String title
+    public java.lang.String musicUrl
+    public java.lang.String url
+    public java.lang.String imageUrl
+    public android.graphics.Bitmap imageData
+    protected int scene
+    public java.lang.String filePath
+    public java.lang.String extInfo
+    public WechatHelper$ShareParams()
+    public WechatHelper$ShareParams(cn.sharesdk.framework.Platform$ShareParams)
+cn.sharesdk.wechat.utils.WechatResp$ErrCode
+cn.sharesdk.wechat.utils.WechatTimelineNotSupportedException
+cn.sharesdk.wechat.utils.a
+cn.sharesdk.wechat.utils.d
+cn.sharesdk.wechat.utils.g:
+    private android.content.Context a
+    private java.lang.String b
+    public boolean a(android.content.Context,java.lang.String)
+    public void a(cn.sharesdk.wechat.utils.i)
+    public boolean a()
+    private boolean c()
+    private java.lang.String a(java.lang.String)
+    public boolean b()
+cn.sharesdk.wechat.utils.h:
+    public h(cn.sharesdk.framework.Platform)
+    public void a(cn.sharesdk.framework.authorize.AuthorizeListener)
+    public void a(cn.sharesdk.wechat.utils.WechatHelper$ShareParams,cn.sharesdk.framework.PlatformActionListener)
+    public cn.sharesdk.wechat.utils.WechatHelper$ShareParams a()
+    public cn.sharesdk.framework.Platform b()
+    public cn.sharesdk.framework.PlatformActionListener c()
+cn.sharesdk.wechat.utils.i
 com.UCMobile.PayPlugin.PayInterface
 com.UCMobile.PayPlugin.PluginIcon
 com.UCMobile.PayPlugin.PluginSurfaceView
 com.UCMobile.PayPlugin.a
-com.ant.liao.GifDecoder:
-    public static final int STATUS_PARSING
-    public static final int STATUS_FORMAT_ERROR
-    public static final int STATUS_OPEN_ERROR
-    public static final int STATUS_FINISH
-    private static final int MaxStackSize
-====    28:84:public GifDecoder(byte[],com.ant.liao.GifAction)
-====    28:89:public GifDecoder(java.io.InputStream,com.ant.liao.GifAction)
-====    104:118:public void free()
-====    125:125:public int getStatus()
-====    133:133:public boolean parseOk()
-====    142:149:public int getDelay(int)
-====    157:165:public int[] getDelays()
-====    186:186:public int getLoopCount()
-====    288:288:public com.ant.liao.GifFrame getCurrentFrame()
-====    314:315:public void reset()
-com.ant.liao.GifView:
-====    89:95:private void setGifDecoderImage(byte[])
-====    102:108:private void setGifDecoderImage(java.io.InputStream)
-====    115:116:public void setGifImage(byte[])
-====    123:124:public void setGifImage(java.io.InputStream)
-====    131:134:public void setGifImage(int)
-====    194:199:public void showCover()
-====    206:209:public void showAnimation()
-====    217:219:public void setGifImageType(com.ant.liao.GifView$GifImageType)
-====    228:237:public void setShowDimension(int,int)
-com.ant.liao.R
-com.ant.liao.R$attr
-com.ant.liao.R$drawable
-com.ant.liao.R$string
+com.alipay.android.app.IAliPay$Stub
+com.alipay.android.app.IAliPay$Stub$Proxy
+com.alipay.android.app.IAlixPay$Stub:
+    private static final java.lang.String DESCRIPTOR
+    static final int TRANSACTION_Pay
+    static final int TRANSACTION_test
+    static final int TRANSACTION_registerCallback
+    static final int TRANSACTION_unregisterCallback
+    static final int TRANSACTION_prePay
+    18:21:public IAlixPay$Stub()
+    39:39:public android.os.IBinder asBinder()
+com.alipay.android.app.IAlixPay$Stub$Proxy:
+    112:112:public java.lang.String getInterfaceDescriptor()
+com.alipay.android.app.IRemoteServiceCallback$Stub:
+    private static final java.lang.String DESCRIPTOR
+    static final int TRANSACTION_startActivity
+    static final int TRANSACTION_payEnd
+    static final int TRANSACTION_isHideLoadingScreen
+com.alipay.android.app.IRemoteServiceCallback$Stub$Proxy:
+    105:105:public java.lang.String getInterfaceDescriptor()
+com.alipay.android.app.lib.ResourceMap:
+    12:12:public ResourceMap()
+    31:31:public static int getString_download()
+    35:35:public static int getString_cancelInstallTips()
+    39:39:public static int getString_cancelInstallAlipayTips()
+    43:43:public static int getString_download_fail()
+    47:47:public static int getString_redo()
+    51:51:public static int getString_install_msp()
+    55:55:public static int getString_install_alipay()
+    63:63:public static int getLayout_alert_dialog()
+    67:67:public static int getStyle_alert_dialog()
+    71:71:public static int getImage_title()
+    75:75:public static int getImage_title_background()
+    79:79:public static int getId_mainView()
+    91:91:public static int getId_left_button()
+    95:95:public static int getId_right_button()
+    99:99:public static int getId_dialog_split_v()
+    103:103:public static int getId_dialog_title()
+    107:107:public static int getId_dialog_message()
+    111:111:public static int getId_dialog_divider()
+    115:115:public static int getId_dialog_content_view()
+    119:119:public static int getId_dialog_button_group()
+com.alipay.android.app.net.AndroidHttpClient
+com.alipay.android.app.net.AndroidHttpClient$1
+com.alipay.android.app.net.AndroidHttpClient$DelegateHttpClient
+com.alipay.android.app.net.HttpClient
+com.alipay.android.app.net.RequestData
+com.alipay.android.app.net.ResponseData
+com.alipay.android.app.net.WebResponseData
+com.alipay.android.app.sdk.AliPay:
+    private static final java.lang.String MSP_APK_NAME
+    private static final java.lang.String ALIPAY_APK_NAME
+    private android.app.Activity mContext
+    private android.os.Handler mHandler
+    private com.alipay.android.app.widget.CustomAlertDialog mInstallMessageAlert
+    private java.lang.String mDownloadUrl
+    private java.lang.String mDownloadType
+    private int mTimeout
+    private java.lang.String mUrl
+    private boolean isInstall
+    private java.lang.Runnable mDownloadFailRunnable
+    private android.content.BroadcastReceiver mReceiver
+    68:71:public AliPay(android.app.Activity,android.os.Handler)
+    76:337:public java.lang.String pay(java.lang.String)
+    342:386:private void processInstall(boolean,java.lang.String,org.json.JSONObject)
+    391:454:private void doInstall(boolean,java.lang.String,java.lang.String)
+    457:513:private void doDownLoad(boolean,java.lang.String)
+    516:558:private void downloadFile()
+    631:672:private void showInstallMessage()
+    52:52:static synthetic android.app.Activity access$0(com.alipay.android.app.sdk.AliPay)
+    515:515:static synthetic void access$1(com.alipay.android.app.sdk.AliPay)
+    56:56:static synthetic com.alipay.android.app.widget.CustomAlertDialog access$2(com.alipay.android.app.sdk.AliPay)
+    54:54:static synthetic android.os.Handler access$3(com.alipay.android.app.sdk.AliPay)
+    66:66:static synthetic void access$4(com.alipay.android.app.sdk.AliPay,boolean)
+    600:600:static synthetic android.content.BroadcastReceiver access$5(com.alipay.android.app.sdk.AliPay)
+    64:64:static synthetic java.lang.String access$6(com.alipay.android.app.sdk.AliPay)
+    62:62:static synthetic int access$7(com.alipay.android.app.sdk.AliPay)
+    630:630:static synthetic void access$8(com.alipay.android.app.sdk.AliPay)
+    560:560:static synthetic java.lang.Runnable access$9(com.alipay.android.app.sdk.AliPay)
+    60:60:static synthetic java.lang.String access$10(com.alipay.android.app.sdk.AliPay)
+    56:56:static synthetic void access$11(com.alipay.android.app.sdk.AliPay,com.alipay.android.app.widget.CustomAlertDialog)
+com.alipay.android.app.sdk.AliPay$1
+com.alipay.android.app.sdk.AliPay$1$1
+com.alipay.android.app.sdk.AliPay$1$2
+com.alipay.android.app.sdk.AliPay$2
+com.alipay.android.app.sdk.AliPay$2$1
+com.alipay.android.app.sdk.AliPay$3
+com.alipay.android.app.sdk.AliPay$3$1
+com.alipay.android.app.sdk.AliPay$3$2
+com.alipay.android.app.sdk.AliPay$4
+com.alipay.android.app.sdk.AliPay$4$1
+com.alipay.android.app.sdk.AliPay$4$2
+com.alipay.android.app.sdk.AliPay$5
+com.alipay.android.app.sdk.AliPay$6
+com.alipay.android.app.sdk.AliPay$6$1
+com.alipay.android.app.sdk.R:
+    9:9:public R()
+com.alipay.android.app.sdk.R$color
+com.alipay.android.app.sdk.R$drawable
+com.alipay.android.app.sdk.R$id:
+    public static final int AlipayTitle
+    public static final int dialog_button_group
+    public static final int dialog_content_view
+    public static final int dialog_divider
+    public static final int dialog_message
+    public static final int dialog_split_v
+    public static final int dialog_title
+    public static final int left_button
+    public static final int mainView
+    public static final int right_button
+    42:42:public R$id()
+com.alipay.android.app.sdk.R$layout:
+    public static final int alipay_title
+    public static final int dialog_alert
+    56:56:public R$layout()
+com.alipay.android.app.sdk.R$string:
+    public static final int cancel_install_alipay
+    public static final int cancel_install_msp
+    public static final int content_description_icon
+    public static final int download
+    public static final int download_fail
+    public static final int install_alipay
+    public static final int install_msp
+    public static final int redo
+    public static final int refresh
+    61:61:public R$string()
+com.alipay.android.app.sdk.R$style
+com.alipay.android.app.sdk.Result:
+    10:10:public Result()
+    19:19:public static java.lang.String getPayResult()
+com.alipay.android.app.sdk.ResultStatus:
+    18:19:public void setStatus(int)
+    26:27:public void setMsg(java.lang.String)
+com.alipay.android.app.sdk.WapPayActivity:
+    private static final java.lang.String PAY_RESULT_TAG
+com.alipay.android.app.sdk.WapPayActivity$InJavaScriptLocalObj:
+    116:135:public void showSource(java.lang.String)
+    112:112:static synthetic com.alipay.android.app.sdk.WapPayActivity access$0(com.alipay.android.app.sdk.WapPayActivity$InJavaScriptLocalObj)
+com.alipay.android.app.sdk.WapPayActivity$InJavaScriptLocalObj$1
+com.alipay.android.app.util.FileDownloader
+com.alipay.android.app.util.FileDownloader$1
+com.alipay.android.app.util.FileDownloader$IDownloadProgress
+com.alipay.android.app.util.FileDownloader$ProgressOutput
+com.alipay.android.app.util.FileFetch
+com.alipay.android.app.util.FileFetch$FileAccess
+com.alipay.android.app.util.LogUtils:
+    private static final boolean DEBUG
+    private static final java.lang.String TAG
+    5:5:public LogUtils()
+    11:12:public static void v(java.lang.String)
+    18:18:public static void v(java.lang.String,java.lang.String)
+    21:22:public static void d(java.lang.String)
+    28:28:public static void d(java.lang.String,java.lang.String)
+    31:32:public static void w(java.lang.String)
+    38:38:public static void w(java.lang.String,java.lang.String)
+    41:42:public static void i(java.lang.String)
+    48:48:public static void i(java.lang.String,java.lang.String)
+    51:52:public static void e(java.lang.String)
+    58:58:public static void e(java.lang.String,java.lang.String)
+com.alipay.android.app.util.NetConnectionType
+com.alipay.android.app.util.PayHelper
+com.alipay.android.app.util.PayHelper$1
+com.alipay.android.app.util.PayHelper$2
+com.alipay.android.app.util.StoreUtils
+com.alipay.android.app.util.Utils:
+    private static final java.lang.String MSP_PACKAGE_NAME
+    private static final java.lang.String ALIPAY_PACKAGE_NAME
+    private static final java.lang.String ALIPAY_VERSION
+    private static final java.lang.String MSP_VERSION
+    42:42:public Utils()
+    54:62:public static boolean isExistMsp(android.content.Context)
+    67:78:public static boolean isExistClient(android.content.Context)
+    97:106:public static boolean isLatestMspVersion(android.content.Context)
+    110:119:public static com.alipay.android.app.util.NetConnectionType getNetConnectionType(android.content.Context)
+    124:131:public static boolean is2G(android.content.Context)
+    135:148:public static java.lang.String getCharset(java.lang.String)
+    152:161:public static java.lang.String getContentType(java.lang.String)
+    166:174:public static void chmod(java.lang.String,java.lang.String)
+    177:186:public static java.lang.String getClientKey(android.content.Context)
+    192:191:public static java.lang.String getClientId(android.content.Context)
+    196:198:public static java.lang.String getAlixTid(android.content.Context)
+    202:205:public static boolean isEmpty4AlixTid(android.content.Context)
+    314:339:public static boolean retrieveApkFromAssets(android.content.Context,java.lang.String,java.lang.String)
+    343:346:public static android.content.pm.PackageInfo getApkInfo(android.content.Context,java.lang.String)
+    350:356:public static void installApk(android.app.Activity,java.lang.String)
+    359:382:public static int compareVersion(java.lang.String,java.lang.String)
+com.alipay.android.app.widget.CustomAlertDialog
+com.alipay.android.app.widget.CustomAlertDialog$1
+com.alipay.android.app.widget.CustomAlertDialog$Builder
+com.alipay.android.app.widget.CustomAlertDialog$ButtonHandler
+com.alipay.android.app.widget.CustomAlertDialog$DialogCache
+com.baidu.mobstat.BasicStoreTools:
+    public static final java.lang.String LAST_SEND_TIME
+    public static final java.lang.String SEND_LOG_TYPE
+    public static final java.lang.String TIME_INTERVAL
+    public static final java.lang.String ONLY_WIFI
+    public static final java.lang.String APP_ANALYSIS_EXCEPTION
+    public static final java.lang.String DEVICE_ID
+    public static final java.lang.String DEVICE_CUID
+    public static final java.lang.String APP_ANALYSIS_EXCEPTION_TAG
+    public static final java.lang.String APP_SET_CHANNEL_WITH_CODE
+    public static final java.lang.String APP_SET_CHANNEL
+    protected void setExceptionHeadTag(android.content.Context,java.lang.String)
+    protected java.lang.String loadExceptionHeadTag(android.content.Context)
+    protected long loadLastSendTime(android.content.Context)
+com.baidu.mobstat.BasicStoreToolsBase:
+    private android.content.SharedPreferences c
+    private android.content.SharedPreferences b(android.content.Context)
+    public java.lang.String getSharedString(android.content.Context,java.lang.String,java.lang.String)
+    public void putSharedString(android.content.Context,java.lang.String,java.lang.String)
+    public int getSharedInt(android.content.Context,java.lang.String,int)
+    public void putSharedInt(android.content.Context,java.lang.String,int)
+    public long getSharedLong(android.content.Context,java.lang.String,long)
+    public void putSharedLong(android.content.Context,java.lang.String,long)
+    public boolean getSharedBoolean(android.content.Context,java.lang.String,boolean)
+    public void putSharedBoolean(android.content.Context,java.lang.String,boolean)
+    public void removeShare(android.content.Context,java.lang.String)
+    public long getLong(android.content.Context,java.lang.String,long)
+    public boolean updateShareInt(android.content.Intent,android.app.Activity,java.lang.String,int)
+    public boolean updateShareBoolean(android.content.Intent,android.app.Activity,java.lang.String)
+    public boolean updateShareBoolean(android.content.Intent,android.app.Activity,java.lang.String,boolean)
+    public boolean updateShareString(android.content.Intent,android.app.Activity,java.lang.String)
+com.baidu.mobstat.StatFragment
+com.baidu.mobstat.StatService:
+    public static final int EXCEPTION_LOG
+    public StatService()
+    private static boolean a()
+    private static void b()
+    public static synchronized void onResume(java.lang.Object)
+    public static synchronized void onPause(java.lang.Object)
+    public static void setOn(android.content.Context,int)
+    public static void setSendLogStrategy(android.content.Context,com.baidu.mobstat.SendStrategyEnum,int,boolean)
+    public static void setSendLogStrategy(android.content.Context,com.baidu.mobstat.SendStrategyEnum,int)
+    private static void a(android.content.Context)
+    public static void onEvent(android.content.Context,java.lang.String,java.lang.String,int)
+    public static void onEvent(android.content.Context,java.lang.String,java.lang.String)
+    public static void onEventStart(android.content.Context,java.lang.String,java.lang.String)
+    public static void onEventEnd(android.content.Context,java.lang.String,java.lang.String)
+    public static void setAppKey(java.lang.String)
+    public static void setAppChannel(java.lang.String)
+    public static void setDebugOn(boolean)
+com.baidu.mobstat.b:
+    public void a(java.lang.String)
+    public void b(java.lang.String)
+com.baidu.mobstat.c:
+    static synthetic java.lang.String a(com.baidu.mobstat.c,java.lang.String)
+com.baidu.mobstat.d:
+    public void a(android.content.Context,java.lang.String,java.lang.String,int,long)
+    public void a(android.content.Context,java.lang.String,java.lang.String,long)
+    public void b(android.content.Context,java.lang.String,java.lang.String,long)
+    public java.lang.String a(java.lang.String,java.lang.String)
+com.baidu.mobstat.e
+com.baidu.mobstat.f
+com.baidu.mobstat.g
+com.baidu.mobstat.i
+com.baidu.mobstat.l:
+    public void a(android.content.Context,com.baidu.mobstat.SendStrategyEnum,int,boolean)
+    public void a(boolean,android.content.Context)
+com.baidu.mobstat.s:
+    private java.lang.ref.WeakReference i
+    public void a(java.lang.Object,long)
+    public void b(java.lang.Object,long)
+com.baidu.mobstat.w
 com.jeremyfeinstein.slidingmenu.CustomViewAbove:
     private static final java.lang.String TAG
     private static final boolean DEBUG
@@ -39,33 +632,33 @@ com.jeremyfeinstein.slidingmenu.CustomViewAbove:
     private static final int MAX_SETTLE_DURATION
     private static final int MIN_DISTANCE_FOR_FLING
     private static final int INVALID_POINTER
-====    262:263:public void setOnOpenedListener(com.jeremyfeinstein.slidingmenu.SlidingMenu$OnOpenedListener)
-====    266:267:public void setOnClosedListener(com.jeremyfeinstein.slidingmenu.SlidingMenu$OnClosedListener)
-====    282:285:public void addIgnoredView(android.view.View)
-====    288:289:public void removeIgnoredView(android.view.View)
-====    292:293:public void clearIgnoredViews()
-====    325:325:public int getContentLeft()
-====    350:356:public int getChildWidth(int)
-====    361:361:public boolean isSlidingEnabled()
-====    365:366:public void setSlidingEnabled(boolean)
-====    375:376:void smoothScrollTo(int,int)
-====    571:571:public int getTouchMode()
-====    900:917:protected boolean canScroll(android.view.View,boolean,int,int,int)
+    262:263:public void setOnOpenedListener(com.jeremyfeinstein.slidingmenu.SlidingMenu$OnOpenedListener)
+    266:267:public void setOnClosedListener(com.jeremyfeinstein.slidingmenu.SlidingMenu$OnClosedListener)
+    282:285:public void addIgnoredView(android.view.View)
+    288:289:public void removeIgnoredView(android.view.View)
+    292:293:public void clearIgnoredViews()
+    325:325:public int getContentLeft()
+    350:356:public int getChildWidth(int)
+    361:361:public boolean isSlidingEnabled()
+    365:366:public void setSlidingEnabled(boolean)
+    375:376:void smoothScrollTo(int,int)
+    571:571:public int getTouchMode()
+    900:917:protected boolean canScroll(android.view.View,boolean,int,int,int)
 com.jeremyfeinstein.slidingmenu.CustomViewAbove$SimpleOnPageChangeListener:
-====    146:146:public void onPageScrollStateChanged(int)
+    146:146:public void onPageScrollStateChanged(int)
 com.jeremyfeinstein.slidingmenu.CustomViewBehind:
     private static final java.lang.String TAG
     private static final int MARGIN_THRESHOLD
-====    49:50:public void setCanvasTransformer(com.jeremyfeinstein.slidingmenu.SlidingMenu$CanvasTransformer)
-====    58:59:public void setMarginThreshold(int)
-====    62:62:public int getMarginThreshold()
-====    85:89:public void setSecondaryContent(android.view.View)
-====    168:168:public int getMode()
-====    176:176:public float getScrollScale()
-====    185:187:public void setSecondaryShadowDrawable(android.graphics.drawable.Drawable)
-====    417:426:public void setSelectedView(android.view.View)
+    49:50:public void setCanvasTransformer(com.jeremyfeinstein.slidingmenu.SlidingMenu$CanvasTransformer)
+    58:59:public void setMarginThreshold(int)
+    62:62:public int getMarginThreshold()
+    85:89:public void setSecondaryContent(android.view.View)
+    168:168:public int getMode()
+    176:176:public float getScrollScale()
+    185:187:public void setSecondaryShadowDrawable(android.graphics.drawable.Drawable)
+    417:426:public void setSelectedView(android.view.View)
 com.jeremyfeinstein.slidingmenu.R:
-====    9:9:public R()
+    9:9:public R()
 com.jeremyfeinstein.slidingmenu.R$attr
 com.jeremyfeinstein.slidingmenu.R$bool
 com.jeremyfeinstein.slidingmenu.R$color
@@ -127,7 +720,7 @@ com.jeremyfeinstein.slidingmenu.R$id:
     public static final int tabMode
     public static final int useLogo
     public static final int wrap_content
-====    285:285:public R$id()
+    285:285:public R$id()
 com.jeremyfeinstein.slidingmenu.R$integer
 com.jeremyfeinstein.slidingmenu.R$layout:
     public static final int abs__action_bar_home
@@ -153,7 +746,7 @@ com.jeremyfeinstein.slidingmenu.R$layout:
     public static final int abs__simple_dropdown_hint
     public static final int sherlock_spinner_dropdown_item
     public static final int sherlock_spinner_item
-====    346:346:public R$layout()
+    346:346:public R$layout()
 com.jeremyfeinstein.slidingmenu.R$string
 com.jeremyfeinstein.slidingmenu.R$style
 com.jeremyfeinstein.slidingmenu.R$styleable:
@@ -324,16 +917,16 @@ com.jeremyfeinstein.slidingmenu.R$styleable:
     public static final int TextAppearance_android_textStyle
     public static final int TextAppearance_android_typeface
     public static final int TextAppearance_textAllCaps
-====    481:481:public R$styleable()
+    481:481:public R$styleable()
 com.jeremyfeinstein.slidingmenu.SlidingActivityBase
 com.jeremyfeinstein.slidingmenu.SlidingActivityHelper:
-====    149:151:public void setContentView(android.view.View)
-====    178:179:public void toggle()
-====    200:201:public void showSecondaryMenu()
+    149:151:public void setContentView(android.view.View)
+    178:179:public void toggle()
+    200:201:public void showSecondaryMenu()
 com.jeremyfeinstein.slidingmenu.SlidingFragmentActivity:
-====    111:112:public void toggle()
-====    118:119:public void showContent()
-====    132:133:public void showSecondaryMenu()
+    111:112:public void toggle()
+    118:119:public void showContent()
+    132:133:public void showSecondaryMenu()
 com.jeremyfeinstein.slidingmenu.SlidingMenu:
     private static final java.lang.String TAG
     public static final int SLIDING_WINDOW
@@ -344,84 +937,87 @@ com.jeremyfeinstein.slidingmenu.SlidingMenu:
     public static final int LEFT
     public static final int RIGHT
     public static final int LEFT_RIGHT
-====    398:399:public void setSecondaryMenu(int)
-====    407:409:public void setSecondaryMenu(android.view.View)
-====    426:427:public void setSlidingEnabled(boolean)
-====    435:435:public boolean isSlidingEnabled()
-====    454:454:public int getMode()
-====    463:474:public void setStatic(boolean)
-====    497:498:public void showSecondaryMenu()
-====    530:531:public void toggle()
-====    539:544:public void toggle(boolean)
-====    570:570:public int getBehindOffset()
-====    613:615:public void setAboveOffsetRes(int)
-====    647:649:public void setBehindWidthRes(int)
-====    657:657:public float getBehindScrollScale()
-====    665:665:public int getTouchmodeMarginThreshold()
-====    673:674:public void setTouchmodeMarginThreshold(int)
-====    694:695:public void setBehindCanvasTransformer(com.jeremyfeinstein.slidingmenu.SlidingMenu$CanvasTransformer)
-====    703:703:public int getTouchModeAbove()
-====    762:763:public void setSecondaryShadowDrawable(int)
-====    771:772:public void setSecondaryShadowDrawable(android.graphics.drawable.Drawable)
-====    826:827:public void setSelectedView(android.view.View)
-====    844:845:public void setSelectorBitmap(android.graphics.Bitmap)
-====    853:854:public void addIgnoredView(android.view.View)
-====    862:863:public void removeIgnoredView(android.view.View)
-====    869:870:public void clearIgnoredViews()
-====    879:880:public void setOnOpenListener(com.jeremyfeinstein.slidingmenu.SlidingMenu$OnOpenListener)
-====    889:890:public void setOnCloseListener(com.jeremyfeinstein.slidingmenu.SlidingMenu$OnCloseListener)
-====    898:899:public void setOnOpenedListener(com.jeremyfeinstein.slidingmenu.SlidingMenu$OnOpenedListener)
-====    907:908:public void setOnClosedListener(com.jeremyfeinstein.slidingmenu.SlidingMenu$OnClosedListener)
+    398:399:public void setSecondaryMenu(int)
+    407:409:public void setSecondaryMenu(android.view.View)
+    426:427:public void setSlidingEnabled(boolean)
+    435:435:public boolean isSlidingEnabled()
+    454:454:public int getMode()
+    463:474:public void setStatic(boolean)
+    497:498:public void showSecondaryMenu()
+    530:531:public void toggle()
+    539:544:public void toggle(boolean)
+    570:570:public int getBehindOffset()
+    613:615:public void setAboveOffsetRes(int)
+    647:649:public void setBehindWidthRes(int)
+    657:657:public float getBehindScrollScale()
+    665:665:public int getTouchmodeMarginThreshold()
+    673:674:public void setTouchmodeMarginThreshold(int)
+    694:695:public void setBehindCanvasTransformer(com.jeremyfeinstein.slidingmenu.SlidingMenu$CanvasTransformer)
+    703:703:public int getTouchModeAbove()
+    762:763:public void setSecondaryShadowDrawable(int)
+    771:772:public void setSecondaryShadowDrawable(android.graphics.drawable.Drawable)
+    826:827:public void setSelectedView(android.view.View)
+    844:845:public void setSelectorBitmap(android.graphics.Bitmap)
+    853:854:public void addIgnoredView(android.view.View)
+    862:863:public void removeIgnoredView(android.view.View)
+    869:870:public void clearIgnoredViews()
+    879:880:public void setOnOpenListener(com.jeremyfeinstein.slidingmenu.SlidingMenu$OnOpenListener)
+    889:890:public void setOnCloseListener(com.jeremyfeinstein.slidingmenu.SlidingMenu$OnCloseListener)
+    898:899:public void setOnOpenedListener(com.jeremyfeinstein.slidingmenu.SlidingMenu$OnOpenedListener)
+    907:908:public void setOnClosedListener(com.jeremyfeinstein.slidingmenu.SlidingMenu$OnClosedListener)
 com.jeremyfeinstein.slidingmenu.SlidingMenu$1:
     public static final int POSITION_OPEN
     public static final int POSITION_CLOSE
 com.nostra13.universalimageloader.cache.disc.BaseDiscCache:
     private static final java.lang.String ERROR_ARG_NULL
-====    40:41:public BaseDiscCache(java.io.File)
+    40:41:public BaseDiscCache(java.io.File)
 com.nostra13.universalimageloader.cache.disc.LimitedDiscCache:
     private static final int INVALID_SIZE
-====    55:56:public LimitedDiscCache(java.io.File,int)
+    55:56:public LimitedDiscCache(java.io.File,int)
 com.nostra13.universalimageloader.cache.disc.impl.FileCountLimitedDiscCache:
-====    40:41:public FileCountLimitedDiscCache(java.io.File,int)
+    40:41:public FileCountLimitedDiscCache(java.io.File,int)
 com.nostra13.universalimageloader.cache.disc.impl.LimitedAgeDiscCache
 com.nostra13.universalimageloader.cache.disc.impl.TotalSizeLimitedDiscCache:
     private static final int MIN_NORMAL_CACHE_SIZE_IN_MB
     private static final int MIN_NORMAL_CACHE_SIZE
 com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache:
-====    36:37:public UnlimitedDiscCache(java.io.File)
+    36:37:public UnlimitedDiscCache(java.io.File)
 com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator:
     private static final java.lang.String HASH_ALGORITHM
     private static final int RADIX
-com.nostra13.universalimageloader.cache.memory.LimitedMemoryCache:
-    private static final int MAX_NORMAL_CACHE_SIZE_IN_MB
-    private static final int MAX_NORMAL_CACHE_SIZE
+com.nostra13.universalimageloader.cache.memory.BaseMemoryCache
+com.nostra13.universalimageloader.cache.memory.LimitedMemoryCache
 com.nostra13.universalimageloader.cache.memory.impl.FIFOLimitedMemoryCache
-com.nostra13.universalimageloader.cache.memory.impl.LRULimitedMemoryCache:
-    private static final int INITIAL_CAPACITY
-    private static final float LOAD_FACTOR
+com.nostra13.universalimageloader.cache.memory.impl.LRULimitedMemoryCache
 com.nostra13.universalimageloader.cache.memory.impl.LargestLimitedMemoryCache
 com.nostra13.universalimageloader.cache.memory.impl.LimitedAgeMemoryCache
 com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache
 com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache
 com.nostra13.universalimageloader.core.DefaultConfigurationFactory:
-====    50:50:public DefaultConfigurationFactory()
+    53:121:public DefaultConfigurationFactory()
 com.nostra13.universalimageloader.core.DisplayBitmapTask:
-    private static final java.lang.String LOG_DISPLAY_IMAGE_IN_IMAGEVIEW
-    private static final java.lang.String LOG_TASK_CANCELLED_IMAGEVIEW_REUSED
-    private static final java.lang.String LOG_TASK_CANCELLED_IMAGEVIEW_LOST
+    private static final java.lang.String LOG_DISPLAY_IMAGE_IN_IMAGEAWARE
+    private static final java.lang.String LOG_TASK_CANCELLED_IMAGEAWARE_REUSED
+    private static final java.lang.String LOG_TASK_CANCELLED_IMAGEAWARE_COLLECTED
 com.nostra13.universalimageloader.core.DisplayImageOptions$Builder:
-====    237:238:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder resetViewBeforeLoading()
-====    243:244:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder resetViewBeforeLoading(boolean)
-====    253:254:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder cacheInMemory()
-====    269:270:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder cacheOnDisc()
-====    290:292:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder bitmapConfig(android.graphics.Bitmap$Config)
-====    304:306:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder decodingOptions(android.graphics.BitmapFactory$Options)
-====    311:312:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder delayBeforeLoading(int)
-====    317:318:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder extraForDownloader(java.lang.Object)
-====    327:328:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder preProcessor(com.nostra13.universalimageloader.core.process.BitmapProcessor)
-====    336:337:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder postProcessor(com.nostra13.universalimageloader.core.process.BitmapProcessor)
-====    345:347:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder displayer(com.nostra13.universalimageloader.core.display.BitmapDisplayer)
-====    355:356:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder handler(android.os.Handler)
+    260:261:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder showImageOnLoading(int)
+    270:271:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder showImageOnLoading(android.graphics.drawable.Drawable)
+    293:294:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder showImageForEmptyUri(android.graphics.drawable.Drawable)
+    316:317:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder showImageOnFail(android.graphics.drawable.Drawable)
+    327:328:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder resetViewBeforeLoading()
+    336:337:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder resetViewBeforeLoading(boolean)
+    346:347:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder cacheInMemory()
+    362:363:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder cacheOnDisc()
+    383:385:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder bitmapConfig(android.graphics.Bitmap$Config)
+    397:399:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder decodingOptions(android.graphics.BitmapFactory$Options)
+    404:405:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder delayBeforeLoading(int)
+    410:411:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder extraForDownloader(java.lang.Object)
+    416:417:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder considerExifParams(boolean)
+    426:427:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder preProcessor(com.nostra13.universalimageloader.core.process.BitmapProcessor)
+    436:437:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder postProcessor(com.nostra13.universalimageloader.core.process.BitmapProcessor)
+    445:447:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder displayer(com.nostra13.universalimageloader.core.display.BitmapDisplayer)
+    451:452:com.nostra13.universalimageloader.core.DisplayImageOptions$Builder syncLoading(boolean)
+    460:461:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder handler(android.os.Handler)
 com.nostra13.universalimageloader.core.ImageLoader:
     static final java.lang.String LOG_INIT_CONFIG
     static final java.lang.String LOG_DESTROY
@@ -430,25 +1026,35 @@ com.nostra13.universalimageloader.core.ImageLoader:
     private static final java.lang.String ERROR_WRONG_ARGUMENTS
     private static final java.lang.String ERROR_NOT_INIT
     private static final java.lang.String ERROR_INIT_CONFIG_WITH_NULL
-====    102:102:public boolean isInited()
-====    117:118:public void displayImage(java.lang.String,android.widget.ImageView)
-====    134:135:public void displayImage(java.lang.String,android.widget.ImageView,com.nostra13.universalimageloader.core.DisplayImageOptions)
-====    151:152:public void displayImage(java.lang.String,android.widget.ImageView,com.nostra13.universalimageloader.core.assist.ImageLoadingListener)
-====    236:237:public void loadImage(java.lang.String,com.nostra13.universalimageloader.core.assist.ImageLoadingListener)
-====    254:255:public void loadImage(java.lang.String,com.nostra13.universalimageloader.core.assist.ImageSize,com.nostra13.universalimageloader.core.assist.ImageLoadingListener)
-====    273:274:public void loadImage(java.lang.String,com.nostra13.universalimageloader.core.DisplayImageOptions,com.nostra13.universalimageloader.core.assist.ImageLoadingListener)
-====    296:316:public void loadImage(java.lang.String,com.nostra13.universalimageloader.core.assist.ImageSize,com.nostra13.universalimageloader.core.DisplayImageOptions,com.nostra13.universalimageloader.core.assist.ImageLoadingListener)
-====    335:336:public com.nostra13.universalimageloader.cache.memory.MemoryCacheAware getMemoryCache()
-====    355:356:public com.nostra13.universalimageloader.cache.disc.DiscCacheAware getDiscCache()
-====    371:371:public java.lang.String getLoadingUriForView(android.widget.ImageView)
-====    380:381:public void cancelDisplayTask(android.widget.ImageView)
-====    394:395:public void denyNetworkDownloads(boolean)
-====    405:406:public void handleSlowNetwork(boolean)
-====    413:414:public void pause()
-====    418:419:public void resume()
-====    435:439:public void destroy()
-com.nostra13.universalimageloader.core.ImageLoaderConfiguration:
-====    134:134:public static com.nostra13.universalimageloader.core.ImageLoaderConfiguration createDefault(android.content.Context)
+    108:108:public boolean isInited()
+    124:125:public void displayImage(java.lang.String,com.nostra13.universalimageloader.core.imageaware.ImageAware)
+    142:143:public void displayImage(java.lang.String,com.nostra13.universalimageloader.core.imageaware.ImageAware,com.nostra13.universalimageloader.core.assist.ImageLoadingListener)
+    160:161:public void displayImage(java.lang.String,com.nostra13.universalimageloader.core.imageaware.ImageAware,com.nostra13.universalimageloader.core.DisplayImageOptions)
+    181:182:public void displayImage(java.lang.String,com.nostra13.universalimageloader.core.imageaware.ImageAware,com.nostra13.universalimageloader.core.DisplayImageOptions,com.nostra13.universalimageloader.core.assist.ImageLoadingListener)
+    281:282:public void displayImage(java.lang.String,android.widget.ImageView)
+    298:299:public void displayImage(java.lang.String,android.widget.ImageView,com.nostra13.universalimageloader.core.DisplayImageOptions)
+    315:316:public void displayImage(java.lang.String,android.widget.ImageView,com.nostra13.universalimageloader.core.assist.ImageLoadingListener)
+    372:373:public void loadImage(java.lang.String,com.nostra13.universalimageloader.core.assist.ImageLoadingListener)
+    392:393:public void loadImage(java.lang.String,com.nostra13.universalimageloader.core.assist.ImageSize,com.nostra13.universalimageloader.core.assist.ImageLoadingListener)
+    411:412:public void loadImage(java.lang.String,com.nostra13.universalimageloader.core.DisplayImageOptions,com.nostra13.universalimageloader.core.assist.ImageLoadingListener)
+    436:437:public void loadImage(java.lang.String,com.nostra13.universalimageloader.core.assist.ImageSize,com.nostra13.universalimageloader.core.DisplayImageOptions,com.nostra13.universalimageloader.core.assist.ImageLoadingListener)
+    463:473:public void loadImage(java.lang.String,com.nostra13.universalimageloader.core.assist.ImageSize,com.nostra13.universalimageloader.core.DisplayImageOptions,com.nostra13.universalimageloader.core.assist.ImageLoadingListener,com.nostra13.universalimageloader.core.assist.ImageLoadingProgressListener)
+    487:487:public android.graphics.Bitmap loadImageSync(java.lang.String)
+    503:503:public android.graphics.Bitmap loadImageSync(java.lang.String,com.nostra13.universalimageloader.core.DisplayImageOptions)
+    521:521:public android.graphics.Bitmap loadImageSync(java.lang.String,com.nostra13.universalimageloader.core.assist.ImageSize)
+    540:547:public android.graphics.Bitmap loadImageSync(java.lang.String,com.nostra13.universalimageloader.core.assist.ImageSize,com.nostra13.universalimageloader.core.DisplayImageOptions)
+    567:568:public com.nostra13.universalimageloader.cache.memory.MemoryCacheAware getMemoryCache()
+    587:588:public com.nostra13.universalimageloader.cache.disc.DiscCacheAware getDiscCache()
+    606:606:public java.lang.String getLoadingUriForView(com.nostra13.universalimageloader.core.imageaware.ImageAware)
+    614:614:public java.lang.String getLoadingUriForView(android.widget.ImageView)
+    625:626:public void cancelDisplayTask(com.nostra13.universalimageloader.core.imageaware.ImageAware)
+    635:636:public void cancelDisplayTask(android.widget.ImageView)
+    649:650:public void denyNetworkDownloads(boolean)
+    660:661:public void handleSlowNetwork(boolean)
+    669:670:public void pause()
+    674:675:public void resume()
+    682:683:public void stop()
+    691:695:public void destroy()
 com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder:
     private static final java.lang.String WARNING_OVERLAP_DISC_CACHE_PARAMS
     private static final java.lang.String WARNING_OVERLAP_DISC_CACHE_NAME_GENERATOR
@@ -456,26 +1062,26 @@ com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder:
     private static final java.lang.String WARNING_OVERLAP_EXECUTOR
     public static final int DEFAULT_THREAD_POOL_SIZE
     public static final int DEFAULT_THREAD_PRIORITY
-====    203:205:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder memoryCacheExtraOptions(int,int)
-====    221:226:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder discCacheExtraOptions(int,int,android.graphics.Bitmap$CompressFormat,int,com.nostra13.universalimageloader.core.process.BitmapProcessor)
-====    243:248:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder taskExecutor(java.util.concurrent.Executor)
-====    270:275:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder taskExecutorForCachedImages(java.util.concurrent.Executor)
-====    283:288:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder threadPoolSize(int)
-====    348:355:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder memoryCacheSize(int)
-====    368:377:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder memoryCacheSizePercentage(int)
-====    391:396:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder memoryCache(com.nostra13.universalimageloader.cache.memory.MemoryCacheAware)
-====    408:415:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder discCacheSize(int)
-====    427:435:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder discCacheFileCount(int)
-====    460:461:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder imageDownloader(com.nostra13.universalimageloader.core.download.ImageDownloader)
-====    471:472:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder imageDecoder(com.nostra13.universalimageloader.core.decode.ImageDecoder)
-====    490:498:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder discCache(com.nostra13.universalimageloader.cache.disc.DiscCacheAware)
-====    508:509:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder defaultDisplayImageOptions(com.nostra13.universalimageloader.core.DisplayImageOptions)
-====    517:518:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder writeDebugLogs()
+    222:224:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder memoryCacheExtraOptions(int,int)
+    242:247:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder discCacheExtraOptions(int,int,android.graphics.Bitmap$CompressFormat,int,com.nostra13.universalimageloader.core.process.BitmapProcessor)
+    264:269:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder taskExecutor(java.util.concurrent.Executor)
+    291:296:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder taskExecutorForCachedImages(java.util.concurrent.Executor)
+    304:309:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder threadPoolSize(int)
+    369:376:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder memoryCacheSize(int)
+    389:399:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder memoryCacheSizePercentage(int)
+    413:418:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder memoryCache(com.nostra13.universalimageloader.cache.memory.MemoryCacheAware)
+    430:437:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder discCacheSize(int)
+    449:457:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder discCacheFileCount(int)
+    482:483:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder imageDownloader(com.nostra13.universalimageloader.core.download.ImageDownloader)
+    493:494:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder imageDecoder(com.nostra13.universalimageloader.core.decode.ImageDecoder)
+    512:520:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder discCache(com.nostra13.universalimageloader.cache.disc.DiscCacheAware)
+    539:540:public com.nostra13.universalimageloader.core.ImageLoaderConfiguration$Builder writeDebugLogs()
 com.nostra13.universalimageloader.core.ImageLoaderEngine:
-====    132:133:void denyNetworkDownloads(boolean)
-====    143:144:void handleSlowNetwork(boolean)
-====    151:152:void pause()
-====    156:160:void resume()
+    139:140:void denyNetworkDownloads(boolean)
+    150:151:void handleSlowNetwork(boolean)
+    158:159:void pause()
+    163:167:void resume()
+    171:180:void stop()
 com.nostra13.universalimageloader.core.LoadAndDisplayImageTask:
     private static final java.lang.String LOG_WAITING_FOR_RESUME
     private static final java.lang.String LOG_RESUME_AFTER_PAUSE
@@ -485,13 +1091,14 @@ com.nostra13.universalimageloader.core.LoadAndDisplayImageTask:
     private static final java.lang.String LOG_GET_IMAGE_FROM_MEMORY_CACHE_AFTER_WAITING
     private static final java.lang.String LOG_LOAD_IMAGE_FROM_NETWORK
     private static final java.lang.String LOG_LOAD_IMAGE_FROM_DISC_CACHE
+    private static final java.lang.String LOG_RESIZE_CACHED_IMAGE_FILE
     private static final java.lang.String LOG_PREPROCESS_IMAGE
     private static final java.lang.String LOG_POSTPROCESS_IMAGE
     private static final java.lang.String LOG_CACHE_IMAGE_IN_MEMORY
     private static final java.lang.String LOG_CACHE_IMAGE_ON_DISC
     private static final java.lang.String LOG_PROCESS_IMAGE_BEFORE_CACHE_ON_DISC
-    private static final java.lang.String LOG_TASK_CANCELLED_IMAGEVIEW_REUSED
-    private static final java.lang.String LOG_TASK_CANCELLED_IMAGEVIEW_LOST
+    private static final java.lang.String LOG_TASK_CANCELLED_IMAGEAWARE_REUSED
+    private static final java.lang.String LOG_TASK_CANCELLED_IMAGEAWARE_COLLECTED
     private static final java.lang.String LOG_TASK_INTERRUPTED
     private static final java.lang.String ERROR_PRE_PROCESSOR_NULL
     private static final java.lang.String ERROR_POST_PROCESSOR_NULL
@@ -501,96 +1108,97 @@ com.nostra13.universalimageloader.core.ProcessAndDisplayImageTask:
     private static final java.lang.String LOG_POSTPROCESS_IMAGE
 com.nostra13.universalimageloader.core.assist.DiscCacheUtil
 com.nostra13.universalimageloader.core.assist.FailReason:
-====    42:42:public java.lang.Throwable getCause()
+    42:42:public java.lang.Throwable getCause()
 com.nostra13.universalimageloader.core.assist.ImageSize:
     private static final int TO_STRING_MAX_LENGHT
     private static final java.lang.String SEPARATOR
 com.nostra13.universalimageloader.core.assist.MemoryCacheUtil:
     private static final java.lang.String URI_AND_SIZE_SEPARATOR
     private static final java.lang.String WIDTH_AND_HEIGHT_SEPARATOR
-====    37:38:private MemoryCacheUtil()
-====    66:72:public static java.util.List findCachedBitmapsForImageUri(java.lang.String,com.nostra13.universalimageloader.cache.memory.MemoryCacheAware)
-====    82:88:public static java.util.List findCacheKeysForImageUri(java.lang.String,com.nostra13.universalimageloader.cache.memory.MemoryCacheAware)
-====    98:107:public static void removeFromCache(java.lang.String,com.nostra13.universalimageloader.cache.memory.MemoryCacheAware)
+    37:38:private MemoryCacheUtil()
+    66:72:public static java.util.List findCachedBitmapsForImageUri(java.lang.String,com.nostra13.universalimageloader.cache.memory.MemoryCacheAware)
+    82:88:public static java.util.List findCacheKeysForImageUri(java.lang.String,com.nostra13.universalimageloader.cache.memory.MemoryCacheAware)
+    98:107:public static void removeFromCache(java.lang.String,com.nostra13.universalimageloader.cache.memory.MemoryCacheAware)
 com.nostra13.universalimageloader.core.assist.PauseOnScrollListener
+com.nostra13.universalimageloader.core.assist.SyncImageLoadingListener
 com.nostra13.universalimageloader.core.assist.deque.BlockingDeque:
-====    public abstract void addFirst(java.lang.Object)
-====    public abstract void addLast(java.lang.Object)
-====    public abstract boolean offerFirst(java.lang.Object)
-====    public abstract boolean offerLast(java.lang.Object)
-====    public abstract void putFirst(java.lang.Object)
-====    public abstract void putLast(java.lang.Object)
-====    public abstract boolean offerFirst(java.lang.Object,long,java.util.concurrent.TimeUnit)
-====    public abstract boolean offerLast(java.lang.Object,long,java.util.concurrent.TimeUnit)
-====    public abstract java.lang.Object takeFirst()
-====    public abstract java.lang.Object takeLast()
-====    public abstract java.lang.Object pollFirst(long,java.util.concurrent.TimeUnit)
-====    public abstract java.lang.Object pollLast(long,java.util.concurrent.TimeUnit)
-====    public abstract boolean removeFirstOccurrence(java.lang.Object)
-====    public abstract boolean removeLastOccurrence(java.lang.Object)
-====    public abstract boolean add(java.lang.Object)
-====    public abstract boolean offer(java.lang.Object)
-====    public abstract void put(java.lang.Object)
-====    public abstract boolean offer(java.lang.Object,long,java.util.concurrent.TimeUnit)
-====    public abstract java.lang.Object remove()
-====    public abstract java.lang.Object poll()
-====    public abstract java.lang.Object take()
-====    public abstract java.lang.Object poll(long,java.util.concurrent.TimeUnit)
-====    public abstract java.lang.Object element()
-====    public abstract java.lang.Object peek()
-====    public abstract boolean remove(java.lang.Object)
-====    public abstract boolean contains(java.lang.Object)
-====    public abstract int size()
-====    public abstract java.util.Iterator iterator()
-====    public abstract void push(java.lang.Object)
+    public abstract void addFirst(java.lang.Object)
+    public abstract void addLast(java.lang.Object)
+    public abstract boolean offerFirst(java.lang.Object)
+    public abstract boolean offerLast(java.lang.Object)
+    public abstract void putFirst(java.lang.Object)
+    public abstract void putLast(java.lang.Object)
+    public abstract boolean offerFirst(java.lang.Object,long,java.util.concurrent.TimeUnit)
+    public abstract boolean offerLast(java.lang.Object,long,java.util.concurrent.TimeUnit)
+    public abstract java.lang.Object takeFirst()
+    public abstract java.lang.Object takeLast()
+    public abstract java.lang.Object pollFirst(long,java.util.concurrent.TimeUnit)
+    public abstract java.lang.Object pollLast(long,java.util.concurrent.TimeUnit)
+    public abstract boolean removeFirstOccurrence(java.lang.Object)
+    public abstract boolean removeLastOccurrence(java.lang.Object)
+    public abstract boolean add(java.lang.Object)
+    public abstract boolean offer(java.lang.Object)
+    public abstract void put(java.lang.Object)
+    public abstract boolean offer(java.lang.Object,long,java.util.concurrent.TimeUnit)
+    public abstract java.lang.Object remove()
+    public abstract java.lang.Object poll()
+    public abstract java.lang.Object take()
+    public abstract java.lang.Object poll(long,java.util.concurrent.TimeUnit)
+    public abstract java.lang.Object element()
+    public abstract java.lang.Object peek()
+    public abstract boolean remove(java.lang.Object)
+    public abstract boolean contains(java.lang.Object)
+    public abstract int size()
+    public abstract java.util.Iterator iterator()
+    public abstract void push(java.lang.Object)
 com.nostra13.universalimageloader.core.assist.deque.Deque:
-====    public abstract void addFirst(java.lang.Object)
-====    public abstract void addLast(java.lang.Object)
-====    public abstract boolean offerFirst(java.lang.Object)
-====    public abstract boolean offerLast(java.lang.Object)
-====    public abstract java.lang.Object removeFirst()
-====    public abstract java.lang.Object removeLast()
-====    public abstract java.lang.Object pollFirst()
-====    public abstract java.lang.Object pollLast()
-====    public abstract java.lang.Object getFirst()
-====    public abstract java.lang.Object getLast()
-====    public abstract java.lang.Object peekFirst()
-====    public abstract java.lang.Object peekLast()
-====    public abstract boolean removeFirstOccurrence(java.lang.Object)
-====    public abstract boolean removeLastOccurrence(java.lang.Object)
-====    public abstract boolean add(java.lang.Object)
-====    public abstract boolean offer(java.lang.Object)
-====    public abstract java.lang.Object remove()
-====    public abstract java.lang.Object poll()
-====    public abstract java.lang.Object element()
-====    public abstract java.lang.Object peek()
-====    public abstract void push(java.lang.Object)
-====    public abstract java.lang.Object pop()
-====    public abstract boolean remove(java.lang.Object)
-====    public abstract boolean contains(java.lang.Object)
-====    public abstract int size()
-====    public abstract java.util.Iterator iterator()
-====    public abstract java.util.Iterator descendingIterator()
+    public abstract void addFirst(java.lang.Object)
+    public abstract void addLast(java.lang.Object)
+    public abstract boolean offerFirst(java.lang.Object)
+    public abstract boolean offerLast(java.lang.Object)
+    public abstract java.lang.Object removeFirst()
+    public abstract java.lang.Object removeLast()
+    public abstract java.lang.Object pollFirst()
+    public abstract java.lang.Object pollLast()
+    public abstract java.lang.Object getFirst()
+    public abstract java.lang.Object getLast()
+    public abstract java.lang.Object peekFirst()
+    public abstract java.lang.Object peekLast()
+    public abstract boolean removeFirstOccurrence(java.lang.Object)
+    public abstract boolean removeLastOccurrence(java.lang.Object)
+    public abstract boolean add(java.lang.Object)
+    public abstract boolean offer(java.lang.Object)
+    public abstract java.lang.Object remove()
+    public abstract java.lang.Object poll()
+    public abstract java.lang.Object element()
+    public abstract java.lang.Object peek()
+    public abstract void push(java.lang.Object)
+    public abstract java.lang.Object pop()
+    public abstract boolean remove(java.lang.Object)
+    public abstract boolean contains(java.lang.Object)
+    public abstract int size()
+    public abstract java.util.Iterator iterator()
+    public abstract java.util.Iterator descendingIterator()
 com.nostra13.universalimageloader.core.assist.deque.LIFOLinkedBlockingDeque:
     private static final long serialVersionUID
 com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque:
     private static final long serialVersionUID
-====    165:178:public LinkedBlockingDeque(java.util.Collection)
-====    294:296:public void addFirst(java.lang.Object)
-====    342:352:public void putFirst(java.lang.Object)
-====    377:391:public boolean offerFirst(java.lang.Object,long,java.util.concurrent.TimeUnit)
-====    430:432:public java.lang.Object removeLast()
-====    446:452:public java.lang.Object pollLast()
-====    469:478:public java.lang.Object takeLast()
-====    501:514:public java.lang.Object pollLast(long,java.util.concurrent.TimeUnit)
-====    530:532:public java.lang.Object getLast()
-====    546:552:public java.lang.Object peekLast()
-====    573:586:public boolean removeLastOccurrence(java.lang.Object)
-====    738:739:public void push(java.lang.Object)
-====    745:745:public java.lang.Object pop()
-====    1007:1007:public java.util.Iterator descendingIterator()
-====    1133:1146:private void writeObject(java.io.ObjectOutputStream)
-====    1155:1167:private void readObject(java.io.ObjectInputStream)
+    165:178:public LinkedBlockingDeque(java.util.Collection)
+    294:296:public void addFirst(java.lang.Object)
+    342:352:public void putFirst(java.lang.Object)
+    377:390:public boolean offerFirst(java.lang.Object,long,java.util.concurrent.TimeUnit)
+    430:432:public java.lang.Object removeLast()
+    446:451:public java.lang.Object pollLast()
+    469:477:public java.lang.Object takeLast()
+    501:513:public java.lang.Object pollLast(long,java.util.concurrent.TimeUnit)
+    530:532:public java.lang.Object getLast()
+    546:551:public java.lang.Object peekLast()
+    573:585:public boolean removeLastOccurrence(java.lang.Object)
+    738:739:public void push(java.lang.Object)
+    745:745:public java.lang.Object pop()
+    1007:1007:public java.util.Iterator descendingIterator()
+    1133:1146:private void writeObject(java.io.ObjectOutputStream)
+    1155:1167:private void readObject(java.io.ObjectInputStream)
 com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque$DescendingItr
 com.nostra13.universalimageloader.core.decode.BaseImageDecoder:
     protected static final java.lang.String LOG_SABSAMPLE_IMAGE
@@ -599,8 +1207,12 @@ com.nostra13.universalimageloader.core.decode.BaseImageDecoder:
     protected static final java.lang.String LOG_FLIP_IMAGE
     protected static final java.lang.String ERROR_CANT_DECODE_IMAGE
 com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer:
-====    34:36:public FadeInBitmapDisplayer(int)
+    44:45:public FadeInBitmapDisplayer(int)
+    54:59:public FadeInBitmapDisplayer(int,boolean,boolean,boolean)
 com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer
+com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer$RoundedDrawable
+com.nostra13.universalimageloader.core.display.RoundedVignetteBitmapDisplayer
+com.nostra13.universalimageloader.core.display.RoundedVignetteBitmapDisplayer$RoundedVignetteDrawable
 com.nostra13.universalimageloader.core.download.BaseImageDownloader:
     public static final int DEFAULT_HTTP_CONNECT_TIMEOUT
     public static final int DEFAULT_HTTP_READ_TIMEOUT
@@ -608,109 +1220,418 @@ com.nostra13.universalimageloader.core.download.BaseImageDownloader:
     protected static final java.lang.String ALLOWED_URI_CHARS
     protected static final int MAX_REDIRECT_COUNT
     private static final java.lang.String ERROR_UNSUPPORTED_SCHEME
-====    65:69:public BaseImageDownloader(android.content.Context,int,int)
+    66:70:public BaseImageDownloader(android.content.Context,int,int)
 com.nostra13.universalimageloader.core.download.HttpClientImageDownloader
+com.nostra13.universalimageloader.core.imageaware.ImageNonViewAware
 com.nostra13.universalimageloader.utils.ImageSizeUtils:
-====    35:36:private ImageSizeUtils()
+    private static final int DEFAULT_MAX_BITMAP_DIMENSION
+    45:46:private ImageSizeUtils()
 com.nostra13.universalimageloader.utils.IoUtils:
-    private static final int BUFFER_SIZE
-====    33:34:private IoUtils()
+    public static final int DEFAULT_BUFFER_SIZE
+    public static final int CONTINUE_LOADING_PERCENTAGE
+    36:37:private IoUtils()
 com.nostra13.universalimageloader.utils.L:
     private static final java.lang.String LOG_FORMAT
-====    32:33:private L()
-====    37:38:public static void enableLogging()
-====    42:43:public static void disableLogging()
-====    66:67:public static varargs void e(java.lang.Throwable,java.lang.String,java.lang.Object[])
+    32:33:private L()
+    37:38:public static void enableLogging()
+    42:43:public static void disableLogging()
+    66:67:public static varargs void e(java.lang.Throwable,java.lang.String,java.lang.Object[])
 com.nostra13.universalimageloader.utils.StorageUtils:
     private static final java.lang.String EXTERNAL_STORAGE_PERMISSION
     private static final java.lang.String INDIVIDUAL_DIR_NAME
-====    38:39:private StorageUtils()
-====    91:98:public static java.io.File getOwnCacheDirectory(android.content.Context,java.lang.String)
-com.tenpay.android.service.DownloadDialog:
-    private static final int M
-    private static final int K
-    private static final int RETRY_TIMES
-    protected static final int INIT_PROGRESS
-    protected static final int DOWNLOAD_PROGRESS
-    protected static final int MSG_SOCKET_TIMEOUT
-    protected static final int MSG_RETRY_DOWNLOAD
-    protected static final int MSG_IO_EXCEPTION
-    protected static final int MSG_SOCKET_EXCEPTION
-====    66:145:public DownloadDialog(android.content.Context)
-====    66:151:public DownloadDialog(android.content.Context,java.lang.String)
-com.tenpay.android.service.IRemoteServiceCallback$Stub:
-    private static final java.lang.String DESCRIPTOR
-    static final int TRANSACTION_startActivity
-com.tenpay.android.service.IRemoteServiceCallback$Stub$Proxy:
-====    79:79:public java.lang.String getInterfaceDescriptor()
-com.tenpay.android.service.ITenpayService$Stub:
-    private static final java.lang.String DESCRIPTOR
-    static final int TRANSACTION_gotoPay
-    static final int TRANSACTION_shareLogin
-====    13:16:public ITenpayService$Stub()
-====    34:34:public android.os.IBinder asBinder()
-com.tenpay.android.service.ITenpayService$Stub$Proxy:
-====    87:87:public java.lang.String getInterfaceDescriptor()
-com.tenpay.android.service.TenpayServiceHelper:
-    protected static final java.lang.String TAG
-====    134:205:public boolean shareLogin(java.util.Map,android.os.Handler,int)
-====    337:352:public void installTenpayService()
-====    359:374:public void installTenpayService(android.content.DialogInterface$OnCancelListener)
-====    442:461:protected void showInstallConfirmDlg(android.content.Context,java.lang.String)
-====    491:517:protected void showGetAppFromNetDlg(android.content.Context,java.lang.String)
-====    522:551:protected void showGetAppFromNetDlg(android.content.Context,java.lang.String,android.content.DialogInterface$OnCancelListener)
+    38:39:private StorageUtils()
+    111:118:public static java.io.File getOwnCacheDirectory(android.content.Context,java.lang.String)
+com.opens.asyncokhttpclient.AsyncHttpResponse:
+    protected static final int SUCCESS
+    protected static final int FAIL
+    protected static final int START
+    protected static final int FINISH
+com.opens.asyncokhttpclient.AsyncOkHttpClient:
+    40:40:public com.squareup.okhttp.OkHttpClient getOkHttpClient()
+    44:45:public void addHeader(java.lang.String,java.lang.String)
+    48:49:public void setThreadPool(java.util.concurrent.ThreadPoolExecutor)
+    52:53:public void setTimeOut(int)
+    77:78:public void get(java.lang.String,java.lang.String,com.opens.asyncokhttpclient.AsyncHttpResponse)
+    85:86:public void get(java.lang.String,com.opens.asyncokhttpclient.RequestParams,com.opens.asyncokhttpclient.AsyncHttpResponse)
+    94:95:public void post(java.lang.String,java.lang.String,com.opens.asyncokhttpclient.AsyncHttpResponse)
+    98:99:public void post(java.lang.String,com.opens.asyncokhttpclient.AsyncHttpResponse)
+    111:113:public void put(java.lang.String,java.lang.String,com.opens.asyncokhttpclient.RequestParams,com.opens.asyncokhttpclient.AsyncHttpResponse)
+    116:117:public void put(java.lang.String,com.opens.asyncokhttpclient.AsyncHttpResponse)
+    120:121:public void put(java.lang.String,java.lang.String,com.opens.asyncokhttpclient.AsyncHttpResponse)
+    124:125:public void put(java.lang.String,com.opens.asyncokhttpclient.RequestParams,com.opens.asyncokhttpclient.AsyncHttpResponse)
+    128:130:public void delete(java.lang.String,java.lang.String,com.opens.asyncokhttpclient.RequestParams,com.opens.asyncokhttpclient.AsyncHttpResponse)
+    133:134:public void delete(java.lang.String,com.opens.asyncokhttpclient.AsyncHttpResponse)
+    137:138:public void delete(java.lang.String,java.lang.String,com.opens.asyncokhttpclient.AsyncHttpResponse)
+    141:142:public void delete(java.lang.String,com.opens.asyncokhttpclient.RequestParams,com.opens.asyncokhttpclient.AsyncHttpResponse)
+com.opens.asyncokhttpclient.JsonAsyncHttpResponse
+com.opens.asyncokhttpclient.RequestModel:
+    28:32:public RequestModel(java.net.URL)
+    52:53:public void addHeader(java.lang.String,java.lang.String)
+com.opens.asyncokhttpclient.RequestParams:
+    32:35:public void put(java.util.Map)
+    38:41:public void put(java.lang.String,java.lang.String)
+com.opens.asyncokhttpclient.utils.Util:
+    28:28:private Util()
+com.sina.sso.RemoteSSO
+com.sina.sso.RemoteSSO$Stub
+com.sina.sso.RemoteSSO$Stub$Proxy
+com.squareup.okhttp.Address:
+    72:72:public int getUriPort()
+    88:88:public javax.net.ssl.HostnameVerifier getHostnameVerifier()
+    96:96:public com.squareup.okhttp.OkAuthenticator getAuthenticator()
+    104:104:public java.util.List getTransports()
+com.squareup.okhttp.Connection:
+    274:274:public com.squareup.okhttp.internal.spdy.SpdyConnection getSpdyConnection()
+com.squareup.okhttp.ConnectionPool:
+    private static final int MAX_CONNECTIONS_TO_CLEANUP
+    private static final long DEFAULT_KEEP_ALIVE_DURATION_MS
+    130:133:java.util.List getConnections()
+    142:149:private void waitForCleanupCallableToRun()
+    157:157:public synchronized int getConnectionCount()
+    162:166:public synchronized int getSpdyConnectionCount()
+    171:175:public synchronized int getHttpConnectionCount()
+    265:273:public void evictAll()
+com.squareup.okhttp.ConnectionPool$2
+com.squareup.okhttp.Dispatcher:
+    37:45:public synchronized void enqueue(java.net.HttpURLConnection,com.squareup.okhttp.Request,com.squareup.okhttp.Response$Receiver)
+    48:53:public synchronized void cancel(java.lang.Object)
+    56:58:synchronized void finished(com.squareup.okhttp.Job)
+com.squareup.okhttp.Dispatcher$RealResponseBody
+com.squareup.okhttp.Failure
+com.squareup.okhttp.Failure$1
+com.squareup.okhttp.Failure$Builder
+com.squareup.okhttp.HttpResponseCache:
+    private static final int VERSION
+    private static final int ENTRY_METADATA
+    private static final int ENTRY_BODY
+    private static final int ENTRY_COUNT
+    private int networkCount
+    private int hitCount
+    private int requestCount
+    174:176:public HttpResponseCache(java.io.File,long)
+    291:310:private void update(java.net.CacheResponse,java.net.HttpURLConnection)
+    338:339:public void delete()
+    342:342:public synchronized int getWriteAbortCount()
+    346:346:public synchronized int getWriteSuccessCount()
+    350:350:public long getSize()
+    354:354:public long getMaxSize()
+    358:359:public void flush()
+    362:363:public void close()
+    366:366:public java.io.File getDirectory()
+    370:370:public boolean isClosed()
+    374:385:private synchronized void trackResponse(com.squareup.okhttp.ResponseSource)
+    388:389:private synchronized void trackConditionalCacheHit()
+    392:392:public synchronized int getNetworkCount()
+    396:396:public synchronized int getHitCount()
+    400:400:public synchronized int getRequestCount()
+    121:121:static synthetic boolean access$000(com.squareup.okhttp.HttpResponseCache,java.lang.String,java.net.URI)
+    121:121:static synthetic void access$100(com.squareup.okhttp.HttpResponseCache,java.net.CacheResponse,java.net.HttpURLConnection)
+    121:121:static synthetic void access$200(com.squareup.okhttp.HttpResponseCache)
+    121:121:static synthetic void access$300(com.squareup.okhttp.HttpResponseCache,com.squareup.okhttp.ResponseSource)
+com.squareup.okhttp.HttpResponseCache$1
+com.squareup.okhttp.HttpResponseCache$3
+com.squareup.okhttp.HttpResponseCache$EntryCacheResponse:
+    675:675:static synthetic com.squareup.okhttp.internal.DiskLruCache$Snapshot access$500(com.squareup.okhttp.HttpResponseCache$EntryCacheResponse)
+com.squareup.okhttp.HttpResponseCache$EntrySecureCacheResponse:
+    695:695:static synthetic com.squareup.okhttp.internal.DiskLruCache$Snapshot access$600(com.squareup.okhttp.HttpResponseCache$EntrySecureCacheResponse)
+com.squareup.okhttp.Job
+com.squareup.okhttp.MediaType
+com.squareup.okhttp.OkHttpClient:
+    125:126:public com.squareup.okhttp.OkHttpClient setProxy(java.net.Proxy)
+    143:144:public com.squareup.okhttp.OkHttpClient setProxySelector(java.net.ProxySelector)
+    159:160:public com.squareup.okhttp.OkHttpClient setCookieHandler(java.net.CookieHandler)
+    174:175:public com.squareup.okhttp.OkHttpClient setResponseCache(java.net.ResponseCache)
+    179:179:public java.net.ResponseCache getResponseCache()
+    231:232:public com.squareup.okhttp.OkHttpClient setAuthenticator(com.squareup.okhttp.OkAuthenticator)
+    246:247:public com.squareup.okhttp.OkHttpClient setConnectionPool(com.squareup.okhttp.ConnectionPool)
+    262:263:public com.squareup.okhttp.OkHttpClient setFollowProtocolRedirects(boolean)
+    327:328:void enqueue(com.squareup.okhttp.Request,com.squareup.okhttp.Response$Receiver)
+    335:336:public void cancel(java.lang.Object)
+com.squareup.okhttp.Request
+com.squareup.okhttp.Request$1
+com.squareup.okhttp.Request$Body
+com.squareup.okhttp.Request$Body$1
+com.squareup.okhttp.Request$Body$2
+com.squareup.okhttp.Request$Builder
+com.squareup.okhttp.Response
+com.squareup.okhttp.Response$1
+com.squareup.okhttp.Response$Body
+com.squareup.okhttp.Response$Builder
+com.squareup.okhttp.Response$Receiver
+com.squareup.okhttp.Route:
+    59:59:public java.net.InetSocketAddress getSocketAddress()
+    64:64:public boolean isModernTls()
+com.squareup.okhttp.RouteDatabase:
+    55:55:public synchronized int failedRoutesCount()
+com.squareup.okhttp.internal.Base64:
+    33:34:private Base64()
+com.squareup.okhttp.internal.DiskLruCache:
+    static final java.lang.String JOURNAL_FILE
+    static final java.lang.String JOURNAL_FILE_TEMP
+    static final java.lang.String JOURNAL_FILE_BACKUP
+    static final java.lang.String MAGIC
+    static final java.lang.String VERSION_1
+    static final long ANY_SEQUENCE_NUMBER
+    private static final java.lang.String CLEAN
+    private static final java.lang.String DIRTY
+    private static final java.lang.String REMOVE
+    private static final java.lang.String READ
+    180:188:private DiskLruCache(java.io.File,int,int,long)
+    201:240:public static com.squareup.okhttp.internal.DiskLruCache open(java.io.File,int,int,long)
+    244:273:private void readJournal()
+    276:312:private void readJournalLine(java.lang.String)
+    319:335:private void processJournal()
+    475:475:public java.io.File getDirectory()
+    483:483:public long getMaxSize()
+    491:493:public synchronized void setMaxSize(long)
+    501:501:public synchronized long size()
+    605:605:public boolean isClosed()
+    616:619:public synchronized void flush()
+    649:651:public void delete()
+    661:661:private static java.lang.String inputStreamToString(java.io.InputStream)
+    88:88:static synthetic com.squareup.okhttp.internal.DiskLruCache$Editor access$1600(com.squareup.okhttp.internal.DiskLruCache,java.lang.String,long)
+    88:88:static synthetic java.lang.String access$1700(java.io.InputStream)
+com.squareup.okhttp.internal.DiskLruCache$1:
+    164:164:DiskLruCache$1(com.squareup.okhttp.internal.DiskLruCache)
+com.squareup.okhttp.internal.DiskLruCache$Editor:
+    733:745:public java.io.InputStream newInputStream(int)
+    753:754:public java.lang.String getString(int)
+    792:799:public void set(int,java.lang.String)
+    824:830:public void abortUnlessCommitted()
+com.squareup.okhttp.internal.DiskLruCache$Entry:
+    901:912:private void setLengths(java.lang.String[])
+    915:915:private java.io.IOException invalidLengths(java.lang.String[])
+    871:871:static synthetic void access$800(com.squareup.okhttp.internal.DiskLruCache$Entry,java.lang.String[])
+com.squareup.okhttp.internal.DiskLruCache$Snapshot:
+    684:684:public com.squareup.okhttp.internal.DiskLruCache$Editor edit()
+    694:694:public java.lang.String getString(int)
+    699:699:public long getLength(int)
+com.squareup.okhttp.internal.FaultRecoveringOutputStream
+com.squareup.okhttp.internal.StrictLineReader:
+    private static final byte CR
+    private static final byte LF
+com.squareup.okhttp.internal.Util:
+    53:54:private Util()
+    85:96:public static void pokeInt(byte[],int,int,java.nio.ByteOrder)
+    123:131:public static void closeQuietly(java.net.Socket)
+    161:173:public static void deleteContents(java.io.File)
+    235:243:public static java.lang.String readFully(java.io.Reader)
+    297:304:public static int copy(java.io.InputStream,java.io.OutputStream)
+com.squareup.okhttp.internal.http.HeaderParser:
+    110:111:private HeaderParser()
+com.squareup.okhttp.internal.http.HttpAuthenticator:
+    74:75:private HttpAuthenticator()
+com.squareup.okhttp.internal.http.HttpDate:
+    86:87:private HttpDate()
+com.squareup.okhttp.internal.http.HttpEngine:
+    public static final int HTTP_CONTINUE
+    168:168:public java.net.URI getUri()
+com.squareup.okhttp.internal.http.HttpTransport:
+    private static final int DISCARD_STREAM_TIMEOUT_MILLIS
+    public static final int DEFAULT_CHUNK_LENGTH
+com.squareup.okhttp.internal.http.HttpTransport$ChunkedInputStream:
+    private static final int NO_CHUNK_YET
+com.squareup.okhttp.internal.http.HttpURLConnectionImpl:
+    static final int HTTP_TEMP_REDIRECT
+    private static final int MAX_REDIRECTS
+com.squareup.okhttp.internal.http.RawHeaders:
+    237:241:public java.util.Set names()
+    265:272:public java.util.List values(java.lang.String)
+com.squareup.okhttp.internal.http.RequestHeaders:
+    129:129:public java.net.URI getUri()
+    165:165:public java.lang.String getTransferEncoding()
+    189:189:public java.lang.String getIfModifiedSince()
+    193:193:public java.lang.String getIfNoneMatch()
+com.squareup.okhttp.internal.http.ResponseHeaders:
+    211:211:public java.net.URI getUri()
+    219:219:public java.util.Date getServedDate()
+    223:223:public java.util.Date getLastModified()
+    227:227:public java.util.Date getExpires()
+    231:231:public boolean isNoCache()
+    235:235:public boolean isNoStore()
+    239:239:public int getMaxAgeSeconds()
+    243:243:public int getSMaxAgeSeconds()
+    247:247:public boolean isPublic()
+    251:251:public boolean isMustRevalidate()
+    255:255:public java.lang.String getEtag()
+    263:263:public java.lang.String getContentEncoding()
+    271:271:public java.lang.String getConnection()
+com.squareup.okhttp.internal.http.RouteSelector:
+    private static final int TLS_MODE_MODERN
+    private static final int TLS_MODE_COMPATIBLE
+    private static final int TLS_MODE_NULL
+com.squareup.okhttp.internal.spdy.FrameWriter:
+    public abstract void synReply(boolean,int,java.util.List)
+    public abstract void headers(int,java.util.List)
+    public abstract void data(boolean,int,byte[])
+    public abstract void settings(com.squareup.okhttp.internal.spdy.Settings)
+    public abstract void noop()
+com.squareup.okhttp.internal.spdy.Http20Draft04:
+    static final int TYPE_DATA
+    static final int TYPE_HEADERS
+    static final int TYPE_PRIORITY
+    static final int TYPE_RST_STREAM
+    static final int TYPE_SETTINGS
+    static final int TYPE_PUSH_PROMISE
+    static final int TYPE_PING
+    static final int TYPE_GOAWAY
+    static final int TYPE_WINDOW_UPDATE
+    static final int FLAG_END_STREAM
+    static final int FLAG_END_HEADERS
+    static final int FLAG_PRIORITY
+    static final int FLAG_PONG
+    static final int FLAG_END_FLOW_CONTROL
+com.squareup.okhttp.internal.spdy.Http20Draft04$Writer:
+    222:222:public synchronized void synReply(boolean,int,java.util.List)
+    227:227:public synchronized void headers(int,java.util.List)
+    236:237:public void data(boolean,int,byte[])
+    245:245:public synchronized void settings(com.squareup.okhttp.internal.spdy.Settings)
+    249:249:public synchronized void noop()
+com.squareup.okhttp.internal.spdy.Ping:
+    55:56:public long roundTripTime()
+    65:68:public long roundTripTime(long,java.util.concurrent.TimeUnit)
+com.squareup.okhttp.internal.spdy.Settings:
+    static final int DEFAULT_INITIAL_WINDOW_SIZE
+    static final int FLAG_CLEAR_PREVIOUSLY_PERSISTED_SETTINGS
+    static final int PERSIST_VALUE
+    static final int PERSISTED
+    static final int UPLOAD_BANDWIDTH
+    static final int DOWNLOAD_BANDWIDTH
+    static final int ROUND_TRIP_TIME
+    static final int MAX_CONCURRENT_STREAMS
+    static final int CURRENT_CWND
+    static final int DOWNLOAD_RETRANS_RATE
+    static final int INITIAL_WINDOW_SIZE
+    static final int CLIENT_CERTIFICATE_VECTOR_SIZE
+    static final int FLOW_CONTROL_OPTIONS
+    static final int COUNT
+    static final int FLOW_CONTROL_OPTIONS_DISABLED
+    112:112:int size()
+    116:117:int getUploadBandwidth(int)
+    121:122:int getDownloadBandwidth(int)
+    126:127:int getRoundTripTime(int)
+    131:132:int getMaxConcurrentStreams(int)
+    136:137:int getCurrentCwnd(int)
+    141:142:int getDownloadRetransRate(int)
+    151:152:int getClientCertificateVectorSize(int)
+    157:159:boolean isFlowControlDisabled()
+com.squareup.okhttp.internal.spdy.Spdy3:
+    static final int TYPE_DATA
+    static final int TYPE_SYN_STREAM
+    static final int TYPE_SYN_REPLY
+    static final int TYPE_RST_STREAM
+    static final int TYPE_SETTINGS
+    static final int TYPE_NOOP
+    static final int TYPE_PING
+    static final int TYPE_GOAWAY
+    static final int TYPE_HEADERS
+    static final int TYPE_WINDOW_UPDATE
+    static final int TYPE_CREDENTIAL
+    static final int FLAG_FIN
+    static final int FLAG_UNIDIRECTIONAL
+    static final int VERSION
+com.squareup.okhttp.internal.spdy.Spdy3$Writer:
+    404:414:public synchronized void synReply(boolean,int,java.util.List)
+    418:428:public synchronized void headers(int,java.util.List)
+    445:446:public synchronized void data(boolean,int,byte[])
+    468:482:public synchronized void settings(com.squareup.okhttp.internal.spdy.Settings)
+    485:491:public synchronized void noop()
+com.squareup.okhttp.internal.spdy.SpdyConnection:
+    109:109:public synchronized int openStreamCount()
+    180:181:void writeSynReply(int,boolean,java.util.List)
+    223:235:public com.squareup.okhttp.internal.spdy.Ping ping()
+    265:266:public void noop()
+com.squareup.okhttp.internal.spdy.SpdyConnection$Builder:
+    371:372:public SpdyConnection$Builder(boolean,java.net.Socket)
+    375:376:public SpdyConnection$Builder(boolean,java.io.InputStream,java.io.OutputStream)
+    383:384:public SpdyConnection$Builder(java.lang.String,boolean,java.net.Socket)
+    398:399:public com.squareup.okhttp.internal.spdy.SpdyConnection$Builder handler(com.squareup.okhttp.internal.spdy.IncomingStreamHandler)
+    403:404:public com.squareup.okhttp.internal.spdy.SpdyConnection$Builder spdy3()
+    408:409:public com.squareup.okhttp.internal.spdy.SpdyConnection$Builder http20Draft04()
+com.squareup.okhttp.internal.spdy.SpdyStream:
+    public static final int WINDOW_UPDATE_THRESHOLD
+    109:109:public com.squareup.okhttp.internal.spdy.SpdyConnection getConnection()
+    113:113:public java.util.List getRequestHeaders()
+    141:141:public synchronized com.squareup.okhttp.internal.spdy.ErrorCode getErrorCode()
+    151:170:public void reply(java.util.List,boolean)
+    181:181:public long getReadTimeoutMillis()
+    327:327:int getPriority()
+    331:331:int getSlot()
+com.squareup.okhttp.internal.tls.OkHostnameVerifier:
+    private static final int ALT_DNS_NAME
+    private static final int ALT_IPA_NAME
+com.tenpay.android.service.DownloadDialog
+com.tenpay.android.service.DownloadDialog$1
+com.tenpay.android.service.DownloadDialog$2
+com.tenpay.android.service.DownloadDialog$3
+com.tenpay.android.service.DownloadDialog$ProgressThread
+com.tenpay.android.service.IRemoteServiceCallback
+com.tenpay.android.service.IRemoteServiceCallback$Stub
+com.tenpay.android.service.IRemoteServiceCallback$Stub$Proxy
+com.tenpay.android.service.ITenpayService
+com.tenpay.android.service.ITenpayService$Stub
+com.tenpay.android.service.ITenpayService$Stub$Proxy
+com.tenpay.android.service.TenpayServiceHelper
+com.tenpay.android.service.TenpayServiceHelper$1
 com.tenpay.android.service.TenpayServiceHelper$10
 com.tenpay.android.service.TenpayServiceHelper$11
 com.tenpay.android.service.TenpayServiceHelper$11$1
 com.tenpay.android.service.TenpayServiceHelper$12
+com.tenpay.android.service.TenpayServiceHelper$13
+com.tenpay.android.service.TenpayServiceHelper$13$1
+com.tenpay.android.service.TenpayServiceHelper$14
+com.tenpay.android.service.TenpayServiceHelper$2
 com.tenpay.android.service.TenpayServiceHelper$3
+com.tenpay.android.service.TenpayServiceHelper$4
 com.tenpay.android.service.TenpayServiceHelper$5
 com.tenpay.android.service.TenpayServiceHelper$6
+com.tenpay.android.service.TenpayServiceHelper$7
+com.tenpay.android.service.TenpayServiceHelper$8
 com.tenpay.android.service.TenpayServiceHelper$9
 com.tenpay.android.service.TenpayServiceHelper$9$1
 com.unionpay.UPPayAssistEx:
     public static final int PLUGIN_VALID
     public static final int PLUGIN_NOT_FOUND
-====    public UPPayAssistEx()
-====    public static int startPay(android.app.Activity,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-====    public static int startPayFromBrowser(android.app.Activity,java.lang.String,java.lang.String)
-====    private static int a(android.app.Activity,java.lang.String,java.lang.String)
-====    private static int a(android.app.Activity,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-====    private static boolean a(android.app.Activity)
-====    public static boolean installUPPayPlugin(android.content.Context)
+    public UPPayAssistEx()
+    public static int startPay(android.app.Activity,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+    public static int startPayFromBrowser(android.app.Activity,java.lang.String,java.lang.String)
+    private static int a(android.app.Activity,java.lang.String,java.lang.String)
+    private static int a(android.app.Activity,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+    private static boolean a(android.app.Activity)
+    public static boolean installUPPayPlugin(android.content.Context)
 com.unionpay.uppay.model.BankCardInfo:
-====    public void setType(java.lang.String)
-====    public android.graphics.drawable.BitmapDrawable getDrawable(android.content.Context)
+    public void setType(java.lang.String)
+    public android.graphics.drawable.BitmapDrawable getDrawable(android.content.Context)
 com.unionpay.uppay.model.PAAInfo:
     private java.lang.String k
     private java.lang.String r
-====    public java.lang.String getUserProvide()
-====    public java.lang.String getMerchantCountry()
-====    public java.lang.String getTransCurrency()
-====    public java.lang.String getSecurityChipType()
-====    public java.lang.String getDigest()
-====    public java.lang.String getAccountUniqueID()
-====    public java.lang.String getOrderGeneratedTime()
-====    public java.lang.String getCardholderIdInfo()
-====    public void setDigest(java.lang.String)
-====    public java.lang.String getSignatureEncoding()
-====    public void setSignatureEncoding(java.lang.String)
+    public java.lang.String getUserProvide()
+    public java.lang.String getMerchantCountry()
+    public java.lang.String getTransCurrency()
+    public java.lang.String getSecurityChipType()
+    public java.lang.String getDigest()
+    public java.lang.String getAccountUniqueID()
+    public java.lang.String getOrderGeneratedTime()
+    public java.lang.String getCardholderIdInfo()
+    public void setDigest(java.lang.String)
+    public java.lang.String getSignatureEncoding()
+    public void setSignatureEncoding(java.lang.String)
 com.unionpay.uppay.model.PurchaseInfo:
-====    public PurchaseInfo(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-====    public java.lang.String getBankCardNumber()
-====    public java.lang.String getUniqueIDCode()
-====    public java.lang.String getCvn2()
-====    public java.lang.String getExpireDate()
+    public PurchaseInfo(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+    public java.lang.String getBankCardNumber()
+    public java.lang.String getUniqueIDCode()
+    public java.lang.String getCvn2()
+    public java.lang.String getExpireDate()
 com.unionpay.uppay.model.ResponseInfo:
     private java.lang.String b
     private java.lang.String c
-====    public void setErrMessage(java.lang.String)
-====    public java.lang.String getResponseCode()
-====    public void setResponseCode(java.lang.String)
-====    public java.lang.String getTsn()
-====    public void setTsn(java.lang.String)
-====    public void setBalance(java.lang.String)
-====    public void setOperationCode(int)
+    public void setErrMessage(java.lang.String)
+    public java.lang.String getResponseCode()
+    public void setResponseCode(java.lang.String)
+    public java.lang.String getTsn()
+    public void setTsn(java.lang.String)
+    public void setBalance(java.lang.String)
+    public void setOperationCode(int)
 com.unionpay.uppay.net.HttpConnection:
     private static org.apache.http.client.HttpClient a
     private static org.apache.http.conn.ClientConnectionManager b
@@ -719,70 +1640,53 @@ com.unionpay.uppay.net.HttpConnection:
     private java.io.InputStream f
     private org.apache.http.HttpEntity g
     private byte[] h
-====    public HttpConnection(com.unionpay.uppay.net.HttpParameters)
-====    public final int connect()
-====    public final byte[] getResponseData()
+    public HttpConnection(com.unionpay.uppay.net.HttpParameters)
+    public final int connect()
+    public final byte[] getResponseData()
 com.unionpay.uppay.net.HttpParameters
 com.unionpay.uppay.net.a:
-====    public static void a()
+    public static void a()
 com.unionpay.uppay.net.c
 com.unionpay.uppay.net.d
 com.unionpay.uppay.util.DeviceInfo:
-====    public DeviceInfo()
-====    public static boolean isSdCardExist()
-====    public static java.lang.String[] getRootDirectory()
-====    public static java.lang.String[] getExternalStorageDirectory()
-====    public static int screenOrientation(android.content.Context)
-====    public static boolean isTermKindOfMobile(android.content.Context)
+    public DeviceInfo()
+    public static boolean isSdCardExist()
+    public static java.lang.String[] getRootDirectory()
+    public static java.lang.String[] getExternalStorageDirectory()
+    public static int screenOrientation(android.content.Context)
+    public static boolean isTermKindOfMobile(android.content.Context)
 com.unionpay.uppay.util.PayEngine:
     private int a
-====    public void setNativePayEngine(int)
-====    public int getNativePayEngine()
-====    public java.lang.String createStringFromGbk(byte[])
-====    public native int requestSupportBankList()
-====    public native java.lang.String getResponseCode()
-====    public native java.lang.String getPayType()
-====    public native java.lang.String getTransSerialNumber()
-====    public native java.lang.String getBillAmount()
-====    public native java.lang.String getSettleDate()
-====    public native java.lang.String getAccountUniqueIDState()
-====    public native java.lang.String getBillconvertRate()
-====    public native java.lang.String getBillcurrency()
-====    public native java.lang.String getMerchantLimitedAmount()
+    public void setNativePayEngine(int)
+    public int getNativePayEngine()
+    public java.lang.String createStringFromGbk(byte[])
+    public native int requestSupportBankList()
+    public native java.lang.String getResponseCode()
+    public native java.lang.String getPayType()
+    public native java.lang.String getTransSerialNumber()
+    public native java.lang.String getBillAmount()
+    public native java.lang.String getSettleDate()
+    public native java.lang.String getAccountUniqueIDState()
+    public native java.lang.String getBillconvertRate()
+    public native java.lang.String getBillcurrency()
+    public native java.lang.String getMerchantLimitedAmount()
 com.unionpay.uppay.util.h:
-====    public final android.graphics.drawable.BitmapDrawable a(android.content.Context,java.lang.String)
+    public final android.graphics.drawable.BitmapDrawable a(android.content.Context,java.lang.String)
 com.yidejia.app.mall.BuildConfig
-com.yidejia.app.mall.DataCleanManager:
-====    19:19:public DataCleanManager()
-====    47:49:public static void cleanSharedPreference(android.content.Context)
-====    59:60:public static void cleanDatabaseByName(android.content.Context,java.lang.String)
-====    93:94:public static void cleanCustomCache(java.lang.String)
-====    104:112:public static varargs void cleanApplicationData(android.content.Context,java.lang.String[])
-====    163:174:public static java.lang.String getPathSize(java.lang.String)
-====    207:218:public static java.lang.String getPathSize(java.io.File)
-com.yidejia.app.mall.ImagePagerActivity:
-    private static final java.lang.String STATE_POSITION
-com.yidejia.app.mall.MainActivity:
-    private com.handmark.pulltorefresh.library.PullToRefreshScrollView mPullToRefreshScrollView
-    protected android.support.v4.app.ListFragment mFrag
-    private android.widget.ViewFlipper viewFlipper
-    private android.view.GestureDetector detector
-    private static final java.lang.String TAG
-    private android.widget.ImageSwitcher imageSwitcher
-    android.view.animation.Animation leftInAnimation
-    android.view.animation.Animation leftOutAnimation
-    android.view.animation.Animation rightInAnimation
-    android.view.animation.Animation rightOutAnimation
-====    237:240:private android.widget.ImageView getImageView(int)
-com.yidejia.app.mall.MainFragmentActivity:
-    private java.util.ArrayList fragmentsList
-    private android.graphics.Bitmap bmp
-    private android.widget.ImageView searchText
-    private android.widget.ImageView searchEditText
-====    201:216:private void addView()
+com.yidejia.app.mall.EditorActivity:
+    int width
+    int height
+com.yidejia.app.mall.FeedBackActivity:
+    private android.widget.EditText opinionEditText
+    private android.widget.EditText contactEditText
+    57:64:private void commitListener()
+    73:73:private void commitOpinion(java.lang.String,java.lang.String)
+com.yidejia.app.mall.HomeBaseActivity:
+    70:70:public int getCurrentActivityId()
 com.yidejia.app.mall.MyApplication:
-====    52:52:public int getSchHstryAmount()
-====    87:87:public java.lang.String getPassword()
+    69:69:public int getSchHstryAmount()
+    93:93:public java.lang.String getUserHeadImg()
+    104:104:public java.lang.String getPassword()
 com.yidejia.app.mall.R
 com.yidejia.app.mall.R$anim
 com.yidejia.app.mall.R$array
@@ -794,171 +1698,150 @@ com.yidejia.app.mall.R$drawable
 com.yidejia.app.mall.R$id
 com.yidejia.app.mall.R$integer
 com.yidejia.app.mall.R$layout
-com.yidejia.app.mall.R$menu
+com.yidejia.app.mall.R$raw
 com.yidejia.app.mall.R$string
 com.yidejia.app.mall.R$style
 com.yidejia.app.mall.R$styleable
 com.yidejia.app.mall.R$xml
-com.yidejia.app.mall.SearchActivity:
-    private com.yidejia.app.mall.search.SuggestionsAdapter mSuggestionsAdapter
-com.yidejia.app.mall.SearchResultActivity:
-    private com.yidejia.app.mall.fragment.SelledResultFragment newFragment
-    private com.yidejia.app.mall.fragment.SelledResultFragment priceFragment
-    private com.yidejia.app.mall.fragment.SelledResultFragment needsFragment
-com.yidejia.app.mall.SlideImageLayout:
-    private int bmpWidth
-    private int bmpHeight
-====    46:88:public android.view.View getSlideImageLayout(android.graphics.Bitmap)
-====    125:126:public void setPageIndex(int)
-com.yidejia.app.mall.SlideImageLayout$ImageOnClickListener
-com.yidejia.app.mall.Test
-com.yidejia.app.mall.UserPayActivity:
-    private static final java.lang.String SERVER_URL
-    private static final java.lang.String TRADE_COMMAND
-    static final int MSG_PAY_RESULT
+com.yidejia.app.mall.RegistActivity:
+    public android.widget.Button mback
 com.yidejia.app.mall.adapter.AllOrderFragmentAdapter
 com.yidejia.app.mall.adapter.AlreadyComFragmentAdapter
 com.yidejia.app.mall.adapter.AlreadyOrderFragmentAdapter
 com.yidejia.app.mall.adapter.BaseFragmentPagerAdapter
+com.yidejia.app.mall.adapter.ComposeExListAdapter
 com.yidejia.app.mall.adapter.FavoriteAdapter:
-====    59:61:public void changeDate(java.util.ArrayList)
+    54:56:public void changeDate(java.util.ArrayList)
 com.yidejia.app.mall.adapter.HistoryAdapter:
-====    44:48:public void setmArrayList(java.util.ArrayList)
-====    71:76:private void initDisplayImageOption()
+    38:42:public void setmArrayList(java.util.ArrayList)
 com.yidejia.app.mall.adapter.ImageAdapter
 com.yidejia.app.mall.adapter.ImageAdapter$1
 com.yidejia.app.mall.adapter.IntegeralFragmentAdapter:
-====    14:15:public IntegeralFragmentAdapter(android.support.v4.app.FragmentManager)
+    14:15:public IntegeralFragmentAdapter(android.support.v4.app.FragmentManager)
 com.yidejia.app.mall.adapter.MainFragmentPagerAdapter
 com.yidejia.app.mall.adapter.MyAdapter
 com.yidejia.app.mall.adapter.MyAdapter$MyAdapterView
 com.yidejia.app.mall.adapter.SearchListAdapter:
-====    24:25:public void setIsEmpty(boolean)
+    27:28:public void setIsEmpty(boolean)
 com.yidejia.app.mall.adapter.SearchResultListAdapter
 com.yidejia.app.mall.adapter.WaitDeliverFragmentAdapter
 com.yidejia.app.mall.adapter.WaitPayFragmentAdapter
-com.yidejia.app.mall.address.ArrayWheelAdapter:
-    public static final int DEFAULT_LENGTH
-    private java.lang.Object[] items
-com.yidejia.app.mall.address.NumericWheelAdapter
-com.yidejia.app.mall.address.WheelView:
-    private static final int SCROLLING_DURATION
-    private static final int MIN_DELTA_FOR_SCROLLING
-    private static final int VALUE_TEXT_COLOR
-    private static final int ITEMS_TEXT_COLOR
-    private static final int ADDITIONAL_ITEM_HEIGHT
-    private static final int TEXT_SIZE
-    private static final int ITEM_OFFSET
-    private static final int ADDITIONAL_ITEMS_SPACE
-    private static final int LABEL_OFFSET
-    private static final int PADDING
-    private static final int DEF_VISIBLE_ITEMS
-====    196:198:public void setInterpolator(android.view.animation.Interpolator)
-====    206:206:public int getVisibleItems()
-====    226:226:public java.lang.String getLabel()
-====    236:241:public void setLabel(java.lang.String)
-====    256:257:public void removeChangingListener(com.yidejia.app.mall.address.OnWheelChangedListener)
-====    275:276:public void addScrollingListener(com.yidejia.app.mall.address.OnWheelScrollListener)
-====    283:284:public void removeScrollingListener(com.yidejia.app.mall.address.OnWheelScrollListener)
-====    310:310:public int getCurrentItem()
-====    360:360:public boolean isCyclic()
-====    368:372:public void setCyclic(boolean)
-com.yidejia.app.mall.ctrl.GlobalSearchItems
-com.yidejia.app.mall.ctrl.RefreshCallBack
+com.yidejia.app.mall.address.AddressAdapter:
+    513:563:private void editAddress(android.widget.CompoundButton,com.yidejia.app.mall.address.ModelAddresses)
+com.yidejia.app.mall.address.AddressAdapter$7
+com.yidejia.app.mall.address.AddressAdapter$7$1
+com.yidejia.app.mall.address.AddressAdapter$DelTask:
+    370:370:private AddressAdapter$DelTask(com.yidejia.app.mall.address.AddressAdapter)
+    375:376:public void setAddresses(com.yidejia.app.mall.address.ModelAddresses)
+com.yidejia.app.mall.address.AddressUtil
+com.yidejia.app.mall.address.AddressUtil$1
+com.yidejia.app.mall.address.AddressUtil$10
+com.yidejia.app.mall.address.AddressUtil$2
+com.yidejia.app.mall.address.AddressUtil$3
+com.yidejia.app.mall.address.AddressUtil$4
+com.yidejia.app.mall.address.AddressUtil$5
+com.yidejia.app.mall.address.AddressUtil$6
+com.yidejia.app.mall.address.AddressUtil$7
+com.yidejia.app.mall.address.AddressUtil$8
+com.yidejia.app.mall.address.AddressUtil$9
+com.yidejia.app.mall.address.EditNewAddressActivity:
+    public static java.lang.String addressId
+    private java.util.Map valueMap2
+    private boolean isUpdate
+com.yidejia.app.mall.address.ModelAddresses:
+    private java.lang.String recipient_id
+    97:98:public void setRecipientId(java.lang.String)
+    100:100:public java.lang.String getRecipientId()
+com.yidejia.app.mall.broadcast.MallAction
+com.yidejia.app.mall.broadcast.MallAction$1
+com.yidejia.app.mall.broadcast.MallAction$10
+com.yidejia.app.mall.broadcast.MallAction$2
+com.yidejia.app.mall.broadcast.MallAction$3
+com.yidejia.app.mall.broadcast.MallAction$4
+com.yidejia.app.mall.broadcast.MallAction$5
+com.yidejia.app.mall.broadcast.MallAction$6
+com.yidejia.app.mall.broadcast.MallAction$7
+com.yidejia.app.mall.broadcast.MallAction$8
+com.yidejia.app.mall.broadcast.MallAction$9
 com.yidejia.app.mall.ctrl.RetViewCtrl:
     private android.widget.LinearLayout linearLayout
 com.yidejia.app.mall.datamanage.AddressDataManage:
-====    57:86:public java.lang.String addAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean,java.lang.String)
-====    105:130:public boolean updateAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean,java.lang.String,java.lang.String)
-====    174:201:public java.util.ArrayList getAddressesArray(java.lang.String,int,int)
-====    211:238:public java.util.ArrayList getDefAddresses(java.lang.String)
-====    248:272:public boolean setDefaultAddress(java.lang.String,java.lang.String,java.lang.String)
-====    582:600:private boolean analysicSetDefJson(java.lang.String)
-====    611:644:private boolean analysicSaveJson(java.lang.String)
-====    652:652:public java.lang.String getReason()
-====    658:658:public java.lang.String getAddressId()
-====    604:604:static synthetic java.lang.String access$3(com.yidejia.app.mall.datamanage.AddressDataManage)
-====    610:610:static synthetic boolean access$4(com.yidejia.app.mall.datamanage.AddressDataManage,java.lang.String)
-====    581:581:static synthetic boolean access$5(com.yidejia.app.mall.datamanage.AddressDataManage,java.lang.String)
+    57:86:public java.lang.String addAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean,java.lang.String)
+    105:130:public boolean updateAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean,java.lang.String,java.lang.String)
+    174:201:public java.util.ArrayList getAddressesArray(java.lang.String,int,int)
+    211:238:public java.util.ArrayList getDefAddresses(java.lang.String)
+    248:272:public boolean setDefaultAddress(java.lang.String,java.lang.String,java.lang.String)
+    285:325:public java.util.ArrayList analysisGetListJson(java.lang.String)
+    582:600:private boolean analysicSetDefJson(java.lang.String)
+    611:644:private boolean analysicSaveJson(java.lang.String)
+    652:652:public java.lang.String getReason()
+    658:658:public java.lang.String getAddressId()
+    604:604:static synthetic java.lang.String access$3(com.yidejia.app.mall.datamanage.AddressDataManage)
+    610:610:static synthetic boolean access$4(com.yidejia.app.mall.datamanage.AddressDataManage,java.lang.String)
+    581:581:static synthetic boolean access$5(com.yidejia.app.mall.datamanage.AddressDataManage,java.lang.String)
 com.yidejia.app.mall.datamanage.AddressDataManage$TaskGetList
 com.yidejia.app.mall.datamanage.AddressDataManage$TaskSave
 com.yidejia.app.mall.datamanage.AddressDataManage$TaskSetDef
-com.yidejia.app.mall.datamanage.AnlsGetOrderData:
-====    66:97:public void getOrderArray(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-====    28:28:static synthetic android.content.Context access$0(com.yidejia.app.mall.datamanage.AnlsGetOrderData)
-====    30:30:static synthetic java.lang.String access$1(com.yidejia.app.mall.datamanage.AnlsGetOrderData)
-====    29:29:static synthetic android.widget.LinearLayout access$2(com.yidejia.app.mall.datamanage.AnlsGetOrderData)
-====    27:27:static synthetic java.util.ArrayList access$3(com.yidejia.app.mall.datamanage.AnlsGetOrderData)
-====    34:34:static synthetic int access$4(com.yidejia.app.mall.datamanage.AnlsGetOrderData)
-com.yidejia.app.mall.datamanage.AnlsGetOrderData$TaskGetList
 com.yidejia.app.mall.datamanage.BrandDataManage
 com.yidejia.app.mall.datamanage.BrandDataManage$TaskBrand
 com.yidejia.app.mall.datamanage.CartsDataManage:
-====    177:184:public boolean cleanCart()
-====    242:251:public int getTypeCount()
-com.yidejia.app.mall.datamanage.FavoriteDataManage:
-====    60:86:public java.util.ArrayList getFavouriteArray(java.lang.String,int,int)
-====    291:291:public int getFavoriteId()
-====    391:443:private java.util.ArrayList analysisGetListJson(java.lang.String)
-====    388:388:static synthetic java.util.ArrayList access$4(com.yidejia.app.mall.datamanage.FavoriteDataManage,java.lang.String)
-com.yidejia.app.mall.datamanage.FavoriteDataManage$TaskGetList
+    182:189:public boolean cleanCart()
+    247:256:public int getTypeCount()
+com.yidejia.app.mall.datamanage.DataCleanManager:
+    19:19:public DataCleanManager()
+    47:49:public static void cleanSharedPreference(android.content.Context)
+    59:60:public static void cleanDatabaseByName(android.content.Context,java.lang.String)
+    93:94:public static void cleanCustomCache(java.lang.String)
+    104:112:public static varargs void cleanApplicationData(android.content.Context,java.lang.String[])
+    163:174:public static java.lang.String getPathSize(java.lang.String)
+    207:218:public static java.lang.String getPathSize(java.io.File)
+com.yidejia.app.mall.datamanage.ExpressDataManage
+com.yidejia.app.mall.datamanage.ExpressDataManage$TaskDis
+com.yidejia.app.mall.datamanage.ExpressDataManage$TaskExpress
+com.yidejia.app.mall.datamanage.ExpressDataManage$TaskFree
 com.yidejia.app.mall.datamanage.FunctionDataManage
 com.yidejia.app.mall.datamanage.FunctionDataManage$TaskFun
-com.yidejia.app.mall.datamanage.MainPageDataManage
-com.yidejia.app.mall.datamanage.MainPageDataManage$TaskMainPage
 com.yidejia.app.mall.datamanage.MessageDataManage:
-====    158:175:public boolean changeReadState(java.lang.String,java.lang.String,java.lang.String)
+    158:175:public boolean changeReadState(java.lang.String,java.lang.String,java.lang.String)
 com.yidejia.app.mall.datamanage.MessageDataManage$TaskChangeRead
-com.yidejia.app.mall.datamanage.OrderDataManage
-com.yidejia.app.mall.datamanage.OrderDataManage$TaskCancel
-com.yidejia.app.mall.datamanage.OrderDataManage$TaskChange
-com.yidejia.app.mall.datamanage.OrderDataManage$TaskGOBC
-com.yidejia.app.mall.datamanage.OrderDataManage$TaskGetList
-com.yidejia.app.mall.datamanage.OrderDataManage$TaskSave
-com.yidejia.app.mall.datamanage.OrderDataManage$TaskSign
-com.yidejia.app.mall.datamanage.PersonCountDataManage:
-====    120:120:public java.lang.String getOrder()
 com.yidejia.app.mall.datamanage.PreferentialDataManage:
-====    99:99:public void getPreferential(int,java.lang.String)
-====    107:108:public boolean addFreePruduct(int)
-====    116:117:public boolean deleteFreePruduct(int)
-====    125:126:public boolean addScoresPruduct(int)
-====    134:135:public boolean deleteScoresPruduct(int)
-====    143:144:public boolean commitOrder(int)
+    private java.lang.String goods
+    private java.lang.String userid
+    61:90:public void getPreferential(java.lang.String,java.lang.String)
+    99:99:public void getPreferential(int,java.lang.String)
+    107:108:public boolean addFreePruduct(int)
+    116:117:public boolean deleteFreePruduct(int)
+    125:126:public boolean addScoresPruduct(int)
+    134:135:public boolean deleteScoresPruduct(int)
+    143:144:public boolean commitOrder(int)
+    226:286:private void analysis(java.lang.String)
+    291:291:public java.util.ArrayList getFreeGoods()
+    297:297:public java.util.ArrayList getScoreGoods()
+    150:150:static synthetic boolean access$0(com.yidejia.app.mall.datamanage.PreferentialDataManage)
+    34:34:static synthetic android.content.Context access$1(com.yidejia.app.mall.datamanage.PreferentialDataManage)
+    150:150:static synthetic void access$2(com.yidejia.app.mall.datamanage.PreferentialDataManage,boolean)
+    148:148:static synthetic java.lang.String access$3(com.yidejia.app.mall.datamanage.PreferentialDataManage)
+    149:149:static synthetic java.lang.String access$4(com.yidejia.app.mall.datamanage.PreferentialDataManage)
+    223:223:static synthetic void access$5(com.yidejia.app.mall.datamanage.PreferentialDataManage,java.lang.String)
+    37:37:static synthetic void access$6(com.yidejia.app.mall.datamanage.PreferentialDataManage,boolean)
+com.yidejia.app.mall.datamanage.PreferentialDataManage$TaskVerify
 com.yidejia.app.mall.datamanage.PriceDataManage
 com.yidejia.app.mall.datamanage.PriceDataManage$TaskPrice
 com.yidejia.app.mall.datamanage.ProductDataManage
 com.yidejia.app.mall.datamanage.ProductDataManage$TaskProduct
-com.yidejia.app.mall.datamanage.SearchDataManage:
-    private java.util.ArrayList searchArray
-    private android.content.Context context
-    private java.lang.String TAG
-    private com.yidejia.app.mall.util.UnicodeToString unicode
-    private boolean isNoMore
-    private boolean isHasResult
-====    33:43:public SearchDataManage(android.content.Context)
-====    60:94:public java.util.ArrayList getSearchArray(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-====    179:219:private void analysisJson(java.lang.String)
-====    33:33:static synthetic java.lang.String access$0(com.yidejia.app.mall.datamanage.SearchDataManage)
-====    37:37:static synthetic void access$1(com.yidejia.app.mall.datamanage.SearchDataManage,boolean)
-====    178:178:static synthetic void access$2(com.yidejia.app.mall.datamanage.SearchDataManage,java.lang.String)
-====    36:36:static synthetic void access$3(com.yidejia.app.mall.datamanage.SearchDataManage,boolean)
+com.yidejia.app.mall.datamanage.SearchDataManage
 com.yidejia.app.mall.datamanage.SearchDataManage$TaskSearch
 com.yidejia.app.mall.datamanage.SearchItemDataManage
 com.yidejia.app.mall.datamanage.SearchItemDataManage$TaskSearch
-com.yidejia.app.mall.datamanage.TaskCancelOrder
-com.yidejia.app.mall.datamanage.TaskGetOrderByCode:
-    private android.widget.RelativeLayout orderAddressLayout
-com.yidejia.app.mall.datamanage.UserCommentDataManage:
-    private java.util.ArrayList waitCommGoods
-====    55:87:public java.util.ArrayList getUserCommentsArray(java.lang.String,int,int,boolean)
-====    101:107:public boolean commitComment(java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-====    174:219:private java.util.ArrayList analysisGetListJson(java.lang.String)
-====    238:253:public java.util.ArrayList getWaitingComment(java.lang.String)
-====    171:171:static synthetic java.util.ArrayList access$0(com.yidejia.app.mall.datamanage.UserCommentDataManage,java.lang.String)
-====    36:36:static synthetic java.lang.String access$1(com.yidejia.app.mall.datamanage.UserCommentDataManage)
-====    256:256:static synthetic java.util.ArrayList access$2(com.yidejia.app.mall.datamanage.UserCommentDataManage)
-====    257:257:static synthetic void access$3(com.yidejia.app.mall.datamanage.UserCommentDataManage,boolean)
+com.yidejia.app.mall.datamanage.TaskGetOrderByCode
+com.yidejia.app.mall.datamanage.TaskGetOrderByCode$1
+com.yidejia.app.mall.datamanage.TaskGetOrderByCode$TaskGOBC
+com.yidejia.app.mall.datamanage.TaskGetOrderByCode$TaskGOBC$1
+com.yidejia.app.mall.datamanage.TaskGetOrderByCode$TaskGetUserAddress
+com.yidejia.app.mall.datamanage.TaskGetTn
+com.yidejia.app.mall.datamanage.TaskGetTn$Task
+com.yidejia.app.mall.datamanage.TaskGetTn$Task$1
+com.yidejia.app.mall.datamanage.UserCommentDataManage
 com.yidejia.app.mall.datamanage.UserCommentDataManage$TaskGetList
 com.yidejia.app.mall.datamanage.UserCommentDataManage$TaskSave
 com.yidejia.app.mall.datamanage.UserCommentDataManage$TaskWaitComm
@@ -968,319 +1851,249 @@ com.yidejia.app.mall.datamanage.UserDatamanage:
     private java.lang.String ip
     private java.lang.String cps
     private java.lang.String message
-====    47:72:public boolean userLogin(java.lang.String,java.lang.String,java.lang.String)
-====    103:130:public boolean register(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-====    27:27:static synthetic java.lang.String access$0(com.yidejia.app.mall.datamanage.UserDatamanage)
-====    28:28:static synthetic java.lang.String access$1(com.yidejia.app.mall.datamanage.UserDatamanage)
-====    29:29:static synthetic java.lang.String access$2(com.yidejia.app.mall.datamanage.UserDatamanage)
-====    35:35:static synthetic android.app.Activity access$3(com.yidejia.app.mall.datamanage.UserDatamanage)
-====    32:32:static synthetic void access$4(com.yidejia.app.mall.datamanage.UserDatamanage,java.lang.String)
-====    25:25:static synthetic java.lang.String access$5(com.yidejia.app.mall.datamanage.UserDatamanage)
-====    30:30:static synthetic java.lang.String access$6(com.yidejia.app.mall.datamanage.UserDatamanage)
-====    33:33:static synthetic void access$7(com.yidejia.app.mall.datamanage.UserDatamanage,boolean)
-====    33:33:static synthetic boolean access$8(com.yidejia.app.mall.datamanage.UserDatamanage)
-====    133:133:static synthetic boolean access$9(com.yidejia.app.mall.datamanage.UserDatamanage)
-====    133:133:static synthetic void access$10(com.yidejia.app.mall.datamanage.UserDatamanage,boolean)
+    47:72:public boolean userLogin(java.lang.String,java.lang.String,java.lang.String)
+    103:130:public boolean register(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+    27:27:static synthetic java.lang.String access$0(com.yidejia.app.mall.datamanage.UserDatamanage)
+    28:28:static synthetic java.lang.String access$1(com.yidejia.app.mall.datamanage.UserDatamanage)
+    29:29:static synthetic java.lang.String access$2(com.yidejia.app.mall.datamanage.UserDatamanage)
+    35:35:static synthetic android.app.Activity access$3(com.yidejia.app.mall.datamanage.UserDatamanage)
+    32:32:static synthetic void access$4(com.yidejia.app.mall.datamanage.UserDatamanage,java.lang.String)
+    25:25:static synthetic java.lang.String access$5(com.yidejia.app.mall.datamanage.UserDatamanage)
+    30:30:static synthetic java.lang.String access$6(com.yidejia.app.mall.datamanage.UserDatamanage)
+    33:33:static synthetic void access$7(com.yidejia.app.mall.datamanage.UserDatamanage,boolean)
+    33:33:static synthetic boolean access$8(com.yidejia.app.mall.datamanage.UserDatamanage)
+    133:133:static synthetic boolean access$9(com.yidejia.app.mall.datamanage.UserDatamanage)
+    133:133:static synthetic void access$10(com.yidejia.app.mall.datamanage.UserDatamanage,boolean)
 com.yidejia.app.mall.datamanage.UserDatamanage$TaskLogin
 com.yidejia.app.mall.datamanage.UserDatamanage$TaskRegister
 com.yidejia.app.mall.datamanage.UserDatamanage$TaskRegister$1
 com.yidejia.app.mall.datamanage.VoucherDataManage:
-====    90:123:public java.lang.String getUserVoucherForPay(java.lang.String,java.lang.String,boolean)
+    90:123:public java.lang.String getUserVoucherForPay(java.lang.String,java.lang.String,boolean)
 com.yidejia.app.mall.exception.NullSearchResultEx
 com.yidejia.app.mall.exception.TimeOutEx:
     private static final long serialVersionUID
-====    16:17:public TimeOutEx(java.lang.String,java.lang.Throwable)
-====    20:21:public TimeOutEx(java.lang.Throwable)
-com.yidejia.app.mall.exception.UserLoginEx
-com.yidejia.app.mall.fragment.AllOrderFragment:
-====    49:52:private void setupShow()
-com.yidejia.app.mall.fragment.AlreadyComFragment
-com.yidejia.app.mall.fragment.AlreadyComFragment$1
-com.yidejia.app.mall.fragment.AlreadyOrderFragment
-com.yidejia.app.mall.fragment.AlreadyOrderFragment$1
-com.yidejia.app.mall.fragment.BaseInfoFragment:
-    private java.lang.String goodsId
-    private int number
-====    169:172:private int getPixels(int)
-com.yidejia.app.mall.fragment.CartActivity:
-    private android.app.AlertDialog dialog
-    private android.widget.ImageView subtract
-    private android.widget.TextView number
-    private android.widget.ImageView addImageView
-    private android.widget.ImageView subtract2
-    private android.widget.TextView number2
-    private android.widget.ImageView addImageView2
-    private int sumString
-    private com.yidejia.app.mall.datamanage.PreferentialDataManage preferentialDataManage
-    public static java.util.ArrayList arrayListFree
-    public static java.util.ArrayList arrayListExchange
-    private java.util.ArrayList mList
+    16:17:public TimeOutEx(java.lang.String,java.lang.Throwable)
+    20:21:public TimeOutEx(java.lang.Throwable)
+com.yidejia.app.mall.favorite.ParseFavJson:
+    120:137:private boolean parseSaveJson(java.lang.String)
 com.yidejia.app.mall.fragment.ExchangeAdapter:
-====    102:103:public static void setIsSelected(java.util.HashMap)
+    101:102:public static void setIsSelected(java.util.HashMap)
 com.yidejia.app.mall.fragment.ExchangeFragment:
-====    45:45:private void setupShow(android.view.View)
-com.yidejia.app.mall.fragment.FilterFragment:
-    private com.yidejia.app.mall.adapter.FilterExListAdapter filterAdapter
-    private android.widget.ExpandableListView filterListView
-    private java.util.ArrayList brandsArray
-    private java.util.ArrayList funsArray
-    private java.util.ArrayList pricesArray
-    private android.widget.Button filter_complete
-    private android.widget.Button filter_clear_conditions
-====    92:207:private void initView(android.view.View)
-====    213:244:private void initTopView(android.view.View)
-====    247:297:private java.lang.String getSelectState(java.util.ArrayList,int)
-====    39:39:static synthetic java.util.HashMap access$0(com.yidejia.app.mall.fragment.FilterFragment)
-====    41:41:static synthetic java.lang.String access$1(com.yidejia.app.mall.fragment.FilterFragment)
-====    37:37:static synthetic com.yidejia.app.mall.adapter.FilterExListAdapter access$2(com.yidejia.app.mall.fragment.FilterFragment)
-====    208:208:static synthetic int access$3(com.yidejia.app.mall.fragment.FilterFragment)
-====    208:208:static synthetic void access$4(com.yidejia.app.mall.fragment.FilterFragment,int)
-====    40:40:static synthetic java.util.ArrayList access$5(com.yidejia.app.mall.fragment.FilterFragment)
-====    246:246:static synthetic java.lang.String access$6(com.yidejia.app.mall.fragment.FilterFragment,java.util.ArrayList,int)
-com.yidejia.app.mall.fragment.FilterFragment$1
-com.yidejia.app.mall.fragment.FilterFragment$2
-com.yidejia.app.mall.fragment.FilterFragment$3
-com.yidejia.app.mall.fragment.FilterFragment$4
-com.yidejia.app.mall.fragment.FilterFragment$5
+    43:43:private void setupShow(android.view.View)
 com.yidejia.app.mall.fragment.FreeGivingAdapter:
-====    67:68:public void changeDate(java.util.ArrayList)
-====    203:203:public com.yidejia.app.mall.model.Cart getCart()
+    67:68:public void changeDate(java.util.ArrayList)
+    186:186:public com.yidejia.app.mall.model.Cart getCart()
 com.yidejia.app.mall.fragment.FreeGivingFragment:
-====    45:45:private void setupShow(android.view.View)
-com.yidejia.app.mall.fragment.IntegeralFragment
-com.yidejia.app.mall.fragment.LoginFragment:
-    private com.yidejia.app.mall.MyMallActivity newFragment
-com.yidejia.app.mall.fragment.MyMallFragment
-com.yidejia.app.mall.fragment.MyMallFragment$1
+    44:44:private void setupShow(android.view.View)
+com.yidejia.app.mall.fragment.GuangFragment
 com.yidejia.app.mall.fragment.ShoppingCartFragment
-com.yidejia.app.mall.fragment.WaitDeliverFragment
-com.yidejia.app.mall.fragment.WaitDeliverFragment$1
 com.yidejia.app.mall.fragment.WaitPayFragment
 com.yidejia.app.mall.fragment.WaitPayFragment$1
-com.yidejia.app.mall.initview.GoodsView:
-====    700:706:private void changeFravoriteBg()
-====    731:784:private void setAnim(android.view.View)
-====    796:806:private android.view.View addViewToAnimLayout(android.view.ViewGroup,android.view.View,int[])
-====    331:331:static synthetic void access$13(com.yidejia.app.mall.initview.GoodsView,int)
-com.yidejia.app.mall.initview.GoodsView$8
 com.yidejia.app.mall.interfacecallback.CallBack
 com.yidejia.app.mall.jni.JNICallBack:
-====    20:20:public java.lang.String hostUrl()
-====    24:24:public java.lang.String getSecretKey()
-====    public native java.lang.String getHttp4ImageUrlPrefix()
-====    public native java.lang.String getHttp4DelComment(java.lang.String)
-====    public native java.lang.String getHttp4PayOut(java.lang.String,java.lang.String)
-====    public native java.lang.String getHttp4SignOrder(java.lang.String,java.lang.String,java.lang.String)
-====    public native java.lang.String getHttp4ChangeRead(java.lang.String,java.lang.String,java.lang.String)
-com.yidejia.app.mall.model.Addresses:
-    private java.lang.String recipient_id
-====    77:77:public java.lang.String getPhone()
-====    97:98:public void setRecipientId(java.lang.String)
-====    100:100:public java.lang.String getRecipientId()
+    20:20:public java.lang.String hostUrl()
+    24:24:public java.lang.String getSecretKey()
+    public native java.lang.String getHttp4ImageUrlPrefix()
+    public native java.lang.String getHttp4DelComment(java.lang.String)
+    public native java.lang.String getHttp4PayOut(java.lang.String,java.lang.String)
+    public native java.lang.String getHttp4SignOrder(java.lang.String,java.lang.String,java.lang.String)
+    public native java.lang.String getHttp4ChangeRead(java.lang.String,java.lang.String,java.lang.String)
+    public native java.lang.String getHttp4GetTn(java.lang.String,java.lang.String,java.lang.String)
+    public native java.lang.String getHttp4SignUp(java.lang.String,java.lang.String)
+com.yidejia.app.mall.log.LoginTask
+com.yidejia.app.mall.log.LoginTask$Task
 com.yidejia.app.mall.model.Brand:
     private int brandId
-====    22:22:public int getBrandId()
-====    26:27:public void setBrandId(int)
+    22:22:public int getBrandId()
+    26:27:public void setBrandId(int)
 com.yidejia.app.mall.model.Express:
-====    80:80:public java.lang.String getDisDesc()
-====    99:99:public boolean getIsDefault()
+    87:87:public java.lang.String getDisDesc()
+    105:105:public boolean getIsDefault()
 com.yidejia.app.mall.model.FreePost:
-====    20:20:public java.lang.String getId()
-====    34:34:public java.lang.String getName()
-====    48:48:public java.lang.String getStartDate()
-====    62:62:public java.lang.String getEndDate()
-====    90:90:public java.lang.String getDesc()
+    20:20:public java.lang.String getId()
+    34:34:public java.lang.String getName()
+    48:48:public java.lang.String getStartDate()
+    62:62:public java.lang.String getEndDate()
+    90:90:public java.lang.String getDesc()
 com.yidejia.app.mall.model.Function:
-====    29:29:public java.lang.String getDesc()
+    private static final long serialVersionUID
 com.yidejia.app.mall.model.MainProduct:
     private java.lang.String subTitle
-====    43:43:public java.lang.String getSubTitle()
-====    47:48:public void setSubTitle(java.lang.String)
+    35:35:public java.lang.String getTitle()
+    43:43:public java.lang.String getSubTitle()
+    47:48:public void setSubTitle(java.lang.String)
+    50:50:public java.lang.String getPrice()
 com.yidejia.app.mall.model.MsgCenter:
-====    17:17:public java.lang.String getMsgid()
-====    38:38:public java.lang.String getUid()
-====    45:45:public java.lang.String getPid()
-====    52:52:public java.lang.String getUrl()
-====    59:59:public java.lang.String getIsread()
+    17:17:public java.lang.String getMsgid()
+    38:38:public java.lang.String getUid()
+    45:45:public java.lang.String getPid()
+    52:52:public java.lang.String getUrl()
+    59:59:public java.lang.String getIsread()
 com.yidejia.app.mall.model.MyListItem
-com.yidejia.app.mall.model.Order:
-    private int orderAmount
-    private java.lang.String tn
-====    78:78:public float getOrderSummary()
-====    85:86:public void setOrderAmount(int)
-====    92:92:public int getOrderAmount()
-====    100:100:public java.lang.String getId()
-====    116:116:public java.lang.String getCore()
-====    132:132:public java.lang.String getTn()
-====    140:141:public void setTn(java.lang.String)
 com.yidejia.app.mall.model.Preferential
-com.yidejia.app.mall.model.RetOrderInfo:
-====    28:28:public java.lang.String getId()
 com.yidejia.app.mall.model.SearchItem:
-====    52:52:public java.lang.String getBrief()
-====    135:135:public java.lang.String getFavoriteId()
-====    152:152:public java.lang.String getTheCode()
-====    166:166:public java.lang.String getModule()
-====    180:180:public java.lang.String getBrand()
-====    194:194:public java.lang.String getSpec()
-====    208:208:public java.lang.String getDesc()
+    52:52:public java.lang.String getBrief()
+    135:135:public java.lang.String getFavoriteId()
+    152:152:public java.lang.String getTheCode()
+    166:166:public java.lang.String getModule()
+    180:180:public java.lang.String getBrand()
+    194:194:public java.lang.String getSpec()
+    208:208:public java.lang.String getDesc()
 com.yidejia.app.mall.model.Skin:
-====    35:35:public java.lang.String getName()
+    35:35:public java.lang.String getName()
 com.yidejia.app.mall.model.UserComment:
     private java.lang.String userPictureUrl
     private java.lang.String productBaseDetail
-====    14:14:public java.lang.String getUserId()
-====    41:42:public void setUserPictureUrl(java.lang.String)
-====    48:48:public java.lang.String getUserPictureUrl()
-====    72:73:public void setProductBaseDetail(java.lang.String)
-====    79:79:public java.lang.String getProductBaseDetail()
-====    121:121:public java.lang.String getGoodsId()
-====    133:133:public java.lang.String getTitle()
-====    145:145:public java.lang.String getId()
+    14:14:public java.lang.String getUserId()
+    41:42:public void setUserPictureUrl(java.lang.String)
+    48:48:public java.lang.String getUserPictureUrl()
+    72:73:public void setProductBaseDetail(java.lang.String)
+    79:79:public java.lang.String getProductBaseDetail()
+    121:121:public java.lang.String getGoodsId()
+    133:133:public java.lang.String getTitle()
+    145:145:public java.lang.String getId()
 com.yidejia.app.mall.model.UserCount
-com.yidejia.app.mall.model.UserInfo
 com.yidejia.app.mall.net.ConnectionDetector:
-====    10:12:public ConnectionDetector()
+    10:12:public ConnectionDetector()
 com.yidejia.app.mall.net.GetImageUrlPrefix
 com.yidejia.app.mall.net.HttpAddressParam
 com.yidejia.app.mall.net.HttpGetConn:
-====    23:33:public HttpGetConn(java.lang.String)
+    31:33:public HttpGetConn(java.lang.String)
 com.yidejia.app.mall.net.HttpPostConn:
     private java.lang.String[] keys
     private java.lang.String[] values
-====    29:43:public HttpPostConn(java.lang.String[],java.lang.String[])
-====    46:76:public java.lang.String getJsonResult()
+    39:43:public HttpPostConn(java.lang.String[],java.lang.String[])
+    46:76:public java.lang.String getJsonResult()
 com.yidejia.app.mall.net.ImageUrl:
-====    85:108:private boolean analysisJson(java.lang.String)
-====    84:84:static synthetic boolean access$0(com.yidejia.app.mall.net.ImageUrl,java.lang.String)
-====    15:15:static synthetic java.lang.String access$1()
+    18:42:public java.lang.String getImageUrl()
+    85:108:private boolean analysisJson(java.lang.String)
+    84:84:static synthetic boolean access$0(com.yidejia.app.mall.net.ImageUrl,java.lang.String)
+    15:15:static synthetic java.lang.String access$1()
 com.yidejia.app.mall.net.ImageUrl$TaskImageUrl
-com.yidejia.app.mall.net.Param
 com.yidejia.app.mall.net.address.DeleteUserAddress:
-====    42:71:private void setKeysAndValues(java.lang.String,java.lang.String)
-====    78:86:public java.lang.String getHttpAddress(java.lang.String,java.lang.String)
-====    90:90:public java.util.Map getHttpAddressMap()
-====    96:99:public java.lang.String deleteAddress(java.lang.String,java.lang.String)
+    42:71:private void setKeysAndValues(java.lang.String,java.lang.String)
+    78:86:public java.lang.String getHttpAddress(java.lang.String,java.lang.String)
+    90:90:public java.util.Map getHttpAddressMap()
+    96:99:public java.lang.String deleteAddress(java.lang.String,java.lang.String)
 com.yidejia.app.mall.net.address.GetUserAddressList:
-====    48:86:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-====    89:94:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+    private android.content.Context context
+    38:40:public GetUserAddressList(android.content.Context)
+    48:86:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+    89:94:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+    104:108:public java.lang.String getAddressListJsonString(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
 com.yidejia.app.mall.net.address.SaveUserAddress:
-====    45:88:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-====    92:101:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-====    120:124:public java.lang.String saveAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+    45:88:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+    92:101:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+    120:124:public java.lang.String saveAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
 com.yidejia.app.mall.net.commments.DeleteProductComment
-com.yidejia.app.mall.net.commments.SaveProductComment:
-====    36:64:private void setKeysAndValues(java.lang.String)
-====    67:75:private java.lang.String getHttpAddress(java.lang.String)
-com.yidejia.app.mall.net.express.GetDistributionList:
-====    33:69:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-====    72:77:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-com.yidejia.app.mall.net.express.GetExpressList:
-====    33:69:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-====    72:77:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-com.yidejia.app.mall.net.express.GetFreeList:
-====    33:69:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-====    72:77:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-com.yidejia.app.mall.net.favorite.CheckExistsFavorite:
-====    37:66:private void setKeysAndValues(java.lang.String,java.lang.String)
-====    69:77:private java.lang.String getHttpAddress(java.lang.String,java.lang.String)
-com.yidejia.app.mall.net.favorite.SaveFavorite:
-====    36:64:private void setKeysAndValues(java.lang.String,java.lang.String)
-====    67:75:private java.lang.String getHttpAddress(java.lang.String,java.lang.String)
-====    88:91:public java.lang.String saveFavorite(java.lang.String,java.lang.String)
+com.yidejia.app.mall.net.commments.GetProductCommentList:
+    31:34:public GetProductCommentList()
+com.yidejia.app.mall.net.commments.SaveProductComment
+com.yidejia.app.mall.net.commments.WaitingComment
+com.yidejia.app.mall.net.express.GetDistributionList
+com.yidejia.app.mall.net.express.GetExpressList
+com.yidejia.app.mall.net.express.GetFreeList
 com.yidejia.app.mall.net.goodsinfo.GetProductAddress:
-====    192:192:public java.util.ArrayList getBannerProducts()
-====    196:196:public java.util.ArrayList getRecommentProducts()
-com.yidejia.app.mall.net.order.CancelOrder:
-====    30:60:private void setKeysAndValues(java.lang.String,java.lang.String)
-====    63:68:private java.lang.String getHttpAddress(java.lang.String,java.lang.String)
-com.yidejia.app.mall.net.order.DelOrder:
-====    35:81:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-====    85:91:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-====    114:118:public java.lang.String getListJsonString(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-com.yidejia.app.mall.net.order.GetOrderByCode:
-    private android.content.Context context
-====    23:91:public GetOrderByCode(android.content.Context)
-====    38:40:public java.lang.String getTNCode(java.lang.String,java.lang.String)
-====    44:80:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-====    83:88:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-====    95:98:public java.lang.String getListJsonString(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-com.yidejia.app.mall.net.order.GetOrderCode
-com.yidejia.app.mall.net.order.GetOrderList:
-====    33:69:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-====    72:77:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-====    84:87:public java.lang.String getListJsonString(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-com.yidejia.app.mall.net.order.GetOrderNoEva
-com.yidejia.app.mall.net.order.PayOutOrder
-com.yidejia.app.mall.net.order.SaveOrder:
-====    41:87:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-====    91:97:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-====    120:124:public java.lang.String getListJsonString(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+    60:73:public boolean analysis(java.lang.String)
+    83:117:private boolean analysisProductJson(java.lang.String)
+    128:152:private void analysisRecmJson(java.lang.String,java.util.ArrayList)
+    164:188:private java.lang.String analysisPicJson(java.lang.String,java.util.ArrayList)
+    192:192:public java.util.ArrayList getBannerProducts()
+    196:196:public java.util.ArrayList getRecommentProducts()
+    200:200:public com.yidejia.app.mall.model.ProductBaseInfo getProductBaseInfo()
+com.yidejia.app.mall.net.order.GetOrderByCode
+com.yidejia.app.mall.net.order.GetTn
 com.yidejia.app.mall.net.order.SignOrder
+com.yidejia.app.mall.net.search.BrandDataUtil
+com.yidejia.app.mall.net.search.EffectDataUtil
 com.yidejia.app.mall.net.search.GetSearchList
+com.yidejia.app.mall.net.search.PriceDataUtil
+com.yidejia.app.mall.net.search.SearchDataUtil
 com.yidejia.app.mall.net.skin.Answer:
-====    23:24:public void setQqName(com.yidejia.app.mall.model.Qq)
-====    88:88:public java.lang.String getMessage()
+    22:23:public void setQqName(com.yidejia.app.mall.model.Qq)
+    87:87:public java.lang.String getMessage()
 com.yidejia.app.mall.net.skin.Question:
-====    137:137:public java.lang.String getMsg()
+    26:38:public java.lang.String getHttpResp()
+    137:137:public java.lang.String getMsg()
 com.yidejia.app.mall.net.user.ChangeRead
+com.yidejia.app.mall.net.user.Login:
+    23:24:public java.lang.String getHttpResponse(java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.net.voucher.Verify
 com.yidejia.app.mall.net.voucher.Voucher:
-====    32:60:private void setKeysAndValues(java.lang.String)
-====    63:71:private java.lang.String getHttpAddress(java.lang.String)
-====    83:86:public java.lang.String getResponse(java.lang.String)
-com.yidejia.app.mall.search.SuggestionsAdapter
+    32:60:private void setKeysAndValues(java.lang.String)
+    63:71:private java.lang.String getHttpAddress(java.lang.String)
+    83:86:public java.lang.String getResponse(java.lang.String)
+com.yidejia.app.mall.order.Order:
+    private int orderAmount
+    private java.lang.String tn
+    87:88:public void setOrderAmount(int)
+    94:94:public int getOrderAmount()
+    102:102:public java.lang.String getId()
+    118:118:public java.lang.String getCore()
+    134:134:public java.lang.String getTn()
+    142:143:public void setTn(java.lang.String)
+com.yidejia.app.mall.order.OrderDetailActivity:
+    private android.widget.RelativeLayout orderAddressLayout
+com.yidejia.app.mall.order.RetOrderInfo:
+    28:28:public java.lang.String getId()
+com.yidejia.app.mall.pay.AlixDefine
+com.yidejia.app.mall.pay.AlixId
+com.yidejia.app.mall.pay.Base64:
+    private static final int BASELENGTH
+    private static final int LOOKUPLENGTH
+    private static final int TWENTYFOURBITGROUP
+    private static final int EIGHTBIT
+    private static final int SIXTEENBIT
+    private static final int FOURBYTE
+    private static final int SIGN
+    private static final char PAD
+    private static final boolean fDebug
+    13:13:public Base64()
+    82:169:public static java.lang.String encode(byte[])
+com.yidejia.app.mall.pay.BaseHelper:
+    17:17:public BaseHelper()
+    26:42:public static java.lang.String convertStreamToString(java.io.InputStream)
+    131:137:public static void chmod(java.lang.String,java.lang.String)
+com.yidejia.app.mall.pay.PartnerConfig
+com.yidejia.app.mall.pay.ResultChecker:
+    public static final int RESULT_INVALID_PARAM
+    public static final int RESULT_CHECK_SIGN_FAILED
+    public static final int RESULT_CHECK_SIGN_SUCCEED
+com.yidejia.app.mall.pay.Rsa:
+    public static final java.lang.String SIGN_ALGORITHMS
+    19:19:public Rsa()
+    55:75:public static java.lang.String sign(java.lang.String,java.lang.String)
+com.yidejia.app.mall.phone.ContactAdapter
+com.yidejia.app.mall.phone.ContactAdapter$ViewHolder
+com.yidejia.app.mall.recharge.ParseRecharge
+com.yidejia.app.mall.search.SearchFragment
+com.yidejia.app.mall.search.SearchFragment$1
+com.yidejia.app.mall.search.SearchFragment$2
+com.yidejia.app.mall.search.SearchFragment$Task
+com.yidejia.app.mall.search.SearchFragment$Task$1
+com.yidejia.app.mall.search.SearchFragment$Task$2
+com.yidejia.app.mall.search.TaskFilter
+com.yidejia.app.mall.search.TaskFilter$1
+com.yidejia.app.mall.search.TaskFilter$2
+com.yidejia.app.mall.search.TaskFilter$3
+com.yidejia.app.mall.search.TaskFilter$Task
+com.yidejia.app.mall.signup.ParseSignUp
+com.yidejia.app.mall.skintest.SkinAnswerUtil:
+    private android.widget.ImageView mButton
+com.yidejia.app.mall.skintest.SkinHomeActivity:
+    24:24:public java.lang.String getCpsNumber()
+    28:29:public void setCpsNumber(java.lang.String)
+com.yidejia.app.mall.skintest.SkinQuesActivity:
+    515:517:private void save(java.lang.String)
+com.yidejia.app.mall.skintest.SkinQuesActivity$Task
+com.yidejia.app.mall.skintest.SkinQuesActivity$Task$1
+com.yidejia.app.mall.skintest.SkinResultAcitivity:
+    private java.lang.String cps
 com.yidejia.app.mall.task.TaskGetCode:
-====    116:116:public int getRegCode()
-com.yidejia.app.mall.task.TaskLoginFragment
-com.yidejia.app.mall.task.TaskSearch
-com.yidejia.app.mall.util.AddressUtil
-com.yidejia.app.mall.util.AddressUtil$1
-com.yidejia.app.mall.util.AddressUtil$10
-com.yidejia.app.mall.util.AddressUtil$2
-com.yidejia.app.mall.util.AddressUtil$3
-com.yidejia.app.mall.util.AddressUtil$4
-com.yidejia.app.mall.util.AddressUtil$5
-com.yidejia.app.mall.util.AddressUtil$6
-com.yidejia.app.mall.util.AddressUtil$7
-com.yidejia.app.mall.util.AddressUtil$8
-com.yidejia.app.mall.util.AddressUtil$9
-com.yidejia.app.mall.util.AllOrderDetail:
-    private com.yidejia.app.mall.datamanage.OrderDataManage orderDataManage
-com.yidejia.app.mall.util.AllOrderUtil:
-    private android.content.Context context
-    private android.view.LayoutInflater inflater
-    private com.yidejia.app.mall.MyApplication myApplication
-    private android.widget.LinearLayout mLinearLayoutLayout
-    private android.widget.LinearLayout mLayout
-    private com.yidejia.app.mall.datamanage.OrderDataManage orderDataManage
-    private int orderType
-====    43:48:public AllOrderUtil(android.content.Context,android.widget.LinearLayout)
-====    86:107:public void loadView(int,int,int,int)
-====    111:199:public void viewCtrl(java.util.ArrayList)
-====    261:285:private java.lang.String setOkBtnText(int)
-====    294:313:private java.lang.String setCancelBtnText(int)
-====    322:329:private int getOrderTypeCode(java.lang.String)
-====    493:502:private void go2OrderDetail(java.lang.String,java.lang.String,java.util.ArrayList)
-====    28:28:static synthetic android.content.Context access$0(com.yidejia.app.mall.util.AllOrderUtil)
-====    41:41:static synthetic com.yidejia.app.mall.datamanage.OrderDataManage access$1(com.yidejia.app.mall.util.AllOrderUtil)
-====    31:31:static synthetic com.yidejia.app.mall.MyApplication access$2(com.yidejia.app.mall.util.AllOrderUtil)
-====    73:73:static synthetic int access$3(com.yidejia.app.mall.util.AllOrderUtil)
-====    38:38:static synthetic android.widget.LinearLayout access$4(com.yidejia.app.mall.util.AllOrderUtil)
-====    492:492:static synthetic void access$5(com.yidejia.app.mall.util.AllOrderUtil,java.lang.String,java.lang.String,java.util.ArrayList)
-com.yidejia.app.mall.util.AllOrderUtil$1
-com.yidejia.app.mall.util.AllOrderUtil$CancelClickListener
-com.yidejia.app.mall.util.AllOrderUtil$CancelClickListener$1
-com.yidejia.app.mall.util.AllOrderUtil$OkClickListener
-com.yidejia.app.mall.util.AlreadyCompleteDetail
-com.yidejia.app.mall.util.AlreadyCompleteDetail$1
-com.yidejia.app.mall.util.AlreadyCompleteDetail$AnimateFirstDisplayListener
-com.yidejia.app.mall.util.AlreadyCompleteUtil
-com.yidejia.app.mall.util.AlreadyCompleteUtil$1
-com.yidejia.app.mall.util.AlreadyOrderDetail
-com.yidejia.app.mall.util.AlreadyOrderDetail$1
-com.yidejia.app.mall.util.AlreadyOrderDetail$AnimateFirstDisplayListener
-com.yidejia.app.mall.util.AlreadyOrderUtil
-com.yidejia.app.mall.util.AnActionModeOfEpicProportions
+    116:116:public int getRegCode()
+com.yidejia.app.mall.task.TaskLoginAct
+com.yidejia.app.mall.task.TaskLoginAct$Task
+com.yidejia.app.mall.task.TaskLoginAct$Task$1
 com.yidejia.app.mall.util.Base64:
     public static final int DEFAULT
     public static final int NO_PADDING
@@ -1288,25 +2101,32 @@ com.yidejia.app.mall.util.Base64:
     public static final int CRLF
     public static final int URL_SAFE
     public static final int NO_CLOSE
-====    480:483:public static java.lang.String encodeToString(byte[],int,int,int)
+    480:483:public static java.lang.String encodeToString(byte[],int,int,int)
 com.yidejia.app.mall.util.Base64$Coder:
-====    public abstract boolean process(byte[],int,int,boolean)
-====    public abstract int maxOutputSize(int)
+    public abstract boolean process(byte[],int,int,boolean)
+    public abstract int maxOutputSize(int)
 com.yidejia.app.mall.util.Base64$Decoder:
     private static final int SKIP
     private static final int EQUALS
-====    257:257:public int maxOutputSize(int)
+    257:257:public int maxOutputSize(int)
 com.yidejia.app.mall.util.Base64$Encoder:
     public static final int LINE_GROUPS
-====    603:603:public int maxOutputSize(int)
-com.yidejia.app.mall.util.CartUtil:
-    private android.widget.TextView number
+    603:603:public int maxOutputSize(int)
+com.yidejia.app.mall.util.BottomChange
 com.yidejia.app.mall.util.CartUtil1:
     private android.widget.TextView number
 com.yidejia.app.mall.util.CommentUtil:
-====    244:258:private void setupShow(com.yidejia.app.mall.model.UserComment)
+    47:56:public CommentUtil(android.content.Context,android.widget.LinearLayout)
+    59:61:public void setRefreshView(com.handmark.pulltorefresh.library.PullToRefreshScrollView,android.widget.RelativeLayout)
+    79:110:public void AllComment(java.lang.String,int,int)
+    244:258:private void setupShow(com.yidejia.app.mall.model.UserComment)
+com.yidejia.app.mall.util.CommentUtil$1
+com.yidejia.app.mall.util.CommentUtil$Task:
+    114:114:private CommentUtil$Task(com.yidejia.app.mall.util.CommentUtil)
+    114:114:synthetic CommentUtil$Task(com.yidejia.app.mall.util.CommentUtil,com.yidejia.app.mall.util.CommentUtil$Task)
 com.yidejia.app.mall.util.Consts:
     public static final java.lang.String DELETE_CART
+    public static final java.lang.String EXIT_APP
     public static final java.lang.String CHECK_UPDATE_CHANGE
     public static final java.lang.String BACK_UPDATE_CHANGE
     public static final java.lang.String UPDATE_CHANGE
@@ -1319,6 +2139,10 @@ com.yidejia.app.mall.util.Consts:
     public static final int PayResponseCode
     public static final int CstmPayActivity_Request
     public static final int CstmPayActivity_Response
+    public static final int DELIVERY_REQUEST
+    public static final int DELIVERY_RESULT
+    public static final int CONSTACT_REQUEST
+    public static final int CONSTACT_RESPONSE
     public static final java.lang.String ADD_SUBSTARCT_UPDATE_
     public static final java.lang.String EXCHANG_FREE
     public static final java.lang.String RETURN_BACk
@@ -1328,233 +2152,265 @@ com.yidejia.app.mall.util.Consts:
     public static final java.lang.String CST_NEWADDRESS
     public static final java.lang.String IMAGES
     public static final java.lang.String IMAGE_POSITION
-====    9:10:public void setMiStr(java.lang.String)
+    9:10:public void setMiStr(java.lang.String)
 com.yidejia.app.mall.util.DESUtil
-com.yidejia.app.mall.util.DPIUtil
+com.yidejia.app.mall.util.DPIUtil:
+    11:11:public DPIUtil()
+    26:26:public static float getDensity()
+    30:30:public static int getHeight()
+    38:38:public static int percentHeight(float)
+    42:42:public static int percentWidth(float)
+    50:50:public static int px2sp(android.content.Context,float)
+    55:56:public static void setDensity(float)
+    88:91:public static float pixelsToDp(float,android.content.Context)
 com.yidejia.app.mall.util.DefinalDate
 com.yidejia.app.mall.util.DesUtils:
     public static final java.lang.String ALGORITHM_DES
-====    10:10:public DesUtils()
+    10:10:public DesUtils()
 com.yidejia.app.mall.util.FreeGivingUtil
-com.yidejia.app.mall.util.FreeGivingUtil$AnimateFirstDisplayListener
 com.yidejia.app.mall.util.Http:
     private static final java.lang.String METHOD_POST
     private static final int CACHE_SIZE
     private static final int CONNECT_TIMEOUT
     private static final int READ_TIMEOUT
-====    10:10:public Http()
+    10:10:public Http()
 com.yidejia.app.mall.util.IsPhone:
-====    8:8:public IsPhone()
+    8:8:public IsPhone()
 com.yidejia.app.mall.util.Md5
 com.yidejia.app.mall.util.MessageUtil:
     private static final java.lang.String CHARSET
     public static final java.lang.String QSTRING_EQUAL
     public static final java.lang.String QSTRING_SPLIT
-====    9:9:public MessageUtil()
-com.yidejia.app.mall.util.OrdersUtil:
-    private android.widget.LinearLayout mLayout
+    9:9:public MessageUtil()
 com.yidejia.app.mall.util.PayUtil:
     private android.widget.LinearLayout mLayout
     private com.yidejia.app.mall.model.Cart cart
-====    36:85:public PayUtil(android.content.Context,android.widget.LinearLayout,com.yidejia.app.mall.model.Cart)
-====    182:213:public java.lang.String cartLoadView()
+    56:63:public PayUtil(android.content.Context,android.widget.LinearLayout,com.nostra13.universalimageloader.core.ImageLoader,com.nostra13.universalimageloader.core.assist.ImageLoadingListener,com.nostra13.universalimageloader.core.DisplayImageOptions)
+    161:192:public java.lang.String cartLoadView()
 com.yidejia.app.mall.util.UnicodeToString:
-====    66:87:public java.lang.String convert(java.lang.String)
+    66:87:public java.lang.String convert(java.lang.String)
 com.yidejia.app.mall.util.Utility
-com.yidejia.app.mall.util.WaitDeliverDetail
-com.yidejia.app.mall.util.WaitDeliverDetail$1
-com.yidejia.app.mall.util.WaitDeliverDetail$AnimateFirstDisplayListener
-com.yidejia.app.mall.util.WaitDeliverUtil
-com.yidejia.app.mall.util.WaitDeliverUtil$1
-com.yidejia.app.mall.util.WaitPayOrderDetail
-com.yidejia.app.mall.util.WaitPayOrderDetail$AnimateFirstDisplayListener
-com.yidejia.app.mall.util.WaitPayUtil
-com.yidejia.app.mall.util.WaitPayUtil$1
-com.yidejia.app.mall.util.WaitPayUtil$2
-com.yidejia.app.mall.util.WaitPayUtil$3
-com.yidejia.app.mall.view.AddressAdapter:
-    private boolean isSelect
-com.yidejia.app.mall.view.AllOrderActivity:
-    private java.util.ArrayList fragmentsList
-    private android.widget.TextView mWeek
-    private android.widget.TextView mMonth
-    private android.widget.TextView mYear
-    private android.widget.ImageView ivBottomLine
-    private int bottomLineWidth
-    private int position_one
-    private int position_two
-    private int position_three
-    private android.content.res.Resources resources
-    private com.handmark.pulltorefresh.library.PullToRefreshScrollView mPullToRefreshScrollView
-====    102:109:private void InitTextView()
-====    113:147:private void InitViewPager()
-====    150:160:private void InitWidth()
-====    177:235:private void changeBGAndFragment(int)
-====    245:263:private void changeFragment(int)
-====    176:176:static synthetic void access$0(com.yidejia.app.mall.view.AllOrderActivity,int)
-com.yidejia.app.mall.view.AllOrderActivity$MyOnClickListener
-com.yidejia.app.mall.view.AlreadyComActivity:
-    private static final java.lang.String TAG
-    private android.support.v4.view.ViewPager mPager
-    private java.util.ArrayList fragmentsList
-    private android.widget.TextView mWeek
-    private android.widget.TextView mMonth
-    private android.widget.TextView mYear
-    private android.widget.ImageView ivBottomLine
-    private int bottomLineWidth
-    private int position_one
-    private int position_two
-    private int position_three
-    private android.content.res.Resources resources
-====    94:101:private void InitTextView()
-====    103:122:private void InitViewPager()
-====    126:136:private void InitWidth()
-====    28:28:static synthetic android.support.v4.view.ViewPager access$0(com.yidejia.app.mall.view.AlreadyComActivity)
-====    33:33:static synthetic int access$1(com.yidejia.app.mall.view.AlreadyComActivity)
-====    31:31:static synthetic android.widget.TextView access$2(com.yidejia.app.mall.view.AlreadyComActivity)
-====    36:36:static synthetic int access$3(com.yidejia.app.mall.view.AlreadyComActivity)
-====    31:31:static synthetic android.widget.TextView access$4(com.yidejia.app.mall.view.AlreadyComActivity)
-====    37:37:static synthetic int access$5(com.yidejia.app.mall.view.AlreadyComActivity)
-====    31:31:static synthetic android.widget.TextView access$6(com.yidejia.app.mall.view.AlreadyComActivity)
-====    35:35:static synthetic int access$7(com.yidejia.app.mall.view.AlreadyComActivity)
-====    33:33:static synthetic void access$8(com.yidejia.app.mall.view.AlreadyComActivity,int)
-====    32:32:static synthetic android.widget.ImageView access$9(com.yidejia.app.mall.view.AlreadyComActivity)
-com.yidejia.app.mall.view.AlreadyComActivity$MyOnClickListener
-com.yidejia.app.mall.view.AlreadyComActivity$MyOnPageChangeListener
-com.yidejia.app.mall.view.AlreadyOrderActivity:
-    private static final java.lang.String TAG
-    private android.support.v4.view.ViewPager mPager
-    private java.util.ArrayList fragmentsList
-    private android.widget.TextView mWeek
-    private android.widget.TextView mMonth
-    private android.widget.TextView mYear
-    private android.widget.ImageView ivBottomLine
-    private int bottomLineWidth
-    private int position_one
-    private int position_two
-    private int position_three
-    private android.content.res.Resources resources
-====    101:108:private void InitTextView()
-====    110:130:private void InitViewPager()
-====    134:144:private void InitWidth()
-====    30:30:static synthetic android.support.v4.view.ViewPager access$0(com.yidejia.app.mall.view.AlreadyOrderActivity)
-====    35:35:static synthetic int access$1(com.yidejia.app.mall.view.AlreadyOrderActivity)
-====    33:33:static synthetic android.widget.TextView access$2(com.yidejia.app.mall.view.AlreadyOrderActivity)
-====    38:38:static synthetic int access$3(com.yidejia.app.mall.view.AlreadyOrderActivity)
-====    33:33:static synthetic android.widget.TextView access$4(com.yidejia.app.mall.view.AlreadyOrderActivity)
-====    39:39:static synthetic int access$5(com.yidejia.app.mall.view.AlreadyOrderActivity)
-====    33:33:static synthetic android.widget.TextView access$6(com.yidejia.app.mall.view.AlreadyOrderActivity)
-====    37:37:static synthetic int access$7(com.yidejia.app.mall.view.AlreadyOrderActivity)
-====    35:35:static synthetic void access$8(com.yidejia.app.mall.view.AlreadyOrderActivity,int)
-====    34:34:static synthetic android.widget.ImageView access$9(com.yidejia.app.mall.view.AlreadyOrderActivity)
-com.yidejia.app.mall.view.AlreadyOrderActivity$MyOnClickListener
-com.yidejia.app.mall.view.AlreadyOrderActivity$MyOnPageChangeListener
 com.yidejia.app.mall.view.CstmPayActivity:
     public static java.util.ArrayList cartList
-    private android.app.AlertDialog addresssDialog
-====    116:116:public static java.util.ArrayList getArrayListFree()
-====    120:121:public static void setArrayListFree(java.util.ArrayList)
-====    124:124:public static java.util.ArrayList getArrayListExchange()
-====    129:130:public static void setArrayListExchange(java.util.ArrayList)
-com.yidejia.app.mall.view.EditNewAddressActivity:
-    public static java.lang.String addressId
-    private java.util.Map valueMap2
-    private boolean isUpdate
-com.yidejia.app.mall.view.EditorActivity:
-    private android.app.AlertDialog dialogAbout
-    private android.app.AlertDialog dialogphone
-    int width
-    int height
+    121:121:public static java.util.ArrayList getArrayListFree()
+    125:126:public static void setArrayListFree(java.util.ArrayList)
+    129:129:public static java.util.ArrayList getArrayListExchange()
+    134:135:public static void setArrayListExchange(java.util.ArrayList)
+    627:633:private boolean checkInfo()
+    641:658:java.lang.String getOrderInfo()
+    681:682:java.lang.String getSignType()
+    695:695:java.lang.String sign(java.lang.String,java.lang.String)
 com.yidejia.app.mall.view.ExchangeFreeActivity:
-    private static final java.lang.String TAG
-    private int position_three
-com.yidejia.app.mall.view.GoCartActivity:
-    private android.app.AlertDialog dialog
-com.yidejia.app.mall.view.IntegeralActivity:
-    private static final java.lang.String TAG
-com.yidejia.app.mall.view.LoginActivity:
-    private com.yidejia.app.mall.datamanage.UserDatamanage userManage
-com.yidejia.app.mall.view.OrderDetailActivity:
-    private java.lang.String orderTn
-com.yidejia.app.mall.view.RegistActivity:
-    public android.widget.Button mback
-com.yidejia.app.mall.view.SkinAnswerActivity:
-    private android.widget.ImageView mButton
-com.yidejia.app.mall.view.SkinHomeActivity:
-====    24:24:public java.lang.String getCpsNumber()
-====    28:29:public void setCpsNumber(java.lang.String)
-com.yidejia.app.mall.view.SkinQuesActivity:
-====    510:512:private void save(java.lang.String)
-com.yidejia.app.mall.view.SkinResultAcitivity:
-    private java.lang.String cps
-com.yidejia.app.mall.view.WaitDeliverActivity:
-    private static final java.lang.String TAG
-    private android.support.v4.view.ViewPager mPager
-    private java.util.ArrayList fragmentsList
-    private android.widget.TextView mWeek
-    private android.widget.TextView mMonth
-    private android.widget.TextView mYear
-    private android.widget.ImageView ivBottomLine
-    private int bottomLineWidth
-    private int position_one
-    private int position_two
-    private int position_three
-    private android.content.res.Resources resources
-====    93:100:private void InitTextView()
-====    102:121:private void InitViewPager()
-====    125:135:private void InitWidth()
-====    28:28:static synthetic android.support.v4.view.ViewPager access$0(com.yidejia.app.mall.view.WaitDeliverActivity)
-====    33:33:static synthetic int access$1(com.yidejia.app.mall.view.WaitDeliverActivity)
-====    36:36:static synthetic int access$2(com.yidejia.app.mall.view.WaitDeliverActivity)
-====    31:31:static synthetic android.widget.TextView access$3(com.yidejia.app.mall.view.WaitDeliverActivity)
-====    37:37:static synthetic int access$4(com.yidejia.app.mall.view.WaitDeliverActivity)
-====    31:31:static synthetic android.widget.TextView access$5(com.yidejia.app.mall.view.WaitDeliverActivity)
-====    31:31:static synthetic android.widget.TextView access$6(com.yidejia.app.mall.view.WaitDeliverActivity)
-====    35:35:static synthetic int access$7(com.yidejia.app.mall.view.WaitDeliverActivity)
-====    33:33:static synthetic void access$8(com.yidejia.app.mall.view.WaitDeliverActivity,int)
-====    32:32:static synthetic android.widget.ImageView access$9(com.yidejia.app.mall.view.WaitDeliverActivity)
-com.yidejia.app.mall.view.WaitDeliverActivity$MyOnClickListener
-com.yidejia.app.mall.view.WaitDeliverActivity$MyOnPageChangeListener
-com.yidejia.app.mall.view.WaitPayActivity:
-    private static final java.lang.String TAG
-    private android.support.v4.view.ViewPager mPager
-    private java.util.ArrayList fragmentsList
-    private android.widget.TextView mWeek
-    private android.widget.TextView mMonth
-    private android.widget.TextView mYear
-    private android.widget.ImageView ivBottomLine
-    private int bottomLineWidth
-    private int position_one
-    private int position_two
-    private int position_three
-    private android.content.res.Resources resources
-====    99:106:private void InitTextView()
-====    108:127:private void InitViewPager()
-====    131:141:private void InitWidth()
-====    29:29:static synthetic android.support.v4.view.ViewPager access$0(com.yidejia.app.mall.view.WaitPayActivity)
-====    34:34:static synthetic int access$1(com.yidejia.app.mall.view.WaitPayActivity)
-====    37:37:static synthetic int access$2(com.yidejia.app.mall.view.WaitPayActivity)
-====    32:32:static synthetic android.widget.TextView access$3(com.yidejia.app.mall.view.WaitPayActivity)
-====    38:38:static synthetic int access$4(com.yidejia.app.mall.view.WaitPayActivity)
-====    32:32:static synthetic android.widget.TextView access$5(com.yidejia.app.mall.view.WaitPayActivity)
-====    32:32:static synthetic android.widget.TextView access$6(com.yidejia.app.mall.view.WaitPayActivity)
-====    36:36:static synthetic int access$7(com.yidejia.app.mall.view.WaitPayActivity)
-====    34:34:static synthetic void access$8(com.yidejia.app.mall.view.WaitPayActivity,int)
-====    33:33:static synthetic android.widget.ImageView access$9(com.yidejia.app.mall.view.WaitPayActivity)
-com.yidejia.app.mall.view.WaitPayActivity$MyOnClickListener
-com.yidejia.app.mall.view.WaitPayActivity$MyOnPageChangeListener
+    196:234:private void setActionBar()
+    67:67:static synthetic float access$17(com.yidejia.app.mall.view.ExchangeFreeActivity)
+com.yidejia.app.mall.view.ExchangeFreeActivity$3
+com.yidejia.app.mall.view.ExchangeFreeActivity$4
+com.yidejia.app.mall.view.ImageLoaderUtil
+com.yidejia.app.mall.view.ImageLoaderUtil$AnimateFirstDisplayListener
+com.yidejia.app.mall.view.ImagePagerActivity:
+    private static final java.lang.String STATE_POSITION
+    private static final int NONE
+    private static final int DRAG
+    private static final int ZOOM
+com.yidejia.app.mall.view.UserPayActivity:
+    private static final java.lang.String SERVER_URL
+    private static final java.lang.String TRADE_COMMAND
+    private java.lang.String mTokenId
+    static final int MSG_PAY_RESULT
+com.yidejia.app.mall.wheelview.ArrayWheelAdapter:
+    public static final int DEFAULT_LENGTH
+    private java.lang.Object[] items
+com.yidejia.app.mall.wheelview.NumericWheelAdapter
+com.yidejia.app.mall.wheelview.WheelView:
+    private static final int SCROLLING_DURATION
+    private static final int MIN_DELTA_FOR_SCROLLING
+    private static final int VALUE_TEXT_COLOR
+    private static final int ITEMS_TEXT_COLOR
+    private static final int ADDITIONAL_ITEM_HEIGHT
+    private static final int TEXT_SIZE
+    private static final int ITEM_OFFSET
+    private static final int ADDITIONAL_ITEMS_SPACE
+    private static final int LABEL_OFFSET
+    private static final int PADDING
+    private static final int DEF_VISIBLE_ITEMS
+    196:198:public void setInterpolator(android.view.animation.Interpolator)
+    206:206:public int getVisibleItems()
+    226:226:public java.lang.String getLabel()
+    236:241:public void setLabel(java.lang.String)
+    256:257:public void removeChangingListener(com.yidejia.app.mall.wheelview.OnWheelChangedListener)
+    275:276:public void addScrollingListener(com.yidejia.app.mall.wheelview.OnWheelScrollListener)
+    283:284:public void removeScrollingListener(com.yidejia.app.mall.wheelview.OnWheelScrollListener)
+    310:310:public int getCurrentItem()
+    360:360:public boolean isCyclic()
+    368:372:public void setCyclic(boolean)
 com.yidejia.app.mall.widget.DateTimePickerDialog:
     private java.lang.String initDateTime
-====    43:54:public void init(android.widget.DatePicker,android.widget.TimePicker)
-com.yidejia.app.mall.widget.RefreshView
-com.yidejia.app.mall.widget.YLImageButton:
-====    36:37:public void setTextColor(int)
-====    49:51:public void setText(int)
-====    54:55:public void setTextX(float)
-====    58:59:public void setTextY(float)
-====    62:63:public void setText(java.lang.CharSequence)
-====    66:67:public void setPaintAlign(android.graphics.Paint$Align)
+    43:54:public void init(android.widget.DatePicker,android.widget.TimePicker)
+com.yidejia.app.mall.widget.WiperSwitch:
+    23:23:public boolean isNowStatus()
+    27:28:public void setNowStatus(boolean)
+    164:170:public void setChecked(boolean)
+com.yidejia.app.mall.widget.YLImageButton
 com.yidejia.app.mall.widget.YLProgressDialog:
-====    35:38:public YLProgressDialog(android.content.Context,int)
-====    41:46:public void show()
-====    96:98:public void setMessage(java.lang.String)
+    35:38:public YLProgressDialog(android.content.Context,int)
+    41:46:public void show()
+    96:98:public void setMessage(java.lang.String)
+com.yidejia.app.mall.yirihui.YirihuiFragment:
+    17:21:public static com.yidejia.app.mall.yirihui.YirihuiFragment newInstance(int)
+m.framework.network.ByteArrayPart
+m.framework.network.FilePart
+m.framework.network.HTTPPart
+m.framework.network.KVPair
+m.framework.network.MultiPart
+m.framework.network.MultiPartInputStream
+m.framework.network.NetworkHelper:
+    public static int connectionTimeout
+    public static int readTimout
+    40:78:public java.lang.String httpGet(java.lang.String,java.util.ArrayList,java.util.ArrayList)
+    84:124:public void httpGet(java.lang.String,java.util.ArrayList,java.util.ArrayList,m.framework.network.ResponseCallback)
+    127:156:public void download(java.lang.String,java.io.File)
+    187:224:public java.lang.String httpPost(java.lang.String,java.util.ArrayList,m.framework.network.KVPair,java.util.ArrayList)
+    231:268:public void httpPost(java.lang.String,java.util.ArrayList,m.framework.network.KVPair,java.util.ArrayList,m.framework.network.ResponseCallback)
+    272:318:private org.apache.http.client.methods.HttpPost filePost(java.lang.String,java.util.ArrayList,m.framework.network.KVPair)
+    323:332:private org.apache.http.client.methods.HttpPost textPost(java.lang.String,java.util.ArrayList)
+    337:367:public void rawPost(java.lang.String,java.util.ArrayList,m.framework.network.HTTPPart,m.framework.network.ResponseCallback)
+    372:416:public java.lang.String httpPut(java.lang.String,java.util.ArrayList,m.framework.network.KVPair,java.util.ArrayList)
+    422:433:private java.lang.String kvPairsToUrl(java.util.ArrayList)
+m.framework.network.StringPart
+m.framework.ui.widget.asyncview.AsyncImageView:
+    public static final int DEFAULT_TRANSPARENT
+    private static final int MSG_IMG_GOT
+    33:35:public AsyncImageView(android.content.Context,android.util.AttributeSet)
+    38:40:public AsyncImageView(android.content.Context,android.util.AttributeSet,int)
+m.framework.ui.widget.asyncview.AsyncView:
+    public abstract void execute(java.lang.String,int)
+m.framework.ui.widget.asyncview.BitmapProcessor:
+    private static final int CAPACITY
+    private static final int MAX_REQ_TIME
+    private static final int MAX_SIZE
+    private static final int OVERFLOW_SIZE
+    52:62:public static void stop()
+m.framework.ui.widget.pulltorefresh.GroupListView
+m.framework.ui.widget.pulltorefresh.GroupListView$1
+m.framework.ui.widget.pulltorefresh.GroupListView$GroupListAdapter
+m.framework.ui.widget.pulltorefresh.GroupListView$ItemHolder
+m.framework.ui.widget.pulltorefresh.PullToRefreshAdatper:
+    20:20:protected m.framework.ui.widget.pulltorefresh.PullToRefreshView getParent()
+m.framework.ui.widget.pulltorefresh.PullToRefreshBaseListAdapter:
+    public abstract boolean isFling()
+    public abstract void onScroll(m.framework.ui.widget.pulltorefresh.Scrollable,int,int,int)
+m.framework.ui.widget.pulltorefresh.PullToRefreshGridAdapter
+m.framework.ui.widget.pulltorefresh.PullToRefreshGridAdapter$1
+m.framework.ui.widget.pulltorefresh.PullToRefreshGroupListAdapter
+m.framework.ui.widget.pulltorefresh.PullToRefreshGroupListAdapter$1
+m.framework.ui.widget.pulltorefresh.PullToRefreshGroupListAdapter$2
+m.framework.ui.widget.pulltorefresh.PullToRefreshView:
+    private static final long MIN_REF_TIME
+    35:37:public PullToRefreshView(android.content.Context,android.util.AttributeSet)
+    40:42:public PullToRefreshView(android.content.Context,android.util.AttributeSet,int)
+    182:183:public void lockPulling()
+    187:188:public void releaseLock()
+m.framework.ui.widget.pulltorefresh.ScrollableGridView
+m.framework.ui.widget.pulltorefresh.ScrollableGridView$1
+m.framework.ui.widget.pulltorefresh.ScrollableGroupListView
+m.framework.ui.widget.pulltorefresh.ScrollableGroupListView$1
+m.framework.ui.widget.pulltorefresh.ScrollableListView:
+    18:20:public ScrollableListView(android.content.Context,android.util.AttributeSet)
+    23:25:public ScrollableListView(android.content.Context,android.util.AttributeSet,int)
+m.framework.ui.widget.slidingmenu.BodyContainer
+m.framework.ui.widget.slidingmenu.MenuAdapter
+m.framework.ui.widget.slidingmenu.MenuConfig
+m.framework.ui.widget.slidingmenu.SlidingMenu
+m.framework.ui.widget.slidingmenu.SlidingMenu$1
+m.framework.ui.widget.slidingmenu.SlidingMenu$1$1
+m.framework.ui.widget.slidingmenu.SlidingMenu$2
+m.framework.ui.widget.slidingmenu.SlidingMenu$3
+m.framework.ui.widget.slidingmenu.SlidingMenu$3$1
+m.framework.ui.widget.slidingmenu.SlidingMenu$4
+m.framework.ui.widget.slidingmenu.SlidingMenu$5
+m.framework.ui.widget.slidingmenu.SlidingMenu$6
+m.framework.ui.widget.slidingmenu.SlidingMenu$6$1
+m.framework.ui.widget.slidingmenu.SlidingMenuGroup
+m.framework.ui.widget.slidingmenu.SlidingMenuItem
+m.framework.ui.widget.viewpager.ViewPagerClassic:
+    private static final int SNAP_VELOCITY
+    private static final int TOUCH_STATE_REST
+    private static final int TOUCH_STATE_SCROLLING
+    454:461:public void scrollLeft()
+    465:473:public void scrollRight()
+m.framework.utils.Data:
+    private static final java.lang.String CHAT_SET
+    8:8:public Data()
+    13:16:public static byte[] SHA1(java.lang.String)
+    27:40:public static byte[] AES128Encode(java.lang.String,java.lang.String)
+    52:61:public static byte[] AES128Encode(byte[],java.lang.String)
+    66:68:public static java.lang.String AES128Decode(java.lang.String,byte[])
+    72:83:public static byte[] AES128Decode(byte[],byte[])
+    87:91:public static java.lang.String byteToHex(byte[])
+    95:95:public static java.util.HashMap parseJson(java.lang.String)
+    99:99:public static java.lang.String parseJson(java.util.HashMap)
+    103:109:public static java.lang.String base62(long)
+m.framework.utils.DeviceHelper:
+    private static m.framework.utils.DeviceHelper deviceHelper
+    43:46:public static m.framework.utils.DeviceHelper getInstance(android.content.Context)
+    64:64:public boolean isRooted()
+    68:78:public java.lang.String getMacAddress()
+    83:83:public java.lang.String getModel()
+    88:88:public java.lang.String getFactory()
+    93:117:public java.lang.String getDeviceId()
+    122:124:public java.lang.String getDeviceData()
+    135:145:public java.lang.String Base64AES(java.lang.String,java.lang.String)
+    150:150:public java.lang.String getOSVersion()
+    155:161:public java.lang.String getScreenSize()
+    176:181:public java.lang.String getCarrier()
+    186:213:public java.lang.String getNetworkType()
+    218:218:public int getPlatformCode()
+    222:262:private boolean isFastMobileNetwork()
+    266:283:public org.json.JSONArray getRunningApp()
+    287:295:public java.lang.String getRunningAppStr()
+    300:309:public java.lang.String getDeviceKey()
+    319:329:public java.lang.String getAppName()
+    335:341:public int getAppVersion()
+    347:353:public java.lang.String getAppVersionName()
+    359:377:public java.util.ArrayList getInstalledApp(boolean)
+    381:383:private boolean isSystemApp(android.content.pm.PackageInfo)
+    387:389:public java.lang.String getNetworkOperator()
+    394:401:public java.lang.String getTopTaskPackageName()
+m.framework.utils.HEX:
+    3:3:public HEX()
+    15:30:public static byte[] toByte(java.lang.String)
+    34:35:public static java.lang.String encodeHexString(byte[])
+    39:39:public static byte[] decodeHexString(java.lang.String)
+    43:60:public static byte[] decodeHex(char[])
+    64:68:protected static int toDigit(char,int)
+    72:82:public static char[] encodeHex(byte[])
+    86:86:public byte[] decode(byte[])
+    91:95:public byte[] decode(java.lang.Object)
+    100:100:public byte[] encode(byte[])
+    105:109:public char[] encode(java.lang.Object)
+m.framework.utils.Hashon:
+    21:30:public java.util.HashMap fromJson(java.lang.String)
+    35:54:private java.util.HashMap fromJson(org.json.JSONObject)
+    59:70:private java.util.ArrayList fromJson(org.json.JSONArray)
+    76:80:public java.lang.String fromHashMap(java.util.HashMap)
+    86:100:private org.json.JSONObject getJSONObject(java.util.HashMap)
+    104:104:private boolean isBasicArray(java.lang.Object)
+    112:175:private java.util.ArrayList arrayToList(java.lang.Object)
+    181:191:private org.json.JSONArray getJSONArray(java.util.ArrayList)
+    197:201:public java.lang.String format(java.lang.String)
+    206:231:private java.lang.String format(java.lang.String,java.util.HashMap)
+    236:260:private java.lang.String format(java.lang.String,java.util.ArrayList)
+m.framework.utils.UIHandler:
+    13:13:public UIHandler()
+    43:45:private static android.os.Message getShellMessage(int,android.os.Handler$Callback)
+    49:49:public static boolean sendMessage(android.os.Message,android.os.Handler$Callback)
+    57:57:public static boolean sendMessageAtTime(android.os.Message,long,android.os.Handler$Callback)
+    61:61:public static boolean sendMessageAtFrontOfQueue(android.os.Message,android.os.Handler$Callback)
+    65:65:public static boolean sendEmptyMessage(int,android.os.Handler$Callback)
+    69:69:public static boolean sendEmptyMessageAtTime(int,long,android.os.Handler$Callback)
+    73:73:public static boolean sendEmptyMessageDelayed(int,long,android.os.Handler$Callback)
+m.framework.utils.Utils:
+    private static float density
+    18:18:public Utils()
+    23:26:public static int dipToPx(android.content.Context,int)
+    128:128:public static int getScreenHeight(android.content.Context)
