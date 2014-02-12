@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
@@ -42,10 +43,9 @@ public class WelcomeActivity extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_welcome);
 
-		// if((getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE) !=
-		// 0){
-		// android.os.Process.killProcess(android.os.Process.myPid());
-		// }
+		if ((getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE) != 0) {
+			android.os.Process.killProcess(android.os.Process.myPid());
+		}
 		StatService.setAppChannel(this, "", false);
 		StatService.setSessionTimeOut(30);
 		StatService.setLogSenderDelayed(10);

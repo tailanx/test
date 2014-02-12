@@ -1,363 +1,3 @@
-cn.sharesdk.R
-cn.sharesdk.R$drawable
-cn.sharesdk.R$string
-cn.sharesdk.framework.FakeActivity:
-    public void startActivity(android.content.Intent)
-    public void startActivityForResult(android.content.Intent,int)
-    public cn.sharesdk.framework.FakeActivity getParent()
-    public final void setResult(java.util.HashMap)
-cn.sharesdk.framework.Platform:
-    public static final int ACTION_AUTHORIZING
-    public static final int ACTION_GETTING_FRIEND_LIST
-    public static final int ACTION_SENDING_DIRECT_MESSAGE
-    public static final int ACTION_FOLLOWING_USER
-    public static final int ACTION_TIMELINE
-    public static final int ACTION_USER_INFOR
-    public static final int ACTION_SHARE
-    public static final int CUSTOMER_ACTION_MASK
-    public static final int SHARE_TEXT
-    public static final int SHARE_IMAGE
-    public static final int SHARE_WEBPAGE
-    public static final int SHARE_MUSIC
-    public static final int SHARE_VIDEO
-    public static final int SHARE_APPS
-    public static final int SHARE_FILE
-    public static final int SHARE_EMOJI
-    public Platform(android.content.Context)
-    public void setDevInfoParam(java.lang.String,java.lang.String)
-    public abstract int getVersion()
-    public int getId()
-    public cn.sharesdk.framework.PlatformActionListener getPlatformActionListener()
-    public boolean isSSODisable()
-    public void authorize()
-    public void authorize(java.lang.String[])
-    protected abstract void a(java.lang.String[])
-    protected void b(int,java.lang.Object)
-    public void followFriend(java.lang.String)
-    public void getTimeLine(java.lang.String,int,int)
-    public void customerProtocol(java.lang.String,java.lang.String,short,java.util.HashMap,java.util.HashMap)
-    public void removeAccount()
-    public java.lang.String getShortLintk(java.lang.String,boolean)
-    private java.lang.String d()
-cn.sharesdk.framework.Platform$ShareParams:
-    public java.lang.String text
-    public java.lang.String imagePath
-cn.sharesdk.framework.PlatformDb:
-    private static final java.lang.String DB_NAME
-    private java.lang.String platformNname
-    private int platformVersion
-    public PlatformDb(android.content.Context,java.lang.String,int)
-    public void put(java.lang.String,java.lang.String)
-    public void putToken(java.lang.String)
-    public java.lang.String getTokenSecret()
-    public void putTokenSecret(java.lang.String)
-    public void putExpiresIn(long)
-    public int getPlatformVersion()
-    public java.lang.String getPlatformNname()
-    public void putUserId(java.lang.String)
-    public java.lang.String getUserName()
-    public java.lang.String getUserIcon()
-    public void removeAccount()
-    public java.lang.String exportData()
-    public void importData(java.lang.String)
-    public java.lang.String getUserGender()
-cn.sharesdk.framework.Service:
-    private android.content.Context a
-    private java.lang.String b
-    private cn.sharesdk.framework.utils.b c
-    public Service(android.content.Context)
-    public android.content.Context getContext()
-    void a(java.lang.String)
-    public java.lang.String getAppKey()
-    public java.lang.String getDeviceKey()
-    protected abstract int getServiceVersionInt()
-    public abstract java.lang.String getServiceVersionName()
-    public void onBind()
-    protected java.util.HashMap filterShareContent(int,cn.sharesdk.framework.Platform$ShareParams,java.util.HashMap)
-    static synthetic cn.sharesdk.framework.utils.b a(cn.sharesdk.framework.Service)
-cn.sharesdk.framework.Service$ServiceEvent
-cn.sharesdk.framework.ShareSDK:
-    public ShareSDK()
-    public static void initSDK(android.content.Context,boolean)
-    public static void initSDK(android.content.Context,java.lang.String)
-    public static void registerService(java.lang.Class)
-    public static void unregisterService(java.lang.Class)
-    public static cn.sharesdk.framework.Service getService(java.lang.Class)
-    public static java.lang.String getSDKVersionName()
-    public static int getSDKVersionCode()
-    public static void setConnTimeout(int)
-    public static void setReadTimeout(int)
-    public static void setNetworkDevInfoEnable(boolean)
-    public static void setDoubanDevInfo(android.content.Context,java.lang.String,java.lang.String,java.lang.String,int,int,boolean)
-    public static void setEvernoteDevInfo(android.content.Context,java.lang.String,java.lang.String,java.lang.String,int,int,boolean,boolean)
-    public static void setFacebookDevInfo(android.content.Context,java.lang.String,int,int,boolean)
-    public static void setFourSquareDevInfo(android.content.Context,java.lang.String,java.lang.String,int,int,boolean)
-    public static void setGooglePlusDevInfo(android.content.Context,int,int,boolean)
-    public static void setKaixinDevInfo(android.content.Context,java.lang.String,java.lang.String,int,int,boolean)
-    public static void setLinkedinDevInfo(android.content.Context,java.lang.String,java.lang.String,java.lang.String,int,int,boolean)
-    public static void setNetEaseMicroBlogDevInfo(android.content.Context,java.lang.String,java.lang.String,int,int,boolean)
-    public static void setRenrenDevInfo(android.content.Context,java.lang.String,java.lang.String,int,int,boolean)
-    public static void setSinaWeiboDevInfo(android.content.Context,java.lang.String,java.lang.String,java.lang.String,int,int,boolean)
-    public static void setSohuMicroBlogDevInfo(android.content.Context,java.lang.String,java.lang.String,int,int,boolean)
-    public static void setSohuSuishenkanDevInfo(android.content.Context,java.lang.String,java.lang.String,java.lang.String,int,int,boolean)
-    public static void setEmailDevInfo(android.content.Context,int,int,boolean)
-    public static void setShortMessageDevInfo(android.content.Context,int,int,boolean)
-    public static void setQQDevInfo(android.content.Context,java.lang.String,int,int,boolean)
-    public static void setQZoneDevInfo(android.content.Context,java.lang.String,int,int,boolean)
-    public static void setTencentWeiboDevInfo(android.content.Context,java.lang.String,java.lang.String,java.lang.String,int,int,boolean)
-    public static void setTwitterDevInfo(android.content.Context,java.lang.String,java.lang.String,java.lang.String,int,int,boolean)
-    public static void setWechatDevInfo(android.content.Context,java.lang.String,int,int,boolean)
-    public static void setWechatMomentsDevInfo(android.content.Context,java.lang.String,int,int,boolean)
-    public static void setWechatFavoriteDevInfo(android.content.Context,java.lang.String,int,int,boolean)
-    public static void setYoudaoDevInfo(android.content.Context,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,int,boolean)
-    public static void setPinterestDevInfo(android.content.Context,java.lang.String,int,int,boolean)
-    public static void setFlickrDevInfo(android.content.Context,java.lang.String,java.lang.String,java.lang.String,int,int,boolean)
-    public static void setTumblrDevInfo(android.content.Context,java.lang.String,java.lang.String,java.lang.String,int,int,boolean)
-    public static void setDropboxDevInfo(android.content.Context,java.lang.String,java.lang.String,int,int,boolean)
-    public static void setVKontakteDevInfo(android.content.Context,java.lang.String,int,int,boolean)
-    public static void setInstagramDevInfo(android.content.Context,java.lang.String,java.lang.String,java.lang.String,int,int,boolean)
-    public static java.lang.String platformIdToName(android.content.Context,int)
-    public static int platformNameToId(android.content.Context,java.lang.String)
-cn.sharesdk.framework.TitleLayout:
-    public TitleLayout(android.content.Context,android.util.AttributeSet)
-cn.sharesdk.framework.a.a
-cn.sharesdk.framework.a.b:
-    public void a(java.io.File)
-cn.sharesdk.framework.a.g:
-    public void a(java.lang.String,java.io.File)
-    public java.io.InputStream a(java.lang.String,java.util.ArrayList,cn.sharesdk.framework.a.c)
-    public java.lang.String b(java.lang.String,java.util.ArrayList,cn.sharesdk.framework.a.d,java.util.ArrayList,java.util.ArrayList)
-cn.sharesdk.framework.a.h
-cn.sharesdk.framework.authorize.AuthorizeAdapter
-cn.sharesdk.framework.authorize.AuthorizeHelper
-cn.sharesdk.framework.authorize.RegisterView
-cn.sharesdk.framework.authorize.ResizeLayout
-cn.sharesdk.framework.authorize.ResizeLayout$OnResizeListener
-cn.sharesdk.framework.authorize.SSOListener
-cn.sharesdk.framework.authorize.a
-cn.sharesdk.framework.authorize.b
-cn.sharesdk.framework.authorize.c
-cn.sharesdk.framework.authorize.d
-cn.sharesdk.framework.authorize.e
-cn.sharesdk.framework.authorize.f
-cn.sharesdk.framework.authorize.g
-cn.sharesdk.framework.authorize.g$a
-cn.sharesdk.framework.authorize.h
-cn.sharesdk.framework.authorize.i
-cn.sharesdk.framework.authorize.j
-cn.sharesdk.framework.b:
-    b()
-    cn.sharesdk.framework.PlatformActionListener a()
-    void a(cn.sharesdk.framework.Platform,int,java.lang.Object)
-cn.sharesdk.framework.b.a:
-    public java.lang.String a(java.lang.String,byte[])
-    public java.lang.String a(java.lang.String,java.lang.String,int,boolean,java.lang.String)
-    private java.lang.String a(java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    private java.lang.String d(java.lang.String,java.lang.String)
-cn.sharesdk.framework.b.b:
-    public java.lang.String a(java.lang.String,boolean,int,java.lang.String)
-cn.sharesdk.framework.b.b.a
-cn.sharesdk.framework.d
-cn.sharesdk.framework.e
-cn.sharesdk.framework.g
-cn.sharesdk.framework.h:
-    void a(java.util.HashMap,java.lang.String)
-    public void a(android.content.Context,java.lang.String,java.lang.String,java.lang.String)
-    public java.lang.String b()
-cn.sharesdk.framework.i
-cn.sharesdk.framework.utils.Escaper
-cn.sharesdk.framework.utils.R:
-    public R()
-    public static int pxToDip(android.content.Context,int)
-    public static java.lang.String getCachePath(android.content.Context,java.lang.String)
-    public static java.lang.String toWordText(java.lang.String,int)
-    public static android.net.Uri pathToContentUri(android.content.Context,java.lang.String)
-    public static long strToDate(java.lang.String)
-    public static long dateStrToLong(java.lang.String)
-    public static long parseTwitterDate(java.lang.String)
-    public static java.lang.String encodeUrl(android.os.Bundle)
-    public static java.lang.String encodeUrl(java.util.ArrayList)
-    public static android.os.Bundle urlToBundle(java.lang.String)
-    public static android.os.Bundle decodeUrl(java.lang.String)
-cn.sharesdk.framework.utils.UIHandler:
-    public UIHandler()
-    public static boolean sendMessageAtTime(android.os.Message,long,android.os.Handler$Callback)
-    public static boolean sendMessageAtFrontOfQueue(android.os.Message,android.os.Handler$Callback)
-    public static boolean sendEmptyMessageAtTime(int,long,android.os.Handler$Callback)
-cn.sharesdk.framework.utils.a:
-    public static byte[] a(byte[],java.lang.String)
-    public static java.lang.String b(java.lang.String)
-cn.sharesdk.framework.utils.b:
-    public java.lang.String f()
-    public java.lang.String h()
-    public java.lang.String q()
-    public java.lang.String t()
-    public boolean v()
-    public java.lang.String w()
-cn.sharesdk.framework.utils.c
-cn.sharesdk.framework.utils.f
-cn.sharesdk.framework.utils.f$1
-cn.sharesdk.framework.utils.f$a
-cn.sharesdk.framework.utils.f$b
-cn.sharesdk.framework.utils.g
-cn.sharesdk.framework.utils.h
-cn.sharesdk.framework.utils.j
-cn.sharesdk.framework.utils.k
-cn.sharesdk.framework.utils.l
-cn.sharesdk.framework.utils.m
-cn.sharesdk.framework.utils.m$a
-cn.sharesdk.onekeyshare.EditPage:
-    private static final int MAX_TEXT_COUNT
-    private static final int MSG_PLATFORM_LIST_GOT
-cn.sharesdk.onekeyshare.OnekeyShare:
-    private static final int MSG_TOAST
-    private static final int MSG_ACTION_CCALLBACK
-    private static final int MSG_CANCEL_NOTIFY
-    121:121:public java.lang.String getText()
-    126:128:public void setImagePath(java.lang.String)
-    132:134:public void setImageUrl(java.lang.String)
-    143:144:public void setFilePath(java.lang.String)
-    188:189:public void setPlatform(java.lang.String)
-    193:194:public void setCallback(cn.sharesdk.framework.PlatformActionListener)
-    198:198:public cn.sharesdk.framework.PlatformActionListener getCallback()
-    208:208:public cn.sharesdk.onekeyshare.ShareContentCustomizeCallback getShareContentCustomizeCallback()
-    213:218:public void setCustomerLogo(android.graphics.Bitmap,java.lang.String,android.view.View$OnClickListener)
-    222:223:public void disableSSOWhenAuthorize()
-    227:229:public void setDialogMode()
-cn.sharesdk.onekeyshare.PlatformGridView:
-    private static final int MSG_PLATFORM_LIST_GOT
-    71:73:public PlatformGridView(android.content.Context,android.util.AttributeSet)
-cn.sharesdk.onekeyshare.R
-cn.sharesdk.onekeyshare.R$drawable
-cn.sharesdk.onekeyshare.R$string
-cn.sharesdk.onekeyshare.ShareCore:
-    119:126:public static boolean canAuthorize(android.content.Context,java.lang.String)
-cn.sharesdk.sina.weibo.SinaWeibo
-cn.sharesdk.sina.weibo.SinaWeibo$ShareParams
-cn.sharesdk.sina.weibo.a
-cn.sharesdk.sina.weibo.b
-cn.sharesdk.sina.weibo.c
-cn.sharesdk.sina.weibo.d
-cn.sharesdk.sina.weibo.e
-cn.sharesdk.sina.weibo.f
-cn.sharesdk.tencent.qq.QQ
-cn.sharesdk.tencent.qq.QQ$ShareParams
-cn.sharesdk.tencent.qq.QQClientNotExistException
-cn.sharesdk.tencent.qq.TencentSSOClientNotInstalledException
-cn.sharesdk.tencent.qq.a
-cn.sharesdk.tencent.qq.b
-cn.sharesdk.tencent.qq.c
-cn.sharesdk.tencent.qzone.QZone
-cn.sharesdk.tencent.qzone.QZone$ShareParams
-cn.sharesdk.tencent.qzone.TencentSSOClientNotInstalledException
-cn.sharesdk.tencent.qzone.a
-cn.sharesdk.tencent.qzone.b
-cn.sharesdk.tencent.qzone.c
-cn.sharesdk.tencent.qzone.d
-cn.sharesdk.tencent.qzone.e
-cn.sharesdk.tencent.qzone.f
-cn.sharesdk.tencent.qzone.g
-cn.sharesdk.tencent.qzone.h
-cn.sharesdk.tencent.qzone.i
-cn.sharesdk.tencent.qzone.j
-cn.sharesdk.tencent.qzone.k
-cn.sharesdk.wechat.favorite.WechatFavorite
-cn.sharesdk.wechat.favorite.WechatFavorite$ShareParams
-cn.sharesdk.wechat.favorite.a
-cn.sharesdk.wechat.friends.Wechat
-cn.sharesdk.wechat.friends.Wechat$ShareParams
-cn.sharesdk.wechat.friends.a
-cn.sharesdk.wechat.moments.WechatMoments
-cn.sharesdk.wechat.moments.WechatMoments$ShareParams
-cn.sharesdk.wechat.moments.a
-cn.sharesdk.wechat.utils.WXAppExtendObject:
-    public WXAppExtendObject(java.lang.String,byte[])
-    public WXAppExtendObject(java.lang.String,java.lang.String)
-    public int type()
-    public boolean checkArgs()
-cn.sharesdk.wechat.utils.WXEmojiObject
-cn.sharesdk.wechat.utils.WXFileObject
-cn.sharesdk.wechat.utils.WXImageObject
-cn.sharesdk.wechat.utils.WXMediaMessage:
-    public static final java.lang.String ACTION_WXAPPMESSAGE
-    public final int getType()
-    public final void setThumbImage(android.graphics.Bitmap)
-cn.sharesdk.wechat.utils.WXMediaMessage$IMediaObject:
-    public static final int TYPE_UNKNOWN
-    public static final int TYPE_TEXT
-    public static final int TYPE_IMAGE
-    public static final int TYPE_MUSIC
-    public static final int TYPE_VIDEO
-    public static final int TYPE_URL
-    public static final int TYPE_FILE
-    public static final int TYPE_APPDATA
-    public static final int TYPE_EMOJI
-    public abstract int type()
-    public abstract boolean checkArgs()
-cn.sharesdk.wechat.utils.WXMusicObject
-cn.sharesdk.wechat.utils.WXTextObject
-cn.sharesdk.wechat.utils.WXVideoObject
-cn.sharesdk.wechat.utils.WXWebpageObject
-cn.sharesdk.wechat.utils.WechatClientNotExistException
-cn.sharesdk.wechat.utils.WechatFavoriteNotSupportedException
-cn.sharesdk.wechat.utils.WechatHelper:
-    public void a(cn.sharesdk.wechat.utils.h)
-    public void b(cn.sharesdk.wechat.utils.h)
-    private void a(java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
-    private void a(java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
-    private void a(java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.wechat.utils.h)
-    private void a(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
-    private void a(java.lang.String,java.lang.String,java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.wechat.utils.h)
-    private void a(java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
-    private void a(java.lang.String,java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.wechat.utils.h)
-    private void b(java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
-    private void b(java.lang.String,java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.wechat.utils.h)
-    private void b(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
-    private void b(java.lang.String,java.lang.String,java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.wechat.utils.h)
-    private void c(java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
-    private void c(java.lang.String,java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.wechat.utils.h)
-    private void b(java.lang.String,java.lang.String,java.lang.String,int,cn.sharesdk.wechat.utils.h)
-    private void b(java.lang.String,java.lang.String,android.graphics.Bitmap,int,cn.sharesdk.wechat.utils.h)
-    private byte[] a(java.lang.String)
-    private byte[] a(byte[])
-    private java.lang.String b(java.lang.String)
-    public boolean a(android.content.Context,java.lang.String)
-    public boolean b()
-    public boolean c()
-    private void a(cn.sharesdk.wechat.utils.WXMediaMessage,java.lang.String,int,cn.sharesdk.wechat.utils.h)
-cn.sharesdk.wechat.utils.WechatHelper$ShareParams:
-    public int shareType
-    public java.lang.String title
-    public java.lang.String musicUrl
-    public java.lang.String url
-    public java.lang.String imageUrl
-    public android.graphics.Bitmap imageData
-    protected int scene
-    public java.lang.String filePath
-    public java.lang.String extInfo
-    public WechatHelper$ShareParams()
-    public WechatHelper$ShareParams(cn.sharesdk.framework.Platform$ShareParams)
-cn.sharesdk.wechat.utils.WechatResp$ErrCode
-cn.sharesdk.wechat.utils.WechatTimelineNotSupportedException
-cn.sharesdk.wechat.utils.a
-cn.sharesdk.wechat.utils.d
-cn.sharesdk.wechat.utils.g:
-    private android.content.Context a
-    private java.lang.String b
-    public boolean a(android.content.Context,java.lang.String)
-    public void a(cn.sharesdk.wechat.utils.i)
-    public boolean a()
-    private boolean c()
-    private java.lang.String a(java.lang.String)
-    public boolean b()
-cn.sharesdk.wechat.utils.h:
-    public h(cn.sharesdk.framework.Platform)
-    public void a(cn.sharesdk.framework.authorize.AuthorizeListener)
-    public void a(cn.sharesdk.wechat.utils.WechatHelper$ShareParams,cn.sharesdk.framework.PlatformActionListener)
-    public cn.sharesdk.wechat.utils.WechatHelper$ShareParams a()
-    public cn.sharesdk.framework.Platform b()
-    public cn.sharesdk.framework.PlatformActionListener c()
-cn.sharesdk.wechat.utils.i
 com.UCMobile.PayPlugin.PayInterface
 com.UCMobile.PayPlugin.PluginIcon
 com.UCMobile.PayPlugin.PluginSurfaceView
@@ -457,38 +97,6 @@ com.alipay.android.app.sdk.AliPay$4$2
 com.alipay.android.app.sdk.AliPay$5
 com.alipay.android.app.sdk.AliPay$6
 com.alipay.android.app.sdk.AliPay$6$1
-com.alipay.android.app.sdk.R:
-    9:9:public R()
-com.alipay.android.app.sdk.R$color
-com.alipay.android.app.sdk.R$drawable
-com.alipay.android.app.sdk.R$id:
-    public static final int AlipayTitle
-    public static final int dialog_button_group
-    public static final int dialog_content_view
-    public static final int dialog_divider
-    public static final int dialog_message
-    public static final int dialog_split_v
-    public static final int dialog_title
-    public static final int left_button
-    public static final int mainView
-    public static final int right_button
-    42:42:public R$id()
-com.alipay.android.app.sdk.R$layout:
-    public static final int alipay_title
-    public static final int dialog_alert
-    56:56:public R$layout()
-com.alipay.android.app.sdk.R$string:
-    public static final int cancel_install_alipay
-    public static final int cancel_install_msp
-    public static final int content_description_icon
-    public static final int download
-    public static final int download_fail
-    public static final int install_alipay
-    public static final int install_msp
-    public static final int redo
-    public static final int refresh
-    61:61:public R$string()
-com.alipay.android.app.sdk.R$style
 com.alipay.android.app.sdk.Result:
     10:10:public Result()
     19:19:public static java.lang.String getPayResult()
@@ -657,267 +265,6 @@ com.jeremyfeinstein.slidingmenu.CustomViewBehind:
     176:176:public float getScrollScale()
     185:187:public void setSecondaryShadowDrawable(android.graphics.drawable.Drawable)
     417:426:public void setSelectedView(android.view.View)
-com.jeremyfeinstein.slidingmenu.R:
-    9:9:public R()
-com.jeremyfeinstein.slidingmenu.R$attr
-com.jeremyfeinstein.slidingmenu.R$bool
-com.jeremyfeinstein.slidingmenu.R$color
-com.jeremyfeinstein.slidingmenu.R$dimen
-com.jeremyfeinstein.slidingmenu.R$drawable
-com.jeremyfeinstein.slidingmenu.R$id:
-    public static final int abs__action_bar
-    public static final int abs__action_bar_container
-    public static final int abs__action_bar_subtitle
-    public static final int abs__action_bar_title
-    public static final int abs__action_context_bar
-    public static final int abs__action_menu_divider
-    public static final int abs__action_menu_presenter
-    public static final int abs__action_mode_bar
-    public static final int abs__action_mode_bar_stub
-    public static final int abs__action_mode_close_button
-    public static final int abs__activity_chooser_view_content
-    public static final int abs__checkbox
-    public static final int abs__content
-    public static final int abs__default_activity_button
-    public static final int abs__expand_activities_button
-    public static final int abs__home
-    public static final int abs__icon
-    public static final int abs__image
-    public static final int abs__imageButton
-    public static final int abs__list_item
-    public static final int abs__progress_circular
-    public static final int abs__progress_horizontal
-    public static final int abs__radio
-    public static final int abs__search_badge
-    public static final int abs__search_bar
-    public static final int abs__search_button
-    public static final int abs__search_close_btn
-    public static final int abs__search_edit_frame
-    public static final int abs__search_go_btn
-    public static final int abs__search_mag_icon
-    public static final int abs__search_plate
-    public static final int abs__search_src_text
-    public static final int abs__search_voice_btn
-    public static final int abs__shortcut
-    public static final int abs__split_action_bar
-    public static final int abs__submit_area
-    public static final int abs__textButton
-    public static final int abs__title
-    public static final int abs__up
-    public static final int disableHome
-    public static final int edit_query
-    public static final int fullscreen
-    public static final int homeAsUp
-    public static final int left
-    public static final int listMode
-    public static final int margin
-    public static final int normal
-    public static final int right
-    public static final int showCustom
-    public static final int showHome
-    public static final int showTitle
-    public static final int slidingmenumain
-    public static final int tabMode
-    public static final int useLogo
-    public static final int wrap_content
-    285:285:public R$id()
-com.jeremyfeinstein.slidingmenu.R$integer
-com.jeremyfeinstein.slidingmenu.R$layout:
-    public static final int abs__action_bar_home
-    public static final int abs__action_bar_tab
-    public static final int abs__action_bar_tab_bar_view
-    public static final int abs__action_bar_title_item
-    public static final int abs__action_menu_item_layout
-    public static final int abs__action_menu_layout
-    public static final int abs__action_mode_bar
-    public static final int abs__action_mode_close_item
-    public static final int abs__activity_chooser_view
-    public static final int abs__activity_chooser_view_list_item
-    public static final int abs__list_menu_item_checkbox
-    public static final int abs__list_menu_item_icon
-    public static final int abs__list_menu_item_radio
-    public static final int abs__popup_menu_item_layout
-    public static final int abs__screen_action_bar
-    public static final int abs__screen_action_bar_overlay
-    public static final int abs__screen_simple
-    public static final int abs__screen_simple_overlay_action_mode
-    public static final int abs__search_dropdown_item_icons_2line
-    public static final int abs__search_view
-    public static final int abs__simple_dropdown_hint
-    public static final int sherlock_spinner_dropdown_item
-    public static final int sherlock_spinner_item
-    346:346:public R$layout()
-com.jeremyfeinstein.slidingmenu.R$string
-com.jeremyfeinstein.slidingmenu.R$style
-com.jeremyfeinstein.slidingmenu.R$styleable:
-    public static final int SherlockActionBar_background
-    public static final int SherlockActionBar_backgroundSplit
-    public static final int SherlockActionBar_backgroundStacked
-    public static final int SherlockActionBar_customNavigationLayout
-    public static final int SherlockActionBar_displayOptions
-    public static final int SherlockActionBar_divider
-    public static final int SherlockActionBar_height
-    public static final int SherlockActionBar_homeLayout
-    public static final int SherlockActionBar_icon
-    public static final int SherlockActionBar_indeterminateProgressStyle
-    public static final int SherlockActionBar_itemPadding
-    public static final int SherlockActionBar_logo
-    public static final int SherlockActionBar_navigationMode
-    public static final int SherlockActionBar_progressBarPadding
-    public static final int SherlockActionBar_progressBarStyle
-    public static final int SherlockActionBar_subtitle
-    public static final int SherlockActionBar_subtitleTextStyle
-    public static final int SherlockActionBar_title
-    public static final int SherlockActionBar_titleTextStyle
-    public static final int SherlockActionMenuItemView_android_minWidth
-    public static final int SherlockActionMode_background
-    public static final int SherlockActionMode_backgroundSplit
-    public static final int SherlockActionMode_height
-    public static final int SherlockActionMode_subtitleTextStyle
-    public static final int SherlockActionMode_titleTextStyle
-    public static final int SherlockActivityChooserView_android_background
-    public static final int SherlockActivityChooserView_expandActivityOverflowButtonDrawable
-    public static final int SherlockActivityChooserView_initialActivityCount
-    public static final int SherlockMenuGroup_android_checkableBehavior
-    public static final int SherlockMenuGroup_android_enabled
-    public static final int SherlockMenuGroup_android_id
-    public static final int SherlockMenuGroup_android_menuCategory
-    public static final int SherlockMenuGroup_android_orderInCategory
-    public static final int SherlockMenuGroup_android_visible
-    public static final int SherlockMenuItem_android_actionLayout
-    public static final int SherlockMenuItem_android_actionProviderClass
-    public static final int SherlockMenuItem_android_actionViewClass
-    public static final int SherlockMenuItem_android_alphabeticShortcut
-    public static final int SherlockMenuItem_android_checkable
-    public static final int SherlockMenuItem_android_checked
-    public static final int SherlockMenuItem_android_enabled
-    public static final int SherlockMenuItem_android_icon
-    public static final int SherlockMenuItem_android_id
-    public static final int SherlockMenuItem_android_menuCategory
-    public static final int SherlockMenuItem_android_numericShortcut
-    public static final int SherlockMenuItem_android_onClick
-    public static final int SherlockMenuItem_android_orderInCategory
-    public static final int SherlockMenuItem_android_showAsAction
-    public static final int SherlockMenuItem_android_title
-    public static final int SherlockMenuItem_android_titleCondensed
-    public static final int SherlockMenuItem_android_visible
-    public static final int SherlockMenuView_headerBackground
-    public static final int SherlockMenuView_horizontalDivider
-    public static final int SherlockMenuView_itemBackground
-    public static final int SherlockMenuView_itemIconDisabledAlpha
-    public static final int SherlockMenuView_itemTextAppearance
-    public static final int SherlockMenuView_preserveIconSpacing
-    public static final int SherlockMenuView_verticalDivider
-    public static final int SherlockMenuView_windowAnimationStyle
-    public static final int SherlockSearchView_android_imeOptions
-    public static final int SherlockSearchView_android_inputType
-    public static final int SherlockSearchView_android_maxWidth
-    public static final int SherlockSearchView_iconifiedByDefault
-    public static final int SherlockSearchView_queryHint
-    public static final int SherlockSpinner_android_dropDownHorizontalOffset
-    public static final int SherlockSpinner_android_dropDownSelector
-    public static final int SherlockSpinner_android_dropDownVerticalOffset
-    public static final int SherlockSpinner_android_dropDownWidth
-    public static final int SherlockSpinner_android_gravity
-    public static final int SherlockSpinner_android_popupBackground
-    public static final int SherlockSpinner_android_popupPromptView
-    public static final int SherlockSpinner_android_prompt
-    public static final int SherlockTheme_actionBarDivider
-    public static final int SherlockTheme_actionBarItemBackground
-    public static final int SherlockTheme_actionBarSize
-    public static final int SherlockTheme_actionBarSplitStyle
-    public static final int SherlockTheme_actionBarStyle
-    public static final int SherlockTheme_actionBarTabBarStyle
-    public static final int SherlockTheme_actionBarTabStyle
-    public static final int SherlockTheme_actionBarTabTextStyle
-    public static final int SherlockTheme_actionBarWidgetTheme
-    public static final int SherlockTheme_actionButtonStyle
-    public static final int SherlockTheme_actionDropDownStyle
-    public static final int SherlockTheme_actionMenuTextAppearance
-    public static final int SherlockTheme_actionMenuTextColor
-    public static final int SherlockTheme_actionModeBackground
-    public static final int SherlockTheme_actionModeCloseButtonStyle
-    public static final int SherlockTheme_actionModeCloseDrawable
-    public static final int SherlockTheme_actionModePopupWindowStyle
-    public static final int SherlockTheme_actionModeShareDrawable
-    public static final int SherlockTheme_actionModeSplitBackground
-    public static final int SherlockTheme_actionModeStyle
-    public static final int SherlockTheme_actionOverflowButtonStyle
-    public static final int SherlockTheme_actionSpinnerItemStyle
-    public static final int SherlockTheme_activatedBackgroundIndicator
-    public static final int SherlockTheme_activityChooserViewStyle
-    public static final int SherlockTheme_buttonStyleSmall
-    public static final int SherlockTheme_dividerVertical
-    public static final int SherlockTheme_dropDownHintAppearance
-    public static final int SherlockTheme_dropDownListViewStyle
-    public static final int SherlockTheme_dropdownListPreferredItemHeight
-    public static final int SherlockTheme_homeAsUpIndicator
-    public static final int SherlockTheme_listPopupWindowStyle
-    public static final int SherlockTheme_listPreferredItemHeightSmall
-    public static final int SherlockTheme_listPreferredItemPaddingLeft
-    public static final int SherlockTheme_listPreferredItemPaddingRight
-    public static final int SherlockTheme_popupMenuStyle
-    public static final int SherlockTheme_searchAutoCompleteTextView
-    public static final int SherlockTheme_searchDropdownBackground
-    public static final int SherlockTheme_searchResultListItemHeight
-    public static final int SherlockTheme_searchViewCloseIcon
-    public static final int SherlockTheme_searchViewEditQuery
-    public static final int SherlockTheme_searchViewEditQueryBackground
-    public static final int SherlockTheme_searchViewGoIcon
-    public static final int SherlockTheme_searchViewSearchIcon
-    public static final int SherlockTheme_searchViewTextField
-    public static final int SherlockTheme_searchViewTextFieldRight
-    public static final int SherlockTheme_searchViewVoiceIcon
-    public static final int SherlockTheme_selectableItemBackground
-    public static final int SherlockTheme_spinnerDropDownItemStyle
-    public static final int SherlockTheme_spinnerItemStyle
-    public static final int SherlockTheme_textAppearanceLargePopupMenu
-    public static final int SherlockTheme_textAppearanceListItemSmall
-    public static final int SherlockTheme_textAppearanceSearchResultSubtitle
-    public static final int SherlockTheme_textAppearanceSearchResultTitle
-    public static final int SherlockTheme_textAppearanceSmall
-    public static final int SherlockTheme_textAppearanceSmallPopupMenu
-    public static final int SherlockTheme_textColorPrimary
-    public static final int SherlockTheme_textColorPrimaryDisableOnly
-    public static final int SherlockTheme_textColorPrimaryInverse
-    public static final int SherlockTheme_textColorSearchUrl
-    public static final int SherlockTheme_windowActionBar
-    public static final int SherlockTheme_windowActionBarOverlay
-    public static final int SherlockTheme_windowActionModeOverlay
-    public static final int SherlockTheme_windowContentOverlay
-    public static final int SherlockTheme_windowMinWidthMajor
-    public static final int SherlockTheme_windowMinWidthMinor
-    public static final int SherlockTheme_windowNoTitle
-    public static final int SherlockTheme_windowSplitActionBar
-    public static final int SherlockView_android_focusable
-    public static final int SlidingMenu_behindOffset
-    public static final int SlidingMenu_behindScrollScale
-    public static final int SlidingMenu_behindWidth
-    public static final int SlidingMenu_fadeDegree
-    public static final int SlidingMenu_fadeEnabled
-    public static final int SlidingMenu_mode
-    public static final int SlidingMenu_selectorDrawable
-    public static final int SlidingMenu_selectorEnabled
-    public static final int SlidingMenu_shadowDrawable
-    public static final int SlidingMenu_shadowWidth
-    public static final int SlidingMenu_touchModeAbove
-    public static final int SlidingMenu_touchModeBehind
-    public static final int SlidingMenu_viewAbove
-    public static final int SlidingMenu_viewBehind
-    public static final int Switch_switchminwidth
-    public static final int Switch_switchpadding
-    public static final int Switch_switchtextappearance
-    public static final int Switch_textoff
-    public static final int Switch_texton
-    public static final int Switch_thumbs
-    public static final int Switch_thumbtextpadding
-    public static final int Switch_tracks
-    public static final int TextAppearance_android_textColor
-    public static final int TextAppearance_android_textSize
-    public static final int TextAppearance_android_textStyle
-    public static final int TextAppearance_android_typeface
-    public static final int TextAppearance_textAllCaps
-    481:481:public R$styleable()
 com.jeremyfeinstein.slidingmenu.SlidingActivityBase
 com.jeremyfeinstein.slidingmenu.SlidingActivityHelper:
     149:151:public void setContentView(android.view.View)
@@ -1272,9 +619,6 @@ com.opens.asyncokhttpclient.RequestParams:
     38:41:public void put(java.lang.String,java.lang.String)
 com.opens.asyncokhttpclient.utils.Util:
     28:28:private Util()
-com.sina.sso.RemoteSSO
-com.sina.sso.RemoteSSO$Stub
-com.sina.sso.RemoteSSO$Stub$Proxy
 com.squareup.okhttp.Address:
     72:72:public int getUriPort()
     88:88:public javax.net.ssl.HostnameVerifier getHostnameVerifier()
@@ -1560,35 +904,6 @@ com.squareup.okhttp.internal.spdy.SpdyStream:
 com.squareup.okhttp.internal.tls.OkHostnameVerifier:
     private static final int ALT_DNS_NAME
     private static final int ALT_IPA_NAME
-com.tenpay.android.service.DownloadDialog
-com.tenpay.android.service.DownloadDialog$1
-com.tenpay.android.service.DownloadDialog$2
-com.tenpay.android.service.DownloadDialog$3
-com.tenpay.android.service.DownloadDialog$ProgressThread
-com.tenpay.android.service.IRemoteServiceCallback
-com.tenpay.android.service.IRemoteServiceCallback$Stub
-com.tenpay.android.service.IRemoteServiceCallback$Stub$Proxy
-com.tenpay.android.service.ITenpayService
-com.tenpay.android.service.ITenpayService$Stub
-com.tenpay.android.service.ITenpayService$Stub$Proxy
-com.tenpay.android.service.TenpayServiceHelper
-com.tenpay.android.service.TenpayServiceHelper$1
-com.tenpay.android.service.TenpayServiceHelper$10
-com.tenpay.android.service.TenpayServiceHelper$11
-com.tenpay.android.service.TenpayServiceHelper$11$1
-com.tenpay.android.service.TenpayServiceHelper$12
-com.tenpay.android.service.TenpayServiceHelper$13
-com.tenpay.android.service.TenpayServiceHelper$13$1
-com.tenpay.android.service.TenpayServiceHelper$14
-com.tenpay.android.service.TenpayServiceHelper$2
-com.tenpay.android.service.TenpayServiceHelper$3
-com.tenpay.android.service.TenpayServiceHelper$4
-com.tenpay.android.service.TenpayServiceHelper$5
-com.tenpay.android.service.TenpayServiceHelper$6
-com.tenpay.android.service.TenpayServiceHelper$7
-com.tenpay.android.service.TenpayServiceHelper$8
-com.tenpay.android.service.TenpayServiceHelper$9
-com.tenpay.android.service.TenpayServiceHelper$9$1
 com.unionpay.UPPayAssistEx:
     public static final int PLUGIN_VALID
     public static final int PLUGIN_NOT_FOUND
@@ -1687,22 +1002,6 @@ com.yidejia.app.mall.MyApplication:
     69:69:public int getSchHstryAmount()
     93:93:public java.lang.String getUserHeadImg()
     104:104:public java.lang.String getPassword()
-com.yidejia.app.mall.R
-com.yidejia.app.mall.R$anim
-com.yidejia.app.mall.R$array
-com.yidejia.app.mall.R$attr
-com.yidejia.app.mall.R$bool
-com.yidejia.app.mall.R$color
-com.yidejia.app.mall.R$dimen
-com.yidejia.app.mall.R$drawable
-com.yidejia.app.mall.R$id
-com.yidejia.app.mall.R$integer
-com.yidejia.app.mall.R$layout
-com.yidejia.app.mall.R$raw
-com.yidejia.app.mall.R$string
-com.yidejia.app.mall.R$style
-com.yidejia.app.mall.R$styleable
-com.yidejia.app.mall.R$xml
 com.yidejia.app.mall.RegistActivity:
     public android.widget.Button mback
 com.yidejia.app.mall.adapter.AllOrderFragmentAdapter
@@ -1752,17 +1051,6 @@ com.yidejia.app.mall.address.ModelAddresses:
     private java.lang.String recipient_id
     97:98:public void setRecipientId(java.lang.String)
     100:100:public java.lang.String getRecipientId()
-com.yidejia.app.mall.broadcast.MallAction
-com.yidejia.app.mall.broadcast.MallAction$1
-com.yidejia.app.mall.broadcast.MallAction$10
-com.yidejia.app.mall.broadcast.MallAction$2
-com.yidejia.app.mall.broadcast.MallAction$3
-com.yidejia.app.mall.broadcast.MallAction$4
-com.yidejia.app.mall.broadcast.MallAction$5
-com.yidejia.app.mall.broadcast.MallAction$6
-com.yidejia.app.mall.broadcast.MallAction$7
-com.yidejia.app.mall.broadcast.MallAction$8
-com.yidejia.app.mall.broadcast.MallAction$9
 com.yidejia.app.mall.ctrl.RetViewCtrl:
     private android.widget.LinearLayout linearLayout
 com.yidejia.app.mall.datamanage.AddressDataManage:
@@ -1782,8 +1070,6 @@ com.yidejia.app.mall.datamanage.AddressDataManage:
 com.yidejia.app.mall.datamanage.AddressDataManage$TaskGetList
 com.yidejia.app.mall.datamanage.AddressDataManage$TaskSave
 com.yidejia.app.mall.datamanage.AddressDataManage$TaskSetDef
-com.yidejia.app.mall.datamanage.BrandDataManage
-com.yidejia.app.mall.datamanage.BrandDataManage$TaskBrand
 com.yidejia.app.mall.datamanage.CartsDataManage:
     182:189:public boolean cleanCart()
     247:256:public int getTypeCount()
@@ -1795,15 +1081,6 @@ com.yidejia.app.mall.datamanage.DataCleanManager:
     104:112:public static varargs void cleanApplicationData(android.content.Context,java.lang.String[])
     163:174:public static java.lang.String getPathSize(java.lang.String)
     207:218:public static java.lang.String getPathSize(java.io.File)
-com.yidejia.app.mall.datamanage.ExpressDataManage
-com.yidejia.app.mall.datamanage.ExpressDataManage$TaskDis
-com.yidejia.app.mall.datamanage.ExpressDataManage$TaskExpress
-com.yidejia.app.mall.datamanage.ExpressDataManage$TaskFree
-com.yidejia.app.mall.datamanage.FunctionDataManage
-com.yidejia.app.mall.datamanage.FunctionDataManage$TaskFun
-com.yidejia.app.mall.datamanage.MessageDataManage:
-    158:175:public boolean changeReadState(java.lang.String,java.lang.String,java.lang.String)
-com.yidejia.app.mall.datamanage.MessageDataManage$TaskChangeRead
 com.yidejia.app.mall.datamanage.PreferentialDataManage:
     private java.lang.String goods
     private java.lang.String userid
@@ -1825,8 +1102,6 @@ com.yidejia.app.mall.datamanage.PreferentialDataManage:
     223:223:static synthetic void access$5(com.yidejia.app.mall.datamanage.PreferentialDataManage,java.lang.String)
     37:37:static synthetic void access$6(com.yidejia.app.mall.datamanage.PreferentialDataManage,boolean)
 com.yidejia.app.mall.datamanage.PreferentialDataManage$TaskVerify
-com.yidejia.app.mall.datamanage.PriceDataManage
-com.yidejia.app.mall.datamanage.PriceDataManage$TaskPrice
 com.yidejia.app.mall.datamanage.ProductDataManage
 com.yidejia.app.mall.datamanage.ProductDataManage$TaskProduct
 com.yidejia.app.mall.datamanage.SearchDataManage
@@ -1841,10 +1116,6 @@ com.yidejia.app.mall.datamanage.TaskGetOrderByCode$TaskGetUserAddress
 com.yidejia.app.mall.datamanage.TaskGetTn
 com.yidejia.app.mall.datamanage.TaskGetTn$Task
 com.yidejia.app.mall.datamanage.TaskGetTn$Task$1
-com.yidejia.app.mall.datamanage.UserCommentDataManage
-com.yidejia.app.mall.datamanage.UserCommentDataManage$TaskGetList
-com.yidejia.app.mall.datamanage.UserCommentDataManage$TaskSave
-com.yidejia.app.mall.datamanage.UserCommentDataManage$TaskWaitComm
 com.yidejia.app.mall.datamanage.UserDatamanage:
     private java.lang.String username
     private java.lang.String password
@@ -1869,6 +1140,7 @@ com.yidejia.app.mall.datamanage.UserDatamanage$TaskRegister
 com.yidejia.app.mall.datamanage.UserDatamanage$TaskRegister$1
 com.yidejia.app.mall.datamanage.VoucherDataManage:
     90:123:public java.lang.String getUserVoucherForPay(java.lang.String,java.lang.String,boolean)
+    214:217:public void cancelTask()
 com.yidejia.app.mall.exception.NullSearchResultEx
 com.yidejia.app.mall.exception.TimeOutEx:
     private static final long serialVersionUID
@@ -1899,7 +1171,6 @@ com.yidejia.app.mall.jni.JNICallBack:
     public native java.lang.String getHttp4SignOrder(java.lang.String,java.lang.String,java.lang.String)
     public native java.lang.String getHttp4ChangeRead(java.lang.String,java.lang.String,java.lang.String)
     public native java.lang.String getHttp4GetTn(java.lang.String,java.lang.String,java.lang.String)
-    public native java.lang.String getHttp4SignUp(java.lang.String,java.lang.String)
 com.yidejia.app.mall.log.LoginTask
 com.yidejia.app.mall.log.LoginTask$Task
 com.yidejia.app.mall.model.Brand:
@@ -1924,11 +1195,21 @@ com.yidejia.app.mall.model.MainProduct:
     47:48:public void setSubTitle(java.lang.String)
     50:50:public java.lang.String getPrice()
 com.yidejia.app.mall.model.MsgCenter:
-    17:17:public java.lang.String getMsgid()
-    38:38:public java.lang.String getUid()
-    45:45:public java.lang.String getPid()
-    52:52:public java.lang.String getUrl()
-    59:59:public java.lang.String getIsread()
+    private java.lang.String uid
+    private java.lang.String pid
+    private java.lang.String msg
+    private java.lang.String isread
+    private java.lang.String url
+    22:23:public void setMsg(java.lang.String)
+    25:25:public java.lang.String getMsg()
+    36:37:public void setUid(java.lang.String)
+    39:39:public java.lang.String getUid()
+    43:44:public void setPid(java.lang.String)
+    46:46:public java.lang.String getPid()
+    50:51:public void setUrl(java.lang.String)
+    53:53:public java.lang.String getUrl()
+    57:58:public void setIsread(java.lang.String)
+    60:60:public java.lang.String getIsread()
 com.yidejia.app.mall.model.MyListItem
 com.yidejia.app.mall.model.Preferential
 com.yidejia.app.mall.model.SearchItem:
@@ -1953,6 +1234,10 @@ com.yidejia.app.mall.model.UserComment:
     133:133:public java.lang.String getTitle()
     145:145:public java.lang.String getId()
 com.yidejia.app.mall.model.UserCount
+com.yidejia.app.mall.msg.ParseMsg:
+    private com.yidejia.app.mall.model.MsgCenter msgCenter
+    78:102:public boolean parseMsgDetails(java.lang.String)
+    108:108:public com.yidejia.app.mall.model.MsgCenter getMsgCenter()
 com.yidejia.app.mall.net.ConnectionDetector:
     10:12:public ConnectionDetector()
 com.yidejia.app.mall.net.GetImageUrlPrefix
@@ -2016,6 +1301,7 @@ com.yidejia.app.mall.net.skin.Question:
     26:38:public java.lang.String getHttpResp()
     137:137:public java.lang.String getMsg()
 com.yidejia.app.mall.net.user.ChangeRead
+com.yidejia.app.mall.net.user.GetMessage
 com.yidejia.app.mall.net.user.Login:
     23:24:public java.lang.String getHttpResponse(java.lang.String,java.lang.String,java.lang.String)
 com.yidejia.app.mall.net.voucher.Verify
@@ -2065,6 +1351,7 @@ com.yidejia.app.mall.pay.Rsa:
     55:75:public static java.lang.String sign(java.lang.String,java.lang.String)
 com.yidejia.app.mall.phone.ContactAdapter
 com.yidejia.app.mall.phone.ContactAdapter$ViewHolder
+com.yidejia.app.mall.qiandao.ParseSignUp
 com.yidejia.app.mall.recharge.ParseRecharge
 com.yidejia.app.mall.search.SearchFragment
 com.yidejia.app.mall.search.SearchFragment$1
@@ -2077,7 +1364,6 @@ com.yidejia.app.mall.search.TaskFilter$1
 com.yidejia.app.mall.search.TaskFilter$2
 com.yidejia.app.mall.search.TaskFilter$3
 com.yidejia.app.mall.search.TaskFilter$Task
-com.yidejia.app.mall.signup.ParseSignUp
 com.yidejia.app.mall.skintest.SkinAnswerUtil:
     private android.widget.ImageView mButton
 com.yidejia.app.mall.skintest.SkinHomeActivity:
@@ -2187,6 +1473,17 @@ com.yidejia.app.mall.util.PayUtil:
     private com.yidejia.app.mall.model.Cart cart
     56:63:public PayUtil(android.content.Context,android.widget.LinearLayout,com.nostra13.universalimageloader.core.ImageLoader,com.nostra13.universalimageloader.core.assist.ImageLoadingListener,com.nostra13.universalimageloader.core.DisplayImageOptions)
     161:192:public java.lang.String cartLoadView()
+com.yidejia.app.mall.util.SharedPreferencesUtil:
+    17:21:public void saveData(java.lang.String,java.lang.String,java.lang.String)
+    29:33:public void saveData(java.lang.String,java.lang.String,int)
+    35:39:public void saveData(java.lang.String,java.lang.String,float)
+    41:45:public void saveData(java.lang.String,java.lang.String,long)
+    48:49:public java.lang.String getData(java.lang.String,java.lang.String,java.lang.String)
+    56:57:public int getData(java.lang.String,java.lang.String,int)
+    60:61:public float getData(java.lang.String,java.lang.String,float)
+    64:65:public long getData(java.lang.String,java.lang.String,long)
+com.yidejia.app.mall.util.TimeUtil:
+    7:7:public TimeUtil()
 com.yidejia.app.mall.util.UnicodeToString:
     66:87:public java.lang.String convert(java.lang.String)
 com.yidejia.app.mall.util.Utility
@@ -2201,8 +1498,8 @@ com.yidejia.app.mall.view.CstmPayActivity:
     681:682:java.lang.String getSignType()
     695:695:java.lang.String sign(java.lang.String,java.lang.String)
 com.yidejia.app.mall.view.ExchangeFreeActivity:
-    196:234:private void setActionBar()
-    67:67:static synthetic float access$17(com.yidejia.app.mall.view.ExchangeFreeActivity)
+    210:249:private void setActionBar()
+    68:68:static synthetic float access$17(com.yidejia.app.mall.view.ExchangeFreeActivity)
 com.yidejia.app.mall.view.ExchangeFreeActivity$3
 com.yidejia.app.mall.view.ExchangeFreeActivity$4
 com.yidejia.app.mall.view.ImageLoaderUtil
@@ -2294,11 +1591,6 @@ m.framework.ui.widget.pulltorefresh.GroupListView
 m.framework.ui.widget.pulltorefresh.GroupListView$1
 m.framework.ui.widget.pulltorefresh.GroupListView$GroupListAdapter
 m.framework.ui.widget.pulltorefresh.GroupListView$ItemHolder
-m.framework.ui.widget.pulltorefresh.PullToRefreshAdatper:
-    20:20:protected m.framework.ui.widget.pulltorefresh.PullToRefreshView getParent()
-m.framework.ui.widget.pulltorefresh.PullToRefreshBaseListAdapter:
-    public abstract boolean isFling()
-    public abstract void onScroll(m.framework.ui.widget.pulltorefresh.Scrollable,int,int,int)
 m.framework.ui.widget.pulltorefresh.PullToRefreshGridAdapter
 m.framework.ui.widget.pulltorefresh.PullToRefreshGridAdapter$1
 m.framework.ui.widget.pulltorefresh.PullToRefreshGroupListAdapter
