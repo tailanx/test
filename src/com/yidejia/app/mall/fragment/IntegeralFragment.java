@@ -78,7 +78,7 @@ public class IntegeralFragment extends Fragment {
 		webView = (WebView) viewIntegeral.findViewById(R.id.wb_webView);
 		webView.setBackgroundColor(0);
 		webView.setBackgroundColor(getResources().getColor(R.color.white));
-		webView.loadUrl("http://m.yidejia.com/regterms.html");
+		webView.loadUrl("http://m.yidejia.com/integral.html");
 	}
 
 	@Override

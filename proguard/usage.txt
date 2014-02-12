@@ -215,7 +215,6 @@ cn.sharesdk.onekeyshare.OnekeyShare:
     private static final int MSG_CANCEL_NOTIFY
     121:121:public java.lang.String getText()
     126:128:public void setImagePath(java.lang.String)
-    132:134:public void setImageUrl(java.lang.String)
     143:144:public void setFilePath(java.lang.String)
     188:189:public void setPlatform(java.lang.String)
     193:194:public void setCallback(cn.sharesdk.framework.PlatformActionListener)
@@ -1752,17 +1751,6 @@ com.yidejia.app.mall.address.ModelAddresses:
     private java.lang.String recipient_id
     97:98:public void setRecipientId(java.lang.String)
     100:100:public java.lang.String getRecipientId()
-com.yidejia.app.mall.broadcast.MallAction
-com.yidejia.app.mall.broadcast.MallAction$1
-com.yidejia.app.mall.broadcast.MallAction$10
-com.yidejia.app.mall.broadcast.MallAction$2
-com.yidejia.app.mall.broadcast.MallAction$3
-com.yidejia.app.mall.broadcast.MallAction$4
-com.yidejia.app.mall.broadcast.MallAction$5
-com.yidejia.app.mall.broadcast.MallAction$6
-com.yidejia.app.mall.broadcast.MallAction$7
-com.yidejia.app.mall.broadcast.MallAction$8
-com.yidejia.app.mall.broadcast.MallAction$9
 com.yidejia.app.mall.ctrl.RetViewCtrl:
     private android.widget.LinearLayout linearLayout
 com.yidejia.app.mall.datamanage.AddressDataManage:
@@ -1782,8 +1770,6 @@ com.yidejia.app.mall.datamanage.AddressDataManage:
 com.yidejia.app.mall.datamanage.AddressDataManage$TaskGetList
 com.yidejia.app.mall.datamanage.AddressDataManage$TaskSave
 com.yidejia.app.mall.datamanage.AddressDataManage$TaskSetDef
-com.yidejia.app.mall.datamanage.BrandDataManage
-com.yidejia.app.mall.datamanage.BrandDataManage$TaskBrand
 com.yidejia.app.mall.datamanage.CartsDataManage:
     182:189:public boolean cleanCart()
     247:256:public int getTypeCount()
@@ -1795,15 +1781,6 @@ com.yidejia.app.mall.datamanage.DataCleanManager:
     104:112:public static varargs void cleanApplicationData(android.content.Context,java.lang.String[])
     163:174:public static java.lang.String getPathSize(java.lang.String)
     207:218:public static java.lang.String getPathSize(java.io.File)
-com.yidejia.app.mall.datamanage.ExpressDataManage
-com.yidejia.app.mall.datamanage.ExpressDataManage$TaskDis
-com.yidejia.app.mall.datamanage.ExpressDataManage$TaskExpress
-com.yidejia.app.mall.datamanage.ExpressDataManage$TaskFree
-com.yidejia.app.mall.datamanage.FunctionDataManage
-com.yidejia.app.mall.datamanage.FunctionDataManage$TaskFun
-com.yidejia.app.mall.datamanage.MessageDataManage:
-    158:175:public boolean changeReadState(java.lang.String,java.lang.String,java.lang.String)
-com.yidejia.app.mall.datamanage.MessageDataManage$TaskChangeRead
 com.yidejia.app.mall.datamanage.PreferentialDataManage:
     private java.lang.String goods
     private java.lang.String userid
@@ -1825,8 +1802,6 @@ com.yidejia.app.mall.datamanage.PreferentialDataManage:
     223:223:static synthetic void access$5(com.yidejia.app.mall.datamanage.PreferentialDataManage,java.lang.String)
     37:37:static synthetic void access$6(com.yidejia.app.mall.datamanage.PreferentialDataManage,boolean)
 com.yidejia.app.mall.datamanage.PreferentialDataManage$TaskVerify
-com.yidejia.app.mall.datamanage.PriceDataManage
-com.yidejia.app.mall.datamanage.PriceDataManage$TaskPrice
 com.yidejia.app.mall.datamanage.ProductDataManage
 com.yidejia.app.mall.datamanage.ProductDataManage$TaskProduct
 com.yidejia.app.mall.datamanage.SearchDataManage
@@ -1841,10 +1816,6 @@ com.yidejia.app.mall.datamanage.TaskGetOrderByCode$TaskGetUserAddress
 com.yidejia.app.mall.datamanage.TaskGetTn
 com.yidejia.app.mall.datamanage.TaskGetTn$Task
 com.yidejia.app.mall.datamanage.TaskGetTn$Task$1
-com.yidejia.app.mall.datamanage.UserCommentDataManage
-com.yidejia.app.mall.datamanage.UserCommentDataManage$TaskGetList
-com.yidejia.app.mall.datamanage.UserCommentDataManage$TaskSave
-com.yidejia.app.mall.datamanage.UserCommentDataManage$TaskWaitComm
 com.yidejia.app.mall.datamanage.UserDatamanage:
     private java.lang.String username
     private java.lang.String password
@@ -1869,6 +1840,7 @@ com.yidejia.app.mall.datamanage.UserDatamanage$TaskRegister
 com.yidejia.app.mall.datamanage.UserDatamanage$TaskRegister$1
 com.yidejia.app.mall.datamanage.VoucherDataManage:
     90:123:public java.lang.String getUserVoucherForPay(java.lang.String,java.lang.String,boolean)
+    214:217:public void cancelTask()
 com.yidejia.app.mall.exception.NullSearchResultEx
 com.yidejia.app.mall.exception.TimeOutEx:
     private static final long serialVersionUID
@@ -1899,7 +1871,6 @@ com.yidejia.app.mall.jni.JNICallBack:
     public native java.lang.String getHttp4SignOrder(java.lang.String,java.lang.String,java.lang.String)
     public native java.lang.String getHttp4ChangeRead(java.lang.String,java.lang.String,java.lang.String)
     public native java.lang.String getHttp4GetTn(java.lang.String,java.lang.String,java.lang.String)
-    public native java.lang.String getHttp4SignUp(java.lang.String,java.lang.String)
 com.yidejia.app.mall.log.LoginTask
 com.yidejia.app.mall.log.LoginTask$Task
 com.yidejia.app.mall.model.Brand:
@@ -1924,11 +1895,21 @@ com.yidejia.app.mall.model.MainProduct:
     47:48:public void setSubTitle(java.lang.String)
     50:50:public java.lang.String getPrice()
 com.yidejia.app.mall.model.MsgCenter:
-    17:17:public java.lang.String getMsgid()
-    38:38:public java.lang.String getUid()
-    45:45:public java.lang.String getPid()
-    52:52:public java.lang.String getUrl()
-    59:59:public java.lang.String getIsread()
+    private java.lang.String uid
+    private java.lang.String pid
+    private java.lang.String msg
+    private java.lang.String isread
+    private java.lang.String url
+    22:23:public void setMsg(java.lang.String)
+    25:25:public java.lang.String getMsg()
+    36:37:public void setUid(java.lang.String)
+    39:39:public java.lang.String getUid()
+    43:44:public void setPid(java.lang.String)
+    46:46:public java.lang.String getPid()
+    50:51:public void setUrl(java.lang.String)
+    53:53:public java.lang.String getUrl()
+    57:58:public void setIsread(java.lang.String)
+    60:60:public java.lang.String getIsread()
 com.yidejia.app.mall.model.MyListItem
 com.yidejia.app.mall.model.Preferential
 com.yidejia.app.mall.model.SearchItem:
@@ -1953,6 +1934,10 @@ com.yidejia.app.mall.model.UserComment:
     133:133:public java.lang.String getTitle()
     145:145:public java.lang.String getId()
 com.yidejia.app.mall.model.UserCount
+com.yidejia.app.mall.msg.ParseMsg:
+    private com.yidejia.app.mall.model.MsgCenter msgCenter
+    78:102:public boolean parseMsgDetails(java.lang.String)
+    108:108:public com.yidejia.app.mall.model.MsgCenter getMsgCenter()
 com.yidejia.app.mall.net.ConnectionDetector:
     10:12:public ConnectionDetector()
 com.yidejia.app.mall.net.GetImageUrlPrefix
@@ -2016,6 +2001,7 @@ com.yidejia.app.mall.net.skin.Question:
     26:38:public java.lang.String getHttpResp()
     137:137:public java.lang.String getMsg()
 com.yidejia.app.mall.net.user.ChangeRead
+com.yidejia.app.mall.net.user.GetMessage
 com.yidejia.app.mall.net.user.Login:
     23:24:public java.lang.String getHttpResponse(java.lang.String,java.lang.String,java.lang.String)
 com.yidejia.app.mall.net.voucher.Verify
@@ -2065,6 +2051,7 @@ com.yidejia.app.mall.pay.Rsa:
     55:75:public static java.lang.String sign(java.lang.String,java.lang.String)
 com.yidejia.app.mall.phone.ContactAdapter
 com.yidejia.app.mall.phone.ContactAdapter$ViewHolder
+com.yidejia.app.mall.qiandao.ParseSignUp
 com.yidejia.app.mall.recharge.ParseRecharge
 com.yidejia.app.mall.search.SearchFragment
 com.yidejia.app.mall.search.SearchFragment$1
@@ -2077,7 +2064,6 @@ com.yidejia.app.mall.search.TaskFilter$1
 com.yidejia.app.mall.search.TaskFilter$2
 com.yidejia.app.mall.search.TaskFilter$3
 com.yidejia.app.mall.search.TaskFilter$Task
-com.yidejia.app.mall.signup.ParseSignUp
 com.yidejia.app.mall.skintest.SkinAnswerUtil:
     private android.widget.ImageView mButton
 com.yidejia.app.mall.skintest.SkinHomeActivity:
@@ -2187,6 +2173,8 @@ com.yidejia.app.mall.util.PayUtil:
     private com.yidejia.app.mall.model.Cart cart
     56:63:public PayUtil(android.content.Context,android.widget.LinearLayout,com.nostra13.universalimageloader.core.ImageLoader,com.nostra13.universalimageloader.core.assist.ImageLoadingListener,com.nostra13.universalimageloader.core.DisplayImageOptions)
     161:192:public java.lang.String cartLoadView()
+com.yidejia.app.mall.util.TimeUtil:
+    7:7:public TimeUtil()
 com.yidejia.app.mall.util.UnicodeToString:
     66:87:public java.lang.String convert(java.lang.String)
 com.yidejia.app.mall.util.Utility
@@ -2201,8 +2189,8 @@ com.yidejia.app.mall.view.CstmPayActivity:
     681:682:java.lang.String getSignType()
     695:695:java.lang.String sign(java.lang.String,java.lang.String)
 com.yidejia.app.mall.view.ExchangeFreeActivity:
-    196:234:private void setActionBar()
-    67:67:static synthetic float access$17(com.yidejia.app.mall.view.ExchangeFreeActivity)
+    210:249:private void setActionBar()
+    68:68:static synthetic float access$17(com.yidejia.app.mall.view.ExchangeFreeActivity)
 com.yidejia.app.mall.view.ExchangeFreeActivity$3
 com.yidejia.app.mall.view.ExchangeFreeActivity$4
 com.yidejia.app.mall.view.ImageLoaderUtil

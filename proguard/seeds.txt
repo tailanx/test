@@ -9787,10 +9787,6 @@ com.yidejia.app.mall.HomeSearchActivity
 com.yidejia.app.mall.HomeSearchActivity: HomeSearchActivity()
 com.yidejia.app.mall.MyApplication
 com.yidejia.app.mall.MyApplication: MyApplication()
-com.yidejia.app.mall.MyCollectActivity
-com.yidejia.app.mall.MyCollectActivity: MyCollectActivity()
-com.yidejia.app.mall.PersonActivity
-com.yidejia.app.mall.PersonActivity: PersonActivity()
 com.yidejia.app.mall.RecommendActivity
 com.yidejia.app.mall.RecommendActivity: RecommendActivity()
 com.yidejia.app.mall.RegistActivity
@@ -9808,6 +9804,8 @@ com.yidejia.app.mall.evaluation.EvaluationActivity
 com.yidejia.app.mall.evaluation.EvaluationActivity: EvaluationActivity()
 com.yidejia.app.mall.evaluation.PersonEvaluationActivity
 com.yidejia.app.mall.evaluation.PersonEvaluationActivity: PersonEvaluationActivity()
+com.yidejia.app.mall.favorite.MyCollectActivity
+com.yidejia.app.mall.favorite.MyCollectActivity: MyCollectActivity()
 com.yidejia.app.mall.fragment.ExchangeFragment$InnerReciver
 com.yidejia.app.mall.goodinfo.CommentActivity
 com.yidejia.app.mall.goodinfo.CommentActivity: CommentActivity()
@@ -9853,6 +9851,7 @@ com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetVerify(java.la
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetCount(java.lang.String,java.lang.String)
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetMessage(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4ChangeRead(java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4MsgDetails(java.lang.String)
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetReturn(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetReturnList(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetShipLog(java.lang.String)
@@ -9865,8 +9864,13 @@ com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4SkinQuestion()
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4SkinAnswer(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4CheckCps(java.lang.String)
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4SignUp(java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4SignCount(java.lang.String,java.lang.String)
 com.yidejia.app.mall.log.LogService
 com.yidejia.app.mall.log.LogService: LogService()
+com.yidejia.app.mall.msg.MsgActivity
+com.yidejia.app.mall.msg.MsgActivity: MsgActivity()
+com.yidejia.app.mall.msg.MsgDetailsActivity
+com.yidejia.app.mall.msg.MsgDetailsActivity: MsgDetailsActivity()
 com.yidejia.app.mall.order.AllOrderActivity
 com.yidejia.app.mall.order.AllOrderActivity: AllOrderActivity()
 com.yidejia.app.mall.order.AlreadyComActivity
