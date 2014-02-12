@@ -3,7 +3,6 @@ package com.yidejia.app.mall.goodinfo;
 import java.io.IOException;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -14,7 +13,6 @@ import cn.sharesdk.framework.Platform.ShareParams;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
-import cn.sharesdk.wechat.moments.WechatMoments;
 
 import com.baidu.mobstat.StatService;
 import com.opens.asyncokhttpclient.AsyncHttpResponse;
