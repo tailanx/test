@@ -28,20 +28,22 @@
 
     <CheckBox
         android:id="@+id/free_giving_item_checkbox"
-        style="@style/CustomCheckboxTheme"
-        android:layout_width="@dimen/base_info_match_add"
+         style="@style/CustomCheckboxTheme"
+        android:layout_width="@dimen/margin_top_add"
         android:layout_height="@dimen/margin_top"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="12dp" />
+        android:layout_marginLeft="12dp"
+        android:focusable="true" />
 
     <ImageView
         android:id="@+id/free_giving_item__imageview1"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="35dp"
+        android:layout_toRightOf="@id/free_giving_item_checkbox"
+        android:layout_marginLeft="@dimen/item_goods_emulate_add"
         android:background="@drawable/product_image_bg"
-        android:padding="10dp" />
+        android:padding="10dp"  />
 
     <TextView
         android:id="@+id/free_giving_item_text"

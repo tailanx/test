@@ -4417,6 +4417,20 @@ android.support.v4.widget.ViewDragHelper$Callback: int getViewVerticalDragRange(
 android.support.v4.widget.ViewDragHelper$Callback: boolean tryCaptureView(android.view.View,int)
 android.support.v4.widget.ViewDragHelper$Callback: int clampViewPositionHorizontal(android.view.View,int,int)
 android.support.v4.widget.ViewDragHelper$Callback: int clampViewPositionVertical(android.view.View,int,int)
+cn.sharesdk.framework.ShareSDKUIShell
+cn.sharesdk.framework.ShareSDKUIShell: ShareSDKUIShell()
+cn.sharesdk.framework.TitleLayout
+cn.sharesdk.framework.TitleLayout: TitleLayout(android.content.Context,android.util.AttributeSet)
+cn.sharesdk.framework.authorize.RegisterView
+cn.sharesdk.framework.authorize.RegisterView: RegisterView(android.content.Context,android.util.AttributeSet)
+cn.sharesdk.framework.authorize.ResizeLayout
+cn.sharesdk.framework.authorize.ResizeLayout: ResizeLayout(android.content.Context,android.util.AttributeSet)
+cn.sharesdk.framework.utils.f$a: cn.sharesdk.framework.utils.f$a[] values()
+cn.sharesdk.framework.utils.f$a: cn.sharesdk.framework.utils.f$a valueOf(java.lang.String)
+cn.sharesdk.onekeyshare.PlatformGridView
+cn.sharesdk.onekeyshare.PlatformGridView: PlatformGridView(android.content.Context,android.util.AttributeSet)
+cn.sharesdk.wechat.utils.WechatHandlerActivity
+cn.sharesdk.wechat.utils.WechatHandlerActivity: WechatHandlerActivity()
 com.UCMobile.PayPlugin.PayPluginService
 com.UCMobile.PayPlugin.PayResultReceiver
 com.UCMobile.PayPlugin.PayResultReceiver: void native_UCPayResultNotify(java.lang.String)
@@ -8910,12 +8924,30 @@ com.actionbarsherlock.widget.SuggestionsAdapter$ChildViewCache: android.widget.I
 com.actionbarsherlock.widget.SuggestionsAdapter$ChildViewCache: android.widget.ImageView mIcon2
 com.actionbarsherlock.widget.SuggestionsAdapter$ChildViewCache: android.widget.ImageView mIconRefine
 com.actionbarsherlock.widget.SuggestionsAdapter$ChildViewCache: SuggestionsAdapter$ChildViewCache(android.view.View)
-com.ant.liao.GifView
-com.ant.liao.GifView: GifView(android.content.Context)
-com.ant.liao.GifView: GifView(android.content.Context,android.util.AttributeSet)
-com.ant.liao.GifView: GifView(android.content.Context,android.util.AttributeSet,int)
-com.ant.liao.GifView$GifImageType: com.ant.liao.GifView$GifImageType[] values()
-com.ant.liao.GifView$GifImageType: com.ant.liao.GifView$GifImageType valueOf(java.lang.String)
+com.alipay.android.app.IAliPay
+com.alipay.android.app.IAliPay: java.lang.String Pay(java.lang.String,java.lang.String,java.lang.String)
+com.alipay.android.app.IAliPay: java.lang.String test()
+com.alipay.android.app.IAliPay: void registerCallback(com.alipay.android.app.IRemoteServiceCallback)
+com.alipay.android.app.IAliPay: void unregisterCallback(com.alipay.android.app.IRemoteServiceCallback)
+com.alipay.android.app.IAlixPay
+com.alipay.android.app.IAlixPay: java.lang.String Pay(java.lang.String)
+com.alipay.android.app.IAlixPay: java.lang.String test()
+com.alipay.android.app.IAlixPay: void registerCallback(com.alipay.android.app.IRemoteServiceCallback)
+com.alipay.android.app.IAlixPay: void unregisterCallback(com.alipay.android.app.IRemoteServiceCallback)
+com.alipay.android.app.IAlixPay: java.lang.String prePay(java.lang.String)
+com.alipay.android.app.IRemoteServiceCallback
+com.alipay.android.app.IRemoteServiceCallback: void startActivity(java.lang.String,java.lang.String,int,android.os.Bundle)
+com.alipay.android.app.IRemoteServiceCallback: void payEnd(boolean,java.lang.String)
+com.alipay.android.app.IRemoteServiceCallback: boolean isHideLoadingScreen()
+com.alipay.android.app.sdk.ResultStatus: com.alipay.android.app.sdk.ResultStatus[] values()
+com.alipay.android.app.sdk.ResultStatus: com.alipay.android.app.sdk.ResultStatus valueOf(java.lang.String)
+com.alipay.android.app.sdk.WapPayActivity
+com.alipay.android.app.sdk.WapPayActivity: WapPayActivity()
+com.alipay.android.app.util.NetConnectionType: com.alipay.android.app.util.NetConnectionType[] values()
+com.alipay.android.app.util.NetConnectionType: com.alipay.android.app.util.NetConnectionType valueOf(java.lang.String)
+com.baidu.mobstat.SendStrategyEnum: com.baidu.mobstat.SendStrategyEnum[] values()
+com.baidu.mobstat.SendStrategyEnum: com.baidu.mobstat.SendStrategyEnum valueOf(java.lang.String)
+com.baidu.mobstat.StatActivity
 com.handmark.pulltorefresh.library.ILoadingLayout
 com.handmark.pulltorefresh.library.ILoadingLayout: void setLastUpdatedLabel(java.lang.CharSequence)
 com.handmark.pulltorefresh.library.ILoadingLayout: void setLoadingDrawable(android.graphics.drawable.Drawable)
@@ -9645,6 +9677,12 @@ com.nostra13.universalimageloader.core.assist.ViewScaleType: com.nostra13.univer
 com.nostra13.universalimageloader.core.assist.ViewScaleType: com.nostra13.universalimageloader.core.assist.ViewScaleType valueOf(java.lang.String)
 com.nostra13.universalimageloader.core.download.ImageDownloader$Scheme: com.nostra13.universalimageloader.core.download.ImageDownloader$Scheme[] values()
 com.nostra13.universalimageloader.core.download.ImageDownloader$Scheme: com.nostra13.universalimageloader.core.download.ImageDownloader$Scheme valueOf(java.lang.String)
+com.squareup.okhttp.ResponseSource: com.squareup.okhttp.ResponseSource[] values()
+com.squareup.okhttp.ResponseSource: com.squareup.okhttp.ResponseSource valueOf(java.lang.String)
+com.squareup.okhttp.internal.http.HttpURLConnectionImpl$Retry: com.squareup.okhttp.internal.http.HttpURLConnectionImpl$Retry[] values()
+com.squareup.okhttp.internal.http.HttpURLConnectionImpl$Retry: com.squareup.okhttp.internal.http.HttpURLConnectionImpl$Retry valueOf(java.lang.String)
+com.squareup.okhttp.internal.spdy.ErrorCode: com.squareup.okhttp.internal.spdy.ErrorCode[] values()
+com.squareup.okhttp.internal.spdy.ErrorCode: com.squareup.okhttp.internal.spdy.ErrorCode valueOf(java.lang.String)
 com.unionpay.mpay.utils.UPPayEngine
 com.unionpay.mpay.utils.UPPayEngine: int initJNIEnv(android.app.Activity,boolean,boolean)
 com.unionpay.mpay.utils.UPPayEngine: java.lang.String getServerUrl(int)
@@ -9715,38 +9753,68 @@ com.unionpay.uppay.util.PayEngine: java.lang.String getPhoneNumber()
 com.unionpay.uppay.util.PayEngine: java.lang.String getUpgradeURL()
 com.unionpay.uppay.util.f: com.unionpay.uppay.util.f[] values()
 com.unionpay.uppay.util.f: com.unionpay.uppay.util.f valueOf(java.lang.String)
+com.yidejia.app.mall.AboutActivity
+com.yidejia.app.mall.AboutActivity: AboutActivity()
 com.yidejia.app.mall.ActiveGoActivity
 com.yidejia.app.mall.ActiveGoActivity: ActiveGoActivity()
-com.yidejia.app.mall.ComposeActivity
-com.yidejia.app.mall.ComposeActivity: ComposeActivity()
-com.yidejia.app.mall.GoodsInfoActivity
-com.yidejia.app.mall.GoodsInfoActivity: GoodsInfoActivity()
-com.yidejia.app.mall.ImagePagerActivity
-com.yidejia.app.mall.ImagePagerActivity: ImagePagerActivity()
-com.yidejia.app.mall.MainActivity
-com.yidejia.app.mall.MainActivity: MainActivity()
-com.yidejia.app.mall.MainFragmentActivity
-com.yidejia.app.mall.MainFragmentActivity: MainFragmentActivity()
+com.yidejia.app.mall.AgreementActivity
+com.yidejia.app.mall.AgreementActivity: AgreementActivity()
+com.yidejia.app.mall.AidouActivity
+com.yidejia.app.mall.AidouActivity: AidouActivity()
+com.yidejia.app.mall.BaseActivity
+com.yidejia.app.mall.BaseActivity: BaseActivity()
+com.yidejia.app.mall.EditorActivity
+com.yidejia.app.mall.EditorActivity: EditorActivity()
+com.yidejia.app.mall.FeedBackActivity
+com.yidejia.app.mall.FeedBackActivity: FeedBackActivity()
+com.yidejia.app.mall.FindPwActivity
+com.yidejia.app.mall.FindPwActivity: FindPwActivity()
+com.yidejia.app.mall.HistoryActivity
+com.yidejia.app.mall.HistoryActivity: HistoryActivity()
+com.yidejia.app.mall.HomeBaseActivity
+com.yidejia.app.mall.HomeBaseActivity: HomeBaseActivity()
+com.yidejia.app.mall.HomeCartActivity
+com.yidejia.app.mall.HomeCartActivity: HomeCartActivity()
+com.yidejia.app.mall.HomeGuangActivity
+com.yidejia.app.mall.HomeGuangActivity: HomeGuangActivity()
+com.yidejia.app.mall.HomeLoginActivity
+com.yidejia.app.mall.HomeLoginActivity: HomeLoginActivity()
+com.yidejia.app.mall.HomeMallActivity
+com.yidejia.app.mall.HomeMallActivity: HomeMallActivity()
+com.yidejia.app.mall.HomeMyMallActivity
+com.yidejia.app.mall.HomeMyMallActivity: HomeMyMallActivity()
+com.yidejia.app.mall.HomeSearchActivity
+com.yidejia.app.mall.HomeSearchActivity: HomeSearchActivity()
 com.yidejia.app.mall.MyApplication
 com.yidejia.app.mall.MyApplication: MyApplication()
-com.yidejia.app.mall.MyMallActivity$InnerReceiver
-com.yidejia.app.mall.SearchActivity
-com.yidejia.app.mall.SearchActivity: SearchActivity()
-com.yidejia.app.mall.SearchResultActivity
-com.yidejia.app.mall.SearchResultActivity: SearchResultActivity()
-com.yidejia.app.mall.UserPayActivity
-com.yidejia.app.mall.UserPayActivity: UserPayActivity()
+com.yidejia.app.mall.MyCollectActivity
+com.yidejia.app.mall.MyCollectActivity: MyCollectActivity()
+com.yidejia.app.mall.PersonActivity
+com.yidejia.app.mall.PersonActivity: PersonActivity()
+com.yidejia.app.mall.RecommendActivity
+com.yidejia.app.mall.RecommendActivity: RecommendActivity()
+com.yidejia.app.mall.RegistActivity
+com.yidejia.app.mall.RegistActivity: RegistActivity()
+com.yidejia.app.mall.VipBuyActivity
 com.yidejia.app.mall.WelcomeActivity
 com.yidejia.app.mall.WelcomeActivity: WelcomeActivity()
-com.yidejia.app.mall.address.WheelDemo
-com.yidejia.app.mall.address.WheelView
-com.yidejia.app.mall.address.WheelView: WheelView(android.content.Context,android.util.AttributeSet,int)
-com.yidejia.app.mall.address.WheelView: WheelView(android.content.Context,android.util.AttributeSet)
-com.yidejia.app.mall.address.WheelView: WheelView(android.content.Context)
-com.yidejia.app.mall.fragment.BaseInfoFragment$InnerReceiver
-com.yidejia.app.mall.fragment.CartActivity$InnerReceiver
+com.yidejia.app.mall.address.AddressActivity
+com.yidejia.app.mall.address.AddressActivity: AddressActivity()
+com.yidejia.app.mall.address.EditNewAddressActivity
+com.yidejia.app.mall.address.EditNewAddressActivity: EditNewAddressActivity()
+com.yidejia.app.mall.address.PayAddressActivity
+com.yidejia.app.mall.address.PayAddressActivity: PayAddressActivity()
+com.yidejia.app.mall.evaluation.EvaluationActivity
+com.yidejia.app.mall.evaluation.EvaluationActivity: EvaluationActivity()
+com.yidejia.app.mall.evaluation.PersonEvaluationActivity
+com.yidejia.app.mall.evaluation.PersonEvaluationActivity: PersonEvaluationActivity()
 com.yidejia.app.mall.fragment.ExchangeFragment$InnerReciver
-com.yidejia.app.mall.fragment.NoProduceFragment$InnerReceiver
+com.yidejia.app.mall.goodinfo.CommentActivity
+com.yidejia.app.mall.goodinfo.CommentActivity: CommentActivity()
+com.yidejia.app.mall.goodinfo.GoodsDetailActivity
+com.yidejia.app.mall.goodinfo.GoodsDetailActivity: GoodsDetailActivity()
+com.yidejia.app.mall.goodinfo.GoodsInfoActivity
+com.yidejia.app.mall.goodinfo.GoodsInfoActivity: GoodsInfoActivity()
 com.yidejia.app.mall.jni.JNICallBack
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4PostUrl()
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4ImageUrlPrefix()
@@ -9796,85 +9864,102 @@ com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4ResetPsw(java.lan
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4SkinQuestion()
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4SkinAnswer(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4CheckCps(java.lang.String)
-com.yidejia.app.mall.view.AboutActivity
-com.yidejia.app.mall.view.AboutActivity: AboutActivity()
-com.yidejia.app.mall.view.AddressActivity
-com.yidejia.app.mall.view.AddressActivity: AddressActivity()
-com.yidejia.app.mall.view.AgreementActivity
-com.yidejia.app.mall.view.AgreementActivity: AgreementActivity()
-com.yidejia.app.mall.view.AllOrderActivity
-com.yidejia.app.mall.view.AllOrderActivity: AllOrderActivity()
-com.yidejia.app.mall.view.AllOrderActivity: void doClick(android.view.View)
-com.yidejia.app.mall.view.AlreadyComActivity
-com.yidejia.app.mall.view.AlreadyComActivity: AlreadyComActivity()
-com.yidejia.app.mall.view.AlreadyOrderActivity
-com.yidejia.app.mall.view.AlreadyOrderActivity: AlreadyOrderActivity()
-com.yidejia.app.mall.view.AlreadyOrderActivity: void doClick(android.view.View)
-com.yidejia.app.mall.view.CheckActivity
-com.yidejia.app.mall.view.CheckActivity: CheckActivity()
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4SignUp(java.lang.String,java.lang.String)
+com.yidejia.app.mall.log.LogService
+com.yidejia.app.mall.log.LogService: LogService()
+com.yidejia.app.mall.order.AllOrderActivity
+com.yidejia.app.mall.order.AllOrderActivity: AllOrderActivity()
+com.yidejia.app.mall.order.AlreadyComActivity
+com.yidejia.app.mall.order.AlreadyComActivity: AlreadyComActivity()
+com.yidejia.app.mall.order.AlreadyOrderActivity
+com.yidejia.app.mall.order.AlreadyOrderActivity: AlreadyOrderActivity()
+com.yidejia.app.mall.order.ExchangeActivity
+com.yidejia.app.mall.order.ExchangeActivity: ExchangeActivity()
+com.yidejia.app.mall.order.OrderDetailActivity
+com.yidejia.app.mall.order.OrderDetailActivity: OrderDetailActivity()
+com.yidejia.app.mall.order.ReturnActivity
+com.yidejia.app.mall.order.ReturnActivity: ReturnActivity()
+com.yidejia.app.mall.order.WaitDeliverActivity
+com.yidejia.app.mall.order.WaitDeliverActivity: WaitDeliverActivity()
+com.yidejia.app.mall.order.WaitPayActivity
+com.yidejia.app.mall.order.WaitPayActivity: WaitPayActivity()
+com.yidejia.app.mall.pay.DeliveryActivity
+com.yidejia.app.mall.pay.DeliveryActivity: DeliveryActivity()
+com.yidejia.app.mall.phone.ContactSureActivity
+com.yidejia.app.mall.phone.ContactSureActivity: ContactSureActivity()
+com.yidejia.app.mall.phone.PhoneActivity
+com.yidejia.app.mall.phone.PhoneActivity: PhoneActivity()
+com.yidejia.app.mall.qiandao.QiandaoActivity
+com.yidejia.app.mall.qiandao.QiandaoActivity: QiandaoActivity()
+com.yidejia.app.mall.search.SearchActivity
+com.yidejia.app.mall.search.SearchActivity: SearchActivity()
+com.yidejia.app.mall.search.SearchResultActivity
+com.yidejia.app.mall.search.SearchResultActivity: SearchResultActivity()
+com.yidejia.app.mall.shark.TestSharkActivity
+com.yidejia.app.mall.shark.TestSharkActivity: TestSharkActivity()
+com.yidejia.app.mall.shiplog.CheckActivity
+com.yidejia.app.mall.shiplog.CheckActivity: CheckActivity()
+com.yidejia.app.mall.skintest.SkinHomeActivity
+com.yidejia.app.mall.skintest.SkinHomeActivity: SkinHomeActivity()
+com.yidejia.app.mall.skintest.SkinQuesActivity
+com.yidejia.app.mall.skintest.SkinQuesActivity: SkinQuesActivity()
+com.yidejia.app.mall.skintest.SkinResultAcitivity
+com.yidejia.app.mall.skintest.SkinResultAcitivity: SkinResultAcitivity()
 com.yidejia.app.mall.view.CstmPayActivity
 com.yidejia.app.mall.view.CstmPayActivity: CstmPayActivity()
-com.yidejia.app.mall.view.CstmPayActivity$InnerReceiver
-com.yidejia.app.mall.view.EditNewAddressActivity
-com.yidejia.app.mall.view.EditNewAddressActivity: EditNewAddressActivity()
-com.yidejia.app.mall.view.EditorActivity
-com.yidejia.app.mall.view.EditorActivity: EditorActivity()
-com.yidejia.app.mall.view.EvaluationActivity
-com.yidejia.app.mall.view.EvaluationActivity: EvaluationActivity()
-com.yidejia.app.mall.view.ExchangeActivity
-com.yidejia.app.mall.view.ExchangeActivity: ExchangeActivity()
 com.yidejia.app.mall.view.ExchangeFreeActivity
 com.yidejia.app.mall.view.ExchangeFreeActivity: ExchangeFreeActivity()
-com.yidejia.app.mall.view.FindPwActivity
-com.yidejia.app.mall.view.FindPwActivity: FindPwActivity()
 com.yidejia.app.mall.view.GoCartActivity
 com.yidejia.app.mall.view.GoCartActivity: GoCartActivity()
-com.yidejia.app.mall.view.GoCartActivity$InnerReceiver
-com.yidejia.app.mall.view.HistoryActivity
-com.yidejia.app.mall.view.HistoryActivity: HistoryActivity()
+com.yidejia.app.mall.view.ImagePagerActivity
+com.yidejia.app.mall.view.ImagePagerActivity: ImagePagerActivity()
 com.yidejia.app.mall.view.IntegeralActivity
 com.yidejia.app.mall.view.IntegeralActivity: IntegeralActivity()
 com.yidejia.app.mall.view.LoginActivity
 com.yidejia.app.mall.view.LoginActivity: LoginActivity()
-com.yidejia.app.mall.view.MyCollectActivity
-com.yidejia.app.mall.view.MyCollectActivity: MyCollectActivity()
 com.yidejia.app.mall.view.NOProduceActivity
 com.yidejia.app.mall.view.NOProduceActivity: NOProduceActivity()
-com.yidejia.app.mall.view.OptionActivity
-com.yidejia.app.mall.view.OptionActivity: OptionActivity()
-com.yidejia.app.mall.view.OrderDetailActivity
-com.yidejia.app.mall.view.OrderDetailActivity: OrderDetailActivity()
-com.yidejia.app.mall.view.PayAddress
-com.yidejia.app.mall.view.PayAddress: PayAddress()
-com.yidejia.app.mall.view.PersonActivity
-com.yidejia.app.mall.view.PersonActivity: PersonActivity()
-com.yidejia.app.mall.view.PersonEvaluationActivity
-com.yidejia.app.mall.view.PersonEvaluationActivity: PersonEvaluationActivity()
-com.yidejia.app.mall.view.RecommendActivity
-com.yidejia.app.mall.view.RecommendActivity: RecommendActivity()
-com.yidejia.app.mall.view.RegistActivity
-com.yidejia.app.mall.view.RegistActivity: RegistActivity()
-com.yidejia.app.mall.view.ReturnActivity
-com.yidejia.app.mall.view.ReturnActivity: ReturnActivity()
-com.yidejia.app.mall.view.SkinAnswerActivity
-com.yidejia.app.mall.view.SkinAnswerActivity: SkinAnswerActivity(android.widget.RelativeLayout,android.app.Activity,java.lang.String)
-com.yidejia.app.mall.view.SkinHomeActivity
-com.yidejia.app.mall.view.SkinHomeActivity: SkinHomeActivity()
-com.yidejia.app.mall.view.SkinQuesActivity
-com.yidejia.app.mall.view.SkinQuesActivity: SkinQuesActivity()
-com.yidejia.app.mall.view.SkinResultAcitivity
-com.yidejia.app.mall.view.SkinResultAcitivity: SkinResultAcitivity()
-com.yidejia.app.mall.view.WaitDeliverActivity
-com.yidejia.app.mall.view.WaitDeliverActivity: WaitDeliverActivity()
-com.yidejia.app.mall.view.WaitPayActivity
-com.yidejia.app.mall.view.WaitPayActivity: WaitPayActivity()
-com.yidejia.app.mall.view.WaitPayActivity: void doClick(android.view.View)
-com.yidejia.app.mall.widget.RefreshView
-com.yidejia.app.mall.widget.RefreshView: RefreshView(android.content.Context,android.util.AttributeSet)
-com.yidejia.app.mall.widget.RefreshView: RefreshView(android.content.Context,android.util.AttributeSet,int)
+com.yidejia.app.mall.view.UserPayActivity
+com.yidejia.app.mall.view.UserPayActivity: UserPayActivity()
+com.yidejia.app.mall.wheelview.WheelDemo
+com.yidejia.app.mall.wheelview.WheelView
+com.yidejia.app.mall.wheelview.WheelView: WheelView(android.content.Context,android.util.AttributeSet,int)
+com.yidejia.app.mall.wheelview.WheelView: WheelView(android.content.Context,android.util.AttributeSet)
+com.yidejia.app.mall.wheelview.WheelView: WheelView(android.content.Context)
+com.yidejia.app.mall.widget.WiperSwitch
+com.yidejia.app.mall.widget.WiperSwitch: WiperSwitch(android.content.Context)
+com.yidejia.app.mall.widget.WiperSwitch: WiperSwitch(android.content.Context,android.util.AttributeSet)
 com.yidejia.app.mall.widget.YLImageButton
 com.yidejia.app.mall.widget.YLImageButton: YLImageButton(android.content.Context,android.util.AttributeSet)
 com.yidejia.app.mall.widget.YLImageButton: YLImageButton(android.content.Context,android.util.AttributeSet,int)
 com.yidejia.app.mall.widget.YLViewPager
 com.yidejia.app.mall.widget.YLViewPager: YLViewPager(android.content.Context)
 com.yidejia.app.mall.widget.YLViewPager: YLViewPager(android.content.Context,android.util.AttributeSet)
+com.yidejia.app.mall.wxapi.WXEntryActivity
+com.yidejia.app.mall.wxapi.WXEntryActivity: WXEntryActivity()
+com.yidejia.app.mall.yirihui.YirihuiActivity
+com.yidejia.app.mall.yirihui.YirihuiActivity: YirihuiActivity()
+m.framework.ui.widget.asyncview.AsyncImageView
+m.framework.ui.widget.asyncview.AsyncImageView: AsyncImageView(android.content.Context,android.util.AttributeSet)
+m.framework.ui.widget.asyncview.AsyncImageView: AsyncImageView(android.content.Context,android.util.AttributeSet,int)
+m.framework.ui.widget.pulltorefresh.GroupListView
+m.framework.ui.widget.pulltorefresh.GroupListView: GroupListView(android.content.Context,android.util.AttributeSet)
+m.framework.ui.widget.pulltorefresh.GroupListView: GroupListView(android.content.Context,android.util.AttributeSet,int)
+m.framework.ui.widget.pulltorefresh.PullToRefreshView
+m.framework.ui.widget.pulltorefresh.PullToRefreshView: PullToRefreshView(android.content.Context,android.util.AttributeSet)
+m.framework.ui.widget.pulltorefresh.PullToRefreshView: PullToRefreshView(android.content.Context,android.util.AttributeSet,int)
+m.framework.ui.widget.pulltorefresh.ScrollableGridView
+m.framework.ui.widget.pulltorefresh.ScrollableGridView: ScrollableGridView(android.content.Context,android.util.AttributeSet)
+m.framework.ui.widget.pulltorefresh.ScrollableGridView: ScrollableGridView(android.content.Context,android.util.AttributeSet,int)
+m.framework.ui.widget.pulltorefresh.ScrollableGroupListView
+m.framework.ui.widget.pulltorefresh.ScrollableGroupListView: ScrollableGroupListView(android.content.Context,android.util.AttributeSet)
+m.framework.ui.widget.pulltorefresh.ScrollableGroupListView: ScrollableGroupListView(android.content.Context,android.util.AttributeSet,int)
+m.framework.ui.widget.pulltorefresh.ScrollableListView
+m.framework.ui.widget.pulltorefresh.ScrollableListView: ScrollableListView(android.content.Context,android.util.AttributeSet)
+m.framework.ui.widget.pulltorefresh.ScrollableListView: ScrollableListView(android.content.Context,android.util.AttributeSet,int)
+m.framework.ui.widget.slidingmenu.SlidingMenu
+m.framework.ui.widget.slidingmenu.SlidingMenu: SlidingMenu(android.content.Context,android.util.AttributeSet)
+m.framework.ui.widget.slidingmenu.SlidingMenu: SlidingMenu(android.content.Context,android.util.AttributeSet,int)
+m.framework.ui.widget.viewpager.ViewPagerClassic
+m.framework.ui.widget.viewpager.ViewPagerClassic: ViewPagerClassic(android.content.Context,android.util.AttributeSet)
+m.framework.ui.widget.viewpager.ViewPagerClassic: ViewPagerClassic(android.content.Context,android.util.AttributeSet,int)

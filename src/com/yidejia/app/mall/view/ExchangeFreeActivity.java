@@ -39,8 +39,9 @@ import com.yidejia.app.mall.util.Consts;
 
 /**
  * 免费送和积分换购
+ * 
  * @author LiuYong
- *
+ * 
  */
 public class ExchangeFreeActivity extends BaseActivity {
 
@@ -53,8 +54,8 @@ public class ExchangeFreeActivity extends BaseActivity {
 	private int bottomLineWidth;
 	private int offset = 0;
 	private int position_one;
-//	private int position_two;
-//	private int position_three;
+	// private int position_two;
+	// private int position_three;
 	private String sumprice;
 	private List<HashMap<String, Float>> exchange;// 换购商品
 	private List<HashMap<String, Object>> cart;// 换购商品
@@ -62,7 +63,7 @@ public class ExchangeFreeActivity extends BaseActivity {
 	private float voucher;// 用户积分
 	private MyApplication myApplication;
 	private ArrayList<Cart> mArrayList;
-//	private String isString;
+	// private String isString;
 	private AlertDialog dialog;
 	private float jifen;
 
@@ -73,92 +74,105 @@ public class ExchangeFreeActivity extends BaseActivity {
 		Intent intent = getIntent();
 		sumprice = intent.getStringExtra("price");
 		jifen = intent.getFloatExtra("voucher", -1);
-//		isString = intent.getStringExtra("cartActivity");
+		// isString = intent.getStringExtra("cartActivity");
 		try {
 			mArrayList = (ArrayList<Cart>) intent.getSerializableExtra("carts");
 		} catch (Exception e) {
 		}
 		setContentView(R.layout.pay_free);
-		dialog = new Builder(this).setIcon(R.drawable.ic_launcher).setTitle(getResources()
-				.getString(R.string.tips)).setMessage(getResources().getString(R.string.sure_commit))
-				.setPositiveButton(getResources().getString(R.string.sure),new android.content.DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
+		dialog = new Builder(this)
+				.setIcon(R.drawable.ic_launcher)
+				.setTitle(getResources().getString(R.string.tips))
+				.setMessage(getResources().getString(R.string.sure_commit))
+				.setPositiveButton(getResources().getString(R.string.sure),
+						new android.content.DialogInterface.OnClickListener() {
 
-						Intent intent = new Intent(ExchangeFreeActivity.this,
-								CstmPayActivity.class);
-						exchange = ExchangeAdapter.mlist1;
-						cart = ExchangeAdapter.mlist2;
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
 
-					
-						float sum = 0;
+								Intent intent = new Intent(
+										ExchangeFreeActivity.this,
+										CstmPayActivity.class);
+								exchange = ExchangeAdapter.mlist1;
+								cart = ExchangeAdapter.mlist2;
 
-						float sum1 = 0;
-						for (int i = 0; i < exchange.size(); i++) {
-							HashMap<String, Float> map = exchange.get(i);
+								float sum = 0;
 
-							Float isSelelct = map.get("isCheck");
-							Float price = map.get("price");
-							Float count = map.get("count");
-							if (isSelelct == 0.0) {
-								sum = price * count;
+								float sum1 = 0;
+								for (int i = 0; i < exchange.size(); i++) {
+									HashMap<String, Float> map = exchange
+											.get(i);
 
-								sum1 += sum;
-							}
+									Float isSelelct = map.get("isCheck");
+									Float price = map.get("price");
+									Float count = map.get("count");
+									if (isSelelct == 0.0) {
+										sum = price * count;
 
-						}
-						if (sum1 > voucher) {
-							Toast.makeText(ExchangeFreeActivity.this,
-									getResources().getString(R.string.my_voucher),
-									Toast.LENGTH_SHORT).show();
-							Intent intent1  = new Intent(Consts.EXCHANG_FREE);
-							sendBroadcast(intent1);
-							return;
-//							}
-						} else if (sum1 <= voucher) {// && isSelelct1 == 0.0
-							for (int i = 0; i < cart.size(); i++) {
-								HashMap<String, Object> map1 = cart.get(i);
-								Float isSelelct1 = Float.parseFloat(map1
-										.get("isCheck1").toString());
-								
-								
-										
-								Float count1 = Float.parseFloat(map1.get("count1")
-										.toString());
+										sum1 += sum;
+									}
 
-								Specials specials = (Specials) map1.get("cart");
-								Cart cart = new Cart();
-
-								cart.setImgUrl(specials.getImgUrl());
-								cart.setPrice(0);
-								cart.setScort(specials.getScores());
-								cart.setProductText(specials.getBrief());
-								cart.setUId(specials.getUId());
-								cart.setSalledAmmount(count1.intValue());
-								if (isSelelct1 == 0.0 && count1>0) {
-									mArrayList.add(cart);
-									voucher = (int) (voucher - sum1);
 								}
+								if (sum1 > voucher) {
+									Toast.makeText(
+											ExchangeFreeActivity.this,
+											getResources().getString(
+													R.string.my_voucher),
+											Toast.LENGTH_SHORT).show();
+									Intent intent1 = new Intent(
+											Consts.EXCHANG_FREE);
+									sendBroadcast(intent1);
+									return;
+									// }
+								} else if (sum1 <= voucher) {// && isSelelct1 ==
+																// 0.0
+									for (int i = 0; i < cart.size(); i++) {
+										HashMap<String, Object> map1 = cart
+												.get(i);
+										Float isSelelct1 = Float
+												.parseFloat(map1
+														.get("isCheck1")
+														.toString());
+
+										Float count1 = Float.parseFloat(map1
+												.get("count1").toString());
+
+										Specials specials = (Specials) map1
+												.get("cart");
+										Cart cart = new Cart();
+
+										cart.setImgUrl(specials.getImgUrl());
+										cart.setPrice(0);
+										cart.setScort(specials.getScores());
+										cart.setProductText(specials.getBrief());
+										cart.setUId(specials.getUId());
+										cart.setSalledAmmount(count1.intValue());
+										if (isSelelct1 == 0.0 && count1 > 0) {
+											mArrayList.add(cart);
+											voucher = (int) (voucher - sum1);
+										}
+									}
+								}
+								Cart cart1 = FreeGivingAdapter.carts;
+								Log.i("voucher", cart1 + "   cart1");
+								if (null != cart1 && cart1.getUId() != null) {
+									mArrayList.add(cart1);
+								}
+								intent.putExtra("price", sumprice);
+								intent.putExtra("voucher", voucher);
+								intent.putExtra("jifen", sum1);
+
+								intent.putExtra("carts", mArrayList);
+								intent.putExtra("cartActivity", "E");
+								setResult(Consts.CstmPayActivity_Response,
+										intent);
+								ExchangeFreeActivity.this.finish();
+
 							}
-						}
-						Cart cart1 = FreeGivingAdapter.carts;
-						Log.i("voucher", cart1+"   cart1");
-						if (null != cart1 && cart1.getUId() != null) {
-							mArrayList.add(cart1);
-						}
-						intent.putExtra("price", sumprice);
-						intent.putExtra("voucher", voucher);
-						intent.putExtra("jifen", sum1);
-						
-						intent.putExtra("carts", mArrayList);
-						intent.putExtra("cartActivity", "E");
-						setResult(Consts.CstmPayActivity_Response, intent);
-						ExchangeFreeActivity.this.finish();
-					
-					}
-				})
-				.setNegativeButton(getResources().getString(R.string.cancel), null).create();				
+						})
+				.setNegativeButton(getResources().getString(R.string.cancel),
+						null).create();
 		if (mArrayList == null) {
 			Toast.makeText(ExchangeFreeActivity.this,
 					getResources().getString(R.string.no_network),
@@ -176,15 +190,15 @@ public class ExchangeFreeActivity extends BaseActivity {
 		InitWidth();
 		InitTextView();
 		InitViewPager();
-//		setActionBar();
+		// setActionBar();
 		setActionbarConfig();
 		setTitle(getResources().getString(R.string.produce_exchange));
-		
+
 		TextView tvComplete = (TextView) findViewById(R.id.ab_common_tv_right);
 		tvComplete.setVisibility(View.VISIBLE);
 		tvComplete.setText(R.string.complete);
 		tvComplete.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				dialog.show();
@@ -218,7 +232,8 @@ public class ExchangeFreeActivity extends BaseActivity {
 				intent.putExtra("cartActivity", "E");
 				bundle.putSerializable("carts", mArrayList);
 				intent.putExtras(bundle);
-				ExchangeFreeActivity.this.setResult(Consts.CstmPayActivity_Response, intent);
+				ExchangeFreeActivity.this.setResult(
+						Consts.CstmPayActivity_Response, intent);
 				ExchangeFreeActivity.this.finish();
 			}
 		});
@@ -228,14 +243,15 @@ public class ExchangeFreeActivity extends BaseActivity {
 			@Override
 			public void onClick(View arg0) {
 				dialog.show();
-				}
+			}
 		});
 
 	}
 
 	private void InitTextView() {
-		mIntegeral = (TextView) findViewById(R.id.pay_free_voucher_Coupons);
-		mCoupons = (TextView) findViewById(R.id.pay_free_voucher_mIntegeral);
+		mIntegeral = (TextView) findViewById(R.id.pay_free_voucher_Coupons);// 赠送
+		mCoupons = (TextView) findViewById(R.id.pay_free_voucher_mIntegeral);// 换购
+		mIntegeral.setSelected(true);
 		mCoupons.setOnClickListener(new MyOnClickListener(1));
 		mIntegeral.setOnClickListener(new MyOnClickListener(0));
 	}
@@ -243,7 +259,7 @@ public class ExchangeFreeActivity extends BaseActivity {
 	private void InitViewPager() {
 		mPager = (ViewPager) findViewById(R.id.avPager);
 		fragmentsList = new ArrayList<Fragment>();
-//		LayoutInflater mInflater = getLayoutInflater();
+		// LayoutInflater mInflater = getLayoutInflater();
 
 		Fragment freeGivingFragment = FreeGivingFragment
 				.newInstance("zengsong");
@@ -267,8 +283,8 @@ public class ExchangeFreeActivity extends BaseActivity {
 		int screenW = dm.widthPixels;// 屏幕的宽
 		offset = (int) ((screenW / 3 - bottomLineWidth) / 2);// 起始位置
 
-//		position_one = (int) (screenW / 3);
-//		position_two = position_one * 2;
+		// position_one = (int) (screenW / 3);
+		// position_two = position_one * 2;
 
 	}
 
@@ -293,27 +309,18 @@ public class ExchangeFreeActivity extends BaseActivity {
 			switch (arg0) {
 			case 0:// 假如是第一个被选中，添加事件
 				if (currIndex == 1) {// 当前是第二个
-					mIntegeral.setPressed(false);
-					mIntegeral
-							.setBackgroundResource(R.drawable.product_details_selected);
+					mCoupons.setSelected(false);
 					animation = new TranslateAnimation(position_one, 0, 0, 0);
-					mIntegeral.setTextColor(Color.parseColor("#702c91"));
 				}
-				mCoupons.setPressed(true);
-				mCoupons.setBackgroundResource(R.drawable.product_details_bg);
-				mCoupons.setTextColor(Color.parseColor("#ed217c"));
+				mIntegeral.setSelected(true);
 				break;
 			case 1:
 				if (currIndex == 0) {
-					mCoupons.setPressed(false);
-					mCoupons.setBackgroundResource(R.drawable.product_details_selected);
+					mIntegeral.setSelected(false);
 					animation = new TranslateAnimation(offset, position_one, 0,
 							0);
-					mCoupons.setTextColor(Color.parseColor("#702c91"));
 				}
-				mIntegeral.setPressed(true);
-				mIntegeral.setBackgroundResource(R.drawable.product_details_bg);
-				mIntegeral.setTextColor(Color.parseColor("#ed217c"));
+				mCoupons.setSelected(true);
 				break;
 
 			}
@@ -334,4 +341,10 @@ public class ExchangeFreeActivity extends BaseActivity {
 		}
 	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (!mArrayList.isEmpty())
+			mArrayList.clear();
+	}
 }

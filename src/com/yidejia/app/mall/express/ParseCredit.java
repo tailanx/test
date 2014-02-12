@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import com.yidejia.app.mall.model.Specials;
 import com.yidejia.app.mall.net.ImageUrl;
 

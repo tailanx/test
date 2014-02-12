@@ -3,8 +3,8 @@
     android:id="@+id/address_management_item_linearlayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:clickable="true"
+    android:orientation="vertical"
     android:paddingTop="@dimen/magin_left_add_add" >
 
     <RelativeLayout
@@ -86,18 +86,25 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:background="@drawable/layout_selector2" >
-        
-<!--             android:layout_toLeftOf="@id/tv_text_set_default"
- -->
+
+        <!-- android:layout_toLeftOf="@id/tv_text_set_default" -->
+
         <CheckBox
             android:id="@+id/address_management_item_relative1_checkBox1"
             style="@style/CustomCheckboxTheme"
+            android:layout_width="@dimen/item_goods_emulate_add"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textColor="@color/text_color_80" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/address_management_item_relative1_checkBox1"
+            android:layout_marginLeft="@dimen/item_goods_emulate_add"
             android:text="@string/addresss_default"
-            android:textSize="@dimen/textsize_small"
-            android:textColor="@color/text_color_80"
-            android:layout_centerVertical="true" />
+            android:textSize="@dimen/textsize_small" />
 
         <TextView
             android:id="@+id/address_management_item_relative1_textview1"
@@ -120,7 +127,6 @@
             android:background="@drawable/theme_textview_background_no_comment"
             android:text="@string/addresss_edit"
             android:textColor="@color/color_sort_text_color_press_add" />
-
     </RelativeLayout>
 
 </LinearLayout>

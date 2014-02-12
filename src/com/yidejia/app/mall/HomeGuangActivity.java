@@ -8,9 +8,11 @@ import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.yidejia.app.mall.qiandao.QiandaoActivity;
 import com.yidejia.app.mall.shark.TestSharkActivity;
+import com.yidejia.app.mall.view.LoginActivity;
 
 public class HomeGuangActivity extends HomeBaseActivity implements
 		OnClickListener {
@@ -51,29 +53,31 @@ public class HomeGuangActivity extends HomeBaseActivity implements
 		Intent intent = null;
 		switch (v.getId()) {
 		case R.id.iv_guang_qiandao:
-			if(!isLogin()) return; 
 			intent = new Intent();
 			intent.setClass(this, QiandaoActivity.class);
+			if (isLogin()) {
+				startActivity(intent);
+			}
 			break;
 
 		case R.id.iv_guang_yaoyiyao:
-			if(!isLogin()) return;
 			intent = new Intent();
 			intent.setClass(this, TestSharkActivity.class);
+			if (isLogin()) {
+				startActivity(intent);
+			}
 			break;
 		}
-		if (null == intent)
-			return;
-		startActivity(intent);
 	}
-
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 	}
+
 	@Override
 	protected void onPause() {
 		super.onPause();
 	}
+
 }

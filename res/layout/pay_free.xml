@@ -12,23 +12,35 @@
 
         <TextView
             android:id="@+id/pay_free_voucher_Coupons"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/width"
             android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:background="@drawable/product_details_selected"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_marginTop="@dimen/width_add"
+            android:layout_weight="1"
+            android:background="@drawable/selecter_bg_sort_sell"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center"
-            android:text="免费赠送"
-            android:textColor="#702c91" />
+            android:text="@string/free_zengsong"
+            android:textColor="@color/color_sort_text_color"
+            android:textSize="@dimen/textsize_small" />
 
         <TextView
             android:id="@+id/pay_free_voucher_mIntegeral"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/width"
             android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:background="@drawable/produce_textview_selector"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/margin_left"
+            android:layout_marginTop="@dimen/width_add"
+            android:layout_weight="1"
+            android:background="@drawable/selecter_bg_sort_popular"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center"
-            android:text="换购商品"
-            android:textColor="#ed217c" />
+            android:text="@string/free_huangou"
+            android:textColor="@color/color_sort_text_color"
+            android:textSize="@dimen/textsize_small" />
     </LinearLayout>
 
     <RelativeLayout

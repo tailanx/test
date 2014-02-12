@@ -44,36 +44,12 @@
 
                 <include layout="@layout/main_function" />
             </RelativeLayout>
-<!-- 
-            <RelativeLayout
-                android:id="@+id/notice_parent_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/function_parent_layout"
-                android:layout_marginTop="10dp" >
-
-                <TextView
-                    android:id="@+id/main_mall_notice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/main_mall_notice_text" />
-
-                <TextView
-                    android:id="@+id/main_mall_notice_content"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/main_mall_notice"
-                    android:ellipsize="end"
-                    android:singleLine="true"
-                    android:text="jlkjlkj" />
-            </RelativeLayout>
- -->
 
             <RelativeLayout
                 android:id="@+id/hot_mall_parent_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/notice_parent_layout"
+                android:layout_below="@id/function_parent_layout"
                 android:padding="5dp" >
 
                 <include layout="@layout/main_hot_sell" />
