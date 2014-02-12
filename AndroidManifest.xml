@@ -28,7 +28,7 @@
     <application
         android:name="com.yidejia.app.mall.MyApplication"
         android:allowBackup="true"
-        android:debuggable="true"
+        android:debuggable="false"
         android:icon="@drawable/ydj_icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
@@ -129,6 +129,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.yidejia.app.mall.GuideActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask" />
         <activity
             android:name="com.yidejia.app.mall.view.UserPayActivity"
             android:screenOrientation="portrait"

@@ -62,12 +62,15 @@ public class HomeMallActivity extends HomeBaseActivity {
 	// 设置随心逛组
 	private ArrayList<MainProduct> sxgProducts;
 
-	// private boolean isFrist = true;
+	private boolean isAppFrist;	//是否为新用户第一次启动app
 
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		isAppFrist = getIntent().getBooleanExtra("isFirstStart", false);
+		
 		setContentView(R.layout.activity_main_fragment_layout);
 		// 实例化组件
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
@@ -88,9 +91,15 @@ public class HomeMallActivity extends HomeBaseActivity {
 		screenHeight = (int) ((screenWidth / 320f) * 160f) - 250;
 	}
 
+	/**获取首页数据**/
 	private void getMainData() {
-		
-		if(!ConnectionDetector.isConnectingToInternet(this)) return;
+		//判断是否连接网络
+		if(!ConnectionDetector.isConnectingToInternet(this)) {
+			if(isAppFrist){
+				Toast.makeText(this, getString(R.string.no_network), Toast.LENGTH_SHORT).show();
+			}
+			return;
+		}
 		
 		String url = new JNICallBack().getHttp4GetHome();
 
@@ -248,6 +257,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
+				if(!isLogin()) return;
 				Intent intentOrder = new Intent(HomeMallActivity.this,
 						MsgActivity.class);
 				HomeMallActivity.this.startActivity(intentOrder);

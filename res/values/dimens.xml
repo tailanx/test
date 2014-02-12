@@ -56,5 +56,7 @@
     <dimen name="width_add_fun">-1dp</dimen>
     <dimen name="width_fu_add">-35dp</dimen>
     <dimen name="width_fu">-45dp</dimen>
+    <!-- 消息中心item的分割距离 -->
+    <dimen name="msg_div">10dp</dimen>
 
 </resources>

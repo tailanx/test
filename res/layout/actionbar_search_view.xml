@@ -13,28 +13,25 @@
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
         android:layout_marginBottom="6dp"
-        android:layout_marginRight="8dip"
         android:layout_marginTop="6dp"
         android:clickable="true"
         android:background="@color/theme"
         android:text="@string/searchLabel"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textSize="@dimen/textsize_big" />
     <TextView 
         android:id="@+id/search_back_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
         android:gravity="center"
-        android:layout_marginBottom="6dp"
-        android:layout_marginLeft="3dip"
-        android:layout_marginTop="6dp"
-       	android:text="@string/back"
-       	android:textColor="@color/white"
-       	android:textSize="@dimen/textsize_big"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="@drawable/bg_abs_text"
         android:clickable="true"
+        android:text="@string/back"
+        android:textColor="@color/color_sort_text_color_press"
+        android:textSize="@dimen/textsize_big"
          />
 
     <EditText
