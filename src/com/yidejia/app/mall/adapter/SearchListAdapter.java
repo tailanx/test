@@ -84,6 +84,7 @@ public class SearchListAdapter extends BaseAdapter {
 			holder.tv_title.setText(mContext.getResources().getString(R.string.filter_all));
 			holder.tv_desc.setText("全类目/妍诗美/妍膳美");
 			holder.iv_icon.setImageResource(R.drawable.all_category);
+			ImageLoader.getInstance().displayImage("", holder.iv_icon, MyApplication.getInstance().initSearchCategoryOption(), MyApplication.getInstance().getImageLoadingListener());
 			return convertView;
 		}
 		if(isEmpty);
@@ -91,7 +92,7 @@ public class SearchListAdapter extends BaseAdapter {
 		else {
 			holder.tv_title.setText(functions.get(position - 1).getFunName());
 			holder.tv_desc.setText(functions.get(position - 1).getDesc());
-			ImageLoader.getInstance().displayImage(functions.get(position - 1).getImgUrl(), holder.iv_icon, MyApplication.getInstance().initGoodsImageOption(), MyApplication.getInstance().getImageLoadingListener());
+			ImageLoader.getInstance().displayImage(functions.get(position - 1).getImgUrl(), holder.iv_icon, MyApplication.getInstance().initSearchCategoryOption(), MyApplication.getInstance().getImageLoadingListener());
 		}
 		return convertView;
 	}
