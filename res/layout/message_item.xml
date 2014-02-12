@@ -2,13 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingTop="@dimen/msg_div"
     android:clickable="true" >
 
     <RelativeLayout
         android:id="@+id/message_item_relateview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/msg_topbg" >
+        android:padding="8dp"
+        android:background="@drawable/bg_common_top_btm" >
 
         <TextView
             android:id="@+id/message_textview2"
@@ -16,18 +18,17 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="8dp"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/message_item_textview1"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/message_textview2"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/message_textview2"
+            android:layout_alignParentLeft="true"
             android:ellipsize="end"
-            android:padding="8dp"
             android:shadowColor="#00f"
             android:singleLine="true"
             android:textSize="20sp" />
@@ -35,12 +36,11 @@
 
     <TextView
         android:id="@+id/message_textview4"
+        android:layout_marginTop="-1dp"
         android:layout_below="@id/message_item_relateview"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:background="@drawable/msg_downbg"
+        android:background="@drawable/bg_common_btm"
         android:padding="8dp"
         android:textSize="18sp" />
 
