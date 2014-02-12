@@ -248,6 +248,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
+				if(!isLogin()) return;
 				Intent intentOrder = new Intent(HomeMallActivity.this,
 						MsgActivity.class);
 				HomeMallActivity.this.startActivity(intentOrder);
