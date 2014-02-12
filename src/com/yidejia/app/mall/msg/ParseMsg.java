@@ -50,7 +50,7 @@ public class ParseMsg {
 					String strTime = respObject.optString("created");
 					try {
 						long time = Long.parseLong(strTime);
-						msgCenter.setTime(TimeUtil.convert(time));
+						msgCenter.setTime(TimeUtil.converDate(time));
 					} catch (NumberFormatException e) {
 					}
 					msgs.add(msgCenter);
@@ -81,7 +81,7 @@ public class ParseMsg {
 			if (1 == code) {
 				String strResp = httpObject.optString("response");
 
-				MsgCenter msgCenter = new MsgCenter();
+				msgCenter = new MsgCenter();
 				JSONObject respObject = new JSONObject(strResp);
 				String id = respObject.optString("id");
 				msgCenter.setMsgid(id);
@@ -91,6 +91,13 @@ public class ParseMsg {
 				msgCenter.setTitle(unicode.revert(title));
 				String msgContent = respObject.optString("txt_content");
 				msgCenter.setMsg(msgContent);
+				
+				String strTime = respObject.optString("created");
+				try {
+					long time = Long.parseLong(strTime);
+					msgCenter.setTime(TimeUtil.convertMill(time));
+				} catch (NumberFormatException e) {
+				}
 				return true;
 			} else {
 				errMsg = httpObject.optString("msg");
