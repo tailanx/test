@@ -19,6 +19,7 @@ import com.opens.asyncokhttpclient.AsyncHttpResponse;
 import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.net.ConnectionDetector;
+import com.yidejia.app.mall.util.SharedPreferencesUtil;
 
 public class WelcomeActivity extends Activity {
 
@@ -30,6 +31,8 @@ public class WelcomeActivity extends Activity {
 	private String version;
 	private String title;
 	private String message = "";
+	
+	private boolean isFirstIn = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,12 @@ public class WelcomeActivity extends Activity {
 		StatService.setAppChannel(this, "", false);
 		StatService.setSessionTimeOut(30);
 		StatService.setLogSenderDelayed(10);
+		
+		if(isFirstStart()){
+			go2Guide();
+			return;
+		}
+		
 		if (ConnectionDetector.isConnectingToInternet(this)) {
 			checkUpdate();
 		} else {
@@ -54,6 +63,25 @@ public class WelcomeActivity extends Activity {
 			go2MainAct();
 		}
 
+	}
+	
+	private boolean isFirstStart(){
+		SharedPreferencesUtil spUtil = new SharedPreferencesUtil(this);
+		isFirstIn = spUtil.getData("appFirstStart", "isFirstStart", true);
+		return isFirstIn;
+	}
+	
+	private void go2Guide(){
+		new Handler().postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				Intent intent = new Intent(WelcomeActivity.this,
+						GuideActivity.class);
+				startActivity(intent);
+				WelcomeActivity.this.finish();
+			}
+		}, 1 * 1500);
 	}
 
 	/**检查更新**/
