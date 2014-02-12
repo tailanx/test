@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.TextView;
 
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.VoucherDataManage;
@@ -82,8 +83,15 @@ public class IntegeralFragment extends Fragment {
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		StatService.onPageStart(this.getActivity(), "欢迎界面页面");
+	}
+
+	@Override
 	public void onPause() {
 		super.onPause();
+		StatService.onPageEnd(this.getActivity(), "欢迎界面页面");
 	}
 
 	@Override

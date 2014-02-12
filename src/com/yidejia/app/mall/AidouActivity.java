@@ -1,5 +1,7 @@
 package com.yidejia.app.mall;
 
+import com.baidu.mobstat.StatService;
+
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.widget.TextView;
@@ -27,5 +29,17 @@ public class AidouActivity extends BaseActivity {
 		webView.setBackgroundColor(0);
 		webView.setBackgroundColor(getResources().getColor(R.color.white));
 		webView.loadUrl("http://m.yidejia.com/regterms.html");
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		StatService.onPageStart(this, "我的爱豆页面");
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		StatService.onPageEnd(this, "我的爱豆页面");
 	}
 }

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
@@ -139,5 +140,17 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		StatService.onPageStart(this, "签到页面");
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		StatService.onPageEnd(this, "签到页面");
 	}
 }

@@ -156,16 +156,14 @@ public class SkinHomeActivity extends Activity implements OnClickListener {
 	}
 
 	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		StatService.onPause(this);
+	protected void onResume() {
+		super.onResume();
+		StatService.onPageStart(this, "皮肤测试首页页面");
 	}
 
 	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		StatService.onResume(this);
+	protected void onPause() {
+		super.onPause();
+		StatService.onPageEnd(this, "皮肤测试首页页面");
 	}
 }

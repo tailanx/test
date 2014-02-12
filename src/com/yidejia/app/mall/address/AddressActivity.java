@@ -15,6 +15,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.baidu.mobstat.StatService;
 //import com.actionbarsherlock.app.SherlockActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 //import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
@@ -252,4 +254,15 @@ public class AddressActivity extends BaseActivity {
 //	private boolean isNomore = false;
 	private boolean isFirstIn = true;
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		StatService.onPageStart(this, "地址管理页面");
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		StatService.onPageEnd(this, "地址管理页面");
+	}
 }

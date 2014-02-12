@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -423,4 +424,15 @@ public class MyCollectActivity extends BaseActivity {
 		});
 	}
 	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		StatService.onPageStart(this, "我的收藏页面");
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		StatService.onPageEnd(this, "我的收藏页面");
+	}
 }

@@ -2,6 +2,7 @@ package com.yidejia.app.mall.msg;
 
 import android.os.Bundle;
 
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.util.HttpClientUtil;
@@ -37,5 +38,17 @@ public class MsgDetailsActivity extends BaseActivity{
 				//TODO
 			}
 		});
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		StatService.onPageStart(this, "消息详情页面");
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		StatService.onPageEnd(this, "消息详情页面");
 	}
 }

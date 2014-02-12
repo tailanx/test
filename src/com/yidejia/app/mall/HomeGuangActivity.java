@@ -8,11 +8,10 @@ import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.qiandao.QiandaoActivity;
 import com.yidejia.app.mall.shark.TestSharkActivity;
-import com.yidejia.app.mall.view.LoginActivity;
 
 public class HomeGuangActivity extends HomeBaseActivity implements
 		OnClickListener {
@@ -73,11 +72,13 @@ public class HomeGuangActivity extends HomeBaseActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
+		StatService.onPageStart(this, "逛发现页面");
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
+		StatService.onPageEnd(this, "逛发现页面");
 	}
 
 }

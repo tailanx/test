@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
 
@@ -143,4 +144,15 @@ public class YirihuiActivity extends SherlockFragmentActivity {
 		}
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		StatService.onPageStart(this, "伊日惠活动页面");
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		StatService.onPageEnd(this, "伊日惠活动页面");
+	}
 }

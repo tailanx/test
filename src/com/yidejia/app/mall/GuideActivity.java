@@ -1,5 +1,6 @@
 package com.yidejia.app.mall;
 
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.util.SharedPreferencesUtil;
 import com.yidejia.app.mall.widget.YLViewPager;
 
@@ -122,6 +123,18 @@ public class GuideActivity extends Activity{
 			currentId = index % images.length;
 		}
 
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		StatService.onPageStart(this, "引导页面");
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		StatService.onPageEnd(this, "引导页面");
 	}
 	
 }

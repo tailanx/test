@@ -17,7 +17,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
@@ -176,14 +175,14 @@ public class SearchActivity extends SherlockFragmentActivity {
 	private ArrayAdapter<String> adapter;
 
 	@Override
-	protected void onPause() {
-		super.onPause();
-		StatService.onPause(this);
+	protected void onResume() {
+		super.onResume();
+		StatService.onPageStart(this, "搜索页面");
 	}
 
 	@Override
-	protected void onResume() {
-		super.onResume();
-		StatService.onResume(this);
+	protected void onPause() {
+		super.onPause();
+		StatService.onPageEnd(this, "搜索页面");
 	}
 }

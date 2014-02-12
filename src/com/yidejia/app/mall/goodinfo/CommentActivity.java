@@ -216,14 +216,14 @@ public class CommentActivity extends BaseActivity  {
 	};
 	
 	@Override
-	public void onPause() {
-		super.onPause();
-		StatService.onPause(this);
+	protected void onResume() {
+		super.onResume();
+		StatService.onPageStart(this, "商品评论页面");
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
-		StatService.onResume(this);
+	protected void onPause() {
+		super.onPause();
+		StatService.onPageEnd(this, "商品评论页面");
 	}
 }

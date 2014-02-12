@@ -8,6 +8,8 @@
 
 package com.yidejia.app.mall.wxapi;
 
+import com.baidu.mobstat.StatService;
+
 import android.content.Intent;
 import android.widget.Toast;
 import cn.sharesdk.wechat.utils.WXAppExtendObject;
@@ -43,6 +45,18 @@ public class WXEntryActivity extends WechatHandlerActivity {
 			WXAppExtendObject obj = (WXAppExtendObject) msg.mediaObject;
 			Toast.makeText(this, obj.extInfo, Toast.LENGTH_SHORT).show();
 		}
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		StatService.onPageStart(this, "微信回调页面");
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		StatService.onPageEnd(this, "微信回调页面");
 	}
 
 }
