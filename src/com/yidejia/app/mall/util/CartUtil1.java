@@ -376,25 +376,13 @@ public class CartUtil1 {
 											map.put("count", (float) 0);
 											boolean isDel = dataManage
 													.delCart(cart.getUId());
-											list1.remove(which);
+											list1.remove(map1);
 											dialog.dismiss();
-											
+
 											Message ms1 = new Message();
 											ms1.what = 125;
 											mList.remove(checkBox);
 											handler.sendMessage(ms1);
-
-											// Intent intent1 = null;
-											// if (dataManage.getCartAmount() ==
-											// 0) {
-											// intent1 = new Intent(
-											// Consts.BROAD_UPDATE_CHANGE);
-											// } else {
-											// intent1 = new Intent(
-											// Consts.UPDATE_CHANGE);
-											// }
-											// activity.sendBroadcast(intent1);
-
 											break;
 
 										case 1:
@@ -485,7 +473,7 @@ public class CartUtil1 {
 											R.string.mix), Toast.LENGTH_LONG)
 									.show();
 						} else {
-							cart.setSalledAmmount(cart.getAmount()-1);
+							cart.setSalledAmmount(cart.getAmount() - 1);
 							sum--;
 							number.setText(sum + "");
 
@@ -514,7 +502,7 @@ public class CartUtil1 {
 											R.string.price_error),
 									Toast.LENGTH_LONG).show();
 						} else {
-							cart.setSalledAmmount(cart.getAmount()+1);
+							cart.setSalledAmmount(cart.getAmount() + 1);
 							sum++;
 							number.setText(sum + "");
 						}

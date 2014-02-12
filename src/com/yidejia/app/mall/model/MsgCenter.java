@@ -9,6 +9,7 @@ public class MsgCenter {
 	private String isread;//是否已读
 	private String url;//改消息内容的url
 	private String time;//发送时间
+	private String subject;	//摘要
 	
 	public void setMsgid(String msgid){
 		this.msgid = msgid;
@@ -64,5 +65,12 @@ public class MsgCenter {
 	}
 	public String getTime(){
 		return time;
+	}
+	
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 }

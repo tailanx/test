@@ -5,24 +5,26 @@
     android:background="@color/main_bg"
     android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/no_produce_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:contentDescription="@string/yidejia"
-        android:src="@drawable/gouwuche" />
-
     <TextView
         android:id="@+id/no_produce_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/no_produce_image"
-        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
         android:layout_marginTop="@dimen/margin_left"
         android:text="@string/cart_no_produce"
         android:textColor="@color/theme"
         android:textSize="@dimen/textsize_small" />
+    
+    
+    <ImageView
+        android:id="@+id/no_produce_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/no_produce_textview"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/yidejia"
+        android:src="@drawable/gouwuche" />
+    
 
     <Button
         android:id="@+id/no_produce_button"

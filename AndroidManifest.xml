@@ -135,7 +135,10 @@
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.yidejia.app.mall.PersonActivity"
+            android:name="com.yidejia.app.mall.msg.MsgActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yidejia.app.mall.msg.MsgDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.yidejia.app.mall.order.ExchangeActivity"
@@ -164,7 +167,7 @@
             android:name="com.yidejia.app.mall.view.IntegeralActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yidejia.app.mall.MyCollectActivity"
+            android:name="com.yidejia.app.mall.favorite.MyCollectActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.yidejia.app.mall.address.AddressActivity"

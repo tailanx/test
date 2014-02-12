@@ -1,4 +1,4 @@
-package com.yidejia.app.mall;
+package com.yidejia.app.mall.favorite;
 
 import java.util.ArrayList;
 
@@ -25,9 +25,13 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.opens.asyncokhttpclient.AsyncHttpResponse;
 import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.opens.asyncokhttpclient.RequestParams;
+import com.yidejia.app.mall.BaseActivity;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.R.id;
+import com.yidejia.app.mall.R.layout;
+import com.yidejia.app.mall.R.string;
 import com.yidejia.app.mall.adapter.FavoriteAdapter;
-import com.yidejia.app.mall.favorite.ParseFavJson;
 import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.SearchItem;

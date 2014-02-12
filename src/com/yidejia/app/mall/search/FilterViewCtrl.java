@@ -13,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
@@ -182,10 +183,10 @@ public class FilterViewCtrl {
 	
 private int groudLastIndex = -1;
 	
-	private Button filter_complete;
+	private TextView filter_complete;
 	private Button filter_clear_conditions;
 	private void initTopView(View view){
-		filter_complete = (Button) view.findViewById(R.id.filter_complete);
+		filter_complete = (TextView) view.findViewById(R.id.filter_complete);
 		filter_clear_conditions = (Button) view.findViewById(R.id.filter_clear_conditions);
 		filter_clear_conditions.setOnClickListener(new OnClickListener() {
 			

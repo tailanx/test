@@ -41,6 +41,7 @@
         android:layout_height="120dp"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@id/free_giving_item_checkbox"
+        android:layout_marginLeft="@dimen/item_goods_emulate_add"
         android:background="@drawable/product_image_bg"
         android:padding="10dp"  />
 

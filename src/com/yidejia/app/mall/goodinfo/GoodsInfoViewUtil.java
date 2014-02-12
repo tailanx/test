@@ -323,15 +323,12 @@ public class GoodsInfoViewUtil {
 
 		@Override
 		public void onClick(View v) {
-			if (!MyApplication.getInstance().getIsLogin()) {
-				// Toast.makeText(activity,
-				// activity.getString(R.string.please_login),
-				// Toast.LENGTH_SHORT).show();
-				Toast.makeText(activity, "请先登录！", Toast.LENGTH_SHORT).show();
-				return;
+			if(activity instanceof GoodsInfoActivity){
+				if(((GoodsInfoActivity)activity).isLogin()){
+					isFavClick = true;
+					checkFavIsExsist();
+				}
 			}
-			isFavClick = true;
-			checkFavIsExsist();
 		}
 	};
 

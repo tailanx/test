@@ -1,4 +1,4 @@
-package com.yidejia.app.mall.signup;
+package com.yidejia.app.mall.qiandao;
 
 import org.json.JSONException;
 import org.json.JSONObject;

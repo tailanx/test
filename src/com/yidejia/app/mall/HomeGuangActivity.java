@@ -80,18 +80,4 @@ public class HomeGuangActivity extends HomeBaseActivity implements
 		super.onPause();
 	}
 
-	/** 检查是否已登录 **/
-	private boolean isLogin() {
-		if (!MyApplication.getInstance().getIsLogin()) {
-			Toast.makeText(this,
-					getResources().getString(R.string.please_login),
-					Toast.LENGTH_LONG).show();
-			Intent intent1 = new Intent(HomeGuangActivity.this,
-					LoginActivity.class);
-			startActivity(intent1);
-			return false;
-		}
-
-		return true;
-	}
 }

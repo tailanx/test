@@ -1,15 +1,17 @@
 package com.yidejia.app.mall.phone;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
 
-public class ContactSureActivity extends Activity implements OnClickListener {
+public class ContactSureActivity extends BaseActivity implements OnClickListener {
 
 	private RelativeLayout zhifubao;// 支付宝
 	private RelativeLayout wangyezhifubao;// 支付宝网页
@@ -19,14 +21,28 @@ public class ContactSureActivity extends Activity implements OnClickListener {
 	private CheckBox cb_wangye;// 支付宝网页的选择框
 	private CheckBox cb_caifutong;// 财付通的选择框
 	private CheckBox cb_yinlian;// 银联的选择框
+	private TextView tvDetails;	//产品信息view
+	private TextView tvPhone;	//充值号码view
+	private TextView tvPrice;	//应付金额view
+	
+	private String details;	//产品信息
+	private String phone;	//充值号码
+	private String price;	//应付金额
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		
+		setActionbarConfig();
+		setTitle(R.string.comfirm_order);
+		
+		Intent intent = getIntent();
+		details = intent.getStringExtra("details");
+		phone = intent.getStringExtra("phone");
+		price = intent.getStringExtra("price");
+		
 		setContentView(R.layout.contact_detail);
 		initview();
-		cb_zhifubao.setChecked(true);
 	}
 
 	/**
@@ -41,12 +57,22 @@ public class ContactSureActivity extends Activity implements OnClickListener {
 		cb_wangye = (CheckBox) findViewById(R.id.zhufubaowangye_checkbox);
 		cb_caifutong = (CheckBox) findViewById(R.id.caifutong_checkbox);
 		cb_yinlian = (CheckBox) findViewById(R.id.yinlian_checkbox);
+		
+		cb_caifutong.setChecked(true);
 
 		// 添加点击事件
 		zhifubao.setOnClickListener(this);
 		wangyezhifubao.setOnClickListener(this);
 		caifutong.setOnClickListener(this);
 		yinlian.setOnClickListener(this);
+		
+		tvDetails = (TextView) findViewById(R.id.tv_contact_name);
+		tvPhone = (TextView) findViewById(R.id.tv_contact_number);
+		tvPrice = (TextView) findViewById(R.id.tv_contact_sum);
+		
+		tvDetails.setText(details);
+		tvPhone.setText(phone);
+		tvPrice.setText(price);
 	}
 
 	@Override

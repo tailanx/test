@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_left"
                 android:layout_toRightOf="@id/tv_contact_detail_d1"
-                android:text="@string/phone_new" />
+                 />
         </RelativeLayout>
 
         <RelativeLayout
@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_left"
-                android:text="@string/phone_new" />
+                android:text="@string/phone_data" />
 
             <TextView
                 android:id="@+id/tv_contact_number"
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_left"
                 android:layout_toRightOf="@id/tv_contact_detail_d2"
-                android:text="@string/phone_data" />
+                 />
         </RelativeLayout>
 
         <RelativeLayout
@@ -77,7 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_left"
-                android:text="@string/phone_new" />
+                android:text="@string/phone_sum" />
 
             <TextView
                 android:id="@+id/tv_contact_sum"
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_left"
                 android:layout_toRightOf="@id/tv_contact_detail_d3"
-                android:text="@string/phone_sum" />
+                 />
         </RelativeLayout>
 
         <TextView
@@ -103,6 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:clickable="true"
                 android:layout_marginTop="@dimen/margin_left_add"
                 android:padding="@dimen/actiobar_margin_top" >
 
@@ -144,7 +145,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/width_fu_add"
-                    android:clickable="true" />
+                    android:clickable="false" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -166,6 +167,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:clickable="true"
                 android:padding="@dimen/actiobar_margin_top" >
 
                 <ImageView
@@ -207,7 +209,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/width_fu_add"
-                    android:clickable="true" />
+                    android:clickable="false" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -228,6 +230,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:clickable="true"
                 android:padding="@dimen/actiobar_margin_top" >
 
                 <ImageView
@@ -268,7 +271,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/width_fu_add"
-                    android:clickable="true" />
+                    android:clickable="false" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -289,6 +292,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:clickable="true"
                 android:padding="@dimen/actiobar_margin_top" >
 
                 <ImageView
@@ -329,7 +333,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/width_fu_add"
-                    android:clickable="true" />
+                    android:clickable="false" />
             </RelativeLayout>
 
             <RelativeLayout

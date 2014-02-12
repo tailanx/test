@@ -6,17 +6,15 @@
 
     <ImageView
         android:id="@+id/iv_search_icon"
-        android:layout_width="@dimen/base_info_match"
-        android:layout_height="@dimen/base_info_match"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignParentLeft="true"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/margin_left"
         android:contentDescription="@string/yidejia"
         android:gravity="center"
-        android:paddingBottom="@dimen/margin_left"
-        android:paddingTop="@dimen/margin_left"
-        android:src="@drawable/user_head" />
+        android:src="@drawable/all_category" />
 
     <LinearLayout
         android:layout_width="wrap_content"

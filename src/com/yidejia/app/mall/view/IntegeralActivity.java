@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.yidejia.app.mall.BaseActivity;
 //import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.datamanage.VoucherDataManage;
 import com.yidejia.app.mall.fragment.IntegeralFragment;
 
 public class IntegeralActivity extends BaseActivity implements OnClickListener {
@@ -26,7 +25,7 @@ public class IntegeralActivity extends BaseActivity implements OnClickListener {
 	private int currentId;// 设置当前id；
 	private TextView integeralTextView;// 积分
 	private TextView youhuiquanTexView;// 优惠券
-	private VoucherDataManage voucherDataManage;// 积分接口
+//	private VoucherDataManage voucherDataManage;// 积分接口
 	// private MyApplication myApplication;
 	// private WebView webView;
 	private Fragment fragment;
@@ -72,9 +71,7 @@ public class IntegeralActivity extends BaseActivity implements OnClickListener {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		if (voucherDataManage != null) {
-			voucherDataManage.cancelTask();
-		}
+		
 	}
 
 	// /**
