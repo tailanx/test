@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/re_go_pay_iv_zhifubao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/magin_left_add_add"
+        android:background="@color/white" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/filter_line"
+            android:contentDescription="@string/yidejia" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/go_pay_zhifubao_relative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:clickable="true"
+        android:padding="@dimen/head_padding" >
+
+        <ImageView
+            android:id="@+id/go_pay_zhifubao_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/alipay_app" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/go_pay_zhifubao_image"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/go_pay_zhifubao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="支付宝客户端"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="需安装支付宝手机钱包客户端"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/zhifubao_checkbox"
+            style="@style/CustomCheckboxTheme"
+            android:layout_width="@dimen/base_info_match_add"
+            android:layout_height="@dimen/margin_top"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/width_fu_add"
+            android:clickable="false" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/re_go_pay_iv_zhifubao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/all_buy_produce_right"
+            android:background="@drawable/filter_line"
+            android:contentDescription="@string/yidejia" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/go_pay_zhifubao_wangyezhifu_relative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:clickable="true"
+        android:padding="@dimen/head_padding" >
+
+        <ImageView
+            android:id="@+id/go_pay_zhifubao_wangyezhifu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:contentDescription="@string/yidejia"
+            android:src="@drawable/alipay" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/go_pay_zhifubao_wangyezhifu"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/go_pay_zhifubaowangye"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="支付宝网页支付"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="可银行卡支付"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/zhufubaowangye_checkbox"
+            style="@style/CustomCheckboxTheme"
+            android:layout_width="@dimen/base_info_match_add"
+            android:layout_height="@dimen/margin_top"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/width_fu_add"
+            android:clickable="false" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/width_add"
+            android:layout_marginLeft="@dimen/all_buy_produce_right"
+            android:background="@drawable/filter_line"
+            android:contentDescription="@string/yidejia" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/go_pay_zhifubao_caifutong_relative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:clickable="true"
+        android:padding="@dimen/head_padding" >
+
+        <ImageView
+            android:id="@+id/go_pay_zhifubao_caifutong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/tenpay" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/go_pay_zhifubao_caifutong"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/go_pay_zhifubaowangye"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="财付通支付"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="可银行卡支付"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/caifutong_checkbox"
+            style="@style/CustomCheckboxTheme"
+            android:layout_width="@dimen/base_info_match_add"
+            android:layout_height="@dimen/margin_top"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/width_fu_add"
+            android:checked="true"
+            android:clickable="false" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/width_add"
+            android:layout_marginLeft="@dimen/all_buy_produce_right"
+            android:background="@drawable/filter_line"
+            android:contentDescription="@string/yidejia" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/go_pay_zhifubao_yinlian_relative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:clickable="true"
+        android:padding="@dimen/head_padding" >
+
+        <ImageView
+            android:id="@+id/go_pay_zhifubao_yinlian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/unionpay" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/go_pay_zhifubao_yinlian"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/go_pay_yinlianzhifu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="银联支付"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="可银联卡支付"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/yinlian_checkbox"
+            style="@style/CustomCheckboxTheme"
+            android:layout_width="@dimen/base_info_match_add"
+            android:layout_height="@dimen/margin_top"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/width_fu_add"
+            android:clickable="false" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/width_add"
+            android:background="@drawable/filter_line"
+            android:contentDescription="@string/yidejia" />
+    </RelativeLayout>
+
+</LinearLayout>

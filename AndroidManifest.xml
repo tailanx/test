@@ -335,6 +335,11 @@
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
+            android:name="com.yidejia.app.mall.view.ChangePayActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.yidejia.app.mall.pay.DeliveryActivity"
             android:screenOrientation="portrait" />
 

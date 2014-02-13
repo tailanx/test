@@ -32,22 +32,25 @@ import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.util.Consts;
+import com.yidejia.app.mall.view.ChangePayActivity;
 
-public class OrderDetailActivity extends BaseActivity {
+public class OrderDetailActivity extends BaseActivity implements
+		OnClickListener {
 	private LinearLayout layout;// 订单内容
-	private TextView emsTextView;//快递费
-	private TextView sumTextView;//总共的价格
-	private TextView orderTime;//下单时间
-	private TextView nameTextView;//收件人姓名
-	private TextView phoneTextView;//收件人电话
-	private TextView detailTextView;//收件人地址
-	private TextView priceTextView;//订单物品价格
-	private TextView payButton;//立即付款
-	private TextView orderNumber;//订单的编号
-	private TextView changePayTypeTextView;//支付方式修改
-	private RelativeLayout orderAddressLayout;//收件人地址的布局
+	private TextView emsTextView;// 快递费
+	private TextView sumTextView;// 总共的价格
+	private TextView orderTime;// 下单时间
+	private TextView nameTextView;// 收件人姓名
+	private TextView phoneTextView;// 收件人电话
+	private TextView detailTextView;// 收件人地址
+	private TextView priceTextView;// 订单物品价格
+	private TextView payButton;// 立即付款
+	private TextView orderNumber;// 订单的编号
+	private TextView changePayTypeTextView;// 支付方式修改
+	private RelativeLayout orderAddressLayout;// 收件人地址的布局
 	private String orderCode;// 传递过来的订单号
 	private String orderPrice;// 传递过来的价格总数
+	private RelativeLayout changePay;// 更改支付方式
 
 	private String TAG = getClass().getName();
 
@@ -59,9 +62,9 @@ public class OrderDetailActivity extends BaseActivity {
 		setActionbarConfig();
 		setTitle(R.string.order_detail);
 		setContentView(R.layout.order_detail);
-		
+
 		findIds();
-		
+
 		initDisplayImageOption();
 
 		Intent intent = getIntent();
@@ -69,19 +72,19 @@ public class OrderDetailActivity extends BaseActivity {
 		orderPrice = intent.getExtras().getString("OrderPrice");
 		ArrayList<Cart> carts = (ArrayList<Cart>) intent
 				.getSerializableExtra("carts");
-		
+
 		Log.i("info", orderCode + "   orderCode");
-		
 
 		layout = (LinearLayout) findViewById(R.id.order_detail_relative2);
 
-		if(null == carts) {
-			Toast.makeText(OrderDetailActivity.this, "购物清单为空", Toast.LENGTH_SHORT).show();
+		if (null == carts) {
+			Toast.makeText(OrderDetailActivity.this, "购物清单为空",
+					Toast.LENGTH_SHORT).show();
 			return;
 		}
-		
+
 		int length = carts.size();
-		for (int i = 0; i < length; i++) {	//加载购物清单界面
+		for (int i = 0; i < length; i++) { // 加载购物清单界面
 			View view = getLayoutInflater().inflate(R.layout.order_detail_item,
 					null);
 			final Cart cart = carts.get(i);
@@ -102,8 +105,8 @@ public class OrderDetailActivity extends BaseActivity {
 		}
 		getData();
 	}
-	
-	private void findIds(){
+
+	private void findIds() {
 		orderTime = (TextView) findViewById(R.id.order_detail_time_number);
 		emsTextView = (TextView) findViewById(R.id.order_detail_yunhui_sum);
 		nameTextView = (TextView) findViewById(R.id.order_detail_name);
@@ -116,7 +119,10 @@ public class OrderDetailActivity extends BaseActivity {
 		orderNumber = (TextView) findViewById(R.id.order_detail_biaohao_number);
 		orderTime = (TextView) findViewById(R.id.order_detail_time_number);
 		changePayTypeTextView = (TextView) findViewById(R.id.change_pay_type);
-//		orderAddressLayout = (RelativeLayout) findViewById(R.id.order_address_layout);
+		changePay = (RelativeLayout) findViewById(R.id.re_order_detail_change_pay);
+		changePay.setOnClickListener(this);
+		// orderAddressLayout = (RelativeLayout)
+		// findViewById(R.id.order_address_layout);
 	}
 
 	@Override
@@ -131,18 +137,19 @@ public class OrderDetailActivity extends BaseActivity {
 			setAddress(addresses1);
 		}
 	}
-	
-	/**根据订单号获取订单信息**/
+
+	/** 根据订单号获取订单信息 **/
 	private void getData() {
-		if(!ConnectionDetector.isConnectingToInternet(this)) {
-			Toast.makeText(this, getResources().getString(R.string.no_network), Toast.LENGTH_LONG).show();
+		if (!ConnectionDetector.isConnectingToInternet(this)) {
+			Toast.makeText(this, getResources().getString(R.string.no_network),
+					Toast.LENGTH_LONG).show();
 			return;
 		}
-		
+
 		String url = new JNICallBack().getHttp4GetOrderByCode(orderCode);
-		
+
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(url, new AsyncHttpResponse(){
+		client.get(url, new AsyncHttpResponse() {
 
 			@Override
 			public void onStart() {
@@ -160,13 +167,14 @@ public class OrderDetailActivity extends BaseActivity {
 			public void onSuccess(int statusCode, String content) {
 				// TODO Auto-generated method stub
 				super.onSuccess(statusCode, content);
-				if(HttpStatus.SC_OK == statusCode) {
-					ParseOrder parseOrder = new ParseOrder(OrderDetailActivity.this);
+				if (HttpStatus.SC_OK == statusCode) {
+					ParseOrder parseOrder = new ParseOrder(
+							OrderDetailActivity.this);
 					boolean isSuccess = parseOrder.parseOrderDetail(content);
-					if(isSuccess){
+					if (isSuccess) {
 						Order order = parseOrder.getOrderDetail();
 						showDetailView(order);
-						
+
 						String recipient_id = parseOrder.getRecipient_id();
 						getAddressData(recipient_id);
 					}
@@ -178,75 +186,78 @@ public class OrderDetailActivity extends BaseActivity {
 				// TODO Auto-generated method stub
 				super.onError(error, content);
 			}
-			
+
 		});
 	}
 
-	private void showDetailView(Order order){
-		
-//		addresses  = new ArrayList<ModelAddresses>();
-		
+	private void showDetailView(Order order) {
+
+		// addresses = new ArrayList<ModelAddresses>();
+
 		priceTextView.setText(orderPrice);
 		String expressNum = order.getShipFee();
 		orderNumber.setText(orderCode);
-		emsTextView.setText(getResources().getString(R.string.unit) + expressNum);
+		emsTextView.setText(getResources().getString(R.string.unit)
+				+ expressNum);
 		orderTime.setText(order.getDate());
-		//录入状态时才显示付款和修改支付方式的按钮
-		if("录入".equals(order.getStatus())){
+		// 录入状态时才显示付款和修改支付方式的按钮
+		if ("录入".equals(order.getStatus())) {
 			payButton.setVisibility(View.VISIBLE);
 			payButton.setOnClickListener(new OnClickListener() {
-				
+
 				@Override
 				public void onClick(View v) {
 					// TODO 提交订单
-//					TaskGetTn task = new TaskGetTn(activity);
-//					task.getOrderTn(orderCode);
+					// TaskGetTn task = new TaskGetTn(activity);
+					// task.getOrderTn(orderCode);
 				}
 			});
 			changePayTypeTextView.setVisibility(View.VISIBLE);
-//			orderAddressLayout.setOnClickListener(new OnClickListener() {
-//				
-//				@Override
-//				public void onClick(View v) {
-//					Intent intent = new Intent(activity,
-//							PayAddress.class);
-//					activity.startActivityForResult(intent,
-//							Consts.AddressRequestCode);
-//				}
-//			});
-		} else{
+			// orderAddressLayout.setOnClickListener(new OnClickListener() {
+			//
+			// @Override
+			// public void onClick(View v) {
+			// Intent intent = new Intent(activity,
+			// PayAddress.class);
+			// activity.startActivityForResult(intent,
+			// Consts.AddressRequestCode);
+			// }
+			// });
+		} else {
 			payButton.setVisibility(View.GONE);
 			changePayTypeTextView.setVisibility(View.GONE);
 		}
 		try {
-			
+
 			float odprice = Float.parseFloat(orderPrice);
 			float exprice = Float.parseFloat(expressNum);
 
-			sumTextView.setText(getResources().getString(R.string.unit) + (odprice + exprice));
+			sumTextView.setText(getResources().getString(R.string.unit)
+					+ (odprice + exprice));
 		} catch (NumberFormatException e) {
 			sumTextView.setText(R.string.price_error);
 		}
-		
-		
-		
+
 	}
 
-	/**获取收件人地址信息**/
-	private void getAddressData(String recipient_id){
-		if(TextUtils.isEmpty(recipient_id)){
+	/** 获取收件人地址信息 **/
+	private void getAddressData(String recipient_id) {
+		if (TextUtils.isEmpty(recipient_id)) {
 			toastAddressError();
 			return;
 		}
-		
-		if(!ConnectionDetector.isConnectingToInternet(OrderDetailActivity.this)){
-			Toast.makeText(this, getResources().getString(R.string.no_network), Toast.LENGTH_SHORT).show();
+
+		if (!ConnectionDetector
+				.isConnectingToInternet(OrderDetailActivity.this)) {
+			Toast.makeText(this, getResources().getString(R.string.no_network),
+					Toast.LENGTH_SHORT).show();
 			return;
 		}
-		String url = new JNICallBack().getHttp4GetAddress("recipient_id=" + recipient_id, "0", "1", "", "", "");
-		
+		String url = new JNICallBack().getHttp4GetAddress("recipient_id="
+				+ recipient_id, "0", "1", "", "", "");
+
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(url, new AsyncHttpResponse(){
+		client.get(url, new AsyncHttpResponse() {
 
 			@Override
 			public void onStart() {
@@ -264,10 +275,12 @@ public class OrderDetailActivity extends BaseActivity {
 			public void onSuccess(int statusCode, String content) {
 				// TODO Auto-generated method stub
 				super.onSuccess(statusCode, content);
-				if(HttpStatus.SC_OK == statusCode){
+				if (HttpStatus.SC_OK == statusCode) {
 					ParseAddressJson parseAddressJson = new ParseAddressJson();
-					boolean isSuccess = parseAddressJson.parseAddressListJson(content);
-					ArrayList<ModelAddresses> addressList = parseAddressJson.getAddresses();
+					boolean isSuccess = parseAddressJson
+							.parseAddressListJson(content);
+					ArrayList<ModelAddresses> addressList = parseAddressJson
+							.getAddresses();
 					if (isSuccess && null != addressList
 							&& !addressList.isEmpty()) {
 						ModelAddresses addresses = addressList.get(0);
@@ -283,13 +296,14 @@ public class OrderDetailActivity extends BaseActivity {
 				// TODO Auto-generated method stub
 				super.onError(error, content);
 			}
-			
+
 		});
 	}
-	
-	/**提示收件人地址出错**/
-	private void toastAddressError(){
-		Toast.makeText(OrderDetailActivity.this, "获取收件人出错!", Toast.LENGTH_SHORT).show();
+
+	/** 提示收件人地址出错 **/
+	private void toastAddressError() {
+		Toast.makeText(OrderDetailActivity.this, "获取收件人出错!", Toast.LENGTH_SHORT)
+				.show();
 	}
 
 	/**
@@ -319,14 +333,15 @@ public class OrderDetailActivity extends BaseActivity {
 				R.string.amount)
 				+ cart.getAmount());
 	}
-	
-	/**设置收件人地址信息**/
-	private void setAddress(ModelAddresses address){
-		
-		if(null == address) return;
-		
+
+	/** 设置收件人地址信息 **/
+	private void setAddress(ModelAddresses address) {
+
+		if (null == address)
+			return;
+
 		StringBuffer sb = new StringBuffer();
-//		Addresses address = addresses.get(0);
+		// Addresses address = addresses.get(0);
 		nameTextView.setText(address.getName());
 		phoneTextView.setText(address.getHandset());
 		sb.append(address.getProvice());
@@ -335,7 +350,6 @@ public class OrderDetailActivity extends BaseActivity {
 		sb.append(address.getAddress());
 		detailTextView.setText(sb.toString());
 	}
-
 
 	private DisplayImageOptions options;
 	protected ImageLoader imageLoader = ImageLoader.getInstance();
@@ -350,14 +364,27 @@ public class OrderDetailActivity extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-//		StatService.onResume(this);
+		// StatService.onResume(this);
 		StatService.onPageStart(this, "订单详情页面");
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-//		StatService.onPause(this);
+		// StatService.onPause(this);
 		StatService.onPageEnd(this, "订单详情页面");
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.re_order_detail_change_pay:
+			Intent intent = new Intent(this, ChangePayActivity.class);
+			startActivityForResult(intent, Consts.CHANGE_REQUEST);
+			break;
+
+		default:
+			break;
+		}
 	}
 }

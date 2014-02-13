@@ -8,6 +8,7 @@
         android:id="@+id/pay_free_linearlayout1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+         android:layout_marginTop="@dimen/actiobar_margin_top"
         android:orientation="horizontal" >
 
         <TextView
@@ -15,8 +16,7 @@
             android:layout_width="@dimen/width"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/margin_left"
-            android:layout_marginTop="@dimen/width_add"
+            android:layout_marginLeft="@dimen/action_height"
             android:layout_weight="1"
             android:background="@drawable/selecter_bg_sort_sell"
             android:clickable="true"
@@ -31,8 +31,7 @@
             android:layout_width="@dimen/width"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginRight="@dimen/margin_left"
-            android:layout_marginTop="@dimen/width_add"
+            android:layout_marginRight="@dimen/action_height"
             android:layout_weight="1"
             android:background="@drawable/selecter_bg_sort_popular"
             android:clickable="true"

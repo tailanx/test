@@ -46,8 +46,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="8dp"
-            android:padding="10dp"
             android:background="@drawable/theme_textview_background"
+            android:padding="8dp"
             android:text="@string/order_pay"
             android:textColor="@color/white" />
     </RelativeLayout>
@@ -140,11 +140,12 @@
                     android:textSize="14sp" />
             </RelativeLayout>
 
-            <!-- <RelativeLayout
+            <RelativeLayout
+                android:id="@+id/re_order_detail_change_pay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_left"
-                android:background="@drawable/layout_selector2" >
+                android:background="@drawable/main_theme_textview_bg" >
 
                 <TextView
                     android:id="@+id/go_pay_address_way"
@@ -152,18 +153,19 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/margin_left"
+                    android:padding="@dimen/margin_left_more"
                     android:text="@string/change_pay_way"
                     android:textSize="16sp" />
 
                 <ImageView
                     android:id="@+id/order_detail_pay_arrow"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true" 
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/arrow"
-                    android:layout_marginRight="@dimen/margin_left"/>
-            </RelativeLayout> -->
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/mall_list_padding"
+                    android:src="@drawable/arrow" />
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/change_pay_type_layout"

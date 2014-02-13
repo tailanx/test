@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-  >
+    android:layout_height="wrap_content" >
 
     <RelativeLayout
         android:id="@+id/evaluation_item_relative"
@@ -15,22 +14,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:background="@drawable/product_image_bg"
-            android:padding="8dp"
             android:layout_marginLeft="8dp"
-             />
+            android:background="@drawable/product_image_bg"
+            android:padding="8dp" />
 
         <TextView
             android:id="@+id/evaluation_item_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_left_more"
             android:layout_toRightOf="@id/evaluation_item_image"
             android:ellipsize="end"
             android:lines="2"
             android:text=""
-            android:textSize="18sp" />
+            android:textSize="@dimen/textsize_small_add" />
 
         <TextView
             android:id="@+id/evaluation_item_sum"
@@ -38,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/evaluation_item_text"
             android:layout_marginLeft="8dp"
+            android:layout_marginTop="@dimen/actiobar_margin_top"
             android:layout_toRightOf="@id/evaluation_item_image"
             android:textColor="#ed217c"
             android:textSize="16sp" />
@@ -48,6 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/evaluation_item_text"
             android:layout_marginLeft="12sp"
+            android:layout_marginTop="@dimen/actiobar_margin_top"
             android:layout_toRightOf="@id/evaluation_item_sum"
             android:text="数量："
             android:textColor="#ed217c"
@@ -58,13 +58,13 @@
         android:layout_width="wrap_content"
         android:layout_height="75dp"
         android:layout_below="@id/evaluation_item_relative"
-        android:background="@drawable/order_statusbg_down" >
+        android:background="@drawable/main_cart_textview_bg" >
 
         <TextView
             android:id="@+id/evaluation_sum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
+            android:layout_marginLeft="@dimen/margin_left"
             android:layout_marginTop="15dp"
             android:text="订单总额："
             android:textSize="16sp" />
@@ -85,8 +85,9 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="8dp"
-            android:background="@drawable/clear_conditions"
+            android:background="@drawable/theme_textview_background"
             android:text="评价"
+            android:textColor="@color/white"
             android:textSize="16sp" />
 
         <TextView
@@ -94,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/evaluation_sum"
-            android:layout_marginLeft="4dp"
+            android:layout_marginLeft="@dimen/margin_left"
             android:text="数量："
             android:textSize="16sp" />
     </RelativeLayout>

@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.net.ImageUrl;
 import com.yidejia.app.mall.net.goodsinfo.GetProductAddress;
@@ -17,7 +19,7 @@ public class ParseEvaJson {
 
 	/**解析待评论商品数据**/
 	public boolean parseNoEvaJson(String content) {
-
+		Log.e("info", content);
 		JSONObject httpObject;
 		try {
 			httpObject = new JSONObject(content);
@@ -36,6 +38,9 @@ public class ParseEvaJson {
 						String goodsid = arrayObject.optString("goods_id");
 						String price = arrayObject.optString("price");
 						String quantity = arrayObject.optString("quantity");
+						String goodsname = arrayObject
+								.optString("goods_name");
+						Log.e("info", goodsname+"goodsname");
 						String evaluate_status = arrayObject
 								.optString("evaluate_status");
 						if ("y".equals(evaluate_status))
@@ -43,7 +48,7 @@ public class ParseEvaJson {
 						String dry_status = arrayObject.optString("dry_status");
 						String imageUrl = ImageUrl.IMAGEURL
 								+ arrayObject.optString("imgname") + "!100";
-						String goodsname = "";
+						
 						GetProductAddress address = new GetProductAddress();
 						try {
 							String productString = address
@@ -56,8 +61,8 @@ public class ParseEvaJson {
 										.optString("response");
 								JSONObject productRespObject = new JSONObject(
 										productResp);
-								goodsname = productRespObject
-										.optString("goods_name");
+								
+								
 							}
 						} catch (IOException e) {
 							e.printStackTrace();
@@ -69,6 +74,7 @@ public class ParseEvaJson {
 						mCart.setImgUrl(imageUrl);
 						mCart.setProductText(goodsname);
 						mCart.setUId(goodsid);
+						mCart.setName(goodsname);
 						try {
 							mCart.setSalledAmmount(Integer.parseInt(quantity));
 							mCart.setPrice(Float.parseFloat(price));

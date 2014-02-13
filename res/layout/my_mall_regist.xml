@@ -193,19 +193,29 @@
             <CheckBox
                 android:id="@+id/ck_my_mall_regist_checkbox"
                 style="@style/CustomCheckboxTheme"
+                android:layout_width="@dimen/item_goods_emulate_add"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/head_height"
+                android:textSize="@dimen/textsize_small" />
+            
+
+            <TextView
+                android:id="@+id/tv_regist_agreemen_fuwu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/yirihui"
+                android:layout_alignBaseline="@id/ck_my_mall_regist_checkbox"
+                android:layout_toRightOf="@id/ck_my_mall_regist_checkbox"
+                android:background="#00000000"
+                android:linksClickable="true"
                 android:text="@string/regist_must"
                 android:textSize="@dimen/textsize_small" />
-
             <TextView
                 android:id="@+id/tv_regist_agreement"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@id/ck_my_mall_regist_checkbox"
                 android:layout_marginLeft="@dimen/margin_left_add"
-                android:layout_toRightOf="@id/ck_my_mall_regist_checkbox"
+                android:layout_toRightOf="@id/tv_regist_agreemen_fuwu"
                 android:background="#00000000"
                 android:linksClickable="true"
                 android:text="@string/regist_service"

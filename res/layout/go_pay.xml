@@ -190,7 +190,7 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/all_buy_produce_right"
                     android:background="@drawable/filter_line"
                     android:contentDescription="@string/yidejia" />
