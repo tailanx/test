@@ -283,7 +283,7 @@
     <string name="edit_version">当前版本</string>
     <string name="edit_tuijian">应用推荐</string>
     <string name="order_state">订单状态：</string>
-    <string name="order_pay">付           款</string>
+    <string name="order_pay">付                  款</string>
     <string name="order_set">设置</string>
     <string name="yirihui_order">规则</string>
     <string name="yirihui_now">正在进行</string>
