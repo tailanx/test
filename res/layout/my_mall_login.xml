@@ -153,12 +153,10 @@
 
                 <com.yidejia.app.mall.widget.WiperSwitch
                     android:id="@+id/cb_my_login_checkbox"
-                    android:layout_width="@dimen/base_info_match"
+                    android:layout_width="@dimen/item_goods_emulate"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/actiobar_margin_top"
-                    android:layout_marginTop="@dimen/margin_left_add_add"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_marginTop="@dimen/white_bg_padding" />
             </RelativeLayout>
 
             <RelativeLayout
