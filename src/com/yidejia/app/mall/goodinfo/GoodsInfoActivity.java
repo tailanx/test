@@ -150,9 +150,10 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 		// title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
 		oks.setTitle(getResources().getString(R.string.share));
 		// titleUrl是标题的网络链接，仅在人人网和QQ空间使用
-		oks.setTitleUrl("http://app.yidejia.com/android.html");
+		oks.setTitleUrl("http://www.yidejia.com/acymer_" + productInfo.getUId()
+				+ ".html");
 		// text是分享文本，所有平台都需要这个字段
-		oks.setText(getResources().getString(R.string.share_content)
+		oks.setText(getResources().getString(R.string.share_content)+productInfo.getName()+productInfo.getBrief()
 				+ "http://www.yidejia.com/acymer_" + productInfo.getUId()
 				+ ".html");
 		// imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
