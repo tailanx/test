@@ -35,6 +35,7 @@ import com.yidejia.app.mall.fragment.FreeGivingAdapter;
 import com.yidejia.app.mall.fragment.FreeGivingFragment;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.Specials;
+import com.yidejia.app.mall.pay.CstmPayActivity;
 import com.yidejia.app.mall.util.Consts;
 
 /**

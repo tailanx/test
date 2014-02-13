@@ -1,4 +1,4 @@
-package com.yidejia.app.mall.view;
+package com.yidejia.app.mall.pay;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -45,12 +45,10 @@ import com.yidejia.app.mall.model.Express;
 import com.yidejia.app.mall.model.FreePost;
 import com.yidejia.app.mall.model.Specials;
 import com.yidejia.app.mall.order.ParseOrder;
-import com.yidejia.app.mall.pay.AlicPayUtil;
-import com.yidejia.app.mall.pay.DeliveryActivity;
-import com.yidejia.app.mall.pay.UnionActivity;
-import com.yidejia.app.mall.pay.WebPayActivity;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.PayUtil;
+import com.yidejia.app.mall.view.ExchangeFreeActivity;
+import com.yidejia.app.mall.view.LoginActivity;
 
 public class CstmPayActivity extends BaseActivity {
 	private TextView tv_userName;// 用户名
@@ -1062,14 +1060,14 @@ public class CstmPayActivity extends BaseActivity {
 	protected void onResume() {
 		super.onResume();
 //		StatService.onResume(this);
-		StatService.onPageStart(this, "支付页面");
+		StatService.onPageStart(this, "确认订单页面");
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
 //		StatService.onPause(this);
-		StatService.onPageEnd(this, "支付页面");
+		StatService.onPageEnd(this, "确认订单页面");
 	}
 	
 }

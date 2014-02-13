@@ -23,7 +23,6 @@ import com.yidejia.app.mall.model.Express;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.HttpClientUtil;
 import com.yidejia.app.mall.util.IHttpResp;
-import com.yidejia.app.mall.view.CstmPayActivity;
 
 public class DeliveryActivity extends BaseActivity{
 

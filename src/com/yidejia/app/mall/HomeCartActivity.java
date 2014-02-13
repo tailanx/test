@@ -8,9 +8,9 @@ import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.model.Cart;
+import com.yidejia.app.mall.pay.CstmPayActivity;
 import com.yidejia.app.mall.search.SearchResultActivity;
 import com.yidejia.app.mall.util.CartUtil1;
-import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 
 import android.app.AlertDialog;

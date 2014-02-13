@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
 
@@ -42,6 +43,20 @@ public class UnionActivity extends BaseActivity{
          *  
          ************************************************/
         if(null != payUtil) payUtil.onActivityResult(data);
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+//		StatService.onResume(this);
+		StatService.onPageStart(this, "银联支付页面");
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+//		StatService.onPause(this);
+		StatService.onPageEnd(this, "银联支付页面");
 	}
 	
 }
