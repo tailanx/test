@@ -28,6 +28,7 @@ public class ChangePayActivity extends BaseActivity implements OnClickListener {
 	private CheckBox cb_wangye;
 	private CheckBox cb_caifutong;
 	private CheckBox cb_yinlian;
+	private int a;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -35,7 +36,32 @@ public class ChangePayActivity extends BaseActivity implements OnClickListener {
 		setActionbarConfig();
 		setTitle(getResources().getString(R.string.change_pay_for));
 		setContentView(R.layout.change_pay);
+
 		initview();
+		a = (int) getIntent().getExtras().getInt(Consts.CHANGE_PAY);
+		if (a == -1) {
+			return;
+		} else {
+			switch (a) {
+			case Consts.CHANGE_ZHIFUBAO://支付宝选中
+				cb_zhifubao.setChecked(true);
+				cb_caifutong.setChecked(false);
+				break;
+			case Consts.CHANGE_WANGYE://支付宝网页选中
+				cb_caifutong.setChecked(false);
+				cb_wangye.setChecked(true);
+				break;
+			case Consts.CHANGE_CAIFUTONG://财付通选中
+				cb_caifutong.setChecked(true);
+				break;
+			case Consts.CHANGE_YINLIAN://银联选中
+				cb_caifutong.setChecked(false);
+				cb_yinlian.setChecked(true);
+				break;
+
+			}
+		}
+
 	}
 
 	/**
@@ -99,6 +125,7 @@ public class ChangePayActivity extends BaseActivity implements OnClickListener {
 			bundle.putInt(Consts.CHANGE_PAY, Consts.CHANGE_YINLIAN);
 			break;
 		}
+		intent.putExtras(bundle);
 		this.setResult(Consts.CHANGE_RESPONSE, intent);
 		this.finish();
 	}

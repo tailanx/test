@@ -141,7 +141,6 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 
 	public void share() {
 		OnekeyShare oks = new OnekeyShare();
-
 		// 分享时Notification的图标和文字
 		oks.setNotification(R.drawable.ydj_icon72,
 				getResources().getString(R.string.app_name));
@@ -153,8 +152,8 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 		oks.setTitleUrl("http://www.yidejia.com/acymer_" + productInfo.getUId()
 				+ ".html");
 		// text是分享文本，所有平台都需要这个字段
-		oks.setText(getResources().getString(R.string.share_content)+productInfo.getName()+productInfo.getBrief()
-				+ "http://www.yidejia.com/acymer_" + productInfo.getUId()
+		oks.setText(getResources().getString(R.string.share_content)+productInfo.getName()
+				+ "http://www.yidejia.com/acymer_" 
 				+ ".html");
 		// imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
 		// oks.setImagePath(MainActivity.TEST_IMAGE);

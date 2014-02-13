@@ -29,9 +29,9 @@ public class Consts {
 	public static final int CONSTACT_REQUEST = 110;
 	public static final int CONSTACT_RESPONSE = 120;
 	public static final int CHANGE_RESPONSE = 20;
-	public static final int CHANGE_REQUEST = 10;
+	public static final int CHANGE_REQUEST = 150;
 	
-	public static final int CHANGE_ZHIFUBAO = 0;// 支付宝
+	public static final int CHANGE_ZHIFUBAO = 4;// 支付宝
 	public static final int CHANGE_WANGYE = 1;// 支付宝网页
 	public static final int CHANGE_CAIFUTONG = 2;// 财付通
 	public static final int CHANGE_YINLIAN = 3;// 银联

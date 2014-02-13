@@ -156,6 +156,15 @@
                     android:padding="@dimen/margin_left_more"
                     android:text="@string/change_pay_way"
                     android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/go_pay_address_way_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/go_pay_address_way"
+                    android:text="@string/change_pay_for_caifutong"
+                    android:textSize="14sp" />
+                
 
                 <ImageView
                     android:id="@+id/order_detail_pay_arrow"

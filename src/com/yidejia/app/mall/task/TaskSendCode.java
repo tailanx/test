@@ -5,6 +5,7 @@ import java.io.IOException;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.R;
@@ -51,6 +52,7 @@ public class TaskSendCode {
 					httpResp = sendMsg.getHttpResp(phone, code);
 					boolean isSuccess = sendMsg.analysisHttpResp(httpResp);
 					response = sendMsg.getResponse();
+					Log.e("info", response);
 					return isSuccess;
 				} catch (TimeOutEx e) {
 					// TODO Auto-generated catch block
@@ -78,8 +80,8 @@ public class TaskSendCode {
 
 			bar.dismiss();
 			if(result){
-				if(response != -1){
-					Toast.makeText(activity, "亲，请在"+response+"秒后重试！", Toast.LENGTH_LONG).show();
+//				if(response != -1){
+//					Toast.makeText(activity, "亲，请在"+response+"秒后重试！", Toast.LENGTH_LONG).show();
 					if (isTimeout) {
 						Toast.makeText(
 								activity,
@@ -89,15 +91,19 @@ public class TaskSendCode {
 						isTimeout = false;
 						return;
 					}
-				} else {
+			else {
 					Toast.makeText(activity, "验证码已发送到您的手机，请注意查看!", Toast.LENGTH_LONG).show();
-				}
 			}
+//				}
+			}else{
+				Toast.makeText(activity,response, Toast.LENGTH_LONG).show();
+			}
+			
 		}
 
 	}
 	
-	private int response;
+	private String response;
 	
 	public void closeTask(){
 		if(task != null && task.getStatus().RUNNING == AsyncTask.Status.RUNNING){

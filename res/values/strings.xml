@@ -333,9 +333,13 @@
     <string name="home_searche_yidejia">搜索伊的家的商品</string>
     <string name="no_phone_number">请输入正确的手机号码</string>
     <string name="sure_delete">请问是否要删除商品</string>
-   <string name="share_content">伊的家女人的世界      </string>
+   <string name="share_content">伊的家女人的世界  &#160;&#160;&#160;</string>
     <string name="evenote_title">伊的家商城</string>
     <string name="free_zengsong">免费赠送</string>
     <string name="free_huangou">换购商品</string>
     <string name="change_pay_for">支付方式</string>
+    <string name="change_pay_for_caifutong">(财付通支付)</string>
+    <string name="change_pay_for_yinlian">(银联支付)</string>
+    <string name="change_pay_for_zhifubao">(支付宝支付)</string>
+    <string name="change_pay_for_wangye">(支付宝网页支付)</string>
 </resources>

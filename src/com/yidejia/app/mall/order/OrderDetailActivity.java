@@ -47,12 +47,14 @@ public class OrderDetailActivity extends BaseActivity implements
 	private TextView payButton;// 立即付款
 	private TextView orderNumber;// 订单的编号
 	private TextView changePayTypeTextView;// 支付方式修改
-	private RelativeLayout orderAddressLayout;// 收件人地址的布局
+	// private RelativeLayout orderAddressLayout;// 收件人地址的布局
 	private String orderCode;// 传递过来的订单号
 	private String orderPrice;// 传递过来的价格总数
 	private RelativeLayout changePay;// 更改支付方式
+	private TextView payDetail;// 具体的支付方式
 
-	private String TAG = getClass().getName();
+	// private String TAG = getClass().getName();
+	private int a = -1;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -121,6 +123,7 @@ public class OrderDetailActivity extends BaseActivity implements
 		changePayTypeTextView = (TextView) findViewById(R.id.change_pay_type);
 		changePay = (RelativeLayout) findViewById(R.id.re_order_detail_change_pay);
 		changePay.setOnClickListener(this);
+		payDetail = (TextView) findViewById(R.id.go_pay_address_way_detail);
 		// orderAddressLayout = (RelativeLayout)
 		// findViewById(R.id.order_address_layout);
 	}
@@ -135,6 +138,32 @@ public class OrderDetailActivity extends BaseActivity implements
 			ModelAddresses addresses1 = (ModelAddresses) data.getExtras()
 					.getSerializable("addresses1");
 			setAddress(addresses1);
+		} else if (requestCode == Consts.CHANGE_REQUEST
+				&& resultCode == Consts.CHANGE_RESPONSE) {
+			a = data.getExtras().getInt(Consts.CHANGE_PAY);// 获取返回的参数
+			if (a != 0) {
+				switch (a) {
+				case Consts.CHANGE_ZHIFUBAO:// 判断是不是支付宝支付
+					payDetail
+							.setText(getString(R.string.change_pay_for_zhifubao));
+					break;
+				case Consts.CHANGE_WANGYE:// 判断是不是支付宝网页支付
+					payDetail
+							.setText(getString(R.string.change_pay_for_wangye));
+
+					break;
+				case Consts.CHANGE_CAIFUTONG:// 判断是不是财付通支付
+					payDetail
+							.setText(getString(R.string.change_pay_for_caifutong));
+
+					break;
+				case Consts.CHANGE_YINLIAN:// 判断是不是银联支付
+					payDetail
+							.setText(getString(R.string.change_pay_for_yinlian));
+
+					break;
+				}
+			}
 		}
 	}
 
@@ -380,11 +409,13 @@ public class OrderDetailActivity extends BaseActivity implements
 		switch (v.getId()) {
 		case R.id.re_order_detail_change_pay:
 			Intent intent = new Intent(this, ChangePayActivity.class);
-			startActivityForResult(intent, Consts.CHANGE_REQUEST);
-			break;
-
-		default:
+			Bundle bundle = new Bundle();
+			bundle.putInt(Consts.CHANGE_PAY, a);
+			intent.putExtras(bundle);
+			OrderDetailActivity.this.startActivityForResult(intent,
+					Consts.CHANGE_REQUEST);
 			break;
 		}
 	}
+
 }

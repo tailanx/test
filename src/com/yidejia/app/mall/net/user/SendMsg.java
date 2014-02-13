@@ -25,8 +25,12 @@ public class SendMsg {
 			int code = object.getInt("code");
 			if(code == 1){
 				isSuccess = true;
-				response = object.getInt("response");
+				response = object.getString("response");
 				return isSuccess;
+			}else{
+				response = object.getString("response");
+				JSONObject oJsonObject = new JSONObject(response);
+				
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -35,9 +39,9 @@ public class SendMsg {
 		return isSuccess;
 	}
 	
-	private int response = -1;
+	private String response;
 	
-	public int getResponse(){
+	public String getResponse(){
 		return response;
 	}
 }

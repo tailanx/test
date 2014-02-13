@@ -347,7 +347,6 @@
         </activity>
         <activity
             android:name="com.yidejia.app.mall.view.ChangePayActivity"
-            android:launchMode="singleTask"
             android:screenOrientation="portrait" >
         </activity>
         <activity
