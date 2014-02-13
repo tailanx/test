@@ -3,11 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/pull_refresh_list"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:cacheColorHint="#00000000"
         android:dividerPadding="0dp"
@@ -15,8 +14,8 @@
         android:fastScrollEnabled="false"
         android:footerDividersEnabled="false"
         android:headerDividersEnabled="false"
-        android:smoothScrollbar="true"
         android:overScrollMode="ifContentScrolls"
+        android:smoothScrollbar="true"
         ptr:ptrAnimationStyle="flip"
         ptr:ptrMode="pullUpFromBottom" />
 
@@ -30,9 +29,11 @@
 
         <Button
             android:id="@+id/guang_button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_marginRight="@dimen/margin_left"
             android:background="@drawable/theme_selector_text"
             android:text="去逛一下"
             android:textColor="#eeeeee"
