@@ -15,7 +15,7 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.net.order.GetTn;
-import com.yidejia.app.mall.view.UserPayActivity;
+import com.yidejia.app.mall.pay.UnionActivity;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class TaskGetTn {
@@ -88,7 +88,7 @@ public class TaskGetTn {
 					return;
 				}
 				Log.e(TAG, "tn is not null");
-				Intent intent = new Intent(activity, UserPayActivity.class);
+				Intent intent = new Intent(activity, UnionActivity.class);
 				Bundle bundle = new Bundle();
 				bundle.putInt("mode", 1);
 				bundle.putString("tn", orderTn);

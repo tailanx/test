@@ -107,7 +107,7 @@ public class MobileSecurePayer {
 					// call the MobileSecurePay service.
 					// 调用安全支付服务的pay方法
 					String strRet = mAlixPay.Pay(strOrderInfo);
-					BaseHelper.log(TAG, "After Pay: " + strRet);
+//					BaseHelper.log(TAG, "After Pay: " + strRet);
 
 					// set the flag to indicate that we have finished.
 					// unregister the Callback, and unbind the service.
