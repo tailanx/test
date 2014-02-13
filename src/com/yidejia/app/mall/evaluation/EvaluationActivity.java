@@ -104,6 +104,8 @@ public class EvaluationActivity extends BaseActivity {
 		Cart mCart;
 		for (int i = 0; i < length; i++) {
 			mCart = waitCommGoods.get(i);
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT,1);
+			lp.setMargins(0, 10, 0, 0);
 			View view = LayoutInflater.from(this).inflate(
 					R.layout.evaluation_item, null);
 			TextView evaluation_item_text = (TextView) view
@@ -153,6 +155,7 @@ public class EvaluationActivity extends BaseActivity {
 							// activity.finish();
 						}
 					});
+			view.setLayoutParams(lp);
 			layout.addView(view);
 		}
 	}

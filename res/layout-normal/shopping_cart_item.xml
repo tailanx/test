@@ -17,8 +17,8 @@
 
     <ImageView
         android:id="@+id/iv_shopping_cart_item__imageview1"
-        android:layout_width="@dimen/head_height"
-        android:layout_height="@dimen/head_height"
+        android:layout_width="@dimen/base_info_match"
+        android:layout_height="@dimen/base_info_match"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/width_fu"
         android:layout_toRightOf="@id/ck_shopping_cart_item_checkbox"

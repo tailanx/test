@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content" >
 
     <RelativeLayout
         android:id="@+id/evaluation_item_relative"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/productlist_bg" >
+        android:background="@drawable/main_cart_textview_bg" >
 
         <ImageView
             android:id="@+id/evaluation_item_image"
@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="@dimen/margin_left_more"
+            android:layout_marginTop="@dimen/mall_list_padding"
             android:layout_toRightOf="@id/evaluation_item_image"
             android:ellipsize="end"
             android:lines="2"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/evaluation_item_text"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="@dimen/actiobar_margin_top"
+            android:layout_marginTop="@dimen/mall_list_padding"
             android:layout_toRightOf="@id/evaluation_item_image"
             android:textColor="#ed217c"
             android:textSize="16sp" />
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/evaluation_item_text"
             android:layout_marginLeft="12sp"
-            android:layout_marginTop="@dimen/actiobar_margin_top"
+            android:layout_marginTop="@dimen/mall_list_padding"
             android:layout_toRightOf="@id/evaluation_item_sum"
             android:text="数量："
             android:textColor="#ed217c"
@@ -55,7 +55,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_below="@id/evaluation_item_relative"
         android:background="@drawable/main_cart_textview_bg" >
