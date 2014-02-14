@@ -181,5 +181,11 @@ public class JNICallBack {
 	/**获取支付宝的拼接字符串**/
 	public native String getHttp4AlicSign(String userId, String token, String orderCode);
 	
+	/**获取爱豆总数**/
+	public native String getHttp4GetGold(String userId, String token);
+	
+	/**获取优惠券**/
+	public native String getHttp4GetTicket(String userId, String token);
+	
 }	
 	

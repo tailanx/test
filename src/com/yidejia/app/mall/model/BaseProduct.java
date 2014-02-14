@@ -11,8 +11,17 @@ import java.io.Serializable;
 public class BaseProduct implements Serializable {
 	private String uId;            //商品ID （可以通过这个ID索引到商品详情）
     private String imgUrl;      //图片链接
+    private String detailUrl;	//详情链接
     
-    public String getImgUrl(){
+    public String getDetailUrl() {
+		return detailUrl;
+	}
+
+	public void setDetailUrl(String detailUrl) {
+		this.detailUrl = detailUrl;
+	}
+
+	public String getImgUrl(){
     	return imgUrl;
     }
 

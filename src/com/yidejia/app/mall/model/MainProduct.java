@@ -14,8 +14,17 @@ public class MainProduct implements Serializable{
     private String title;       //商品标题 如：椒盐蛋白
     private String subTitle;    //子标题 如：美白 淡斑
     private String price;       //价格 如：¥220.00元
+    private String detailUrl;	//详情链接
     
-    public String getUId(){
+    public String getDetailUrl() {
+		return detailUrl;
+	}
+
+	public void setDetailUrl(String detailUrl) {
+		this.detailUrl = detailUrl;
+	}
+
+	public String getUId(){
     	return uId;
     }
     
