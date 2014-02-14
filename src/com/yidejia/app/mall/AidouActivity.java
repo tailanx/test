@@ -1,6 +1,7 @@
 package com.yidejia.app.mall;
 
 import com.baidu.mobstat.StatService;
+import com.yidejia.app.mall.jni.JNICallBack;
 
 import android.os.Bundle;
 import android.webkit.WebView;
@@ -41,5 +42,11 @@ public class AidouActivity extends BaseActivity {
 	protected void onPause() {
 		super.onPause();
 		StatService.onPageEnd(this, "我的爱豆页面");
+	}
+	/**
+	 * 获取爱豆
+	 */
+	private void getAidou(){
+//		String  url = new JNICallBack().geta
 	}
 }
