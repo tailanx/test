@@ -54,7 +54,7 @@ public class OrderDetailActivity extends BaseActivity implements
 	private TextView payDetail;// 具体的支付方式
 
 	// private String TAG = getClass().getName();
-	private int a = -1;
+	private int payMode = -1;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -140,9 +140,9 @@ public class OrderDetailActivity extends BaseActivity implements
 			setAddress(addresses1);
 		} else if (requestCode == Consts.CHANGE_REQUEST
 				&& resultCode == Consts.CHANGE_RESPONSE) {
-			a = data.getExtras().getInt(Consts.CHANGE_PAY);// 获取返回的参数
-			if (a != 0) {
-				switch (a) {
+			payMode = data.getExtras().getInt(Consts.CHANGE_PAY);// 获取返回的参数
+			if (payMode != 0) {
+				switch (payMode) {
 				case Consts.CHANGE_ZHIFUBAO:// 判断是不是支付宝支付
 					payDetail
 							.setText(getString(R.string.change_pay_for_zhifubao));
@@ -410,7 +410,7 @@ public class OrderDetailActivity extends BaseActivity implements
 		case R.id.re_order_detail_change_pay:
 			Intent intent = new Intent(this, ChangePayActivity.class);
 			Bundle bundle = new Bundle();
-			bundle.putInt(Consts.CHANGE_PAY, a);
+			bundle.putInt(Consts.CHANGE_PAY, payMode);
 			intent.putExtras(bundle);
 			OrderDetailActivity.this.startActivityForResult(intent,
 					Consts.CHANGE_REQUEST);
