@@ -34,6 +34,7 @@ import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.address.AddressActivity;
+import com.yidejia.app.mall.address.EditNewAddressActivity;
 import com.yidejia.app.mall.address.ModelAddresses;
 import com.yidejia.app.mall.address.ParseAddressJson;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
@@ -45,6 +46,7 @@ import com.yidejia.app.mall.model.Express;
 import com.yidejia.app.mall.model.FreePost;
 import com.yidejia.app.mall.model.Specials;
 import com.yidejia.app.mall.order.ParseOrder;
+import com.yidejia.app.mall.util.ActivityIntentUtil;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.PayUtil;
 import com.yidejia.app.mall.view.ExchangeFreeActivity;
@@ -548,6 +550,10 @@ public class CstmPayActivity extends BaseActivity {
 							AlicPayUtil util = new AlicPayUtil(CstmPayActivity.this);
 							util.getAlicPay(userId, token, orderCode);
 						}
+					} else {
+						String errResult = parseOrder.getErrResult();
+						if(TextUtils.isEmpty(errResult)) return;
+						Toast.makeText(CstmPayActivity.this, errResult, Toast.LENGTH_SHORT).show();
 					}
 				}
 			}
@@ -640,6 +646,7 @@ public class CstmPayActivity extends BaseActivity {
 						}
 					} else {
 						//TODO 收货地址为空，需要跳转到新增地址栏
+						ActivityIntentUtil.intentActivityForResult(CstmPayActivity.this, EditNewAddressActivity.class, Consts.AddressRequestCode);
 					}
 				}
 			}

@@ -25,6 +25,8 @@ public class ParseOrder {
 	
 	private Order orderDetail;	//订单详细的具体订单信息
 	private String recipient_id;	//收件人id
+	
+	private String errResult;
 
 	public ParseOrder(Context context) {
 		this.context = context;
@@ -57,6 +59,8 @@ public class ParseOrder {
 					resp_code = responseObject.optString("@p_resp_code");
 					tn = responseObject.optString("@p_tn");
 					return true;
+				} else {
+					errResult = result;
 				}
 			}
 		} catch (JSONException e) {
@@ -87,6 +91,11 @@ public class ParseOrder {
 	 */
 	public String getTn() {
 		return tn;
+	}
+	
+	/**提交订单出错是返回的错误信息**/
+	public String getErrResult() {
+		return errResult;
 	}
 
 	/**

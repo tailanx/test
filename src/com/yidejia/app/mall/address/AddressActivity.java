@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+
 import com.baidu.mobstat.StatService;
 //import com.actionbarsherlock.app.SherlockActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -29,6 +30,7 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 //import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.jni.JNICallBack;
+import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DefinalDate;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
@@ -41,7 +43,7 @@ public class AddressActivity extends BaseActivity {
 	private MyApplication myApplication;
 	private String userId;
 	private PullToRefreshListView pullToRefreshListView;
-	private String TAG = "AddressActivity";
+//	private String TAG = "AddressActivity";
 	private int requestCode = -1;
 
 	// private String message;// 发生错误时候的报错信息
@@ -64,7 +66,7 @@ public class AddressActivity extends BaseActivity {
 				Bundle bundle = new Bundle();
 				bundle.putSerializable("editaddress", null);
 				intent2.putExtras(bundle);
-				startActivityForResult(intent2, DefinalDate.requestcode);//
+				startActivityForResult(intent2, Consts.AddressRequestCode);//
 			}
 		});
 
@@ -139,8 +141,8 @@ public class AddressActivity extends BaseActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		try {
-			if (requestCode == DefinalDate.requestcode
-					&& resultCode == DefinalDate.responcode) {
+			if (requestCode == Consts.AddressRequestCode
+					&& resultCode == Consts.AddressResponseCode) {
 				try {
 
 					fromIndex = 0;
