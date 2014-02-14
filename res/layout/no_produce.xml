@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/no_produce_textview"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/margin_left"
+        android:layout_marginTop="@dimen/margin_top_car"
         android:background="@drawable/theme_selector_text"
         android:text="@string/cart_guang"
         android:textColor="@color/white"

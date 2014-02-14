@@ -24,13 +24,21 @@
         android:layout_height="wrap_content"
         android:background="@drawable/main_theme_textview_bg" >
 
+        <ImageView
+            android:id="@+id/iv_qiandao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:contentDescription="@string/yidejia"
+            android:src="@drawable/guangqiandao" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_left"
-            android:drawableLeft="@drawable/guangqiandao"
-            android:gravity="center_vertical"
+            android:layout_toRightOf="@id/iv_qiandao"
             android:text="@string/qiandao"
             android:textColor="@color/text_color_80"
             android:textSize="@dimen/textsize_big" />
@@ -45,7 +53,7 @@
             android:src="@drawable/arrow" />
     </RelativeLayout>
 
-     <RelativeLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/main_theme_textview_bg" >
@@ -56,21 +64,29 @@
             android:background="@color/line_color"
             android:contentDescription="@string/yidejia" />
     </RelativeLayout>
-    
+
     <RelativeLayout
         android:id="@+id/iv_guang_yaoyiyao"
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/width_add_fun"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/width_add_fun"
         android:background="@drawable/main_theme_textview_bg" >
+
+        <ImageView
+            android:id="@+id/iv_yaoyiyao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:contentDescription="@string/yidejia"
+            android:src="@drawable/yaoyiyao" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_left"
-            android:drawableLeft="@drawable/yaoyiyao"
-            android:gravity="center_vertical"
+            android:layout_toRightOf="@id/iv_yaoyiyao"
             android:text="@string/yaoyiyao"
             android:textColor="@color/text_color_80"
             android:textSize="@dimen/textsize_big" />
@@ -84,7 +100,8 @@
             android:padding="@dimen/mall_list_padding"
             android:src="@drawable/arrow" />
     </RelativeLayout>
- <RelativeLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/main_theme_textview_bg" >
@@ -95,4 +112,5 @@
             android:background="@color/line_color"
             android:contentDescription="@string/yidejia" />
     </RelativeLayout>
+
 </LinearLayout>

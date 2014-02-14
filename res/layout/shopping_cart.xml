@@ -14,11 +14,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/cart_sum"
-            android:layout_marginLeft="@dimen/margin_left_add"
-            android:textColor="@color/text_color_80"
-            android:textSize="@dimen/textsize_small" />
+            android:layout_marginLeft="@dimen/margin_left_add" />
 
+        <TextView
+            android:id="@+id/shopping_cart_sum_mone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/shopping_cart_checkbox"
+            android:layout_gravity="center"
+            android:layout_marginLeft="4dp"
+            android:layout_toRightOf="@id/shopping_cart_checkbox"
+            android:text="@string/cart_sum"
+            android:textSize="16sp" />
         <TextView
             android:id="@+id/shopping_cart_sum_money_price"
             android:layout_width="wrap_content"
@@ -26,7 +33,7 @@
             android:layout_alignBaseline="@id/shopping_cart_checkbox"
             android:layout_gravity="center"
             android:layout_marginLeft="2dp"
-            android:layout_toRightOf="@id/shopping_cart_checkbox"
+            android:layout_toRightOf="@id/shopping_cart_sum_mone"
             android:text="@string/go_pay_show_pay_money"
             android:textColor="@color/theme"
             android:textSize="14sp" />
