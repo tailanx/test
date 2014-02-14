@@ -7,7 +7,6 @@ import org.apache.http.HttpStatus;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -54,23 +53,27 @@ public class HomeMallActivity extends HomeBaseActivity {
 	private BannerView bannerView;
 
 	private PullToRefreshScrollView mPullToRefreshScrollView;
-	private static int screenWidth;
-	private static int screenHeight;
+	private int screenWidth;
+	private int screenHeight;
+	private int suiLeftWidth;// 随心逛的商品的宽
+	private int suiLeftHeight;// 随心逛的商品的高
+	private int suiRightWidht;// 随心逛右边的商品的宽
+	private int suiRightHeight;// 随心逛右边的商品的高
 
 	// 设置大家都在买组
 	private ArrayList<MainProduct> djdzmProducts;
 	// 设置随心逛组
 	private ArrayList<MainProduct> sxgProducts;
 
-	private boolean isAppFrist;	//是否为新用户第一次启动app
+	private boolean isAppFrist; // 是否为新用户第一次启动app
 
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		isAppFrist = getIntent().getBooleanExtra("isFirstStart", false);
-		
+
 		setContentView(R.layout.activity_main_fragment_layout);
 		// 实例化组件
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
@@ -89,18 +92,25 @@ public class HomeMallActivity extends HomeBaseActivity {
 		Display display = manager.getDefaultDisplay();
 		screenWidth = display.getHeight();
 		screenHeight = (int) ((screenWidth / 320f) * 160f) - 250;
+
+		suiLeftWidth = ((int) display.getHeight()) - 34;
+		suiLeftHeight = (int) screenHeight / 2;
+
+		suiRightWidht = ((int) display.getHeight()) + 34;
+		suiRightHeight = (int) screenHeight / 2;
 	}
 
-	/**获取首页数据**/
+	/** 获取首页数据 **/
 	private void getMainData() {
-		//判断是否连接网络
-		if(!ConnectionDetector.isConnectingToInternet(this)) {
-			if(isAppFrist){
-				Toast.makeText(this, getString(R.string.no_network), Toast.LENGTH_SHORT).show();
+		// 判断是否连接网络
+		if (!ConnectionDetector.isConnectingToInternet(this)) {
+			if (isAppFrist) {
+				Toast.makeText(this, getString(R.string.no_network),
+						Toast.LENGTH_SHORT).show();
 			}
 			return;
 		}
-		
+
 		String url = new JNICallBack().getHttp4GetHome();
 
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
@@ -244,7 +254,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				if(isLogin()) {
+				if (isLogin()) {
 					Intent intent = new Intent(HomeMallActivity.this,
 							PhoneActivity.class);
 					HomeMallActivity.this.startActivity(intent);
@@ -257,7 +267,8 @@ public class HomeMallActivity extends HomeBaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				if(!isLogin()) return;
+				if (!isLogin())
+					return;
 				Intent intentOrder = new Intent(HomeMallActivity.this,
 						MsgActivity.class);
 				HomeMallActivity.this.startActivity(intentOrder);
@@ -368,6 +379,15 @@ public class HomeMallActivity extends HomeBaseActivity {
 		ivDjdzmLeft.setOnClickListener(new ToucheOnclick(0, 0));
 		ivDjdzmRLeft.setOnClickListener(new ToucheOnclick(0, 1));
 		ivDjdzmRRight.setOnClickListener(new ToucheOnclick(0, 2));
+
+		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+				suiLeftWidth, suiLeftHeight);
+		RelativeLayout.LayoutParams rightLp = new RelativeLayout.LayoutParams(
+				suiRightWidht, suiRightHeight);
+		ivDjdzmLeft.setLayoutParams(lp);
+		ivDjdzmRLeft.setLayoutParams(rightLp);
+		ivDjdzmRRight.setLayoutParams(rightLp);
+
 		ImageLoader.getInstance()
 				.init(MyApplication.getInstance().initConfig());
 
@@ -390,7 +410,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 		ImageView ivSxgLeft = (ImageView) findViewById(R.id.iv_sxg_left);
 		ImageView ivSxgRUp = (ImageView) findViewById(R.id.iv_sxg_right_up);
 		ImageView ivSxgRDown = (ImageView) findViewById(R.id.iv_sxg_right_down);
-		
+
 		ivSxgTop.setOnClickListener(new ToucheOnclick(1, 0));
 		ivSxgLeft.setOnClickListener(new ToucheOnclick(1, 1));
 		ivSxgRUp.setOnClickListener(new ToucheOnclick(1, 2));
@@ -399,12 +419,21 @@ public class HomeMallActivity extends HomeBaseActivity {
 		int length = products.size();
 
 		LayoutParams layoutParams = new LayoutParams(screenWidth, screenHeight);
-		layoutParams.setMargins(5, 4, 5, 0);
+
+		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+				suiLeftWidth, suiLeftHeight);
+		RelativeLayout.LayoutParams rightLp = new RelativeLayout.LayoutParams(
+				suiRightWidht, suiRightHeight);
+		ivSxgLeft.setLayoutParams(lp);
+
+		ivSxgRUp.setLayoutParams(rightLp);
+		ivSxgRDown.setLayoutParams(rightLp);
+
+		layoutParams.setMargins(2, 4, 2, 0);
 		ivSxgTop.setLayoutParams(layoutParams);
 
 		if (length > 0)
-			Log.e("info", products.get(0).getImgUrl());
-		imageload(products.get(0).getImgUrl(), ivSxgTop);
+			imageload(products.get(0).getImgUrl(), ivSxgTop);
 
 		if (length > 1)
 			imageload(products.get(1).getImgUrl(), ivSxgLeft);
@@ -487,8 +516,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 			Bundle bundle = new Bundle();
 			switch (type) {
 			case 0:// 大家都在买
-				bundle.putString("goodsId", djdzmProducts.get(index)
-						.getUId());
+				bundle.putString("goodsId", djdzmProducts.get(index).getUId());
 				break;
 
 			case 1:// 1代表随心逛
@@ -499,6 +527,5 @@ public class HomeMallActivity extends HomeBaseActivity {
 			startActivity(intent);
 		}
 	}
-	
-	
+
 }

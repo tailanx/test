@@ -357,7 +357,7 @@
 
             <ImageView
                 android:id="@+id/iv_sxg_left"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/yirihui"
                 android:layout_centerVertical="true"
                 android:contentDescription="@string/yidejia"
@@ -380,7 +380,7 @@
 
                 <ImageView
                     android:id="@+id/iv_sxg_right_up"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/all_buy_produce_right"
                     android:layout_centerInParent="true"
                     android:contentDescription="@string/yidejia"
@@ -396,7 +396,7 @@
 
                 <ImageView
                     android:id="@+id/iv_sxg_right_down"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/all_buy_produce_right"
                     android:layout_centerInParent="true"
                     android:contentDescription="@string/yidejia"
