@@ -17,6 +17,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.baidu.mobstat.StatService;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.opens.asyncokhttpclient.AsyncHttpResponse;
 import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.yidejia.app.mall.R;
@@ -64,12 +67,16 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 	private String favolitenNum; // 收藏
 	private String orderNum; // 订单
 	private String msgNum; // 消息中心
+	private ImageLoadingListener animateFirstListener;
+	private DisplayImageOptions options;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// cartsDataManage = new CartsDataManage();
 		myApplication = MyApplication.getInstance();
+		animateFirstListener = myApplication.getImageLoadingListener();
+		options = myApplication.initGoodsImageOption();
 		setContentView(R.layout.activity_main_fragment_layout);
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
 		inflater = LayoutInflater.from(this);
@@ -177,6 +184,9 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 		aidouRelative.setOnClickListener(this);
 		head = (ImageView) view
 				.findViewById(R.id.iv_person_shopping_image_person);
+		ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
+		
+		ImageLoader.getInstance().displayImage(myApplication.getUserHeadImg(), head, options, animateFirstListener);
 		head.setOnClickListener(this);// 图像
 		nick = (TextView) view
 				.findViewById(R.id.tv_person_shopping_person_name);// 昵称

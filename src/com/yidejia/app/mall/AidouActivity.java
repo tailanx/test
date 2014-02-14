@@ -28,7 +28,7 @@ public class AidouActivity extends BaseActivity {
 		webView = (WebView) findViewById(R.id.wb_webView);
 		webView.setBackgroundColor(0);
 		webView.setBackgroundColor(getResources().getColor(R.color.white));
-		webView.loadUrl("http://m.yidejia.com/regterms.html");
+		webView.loadUrl("http://m.yidejia.com/aidourules.html");
 	}
 	
 	@Override
