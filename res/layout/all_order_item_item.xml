@@ -3,6 +3,7 @@
     android:id="@+id/all_order_item_main_linerar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/actiobar_margin_top"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -15,8 +16,8 @@
             android:id="@+id/all_order_item_main_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="4dp"
             android:text="@string/order_state"
             android:textSize="14sp" />
 
@@ -34,8 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/all_order_item_main_item"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="8dp"
             android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
             android:textSize="12sp" />
 
         <TextView
@@ -55,8 +56,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
     </LinearLayout>
-    
-
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -129,8 +128,8 @@
             android:id="@+id/all_order_item_main_item_textview7_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/all_order_item_main_sum"
             android:layout_alignBaseline="@id/all_order_item_main_item_textview7"
+            android:layout_below="@id/all_order_item_main_sum"
             android:layout_marginLeft="8dp"
             android:layout_toRightOf="@id/all_order_item_main_item_textview7"
             android:textSize="15sp" />
