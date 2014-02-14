@@ -103,6 +103,7 @@ public class OrderDetailActivity extends BaseActivity implements
 			});
 			layout.addView(view);
 		}
+		/** 根据订单号获取订单信息 **/
 		getData();
 	}
 
