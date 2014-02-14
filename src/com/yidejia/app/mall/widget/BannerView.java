@@ -13,6 +13,7 @@ import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +24,7 @@ import android.widget.ImageView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
+import com.yidejia.app.mall.ActiveGoActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
@@ -189,12 +191,18 @@ public class BannerView {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context,
-						GoodsInfoActivity.class);
-				Bundle bundle = new Bundle();
-				bundle.putString("goodsId", bannerArray.get(index).getUId());
-				intent.putExtras(bundle);
-				context.startActivity(intent);
+				boolean isGoods = !TextUtils.isEmpty(bannerArray.get(index).getUId());
+				if (isGoods) {
+					Intent intent = new Intent(context, GoodsInfoActivity.class);
+					Bundle bundle = new Bundle();
+					bundle.putString("goodsId", bannerArray.get(index).getUId());
+					intent.putExtras(bundle);
+					context.startActivity(intent);
+				} else {
+					Intent intent = new Intent(context, ActiveGoActivity.class);
+					intent.putExtra("url", bannerArray.get(index).getDetailUrl());
+					context.startActivity(intent);
+				}
 			}
 		}
 	}
