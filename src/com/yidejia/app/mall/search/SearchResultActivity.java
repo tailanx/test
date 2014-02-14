@@ -306,14 +306,14 @@ public class SearchResultActivity extends SlidingFragmentActivity {
 	}
 	
 	@Override
-	protected void onPause() {
-		super.onPause();
-		StatService.onPause(this);
+	protected void onResume() {
+		super.onResume();
+		StatService.onPageStart(this, "搜索结果页面");
 	}
 
 	@Override
-	protected void onResume() {
-		super.onResume();
-		StatService.onResume(this);
+	protected void onPause() {
+		super.onPause();
+		StatService.onPageEnd(this, "搜索结果页面");
 	}
 }

@@ -10,6 +10,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebStorage.QuotaUpdater;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
 import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
@@ -100,14 +101,14 @@ public class GoodsDetailActivity extends BaseActivity{
 
 	
 	@Override
-	public void onPause() {
-		super.onPause();
-		StatService.onPause(this);
+	protected void onResume() {
+		super.onResume();
+		StatService.onPageStart(this, "商品图文详情页面");
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
-		StatService.onResume(this);
+	protected void onPause() {
+		super.onPause();
+		StatService.onPageEnd(this, "商品图文详情页面");
 	}
 }

@@ -175,6 +175,18 @@ public class MyApplication extends Application {
 
 		return options;
 	}
+	
+	public DisplayImageOptions initSearchCategoryOption() {
+		options = new DisplayImageOptions.Builder()
+		.showStubImage(R.drawable.image_bg)
+		.showImageOnFail(R.drawable.image_bg)
+		.showImageForEmptyUri(R.drawable.all_category)
+//				.cacheInMemory(true)
+		.showImageOnLoading(R.drawable.image_bg)
+		.cacheOnDisc(true).build();
+		
+		return options;
+	}
 
 	public DisplayImageOptions initBannerImageOption() {
 		options = new DisplayImageOptions.Builder()

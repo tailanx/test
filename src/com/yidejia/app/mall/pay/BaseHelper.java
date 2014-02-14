@@ -12,6 +12,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 
 public class BaseHelper {
@@ -55,11 +56,77 @@ public class BaseHelper {
 	 */
 	public static void showDialog(Activity context, String strTitle,
 			String strText, int icon) {
+		showDialog(context, strTitle, strText, icon, android.R.string.ok, null, -1, null);
+	}
+	
+	/**
+	 * 显示dialog
+	 * 
+	 * @param context
+	 *            环境
+	 * @param strTitle
+	 *            标题
+	 * @param strText
+	 *            内容
+	 * @param icon
+	 *            图标
+	 * @param strOk
+	 *            确定按钮文字，null便是不显示
+	 * @param okListener
+	 *            确定按钮点击事件
+	 * @param strCancel
+	 *            取消按钮文字，null表示不显示
+	 * @param cancelListener
+	 *            取消按钮点击事件
+	 * 
+	 */
+	public static void showDialog(Activity context, String strTitle,
+			String strText, int icon, String strOk,
+			DialogInterface.OnClickListener okListener, String strCancel,
+			DialogInterface.OnClickListener cancelListener) {
 		AlertDialog.Builder tDialog = new AlertDialog.Builder(context);
 		tDialog.setIcon(icon);
 		tDialog.setTitle(strTitle);
 		tDialog.setMessage(strText);
-		tDialog.setPositiveButton(android.R.string.ok, null);
+		if(!TextUtils.isEmpty(strOk))
+			tDialog.setPositiveButton(strOk, okListener);
+		if(!TextUtils.isEmpty(strCancel))
+			tDialog.setNegativeButton(strCancel, cancelListener);
+		tDialog.show();
+	}
+	/**
+	 * 显示dialog
+	 * 
+	 * @param context
+	 *            环境
+	 * @param strTitle
+	 *            标题
+	 * @param strText
+	 *            内容
+	 * @param icon
+	 *            图标
+	 * @param idOk
+	 *            确定按钮文字资源id,-1表示不显示
+	 * @param okListener
+	 *            确定按钮点击事件
+	 * @param idCancel
+	 *            取消按钮文字资源id,-1表示不显示
+	 * @param cancelListener
+	 *            取消按钮点击事件
+	 * 
+	 */
+	public static void showDialog(Activity context, String strTitle,
+			String strText, int icon, int idOk,
+			DialogInterface.OnClickListener okListener, int idCancel,
+			DialogInterface.OnClickListener cancelListener) {
+		AlertDialog.Builder tDialog = new AlertDialog.Builder(context);
+		tDialog.setIcon(icon);
+		tDialog.setTitle(strTitle);
+		tDialog.setMessage(strText);
+		if(-1 != idOk)
+			tDialog.setPositiveButton(idOk, okListener);
+		if(-1 != idCancel)
+			tDialog.setNegativeButton(idCancel, cancelListener);
 		tDialog.show();
 	}
 
@@ -106,17 +173,6 @@ public class BaseHelper {
 		}
 	}
 	
-	/**
-	 * 打印信息
-	 * 
-	 * @param tag
-	 *            标签
-	 * @param info
-	 *            信息
-	 */
-	public static void log(String tag, String info) {
-		// Log.d(tag, info);
-	}
 	
 	/**
 	 * 获取权限

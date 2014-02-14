@@ -14,6 +14,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.adapter.HistoryAdapter;
@@ -107,4 +108,16 @@ public class HistoryActivity extends BaseActivity {
 			dialog.show();
 		}
 	};
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		StatService.onPageStart(this, "历史记录页面");
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		StatService.onPageEnd(this, "历史记录页面");
+	}
 }

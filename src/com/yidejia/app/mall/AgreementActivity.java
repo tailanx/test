@@ -6,6 +6,7 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
 
 /**
@@ -40,4 +41,15 @@ public class AgreementActivity extends SherlockFragmentActivity{
 		});
 	}
 	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		StatService.onPageStart(this, "服务条款页面");
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		StatService.onPageEnd(this, "服务条款页面");
+	}
 }

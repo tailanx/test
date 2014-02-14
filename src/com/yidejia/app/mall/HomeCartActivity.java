@@ -8,9 +8,9 @@ import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.datamanage.CartsDataManage;
 import com.yidejia.app.mall.model.Cart;
+import com.yidejia.app.mall.pay.CstmPayActivity;
 import com.yidejia.app.mall.search.SearchResultActivity;
 import com.yidejia.app.mall.util.CartUtil1;
-import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 
 import android.app.AlertDialog;
@@ -24,7 +24,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;

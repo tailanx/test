@@ -70,22 +70,7 @@
             android:name="BaiduMobAd_WIFI_LOCATION"
             android:value="true" />
 
-        <!--
-        <activity
-            android:name="com.yidejia.app.mall.MainActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:uiOptions="splitActionBarWhenNarrow"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
-        -->
-        <!--
-        <activity
-            android:name="com.yidejia.app.mall.ComposeActivity"
-            android:screenOrientation="portrait"
-            android:uiOptions="splitActionBarWhenNarrow" >
-        </activity>
-        -->
+      
         <activity
             android:name="com.yidejia.app.mall.goodinfo.GoodsInfoActivity"
             android:screenOrientation="portrait" >
@@ -131,13 +116,17 @@
         </activity>
         <activity
             android:name="com.yidejia.app.mall.GuideActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.yidejia.app.mall.view.UserPayActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" >
+            android:launchMode="singleTask" />
+        <activity
+            android:name="com.yidejia.app.mall.pay.UnionActivity"
+            android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="com.yidejia.app.mall.pay.WebPayActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+
         <activity
             android:name="com.yidejia.app.mall.msg.MsgActivity"
             android:screenOrientation="portrait" />
@@ -185,7 +174,7 @@
         <!--
              <activity
             android:name="com.yidejia.app.mall.view.NewAddressActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" />
         -->
         <activity
             android:name="com.yidejia.app.mall.EditorActivity"
@@ -200,7 +189,7 @@
             android:name="com.yidejia.app.mall.FindPwActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yidejia.app.mall.view.CstmPayActivity"
+            android:name="com.yidejia.app.mall.pay.CstmPayActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity

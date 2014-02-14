@@ -210,7 +210,9 @@ public class EditorActivity extends BaseActivity {
 
 	/** 清除数据 **/
 	private void cleanData() {
-		thread.start();
+		if(thread.getState() == Thread.State.NEW)
+			thread.start();
+		else thread.run();
 	}
 
 	private Thread thread = new Thread(new Runnable() {
@@ -241,6 +243,7 @@ public class EditorActivity extends BaseActivity {
 				Toast.makeText(EditorActivity.this, "清除成功", Toast.LENGTH_LONG)
 						.show();
 				editor_cache_size.setText("0.00B");
+				
 			}
 		}
 

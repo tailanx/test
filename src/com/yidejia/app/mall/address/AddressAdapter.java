@@ -42,9 +42,9 @@ import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.net.address.DeleteUserAddress;
 import com.yidejia.app.mall.net.address.SetDefAddr;
+import com.yidejia.app.mall.pay.CstmPayActivity;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DefinalDate;
-import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 import android.content.SharedPreferences;

@@ -21,8 +21,8 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.net.address.GetUserAddressList;
+import com.yidejia.app.mall.pay.CstmPayActivity;
 import com.yidejia.app.mall.util.Consts;
-import com.yidejia.app.mall.view.CstmPayActivity;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class PayAddressActivity extends SherlockActivity {

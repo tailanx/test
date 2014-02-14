@@ -6,15 +6,23 @@ import java.util.Date;
 
 public class TimeUtil {
 	@SuppressLint("SimpleDateFormat")
-	public static String convert(long mill) {
+	private static String convert(long mill, String format) {
 		Date date = new Date(mill * 1000L);
 		String strs = "";
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat sdf = new SimpleDateFormat(format);
 			strs = sdf.format(date);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return strs;
+	}
+	
+	public static String converDate(long mill){
+		return convert(mill, "yyyy-MM-dd");
+	}
+	
+	public static String convertMill(long mill){
+		return convert(mill, "yyyy-MM-dd HH:mm:ss");
 	}
 }

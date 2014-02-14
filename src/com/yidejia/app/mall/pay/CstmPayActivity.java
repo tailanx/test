@@ -1,4 +1,4 @@
-package com.yidejia.app.mall.view;
+package com.yidejia.app.mall.pay;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -10,13 +10,10 @@ import org.apache.http.HttpStatus;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -48,15 +45,10 @@ import com.yidejia.app.mall.model.Express;
 import com.yidejia.app.mall.model.FreePost;
 import com.yidejia.app.mall.model.Specials;
 import com.yidejia.app.mall.order.ParseOrder;
-import com.yidejia.app.mall.pay.AlixId;
-import com.yidejia.app.mall.pay.BaseHelper;
-import com.yidejia.app.mall.pay.DeliveryActivity;
-import com.yidejia.app.mall.pay.MobileSecurePayer;
-import com.yidejia.app.mall.pay.PartnerConfig;
-import com.yidejia.app.mall.pay.ResultChecker;
-import com.yidejia.app.mall.pay.Rsa;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.PayUtil;
+import com.yidejia.app.mall.view.ExchangeFreeActivity;
+import com.yidejia.app.mall.view.LoginActivity;
 
 public class CstmPayActivity extends BaseActivity {
 	private TextView tv_userName;// 用户名
@@ -115,7 +107,9 @@ public class CstmPayActivity extends BaseActivity {
 	private float voucher;
 	private final String TAG = getClass().getName();
 	
-	private ProgressDialog mProgress = null;
+//	private ProgressDialog mProgress = null;
+//	
+//	private String alicInfo;	//支付宝客户端支付需要的字符串
 
 	public static ArrayList<Specials> getArrayListFree() {
 		return arrayListFree;
@@ -374,6 +368,7 @@ public class CstmPayActivity extends BaseActivity {
 		
 	}
 	
+	/**显示界面**/
 	private void show(final ArrayList<Cart> carts, boolean isHuanGou) {
 		setContentView(R.layout.go_pay);
 			
@@ -410,7 +405,7 @@ public class CstmPayActivity extends BaseActivity {
 		PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
 		goods = pay.loadView(carts, isHuanGou);
 		
-		// 提交订单
+		// 提交订单点击事件
 		tv_saveOrderBtn.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -433,24 +428,12 @@ public class CstmPayActivity extends BaseActivity {
 				} else if (cb_caifutong.isChecked()) {
 					mode = 0;
 					pay_type = "tenpay";
-//					Toast.makeText(CstmPayActivity.this, "亲，暂时只支持银联的支付方式哦！",
-//							Toast.LENGTH_LONG).show();
-//					return;
 				} else if (cb_zhifubao.isChecked()) {
 					mode = 2;
 					pay_type = "alipay";
-//					Toast.makeText(CstmPayActivity.this, "亲，暂时只支持银联的支付方式哦！",
-//							Toast.LENGTH_LONG).show();
-//					return;
-					performPay();
-					return;
 				} else {
 					mode = 3;
-//					pay_type = "aliwappay";
 					pay_type = "alipay";
-//					Toast.makeText(CstmPayActivity.this, "亲，暂时只支持银联的支付方式哦！",
-//							Toast.LENGTH_LONG).show();
-//					return;
 				}
 				saveOrder();
 			}
@@ -462,6 +445,25 @@ public class CstmPayActivity extends BaseActivity {
 	
 	String pay_type = "";
 	int mode = 1;
+	/**清除购物车数据**/
+	private void cleanCart(){
+		if (isCartActivity.equals("Y")) {// ；来自购物车
+			// 删除购物车的商品
+			CartsDataManage cartsDataManage = new CartsDataManage();
+			int length = carts.size();
+			for (int i = 0; i < length; i++) {
+				cartsDataManage.delCart(carts.get(i).getUId());
+			}
+		}
+	}
+	
+	private void go2WebPay(String title, String payurl){
+		Intent webIntent = new Intent(this, WebPayActivity.class);
+		webIntent.putExtra("title", title);
+		webIntent.putExtra("payurl", payurl);
+		startActivity(webIntent);
+		finish();
+	}
 	
 	/**
 	 * 支付事件操作
@@ -470,36 +472,23 @@ public class CstmPayActivity extends BaseActivity {
 	private void go2Pay(int mode){
 		if (TextUtils.isEmpty(orderCode))
 			return;
-		if (isCartActivity.equals("Y")) {// ；来自购物车
-			Log.e("NoProduceFragment", "DELETE_CART");
-			// 删除购物车的商品
-			CartsDataManage cartsDataManage = new CartsDataManage();
-			int length = carts.size();
-			for (int i = 0; i < length; i++) {
-				cartsDataManage.delCart(carts.get(i).getUId());
-			}
-		}
+		
 		// 跳转到支付页面
 		Intent userpayintent = new Intent(CstmPayActivity.this,
-				UserPayActivity.class);
+				UnionActivity.class);
 		Bundle bundle = new Bundle();
 		
 		bundle.putInt("mode", mode);
 		bundle.putString("code", orderCode);
-		if (mode == 1) {
-			bundle.putString("uid", userId);
-			bundle.putString("resp_code", resp_code);
-			bundle.putString("tn", tn);
-		} else if(mode == 0) {
-			bundle.putString("payurl", "http://u.yidejia.com/index.php?m=ucenter&c=order&a=onlineWap&code="+orderCode+"&type=tenpay");
-		} else if(mode == 3) {
-			bundle.putString("payurl", "http://u.yidejia.com/index.php?m=ucenter&c=order&a=onlineWap&code="+orderCode+"&type=alipay");
-		}
+		bundle.putString("uid", userId);
+		bundle.putString("resp_code", resp_code);
+		bundle.putString("tn", tn);
 		userpayintent.putExtras(bundle);
 		startActivity(userpayintent);
 		CstmPayActivity.this.finish();
 	}
 	
+	/**提交订单**/
 	private void saveOrder() {
 		String encodeMethod = "UTF-8";
 		
@@ -520,7 +509,7 @@ public class CstmPayActivity extends BaseActivity {
 				"", jifen + "", expressNum, tmpPostMethod, tmpPeisong, goods,
 				tmpComment, pay_type, token);
 		
-		Log.e("system.out", url+params);
+//		Log.e("system.out", url+params);
 		
 		RequestParams requestParams = new RequestParams();
 		requestParams.put(params);
@@ -532,22 +521,32 @@ public class CstmPayActivity extends BaseActivity {
 			public void onSuccess(int statusCode, String content) {
 				super.onSuccess(statusCode, content);
 				if(statusCode == HttpStatus.SC_OK) {
+					//清除购物车数据
+					cleanCart();
+					
 					ParseOrder parseOrder = new ParseOrder(CstmPayActivity.this);
 					Log.e("system.out", content);
 					if(parseOrder.parseSaveOrder(content)){
 						orderCode = parseOrder.getOrderCode();
 						tn = parseOrder.getTn();
 						resp_code = parseOrder.getResp_code();
+						
+						if (TextUtils.isEmpty(orderCode))
+							return;
+						
 						if(mode == 1) {
 							go2Pay(mode);
 						} else if(mode == 0){	//财付通网页
-							//http://u.yidejia.com/index.php?m=ucenter&c=order&a=onlineWap&code=d0200114011626&type=tenpay
-							go2Pay(mode);
+							String payurl = "http://u.yidejia.com/index.php?m=ucenter&c=order&a=onlineWap&code="+orderCode+"&type=tenpay";
+//							go2Pay(mode);
+							go2WebPay(getString(R.string.caifutong_pay), payurl);
 						} else if(mode == 3) {	//支付宝网页
-							//http://u.yidejia.com/index.php?m=ucenter&c=order&a=onlineWap&code=d0200114011626&type=alipay
-							go2Pay(mode);
+							String payurl = "http://u.yidejia.com/index.php?m=ucenter&c=order&a=onlineWap&code="+orderCode+"&type=alipay";
+//							go2Pay(mode);
+							go2WebPay(getString(R.string.zhifubao_wangye_pay_list), payurl);
 						} else if(mode == 2) {
-							performPay();
+							AlicPayUtil util = new AlicPayUtil(CstmPayActivity.this);
+							util.getAlicPay(userId, token, orderCode);
 						}
 					}
 				}
@@ -563,198 +562,6 @@ public class CstmPayActivity extends BaseActivity {
 		});
 	}
 	
-	/**alipay支付宝客户端支付**/
-	private void performPay() {
-		//
-		// check to see if the MobileSecurePay is already installed.
-
-		// check some info.
-		// 检测配置信息
-//		if (!checkInfo()) {
-//			BaseHelper
-//					.showDialog(
-//							CstmPayActivity.this,
-//							"提示",
-//							"缺少partner或者seller，请在PartnerConfig.java中增加。",
-//							R.drawable.infoicon);
-//			return;
-//		}
-
-		// start pay for this order.
-		// 根据订单信息开始进行支付
-		try {
-			// prepare the order info.
-			// 准备订单信息
-			/*String orderInfo = getOrderInfo();
-			// 这里根据签名方式对订单信息进行签名
-			String signType = getSignType();
-			String strsign = sign(signType, orderInfo);
-			Log.v("sign:", strsign);
-			// 对签名进行编码
-			strsign = URLEncoder.encode(strsign, "UTF-8");
-			// 组装好参数
-			String info = orderInfo + "&sign=" + "\"" + strsign + "\"" + "&"
-					+ getSignType();*/
-			String info = "partner=\"2088011831506812\"&seller_id=\"pay@yidejia.com\"&out_trade_no=\"d0200114011751\"&subject=\"title..\"&body=\"description..\"&total_fee=\"0.01\"&notify_url=\"http://www.taobao.com\"&service=\"mobile.securitypay.pay\"&_input_charset=\"utf-8\"&payment_type=\"1\"&sign=\"kmSIemgqtWgR4Z4YpKx8z%2FWcIsu8OUrDxqEGQOHxsve1wLHDr08N5RtzL9j60aUh0eQmd0kl6JjoNpVbAxwS%2Bm7iJw%2B4D%2BbdNrpmnkgghiI9Lqj2zUXURFbJx0sTY9tZ7mWVXr%2FBV0uR24%2FlNlm6fPb5vcB7bi4L3Ohp46AyJ5k%3D\"&sign_type=\"RSA\"";
-			Log.v("orderInfo:", info);
-			// start the pay.
-			// 调用pay方法进行支付
-			MobileSecurePayer msp = new MobileSecurePayer();
-			boolean bRet = msp.pay(info, mHandler, AlixId.RQF_PAY, this);
-
-			if (bRet) {
-				// show the progress bar to indicate that we have started
-				// paying.
-				// 显示“正在支付”进度条
-				closeProgress();
-				mProgress = BaseHelper.showProgress(this, null, "正在支付", false,
-						true);
-			} else
-				;
-		} catch (Exception ex) {
-			Toast.makeText(CstmPayActivity.this, R.string.remote_call_failed,
-					Toast.LENGTH_SHORT).show();
-		}
-	}
-	
-	/**
-	 * check some info.the partner,seller etc. 检测配置信息
-	 * partnerid商户id，seller收款帐号不能为空
-	 * 
-	 * @return
-	 */
-	private boolean checkInfo() {
-		String partner = PartnerConfig.PARTNER;
-		String seller = PartnerConfig.SELLER;
-		if (partner == null || partner.length() <= 0 || seller == null
-				|| seller.length() <= 0)
-			return false;
-
-		return true;
-	}
-	/**
-	 * get the selected order info for pay. 获取商品订单信息
-	 * 
-	 * @return
-	 */
-	String getOrderInfo() {
-		String strOrderInfo = "partner=" + "\"" + PartnerConfig.PARTNER + "\"";
-		strOrderInfo += "&";
-		strOrderInfo += "seller=" + "\"" + PartnerConfig.SELLER + "\"";
-		strOrderInfo += "&";
-		strOrderInfo += "out_trade_no=" + "\"" + orderCode + "\"";
-		strOrderInfo += "&";
-		strOrderInfo += "subject=" + "\"" + "伊的家商城订单"
-				+ "\"";
-		strOrderInfo += "&";
-		strOrderInfo += "body=" + "\"" + "测试支付宝支付订单" + "\"";
-		strOrderInfo += "&";
-		strOrderInfo += "total_fee=" + "\""
-				+ "0.1" + "\"";
-		strOrderInfo += "&";
-		strOrderInfo += "notify_url=" + "\""
-				+ "http://notify.java.jpxx.org/index.jsp" + "\"";
-
-		return strOrderInfo;
-	}
-	
-	//
-	// close the progress bar
-	// 关闭进度框
-	void closeProgress() {
-		try {
-			if (mProgress != null) {
-				mProgress.dismiss();
-				mProgress = null;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * get the sign type we use. 获取签名方式
-	 * 
-	 * @return
-	 */
-	String getSignType() {
-		String getSignType = "sign_type=" + "\"" + "RSA" + "\"";
-		return getSignType;
-	}
-	
-	/**
-	 * sign the order info. 对订单信息进行签名
-	 * 
-	 * @param signType
-	 *            签名方式
-	 * @param content
-	 *            待签名订单信息
-	 * @return
-	 */
-	String sign(String signType, String content) {
-		return Rsa.sign(content, PartnerConfig.RSA_PRIVATE);
-	}
-	
-	// 这里接收支付结果，支付宝手机端同步通知
-		private Handler mHandler = new Handler() {
-			public void handleMessage(Message msg) {
-				try {
-					String ret = (String) msg.obj;
-
-					Log.e(TAG, ret); // strRet范例：resultStatus={9000};memo={};result={partner="2088201564809153"&seller="2088201564809153"&out_trade_no="050917083121576"&subject="123456"&body="2010新款NIKE 耐克902第三代板鞋 耐克男女鞋 386201 白红"&total_fee="0.01"&notify_url="http://notify.java.jpxx.org/index.jsp"&success="true"&sign_type="RSA"&sign="d9pdkfy75G997NiPS1yZoYNCmtRbdOP0usZIMmKCCMVqbSG1P44ohvqMYRztrB6ErgEecIiPj9UldV5nSy9CrBVjV54rBGoT6VSUF/ufjJeCSuL510JwaRpHtRPeURS1LXnSrbwtdkDOktXubQKnIMg2W0PreT1mRXDSaeEECzc="}
-					switch (msg.what) {
-					case AlixId.RQF_PAY: {
-						//
-						closeProgress();
-
-						BaseHelper.log(TAG, ret);
-
-						// 处理交易结果
-						try {
-							// 获取交易状态码，具体状态代码请参看文档
-							String tradeStatus = "resultStatus={";
-							int imemoStart = ret.indexOf("resultStatus=");
-							imemoStart += tradeStatus.length();
-							int imemoEnd = ret.indexOf("};memo=");
-							tradeStatus = ret.substring(imemoStart, imemoEnd);
-
-							// 先验签通知
-							ResultChecker resultChecker = new ResultChecker(ret);
-							int retVal = resultChecker.checkSign();
-							// 验签失败
-							if (retVal == ResultChecker.RESULT_CHECK_SIGN_FAILED) {
-								BaseHelper.showDialog(
-										CstmPayActivity.this,
-										"提示",
-										getResources().getString(
-												R.string.check_sign_failed),
-										android.R.drawable.ic_dialog_alert);
-							} else {// 验签成功。验签成功后再判断交易状态码
-								if (tradeStatus.equals("9000"))// 判断交易状态码，只有9000表示交易成功
-									BaseHelper.showDialog(CstmPayActivity.this, "提示",
-											"支付成功。交易状态码：" + tradeStatus,
-											R.drawable.ic_launcher);
-								else
-									BaseHelper.showDialog(CstmPayActivity.this, "提示",
-											"支付失败。交易状态码:" + tradeStatus,
-											R.drawable.ic_launcher);
-							}
-
-						} catch (Exception e) {
-							e.printStackTrace();
-//							BaseHelper.showDialog(CstmPayActivity.this, "提示", ret,
-//									R.drawable.infoicon);
-						}
-					}
-						break;
-					}
-
-					super.handleMessage(msg);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		};
 	
 	private String getAddressUrl(boolean isDefault) {
 		String url = "";
@@ -1213,16 +1020,6 @@ public class CstmPayActivity extends BaseActivity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// super.onActivityResult(requestCode, resultCode, data);
-		/*************************************************
-		 * 
-		 * 步骤3：处理银联手机支付控件返回的支付结果
-		 * 
-		 ************************************************/
-
-//		Log.i("info", requestCode + "   requestCode");
-//		Log.i("info", resultCode + "   resultCode");
-
 		
 		if (data == null) {
 			return;
@@ -1234,13 +1031,8 @@ public class CstmPayActivity extends BaseActivity {
 			Log.i("info", addresses1.getAddress() + "str");
 			if (addresses1 != null) {
 				setAdd(addresses1);
-				// 判断是否免邮
-//				canFree(sum);
-				
-//				getDeliveryPoint(true);
+				// 获取邮费
 				getExpressData(addresses1.getProvice(), true);
-				// 设置快递费用和配送中心
-//				setKuaiDi(addresses1);
 			}
 		} else if (requestCode == Consts.CstmPayActivity_Request
 				&& resultCode == Consts.CstmPayActivity_Response) {
@@ -1250,10 +1042,7 @@ public class CstmPayActivity extends BaseActivity {
 
 			voucher = data.getFloatExtra("voucher", -1);
 			jifen = data.getFloatExtra("jifen", -1);
-			// Log.i("voucher", voucher + "  voucher");
-			// Log.i("voucher", voucher + "  voucher");
-			// isCartActivity = data.getStringExtra("cartActivity");
-//			show(carts, false);
+			
 			layout.removeAllViews();
 			PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
 			goods = pay.loadView(carts, false);
@@ -1271,14 +1060,14 @@ public class CstmPayActivity extends BaseActivity {
 	protected void onResume() {
 		super.onResume();
 //		StatService.onResume(this);
-		StatService.onPageStart(this, "支付页面");
+		StatService.onPageStart(this, "确认订单页面");
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
 //		StatService.onPause(this);
-		StatService.onPageEnd(this, "支付页面");
+		StatService.onPageEnd(this, "确认订单页面");
 	}
 	
 }

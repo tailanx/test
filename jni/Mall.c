@@ -3094,6 +3094,57 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 
 	return (*env)->NewStringUTF(env, urlString);
 }
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4AlicSign(JNIEnv* env,
+		jobject thiz, jstring userid, jstring token, jstring ordercode){//
+
+	char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
+	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chorder = (*env)->GetStringUTFChars(env, ordercode, NULL);
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+	char *api="api=ucenter.order.alicSign";
+	addString(urlString, api);
+
+	addString(urlString, "&user_id=");
+	if(chuid != NULL)addString(urlString, chuid);
+	addString(urlString, "&token=");
+	if(chtoken != NULL)addString(urlString, chtoken);
+	addString(urlString, "&code=");
+	if(chorder != NULL)addString(urlString, chorder);
+
+	addString(urlString, pHead);
+
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
+
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "ucenter.order.alicSign");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
 
 #ifdef __cplusplus
 }
