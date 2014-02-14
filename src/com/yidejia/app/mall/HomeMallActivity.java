@@ -41,6 +41,7 @@ import com.yidejia.app.mall.phone.PhoneActivity;
 //import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.search.SearchActivity;
 import com.yidejia.app.mall.skintest.SkinHomeActivity;
+import com.yidejia.app.mall.util.SharedPreferencesUtil;
 import com.yidejia.app.mall.view.IntegeralActivity;
 import com.yidejia.app.mall.widget.BannerView;
 import com.yidejia.app.mall.yirihui.YirihuiActivity;
@@ -63,6 +64,8 @@ public class HomeMallActivity extends HomeBaseActivity {
 	private ArrayList<MainProduct> sxgProducts;
 
 	private boolean isAppFrist;	//是否为新用户第一次启动app
+	
+	private SharedPreferencesUtil util;
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -70,6 +73,8 @@ public class HomeMallActivity extends HomeBaseActivity {
 		super.onCreate(savedInstanceState);
 		
 		isAppFrist = getIntent().getBooleanExtra("isFirstStart", false);
+		
+		util = new SharedPreferencesUtil(this);
 		
 		setContentView(R.layout.activity_main_fragment_layout);
 		// 实例化组件
@@ -83,12 +88,22 @@ public class HomeMallActivity extends HomeBaseActivity {
 
 		setActionBar();
 		setCurrentActivityId(0);
-
-		getMainData();
 		WindowManager manager = getWindowManager();
 		Display display = manager.getDefaultDisplay();
 		screenWidth = display.getHeight();
 		screenHeight = (int) ((screenWidth / 320f) * 160f) - 250;
+		
+		GetHomePage getHomePage = new GetHomePage();
+		String content = util.getData("home", "data", "");
+		
+		if (getHomePage.parseGetHomeJson(content)) {
+			loadView(getHomePage);
+		}
+		
+		if(!MyApplication.getInstance().isHomeCreated()){
+			getMainData();
+			MyApplication.getInstance().setHomeCreated(true);
+		}
 	}
 
 	/**获取首页数据**/
@@ -125,19 +140,10 @@ public class HomeMallActivity extends HomeBaseActivity {
 				if (HttpStatus.SC_OK == statusCode) {
 					GetHomePage getHomePage = new GetHomePage();
 					if (getHomePage.parseGetHomeJson(content)) {
-						// 设置轮播的组
-						ArrayList<BaseProduct> bannerProducts = getHomePage
-								.getBannerArray();
-						bannerView = new BannerView(bannerProducts,
-								HomeMallActivity.this);
-						bannerViewGroup.removeAllViews();
-						bannerViewGroup.addView(bannerView
-								.getMainListFirstItem());
-						bannerView.startTimer();
-						djdzmProducts = getHomePage.getDjdzmArray();
-						setDjdzmView(djdzmProducts);
-						sxgProducts = getHomePage.getSxgArray();
-						setSxgView(sxgProducts);
+						
+						util.saveData("home", "data", content);
+						
+						loadView(getHomePage);
 					} else {
 						Toast.makeText(HomeMallActivity.this,
 								getString(R.string.bad_network),
@@ -166,6 +172,22 @@ public class HomeMallActivity extends HomeBaseActivity {
 			}
 
 		});
+	}
+	
+	private void loadView(GetHomePage getHomePage){
+		// 设置轮播的组
+		ArrayList<BaseProduct> bannerProducts = getHomePage
+				.getBannerArray();
+		bannerView = new BannerView(bannerProducts,
+				HomeMallActivity.this);
+		bannerViewGroup.removeAllViews();
+		bannerViewGroup.addView(bannerView
+				.getMainListFirstItem());
+		bannerView.startTimer();
+		djdzmProducts = getHomePage.getDjdzmArray();
+		setDjdzmView(djdzmProducts);
+		sxgProducts = getHomePage.getSxgArray();
+		setSxgView(sxgProducts);
 	}
 
 	/**
@@ -425,6 +447,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		MyApplication.getInstance().setHomeCreated(false);
 	}
 
 	@Override
