@@ -6,6 +6,7 @@ import org.apache.http.HttpStatus;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.Display;
@@ -505,23 +506,30 @@ public class HomeMallActivity extends HomeBaseActivity {
 
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent(HomeMallActivity.this,
-					GoodsInfoActivity.class);
-			Bundle bundle = new Bundle();
 			switch (type) {
 			case 0:// 大家都在买
-				bundle.putString("goodsId", djdzmProducts.get(index)
-						.getUId());
+				djdzmOnclick(index, djdzmProducts);
 				break;
 
 			case 1:// 1代表随心逛
-				bundle.putString("goodsId", sxgProducts.get(index).getUId());
+				djdzmOnclick(index, sxgProducts);
 				break;
 			}
-			intent.putExtras(bundle);
-			startActivity(intent);
 		}
 	}
 	
-	
+	private void djdzmOnclick(int index, ArrayList<MainProduct> djdzmProducts){
+		boolean isGoods = !TextUtils.isEmpty(djdzmProducts.get(index).getUId());
+		if(isGoods){
+			Intent intent = new Intent(this, GoodsInfoActivity.class);
+			Bundle bundle = new Bundle();
+			bundle.putString("goodsId", djdzmProducts.get(index).getUId());
+			intent.putExtras(bundle);
+			startActivity(intent);
+		} else {
+			Intent intent = new Intent(this, ActiveGoActivity.class);
+			intent.putExtra("url", djdzmProducts.get(index).getDetailUrl());
+			startActivity(intent);
+		}
+	}
 }

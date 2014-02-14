@@ -115,12 +115,14 @@ public class GetHomePage {
 			
 			for(int i = 0; i < length; i++){
 				JSONObject itemJsonObject = sxgArray.optJSONObject(i);
+				String detailUrl = itemJsonObject.optString("url");
 				String goodsId = itemJsonObject.optString("goods_id");
 				String goodsUrl = itemJsonObject.optString("img_name");
 				String goodsName = itemJsonObject.optString("goods_name");
 				String price = itemJsonObject.optString("price");
 				
 				product = new MainProduct();
+				product.setDetailUrl(detailUrl);
 				product.setPrice(price);
 				product.setUId(goodsId);
 				product.setTitle(unicode.revert(goodsName));
@@ -143,7 +145,9 @@ public class GetHomePage {
 		BaseProduct baseProduct ;
 		for (int i = 0; i < length; i++) {
 			baseProduct = new BaseProduct();
-			itemObject = bannerJsonArray.getJSONObject(i);
+			itemObject = bannerJsonArray.optJSONObject(i);
+			String detailUrl = itemObject.optString("url");
+			baseProduct.setDetailUrl(detailUrl);
 			String goodsId = itemObject.optString("goods_id");
 			baseProduct.setUId(goodsId);
 			String imgUrl = itemObject.optString("img_name");

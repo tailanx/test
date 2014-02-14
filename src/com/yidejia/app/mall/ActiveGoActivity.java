@@ -1,6 +1,7 @@
 package com.yidejia.app.mall;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,6 +21,12 @@ public class ActiveGoActivity extends SherlockActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		url = getIntent().getStringExtra("url");
+		if(TextUtils.isEmpty(url)){
+			url = "http://m.yidejia.com/active.html";
+		}
+		
 		ActViewCtrl viewCtrl = new ActViewCtrl(this);
 		mWebView = viewCtrl.getWebView(url);
 		setContentView(mWebView);
