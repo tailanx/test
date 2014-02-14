@@ -12,11 +12,13 @@ import android.view.ViewGroup;
 
 import com.opens.asyncokhttpclient.AsyncHttpResponse;
 import com.opens.asyncokhttpclient.AsyncOkHttpClient;
+import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.Brand;
 import com.yidejia.app.mall.model.Function;
 import com.yidejia.app.mall.model.PriceLevel;
+import com.yidejia.app.mall.util.SharedPreferencesUtil;
 
 @SuppressLint("UseSparseArrays")
 public class FilterFragment extends Fragment {
@@ -27,6 +29,8 @@ public class FilterFragment extends Fragment {
 	private View view;
 	private FilterViewCtrl ctrl;
 	
+	private SharedPreferencesUtil spUtil;
+	
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
@@ -36,11 +40,13 @@ public class FilterFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		spUtil = new SharedPreferencesUtil(getActivity());
 	}
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
 		System.gc();
+		spUtil = null;
 	}
 	
 	@Override
@@ -67,6 +73,9 @@ public class FilterFragment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		Log.e(FilterFragment.class.getName(), "===onActivityCreated");
+		
+		
+		
 		if(null == view){
 //			view = ((MyApplication)getActivity().getApplication()).getView();
 			return;
@@ -76,7 +85,13 @@ public class FilterFragment extends Fragment {
 		effects = new ArrayList<Function>();
 		ctrl = new FilterViewCtrl(getActivity());
 		showFilterView();
-		getFilter();
+		
+		loadCache();
+		
+		if(!MyApplication.getInstance().isFilterCreated()){
+			getFilter();
+			MyApplication.getInstance().setFilterCreated(true);
+		}
 	}
 	
 	private void showFilterView() {
@@ -84,6 +99,29 @@ public class FilterFragment extends Fragment {
 		ctrl.setPrices(pricesLevels);
 		ctrl.setFuns(effects);
 		ctrl.getView(view);
+	}
+	
+	/**加载本地缓存数据**/
+	private void loadCache(){
+		if(null == spUtil) spUtil = new SharedPreferencesUtil(getActivity());
+		String strBrand = spUtil.getData("filter", "brand", "");
+		String strPrice = spUtil.getData("filter", "price", "");
+		String strEffect = spUtil.getData("filter", "effect", "");
+		
+		ParseSearchJson parseSearchJson = new ParseSearchJson();
+		if(parseSearchJson.parseBrandJson(strBrand)){
+			brands = parseSearchJson.getBrands();
+			ctrl.setBrands(brands);
+		}
+		if(parseSearchJson.parsePriceJson(strPrice)){
+			pricesLevels = parseSearchJson.getPriceLevels();
+			ctrl.setPrices(pricesLevels);
+		}
+		if(parseSearchJson.parseFunJson(strEffect)){
+			effects = parseSearchJson.getFunctions();
+			ctrl.setFuns(effects);
+		}
+		ctrl.update();
 	}
 	
 	private void getFilter(){
@@ -101,10 +139,14 @@ public class FilterFragment extends Fragment {
 			public void onSuccess(int statusCode, String content) {
 				super.onSuccess(statusCode, content);
 				ParseSearchJson parseSearchJson = new ParseSearchJson();
-				parseSearchJson.parseBrandJson(content);
-				brands = parseSearchJson.getBrands();
-				ctrl.setBrands(brands);
-				ctrl.update();
+				if (parseSearchJson.parseBrandJson(content)) {
+					if(null != spUtil)
+					spUtil.saveData("filter", "brand", content);
+					
+					brands = parseSearchJson.getBrands();
+					ctrl.setBrands(brands);
+					ctrl.update();
+				}
 			}
 			
 		});
@@ -114,10 +156,14 @@ public class FilterFragment extends Fragment {
 			public void onSuccess(int statusCode, String content) {
 				super.onSuccess(statusCode, content);
 				ParseSearchJson parseSearchJson = new ParseSearchJson();
-				parseSearchJson.parsePriceJson(content);
-				pricesLevels = parseSearchJson.getPriceLevels();
-				ctrl.setPrices(pricesLevels);
-				ctrl.update();
+				if (parseSearchJson.parsePriceJson(content)) {
+					if(null != spUtil)
+					spUtil.saveData("filter", "price", content);
+					
+					pricesLevels = parseSearchJson.getPriceLevels();
+					ctrl.setPrices(pricesLevels);
+					ctrl.update();
+				}
 			}
 			
 		});
@@ -127,10 +173,14 @@ public class FilterFragment extends Fragment {
 			public void onSuccess(int statusCode, String content) {
 				super.onSuccess(statusCode, content);
 				ParseSearchJson parseSearchJson = new ParseSearchJson();
-				parseSearchJson.parseFunJson(content);
-				effects = parseSearchJson.getFunctions();
-				ctrl.setFuns(effects);
-				ctrl.update();
+				if (parseSearchJson.parseFunJson(content)) {
+					if(null != spUtil)
+					spUtil.saveData("filter", "effect", content);
+
+					effects = parseSearchJson.getFunctions();
+					ctrl.setFuns(effects);
+					ctrl.update();
+				}
 			}
 			
 		});

@@ -6,6 +6,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.text.TextUtils;
+import android.util.Log;
+
+import com.yidejia.app.mall.MyApplication;
+import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.util.UnicodeToString;
 
 
@@ -14,6 +19,8 @@ public class ParseAddressJson {
 	private String TAG = getClass().getName();
 	private ArrayList<ModelAddresses> addressesArray;
 	private UnicodeToString unicode;
+	private String recipient_id = "";
+	private String isSuccessString = "";
 	
 	public ParseAddressJson() {
 		unicode = new UnicodeToString();
@@ -72,8 +79,54 @@ public class ParseAddressJson {
 		}
 		return false;
 	}
-	
+	/**获取地址列表**/
 	public ArrayList<ModelAddresses> getAddresses(){
 		return addressesArray;
+	}
+	
+	
+	/**
+	 * 解析添加或修改地址数据
+	 * @param resultJson http返回的数据
+	 * @return
+	 */
+	public boolean parseSaveJson(String resultJson) {
+		
+		if ("".equals(resultJson))
+			return false;
+		
+		JSONObject httpResultObject;
+		try {
+			httpResultObject = new JSONObject(resultJson);
+			int code = httpResultObject.getInt("code");
+			if (code == 1){
+				String response = httpResultObject.getString("response");
+				JSONObject responseJsonObject = new JSONObject(response);
+				String temp = responseJsonObject.getString("@p_recipient_id");
+				recipient_id = temp;
+				isSuccessString = responseJsonObject.getString("@p_result");
+				if(MyApplication.getInstance().getResources().getString(R.string.success_del).equals(unicode.revert(isSuccessString))){
+					if(!TextUtils.isEmpty(temp))
+						return true;
+				}
+				
+			}
+		} catch (JSONException e) {
+			Log.e(TAG, "save address analysis json jsonexception error");
+			e.printStackTrace();
+		} catch (Exception e) {
+			Log.e(TAG, "save address analysis json exception error");
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	/**获取地址id**/
+	public String getRecipient_id() {
+		return recipient_id;
+	}
+	/****/
+	public String getIsSuccessString() {
+		return isSuccessString;
 	}
 }

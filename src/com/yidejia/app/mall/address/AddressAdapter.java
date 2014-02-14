@@ -1,6 +1,6 @@
 package com.yidejia.app.mall.address;
 
-import java.io.IOException;
+//import java.io.IOException;
 import java.util.ArrayList;
 
 import org.json.JSONException;
@@ -13,7 +13,7 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
-import android.os.AsyncTask;
+//import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,28 +23,25 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 //import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.baidu.a.a.a.a.a;
 import com.opens.asyncokhttpclient.AsyncHttpResponse;
 import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.opens.asyncokhttpclient.RequestParams;
-import com.yidejia.app.mall.HomeMallActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 //import com.yidejia.app.mall.datamanage.AddressDataManage;
-import com.yidejia.app.mall.exception.TimeOutEx;
+//import com.yidejia.app.mall.exception.TimeOutEx;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.ConnectionDetector;
-import com.yidejia.app.mall.net.address.DeleteUserAddress;
-import com.yidejia.app.mall.net.address.SetDefAddr;
+//import com.yidejia.app.mall.net.address.DeleteUserAddress;
+//import com.yidejia.app.mall.net.address.SetDefAddr;
 import com.yidejia.app.mall.pay.CstmPayActivity;
 import com.yidejia.app.mall.util.Consts;
-import com.yidejia.app.mall.util.DefinalDate;
+//import com.yidejia.app.mall.util.DefinalDate;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 import android.content.SharedPreferences;
@@ -69,10 +66,10 @@ public class AddressAdapter extends BaseAdapter {
 		// dataManage = new AddressDataManage(context);
 		this.activity = context;
 		this.inflater = LayoutInflater.from(context);
-		setDefAddr = new SetDefAddr();
+//		setDefAddr = new SetDefAddr();
 		// bar = new ProgressDialog(context);
 
-		delAddress = new DeleteUserAddress(context);
+//		delAddress = new DeleteUserAddress(context);
 
 		sp = myApplication.getSharedPreferences("StateCBId",
 				Activity.MODE_PRIVATE);
@@ -109,7 +106,7 @@ public class AddressAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup arg2) {
 		final int positionId = position;
 		temp = sp.getInt("stateCBId", -1);
-		Log.e("info", temp + "  get  temp");
+//		Log.e("info", temp + "  get  temp");
 		final ViewHolder holder;
 
 		if (convertView == null) {
@@ -131,7 +128,6 @@ public class AddressAdapter extends BaseAdapter {
 			holder.editImageView = (TextView) convertView
 					.findViewById(R.id.address_management_item_relative1_textview2);
 			
-//			holder.llAddress = (LinearLayout) convertView.findViewById(R.id.address_management_item_linearlayout);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -152,12 +148,8 @@ public class AddressAdapter extends BaseAdapter {
 							public void onClick(DialogInterface dialog,
 									int which) {
 
-								addressId = addresses.getAddressId();
+//								addressId = addresses.getAddressId();
 								deleDate(addresses);
-								// closeTask();
-								// delTask = new DelTask();
-								// delTask.setAddresses(addresses);
-								// delTask.execute();
 							}
 						})
 				.setNegativeButton(
@@ -184,7 +176,7 @@ public class AddressAdapter extends BaseAdapter {
 				bundle.putSerializable("editaddress", addresses);
 				intent.putExtras(bundle);
 				((Activity) activity).startActivityForResult(intent,
-						DefinalDate.requestcode);
+						Consts.AddressRequestCode);
 			}
 		});
 		holder.deteleImageView.setOnClickListener(new OnClickListener() {
@@ -224,13 +216,13 @@ public class AddressAdapter extends BaseAdapter {
 						return;
 					}
 
-					 addressId = addresses.getAddressId();
-					 closeTask();
-					 task = new Task();
-					 task.setButtonView(buttonView);
-					 task.execute();
+//					 addressId = addresses.getAddressId();
+//					 closeTask();
+//					 task = new Task();
+//					 task.setButtonView(buttonView);
+//					 task.execute();
 					 // }
-//					editAddress(buttonView, addresses);
+					setDefAddress(buttonView, addresses);
 				} else {
 				}
 			}
@@ -290,10 +282,10 @@ public class AddressAdapter extends BaseAdapter {
 	
 	private int requestCode = -1;
 	
-	private SetDefAddr setDefAddr;
+//	private SetDefAddr setDefAddr;
 	private ProgressDialog bar;
-	private String addressId;
-	private Task task;
+//	private String addressId;
+	/*private Task task;
 
 	private class Task extends AsyncTask<Void, Void, Boolean> {
 
@@ -351,23 +343,23 @@ public class AddressAdapter extends BaseAdapter {
 			}
 		}
 
-	}
+	}*/
 
-	public void closeTask() {
+	/*public void closeTask() {
 		if (task != null
 				&& task.getStatus().RUNNING == AsyncTask.Status.RUNNING) {
 			task.cancel(true);
 		}
-		if (delTask != null
-				&& delTask.getStatus().RUNNING == AsyncTask.Status.RUNNING) {
-			delTask.cancel(true);
-		}
-	}
+//		if (delTask != null
+//				&& delTask.getStatus().RUNNING == AsyncTask.Status.RUNNING) {
+//			delTask.cancel(true);
+//		}
+	}*/
 
-	private DelTask delTask;
-	private DeleteUserAddress delAddress;
+//	private DelTask delTask;
+//	private DeleteUserAddress delAddress;
 
-	private class DelTask extends AsyncTask<Void, Void, Boolean> {
+	/*private class DelTask extends AsyncTask<Void, Void, Boolean> {
 
 		private ModelAddresses addresses;
 
@@ -427,7 +419,7 @@ public class AddressAdapter extends BaseAdapter {
 			return false;
 		}
 	}
-
+*/
 	private boolean isTimeout = false;
 
 	private void deleDate(final ModelAddresses addresses) {
@@ -508,12 +500,15 @@ public class AddressAdapter extends BaseAdapter {
 				});
 	}
 
-	private void editAddress(final CompoundButton buttonView,
+	private void setDefAddress(final CompoundButton buttonView,
 			ModelAddresses addresses) {
-		String url = new JNICallBack().getHttp4SetDefAddr(
+		String param = new JNICallBack().getHttp4SetDefAddr(
 				myApplication.getUserId(), addresses.getAddressId(),
 				myApplication.getToken());
-		requestParams.put(url);
+		String url = new JNICallBack().HTTPURL;
+		requestParams.put(param);
+		
+//		Log.e("system.out", )
 		client.post(url, contentType, requestParams, new AsyncHttpResponse() {
 			@Override
 			public void onError(Throwable error, String content) {

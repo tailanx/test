@@ -131,6 +131,36 @@ public class MyApplication extends Application {
 	public String getAidou() {
 		return aidou;
 	}
+	
+	private boolean isHomeCreated = false;	//首页
+
+	public boolean isHomeCreated() {
+		return isHomeCreated;
+	}
+
+	public void setHomeCreated(boolean isHomeCreated) {
+		this.isHomeCreated = isHomeCreated;
+	}
+	
+	private boolean isCategoryCreated = false;	//分类
+	
+	public boolean isCategoryCreated() {
+		return isCategoryCreated;
+	}
+	
+	public void setCategoryCreated(boolean isCategoryCreated) {
+		this.isCategoryCreated = isCategoryCreated;
+	}
+	
+	private boolean isFilterCreated = false;	//筛选
+	
+	public boolean isFilterCreated() {
+		return isFilterCreated;
+	}
+	
+	public void setFilterCreated(boolean isFilterCreated) {
+		this.isFilterCreated = isFilterCreated;
+	}
 
 	/**
 	 * 
@@ -159,8 +189,11 @@ public class MyApplication extends Application {
 
 	@Override
 	public void onLowMemory() {
-		super.onLowMemory();
 		ImageLoader.getInstance().clearMemoryCache();
+		setHomeCreated(false);
+		setCategoryCreated(false);
+		setFilterCreated(false);
+		super.onLowMemory();
 	}
 
 	private DisplayImageOptions options;

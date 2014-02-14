@@ -30,6 +30,7 @@ import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.search.ParseSearchJson;
 import com.yidejia.app.mall.search.SearchActivity;
 import com.yidejia.app.mall.search.SearchResultActivity;
+import com.yidejia.app.mall.util.SharedPreferencesUtil;
 
 public class HomeSearchActivity extends HomeBaseActivity {
 	private LayoutInflater inflater;
@@ -44,12 +45,15 @@ public class HomeSearchActivity extends HomeBaseActivity {
 	private String TAG = "SearchFragment";
 	private FrameLayout frameLayout;
 
+	private SharedPreferencesUtil util;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 
 		Log.e(TAG, "search onCreate");
+		
+		util = new SharedPreferencesUtil(this);
 
 		if (null != arg0) {
 			functions = (ArrayList<Function>) arg0.getSerializable("funs");
@@ -93,8 +97,19 @@ public class HomeSearchActivity extends HomeBaseActivity {
 				}
 			});
 		}
-		if(null == functions || functions.isEmpty())
-		getData();
+		
+		//加载默认数据
+		String content = util.getData("category", "data", "");
+		ParseSearchJson parseSearchJson = new ParseSearchJson();
+		boolean isSuccess = parseSearchJson.parseFunJson(content);
+		if(isSuccess){
+			loadView(parseSearchJson);
+		}
+		
+		if ((null == functions || functions.isEmpty()) && !MyApplication.getInstance().isCategoryCreated()) {
+			getData();
+			MyApplication.getInstance().setCategoryCreated(true);
+		}
 	}
 
 	private ImageView searchText;
@@ -145,20 +160,9 @@ public class HomeSearchActivity extends HomeBaseActivity {
 					ParseSearchJson parseSearchJson = new ParseSearchJson();
 					boolean isSuccess = parseSearchJson.parseFunJson(content);
 					if(isSuccess){
-						searchListView.setVisibility(View.VISIBLE);
-						search_item_refresh_view.setVisibility(View.GONE);
-						functions = parseSearchJson.getFunctions();
-						searchListAdapter = new SearchListAdapter(
-								HomeSearchActivity.this, functions);
-						searchListView.setAdapter(searchListAdapter);
-						searchListView.setOnItemClickListener(new OnItemClickListener() {
-
-							@Override
-							public void onItemClick(AdapterView<?> arg0,
-									View arg1, int arg2, long arg3) {
-								listener(arg2);
-							}
-						});
+						util.saveData("category", "data", content);
+						
+						loadView(parseSearchJson);
 					} else {
 						//TODO
 					}
@@ -176,7 +180,24 @@ public class HomeSearchActivity extends HomeBaseActivity {
 		});
 		
 	}
+	
+	private void loadView(ParseSearchJson parseSearchJson){
+		searchListView.setVisibility(View.VISIBLE);
+		search_item_refresh_view.setVisibility(View.GONE);
+		functions = parseSearchJson.getFunctions();
+		searchListAdapter = new SearchListAdapter(
+				HomeSearchActivity.this, functions);
+		searchListView.setAdapter(searchListAdapter);
+		searchListView.setOnItemClickListener(new OnItemClickListener() {
 
+			@Override
+			public void onItemClick(AdapterView<?> arg0,
+					View arg1, int arg2, long arg3) {
+				listener(arg2);
+			}
+		});
+	}
+	
 	private ProgressDialog bar;
 
 
@@ -236,6 +257,12 @@ public class HomeSearchActivity extends HomeBaseActivity {
 	protected void onResume() {
 		super.onResume();
 		StatService.onPageStart(this, getString(R.string.searchLabel));
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		MyApplication.getInstance().setCategoryCreated(false);
 	}
 
 }
