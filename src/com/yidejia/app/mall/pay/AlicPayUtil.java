@@ -33,6 +33,12 @@ public class AlicPayUtil {
 	}
 
 	public void getAlicPay(String userId, String token, String orderCode) {
+		
+		// 检测安全支付服务是否被安装
+		MobileSecurePayHelper mspHelper = new MobileSecurePayHelper(activity);
+		boolean isAlicExsist = mspHelper.detectMobile_sp();
+		if(!isAlicExsist) return;
+		
 		String url = new JNICallBack().HTTPURL;
 		String param = new JNICallBack().getHttp4AlicSign(userId, token,
 				orderCode);
