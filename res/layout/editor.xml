@@ -37,6 +37,7 @@
                 android:layout_centerVertical="true"
                 android:paddingLeft="@dimen/margin_left_more"
                 android:text="@string/edit_help"
+                android:textColor="@color/text_color_80"
                 android:textSize="@dimen/textsize_big" />
 
             <ImageView
@@ -75,6 +76,7 @@
                 android:layout_centerVertical="true"
                 android:paddingLeft="@dimen/margin_left_more"
                 android:text="@string/edit_cache"
+                android:textColor="@color/text_color_80"
                 android:textSize="@dimen/textsize_big" />
 
             <ImageView
@@ -134,6 +136,7 @@
                 android:layout_centerVertical="true"
                 android:paddingLeft="@dimen/margin_left_more"
                 android:text="@string/edit_about_add"
+                android:textColor="@color/text_color_80"
                 android:textSize="@dimen/textsize_big" />
 
             <ImageView
@@ -172,6 +175,7 @@
                 android:layout_centerVertical="true"
                 android:paddingLeft="@dimen/margin_left_more"
                 android:text="@string/edit_phone"
+                android:textColor="@color/text_color_80"
                 android:textSize="@dimen/textsize_big" />
 
             <TextView
@@ -182,6 +186,7 @@
                 android:layout_centerVertical="true"
                 android:padding="@dimen/margin_left_more"
                 android:text="@string/edit_number"
+                android:textColor="@color/text_color_80"
                 android:textSize="@dimen/mall_list_padding" />
         </RelativeLayout>
 
@@ -223,6 +228,7 @@
                 android:layout_centerVertical="true"
                 android:paddingLeft="@dimen/margin_left_more"
                 android:text="@string/edit_gengxin"
+                android:textColor="@color/text_color_80"
                 android:textSize="@dimen/textsize_big" />
 
             <ImageView
@@ -250,6 +256,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/editor_current_version"
                 android:text="@string/edit_version"
+                android:textColor="@color/text_color_80"
                 android:textSize="@dimen/textsize_big" />
         </RelativeLayout>
 
@@ -291,6 +298,7 @@
                 android:layout_centerVertical="true"
                 android:paddingLeft="@dimen/margin_left_more"
                 android:text="@string/edit_tuijian"
+                android:textColor="@color/text_color_80"
                 android:textSize="@dimen/textsize_big" />
 
             <ImageView

@@ -115,7 +115,8 @@
             android:layout_centerVertical="true"
             android:layout_gravity="center|right"
             android:background="@drawable/main_cart_textview_bg"
-            android:layout_marginRight="@dimen/margin_left"
+            android:paddingLeft="@dimen/head_padding"
+            android:paddingRight="@dimen/head_padding"
             android:gravity="right"
             android:textColor="@color/text_color_120" />
     </RelativeLayout>

@@ -22,6 +22,7 @@
         android:layout_toRightOf="@id/go_pay_item_image"
         android:ellipsize="end"
         android:lines="2"
+        android:textColor="@color/text_color_80"
         android:textSize="15sp" />
     <!--
               <TextView 
@@ -52,11 +53,11 @@
         android:id="@+id/go_pay_item_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/go_pay_item_text"
         android:layout_below="@id/go_pay_item_sum_detail"
         android:layout_marginBottom="@dimen/margin_left_add"
         android:layout_marginTop="@dimen/actiobar_margin_top"
         android:layout_toRightOf="@id/go_pay_item_image"
-        android:layout_alignLeft="@id/go_pay_item_text"
         android:text="数量："
         android:textSize="15sp" />
 
@@ -68,6 +69,7 @@
         android:layout_marginBottom="@dimen/margin_left_add"
         android:layout_marginTop="@dimen/actiobar_margin_top"
         android:layout_toRightOf="@id/go_pay_item_count"
+        android:textColor="@color/theme"
         android:textSize="15sp" />
 
     <TextView

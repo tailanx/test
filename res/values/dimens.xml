@@ -25,7 +25,7 @@
     <dimen name="base_info_image">150dp</dimen>
     <dimen name="yirihui">120dp</dimen>
     <dimen name="head_height">110dp</dimen>
-    <dimen name="head_height_add">105dp</dimen>
+    <dimen name="head_height_add">98dp</dimen>
     <dimen name="base_info_match">90dp</dimen>
     <dimen name="base_info_match_add">85dp</dimen>
     <dimen name="all_buy_produce_right">80dp</dimen>

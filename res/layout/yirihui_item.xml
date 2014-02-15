@@ -16,7 +16,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_left_add"
-            android:text="@string/yirihui_delay" />
+            android:text="@string/yirihui_delay"
+            android:textColor="@color/text_color_80" />
 
         <TextView
             android:id="@+id/tv_main_hot_hour_third"
@@ -37,6 +38,7 @@
             android:layout_marginLeft="@dimen/margin_left_add"
             android:layout_toRightOf="@id/tv_main_hot_hour_third"
             android:text="@string/yirihui_hour_add"
+            android:textColor="@color/text_color_80"
             android:textSize="@dimen/textsize_small" />
 
         <TextView
@@ -58,6 +60,7 @@
             android:layout_marginLeft="@dimen/margin_left_add"
             android:layout_toRightOf="@id/tv_main_hot_mini_third"
             android:text="@string/yirihui_min_add"
+            android:textColor="@color/text_color_80"
             android:textSize="@dimen/textsize_small" />
 
         <TextView
@@ -77,6 +80,7 @@
             android:layout_marginLeft="@dimen/margin_left_add"
             android:layout_toRightOf="@id/tv_main_hot_second_third"
             android:text="@string/yirihui_second_add"
+            android:textColor="@color/text_color_80"
             android:textSize="@dimen/textsize_small" />
 
         <TextView
@@ -140,7 +144,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:lines="2"
-                    android:text="@string/free_post" />
+                    android:text="@string/free_post"
+                    android:textColor="@color/text_color_80" />
 
                 <TextView
                     android:id="@+id/tv_main_hot_yirihui_price"
@@ -162,7 +167,8 @@
                         android:id="@+id/tv_yirihui_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/cart_count" />
+                        android:text="@string/cart_count"
+                        android:textColor="@color/text_color_80" />
 
                     <TextView
                         android:id="@+id/tv_main_hot_yirihui_count"
