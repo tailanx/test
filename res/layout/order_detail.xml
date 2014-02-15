@@ -137,6 +137,7 @@
                     android:layout_toRightOf="@id/go_pay_address"
                     android:paddingBottom="@dimen/margin_left_more"
                     android:paddingTop="@dimen/margin_left_more"
+                    android:layout_marginRight="@dimen/margin_left_more"
                     android:textSize="14sp" />
             </RelativeLayout>
 
@@ -152,7 +153,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/margin_left"
+                    
                     android:padding="@dimen/margin_left_more"
                     android:text="@string/change_pay_way"
                     android:textSize="16sp" />

@@ -2,6 +2,8 @@ package com.yidejia.app.mall.util;
 
 import org.apache.http.HttpStatus;
 
+import android.widget.Toast;
+
 import com.opens.asyncokhttpclient.AsyncHttpResponse;
 import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.opens.asyncokhttpclient.RequestParams;
@@ -37,6 +39,7 @@ public class HttpClientUtil {
 		public void onError(Throwable error, String content) {
 			// TODO Auto-generated method stub
 			super.onError(error, content);
+//			Toast.makeText(activ, text, duration)
 		}
 		
 	};
