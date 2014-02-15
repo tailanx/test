@@ -45,6 +45,12 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 			mAddressManagement, mLayout11, mWaitComent;
 	private TextView favorites, integration, message, nick, vip;
 	private RelativeLayout aidouRelative;
+	
+	private TextView tvNumWaitPay;
+	private TextView tvNumWaitDeliver;
+	private TextView tvNumDeliverd;
+	private TextView tvNumCompleted;
+	private TextView tvNumComment;
 
 	private ImageView head;// 头像
 	private MyApplication myApplication;
@@ -62,8 +68,12 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 
 	private String scoresNum; // 积分
 	private String favolitenNum; // 收藏
-	private String orderNum; // 订单
 	private String msgNum; // 消息中心
+	private String numOrder; // 录入订单数
+	private String numWaitDeliver;	//待发货订单数
+	private String numDeliver;	//已发货订单数
+	private String numCompleted;	//已完成订单数
+	private String numComment;	//待评价订单数
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -224,6 +234,13 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 		message.setOnClickListener(this);
 		integration = (TextView) view.findViewById(R.id.tv_integration);
 		integration.setOnClickListener(this);
+		
+		tvNumWaitPay = (TextView) view.findViewById(R.id.tv_wait_pay_order_number);
+		tvNumWaitDeliver = (TextView) view.findViewById(R.id.tv_wait_pay_deliver_number);
+		tvNumDeliverd = (TextView) view.findViewById(R.id.tv_already_deliver_number);
+		tvNumCompleted = (TextView) view.findViewById(R.id.tv_already_complete_number);
+		tvNumComment = (TextView) view.findViewById(R.id.tv_wait_commen_number);
+		
 		// 头部实例化
 		getActionbar();
 
@@ -268,7 +285,6 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 		String name = myApplication.getNick();
 		if (name == null || "".equals(name)) {
 			nick.setText(myApplication.getUserId());
-			Log.i("info", myApplication.getUserId() + "   name");
 		} else {
 			nick.setText(name);
 		}
@@ -293,7 +309,7 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 				super.onSuccess(statusCode, content);
 				if (HttpStatus.SC_OK == statusCode) {
 					parseCountJson(content);
-					setCount(favolitenNum, msgNum, scoresNum);
+					setCount();
 				}
 			}
 
@@ -310,7 +326,12 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 				String response = httpObject.getString("response");
 				JSONObject resObject = new JSONObject(response);
 				scoresNum = resObject.optString("scores");
-				orderNum = resObject.optString("order");
+				numOrder = resObject.optString("order");
+				numWaitDeliver = resObject.optString("pay_order");
+				numDeliver = resObject.optString("ship_order");
+				numCompleted = resObject.optString("sign_order");
+				numComment = resObject.optString("pingjia");
+				
 				favolitenNum = resObject.optString("favoliten");
 				msgNum = resObject.optString("msg");
 			}
@@ -320,23 +341,53 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 	}
 
 	/** 设置收藏，消息中心，积分的个数 **/
-	private void setCount(String faString, String msString, String inString) {
-		if (TextUtils.isEmpty(faString)) {
+	private void setCount() {
+		if (TextUtils.isEmpty(favolitenNum)) {
 			favorites.setText(0 + "");
 		} else {
-			favorites.setText(faString);
+			favorites.setText(favolitenNum);
 		}
 
-		if (TextUtils.isEmpty(msString)) {
+		if (TextUtils.isEmpty(msgNum)) {
 			message.setText(0 + "");
 		} else {
-			message.setText(msString);
+			message.setText(msgNum);
 		}
 
-		if (TextUtils.isEmpty(inString)) {
+		if (TextUtils.isEmpty(scoresNum)) {
 			integration.setText(0 + "");
 		} else {
-			integration.setText(inString);
+			integration.setText(scoresNum);
+		}
+		
+		if(TextUtils.isEmpty(numComment)){
+			tvNumComment.setText("0");
+		} else {
+			tvNumComment.setText(numComment);
+		}
+		
+		if(TextUtils.isEmpty(numCompleted)){
+			tvNumCompleted.setText("0");
+		} else {
+			tvNumCompleted.setText(numCompleted);
+		}
+		
+		if(TextUtils.isEmpty(numDeliver)){
+			tvNumDeliverd.setText("0");
+		} else {
+			tvNumDeliverd.setText(numDeliver);
+		}
+		
+		if(TextUtils.isEmpty(numOrder)){
+			tvNumWaitPay.setText("0");
+		} else {
+			tvNumWaitPay.setText(numOrder);
+		}
+		
+		if(TextUtils.isEmpty(numWaitDeliver)){
+			tvNumWaitDeliver.setText("0");
+		} else {
+			tvNumWaitDeliver.setText(numWaitDeliver);
 		}
 	}
 
