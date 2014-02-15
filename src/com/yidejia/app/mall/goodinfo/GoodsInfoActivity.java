@@ -1,7 +1,9 @@
 package com.yidejia.app.mall.goodinfo;
 
 import java.io.IOException;
+import java.util.List;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -47,6 +49,20 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 		if (bundle != null) {
 			goodsId = bundle.getString("goodsId");
 		}
+		
+		Uri dataUri = getIntent().getData();
+		if(null != dataUri){
+//			String scheme = dataUri.getScheme();
+//			String host = dataUri.getHost();
+			List<String> params = dataUri.getPathSegments(); 
+			if(null != params && params.size() != 0){
+				String temp = params.get(0);
+				temp = temp.replace("acymer_", "");
+				goodsId = temp.replace(".html", "");
+			}
+		}
+		
+		
 		setActionbarConfig();
 		shareImageView = (ImageView) findViewById(R.id.ab_common_iv_share);
 		shareImageView.setVisibility(View.VISIBLE);
