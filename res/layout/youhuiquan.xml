@@ -5,10 +5,10 @@
     android:background="@color/bg" >
 
     <LinearLayout
-    android:layout_marginTop="@dimen/margin_left_more"
         android:id="@+id/iv_youhuiquan_image"
         android:layout_width="@dimen/login_height"
         android:layout_height="@dimen/base_info_image"
+        android:layout_marginTop="@dimen/margin_left_more"
         android:background="@color/integer_bule"
         android:orientation="vertical" >
 
@@ -35,10 +35,10 @@
             android:id="@+id/tv_youhuiquan_price_way"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_left_add"
             android:layout_marginLeft="@dimen/margin_left"
             android:layout_marginTop="@dimen/margin_left_add"
             android:text="@string/integeral_way_rule"
-            android:layout_marginBottom="@dimen/margin_left_add"
             android:textColor="@color/white" />
     </LinearLayout>
 
@@ -58,7 +58,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/margin_left"
-            android:text="@string/integeral_time_long" />
+            android:text="@string/integeral_time_long"
+            android:textColor="@color/text_color_80" />
 
         <TextView
             android:id="@+id/tv_youhuiquan_start_time"
@@ -66,7 +67,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/margin_left_add"
-            android:text="@string/integeral_start_time" />
+            android:text="@string/integeral_start_time"
+            android:textColor="@color/text_color_80" />
 
         <TextView
             android:id="@+id/tv_youhuiquan_end_time"
@@ -74,7 +76,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/margin_left_add"
-            android:text="@string/integeral_end_time" />
+            android:text="@string/integeral_end_time"
+            android:textColor="@color/text_color_80" />
 
         <TextView
             android:id="@+id/tv_youhuiquan_must"

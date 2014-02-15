@@ -28,6 +28,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
+                    android:textColor="@color/text_color_80"
+        
         android:layout_marginTop="10dp"
         android:layout_toLeftOf="@+id/exchange_produce_item_right"
         android:layout_toRightOf="@id/exchange_produce_item__imageview1"

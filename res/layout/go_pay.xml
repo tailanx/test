@@ -36,6 +36,7 @@
                         android:layout_centerVertical="true"
                         android:gravity="center_vertical"
                         android:text="@string/addresss_default_name"
+                        android:textColor="@color/text_color_80"
                         android:textSize="14sp" />
 
                     <TextView
@@ -45,6 +46,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="1dp"
                         android:layout_toRightOf="@id/go_pay_consignee"
+                        android:textColor="@color/text_color_80"
                         android:textSize="14sp" />
 
                     <TextView
@@ -54,6 +56,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="4dp"
+                        android:textColor="@color/text_color_80"
                         android:textSize="14sp" />
                 </RelativeLayout>
 
@@ -84,6 +87,7 @@
                         android:layout_height="wrap_content"
                         android:padding="@dimen/margin_left_more"
                         android:text="@string/address_produce"
+                        android:textColor="@color/text_color_80"
                         android:textSize="14sp" />
 
                     <TextView
@@ -93,6 +97,7 @@
                         android:layout_toRightOf="@id/go_pay_address"
                         android:paddingBottom="@dimen/margin_left_more"
                         android:paddingTop="@dimen/margin_left_more"
+                        android:textColor="@color/text_color_80"
                         android:textSize="14sp" />
                 </RelativeLayout>
             </RelativeLayout>
@@ -162,12 +167,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="支付宝客户端"
+                        android:textColor="@color/text_color_80"
                         android:textSize="13sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="需安装支付宝手机钱包客户端"
+                        android:textColor="@color/text_color_80"
                         android:textSize="10sp" />
                 </LinearLayout>
 
@@ -226,12 +233,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="支付宝网页支付"
+                        android:textColor="@color/text_color_80"
                         android:textSize="13sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="可银行卡支付"
+                        android:textColor="@color/text_color_80"
                         android:textSize="10sp" />
                 </LinearLayout>
 
@@ -288,12 +297,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="财付通支付"
+                        android:textColor="@color/text_color_80"
                         android:textSize="13sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="可银行卡支付"
+                        android:textColor="@color/text_color_80"
                         android:textSize="10sp" />
                 </LinearLayout>
 
@@ -350,12 +361,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="银联支付"
+                        android:textColor="@color/text_color_80"
                         android:textSize="13sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="可银联卡支付"
+                        android:textColor="@color/text_color_80"
                         android:textSize="10sp" />
                 </LinearLayout>
 
@@ -408,6 +421,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="发货地点："
+                    android:textColor="@color/text_color_80"
                     android:textSize="15sp" />
 
                 <TextView
@@ -417,6 +431,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="6dp"
                     android:layout_toRightOf="@id/go_pay_addresss"
+                    android:textColor="@color/text_color_80"
                     android:textSize="15sp" />
 
                 <ImageView
@@ -479,6 +494,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:text="普通配送"
+                    android:textColor="@color/text_color_80"
                     android:textSize="13sp" />
 
                 <TextView
@@ -510,6 +526,7 @@
                     android:layout_alignLeft="@id/go_pay_pay_money"
                     android:layout_below="@id/go_pay_pay_money"
                     android:text="系统将根据您的收货地址自动匹配快递公司进行配送，顺丰除外"
+                    android:textColor="@color/text_color_80"
                     android:textSize="8sp" />
 
                 <CheckBox
@@ -553,6 +570,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:text="EMS配送"
+                    android:textColor="@color/text_color_80"
                     android:textSize="13sp" />
 
                 <TextView
@@ -583,7 +601,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@id/go_pay_payEMS_money"
                     android:layout_below="@id/go_pay_payEMS_money"
-                    android:text="偏远地区请选择EMS配送 如：到镇，村，户地址’"
+                    android:text="偏远地区请选择EMS配送 如：到镇，村，户地址"
+                    android:textColor="@color/text_color_80"
                     android:textSize="8sp" />
 
                 <CheckBox
@@ -634,6 +653,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    
+                        android:textColor="@color/text_color_80"
                     android:text="使用优惠折扣"
                     android:textSize="15sp" />
 

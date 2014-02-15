@@ -34,6 +34,7 @@
         android:layout_toRightOf="@+id/search_result_small_img_layout"
         android:ellipsize="end"
         android:maxLines="2"
+        android:textColor="@color/text_color_80"
         android:textSize="16sp" />
 
     <TextView
@@ -54,6 +55,7 @@
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/search_result_small_img_layout"
         android:text="已售："
+        android:textColor="@color/text_color_80"
         android:textSize="14sp" />
 
     <TextView
@@ -63,6 +65,7 @@
         android:layout_alignBaseline="@+id/search_result_small_sell"
         android:layout_below="@+id/search_result_small_price"
         android:layout_toRightOf="@+id/search_result_small_sell"
+        android:textColor="@color/theme"
         android:textSize="14sp" />
 
     <TextView
@@ -74,6 +77,7 @@
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/search_result_small_sell_num"
         android:text="评价："
+        android:textColor="@color/text_color_80"
         android:textSize="14sp" />
 
     <TextView
@@ -83,6 +87,7 @@
         android:layout_alignBaseline="@+id/search_result_small_sell"
         android:layout_below="@+id/search_result_small_price"
         android:layout_toRightOf="@+id/search_result_small_emulate"
+        android:textColor="@color/theme"
         android:textSize="14sp" />
 
 </RelativeLayout>

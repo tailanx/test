@@ -28,6 +28,7 @@
             android:layout_toRightOf="@id/my_collect_item__imageview1"
             android:ellipsize="end"
             android:lines="2"
+            android:textColor="@color/text_color_80"
             android:textSize="18sp" />
 
         <TextView
@@ -37,7 +38,7 @@
             android:layout_below="@id/my_collect_item_text"
             android:layout_marginLeft="8dp"
             android:layout_toRightOf="@id/my_collect_item__imageview1"
-            android:textColor="#ed217c"
+            android:textColor="@color/theme"
             android:textSize="15sp" />
 
         <TextView
@@ -48,6 +49,7 @@
             android:layout_marginLeft="12sp"
             android:layout_toRightOf="@id/my_collect_item__imageview1"
             android:text="已售："
+            android:textColor="@color/text_color_80"
             android:textSize="15sp" />
 
         <TextView
@@ -56,6 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/my_collect_item_money"
             android:layout_toRightOf="@+id/my_collect_item_already_sell"
+            android:textColor="@color/theme"
             android:textSize="15sp" />
 
         <TextView
@@ -66,6 +69,7 @@
             android:layout_marginLeft="12dp"
             android:layout_toRightOf="@+id/my_collect_item_sum1"
             android:text="评论:"
+            android:textColor="@color/text_color_80"
             android:textSize="15sp" />
 
         <TextView
@@ -74,6 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/my_collect_item_money"
             android:layout_toRightOf="@+id/my_collect_item_comments"
+            android:textColor="@color/theme"
             android:textSize="15sp" />
 
         <TextView

@@ -79,6 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="收货人:"
+                    android:textColor="@color/text_color_80"
                     android:textSize="14sp" />
 
                 <TextView
@@ -88,6 +89,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="1dp"
                     android:layout_toRightOf="@id/go_pay_consignee"
+                    android:textColor="@color/text_color_80"
                     android:textSize="14sp" />
 
                 <TextView
@@ -98,6 +100,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/margin_left"
                     android:gravity="center_vertical"
+                    android:textColor="@color/text_color_80"
                     android:textSize="14sp" />
             </RelativeLayout>
 
@@ -127,6 +130,7 @@
                     android:layout_centerVertical="true"
                     android:padding="@dimen/margin_left_more"
                     android:text="@string/address_produce"
+                    android:textColor="@color/text_color_80"
                     android:textSize="14sp" />
 
                 <TextView
@@ -138,6 +142,7 @@
                     android:paddingBottom="@dimen/margin_left_more"
                     android:paddingTop="@dimen/margin_left_more"
                     android:layout_marginRight="@dimen/margin_left_more"
+                    android:textColor="@color/text_color_80"
                     android:textSize="14sp" />
             </RelativeLayout>
 
@@ -153,10 +158,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    
                     android:padding="@dimen/margin_left_more"
                     android:text="@string/change_pay_way"
+                    android:textColor="@color/text_color_80"
                     android:textSize="16sp" />
+                
                 <TextView
                     android:id="@+id/go_pay_address_way_detail"
                     android:layout_width="wrap_content"
@@ -164,6 +170,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/go_pay_address_way"
                     android:text="@string/change_pay_for_caifutong"
+                    android:textColor="@color/text_color_80"
                     android:textSize="14sp" />
                 
 
@@ -240,6 +247,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/margin_left"
                     android:text="@string/buy_kind"
+                    android:textColor="@color/text_color_80"
                     android:textSize="16sp" />
             </LinearLayout>
 

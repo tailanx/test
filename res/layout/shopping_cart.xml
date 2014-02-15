@@ -25,7 +25,9 @@
             android:layout_marginLeft="4dp"
             android:layout_toRightOf="@id/shopping_cart_checkbox"
             android:text="@string/cart_sum"
+            android:textColor="@color/text_color_80"
             android:textSize="16sp" />
+
         <TextView
             android:id="@+id/shopping_cart_sum_money_price"
             android:layout_width="wrap_content"
@@ -59,6 +61,7 @@
             android:layout_marginLeft="@dimen/mall_list_padding"
             android:layout_toRightOf="@id/shopping_cart_sum_money"
             android:text="@string/cart_count"
+            android:textColor="@color/text_color_80"
             android:textSize="16sp" />
 
         <TextView

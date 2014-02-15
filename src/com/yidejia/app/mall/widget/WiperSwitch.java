@@ -198,7 +198,7 @@ public class WiperSwitch extends View implements OnTouchListener {
 			int reqWidth, int reqHeight) {
 		int height = options.outHeight;
 		int width = options.outWidth;
-		int inSampleSize = 2;
+		int inSampleSize = 1;
 		float a = (float) height / reqHeight;
 		float b = (float) width / reqWidth;
 //		inSampleSize = a > b ? (int) a : (int) b;

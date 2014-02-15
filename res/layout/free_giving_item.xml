@@ -51,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="10dp"
+        android:textColor="@color/text_color_80"
         android:layout_toLeftOf="@+id/free_giving_item_right"
         android:layout_toRightOf="@id/free_giving_item__imageview1"
         android:ellipsize="end"
@@ -97,6 +98,7 @@
         android:layout_alignLeft="@id/free_giving_item_money_price"
         android:layout_below="@id/free_giving_item_money"
         android:text="领取赠品"
+        android:textColor="@color/text_color_80"
         android:textSize="15sp" />
 
 </RelativeLayout>

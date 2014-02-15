@@ -25,6 +25,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/margin_left"
                 android:text="@string/addresss_default_name_add"
+                android:textColor="@color/text_color_80"
                 android:textSize="@dimen/textsize_small" />
 
             <EditText
@@ -65,6 +66,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/margin_left"
                 android:text="@string/phone_number1"
+                android:textColor="@color/text_color_80"
                 android:textSize="@dimen/textsize_small" />
 
             <EditText
@@ -94,8 +96,8 @@
             android:id="@+id/new_address_tablerow3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_left"
-            android:background="@drawable/main_theme_textview_bg" >
+            android:background="@drawable/main_theme_textview_bg"
+            android:padding="@dimen/margin_left" >
 
             <TextView
                 android:id="@+id/new_address_item_textview3"
@@ -104,6 +106,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/mall_list_padding_add"
                 android:text="@string/addresss_detail_add"
+                android:textColor="@color/text_color_80"
                 android:textSize="@dimen/textsize_small" />
 
             <LinearLayout
@@ -173,6 +176,7 @@
                 android:layout_marginLeft="@dimen/margin_left"
                 android:gravity="left"
                 android:text="@string/addresss_detail"
+                android:textColor="@color/text_color_80"
                 android:textSize="@dimen/textsize_small" />
 
             <EditText

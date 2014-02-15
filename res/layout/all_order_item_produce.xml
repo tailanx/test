@@ -23,6 +23,7 @@
         android:layout_toRightOf="@id/all_order_item_image"
         android:ellipsize="end"
         android:lines="2"
+        android:textColor="@color/text_color_80"
         android:textSize="18sp" />
 
     <TextView
@@ -62,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/all_order_item_sum"
         android:layout_toRightOf="@id/all_order_item_count"
-        android:textColor="@color/text_color_80"
+        android:textColor="@color/theme"
         android:textSize="15sp" />
 
     <ImageView

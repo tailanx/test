@@ -156,7 +156,7 @@
                     android:layout_width="@dimen/item_goods_emulate"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginTop="@dimen/white_bg_padding" />
+                    android:layout_marginTop="@dimen/head_padding" />
             </RelativeLayout>
 
             <RelativeLayout

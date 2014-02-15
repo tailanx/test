@@ -89,7 +89,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:text="@string/price_contact" />
+            android:text="@string/price_contact"
+            android:textColor="@color/text_color_80" />
 
         <TextView
             android:id="@+id/tv_price_contact"
@@ -106,7 +107,8 @@
             android:layout_alignBottom="@id/tv_price_danjia"
             android:layout_marginLeft="4dp"
             android:layout_toRightOf="@id/tv_price_contact"
-            android:text="@string/price_yuan" />
+            android:text="@string/price_yuan"
+            android:textColor="@color/text_color_80" />
     </RelativeLayout>
 
     <Button

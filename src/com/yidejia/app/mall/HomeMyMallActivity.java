@@ -7,7 +7,6 @@ import org.json.JSONObject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +16,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.baidu.mobstat.StatService;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.opens.asyncokhttpclient.AsyncHttpResponse;
 import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.yidejia.app.mall.R;
@@ -55,16 +57,8 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 	private ImageView head;// 头像
 	private MyApplication myApplication;
 
-	// private BottomChange bottomChange;
-
-	// private RelativeLayout downHomeLayout;
-	// private RelativeLayout downGuangLayout;
-	// private RelativeLayout downSearchLayout;
-	// private RelativeLayout downShoppingLayout;
-	// private RelativeLayout downMyLayout;
-	// private CartsDataManage cartsDataManage;
-	// private int number;
-	// private Button cartImage;
+	private ImageLoadingListener animateFirstListener;
+	private DisplayImageOptions options;
 
 	private String scoresNum; // 积分
 	private String favolitenNum; // 收藏
@@ -80,6 +74,9 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 		super.onCreate(savedInstanceState);
 		// cartsDataManage = new CartsDataManage();
 		myApplication = MyApplication.getInstance();
+		animateFirstListener = myApplication.getImageLoadingListener();
+		options = myApplication.initGoodsImageOption();
+		
 		setContentView(R.layout.activity_main_fragment_layout);
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
 		inflater = LayoutInflater.from(this);
@@ -91,14 +88,6 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 		setupView(view);
 
 		setCurrentActivityId(4);
-
-		// 设置底部
-		// bottomLayout = (RelativeLayout)
-		// findViewById(R.id.down_parent_layout);
-		// bottomChange = new BottomChange(this, bottomLayout);
-		// if (current != -1 || next != -1) {
-		// bottomChange.initNavView(current, next);
-		// }
 
 	}
 
@@ -187,6 +176,9 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 		aidouRelative.setOnClickListener(this);
 		head = (ImageView) view
 				.findViewById(R.id.iv_person_shopping_image_person);
+		ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
+		
+		ImageLoader.getInstance().displayImage(myApplication.getUserHeadImg(), head, options, animateFirstListener);
 		head.setOnClickListener(this);// 图像
 		nick = (TextView) view
 				.findViewById(R.id.tv_person_shopping_person_name);// 昵称

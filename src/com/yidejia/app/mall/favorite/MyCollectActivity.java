@@ -17,6 +17,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.mobstat.StatService;
@@ -29,9 +30,9 @@ import com.opens.asyncokhttpclient.RequestParams;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.R.id;
-import com.yidejia.app.mall.R.layout;
-import com.yidejia.app.mall.R.string;
+//import com.yidejia.app.mall.R.id;
+//import com.yidejia.app.mall.R.layout;
+//import com.yidejia.app.mall.R.string;
 import com.yidejia.app.mall.adapter.FavoriteAdapter;
 import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.jni.JNICallBack;
@@ -40,8 +41,9 @@ import com.yidejia.app.mall.search.SearchResultActivity;
 
 /**
  * 我的收藏
+ * 
  * @author LongBin
- *
+ * 
  */
 public class MyCollectActivity extends BaseActivity {
 	private FavoriteAdapter fAdapter;
@@ -52,6 +54,7 @@ public class MyCollectActivity extends BaseActivity {
 	private int amount = 10;
 	private String userId;
 	private String token;
+	private TextView rightTextView;// 删除
 
 	private void setupShow() {
 
@@ -111,8 +114,19 @@ public class MyCollectActivity extends BaseActivity {
 		emptyLayout = (RelativeLayout) findViewById(R.id.empty_fav);
 		Button search = (Button) findViewById(R.id.favorite_empty_button);
 		setActionbarConfig();
+		favList = new ArrayList<SearchItem>();
 		setTitle(getResources().getString(R.string.my_collect));
-		
+		rightTextView = (TextView) findViewById(R.id.ab_common_tv_right);
+		rightTextView.setVisibility(View.VISIBLE);
+		rightTextView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (!favList.isEmpty()) {
+					favList.clear();
+				}
+			}
+		});
+
 		search.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -129,29 +143,29 @@ public class MyCollectActivity extends BaseActivity {
 				MyCollectActivity.this.startActivity(intent);
 			}
 		});
-		favList = new ArrayList<SearchItem>();
+
 		setupShow();
-//		closeTask();
-//		task = new Task();
-//		task.execute();
-		
+		// closeTask();
+		// task = new Task();
+		// task.execute();
+
 		userId = MyApplication.getInstance().getUserId();
 		token = MyApplication.getInstance().getToken();
-		
+
 		getCollectsData();
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		if(null != favList) {
+		if (null != favList) {
 			favList.clear();
 			favList = null;
 		}
-		if(null != fAdapter) {
+		if (null != fAdapter) {
 			fAdapter = null;
 		}
-//		closeTask();
+		// closeTask();
 	}
 
 	private boolean isDownRefresh = false;
@@ -162,9 +176,9 @@ public class MyCollectActivity extends BaseActivity {
 		public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
 			fromIndex = 0;
 			isDownRefresh = true;
-//			closeTask();
-//			task = new Task();
-//			task.execute();
+			// closeTask();
+			// task = new Task();
+			// task.execute();
 			getCollectsData();
 		}
 
@@ -172,19 +186,19 @@ public class MyCollectActivity extends BaseActivity {
 		public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
 			fromIndex += amount;
 			isDownRefresh = false;
-//			closeTask();
-//			task = new Task();
-//			task.execute();
+			// closeTask();
+			// task = new Task();
+			// task.execute();
 			getCollectsData();
 		}
 
 	};
-	
+
 	private void getCollectsData() {
-		String url = new JNICallBack().getHttp4GetFav("userid=" + userId, fromIndex + "",
-				+amount + "", "", "created+desc", "%2A");
+		String url = new JNICallBack().getHttp4GetFav("userid=" + userId,
+				fromIndex + "", +amount + "", "", "created+desc", "%2A");
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(url, new AsyncHttpResponse(){
+		client.get(url, new AsyncHttpResponse() {
 
 			@Override
 			public void onStart() {
@@ -195,10 +209,10 @@ public class MyCollectActivity extends BaseActivity {
 			@Override
 			public void onFinish() {
 				super.onFinish();
-				if(isFirstIn) {
-					// TODO 
-					
-				} else if(null != mPullRefreshListView) {
+				if (isFirstIn) {
+					// TODO
+
+				} else if (null != mPullRefreshListView) {
 					mPullRefreshListView.onRefreshComplete();
 				}
 				isFirstIn = false;
@@ -207,13 +221,14 @@ public class MyCollectActivity extends BaseActivity {
 			@Override
 			public void onSuccess(int statusCode, String content) {
 				super.onSuccess(statusCode, content);
-				if(statusCode == HttpStatus.SC_OK) {
+				if (statusCode == HttpStatus.SC_OK) {
 					ParseFavJson parseFavJson = new ParseFavJson();
 					boolean isSuccess = parseFavJson.parseGetListJson(content);
-					if(isSuccess) {
-						ArrayList<SearchItem> tempList = parseFavJson.getFavList();
-						if(null != tempList){
-							if(isDownRefresh) {
+					if (isSuccess) {
+						ArrayList<SearchItem> tempList = parseFavJson
+								.getFavList();
+						if (null != tempList) {
+							if (isDownRefresh) {
 								favList.clear();
 							}
 							favList.addAll(tempList);
@@ -231,159 +246,104 @@ public class MyCollectActivity extends BaseActivity {
 			public void onError(Throwable error, String content) {
 				super.onError(error, content);
 				fromIndex -= amount;
-				if(fromIndex < 0) {
-					fromIndex  = 0;
+				if (fromIndex < 0) {
+					fromIndex = 0;
 				}
 				Toast.makeText(MyCollectActivity.this,
 						getResources().getString(R.string.bad_network),
 						Toast.LENGTH_SHORT).show();
 			}
-			
+
 		});
 	}
 
 	private String TAG = MyCollectActivity.class.getName();
 
 	private boolean isFirstIn = true;
-//	private boolean isNoMore = false;
+	// private boolean isNoMore = false;
 	private ArrayList<SearchItem> favList;
-//	private ArrayList<SearchItem> mList;
-//	private ProgressDialog bar;
-//	private Task task;
-//	private GetFavoriteList getFavoriteList = new GetFavoriteList();
 
-	/*private class Task extends AsyncTask<Void, Void, Boolean> {
+	// private ArrayList<SearchItem> mList;
+	// private ProgressDialog bar;
+	// private Task task;
+	// private GetFavoriteList getFavoriteList = new GetFavoriteList();
 
-		@Override
-		protected Boolean doInBackground(Void... params) {
-			try {
-				String httpresp;
-				try {
-					httpresp = getFavoriteList.getHttpResp(
-							((MyApplication) getApplication()).getUserId(),
-							fromIndex + "", amount + "");
-					boolean issuccess = getFavoriteList
-							.analysisGetListJson(httpresp);
-					isNoMore = getFavoriteList.getIsNoMore();
-					mList = getFavoriteList.getFavList();
-					return issuccess;
-				} catch (TimeOutEx e) {
-					e.printStackTrace();
-					isTimeout = true;
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+	/*
+	 * private class Task extends AsyncTask<Void, Void, Boolean> {
+	 * 
+	 * @Override protected Boolean doInBackground(Void... params) { try { String
+	 * httpresp; try { httpresp = getFavoriteList.getHttpResp( ((MyApplication)
+	 * getApplication()).getUserId(), fromIndex + "", amount + ""); boolean
+	 * issuccess = getFavoriteList .analysisGetListJson(httpresp); isNoMore =
+	 * getFavoriteList.getIsNoMore(); mList = getFavoriteList.getFavList();
+	 * return issuccess; } catch (TimeOutEx e) { e.printStackTrace(); isTimeout
+	 * = true; } } catch (IOException e) { e.printStackTrace(); }
+	 * 
+	 * return false; }
+	 * 
+	 * @Override protected void onPreExecute() { super.onPreExecute(); if
+	 * (isFirstIn) { bar = (ProgressDialog) new YLProgressDialog(
+	 * MyCollectActivity.this).createLoadingDialog( MyCollectActivity.this,
+	 * null); bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
+	 * 
+	 * @Override public void onCancel(DialogInterface dialog) { cancel(true); }
+	 * }); } }
+	 * 
+	 * @Override protected void onPostExecute(Boolean result) {
+	 * super.onPostExecute(result); if (result) { if (mList != null &&
+	 * !mList.isEmpty()) {
+	 * mPullRefreshListView.setVisibility(ViewGroup.VISIBLE);
+	 * emptyLayout.setVisibility(ViewGroup.GONE); String label =
+	 * getResources().getString( R.string.update_time) +
+	 * DateUtils.formatDateTime(MyCollectActivity.this,
+	 * System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME |
+	 * DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
+	 * mPullRefreshListView.getLoadingLayoutProxy() .setLastUpdatedLabel(label);
+	 * 
+	 * if (isDownRefresh) { favList.clear(); isDownRefresh = false; }
+	 * favList.addAll(mList); fAdapter.notifyDataSetChanged(); } else { if
+	 * (favList != null && !favList.isEmpty() && isNoMore) {
+	 * Toast.makeText(MyCollectActivity.this,
+	 * getResources().getString(R.string.nomore), Toast.LENGTH_LONG).show(); if
+	 * (!isFirstIn) mPullRefreshListView.onRefreshComplete(); else
+	 * bar.dismiss(); return; }
+	 * mPullRefreshListView.setVisibility(ViewGroup.GONE);
+	 * emptyLayout.setVisibility(ViewGroup.VISIBLE); } } else { if (fromIndex !=
+	 * 0) fromIndex -= amount; if (isTimeout) { Toast.makeText(
+	 * MyCollectActivity.this, MyCollectActivity.this.getResources().getString(
+	 * R.string.time_out), Toast.LENGTH_SHORT) .show(); isTimeout = false;
+	 * 
+	 * } } if (isFirstIn) { bar.dismiss(); isFirstIn = false; } else
+	 * mPullRefreshListView.onRefreshComplete(); }
+	 * 
+	 * }
+	 * 
+	 * private boolean isTimeout = false;
+	 * 
+	 * private void closeTask() { if (task != null && task.getStatus().RUNNING
+	 * == AsyncTask.Status.RUNNING) { task.cancel(true); } if (taskDelFav !=
+	 * null) { taskDelFav.closeTask(); } }
+	 */
 
-			return false;
-		}
+	// private TaskDelFav taskDelFav;
 
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			if (isFirstIn) {
-				bar = (ProgressDialog) new YLProgressDialog(
-						MyCollectActivity.this).createLoadingDialog(
-						MyCollectActivity.this, null);
-				bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-					@Override
-					public void onCancel(DialogInterface dialog) {
-						cancel(true);
-					}
-				});
-			}
-		}
-
-		@Override
-		protected void onPostExecute(Boolean result) {
-			super.onPostExecute(result);
-			if (result) {
-				if (mList != null && !mList.isEmpty()) {
-					mPullRefreshListView.setVisibility(ViewGroup.VISIBLE);
-					emptyLayout.setVisibility(ViewGroup.GONE);
-					String label = getResources().getString(
-							R.string.update_time)
-							+ DateUtils.formatDateTime(MyCollectActivity.this,
-									System.currentTimeMillis(),
-									DateUtils.FORMAT_SHOW_TIME
-											| DateUtils.FORMAT_SHOW_DATE
-											| DateUtils.FORMAT_ABBREV_ALL);
-					mPullRefreshListView.getLoadingLayoutProxy()
-							.setLastUpdatedLabel(label);
-
-					if (isDownRefresh) {
-						favList.clear();
-						isDownRefresh = false;
-					}
-					favList.addAll(mList);
-					fAdapter.notifyDataSetChanged();
-				} else {
-					if (favList != null && !favList.isEmpty() && isNoMore) {
-						Toast.makeText(MyCollectActivity.this,
-								getResources().getString(R.string.nomore),
-								Toast.LENGTH_LONG).show();
-						if (!isFirstIn)
-							mPullRefreshListView.onRefreshComplete();
-						else
-							bar.dismiss();
-						return;
-					}
-					mPullRefreshListView.setVisibility(ViewGroup.GONE);
-					emptyLayout.setVisibility(ViewGroup.VISIBLE);
-				}
-			} else {
-				if (fromIndex != 0)
-					fromIndex -= amount;
-				if (isTimeout) {
-					Toast.makeText(
-							MyCollectActivity.this,
-							MyCollectActivity.this.getResources().getString(
-									R.string.time_out), Toast.LENGTH_SHORT)
-							.show();
-					isTimeout = false;
-
-				}
-			}
-			if (isFirstIn) {
-				bar.dismiss();
-				isFirstIn = false;
-			} else
-				mPullRefreshListView.onRefreshComplete();
-		}
-
-	}
-
-	private boolean isTimeout = false;
-
-	private void closeTask() {
-		if (task != null
-				&& task.getStatus().RUNNING == AsyncTask.Status.RUNNING) {
-			task.cancel(true);
-		}
-		if (taskDelFav != null) {
-			taskDelFav.closeTask();
-		}
-	}*/
-
-//	private TaskDelFav taskDelFav;
-
-	/**删除收藏**/
+	/** 删除收藏 **/
 	private void delFav(String productId, final ListView parent, final View view) {
-//		taskDelFav = new TaskDelFav(MyCollectActivity.this,
-//				mPullRefreshListView);
-//		taskDelFav.delFav(((MyApplication) getApplication()).getUserId(),
-//				productId, ((MyApplication) getApplication()).getToken());
-		
+		// taskDelFav = new TaskDelFav(MyCollectActivity.this,
+		// mPullRefreshListView);
+		// taskDelFav.delFav(((MyApplication) getApplication()).getUserId(),
+		// productId, ((MyApplication) getApplication()).getToken());
+
 		String url = new JNICallBack().HTTPURL;
-		String param = new JNICallBack().getHttp4DelFav(userId, productId, token);
-		
+		String param = new JNICallBack().getHttp4DelFav(userId, productId,
+				token);
+
 		RequestParams requestParams = new RequestParams();
 		requestParams.put(param);
 		String contentType = "application/x-www-form-urlencoded;charset=UTF-8";
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		
-		client.post(url, contentType, requestParams, new AsyncHttpResponse(){
+
+		client.post(url, contentType, requestParams, new AsyncHttpResponse() {
 
 			@Override
 			public void onStart() {
@@ -400,14 +360,14 @@ public class MyCollectActivity extends BaseActivity {
 			@Override
 			public void onSuccess(int statusCode, String content) {
 				super.onSuccess(statusCode, content);
-				if(HttpStatus.SC_OK == statusCode) {
+				if (HttpStatus.SC_OK == statusCode) {
 					ParseFavJson parseFavJson = new ParseFavJson();
 					boolean issuccess = parseFavJson.parseDeleteJson(content);
 					if (issuccess) {
 						Toast.makeText(MyCollectActivity.this,
 								getResources().getString(R.string.del_fav_ok),
 								Toast.LENGTH_SHORT).show();
-						if(null != mPullRefreshListView) {
+						if (null != mPullRefreshListView) {
 							fromIndex = 0;
 							mPullRefreshListView.setRefreshing();
 						}
@@ -420,10 +380,10 @@ public class MyCollectActivity extends BaseActivity {
 				// TODO Auto-generated method stub
 				super.onError(error, content);
 			}
-			
+
 		});
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
