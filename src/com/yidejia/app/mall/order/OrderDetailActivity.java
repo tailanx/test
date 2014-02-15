@@ -255,7 +255,7 @@ public class OrderDetailActivity extends BaseActivity implements
 		} else {
 			payButton.setVisibility(View.GONE);
 			changePayTypeTextView.setVisibility(View.GONE);
-			changePay.setVisibility(View.VISIBLE);
+			changePay.setVisibility(View.GONE);
 		}
 		try {
 
