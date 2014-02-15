@@ -156,7 +156,6 @@ public class HomeMallActivity extends HomeBaseActivity {
 				if (HttpStatus.SC_OK == statusCode) {
 					GetHomePage getHomePage = new GetHomePage();
 					if (getHomePage.parseGetHomeJson(content)) {
-						
 						util.saveData("home", "data", content);
 						
 						loadView(getHomePage);
@@ -456,7 +455,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 		ivSxgRUp.setLayoutParams(rightLp);
 		ivSxgRDown.setLayoutParams(rightLp);
 
-		layoutParams.setMargins(12, 6, 12, 5);
+		layoutParams.setMargins(5, 6, 5, 5);
 		ivSxgTop.setLayoutParams(layoutParams);
 
 		if (length > 0)
@@ -552,7 +551,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 	}
 	
 	private void djdzmOnclick(int index, ArrayList<MainProduct> djdzmProducts){
-		boolean isGoods = !TextUtils.isEmpty(djdzmProducts.get(index).getUId());
+		boolean isGoods = !(TextUtils.isEmpty(djdzmProducts.get(index).getUId()) || "0".equals(djdzmProducts.get(index).getUId()));
 		if(isGoods){
 			Intent intent = new Intent(this, GoodsInfoActivity.class);
 			Bundle bundle = new Bundle();

@@ -191,7 +191,7 @@ public class BannerView {
 
 			@Override
 			public void onClick(View v) {
-				boolean isGoods = !TextUtils.isEmpty(bannerArray.get(index).getUId());
+				boolean isGoods = !(TextUtils.isEmpty(bannerArray.get(index).getUId())|| "0".equals(bannerArray.get(index).getUId()));
 				if (isGoods) {
 					Intent intent = new Intent(context, GoodsInfoActivity.class);
 					Bundle bundle = new Bundle();
