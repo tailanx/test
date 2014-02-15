@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,11 +19,15 @@ import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.opens.asyncokhttpclient.AsyncHttpResponse;
+import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.address.AddressActivity;
 import com.yidejia.app.mall.datamanage.VoucherDataManage;
 //import com.yidejia.app.mall.view.IntegeralActivity;
 import com.yidejia.app.mall.exception.TimeOutEx;
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.voucher.Voucher;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
@@ -39,6 +44,7 @@ public class IntegeralFragment extends Fragment {
 	private boolean isTimeout = false;
 	private boolean isFromPay = false;
 	private TaskVoucher taskVoucher;
+	private ProgressDialog bar;// 加载框
 
 	// 通过单例模式，构建对象
 	public static IntegeralFragment newInstance(int s) {
@@ -67,7 +73,7 @@ public class IntegeralFragment extends Fragment {
 		viewCoupons = inflater.inflate(R.layout.youhuiquan, null);// 优惠券视图
 		viewIntegeral = inflater.inflate(R.layout.coupons, null);// 积分视图
 		jiFen = (TextView) viewIntegeral.findViewById(R.id.jiefen);
-		Log.i("info", jiFen + "jifen");
+		// Log.i("info", jiFen + "jifen");
 		// String ji =
 		// voucherDataManage.getUserVoucher(myApplication.getUserId(),
 		// myApplication.getToken());
@@ -89,11 +95,7 @@ public class IntegeralFragment extends Fragment {
 	 * 加载积分的界面
 	 */
 	private void initviewJifen() {
-		// voucherDataManage = new VoucherDataManage(getActivity());
-		// voucherDataManage.getUserVoucher(myApplication.getUserId(),
-		// myApplication.getToken());
-		taskVoucher = new TaskVoucher();
-		taskVoucher.execute();
+		getInteger();
 		webView = (WebView) viewIntegeral.findViewById(R.id.wb_webView);
 		webView.setBackgroundColor(0);
 		webView.setBackgroundColor(getResources().getColor(R.color.white));
@@ -109,10 +111,83 @@ public class IntegeralFragment extends Fragment {
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		if (taskVoucher != null
-				&& AsyncTask.Status.RUNNING == taskVoucher.getStatus()) {
-			taskVoucher.cancel(true);
-		}
+		// if (taskVoucher != null
+		// && AsyncTask.Status.RUNNING == taskVoucher.getStatus()) {
+		// taskVoucher.cancel(true);
+		// }
+
+	}
+
+	/**
+	 * 获取用户的积分
+	 * 
+	 */
+	private void getInteger() {
+		String url = new JNICallBack().getHttp4GetVoucher(
+				myApplication.getUserId(), myApplication.getToken());
+		AsyncOkHttpClient client = new AsyncOkHttpClient();
+		client.get(url, new AsyncHttpResponse() {
+			@Override
+			public void onError(Throwable error, String content) {
+				super.onError(error, content);
+				Toast.makeText(getActivity(),
+						getResources().getString(R.string.bad_network),
+						Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void onFinish() {
+				super.onFinish();
+			}
+
+			@SuppressWarnings("static-access")
+			@Override
+			public void onStart() {
+				super.onStart();
+				bar = new YLProgressDialog(getActivity()).createLoadingDialog(
+						getActivity(), null);
+				bar.setOnCancelListener(new OnCancelListener() {
+
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						bar.cancel();
+					}
+				});
+			}
+
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				super.onSuccess(statusCode, content);
+				Log.e("info", content);
+				if (200 == statusCode) {
+					bar.cancel();
+				}
+				JSONObject httpObject;
+				try {
+					httpObject = new JSONObject(content);
+					if ("1".equals(httpObject.getString("code"))) {
+						String response = httpObject.getString("response");
+						JSONObject resObject = new JSONObject(response);
+						voucherNum = resObject.getString("can_use_score");
+						jiFen = (TextView) viewIntegeral
+								.findViewById(R.id.jiefen);
+						if (null != voucherNum || "".equals(voucherNum)) {
+							jiFen.setText(voucherNum);
+						} else {
+							jiFen.setText(0 + "");
+						}
+					} else {
+						Toast.makeText(getActivity(),
+								getResources().getString(R.string.bad_network),
+								Toast.LENGTH_SHORT).show();
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+		});
 
 	}
 

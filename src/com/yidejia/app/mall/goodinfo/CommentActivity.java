@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -118,6 +119,7 @@ public class CommentActivity extends BaseActivity  {
 			@Override
 			public void onSuccess(int statusCode, String content) {
 				super.onSuccess(statusCode, content);
+				Log.e("info", content);
 				ParseGoodsJson parseGoodsJson = new ParseGoodsJson();
 				boolean isSuccess = parseGoodsJson.parseCommentJson(content);
 				if(isSuccess) {

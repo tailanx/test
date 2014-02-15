@@ -22,6 +22,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/actiobar_margin_top"
                 android:text="@string/yirihui"
+                android:textColor="@color/text_color_80"
                 android:textSize="@dimen/textsize_small_add" />
 
             <TextView
@@ -36,6 +37,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:singleLine="true"
                 android:text="@string/yirihui_add"
+                android:textColor="@color/text_color_120"
                 android:textSize="14sp" />
         </RelativeLayout>
 
@@ -227,6 +229,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/white_bg_padding"
             android:text="@string/all_buy"
+            android:textColor="@color/text_color_80"
             android:textSize="@dimen/textsize_small_add" />
 
         <TextView
@@ -236,6 +239,7 @@
             android:layout_marginRight="@dimen/margin_left"
             android:singleLine="true"
             android:text="@string/watch_all"
+            android:textColor="@color/text_color_120"
             android:textSize="14sp" />
     </RelativeLayout>
 
@@ -325,6 +329,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/white_bg_padding"
             android:text="@string/free_pay_title"
+            android:textColor="@color/text_color_80"
             android:textSize="@dimen/textsize_small_add" />
     </RelativeLayout>
 
