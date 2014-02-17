@@ -1,7 +1,5 @@
 package com.yidejia.app.mall.yirihui;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -14,7 +12,6 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
-import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
 
 public class YirihuiActivity extends SherlockFragmentActivity {

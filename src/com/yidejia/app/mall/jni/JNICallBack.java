@@ -189,5 +189,8 @@ public class JNICallBack {
 	/**获取摇一摇数据**/
 	public native String getHttp4GetShark(String userId, String token);
 	
+	/**获取伊日惠数据**/
+	public native String getHttp4GetYiRiHui(String type, String offset, String limit, String sort);
+	
 }	
 	

@@ -3301,6 +3301,60 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 
 	return (*env)->NewStringUTF(env, urlString);
 }
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetYiRiHui(JNIEnv* env,
+		jobject thiz, jstring type, jstring offset, jstring limit, jstring sort){//
+
+	char *chtype = (*env)->GetStringUTFChars(env, type, NULL);
+	char *choffset = (*env)->GetStringUTFChars(env, offset, NULL);
+	char *chlimit = (*env)->GetStringUTFChars(env, limit, NULL);
+	char *chsort = (*env)->GetStringUTFChars(env, sort, NULL);
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+	char *api="api=active.yirihui.getYrhList";
+	addString(urlString, api);
+
+	addString(urlString, "&type=");
+	if(chtype != NULL)addString(urlString, chtype);
+	addString(urlString, "&offset=");
+	if(choffset != NULL)addString(urlString, choffset);
+	addString(urlString, "&limit=");
+	if(chlimit != NULL)addString(urlString, chlimit);
+	addString(urlString, "&sort=");
+	if(chsort != NULL)addString(urlString, chsort);
+
+	addString(urlString, pHead);
+
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
+
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "active.yirihui.getYrhList");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
 
 #ifdef __cplusplus
 }
