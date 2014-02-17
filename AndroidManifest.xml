@@ -306,7 +306,7 @@
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="com.yidejia.app.mall.shark.TestSharkActivity"
+            android:name="com.yidejia.app.mall.shark.SharkActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -355,6 +355,9 @@
         <activity
             android:name="com.yidejia.app.mall.pay.DeliveryActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yidejia.app.mall.view.ViewPagerActivity"
+            android:screenOrientation="portrait" />
 
         <service android:name="com.yidejia.app.mall.log.LogService" >
         </service>
@@ -371,6 +374,7 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        
     </application>
 
 </manifest>

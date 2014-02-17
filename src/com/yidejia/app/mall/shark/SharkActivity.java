@@ -8,10 +8,14 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.jni.JNICallBack;
@@ -19,7 +23,7 @@ import com.yidejia.app.mall.model.ProductBaseInfo;
 import com.yidejia.app.mall.util.HttpClientUtil;
 import com.yidejia.app.mall.util.IHttpResp;
 
-public class TestSharkActivity extends Activity implements OnClickListener {
+public class SharkActivity extends Activity implements OnClickListener {
 
 	private SharkUtil sharkUtil;
 
@@ -29,6 +33,8 @@ public class TestSharkActivity extends Activity implements OnClickListener {
 	private ImageView backImageView;
 	private Animation quanAnimation;
 	private MediaPlayer mediaPlayer;
+	
+	private TextView guize;// 规则
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +51,17 @@ public class TestSharkActivity extends Activity implements OnClickListener {
 		quanAnimation = AnimationUtils.loadAnimation(this,
 				R.anim.my_translate_action);
 		quanImageView.startAnimation(quanAnimation);
+		
+		guize = (TextView) findViewById(R.id.tv_shark_activity_guize);
+		guize.setOnClickListener(this);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
+		
+		StatService.onPageStart(this, "摇一摇页面");
+		
 		sharkUtil.registerListener(new IShark() {
 
 			@Override
@@ -85,7 +97,7 @@ public class TestSharkActivity extends Activity implements OnClickListener {
 					int theType = parseShark.getTheType();
 					switch (theType) {
 					case 1:	//什么都没摇到
-						Toast.makeText(TestSharkActivity.this, parseShark.getData(), Toast.LENGTH_SHORT).show();
+						Toast.makeText(SharkActivity.this, parseShark.getData(), Toast.LENGTH_SHORT).show();
 						break;
 					case 2:	//摇到商品
 						ProductBaseInfo productInfo = parseShark.getProductBaseInfo();
@@ -108,14 +120,15 @@ public class TestSharkActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 		sharkUtil.unregisterListener();
+		StatService.onPageEnd(this, "摇一摇页面");
+		
 	}
+	
 
 	@Override
 	protected void onStop() {
-		// TODO Auto-generated method stub
 		super.onStop();
 		sharkUtil.unregisterListener();
 	}
@@ -127,13 +140,21 @@ public class TestSharkActivity extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.iv_shark_back:
 			this.finish();
 			break;
 
-		default:
+		case R.id.tv_shark_activity_guize:// 规则
+			LinearLayout root = new LinearLayout(this);
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+					LinearLayout.LayoutParams.MATCH_PARENT,
+					LinearLayout.LayoutParams.WRAP_CONTENT);
+			WebView webView = new WebView(this);
+			webView.setLayoutParams(lp);
+			root.addView(webView);
+			webView.loadUrl("http://m.yidejia.com/shakerules.html");
+			setContentView(root);
 			break;
 		}
 	}

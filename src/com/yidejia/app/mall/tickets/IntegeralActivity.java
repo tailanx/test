@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 
 
+
+import com.baidu.mobstat.StatService;
 //import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.yidejia.app.mall.BaseActivity;
 //import com.yidejia.app.mall.MyApplication;
@@ -102,4 +104,15 @@ public class IntegeralActivity extends BaseActivity implements OnClickListener {
 		}
 	}
 	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		StatService.onPageStart(this, "积分卡券页面");
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		StatService.onPageEnd(this, "积分卡券页面");
+	}
 }

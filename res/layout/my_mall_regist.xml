@@ -87,10 +87,10 @@
                 <ImageView
                     android:id="@+id/iv_my_mall_regist_password_validation_button"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/magin_left_add"
+                    android:layout_height="@dimen/margin_top_car"
                     android:layout_gravity="center_vertical"
                     android:layout_marginBottom="@dimen/margin_left_add"
-                    android:layout_marginLeft="@dimen/magin_left_add"
+                    android:layout_marginLeft="@dimen/action_height"
                     android:layout_marginTop="@dimen/margin_left_add"
                     android:contentDescription="@string/yidejia"
                     android:singleLine="true"

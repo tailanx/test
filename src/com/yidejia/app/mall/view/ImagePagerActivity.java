@@ -18,6 +18,7 @@ package com.yidejia.app.mall.view;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.PointF;
@@ -33,8 +34,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.View.OnTouchListener;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -175,7 +179,9 @@ public class ImagePagerActivity extends Activity {
 								View view, Bitmap loadedImage) {
 						}
 					});
-
+			FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+			lp.setMargins(0, 200, 0, 0);
+			view.setLayoutParams(lp);
 			((ViewPager) view).addView(imageLayout, 0);
 			imageView.setOnTouchListener(new OnTouchListener() {
 				@Override

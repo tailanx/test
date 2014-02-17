@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.qiandao.QiandaoActivity;
-import com.yidejia.app.mall.shark.TestSharkActivity;
+import com.yidejia.app.mall.shark.SharkActivity;
 
 public class HomeGuangActivity extends HomeBaseActivity implements
 		OnClickListener {
@@ -61,7 +61,7 @@ public class HomeGuangActivity extends HomeBaseActivity implements
 
 		case R.id.iv_guang_yaoyiyao:
 			intent = new Intent();
-			intent.setClass(this, TestSharkActivity.class);
+			intent.setClass(this, SharkActivity.class);
 			if (isLogin()) {
 				startActivity(intent);
 			}
