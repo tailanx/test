@@ -73,14 +73,13 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener {
 
 	private void getSignCount(){
 		String param = jniCallBack.getHttp4SignCount(userId, token);
-		Log.e("system.out", url);
 		HttpClientUtil httpClientUtil = new HttpClientUtil();
 		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
 			
 			@Override
 			public void success(String content) {
 				// TODO Auto-generated method stub
-				Log.e("system.out", content);
+				Log.e("info", content+"content");
 				if(parseGetCount(content)){
 					tvSignCount.setText(signCount + "");
 				}
@@ -98,6 +97,12 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener {
 				JSONObject respObject = new JSONObject(strResp);
 				lxSign = respObject.optInt("lxSign");
 				signCount = respObject.optInt("countSign");
+				Log.e("info", strResp);
+//				if(getResources().getString(R.string.complete_qiandao).equals(strResp)){
+//					ivSignAdd.setImageResource(R.drawable.yiqiandao);
+//				}else{
+//					ivSignAdd.setImageResource(R.drawable.qiandao_button);
+//				}
 				return true;
 			}
 		} catch (JSONException e) {
@@ -108,7 +113,6 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener {
 	
 	private void signUp(){
 		String param = new JNICallBack().getHttp4SignUp(userId, token);
-		Log.e("system.out", url);
 		
 		HttpClientUtil httpClientUtil = new HttpClientUtil();
 		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
@@ -116,7 +120,7 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener {
 			@Override
 			public void success(String content) {
 				// TODO Auto-generated method stub
-				Log.e("system.out", content);
+				Log.e("info", content+"content");
 				String showMsg ;
 				if(parseSignAdd(content)){
 					showMsg = "获得" + respMsg + "个爱豆";

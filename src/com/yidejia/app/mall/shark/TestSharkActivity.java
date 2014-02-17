@@ -3,14 +3,16 @@ package com.yidejia.app.mall.shark;
 import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.provider.MediaStore.Video.Media;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.yidejia.app.mall.R;
 
@@ -24,6 +26,7 @@ public class TestSharkActivity extends Activity implements OnClickListener {
 	private ImageView backImageView;
 	private Animation quanAnimation;
 	private MediaPlayer mediaPlayer;
+	private TextView guize;// 规则
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,8 @@ public class TestSharkActivity extends Activity implements OnClickListener {
 		relativeLayout = (RelativeLayout) findViewById(R.id.Re_show_produce);
 		quanImageView = (ImageView) findViewById(R.id.iv_yaoyiyao_shou);
 		backImageView = (ImageView) findViewById(R.id.iv_shark_back);
+		guize = (TextView) findViewById(R.id.tv_shark_activity_guize);
+		guize.setOnClickListener(this);
 		backImageView.setOnClickListener(this);
 		mediaPlayer = MediaPlayer.create(this, R.raw.yao);
 		quanAnimation = AnimationUtils.loadAnimation(this,
@@ -92,7 +97,16 @@ public class TestSharkActivity extends Activity implements OnClickListener {
 			this.finish();
 			break;
 
-		default:
+		case R.id.tv_shark_activity_guize:// 规则
+			LinearLayout root = new LinearLayout(this);
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+					LinearLayout.LayoutParams.MATCH_PARENT,
+					LinearLayout.LayoutParams.WRAP_CONTENT);
+			WebView webView = new WebView(this);
+			webView.setLayoutParams(lp);
+			root.addView(webView);
+			webView.loadUrl("http://m.yidejia.com/shakerules.html");
+			setContentView(root);
 			break;
 		}
 	}

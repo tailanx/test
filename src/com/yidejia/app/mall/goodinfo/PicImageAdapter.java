@@ -10,6 +10,7 @@ import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DPIUtil;
 import com.yidejia.app.mall.view.ImagePagerActivity;
+import com.yidejia.app.mall.view.ViewPagerActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -73,7 +74,7 @@ public class PicImageAdapter extends PagerAdapter {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(activity,ImagePagerActivity.class);
+				Intent intent = new Intent(activity,ViewPagerActivity.class);
 				intent.putExtra(Consts.IMAGES, productPics);
 				intent.putExtra(Consts.IMAGE_POSITION, v.getId());
 				activity.startActivity(intent);
