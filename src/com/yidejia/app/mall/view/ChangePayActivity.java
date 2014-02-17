@@ -28,7 +28,7 @@ public class ChangePayActivity extends BaseActivity implements OnClickListener {
 	private CheckBox cb_wangye;
 	private CheckBox cb_caifutong;
 	private CheckBox cb_yinlian;
-	private int a;
+	private int payMode;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -38,11 +38,11 @@ public class ChangePayActivity extends BaseActivity implements OnClickListener {
 		setContentView(R.layout.change_pay);
 
 		initview();
-		a = (int) getIntent().getExtras().getInt(Consts.CHANGE_PAY);
-		if (a == -1) {
+		payMode = (int) getIntent().getExtras().getInt(Consts.CHANGE_PAY);
+		if (payMode == -1) {
 			return;
 		} else {
-			switch (a) {
+			switch (payMode) {
 			case Consts.CHANGE_ZHIFUBAO://支付宝选中
 				cb_zhifubao.setChecked(true);
 				cb_caifutong.setChecked(false);

@@ -21,7 +21,8 @@
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="17" />
+        android:targetSdkVersion="17"
+         />
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
@@ -70,11 +71,24 @@
             android:name="BaiduMobAd_WIFI_LOCATION"
             android:value="true" />
 
-      
         <activity
             android:name="com.yidejia.app.mall.goodinfo.GoodsInfoActivity"
             android:screenOrientation="portrait" >
+            <intent-filter>
+                <data
+                    android:host="yidejia.com"
+                    android:scheme="http" />
+                <data
+                    android:host="www.yidejia.com"
+                    android:scheme="http" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
         </activity>
+
         <activity
             android:name="com.yidejia.app.mall.goodinfo.CommentActivity"
             android:screenOrientation="portrait" >

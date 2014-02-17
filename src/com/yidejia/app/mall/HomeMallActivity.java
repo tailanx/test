@@ -9,11 +9,11 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
-import android.view.Display;
+//import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.WindowManager;
+//import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -42,6 +42,7 @@ import com.yidejia.app.mall.phone.PhoneActivity;
 //import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.search.SearchActivity;
 import com.yidejia.app.mall.skintest.SkinHomeActivity;
+import com.yidejia.app.mall.util.DPIUtil;
 import com.yidejia.app.mall.util.SharedPreferencesUtil;
 import com.yidejia.app.mall.view.IntegeralActivity;
 import com.yidejia.app.mall.widget.BannerView;
@@ -58,11 +59,11 @@ public class HomeMallActivity extends HomeBaseActivity {
 	private PullToRefreshScrollView mPullToRefreshScrollView;
 	
 	private int screenWidth;
-	private int screenHeight;
-	private int suiLeftWidth;// 随心逛的商品的宽
-	private int suiLeftHeight;// 随心逛的商品的高
-	private int suiRightWidht;// 随心逛右边的商品的宽
-	private int suiRightHeight;// 随心逛右边的商品的高
+//	private int screenHeight;
+	private float suiLeftWidth;// 随心逛的商品的宽
+	private float suiLeftHeight;// 随心逛的商品的高
+	private float suiRightWidht;// 随心逛右边的商品的宽
+	private float suiRightHeight;// 随心逛右边的商品的高
 
 	// 设置大家都在买组
 	private ArrayList<MainProduct> djdzmProducts;
@@ -73,7 +74,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 	
 	private SharedPreferencesUtil util;
 
-	@SuppressWarnings("deprecation")
+//	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -94,16 +95,19 @@ public class HomeMallActivity extends HomeBaseActivity {
 
 		setActionBar();
 		setCurrentActivityId(0);
-		WindowManager manager = getWindowManager();
-		Display display = manager.getDefaultDisplay();
-		screenWidth = display.getHeight();
-		screenHeight = (int) ((screenWidth / 320f) * 160f) - 250;
+//		WindowManager manager = getWindowManager();
+//		Display display = manager.getDefaultDisplay();
+//		screenWidth = display.getHeight();
+//		screenHeight = (int) ((screenWidth / 320f) * 160f) - 250;
+		screenWidth = DPIUtil.getWidth();
 		
-		suiLeftWidth = ((int) display.getHeight()) - 34;
-		suiLeftHeight = (int) screenHeight / 2;
+		
+		suiLeftWidth = (float)(screenWidth / 334F * 165);
+		
+		suiLeftHeight = (float) suiLeftWidth * (165 / 162F);
 
-		suiRightWidht = ((int) display.getHeight()) + 34;
-		suiRightHeight = (int) screenHeight / 2;
+		suiRightWidht = ((float) screenWidth / 334F * 169);
+		suiRightHeight = (float) suiLeftHeight / 2;
 		
 		GetHomePage getHomePage = new GetHomePage();
 		String content = util.getData("home", "data", "");
@@ -152,7 +156,6 @@ public class HomeMallActivity extends HomeBaseActivity {
 				if (HttpStatus.SC_OK == statusCode) {
 					GetHomePage getHomePage = new GetHomePage();
 					if (getHomePage.parseGetHomeJson(content)) {
-						
 						util.saveData("home", "data", content);
 						
 						loadView(getHomePage);
@@ -405,9 +408,9 @@ public class HomeMallActivity extends HomeBaseActivity {
 		
 
 		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-				suiLeftWidth, suiLeftHeight);
+				(int)suiLeftWidth, (int)suiLeftHeight);
 		RelativeLayout.LayoutParams rightLp = new RelativeLayout.LayoutParams(
-				suiRightWidht, suiRightHeight);
+				(int)suiRightWidht, (int)suiRightHeight);
 		ivDjdzmLeft.setLayoutParams(lp);
 		ivDjdzmRLeft.setLayoutParams(rightLp);
 		ivDjdzmRRight.setLayoutParams(rightLp);
@@ -441,17 +444,18 @@ public class HomeMallActivity extends HomeBaseActivity {
 
 		int length = products.size();
 
-		LayoutParams layoutParams = new LayoutParams(screenWidth, screenHeight);
+		float sxgTopHeight = (screenWidth / 320F * 150);
+		LayoutParams layoutParams = new LayoutParams(screenWidth, (int)sxgTopHeight);
 		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-				suiLeftWidth, suiLeftHeight);
+				(int)suiLeftWidth, (int)suiLeftHeight);
 		RelativeLayout.LayoutParams rightLp = new RelativeLayout.LayoutParams(
-				suiRightWidht, suiRightHeight);
+				(int)suiRightWidht, (int)suiRightHeight);
 		ivSxgLeft.setLayoutParams(lp);
 
 		ivSxgRUp.setLayoutParams(rightLp);
 		ivSxgRDown.setLayoutParams(rightLp);
 
-		layoutParams.setMargins(2, 4, 2, 0);
+		layoutParams.setMargins(5, 6, 5, 5);
 		ivSxgTop.setLayoutParams(layoutParams);
 
 		if (length > 0)
@@ -547,7 +551,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 	}
 	
 	private void djdzmOnclick(int index, ArrayList<MainProduct> djdzmProducts){
-		boolean isGoods = !TextUtils.isEmpty(djdzmProducts.get(index).getUId());
+		boolean isGoods = !(TextUtils.isEmpty(djdzmProducts.get(index).getUId()) || "0".equals(djdzmProducts.get(index).getUId()));
 		if(isGoods){
 			Intent intent = new Intent(this, GoodsInfoActivity.class);
 			Bundle bundle = new Bundle();

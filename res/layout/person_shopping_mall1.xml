@@ -40,7 +40,6 @@
                 android:layout_toRightOf="@id/iv_person_shopping_image_person"
                 android:drawableLeft="@drawable/jifen"
                 android:gravity="center"
-                android:text="@string/mint"
                 android:textColor="#FFeeeeee"
                 android:textSize="@dimen/textsize_small" />
 
@@ -54,7 +53,6 @@
                 android:layout_toRightOf="@id/tv_integration"
                 android:drawableLeft="@drawable/favorites2"
                 android:gravity="center"
-                android:text="@string/hour"
                 android:textColor="#FFeeeeee"
                 android:textSize="@dimen/textsize_small" />
 
@@ -68,10 +66,23 @@
                 android:layout_toRightOf="@id/tv_favorites"
                 android:drawableLeft="@drawable/message"
                 android:gravity="center"
-                android:text="@string/second"
                 android:textColor="#FFeeeeee"
                 android:textSize="@dimen/textsize_small" />
 
+            <TextView
+                android:id="@+id/tv_person_shopping_person_vip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/tv_integration"
+                android:layout_marginBottom="@dimen/head_padding"
+                android:layout_alignLeft="@id/tv_integration"
+                android:layout_toRightOf="@id/iv_person_shopping_image_person"
+                android:drawableLeft="@drawable/vip"
+                android:gravity="center"
+                android:textColor="#FFeeeeee"
+                android:textSize="@dimen/textsize_big_big" />
+
+            <!--
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -79,36 +90,27 @@
                 android:layout_marginBottom="@dimen/head_padding"
                 android:layout_marginLeft="@dimen/mall_list_padding"
                 android:layout_toRightOf="@id/iv_person_shopping_image_person" >
-
-                <TextView
-                    android:id="@+id/tv_person_shopping_person_name"
-                    style="@style/StyleBarTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:shadowRadius="6.0"
-                    android:text="@string/free_pay_title"
-                    android:textColor="#FFeeeeee"
-                    android:textSize="@dimen/textsize_big_big" />
-
-                <TextView
-                    android:id="@+id/tv_person_shopping_person_vip"
-                    style="@style/StyleBarTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/activity_vertical_margin"
-                    android:layout_toRightOf="@id/tv_person_shopping_person_name"
-                    android:drawableLeft="@drawable/vip"
-                    android:text="@string/VIP"
-                    android:textColor="#FFeeeeee"
-                    android:textSize="@dimen/textsize_big_big" />
+                      
             </RelativeLayout>
+            -->
+
+            <TextView
+                android:id="@+id/tv_person_shopping_person_name"
+                style="@style/StyleBarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/tv_person_shopping_person_vip"
+                android:layout_marginBottom="@dimen/head_padding"
+                android:layout_alignLeft="@id/tv_integration"
+                android:layout_toRightOf="@id/iv_person_shopping_image_person"
+                android:shadowRadius="6.0"
+                android:textColor="#FFeeeeee"
+                android:textSize="@dimen/textsize_big_big" />
 
             <LinearLayout
                 android:id="@+id/ll_wait_pay_order_linearlayout1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-              
                 android:layout_alignParentBottom="true"
                 android:orientation="horizontal" >
 

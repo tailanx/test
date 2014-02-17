@@ -3,6 +3,8 @@ package com.yidejia.app.mall.order;
 import java.util.ArrayList;
 
 import org.apache.http.HttpStatus;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,7 +33,12 @@ import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.net.ConnectionDetector;
+import com.yidejia.app.mall.pay.AlicPayUtil;
+import com.yidejia.app.mall.pay.UnionActivity;
+import com.yidejia.app.mall.pay.WebPayActivity;
 import com.yidejia.app.mall.util.Consts;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.view.ChangePayActivity;
 
 public class OrderDetailActivity extends BaseActivity implements
@@ -54,8 +61,8 @@ public class OrderDetailActivity extends BaseActivity implements
 	private TextView payDetail;// 具体的支付方式
 
 	// private String TAG = getClass().getName();
-	private int payMode = -1;
-
+	private int payMode = Consts.CHANGE_CAIFUTONG;
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +112,7 @@ public class OrderDetailActivity extends BaseActivity implements
 			});
 			layout.addView(view);
 		}
+		//获取订单数据
 		getData();
 	}
 
@@ -122,6 +130,7 @@ public class OrderDetailActivity extends BaseActivity implements
 		orderTime = (TextView) findViewById(R.id.order_detail_time_number);
 		changePayTypeTextView = (TextView) findViewById(R.id.change_pay_type);
 		changePay = (RelativeLayout) findViewById(R.id.re_order_detail_change_pay);
+		changePay.setVisibility(View.GONE);
 		changePay.setOnClickListener(this);
 		payDetail = (TextView) findViewById(R.id.go_pay_address_way_detail);
 		// orderAddressLayout = (RelativeLayout)
@@ -214,6 +223,7 @@ public class OrderDetailActivity extends BaseActivity implements
 			public void onError(Throwable error, String content) {
 				// TODO Auto-generated method stub
 				super.onError(error, content);
+				Toast.makeText(OrderDetailActivity.this, getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 			}
 
 		});
@@ -231,30 +241,21 @@ public class OrderDetailActivity extends BaseActivity implements
 		orderTime.setText(order.getDate());
 		// 录入状态时才显示付款和修改支付方式的按钮
 		if ("录入".equals(order.getStatus())) {
+			changePay.setVisibility(View.VISIBLE);
 			payButton.setVisibility(View.VISIBLE);
 			payButton.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
-					// TODO 提交订单
-					// TaskGetTn task = new TaskGetTn(activity);
-					// task.getOrderTn(orderCode);
+					// 提交订单
+					saveOrder();
 				}
 			});
 			changePayTypeTextView.setVisibility(View.VISIBLE);
-			// orderAddressLayout.setOnClickListener(new OnClickListener() {
-			//
-			// @Override
-			// public void onClick(View v) {
-			// Intent intent = new Intent(activity,
-			// PayAddress.class);
-			// activity.startActivityForResult(intent,
-			// Consts.AddressRequestCode);
-			// }
-			// });
 		} else {
 			payButton.setVisibility(View.GONE);
 			changePayTypeTextView.setVisibility(View.GONE);
+			changePay.setVisibility(View.GONE);
 		}
 		try {
 
@@ -267,6 +268,81 @@ public class OrderDetailActivity extends BaseActivity implements
 			sumTextView.setText(R.string.price_error);
 		}
 
+	}
+	
+	/**提交订单**/
+	private void saveOrder(){
+		switch (payMode) {
+		case Consts.CHANGE_YINLIAN:
+			//获取流水号tn
+			getTn();
+			break;
+		case Consts.CHANGE_CAIFUTONG:
+			String payurl = "http://u.yidejia.com/index.php?m=ucenter&c=order&a=onlineWap&code="+orderCode+"&type=tenpay";
+			go2WebPay(getString(R.string.caifutong_pay), payurl);
+			break;
+		case Consts.CHANGE_WANGYE:
+			String payurlAli = "http://u.yidejia.com/index.php?m=ucenter&c=order&a=onlineWap&code="+orderCode+"&type=alipay";
+			go2WebPay(getString(R.string.zhifubao_wangye_pay_list), payurlAli);
+			break;
+		case Consts.CHANGE_ZHIFUBAO:
+			AlicPayUtil util = new AlicPayUtil(this);
+			util.getAlicPay(MyApplication.getInstance().getUserId(), MyApplication.getInstance().getToken(), orderCode);
+		default:
+			break;
+		}
+	}
+	
+	/**获取银联流水号**/
+	private void getTn(){
+		String param = new JNICallBack().getHttp4GetTn(MyApplication.getInstance().getUserId(), orderCode, MyApplication.getInstance().getToken());
+		String url = new JNICallBack().HTTPURL;
+		
+		HttpClientUtil httpClientUtil = new HttpClientUtil();
+		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
+			
+			@Override
+			public void success(String content) {
+				//
+				JSONObject httpJsonObject;
+				try {
+					httpJsonObject = new JSONObject(content);
+					int code = httpJsonObject.getInt("code");
+					String tn = httpJsonObject.getString("response");
+					if (code == 1) {
+						/** 跳转到银联支付 **/
+						go2UnionPay(tn);
+					} else {
+						Toast.makeText(OrderDetailActivity.this, tn,
+								Toast.LENGTH_SHORT).show();
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	/**跳转到银联支付**/
+	private void go2UnionPay(String orderTn){
+		Intent intent = new Intent(this, UnionActivity.class);
+		Bundle bundle = new Bundle();
+		bundle.putInt("mode", 1);
+		bundle.putString("tn", orderTn);
+		bundle.putString("resp_code", "00");
+		bundle.putString("code", orderCode);
+		intent.putExtras(bundle);
+		startActivity(intent);
+		finish();
+	}
+	
+	/**跳转到网页支付**/
+	private void go2WebPay(String title, String payurl){
+		Intent webIntent = new Intent(this, WebPayActivity.class);
+		webIntent.putExtra("title", title);
+		webIntent.putExtra("payurl", payurl);
+		startActivity(webIntent);
+		finish();
 	}
 
 	/** 获取收件人地址信息 **/

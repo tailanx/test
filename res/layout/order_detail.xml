@@ -141,6 +141,7 @@
                     android:layout_toRightOf="@id/go_pay_address"
                     android:paddingBottom="@dimen/margin_left_more"
                     android:paddingTop="@dimen/margin_left_more"
+                    android:layout_marginRight="@dimen/margin_left_more"
                     android:textColor="@color/text_color_80"
                     android:textSize="14sp" />
             </RelativeLayout>
@@ -157,12 +158,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/margin_left"
                     android:padding="@dimen/margin_left_more"
                     android:text="@string/change_pay_way"
                     android:textColor="@color/text_color_80"
                     android:textSize="16sp" />
-
+                
                 <TextView
                     android:id="@+id/go_pay_address_way_detail"
                     android:layout_width="wrap_content"
@@ -172,6 +172,7 @@
                     android:text="@string/change_pay_for_caifutong"
                     android:textColor="@color/text_color_80"
                     android:textSize="14sp" />
+                
 
                 <ImageView
                     android:id="@+id/order_detail_pay_arrow"

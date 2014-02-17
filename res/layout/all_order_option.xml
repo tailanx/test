@@ -39,7 +39,6 @@
             android:layout_below="@id/tv_wait_pay_order"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margin_left_add"
-            android:text="@string/hour"
             android:textColor="@color/white" />
     </RelativeLayout>
 
@@ -74,7 +73,6 @@
             android:layout_below="@id/tv_wait_pay_deliver"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margin_left_add"
-            android:text="@string/hour"
             android:textColor="@color/white" />
     </RelativeLayout>
 
@@ -109,7 +107,6 @@
             android:layout_below="@id/tv_already_deliver"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margin_left_add"
-            android:text="@string/hour"
             android:textColor="@color/white" />
     </RelativeLayout>
 
@@ -144,7 +141,6 @@
             android:layout_below="@id/tv_already_compelte"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margin_left_add"
-            android:text="@string/hour"
             android:textColor="@color/white" />
     </RelativeLayout>
 
@@ -171,7 +167,6 @@
             android:layout_below="@id/tv_wait_comment"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margin_left_add"
-            android:text="@string/hour"
             android:textColor="@color/white" />
     </RelativeLayout>
 
