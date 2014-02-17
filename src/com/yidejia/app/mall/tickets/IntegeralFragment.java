@@ -1,6 +1,5 @@
 package com.yidejia.app.mall.tickets;
 
-
 import java.util.ArrayList;
 
 import org.json.JSONException;
@@ -15,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,9 +24,11 @@ import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.opens.asyncokhttpclient.RequestParams;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.adapter.IntegerAdapter;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.util.HttpClientUtil;
 import com.yidejia.app.mall.util.IHttpResp;
+import com.yidejia.app.mall.util.TimeUtil;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class IntegeralFragment extends Fragment {
@@ -38,6 +41,7 @@ public class IntegeralFragment extends Fragment {
 	private View viewCoupons;// 优惠券的界面视图
 	private String voucherNum = "";
 	private ProgressDialog bar;// 加载框
+	private ListView listview;
 
 	// 通过单例模式，构建对象
 	public static IntegeralFragment newInstance(int s) {
@@ -66,11 +70,14 @@ public class IntegeralFragment extends Fragment {
 			return viewIntegeral;
 		} else {
 			viewCoupons = inflater.inflate(R.layout.youhuiquan, null);// 优惠券视图
+			listview = (ListView) viewCoupons
+					.findViewById(R.id.youhuiquan_listview);
 			getTicket();
+
 			return viewCoupons;
 		}
 	}
-	
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -87,28 +94,30 @@ public class IntegeralFragment extends Fragment {
 		webView.loadUrl("http://m.yidejia.com/integral.html");
 	}
 
-	/**获取优惠券**/
-	private void getTicket(){
-		String url = new JNICallBack().getHttp4GetTicket(myApplication.getUserId(), myApplication.getToken());
-		
+	/** 获取优惠券 **/
+	private void getTicket() {
+		String url = new JNICallBack().getHttp4GetTicket(
+				myApplication.getUserId(), myApplication.getToken());
+
 		HttpClientUtil httpClientUtil = new HttpClientUtil();
 		httpClientUtil.getHttpResp(url, new IHttpResp() {
-			
+
 			@Override
 			public void success(String content) {
 				ParseTickets parseTickets = new ParseTickets();
 				boolean isSuccess = parseTickets.parseTickets(content);
-				if(isSuccess) {
+				if (isSuccess) {
 					ArrayList<Ticket> tickets = parseTickets.getTickets();
-					if(null != tickets) {
-						//TODO 显示优惠券
-						
+					if (null != tickets) {
+						IntegerAdapter adapter = new IntegerAdapter(
+								getActivity(), tickets);
+						listview.setAdapter(adapter);
 					}
 				}
 			}
 		});
 	}
-	
+
 	/**
 	 * 获取用户的积分
 	 * 
@@ -117,10 +126,10 @@ public class IntegeralFragment extends Fragment {
 		String param = new JNICallBack().getHttp4GetVoucher(
 				myApplication.getUserId(), myApplication.getToken());
 		String url = new JNICallBack().HTTPURL;
-		
+
 		RequestParams requestParams = new RequestParams();
 		requestParams.put(param);
-		
+
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
 		client.post(url, requestParams, new AsyncHttpResponse() {
 			@Override
@@ -194,6 +203,5 @@ public class IntegeralFragment extends Fragment {
 	public void onDestroy() {
 		super.onDestroy();
 	}
-
 
 }
