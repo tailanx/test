@@ -36,7 +36,7 @@
                     android:contentDescription="@string/yidejia"
                     android:src="@drawable/qiandao_selector" />
 
-                <RelativeLayout
+                <LinearLayout
                     android:id="@+id/iv_qiandao_button_day"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -44,20 +44,39 @@
                     android:layout_marginRight="@dimen/margin_left"
                     android:layout_marginTop="@dimen/margin_top_add"
                     android:layout_toLeftOf="@id/iv_qiandao_button"
-                    android:background="@drawable/daysbg"
+                    android:background="@drawable/daysbg2"
                     android:contentDescription="@string/yidejia" >
 
                     <TextView
-                        android:id="@+id/tv_sign_count"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tv_sign_count1"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="@dimen/mall_list_padding_add"
-                        android:text="@string/hour"
+                        android:layout_weight="1.0"
+                        android:background="@drawable/daysbg1"
+                        android:gravity="center"
                         android:textColor="@color/theme"
                         android:textSize="@dimen/textsize_big_big" />
-                </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/tv_sign_count2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:background="@drawable/daysbg1"
+                        android:gravity="center"
+                        android:textColor="@color/theme"
+                        android:textSize="@dimen/textsize_big_big" />
+
+                    <TextView
+                        android:id="@+id/tv_sign_count3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:background="@drawable/daysbg1"
+                        android:gravity="center"
+                        android:textColor="@color/theme"
+                        android:textSize="@dimen/textsize_big_big" />
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
