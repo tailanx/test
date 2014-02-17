@@ -186,6 +186,8 @@ public class JNICallBack {
 	
 	/**获取优惠券**/
 	public native String getHttp4GetTicket(String userId, String token);
+	/**获取摇一摇数据**/
+	public native String getHttp4GetShark(String userId, String token);
 	
 }	
 	

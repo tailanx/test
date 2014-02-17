@@ -347,7 +347,6 @@ com.nostra13.universalimageloader.core.DisplayBitmapTask:
     private static final java.lang.String LOG_TASK_CANCELLED_IMAGEAWARE_REUSED
     private static final java.lang.String LOG_TASK_CANCELLED_IMAGEAWARE_COLLECTED
 com.nostra13.universalimageloader.core.DisplayImageOptions$Builder:
-    260:261:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder showImageOnLoading(int)
     270:271:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder showImageOnLoading(android.graphics.drawable.Drawable)
     293:294:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder showImageForEmptyUri(android.graphics.drawable.Drawable)
     316:317:public com.nostra13.universalimageloader.core.DisplayImageOptions$Builder showImageOnFail(android.graphics.drawable.Drawable)
@@ -1000,8 +999,8 @@ com.yidejia.app.mall.HomeBaseActivity:
     70:70:public int getCurrentActivityId()
 com.yidejia.app.mall.MyApplication:
     69:69:public int getSchHstryAmount()
-    93:93:public java.lang.String getUserHeadImg()
     104:104:public java.lang.String getPassword()
+    132:132:public java.lang.String getAidou()
 com.yidejia.app.mall.RegistActivity:
     public android.widget.Button mback
 com.yidejia.app.mall.adapter.AllOrderFragmentAdapter
@@ -1025,13 +1024,6 @@ com.yidejia.app.mall.adapter.SearchListAdapter:
 com.yidejia.app.mall.adapter.SearchResultListAdapter
 com.yidejia.app.mall.adapter.WaitDeliverFragmentAdapter
 com.yidejia.app.mall.adapter.WaitPayFragmentAdapter
-com.yidejia.app.mall.address.AddressAdapter:
-    513:563:private void editAddress(android.widget.CompoundButton,com.yidejia.app.mall.address.ModelAddresses)
-com.yidejia.app.mall.address.AddressAdapter$7
-com.yidejia.app.mall.address.AddressAdapter$7$1
-com.yidejia.app.mall.address.AddressAdapter$DelTask:
-    370:370:private AddressAdapter$DelTask(com.yidejia.app.mall.address.AddressAdapter)
-    375:376:public void setAddresses(com.yidejia.app.mall.address.ModelAddresses)
 com.yidejia.app.mall.address.AddressUtil
 com.yidejia.app.mall.address.AddressUtil$1
 com.yidejia.app.mall.address.AddressUtil$10
@@ -1102,20 +1094,8 @@ com.yidejia.app.mall.datamanage.PreferentialDataManage:
     223:223:static synthetic void access$5(com.yidejia.app.mall.datamanage.PreferentialDataManage,java.lang.String)
     37:37:static synthetic void access$6(com.yidejia.app.mall.datamanage.PreferentialDataManage,boolean)
 com.yidejia.app.mall.datamanage.PreferentialDataManage$TaskVerify
-com.yidejia.app.mall.datamanage.ProductDataManage
-com.yidejia.app.mall.datamanage.ProductDataManage$TaskProduct
 com.yidejia.app.mall.datamanage.SearchDataManage
 com.yidejia.app.mall.datamanage.SearchDataManage$TaskSearch
-com.yidejia.app.mall.datamanage.SearchItemDataManage
-com.yidejia.app.mall.datamanage.SearchItemDataManage$TaskSearch
-com.yidejia.app.mall.datamanage.TaskGetOrderByCode
-com.yidejia.app.mall.datamanage.TaskGetOrderByCode$1
-com.yidejia.app.mall.datamanage.TaskGetOrderByCode$TaskGOBC
-com.yidejia.app.mall.datamanage.TaskGetOrderByCode$TaskGOBC$1
-com.yidejia.app.mall.datamanage.TaskGetOrderByCode$TaskGetUserAddress
-com.yidejia.app.mall.datamanage.TaskGetTn
-com.yidejia.app.mall.datamanage.TaskGetTn$Task
-com.yidejia.app.mall.datamanage.TaskGetTn$Task$1
 com.yidejia.app.mall.datamanage.UserDatamanage:
     private java.lang.String username
     private java.lang.String password
@@ -1139,8 +1119,8 @@ com.yidejia.app.mall.datamanage.UserDatamanage$TaskLogin
 com.yidejia.app.mall.datamanage.UserDatamanage$TaskRegister
 com.yidejia.app.mall.datamanage.UserDatamanage$TaskRegister$1
 com.yidejia.app.mall.datamanage.VoucherDataManage:
-    90:123:public java.lang.String getUserVoucherForPay(java.lang.String,java.lang.String,boolean)
-    214:217:public void cancelTask()
+    102:140:public java.lang.String getUserVoucherForPay(java.lang.String,java.lang.String,boolean)
+    231:235:public void cancelTask()
 com.yidejia.app.mall.exception.NullSearchResultEx
 com.yidejia.app.mall.exception.TimeOutEx:
     private static final long serialVersionUID
@@ -1158,6 +1138,8 @@ com.yidejia.app.mall.fragment.FreeGivingAdapter:
 com.yidejia.app.mall.fragment.FreeGivingFragment:
     44:44:private void setupShow(android.view.View)
 com.yidejia.app.mall.fragment.GuangFragment
+com.yidejia.app.mall.fragment.IntegeralFragment:
+    81:82:private void getTicket()
 com.yidejia.app.mall.fragment.ShoppingCartFragment
 com.yidejia.app.mall.fragment.WaitPayFragment
 com.yidejia.app.mall.fragment.WaitPayFragment$1
@@ -1170,13 +1152,15 @@ com.yidejia.app.mall.jni.JNICallBack:
     public native java.lang.String getHttp4PayOut(java.lang.String,java.lang.String)
     public native java.lang.String getHttp4SignOrder(java.lang.String,java.lang.String,java.lang.String)
     public native java.lang.String getHttp4ChangeRead(java.lang.String,java.lang.String,java.lang.String)
-    public native java.lang.String getHttp4GetTn(java.lang.String,java.lang.String,java.lang.String)
+    public native java.lang.String getHttp4GetTicket(java.lang.String,java.lang.String)
 com.yidejia.app.mall.log.LoginTask
 com.yidejia.app.mall.log.LoginTask$Task
 com.yidejia.app.mall.model.Brand:
     private int brandId
     22:22:public int getBrandId()
     26:27:public void setBrandId(int)
+com.yidejia.app.mall.model.Cart:
+    13:13:public java.lang.String getName()
 com.yidejia.app.mall.model.Express:
     87:87:public java.lang.String getDisDesc()
     105:105:public boolean getIsDefault()
@@ -1190,18 +1174,15 @@ com.yidejia.app.mall.model.Function:
     private static final long serialVersionUID
 com.yidejia.app.mall.model.MainProduct:
     private java.lang.String subTitle
-    35:35:public java.lang.String getTitle()
-    43:43:public java.lang.String getSubTitle()
-    47:48:public void setSubTitle(java.lang.String)
-    50:50:public java.lang.String getPrice()
+    44:44:public java.lang.String getTitle()
+    52:52:public java.lang.String getSubTitle()
+    56:57:public void setSubTitle(java.lang.String)
+    59:59:public java.lang.String getPrice()
 com.yidejia.app.mall.model.MsgCenter:
     private java.lang.String uid
     private java.lang.String pid
-    private java.lang.String msg
     private java.lang.String isread
     private java.lang.String url
-    22:23:public void setMsg(java.lang.String)
-    25:25:public java.lang.String getMsg()
     36:37:public void setUid(java.lang.String)
     39:39:public java.lang.String getUid()
     43:44:public void setPid(java.lang.String)
@@ -1234,10 +1215,6 @@ com.yidejia.app.mall.model.UserComment:
     133:133:public java.lang.String getTitle()
     145:145:public java.lang.String getId()
 com.yidejia.app.mall.model.UserCount
-com.yidejia.app.mall.msg.ParseMsg:
-    private com.yidejia.app.mall.model.MsgCenter msgCenter
-    78:102:public boolean parseMsgDetails(java.lang.String)
-    108:108:public com.yidejia.app.mall.model.MsgCenter getMsgCenter()
 com.yidejia.app.mall.net.ConnectionDetector:
     10:12:public ConnectionDetector()
 com.yidejia.app.mall.net.GetImageUrlPrefix
@@ -1260,16 +1237,15 @@ com.yidejia.app.mall.net.address.DeleteUserAddress:
     78:86:public java.lang.String getHttpAddress(java.lang.String,java.lang.String)
     90:90:public java.util.Map getHttpAddressMap()
     96:99:public java.lang.String deleteAddress(java.lang.String,java.lang.String)
+    121:139:public boolean analysicDeleteJson(java.lang.String)
 com.yidejia.app.mall.net.address.GetUserAddressList:
     private android.content.Context context
     38:40:public GetUserAddressList(android.content.Context)
     48:86:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
     89:94:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
     104:108:public java.lang.String getAddressListJsonString(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-com.yidejia.app.mall.net.address.SaveUserAddress:
-    45:88:private void setKeysAndValues(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-    92:101:private java.lang.String getHttpAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-    120:124:public java.lang.String saveAddress(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.net.address.SaveUserAddress
+com.yidejia.app.mall.net.address.SetDefAddr
 com.yidejia.app.mall.net.commments.DeleteProductComment
 com.yidejia.app.mall.net.commments.GetProductCommentList:
     31:34:public GetProductCommentList()
@@ -1318,37 +1294,37 @@ com.yidejia.app.mall.order.Order:
     118:118:public java.lang.String getCore()
     134:134:public java.lang.String getTn()
     142:143:public void setTn(java.lang.String)
-com.yidejia.app.mall.order.OrderDetailActivity:
-    private android.widget.RelativeLayout orderAddressLayout
 com.yidejia.app.mall.order.RetOrderInfo:
     28:28:public java.lang.String getId()
 com.yidejia.app.mall.pay.AlixDefine
 com.yidejia.app.mall.pay.AlixId
-com.yidejia.app.mall.pay.Base64:
-    private static final int BASELENGTH
-    private static final int LOOKUPLENGTH
-    private static final int TWENTYFOURBITGROUP
-    private static final int EIGHTBIT
-    private static final int SIXTEENBIT
-    private static final int FOURBYTE
-    private static final int SIGN
-    private static final char PAD
-    private static final boolean fDebug
-    13:13:public Base64()
-    82:169:public static java.lang.String encode(byte[])
+com.yidejia.app.mall.pay.Base64
 com.yidejia.app.mall.pay.BaseHelper:
-    17:17:public BaseHelper()
-    26:42:public static java.lang.String convertStreamToString(java.io.InputStream)
-    131:137:public static void chmod(java.lang.String,java.lang.String)
+    18:18:public BaseHelper()
+    59:60:public static void showDialog(android.app.Activity,java.lang.String,java.lang.String,int)
+    203:217:public static org.json.JSONObject string2JSON(java.lang.String,java.lang.String)
+com.yidejia.app.mall.pay.CstmPayActivity:
+    public static java.util.ArrayList cartList
+    117:117:public static java.util.ArrayList getArrayListFree()
+    121:122:public static void setArrayListFree(java.util.ArrayList)
+    125:125:public static java.util.ArrayList getArrayListExchange()
+    130:131:public static void setArrayListExchange(java.util.ArrayList)
+com.yidejia.app.mall.pay.FileDownloader:
+    50:52:public FileDownloader(boolean)
+    63:64:public final void setShowProgress(boolean)
+    131:132:public void stop()
+com.yidejia.app.mall.pay.FileFetch:
+    143:144:public final void stop()
+com.yidejia.app.mall.pay.MobileSecurePayHelper:
+    static final java.lang.String TAG
+    333:342:public boolean retrieveApkFromNet(android.content.Context,java.lang.String,java.lang.String)
+com.yidejia.app.mall.pay.NetworkManager:
+    static final java.lang.String TAG
+    143:182:public boolean urlDownloadToFile(android.content.Context,java.lang.String,java.lang.String)
 com.yidejia.app.mall.pay.PartnerConfig
-com.yidejia.app.mall.pay.ResultChecker:
-    public static final int RESULT_INVALID_PARAM
-    public static final int RESULT_CHECK_SIGN_FAILED
-    public static final int RESULT_CHECK_SIGN_SUCCEED
-com.yidejia.app.mall.pay.Rsa:
-    public static final java.lang.String SIGN_ALGORITHMS
-    19:19:public Rsa()
-    55:75:public static java.lang.String sign(java.lang.String,java.lang.String)
+com.yidejia.app.mall.pay.PayOrderUtil
+com.yidejia.app.mall.pay.ResultChecker
+com.yidejia.app.mall.pay.Rsa
 com.yidejia.app.mall.phone.ContactAdapter
 com.yidejia.app.mall.phone.ContactAdapter$ViewHolder
 com.yidejia.app.mall.qiandao.ParseSignUp
@@ -1376,28 +1352,16 @@ com.yidejia.app.mall.skintest.SkinQuesActivity$Task$1
 com.yidejia.app.mall.skintest.SkinResultAcitivity:
     private java.lang.String cps
 com.yidejia.app.mall.task.TaskGetCode:
-    116:116:public int getRegCode()
+    117:117:public int getRegCode()
 com.yidejia.app.mall.task.TaskLoginAct
 com.yidejia.app.mall.task.TaskLoginAct$Task
 com.yidejia.app.mall.task.TaskLoginAct$Task$1
-com.yidejia.app.mall.util.Base64:
-    public static final int DEFAULT
-    public static final int NO_PADDING
-    public static final int NO_WRAP
-    public static final int CRLF
-    public static final int URL_SAFE
-    public static final int NO_CLOSE
-    480:483:public static java.lang.String encodeToString(byte[],int,int,int)
-com.yidejia.app.mall.util.Base64$Coder:
-    public abstract boolean process(byte[],int,int,boolean)
-    public abstract int maxOutputSize(int)
-com.yidejia.app.mall.util.Base64$Decoder:
-    private static final int SKIP
-    private static final int EQUALS
-    257:257:public int maxOutputSize(int)
-com.yidejia.app.mall.util.Base64$Encoder:
-    public static final int LINE_GROUPS
-    603:603:public int maxOutputSize(int)
+com.yidejia.app.mall.util.ActivityIntentUtil:
+    6:6:public ActivityIntentUtil()
+com.yidejia.app.mall.util.Base64
+com.yidejia.app.mall.util.Base64$Coder
+com.yidejia.app.mall.util.Base64$Decoder
+com.yidejia.app.mall.util.Base64$Encoder
 com.yidejia.app.mall.util.BottomChange
 com.yidejia.app.mall.util.CartUtil1:
     private android.widget.TextView number
@@ -1429,6 +1393,13 @@ com.yidejia.app.mall.util.Consts:
     public static final int DELIVERY_RESULT
     public static final int CONSTACT_REQUEST
     public static final int CONSTACT_RESPONSE
+    public static final int CHANGE_RESPONSE
+    public static final int CHANGE_REQUEST
+    public static final int CHANGE_ZHIFUBAO
+    public static final int CHANGE_WANGYE
+    public static final int CHANGE_CAIFUTONG
+    public static final int CHANGE_YINLIAN
+    public static final java.lang.String CHANGE_PAY
     public static final java.lang.String ADD_SUBSTARCT_UPDATE_
     public static final java.lang.String EXCHANG_FREE
     public static final java.lang.String RETURN_BACk
@@ -1454,31 +1425,20 @@ com.yidejia.app.mall.util.DesUtils:
     public static final java.lang.String ALGORITHM_DES
     10:10:public DesUtils()
 com.yidejia.app.mall.util.FreeGivingUtil
-com.yidejia.app.mall.util.Http:
-    private static final java.lang.String METHOD_POST
-    private static final int CACHE_SIZE
-    private static final int CONNECT_TIMEOUT
-    private static final int READ_TIMEOUT
-    10:10:public Http()
+com.yidejia.app.mall.util.Http
 com.yidejia.app.mall.util.IsPhone:
     8:8:public IsPhone()
 com.yidejia.app.mall.util.Md5
-com.yidejia.app.mall.util.MessageUtil:
-    private static final java.lang.String CHARSET
-    public static final java.lang.String QSTRING_EQUAL
-    public static final java.lang.String QSTRING_SPLIT
-    9:9:public MessageUtil()
+com.yidejia.app.mall.util.MessageUtil
 com.yidejia.app.mall.util.PayUtil:
     private android.widget.LinearLayout mLayout
     private com.yidejia.app.mall.model.Cart cart
     56:63:public PayUtil(android.content.Context,android.widget.LinearLayout,com.nostra13.universalimageloader.core.ImageLoader,com.nostra13.universalimageloader.core.assist.ImageLoadingListener,com.nostra13.universalimageloader.core.DisplayImageOptions)
     161:192:public java.lang.String cartLoadView()
 com.yidejia.app.mall.util.SharedPreferencesUtil:
-    17:21:public void saveData(java.lang.String,java.lang.String,java.lang.String)
     29:33:public void saveData(java.lang.String,java.lang.String,int)
     35:39:public void saveData(java.lang.String,java.lang.String,float)
     41:45:public void saveData(java.lang.String,java.lang.String,long)
-    48:49:public java.lang.String getData(java.lang.String,java.lang.String,java.lang.String)
     56:57:public int getData(java.lang.String,java.lang.String,int)
     60:61:public float getData(java.lang.String,java.lang.String,float)
     64:65:public long getData(java.lang.String,java.lang.String,long)
@@ -1487,19 +1447,9 @@ com.yidejia.app.mall.util.TimeUtil:
 com.yidejia.app.mall.util.UnicodeToString:
     66:87:public java.lang.String convert(java.lang.String)
 com.yidejia.app.mall.util.Utility
-com.yidejia.app.mall.view.CstmPayActivity:
-    public static java.util.ArrayList cartList
-    121:121:public static java.util.ArrayList getArrayListFree()
-    125:126:public static void setArrayListFree(java.util.ArrayList)
-    129:129:public static java.util.ArrayList getArrayListExchange()
-    134:135:public static void setArrayListExchange(java.util.ArrayList)
-    627:633:private boolean checkInfo()
-    641:658:java.lang.String getOrderInfo()
-    681:682:java.lang.String getSignType()
-    695:695:java.lang.String sign(java.lang.String,java.lang.String)
 com.yidejia.app.mall.view.ExchangeFreeActivity:
-    210:249:private void setActionBar()
-    68:68:static synthetic float access$17(com.yidejia.app.mall.view.ExchangeFreeActivity)
+    211:250:private void setActionBar()
+    69:69:static synthetic float access$17(com.yidejia.app.mall.view.ExchangeFreeActivity)
 com.yidejia.app.mall.view.ExchangeFreeActivity$3
 com.yidejia.app.mall.view.ExchangeFreeActivity$4
 com.yidejia.app.mall.view.ImageLoaderUtil
@@ -1509,11 +1459,6 @@ com.yidejia.app.mall.view.ImagePagerActivity:
     private static final int NONE
     private static final int DRAG
     private static final int ZOOM
-com.yidejia.app.mall.view.UserPayActivity:
-    private static final java.lang.String SERVER_URL
-    private static final java.lang.String TRADE_COMMAND
-    private java.lang.String mTokenId
-    static final int MSG_PAY_RESULT
 com.yidejia.app.mall.wheelview.ArrayWheelAdapter:
     public static final int DEFAULT_LENGTH
     private java.lang.Object[] items
@@ -1544,9 +1489,9 @@ com.yidejia.app.mall.widget.DateTimePickerDialog:
     private java.lang.String initDateTime
     43:54:public void init(android.widget.DatePicker,android.widget.TimePicker)
 com.yidejia.app.mall.widget.WiperSwitch:
-    23:23:public boolean isNowStatus()
-    27:28:public void setNowStatus(boolean)
-    164:170:public void setChecked(boolean)
+    25:25:public boolean isNowStatus()
+    29:30:public void setNowStatus(boolean)
+    168:174:public void setChecked(boolean)
 com.yidejia.app.mall.widget.YLImageButton
 com.yidejia.app.mall.widget.YLProgressDialog:
     35:38:public YLProgressDialog(android.content.Context,int)

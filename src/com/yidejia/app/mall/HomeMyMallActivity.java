@@ -33,7 +33,7 @@ import com.yidejia.app.mall.order.AlreadyOrderActivity;
 import com.yidejia.app.mall.order.ExchangeActivity;
 import com.yidejia.app.mall.order.WaitDeliverActivity;
 import com.yidejia.app.mall.order.WaitPayActivity;
-import com.yidejia.app.mall.view.IntegeralActivity;
+import com.yidejia.app.mall.tickets.IntegeralActivity;
 
 public class HomeMyMallActivity extends HomeBaseActivity implements
 		OnClickListener {
