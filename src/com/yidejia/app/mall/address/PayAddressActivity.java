@@ -37,9 +37,9 @@ public class PayAddressActivity extends SherlockActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.pay_address);
+		setContentView(R.layout.common_listview);
 		setActionbar();
-		listview = (ListView) findViewById(R.id.pay_address);
+		listview = (ListView) findViewById(R.id.lv_common);
 		myApplication = (MyApplication) getApplication();
 		userId = myApplication.getUserId();
 		mAddresses = new ArrayList<ModelAddresses>();

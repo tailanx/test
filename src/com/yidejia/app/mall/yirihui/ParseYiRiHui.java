@@ -6,6 +6,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.yidejia.app.mall.net.ImageUrl;
+import com.yidejia.app.mall.util.TimeUtil;
+
 public class ParseYiRiHui {
 
 	private ArrayList<YiRiHuiData> yiRiHuiDatas;
@@ -16,6 +19,7 @@ public class ParseYiRiHui {
 			JSONObject httpJsonObject = new JSONObject(content);
 			int code = httpJsonObject.optInt("code");
 			String strResp = httpJsonObject.optString("response");
+			long ts = httpJsonObject.optLong("ts");
 			if(1 == code){
 				
 				yiRiHuiDatas = new ArrayList<YiRiHuiData>();
@@ -28,13 +32,17 @@ public class ParseYiRiHui {
 					tempYRH.setTheId(yrhObject.optString("the_id"));
 					tempYRH.setRuleName(yrhObject.optString("rule_name"));
 					tempYRH.setBeginTime(yrhObject.optString("begin_time"));
-					tempYRH.setEndTime(yrhObject.optString("end_time"));
+					String strEndTime = yrhObject.optString("end_time");
+					tempYRH.setEndTime(strEndTime);
+					long endTime = TimeUtil.stringToTimestamp(strEndTime);
+					tempYRH.setStartTime((endTime - ts) + "");
+					
 					tempYRH.setGoodsId(yrhObject.optString("goods_id"));
 					tempYRH.setQuantity(yrhObject.optString("quantity"));
 					tempYRH.setCanBuyQuantity(yrhObject.optString("can_buy_quantity"));
 					tempYRH.setOverTime(yrhObject.optString("overtime"));
-					tempYRH.setImg1(yrhObject.optString("img_1"));
-					tempYRH.setImg2(yrhObject.optString("img_2"));
+					tempYRH.setImg1(ImageUrl.IMAGEURL + yrhObject.optString("img_1"));
+					tempYRH.setImg2(ImageUrl.IMAGEURL + yrhObject.optString("img_2"));
 					tempYRH.setValidFlag(yrhObject.optString("valid_flag"));
 					tempYRH.setShellFlag(yrhObject.optString("shell_flag"));
 					tempYRH.setGoodsName(yrhObject.optString("goods_name"));

@@ -8,15 +8,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.util.HttpClientUtil;
 import com.yidejia.app.mall.util.IHttpResp;
 
 public class YirihuiFragment extends Fragment {
-	private int index;	
-//	private PullToRefreshListView refreshListView;
+	private int index = 0;	
+	private PullToRefreshListView refreshListView;
+	private ListView lvYiRiHui;
+	private YiRiHuiAdapter adapter;
+	private ArrayList<YiRiHuiData> yiRiHuiDatas;
 	private int type = 0;	//type -1 过去 0现在 1 将来  
 	private int offset = 0;	//offset 起始位置
 	private int limit = 10;	//limit 偏移量 必须
@@ -41,10 +46,14 @@ public class YirihuiFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		View view = inflater.inflate(R.layout.yirihui_item, null);
-//		refreshListView = (PullToRefreshListView) view
-//				.findViewById(R.id.pull_refresh_list);
+		View view = inflater.inflate(R.layout.common_listview, null);
+		refreshListView = (PullToRefreshListView) view
+				.findViewById(R.id.lv_common);
+		lvYiRiHui = refreshListView.getRefreshableView();
+		yiRiHuiDatas = new ArrayList<YiRiHuiData>();
+		adapter = new YiRiHuiAdapter(getActivity(), yiRiHuiDatas);
+		lvYiRiHui.setAdapter(adapter);
+		
 		getYiriHuiData();
 		return view;
 	}
@@ -66,10 +75,11 @@ public class YirihuiFragment extends Fragment {
 				ParseYiRiHui parseYiRiHui = new ParseYiRiHui();
 				boolean isSuccess = parseYiRiHui.parseYiRiHui(content);
 				if(isSuccess){
-					ArrayList<YiRiHuiData> yiRiHuiDatas = parseYiRiHui.getYiRiHuiDatas();
-					if(null != yiRiHuiDatas) {
+					ArrayList<YiRiHuiData> tempYiRiHuiDatas = parseYiRiHui.getYiRiHuiDatas();
+					if(null != tempYiRiHuiDatas) {
 						//TODO 显示数据
-						
+						yiRiHuiDatas.addAll(tempYiRiHuiDatas);
+						adapter.notifyDataSetChanged();
 					}
 				}
 			}

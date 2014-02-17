@@ -16,6 +16,8 @@ public class YiRiHuiData {
 	private String shellFlag;
 	private String goodsName;
 	private String goodsPrice;
+	private String startTime;
+	
 	public String getTheId() {
 		return theId;
 	}
@@ -99,6 +101,12 @@ public class YiRiHuiData {
 	}
 	public void setGoodsPrice(String goodsPrice) {
 		this.goodsPrice = goodsPrice;
+	}
+	public String getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
 	}
 	
 	
