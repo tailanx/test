@@ -516,7 +516,7 @@ public class CstmPayActivity extends BaseActivity {
 		String url = jniCallBack.HTTPURL;
 		String params = jniCallBack.getHttp4SaveOrder(userId, tickId, recipientId,
 				"", jifen + "", expressNum, tmpPostMethod, tmpPeisong, goods,
-				tmpComment, pay_type, token);
+				tmpComment, pay_type, token, "android");
 		
 //		Log.e("system.out", url+params);
 		

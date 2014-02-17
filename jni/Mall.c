@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-//static char *url = "http://192.168.1.254:802/";
+//static char *url = "http://192.168.1.254/";
 //char *strTemp = "ChunTianfw_mobile123456";
 char *url = "http://fw1.atido.net/";
 char *strTemp = "ChunTianfw_mobile@SDF!TD#DF#*CB$GER@";
@@ -1487,7 +1487,7 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 //ship_type , ship_entity_name, goods_qty_scr,comments, token, ����post
 jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveOrder(JNIEnv* env,
 		jobject thiz, jstring customer_id, jstring ticket_id, jstring recipient_id, jstring pingou_id, jstring goods_ascore,
-		jstring ship_fee, jstring ship_type, jstring ship_entity_name, jstring goods_qty_scr, jstring comments, jstring pay_type, jstring token){
+		jstring ship_fee, jstring ship_type, jstring ship_entity_name, jstring goods_qty_scr, jstring comments, jstring pay_type, jstring token, jstring device){
 	char *chcustomer_id = (*env)->GetStringUTFChars(env, customer_id, NULL);
 	char *chticket_id = (*env)->GetStringUTFChars(env, ticket_id, NULL);
 	char *chrecipient_id = (*env)->GetStringUTFChars(env, recipient_id, NULL);
@@ -1500,6 +1500,7 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 	char *chcomments = (*env)->GetStringUTFChars(env, comments, NULL);
 	char *chpay_type = (*env)->GetStringUTFChars(env, pay_type, NULL);
 	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chdevice = (*env)->GetStringUTFChars(env, device, NULL);
 
 	char encrypt[LEN], urlString[LEN];
 	encrypt[0] = 0;
@@ -1531,6 +1532,8 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 	if(chcomments != NULL)addString(urlString, chcomments);
 	addString(urlString, "&pay_type=");
 	if(chpay_type != NULL)addString(urlString, chpay_type);
+	addString(urlString, "&device_type=");
+	if(chdevice != NULL)addString(urlString, chdevice);
 	addString(urlString, "&token=");
 	if(chtoken != NULL)addString(urlString, chtoken);
 

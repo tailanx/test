@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.BaseActivity;
+import com.yidejia.app.mall.HomeMyMallActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.order.WaitPayActivity;
 import com.yidejia.app.mall.util.ActivityIntentUtil;
@@ -35,6 +36,7 @@ public class WebPayActivity extends BaseActivity {
 			}
 		});
 		
+//		payUrl = "http://m.yidejia.com/paysuccess.html";
 		WebPayUtil util = new WebPayUtil(this);
 		util.webPay(payUrl);
 	}
@@ -42,7 +44,7 @@ public class WebPayActivity extends BaseActivity {
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			ActivityIntentUtil.intentActivityAndFinish(WebPayActivity.this, WaitPayActivity.class);
+			ActivityIntentUtil.intentActivityAndFinish(WebPayActivity.this, HomeMyMallActivity.class);
 			return true;
 		}
 		return super.onKeyUp(keyCode, event);
