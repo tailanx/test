@@ -28,6 +28,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.baidu.mobstat.StatService;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yidejia.app.mall.MyApplication;
@@ -108,6 +109,18 @@ public class ViewPagerActivity extends Activity {
 			return view == object;
 		}
 
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		StatService.onPageStart(this, "图片放大和缩小页面");
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		StatService.onPageStart(this,"图片放大和缩小页面");
 	}
 
 }
