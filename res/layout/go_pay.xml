@@ -725,7 +725,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/margin_left"
-            android:background="@drawable/theme_textview_background"
+            android:background="@drawable/bg_pay_selector"
             android:padding="@dimen/margin_left"
             android:text="@string/go_pay_show_pay_commit"
             android:textColor="@color/white" />

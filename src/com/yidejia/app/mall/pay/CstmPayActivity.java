@@ -109,6 +109,9 @@ public class CstmPayActivity extends BaseActivity {
 	private float voucher;
 	private final String TAG = getClass().getName();
 	
+	private boolean isCanPay = false;	//所有数据都获取成功，可以点击支付按钮
+	private String tickId = "0";
+	
 //	private ProgressDialog mProgress = null;
 //	
 //	private String alicInfo;	//支付宝客户端支付需要的字符串
@@ -395,23 +398,27 @@ public class CstmPayActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				if (null != showAddress) {
+//				if (null != showAddress) {
 					Intent intent = new Intent(CstmPayActivity.this,
 							AddressActivity.class);
 					intent.putExtra("requestCode", Consts.AddressRequestCode);
 					CstmPayActivity.this.startActivityForResult(intent,
 							Consts.AddressRequestCode);
-				}
+//				}
 			}
 		});
 		PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
 		goods = pay.loadView(carts, isHuanGou);
 		
+		tv_saveOrderBtn.setSelected(false);
 		// 提交订单点击事件
 		tv_saveOrderBtn.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
+				
+				if(!isCanPay) return;
+				
 				if (!cb_yinlian.isChecked()
 						&& !cb_zhifubao.isChecked()
 						&& !cb_zhifubaowangye.isChecked()
@@ -507,7 +514,7 @@ public class CstmPayActivity extends BaseActivity {
 		
 		JNICallBack jniCallBack = new JNICallBack();
 		String url = jniCallBack.HTTPURL;
-		String params = jniCallBack.getHttp4SaveOrder(userId, "0", recipientId,
+		String params = jniCallBack.getHttp4SaveOrder(userId, tickId, recipientId,
 				"", jifen + "", expressNum, tmpPostMethod, tmpPeisong, goods,
 				tmpComment, pay_type, token);
 		
@@ -696,6 +703,8 @@ public class CstmPayActivity extends BaseActivity {
 						if (null != distributions && distributions.size() != 0) {
 							peiSongCenter = distributions.get(0).getDisName();
 							tv_peiSong.setText(peiSongCenter);
+							isCanPay = true;
+							tv_saveOrderBtn.setSelected(true);
 						} else {
 							// TODO 
 							Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_LONG).show();
@@ -776,6 +785,9 @@ public class CstmPayActivity extends BaseActivity {
 							preId = expressArray.get(0).getPreId();
 							if(isDefault){
 								getDeliveryPoint(isDefault);
+							} else {
+								isCanPay = true;
+								tv_saveOrderBtn.setSelected(true);
 							}
 						}  else {
 							// TODO 
@@ -1038,6 +1050,7 @@ public class CstmPayActivity extends BaseActivity {
 			Log.i("info", addresses1.getAddress() + "str");
 			if (addresses1 != null) {
 				setAdd(addresses1);
+				if(null != tv_saveOrderBtn) tv_saveOrderBtn.setSelected(false);
 				// 获取邮费
 				getExpressData(addresses1.getProvice(), true);
 			}
@@ -1058,7 +1071,10 @@ public class CstmPayActivity extends BaseActivity {
 			tv_peiSong.setText(delivery.getDisName());
 			preId = delivery.getPreId();
 			if(isFree) return;
-			getExpressData(province, false);
+			if(!TextUtils.isEmpty(province)) {
+				if(null != tv_saveOrderBtn) tv_saveOrderBtn.setSelected(false);
+				getExpressData(province, false);
+			}
 		}
 	}
 	
