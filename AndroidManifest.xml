@@ -171,7 +171,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yidejia.app.mall.view.IntegeralActivity"
+            android:name="com.yidejia.app.mall.tickets.IntegeralActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.yidejia.app.mall.favorite.MyCollectActivity"

@@ -17,6 +17,8 @@ public class ActiveGoActivity extends SherlockActivity {
 	
 	private String url = "http://m.yidejia.com/active.html";
 	private WebView mWebView;
+	
+	private TextView titleTextView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +29,12 @@ public class ActiveGoActivity extends SherlockActivity {
 			url = "http://m.yidejia.com/active.html";
 		}
 		
+		setActionbarConfig();
+		
 		ActViewCtrl viewCtrl = new ActViewCtrl(this);
+		viewCtrl.setTitleTextView(titleTextView);
 		mWebView = viewCtrl.getWebView(url);
 		setContentView(mWebView);
-		setActionbarConfig();
 	}
 	
 	private void setActionbarConfig() {
@@ -39,7 +43,7 @@ public class ActiveGoActivity extends SherlockActivity {
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
+		titleTextView = (TextView) findViewById(R.id.ab_common_title);
 		// titleTextView.setText("商品展示") ;
 		titleTextView.setText(getResources().getString(R.string.main_event_text));
 		TextView leftImageView = (TextView) findViewById(R.id.ab_common_back);

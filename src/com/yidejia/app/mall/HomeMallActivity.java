@@ -42,9 +42,9 @@ import com.yidejia.app.mall.phone.PhoneActivity;
 //import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.search.SearchActivity;
 import com.yidejia.app.mall.skintest.SkinHomeActivity;
+import com.yidejia.app.mall.tickets.IntegeralActivity;
 import com.yidejia.app.mall.util.DPIUtil;
 import com.yidejia.app.mall.util.SharedPreferencesUtil;
-import com.yidejia.app.mall.view.IntegeralActivity;
 import com.yidejia.app.mall.widget.BannerView;
 import com.yidejia.app.mall.yirihui.YirihuiActivity;
 
