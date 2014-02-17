@@ -8,6 +8,7 @@ import android.view.View.OnClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
@@ -62,4 +63,15 @@ public class YouhuiActivity extends BaseActivity implements OnClickListener {
 			}
 		});
 	}
+	@Override
+	protected void onPause() {
+		super.onPause();
+	StatService.onPageEnd(this, "优惠券页面");	
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		StatService.onPageStart(this, "优惠券页面");
+	}
+	
 }
