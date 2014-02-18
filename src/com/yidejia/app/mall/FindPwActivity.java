@@ -1,19 +1,19 @@
 package com.yidejia.app.mall;
 
-import com.actionbarsherlock.app.SherlockActivity;
-import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.task.TaskGetCode;
-import com.yidejia.app.mall.task.TaskReset;
-import com.yidejia.app.mall.util.IsPhone;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.yidejia.app.mall.jni.JNICallBack;
+import com.yidejia.app.mall.task.TaskGetCode;
+import com.yidejia.app.mall.task.TaskReset;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
+import com.yidejia.app.mall.util.IsPhone;
 
 public class FindPwActivity extends BaseActivity {
 
@@ -32,6 +32,10 @@ public class FindPwActivity extends BaseActivity {
 	private TaskGetCode getCodeTask;
 
 	private TaskReset taskReset;
+	private String url;
+	private HttpClientUtil client;
+	private String reponse;// 返回码信息
+	private int code;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +92,41 @@ public class FindPwActivity extends BaseActivity {
 					Toast.LENGTH_SHORT).show();
 			return;
 		}
-		getCodeTask = new TaskGetCode(FindPwActivity.this);
-		getCodeTask.getCode(account);
+		// getCodeTask = new TaskGetCode(FindPwActivity.this);
+		// getCodeTask.getCode(account);
+		String param = new JNICallBack().getHttp4GetCode(account);
+		url = new JNICallBack().HTTPURL;
+		client = new HttpClientUtil();
+		client.getHttpResp(url, param, new IHttpResp() {
+
+			@Override
+			public void success(String content) {
+				getCodeTask = new TaskGetCode(FindPwActivity.this);
+				if (getCodeTask.parse(content)) {
+					String respParam = new JNICallBack().getHttp4SendMsg(
+							account, code + "");
+					client.getHttpResp(url, respParam, new IHttpResp() {
+
+						@Override
+						public void success(String content) {
+							if (getCodeTask.parseResp(content)) {
+								Toast.makeText(FindPwActivity.this,
+										"验证码已发送到您的手机，请注意查看!", Toast.LENGTH_LONG)
+										.show();
+							} else {
+								Toast.makeText(
+										FindPwActivity.this,
+										FindPwActivity.this.getResources()
+												.getString(R.string.time_out),
+										Toast.LENGTH_SHORT).show();
+							}
+						}
+					});
+
+				}
+
+			}
+		});
 	}
 
 	/**
@@ -137,10 +174,10 @@ public class FindPwActivity extends BaseActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		if (taskReset != null)
-			taskReset.closeTask();
-		if (getCodeTask != null)
-			getCodeTask.closeTask();
+		// if (taskReset != null)
+		// taskReset.closeTask();
+		// if (getCodeTask != null)
+		// getCodeTask.closeTask();
 	}
 
 	/*

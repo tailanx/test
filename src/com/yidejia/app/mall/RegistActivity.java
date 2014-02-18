@@ -35,14 +35,14 @@ import com.yidejia.app.mall.util.IsPhone;
 
 public class RegistActivity extends BaseActivity {
 	public Button mback;// ����
-	private UserDatamanage userManage;
+	// private UserDatamanage userManage;
 	private EditText mZhanghao;
 	private EditText mPws;
 	private EditText mEditText;
 	private EditText mEditText2;
 	private Button mButton;
 	private ImageView getCodeImgView;
-	private TextView regist_agreement;
+	// private TextView regist_agreement;
 	private TextView protocol;// 协议
 
 	private String account;
@@ -59,9 +59,9 @@ public class RegistActivity extends BaseActivity {
 	private String url;
 	private HttpClientUtil client;
 	private String reponse;// 返回码信息
+	private int code;
 
 	private TaskCheckCode taskCheckCode;
-	private int code;
 
 	private void setupShow() {
 		mZhanghao = (EditText) findViewById(R.id.et_my_mall_regist_edittext_account);
@@ -71,7 +71,7 @@ public class RegistActivity extends BaseActivity {
 		mButton = (Button) findViewById(R.id.bt_find_password_confirm_button);
 		mBox = (CheckBox) findViewById(R.id.ck_my_mall_regist_checkbox);
 		getCodeImgView = (ImageView) findViewById(R.id.iv_my_mall_regist_password_validation_button);
-		regist_agreement = (TextView) findViewById(R.id.tv_regist_agreement);
+		// regist_agreement = (TextView) findViewById(R.id.tv_regist_agreement);
 		protocol = (TextView) findViewById(R.id.tv_regist_agreement);
 
 	}
@@ -84,7 +84,7 @@ public class RegistActivity extends BaseActivity {
 
 			setActionbarConfig();
 			setTitle(getResources().getString(R.string.login_find_psw_add));
-			userManage = new UserDatamanage(RegistActivity.this);
+			// userManage = new UserDatamanage(RegistActivity.this);
 			ip = new IpAddress();
 			ipAddress = ip.getIpAddress();
 			setContentView(R.layout.my_mall_regist);
@@ -111,15 +111,15 @@ public class RegistActivity extends BaseActivity {
 					getCodeListener();
 				}
 			});
-
-			regist_agreement.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					goToAgreementAct();
-				}
-			});
+			//
+			// regist_agreement.setOnClickListener(new OnClickListener() {
+			//
+			// @Override
+			// public void onClick(View v) {
+			// // TODO Auto-generated method stub
+			// goToAgreementAct();
+			// }
+			// });
 
 			protocol.setOnClickListener(new View.OnClickListener() {
 
@@ -141,10 +141,10 @@ public class RegistActivity extends BaseActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		if (taskCheckCode != null)
-			taskCheckCode.closeTask();
-		if (getCodeTask != null)
-			getCodeTask.closeTask();
+		// if (taskCheckCode != null)
+		// taskCheckCode.closeTask();
+		// if (getCodeTask != null)
+		// getCodeTask.closeTask();
 	}
 
 	/**
@@ -215,15 +215,17 @@ public class RegistActivity extends BaseActivity {
 
 			@Override
 			public void success(String content) {
-
-				if (parse(content)) {
+				Log.e("info", content);
+				getCodeTask = new TaskGetCode(RegistActivity.this);
+				if (getCodeTask.parse(content)) {
 					String respParam = new JNICallBack().getHttp4SendMsg(
 							account, code + "");
 					client.getHttpResp(url, respParam, new IHttpResp() {
 
 						@Override
 						public void success(String content) {
-							if (parseResp(content)) {
+							Log.e("info", content+"content");
+							if (getCodeTask.parseResp(content)) {
 								Toast.makeText(RegistActivity.this,
 										"验证码已发送到您的手机，请注意查看!", Toast.LENGTH_LONG)
 										.show();
@@ -243,13 +245,14 @@ public class RegistActivity extends BaseActivity {
 		});
 	}
 
-	/**
-	 * 跳转到伊的家服务条款页面
-	 */
-	private void goToAgreementAct() {
-		Intent intent = new Intent(this, AgreementActivity.class);
-		startActivity(intent);
-	}
+	//
+	// /**
+	// * 跳转到伊的家服务条款页面
+	// */
+	// private void goToAgreementAct() {
+	// Intent intent = new Intent(this, AgreementActivity.class);
+	// startActivity(intent);
+	// }
 
 	@Override
 	protected void onResume() {
@@ -263,40 +266,40 @@ public class RegistActivity extends BaseActivity {
 		StatService.onPageEnd(this, "注册页面");
 	}
 
-	private boolean parse(String content) {
-		JSONObject object;
-		try {
-			object = new JSONObject(content);
-			int respCode = object.getInt("code");
-			if (respCode == 1) {
-				code = object.getInt("response");
-			}
-			return true;
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return false;
-	}
-
-	private boolean parseResp(String content) {
-		JSONObject object;
-		boolean isSucess = false;
-		try {
-			object = new JSONObject(content);
-			int code = object.getInt("code");
-			if (code == 1) {
-				isSucess = true;
-				reponse = object.getString("response");
-			} else {
-				reponse = object.getString("response");
-			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return isSucess;
-	}
+	// private boolean parse(String content) {
+	// JSONObject object;
+	// try {
+	// object = new JSONObject(content);
+	// int respCode = object.getInt("code");
+	// if (respCode == 1) {
+	// code = object.getInt("response");
+	// }
+	// return true;
+	// } catch (JSONException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	//
+	// return false;
+	// }
+	//
+	// private boolean parseResp(String content) {
+	// JSONObject object;
+	// boolean isSucess = false;
+	// try {
+	// object = new JSONObject(content);
+	// int code = object.getInt("code");
+	// if (code == 1) {
+	// isSucess = true;
+	// reponse = object.getString("response");
+	// } else {
+	// reponse = object.getString("response");
+	// }
+	// } catch (JSONException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	//
+	// return isSucess;
+	// }
 }
