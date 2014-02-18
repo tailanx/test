@@ -74,6 +74,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 	private AlertDialog dialog;
 	private RelativeLayout addressRelative;
 	private RelativeLayout rlYouhuiquan;// 使用优惠折扣
+	private TextView tvTicketName;	//使用优惠券的名称
 
 	private RelativeLayout rl_peisong; // 选择配送中心的layout
 
@@ -225,6 +226,8 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 	public void setupShow() {
 		try {
 			rlYouhuiquan = (RelativeLayout) findViewById(R.id.go_shopping_use_evalution);
+			tvTicketName = (TextView) findViewById(R.id.tv_ticket_name);
+			tvTicketName.setText("");
 			tv_sumPrice = (TextView) findViewById(R.id.go_pay_show_pay_money);
 			tv_saveOrderBtn = (TextView) findViewById(R.id.save_order_btn);
 			tv_userName = (TextView) findViewById(R.id.go_pay_name);
@@ -261,8 +264,8 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 						cb_emsBox.setChecked(false);
 						try {
 							expressNum = tv_generalPrice.getText().toString();
-							tv_sumPrice.setText(goodsPrice
-									+ Float.parseFloat(expressNum) + "");
+							tv_sumPrice.setText((goodsPrice
+									+ Float.parseFloat(expressNum)) + "");
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -280,8 +283,8 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 						cb_emsBox.setChecked(true);
 						try {
 							expressNum = tv_emsPrice.getText().toString();
-							tv_sumPrice.setText(goodsPrice
-									+ Float.parseFloat(expressNum) + "");
+							tv_sumPrice.setText((goodsPrice
+									+ Float.parseFloat(expressNum)) + "");
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -1035,11 +1038,14 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 		RequestParams requestParams = new RequestParams();
 		requestParams.put(param);
 
+//		Log.e("system.out", url + "?" + param);
 		// client.get(url, new AsyncHttpResponse(){
 		client.post(url, contentType, requestParams, new AsyncHttpResponse() {
 			@Override
 			public void onSuccess(int statusCode, String content) {
 				super.onSuccess(statusCode, content);
+				
+				
 				if (statusCode == HttpStatus.SC_OK) {
 					ParseCredit parseCredit = new ParseCredit();
 					boolean isSuccess = parseCredit.parseVerify(content);
@@ -1113,14 +1119,14 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 		if (isFree) {
 			tv_generalPrice.setText("0");
 			tv_emsPrice.setText("0");
-			tv_sumPrice.setText(goodsPrice + "");
 			expressNum = "0";
+			tv_sumPrice.setText((goodsPrice + Float.parseFloat(expressNum)) + "");
 		} else {
 			tv_generalPrice.setText(generalNum);
 			tv_emsPrice.setText(emsNum);
 			expressNum = (cb_general.isChecked() ? tv_generalPrice.getText()
 					.toString() : tv_emsPrice.getText().toString());
-			tv_sumPrice.setText(goodsPrice + Float.parseFloat(expressNum) + "");
+			tv_sumPrice.setText((goodsPrice + Float.parseFloat(expressNum)) + "");
 		}
 	}
 
@@ -1181,8 +1187,24 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 		} else if (Consts.YOUHUIQUAN_REQUEST == requestCode
 				&& Consts.YOUHUIQUAN_RESPONSE == resultCode) {//使用优惠权的返回值
 			String youhuiData = data.getExtras().getString("youhuiquan");
-			if (null != youhuiData || "".equals(rlYouhuiquan)) {
-//				Log.e("info", rlYouhuiquan + "");
+			tickId = data.getExtras().getString("tickId");
+			String tickName = data.getExtras().getString("tickName");
+//			Log.e("system.out", "price:" + youhuiData + ":id:" + tickId + ":name:" + tickName);
+			if(TextUtils.isEmpty(tickId)) tickId = "0";
+			if (null != youhuiData && null != tvTicketName) {
+				tvTicketName.setText("(" + tickName + ")");
+				try {
+					float priceF = (goodsPrice + Float.parseFloat(expressNum) - Float
+							.parseFloat(youhuiData));
+					if (priceF < 0.001){
+						isCanPay = false;
+						return;
+					}
+					tv_sumPrice.setText(priceF + "");
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+					isCanPay = false;
+				}
 			}
 		}
 	}
@@ -1207,6 +1229,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 		case R.id.go_shopping_use_evalution:
 			Intent intent = new Intent(CstmPayActivity.this,
 					YouhuiActivity.class);
+			intent.putExtra("totalPrice", goodsPrice);
 			startActivityForResult(intent, Consts.YOUHUIQUAN_REQUEST);
 			break;
 		}

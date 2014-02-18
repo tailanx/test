@@ -650,14 +650,22 @@
                 android:padding="@dimen/activity_vertical_margin" >
 
                 <TextView
-                    android:id="@+id/go_pay_addresss"
+                    android:id="@+id/tv_ticket_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    
-                        android:textColor="@color/text_color_80"
-                    android:text="使用优惠折扣"
+                    android:text="使用优惠抵扣"
+                    android:textColor="@color/text_color_80"
                     android:textSize="15sp" />
+                
+                <TextView android:id="@+id/tv_ticket_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tv_ticket_text"
+                    android:layout_centerVertical="true"
+                    android:text="摇一摇30元优惠券"
+                    android:textColor="@color/text_color_80"
+                    android:textSize="10sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"

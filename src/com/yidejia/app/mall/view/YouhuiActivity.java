@@ -22,10 +22,21 @@ import com.yidejia.app.mall.util.IHttpResp;
 public class YouhuiActivity extends BaseActivity implements OnClickListener {
 	private TextView back;// 返回
 	private ListView listview;
+	
+	private float totalPrice = 0.0f;	//总的商品价格
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
+		
+		totalPrice = getIntent().getFloatExtra("totalPrice", 0.0f);
+//		String strTotalPrice = getIntent().getStringExtra("totalPrice");
+//		try{
+//			totalPrice = Float.parseFloat(strTotalPrice);
+//		} catch(NumberFormatException e){
+//			totalPrice = 0.0f;
+//		}
+		
 		setContentView(R.layout.youhuiquan);
 		listview = (ListView) findViewById(R.id.youhuiquan_listview);
 		setActionbarConfig();
@@ -58,6 +69,7 @@ public class YouhuiActivity extends BaseActivity implements OnClickListener {
 				if(isSuccess){
 					ArrayList<Ticket> tickets = parseTickets.getTickets();
 					IntegerAdapter adapter = new IntegerAdapter(YouhuiActivity.this, tickets,"Youhuiquan");
+					adapter.setTotalPrice(totalPrice);
 					listview.setAdapter(adapter);
 				}
 			}
