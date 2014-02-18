@@ -9,6 +9,7 @@ public class Consts {
 		this.miStr = miStr;
 	}
 
+	public static final String EXIT_LOGIN = "com.yidejia.exit.login";
 	public static final String DELETE_CART = "com.yidejia.delete";
 	public static final String EXIT_APP = "com.yidejia.exit.app";
 	public static final String CHECK_UPDATE_CHANGE = "com.yidejia.check";
@@ -30,6 +31,10 @@ public class Consts {
 	public static final int CONSTACT_RESPONSE = 120;
 	public static final int CHANGE_RESPONSE = 20;
 	public static final int CHANGE_REQUEST = 150;
+	
+	public static final int YOUHUIQUAN_REQUEST = 110;//优惠券
+	public static final int YOUHUIQUAN_RESPONSE = 120;
+	
 	
 	public static final int CHANGE_ZHIFUBAO = 4;// 支付宝
 	public static final int CHANGE_WANGYE = 1;// 支付宝网页

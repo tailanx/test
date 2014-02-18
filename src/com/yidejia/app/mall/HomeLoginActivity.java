@@ -1,6 +1,5 @@
 package com.yidejia.app.mall;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,8 +32,8 @@ import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.widget.WiperSwitch;
 import com.yidejia.app.mall.widget.WiperSwitch.OnChangedListener;
 
-public class HomeLoginActivity extends HomeBaseActivity implements OnClickListener,
-		OnChangedListener {
+public class HomeLoginActivity extends HomeBaseActivity implements
+		OnClickListener, OnChangedListener {
 	private MyApplication myApplication;
 	private View view;
 	private LayoutInflater inflater;
@@ -56,21 +55,26 @@ public class HomeLoginActivity extends HomeBaseActivity implements OnClickListen
 	private String name = "";
 	private String pwd = "";
 	private String ip = "";
-	
+
+	private String saveName;
+	private String savePwd;
+	private String deflaut;// 获取默认的值
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
+		deflaut = getIntent().getExtras().getString("exit");
 		setContentView(R.layout.activity_main_fragment_layout);
-		
+
 		myApplication = (MyApplication) getApplication();
 		inflater = LayoutInflater.from(this);
 		view = inflater.inflate(R.layout.my_mall_login, null);
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
 		frameLayout.addView(view);
-		
+
 		// 设置底部
 		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
-		
+
 		// 添加头部
 		setActionBarConfigView();
 		setCurrentActivityId(5);
@@ -82,6 +86,17 @@ public class HomeLoginActivity extends HomeBaseActivity implements OnClickListen
 		consts = new Consts();
 		sp = PreferenceManager
 				.getDefaultSharedPreferences(HomeLoginActivity.this);
+
+		saveName = sp.getString("DESMI", null);
+		//
+		String basePwd = sp.getString("DESPWD", null);
+		String keyName = saveName + consts.getMiStr();
+
+		savePwd = DesUtils.decode(keyName, basePwd);
+		Log.e("info", saveName + "saveName");
+		Log.e("info", savePwd + "savePwd");
+		Log.e("info", deflaut + "deflaut");
+
 		// 设置默认选中
 		mBox = (WiperSwitch) view.findViewById(R.id.cb_my_login_checkbox);
 		mBox.setOnChangedListener(this);
@@ -99,6 +114,12 @@ public class HomeLoginActivity extends HomeBaseActivity implements OnClickListen
 				.findViewById(R.id.et_my_mall_login__edittext_account);
 		stringPassword = (EditText) view
 				.findViewById(R.id.et_my_mall_login__edittext_password);
+		
+		if (null != deflaut && Consts.EXIT_LOGIN.equals(deflaut)
+				&& null != saveName && !"".equals(saveName)) {
+			stringName.setText(saveName);
+			stringPassword.setText(savePwd);
+		}
 		// 优化登录账号密码焦点获取
 		LinearLayout login_acount = (LinearLayout) view
 				.findViewById(R.id.ll_login_acount);
@@ -127,7 +148,6 @@ public class HomeLoginActivity extends HomeBaseActivity implements OnClickListen
 			}
 		});
 	}
-
 
 	/**
 	 * 头部
@@ -188,7 +208,7 @@ public class HomeLoginActivity extends HomeBaseActivity implements OnClickListen
 						Toast.LENGTH_LONG).show();
 				return;
 			}
-			//登录
+			// 登录
 			login();
 			break;
 		default:
@@ -196,28 +216,27 @@ public class HomeLoginActivity extends HomeBaseActivity implements OnClickListen
 		}
 	}
 
-	/**登录操作，向服务器发送登录请求**/
-	private void login(){
+	/** 登录操作，向服务器发送登录请求 **/
+	private void login() {
 		String param = new JNICallBack().getHttp4Login(name, pwd, ip);
 		String url = new JNICallBack().HTTPURL;
 		HttpClientUtil httpClientUtil = new HttpClientUtil();
 		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
-			
+
 			@Override
 			public void success(String content) {
 				Login login = new Login();
 				boolean issuccess = login.parseLogin(content);
-				if(issuccess){	//登录成功
-					Toast.makeText(
-							HomeLoginActivity.this,
-							getResources()
-									.getString(R.string.login_success),
+				if (issuccess) { // 登录成功
+					Toast.makeText(HomeLoginActivity.this,
+							getResources().getString(R.string.login_success),
 							Toast.LENGTH_LONG).show();
-					Intent intent = new Intent(HomeLoginActivity.this, HomeMyMallActivity.class);
+					Intent intent = new Intent(HomeLoginActivity.this,
+							HomeMyMallActivity.class);
 					intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(intent);
 					finish();
-					
+
 					sp.edit().putString("DESMI", name).commit();
 					sp.edit().putBoolean("CHECK", true).commit();
 					String keyName = name + consts.getMiStr();
@@ -229,7 +248,8 @@ public class HomeLoginActivity extends HomeBaseActivity implements OnClickListen
 						e.printStackTrace();
 					}
 				} else {
-					Toast.makeText(HomeLoginActivity.this, login.getMsg(), Toast.LENGTH_LONG).show();
+					Toast.makeText(HomeLoginActivity.this, login.getMsg(),
+							Toast.LENGTH_LONG).show();
 					sp.edit().remove("CHECK").commit();
 					sp.edit().remove("DESMI").commit();
 					sp.edit().remove("DESPWD").commit();

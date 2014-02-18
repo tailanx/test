@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/yao_bg2"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="@string/shared_produce"
+        android:textColor="#ee0000"
+        android:textSize="20sp" >
+    </TextView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/magin_left_add_add_add"
+        android:padding="@dimen/margin_left" >
+
+        <TextView
+            android:id="@+id/tv_youhuiquan_price"
+            android:layout_width="@dimen/base_info_image"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/ticks_bg"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_youhuiquan_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_youhuiquan_price"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_marginRight="@dimen/margin_left"
+            android:layout_marginTop="@dimen/margin_left"
+            android:lines="2"
+            android:text="@string/shared_youhuiquan" />
+        <TextView
+            android:id="@+id/tv_youhuiquan_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_youhuiquan_title"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_marginTop="@dimen/actiobar_margin_top"
+            android:gravity="center_vertical"
+            android:text="@string/shared_youhuiquan_time" />
+        <TextView
+            android:id="@+id/tv_youhuiquan_time_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_youhuiquan_title"
+            android:layout_marginLeft="@dimen/actiobar_margin_top"
+            android:layout_toRightOf="@id/tv_youhuiquan_time"
+            android:layout_marginTop="@dimen/actiobar_margin_top"
+            android:gravity="center_vertical"
+            android:text="@string/shared_youhuiquan_time" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_shark_no_produce"
+        android:layout_width="@dimen/base_info_match_add"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/theme_textview_background"
+        android:contentDescription="@string/yidejia"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/shared_produce_chakan"
+        android:textColor="#ffffff" />
+
+</LinearLayout>

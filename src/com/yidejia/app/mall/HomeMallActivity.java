@@ -74,6 +74,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 	private boolean isAppFrist;	//是否为新用户第一次启动app
 	
 	private SharedPreferencesUtil util;
+	private HomeYRHView homeYRHView;
 
 //	@SuppressWarnings("deprecation")
 	@Override
@@ -122,7 +123,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 			MyApplication.getInstance().setHomeCreated(true);
 		}
 		
-		HomeYRHView homeYRHView = new HomeYRHView(this);
+		homeYRHView = new HomeYRHView(this);
 		homeYRHView.getYRHData();
 	}
 
@@ -357,7 +358,11 @@ public class HomeMallActivity extends HomeBaseActivity {
 					mPullToRefreshScrollView.onRefreshComplete();
 					return;
 				}
+				
+				homeYRHView.getYRHData();
+				
 				getMainData();
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 				Toast.makeText(HomeMallActivity.this,

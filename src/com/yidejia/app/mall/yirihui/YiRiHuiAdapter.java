@@ -113,7 +113,7 @@ public class YiRiHuiAdapter extends BaseAdapter{
 		holder.tvGoodsName.setText(goodsName);
 		
 		final String goodsPrice = yiRiHuiDatas.get(position).getGoodsPrice();
-		holder.tvPrice.setText(goodsPrice);
+		holder.tvPrice.setText(activity.getString(R.string.unit) + goodsPrice);
 		
 		final String imgUrlBig = yiRiHuiDatas.get(position).getImg1();
 		ImageLoader.getInstance().displayImage(imgUrlBig, holder.ivGoodsBig, options, animateFirstListener);

@@ -7,12 +7,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.webkit.WebView;
+import android.widget.LinearLayout;
 //import android.webkit.WebView;
 //import android.widget.ImageView;
 import android.widget.TextView;
-
-
-
 
 import com.baidu.mobstat.StatService;
 //import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -27,6 +26,7 @@ public class IntegeralActivity extends BaseActivity implements OnClickListener {
 	private TextView integeralTextView;// 积分
 	private TextView youhuiquanTexView;// 优惠券
 	private Fragment fragment;
+	private TextView shuoming;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +37,12 @@ public class IntegeralActivity extends BaseActivity implements OnClickListener {
 		// 已取消优惠券只显示积分
 		setContentView(R.layout.integeraltop);
 		setActionBar();
+		shuoming = (TextView) findViewById(R.id.integeral_edit);
+		shuoming.setOnClickListener(this);
 		fragment = IntegeralFragment.newInstance(0);
 		ft = manager.beginTransaction();
 		ft.add(R.id.fl_search_result_fragment, fragment);
-//		ft.addToBackStack("jifen");
+		// ft.addToBackStack("jifen");
 		ft.commit();
 
 	}
@@ -48,10 +50,10 @@ public class IntegeralActivity extends BaseActivity implements OnClickListener {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		
+
 	}
 
-	 /**
+	/**
 	 * 设置头部
 	 */
 	private void setActionBar() {
@@ -101,9 +103,20 @@ public class IntegeralActivity extends BaseActivity implements OnClickListener {
 				currentId = 0;
 			}
 			break;
+		case R.id.integeral_edit:// 说明
+			LinearLayout root = new LinearLayout(IntegeralActivity.this);
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+					LinearLayout.LayoutParams.MATCH_PARENT,
+					LinearLayout.LayoutParams.WRAP_CONTENT);
+			WebView webView = new WebView(IntegeralActivity.this);
+			webView.loadUrl("http://m.yidejia.com/couponrules.html");
+			webView.setLayoutParams(lp);
+			root.addView(webView);
+			setContentView(root);
+
 		}
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();

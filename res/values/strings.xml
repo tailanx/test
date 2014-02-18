@@ -343,4 +343,12 @@
     <string name="change_pay_for_zhifubao">(支付宝支付)</string>
     <string name="change_pay_for_wangye">(支付宝网页支付)</string>
     <string name="complete_qiandao">您已经签到过了</string>
+    <string name="shared_produce">恭喜您！摇到商品了！</string>
+    <string name="shared_produce_chakan">查 看</string>
+    <string name="shared_youhuiquan">仅限伊的家商城购物使用</string>
+    <string name="shared_youhuiquan_time">过期时间:</string>
+    <string name="shared_count">您今天还有</string>
+    <string name="no_count">今天的机会已经用完，明天再来玩吧</string>
+    <string name="shared_count_add">次摇一摇的机会</string>
+    <string name="youhuiquan_zekou">使用优惠折扣</string>
 </resources>

@@ -58,6 +58,30 @@
 
             <include layout="@layout/shark_show_produce" />
         </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/Re_show_produce_youhuiquan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/mall_list_padding"
+            android:layout_marginRight="@dimen/mall_list_padding"
+            android:layout_marginTop="75dp"
+            android:visibility="gone" >
+
+            <include layout="@layout/shark_youhuiquan" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/Re_show_produce_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/mall_list_padding"
+            android:layout_marginRight="@dimen/mall_list_padding"
+            android:layout_marginTop="75dp"
+            android:visibility="gone" >
+
+            <include layout="@layout/shark_produce" />
+        </RelativeLayout>
     </RelativeLayout>
 
     <ImageView
@@ -68,4 +92,34 @@
         android:contentDescription="@string/yidejia"
         android:src="@drawable/yao" />
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/margin_left" >
+
+    <TextView
+        android:id="@+id/tv_shared_sum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/shared_count"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_shared_sum_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_shared_sum"
+        android:text="@string/second"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_shared_sum_add"
+        android:text="@string/shared_count"
+        android:textColor="@color/white" />
+
+    </RelativeLayout>
 </RelativeLayout>

@@ -116,7 +116,7 @@ public class HomeYRHView {
 		tvGoodsName.setText(goodsName);
 		
 		final String goodsPrice = yiRiHuiDatas.getGoodsPrice();
-		tvPrice.setText(goodsPrice);
+		tvPrice.setText(activity.getString(R.string.unit) + goodsPrice);
 		
 		final String imgUrlBig = yiRiHuiDatas.getImg1();
 		ImageLoader.getInstance().displayImage(imgUrlBig, ivGoodsBig, options, animateFirstListener);
