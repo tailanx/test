@@ -177,7 +177,8 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 		// 微信的两个平台、Linked-In支持此字段
 		oks.setImageUrl(productInfo.getImgUrl());
 		// url仅在微信（包括好友和朋友圈）中使用
-		oks.setUrl("http://app.yidejia.com/android.html");
+		oks.setUrl("http://www.yidejia.com/acymer_" +productInfo.getUId()
+				+ ".html");
 		// appPath是待分享应用程序的本地路劲，仅在微信中使用
 		// oks.setAppPath(MainActivity.TEST_IMAGE);
 		// comment是我对这条分享的评论，仅在人人网和QQ空间使用

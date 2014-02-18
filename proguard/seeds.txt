@@ -12741,7 +12741,6 @@ com.yidejia.app.mall.R$attr: int ptrScrollingWhileRefreshingEnabled
 com.yidejia.app.mall.R$attr: int ptrShowIndicator
 com.yidejia.app.mall.R$attr: int ptrSubHeaderTextAppearance
 com.yidejia.app.mall.R$attr: int queryHint
-com.yidejia.app.mall.R$attr: int refreshViewStyle
 com.yidejia.app.mall.R$attr: int searchAutoCompleteTextView
 com.yidejia.app.mall.R$attr: int searchDropdownBackground
 com.yidejia.app.mall.R$attr: int searchResultListItemHeight
@@ -13081,7 +13080,6 @@ com.yidejia.app.mall.R$drawable: int auth_title_back
 com.yidejia.app.mall.R$drawable: int b
 com.yidejia.app.mall.R$drawable: int back1
 com.yidejia.app.mall.R$drawable: int banner_bg
-com.yidejia.app.mall.R$drawable: int bar
 com.yidejia.app.mall.R$drawable: int best_express
 com.yidejia.app.mall.R$drawable: int bg_abs_text
 com.yidejia.app.mall.R$drawable: int bg_common_btm
@@ -13128,6 +13126,8 @@ com.yidejia.app.mall.R$drawable: int coupon_tabbg_normal
 com.yidejia.app.mall.R$drawable: int dark_gray
 com.yidejia.app.mall.R$drawable: int dashed
 com.yidejia.app.mall.R$drawable: int daysbg
+com.yidejia.app.mall.R$drawable: int daysbg1
+com.yidejia.app.mall.R$drawable: int daysbg2
 com.yidejia.app.mall.R$drawable: int default_image1
 com.yidejia.app.mall.R$drawable: int default_image2
 com.yidejia.app.mall.R$drawable: int default_ptr_flip
@@ -13467,6 +13467,8 @@ com.yidejia.app.mall.R$drawable: R$drawable()
 com.yidejia.app.mall.R$id
 com.yidejia.app.mall.R$id: int AlipayTitle
 com.yidejia.app.mall.R$id: int Re_show_produce
+com.yidejia.app.mall.R$id: int Re_show_produce_add
+com.yidejia.app.mall.R$id: int Re_show_produce_youhuiquan
 com.yidejia.app.mall.R$id: int ScrollView01
 com.yidejia.app.mall.R$id: int ab_common_back
 com.yidejia.app.mall.R$id: int ab_common_iv_share
@@ -13615,7 +13617,6 @@ com.yidejia.app.mall.R$id: int banner_imageview
 com.yidejia.app.mall.R$id: int banner_name
 com.yidejia.app.mall.R$id: int banner_price
 com.yidejia.app.mall.R$id: int base_info_price_layout
-com.yidejia.app.mall.R$id: int body
 com.yidejia.app.mall.R$id: int both
 com.yidejia.app.mall.R$id: int bottom_textview1
 com.yidejia.app.mall.R$id: int bt_find_find_confirm_button
@@ -13874,6 +13875,7 @@ com.yidejia.app.mall.R$id: int iv_qiandao_button
 com.yidejia.app.mall.R$id: int iv_qiandao_button_day
 com.yidejia.app.mall.R$id: int iv_search_icon
 com.yidejia.app.mall.R$id: int iv_search_result_price
+com.yidejia.app.mall.R$id: int iv_shared_produce_image
 com.yidejia.app.mall.R$id: int iv_shark_back
 com.yidejia.app.mall.R$id: int iv_shopping_cart_item__imageview1
 com.yidejia.app.mall.R$id: int iv_shopping_cart_item_add
@@ -13886,8 +13888,6 @@ com.yidejia.app.mall.R$id: int iv_sxg_top
 com.yidejia.app.mall.R$id: int iv_yaoyiyao
 com.yidejia.app.mall.R$id: int iv_yaoyiyao_shou
 com.yidejia.app.mall.R$id: int iv_youhuiquan_image
-com.yidejia.app.mall.R$id: int iv_youhuiquan_image_add
-com.yidejia.app.mall.R$id: int iv_youhuiquan_image_add_add
 com.yidejia.app.mall.R$id: int jiefen
 com.yidejia.app.mall.R$id: int layout
 com.yidejia.app.mall.R$id: int layout_circle_images
@@ -13910,7 +13910,6 @@ com.yidejia.app.mall.R$id: int ll_search_result_tabhost
 com.yidejia.app.mall.R$id: int ll_wait_pay_order_linearlayout1
 com.yidejia.app.mall.R$id: int ll_wait_pay_order_linearlayout_list
 com.yidejia.app.mall.R$id: int ll_youhuiquan_right
-com.yidejia.app.mall.R$id: int ll_youhuiquan_right_add
 com.yidejia.app.mall.R$id: int load_data_fail_textview
 com.yidejia.app.mall.R$id: int logistics_details_layout
 com.yidejia.app.mall.R$id: int lv_contacts
@@ -13948,7 +13947,6 @@ com.yidejia.app.mall.R$id: int manualOnly
 com.yidejia.app.mall.R$id: int margin
 com.yidejia.app.mall.R$id: int match_goods
 com.yidejia.app.mall.R$id: int menu_frame
-com.yidejia.app.mall.R$id: int message
 com.yidejia.app.mall.R$id: int message_item_relateview
 com.yidejia.app.mall.R$id: int message_item_textview1
 com.yidejia.app.mall.R$id: int message_scrollView
@@ -14057,9 +14055,6 @@ com.yidejia.app.mall.R$id: int produce_relative1
 com.yidejia.app.mall.R$id: int produce_textview3
 com.yidejia.app.mall.R$id: int produce_textview4
 com.yidejia.app.mall.R$id: int produce_textview5
-com.yidejia.app.mall.R$id: int progress
-com.yidejia.app.mall.R$id: int progress_number
-com.yidejia.app.mall.R$id: int progress_percent
 com.yidejia.app.mall.R$id: int pullDownFromTop
 com.yidejia.app.mall.R$id: int pullFromEnd
 com.yidejia.app.mall.R$id: int pullFromStart
@@ -14348,7 +14343,13 @@ com.yidejia.app.mall.R$id: int tv_search_result_selled
 com.yidejia.app.mall.R$id: int tv_search_title
 com.yidejia.app.mall.R$id: int tv_selled_num_text
 com.yidejia.app.mall.R$id: int tv_selled_text
+com.yidejia.app.mall.R$id: int tv_shared_produce_price
+com.yidejia.app.mall.R$id: int tv_shared_produce_title
+com.yidejia.app.mall.R$id: int tv_shared_sum
+com.yidejia.app.mall.R$id: int tv_shared_sum_add
+com.yidejia.app.mall.R$id: int tv_shark_activity_guize
 com.yidejia.app.mall.R$id: int tv_shark_no_produce
+com.yidejia.app.mall.R$id: int tv_shark_no_produce_add
 com.yidejia.app.mall.R$id: int tv_shopping_cart_go_pay
 com.yidejia.app.mall.R$id: int tv_shopping_cart_gopay
 com.yidejia.app.mall.R$id: int tv_shopping_cart_item_edit_number
@@ -14359,7 +14360,9 @@ com.yidejia.app.mall.R$id: int tv_shopping_cart_item_money_price_add
 com.yidejia.app.mall.R$id: int tv_shopping_cart_item_text
 com.yidejia.app.mall.R$id: int tv_show_num_text
 com.yidejia.app.mall.R$id: int tv_show_text
-com.yidejia.app.mall.R$id: int tv_sign_count
+com.yidejia.app.mall.R$id: int tv_sign_count1
+com.yidejia.app.mall.R$id: int tv_sign_count2
+com.yidejia.app.mall.R$id: int tv_sign_count3
 com.yidejia.app.mall.R$id: int tv_test
 com.yidejia.app.mall.R$id: int tv_wait_commen_number
 com.yidejia.app.mall.R$id: int tv_wait_comment
@@ -14378,6 +14381,9 @@ com.yidejia.app.mall.R$id: int tv_youhuiquan_price_user
 com.yidejia.app.mall.R$id: int tv_youhuiquan_price_way
 com.yidejia.app.mall.R$id: int tv_youhuiquan_shiyong
 com.yidejia.app.mall.R$id: int tv_youhuiquan_start_time
+com.yidejia.app.mall.R$id: int tv_youhuiquan_time
+com.yidejia.app.mall.R$id: int tv_youhuiquan_time_add
+com.yidejia.app.mall.R$id: int tv_youhuiquan_title
 com.yidejia.app.mall.R$id: int useLogo
 com.yidejia.app.mall.R$id: int user_icon
 com.yidejia.app.mall.R$id: int user_icon_bg
@@ -14422,6 +14428,7 @@ com.yidejia.app.mall.R$id: int wgo_pay_crollView_linearlayout1
 com.yidejia.app.mall.R$id: int wrap_content
 com.yidejia.app.mall.R$id: int xiazai
 com.yidejia.app.mall.R$id: int yinlian_checkbox
+com.yidejia.app.mall.R$id: int youhuiquan_listview
 com.yidejia.app.mall.R$id: int zhifubao_checkbox
 com.yidejia.app.mall.R$id: int zhufubaowangye_checkbox
 com.yidejia.app.mall.R$id: R$id()
@@ -14480,7 +14487,6 @@ com.yidejia.app.mall.R$layout: int activity_welcome
 com.yidejia.app.mall.R$layout: int address_management
 com.yidejia.app.mall.R$layout: int address_management_item
 com.yidejia.app.mall.R$layout: int agreement_layout
-com.yidejia.app.mall.R$layout: int alert_dialog_progress
 com.yidejia.app.mall.R$layout: int alipay
 com.yidejia.app.mall.R$layout: int alipay_title
 com.yidejia.app.mall.R$layout: int all_order
@@ -14577,7 +14583,6 @@ com.yidejia.app.mall.R$layout: int phone_contact
 com.yidejia.app.mall.R$layout: int phone_number
 com.yidejia.app.mall.R$layout: int present_library
 com.yidejia.app.mall.R$layout: int produce
-com.yidejia.app.mall.R$layout: int progress_dialog
 com.yidejia.app.mall.R$layout: int pull_to_refresh_header_horizontal
 com.yidejia.app.mall.R$layout: int pull_to_refresh_header_vertical
 com.yidejia.app.mall.R$layout: int qiandao
@@ -14591,7 +14596,9 @@ com.yidejia.app.mall.R$layout: int search_empty
 com.yidejia.app.mall.R$layout: int search_list_item
 com.yidejia.app.mall.R$layout: int search_top_actionbar
 com.yidejia.app.mall.R$layout: int shark_activity_main
+com.yidejia.app.mall.R$layout: int shark_produce
 com.yidejia.app.mall.R$layout: int shark_show_produce
+com.yidejia.app.mall.R$layout: int shark_youhuiquan
 com.yidejia.app.mall.R$layout: int sherlock_spinner_dropdown_item
 com.yidejia.app.mall.R$layout: int sherlock_spinner_item
 com.yidejia.app.mall.R$layout: int shopping_cart
@@ -14612,6 +14619,7 @@ com.yidejia.app.mall.R$layout: int wait_pay_order_item
 com.yidejia.app.mall.R$layout: int yirihui
 com.yidejia.app.mall.R$layout: int yirihui_item
 com.yidejia.app.mall.R$layout: int youhuiquan
+com.yidejia.app.mall.R$layout: int youhuiquan_item
 com.yidejia.app.mall.R$layout: R$layout()
 com.yidejia.app.mall.R$raw
 com.yidejia.app.mall.R$raw: int yao
@@ -14690,6 +14698,7 @@ com.yidejia.app.mall.R$string: int commit
 com.yidejia.app.mall.R$string: int commit_compelte
 com.yidejia.app.mall.R$string: int complete
 com.yidejia.app.mall.R$string: int complete_order
+com.yidejia.app.mall.R$string: int complete_qiandao
 com.yidejia.app.mall.R$string: int confirm_install
 com.yidejia.app.mall.R$string: int confirm_install_hint
 com.yidejia.app.mall.R$string: int confirm_title
@@ -14840,6 +14849,7 @@ com.yidejia.app.mall.R$string: int neteasemicroblog
 com.yidejia.app.mall.R$string: int new_address
 com.yidejia.app.mall.R$string: int no_address_content
 com.yidejia.app.mall.R$string: int no_address_title
+com.yidejia.app.mall.R$string: int no_count
 com.yidejia.app.mall.R$string: int no_find_data
 com.yidejia.app.mall.R$string: int no_network
 com.yidejia.app.mall.R$string: int no_phone_number
@@ -14919,6 +14929,7 @@ com.yidejia.app.mall.R$string: int refresh
 com.yidejia.app.mall.R$string: int refresh_data
 com.yidejia.app.mall.R$string: int refreshing
 com.yidejia.app.mall.R$string: int regist
+com.yidejia.app.mall.R$string: int regist_argee
 com.yidejia.app.mall.R$string: int regist_complete
 com.yidejia.app.mall.R$string: int regist_false
 com.yidejia.app.mall.R$string: int regist_must
@@ -14946,6 +14957,12 @@ com.yidejia.app.mall.R$string: int share_content
 com.yidejia.app.mall.R$string: int share_failed
 com.yidejia.app.mall.R$string: int share_to
 com.yidejia.app.mall.R$string: int share_to_qzone
+com.yidejia.app.mall.R$string: int shared_count
+com.yidejia.app.mall.R$string: int shared_count_add
+com.yidejia.app.mall.R$string: int shared_produce
+com.yidejia.app.mall.R$string: int shared_produce_chakan
+com.yidejia.app.mall.R$string: int shared_youhuiquan
+com.yidejia.app.mall.R$string: int shared_youhuiquan_time
 com.yidejia.app.mall.R$string: int sharing
 com.yidejia.app.mall.R$string: int shell
 com.yidejia.app.mall.R$string: int sheng
@@ -15031,6 +15048,7 @@ com.yidejia.app.mall.R$string: int yixin
 com.yidejia.app.mall.R$string: int yixin_client_inavailable
 com.yidejia.app.mall.R$string: int yixinmoments
 com.yidejia.app.mall.R$string: int youdao
+com.yidejia.app.mall.R$string: int youhuiquan_zekou
 com.yidejia.app.mall.R$string: int yto
 com.yidejia.app.mall.R$string: int yunda
 com.yidejia.app.mall.R$string: int zhanwulishishuju
@@ -15430,6 +15448,7 @@ com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4SignCount(java.la
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4AlicSign(java.lang.String,java.lang.String,java.lang.String)
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetGold(java.lang.String,java.lang.String)
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetTicket(java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetShark(java.lang.String,java.lang.String)
 com.yidejia.app.mall.log.LogService
 com.yidejia.app.mall.log.LogService: LogService()
 com.yidejia.app.mall.msg.MsgActivity
@@ -15464,14 +15483,17 @@ com.yidejia.app.mall.phone.ContactSureActivity
 com.yidejia.app.mall.phone.ContactSureActivity: ContactSureActivity()
 com.yidejia.app.mall.phone.PhoneActivity
 com.yidejia.app.mall.phone.PhoneActivity: PhoneActivity()
+com.yidejia.app.mall.photoview.PhotoView
+com.yidejia.app.mall.photoview.PhotoView: PhotoView(android.content.Context,android.util.AttributeSet)
+com.yidejia.app.mall.photoview.PhotoView: PhotoView(android.content.Context,android.util.AttributeSet,int)
 com.yidejia.app.mall.qiandao.QiandaoActivity
 com.yidejia.app.mall.qiandao.QiandaoActivity: QiandaoActivity()
 com.yidejia.app.mall.search.SearchActivity
 com.yidejia.app.mall.search.SearchActivity: SearchActivity()
 com.yidejia.app.mall.search.SearchResultActivity
 com.yidejia.app.mall.search.SearchResultActivity: SearchResultActivity()
-com.yidejia.app.mall.shark.TestSharkActivity
-com.yidejia.app.mall.shark.TestSharkActivity: TestSharkActivity()
+com.yidejia.app.mall.shark.SharkActivity
+com.yidejia.app.mall.shark.SharkActivity: SharkActivity()
 com.yidejia.app.mall.shiplog.CheckActivity
 com.yidejia.app.mall.shiplog.CheckActivity: CheckActivity()
 com.yidejia.app.mall.skintest.SkinHomeActivity
@@ -15480,6 +15502,8 @@ com.yidejia.app.mall.skintest.SkinQuesActivity
 com.yidejia.app.mall.skintest.SkinQuesActivity: SkinQuesActivity()
 com.yidejia.app.mall.skintest.SkinResultAcitivity
 com.yidejia.app.mall.skintest.SkinResultAcitivity: SkinResultAcitivity()
+com.yidejia.app.mall.tickets.IntegeralActivity
+com.yidejia.app.mall.tickets.IntegeralActivity: IntegeralActivity()
 com.yidejia.app.mall.view.ChangePayActivity
 com.yidejia.app.mall.view.ChangePayActivity: ChangePayActivity()
 com.yidejia.app.mall.view.ExchangeFreeActivity
@@ -15488,12 +15512,14 @@ com.yidejia.app.mall.view.GoCartActivity
 com.yidejia.app.mall.view.GoCartActivity: GoCartActivity()
 com.yidejia.app.mall.view.ImagePagerActivity
 com.yidejia.app.mall.view.ImagePagerActivity: ImagePagerActivity()
-com.yidejia.app.mall.view.IntegeralActivity
-com.yidejia.app.mall.view.IntegeralActivity: IntegeralActivity()
 com.yidejia.app.mall.view.LoginActivity
 com.yidejia.app.mall.view.LoginActivity: LoginActivity()
 com.yidejia.app.mall.view.NOProduceActivity
 com.yidejia.app.mall.view.NOProduceActivity: NOProduceActivity()
+com.yidejia.app.mall.view.ViewPagerActivity
+com.yidejia.app.mall.view.ViewPagerActivity: ViewPagerActivity()
+com.yidejia.app.mall.view.YouhuiActivity
+com.yidejia.app.mall.view.YouhuiActivity: YouhuiActivity()
 com.yidejia.app.mall.wheelview.WheelDemo
 com.yidejia.app.mall.wheelview.WheelView
 com.yidejia.app.mall.wheelview.WheelView: WheelView(android.content.Context,android.util.AttributeSet,int)
