@@ -188,7 +188,7 @@
         <!--
              <activity
             android:name="com.yidejia.app.mall.view.NewAddressActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" />
         -->
         <activity
             android:name="com.yidejia.app.mall.EditorActivity"
@@ -205,7 +205,9 @@
         <activity
             android:name="com.yidejia.app.mall.pay.CstmPayActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="stateHidden|adjustResize"
+             />
+        <!-- android:windowSoftInputMode="adjustPan" -->
         <activity
             android:name="com.yidejia.app.mall.shiplog.CheckActivity"
             android:screenOrientation="portrait" />

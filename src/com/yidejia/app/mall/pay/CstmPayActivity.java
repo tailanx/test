@@ -48,6 +48,8 @@ import com.yidejia.app.mall.model.Specials;
 import com.yidejia.app.mall.order.ParseOrder;
 import com.yidejia.app.mall.util.ActivityIntentUtil;
 import com.yidejia.app.mall.util.Consts;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.util.PayUtil;
 import com.yidejia.app.mall.view.ExchangeFreeActivity;
 import com.yidejia.app.mall.view.LoginActivity;
@@ -70,6 +72,7 @@ public class CstmPayActivity extends BaseActivity {
 	private EditText et_comment;// 评论
 	private AlertDialog dialog;
 	private RelativeLayout addressRelative;
+	private RelativeLayout rlTicket;
 	
 	private RelativeLayout rl_peisong;	//选择配送中心的layout
 	
@@ -111,6 +114,11 @@ public class CstmPayActivity extends BaseActivity {
 	
 	private boolean isCanPay = false;	//所有数据都获取成功，可以点击支付按钮
 	private String tickId = "0";
+	private boolean isCanHuanGou = true;
+	private boolean isCanTicket = true;
+//	private boolean isYRH = false;
+	
+	private String ruleId = "";
 	
 //	private ProgressDialog mProgress = null;
 //	
@@ -146,6 +154,10 @@ public class CstmPayActivity extends BaseActivity {
 			Intent intent = getIntent();
 			Bundle bundle = intent.getExtras();
 			goodsPrice = bundle.getFloat("price");
+			isCanHuanGou = bundle.getBoolean("canHuanGou", true);
+			isCanTicket = bundle.getBoolean("canTicket", true);
+//			isYRH = bundle.getBoolean("isYRH", false);
+			ruleId = bundle.getString("ruleId");
 			carts = (ArrayList<Cart>) intent.getSerializableExtra("carts");
 			isCartActivity = intent.getStringExtra("cartActivity");
 
@@ -201,7 +213,8 @@ public class CstmPayActivity extends BaseActivity {
 							getResources().getString(R.string.cancel), null)
 					.create();
 			
-			getCredit();
+			if(isCanHuanGou)
+				getCredit();
 			
 			postMethod = getResources().getString(R.string.ship_post);
 			
@@ -390,6 +403,10 @@ public class CstmPayActivity extends BaseActivity {
 				go2Delivery();
 			}
 		});
+		
+		rlTicket = (RelativeLayout) findViewById(R.id.go_shopping_use_evalution);
+		if(!isCanTicket) rlTicket.setVisibility(View.GONE);
+		
 //		reLayout = (RelativeLayout) findViewById(R.id.go_pay_relative);
 		addressRelative = (RelativeLayout) findViewById(R.id.go_pay_relativelayout);
 		
@@ -557,6 +574,11 @@ public class CstmPayActivity extends BaseActivity {
 							AlicPayUtil util = new AlicPayUtil(CstmPayActivity.this);
 							util.getAlicPay(userId, token, orderCode);
 						}
+						
+						if(!TextUtils.isEmpty(ruleId)){
+							updateYRH(ruleId);
+						}
+						
 					} else {
 						String errResult = parseOrder.getErrResult();
 						if(TextUtils.isEmpty(errResult)) return;
@@ -572,6 +594,22 @@ public class CstmPayActivity extends BaseActivity {
 				Toast.makeText(CstmPayActivity.this, getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 			}
 			
+		});
+	}
+	
+	private void updateYRH(String rule_id){
+		String url = new JNICallBack().HTTPURL;
+		String param = new JNICallBack().getHttp4UpdateYiRiHui(rule_id);
+		Log.e("system.out", url + "?" + param);
+		
+		HttpClientUtil httpClientUtil = new HttpClientUtil();
+		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
+			
+			@Override
+			public void success(String content) {
+				Log.e("system.out", content);
+				
+			}
 		});
 	}
 	

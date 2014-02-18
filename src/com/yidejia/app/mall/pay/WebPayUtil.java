@@ -55,7 +55,7 @@ public class WebPayUtil {
 			ActivityIntentUtil.intentActivityAndFinish(activity, AllOrderActivity.class);
 			return false;
 		} else if(url.contains("failure")){
-			ActivityIntentUtil.intentActivityAndFinish(activity, WaitPayActivity.class);
+			ActivityIntentUtil.intentActivityAndFinish(activity, AllOrderActivity.class);
 			return false;
 		}
 		return true;

@@ -97,6 +97,7 @@
                         android:layout_toRightOf="@id/go_pay_address"
                         android:paddingBottom="@dimen/margin_left_more"
                         android:paddingTop="@dimen/margin_left_more"
+                        android:paddingRight="@dimen/margin_left_more"
                         android:textColor="@color/text_color_80"
                         android:textSize="14sp" />
                 </RelativeLayout>

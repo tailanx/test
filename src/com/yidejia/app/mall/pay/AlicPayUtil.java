@@ -129,11 +129,12 @@ public class AlicPayUtil {
 									R.drawable.ic_launcher,
 									android.R.string.ok, paySuccessListener,
 									-1, null);
-
+							ActivityIntentUtil.intentActivityAndFinish(
+									activity, AllOrderActivity.class);
 							StatService.onEventDuration(activity, "alicpaysuccess", "alicpaysuccess", 100);
 						} else if (tradeStatus.equals("6001")) {
 							ActivityIntentUtil.intentActivityAndFinish(
-									activity, WaitPayActivity.class);
+									activity, AllOrderActivity.class);
 							StatService.onEventDuration(activity, "alicpaycancel", "alicpaycancel", 100);
 							return;
 						} else if (tradeStatus.equals("6002")) {
@@ -200,7 +201,7 @@ public class AlicPayUtil {
 		public void onClick(DialogInterface dialog, int which) {
 			// go2WaitPayOrder();
 			ActivityIntentUtil.intentActivityAndFinish(activity,
-					WaitPayActivity.class);
+					AllOrderActivity.class);
 		}
 	};
 }

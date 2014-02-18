@@ -10,6 +10,7 @@ import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.HomeMyMallActivity;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.order.AllOrderActivity;
 import com.yidejia.app.mall.order.WaitPayActivity;
 import com.yidejia.app.mall.util.ActivityIntentUtil;
 
@@ -32,7 +33,7 @@ public class WebPayActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				ActivityIntentUtil.intentActivityAndFinish(WebPayActivity.this, WaitPayActivity.class);
+				ActivityIntentUtil.intentActivityAndFinish(WebPayActivity.this, AllOrderActivity.class);
 			}
 		});
 		
@@ -44,7 +45,7 @@ public class WebPayActivity extends BaseActivity {
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			ActivityIntentUtil.intentActivityAndFinish(WebPayActivity.this, HomeMyMallActivity.class);
+			ActivityIntentUtil.intentActivityAndFinish(WebPayActivity.this, AllOrderActivity.class);
 			return true;
 		}
 		return super.onKeyUp(keyCode, event);
