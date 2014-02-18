@@ -169,7 +169,7 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 				+ ".html");
 		// text是分享文本，所有平台都需要这个字段
 		oks.setText(getResources().getString(R.string.share_content)+productInfo.getName()
-				+ "http://www.yidejia.com/acymer_" 
+				+ "http://www.yidejia.com/acymer_" +productInfo.getUId()
 				+ ".html");
 		// imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
 		// oks.setImagePath(MainActivity.TEST_IMAGE);
@@ -177,7 +177,8 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 		// 微信的两个平台、Linked-In支持此字段
 		oks.setImageUrl(productInfo.getImgUrl());
 		// url仅在微信（包括好友和朋友圈）中使用
-		oks.setUrl("http://app.yidejia.com/android.html");
+		oks.setUrl("http://www.yidejia.com/acymer_" +productInfo.getUId()
+				+ ".html");
 		// appPath是待分享应用程序的本地路劲，仅在微信中使用
 		// oks.setAppPath(MainActivity.TEST_IMAGE);
 		// comment是我对这条分享的评论，仅在人人网和QQ空间使用

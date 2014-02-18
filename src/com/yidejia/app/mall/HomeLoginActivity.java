@@ -93,9 +93,6 @@ public class HomeLoginActivity extends HomeBaseActivity implements
 		String keyName = saveName + consts.getMiStr();
 
 		savePwd = DesUtils.decode(keyName, basePwd);
-		Log.e("info", saveName + "saveName");
-		Log.e("info", savePwd + "savePwd");
-		Log.e("info", deflaut + "deflaut");
 
 		// 设置默认选中
 		mBox = (WiperSwitch) view.findViewById(R.id.cb_my_login_checkbox);

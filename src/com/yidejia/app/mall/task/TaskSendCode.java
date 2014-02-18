@@ -52,7 +52,6 @@ public class TaskSendCode {
 					httpResp = sendMsg.getHttpResp(phone, code);
 					boolean isSuccess = sendMsg.analysisHttpResp(httpResp);
 					response = sendMsg.getResponse();
-					Log.e("info", response);
 					return isSuccess;
 				} catch (TimeOutEx e) {
 					// TODO Auto-generated catch block
