@@ -23,6 +23,7 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.cache.CleanImageCache;
 import com.yidejia.app.mall.ctrl.Check4Update;
 import com.yidejia.app.mall.datamanage.DataCleanManager;
+import com.yidejia.app.mall.util.Consts;
 
 public class EditorActivity extends BaseActivity {
 	private RelativeLayout help;
@@ -200,6 +201,9 @@ public class EditorActivity extends BaseActivity {
 
 								Intent intent = new Intent(EditorActivity.this,
 										HomeLoginActivity.class);
+								Bundle bundle = new Bundle();
+								bundle.putString("exit", Consts.EXIT_LOGIN);
+								intent.putExtras(bundle);
 								EditorActivity.this.startActivity(intent);
 								EditorActivity.this.finish();
 							}

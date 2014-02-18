@@ -9,6 +9,7 @@ public class Consts {
 		this.miStr = miStr;
 	}
 
+	public static final String EXIT_LOGIN = "com.yidejia.exit.login";
 	public static final String DELETE_CART = "com.yidejia.delete";
 	public static final String EXIT_APP = "com.yidejia.exit.app";
 	public static final String CHECK_UPDATE_CHANGE = "com.yidejia.check";
