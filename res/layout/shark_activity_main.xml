@@ -99,27 +99,27 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/margin_left" >
 
-    <TextView
-        android:id="@+id/tv_shared_sum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/shared_count"
-        android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/tv_shared_sum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/shared_count"
+            android:textColor="@color/white" />
 
-    <TextView
-        android:id="@+id/tv_shared_sum_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/tv_shared_sum"
-        android:text="@string/second"
-        android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/tv_shared_sum_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_shared_sum"
+            android:text="@string/second"
+            android:textColor="@color/white" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/tv_shared_sum_add"
-        android:text="@string/shared_count"
-        android:textColor="@color/white" />
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_shared_sum_add"
+            android:text="@string/shared_count_add"
+            android:textColor="@color/white" />
     </RelativeLayout>
+
 </RelativeLayout>

@@ -28,13 +28,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-                    android:textColor="@color/text_color_80"
-        
         android:layout_marginTop="10dp"
         android:layout_toLeftOf="@+id/exchange_produce_item_right"
         android:layout_toRightOf="@id/exchange_produce_item__imageview1"
         android:ellipsize="end"
         android:lines="2"
+        android:textColor="@color/text_color_80"
         android:textSize="15sp" />
 
     <TextView
@@ -71,7 +70,7 @@
 
     <RelativeLayout
         android:id="@+id/exchange_produce_item_relative"
-        android:layout_width="@dimen/yirihui"
+        android:layout_width="@dimen/head_height"
         android:layout_height="wrap_content"
         android:layout_below="@id/exchange_produce_item_money_text"
         android:layout_marginBottom="@dimen/actiobar_margin_top"
@@ -97,16 +96,14 @@
 
         <TextView
             android:id="@+id/exchange_produce_item_edit_number"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/margin_top_car"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/exchange_produce_item_subtract"
             android:layout_alignTop="@id/exchange_produce_item_subtract"
-            android:layout_marginLeft="@dimen/white_bg_padding"
+            android:layout_marginLeft="@dimen/margin_left_add"
             android:layout_toRightOf="@id/exchange_produce_item_subtract"
             android:background="@drawable/main_cart_textview_bg"
-            android:paddingBottom="@dimen/margin_left_add"
-            android:paddingLeft="@dimen/margin_left"
-            android:paddingRight="@dimen/margin_left"
+            android:gravity="center"
             android:text="@string/hour" />
     </RelativeLayout>
 
