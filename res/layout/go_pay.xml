@@ -655,7 +655,7 @@
                     android:layout_centerVertical="true"
                     
                         android:textColor="@color/text_color_80"
-                    android:text="使用优惠折扣"
+                    android:text="使用优惠抵扣"
                     android:textSize="15sp" />
 
                 <ImageView
