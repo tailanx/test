@@ -465,7 +465,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 
 	/** 清除购物车数据 **/
 	private void cleanCart() {
-		if (isCartActivity.equals("Y")) {// ；来自购物车
+		if ("Y".equals(isCartActivity)) {// ；来自购物车
 			// 删除购物车的商品
 			CartsDataManage cartsDataManage = new CartsDataManage();
 			int length = carts.size();
