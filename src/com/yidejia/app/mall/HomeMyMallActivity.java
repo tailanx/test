@@ -56,6 +56,8 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 
 	private ImageView head;// 头像
 	private MyApplication myApplication;
+	
+	private String headUrl = "";	//头像url
 
 	private ImageLoadingListener animateFirstListener;
 	private DisplayImageOptions options;
@@ -176,10 +178,7 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 		aidouRelative.setOnClickListener(this);
 		head = (ImageView) view
 				.findViewById(R.id.iv_person_shopping_image_person);
-		ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
 		
-		ImageLoader.getInstance().displayImage(myApplication.getUserHeadImg(), head, options, animateFirstListener);
-		head.setOnClickListener(this);// 图像
 		nick = (TextView) view
 				.findViewById(R.id.tv_person_shopping_person_name);// 昵称
 
@@ -286,6 +285,15 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 			vip.setText("VIP0");
 		} else {
 			vip.setText(vip1);
+		}
+		
+		String imgUrl = myApplication.getUserHeadImg();
+		if(!imgUrl.equals(headUrl)){
+			ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
+			
+			ImageLoader.getInstance().displayImage(myApplication.getUserHeadImg(), head, options, animateFirstListener);
+			head.setOnClickListener(this);// 图像
+			headUrl = imgUrl;
 		}
 	}
 

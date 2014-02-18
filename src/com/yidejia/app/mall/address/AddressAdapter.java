@@ -3,8 +3,9 @@ package com.yidejia.app.mall.address;
 //import java.io.IOException;
 import java.util.ArrayList;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.apache.http.HttpStatus;
+//import org.json.JSONException;
+//import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -109,7 +110,7 @@ public class AddressAdapter extends BaseAdapter {
 //		Log.e("info", temp + "  get  temp");
 		final ViewHolder holder;
 
-		if (convertView == null) {
+//		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.address_management_item,
 					null);
 			holder = new ViewHolder();
@@ -128,10 +129,10 @@ public class AddressAdapter extends BaseAdapter {
 			holder.editImageView = (TextView) convertView
 					.findViewById(R.id.address_management_item_relative1_textview2);
 			
-			convertView.setTag(holder);
-		} else {
-			holder = (ViewHolder) convertView.getTag();
-		}
+//			convertView.setTag(holder);
+//		} else {
+//			holder = (ViewHolder) convertView.getTag();
+//		}
 
 		final ModelAddresses addresses = mAddresses.get(position);
 		final AlertDialog dialog = new Builder(activity)
@@ -195,8 +196,14 @@ public class AddressAdapter extends BaseAdapter {
 
 		holder.cb.setId(position);// 对checkbox的id进行重新设置为当前的position
 		if (addresses.getDefaultAddress()) {
-			position = temp;
+//			position = temp;
+			temp = position;
+			Editor editor = sp.edit();
+			editor.putInt("stateCBId", temp);
+			editor.commit();
+			holder.cb.setChecked(true);
 		} else {
+			holder.cb.setChecked(false);
 		}
 //		if(!holder.cb.isChecked())
 		holder.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -224,14 +231,15 @@ public class AddressAdapter extends BaseAdapter {
 					 // }
 					setDefAddress(buttonView, addresses);
 				} else {
+					holder.cb.setChecked(true);
 				}
 			}
 		});
 
-		if (position == temp)// 比对position和当前的temp是否一致
-			holder.cb.setChecked(true);
-		else
-			holder.cb.setChecked(false);
+//		if (position == temp)// 比对position和当前的temp是否一致
+//			holder.cb.setChecked(true);
+//		else
+//			holder.cb.setChecked(false);
 		if(requestCode == Consts.AddressRequestCode) {
 			convertView.setOnClickListener(new OnClickListener() {
 				
@@ -464,7 +472,17 @@ public class AddressAdapter extends BaseAdapter {
 					@Override
 					public void onSuccess(int statusCode, String content) {
 						super.onSuccess(statusCode, content);
-						JSONObject httpResultObject;
+						
+						if(HttpStatus.SC_OK == statusCode) {
+							ParseAddressJson parseAddressJson = new ParseAddressJson();
+							if(!parseAddressJson.parseSetDefault(content)){
+								return;
+							} 
+							mAddresses.remove(addresses);
+							notifyDataSetChanged();
+						}
+						
+						/*JSONObject httpResultObject;
 						if (content != null && !"".equals(content)) {
 							try {
 								httpResultObject = new JSONObject(content);
@@ -487,7 +505,7 @@ public class AddressAdapter extends BaseAdapter {
 
 						} else {
 							return;
-						}
+						}*/
 
 					}
 
@@ -514,6 +532,11 @@ public class AddressAdapter extends BaseAdapter {
 			public void onError(Throwable error, String content) {
 				super.onError(error, content);
 				isTimeout = true;
+				temp = buttonView.getId();
+				CheckBox tempCheckBox = (CheckBox) activity
+						.findViewById(temp);
+				if (tempCheckBox != null)
+					tempCheckBox.setChecked(false);
 			}
 
 			@Override
@@ -539,7 +562,19 @@ public class AddressAdapter extends BaseAdapter {
 			@Override
 			public void onSuccess(int statusCode, String content) {
 				super.onSuccess(statusCode, content);
-				if (statusCode == AsyncHttpResponse.SUCCESS) {
+				if (statusCode == HttpStatus.SC_OK) {
+					
+					ParseAddressJson parseAddressJson = new ParseAddressJson();
+					if(!parseAddressJson.parseSetDefault(content)) {
+						temp = buttonView.getId();
+						CheckBox tempCheckBox = (CheckBox) activity
+								.findViewById(temp);
+						if (tempCheckBox != null)
+							tempCheckBox.setChecked(false);
+						return;
+					}
+					
+					temp = sp.getInt("stateCBId", -1);
 					if (temp != -1) {
 						// 找到上次点击的checkbox,并把它设置为false,对重新选择时可以将以前的关掉
 						Log.e("info", temp+"temp");
@@ -547,13 +582,20 @@ public class AddressAdapter extends BaseAdapter {
 								.findViewById(temp);
 						if (tempCheckBox != null)
 							tempCheckBox.setChecked(false);
+						else Log.e("info", "null");
+						mAddresses.get(temp).setDefaultAddress(false);
 					}
 					if (buttonView != null) {
 						temp = buttonView.getId();// 保存当前选中的checkbox的id值
-
+						mAddresses.get(temp).setDefaultAddress(true);
+						Editor editor = sp.edit();
+						editor.putInt("stateCBId", temp);
+						editor.commit();
 					}
+					notifyDataSetChanged();
 				}
 			}
 		});
 	}
+	
 }

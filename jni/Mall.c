@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-//static char *url = "http://192.168.1.254:802/";
+//static char *url = "http://192.168.1.254/";
 //char *strTemp = "ChunTianfw_mobile123456";
 char *url = "http://fw1.atido.net/";
 char *strTemp = "ChunTianfw_mobile@SDF!TD#DF#*CB$GER@";
@@ -1487,7 +1487,7 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 //ship_type , ship_entity_name, goods_qty_scr,comments, token, ����post
 jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveOrder(JNIEnv* env,
 		jobject thiz, jstring customer_id, jstring ticket_id, jstring recipient_id, jstring pingou_id, jstring goods_ascore,
-		jstring ship_fee, jstring ship_type, jstring ship_entity_name, jstring goods_qty_scr, jstring comments, jstring pay_type, jstring token){
+		jstring ship_fee, jstring ship_type, jstring ship_entity_name, jstring goods_qty_scr, jstring comments, jstring pay_type, jstring token, jstring device){
 	char *chcustomer_id = (*env)->GetStringUTFChars(env, customer_id, NULL);
 	char *chticket_id = (*env)->GetStringUTFChars(env, ticket_id, NULL);
 	char *chrecipient_id = (*env)->GetStringUTFChars(env, recipient_id, NULL);
@@ -1500,6 +1500,7 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 	char *chcomments = (*env)->GetStringUTFChars(env, comments, NULL);
 	char *chpay_type = (*env)->GetStringUTFChars(env, pay_type, NULL);
 	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chdevice = (*env)->GetStringUTFChars(env, device, NULL);
 
 	char encrypt[LEN], urlString[LEN];
 	encrypt[0] = 0;
@@ -1531,6 +1532,8 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 	if(chcomments != NULL)addString(urlString, chcomments);
 	addString(urlString, "&pay_type=");
 	if(chpay_type != NULL)addString(urlString, chpay_type);
+	addString(urlString, "&device_type=");
+	if(chdevice != NULL)addString(urlString, chdevice);
 	addString(urlString, "&token=");
 	if(chtoken != NULL)addString(urlString, chtoken);
 
@@ -3282,6 +3285,105 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 	addString(urlString, "&sign=");
 	addString(encrypt, strTemp);
 	addString(encrypt, "active.shake.save");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetYiRiHui(JNIEnv* env,
+		jobject thiz, jstring type, jstring offset, jstring limit, jstring sort){//
+
+	char *chtype = (*env)->GetStringUTFChars(env, type, NULL);
+	char *choffset = (*env)->GetStringUTFChars(env, offset, NULL);
+	char *chlimit = (*env)->GetStringUTFChars(env, limit, NULL);
+	char *chsort = (*env)->GetStringUTFChars(env, sort, NULL);
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+	char *api="api=active.yirihui.getYrhList";
+	addString(urlString, api);
+
+	addString(urlString, "&type=");
+	if(chtype != NULL)addString(urlString, chtype);
+	addString(urlString, "&offset=");
+	if(choffset != NULL)addString(urlString, choffset);
+	addString(urlString, "&limit=");
+	if(chlimit != NULL)addString(urlString, chlimit);
+	addString(urlString, "&sort=");
+	if(chsort != NULL)addString(urlString, chsort);
+
+	addString(urlString, pHead);
+
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
+
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "active.yirihui.getYrhList");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4UpdateYiRiHui(JNIEnv* env,
+		jobject thiz, jstring ruleId){//
+
+	char *chRuleId = (*env)->GetStringUTFChars(env, ruleId, NULL);
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+	char *api="api=active.yirihui.updateLaveTotal";
+	addString(urlString, api);
+
+	addString(urlString, "&rule_id=");
+	if(chRuleId != NULL)addString(urlString, chRuleId);
+
+	addString(urlString, pHead);
+
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
+
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "active.yirihui.updateLaveTotal");
 	addString(encrypt, chtime);
 
 	MD5_CTX md5;

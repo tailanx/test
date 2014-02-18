@@ -76,7 +76,7 @@ public class LoginTask{
 				String httpresp;
 				try {
 					httpresp = login.getHttpResponse(name, pwd, ip);
-					boolean issuccess = login.analysisHttpResp(context,
+					boolean issuccess = login.parseLogin(
 							httpresp);
 					message = login.getMsg();
 					return issuccess;

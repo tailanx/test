@@ -64,7 +64,7 @@ public class TaskLoginAct {
 				String httpresp;
 				try {
 					httpresp = login.getHttpResponse(username, password, ip);
-					boolean issuccess = login.analysisHttpResp(activity, httpresp);
+					boolean issuccess = login.parseLogin(httpresp);
 					message = login.getMsg();
 					return issuccess;
 				} catch (TimeOutEx e) {

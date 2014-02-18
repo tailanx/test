@@ -27,6 +27,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.opens.asyncokhttpclient.AsyncHttpResponse;
 import com.opens.asyncokhttpclient.AsyncOkHttpClient;
+import com.yidejia.app.mall.ctrl.HomeYRHView;
 import com.yidejia.app.mall.favorite.MyCollectActivity;
 import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.jni.JNICallBack;
@@ -72,6 +73,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 	private boolean isAppFrist; // 是否为新用户第一次启动app
 
 	private SharedPreferencesUtil util;
+	private HomeYRHView homeYRHView;
 
 	// @SuppressWarnings("deprecation")
 	@Override
@@ -118,6 +120,9 @@ public class HomeMallActivity extends HomeBaseActivity {
 			getMainData();
 			MyApplication.getInstance().setHomeCreated(true);
 		}
+		
+		homeYRHView = new HomeYRHView(this);
+		homeYRHView.getYRHData();
 	}
 
 	/** 获取首页数据 **/
@@ -350,7 +355,11 @@ public class HomeMallActivity extends HomeBaseActivity {
 					mPullToRefreshScrollView.onRefreshComplete();
 					return;
 				}
+				
+				homeYRHView.getYRHData();
+				
 				getMainData();
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 				Toast.makeText(HomeMallActivity.this,

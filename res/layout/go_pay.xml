@@ -97,6 +97,7 @@
                         android:layout_toRightOf="@id/go_pay_address"
                         android:paddingBottom="@dimen/margin_left_more"
                         android:paddingTop="@dimen/margin_left_more"
+                        android:paddingRight="@dimen/margin_left_more"
                         android:textColor="@color/text_color_80"
                         android:textSize="14sp" />
                 </RelativeLayout>
@@ -655,7 +656,7 @@
                     android:layout_centerVertical="true"
                     
                         android:textColor="@color/text_color_80"
-                    android:text="使用优惠抵扣"
+                    android:text="使用优惠折扣"
                     android:textSize="15sp" />
 
                 <ImageView
@@ -725,7 +726,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/margin_left"
-            android:background="@drawable/theme_textview_background"
+            android:background="@drawable/bg_pay_selector"
             android:padding="@dimen/margin_left"
             android:text="@string/go_pay_show_pay_commit"
             android:textColor="@color/white" />

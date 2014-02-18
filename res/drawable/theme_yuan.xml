@@ -8,9 +8,8 @@
         android:right="@dimen/margin_left_add_add"
         android:top="@dimen/margin_left_add_add" />
 
-    <stroke
-        android:width="@dimen/above_offset"
-        android:color="@color/theme" />
+    <corners android:radius="5dp" />
+
 
     <solid android:color="@color/theme" />
 

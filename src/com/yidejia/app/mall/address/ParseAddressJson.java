@@ -129,4 +129,16 @@ public class ParseAddressJson {
 	public String getIsSuccessString() {
 		return isSuccessString;
 	}
+	
+	/**解析设置默认地址**/
+	public boolean parseSetDefault(String content){
+		try {
+			JSONObject httpJsonObject = new JSONObject(content);
+			int code = httpJsonObject.optInt("code");
+			if(1 == code) return true;
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }

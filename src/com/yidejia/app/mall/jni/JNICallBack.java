@@ -101,7 +101,7 @@ public class JNICallBack {
 			String ticket_id, String recipient_id, String pingou_id,
 			String goods_ascore, String ship_fee, String ship_type,
 			String ship_entity_name, String goods_qty_scr, String comments,
-			String pay_type, String token);
+			String pay_type, String token, String device_type);
 
 	//获取品牌
 	public native String getHttp4GetBrand();
@@ -188,6 +188,12 @@ public class JNICallBack {
 	public native String getHttp4GetTicket(String userId, String token);
 	/**获取摇一摇数据**/
 	public native String getHttp4GetShark(String userId, String token);
+	
+	/**获取伊日惠数据**/
+	public native String getHttp4GetYiRiHui(String type, String offset, String limit, String sort);
+	
+	/**获取伊日惠数据**/
+	public native String getHttp4UpdateYiRiHui(String rule_id);
 	
 }	
 	

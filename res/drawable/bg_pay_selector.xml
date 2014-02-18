@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:state_selected="true">
+        <layer-list>
+            <item >
+            	<shape android:shape="rectangle">
+                	<corners android:radius="@dimen/margin_left_add" />
+
+                	<padding android:bottom="@dimen/actiobar_margin_left" android:left="@dimen/margin_left_add" android:right="@dimen/margin_left_add" android:top="@dimen/actiobar_margin_left" />
+
+                	<stroke android:width="@dimen/above_offset" android:color="@color/theme" />
+
+                	<solid android:color="@color/theme" />
+            	</shape>
+            </item>
+        </layer-list>
+    </item>
+    <item>
+        <layer-list>
+            
+			<item >
+			    <shape android:shape="rectangle">
+                	<corners android:radius="@dimen/margin_left_add" />
+
+                	<padding android:bottom="@dimen/actiobar_margin_left" android:left="@dimen/margin_left_add" android:right="@dimen/margin_left_add" android:top="@dimen/actiobar_margin_left" />
+
+                	<stroke android:width="@dimen/above_offset" android:color="@color/theme" />
+
+                	<solid android:color="@color/bg_can_not_pay" />
+
+            	</shape>
+        	</item>
+		</layer-list>
+	</item>
+
+</selector>

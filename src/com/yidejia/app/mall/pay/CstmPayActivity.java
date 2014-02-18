@@ -15,7 +15,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
+//import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
@@ -48,6 +48,8 @@ import com.yidejia.app.mall.model.Specials;
 import com.yidejia.app.mall.order.ParseOrder;
 import com.yidejia.app.mall.util.ActivityIntentUtil;
 import com.yidejia.app.mall.util.Consts;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.util.PayUtil;
 import com.yidejia.app.mall.view.ExchangeFreeActivity;
 import com.yidejia.app.mall.view.LoginActivity;
@@ -71,7 +73,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 	private EditText et_comment;// 评论
 	private AlertDialog dialog;
 	private RelativeLayout addressRelative;
-	private RelativeLayout youhuiquan;// 使用优惠折扣
+	private RelativeLayout rlYouhuiquan;// 使用优惠折扣
 
 	private RelativeLayout rl_peisong; // 选择配送中心的layout
 
@@ -109,11 +111,13 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 
 	private float goodsPrice;
 	private float voucher;
-	private final String TAG = getClass().getName();
+//	private final String TAG = getClass().getName();
 
-	// private ProgressDialog mProgress = null;
-	//
-	// private String alicInfo; //支付宝客户端支付需要的字符串
+	private boolean isCanPay = false;	//所有数据都获取成功，可以点击支付按钮
+	private String tickId = "0";	//优惠券id
+	private boolean isCanHuanGou = true;		//是否可以免费换购
+	private boolean isCanTicket = true;	//是否可以使用优惠券
+	private String ruleId = "";		//伊日惠id
 
 	public static ArrayList<Specials> getArrayListFree() {
 		return arrayListFree;
@@ -144,6 +148,9 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 			Intent intent = getIntent();
 			Bundle bundle = intent.getExtras();
 			goodsPrice = bundle.getFloat("price");
+			isCanHuanGou = bundle.getBoolean("canHuanGou", true);
+			isCanTicket = bundle.getBoolean("canTicket", true);
+			ruleId = bundle.getString("ruleId");
 			carts = (ArrayList<Cart>) intent.getSerializableExtra("carts");
 			isCartActivity = intent.getStringExtra("cartActivity");
 
@@ -198,8 +205,8 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 					.setNegativeButton(
 							getResources().getString(R.string.cancel), null)
 					.create();
-
-			getCredit();
+			if(isCanHuanGou)
+				getCredit();
 
 			postMethod = getResources().getString(R.string.ship_post);
 
@@ -217,7 +224,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 	 */
 	public void setupShow() {
 		try {
-			youhuiquan = (RelativeLayout) findViewById(R.id.go_shopping_use_evalution);
+			rlYouhuiquan = (RelativeLayout) findViewById(R.id.go_shopping_use_evalution);
 			tv_sumPrice = (TextView) findViewById(R.id.go_pay_show_pay_money);
 			tv_saveOrderBtn = (TextView) findViewById(R.id.save_order_btn);
 			tv_userName = (TextView) findViewById(R.id.go_pay_name);
@@ -347,8 +354,8 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 			return;
 		try {
 			voucher = Float.parseFloat(voucherString1);
-			Log.e(TAG, voucherString1 + ":voucher and is cartact"
-					+ isCartActivity);
+//			Log.e(TAG, voucherString1 + ":voucher and is cartact"
+//					+ isCartActivity);
 		} catch (Exception e) {
 			voucherString1 = "";
 			voucher = 0.0f;
@@ -377,7 +384,9 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 
 		scv_go_pay = (ScrollView) findViewById(R.id.go_pay_scrollView);
 		setupShow();
-		youhuiquan.setOnClickListener(this);
+		rlYouhuiquan.setOnClickListener(this);
+		if(!isCanTicket) rlYouhuiquan.setVisibility(View.GONE);
+		
 		layout = (LinearLayout) findViewById(R.id.go_pay_relative2);
 
 		rl_peisong = (RelativeLayout) findViewById(R.id.rl_peisong);
@@ -408,11 +417,14 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 		PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
 		goods = pay.loadView(carts, isHuanGou);
 
+		tv_saveOrderBtn.setSelected(false);
 		// 提交订单点击事件
 		tv_saveOrderBtn.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
+				if(!isCanPay) return;
+				
 				if (!cb_yinlian.isChecked() && !cb_zhifubao.isChecked()
 						&& !cb_zhifubaowangye.isChecked()
 						&& !cb_caifutong.isChecked()) {
@@ -509,9 +521,9 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 
 		JNICallBack jniCallBack = new JNICallBack();
 		String url = jniCallBack.HTTPURL;
-		String params = jniCallBack.getHttp4SaveOrder(userId, "0", recipientId,
+		String params = jniCallBack.getHttp4SaveOrder(userId, tickId, recipientId,
 				"", jifen + "", expressNum, tmpPostMethod, tmpPeisong, goods,
-				tmpComment, pay_type, token);
+				tmpComment, pay_type, token, "android");
 
 		// Log.e("system.out", url+params);
 
@@ -529,7 +541,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 					cleanCart();
 
 					ParseOrder parseOrder = new ParseOrder(CstmPayActivity.this);
-					Log.e("system.out", content);
+//					Log.e("system.out", content);
 					if (parseOrder.parseSaveOrder(content)) {
 						orderCode = parseOrder.getOrderCode();
 						tn = parseOrder.getTn();
@@ -557,6 +569,11 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 									CstmPayActivity.this);
 							util.getAlicPay(userId, token, orderCode);
 						}
+						
+						if(!TextUtils.isEmpty(ruleId)){
+							updateYRH(ruleId);
+						}
+						
 					} else {
 						String errResult = parseOrder.getErrResult();
 						if (TextUtils.isEmpty(errResult))
@@ -576,6 +593,22 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 						.show();
 			}
 
+		});
+	}
+	
+	private void updateYRH(String rule_id){
+		String url = new JNICallBack().HTTPURL;
+		String param = new JNICallBack().getHttp4UpdateYiRiHui(rule_id);
+//		Log.e("system.out", url + "?" + param);
+		
+		HttpClientUtil httpClientUtil = new HttpClientUtil();
+		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
+			
+			@Override
+			public void success(String content) {
+//				Log.e("system.out", content);
+				
+			}
 		});
 	}
 
@@ -720,6 +753,8 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 						if (null != distributions && distributions.size() != 0) {
 							peiSongCenter = distributions.get(0).getDisName();
 							tv_peiSong.setText(peiSongCenter);
+							isCanPay = true;
+							tv_saveOrderBtn.setSelected(true);
 						} else {
 							// TODO
 							Toast.makeText(CstmPayActivity.this,
@@ -812,6 +847,9 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 							preId = expressArray.get(0).getPreId();
 							if (isDefault) {
 								getDeliveryPoint(isDefault);
+							} else {
+								isCanPay = true;
+								tv_saveOrderBtn.setSelected(true);
 							}
 						} else {
 							// TODO
@@ -821,7 +859,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 						}
 					} else {
 						// TODO
-						Log.e("system.out", content);
+//						Log.e("system.out", content);
 						Toast.makeText(CstmPayActivity.this,
 								getString(R.string.bad_network),
 								Toast.LENGTH_LONG).show();
@@ -1104,9 +1142,13 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 				&& resultCode == Consts.AddressResponseCode) {
 			ModelAddresses addresses1 = (ModelAddresses) data.getExtras()
 					.getSerializable("addresses1");
-			Log.i("info", addresses1.getAddress() + "str");
+//			Log.i("info", addresses1.getAddress() + "str");
 			if (addresses1 != null) {
 				setAdd(addresses1);
+				if(null != tv_saveOrderBtn) {
+					isCanPay = false;
+					tv_saveOrderBtn.setSelected(false);
+				}
 				// 获取邮费
 				getExpressData(addresses1.getProvice(), true);
 			}
@@ -1129,12 +1171,18 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 			preId = delivery.getPreId();
 			if (isFree)
 				return;
-			getExpressData(province, false);
+			if(!TextUtils.isEmpty(province)) {
+				if(null != tv_saveOrderBtn) {
+					isCanPay = false;
+					tv_saveOrderBtn.setSelected(false);
+				}
+				getExpressData(province, false);
+			}
 		} else if (Consts.YOUHUIQUAN_REQUEST == requestCode
 				&& Consts.YOUHUIQUAN_RESPONSE == resultCode) {//使用优惠权的返回值
 			String youhuiData = data.getExtras().getString("youhuiquan");
-			if (null != youhuiData || "".equals(youhuiquan)) {
-				Log.e("info", youhuiquan + "");
+			if (null != youhuiData || "".equals(rlYouhuiquan)) {
+//				Log.e("info", rlYouhuiquan + "");
 			}
 		}
 	}

@@ -1,6 +1,8 @@
 package com.yidejia.app.mall.util;
 
 import android.annotation.SuppressLint;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -24,5 +26,23 @@ public class TimeUtil {
 	
 	public static String convertMill(long mill){
 		return convert(mill, "yyyy-MM-dd HH:mm:ss");
+	}
+	
+	@SuppressLint("SimpleDateFormat")
+	public static long stringToTimestamp(String strDate) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date d;
+		try {
+
+			d = sdf.parse(strDate);
+			long l = d.getTime();
+//			String str = String.valueOf(l);
+//			String re_time = str.substring(0, 10);
+			return l / 1000;
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 }

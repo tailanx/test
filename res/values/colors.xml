@@ -47,5 +47,6 @@
 	<color name="integer_green">#4aae32</color>
 	<color name="integer_orange">#FB6A00</color>
 	<color name="bg">#EEEEEE</color>
+	<color name="bg_can_not_pay">#b4b4b4</color>
 	
 </resources>

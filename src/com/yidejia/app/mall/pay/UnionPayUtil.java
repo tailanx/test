@@ -65,7 +65,7 @@ public class UnionPayUtil {
         } else if (str.equalsIgnoreCase("cancel")) {
         	StatService.onEventDuration(activity, "unionpay cancel", "unionpay cancel", 100);
             
-            ActivityIntentUtil.intentActivityAndFinish(activity, WaitPayActivity.class);
+            ActivityIntentUtil.intentActivityAndFinish(activity, AllOrderActivity.class);
             return;
         }
 
@@ -97,7 +97,7 @@ public class UnionPayUtil {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
-                   ActivityIntentUtil.intentActivityAndFinish(activity, WaitPayActivity.class);
+                   ActivityIntentUtil.intentActivityAndFinish(activity, AllOrderActivity.class);
                 }
             });
         }
