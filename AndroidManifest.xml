@@ -185,7 +185,7 @@
         <!--
              <activity
             android:name="com.yidejia.app.mall.view.NewAddressActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" />
         -->
         <activity
             android:name="com.yidejia.app.mall.EditorActivity"
@@ -361,6 +361,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.yidejia.app.mall.youhui.YouhuiGuiZeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yidejia.app.mall.shark.GuizeActivity"
             android:screenOrientation="portrait" />
 
         <service android:name="com.yidejia.app.mall.log.LogService" >
