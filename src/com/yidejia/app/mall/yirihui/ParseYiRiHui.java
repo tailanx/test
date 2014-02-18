@@ -51,6 +51,8 @@ public class ParseYiRiHui {
 				}
 				
 				return true;
+			} else if(-1 == code) {
+				return true;
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();

@@ -9,7 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.jni.JNICallBack;
@@ -41,6 +44,18 @@ public class YirihuiFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		index = getArguments() != null ? getArguments().getInt("index") : -1;
+		switch (index) {
+		case 0:	//正在进行
+			type = 0;
+			break;
+		case 1:	//即将开始
+			type = 1;
+			break;
+		case 2:	//已经结束
+			type = -1;
+		default:
+			break;
+		}
 	}
 
 	@Override
@@ -49,12 +64,19 @@ public class YirihuiFragment extends Fragment {
 		View view = inflater.inflate(R.layout.common_listview, null);
 		refreshListView = (PullToRefreshListView) view
 				.findViewById(R.id.lv_common);
+		
+		refreshListView.setOnRefreshListener(listener);
+		
 		lvYiRiHui = refreshListView.getRefreshableView();
 		yiRiHuiDatas = new ArrayList<YiRiHuiData>();
 		adapter = new YiRiHuiAdapter(getActivity(), yiRiHuiDatas);
+		if(type == 0) adapter.setCanBuy(true);
 		lvYiRiHui.setAdapter(adapter);
 		
 		getYiriHuiData();
+		
+//		updateYRH("1");
+		
 		return view;
 	}
 	
@@ -78,17 +100,66 @@ public class YirihuiFragment extends Fragment {
 					ArrayList<YiRiHuiData> tempYiRiHuiDatas = parseYiRiHui.getYiRiHuiDatas();
 					if(null != tempYiRiHuiDatas) {
 						//TODO 显示数据
-						yiRiHuiDatas.addAll(tempYiRiHuiDatas);
-						adapter.notifyDataSetChanged();
+						
+						if(0 == offset && null != yiRiHuiDatas) {
+							yiRiHuiDatas.clear();
+						}
+						if(null != yiRiHuiDatas)
+							yiRiHuiDatas.addAll(tempYiRiHuiDatas);
+						if(null != adapter)
+							adapter.notifyDataSetChanged();
+					} else {
+						Toast.makeText(getActivity(), getString(R.string.nomore), Toast.LENGTH_SHORT).show();
 					}
-				}
+				} 
 			}
 		});
 	}
+	
+	private OnRefreshListener2<ListView> listener = new OnRefreshListener2<ListView>() {
+
+		@Override
+		public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+			offset = 0;
+			getYiriHuiData();
+		}
+
+		@Override
+		public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+			offset += limit;
+			getYiriHuiData();
+		}
+	}; 
 
 	@Override
 	public void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
 	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		if (null != yiRiHuiDatas) {
+			yiRiHuiDatas.clear();
+			yiRiHuiDatas = null;
+		} 
+		if(null != adapter){
+			adapter = null;
+		}
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		if (null != yiRiHuiDatas) {
+			yiRiHuiDatas.clear();
+			yiRiHuiDatas = null;
+		}
+		if(null != adapter){
+			adapter = null;
+		}
+	}
+	
+	
 }

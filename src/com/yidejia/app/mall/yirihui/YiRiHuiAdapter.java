@@ -7,8 +7,12 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.model.Cart;
+import com.yidejia.app.mall.pay.CstmPayActivity;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +26,12 @@ public class YiRiHuiAdapter extends BaseAdapter{
 	private ArrayList<YiRiHuiData> yiRiHuiDatas;
 	private DisplayImageOptions options;
 	private ImageLoadingListener animateFirstListener;
+	private Activity activity;
+	
+	private boolean isCanBuy = false;
 
 	public YiRiHuiAdapter(Activity activity, ArrayList<YiRiHuiData> yiRiHuiDatas){
+		this.activity = activity;
 		inflater = activity.getLayoutInflater();
 		this.yiRiHuiDatas = yiRiHuiDatas;
 		
@@ -32,6 +40,13 @@ public class YiRiHuiAdapter extends BaseAdapter{
 		ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
 	}
 	
+	/**设置是否为正在进行的活动**/
+	public void setCanBuy(boolean isCanBuy) {
+		this.isCanBuy = isCanBuy;
+	}
+
+
+
 	@Override
 	public int getCount() {
 		if(null != yiRiHuiDatas) return yiRiHuiDatas.size();
@@ -77,24 +92,56 @@ public class YiRiHuiAdapter extends BaseAdapter{
 		String overTime = yiRiHuiDatas.get(position).getStartTime();
 		setTime(holder, overTime);
 		
-		String count = yiRiHuiDatas.get(position).getQuantity();
+//		String count = yiRiHuiDatas.get(position).getQuantity();
+		String totalCount = yiRiHuiDatas.get(position).getCanBuyQuantity();
+		holder.tvCount.setText(totalCount);
 		
-		String goodsName = yiRiHuiDatas.get(position).getGoodsName();
+		final String goodsId = yiRiHuiDatas.get(position).getGoodsId();
+		final String ruleId = yiRiHuiDatas.get(position).getTheId();
+		
+		final String goodsName = yiRiHuiDatas.get(position).getGoodsName();
 		holder.tvGoodsName.setText(goodsName);
 		
-		String goodsPrice = yiRiHuiDatas.get(position).getGoodsPrice();
+		final String goodsPrice = yiRiHuiDatas.get(position).getGoodsPrice();
 		holder.tvPrice.setText(goodsPrice);
 		
-		String imgUrlBig = yiRiHuiDatas.get(position).getImg1();
+		final String imgUrlBig = yiRiHuiDatas.get(position).getImg1();
 		ImageLoader.getInstance().displayImage(imgUrlBig, holder.ivGoodsBig, options, animateFirstListener);
 		
 		String imgUrlSmall = yiRiHuiDatas.get(position).getImg2();
 		ImageLoader.getInstance().displayImage(imgUrlSmall, holder.ivGoodsSmall, options, animateFirstListener);
 		
+		if(isCanBuy) {
+			holder.tvBuyNow.setSelected(true);
+			holder.tvBuyNow.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Cart cart = new Cart();
+					cart.setUId(goodsId);
+					cart.setName(goodsName);
+					
+					float price = 0.0f;
+					try {
+						price = Float.parseFloat(goodsPrice);
+					} catch (NumberFormatException e) {
+						e.printStackTrace();
+					}
+					cart.setPrice(price);
+					cart.setProductText(goodsName);
+					cart.setSalledAmmount(1);
+					cart.setScort("0.0f");
+					ArrayList<Cart> cartArray = new ArrayList<Cart>();
+					cartArray.add(cart);
+					go2Pay(price, cartArray, ruleId);
+				}
+			});
+		}
 		
 		return convertView;
 	}
 	
+	/**设置时间**/
 	private void setTime(ViewHolder holder, String overTime){
 		if (null == holder) {
 			return;
@@ -112,6 +159,21 @@ public class YiRiHuiAdapter extends BaseAdapter{
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void go2Pay(float price, ArrayList<Cart> carts, String ruleId){
+		
+			Intent intent = new Intent(activity, CstmPayActivity.class);
+			Bundle bundle = new Bundle();
+			bundle.putFloat("price", price);
+			bundle.putBoolean("canHuanGou", false);
+			bundle.putBoolean("canTicket", false);
+//			bundle.putBoolean("isYRH", true);
+			bundle.putString("ruleId", ruleId);
+			intent.putExtras(bundle);
+			intent.putExtra("carts", carts);
+			activity.startActivity(intent);
+		
 	}
 	
 	static class ViewHolder {
