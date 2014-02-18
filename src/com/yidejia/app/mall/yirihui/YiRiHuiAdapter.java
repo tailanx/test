@@ -29,6 +29,7 @@ public class YiRiHuiAdapter extends BaseAdapter{
 	private Activity activity;
 	
 	private boolean isCanBuy = false;
+	private int type = 0;	//type -1 过去 0现在 1 将来  
 
 	public YiRiHuiAdapter(Activity activity, ArrayList<YiRiHuiData> yiRiHuiDatas){
 		this.activity = activity;
@@ -43,6 +44,11 @@ public class YiRiHuiAdapter extends BaseAdapter{
 	/**设置是否为正在进行的活动**/
 	public void setCanBuy(boolean isCanBuy) {
 		this.isCanBuy = isCanBuy;
+	}
+	
+	/**type -1 过去 0现在 1 将来  **/
+	public void setType(int type){
+		this.type = type;
 	}
 
 	@Override
@@ -76,7 +82,6 @@ public class YiRiHuiAdapter extends BaseAdapter{
 			holder.tvLong = (TextView) convertView.findViewById(R.id.tv_yirihui_long);
 			holder.tvHour = (TextView) convertView.findViewById(R.id.tv_hour);
 			holder.tvMin = (TextView) convertView.findViewById(R.id.tv_min);
-			holder.tvMin = (TextView) convertView.findViewById(R.id.tv_min);
 			holder.tvSecond = (TextView) convertView.findViewById(R.id.tv_second);
 			holder.tvBuyNow = (TextView) convertView.findViewById(R.id.tv_buy_now);
 			holder.tvGoodsName = (TextView) convertView.findViewById(R.id.tv_yirihui_detail);
@@ -89,6 +94,8 @@ public class YiRiHuiAdapter extends BaseAdapter{
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
+		
+		setLongText(holder);
 		
 		if(null == yiRiHuiDatas) return convertView;
 		
@@ -177,6 +184,22 @@ public class YiRiHuiAdapter extends BaseAdapter{
 			intent.putExtra("carts", carts);
 			activity.startActivity(intent);
 		
+	}
+	
+	private void setLongText(ViewHolder holder){
+		switch (type) {
+		case 0:
+			
+			break;
+		case -1:
+			holder.tvLong.setText("已结束");
+			break;
+		case 1:
+			holder.tvLong.setText("距离开始");
+			break;
+		default:
+			break;
+		}
 	}
 	
 	static class ViewHolder {

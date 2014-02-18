@@ -28,6 +28,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.opens.asyncokhttpclient.AsyncHttpResponse;
 import com.opens.asyncokhttpclient.AsyncOkHttpClient;
+import com.yidejia.app.mall.ctrl.HomeYRHView;
 import com.yidejia.app.mall.favorite.MyCollectActivity;
 import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.jni.JNICallBack;
@@ -120,6 +121,9 @@ public class HomeMallActivity extends HomeBaseActivity {
 			getMainData();
 			MyApplication.getInstance().setHomeCreated(true);
 		}
+		
+		HomeYRHView homeYRHView = new HomeYRHView(this);
+		homeYRHView.getYRHData();
 	}
 
 	/**获取首页数据**/

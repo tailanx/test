@@ -41,8 +41,8 @@ public class ParseYiRiHui {
 					tempYRH.setQuantity(yrhObject.optString("quantity"));
 					tempYRH.setCanBuyQuantity(yrhObject.optString("can_buy_quantity"));
 					tempYRH.setOverTime(yrhObject.optString("overtime"));
-					tempYRH.setImg1(ImageUrl.IMAGEURL + yrhObject.optString("img_1"));
-					tempYRH.setImg2(ImageUrl.IMAGEURL + yrhObject.optString("img_2"));
+					tempYRH.setImg1(ImageUrl.IMAGEURL + yrhObject.optString("img_1") + "!150");
+					tempYRH.setImg2(ImageUrl.IMAGEURL + yrhObject.optString("img_2") + "!150");
 					tempYRH.setValidFlag(yrhObject.optString("valid_flag"));
 					tempYRH.setShellFlag(yrhObject.optString("shell_flag"));
 					tempYRH.setGoodsName(yrhObject.optString("goods_name"));

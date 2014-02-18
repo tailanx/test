@@ -71,6 +71,7 @@ public class YirihuiFragment extends Fragment {
 		yiRiHuiDatas = new ArrayList<YiRiHuiData>();
 		adapter = new YiRiHuiAdapter(getActivity(), yiRiHuiDatas);
 		if(type == 0) adapter.setCanBuy(true);
+		adapter.setType(type);
 		lvYiRiHui.setAdapter(adapter);
 		
 		getYiriHuiData();

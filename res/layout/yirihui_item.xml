@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -25,7 +26,6 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_left"
             android:layout_toRightOf="@id/tv_yirihui_long"
-            android:text="@string/hour"
             android:textColor="@color/theme"
             android:textSize="@dimen/textsize_small" />
 
@@ -47,7 +47,6 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_left_add"
             android:layout_toRightOf="@id/tv_hour_add_third"
-            android:text="@string/mint"
             android:textColor="@color/theme"
             android:textSize="@dimen/textsize_small" />
 
@@ -67,8 +66,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_left_add"
             android:layout_toRightOf="@id/tv_hour_add_add_third"
-            android:text="@string/second"
             android:textColor="@color/theme"
             android:textSize="@dimen/textsize_small" />
 
@@ -122,6 +121,7 @@
 
             <RelativeLayout
                 android:id="@+id/re_yirihui_left"
+                android:layout_gravity="center_vertical"
                 android:layout_width="@dimen/yirihui"
                 android:layout_height="wrap_content"
                 android:gravity="center" >
@@ -178,9 +178,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@id/tv_yirihui_count_text"
+                        android:layout_marginLeft="@dimen/margin_left_add"
                         android:background="@drawable/theme_textview_background"
                         android:layout_centerVertical="true"
-                        android:text="1"
                         android:textColor="@color/white" />
                 </RelativeLayout>
 
