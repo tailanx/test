@@ -1,15 +1,14 @@
 package com.yidejia.app.mall;
 
-import java.net.URL;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Handler.Callback;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,20 +19,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockActivity;
 import com.baidu.mobstat.StatService;
-import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.IpAddress;
-import com.yidejia.app.mall.datamanage.UserDatamanage;
-import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.task.TaskCheckCode;
 import com.yidejia.app.mall.task.TaskGetCode;
+import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.HttpClientUtil;
 import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.util.IsPhone;
 
-public class RegistActivity extends BaseActivity {
+public class RegistActivity extends BaseActivity implements Callback {
 	public Button mback;// ����
 	// private UserDatamanage userManage;
 	private EditText mZhanghao;
@@ -60,8 +56,10 @@ public class RegistActivity extends BaseActivity {
 	private HttpClientUtil client;
 	private String reponse;// 返回码信息
 	private int code;
+	private TextView daojishi;// 倒计时
 
 	private TaskCheckCode taskCheckCode;
+	private Handler handler;
 
 	private void setupShow() {
 		mZhanghao = (EditText) findViewById(R.id.et_my_mall_regist_edittext_account);
@@ -73,6 +71,8 @@ public class RegistActivity extends BaseActivity {
 		getCodeImgView = (ImageView) findViewById(R.id.iv_my_mall_regist_password_validation_button);
 		// regist_agreement = (TextView) findViewById(R.id.tv_regist_agreement);
 		protocol = (TextView) findViewById(R.id.tv_regist_agreement);
+		daojishi = (TextView) findViewById(R.id.tv_dao_jisi);
+		handler = new Handler(this);
 
 	}
 
@@ -224,8 +224,31 @@ public class RegistActivity extends BaseActivity {
 
 						@Override
 						public void success(String content) {
-							Log.e("info", content+"content");
+							Log.e("info", content + "content");
 							if (getCodeTask.parseResp(content)) {
+								getCodeImgView.setClickable(false);
+								daojishi.setVisibility(View.VISIBLE);
+								final Timer timer = new Timer();
+								timer.scheduleAtFixedRate(new TimerTask() {
+									long start = System.currentTimeMillis() + 1 * 60 * 1000;
+
+									@Override
+									public void run() {
+										long end = System.currentTimeMillis();
+										long time = (int) ((start - end) / 1000);
+										Message msg = new Message();
+										if (time > 0) {
+
+											msg.arg1 = (int) time;
+
+										} else {
+											msg.what = Consts.EMS;
+											timer.cancel();
+										}
+										handler.sendMessage(msg);
+
+									}
+								}, 0, 1000);
 								Toast.makeText(RegistActivity.this,
 										"验证码已发送到您的手机，请注意查看!", Toast.LENGTH_LONG)
 										.show();
@@ -264,6 +287,19 @@ public class RegistActivity extends BaseActivity {
 	protected void onPause() {
 		super.onPause();
 		StatService.onPageEnd(this, "注册页面");
+	}
+
+	@Override
+	public boolean handleMessage(Message msg) {
+
+		if (msg.what == Consts.EMS) {
+			daojishi.setVisibility(View.GONE);
+			getCodeImgView.setClickable(true);
+
+		} else {
+			daojishi.setText(msg.arg1 + "");
+		}
+		return false;
 	}
 
 	// private boolean parse(String content) {

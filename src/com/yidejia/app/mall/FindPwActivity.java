@@ -1,21 +1,30 @@
 package com.yidejia.app.mall;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Handler.Callback;
+import android.os.Message;
+import android.text.format.Time;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.task.TaskGetCode;
 import com.yidejia.app.mall.task.TaskReset;
+import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.HttpClientUtil;
 import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.util.IsPhone;
 
-public class FindPwActivity extends BaseActivity {
+public class FindPwActivity extends BaseActivity implements Callback {
 
 	private EditText acount_textview;
 	private EditText obtain_textView;
@@ -36,6 +45,8 @@ public class FindPwActivity extends BaseActivity {
 	private HttpClientUtil client;
 	private String reponse;// 返回码信息
 	private int code;
+	private TextView daojishi;// 倒计时
+	private Handler handler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +64,8 @@ public class FindPwActivity extends BaseActivity {
 	}
 
 	private void findIds() {
+		handler = new Handler(this);
+		daojishi = (TextView) findViewById(R.id.tv_dao_jisi);
 		acount_textview = (EditText) findViewById(R.id.et_my_mall_find_edittext_account);
 		obtain_textView = (EditText) findViewById(R.id.et_my_mall_find_obtain);
 		obtain_imageView = (ImageView) findViewById(R.id.iv_my_mall_find_password_validation_button);
@@ -110,6 +123,27 @@ public class FindPwActivity extends BaseActivity {
 						@Override
 						public void success(String content) {
 							if (getCodeTask.parseResp(content)) {
+								daojishi.setVisibility(View.VISIBLE);
+								obtain_imageView.setClickable(false);
+								final Timer timer = new Timer();
+								timer.scheduleAtFixedRate(new TimerTask() {
+									long start = System.currentTimeMillis() + 1 * 60 * 1000;
+
+									@Override
+									public void run() {
+										long end = System.currentTimeMillis();
+										long time = (start - end) / 1000;
+										Message msg = new Message();
+
+										if (time > 0) {
+											msg.arg1 = (int) time;
+										} else {
+											msg.what = Consts.GENERAL;
+											timer.cancel();
+										}
+										handler.sendMessage(msg);
+									}
+								}, 0, 1000);
 								Toast.makeText(FindPwActivity.this,
 										"验证码已发送到您的手机，请注意查看!", Toast.LENGTH_LONG)
 										.show();
@@ -178,6 +212,17 @@ public class FindPwActivity extends BaseActivity {
 		// taskReset.closeTask();
 		// if (getCodeTask != null)
 		// getCodeTask.closeTask();
+	}
+
+	@Override
+	public boolean handleMessage(Message msg) {
+		if (msg.what == Consts.GENERAL) {
+			daojishi.setVisibility(View.GONE);
+			obtain_imageView.setClickable(true);
+		} else {
+			daojishi.setText(msg.arg1 + "");
+		}
+		return false;
 	}
 
 	/*
