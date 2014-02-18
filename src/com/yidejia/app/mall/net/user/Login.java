@@ -24,7 +24,7 @@ public class Login {
 		return conn.getHttpResponse();
 	}
 	
-	public boolean analysisHttpResp(Context context, String httpResp){
+	private boolean analysisHttpResp(Context context, String httpResp){
 		boolean isSuccess = false;
 		try {
 			int code;
@@ -32,7 +32,7 @@ public class Login {
 			code = jsonObject.getInt("code");
 			String response = jsonObject.getString("response");
 			if(code == 1000){
-				MyApplication myApplication = (MyApplication) context.getApplicationContext();
+				MyApplication myApplication = MyApplication.getInstance();
 				JSONObject responseObject = new JSONObject(response);
 				String customer_id = responseObject.getString("customer_id");
 				myApplication.setUserId(customer_id);

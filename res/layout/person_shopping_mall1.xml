@@ -19,12 +19,23 @@
             android:layout_height="wrap_content"
             android:background="@drawable/mymallbg" >
 
+            
+            <LinearLayout
+                android:id="@+id/ll_wait_pay_order_linearlayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal" >
+
+                <include layout="@layout/all_order_option" />
+            </LinearLayout>
+            
             <ImageView
                 android:id="@+id/iv_person_shopping_image_person"
                 android:layout_width="@dimen/head_height"
                 android:layout_height="@dimen/head_height"
                 android:layout_marginLeft="@dimen/mall_list_padding"
-                android:layout_marginTop="@dimen/margin_top"
+                android:layout_marginTop="@dimen/magin_left_add_add_add"
                 android:background="@drawable/user_head_bg"
                 android:contentDescription="@string/yidejia"
                 android:padding="@dimen/head_padding"
@@ -32,6 +43,7 @@
 
             <TextView
                 android:id="@+id/tv_integration"
+                style="@style/StyleBarTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@id/iv_person_shopping_image_person"
@@ -39,18 +51,21 @@
                 android:layout_marginLeft="@dimen/activity_vertical_margin"
                 android:layout_toRightOf="@id/iv_person_shopping_image_person"
                 android:drawableLeft="@drawable/jifen"
+                android:paddingRight="1dp"
                 android:gravity="center"
                 android:textColor="#FFeeeeee"
                 android:textSize="@dimen/textsize_small" />
 
             <TextView
                 android:id="@+id/tv_favorites"
+                style="@style/StyleBarTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@id/iv_person_shopping_image_person"
                 android:layout_marginBottom="@dimen/head_padding"
                 android:layout_marginLeft="@dimen/activity_vertical_margin"
                 android:layout_toRightOf="@id/tv_integration"
+                android:paddingRight="1dp"
                 android:drawableLeft="@drawable/favorites2"
                 android:gravity="center"
                 android:textColor="#FFeeeeee"
@@ -58,12 +73,14 @@
 
             <TextView
                 android:id="@+id/tv_message"
+                style="@style/StyleBarTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@id/iv_person_shopping_image_person"
                 android:layout_marginBottom="@dimen/head_padding"
                 android:layout_marginLeft="@dimen/activity_vertical_margin"
                 android:layout_toRightOf="@id/tv_favorites"
+                android:paddingRight="1dp"
                 android:drawableLeft="@drawable/message"
                 android:gravity="center"
                 android:textColor="#FFeeeeee"
@@ -71,12 +88,14 @@
 
             <TextView
                 android:id="@+id/tv_person_shopping_person_vip"
+                style="@style/StyleBarTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@id/tv_integration"
-                android:layout_marginBottom="@dimen/head_padding"
+                android:layout_marginBottom="@dimen/vip_div"
                 android:layout_alignLeft="@id/tv_integration"
                 android:layout_toRightOf="@id/iv_person_shopping_image_person"
+                android:paddingRight="1dp"
                 android:drawableLeft="@drawable/vip"
                 android:gravity="center"
                 android:textColor="#FFeeeeee"
@@ -100,22 +119,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@id/tv_person_shopping_person_vip"
-                android:layout_marginBottom="@dimen/head_padding"
+                android:layout_marginBottom="@dimen/vip_div"
                 android:layout_alignLeft="@id/tv_integration"
                 android:layout_toRightOf="@id/iv_person_shopping_image_person"
+                android:paddingRight="1dp"
                 android:shadowRadius="6.0"
                 android:textColor="#FFeeeeee"
                 android:textSize="@dimen/textsize_big_big" />
 
-            <LinearLayout
-                android:id="@+id/ll_wait_pay_order_linearlayout1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:orientation="horizontal" >
-
-                <include layout="@layout/all_order_option" />
-            </LinearLayout>
         </RelativeLayout>
 
         <LinearLayout

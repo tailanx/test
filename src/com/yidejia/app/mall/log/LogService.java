@@ -95,7 +95,7 @@ public class LogService extends Service {
 				super.onSuccess(statusCode, content);
 				if (null != content && !"".equals(content)) {
 					Login login = new Login();
-					login.analysisHttpResp(getApplicationContext(), content);
+					login.parseLogin(content);
 					stopSelf();
 				} else {
 					stopSelf();

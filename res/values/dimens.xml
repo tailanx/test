@@ -59,5 +59,7 @@
     <dimen name="width_fu">-45dp</dimen>
     <!-- 消息中心item的分割距离 -->
     <dimen name="msg_div">10dp</dimen>
+    
+    <dimen name="vip_div">0dp</dimen>
 
 </resources>

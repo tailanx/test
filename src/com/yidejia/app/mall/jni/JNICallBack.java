@@ -192,5 +192,8 @@ public class JNICallBack {
 	/**获取伊日惠数据**/
 	public native String getHttp4GetYiRiHui(String type, String offset, String limit, String sort);
 	
+	/**获取伊日惠数据**/
+	public native String getHttp4UpdateYiRiHui(String rule_id);
+	
 }	
 	

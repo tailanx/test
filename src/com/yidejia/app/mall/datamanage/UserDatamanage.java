@@ -81,7 +81,7 @@ public class UserDatamanage {
 			boolean issuccess = false;
 			try {
 				String httpResponse = login.getHttpResponse(username, password, ip);
-				issuccess = login.analysisHttpResp(context, httpResponse);
+				issuccess = login.parseLogin(httpResponse);
 				message = login.getMsg();
 				return issuccess;
 			} catch (IOException e) {
