@@ -94,7 +94,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 	private String tn;// 流水号
 	private LinearLayout layout;
 	public static ArrayList<Cart> cartList;
-	private float jifen = 0;
+	private float needJifen = 0;
 	public static String voucherString1;// 积分
 	private ModelAddresses showAddress;
 	private ArrayList<FreePost> freePosts; // 免邮条件列表
@@ -107,7 +107,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 	private ArrayList<Cart> carts;// 购物车的数据，非换购的数据
 	// private RelativeLayout reLayout;
 	private String isCartActivity;
-	private String sum;
+//	private String sum;
 	private String contentType;
 
 	private float goodsPrice;
@@ -193,7 +193,8 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 									Bundle bundle = new Bundle();
 									bundle.putString("cartActivity",
 											isCartActivity);
-									bundle.putString("price", sum + "");
+//									bundle.putString("price", sum + "");
+									bundle.putFloat("price", goodsPrice);
 									intent.putExtras(bundle);
 									intent.putExtra("carts", carts);
 									intent.putExtra("voucher", voucher);
@@ -525,7 +526,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 		JNICallBack jniCallBack = new JNICallBack();
 		String url = jniCallBack.HTTPURL;
 		String params = jniCallBack.getHttp4SaveOrder(userId, tickId, recipientId,
-				"", jifen + "", expressNum, tmpPostMethod, tmpPeisong, goods,
+				"", needJifen + "", expressNum, tmpPostMethod, tmpPeisong, goods,
 				tmpComment, pay_type, token, "android");
 
 		// Log.e("system.out", url+params);
@@ -1164,7 +1165,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 			carts = (ArrayList<Cart>) data.getSerializableExtra("carts");
 
 			voucher = data.getFloatExtra("voucher", -1);
-			jifen = data.getFloatExtra("jifen", -1);
+			needJifen = data.getFloatExtra("jifen", -1);
 
 			layout.removeAllViews();
 			PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
