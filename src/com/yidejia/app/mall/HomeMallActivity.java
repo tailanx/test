@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
+import android.util.Log;
 //import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -41,6 +42,7 @@ import com.yidejia.app.mall.order.AllOrderActivity;
 import com.yidejia.app.mall.phone.PhoneActivity;
 //import com.yidejia.app.mall.util.BottomChange;
 import com.yidejia.app.mall.search.SearchActivity;
+import com.yidejia.app.mall.search.SearchResultActivity;
 import com.yidejia.app.mall.skintest.SkinHomeActivity;
 import com.yidejia.app.mall.tickets.IntegeralActivity;
 import com.yidejia.app.mall.util.DPIUtil;
@@ -48,7 +50,8 @@ import com.yidejia.app.mall.util.SharedPreferencesUtil;
 import com.yidejia.app.mall.widget.BannerView;
 import com.yidejia.app.mall.yirihui.YirihuiActivity;
 
-public class HomeMallActivity extends HomeBaseActivity {
+public class HomeMallActivity extends HomeBaseActivity implements
+		OnClickListener {
 
 	private FrameLayout frameLayout;// 填充activity的界面用的
 
@@ -64,6 +67,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 	private float suiLeftHeight;// 随心逛的商品的高
 	private float suiRightWidht;// 随心逛右边的商品的宽
 	private float suiRightHeight;// 随心逛右边的商品的高
+	private RelativeLayout layout;
 
 	// 设置大家都在买组
 	private ArrayList<MainProduct> djdzmProducts;
@@ -120,7 +124,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 			getMainData();
 			MyApplication.getInstance().setHomeCreated(true);
 		}
-		
+
 		homeYRHView = new HomeYRHView(this);
 		homeYRHView.getYRHData();
 	}
@@ -355,11 +359,11 @@ public class HomeMallActivity extends HomeBaseActivity {
 					mPullToRefreshScrollView.onRefreshComplete();
 					return;
 				}
-				
+
 				homeYRHView.getYRHData();
-				
+
 				getMainData();
-				
+
 			} catch (Exception e) {
 				e.printStackTrace();
 				Toast.makeText(HomeMallActivity.this,
@@ -404,7 +408,8 @@ public class HomeMallActivity extends HomeBaseActivity {
 	private void setDjdzmView(ArrayList<MainProduct> products) {
 		if (null == products)
 			return;
-
+		layout = (RelativeLayout) findViewById(R.id.rv_main_hot_sell_title_all_buy);
+		layout.setOnClickListener(this);
 		ImageView ivDjdzmLeft = (ImageView) findViewById(R.id.iv_djdzm_left);
 		ImageView ivDjdzmRLeft = (ImageView) findViewById(R.id.iv_djdzm_left_right);
 		ImageView ivDjdzmRRight = (ImageView) findViewById(R.id.iv_djdzm_right_right);
@@ -569,6 +574,26 @@ public class HomeMallActivity extends HomeBaseActivity {
 			Intent intent = new Intent(this, ActiveGoActivity.class);
 			intent.putExtra("url", djdzmProducts.get(index).getDetailUrl());
 			startActivity(intent);
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.rv_main_hot_sell_title_all_buy:
+			Intent intent = new Intent(HomeMallActivity.this,
+					SearchResultActivity.class);
+			Bundle bundle = new Bundle();
+			Log.e("info", "gouwuche");
+			bundle.putString("title", "全部");
+			bundle.putString("name", "");
+			bundle.putString("price", "");
+			bundle.putString("brand", "");
+			bundle.putString("fun", "");
+			intent.putExtras(bundle);
+			HomeMallActivity.this.startActivity(intent);
+			break;
+
 		}
 	}
 }

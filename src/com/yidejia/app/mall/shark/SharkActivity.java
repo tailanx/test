@@ -227,6 +227,8 @@ public class SharkActivity extends Activity implements OnClickListener,
 			break;
 
 		case R.id.tv_shark_activity_guize:// 规则
+			Intent intent1= new Intent(this, GuizeActivity.class);
+			startActivity(intent1);
 //			LinearLayout root = new LinearLayout(this);
 //			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 //					LinearLayout.LayoutParams.MATCH_PARENT,
