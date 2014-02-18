@@ -75,7 +75,7 @@ public class HomeYRHView {
 	public void getYRHData(){
 		String url = new JNICallBack().HTTPURL;
 		String param = new JNICallBack().getHttp4GetYiRiHui("0", "0", "1", "");
-		Log.e("system.out", url + "?" + param);
+//		Log.e("system.out", url + "?" + param);
 		
 		HttpClientUtil httpClientUtil = new HttpClientUtil();
 		
@@ -83,7 +83,7 @@ public class HomeYRHView {
 			
 			@Override
 			public void success(String content) {
-				Log.e("system.out", content);
+//				Log.e("system.out", content);
 //				content = "{\"code\":1,\"msg\":\"成功\",\"response\":[{\"the_id\":\"1\",\"rule_name\":\"伊日惠测试活动一\",\"begin_time\":\"2014-02-17 11:03:07\",\"end_time\":\"2014-02-18 00:00:00\",\"goods_id\":\"1590\",\"quantity\":\"1\",\"can_buy_quantity\":\"1\",\"overtime\":\"900\",\"img_1\":\"5/2014/02/17/a0acc98642b.jpg\",\"img_2\":\"8/2014/02/17/a0ac9bce227.jpg\",\"valid_flag\":\"y\",\"shell_flag\":\"y\",\"goods_name\":\"【马年活动】脱盐海泉精华\",\"goods_price\":\"50.00\"}],\"ts\":1392609753}";
 				//TODO 解析数据显示数据
 				ParseYiRiHui parseYiRiHui = new ParseYiRiHui();

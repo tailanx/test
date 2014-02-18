@@ -63,7 +63,13 @@ public class HomeLoginActivity extends HomeBaseActivity implements
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		deflaut = getIntent().getExtras().getString("exit");
+		Intent intent = getIntent();
+		if(null != intent){
+			Bundle bundle = intent.getExtras();
+			if(null != bundle){
+				deflaut = bundle.getString("exit");
+			}
+		}
 		setContentView(R.layout.activity_main_fragment_layout);
 
 		myApplication = (MyApplication) getApplication();
