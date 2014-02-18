@@ -295,7 +295,7 @@ public class OrderDetailActivity extends BaseActivity implements
 	
 	/**获取银联流水号**/
 	private void getTn(){
-		String param = new JNICallBack().getHttp4GetTn(MyApplication.getInstance().getUserId(), orderCode, MyApplication.getInstance().getToken());
+		String param = new JNICallBack().getHttp4GetTn(MyApplication.getInstance().getUserId(), orderCode, MyApplication.getInstance().getToken(), "");
 		String url = new JNICallBack().HTTPURL;
 		
 		HttpClientUtil httpClientUtil = new HttpClientUtil();

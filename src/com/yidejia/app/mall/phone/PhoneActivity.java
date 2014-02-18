@@ -1,8 +1,5 @@
 package com.yidejia.app.mall.phone;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -12,7 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.telephony.TelephonyManager;
-import android.util.Log;
+//import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -25,6 +22,7 @@ import android.widget.Toast;
 import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.recharge.ParseRecharge;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.HttpClientUtil;
 import com.yidejia.app.mall.util.IHttpResp;
@@ -45,23 +43,28 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 	private String numberContact;
 	
 	private String cardid;	//卡类id
-	private String inprice;	//所需面额
+	private double inprice;	//所需面额
 	private String game_area;	//运营商
 	private String details;	//商品信息
 	
 	private boolean isCanClick = false;
+	
+	private ParseRecharge parseRecharge;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setActionbarConfig();
 		setTitle(R.string.main_message_center_text);
+		
+		parseRecharge = new ParseRecharge();
 
 		setContentView(R.layout.phone_contact);
 
 		initview();
 		ivPhoneContact.setOnClickListener(this);
 		btCommit.setOnClickListener(this);
+		
 	}
 
 	/**
@@ -102,7 +105,7 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 		case R.id.iv_commit_phone_contace:
 			String phoneNumber = etPhoneNumber.getText().toString().trim().replace(" ", "");
 			
-			Log.e("info", phoneNumber);
+//			Log.e("info", phoneNumber);
 			//判断是不是手机号码，和非空判断
 			if (null == phoneNumber || "".equals(phoneNumber)||!IsPhone.isMobileNO(phoneNumber)) {
 				Toast.makeText(this,
@@ -114,6 +117,8 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 				intent.setClass(this, ContactSureActivity.class);
 				intent.putExtra("details", details);
 				intent.putExtra("price", inprice);
+				intent.putExtra("goodsId", cardid);
+				intent.putExtra("amount", getAmount());
 				intent.putExtra("phone", phoneNumber);
 				startActivity(intent);
 			}
@@ -143,6 +148,7 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 		isCanClick = false;
 		rlPhonePrice.setVisibility(View.INVISIBLE);
 		String handset = etPhoneNumber.getText().toString().trim();
+		handset = handset.replace(" ", "");
 		String amount = getAmount();
 		if(IsPhone.isMobileNO(handset))
 			getSimData(handset, amount);
@@ -158,13 +164,19 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 	 * @param amount 面值
 	 */
 	private void getSimData(String handset, String amount){
-		String url = "http://u.yidejia.com/index.php?m=of&c=index&a=telquery&handset="+handset + "&amount=" + amount;
+//		String url = "http://u.yidejia.com/index.php?m=of&c=index&a=telquery&handset="+handset + "&amount=" + amount;
+		String url = parseRecharge.getNeedPayUrl(handset, amount);
 		HttpClientUtil httpClientUtil = new HttpClientUtil();
 		httpClientUtil.getHttpResp(url, new IHttpResp() {
 			
 			@Override
 			public void success(String content) {
-				if(parseSim(content)){
+				
+				if(parseRecharge.parseNeedPay(content)){
+					inprice = parseRecharge.getInPrice();
+					cardid = parseRecharge.getCardid();
+					game_area = parseRecharge.getGame_area();
+					details = parseRecharge.getCardname();
 					rlPhonePrice.setVisibility(View.VISIBLE);
 					isCanClick = true;
 					tvRealPrice.setText(game_area + inprice);
@@ -173,27 +185,27 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 		});
 	}
 	
-	/**
-	 * 解析Sim信息数据
-	 * @param content
-	 */
-	private boolean parseSim(String content){
-		try {
-			JSONObject simObject = new JSONObject(content);
-			if(!"1".equals(simObject.opt("retcode"))){
-				Toast.makeText(this, simObject.optString("err_msg"), Toast.LENGTH_SHORT).show();
-			} else {
-				cardid = simObject.optString("cardid");
-				inprice = simObject.optString("inprice");
-				game_area = simObject.optString("game_area");
-				details = simObject.optString("cardname");
-				return true;
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		 return false;
-	}
+//	/**
+//	 * 解析Sim信息数据
+//	 * @param content
+//	 */
+//	private boolean parseSim(String content){
+//		try {
+//			JSONObject simObject = new JSONObject(content);
+//			if(!"1".equals(simObject.opt("retcode"))){
+//				Toast.makeText(this, simObject.optString("err_msg"), Toast.LENGTH_SHORT).show();
+//			} else {
+//				cardid = simObject.optString("cardid");
+//				inprice = simObject.optString("inprice");
+//				game_area = simObject.optString("game_area");
+//				details = simObject.optString("cardname");
+//				return true;
+//			}
+//		} catch (JSONException e) {
+//			e.printStackTrace();
+//		}
+//		 return false;
+//	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
