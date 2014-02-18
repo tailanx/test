@@ -7,7 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.yidejia.app.mall.net.ImageUrl;
-import com.yidejia.app.mall.util.TimeUtil;
 
 public class ParseYiRiHui {
 
@@ -31,11 +30,12 @@ public class ParseYiRiHui {
 					tempYRH = new YiRiHuiData();
 					tempYRH.setTheId(yrhObject.optString("the_id"));
 					tempYRH.setRuleName(yrhObject.optString("rule_name"));
-					tempYRH.setBeginTime(yrhObject.optString("begin_time"));
-					String strEndTime = yrhObject.optString("end_time");
-					tempYRH.setEndTime(strEndTime);
-					long endTime = TimeUtil.stringToTimestamp(strEndTime);
-					tempYRH.setStartTime((endTime - ts) + "");
+					tempYRH.setBeginTime(yrhObject.optLong("begin_time"));
+					long endTime = yrhObject.optLong("end_time");
+//					String strEndTime = yrhObject.optString("end_time");
+					tempYRH.setEndTime(endTime);
+					if((endTime - ts) < 0) tempYRH.setStartTime(0);
+					else tempYRH.setStartTime((endTime - ts));
 					
 					tempYRH.setGoodsId(yrhObject.optString("goods_id"));
 					tempYRH.setQuantity(yrhObject.optString("quantity"));

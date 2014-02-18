@@ -70,7 +70,7 @@ public class YirihuiActivity extends SherlockFragmentActivity {
 		imagePrice.setVisibility(View.GONE);
 		nowText.setSelected(true);
 		lastIndex = 0;
-		mFragment = new YirihuiFragment();
+		mFragment = YirihuiFragment.newInstance(0);
 		ft = manager.beginTransaction();
 		ft.add(R.id.fl_search_result_fragment, mFragment);
 		ft.commit();
@@ -88,13 +88,13 @@ public class YirihuiActivity extends SherlockFragmentActivity {
 
 		@Override
 		public void onClick(View v) {
-			mFragment = new YirihuiFragment();
 			switch (clickIndex) {
 
 			case 0:
 				if (clickIndex == lastIndex) {
 					return;
 				} else if (lastIndex == 1 || lastIndex == 2) {
+					mFragment = YirihuiFragment.newInstance(0);
 					nowText.setSelected(true);
 					laterText.setSelected(false);
 					completeText.setSelected(false);
@@ -111,6 +111,7 @@ public class YirihuiActivity extends SherlockFragmentActivity {
 				if (lastIndex == 1) {
 					return;
 				} else if (lastIndex == 0 || lastIndex == 2) {
+					mFragment = YirihuiFragment.newInstance(1);
 					laterText.setSelected(true);
 					nowText.setSelected(false);
 					completeText.setSelected(false);
@@ -125,6 +126,7 @@ public class YirihuiActivity extends SherlockFragmentActivity {
 				if (lastIndex == 2) {
 					return;
 				} else if (lastIndex == 0 || lastIndex == 1) {
+					mFragment = YirihuiFragment.newInstance(2);
 					completeText.setSelected(true);
 					nowText.setSelected(false);
 					laterText.setSelected(false);

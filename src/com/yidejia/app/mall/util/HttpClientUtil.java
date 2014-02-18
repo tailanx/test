@@ -2,8 +2,9 @@ package com.yidejia.app.mall.util;
 
 import org.apache.http.HttpStatus;
 
-import android.widget.Toast;
-
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.opens.asyncokhttpclient.AsyncHttpResponse;
 import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.opens.asyncokhttpclient.RequestParams;
@@ -11,6 +12,8 @@ import com.opens.asyncokhttpclient.RequestParams;
 public class HttpClientUtil {
 	
 	private IHttpResp iHttpResp;
+	
+	private PullToRefreshBase<?> mPullToRefreshBase;
 	
 	private AsyncHttpResponse asyncHttpResponse = new AsyncHttpResponse(){
 
@@ -24,11 +27,11 @@ public class HttpClientUtil {
 		public void onFinish() {
 			// TODO Auto-generated method stub
 			super.onFinish();
+			if(null != mPullToRefreshBase)mPullToRefreshBase.onRefreshComplete();
 		}
 
 		@Override
 		public void onSuccess(int statusCode, String content) {
-			// TODO Auto-generated method stub
 			super.onSuccess(statusCode, content);
 			if(HttpStatus.SC_OK == statusCode){
 				iHttpResp.success(content);
@@ -37,12 +40,19 @@ public class HttpClientUtil {
 
 		@Override
 		public void onError(Throwable error, String content) {
-			// TODO Auto-generated method stub
 			super.onError(error, content);
 //			Toast.makeText(activ, text, duration)
 		}
 		
 	};
+	
+	public void setPullToRefreshView(PullToRefreshListView mPullToRefreshListView){
+		this.mPullToRefreshBase = mPullToRefreshListView;
+	}
+	
+	public void setPullToRefreshView(PullToRefreshScrollView mPullToRefreshScrollView){
+		this.mPullToRefreshBase = mPullToRefreshScrollView;
+	}
 	
 	/**
 	 * 联网获取数据，get方法获取url上的数据，返回数据处理用ihttpresp回调；封装了转圈，获取数据失败等

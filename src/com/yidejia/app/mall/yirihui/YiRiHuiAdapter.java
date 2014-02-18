@@ -45,7 +45,10 @@ public class YiRiHuiAdapter extends BaseAdapter{
 		this.isCanBuy = isCanBuy;
 	}
 
-
+	@Override
+	public boolean isEnabled(int position) {
+		return false;
+	}
 
 	@Override
 	public int getCount() {
@@ -89,7 +92,7 @@ public class YiRiHuiAdapter extends BaseAdapter{
 		
 		if(null == yiRiHuiDatas) return convertView;
 		
-		String overTime = yiRiHuiDatas.get(position).getStartTime();
+		long overTime = yiRiHuiDatas.get(position).getStartTime();
 		setTime(holder, overTime);
 		
 //		String count = yiRiHuiDatas.get(position).getQuantity();
@@ -142,19 +145,19 @@ public class YiRiHuiAdapter extends BaseAdapter{
 	}
 	
 	/**设置时间**/
-	private void setTime(ViewHolder holder, String overTime){
+	private void setTime(ViewHolder holder, long overTime){
 		if (null == holder) {
 			return;
 		}
-		int time = 0;
+//		int time = 0;
 		try {
-			time = Integer.parseInt(overTime);
+//			time = Integer.parseInt(overTime);
 			
-			int second = time % 60;
+			int second = (int)overTime % 60;
 			holder.tvSecond.setText(second + "");
-			int min = (time / 60) % 60;
+			int min = (int)(overTime / 60) % 60;
 			holder.tvMin.setText(min + "");
-			int hour = time / 3600;
+			int hour = (int)overTime / 3600;
 			holder.tvHour.setText(hour + "");
 		} catch (NumberFormatException e) {
 			e.printStackTrace();

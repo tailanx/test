@@ -4,8 +4,8 @@ public class YiRiHuiData {
 
 	private String theId;
 	private String ruleName;
-	private String beginTime;
-	private String endTime;
+	private long beginTime;
+	private long endTime;
 	private String goodsId;
 	private String quantity;
 	private String canBuyQuantity;
@@ -16,7 +16,7 @@ public class YiRiHuiData {
 	private String shellFlag;
 	private String goodsName;
 	private String goodsPrice;
-	private String startTime;
+	private long startTime;
 	
 	public String getTheId() {
 		return theId;
@@ -30,16 +30,16 @@ public class YiRiHuiData {
 	public void setRuleName(String ruleName) {
 		this.ruleName = ruleName;
 	}
-	public String getBeginTime() {
+	public long getBeginTime() {
 		return beginTime;
 	}
-	public void setBeginTime(String beginTime) {
+	public void setBeginTime(long beginTime) {
 		this.beginTime = beginTime;
 	}
-	public String getEndTime() {
+	public long getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(String endTime) {
+	public void setEndTime(long endTime) {
 		this.endTime = endTime;
 	}
 	public String getGoodsId() {
@@ -102,10 +102,10 @@ public class YiRiHuiData {
 	public void setGoodsPrice(String goodsPrice) {
 		this.goodsPrice = goodsPrice;
 	}
-	public String getStartTime() {
+	public long getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(String startTime) {
+	public void setStartTime(long startTime) {
 		this.startTime = startTime;
 	}
 	
