@@ -169,7 +169,7 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 				+ ".html");
 		// text是分享文本，所有平台都需要这个字段
 		oks.setText(getResources().getString(R.string.share_content)+productInfo.getName()
-				+ "http://www.yidejia.com/acymer_" 
+				+ "http://www.yidejia.com/acymer_" +productInfo.getUId()
 				+ ".html");
 		// imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
 		// oks.setImagePath(MainActivity.TEST_IMAGE);
