@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
-import android.util.Log;
 //import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -57,9 +56,9 @@ public class HomeMallActivity extends HomeBaseActivity {
 	private BannerView bannerView;
 
 	private PullToRefreshScrollView mPullToRefreshScrollView;
-	
+
 	private int screenWidth;
-//	private int screenHeight;
+	// private int screenHeight;
 	private float suiLeftWidth;// 随心逛的商品的宽
 	private float suiLeftHeight;// 随心逛的商品的高
 	private float suiRightWidht;// 随心逛右边的商品的宽
@@ -70,19 +69,19 @@ public class HomeMallActivity extends HomeBaseActivity {
 	// 设置随心逛组
 	private ArrayList<MainProduct> sxgProducts;
 
-	private boolean isAppFrist;	//是否为新用户第一次启动app
-	
+	private boolean isAppFrist; // 是否为新用户第一次启动app
+
 	private SharedPreferencesUtil util;
 
-//	@SuppressWarnings("deprecation")
+	// @SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		isAppFrist = getIntent().getBooleanExtra("isFirstStart", false);
-		
+
 		util = new SharedPreferencesUtil(this);
-		
+
 		setContentView(R.layout.activity_main_fragment_layout);
 		// 实例化组件
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
@@ -95,43 +94,43 @@ public class HomeMallActivity extends HomeBaseActivity {
 
 		setActionBar();
 		setCurrentActivityId(0);
-//		WindowManager manager = getWindowManager();
-//		Display display = manager.getDefaultDisplay();
-//		screenWidth = display.getHeight();
-//		screenHeight = (int) ((screenWidth / 320f) * 160f) - 250;
+		// WindowManager manager = getWindowManager();
+		// Display display = manager.getDefaultDisplay();
+		// screenWidth = display.getHeight();
+		// screenHeight = (int) ((screenWidth / 320f) * 160f) - 250;
 		screenWidth = DPIUtil.getWidth();
-		
-		
-		suiLeftWidth = (float)(screenWidth / 334F * 165);
-		
+
+		suiLeftWidth = (float) (screenWidth / 334F * 165);
+
 		suiLeftHeight = (float) suiLeftWidth * (165 / 162F);
 
 		suiRightWidht = ((float) screenWidth / 334F * 169);
 		suiRightHeight = (float) suiLeftHeight / 2;
-		
+
 		GetHomePage getHomePage = new GetHomePage();
 		String content = util.getData("home", "data", "");
-		
+
 		if (getHomePage.parseGetHomeJson(content)) {
 			loadView(getHomePage);
 		}
-		
-		if(!MyApplication.getInstance().isHomeCreated()){
+
+		if (!MyApplication.getInstance().isHomeCreated()) {
 			getMainData();
 			MyApplication.getInstance().setHomeCreated(true);
 		}
 	}
 
-	/**获取首页数据**/
+	/** 获取首页数据 **/
 	private void getMainData() {
-		//判断是否连接网络
-		if(!ConnectionDetector.isConnectingToInternet(this)) {
-			if(isAppFrist){
-				Toast.makeText(this, getString(R.string.no_network), Toast.LENGTH_SHORT).show();
+		// 判断是否连接网络
+		if (!ConnectionDetector.isConnectingToInternet(this)) {
+			if (isAppFrist) {
+				Toast.makeText(this, getString(R.string.no_network),
+						Toast.LENGTH_SHORT).show();
 			}
 			return;
 		}
-		
+
 		String url = new JNICallBack().getHttp4GetHome();
 
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
@@ -157,7 +156,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 					GetHomePage getHomePage = new GetHomePage();
 					if (getHomePage.parseGetHomeJson(content)) {
 						util.saveData("home", "data", content);
-						
+
 						loadView(getHomePage);
 					} else {
 						Toast.makeText(HomeMallActivity.this,
@@ -188,16 +187,13 @@ public class HomeMallActivity extends HomeBaseActivity {
 
 		});
 	}
-	
-	private void loadView(GetHomePage getHomePage){
+
+	private void loadView(GetHomePage getHomePage) {
 		// 设置轮播的组
-		ArrayList<BaseProduct> bannerProducts = getHomePage
-				.getBannerArray();
-		bannerView = new BannerView(bannerProducts,
-				HomeMallActivity.this);
+		ArrayList<BaseProduct> bannerProducts = getHomePage.getBannerArray();
+		bannerView = new BannerView(bannerProducts, HomeMallActivity.this);
 		bannerViewGroup.removeAllViews();
-		bannerViewGroup.addView(bannerView
-				.getMainListFirstItem());
+		bannerViewGroup.addView(bannerView.getMainListFirstItem());
 		bannerView.startTimer();
 		djdzmProducts = getHomePage.getDjdzmArray();
 		setDjdzmView(djdzmProducts);
@@ -281,7 +277,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				if(isLogin()) {
+				if (isLogin()) {
 					Intent intent = new Intent(HomeMallActivity.this,
 							PhoneActivity.class);
 					HomeMallActivity.this.startActivity(intent);
@@ -294,7 +290,8 @@ public class HomeMallActivity extends HomeBaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				if(!isLogin()) return;
+				if (!isLogin())
+					return;
 				Intent intentOrder = new Intent(HomeMallActivity.this,
 						MsgActivity.class);
 				HomeMallActivity.this.startActivity(intentOrder);
@@ -405,12 +402,11 @@ public class HomeMallActivity extends HomeBaseActivity {
 		ivDjdzmLeft.setOnClickListener(new ToucheOnclick(0, 0));
 		ivDjdzmRLeft.setOnClickListener(new ToucheOnclick(0, 1));
 		ivDjdzmRRight.setOnClickListener(new ToucheOnclick(0, 2));
-		
 
 		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-				(int)suiLeftWidth, (int)suiLeftHeight);
+				(int) suiLeftWidth, (int) suiLeftHeight);
 		RelativeLayout.LayoutParams rightLp = new RelativeLayout.LayoutParams(
-				(int)suiRightWidht, (int)suiRightHeight);
+				(int) suiRightWidht, (int) suiRightHeight);
 		ivDjdzmLeft.setLayoutParams(lp);
 		ivDjdzmRLeft.setLayoutParams(rightLp);
 		ivDjdzmRRight.setLayoutParams(rightLp);
@@ -436,7 +432,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 		ImageView ivSxgLeft = (ImageView) findViewById(R.id.iv_sxg_left);
 		ImageView ivSxgRUp = (ImageView) findViewById(R.id.iv_sxg_right_up);
 		ImageView ivSxgRDown = (ImageView) findViewById(R.id.iv_sxg_right_down);
-		
+
 		ivSxgTop.setOnClickListener(new ToucheOnclick(1, 0));
 		ivSxgLeft.setOnClickListener(new ToucheOnclick(1, 1));
 		ivSxgRUp.setOnClickListener(new ToucheOnclick(1, 2));
@@ -445,11 +441,12 @@ public class HomeMallActivity extends HomeBaseActivity {
 		int length = products.size();
 
 		float sxgTopHeight = (screenWidth / 320F * 150);
-		LayoutParams layoutParams = new LayoutParams(screenWidth, (int)sxgTopHeight);
+		LayoutParams layoutParams = new LayoutParams(screenWidth,
+				(int) sxgTopHeight);
 		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-				(int)suiLeftWidth, (int)suiLeftHeight);
+				(int) suiLeftWidth, (int) suiLeftHeight);
 		RelativeLayout.LayoutParams rightLp = new RelativeLayout.LayoutParams(
-				(int)suiRightWidht, (int)suiRightHeight);
+				(int) suiRightWidht, (int) suiRightHeight);
 		ivSxgLeft.setLayoutParams(lp);
 
 		ivSxgRUp.setLayoutParams(rightLp);
@@ -459,8 +456,7 @@ public class HomeMallActivity extends HomeBaseActivity {
 		ivSxgTop.setLayoutParams(layoutParams);
 
 		if (length > 0)
-			Log.e("info", products.get(0).getImgUrl());
-		imageload(products.get(0).getImgUrl(), ivSxgTop);
+			imageload(products.get(0).getImgUrl(), ivSxgTop);
 
 		if (length > 1)
 			imageload(products.get(1).getImgUrl(), ivSxgLeft);
@@ -549,10 +545,12 @@ public class HomeMallActivity extends HomeBaseActivity {
 			}
 		}
 	}
-	
-	private void djdzmOnclick(int index, ArrayList<MainProduct> djdzmProducts){
-		boolean isGoods = !(TextUtils.isEmpty(djdzmProducts.get(index).getUId()) || "0".equals(djdzmProducts.get(index).getUId()));
-		if(isGoods){
+
+	private void djdzmOnclick(int index, ArrayList<MainProduct> djdzmProducts) {
+		boolean isGoods = !(TextUtils
+				.isEmpty(djdzmProducts.get(index).getUId()) || "0"
+				.equals(djdzmProducts.get(index).getUId()));
+		if (isGoods) {
 			Intent intent = new Intent(this, GoodsInfoActivity.class);
 			Bundle bundle = new Bundle();
 			bundle.putString("goodsId", djdzmProducts.get(index).getUId());

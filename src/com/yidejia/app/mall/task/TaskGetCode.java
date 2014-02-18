@@ -15,34 +15,35 @@ import com.yidejia.app.mall.net.user.GetCode;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class TaskGetCode {
-	
+
 	private Activity activity;
-	
+
 	private String name;
-	
+
 	private Task task;
 	private TaskSendCode taskSendCode;
-	
-	public TaskGetCode(Activity activity){
+
+	public TaskGetCode(Activity activity) {
 		this.activity = activity;
 	}
-	
-	public void getCode(String name){
+
+	public void getCode(String name) {
 		this.name = name;
-		if(task != null && task.getStatus().RUNNING == AsyncTask.Status.RUNNING){
+		if (task != null
+				&& task.getStatus().RUNNING == AsyncTask.Status.RUNNING) {
 			task.cancel(true);
 		}
-		
+
 		task = new Task();
 		task.execute();
 	}
-	
+
 	private boolean isTimeout = false;
-	
-	private class Task extends AsyncTask<Void, Void, Boolean>{
+
+	private class Task extends AsyncTask<Void, Void, Boolean> {
 
 		private ProgressDialog bar;
-		
+
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// TODO Auto-generated method stub
@@ -63,7 +64,7 @@ public class TaskGetCode {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 			return false;
 		}
 
@@ -71,11 +72,11 @@ public class TaskGetCode {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-//			bar = new ProgressDialog(activity);
-//			bar.setCancelable(true);
-//			bar.setMessage(activity.getResources().getString(R.string.loading));
-//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//			bar.show();
+			// bar = new ProgressDialog(activity);
+			// bar.setCancelable(true);
+			// bar.setMessage(activity.getResources().getString(R.string.loading));
+			// bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			// bar.show();
 			bar = (ProgressDialog) new YLProgressDialog(activity)
 					.createLoadingDialog(activity, null);
 			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -92,7 +93,7 @@ public class TaskGetCode {
 		protected void onPostExecute(Boolean result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			if(result){
+			if (result) {
 				TaskSendCode taskSendCode = new TaskSendCode(activity, bar);
 				taskSendCode.sendMsg(name, regCode + "");
 			} else {
@@ -107,24 +108,24 @@ public class TaskGetCode {
 				bar.dismiss();
 			}
 		}
-		
+
 	}
-	
-	
+
 	private int regCode;
-	
-	public int getRegCode(){
+
+	public int getRegCode() {
 		return regCode;
 	}
-	
-	public void closeTask(){
-		if(task != null && task.getStatus().RUNNING == AsyncTask.Status.RUNNING){
+
+	public void closeTask() {
+		if (task != null
+				&& task.getStatus().RUNNING == AsyncTask.Status.RUNNING) {
 			task.cancel(true);
 		}
-		
-		if(taskSendCode != null) {
+
+		if (taskSendCode != null) {
 			taskSendCode.closeTask();
 		}
 	}
-	
+
 }
