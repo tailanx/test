@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yidejia.app.mall.R;
@@ -62,6 +63,8 @@ public class IntegerAdapter extends BaseAdapter {
 			convertView = LayoutInflater.from(context).inflate(
 					R.layout.youhuiquan_item, null);
 			holder = new ViewHolder();
+			holder.layout = (RelativeLayout) convertView
+					.findViewById(R.id.iv_youhuiquan_image);
 			holder.price = (TextView) convertView
 					.findViewById(R.id.tv_youhuiquan_price);
 			holder.content = (TextView) convertView
@@ -74,36 +77,53 @@ public class IntegerAdapter extends BaseAdapter {
 					.findViewById(R.id.tv_youhuiquan_end_time);
 			holder.mustUser = (TextView) convertView
 					.findViewById(R.id.tv_youhuiquan_must);
-			if (null != type || !"".equals(type)) {
+			if (null != type && !"".equals(type) && "Youhuiquan".equals(type)) {
 				holder.mustUser = (TextView) convertView
 						.findViewById(R.id.tv_youhuiquan_must);
 				holder.mustUser.setVisibility(View.VISIBLE);
 
 				convertView.setTag(holder);
-			} else {
-				holder = (ViewHolder) convertView.getTag();
+			} else{
+				holder.mustUser.setVisibility(View.GONE);
 			}
-			final Ticket ticket = list.get(position);
-			holder.price.setText("￥" + ticket.getMoney());
-			holder.content.setText(ticket.getComments());
-			holder.kind.setText(ticket.getName());
-			holder.startTime.setText(TimeUtil.converDate(Long.parseLong(ticket
-					.getBeginDate())));
-			holder.endTime.setText(TimeUtil.converDate(Long.parseLong(ticket
-					.getEndDate())));
-			holder.mustUser.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(context, CstmPayActivity.class);
-					Bundle bundle = new Bundle();
-					bundle.putString("youhuiquan", ticket.getMoney());
-					intent.putExtras(bundle);
-					context.setResult(Consts.YOUHUIQUAN_RESPONSE, intent);
-					context.finish();
-				}
-			});
+			convertView.setTag(holder);
+		} else {
+			holder = (ViewHolder) convertView.getTag();
 		}
+		final Ticket ticket = list.get(position);
+		if ("10".equals(ticket.getMoney())) {
+			holder.layout.setBackgroundColor(context.getResources().getColor(
+					R.color.integer_green));
+		} else if ("20".equals(ticket.getMoney())) {
+			holder.layout.setBackgroundColor(context.getResources().getColor(
+					R.color.integer_bule));
+		} else if ("30".equals(ticket.getMoney())) {
+			holder.layout.setBackgroundColor(context.getResources().getColor(
+					R.color.integer_orange));
+		} else {
+			holder.layout.setBackgroundColor(context.getResources().getColor(
+					R.color.integer_other));
+		}
+		holder.price.setText("￥" + ticket.getMoney());
+		holder.content.setText(ticket.getComments());
+		holder.kind.setText(ticket.getName());
+		holder.startTime.setText(TimeUtil.converDate(Long.parseLong(ticket
+				.getBeginDate())));
+		holder.endTime.setText(TimeUtil.converDate(Long.parseLong(ticket
+				.getEndDate())));
+		holder.mustUser.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(context, CstmPayActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putString("youhuiquan", ticket.getMoney());
+				intent.putExtras(bundle);
+				context.setResult(Consts.YOUHUIQUAN_RESPONSE, intent);
+				context.finish();
+			}
+		});
+
 		return convertView;
 	}
 
@@ -115,6 +135,7 @@ public class IntegerAdapter extends BaseAdapter {
 		private TextView startTime;// 开始时间
 		private TextView endTime;// 结束时间
 		private TextView mustUser;// 立即使用
+		private RelativeLayout layout;
 	}
 
 }

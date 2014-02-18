@@ -1,14 +1,13 @@
 package com.yidejia.app.mall.tickets;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
-import android.webkit.WebView;
-import android.widget.LinearLayout;
+import android.view.Window;
 //import android.webkit.WebView;
 //import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +17,7 @@ import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.BaseActivity;
 //import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
+import com.yidejia.app.mall.youhui.YouhuiGuiZeActivity;
 
 public class IntegeralActivity extends BaseActivity implements OnClickListener {
 	private FragmentManager manager;
@@ -104,15 +104,17 @@ public class IntegeralActivity extends BaseActivity implements OnClickListener {
 			}
 			break;
 		case R.id.integeral_edit:// 说明
-			LinearLayout root = new LinearLayout(IntegeralActivity.this);
-			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-					LinearLayout.LayoutParams.MATCH_PARENT,
-					LinearLayout.LayoutParams.WRAP_CONTENT);
-			WebView webView = new WebView(IntegeralActivity.this);
-			webView.loadUrl("http://m.yidejia.com/couponrules.html");
-			webView.setLayoutParams(lp);
-			root.addView(webView);
-			setContentView(root);
+			Intent intent = new Intent(this,YouhuiGuiZeActivity.class);
+			startActivity(intent);
+//			LinearLayout root = new LinearLayout(IntegeralActivity.this);
+//			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+//					LinearLayout.LayoutParams.MATCH_PARENT,
+//					LinearLayout.LayoutParams.WRAP_CONTENT);
+//			WebView webView = new WebView(IntegeralActivity.this);
+//			webView.loadUrl("http://m.yidejia.com/couponrules.html");
+//			webView.setLayoutParams(lp);
+//			root.addView(webView);
+//			setContentView(root);
 
 		}
 	}

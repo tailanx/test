@@ -352,4 +352,6 @@
     <string name="shared_count_add">次摇一摇的机会</string>
     <string name="youhuiquan_zekou">使用优惠折扣</string>
     <string name="regist_argee">同意</string>
+    <string name="youhui_guize">优惠券使用规则</string>
+    <string name="no_youhuiquan">亲，您还没有优惠券</string>
 </resources>

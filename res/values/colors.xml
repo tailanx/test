@@ -36,17 +36,18 @@
     <color name="order_cor">#68573b</color>
     <!-- 80文字色值 -->
     <color name="text_color_80">#505050</color>
-	<color name="text_press_color">#ffb4c8</color>
-	<!-- 200色值 -->
-	<color name="line_color">#DCDCDC</color>
-	<!-- 120文字色值 -->
-	<color name="text_color_120">#787878</color>
-	<!-- 40色值 -->
-	<color name="text_color_40">#282828</color>
-	<color name="integer_bule">#1987DC</color>
-	<color name="integer_green">#4aae32</color>
-	<color name="integer_orange">#FB6A00</color>
-	<color name="bg">#EEEEEE</color>
-	<color name="bg_can_not_pay">#b4b4b4</color>
-	
+    <color name="text_press_color">#ffb4c8</color>
+    <!-- 200色值 -->
+    <color name="line_color">#DCDCDC</color>
+    <!-- 120文字色值 -->
+    <color name="text_color_120">#787878</color>
+    <!-- 40色值 -->
+    <color name="text_color_40">#282828</color>
+    <color name="integer_bule">#1987DC</color>
+    <color name="integer_green">#4aae32</color>
+    <color name="integer_orange">#FB6A00</color>
+    <color name="integer_other">#ED3587</color>
+    <color name="bg">#EEEEEE</color>
+    <color name="bg_can_not_pay">#b4b4b4</color>
+
 </resources>

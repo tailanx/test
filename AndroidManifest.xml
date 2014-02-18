@@ -185,7 +185,7 @@
         <!--
              <activity
             android:name="com.yidejia.app.mall.view.NewAddressActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" />
         -->
         <activity
             android:name="com.yidejia.app.mall.EditorActivity"
@@ -202,8 +202,7 @@
         <activity
             android:name="com.yidejia.app.mall.pay.CstmPayActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-             />
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <!-- android:windowSoftInputMode="adjustPan" -->
         <activity
             android:name="com.yidejia.app.mall.shiplog.CheckActivity"
@@ -355,10 +354,13 @@
             android:name="com.yidejia.app.mall.pay.DeliveryActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.yidejia.app.mall.view.YouhuiActivity"
+            android:name="com.yidejia.app.mall.youhui.YouhuiActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.yidejia.app.mall.view.ViewPagerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yidejia.app.mall.youhui.YouhuiGuiZeActivity"
             android:screenOrientation="portrait" />
 
         <service android:name="com.yidejia.app.mall.log.LogService" >

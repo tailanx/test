@@ -42,6 +42,7 @@ public class IntegeralFragment extends Fragment {
 	private String voucherNum = "";
 	private ProgressDialog bar;// 加载框
 	private ListView listview;
+	private TextView noTextView;// 没有数据
 
 	// 通过单例模式，构建对象
 	public static IntegeralFragment newInstance(int s) {
@@ -72,6 +73,7 @@ public class IntegeralFragment extends Fragment {
 			viewCoupons = inflater.inflate(R.layout.youhuiquan, null);// 优惠券视图
 			listview = (ListView) viewCoupons
 					.findViewById(R.id.youhuiquan_listview);
+			noTextView = (TextView) viewCoupons.findViewById(R.id.tv_no_data);
 			getTicket();
 
 			return viewCoupons;
@@ -108,11 +110,14 @@ public class IntegeralFragment extends Fragment {
 				boolean isSuccess = parseTickets.parseTickets(content);
 				if (isSuccess) {
 					ArrayList<Ticket> tickets = parseTickets.getTickets();
-					if (null != tickets) {
-						IntegerAdapter adapter = new IntegerAdapter(
-								getActivity(), tickets);
-						listview.setAdapter(adapter);
-					}
+
+					IntegerAdapter adapter = new IntegerAdapter(getActivity(),
+							tickets, "Fragment");
+					listview.setAdapter(adapter);
+
+				} else {
+					listview.setVisibility(View.GONE);
+					noTextView.setVisibility(View.VISIBLE);
 				}
 			}
 		});

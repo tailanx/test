@@ -11,6 +11,7 @@ import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.pay.CstmPayActivity;
 import com.yidejia.app.mall.search.SearchResultActivity;
 import com.yidejia.app.mall.util.CartUtil1;
+import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.view.LoginActivity;
 
 import android.app.AlertDialog;
@@ -118,7 +119,7 @@ public class HomeCartActivity extends HomeBaseActivity implements
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		if (!cartList.isEmpty()){
+		if (!cartList.isEmpty()) {
 			cartList.clear();
 		}
 	}
@@ -199,6 +200,9 @@ public class HomeCartActivity extends HomeBaseActivity implements
 								Intent intent = new Intent(
 										HomeCartActivity.this,
 										LoginActivity.class);
+								Bundle bundle = new Bundle();
+								bundle.putString("exit", Consts.DELETE_CART);
+								intent.putExtras(bundle);
 								startActivity(intent);
 							}
 							//
@@ -212,7 +216,7 @@ public class HomeCartActivity extends HomeBaseActivity implements
 			HashMap<String, Object> map = orderCarts.get(i);
 			float ischeck = Float.parseFloat(map.get("check").toString());
 			Cart cart1 = (Cart) map.get("cart");
-			
+
 			if (ischeck == 1.0) {
 				// i++;
 				cartList.add(cart1);
@@ -228,13 +232,12 @@ public class HomeCartActivity extends HomeBaseActivity implements
 		sum = Float.parseFloat(sumTextView.getText().toString());
 		intent1.putExtra("carts", cartList);
 
-
 		if (sum > 0) {
 			bundle.putString("cartActivity", "Y");
 			bundle.putFloat("price", sum);
 			intent1.putExtras(bundle);
-			HomeCartActivity.this.startActivity(intent1);	
-				cartList.clear();
+			HomeCartActivity.this.startActivity(intent1);
+			cartList.clear();
 		} else {
 			Toast.makeText(HomeCartActivity.this,
 					getResources().getString(R.string.buy_nothing),
@@ -283,7 +286,6 @@ public class HomeCartActivity extends HomeBaseActivity implements
 			break;
 		}
 	}
-	
 
 	/**
 	 * 创建一个对话框

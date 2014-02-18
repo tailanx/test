@@ -10,6 +10,7 @@
 
     <integer name="num_cols">1</integer>
 
+    <dimen name="text">28sp</dimen>
     <dimen name="text_size">24sp</dimen>
     <dimen name="textsize_big_big">20sp</dimen>
     <dimen name="textsize_big">18sp</dimen>

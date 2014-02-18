@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/iv_youhuiquan_image"
         android:layout_width="@dimen/login_height"
         android:layout_height="@dimen/base_info_image"
@@ -16,9 +16,10 @@
             android:id="@+id/tv_youhuiquan_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_left_add"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_marginTop="@dimen/head_padding"
             android:text="@string/integeral_price"
-			android:layout_gravity="center"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size" />
 
@@ -26,8 +27,8 @@
             android:id="@+id/tv_youhuiquan_price_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_left"
-            android:layout_marginTop="@dimen/head_padding"
             android:text="@string/integeral_rule"
             android:textColor="@color/white" />
 
@@ -35,12 +36,12 @@
             android:id="@+id/tv_youhuiquan_price_way"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_left_add"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/mall_list_padding_add"
             android:layout_marginLeft="@dimen/margin_left"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:text="@string/integeral_way_rule"
             android:textColor="@color/white" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/ll_youhuiquan_right"
