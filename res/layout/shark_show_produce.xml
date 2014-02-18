@@ -30,7 +30,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/theme_textview_background"
         android:contentDescription="@string/yidejia"
         android:gravity="center"

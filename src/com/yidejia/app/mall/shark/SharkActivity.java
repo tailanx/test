@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Handler.Callback;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,7 +31,8 @@ import com.yidejia.app.mall.model.ProductBaseInfo;
 import com.yidejia.app.mall.util.HttpClientUtil;
 import com.yidejia.app.mall.util.IHttpResp;
 
-public class SharkActivity extends Activity implements OnClickListener {
+public class SharkActivity extends Activity implements OnClickListener,
+		Callback {
 
 	private SharkUtil sharkUtil;
 
@@ -58,6 +62,7 @@ public class SharkActivity extends Activity implements OnClickListener {
 	private TextView produceChakan;// 商品查看
 	private int count;
 	private DisplayImageOptions options;
+	private Handler handler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,13 +81,15 @@ public class SharkActivity extends Activity implements OnClickListener {
 		guize = (TextView) findViewById(R.id.tv_shark_activity_guize);
 		guize.setOnClickListener(this);
 		produceChakan.setOnClickListener(this);
-
+		handler = new Handler(this);
+		youhuichakan.setOnClickListener(this);
 	}
 
 	private void initView() {
 		noProcue = (RelativeLayout) findViewById(R.id.Re_show_produce);
 		produce = (RelativeLayout) findViewById(R.id.Re_show_produce_add);
 		youhuiquan = (RelativeLayout) findViewById(R.id.Re_show_produce_youhuiquan);
+
 		yaocishu = (TextView) findViewById(R.id.tv_shared_sum_add);
 
 		quanImageView = (ImageView) findViewById(R.id.iv_yaoyiyao_shou);
@@ -141,15 +148,19 @@ public class SharkActivity extends Activity implements OnClickListener {
 				ParseShark parseShark = new ParseShark();
 				boolean isSuccess = parseShark.parseShark(content);
 				count = parseShark.getCount();
-			
-//				if (count == 0) {
-//					sharkUtil.unregisterListener();
-//					Toast.makeText(SharkActivity.this,
-//							getResources().getString(R.string.no_count),
-//							Toast.LENGTH_SHORT).show();
-//				}
-//				yaocishu.setText(count);
+
+				// if (count == 0) {
+				// sharkUtil.unregisterListener();
+				// Toast.makeText(SharkActivity.this,
+				// getResources().getString(R.string.no_count),
+				// Toast.LENGTH_SHORT).show();
+				// }
 				if (isSuccess) {
+					Message msg = new Message();
+					msg.what = 1;
+					msg.arg1 = count;
+					handler.sendMessage(msg);
+					// yaocishu.setText(count);
 					int theType = parseShark.getTheType();
 					switch (theType) {
 					case 1: // 什么都没摇到
@@ -232,6 +243,25 @@ public class SharkActivity extends Activity implements OnClickListener {
 			bundle.putString("goodsId", info.getUId());
 			intent.putExtras(bundle);
 			SharkActivity.this.startActivity(intent);
+			break;
+		case R.id.tv_shark_no_produce:// 再摇一次】
+			noProcue.setVisibility(View.GONE);
+			produce.setVisibility(View.GONE);
+			youhuiquan.setVisibility(View.GONE);
+			quanImageView.setVisibility(View.VISIBLE);
+			quanImageView.startAnimation(quanAnimation);
 		}
+
+	}
+
+	@Override
+	public boolean handleMessage(Message msg) {
+		switch (msg.what) {
+		case 1:
+			yaocishu.setText(msg.arg1 + "");
+			break;
+
+		}
+		return false;
 	}
 }
