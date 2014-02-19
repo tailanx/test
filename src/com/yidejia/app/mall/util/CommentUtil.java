@@ -80,19 +80,19 @@ public class CommentUtil {
 		this.fromIndex = fromIndex;
 		this.amount = amount;
 		if (ConnectionDetector.isConnectingToInternet(context)) {
-			if("".equals(goodsId) || goodsId == null) {
+			if(null == goodsId || "".equals(goodsId)) {
 				Toast.makeText(context, context.getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 //				return;
-				refresh_view.setVisibility(view.VISIBLE);
-				mPullToRefreshScrollView.setVisibility(view.GONE);
+				refresh_view.setVisibility(View.VISIBLE);
+				mPullToRefreshScrollView.setVisibility(View.GONE);
 			} else {
 				closeTask();
 				task = new Task();
 				task.execute();
 			}
 		} else {
-			refresh_view.setVisibility(view.VISIBLE);
-			mPullToRefreshScrollView.setVisibility(view.GONE);
+			refresh_view.setVisibility(View.VISIBLE);
+			mPullToRefreshScrollView.setVisibility(View.GONE);
 		}
 		bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
 			
@@ -101,8 +101,8 @@ public class CommentUtil {
 				// TODO Auto-generated method stub
 //					isFirstIn = false;
 				if(!isHasRet){
-					refresh_view.setVisibility(view.VISIBLE);
-					mPullToRefreshScrollView.setVisibility(view.GONE);
+					refresh_view.setVisibility(View.VISIBLE);
+					mPullToRefreshScrollView.setVisibility(View.GONE);
 				}
 				closeTask();
 			}

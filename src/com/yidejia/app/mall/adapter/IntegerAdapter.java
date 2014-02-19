@@ -67,7 +67,7 @@ public class IntegerAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
-		if (convertView == null) {
+		if (null == convertView) {
 			convertView = LayoutInflater.from(context).inflate(
 					R.layout.youhuiquan_item, null);
 			holder = new ViewHolder();

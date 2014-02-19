@@ -48,7 +48,7 @@ public class AllOrderDetail {
 		try {
 			map = new HashMap<String, Float>();
 			ArrayList<Cart> mArrayList = order.getCartsArray();
-			if(mArrayList == null) return;
+			if(null == mArrayList) return;
 			for (int i = 0; i < mArrayList.size(); i++) {
 				final Cart cart = mArrayList.get(i);
 				View view = inflater.inflate(R.layout.all_order_item_produce, null);

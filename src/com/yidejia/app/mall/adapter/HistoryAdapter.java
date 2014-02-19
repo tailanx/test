@@ -69,7 +69,7 @@ public class HistoryAdapter extends BaseAdapter {
 	public View getView(int id, View convertView, ViewGroup arg2) {
 		
 		ViewHolder holder = null ;
-		if(convertView == null){
+		if(null == convertView){
 			holder = new ViewHolder();
 			convertView = inflater.inflate(R.layout.history_my_collect_item, null);
 			holder.head = (ImageView) convertView

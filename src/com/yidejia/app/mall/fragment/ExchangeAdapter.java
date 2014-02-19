@@ -143,7 +143,7 @@ public class ExchangeAdapter extends BaseAdapter {
 		final HashMap<String, Float> map = new HashMap<String, Float>();
 		final HashMap<String, Object> map1 = new HashMap<String, Object>();
 		 final ViewHolder holder;
-		if (covertView == null) {
+		if (null == covertView) {
 			covertView = inflater.inflate(R.layout.exchange_produce_item, null);
 			holder = new ViewHolder();
 			holder.iv = (ImageView) covertView

@@ -110,7 +110,7 @@ public class AddressAdapter extends BaseAdapter {
 //		Log.e("info", temp + "  get  temp");
 		final ViewHolder holder;
 
-//		if (convertView == null) {
+//		if (null == convertView) {
 			convertView = inflater.inflate(R.layout.address_management_item,
 					null);
 			holder = new ViewHolder();

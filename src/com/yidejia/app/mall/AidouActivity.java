@@ -104,8 +104,8 @@ public class AidouActivity extends BaseActivity {
 				JSONObject object;
 				try {
 					object = new JSONObject(content);
-					if ("1".equals(object.getString("code"))) {
-						String sumAidou = object.getString("response");
+					if ("1".equals(object.optString("code"))) {
+						String sumAidou = object.optString("response");
 						sum.setText(sumAidou);
 					} else {
 						Toast.makeText(

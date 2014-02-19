@@ -80,8 +80,8 @@ public class ParseShark {
 			productBaseInfo.setProductSpecifications(dataObject
 					.optString("sepc"));
 			productBaseInfo.setShowListAmount(dataObject.optString("shaidan"));
-			productBaseInfo.setShow_flag(dataObject.optString("is_valid")
-					.equals("y"));
+			productBaseInfo.setShow_flag("y"
+					.equals(dataObject.optString("is_valid")));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

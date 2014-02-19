@@ -53,7 +53,6 @@ import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.util.PayUtil;
 import com.yidejia.app.mall.view.ExchangeFreeActivity;
 import com.yidejia.app.mall.view.LoginActivity;
-import com.yidejia.app.mall.yirihui.YirihuiActivity;
 import com.yidejia.app.mall.youhui.YouhuiActivity;
 
 public class CstmPayActivity extends BaseActivity implements OnClickListener {
