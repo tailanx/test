@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 //import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -41,14 +42,14 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 	private RelativeLayout rlPhonePrice;
 	private TextView tvRealPrice;
 	private String numberContact;
-	
-	private String cardid;	//卡类id
-	private double inprice;	//所需面额
-	private String game_area;	//运营商
-	private String details;	//商品信息
-	
+
+	private String cardid; // 卡类id
+	private double inprice; // 所需面额
+	private String game_area; // 运营商
+	private String details; // 商品信息
+
 	private boolean isCanClick = false;
-	
+
 	private ParseRecharge parseRecharge;
 
 	@Override
@@ -56,7 +57,7 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 		super.onCreate(arg0);
 		setActionbarConfig();
 		setTitle(R.string.main_message_center_text);
-		
+
 		parseRecharge = new ParseRecharge();
 
 		setContentView(R.layout.phone_contact);
@@ -64,7 +65,7 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 		initview();
 		ivPhoneContact.setOnClickListener(this);
 		btCommit.setOnClickListener(this);
-		
+
 	}
 
 	/**
@@ -76,7 +77,7 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 		bt30 = (Button) findViewById(R.id.bt_price_30);
 		bt50 = (Button) findViewById(R.id.bt_price_50);
 		bt100 = (Button) findViewById(R.id.bt_price_100);
-		
+
 		rlPhonePrice = (RelativeLayout) findViewById(R.id.rl_phone_price);
 
 		bt100.setOnClickListener(this);// 30元点击事件
@@ -86,8 +87,9 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 
 		btCommit = (Button) findViewById(R.id.iv_commit_phone_contace);
 		tvRealPrice = (TextView) findViewById(R.id.tv_price_contact);
-		
-		TelephonyManager phoneMgr=(TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
+
+		TelephonyManager phoneMgr = (TelephonyManager) this
+				.getSystemService(Context.TELEPHONY_SERVICE);
 		etPhoneNumber.setText(phoneMgr.getLine1Number());
 		showPrice();
 	}
@@ -103,11 +105,15 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 			break;
 
 		case R.id.iv_commit_phone_contace:
-			String phoneNumber = etPhoneNumber.getText().toString().trim().replace(" ", "");
-			
-//			Log.e("info", phoneNumber);
-			//判断是不是手机号码，和非空判断
-			if (null == phoneNumber || "".equals(phoneNumber)||!IsPhone.isMobileNO(phoneNumber)) {
+			String phoneNumber = etPhoneNumber.getText().toString().trim()
+					.replace(" ", "");
+			if (phoneNumber.length() == 14) {
+				phoneNumber = phoneNumber.substring(3, phoneNumber.length());
+			}
+			// Log.e("info", phoneNumber);
+			// 判断是不是手机号码，和非空判断
+			if (null == phoneNumber || "".equals(phoneNumber)
+					|| !IsPhone.isMobileNO(phoneNumber)) {
 				Toast.makeText(this,
 						getResources().getString(R.string.no_phone_number),
 						Toast.LENGTH_SHORT).show();
@@ -143,36 +149,43 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 			break;
 		}
 	}
-	
-	private void showPrice(){
+
+	private void showPrice() {
 		isCanClick = false;
 		rlPhonePrice.setVisibility(View.INVISIBLE);
 		String handset = etPhoneNumber.getText().toString().trim();
 		handset = handset.replace(" ", "");
 		String amount = getAmount();
-		if(IsPhone.isMobileNO(handset))
+		if (IsPhone.isMobileNO(handset))
 			getSimData(handset, amount);
 	}
-	
-	private String getAmount(){
-		return (bt30.isSelected())?"30":(bt50.isSelected()?"50":"100");
+
+	private String getAmount() {
+		return (bt30.isSelected()) ? "30" : (bt50.isSelected() ? "50" : "100");
 	}
-	
+
 	/**
 	 * 获取手机号码handset的sim情况和充值面值amount所需的价格
-	 * @param handset 手机号码
-	 * @param amount 面值
+	 * 
+	 * @param handset
+	 *            手机号码
+	 * @param amount
+	 *            面值
 	 */
-	private void getSimData(String handset, String amount){
-//		String url = "http://u.yidejia.com/index.php?m=of&c=index&a=telquery&handset="+handset + "&amount=" + amount;
+	private void getSimData(String handset, String amount) {
+		if (handset.length() == 14) {
+			handset = handset.substring(3, handset.length());
+		}
+		// String url =
+		// "http://u.yidejia.com/index.php?m=of&c=index&a=telquery&handset="+handset
+		// + "&amount=" + amount;
 		String url = parseRecharge.getNeedPayUrl(handset, amount);
 		HttpClientUtil httpClientUtil = new HttpClientUtil();
 		httpClientUtil.getHttpResp(url, new IHttpResp() {
-			
+
 			@Override
 			public void success(String content) {
-				
-				if(parseRecharge.parseNeedPay(content)){
+				if (parseRecharge.parseNeedPay(content)) {
 					inprice = parseRecharge.getInPrice();
 					cardid = parseRecharge.getCardid();
 					game_area = parseRecharge.getGame_area();
@@ -184,28 +197,29 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 			}
 		});
 	}
-	
-//	/**
-//	 * 解析Sim信息数据
-//	 * @param content
-//	 */
-//	private boolean parseSim(String content){
-//		try {
-//			JSONObject simObject = new JSONObject(content);
-//			if(!"1".equals(simObject.opt("retcode"))){
-//				Toast.makeText(this, simObject.optString("err_msg"), Toast.LENGTH_SHORT).show();
-//			} else {
-//				cardid = simObject.optString("cardid");
-//				inprice = simObject.optString("inprice");
-//				game_area = simObject.optString("game_area");
-//				details = simObject.optString("cardname");
-//				return true;
-//			}
-//		} catch (JSONException e) {
-//			e.printStackTrace();
-//		}
-//		 return false;
-//	}
+
+	// /**
+	// * 解析Sim信息数据
+	// * @param content
+	// */
+	// private boolean parseSim(String content){
+	// try {
+	// JSONObject simObject = new JSONObject(content);
+	// if(!"1".equals(simObject.opt("retcode"))){
+	// Toast.makeText(this, simObject.optString("err_msg"),
+	// Toast.LENGTH_SHORT).show();
+	// } else {
+	// cardid = simObject.optString("cardid");
+	// inprice = simObject.optString("inprice");
+	// game_area = simObject.optString("game_area");
+	// details = simObject.optString("cardname");
+	// return true;
+	// }
+	// } catch (JSONException e) {
+	// e.printStackTrace();
+	// }
+	// return false;
+	// }
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -242,7 +256,7 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 			}
 		}
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();

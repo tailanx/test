@@ -23,7 +23,8 @@ import com.yidejia.app.mall.recharge.ParseRecharge;
 import com.yidejia.app.mall.util.HttpClientUtil;
 import com.yidejia.app.mall.util.IHttpResp;
 
-public class ContactSureActivity extends BaseActivity implements OnClickListener {
+public class ContactSureActivity extends BaseActivity implements
+		OnClickListener {
 
 	private RelativeLayout zhifubao;// 支付宝
 	private RelativeLayout wangyezhifubao;// 支付宝网页
@@ -33,45 +34,46 @@ public class ContactSureActivity extends BaseActivity implements OnClickListener
 	private CheckBox cb_wangye;// 支付宝网页的选择框
 	private CheckBox cb_caifutong;// 财付通的选择框
 	private CheckBox cb_yinlian;// 银联的选择框
-	private TextView tvDetails;	//产品信息view
-	private TextView tvPhone;	//充值号码view
-	private TextView tvPrice;	//应付金额view
-	private Button btnSaveOrder;	//提交订单按钮
-	
-	private String details = "";	//产品信息
-	private String phone = "";	//充值号码
-	private double price = -1;	//应付金额
-	private String goodsId = "";	//手机充值商品id
-	private String amount = "";	//充值金额
-	
-	private boolean isCanPay = false;	//是否能支付
-	
+	private TextView tvDetails; // 产品信息view
+	private TextView tvPhone; // 充值号码view
+	private TextView tvPrice; // 应付金额view
+	private Button btnSaveOrder; // 提交订单按钮
+
+	private String details = ""; // 产品信息
+	private String phone = ""; // 充值号码
+	private double price = -1; // 应付金额
+	private String goodsId = ""; // 手机充值商品id
+	private String amount = ""; // 充值金额
+
+	private boolean isCanPay = false; // 是否能支付
+
 	private String userId = "";
 	private String token = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		setActionbarConfig();
 		setTitle(R.string.comfirm_order);
-		
+
 		userId = MyApplication.getInstance().getUserId();
 		token = MyApplication.getInstance().getToken();
-		
+
 		Intent intent = getIntent();
 		details = intent.getStringExtra("details");
 		phone = intent.getStringExtra("phone");
 		price = intent.getDoubleExtra("price", -1);
 		goodsId = intent.getStringExtra("goodsId");
 		amount = intent.getStringExtra("amount");
-		
-		if(TextUtils.isEmpty(details) || TextUtils.isEmpty(phone) || price < 0.1) {
-			isCanPay = false;
-		} else {
+
+		if (TextUtils.isEmpty(details) || TextUtils.isEmpty(phone)
+				|| price < 0.1) {
 			isCanPay = true;
+		} else {
+			isCanPay = false;
 		}
-		
+
 		setContentView(R.layout.contact_detail);
 		initview();
 	}
@@ -80,12 +82,14 @@ public class ContactSureActivity extends BaseActivity implements OnClickListener
 	 * 初始化数据
 	 */
 	private void initview() {
-		
+
 		btnSaveOrder = (Button) findViewById(R.id.btn_commit_phone_contace);
-		if(isCanPay) btnSaveOrder.setSelected(true);
-		else btnSaveOrder.setClickable(false);
+		if (isCanPay)
+			btnSaveOrder.setSelected(true);
+		else
+			btnSaveOrder.setClickable(false);
 		btnSaveOrder.setOnClickListener(this);
-		
+
 		zhifubao = (RelativeLayout) findViewById(R.id.go_pay_zhifubao_relative);
 		wangyezhifubao = (RelativeLayout) findViewById(R.id.go_pay_zhifubao_wangyezhifu_relative);
 		caifutong = (RelativeLayout) findViewById(R.id.go_pay_zhifubao_caifutong_relative);
@@ -94,7 +98,7 @@ public class ContactSureActivity extends BaseActivity implements OnClickListener
 		cb_wangye = (CheckBox) findViewById(R.id.zhufubaowangye_checkbox);
 		cb_caifutong = (CheckBox) findViewById(R.id.caifutong_checkbox);
 		cb_yinlian = (CheckBox) findViewById(R.id.yinlian_checkbox);
-		
+
 		cb_caifutong.setChecked(true);
 
 		// 添加点击事件
@@ -102,11 +106,11 @@ public class ContactSureActivity extends BaseActivity implements OnClickListener
 		wangyezhifubao.setOnClickListener(this);
 		caifutong.setOnClickListener(this);
 		yinlian.setOnClickListener(this);
-		
+
 		tvDetails = (TextView) findViewById(R.id.tv_contact_name);
 		tvPhone = (TextView) findViewById(R.id.tv_contact_number);
 		tvPrice = (TextView) findViewById(R.id.tv_contact_sum);
-		
+
 		tvDetails.setText(details);
 		tvPhone.setText(phone);
 		tvPrice.setText(price + "");
@@ -161,68 +165,71 @@ public class ContactSureActivity extends BaseActivity implements OnClickListener
 
 			break;
 		case R.id.btn_commit_phone_contace:
-			if(!isCanPay) return;
-			//提交订单
+			if (isCanPay)
+				return;
+			// 提交订单
 			saveOrder();
 			break;
 		}
 	}
-	
-	/**提交订单**/
-	private void saveOrder(){
-		String param = new JNICallBack().getHttp4SaveCZOrder(userId, phone, amount, price + "", details, goodsId, token);
+
+	/** 提交订单 **/
+	private void saveOrder() {
+		String param = new JNICallBack().getHttp4SaveCZOrder(userId, phone,
+				amount, price + "", details, goodsId, token);
 		String url = new JNICallBack().HTTPURL;
 		Log.e("system.out", url + "?" + param);
-		
+
 		HttpClientUtil httpClientUtil = new HttpClientUtil();
 		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
-			
+
 			@Override
 			public void success(String content) {
 				Log.e("system.out", content);
 				ParseRecharge parseRecharge = new ParseRecharge();
-				if(parseRecharge.parseCZOrder(content)){
-					//获取订单号
-					String orderCode = parseRecharge.getCzOrderCode(); 
+				if (parseRecharge.parseCZOrder(content)) {
+					// 获取订单号
+					String orderCode = parseRecharge.getCzOrderCode();
 					Log.e("system.out", orderCode);
-					if(TextUtils.isEmpty(orderCode)) return;
-					/**根据用户选择的支付方式支付**/
+					if (TextUtils.isEmpty(orderCode))
+						return;
+					/** 根据用户选择的支付方式支付 **/
 					switchPay(orderCode);
 				}
 			}
 		});
-		
+
 	}
-	
-	/**根据用户选择的支付方式支付**/
-	private void switchPay(String orderCode){
-		if(cb_caifutong.isChecked()) {
+
+	/** 根据用户选择的支付方式支付 **/
+	private void switchPay(String orderCode) {
+		if (cb_caifutong.isChecked()) {
 			tenWebPay(orderCode);
-		} else if(cb_wangye.isChecked()) {
+		} else if (cb_wangye.isChecked()) {
 			aliWapPay(orderCode);
-		} else if(cb_zhifubao.isChecked()){
+		} else if (cb_zhifubao.isChecked()) {
 			AlicPayUtil util = new AlicPayUtil(this);
 			util.getAlicPay(userId, token, orderCode);
-		} else if(cb_yinlian.isChecked()){
+		} else if (cb_yinlian.isChecked()) {
 			getUnionTn(orderCode);
 		}
 	}
-	
-	/**财付通支付**/
-	private void tenWebPay(String orderCode){
+
+	/** 财付通支付 **/
+	private void tenWebPay(String orderCode) {
 		String payurl = "http://u.yidejia.com/index.php?m=ucenter&c=order&a=onlineWap&code="
 				+ orderCode + "&type=tenpay&is_mobile=y";
 		go2WebPay(getString(R.string.caifutong_pay), payurl);
 	}
-	
-	/**支付宝网页支付**/
-	private void aliWapPay(String orderCode){
+
+	/** 支付宝网页支付 **/
+	private void aliWapPay(String orderCode) {
 		String payurl = "http://u.yidejia.com/index.php?m=ucenter&c=order&a=onlineWap&code="
 				+ orderCode + "&type=alipay&is_mobile=y";
 		go2WebPay(getString(R.string.zhifubao_wangye_pay_list), payurl);
 	}
-	
-	/**跳转到网页支付**/
+
+	/** 跳转到网页支付 **/
 	private void go2WebPay(String title, String payurl) {
 		Intent webIntent = new Intent(this, WebPayActivity.class);
 		webIntent.putExtra("title", title);
@@ -230,26 +237,30 @@ public class ContactSureActivity extends BaseActivity implements OnClickListener
 		startActivity(webIntent);
 		finish();
 	}
-	/**银联支付获取流水号**/
-	private void getUnionTn(final String orderCode){
-		String param = new JNICallBack().getHttp4GetTn(userId, orderCode, token, "y");
+
+	/** 银联支付获取流水号 **/
+	private void getUnionTn(final String orderCode) {
+		String param = new JNICallBack().getHttp4GetTn(userId, orderCode,
+				token, "y");
 		String url = new JNICallBack().HTTPURL;
-		
+
 		HttpClientUtil httpClientUtil = new HttpClientUtil();
 		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
-			
+
 			@Override
 			public void success(String content) {
 				ParseRecharge parseRecharge = new ParseRecharge();
-				if(parseRecharge.parseCZUnion(content)){
+				if (parseRecharge.parseCZUnion(content)) {
 					String tn = parseRecharge.getTn();
-					if(TextUtils.isEmpty(tn))return;
+					if (TextUtils.isEmpty(tn))
+						return;
 					go2UnionPay(orderCode, tn);
 				}
 			}
 		});
 	}
-	/**跳转到银联支付**/
+
+	/** 跳转到银联支付 **/
 	private void go2UnionPay(String orderCode, String tn) {
 		if (TextUtils.isEmpty(orderCode))
 			return;
@@ -268,7 +279,7 @@ public class ContactSureActivity extends BaseActivity implements OnClickListener
 		startActivity(userpayintent);
 		finish();
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
