@@ -121,6 +121,9 @@ public class YiRiHuiAdapter extends BaseAdapter{
 		String imgUrlSmall = yiRiHuiDatas.get(position).getImg2();
 		ImageLoader.getInstance().displayImage(imgUrlSmall, holder.ivGoodsSmall, options, animateFirstListener);
 		
+		//已结束 马上购买文字变为已售罄
+		if(-1 == type) holder.tvBuyNow.setText("已售罄");
+		
 		if(isCanBuy) {
 			holder.tvBuyNow.setSelected(true);
 			holder.tvBuyNow.setOnClickListener(new View.OnClickListener() {
