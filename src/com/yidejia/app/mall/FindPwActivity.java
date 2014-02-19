@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
 import android.text.format.Time;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -116,12 +117,15 @@ public class FindPwActivity extends BaseActivity implements Callback {
 			public void success(String content) {
 				getCodeTask = new TaskGetCode(FindPwActivity.this);
 				if (getCodeTask.parse(content)) {
+					Log.e("info", content + "content");
+					code = getCodeTask.getCode();
 					String respParam = new JNICallBack().getHttp4SendMsg(
 							account, code + "");
 					client.getHttpResp(url, respParam, new IHttpResp() {
 
 						@Override
 						public void success(String content) {
+							Log.e("info", content + "content");
 							if (getCodeTask.parseResp(content)) {
 								daojishi.setVisibility(View.VISIBLE);
 								obtain_imageView.setClickable(false);

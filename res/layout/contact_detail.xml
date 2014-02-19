@@ -368,7 +368,7 @@
             android:background="@drawable/bg_pay_selector"
             android:contentDescription="@string/phone_number"
             android:text="@string/pay_commit"
-            android:textColor="@color/color_sort_text_color_press"
+            android:textColor="@color/white"
             android:textSize="20sp" />
     </LinearLayout>
 

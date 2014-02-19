@@ -9,6 +9,9 @@ import org.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Handler.Callback;
+import android.os.Message;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -23,11 +26,13 @@ import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.jni.JNICallBack;
+import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.HttpClientUtil;
 import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.util.SharedPreferencesUtil;
 
-public class QiandaoActivity extends BaseActivity implements OnClickListener {
+public class QiandaoActivity extends BaseActivity implements OnClickListener,
+		Callback {
 
 	private ImageView backImagView;
 	private ImageView ivSignAdd;
@@ -40,7 +45,7 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener {
 	private JNICallBack jniCallBack;
 	private String url;
 
-	private int lxSign = 0; // 已连续签到天数
+	// private int lxSign = 0; // 已连续签到天数
 	private int signCount = 0; // 总签到天数
 	private String respMsg; // 签到返回信息
 	private SharedPreferencesUtil sp;// 保存日期
@@ -49,6 +54,7 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener {
 	private String nowDate;// 当前日期
 	private String lastDate;// 保存的日期
 	private String lastId;// 保存的用户的Id
+	private Handler handler;// 用来更新界面
 
 	@SuppressLint("SimpleDateFormat")
 	@Override
@@ -57,6 +63,7 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener {
 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.qiandao);
+		handler = new Handler(this);
 		backImagView = (ImageView) findViewById(R.id.iv_qiandao_back);
 		backImagView.setOnClickListener(this);
 
@@ -114,12 +121,12 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener {
 				// TODO Auto-generated method stub
 				if (parseGetCount(content)) {
 					if (!"".equals(signCount)) {
-						int gewei = signCount%10;
-						int shiwei = signCount/10%10;
-						int baiwei  = signCount/100;
-					tvSignCount3.setText(gewei + "");
-					tvSignCount2.setText(shiwei + "");
-					tvSignCount1.setText(baiwei + "");
+						int gewei = signCount % 10;
+						int shiwei = signCount / 10 % 10;
+						int baiwei = signCount / 100;
+						tvSignCount3.setText(gewei + "");
+						tvSignCount2.setText(shiwei + "");
+						tvSignCount1.setText(baiwei + "");
 					}
 				}
 			}
@@ -133,10 +140,9 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener {
 			int code = httpObject.optInt("code");
 			String strResp = httpObject.optString("response");
 			if (1 == code) {
-				Log.e("info", content);
 				JSONObject respObject = new JSONObject(strResp);
-				lxSign = respObject.optInt("lxSign");
-				signCount = respObject.optInt("countSign");
+				// lxSign = respObject.optInt("lxSign");
+				signCount = respObject.optInt("countSign") ;
 				return true;
 			}
 		} catch (JSONException e) {
@@ -159,9 +165,12 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener {
 			public void success(String content) {
 				// TODO Auto-generated method stub
 				String showMsg;
+				Log.e("info", content);
 				if (parseSignAdd(content)) {
 					showMsg = "获得" + respMsg + "个爱豆";
 					ivSignAdd.setImageResource(R.drawable.yiqiandao);
+					signCount++;
+					handler.sendEmptyMessage(Consts.QIANDAO);
 				} else {
 					showMsg = respMsg;
 				}
@@ -195,5 +204,18 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener {
 	protected void onPause() {
 		super.onPause();
 		StatService.onPageEnd(this, "签到页面");
+	}
+
+	@Override
+	public boolean handleMessage(Message msg) {
+		if (msg.what == Consts.QIANDAO) {
+			int gewei = signCount % 10;
+			int shiwei = signCount / 10 % 10;
+			int baiwei = signCount / 100;
+			tvSignCount3.setText(gewei + "");
+			tvSignCount2.setText(shiwei + "");
+			tvSignCount1.setText(baiwei + "");
+		}
+		return false;
 	}
 }

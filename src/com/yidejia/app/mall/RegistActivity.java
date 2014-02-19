@@ -215,16 +215,15 @@ public class RegistActivity extends BaseActivity implements Callback {
 
 			@Override
 			public void success(String content) {
-				Log.e("info", content);
 				getCodeTask = new TaskGetCode(RegistActivity.this);
 				if (getCodeTask.parse(content)) {
+					code = getCodeTask.getCode();
 					String respParam = new JNICallBack().getHttp4SendMsg(
 							account, code + "");
 					client.getHttpResp(url, respParam, new IHttpResp() {
 
 						@Override
 						public void success(String content) {
-							Log.e("info", content + "content");
 							if (getCodeTask.parseResp(content)) {
 								getCodeImgView.setClickable(false);
 								daojishi.setVisibility(View.VISIBLE);
