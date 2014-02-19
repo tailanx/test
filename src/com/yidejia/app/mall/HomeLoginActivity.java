@@ -223,11 +223,15 @@ public class HomeLoginActivity extends HomeBaseActivity implements
 	private void login() {
 		String param = new JNICallBack().getHttp4Login(name, pwd, ip);
 		String url = new JNICallBack().HTTPURL;
+		Log.e("system.out", url + "?" + param);
 		HttpClientUtil httpClientUtil = new HttpClientUtil();
 		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
 
 			@Override
 			public void success(String content) {
+				
+				Log.e("system.out", content);
+				
 				Login login = new Login();
 				boolean issuccess = login.parseLogin(content);
 				if (issuccess) { // 登录成功

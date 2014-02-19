@@ -141,6 +141,7 @@ public class HomeMallActivity extends HomeBaseActivity implements
 		}
 
 		String url = new JNICallBack().getHttp4GetHome();
+		Log.e("system.out", url);
 
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
 		client.get(url, new AsyncHttpResponse() {
@@ -161,6 +162,7 @@ public class HomeMallActivity extends HomeBaseActivity implements
 			@Override
 			public void onSuccess(int statusCode, String content) {
 				super.onSuccess(statusCode, content);
+				Log.e("system.out", content);
 				if (HttpStatus.SC_OK == statusCode) {
 					GetHomePage getHomePage = new GetHomePage();
 					if (getHomePage.parseGetHomeJson(content)) {
