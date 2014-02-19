@@ -195,7 +195,9 @@ public class JNICallBack {
 	/**获取伊日惠数据**/
 	public native String getHttp4UpdateYiRiHui(String rule_id);
 	
+	/**获取提交手机充值订单的订单号**/
 	public native String getHttp4SaveCZOrder(String userId, String hanset, String amount, String price, String goodsName, String goodsId, String token);
-	
+	/**获取用户手机充值的订单**/
+	public native String getHttp4GetCZOrder(String userId, String offset, String limit, String token);
 }	
 	
