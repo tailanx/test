@@ -8,10 +8,8 @@ import android.widget.TextView;
 
 import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.BaseActivity;
-import com.yidejia.app.mall.HomeMyMallActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.order.AllOrderActivity;
-import com.yidejia.app.mall.order.WaitPayActivity;
 import com.yidejia.app.mall.util.ActivityIntentUtil;
 
 public class WebPayActivity extends BaseActivity {

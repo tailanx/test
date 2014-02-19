@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.yidejia.app.mall.MyApplication;
@@ -77,7 +78,11 @@ public class Login {
 				myApplication.setUserId(customer_id);
 				myApplication.setPassword(responseObject.optString("password"));
 				myApplication.setVip(responseObject.optString("customer_grade"));
-				myApplication.setNick(responseObject.optString("customer_nick"));
+				String nick = responseObject.optString("customer_nick");
+				if(TextUtils.isEmpty(nick)){
+					nick = "商城用户";
+				}
+				myApplication.setNick(nick);
 				String imgUrl = responseObject.optString("avatar_path");
 				myApplication.setUserHeadImg(ImageUrl.IMAGEURL + imgUrl + "!100");
 				String token = responseObject.optString("token");

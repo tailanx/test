@@ -23,6 +23,8 @@ public class IntegerAdapter extends BaseAdapter {
 	private Activity context;
 	private ArrayList<Ticket> list;
 	private String type;
+	
+	private float totalPrice = 0.0f;
 
 	public IntegerAdapter(Activity context, ArrayList<Ticket> tickets) {
 		this.context = context;
@@ -35,6 +37,12 @@ public class IntegerAdapter extends BaseAdapter {
 		this.list = tickets;
 		this.type = name;
 	}
+	
+	/**设置总价格，只有确认订单页跳转过来时的totalprice才会大于0**/
+	public void setTotalPrice(float totalPrice){
+		this.totalPrice = totalPrice;
+	}
+
 
 	@Override
 	public int getCount() {
@@ -91,6 +99,20 @@ public class IntegerAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		final Ticket ticket = list.get(position);
+		//商品总价格大于优惠券的最小使用金额才会显示可以使用的按钮
+		String strLowCash = ticket.getLowCash();
+		try {
+			float lowCash = Float.parseFloat(strLowCash);
+			if(totalPrice > lowCash) {
+				holder.mustUser.setVisibility(View.VISIBLE);
+			} else {
+				holder.mustUser.setVisibility(View.GONE);
+			}
+		} catch (NumberFormatException e) {
+			holder.mustUser.setVisibility(View.GONE);
+		}
+
+		
 		if ("10".equals(ticket.getMoney())) {
 			holder.layout.setBackgroundColor(context.getResources().getColor(
 					R.color.integer_green));
@@ -117,7 +139,9 @@ public class IntegerAdapter extends BaseAdapter {
 			public void onClick(View v) {
 				Intent intent = new Intent(context, CstmPayActivity.class);
 				Bundle bundle = new Bundle();
-				bundle.putString("youhuiquan", ticket.getMoney());
+				bundle.putString("youhuiquan", ticket.getMoney());			
+				bundle.putString("tickId", ticket.getTicketId());
+				bundle.putString("tickName", ticket.getName());
 				intent.putExtras(bundle);
 				context.setResult(Consts.YOUHUIQUAN_RESPONSE, intent);
 				context.finish();

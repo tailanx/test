@@ -29,7 +29,7 @@ public class YirihuiFragment extends Fragment {
 	private int type = -2;	//type -1 过去 0现在 1 将来  
 	private int offset = 0;	//offset 起始位置
 	private int limit = 10;	//limit 偏移量 必须
-	private String sort;	//sort 排序 默认按结束时间倒序(end_time desc)
+	private String sort = "";	//sort 排序 默认按结束时间倒序(end_time desc)
 
 
 	public static YirihuiFragment newInstance(int num) {
@@ -127,7 +127,9 @@ public class YirihuiFragment extends Fragment {
 						refreshListView.getLoadingLayoutProxy()
 						.setLastUpdatedLabel(label);
 					}
-				} 
+				} else {
+					offset -= limit;
+				}
 			}
 		});
 	}

@@ -53,6 +53,7 @@ import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.util.PayUtil;
 import com.yidejia.app.mall.view.ExchangeFreeActivity;
 import com.yidejia.app.mall.view.LoginActivity;
+import com.yidejia.app.mall.yirihui.YirihuiActivity;
 import com.yidejia.app.mall.youhui.YouhuiActivity;
 
 public class CstmPayActivity extends BaseActivity implements OnClickListener {
@@ -74,6 +75,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 	private AlertDialog dialog;
 	private RelativeLayout addressRelative;
 	private RelativeLayout rlYouhuiquan;// 使用优惠折扣
+	private TextView tvTicketName;	//使用优惠券的名称
 
 	private RelativeLayout rl_peisong; // 选择配送中心的layout
 
@@ -93,7 +95,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 	private String tn;// 流水号
 	private LinearLayout layout;
 	public static ArrayList<Cart> cartList;
-	private float jifen = 0;
+	private float needJifen = 0;
 	public static String voucherString1;// 积分
 	private ModelAddresses showAddress;
 	private ArrayList<FreePost> freePosts; // 免邮条件列表
@@ -106,7 +108,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 	private ArrayList<Cart> carts;// 购物车的数据，非换购的数据
 	// private RelativeLayout reLayout;
 	private String isCartActivity;
-	private String sum;
+//	private String sum;
 	private String contentType;
 
 	private float goodsPrice;
@@ -192,7 +194,8 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 									Bundle bundle = new Bundle();
 									bundle.putString("cartActivity",
 											isCartActivity);
-									bundle.putString("price", sum + "");
+//									bundle.putString("price", sum + "");
+									bundle.putFloat("price", goodsPrice);
 									intent.putExtras(bundle);
 									intent.putExtra("carts", carts);
 									intent.putExtra("voucher", voucher);
@@ -225,6 +228,8 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 	public void setupShow() {
 		try {
 			rlYouhuiquan = (RelativeLayout) findViewById(R.id.go_shopping_use_evalution);
+			tvTicketName = (TextView) findViewById(R.id.tv_ticket_name);
+			tvTicketName.setText("");
 			tv_sumPrice = (TextView) findViewById(R.id.go_pay_show_pay_money);
 			tv_saveOrderBtn = (TextView) findViewById(R.id.save_order_btn);
 			tv_userName = (TextView) findViewById(R.id.go_pay_name);
@@ -261,8 +266,8 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 						cb_emsBox.setChecked(false);
 						try {
 							expressNum = tv_generalPrice.getText().toString();
-							tv_sumPrice.setText(goodsPrice
-									+ Float.parseFloat(expressNum) + "");
+							tv_sumPrice.setText((goodsPrice
+									+ Float.parseFloat(expressNum)) + "");
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -280,8 +285,8 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 						cb_emsBox.setChecked(true);
 						try {
 							expressNum = tv_emsPrice.getText().toString();
-							tv_sumPrice.setText(goodsPrice
-									+ Float.parseFloat(expressNum) + "");
+							tv_sumPrice.setText((goodsPrice
+									+ Float.parseFloat(expressNum)) + "");
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -461,7 +466,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 
 	/** 清除购物车数据 **/
 	private void cleanCart() {
-		if (isCartActivity.equals("Y")) {// ；来自购物车
+		if ("Y".equals(isCartActivity)) {// ；来自购物车
 			// 删除购物车的商品
 			CartsDataManage cartsDataManage = new CartsDataManage();
 			int length = carts.size();
@@ -522,7 +527,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 		JNICallBack jniCallBack = new JNICallBack();
 		String url = jniCallBack.HTTPURL;
 		String params = jniCallBack.getHttp4SaveOrder(userId, tickId, recipientId,
-				"", jifen + "", expressNum, tmpPostMethod, tmpPeisong, goods,
+				"", needJifen + "", expressNum, tmpPostMethod, tmpPeisong, goods,
 				tmpComment, pay_type, token, "android");
 
 		// Log.e("system.out", url+params);
@@ -1035,11 +1040,14 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 		RequestParams requestParams = new RequestParams();
 		requestParams.put(param);
 
+//		Log.e("system.out", url + "?" + param);
 		// client.get(url, new AsyncHttpResponse(){
 		client.post(url, contentType, requestParams, new AsyncHttpResponse() {
 			@Override
 			public void onSuccess(int statusCode, String content) {
 				super.onSuccess(statusCode, content);
+				
+				
 				if (statusCode == HttpStatus.SC_OK) {
 					ParseCredit parseCredit = new ParseCredit();
 					boolean isSuccess = parseCredit.parseVerify(content);
@@ -1113,14 +1121,14 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 		if (isFree) {
 			tv_generalPrice.setText("0");
 			tv_emsPrice.setText("0");
-			tv_sumPrice.setText(goodsPrice + "");
 			expressNum = "0";
+			tv_sumPrice.setText((goodsPrice + Float.parseFloat(expressNum)) + "");
 		} else {
 			tv_generalPrice.setText(generalNum);
 			tv_emsPrice.setText(emsNum);
 			expressNum = (cb_general.isChecked() ? tv_generalPrice.getText()
 					.toString() : tv_emsPrice.getText().toString());
-			tv_sumPrice.setText(goodsPrice + Float.parseFloat(expressNum) + "");
+			tv_sumPrice.setText((goodsPrice + Float.parseFloat(expressNum)) + "");
 		}
 	}
 
@@ -1158,7 +1166,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 			carts = (ArrayList<Cart>) data.getSerializableExtra("carts");
 
 			voucher = data.getFloatExtra("voucher", -1);
-			jifen = data.getFloatExtra("jifen", -1);
+			needJifen = data.getFloatExtra("jifen", -1);
 
 			layout.removeAllViews();
 			PayUtil pay = new PayUtil(CstmPayActivity.this, layout);
@@ -1181,8 +1189,24 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 		} else if (Consts.YOUHUIQUAN_REQUEST == requestCode
 				&& Consts.YOUHUIQUAN_RESPONSE == resultCode) {//使用优惠权的返回值
 			String youhuiData = data.getExtras().getString("youhuiquan");
-			if (null != youhuiData || "".equals(rlYouhuiquan)) {
-//				Log.e("info", rlYouhuiquan + "");
+			tickId = data.getExtras().getString("tickId");
+			String tickName = data.getExtras().getString("tickName");
+//			Log.e("system.out", "price:" + youhuiData + ":id:" + tickId + ":name:" + tickName);
+			if(TextUtils.isEmpty(tickId)) tickId = "0";
+			if (null != youhuiData && null != tvTicketName) {
+				tvTicketName.setText("(" + tickName + ")");
+				try {
+					float priceF = (goodsPrice + Float.parseFloat(expressNum) - Float
+							.parseFloat(youhuiData));
+					if (priceF < 0.001){
+						isCanPay = false;
+						return;
+					}
+					tv_sumPrice.setText(priceF + "");
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+					isCanPay = false;
+				}
 			}
 		}
 	}
@@ -1207,6 +1231,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 		case R.id.go_shopping_use_evalution:
 			Intent intent = new Intent(CstmPayActivity.this,
 					YouhuiActivity.class);
+			intent.putExtra("totalPrice", goodsPrice);
 			startActivityForResult(intent, Consts.YOUHUIQUAN_REQUEST);
 			break;
 		}

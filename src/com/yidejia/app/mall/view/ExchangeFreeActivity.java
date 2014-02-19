@@ -57,7 +57,7 @@ public class ExchangeFreeActivity extends BaseActivity {
 	private int position_one;
 	// private int position_two;
 	// private int position_three;
-	private String sumprice;
+//	private String sumprice;
 	private List<HashMap<String, Float>> exchange;// 换购商品
 	private List<HashMap<String, Object>> cart;// 换购商品
 	private VoucherDataManage dataManage;// 用户积分
@@ -66,14 +66,15 @@ public class ExchangeFreeActivity extends BaseActivity {
 	private ArrayList<Cart> mArrayList;
 	// private String isString;
 	private AlertDialog dialog;
-	private float jifen;
+	private float jifen = 0.0f;
+	private float goodsPrice;
 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Intent intent = getIntent();
-		sumprice = intent.getStringExtra("price");
+		goodsPrice = intent.getFloatExtra("price", 0.0f);
 		jifen = intent.getFloatExtra("voucher", -1);
 		// isString = intent.getStringExtra("cartActivity");
 		try {
@@ -160,7 +161,7 @@ public class ExchangeFreeActivity extends BaseActivity {
 								if (null != cart1 && cart1.getUId() != null) {
 									mArrayList.add(cart1);
 								}
-								intent.putExtra("price", sumprice);
+								intent.putExtra("price", goodsPrice);
 								intent.putExtra("voucher", voucher);
 								intent.putExtra("jifen", sum1);
 
@@ -228,7 +229,7 @@ public class ExchangeFreeActivity extends BaseActivity {
 						CstmPayActivity.class);
 
 				Bundle bundle = new Bundle();
-				bundle.putString("price", sumprice);
+				bundle.putFloat("price", goodsPrice);
 				bundle.putFloat("jifen", jifen);
 				intent.putExtra("cartActivity", "E");
 				bundle.putSerializable("carts", mArrayList);

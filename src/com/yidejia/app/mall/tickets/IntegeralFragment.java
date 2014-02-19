@@ -10,11 +10,11 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +28,6 @@ import com.yidejia.app.mall.adapter.IntegerAdapter;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.util.HttpClientUtil;
 import com.yidejia.app.mall.util.IHttpResp;
-import com.yidejia.app.mall.util.TimeUtil;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class IntegeralFragment extends Fragment {
@@ -101,6 +100,8 @@ public class IntegeralFragment extends Fragment {
 		String url = new JNICallBack().getHttp4GetTicket(
 				myApplication.getUserId(), myApplication.getToken());
 
+		Log.e("system.out", url);
+		
 		HttpClientUtil httpClientUtil = new HttpClientUtil();
 		httpClientUtil.getHttpResp(url, new IHttpResp() {
 

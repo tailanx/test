@@ -21,7 +21,7 @@ public class GetTn {
 	 * @throws TimeOutEx 
 	 */
 	public String getTnHttpResp(String userid, String orderCode, String token) throws IOException, TimeOutEx{
-		String url = new JNICallBack().getHttp4GetTn(userid, orderCode, token);
+		String url = new JNICallBack().getHttp4GetTn(userid, orderCode, token, "");
 		HttpPostConn conn = new HttpPostConn(url);
 		return conn.getHttpResponse();
 	}

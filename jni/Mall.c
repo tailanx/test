@@ -2530,11 +2530,12 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 
 //获取tn
 jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetTn(JNIEnv* env,
-		jobject thiz, jstring userid, jstring order_code, jstring token){//
+		jobject thiz, jstring userid, jstring order_code, jstring token, jstring isMobile){//
 
 	char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
 	char *chorder_code = (*env)->GetStringUTFChars(env, order_code, NULL);
 	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+	char *chisMobile = (*env)->GetStringUTFChars(env, isMobile, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
@@ -2553,6 +2554,10 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 	if(chorder_code != NULL)addString(urlString, chorder_code);
 	addString(urlString, "&token=");
 	if(chtoken != NULL)addString(urlString, chtoken);
+	if(chisMobile != NULL){
+		addString(urlString, "&is_mobile=");
+		addString(urlString, chisMobile);
+	}
 
 	addString(urlString, pHead);
 
@@ -3384,6 +3389,69 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 	addString(urlString, "&sign=");
 	addString(encrypt, strTemp);
 	addString(encrypt, "active.yirihui.updateLaveTotal");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveCZOrder(JNIEnv* env,
+		jobject thiz, jstring userId, jstring hanset, jstring amount, jstring price, jstring goodsName, jstring goodsId, jstring token){//
+
+	char *chuserId = (*env)->GetStringUTFChars(env, userId, NULL);
+	char *chhanset = (*env)->GetStringUTFChars(env, hanset, NULL);
+	char *chamount = (*env)->GetStringUTFChars(env, amount, NULL);
+	char *chprice = (*env)->GetStringUTFChars(env, price, NULL);
+	char *chgoodsName = (*env)->GetStringUTFChars(env, goodsName, NULL);
+	char *chgoodsId = (*env)->GetStringUTFChars(env, goodsId, NULL);
+	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+	char *api="api=of.onlineorder.save";
+	addString(urlString, api);
+
+	addString(urlString, "&p_customer_id=");
+	if(chuserId != NULL)addString(urlString, chuserId);
+	addString(urlString, "&p_handset=");
+	if(chhanset != NULL)addString(urlString, chhanset);
+	addString(urlString, "&p_recharge_amount=");
+	if(chamount != NULL)addString(urlString, chamount);
+	addString(urlString, "&p_pay_amount=");
+	if(chprice != NULL)addString(urlString, chprice);
+	addString(urlString, "&p_goods_detail=");
+	if(chgoodsName != NULL)addString(urlString, chgoodsName);
+	addString(urlString, "&p_ogoods_id=");
+	if(chgoodsId != NULL)addString(urlString, chgoodsId);
+	addString(urlString, "&token=");
+	if(chtoken != NULL)addString(urlString, chtoken);
+
+	addString(urlString, pHead);
+
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
+
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "of.onlineorder.save");
 	addString(encrypt, chtime);
 
 	MD5_CTX md5;

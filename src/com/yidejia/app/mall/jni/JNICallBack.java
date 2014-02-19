@@ -151,7 +151,7 @@ public class JNICallBack {
 	public native String getHttp4GetShipLog(String code);
 	
 	//获取tn
-	public native String getHttp4GetTn(String userid, String order_code, String token);
+	public native String getHttp4GetTn(String userid, String order_code, String token, String isMobile);
 	
 	//获取图片验证码
 	public native String getHttp4GetCode(String name);
@@ -194,6 +194,8 @@ public class JNICallBack {
 	
 	/**获取伊日惠数据**/
 	public native String getHttp4UpdateYiRiHui(String rule_id);
+	
+	public native String getHttp4SaveCZOrder(String userId, String hanset, String amount, String price, String goodsName, String goodsId, String token);
 	
 }	
 	
