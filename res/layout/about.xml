@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:src="@drawable/logo" />
+            android:src="@drawable/ydj_icon" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="2dp"
-            android:text="Copyright @ 2013 YiDeJia.All Right Reserved"
+            android:text="Copyright @ 2014 YiDeJia.All Right Reserved"
             android:textColor="#8d5aa6"
             android:textSize="13sp" />
     </LinearLayout>
