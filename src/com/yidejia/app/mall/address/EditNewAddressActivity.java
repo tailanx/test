@@ -94,6 +94,8 @@ public class EditNewAddressActivity extends BaseActivity {
 
 	private View view;
 	private Dialog dialog;
+	
+	private String strTitle = "新增收货地址";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +103,13 @@ public class EditNewAddressActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 
 		myApplication = (MyApplication) getApplication();
+		// 获取bundle对象
+		Bundle bundle = this.getIntent().getExtras();
+		ModelAddresses addresses = null;
+		if (null != bundle) {
+			addresses = (ModelAddresses) bundle.get("editaddress");
+			strTitle = "编辑收货地址";
+		}
 
 		setActionbar();
 		setContentView(R.layout.new_address);
@@ -113,12 +122,6 @@ public class EditNewAddressActivity extends BaseActivity {
 		shi = (TextView) findViewById(R.id.city1);
 		qu = (TextView) findViewById(R.id.district1);
 
-		// 获取bundle对象
-		Bundle bundle = this.getIntent().getExtras();
-		ModelAddresses addresses = null;
-		if (null != bundle) {
-			addresses = (ModelAddresses) bundle.get("editaddress");
-		}
 		String name = "";
 		String phone = "";
 		String dString = "";
@@ -418,7 +421,7 @@ public class EditNewAddressActivity extends BaseActivity {
 		});
 
 		TextView titleTextView = (TextView) findViewById(R.id.ab_common_title);
-		titleTextView.setText("编辑收货地址");
+		titleTextView.setText(strTitle);
 	}
 	
 	private void saveAddr(final String customer_id, final String customer_name,
@@ -557,12 +560,12 @@ public class EditNewAddressActivity extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		StatService.onPageStart(this, "新建或编辑地址页面");
+		StatService.onPageStart(this, strTitle + "页面");
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		StatService.onPageEnd(this, "新建或编辑地址页面");
+		StatService.onPageEnd(this, strTitle + "页面");
 	}
 }
