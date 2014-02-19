@@ -52,9 +52,9 @@ public class ParseOrder {
 				String response = jsonObject.optString("response");
 				JSONObject responseObject = new JSONObject(response);
 				String result = responseObject.optString("@p_result");
-				if (unicode.revert(result).equals(
-						context.getResources().getString(
-								R.string.success_save_order))) {
+				if (context.getResources()
+						.getString(R.string.success_save_order)
+						.equals(unicode.revert(result))) {
 					orderCode = responseObject.optString("@p_order_code");
 					resp_code = responseObject.optString("@p_resp_code");
 					tn = responseObject.optString("@p_tn");
@@ -273,7 +273,7 @@ public class ParseOrder {
 				String response = jsonObject.getString("response");
 				JSONObject responseObject = new JSONObject(response);
 				String result = responseObject.getString("@p_result");
-				if (unicode.revert(result).equals("success取消成功")) {
+				if ("success取消成功".equals(unicode.revert(result))) {
 					return true;
 				}
 			}

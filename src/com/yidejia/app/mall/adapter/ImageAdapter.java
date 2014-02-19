@@ -54,7 +54,7 @@ public class ImageAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		if (convertView == null) {
+		if (null == convertView) {
 			convertView = mInflater.inflate(R.layout.image_item, null);
 		}
 		final int p = position;

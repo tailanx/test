@@ -76,7 +76,7 @@ public class YiRiHuiAdapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		final ViewHolder holder;
-		if (convertView == null) {
+		if (null == convertView) {
 			convertView = inflater.inflate(R.layout.yirihui_item, null);
 			holder = new ViewHolder();
 			holder.tvLong = (TextView) convertView.findViewById(R.id.tv_yirihui_long);

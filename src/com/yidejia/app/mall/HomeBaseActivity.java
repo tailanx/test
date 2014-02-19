@@ -46,6 +46,7 @@ public class HomeBaseActivity extends BaseActivity {
 	private int currentActivityId = 0; // 设置当前activity的id，0-5分别表示首页，逛，搜索，购物车，商城，登录
 	private int intentId = 0; // 目的界面的id，0-5分别表示首页，逛，搜索，购物车，商城，登录
 	
+	private boolean isNeedExit = true;	//是否需要退出；当前页（购物车或登录页面）不是根节点时值应该设置为false
 	
 	@Override
 	protected void onStart() {
@@ -59,7 +60,10 @@ public class HomeBaseActivity extends BaseActivity {
 		setNum();
 	}
 
-
+	/**是否需要退出；当前页（购物车或登录页面）不是根节点时值应该设置为false**/
+	public void setIsNeedExit(boolean isNeedExit){
+		this.isNeedExit = isNeedExit;
+	}
 
 	@Override
 	protected void onNewIntent(Intent intent) {
@@ -83,6 +87,9 @@ public class HomeBaseActivity extends BaseActivity {
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			//当前页（购物车或登录页面）不是根节点时,按物理返回键直接返回上一个页面，不退出程序
+			if(!isNeedExit) return super.onKeyUp(keyCode, event);
+			
 			if ((System.currentTimeMillis() - exitTime) > 2000) {
 				Toast.makeText(getApplicationContext(),
 						getResources().getString(R.string.exit),

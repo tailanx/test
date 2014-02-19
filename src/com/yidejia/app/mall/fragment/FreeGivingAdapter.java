@@ -100,7 +100,7 @@ public class FreeGivingAdapter extends BaseAdapter {
 //		Log.i("info", position+"           postion");
 		ViewHolder holder = null;
 		HashMap< String , Object> map = new HashMap<String, Object>();
-		if (convertView == null) {
+		if (null == convertView) {
 			convertView = inflater.inflate(R.layout.free_giving_item, null);
 			holder = new ViewHolder();
 			holder.title = (TextView) convertView

@@ -8,6 +8,9 @@ public class LoginActivity extends HomeLoginActivity {
 	protected void onResume() {
 		super.onResume();
 		hideBottomView();
+		
+		//当前的登录页不是根节点时值应该设置为false
+		setIsNeedExit(false);
 	}
 
 }

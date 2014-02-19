@@ -57,7 +57,7 @@ public class PayAddressAdapter extends BaseAdapter {
 	public View getView(int postion, View convertview, ViewGroup arg2) {
 		// TODO Auto-generated method stub
 		ViewHolder holder;
-		if (convertview == null) {
+		if (null == convertview) {
 			convertview = inflater.inflate(R.layout.pay_address_item, null);
 			holder = new ViewHolder();
 			holder.name = (TextView) convertview

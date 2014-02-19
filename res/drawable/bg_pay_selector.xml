@@ -26,7 +26,7 @@
 
                 	<stroke android:width="@dimen/above_offset" android:color="@color/theme" />
 
-                	<solid android:color="@color/white" />
+                	<solid android:color="@color/bg_can_not_pay" />
 
             	</shape>
         	</item>

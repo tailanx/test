@@ -15,7 +15,6 @@ import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.order.AllOrderActivity;
-import com.yidejia.app.mall.order.WaitPayActivity;
 import com.yidejia.app.mall.util.ActivityIntentUtil;
 import com.yidejia.app.mall.util.HttpClientUtil;
 import com.yidejia.app.mall.util.IHttpResp;
@@ -32,16 +31,18 @@ public class AlicPayUtil {
 		this.activity = activity;
 	}
 
-	public void getAlicPay(String userId, String token, String orderCode) {
+	public void getAlicPay(String userId, String token, String orderCode, boolean isMobile) {
 		
 		// 检测安全支付服务是否被安装
 		MobileSecurePayHelper mspHelper = new MobileSecurePayHelper(activity);
 		boolean isAlicExsist = mspHelper.detectMobile_sp();
 		if(!isAlicExsist) return;
+		String isMobileStr = "";
+		if(isMobile) isMobileStr = "y";
 		
 		String url = new JNICallBack().HTTPURL;
 		String param = new JNICallBack().getHttp4AlicSign(userId, token,
-				orderCode);
+				orderCode , isMobileStr);
 
 		HttpClientUtil httpClientUtil = new HttpClientUtil();
 		httpClientUtil.getHttpResp(url, param, new IHttpResp() {

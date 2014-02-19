@@ -9,8 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.telephony.TelephonyManager;
-import android.util.Log;
-//import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -119,6 +117,8 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 						Toast.LENGTH_SHORT).show();
 				return;
 			} else {
+				if(!isCanClick) return;
+				
 				intent = new Intent();
 				intent.setClass(this, ContactSureActivity.class);
 				intent.putExtra("details", details);
@@ -179,6 +179,9 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 		// String url =
 		// "http://u.yidejia.com/index.php?m=of&c=index&a=telquery&handset="+handset
 		// + "&amount=" + amount;
+		rlPhonePrice.setVisibility(View.INVISIBLE);
+		isCanClick = false;
+		
 		String url = parseRecharge.getNeedPayUrl(handset, amount);
 		HttpClientUtil httpClientUtil = new HttpClientUtil();
 		httpClientUtil.getHttpResp(url, new IHttpResp() {

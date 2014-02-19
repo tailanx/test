@@ -77,7 +77,7 @@ public class FavoriteAdapter extends BaseAdapter {
 	@Override
 	public View getView(int id, View convertView, ViewGroup arg2) {
 		ViewHolder holder = null;
-		if (convertView == null) {
+		if (null == convertView) {
 			convertView = inflater.inflate(R.layout.my_collect_item, null);
 			holder = new ViewHolder();
 			holder.head = (ImageView) convertView

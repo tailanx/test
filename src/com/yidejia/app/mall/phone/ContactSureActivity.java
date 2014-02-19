@@ -69,9 +69,9 @@ public class ContactSureActivity extends BaseActivity implements
 
 		if (TextUtils.isEmpty(details) || TextUtils.isEmpty(phone)
 				|| price < 0.1) {
-			isCanPay = true;
-		} else {
 			isCanPay = false;
+		} else {
+			isCanPay = true;
 		}
 
 		setContentView(R.layout.contact_detail);
@@ -165,7 +165,7 @@ public class ContactSureActivity extends BaseActivity implements
 
 			break;
 		case R.id.btn_commit_phone_contace:
-			if (isCanPay)
+			if (!isCanPay)
 				return;
 			// 提交订单
 			saveOrder();
@@ -178,19 +178,19 @@ public class ContactSureActivity extends BaseActivity implements
 		String param = new JNICallBack().getHttp4SaveCZOrder(userId, phone,
 				amount, price + "", details, goodsId, token);
 		String url = new JNICallBack().HTTPURL;
-		Log.e("system.out", url + "?" + param);
+//		Log.e("system.out", url + "?" + param);
 
 		HttpClientUtil httpClientUtil = new HttpClientUtil();
 		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
 
 			@Override
 			public void success(String content) {
-				Log.e("system.out", content);
+//				Log.e("system.out", content);
 				ParseRecharge parseRecharge = new ParseRecharge();
 				if (parseRecharge.parseCZOrder(content)) {
 					// 获取订单号
 					String orderCode = parseRecharge.getCzOrderCode();
-					Log.e("system.out", orderCode);
+//					Log.e("system.out", orderCode);
 					if (TextUtils.isEmpty(orderCode))
 						return;
 					/** 根据用户选择的支付方式支付 **/
@@ -209,7 +209,7 @@ public class ContactSureActivity extends BaseActivity implements
 			aliWapPay(orderCode);
 		} else if (cb_zhifubao.isChecked()) {
 			AlicPayUtil util = new AlicPayUtil(this);
-			util.getAlicPay(userId, token, orderCode);
+			util.getAlicPay(userId, token, orderCode, true);
 		} else if (cb_yinlian.isChecked()) {
 			getUnionTn(orderCode);
 		}
