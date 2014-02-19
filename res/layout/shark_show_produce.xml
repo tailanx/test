@@ -24,7 +24,7 @@
         android:src="@drawable/sadface" />
 
     <TextView
-        android:id="@+id/tv_shark_no_produce"
+        android:id="@+id/tv_shark_no_produce_no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

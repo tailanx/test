@@ -49,5 +49,6 @@
     <color name="integer_other">#ED3587</color>
     <color name="bg">#EEEEEE</color>
     <color name="bg_can_not_pay">#b4b4b4</color>
+    <color name="white_white_white">#aaf0f0f0</color>
 
 </resources>

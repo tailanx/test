@@ -22,23 +22,25 @@ import com.yidejia.app.mall.util.IHttpResp;
 public class YouhuiActivity extends BaseActivity implements OnClickListener {
 	private TextView back;// 返回
 	private ListView listview;
-	
-	private float totalPrice = 0.0f;	//总的商品价格
+	private TextView noTextView;
+
+	private float totalPrice = 0.0f; // 总的商品价格
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		
+
 		totalPrice = getIntent().getFloatExtra("totalPrice", 0.0f);
-//		String strTotalPrice = getIntent().getStringExtra("totalPrice");
-//		try{
-//			totalPrice = Float.parseFloat(strTotalPrice);
-//		} catch(NumberFormatException e){
-//			totalPrice = 0.0f;
-//		}
-		
+		// String strTotalPrice = getIntent().getStringExtra("totalPrice");
+		// try{
+		// totalPrice = Float.parseFloat(strTotalPrice);
+		// } catch(NumberFormatException e){
+		// totalPrice = 0.0f;
+		// }
+
 		setContentView(R.layout.youhuiquan);
 		listview = (ListView) findViewById(R.id.youhuiquan_listview);
+		noTextView = (TextView) findViewById(R.id.tv_no_data);
 		setActionbarConfig();
 		setTitle(getString(R.string.youhuiquan_zekou));
 		back = (TextView) findViewById(R.id.ab_common_back);
@@ -54,36 +56,45 @@ public class YouhuiActivity extends BaseActivity implements OnClickListener {
 			break;
 		}
 	}
+
 	/**
 	 * 获取优惠券
 	 */
-	private void getTicket(){
-		String url = new JNICallBack().getHttp4GetTicket(MyApplication.getInstance().getUserId(), MyApplication.getInstance().getToken());
+	private void getTicket() {
+		String url = new JNICallBack().getHttp4GetTicket(MyApplication
+				.getInstance().getUserId(), MyApplication.getInstance()
+				.getToken());
 		HttpClientUtil client = new HttpClientUtil();
 		client.getHttpResp(url, new IHttpResp() {
-			
+
 			@Override
 			public void success(String content) {
 				ParseTickets parseTickets = new ParseTickets();
 				boolean isSuccess = parseTickets.parseTickets(content);
-				if(isSuccess){
+				if (isSuccess) {
 					ArrayList<Ticket> tickets = parseTickets.getTickets();
-					IntegerAdapter adapter = new IntegerAdapter(YouhuiActivity.this, tickets,"Youhuiquan");
+					IntegerAdapter adapter = new IntegerAdapter(
+							YouhuiActivity.this, tickets, "Youhuiquan");
 					adapter.setTotalPrice(totalPrice);
 					listview.setAdapter(adapter);
+				} else {
+					listview.setVisibility(View.GONE);
+					noTextView.setVisibility(View.VISIBLE);
 				}
 			}
 		});
 	}
+
 	@Override
 	protected void onPause() {
 		super.onPause();
-	StatService.onPageEnd(this, "优惠券页面");	
+		StatService.onPageEnd(this, "优惠券页面");
 	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
 		StatService.onPageStart(this, "优惠券页面");
 	}
-	
+
 }
