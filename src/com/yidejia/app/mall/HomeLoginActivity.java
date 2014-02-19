@@ -34,7 +34,7 @@ import com.yidejia.app.mall.widget.WiperSwitch.OnChangedListener;
 
 public class HomeLoginActivity extends HomeBaseActivity implements
 		OnClickListener, OnChangedListener {
-	private MyApplication myApplication;
+//	private MyApplication myApplication;
 	private View view;
 	private LayoutInflater inflater;
 	private FrameLayout frameLayout;
@@ -49,7 +49,7 @@ public class HomeLoginActivity extends HomeBaseActivity implements
 	private WiperSwitch mBox;
 	private SharedPreferences sp;
 	private Consts consts;
-	private RelativeLayout bottomLayout;
+//	private RelativeLayout bottomLayout;
 	public static boolean isCheck;
 
 	private String name = "";
@@ -72,14 +72,14 @@ public class HomeLoginActivity extends HomeBaseActivity implements
 		}
 		setContentView(R.layout.activity_main_fragment_layout);
 
-		myApplication = (MyApplication) getApplication();
+//		myApplication = (MyApplication) getApplication();
 		inflater = LayoutInflater.from(this);
 		view = inflater.inflate(R.layout.my_mall_login, null);
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
 		frameLayout.addView(view);
 
 		// 设置底部
-		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
+//		bottomLayout = (RelativeLayout) findViewById(R.id.down_parent_layout);
 
 		// 添加头部
 		setActionBarConfigView();
@@ -223,14 +223,14 @@ public class HomeLoginActivity extends HomeBaseActivity implements
 	private void login() {
 		String param = new JNICallBack().getHttp4Login(name, pwd, ip);
 		String url = new JNICallBack().HTTPURL;
-		Log.e("system.out", url + "?" + param);
+//		Log.e("system.out", url + "?" + param);
 		HttpClientUtil httpClientUtil = new HttpClientUtil();
 		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
 
 			@Override
 			public void success(String content) {
 				
-				Log.e("system.out", content);
+//				Log.e("system.out", content);
 				
 				Login login = new Login();
 				boolean issuccess = login.parseLogin(content);
@@ -254,6 +254,9 @@ public class HomeLoginActivity extends HomeBaseActivity implements
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
+					if(null != inputMethodManager)
+					inputMethodManager.hideSoftInputFromWindow(HomeLoginActivity.this.getCurrentFocus().getWindowToken(), 0);
+					
 				} else {
 					Toast.makeText(HomeLoginActivity.this, login.getMsg(),
 							Toast.LENGTH_LONG).show();
