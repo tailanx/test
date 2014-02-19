@@ -534,7 +534,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 		String url = jniCallBack.HTTPURL;
 		String params = jniCallBack.getHttp4SaveOrder(userId, tickId, recipientId,
 				"", needJifen + "", expressNum, tmpPostMethod, tmpPeisong, goods,
-				tmpComment, pay_type, token, "android" + VersonNameUtil.getVersionName());
+				tmpComment, pay_type, token, "android" + VersonNameUtil.getVersionName(), ruleId);
 
 		// Log.e("system.out", url+params);
 
@@ -581,10 +581,10 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 							util.getAlicPay(userId, token, orderCode, false);
 						}
 						
-						if(!TextUtils.isEmpty(ruleId)){
-							updateYRH(ruleId);
-						}
-						
+//						if(!TextUtils.isEmpty(ruleId)){
+//							updateYRH(ruleId);
+//						}
+//						
 					} else {
 						String errResult = parseOrder.getErrResult();
 						if (TextUtils.isEmpty(errResult))
@@ -606,7 +606,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 
 		});
 	}
-	
+	/*
 	private void updateYRH(String rule_id){
 		String url = new JNICallBack().HTTPURL;
 		String param = new JNICallBack().getHttp4UpdateYiRiHui(rule_id);
@@ -621,7 +621,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 				
 			}
 		});
-	}
+	}*/
 
 	private String getAddressUrl(boolean isDefault) {
 		String url = "";

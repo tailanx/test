@@ -1487,7 +1487,8 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 //ship_type , ship_entity_name, goods_qty_scr,comments, token, ����post
 jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4SaveOrder(JNIEnv* env,
 		jobject thiz, jstring customer_id, jstring ticket_id, jstring recipient_id, jstring pingou_id, jstring goods_ascore,
-		jstring ship_fee, jstring ship_type, jstring ship_entity_name, jstring goods_qty_scr, jstring comments, jstring pay_type, jstring token, jstring device){
+		jstring ship_fee, jstring ship_type, jstring ship_entity_name, jstring goods_qty_scr, jstring comments, jstring pay_type,
+		jstring token, jstring device, jstring ruleid){
 	char *chcustomer_id = (*env)->GetStringUTFChars(env, customer_id, NULL);
 	char *chticket_id = (*env)->GetStringUTFChars(env, ticket_id, NULL);
 	char *chrecipient_id = (*env)->GetStringUTFChars(env, recipient_id, NULL);
@@ -1501,6 +1502,7 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 	char *chpay_type = (*env)->GetStringUTFChars(env, pay_type, NULL);
 	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 	char *chdevice = (*env)->GetStringUTFChars(env, device, NULL);
+	char *chruleid = (*env)->GetStringUTFChars(env, ruleid, NULL);
 
 	char encrypt[LEN], urlString[LEN];
 	encrypt[0] = 0;
@@ -1534,6 +1536,10 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 	if(chpay_type != NULL)addString(urlString, chpay_type);
 	addString(urlString, "&device_type=");
 	if(chdevice != NULL)addString(urlString, chdevice);
+	if(chruleid != NULL) {
+		addString(urlString, "&rule_id=");
+		addString(urlString, chruleid);
+	}
 	addString(urlString, "&token=");
 	if(chtoken != NULL)addString(urlString, chtoken);
 
