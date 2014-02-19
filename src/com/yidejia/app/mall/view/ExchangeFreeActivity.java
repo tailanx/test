@@ -8,7 +8,6 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -19,7 +18,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,12 +59,13 @@ public class ExchangeFreeActivity extends BaseActivity {
 	private List<HashMap<String, Float>> exchange;// 换购商品
 	private List<HashMap<String, Object>> cart;// 换购商品
 	private VoucherDataManage dataManage;// 用户积分
-	private float voucher;// 用户积分
+//	private float voucher;// 用户积分
 	private MyApplication myApplication;
 	private ArrayList<Cart> mArrayList;
 	// private String isString;
 	private AlertDialog dialog;
-	private float jifen = 0.0f;
+	private float voucher = 0.0f;	//用户总积分
+//	private float needJifen = 0.0f;	//用户本次购买消耗积分
 	private float goodsPrice;
 
 	@SuppressWarnings("unchecked")
@@ -75,7 +74,7 @@ public class ExchangeFreeActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		Intent intent = getIntent();
 		goodsPrice = intent.getFloatExtra("price", 0.0f);
-		jifen = intent.getFloatExtra("voucher", -1);
+		voucher = intent.getFloatExtra("voucher", -1);
 		// isString = intent.getStringExtra("cartActivity");
 		try {
 			mArrayList = (ArrayList<Cart>) intent.getSerializableExtra("carts");
@@ -163,7 +162,7 @@ public class ExchangeFreeActivity extends BaseActivity {
 								}
 								intent.putExtra("price", goodsPrice);
 								intent.putExtra("voucher", voucher);
-								intent.putExtra("jifen", sum1);
+								intent.putExtra("needJifen", sum1);
 
 								intent.putExtra("carts", mArrayList);
 								intent.putExtra("cartActivity", "E");
@@ -175,18 +174,18 @@ public class ExchangeFreeActivity extends BaseActivity {
 						})
 				.setNegativeButton(getResources().getString(R.string.cancel),
 						null).create();
-		if (mArrayList == null) {
+		if (null == mArrayList) {
 			Toast.makeText(ExchangeFreeActivity.this,
 					getResources().getString(R.string.no_network),
 					Toast.LENGTH_SHORT).show();
 		}
 		dataManage = new VoucherDataManage(ExchangeFreeActivity.this);
 		myApplication = (MyApplication) getApplication();
-		if (jifen == -1) {
+		if (voucher == -1) {
 			voucher = Float.parseFloat(dataManage.getUserVoucher(
 					myApplication.getUserId(), myApplication.getToken()));
 		} else {
-			voucher = jifen;
+//			voucher = jifen;
 		}
 
 		InitWidth();
@@ -206,48 +205,6 @@ public class ExchangeFreeActivity extends BaseActivity {
 				dialog.show();
 			}
 		});
-	}
-
-	private void setActionBar() {
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayUseLogoEnabled(false);
-		getSupportActionBar().setCustomView(R.layout.actionbar_search_result);
-		ImageView back = (ImageView) findViewById(R.id.actionbar_left);
-		Button confirm = (Button) findViewById(R.id.actionbar_right);
-		confirm.setText(getResources().getString(R.string.complete));
-		TextView titleTextView = (TextView) findViewById(R.id.actionbar_title);
-		titleTextView.setText(getResources().getString(
-				R.string.produce_exchange));
-		back.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(ExchangeFreeActivity.this,
-						CstmPayActivity.class);
-
-				Bundle bundle = new Bundle();
-				bundle.putFloat("price", goodsPrice);
-				bundle.putFloat("jifen", jifen);
-				intent.putExtra("cartActivity", "E");
-				bundle.putSerializable("carts", mArrayList);
-				intent.putExtras(bundle);
-				ExchangeFreeActivity.this.setResult(
-						Consts.CstmPayActivity_Response, intent);
-				ExchangeFreeActivity.this.finish();
-			}
-		});
-
-		confirm.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				dialog.show();
-			}
-		});
-
 	}
 
 	private void InitTextView() {
