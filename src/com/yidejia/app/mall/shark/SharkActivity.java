@@ -13,9 +13,12 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.OvershootInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,7 +40,7 @@ public class SharkActivity extends Activity implements OnClickListener,
 	private SharkUtil sharkUtil;
 
 	private RelativeLayout noProcue;// 无商品
-	private RelativeLayout produce;// 无商品
+	private RelativeLayout produce;// 商品
 	private RelativeLayout youhuiquan;// 优惠券
 
 	private ImageView quanImageView;
@@ -60,9 +63,12 @@ public class SharkActivity extends Activity implements OnClickListener,
 	private TextView produceTitle;// 商品的名称
 	private TextView producePrice;// 商品的价格
 	private TextView produceChakan;// 商品查看
+	private LayoutParams params;
 	private int count;
 	private DisplayImageOptions options;
 	private Handler handler;
+
+	private Animation anim;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +84,13 @@ public class SharkActivity extends Activity implements OnClickListener,
 		quanAnimation = AnimationUtils.loadAnimation(this,
 				R.anim.my_translate_action);
 		quanImageView.startAnimation(quanAnimation);
+//		startAnimation();
 		guize = (TextView) findViewById(R.id.tv_shark_activity_guize);
 		guize.setOnClickListener(this);
-		produceChakan.setOnClickListener(this);
+
 		handler = new Handler(this);
 		youhuichakan.setOnClickListener(this);
+		produceChakan.setOnClickListener(this);
 	}
 
 	private void initView() {
@@ -94,7 +102,7 @@ public class SharkActivity extends Activity implements OnClickListener,
 
 		quanImageView = (ImageView) findViewById(R.id.iv_yaoyiyao_shou);
 		backImageView = (ImageView) findViewById(R.id.iv_shark_back);
-		youhuichakan = (TextView) findViewById(R.id.tv_shark_no_produce);
+		youhuichakan = (TextView) findViewById(R.id.tv_shark_no_produce_no);
 		youhuicount = (TextView) findViewById(R.id.tv_youhuiquan_price);
 		youhuixianzhi = (TextView) findViewById(R.id.tv_youhuiquan_title);
 		youhuiTime = (TextView) findViewById(R.id.tv_youhuiquan_time_add);
@@ -148,30 +156,24 @@ public class SharkActivity extends Activity implements OnClickListener,
 				ParseShark parseShark = new ParseShark();
 				boolean isSuccess = parseShark.parseShark(content);
 				count = parseShark.getCount();
-
-				// if (count == 0) {
-				// sharkUtil.unregisterListener();
-				// Toast.makeText(SharkActivity.this,
-				// getResources().getString(R.string.no_count),
-				// Toast.LENGTH_SHORT).show();
-				// }
 				if (isSuccess) {
 					Message msg = new Message();
-					msg.what = 1;
+
 					msg.arg1 = count;
-					handler.sendMessage(msg);
+
 					// yaocishu.setText(count);
 					int theType = parseShark.getTheType();
 					switch (theType) {
 					case 1: // 什么都没摇到
 						noProcue.setVisibility(View.VISIBLE);
 						startAnimaton(noProcue);
+						msg.what = 1;
 						break;
 					case 2: // 摇到商品
 
 						produce.setVisibility(View.VISIBLE);
 						startAnimaton(produce);
-
+						// msg.what = 2;
 						info = parseShark.getProductBaseInfo();
 						if (null != info && !"".equals(info)) {
 							ImageLoader.getInstance().init(
@@ -195,6 +197,7 @@ public class SharkActivity extends Activity implements OnClickListener,
 					// startAnimaton(youhuiquan);
 					// break;
 					}
+					handler.sendMessage(msg);
 				}
 			}
 		});
@@ -214,8 +217,44 @@ public class SharkActivity extends Activity implements OnClickListener,
 		sharkUtil.unregisterListener();
 	}
 
-	private void startAnimaton(RelativeLayout rela) {
-		animation = AnimationUtils.loadAnimation(this, R.anim.myown_design);
+	private void startAnimaton(final RelativeLayout rela) {
+		TranslateAnimation animation = new TranslateAnimation(0, 0, -514,0);
+		animation.setInterpolator(new OvershootInterpolator());
+		  animation.setDuration(1000);
+		// animation1 = AnimationUtils.loadAnimation(this,
+		// R.anim.slide_down_in);
+		// animation.setFillAfter(true);
+		animation.setAnimationListener(new Animation.AnimationListener() {
+			@Override
+			public void onAnimationEnd(Animation arg0) {
+				int left = rela.getLeft();
+				int top = rela.getTop() + 770;
+				int width = rela.getWidth();
+				int height = rela.getHeight();      
+				Log.e("info", height+"height");
+				Log.e("info", top+"top");
+				rela.clearAnimation();
+				rela.layout(left, 0, left + width, height);
+				// params = new LayoutParams(
+				// LinearLayout.LayoutParams.WRAP_CONTENT,
+				// LinearLayout.LayoutParams.WRAP_CONTENT);
+				// params.setMargins(0, 450, 0, 0);
+				// youhuichakan.setLayoutParams(params);
+
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void onAnimationStart(Animation animation) {
+				// TODO Auto-generated method stub
+			}
+		});
+
+		// animation.setFillAfter(true);
 		rela.startAnimation(animation);
 	}
 
@@ -227,17 +266,17 @@ public class SharkActivity extends Activity implements OnClickListener,
 			break;
 
 		case R.id.tv_shark_activity_guize:// 规则
-			Intent intent1= new Intent(this, GuizeActivity.class);
+			Intent intent1 = new Intent(this, GuizeActivity.class);
 			startActivity(intent1);
-//			LinearLayout root = new LinearLayout(this);
-//			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-//					LinearLayout.LayoutParams.MATCH_PARENT,
-//					LinearLayout.LayoutParams.WRAP_CONTENT);
-//			WebView webView = new WebView(this);
-//			webView.setLayoutParams(lp);
-//			root.addView(webView);
-//			webView.loadUrl("http://m.yidejia.com/shakerules.html");
-//			setContentView(root);
+			// LinearLayout root = new LinearLayout(this);
+			// LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+			// LinearLayout.LayoutParams.MATCH_PARENT,
+			// LinearLayout.LayoutParams.WRAP_CONTENT);
+			// WebView webView = new WebView(this);
+			// webView.setLayoutParams(lp);
+			// root.addView(webView);
+			// webView.loadUrl("http://m.yidejia.com/shakerules.html");
+			// setContentView(root);
 			break;
 		case R.id.tv_shark_no_produce_add:
 			Intent intent = new Intent(this, GoodsInfoActivity.class);
@@ -245,8 +284,9 @@ public class SharkActivity extends Activity implements OnClickListener,
 			bundle.putString("goodsId", info.getUId());
 			intent.putExtras(bundle);
 			SharkActivity.this.startActivity(intent);
+			Log.e("info", "chakan");
 			break;
-		case R.id.tv_shark_no_produce:// 再摇一次】
+		case R.id.tv_shark_no_produce_no:// 再摇一次
 			noProcue.setVisibility(View.GONE);
 			produce.setVisibility(View.GONE);
 			youhuiquan.setVisibility(View.GONE);
@@ -259,11 +299,25 @@ public class SharkActivity extends Activity implements OnClickListener,
 	@Override
 	public boolean handleMessage(Message msg) {
 		switch (msg.what) {
-		case 1:
+		case 1:// 什么都没有摇到
+				// noProcue.startAnimation(anim);
 			yaocishu.setText(msg.arg1 + "");
+			//
 			break;
-
+		case 2:// 摇到了商品
+				// produce.startAnimation(anim);
+				// produceChakan.setOnClickListener(this);
 		}
 		return false;
 	}
+
+	// /**
+	// * 启动打印小票动画
+	// */
+	// private void startAnimation() {
+	// anim = AnimationUtils.loadAnimation(this, R.anim.slide_down_in);
+	// anim.setDuration(1000);
+	// anim.setFillAfter(true);
+	// // rl_payInfo.startAnimation(anim);
 }
+// }

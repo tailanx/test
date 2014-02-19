@@ -39,6 +39,7 @@
             android:layout_marginTop="@dimen/margin_left"
             android:lines="2"
             android:text="@string/shared_youhuiquan" />
+
         <TextView
             android:id="@+id/tv_youhuiquan_time"
             android:layout_width="wrap_content"
@@ -48,14 +49,15 @@
             android:layout_marginTop="@dimen/actiobar_margin_top"
             android:gravity="center_vertical"
             android:text="@string/shared_youhuiquan_time" />
+
         <TextView
             android:id="@+id/tv_youhuiquan_time_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_youhuiquan_title"
             android:layout_marginLeft="@dimen/actiobar_margin_top"
-            android:layout_toRightOf="@id/tv_youhuiquan_time"
             android:layout_marginTop="@dimen/actiobar_margin_top"
+            android:layout_toRightOf="@id/tv_youhuiquan_time"
             android:gravity="center_vertical"
             android:text="@string/shared_youhuiquan_time" />
     </RelativeLayout>
@@ -69,6 +71,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/theme_textview_background"
+        android:clickable="true"
         android:contentDescription="@string/yidejia"
         android:gravity="center"
         android:padding="10dp"

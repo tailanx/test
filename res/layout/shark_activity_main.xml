@@ -36,53 +36,62 @@
             android:textSize="22sp" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/re_activity_top" >
+        android:layout_height="match_parent"
+        android:layout_below="@id/re_activity_top"
+        android:layout_marginTop="60dp"
+        android:gravity="center" >
 
         <ImageView
+            android:id="@+id/iv_export"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/yidejia"
-            android:src="@drawable/yao_box" />
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/yao_box" />
 
         <RelativeLayout
-            android:id="@+id/Re_show_produce"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/mall_list_padding"
-            android:layout_marginRight="@dimen/mall_list_padding"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="75dp"
-            android:visibility="gone" >
+            android:gravity="top"
+            android:orientation="vertical" >
 
-            <include layout="@layout/shark_show_produce" />
+            <RelativeLayout
+                android:id="@+id/Re_show_produce"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/actiobar_margin_top"
+                android:layout_marginRight="@dimen/magin_left_add_add_add"
+                android:layout_marginTop="-514dip" >
+
+                <include layout="@layout/shark_show_produce" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/Re_show_produce_youhuiquan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/actiobar_margin_top"
+                android:layout_marginRight="@dimen/magin_left_add_add_add"
+                android:layout_marginTop="-514dip" >
+
+                <include layout="@layout/shark_youhuiquan" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/Re_show_produce_add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/actiobar_margin_top"
+                android:layout_marginRight="@dimen/magin_left_add_add_add"
+                android:layout_marginTop="-514dip" >
+
+                <include layout="@layout/shark_produce" />
+            </RelativeLayout>
         </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/Re_show_produce_youhuiquan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/mall_list_padding"
-            android:layout_marginRight="@dimen/mall_list_padding"
-            android:layout_marginTop="75dp"
-            android:visibility="gone" >
-
-            <include layout="@layout/shark_youhuiquan" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/Re_show_produce_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/mall_list_padding"
-            android:layout_marginRight="@dimen/mall_list_padding"
-            android:layout_marginTop="75dp"
-            android:visibility="gone" >
-
-            <include layout="@layout/shark_produce" />
-        </RelativeLayout>
-    </RelativeLayout>
+    </FrameLayout>
 
     <ImageView
         android:id="@+id/iv_yaoyiyao_shou"
