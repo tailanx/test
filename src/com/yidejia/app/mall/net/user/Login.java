@@ -90,8 +90,8 @@ public class Login {
 				message = myApplication.getResources().getString(R.string.login_success);
 				myApplication.setIsLogin(true);
 				return true;
-			} else{
-				message = jsonObject.optString("msg");
+			} else {
+				message = "用户不存在或密码错误";
 				isSuccess = false;
 			}
 		} catch (JSONException e) {
