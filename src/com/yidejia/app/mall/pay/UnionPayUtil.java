@@ -10,7 +10,6 @@ import com.baidu.mobstat.StatService;
 import com.unionpay.UPPayAssistEx;
 import com.unionpay.uppay.PayActivity;
 import com.yidejia.app.mall.order.AllOrderActivity;
-import com.yidejia.app.mall.order.WaitPayActivity;
 import com.yidejia.app.mall.util.ActivityIntentUtil;
 
 public class UnionPayUtil {

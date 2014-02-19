@@ -178,19 +178,19 @@ public class ContactSureActivity extends BaseActivity implements
 		String param = new JNICallBack().getHttp4SaveCZOrder(userId, phone,
 				amount, price + "", details, goodsId, token);
 		String url = new JNICallBack().HTTPURL;
-		Log.e("system.out", url + "?" + param);
+//		Log.e("system.out", url + "?" + param);
 
 		HttpClientUtil httpClientUtil = new HttpClientUtil();
 		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
 
 			@Override
 			public void success(String content) {
-				Log.e("system.out", content);
+//				Log.e("system.out", content);
 				ParseRecharge parseRecharge = new ParseRecharge();
 				if (parseRecharge.parseCZOrder(content)) {
 					// 获取订单号
 					String orderCode = parseRecharge.getCzOrderCode();
-					Log.e("system.out", orderCode);
+//					Log.e("system.out", orderCode);
 					if (TextUtils.isEmpty(orderCode))
 						return;
 					/** 根据用户选择的支付方式支付 **/

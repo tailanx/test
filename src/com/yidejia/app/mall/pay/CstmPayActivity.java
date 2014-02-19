@@ -117,9 +117,13 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 
 	private boolean isCanPay = false;	//所有数据都获取成功，可以点击支付按钮
 	private String tickId = "0";	//优惠券id
+	private String tickMoney = "0.0";	//优惠券面值
 	private boolean isCanHuanGou = true;		//是否可以免费换购
 	private boolean isCanTicket = true;	//是否可以使用优惠券
 	private String ruleId = "";		//伊日惠id
+	
+	private String generalNum = "0";		//快递费用
+	private String emsNum = "0";	//ems邮费
 
 	public static ArrayList<Specials> getArrayListFree() {
 		return arrayListFree;
@@ -267,7 +271,8 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 						try {
 							expressNum = tv_generalPrice.getText().toString();
 							tv_sumPrice.setText((goodsPrice
-									+ Float.parseFloat(expressNum)) + "");
+									+ Float.parseFloat(expressNum))  - Float
+									.parseFloat(tickMoney) + "");
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -286,7 +291,8 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 						try {
 							expressNum = tv_emsPrice.getText().toString();
 							tv_sumPrice.setText((goodsPrice
-									+ Float.parseFloat(expressNum)) + "");
+									+ Float.parseFloat(expressNum)) - Float
+									.parseFloat(tickMoney) + "");
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -847,14 +853,19 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 					if (isSuccess) {
 						expressArray = parseExpressJson.getExpresses();
 						if (null != expressArray && 0 != expressArray.size()) {
-							showExpressNum(expressArray.get(0).getExpress(),
-									expressArray.get(0).getEms());
+							generalNum = expressArray.get(0).getExpress();
+							emsNum = expressArray.get(0).getEms();
+							showExpressNum();
 							preId = expressArray.get(0).getPreId();
 							if (isDefault) {
 								getDeliveryPoint(isDefault);
 							} else {
-								isCanPay = true;
-								tv_saveOrderBtn.setSelected(true);
+								if (!TextUtils.isEmpty(generalNum)
+										&& !TextUtils.isEmpty(emsNum)) {
+									//邮费不为空时，可购买
+									isCanPay = true;
+									tv_saveOrderBtn.setSelected(true);
+								}
 							}
 						} else {
 							// TODO
@@ -954,7 +965,8 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 		try {
 			if (null != freePosts && freePosts.size() != 0)
 				fP = Float.parseFloat(freePosts.get(0).getMax());
-			if (goodsPrice >= (fP - 0.001)) {// 大于等于免邮费用
+			if ((goodsPrice - Float
+					.parseFloat(tickMoney)) >= (fP - 0.001)) {// 大于等于免邮费用
 				isFree = true;
 				expressNum = "0";
 			} else {
@@ -1117,18 +1129,20 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 
 	private ArrayList<Express> expressArray;
 
-	private void showExpressNum(String generalNum, String emsNum) {
+	private void showExpressNum() {
 		if (isFree) {
 			tv_generalPrice.setText("0");
 			tv_emsPrice.setText("0");
 			expressNum = "0";
-			tv_sumPrice.setText((goodsPrice + Float.parseFloat(expressNum)) + "");
+			tv_sumPrice.setText((goodsPrice + Float.parseFloat(expressNum)) - Float
+					.parseFloat(tickMoney) + "");
 		} else {
 			tv_generalPrice.setText(generalNum);
 			tv_emsPrice.setText(emsNum);
 			expressNum = (cb_general.isChecked() ? tv_generalPrice.getText()
 					.toString() : tv_emsPrice.getText().toString());
-			tv_sumPrice.setText((goodsPrice + Float.parseFloat(expressNum)) + "");
+			tv_sumPrice.setText((goodsPrice + Float.parseFloat(expressNum)) - Float
+					.parseFloat(tickMoney) + "");
 		}
 	}
 
@@ -1188,21 +1202,38 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 			}
 		} else if (Consts.YOUHUIQUAN_REQUEST == requestCode
 				&& Consts.YOUHUIQUAN_RESPONSE == resultCode) {//使用优惠权的返回值
-			String youhuiData = data.getExtras().getString("youhuiquan");
+			tickMoney = data.getExtras().getString("youhuiquan");
 			tickId = data.getExtras().getString("tickId");
 			String tickName = data.getExtras().getString("tickName");
 //			Log.e("system.out", "price:" + youhuiData + ":id:" + tickId + ":name:" + tickName);
 			if(TextUtils.isEmpty(tickId)) tickId = "0";
-			if (null != youhuiData && null != tvTicketName) {
+			if (null != tickMoney && null != tvTicketName) {
 				tvTicketName.setText("(" + tickName + ")");
 				try {
 					float priceF = (goodsPrice + Float.parseFloat(expressNum) - Float
-							.parseFloat(youhuiData));
+							.parseFloat(tickMoney));
 					if (priceF < 0.001){
 						isCanPay = false;
 						return;
 					}
-					tv_sumPrice.setText(priceF + "");
+					
+					float fP = Float.MAX_VALUE;
+					try {
+						if (null != freePosts && freePosts.size() != 0)
+							fP = Float.parseFloat(freePosts.get(0).getMax());
+						if (priceF >= (fP - 0.001)) {// 大于等于免邮费用
+							isFree = true;
+							expressNum = "0";
+							tv_sumPrice.setText(priceF + "");
+						} else {
+							isFree = false;
+//							getExpressData(province, true);
+							showExpressNum();
+						}
+					} catch (NumberFormatException e) {
+						e.printStackTrace();
+					}
+					
 				} catch (NumberFormatException e) {
 					e.printStackTrace();
 					isCanPay = false;
