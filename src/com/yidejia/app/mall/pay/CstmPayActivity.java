@@ -51,6 +51,7 @@ import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.HttpClientUtil;
 import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.util.PayUtil;
+import com.yidejia.app.mall.util.VersonNameUtil;
 import com.yidejia.app.mall.view.ExchangeFreeActivity;
 import com.yidejia.app.mall.view.LoginActivity;
 import com.yidejia.app.mall.youhui.YouhuiActivity;
@@ -94,7 +95,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 	private String tn;// 流水号
 	private LinearLayout layout;
 	public static ArrayList<Cart> cartList;
-	private float needJifen = 0;
+	private float needJifen = 0;	//用户本次购买消耗积分
 	public static String voucherString1;// 积分
 	private ModelAddresses showAddress;
 	private ArrayList<FreePost> freePosts; // 免邮条件列表
@@ -111,7 +112,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 	private String contentType;
 
 	private float goodsPrice;
-	private float voucher;
+	private float voucher;	//用户总积分
 //	private final String TAG = getClass().getName();
 
 	private boolean isCanPay = false;	//所有数据都获取成功，可以点击支付按钮
@@ -527,7 +528,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 		String url = jniCallBack.HTTPURL;
 		String params = jniCallBack.getHttp4SaveOrder(userId, tickId, recipientId,
 				"", needJifen + "", expressNum, tmpPostMethod, tmpPeisong, goods,
-				tmpComment, pay_type, token, "android");
+				tmpComment, pay_type, token, "android" + VersonNameUtil.getVersionName());
 
 		// Log.e("system.out", url+params);
 
@@ -571,7 +572,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 						} else if (mode == 2) {
 							AlicPayUtil util = new AlicPayUtil(
 									CstmPayActivity.this);
-							util.getAlicPay(userId, token, orderCode);
+							util.getAlicPay(userId, token, orderCode, false);
 						}
 						
 						if(!TextUtils.isEmpty(ruleId)){
@@ -1165,7 +1166,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 			carts = (ArrayList<Cart>) data.getSerializableExtra("carts");
 
 			voucher = data.getFloatExtra("voucher", -1);
-			needJifen = data.getFloatExtra("jifen", -1);
+			needJifen = data.getFloatExtra("needJifen", -1);
 
 			layout.removeAllViews();
 			PayUtil pay = new PayUtil(CstmPayActivity.this, layout);

@@ -3103,11 +3103,12 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 	return (*env)->NewStringUTF(env, urlString);
 }
 jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4AlicSign(JNIEnv* env,
-		jobject thiz, jstring userid, jstring token, jstring ordercode){//
+		jobject thiz, jstring userid, jstring token, jstring ordercode, jstring isMobile){//
 
 	char *chuid = (*env)->GetStringUTFChars(env, userid, NULL);
 	char *chtoken = (*env)->GetStringUTFChars(env, token, NULL);
 	char *chorder = (*env)->GetStringUTFChars(env, ordercode, NULL);
+	char *chIsMobile = (*env)->GetStringUTFChars(env, isMobile, NULL);
 
 	char encrypt[LEN] , urlString[LEN];
 	encrypt[0] = 0;
@@ -3122,6 +3123,10 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 	if(chtoken != NULL)addString(urlString, chtoken);
 	addString(urlString, "&code=");
 	if(chorder != NULL)addString(urlString, chorder);
+	if(chIsMobile != NULL) {
+		addString(urlString, "&is_mobile=");
+		addString(urlString, chIsMobile);
+	}
 
 	addString(urlString, pHead);
 

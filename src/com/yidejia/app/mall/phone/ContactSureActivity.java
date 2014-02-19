@@ -202,7 +202,7 @@ public class ContactSureActivity extends BaseActivity implements OnClickListener
 			aliWapPay(orderCode);
 		} else if(cb_zhifubao.isChecked()){
 			AlicPayUtil util = new AlicPayUtil(this);
-			util.getAlicPay(userId, token, orderCode);
+			util.getAlicPay(userId, token, orderCode, true);
 		} else if(cb_yinlian.isChecked()){
 			getUnionTn(orderCode);
 		}

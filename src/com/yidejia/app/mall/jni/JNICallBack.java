@@ -179,7 +179,7 @@ public class JNICallBack {
 	public native String getHttp4SignCount(String userId, String token);
 	
 	/**获取支付宝的拼接字符串**/
-	public native String getHttp4AlicSign(String userId, String token, String orderCode);
+	public native String getHttp4AlicSign(String userId, String token, String orderCode, String isMobile);
 	
 	/**获取爱豆总数**/
 	public native String getHttp4GetGold(String userId, String token);

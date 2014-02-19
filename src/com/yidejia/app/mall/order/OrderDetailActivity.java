@@ -287,7 +287,7 @@ public class OrderDetailActivity extends BaseActivity implements
 			break;
 		case Consts.CHANGE_ZHIFUBAO:
 			AlicPayUtil util = new AlicPayUtil(this);
-			util.getAlicPay(MyApplication.getInstance().getUserId(), MyApplication.getInstance().getToken(), orderCode);
+			util.getAlicPay(MyApplication.getInstance().getUserId(), MyApplication.getInstance().getToken(), orderCode, false);
 		default:
 			break;
 		}
