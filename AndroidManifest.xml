@@ -20,7 +20,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="8"
         android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -185,7 +185,7 @@
         <!--
              <activity
             android:name="com.yidejia.app.mall.view.NewAddressActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" />
         -->
         <activity
             android:name="com.yidejia.app.mall.EditorActivity"
@@ -363,7 +363,13 @@
             android:name="com.yidejia.app.mall.youhui.YouhuiGuiZeActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.yidejia.app.mall.phone.PhoneOrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.yidejia.app.mall.shark.GuizeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yidejia.app.mall.yirihui.YiGuiZeActivity"
             android:screenOrientation="portrait" />
 
         <service android:name="com.yidejia.app.mall.log.LogService" >

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/all_order_item_main_linerar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/actiobar_margin_top"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/all_order_item_main_produce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/p_bg" >
+
+        <TextView
+            android:id="@+id/all_order_item_main_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="4dp"
+            android:text="@string/order_state"
+            android:textColor="@color/text_color_80"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/all_order_item_main_item_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/all_order_item_main_item"
+            android:textColor="@color/text_color_80"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/all_order_item_main_item_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/all_order_item_main_item"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:textColor="@color/text_color_80"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/all_order_item_main_item_textview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/all_order_item_main_item"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/all_order_item_main_item_number"
+            android:text="订单号："
+            android:textColor="@color/text_color_80"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/all_relative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/main_cart_textview_bg" >
+
+        <ImageView
+            android:id="@+id/all_order_item_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/product_image_bg"
+            android:padding="10dp" />
+
+        <TextView
+            android:id="@+id/all_order_item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@id/all_order_item_image"
+            android:ellipsize="end"
+            android:lines="2"
+            android:textColor="@color/text_color_80"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/all_order_item_sum_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/all_order_item_text"
+            android:layout_toRightOf="@id/all_order_item_image"
+            android:textColor="@color/theme"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/all_order_item_sum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/all_order_item_sum_detail"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/all_order_item_image"
+            android:text="@string/unit"
+            android:textColor="@color/theme"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/p_bg" >
+
+        <TextView
+            android:id="@+id/all_order_item_main_sum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="15dp"
+            android:text="下单时间："
+            android:textColor="@color/text_color_80"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/all_order_item_main_sum_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/all_order_item_main_sum"
+            android:textColor="@color/text_color_80"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+</LinearLayout>
