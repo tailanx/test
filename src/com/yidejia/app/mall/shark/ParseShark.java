@@ -3,7 +3,10 @@ package com.yidejia.app.mall.shark;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import com.yidejia.app.mall.model.ProductBaseInfo;
+import com.yidejia.app.mall.net.ImageUrl;
 
 /**
  * 解析摇一摇数据
@@ -65,6 +68,7 @@ public class ParseShark {
 	 */
 	private void parseGoods(String strData) {
 		try {
+			Log.e("info", strData);
 			JSONObject dataObject = new JSONObject(strData);
 
 			productBaseInfo = new ProductBaseInfo();
@@ -76,7 +80,7 @@ public class ParseShark {
 			productBaseInfo.setSalledAmount(dataObject.optString("sells"));
 			productBaseInfo.setCommentAmount(dataObject.optString("remarks"));
 			productBaseInfo.setProductNumber(dataObject.optString("the_code"));
-			productBaseInfo.setImgUrl(dataObject.optString("imgname"));
+			productBaseInfo.setImgUrl(ImageUrl.IMAGEURL + dataObject.optString("imgname") + "!200");
 			productBaseInfo.setProductSpecifications(dataObject
 					.optString("sepc"));
 			productBaseInfo.setShowListAmount(dataObject.optString("shaidan"));

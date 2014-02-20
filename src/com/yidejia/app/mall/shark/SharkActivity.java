@@ -231,9 +231,8 @@ public class SharkActivity extends Activity implements OnClickListener,
 				int top = rela.getTop() + 770;
 				int width = rela.getWidth();
 				int height = rela.getHeight();      
-				Log.e("info", height+"height");
-				Log.e("info", top+"top");
 				rela.clearAnimation();
+				Log.e("info", top+"");
 				rela.layout(left, 0, left + width, height);
 				// params = new LayoutParams(
 				// LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -268,15 +267,6 @@ public class SharkActivity extends Activity implements OnClickListener,
 		case R.id.tv_shark_activity_guize:// 规则
 			Intent intent1 = new Intent(this, GuizeActivity.class);
 			startActivity(intent1);
-			// LinearLayout root = new LinearLayout(this);
-			// LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-			// LinearLayout.LayoutParams.MATCH_PARENT,
-			// LinearLayout.LayoutParams.WRAP_CONTENT);
-			// WebView webView = new WebView(this);
-			// webView.setLayoutParams(lp);
-			// root.addView(webView);
-			// webView.loadUrl("http://m.yidejia.com/shakerules.html");
-			// setContentView(root);
 			break;
 		case R.id.tv_shark_no_produce_add:
 			Intent intent = new Intent(this, GoodsInfoActivity.class);
