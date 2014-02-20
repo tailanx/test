@@ -157,6 +157,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 			isCanHuanGou = bundle.getBoolean("canHuanGou", true);
 			isCanTicket = bundle.getBoolean("canTicket", true);
 			ruleId = bundle.getString("ruleId");
+			if(null == ruleId) ruleId = "";
 			carts = (ArrayList<Cart>) intent.getSerializableExtra("carts");
 			isCartActivity = intent.getStringExtra("cartActivity");
 
