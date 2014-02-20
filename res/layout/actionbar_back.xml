@@ -7,10 +7,10 @@
         android:id="@+id/tv_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/mall_list_padding"
-        android:text="X"
+        android:layout_marginLeft="@dimen/mall_list_padding"
+        android:text="&lt;-"
         android:textColor="@color/white_white"
         android:textSize="@dimen/text_size" />
 
