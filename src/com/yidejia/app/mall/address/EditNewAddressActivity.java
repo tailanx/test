@@ -108,7 +108,8 @@ public class EditNewAddressActivity extends BaseActivity {
 		ModelAddresses addresses = null;
 		if (null != bundle) {
 			addresses = (ModelAddresses) bundle.get("editaddress");
-			strTitle = "编辑收货地址";
+			if(null != addresses)
+				strTitle = "编辑收货地址";
 		}
 
 		setActionbar();
