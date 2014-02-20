@@ -199,5 +199,7 @@ public class JNICallBack {
 	public native String getHttp4SaveCZOrder(String userId, String hanset, String amount, String price, String goodsName, String goodsId, String token);
 	/**获取用户手机充值的订单**/
 	public native String getHttp4GetCZOrder(String userId, String offset, String limit, String token);
+	/**获取首页伊日惠数据**/
+	public native String getHttp4GetYRHHome();
 }	
 	
