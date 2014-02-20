@@ -79,7 +79,7 @@ public class SharkUtil {
 //				vibrator.vibrate(200);
 //				handler = new Handler();
 				iShark.onStart();
-				vibrator.vibrate(new long[]{10, 200, 500, 200}, -1);
+				vibrator.vibrate(new long[] { 500, 200, 500, 200 }, -1);//第一个参数是震动的前奏时间，第二个参数是震动到不震动的时间
 //				handler.postDelayed(runnable, 3000);
 //				handler.postDelayed(runnable, 800);
 			}

@@ -84,7 +84,7 @@ public class SharkActivity extends Activity implements OnClickListener,
 		quanAnimation = AnimationUtils.loadAnimation(this,
 				R.anim.my_translate_action);
 		quanImageView.startAnimation(quanAnimation);
-//		startAnimation();
+		// startAnimation();
 		guize = (TextView) findViewById(R.id.tv_shark_activity_guize);
 		guize.setOnClickListener(this);
 
@@ -173,7 +173,7 @@ public class SharkActivity extends Activity implements OnClickListener,
 
 						produce.setVisibility(View.VISIBLE);
 						startAnimaton(produce);
-						// msg.what = 2;
+						 msg.what = 2;
 						info = parseShark.getProductBaseInfo();
 						if (null != info && !"".equals(info)) {
 							ImageLoader.getInstance().init(
@@ -218,9 +218,9 @@ public class SharkActivity extends Activity implements OnClickListener,
 	}
 
 	private void startAnimaton(final RelativeLayout rela) {
-		TranslateAnimation animation = new TranslateAnimation(0, 0, -514,0);
+		TranslateAnimation animation = new TranslateAnimation(0, 0, -514, 0);
 		animation.setInterpolator(new OvershootInterpolator());
-		  animation.setDuration(1000);
+		animation.setDuration(1000);
 		// animation1 = AnimationUtils.loadAnimation(this,
 		// R.anim.slide_down_in);
 		// animation.setFillAfter(true);
@@ -230,9 +230,9 @@ public class SharkActivity extends Activity implements OnClickListener,
 				int left = rela.getLeft();
 				int top = rela.getTop() + 770;
 				int width = rela.getWidth();
-				int height = rela.getHeight();      
+				int height = rela.getHeight();
 				rela.clearAnimation();
-				Log.e("info", top+"");
+
 				rela.layout(left, 0, left + width, height);
 				// params = new LayoutParams(
 				// LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -274,7 +274,7 @@ public class SharkActivity extends Activity implements OnClickListener,
 			bundle.putString("goodsId", info.getUId());
 			intent.putExtras(bundle);
 			SharkActivity.this.startActivity(intent);
-			Log.e("info", "chakan");
+
 			break;
 		case R.id.tv_shark_no_produce_no:// 再摇一次
 			noProcue.setVisibility(View.GONE);
@@ -291,23 +291,17 @@ public class SharkActivity extends Activity implements OnClickListener,
 		switch (msg.what) {
 		case 1:// 什么都没有摇到
 				// noProcue.startAnimation(anim);
+			Log.e("info", msg.arg1 + "msg.arg1");
 			yaocishu.setText(msg.arg1 + "");
 			//
 			break;
 		case 2:// 摇到了商品
+			Log.e("info", msg.arg1 + "msg.arg2");
+			yaocishu.setText(msg.arg1 + "");
 				// produce.startAnimation(anim);
 				// produceChakan.setOnClickListener(this);
 		}
 		return false;
 	}
 
-	// /**
-	// * 启动打印小票动画
-	// */
-	// private void startAnimation() {
-	// anim = AnimationUtils.loadAnimation(this, R.anim.slide_down_in);
-	// anim.setDuration(1000);
-	// anim.setFillAfter(true);
-	// // rl_payInfo.startAnimation(anim);
 }
-// }

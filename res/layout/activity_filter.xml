@@ -46,6 +46,6 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/filter_listview"
-        android:src="@drawable/filter_line" />
+        android:background="@color/line_color" />
 
 </RelativeLayout>
