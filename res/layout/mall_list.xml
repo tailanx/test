@@ -30,7 +30,35 @@
             android:padding="@dimen/mall_list_padding"
             android:src="@drawable/arrow" />
     </RelativeLayout>
+  <RelativeLayout
+        android:id="@+id/re_main2_main2_linearlayout4_all_show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/width_add_fun"
+        android:background="@drawable/layout_selector2"
+       >
 
+        <TextView
+            android:id="@+id/tv_main2_main2_linearlayout4_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:text="@string/phone_order"
+            android:textColor="@color/text_color_80"
+            android:textSize="@dimen/textsize_big" />
+
+        <ImageView
+            android:id="@+id/tv_main2_main2_linearlayout4_imageview2_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/yidejia"
+            android:padding="@dimen/mall_list_padding"
+            android:src="@drawable/arrow" />
+    </RelativeLayout>
+    
     <RelativeLayout
         android:id="@+id/re_main2_main2_linearlayout4_integer"
         android:layout_width="match_parent"
@@ -172,35 +200,7 @@
             android:src="@drawable/arrow" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/re_main2_main2_linearlayout4_all_show"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_left"
-        android:background="@drawable/layout_selector2"
-        android:visibility="gone" >
-
-        <TextView
-            android:id="@+id/tv_main2_main2_linearlayout4_show"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/margin_left"
-            android:text="@string/show"
-            android:textColor="@color/text_color_80"
-            android:textSize="@dimen/textsize_big" />
-
-        <ImageView
-            android:id="@+id/tv_main2_main2_linearlayout4_imageview2_show"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:contentDescription="@string/yidejia"
-            android:padding="@dimen/mall_list_padding"
-            android:src="@drawable/arrow" />
-    </RelativeLayout>
-
+  
     <RelativeLayout
         android:id="@+id/re_main2_main2_linearlayout4_all_return"
         android:layout_width="match_parent"

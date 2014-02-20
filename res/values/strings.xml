@@ -355,4 +355,6 @@
     <string name="youhui_guize">优惠券使用规则</string>
     <string name="no_youhuiquan">亲，您还没有优惠券</string>
     <string name="shared_yguize">摇一摇规则</string>
+    <string name="phone_order">手机订单</string>
+    <string name="phone_order_title">手机充值订单</string>
 </resources>

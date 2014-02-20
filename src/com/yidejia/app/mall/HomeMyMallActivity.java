@@ -33,6 +33,7 @@ import com.yidejia.app.mall.order.AlreadyOrderActivity;
 import com.yidejia.app.mall.order.ExchangeActivity;
 import com.yidejia.app.mall.order.WaitDeliverActivity;
 import com.yidejia.app.mall.order.WaitPayActivity;
+import com.yidejia.app.mall.phone.PhoneOrderActivity;
 import com.yidejia.app.mall.tickets.IntegeralActivity;
 
 public class HomeMyMallActivity extends HomeBaseActivity implements
@@ -142,9 +143,9 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 			intent = new Intent();
 			intent.setClass(this, AddressActivity.class);
 			break;
-		case R.id.re_main2_main2_linearlayout4_all_show:// 评价晒单
+		case R.id.re_main2_main2_linearlayout4_all_show://手机订单
 			intent = new Intent();
-			intent.setClass(this, EvaluationActivity.class);
+			intent.setClass(this, PhoneOrderActivity.class);
 			break;
 		case R.id.tv_favorites:// 收藏
 			intent = new Intent();

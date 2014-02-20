@@ -10,6 +10,31 @@ import com.yidejia.app.mall.model.Cart;
  *
  */
 public class Order {
+	public String getPay_money() {
+		return pay_money;
+	}
+	public void setPay_money(String pay_money) {
+		this.pay_money = pay_money;
+	}
+	public String getDetail() {
+		return detail;
+	}
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+	public String getNumber() {
+		return number;
+	}
+	public void setNumber(String number) {
+		this.number = number;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	private String orderId ; //订单id
 	private String orderCode;           //订单号
 	private String status;              //订单状态（已付款，待确认等）
@@ -22,7 +47,15 @@ public class Order {
     private String core;//积分
     private String date;// 时间
     
+    
     private String tn;//流水号
+    private String detail;//订单详情
+    private String number;//手机号
+    private String image;//手机图片
+    private String pay_money;//支付的钱
+    
+    
+    
     /**
      * 订单号
      * @param orderCode 订单号
