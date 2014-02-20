@@ -117,7 +117,6 @@
         </activity>
         <activity
             android:name="com.yidejia.app.mall.WelcomeActivity"
-            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/Loading" >
             <intent-filter>
@@ -185,7 +184,7 @@
         <!--
              <activity
             android:name="com.yidejia.app.mall.view.NewAddressActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" />
         -->
         <activity
             android:name="com.yidejia.app.mall.EditorActivity"
