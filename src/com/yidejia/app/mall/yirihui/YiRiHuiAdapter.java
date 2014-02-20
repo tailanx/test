@@ -9,6 +9,8 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.pay.CstmPayActivity;
+import com.yidejia.app.mall.util.Consts;
+import com.yidejia.app.mall.view.LoginActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class YiRiHuiAdapter extends BaseAdapter{
 	
@@ -168,6 +171,8 @@ public class YiRiHuiAdapter extends BaseAdapter{
 				public void onClick(View v) {
 					
 					if(!holder.tvBuyNow.isSelected()) return;
+					//检查是否登录
+					if(!isLogin()) return;
 					
 					Cart cart = new Cart();
 					cart.setUId(goodsId);
@@ -216,19 +221,18 @@ public class YiRiHuiAdapter extends BaseAdapter{
 		}
 	}
 	
-	private void go2Pay(float price, ArrayList<Cart> carts, String ruleId){
-		
-			Intent intent = new Intent(activity, CstmPayActivity.class);
-			Bundle bundle = new Bundle();
-			bundle.putFloat("price", price);
-			bundle.putBoolean("canHuanGou", false);
-			bundle.putBoolean("canTicket", false);
-//			bundle.putBoolean("isYRH", true);
-			bundle.putString("ruleId", ruleId);
-			intent.putExtras(bundle);
-			intent.putExtra("carts", carts);
-			activity.startActivity(intent);
-		
+	private void go2Pay(float price, ArrayList<Cart> carts, String ruleId) {
+		Intent intent = new Intent(activity, CstmPayActivity.class);
+		Bundle bundle = new Bundle();
+		bundle.putFloat("price", price);
+		bundle.putBoolean("canHuanGou", false);
+		bundle.putBoolean("canTicket", false);
+		// bundle.putBoolean("isYRH", true);
+		bundle.putString("ruleId", ruleId);
+		intent.putExtras(bundle);
+		intent.putExtra("carts", carts);
+		activity.startActivity(intent);
+
 	}
 	
 	private void setLongText(ViewHolder holder){
@@ -245,6 +249,22 @@ public class YiRiHuiAdapter extends BaseAdapter{
 		default:
 			break;
 		}
+	}
+	
+	/** 检查是否已登录 **/
+	private boolean isLogin() {
+		if (!MyApplication.getInstance().getIsLogin()) {
+			Toast.makeText(activity,
+					activity.getResources().getString(R.string.please_login),
+					Toast.LENGTH_LONG).show();
+			Intent intent1 = new Intent(activity, LoginActivity.class);
+			Bundle bundle = new Bundle();
+			bundle.putString("exit", Consts.DELETE_CART);
+			intent1.putExtras(bundle);
+			activity.startActivity(intent1);
+			return false;
+		}
+		return true;
 	}
 	
 	static class ViewHolder {

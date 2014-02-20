@@ -25,6 +25,7 @@ import com.yidejia.app.mall.yirihui.YirihuiActivity;
 public class HomeYRHView {
 	
 	private Activity activity;
+	private CountDownTimer timer;	//倒计时
 	
 	private TextView tvHour;// 小时
 	private TextView tvMin;// 分钟
@@ -146,18 +147,26 @@ public class HomeYRHView {
 		String imgUrlSmall = yiRiHuiDatas.getImg2();
 		ImageLoader.getInstance().displayImage(imgUrlSmall, ivGoodsSmall, options, animateFirstListener);
 		
-		if(0 == type)
-		new CountDownTimer(overTime * 1000, 1000) {
-			
+		if (0 == type) {
+			startTimer(overTime);
+		}
+	}
+	
+	private void startTimer(long overTime){
+		if(null != timer) {
+			timer.cancel();
+			timer = null;
+		}
+		
+		timer = new CountDownTimer(overTime * 1000, 1000) {
+
 			@Override
 			public void onTick(long millisUntilFinished) {
 				setTime(millisUntilFinished / 1000);
 			}
-			
+
 			@Override
 			public void onFinish() {
-				// TODO Auto-generated method stub
-				
 			}
 		}.start();
 	}

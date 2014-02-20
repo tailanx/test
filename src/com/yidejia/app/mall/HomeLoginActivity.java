@@ -224,7 +224,9 @@ public class HomeLoginActivity extends HomeBaseActivity implements
 		String param = new JNICallBack().getHttp4Login(name, pwd, ip);
 		String url = new JNICallBack().HTTPURL;
 //		Log.e("system.out", url + "?" + param);
-		HttpClientUtil httpClientUtil = new HttpClientUtil();
+		HttpClientUtil httpClientUtil = new HttpClientUtil(this);
+		httpClientUtil.setIsShowLoading(true);
+		httpClientUtil.setShowErrMessage(true);
 		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
 
 			@Override
