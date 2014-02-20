@@ -158,7 +158,7 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 	public void share() {
 		OnekeyShare oks = new OnekeyShare();
 		// 分享时Notification的图标和文字
-		oks.setNotification(R.drawable.ydj_icon72,
+		oks.setNotification(R.drawable.ydj_icon,
 				getResources().getString(R.string.app_name));
 		// address是接收人地址，仅在信息和邮件使用
 		oks.setAddress("12345678901");

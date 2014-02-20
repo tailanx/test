@@ -3,7 +3,7 @@ package com.yidejia.app.mall.ctrl;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.util.Log;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -42,6 +42,8 @@ public class HomeYRHView {
 	private DisplayImageOptions options;
 	private ImageLoadingListener animateFirstListener;
 	
+	private int type = 0;	//type -1 过去 0现在 1 将来  
+	
 	public HomeYRHView(Activity activity){
 		this.activity = activity;
 		findIds();
@@ -74,7 +76,7 @@ public class HomeYRHView {
 	/**获取伊日惠数据**/
 	public void getYRHData(){
 		String url = new JNICallBack().HTTPURL;
-		String param = new JNICallBack().getHttp4GetYiRiHui("0", "0", "1", "");
+		String param = new JNICallBack().getHttp4GetYiRiHui("" + type, "0", "1", "");
 //		Log.e("system.out", url + "?" + param);
 		
 		HttpClientUtil httpClientUtil = new HttpClientUtil();
@@ -94,6 +96,10 @@ public class HomeYRHView {
 						//TODO 显示数据
 						showView(tempYiRiHuiDatas.get(0));
 					} else {
+						if(0 == type){
+							type = -1;
+							getYRHData();
+						}
 					}
 				} 
 			}
@@ -109,10 +115,26 @@ public class HomeYRHView {
 		String totalCount = yiRiHuiDatas.getCanBuyQuantity();
 		tvCount.setText(totalCount);
 		
+		if(0 == type){
+			setTextViewSelected(true);
+		} else if(-1 == type){
+			setTextViewSelected(false);
+		}
+		
+		try {
+			int count = 0;
+			count = Integer.parseInt(totalCount);
+			if(count <= 0) {
+				tvCount.setText("00");
+				tvCount.setSelected(false);
+			}
+		} catch (NumberFormatException e) {
+		}
+		
 //		final String goodsId = yiRiHuiDatas.getGoodsId();
 //		final String ruleId = yiRiHuiDatas.getTheId();
 		
-		final String goodsName = yiRiHuiDatas.getGoodsName();
+		final String goodsName = yiRiHuiDatas.getRuleName();
 		tvGoodsName.setText(goodsName);
 		
 		final String goodsPrice = yiRiHuiDatas.getGoodsPrice();
@@ -123,6 +145,21 @@ public class HomeYRHView {
 		
 		String imgUrlSmall = yiRiHuiDatas.getImg2();
 		ImageLoader.getInstance().displayImage(imgUrlSmall, ivGoodsSmall, options, animateFirstListener);
+		
+		if(0 == type)
+		new CountDownTimer(overTime * 1000, 1000) {
+			
+			@Override
+			public void onTick(long millisUntilFinished) {
+				setTime(millisUntilFinished / 1000);
+			}
+			
+			@Override
+			public void onFinish() {
+				// TODO Auto-generated method stub
+				
+			}
+		}.start();
 	}
 	
 	/**设置时间**/
@@ -132,14 +169,24 @@ public class HomeYRHView {
 //			time = Integer.parseInt(overTime);
 			
 			int second = (int)overTime % 60;
-			tvSecond.setText(second + "");
+			if(second < 10) tvSecond.setText("0" + second);
+			else tvSecond.setText(second + "");
 			int min = (int)(overTime / 60) % 60;
-			tvMin.setText(min + "");
+			if(min < 10) tvMin.setText("0" + min);
+			else tvMin.setText(min + "");
 			int hour = (int)overTime / 3600;
-			tvHour.setText(hour + "");
+			if(hour < 10) tvHour.setText("0" + hour);
+			else tvHour.setText(hour + "");
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void setTextViewSelected(boolean isSelected){
+		tvHour.setSelected(isSelected);
+		tvMin.setSelected(isSelected);
+		tvSecond.setSelected(isSelected);
+		tvCount.setSelected(isSelected);
 	}
 	
 }

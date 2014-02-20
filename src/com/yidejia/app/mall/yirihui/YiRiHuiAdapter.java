@@ -13,6 +13,7 @@ import com.yidejia.app.mall.pay.CstmPayActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,7 @@ public class YiRiHuiAdapter extends BaseAdapter{
 	private ImageLoadingListener animateFirstListener;
 	private Activity activity;
 	
-	private boolean isCanBuy = false;
+//	private boolean isCanBuy = false;
 	private int type = 0;	//type -1 过去 0现在 1 将来  
 
 	public YiRiHuiAdapter(Activity activity, ArrayList<YiRiHuiData> yiRiHuiDatas){
@@ -43,7 +44,7 @@ public class YiRiHuiAdapter extends BaseAdapter{
 	
 	/**设置是否为正在进行的活动**/
 	public void setCanBuy(boolean isCanBuy) {
-		this.isCanBuy = isCanBuy;
+//		this.isCanBuy = isCanBuy;
 	}
 	
 	/**type -1 过去 0现在 1 将来  **/
@@ -95,11 +96,15 @@ public class YiRiHuiAdapter extends BaseAdapter{
 			holder = (ViewHolder) convertView.getTag();
 		}
 		
+//		boolean isCanBuy = false;
+//		if(0 == type) isCanBuy = true;
+		if(0 == type) holder.tvBuyNow.setSelected(true);
+		
 		setLongText(holder);
 		
 		if(null == yiRiHuiDatas) return convertView;
 		
-		long overTime = yiRiHuiDatas.get(position).getStartTime();
+		final long overTime = yiRiHuiDatas.get(position).getStartTime();
 		setTime(holder, overTime);
 		
 //		String count = yiRiHuiDatas.get(position).getQuantity();
@@ -109,7 +114,7 @@ public class YiRiHuiAdapter extends BaseAdapter{
 		final String goodsId = yiRiHuiDatas.get(position).getGoodsId();
 		final String ruleId = yiRiHuiDatas.get(position).getTheId();
 		
-		final String goodsName = yiRiHuiDatas.get(position).getGoodsName();
+		final String goodsName = yiRiHuiDatas.get(position).getRuleName();
 		holder.tvGoodsName.setText(goodsName);
 		
 		final String goodsPrice = yiRiHuiDatas.get(position).getGoodsPrice();
@@ -122,14 +127,48 @@ public class YiRiHuiAdapter extends BaseAdapter{
 		ImageLoader.getInstance().displayImage(imgUrlSmall, holder.ivGoodsSmall, options, animateFirstListener);
 		
 		//已结束 马上购买文字变为已售罄
-		if(-1 == type) holder.tvBuyNow.setText("已售罄");
+		if(-1 == type) {
+			holder.tvBuyNow.setText("已售罄");
+			holder.tvCount.setText("00");
+		} else {
+			holder.tvCount.setSelected(true);
+		}
 		
-		if(isCanBuy) {
-			holder.tvBuyNow.setSelected(true);
+		if(-1 != type){
+			new CountDownTimer(overTime * 1000, 1000) {
+				
+				@Override
+				public void onTick(long millisUntilFinished) {
+					// TODO Auto-generated method stub
+					setTime(holder, millisUntilFinished / 1000);
+				}
+				
+				@Override
+				public void onFinish() {
+					// TODO Auto-generated method stub
+					
+				}
+			}.start();
+		}
+		
+		try {
+			final int canBuyCount = Integer.parseInt(totalCount);
+			if(canBuyCount <= 0) {	//用户可购买的数量小于0
+				holder.tvBuyNow.setSelected(false);
+				holder.tvCount.setSelected(false);
+			}
+			if(canBuyCount < 10) holder.tvCount.setText("0" + canBuyCount);
+		} catch (NumberFormatException e) {
+		}
+		
+		if(0 == type) {
 			holder.tvBuyNow.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
+					
+					if(!holder.tvBuyNow.isSelected()) return;
+					
 					Cart cart = new Cart();
 					cart.setUId(goodsId);
 					cart.setName(goodsName);
@@ -140,6 +179,7 @@ public class YiRiHuiAdapter extends BaseAdapter{
 					} catch (NumberFormatException e) {
 						e.printStackTrace();
 					}
+					cart.setImgUrl(imgUrlBig);
 					cart.setPrice(price);
 					cart.setProductText(goodsName);
 					cart.setSalledAmmount(1);
@@ -162,13 +202,15 @@ public class YiRiHuiAdapter extends BaseAdapter{
 //		int time = 0;
 		try {
 //			time = Integer.parseInt(overTime);
-			
 			int second = (int)overTime % 60;
-			holder.tvSecond.setText(second + "");
+			if(second < 10) holder.tvSecond.setText("0" + second);
+			else holder.tvSecond.setText(second + "");
 			int min = (int)(overTime / 60) % 60;
-			holder.tvMin.setText(min + "");
+			if(min < 10) holder.tvMin.setText("0" + min);
+			else holder.tvMin.setText(min + "");
 			int hour = (int)overTime / 3600;
-			holder.tvHour.setText(hour + "");
+			if(hour < 10) holder.tvHour.setText("0" + hour);
+			else holder.tvHour.setText(hour + "");
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
