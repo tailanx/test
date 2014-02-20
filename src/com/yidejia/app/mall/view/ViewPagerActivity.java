@@ -65,17 +65,6 @@ public class ViewPagerActivity extends SherlockFragmentActivity {
 		options = MyApplication.getInstance().initGoodsImageOption();
 		
 		mViewPager = new HackyViewPager(this);
-		// RelativeLayout layout = new RelativeLayout(this);
-		// LayoutParams re = new LayoutParams(LayoutParams.WRAP_CONTENT,
-		// LayoutParams.WRAP_CONTENT);
-		// TextView textview = new TextView(this);
-		// textview.setText("X");
-		// textview.setTextColor(getResources().getColor(R.color.white_white));
-		// textview.setTextSize(25);
-		// textview.setLayoutParams(re);
-		// // textview.layout(, t, r, b);
-		// layout.addView(textview);
-		// mViewPager.addView(layout);
 		setContentView(mViewPager);
 		Bundle bundle = getIntent().getExtras();
 		sDrawables = (ArrayList<BaseProduct>) getIntent().getSerializableExtra(

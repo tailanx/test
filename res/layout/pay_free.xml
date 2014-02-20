@@ -13,10 +13,10 @@
 
         <TextView
             android:id="@+id/pay_free_voucher_Coupons"
-            android:layout_width="@dimen/width"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/action_height"
+            android:layout_marginLeft="@dimen/margin_left"
             android:layout_weight="1"
             android:background="@drawable/selecter_bg_sort_sell"
             android:clickable="true"
@@ -28,10 +28,10 @@
 
         <TextView
             android:id="@+id/pay_free_voucher_mIntegeral"
-            android:layout_width="@dimen/width"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginRight="@dimen/action_height"
+            android:layout_marginRight="@dimen/margin_left"
             android:layout_weight="1"
             android:background="@drawable/selecter_bg_sort_popular"
             android:clickable="true"

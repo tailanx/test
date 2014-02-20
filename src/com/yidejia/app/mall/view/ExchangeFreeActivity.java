@@ -55,17 +55,17 @@ public class ExchangeFreeActivity extends BaseActivity {
 	private int position_one;
 	// private int position_two;
 	// private int position_three;
-//	private String sumprice;
+	// private String sumprice;
 	private List<HashMap<String, Float>> exchange;// 换购商品
 	private List<HashMap<String, Object>> cart;// 换购商品
 	private VoucherDataManage dataManage;// 用户积分
-//	private float voucher;// 用户积分
+	// private float voucher;// 用户积分
 	private MyApplication myApplication;
 	private ArrayList<Cart> mArrayList;
 	// private String isString;
 	private AlertDialog dialog;
-	private float voucher = 0.0f;	//用户总积分
-//	private float needJifen = 0.0f;	//用户本次购买消耗积分
+	private float voucher = 0.0f; // 用户总积分
+	// private float needJifen = 0.0f; //用户本次购买消耗积分
 	private float goodsPrice;
 
 	@SuppressWarnings("unchecked")
@@ -185,7 +185,7 @@ public class ExchangeFreeActivity extends BaseActivity {
 			voucher = Float.parseFloat(dataManage.getUserVoucher(
 					myApplication.getUserId(), myApplication.getToken()));
 		} else {
-//			voucher = jifen;
+			// voucher = jifen;
 		}
 
 		InitWidth();
@@ -210,7 +210,7 @@ public class ExchangeFreeActivity extends BaseActivity {
 	private void InitTextView() {
 		mIntegeral = (TextView) findViewById(R.id.pay_free_voucher_Coupons);// 赠送
 		mCoupons = (TextView) findViewById(R.id.pay_free_voucher_mIntegeral);// 换购
-		mIntegeral.setSelected(true);
+		// mIntegeral.setSelected(true);
 		mCoupons.setOnClickListener(new MyOnClickListener(1));
 		mIntegeral.setOnClickListener(new MyOnClickListener(0));
 	}
@@ -229,7 +229,14 @@ public class ExchangeFreeActivity extends BaseActivity {
 
 		mPager.setAdapter(new IntegeralFragmentAdapter(this
 				.getSupportFragmentManager(), fragmentsList));
-		mPager.setCurrentItem(0);
+		if (CstmPayActivity.arrayListFree.isEmpty()) {
+			mPager.setCurrentItem(1);
+			mCoupons.setSelected(true);
+			currIndex = 1;
+		} else {
+			mPager.setCurrentItem(0);
+			mIntegeral.setSelected(true);
+		}
 		mPager.setOnPageChangeListener(new MyOnPageChangeListener());
 
 	}
@@ -242,7 +249,7 @@ public class ExchangeFreeActivity extends BaseActivity {
 		int screenW = dm.widthPixels;// 屏幕的宽
 		offset = (int) ((screenW / 3 - bottomLineWidth) / 2);// 起始位置
 
-		// position_one = (int) (screenW / 3);
+		position_one = (int) (screenW / 3);
 		// position_two = position_one * 2;
 
 	}
