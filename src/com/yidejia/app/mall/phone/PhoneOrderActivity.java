@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
@@ -120,5 +121,15 @@ public class PhoneOrderActivity extends BaseActivity {
 						.setLastUpdatedLabel(label);
 			}
 		});
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		StatService.onPageStart(this, "手机订单页面");
+	}
+	@Override
+	protected void onPause() {
+		super.onPause();
+		StatService.onPageEnd(this, "手机订单页面");
 	}
 }
