@@ -17,8 +17,6 @@ package com.yidejia.app.mall.view;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -26,8 +24,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
-import android.view.WindowManager;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -37,7 +37,7 @@ import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.photoview.PhotoView;
 import com.yidejia.app.mall.util.Consts;
 
-public class ViewPagerActivity extends Activity {
+public class ViewPagerActivity extends SherlockFragmentActivity {
 
 	private ViewPager mViewPager;
 	private static final String STATE_POSITION = "STATE_POSITION";
@@ -47,10 +47,35 @@ public class ViewPagerActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		options = MyApplication.getInstance().initGoodsImageOption();
+		// requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getSupportActionBar().setCustomView(R.layout.actionbar_back);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+		getSupportActionBar().setDisplayShowCustomEnabled(true);
+		getSupportActionBar().setDisplayShowTitleEnabled(false);
+		getSupportActionBar().setDisplayShowHomeEnabled(false);
+		findViewById(R.id.tv_back).setOnClickListener(
+				new View.OnClickListener() {
 
+					@Override
+					public void onClick(View v) {
+						ViewPagerActivity.this.finish();
+					}
+				});
+
+		options = MyApplication.getInstance().initGoodsImageOption();
+		
 		mViewPager = new HackyViewPager(this);
+		// RelativeLayout layout = new RelativeLayout(this);
+		// LayoutParams re = new LayoutParams(LayoutParams.WRAP_CONTENT,
+		// LayoutParams.WRAP_CONTENT);
+		// TextView textview = new TextView(this);
+		// textview.setText("X");
+		// textview.setTextColor(getResources().getColor(R.color.white_white));
+		// textview.setTextSize(25);
+		// textview.setLayoutParams(re);
+		// // textview.layout(, t, r, b);
+		// layout.addView(textview);
+		// mViewPager.addView(layout);
 		setContentView(mViewPager);
 		Bundle bundle = getIntent().getExtras();
 		sDrawables = (ArrayList<BaseProduct>) getIntent().getSerializableExtra(
@@ -120,7 +145,7 @@ public class ViewPagerActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		StatService.onPageStart(this,"图片放大和缩小页面");
+		StatService.onPageStart(this, "图片放大和缩小页面");
 	}
 
 }
