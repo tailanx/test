@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:background="@drawable/ticks_bg"
+            android:gravity="center"
             android:textColor="@color/white" />
 
         <TextView
@@ -58,12 +59,11 @@
             android:layout_marginLeft="@dimen/actiobar_margin_top"
             android:layout_marginTop="@dimen/actiobar_margin_top"
             android:layout_toRightOf="@id/tv_youhuiquan_time"
-            android:gravity="center_vertical"
-            android:text="@string/shared_youhuiquan_time" />
+            android:gravity="center_vertical" />
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/tv_shark_no_produce"
+        android:id="@+id/tv_shark_no_produce_add_add"
         android:layout_width="@dimen/base_info_match_add"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

@@ -903,6 +903,35 @@ com.squareup.okhttp.internal.spdy.SpdyStream:
 com.squareup.okhttp.internal.tls.OkHostnameVerifier:
     private static final int ALT_DNS_NAME
     private static final int ALT_IPA_NAME
+com.tenpay.android.service.DownloadDialog
+com.tenpay.android.service.DownloadDialog$1
+com.tenpay.android.service.DownloadDialog$2
+com.tenpay.android.service.DownloadDialog$3
+com.tenpay.android.service.DownloadDialog$ProgressThread
+com.tenpay.android.service.IRemoteServiceCallback
+com.tenpay.android.service.IRemoteServiceCallback$Stub
+com.tenpay.android.service.IRemoteServiceCallback$Stub$Proxy
+com.tenpay.android.service.ITenpayService
+com.tenpay.android.service.ITenpayService$Stub
+com.tenpay.android.service.ITenpayService$Stub$Proxy
+com.tenpay.android.service.TenpayServiceHelper
+com.tenpay.android.service.TenpayServiceHelper$1
+com.tenpay.android.service.TenpayServiceHelper$10
+com.tenpay.android.service.TenpayServiceHelper$11
+com.tenpay.android.service.TenpayServiceHelper$11$1
+com.tenpay.android.service.TenpayServiceHelper$12
+com.tenpay.android.service.TenpayServiceHelper$13
+com.tenpay.android.service.TenpayServiceHelper$13$1
+com.tenpay.android.service.TenpayServiceHelper$14
+com.tenpay.android.service.TenpayServiceHelper$2
+com.tenpay.android.service.TenpayServiceHelper$3
+com.tenpay.android.service.TenpayServiceHelper$4
+com.tenpay.android.service.TenpayServiceHelper$5
+com.tenpay.android.service.TenpayServiceHelper$6
+com.tenpay.android.service.TenpayServiceHelper$7
+com.tenpay.android.service.TenpayServiceHelper$8
+com.tenpay.android.service.TenpayServiceHelper$9
+com.tenpay.android.service.TenpayServiceHelper$9$1
 com.unionpay.UPPayAssistEx:
     public static final int PLUGIN_VALID
     public static final int PLUGIN_NOT_FOUND
@@ -1138,7 +1167,6 @@ com.yidejia.app.mall.jni.JNICallBack:
     public native java.lang.String getHttp4SignOrder(java.lang.String,java.lang.String,java.lang.String)
     public native java.lang.String getHttp4ChangeRead(java.lang.String,java.lang.String,java.lang.String)
     public native java.lang.String getHttp4UpdateYiRiHui(java.lang.String)
-    public native java.lang.String getHttp4GetCZOrder(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
 com.yidejia.app.mall.log.LoginTask
 com.yidejia.app.mall.log.LoginTask$Task
 com.yidejia.app.mall.model.Brand:
@@ -1277,12 +1305,12 @@ com.yidejia.app.mall.net.voucher.Voucher:
 com.yidejia.app.mall.order.Order:
     private int orderAmount
     private java.lang.String tn
-    87:88:public void setOrderAmount(int)
-    94:94:public int getOrderAmount()
-    102:102:public java.lang.String getId()
-    118:118:public java.lang.String getCore()
-    134:134:public java.lang.String getTn()
-    142:143:public void setTn(java.lang.String)
+    120:121:public void setOrderAmount(int)
+    127:127:public int getOrderAmount()
+    135:135:public java.lang.String getId()
+    151:151:public java.lang.String getCore()
+    167:167:public java.lang.String getTn()
+    175:176:public void setTn(java.lang.String)
 com.yidejia.app.mall.order.RetOrderInfo:
     28:28:public java.lang.String getId()
 com.yidejia.app.mall.pay.AlixDefine
@@ -1381,7 +1409,7 @@ com.yidejia.app.mall.search.TaskFilter$2
 com.yidejia.app.mall.search.TaskFilter$3
 com.yidejia.app.mall.search.TaskFilter$Task
 com.yidejia.app.mall.shark.ParseShark:
-    116:116:public java.lang.String getData()
+    120:120:public java.lang.String getData()
 com.yidejia.app.mall.shark.SharkActivity:
     private android.view.animation.Animation animation
     private android.widget.LinearLayout$LayoutParams params
@@ -1488,8 +1516,8 @@ com.yidejia.app.mall.util.DesUtils:
 com.yidejia.app.mall.util.FreeGivingUtil
 com.yidejia.app.mall.util.Http
 com.yidejia.app.mall.util.HttpClientUtil:
-    60:61:public void setPullToRefreshView(com.handmark.pulltorefresh.library.PullToRefreshScrollView)
-    64:65:public void setProgressDialog(android.app.ProgressDialog)
+    91:92:public void setProgressDialog(android.app.ProgressDialog)
+    96:96:public android.app.ProgressDialog getProgressDialog()
 com.yidejia.app.mall.util.IsPhone:
     8:8:public IsPhone()
 com.yidejia.app.mall.util.Md5

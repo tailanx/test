@@ -4,7 +4,7 @@
         <layer-list>
             <item >
             	<shape android:shape="ring"
-            	    android:innerRadius="18dp"
+            	    android:innerRadius="16dp"
             	    android:useLevel="false">
 
 
@@ -19,7 +19,7 @@
             
 			<item >
 			    <shape android:shape="ring"
-			        android:innerRadius="18dp"
+			        android:innerRadius="16dp"
 			        android:useLevel="false">
 
             
