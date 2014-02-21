@@ -65,6 +65,8 @@ public class YirihuiActivity extends SherlockFragmentActivity implements
 
 		laterLinear = (LinearLayout) findViewById(R.id.ll_search_result_price_layout);
 		laterText = (TextView) findViewById(R.id.tv_search_result_price);
+		laterLinear.setClickable(true);
+		laterText.setClickable(false);
 
 		laterText.setText(getResources().getString(R.string.yirihui_later));
 
@@ -79,7 +81,7 @@ public class YirihuiActivity extends SherlockFragmentActivity implements
 		ft.add(R.id.fl_search_result_fragment, mFragment);
 		ft.commit();
 		nowText.setOnClickListener(new TextClick(0));
-		laterText.setOnClickListener(new TextClick(1));
+		laterLinear.setOnClickListener(new TextClick(1));
 		completeText.setOnClickListener(new TextClick(2));
 	}
 

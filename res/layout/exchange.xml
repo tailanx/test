@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/exchange_scrollView_linearlayout1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginTop="8dp"
@@ -17,14 +17,14 @@
 
         <TextView
             android:id="@+id/exchange_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/order_detailsbg_top"
             android:gravity="center"
             android:textSize="15sp" />
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/order_statusbg_down"
             android:gravity="center_vertical"
