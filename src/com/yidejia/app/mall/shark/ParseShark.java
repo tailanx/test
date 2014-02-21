@@ -85,6 +85,7 @@ public class ParseShark {
 			ticket.setId(jsonArray.optString("id"));
 			ticket.setLowCash(jsonArray.optString("low_cash"));
 			ticket.setName(jsonArray.optString("name"));
+			ticket.setMoney(jsonArray.optString("money"));
 			ticket.setBeginDate(jsonArray.optString("begin_date"));
 			ticket.setEndDate(jsonArray.optString("end_date"));
 			ticket.setGoodsId(jsonArray.optString("goods_id"));

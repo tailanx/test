@@ -1,5 +1,6 @@
 package com.yidejia.app.mall.yirihui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -14,7 +15,8 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
 
-public class YirihuiActivity extends SherlockFragmentActivity {
+public class YirihuiActivity extends SherlockFragmentActivity implements
+		OnClickListener {
 	private TextView rightText;// 规则
 	private int lastIndex;
 	private TextView nowText;// 正在进行
@@ -43,6 +45,7 @@ public class YirihuiActivity extends SherlockFragmentActivity {
 		rightText = (TextView) findViewById(R.id.actionbar_right);
 		rightText.setVisibility(View.VISIBLE);
 		rightText.setText(getResources().getString(R.string.yirihui_order));
+		rightText.setOnClickListener(this);
 		((TextView) findViewById(R.id.actionbar_left))
 				.setOnClickListener(new OnClickListener() {
 
@@ -153,5 +156,19 @@ public class YirihuiActivity extends SherlockFragmentActivity {
 	protected void onPause() {
 		super.onPause();
 		StatService.onPageEnd(this, "伊日惠活动页面");
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.actionbar_right:
+			Intent intent = new Intent(this, YiGuiZeActivity.class);
+			startActivity(intent);
+
+			break;
+
+		default:
+			break;
+		}
 	}
 }

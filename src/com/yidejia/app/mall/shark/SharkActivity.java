@@ -169,19 +169,25 @@ public class SharkActivity extends Activity implements OnClickListener,
 				boolean isSuccess = parseShark.parseShark(content);
 				count = parseShark.getCount();
 				Message msg = new Message();
+
 				if (isSuccess) {
 					showData.setVisibility(View.VISIBLE);
-
 					msg.arg1 = count;
 
 					// yaocishu.setText(count);
 					int theType = parseShark.getTheType();
 					switch (theType) {
 					case 1:// 已经摇过了3次
-						Toast.makeText(SharkActivity.this,
-								parseShark.getData(), Toast.LENGTH_SHORT)
-								.show();
-						msg.what = 5;
+						if (count < 0) {
+							Toast.makeText(SharkActivity.this,
+									parseShark.getData(), Toast.LENGTH_SHORT)
+									.show();
+							msg.what = 5;
+						} else {
+							noProcue.setVisibility(View.VISIBLE);
+							startAnimaton(noProcue);
+							msg.what = 1;
+						}
 						break;
 
 					case 2: // 摇到商品
@@ -215,7 +221,7 @@ public class SharkActivity extends Activity implements OnClickListener,
 					case 4: // 摇到现金券
 						youhuiquan.setVisibility(View.VISIBLE);
 						ticket = parseShark.getTicket();
-						if (null != ticket && "".equals(ticket)) {
+						if (null != ticket && !"".equals(ticket)) {
 							youhuicount.setText(ticket.getMoney() + "元优惠券");
 							youhuixianzhi.setText(ticket.getComments());
 							youhuiTime.setText(TimeUtil.converDate(Long
@@ -334,13 +340,14 @@ public class SharkActivity extends Activity implements OnClickListener,
 			break;
 		case 2:// 摇到了商品
 			yaocishu.setText(msg.arg1 + "");
-			// produce.startAnimation(anim);
-			// produceChakan.setOnClickListener(this);
 			break;
 		case 4:// 优惠券
 			yaocishu.setText(msg.arg1 + "");
 			break;
 		case 5:// 不能再摇了
+			yaocishu.setText("0");
+			break;
+		case 3:// 什么都没摇到
 			yaocishu.setText("0");
 			break;
 		}
