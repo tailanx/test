@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
-import android.util.Log;
+//import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -43,7 +43,7 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 	private JNICallBack jniCallBack;
 	private String url;
 
-	// private int lxSign = 0; // 已连续签到天数
+	private int lxSign = 0; // 已连续签到天数
 	private int signCount = 0; // 总签到天数
 	private String respMsg; // 签到返回信息
 	private SharedPreferencesUtil sp;// 保存日期
@@ -123,7 +123,6 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 
 			@Override
 			public void onSuccess(String content) {
-				// TODO Auto-generated method stub
 				if (parseGetCount(content)) {
 					if (!"".equals(signCount)) {
 						int gewei = signCount % 10;
@@ -146,7 +145,7 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 			String strResp = httpObject.optString("response");
 			if (1 == code) {
 				JSONObject respObject = new JSONObject(strResp);
-				// lxSign = respObject.optInt("lxSign");
+				lxSign = respObject.optInt("lxSign");
 				signCount = respObject.optInt("countSign") ;
 				return true;
 			}
@@ -170,11 +169,10 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 
 			@Override
 			public void onSuccess(String content) {
-				// TODO Auto-generated method stub
 				String showMsg;
-				Log.e("info", content);
+//				Log.e("info", content);
 				if (parseSignAdd(content)) {
-					showMsg = "获得" + respMsg + "个爱豆";
+					showMsg = "您已连续签到"+ (lxSign + 1) + "天，本次签到获得" + respMsg + "个爱豆";
 					ivSignAdd.setImageResource(R.drawable.yiqiandao);
 					signCount++;
 					handler.sendEmptyMessage(Consts.QIANDAO);
@@ -183,7 +181,7 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 					showMsg = respMsg;
 				}
 				Toast.makeText(QiandaoActivity.this, showMsg,
-						Toast.LENGTH_SHORT).show();
+						Toast.LENGTH_LONG).show();
 			}
 		});
 	}
