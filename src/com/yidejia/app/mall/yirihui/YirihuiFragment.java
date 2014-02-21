@@ -3,6 +3,7 @@ package com.yidejia.app.mall.yirihui;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -30,6 +31,8 @@ public class YirihuiFragment extends Fragment {
 	private int limit = 10;	//limit 偏移量 必须
 	private String sort = "";	//sort 排序 默认按结束时间倒序(end_time desc)
 	private boolean isFirstIn = true;
+	
+//	private CountDownTimer updateTimer;	//更新的倒计时
 
 	public static YirihuiFragment newInstance(int num) {
 		YirihuiFragment now = new YirihuiFragment();
@@ -86,7 +89,7 @@ public class YirihuiFragment extends Fragment {
 		String param = new JNICallBack().getHttp4GetYiRiHui(type + "", offset + "", limit + "", sort);
 //		Log.e("system.out", url + "?" + param);
 		
-		HttpClientUtil httpClientUtil = new HttpClientUtil(getActivity());
+		final HttpClientUtil httpClientUtil = new HttpClientUtil(getActivity());
 		
 		httpClientUtil.setPullToRefreshView(refreshListView);
 		if(isFirstIn) httpClientUtil.setIsShowLoading(true);
@@ -130,6 +133,13 @@ public class YirihuiFragment extends Fragment {
 					offset -= limit;
 				}
 			}
+
+			@Override
+			public void onFinish() {
+				super.onFinish();
+//				updateYRH();
+				if(httpClientUtil != null) httpClientUtil.closeConn();
+			}
 		});
 	}
 	
@@ -152,8 +162,14 @@ public class YirihuiFragment extends Fragment {
 
 	@Override
 	public void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
+//		cancelUpdateYRH();
+	}
+	
+	@Override
+	public void onDetach() {
+		super.onDetach();
+//		cancelUpdateYRH();
 	}
 
 	@Override
@@ -180,5 +196,31 @@ public class YirihuiFragment extends Fragment {
 		}
 	}
 	
-	
+//	private void updateYRH(){
+//		if(null != updateTimer) {
+//			updateTimer.cancel();
+//			updateTimer = null;
+//		}
+//		
+//		updateTimer = new CountDownTimer(8 * 1000, 1000) {
+//
+//			@Override
+//			public void onTick(long millisUntilFinished) {
+//			}
+//
+//			@Override
+//			public void onFinish() {
+//				offset = 0;
+//				isFirstIn = false;
+//				getYiriHuiData();
+//			}
+//		}.start();
+//	}
+//	
+//	private void cancelUpdateYRH(){
+//		if(null != updateTimer) {
+//			updateTimer.cancel();
+//			updateTimer = null;
+//		}
+//	}
 }

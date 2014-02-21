@@ -484,6 +484,7 @@ public class HomeMallActivity extends HomeBaseActivity implements
 		if (null != bannerView || "".equals(bannerView)) {
 			bannerView.stopTimer();
 		}
+		if(null != homeYRHView) homeYRHView.cancelUpdateYRH();
 	}
 
 	@Override

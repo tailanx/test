@@ -113,14 +113,12 @@
 
                     <TextView
                         android:id="@+id/tv_main_hot_yirihui_count"
-                        android:layout_width="@dimen/margin_top_add"
-                        android:layout_height="@dimen/margin_top_add"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/margin_left"
                         android:layout_toRightOf="@id/tv_yirihui_count"
-                        android:background="@drawable/bg_pay_selector_add"
-                        android:gravity="center"
-                        android:textColor="@color/theme"
-                        android:textSize="15sp" />
+                        android:background="@drawable/bg_pay_selector"
+                        android:textColor="@color/white" />
                 </RelativeLayout>
 
                 <RelativeLayout
