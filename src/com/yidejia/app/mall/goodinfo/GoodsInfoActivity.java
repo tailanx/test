@@ -67,7 +67,7 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 		
 		setActionbarConfig();
 		shareImageView = (ImageView) findViewById(R.id.ab_common_iv_share);
-		shareImageView.setVisibility(View.VISIBLE);
+//		shareImageView.setVisibility(View.VISIBLE);
 		shareImageView.setImageResource(R.drawable.share);
 		shareImageView.setOnClickListener(this);// 分享的点击事件
 		setTitle(R.string.goods_info);
@@ -100,6 +100,7 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 					productInfo = parseGoodsJson.getProductBaseInfo();
 					viewUtil = new GoodsInfoViewUtil(GoodsInfoActivity.this);
 					viewUtil.initGoodsView(productInfo);
+					shareImageView.setVisibility(View.VISIBLE);
 				} else {
 					Toast.makeText(GoodsInfoActivity.this,
 							getResources().getString(R.string.no_product),
@@ -193,9 +194,9 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 		oks.setNotification(R.drawable.ydj_icon,
 				getResources().getString(R.string.app_name));
 		// address是接收人地址，仅在信息和邮件使用
-		oks.setAddress("12345678901");
+//		oks.setAddress("12345678901");
 		// title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
-		oks.setTitle(getResources().getString(R.string.share));
+		oks.setTitle(getResources().getString(R.string.share_add));
 		// titleUrl是标题的网络链接，仅在人人网和QQ空间使用
 		oks.setTitleUrl("http://www.yidejia.com/acymer_" + productInfo.getUId()
 				+ ".html");
@@ -214,7 +215,7 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 		// appPath是待分享应用程序的本地路劲，仅在微信中使用
 		// oks.setAppPath(MainActivity.TEST_IMAGE);
 		// comment是我对这条分享的评论，仅在人人网和QQ空间使用
-		oks.setComment(getResources().getString(R.string.share));
+		oks.setComment(getResources().getString(R.string.share_add));
 		// site是分享此内容的网站名称，仅在QQ空间使用
 		oks.setSite(GoodsInfoActivity.this.getString(R.string.app_name));
 		// siteUrl是分享此内容的网站地址，仅在QQ空间使用

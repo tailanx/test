@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/re_activity_top"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="20dp"
         android:gravity="center" >
 
         <ImageView
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/yao_box" />
+            android:src="@drawable/yao_box" />
 
         <RelativeLayout
             android:layout_width="wrap_content"

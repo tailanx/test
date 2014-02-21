@@ -7,9 +7,9 @@
 
     <RelativeLayout
         android:id="@+id/rl_home_yrh"
-        android:clickable="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:clickable="true" >
 
         <RelativeLayout
             android:id="@+id/rv_yrh_title"
@@ -52,14 +52,13 @@
             android:background="#ffffff"
             android:baselineAligned="false"
             android:orientation="horizontal"
-            android:padding="@dimen/margin_left"
-             >
+            android:padding="@dimen/margin_left" >
 
             <RelativeLayout
                 android:id="@+id/re_yirihui_left"
-                android:layout_gravity="center_vertical"
                 android:layout_width="@dimen/yirihui"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:gravity="center" >
 
                 <ImageView
@@ -75,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/margin_left_add"
+                android:layout_marginLeft="@dimen/actiobar_margin_left"
                 android:layout_marginRight="@dimen/margin_left_add" >
 
                 <TextView
@@ -89,35 +88,39 @@
                     android:id="@+id/tv_main_hot_yirihui_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_left"
                     android:layout_below="@id/tv_main_hot_yirihui_detail"
+                    android:layout_marginTop="@dimen/margin_left"
                     android:text="@string/go_pay_show_pay_money"
-                    android:textStyle="bold"
+                    android:textColor="@color/theme"
                     android:textSize="@dimen/textsize_small"
-                    android:textColor="@color/theme" />
+                    android:textStyle="bold" />
 
                 <RelativeLayout
                     android:id="@+id/re_yirihui_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_main_hot_yirihui_price"
                     android:layout_marginTop="@dimen/margin_left"
-                    android:layout_below="@id/tv_main_hot_yirihui_price" >
+                    android:gravity="center" >
 
                     <TextView
                         android:id="@+id/tv_yirihui_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/text_color_80"
-                        android:text="@string/cart_count" />
+                        android:layout_centerVertical="true"
+                        android:text="@string/cart_count"
+                        android:textColor="@color/text_color_80" />
 
                     <TextView
                         android:id="@+id/tv_main_hot_yirihui_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/margin_top_add"
+                        android:layout_height="@dimen/margin_top_add"
                         android:layout_marginLeft="@dimen/margin_left"
                         android:layout_toRightOf="@id/tv_yirihui_count"
-                        android:background="@drawable/bg_pay_selector"
-                        android:textColor="@color/white" />
+                        android:background="@drawable/bg_pay_selector_add"
+                        android:gravity="center"
+                        android:textColor="@color/theme"
+                        android:textSize="15sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -189,31 +192,26 @@
                     android:layout_below="@id/tv_main_hot_yirihui_detail"
                     android:layout_marginLeft="@dimen/margin_left"
                     android:layout_marginRight="@dimen/head_padding"
-                    android:layout_marginTop="@dimen/head_padding" >
+                    android:layout_marginTop="@dimen/actiobar_margin_top" >
 
                     <ImageView
                         android:id="@+id/iv_yrh_img2"
-                        android:layout_width="@dimen/all_buy_produce_right"
-                        android:layout_height="@dimen/all_buy_produce_right"
+                        android:layout_width="@dimen/action_height"
+                        android:layout_height="@dimen/action_height"
                         android:contentDescription="@string/yidejia"
                         android:src="@drawable/image_bg" />
                 </RelativeLayout>
             </RelativeLayout>
         </LinearLayout>
 
-       <!--  <RelativeLayout
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ll_main_hot"> -->
-
-            <ImageView
-                android:layout_below="@id/ll_main_hot"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/width_add"
-            	android:background="@drawable/main_theme_textview_bg" 
-                android:src="@color/line_color"
-                android:contentDescription="@string/yidejia" />
-       <!--  </RelativeLayout> -->
+            android:layout_height="@dimen/width_add"
+            android:layout_below="@id/ll_main_hot"
+            android:background="@drawable/main_theme_textview_bg"
+            android:contentDescription="@string/yidejia"
+            android:src="@color/line_color" />
+        <!-- </RelativeLayout> -->
     </RelativeLayout>
 
     <RelativeLayout

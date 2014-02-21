@@ -358,4 +358,6 @@
     <string name="phone_order">手机订单</string>
     <string name="phone_order_title">手机充值订单</string>
     <string name="yirihui_guize">伊日惠规则</string>
+     <string name="share">分享</string>
+    <string name="share_add">伊的家分享:我在伊的家发现一个超赞的宝贝</string>
 </resources>

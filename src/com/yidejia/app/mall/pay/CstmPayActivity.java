@@ -150,6 +150,8 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 		try {
 			super.onCreate(savedInstanceState);
 
+			arrayListFree = new ArrayList<Specials>();
+			
 			setActionbarConfig();
 			setTitle(R.string.comfirm_order);
 
