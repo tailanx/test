@@ -1,5 +1,6 @@
 package com.yidejia.app.mall.shark;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -7,6 +8,7 @@ import android.util.Log;
 
 import com.yidejia.app.mall.model.ProductBaseInfo;
 import com.yidejia.app.mall.net.ImageUrl;
+import com.yidejia.app.mall.tickets.Ticket;
 
 /**
  * 解析摇一摇数据
@@ -16,12 +18,18 @@ import com.yidejia.app.mall.net.ImageUrl;
  */
 public class ParseShark {
 
+	public Ticket getTicket() {
+		return ticket;
+	}
+
 	public int getCount() {
 		return count;
 	}
 
+	private Ticket ticket;// 优惠券
+
 	private int theType;
-	private String data;
+	private String data;// 返回的内容
 	private int count;// 剩下的摇一摇的次数
 
 	private ProductBaseInfo productBaseInfo;
@@ -40,8 +48,8 @@ public class ParseShark {
 			if (code == 1) {
 				JSONObject respObject = new JSONObject(strResp);
 				theType = respObject.optInt("the_type");
-				data = respObject.optString("data");
 				count = respObject.optInt("times");
+				data = respObject.optString("data");
 				switch (theType) {
 				case 1:
 
@@ -50,7 +58,10 @@ public class ParseShark {
 					// 解析摇到商品的数据
 					parseGoods(data);
 					break;
-				default:
+				case 3: // 什么都没摇到
+					break;
+				case 4:// 摇到优惠券
+					parseTicks(data);
 					break;
 				}
 				return true;
@@ -59,6 +70,33 @@ public class ParseShark {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	/**
+	 * 解析优惠券
+	 * 
+	 * @param content
+	 */
+	private void parseTicks(String content) {
+		JSONObject jsonArray;
+		try {
+			jsonArray = new JSONObject(content);
+			ticket = new Ticket();
+			ticket.setId(jsonArray.optString("id"));
+			ticket.setLowCash(jsonArray.optString("low_cash"));
+			ticket.setName(jsonArray.optString("name"));
+			ticket.setMoney(jsonArray.optString("money"));
+			ticket.setBeginDate(jsonArray.optString("begin_date"));
+			ticket.setEndDate(jsonArray.optString("end_date"));
+			ticket.setGoodsId(jsonArray.optString("goods_id"));
+			ticket.setName(jsonArray.optString("name"));
+			ticket.setComments(jsonArray.optString("comments"));
+			ticket.setType(jsonArray.optString("type"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -80,12 +118,13 @@ public class ParseShark {
 			productBaseInfo.setSalledAmount(dataObject.optString("sells"));
 			productBaseInfo.setCommentAmount(dataObject.optString("remarks"));
 			productBaseInfo.setProductNumber(dataObject.optString("the_code"));
-			productBaseInfo.setImgUrl(ImageUrl.IMAGEURL + dataObject.optString("imgname") + "!200");
+			productBaseInfo.setImgUrl(ImageUrl.IMAGEURL
+					+ dataObject.optString("imgname") + "!200");
 			productBaseInfo.setProductSpecifications(dataObject
 					.optString("sepc"));
 			productBaseInfo.setShowListAmount(dataObject.optString("shaidan"));
-			productBaseInfo.setShow_flag("y"
-					.equals(dataObject.optString("is_valid")));
+			productBaseInfo.setShow_flag("y".equals(dataObject
+					.optString("is_valid")));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

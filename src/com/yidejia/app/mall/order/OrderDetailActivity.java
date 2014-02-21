@@ -227,6 +227,7 @@ public class OrderDetailActivity extends BaseActivity implements
 		// 录入状态时才显示付款和修改支付方式的按钮
 		if ("录入".equals(order.getStatus())) {
 			changePay.setVisibility(View.VISIBLE);
+			payButton.setVisibility(View.VISIBLE);
 			payButton.setOnClickListener(new OnClickListener() {
 
 				@Override

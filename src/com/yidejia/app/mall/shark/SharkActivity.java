@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
+import android.support.v4.util.TimeUtils;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,8 +33,11 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.ProductBaseInfo;
+import com.yidejia.app.mall.tickets.Ticket;
 import com.yidejia.app.mall.util.HttpClientUtil;
 import com.yidejia.app.mall.util.IHttpResp;
+import com.yidejia.app.mall.util.TimeUtil;
+import com.yidejia.app.mall.youhui.YouhuiActivity;
 
 public class SharkActivity extends Activity implements OnClickListener,
 		Callback {
@@ -50,7 +55,9 @@ public class SharkActivity extends Activity implements OnClickListener,
 	private Animation quanAnimation;
 	private MediaPlayer mediaPlayer;
 	private ProductBaseInfo info;// 获取到的摇到的商品
+	private Ticket ticket;// 摇到的优惠券
 	private TextView guize;// 规则
+	private TextView noProduce;// 没有商品
 
 	private TextView yaocishu;// 剩下的要的次数
 
@@ -69,6 +76,7 @@ public class SharkActivity extends Activity implements OnClickListener,
 	private Handler handler;
 
 	private Animation anim;
+	private RelativeLayout showData;// 展示摇的次数
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +91,7 @@ public class SharkActivity extends Activity implements OnClickListener,
 		mediaPlayer = MediaPlayer.create(this, R.raw.yao);
 		quanAnimation = AnimationUtils.loadAnimation(this,
 				R.anim.my_translate_action);
-		quanImageView.startAnimation(quanAnimation);
+//		quanImageView.startAnimation(quanAnimation);
 		// startAnimation();
 		guize = (TextView) findViewById(R.id.tv_shark_activity_guize);
 		guize.setOnClickListener(this);
@@ -91,9 +99,12 @@ public class SharkActivity extends Activity implements OnClickListener,
 		handler = new Handler(this);
 		youhuichakan.setOnClickListener(this);
 		produceChakan.setOnClickListener(this);
+		noProduce.setOnClickListener(this);
 	}
 
 	private void initView() {
+		showData = (RelativeLayout) findViewById(R.id.re_show_data);
+		noProduce = (TextView) findViewById(R.id.tv_shark_no_produce_no);
 		noProcue = (RelativeLayout) findViewById(R.id.Re_show_produce);
 		produce = (RelativeLayout) findViewById(R.id.Re_show_produce_add);
 		youhuiquan = (RelativeLayout) findViewById(R.id.Re_show_produce_youhuiquan);
@@ -102,7 +113,7 @@ public class SharkActivity extends Activity implements OnClickListener,
 
 		quanImageView = (ImageView) findViewById(R.id.iv_yaoyiyao_shou);
 		backImageView = (ImageView) findViewById(R.id.iv_shark_back);
-		youhuichakan = (TextView) findViewById(R.id.tv_shark_no_produce_no);
+		youhuichakan = (TextView) findViewById(R.id.tv_shark_no_produce_add_add);
 		youhuicount = (TextView) findViewById(R.id.tv_youhuiquan_price);
 		youhuixianzhi = (TextView) findViewById(R.id.tv_youhuiquan_title);
 		youhuiTime = (TextView) findViewById(R.id.tv_youhuiquan_time_add);
@@ -132,6 +143,7 @@ public class SharkActivity extends Activity implements OnClickListener,
 				// startAnimaton();
 				noProcue.setVisibility(View.GONE);
 				produce.setVisibility(View.GONE);
+				Log.e("info", "摇一摇页面");
 				getSharkData();
 			}
 
@@ -153,27 +165,37 @@ public class SharkActivity extends Activity implements OnClickListener,
 
 			@Override
 			public void onSuccess(String content) {
+				Log.e("info", content);
 				ParseShark parseShark = new ParseShark();
 				boolean isSuccess = parseShark.parseShark(content);
 				count = parseShark.getCount();
-				if (isSuccess) {
-					Message msg = new Message();
+				Message msg = new Message();
 
+				if (isSuccess) {
+					showData.setVisibility(View.VISIBLE);
 					msg.arg1 = count;
 
 					// yaocishu.setText(count);
 					int theType = parseShark.getTheType();
 					switch (theType) {
-					case 1: // 什么都没摇到
-						noProcue.setVisibility(View.VISIBLE);
-						startAnimaton(noProcue);
-						msg.what = 1;
+					case 1:// 已经摇过了3次
+						if (count < 0) {
+							Toast.makeText(SharkActivity.this,
+									parseShark.getData(), Toast.LENGTH_SHORT)
+									.show();
+							msg.what = 5;
+						} else {
+							noProcue.setVisibility(View.VISIBLE);
+							startAnimaton(noProcue);
+							msg.what = 1;
+						}
 						break;
+
 					case 2: // 摇到商品
 
 						produce.setVisibility(View.VISIBLE);
 						startAnimaton(produce);
-						 msg.what = 2;
+						msg.what = 2;
 						info = parseShark.getProductBaseInfo();
 						if (null != info && !"".equals(info)) {
 							ImageLoader.getInstance().init(
@@ -188,16 +210,34 @@ public class SharkActivity extends Activity implements OnClickListener,
 							producePrice.setText("￥" + info.getPrice());
 						}
 						break;
+					case 3: // 什么都没摇到
+						noProcue.setVisibility(View.VISIBLE);
+						startAnimaton(noProcue);
+						msg.what = 1;
+						break;
 					// case 3: // 摇到礼品券
 					// youhuiquan.setVisibility(View.VISIBLE);
 					// startAnimaton(youhuiquan);
 					// break;
-					// case 4: // 摇到现金券
-					// youhuiquan.setVisibility(View.VISIBLE);
-					// startAnimaton(youhuiquan);
-					// break;
+					case 4: // 摇到现金券
+						youhuiquan.setVisibility(View.VISIBLE);
+						ticket = parseShark.getTicket();
+						if (null != ticket && !"".equals(ticket)) {
+							youhuicount.setText(ticket.getMoney() + "元优惠券");
+							youhuixianzhi.setText(ticket.getComments());
+							youhuiTime.setText(TimeUtil.converDate(Long
+									.parseLong(ticket.getEndDate())));
+
+						}
+						startAnimaton(youhuiquan);
+						msg.what = 4;
+						break;
 					}
 					handler.sendMessage(msg);
+				} else {
+					Toast.makeText(SharkActivity.this,
+							getResources().getString(R.string.no_network),
+							Toast.LENGTH_SHORT).show();
 				}
 			}
 		});
@@ -282,6 +322,11 @@ public class SharkActivity extends Activity implements OnClickListener,
 			youhuiquan.setVisibility(View.GONE);
 			quanImageView.setVisibility(View.VISIBLE);
 			quanImageView.startAnimation(quanAnimation);
+			break;
+		case R.id.tv_shark_no_produce_add_add:// 摇到优惠券
+			Intent yuohuiIntent = new Intent(this, YouhuiActivity.class);
+			startActivity(yuohuiIntent);
+			break;
 		}
 
 	}
@@ -296,8 +341,16 @@ public class SharkActivity extends Activity implements OnClickListener,
 			break;
 		case 2:// 摇到了商品
 			yaocishu.setText(msg.arg1 + "");
-				// produce.startAnimation(anim);
-				// produceChakan.setOnClickListener(this);
+			break;
+		case 4:// 优惠券
+			yaocishu.setText(msg.arg1 + "");
+			break;
+		case 5:// 不能再摇了
+			yaocishu.setText("0");
+			break;
+		case 3:// 什么都没摇到
+			yaocishu.setText("0");
+			break;
 		}
 		return false;
 	}

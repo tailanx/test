@@ -21,7 +21,7 @@ public class YiGuiZeActivity extends BaseActivity implements OnClickListener {
 		setTitle(getString(R.string.yirihui_guize));
 
 		webView = (WebView) findViewById(R.id.webview);
-		webView.setOnClickListener(this);
+		webView.loadUrl(url);
 	}
 
 	@Override
@@ -39,8 +39,8 @@ public class YiGuiZeActivity extends BaseActivity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.webview:
-			webView.loadUrl(url);
+		case R.id.ab_common_tv_right:
+//			webView.loadUrl(url);
 			break;
 
 		}
