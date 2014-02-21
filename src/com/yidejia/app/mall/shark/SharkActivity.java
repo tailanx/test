@@ -91,7 +91,7 @@ public class SharkActivity extends Activity implements OnClickListener,
 		mediaPlayer = MediaPlayer.create(this, R.raw.yao);
 		quanAnimation = AnimationUtils.loadAnimation(this,
 				R.anim.my_translate_action);
-		quanImageView.startAnimation(quanAnimation);
+//		quanImageView.startAnimation(quanAnimation);
 		// startAnimation();
 		guize = (TextView) findViewById(R.id.tv_shark_activity_guize);
 		guize.setOnClickListener(this);
