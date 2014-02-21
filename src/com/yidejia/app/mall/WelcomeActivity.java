@@ -45,12 +45,12 @@ public class WelcomeActivity extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_welcome);
 
-//		if ((getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE) != 0) {
-//			android.os.Process.killProcess(android.os.Process.myPid());
-//		}
+		if ((getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE) != 0) {
+			android.os.Process.killProcess(android.os.Process.myPid());
+		}
 		StatService.setAppChannel(this, "", false);
 		StatService.setSessionTimeOut(30);
-		StatService.setLogSenderDelayed(10);
+		StatService.setLogSenderDelayed(6);
 		
 		if(isFirstStart()){
 			go2Guide();

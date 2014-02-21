@@ -28,6 +28,8 @@ public class HomeYRHView {
 	private Activity activity;
 	private CountDownTimer timer;	//倒计时
 	
+	private CountDownTimer updateTimer;	//更新的倒计时
+	
 	private TextView tvHour;// 小时
 	private TextView tvMin;// 分钟
 	private TextView tvSecond;// 秒
@@ -45,6 +47,8 @@ public class HomeYRHView {
 	private ImageLoadingListener animateFirstListener;
 	
 	private int type = 0;	//type -1 过去 0现在 1 将来  
+	
+	private String ruleId = "";
 	
 	public HomeYRHView(Activity activity){
 		this.activity = activity;
@@ -96,6 +100,13 @@ public class HomeYRHView {
 					}
 				} 
 			}
+
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				updateYRH();
+			}
+			
 		});
 	}
 	
@@ -132,6 +143,24 @@ public class HomeYRHView {
 //		final String goodsId = yiRiHuiDatas.getGoodsId();
 //		final String ruleId = yiRiHuiDatas.getTheId();
 		
+		rlHomeYRH.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+//				ActivityIntentUtil.intentActivity(activity, YirihuiActivity.class);
+				Intent intent = new Intent(activity, YirihuiActivity.class);
+				intent.putExtra("type", type);
+				activity.startActivity(intent);
+			}
+		});
+		
+		if(ruleId.equals(yiRiHuiDatas.getTheId())) return;
+		
+		if (0 == type) {
+			startTimer(overTime);
+		}
+		ruleId = yiRiHuiDatas.getTheId();
+		
 		final String goodsName = yiRiHuiDatas.getRuleName();
 		tvGoodsName.setText(goodsName);
 		
@@ -143,20 +172,6 @@ public class HomeYRHView {
 		
 		String imgUrlSmall = yiRiHuiDatas.getImg2();
 		ImageLoader.getInstance().displayImage(imgUrlSmall, ivGoodsSmall, options, animateFirstListener);
-		
-		if (0 == type) {
-			startTimer(overTime);
-		}
-		rlHomeYRH.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-//				ActivityIntentUtil.intentActivity(activity, YirihuiActivity.class);
-				Intent intent = new Intent(activity, YirihuiActivity.class);
-				intent.putExtra("type", type);
-				activity.startActivity(intent);
-			}
-		});
 	}
 	
 	private void startTimer(long overTime){
@@ -174,6 +189,7 @@ public class HomeYRHView {
 
 			@Override
 			public void onFinish() {
+				getYRHData();
 			}
 		}.start();
 	}
@@ -203,6 +219,32 @@ public class HomeYRHView {
 		tvMin.setSelected(isSelected);
 		tvSecond.setSelected(isSelected);
 		tvCount.setSelected(isSelected);
+	}
+	
+	private void updateYRH(){
+		if(null != updateTimer) {
+			updateTimer.cancel();
+			updateTimer = null;
+		}
+		
+		updateTimer = new CountDownTimer(8 * 1000, 1000) {
+
+			@Override
+			public void onTick(long millisUntilFinished) {
+			}
+
+			@Override
+			public void onFinish() {
+				getYRHData();
+			}
+		}.start();
+	}
+	
+	public void cancelUpdateYRH(){
+		if(null != updateTimer) {
+			updateTimer.cancel();
+			updateTimer = null;
+		}
 	}
 	
 }

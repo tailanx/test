@@ -18,6 +18,7 @@
 
             <RelativeLayout
                 android:id="@+id/go_pay_relativelayout"
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
@@ -25,7 +26,6 @@
                     android:id="@+id/go_pay_relativelayout1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/main_theme_textview_bg"
                     android:gravity="center_vertical"
                     android:padding="@dimen/activity_vertical_margin" >
 
@@ -60,7 +60,7 @@
                         android:textSize="14sp" />
                 </RelativeLayout>
 
-                <RelativeLayout
+                <!-- <RelativeLayout
                     android:id="@+id/re_go_pay_iv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -73,13 +73,13 @@
                         android:layout_marginLeft="@dimen/margin_left_more"
                         android:background="@drawable/filter_line"
                         android:contentDescription="@string/yidejia" />
-                </RelativeLayout>
+                </RelativeLayout> -->
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/re_go_pay_iv"
-                    android:background="@drawable/main_theme_textview_bg" >
+                    android:layout_below="@id/go_pay_relativelayout1"
+                    android:background="@drawable/bg_common_top_btm" >
 
                     <TextView
                         android:id="@+id/go_pay_address"
@@ -103,7 +103,7 @@
                 </RelativeLayout>
             </RelativeLayout>
 
-            <RelativeLayout
+            <!-- <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/main_theme_textview_bg" >
@@ -114,7 +114,7 @@
                     android:background="@color/line_color"
                     android:contentDescription="@string/yidejia" />
             </RelativeLayout>
-
+ -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -130,7 +130,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/main_theme_textview_bg" >
+                android:background="@color/white" >
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -138,6 +138,8 @@
                     android:background="@color/line_color"
                     android:contentDescription="@string/yidejia" />
             </RelativeLayout>
+            
+            
 
             <RelativeLayout
                 android:id="@+id/go_pay_zhifubao_relative"
@@ -155,7 +157,7 @@
                     android:layout_marginLeft="10dp"
                     android:src="@drawable/alipay_app" />
 
-                <LinearLayout
+               <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -177,7 +179,7 @@
                         android:text="需安装支付宝手机钱包客户端"
                         android:textColor="@color/text_color_80"
                         android:textSize="10sp" />
-                </LinearLayout>
+                </LinearLayout> 
 
                 <CheckBox
                     android:id="@+id/zhifubao_checkbox"
@@ -198,9 +200,9 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="1dp"
                     android:layout_marginLeft="@dimen/all_buy_produce_right"
-                    android:background="@drawable/filter_line"
+                    android:src="@color/line_color"
                     android:contentDescription="@string/yidejia" />
             </RelativeLayout>
 
@@ -320,7 +322,7 @@
                     android:clickable="false" />
             </RelativeLayout>
 
-            <RelativeLayout
+           <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white" >
@@ -331,7 +333,7 @@
                     android:layout_marginLeft="@dimen/all_buy_produce_right"
                     android:background="@drawable/filter_line"
                     android:contentDescription="@string/yidejia" />
-            </RelativeLayout>
+          </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/go_pay_zhifubao_yinlian_relative"
@@ -383,8 +385,14 @@
                     android:layout_marginRight="@dimen/width_fu_add"
                     android:clickable="false" />
             </RelativeLayout>
+            
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/width_add"
+                    android:background="@drawable/filter_line"
+                    android:contentDescription="@string/yidejia" />
 
-            <RelativeLayout
+            <!-- <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/main_theme_textview_bg" >
@@ -394,9 +402,9 @@
                     android:layout_height="@dimen/width_add"
                     android:background="@color/line_color"
                     android:contentDescription="@string/yidejia" />
-            </RelativeLayout>
+            </RelativeLayout> -->
 
-            <RelativeLayout
+            <!-- <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_left"
@@ -407,13 +415,14 @@
                     android:layout_height="@dimen/width_add"
                     android:background="@color/line_color"
                     android:contentDescription="@string/yidejia" />
-            </RelativeLayout>
+            </RelativeLayout> -->
 
             <RelativeLayout
                 android:id="@+id/rl_peisong"
+                android:layout_marginTop="@dimen/margin_left"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/main_theme_textview_bg"
+                android:background="@drawable/bg_common_top_btm"
                 android:padding="@dimen/activity_vertical_margin" >
 
                 <TextView
@@ -445,7 +454,7 @@
                     android:src="@drawable/arrow" />
             </RelativeLayout>
 
-            <RelativeLayout
+            <!-- <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/main_theme_textview_bg" >
@@ -455,7 +464,7 @@
                     android:layout_height="@dimen/width_add"
                     android:background="@color/line_color"
                     android:contentDescription="@string/yidejia" />
-            </RelativeLayout>
+            </RelativeLayout> -->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -629,7 +638,7 @@
                     android:contentDescription="@string/yidejia" />
             </RelativeLayout>
 
-            <RelativeLayout
+           <!--  <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_left"
@@ -640,13 +649,14 @@
                     android:layout_height="@dimen/width_add"
                     android:background="@color/line_color"
                     android:contentDescription="@string/yidejia" />
-            </RelativeLayout>
+            </RelativeLayout> -->
 
             <RelativeLayout
                 android:id="@+id/go_shopping_use_evalution"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/main_theme_textview_bg"
+                android:layout_marginTop="@dimen/margin_left"
+                android:background="@drawable/bg_common_top_btm"
                 android:padding="@dimen/activity_vertical_margin" >
 
                 <TextView
@@ -663,7 +673,6 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/tv_ticket_text"
                     android:layout_centerVertical="true"
-                    android:text="摇一摇30元优惠券"
                     android:textColor="@color/text_color_80"
                     android:textSize="10sp" />
 
@@ -676,7 +685,7 @@
                     android:src="@drawable/arrow" />
             </RelativeLayout>
 
-            <RelativeLayout
+            <!-- <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/main_theme_textview_bg" >
@@ -686,7 +695,7 @@
                     android:layout_height="@dimen/width_add"
                     android:background="@color/line_color"
                     android:contentDescription="@string/yidejia" />
-            </RelativeLayout>
+            </RelativeLayout> -->
 
             <TextView
                 android:layout_width="match_parent"
@@ -712,10 +721,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="100dp"
                 android:layout_marginTop="@dimen/margin_left"
-                android:background="@drawable/main_theme_textview_bg"
+                android:background="@drawable/bg_common_top_btm"
                 android:editable="true"
                 android:hint="订单留言......                                                                                                                                                 "
-                android:padding="10dp"
+                android:padding="12dp"
                 android:textSize="15sp" />
         </LinearLayout>
     </ScrollView>
