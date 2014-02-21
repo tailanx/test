@@ -184,7 +184,7 @@
         <!--
              <activity
             android:name="com.yidejia.app.mall.view.NewAddressActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" />
         -->
         <activity
             android:name="com.yidejia.app.mall.EditorActivity"
