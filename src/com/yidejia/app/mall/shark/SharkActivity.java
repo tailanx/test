@@ -153,6 +153,7 @@ public class SharkActivity extends Activity implements OnClickListener,
 
 			@Override
 			public void success(String content) {
+				Log.e("info", content);
 				ParseShark parseShark = new ParseShark();
 				boolean isSuccess = parseShark.parseShark(content);
 				count = parseShark.getCount();
@@ -291,7 +292,6 @@ public class SharkActivity extends Activity implements OnClickListener,
 		switch (msg.what) {
 		case 1:// 什么都没有摇到
 				// noProcue.startAnimation(anim);
-			Log.e("info", msg.arg1 + "msg.arg1");
 			yaocishu.setText(msg.arg1 + "");
 			//
 			break;

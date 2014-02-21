@@ -91,7 +91,7 @@ public class HomeMallActivity extends HomeBaseActivity implements
 		setContentView(R.layout.activity_main_fragment_layout);
 		// 实例化组件
 		frameLayout = (FrameLayout) findViewById(R.id.main_fragment);
-		view = getLayoutInflater().inflate(R.layout.activity_main_layout, null);// 加载主界面
+		view = getLayoutInflater().inflate(R.layout.activity_main_layout, null);// 加载主界面 
 		frameLayout.addView(view);
 		bannerViewGroup = (FrameLayout) view.findViewById(R.id.layout);
 
