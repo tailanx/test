@@ -107,7 +107,9 @@ public class YiRiHuiAdapter extends BaseAdapter{
 		
 		if(null == yiRiHuiDatas) return convertView;
 		
-		final long overTime = yiRiHuiDatas.get(position).getStartTime();
+		final long overTime;
+		if(1 == type) overTime = (yiRiHuiDatas.get(position).getBeginTime() - yiRiHuiDatas.get(position).getTs());
+		else overTime = yiRiHuiDatas.get(position).getStartTime();
 		setTime(holder, overTime);
 		
 //		String count = yiRiHuiDatas.get(position).getQuantity();
@@ -129,6 +131,17 @@ public class YiRiHuiAdapter extends BaseAdapter{
 		String imgUrlSmall = yiRiHuiDatas.get(position).getImg2();
 		ImageLoader.getInstance().displayImage(imgUrlSmall, holder.ivGoodsSmall, options, animateFirstListener);
 		
+
+		try {
+			final int canBuyCount = Integer.parseInt(totalCount);
+			if(canBuyCount <= 0) {	//用户可购买的数量小于0
+				holder.tvBuyNow.setSelected(false);
+				holder.tvCount.setSelected(false);
+			}
+			if(canBuyCount < 10) holder.tvCount.setText("0" + canBuyCount);
+		} catch (NumberFormatException e) {
+		}
+		
 		//已结束 马上购买文字变为已售罄
 		if(-1 == type) {
 			holder.tvBuyNow.setText("已售罄");
@@ -142,26 +155,13 @@ public class YiRiHuiAdapter extends BaseAdapter{
 				
 				@Override
 				public void onTick(long millisUntilFinished) {
-					// TODO Auto-generated method stub
 					setTime(holder, millisUntilFinished / 1000);
 				}
 				
 				@Override
 				public void onFinish() {
-					// TODO Auto-generated method stub
-					
 				}
 			}.start();
-		}
-		
-		try {
-			final int canBuyCount = Integer.parseInt(totalCount);
-			if(canBuyCount <= 0) {	//用户可购买的数量小于0
-				holder.tvBuyNow.setSelected(false);
-				holder.tvCount.setSelected(false);
-			}
-			if(canBuyCount < 10) holder.tvCount.setText("0" + canBuyCount);
-		} catch (NumberFormatException e) {
 		}
 		
 		if(0 == type) {

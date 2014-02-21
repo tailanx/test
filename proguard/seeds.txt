@@ -5813,7 +5813,6 @@ cn.sharesdk.onekeyshare.R$string: int release_to_refresh
 cn.sharesdk.onekeyshare.R$string: int renren
 cn.sharesdk.onekeyshare.R$string: int select_one_plat_at_least
 cn.sharesdk.onekeyshare.R$string: int share
-cn.sharesdk.onekeyshare.R$string: int share_add
 cn.sharesdk.onekeyshare.R$string: int share_canceled
 cn.sharesdk.onekeyshare.R$string: int share_completed
 cn.sharesdk.onekeyshare.R$string: int share_failed
@@ -12742,6 +12741,7 @@ com.yidejia.app.mall.R$attr: int ptrScrollingWhileRefreshingEnabled
 com.yidejia.app.mall.R$attr: int ptrShowIndicator
 com.yidejia.app.mall.R$attr: int ptrSubHeaderTextAppearance
 com.yidejia.app.mall.R$attr: int queryHint
+com.yidejia.app.mall.R$attr: int refreshViewStyle
 com.yidejia.app.mall.R$attr: int searchAutoCompleteTextView
 com.yidejia.app.mall.R$attr: int searchDropdownBackground
 com.yidejia.app.mall.R$attr: int searchResultListItemHeight
@@ -13086,6 +13086,7 @@ com.yidejia.app.mall.R$drawable: int auth_title_back
 com.yidejia.app.mall.R$drawable: int b
 com.yidejia.app.mall.R$drawable: int back1
 com.yidejia.app.mall.R$drawable: int banner_bg
+com.yidejia.app.mall.R$drawable: int bar
 com.yidejia.app.mall.R$drawable: int best_express
 com.yidejia.app.mall.R$drawable: int bg_abs_text
 com.yidejia.app.mall.R$drawable: int bg_common_btm
@@ -13097,7 +13098,6 @@ com.yidejia.app.mall.R$drawable: int bg_down_mall
 com.yidejia.app.mall.R$drawable: int bg_down_search
 com.yidejia.app.mall.R$drawable: int bg_img
 com.yidejia.app.mall.R$drawable: int bg_pay_selector
-com.yidejia.app.mall.R$drawable: int bg_pay_selector_add
 com.yidejia.app.mall.R$drawable: int black
 com.yidejia.app.mall.R$drawable: int blue
 com.yidejia.app.mall.R$drawable: int boot_page1
@@ -14069,6 +14069,9 @@ com.yidejia.app.mall.R$id: int produce_relative1
 com.yidejia.app.mall.R$id: int produce_textview3
 com.yidejia.app.mall.R$id: int produce_textview4
 com.yidejia.app.mall.R$id: int produce_textview5
+com.yidejia.app.mall.R$id: int progress
+com.yidejia.app.mall.R$id: int progress_number
+com.yidejia.app.mall.R$id: int progress_percent
 com.yidejia.app.mall.R$id: int pullDownFromTop
 com.yidejia.app.mall.R$id: int pullFromEnd
 com.yidejia.app.mall.R$id: int pullFromStart
@@ -14280,7 +14283,6 @@ com.yidejia.app.mall.R$id: int tv_already_compelte
 com.yidejia.app.mall.R$id: int tv_already_complete_number
 com.yidejia.app.mall.R$id: int tv_already_deliver
 com.yidejia.app.mall.R$id: int tv_already_deliver_number
-com.yidejia.app.mall.R$id: int tv_back
 com.yidejia.app.mall.R$id: int tv_brand_name_text
 com.yidejia.app.mall.R$id: int tv_brand_text
 com.yidejia.app.mall.R$id: int tv_buy_now
@@ -14492,7 +14494,6 @@ com.yidejia.app.mall.R$layout: int abs__simple_dropdown_hint
 com.yidejia.app.mall.R$layout: int ac_image_pager
 com.yidejia.app.mall.R$layout: int act_guang
 com.yidejia.app.mall.R$layout: int act_search_history
-com.yidejia.app.mall.R$layout: int actionbar_back
 com.yidejia.app.mall.R$layout: int actionbar_cart
 com.yidejia.app.mall.R$layout: int actionbar_common
 com.yidejia.app.mall.R$layout: int actionbar_main_home_title
@@ -14518,6 +14519,7 @@ com.yidejia.app.mall.R$layout: int activity_welcome
 com.yidejia.app.mall.R$layout: int address_management
 com.yidejia.app.mall.R$layout: int address_management_item
 com.yidejia.app.mall.R$layout: int agreement_layout
+com.yidejia.app.mall.R$layout: int alert_dialog_progress
 com.yidejia.app.mall.R$layout: int alipay
 com.yidejia.app.mall.R$layout: int alipay_title
 com.yidejia.app.mall.R$layout: int all_order
@@ -14987,7 +14989,6 @@ com.yidejia.app.mall.R$string: int select_pay_type
 com.yidejia.app.mall.R$string: int selled_num
 com.yidejia.app.mall.R$string: int service
 com.yidejia.app.mall.R$string: int share
-com.yidejia.app.mall.R$string: int share_add
 com.yidejia.app.mall.R$string: int share_canceled
 com.yidejia.app.mall.R$string: int share_completed
 com.yidejia.app.mall.R$string: int share_content
@@ -15494,6 +15495,7 @@ com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetYiRiHui(java.l
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4UpdateYiRiHui(java.lang.String)
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4SaveCZOrder(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetCZOrder(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetYRHHome()
 com.yidejia.app.mall.log.LogService
 com.yidejia.app.mall.log.LogService: LogService()
 com.yidejia.app.mall.msg.MsgActivity

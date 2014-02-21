@@ -180,11 +180,13 @@ public class ContactSureActivity extends BaseActivity implements
 		String url = new JNICallBack().HTTPURL;
 //		Log.e("system.out", url + "?" + param);
 
-		HttpClientUtil httpClientUtil = new HttpClientUtil();
+		HttpClientUtil httpClientUtil = new HttpClientUtil(this);
+		httpClientUtil.setIsShowLoading(true);
+		httpClientUtil.setShowErrMessage(true);
 		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
 
 			@Override
-			public void success(String content) {
+			public void onSuccess(String content) {
 //				Log.e("system.out", content);
 				ParseRecharge parseRecharge = new ParseRecharge();
 				if (parseRecharge.parseCZOrder(content)) {
@@ -234,6 +236,7 @@ public class ContactSureActivity extends BaseActivity implements
 		Intent webIntent = new Intent(this, WebPayActivity.class);
 		webIntent.putExtra("title", title);
 		webIntent.putExtra("payurl", payurl);
+		webIntent.putExtra("isPhoneOrder", true);
 		startActivity(webIntent);
 		finish();
 	}
@@ -244,11 +247,13 @@ public class ContactSureActivity extends BaseActivity implements
 				token, "y");
 		String url = new JNICallBack().HTTPURL;
 
-		HttpClientUtil httpClientUtil = new HttpClientUtil();
+		HttpClientUtil httpClientUtil = new HttpClientUtil(this);
+//		httpClientUtil.setIsShowLoading(true);
+		httpClientUtil.setShowErrMessage(true);
 		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
 
 			@Override
-			public void success(String content) {
+			public void onSuccess(String content) {
 				ParseRecharge parseRecharge = new ParseRecharge();
 				if (parseRecharge.parseCZUnion(content)) {
 					String tn = parseRecharge.getTn();
@@ -273,6 +278,7 @@ public class ContactSureActivity extends BaseActivity implements
 		bundle.putInt("mode", 1);
 		bundle.putString("code", orderCode);
 		bundle.putString("uid", userId);
+		bundle.putBoolean("isPhoneOrder", true);
 		bundle.putString("resp_code", "00");
 		bundle.putString("tn", tn);
 		userpayintent.putExtras(bundle);

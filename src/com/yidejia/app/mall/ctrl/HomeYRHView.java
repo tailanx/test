@@ -3,6 +3,7 @@ package com.yidejia.app.mall.ctrl;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.ImageView;
@@ -65,42 +66,33 @@ public class HomeYRHView {
 		ivGoodsSmall = (ImageView) activity.findViewById(R.id.iv_yrh_img2);
 		rlHomeYRH = (RelativeLayout) activity.findViewById(R.id.rl_home_yrh);
 		
-		rlHomeYRH.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				ActivityIntentUtil.intentActivity(activity, YirihuiActivity.class);
-			}
-		});
 	}
 	
 	/**获取伊日惠数据**/
 	public void getYRHData(){
-		String url = new JNICallBack().HTTPURL;
-		String param = new JNICallBack().getHttp4GetYiRiHui("" + type, "0", "1", "");
-//		Log.e("system.out", url + "?" + param);
+		String url = new JNICallBack().getHttp4GetYRHHome();
+//		String param = new JNICallBack().getHttp4GetYiRiHui("" + type, "0", "1", "");
+//		Log.e("system.out", url);
 		
 		HttpClientUtil httpClientUtil = new HttpClientUtil();
 		
-		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
+		httpClientUtil.getHttpResp(url, new IHttpResp() {
 			
 			@Override
-			public void success(String content) {
+			public void onSuccess(String content) {
 //				Log.e("system.out", content);
 //				content = "{\"code\":1,\"msg\":\"成功\",\"response\":[{\"the_id\":\"1\",\"rule_name\":\"伊日惠测试活动一\",\"begin_time\":\"2014-02-17 11:03:07\",\"end_time\":\"2014-02-18 00:00:00\",\"goods_id\":\"1590\",\"quantity\":\"1\",\"can_buy_quantity\":\"1\",\"overtime\":\"900\",\"img_1\":\"5/2014/02/17/a0acc98642b.jpg\",\"img_2\":\"8/2014/02/17/a0ac9bce227.jpg\",\"valid_flag\":\"y\",\"shell_flag\":\"y\",\"goods_name\":\"【马年活动】脱盐海泉精华\",\"goods_price\":\"50.00\"}],\"ts\":1392609753}";
-				//TODO 解析数据显示数据
 				ParseYiRiHui parseYiRiHui = new ParseYiRiHui();
-				boolean isSuccess = parseYiRiHui.parseYiRiHui(content);
+				boolean isSuccess = parseYiRiHui.parseMainYRH(content);
 				if(isSuccess){
 					ArrayList<YiRiHuiData> tempYiRiHuiDatas = parseYiRiHui.getYiRiHuiDatas();
 					if(null != tempYiRiHuiDatas && tempYiRiHuiDatas.size() != 0) {
-						//TODO 显示数据
 						showView(tempYiRiHuiDatas.get(0));
 					} else {
-						if(0 == type){
-							type = -1;
-							getYRHData();
-						}
+//						if(0 == type){
+//							type = -1;
+//							getYRHData();
+//						}
 					}
 				} 
 			}
@@ -116,10 +108,13 @@ public class HomeYRHView {
 		String totalCount = yiRiHuiDatas.getCanBuyQuantity();
 		tvCount.setText(totalCount);
 		
-		if(0 == type){
+		if(overTime > 0){
 			setTextViewSelected(true);
-		} else if(-1 == type){
+			type = 0;
+		} else{
 			setTextViewSelected(false);
+			totalCount = "0";
+			type = -1;
 		}
 		
 		try {
@@ -128,6 +123,8 @@ public class HomeYRHView {
 			if(count <= 0) {
 				tvCount.setText("00");
 				tvCount.setSelected(false);
+			} else if(count < 10) {
+				tvCount.setText("0" + count);
 			}
 		} catch (NumberFormatException e) {
 		}
@@ -150,6 +147,16 @@ public class HomeYRHView {
 		if (0 == type) {
 			startTimer(overTime);
 		}
+		rlHomeYRH.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+//				ActivityIntentUtil.intentActivity(activity, YirihuiActivity.class);
+				Intent intent = new Intent(activity, YirihuiActivity.class);
+				intent.putExtra("type", type);
+				activity.startActivity(intent);
+			}
+		});
 	}
 	
 	private void startTimer(long overTime){

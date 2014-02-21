@@ -24,6 +24,8 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.ProductBaseInfo;
 import com.yidejia.app.mall.util.DPIUtil;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.widget.YLViewPager;
 
 /**
@@ -68,7 +70,6 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 //		shareImageView.setVisibility(View.VISIBLE);
 		shareImageView.setImageResource(R.drawable.share);
 		shareImageView.setOnClickListener(this);// 分享的点击事件
-//		shareImageView.set
 		setTitle(R.string.goods_info);
 
 		setContentView(R.layout.item_goods_base_info);
@@ -85,7 +86,38 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 
 	private void getData() {
 		String url = new JNICallBack().getHttp4GetGoods(goodsId);
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
+		
+		HttpClientUtil httpClientUtil = new HttpClientUtil(this);
+		httpClientUtil.setIsShowLoading(true);
+		httpClientUtil.getHttpResp(url, new IHttpResp(){
+
+			@Override
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+				ParseGoodsJson parseGoodsJson = new ParseGoodsJson();
+				boolean issucess = parseGoodsJson.parseGoodsInfo(content);
+				if (issucess) {
+					productInfo = parseGoodsJson.getProductBaseInfo();
+					viewUtil = new GoodsInfoViewUtil(GoodsInfoActivity.this);
+					viewUtil.initGoodsView(productInfo);
+					shareImageView.setVisibility(View.VISIBLE);
+				} else {
+					Toast.makeText(GoodsInfoActivity.this,
+							getResources().getString(R.string.no_product),
+							Toast.LENGTH_SHORT).show();
+				}
+			}
+
+			@Override
+			public void onError() {
+				super.onError();
+//				if(GoodsInfoActivity.this.isDestroyed()) return;
+				GoodsInfoActivity.this.finish();
+			}
+			
+		});
+		
+		/*AsyncOkHttpClient client = new AsyncOkHttpClient();
 		client.get(url, new AsyncHttpResponse() {
 
 			@Override
@@ -107,7 +139,6 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 					productInfo = parseGoodsJson.getProductBaseInfo();
 					viewUtil = new GoodsInfoViewUtil(GoodsInfoActivity.this);
 					viewUtil.initGoodsView(productInfo);
-					shareImageView.setVisibility(View.VISIBLE);
 				} else {
 					Toast.makeText(GoodsInfoActivity.this,
 							getResources().getString(R.string.no_product),
@@ -125,7 +156,7 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 				}
 			}
 
-		});
+		});*/
 	}
 
 	@Override
@@ -163,7 +194,7 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 		oks.setNotification(R.drawable.ydj_icon,
 				getResources().getString(R.string.app_name));
 		// address是接收人地址，仅在信息和邮件使用
-		oks.setAddress("12345678901");
+//		oks.setAddress("12345678901");
 		// title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
 		oks.setTitle(getResources().getString(R.string.share_add));
 		// titleUrl是标题的网络链接，仅在人人网和QQ空间使用

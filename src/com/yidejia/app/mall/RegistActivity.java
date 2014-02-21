@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -54,7 +53,7 @@ public class RegistActivity extends BaseActivity implements Callback {
 	private TaskGetCode getCodeTask;
 	private String url;
 	private HttpClientUtil client;
-	private String reponse;// 返回码信息
+//	private String reponse;// 返回码信息
 	private int code;
 	private TextView daojishi;// 倒计时
 
@@ -78,7 +77,6 @@ public class RegistActivity extends BaseActivity implements Callback {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		try {
 			super.onCreate(savedInstanceState);
 
@@ -97,7 +95,6 @@ public class RegistActivity extends BaseActivity implements Callback {
 
 				@Override
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
 					registerListener();
 				}
 
@@ -107,7 +104,6 @@ public class RegistActivity extends BaseActivity implements Callback {
 
 				@Override
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
 					getCodeListener();
 				}
 			});
@@ -125,14 +121,12 @@ public class RegistActivity extends BaseActivity implements Callback {
 
 				@Override
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
 					Uri uri = Uri.parse(url1);
 					Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 					startActivity(intent);
 				}
 			});
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 
 		}
@@ -141,10 +135,6 @@ public class RegistActivity extends BaseActivity implements Callback {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		// if (taskCheckCode != null)
-		// taskCheckCode.closeTask();
-		// if (getCodeTask != null)
-		// getCodeTask.closeTask();
 	}
 
 	/**
@@ -206,24 +196,27 @@ public class RegistActivity extends BaseActivity implements Callback {
 					Toast.LENGTH_SHORT).show();
 			return;
 		}
-		// getCodeTask = new TaskGetCode(RegistActivity.this);
-		// getCodeTask.getCode(account);
 		String param = new JNICallBack().getHttp4GetCode(account);
 		url = new JNICallBack().HTTPURL;
-		client = new HttpClientUtil();
+		client = new HttpClientUtil(this);
+		client.setIsShowLoading(true);
+		client.setShowErrMessage(true);
+		
 		client.getHttpResp(url, param, new IHttpResp() {
 
 			@Override
-			public void success(String content) {
+			public void onSuccess(String content) {
 				getCodeTask = new TaskGetCode(RegistActivity.this);
 				if (getCodeTask.parse(content)) {
 					code = getCodeTask.getCode();
 					String respParam = new JNICallBack().getHttp4SendMsg(
 							account, code + "");
+					HttpClientUtil client = new HttpClientUtil(RegistActivity.this);
+					client.setShowErrMessage(true);
 					client.getHttpResp(url, respParam, new IHttpResp() {
 
 						@Override
-						public void success(String content) {
+						public void onSuccess(String content) {
 							if (getCodeTask.parseResp(content)) {
 								getCodeImgView.setClickable(false);
 								daojishi.setVisibility(View.VISIBLE);
@@ -267,14 +260,6 @@ public class RegistActivity extends BaseActivity implements Callback {
 		});
 	}
 
-	//
-	// /**
-	// * 跳转到伊的家服务条款页面
-	// */
-	// private void goToAgreementAct() {
-	// Intent intent = new Intent(this, AgreementActivity.class);
-	// startActivity(intent);
-	// }
 
 	@Override
 	protected void onResume() {
@@ -300,41 +285,4 @@ public class RegistActivity extends BaseActivity implements Callback {
 		}
 		return false;
 	}
-
-	// private boolean parse(String content) {
-	// JSONObject object;
-	// try {
-	// object = new JSONObject(content);
-	// int respCode = object.getInt("code");
-	// if (respCode == 1) {
-	// code = object.getInt("response");
-	// }
-	// return true;
-	// } catch (JSONException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	//
-	// return false;
-	// }
-	//
-	// private boolean parseResp(String content) {
-	// JSONObject object;
-	// boolean isSucess = false;
-	// try {
-	// object = new JSONObject(content);
-	// int code = object.getInt("code");
-	// if (code == 1) {
-	// isSucess = true;
-	// reponse = object.getString("response");
-	// } else {
-	// reponse = object.getString("response");
-	// }
-	// } catch (JSONException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	//
-	// return isSucess;
-	// }
 }

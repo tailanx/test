@@ -35,6 +35,8 @@ import com.yidejia.app.mall.order.WaitDeliverActivity;
 import com.yidejia.app.mall.order.WaitPayActivity;
 import com.yidejia.app.mall.phone.PhoneOrderActivity;
 import com.yidejia.app.mall.tickets.IntegeralActivity;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 
 public class HomeMyMallActivity extends HomeBaseActivity implements
 		OnClickListener {
@@ -302,16 +304,15 @@ public class HomeMyMallActivity extends HomeBaseActivity implements
 	private void getNumData() {
 		String url = new JNICallBack().getHttp4GetCount(
 				myApplication.getUserId(), myApplication.getToken());
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(url, new AsyncHttpResponse() {
+		HttpClientUtil client = new HttpClientUtil(this);
+		client.setShowErrMessage(false);
+		client.getHttpResp(url, new IHttpResp() {
 
 			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
-				if (HttpStatus.SC_OK == statusCode) {
-					parseCountJson(content);
-					setCount();
-				}
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+				parseCountJson(content);
+				setCount();
 			}
 
 		});

@@ -24,6 +24,8 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.MsgCenter;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 
 /**
  * 前消息中心
@@ -72,7 +74,49 @@ public class MsgActivity extends BaseActivity {
 	private void getMsg(){
 		String url = new JNICallBack().getHttp4GetMessage(userId, token, fromIndex + "", amount + "");
 		
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
+		HttpClientUtil httpClientUtil = new HttpClientUtil(this);
+		if(fromIndex == 0)httpClientUtil.setIsShowLoading(true);
+		else httpClientUtil.setIsShowLoading(false);
+		httpClientUtil.setPullToRefreshView(mPullToRefreshScrollView);
+		httpClientUtil.getHttpResp(url, new IHttpResp() {
+			@Override
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+				if(null == getResources()) return;
+				ParseMsg parseMsg = new ParseMsg();
+				boolean isSuccess = parseMsg.parseMsg(content);
+				if (isSuccess) {
+					ArrayList<MsgCenter> msgCenters = parseMsg.getMsgs();
+					if (null != msgCenters && msgCenters.size() != 0) {
+						loadView(msgCenters);
+					} else {
+						Toast.makeText(MsgActivity.this,
+								getString(R.string.nomore), Toast.LENGTH_SHORT)
+								.show();
+					}
+					
+					String label = getResources().getString(
+							R.string.update_time)
+							+ DateUtils.formatDateTime(
+									MsgActivity.this.getApplicationContext(),
+									System.currentTimeMillis(),
+									DateUtils.FORMAT_SHOW_TIME
+											| DateUtils.FORMAT_SHOW_DATE
+											| DateUtils.FORMAT_ABBREV_ALL);
+					if (null != mPullToRefreshScrollView)
+						mPullToRefreshScrollView.getLoadingLayoutProxy()
+								.setLastUpdatedLabel(label);
+				} else {
+					String errMsg = (null != parseMsg.getErrMsg() && !""
+							.equals(parseMsg.getErrMsg())) ? parseMsg
+							.getErrMsg() : getString(R.string.bad_network);
+					Toast.makeText(MsgActivity.this, errMsg, Toast.LENGTH_SHORT)
+							.show();
+				}
+			}
+		});
+		
+		/*AsyncOkHttpClient client = new AsyncOkHttpClient();
 		
 		client.get(url, new AsyncHttpResponse(){
 
@@ -130,7 +174,7 @@ public class MsgActivity extends BaseActivity {
 				Toast.makeText(MsgActivity.this, getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 			}
 			
-		});
+		});*/
 	}
 	
 	public void loadView(ArrayList<MsgCenter> msgCenters) {

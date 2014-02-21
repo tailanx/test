@@ -18,7 +18,7 @@ import com.yidejia.app.mall.R;
 public class YirihuiActivity extends SherlockFragmentActivity implements
 		OnClickListener {
 	private TextView rightText;// 规则
-	private int lastIndex;
+	private int lastIndex = 0;
 	private TextView nowText;// 正在进行
 	private LinearLayout laterLinear;
 	private TextView laterText;// 即将开始
@@ -30,9 +30,11 @@ public class YirihuiActivity extends SherlockFragmentActivity implements
 
 	@Override
 	protected void onCreate(Bundle arg0) {
-		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+		lastIndex = getIntent().getIntExtra("type", 0);
+
 		setContentView(R.layout.activity_search_result_info_layout);
 		manager = getSupportFragmentManager();
 		initView();
@@ -72,8 +74,7 @@ public class YirihuiActivity extends SherlockFragmentActivity implements
 		imagePrice = (ImageView) findViewById(R.id.iv_search_result_price);
 		imagePrice.setVisibility(View.GONE);
 		nowText.setSelected(true);
-		lastIndex = 0;
-		mFragment = YirihuiFragment.newInstance(0);
+		mFragment = YirihuiFragment.newInstance(lastIndex);
 		ft = manager.beginTransaction();
 		ft.add(R.id.fl_search_result_fragment, mFragment);
 		ft.commit();
@@ -164,7 +165,6 @@ public class YirihuiActivity extends SherlockFragmentActivity implements
 		case R.id.actionbar_right:
 			Intent intent = new Intent(this, YiGuiZeActivity.class);
 			startActivity(intent);
-
 			break;
 
 		default:

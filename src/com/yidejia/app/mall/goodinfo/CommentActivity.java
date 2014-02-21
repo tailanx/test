@@ -28,6 +28,8 @@ import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.UserComment;
 import com.yidejia.app.mall.util.CommentUtil;
 import com.yidejia.app.mall.util.DPIUtil;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 
 public class CommentActivity extends BaseActivity  {
 	private String goodsId;
@@ -35,7 +37,7 @@ public class CommentActivity extends BaseActivity  {
 	private PullToRefreshScrollView mPullToRefreshScrollView;
 	
 //	private View view;
-	private CommentUtil util;
+//	private CommentUtil util;
 	private RelativeLayout refresh_view;
 	private ImageView refreshBtn;
 	
@@ -94,11 +96,59 @@ public class CommentActivity extends BaseActivity  {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		if(util != null) util.closeTask();
+//		if(util != null) util.closeTask();
 	}
 
 	private void setupShow(){
 		String url = new JNICallBack().getHttp4GetComment("goods_id=" + goodsId, fromIndex + "", amount + "", "", "commentDate+desc", "%2A");
+		
+		HttpClientUtil httpClientUtil = new HttpClientUtil(this);
+		if(isFirstIn)httpClientUtil.setIsShowLoading(true);
+		else httpClientUtil.setIsShowLoading(false);
+		httpClientUtil.setPullToRefreshView(mPullToRefreshScrollView);
+		httpClientUtil.getHttpResp(url, new IHttpResp(){
+
+			@Override
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+				if(null == getResources()) return;
+				ParseGoodsJson parseGoodsJson = new ParseGoodsJson();
+				boolean isSuccess = parseGoodsJson.parseCommentJson(content);
+				if(isSuccess) {
+					ArrayList<UserComment> comments = parseGoodsJson.getComments();
+					showItemView(comments);
+				} else {
+					if (parseGoodsJson.getIsNoMore()) {
+						Toast.makeText(CommentActivity.this,
+								getResources().getString(R.string.nomore),
+								Toast.LENGTH_SHORT).show();
+						fromIndex -= amount;
+					}
+				}
+				
+				
+				String label = getResources().getString(R.string.update_time) + DateUtils.formatDateTime(
+						CommentActivity.this,
+						System.currentTimeMillis(),
+						DateUtils.FORMAT_SHOW_TIME
+							| DateUtils.FORMAT_SHOW_DATE
+							| DateUtils.FORMAT_ABBREV_ALL);
+				if(null != mPullToRefreshScrollView)
+				mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+			}
+
+			@Override
+			public void onError() {
+				super.onError();
+				fromIndex -= amount;
+				if(fromIndex < 0) {
+					fromIndex = 0;
+				}
+			}
+			
+		});
+		
+		/*
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
 		client.get(url, new AsyncHttpResponse(){
 
@@ -145,7 +195,7 @@ public class CommentActivity extends BaseActivity  {
 				}
 			}
 			
-		});
+		});*/
 	}
 	
 	/**
@@ -186,9 +236,9 @@ public class CommentActivity extends BaseActivity  {
 	 * @param starLayout
 	 */
 	private void setCommStar(int rate, LinearLayout starLayout){
-		float px = DPIUtil.dpToPixel(20, this);
-		LinearLayout.LayoutParams lp_base = new LinearLayout.LayoutParams(
-				(new Float(px)).intValue(), (new Float(px)).intValue());
+		int px = (int)DPIUtil.dpToPixel(20, this);
+		LinearLayout.LayoutParams lp_base = new LinearLayout.LayoutParams(px,
+				px);
 		
 		lp_base.gravity = Gravity.CENTER;
 		for (int i = 0; i < rate; i++) {
@@ -204,13 +254,8 @@ public class CommentActivity extends BaseActivity  {
 
 		@Override
 		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-			String label = getResources().getString(R.string.update_time) + DateUtils.formatDateTime(
-					CommentActivity.this,
-					System.currentTimeMillis(),
-					DateUtils.FORMAT_SHOW_TIME
-						| DateUtils.FORMAT_SHOW_DATE
-						| DateUtils.FORMAT_ABBREV_ALL);
-			refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+			
+			isFirstIn = false;
 			fromIndex += amount;
 			setupShow();
 		}

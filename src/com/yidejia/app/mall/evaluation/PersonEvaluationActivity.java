@@ -3,7 +3,6 @@ package com.yidejia.app.mall.evaluation;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.http.HttpStatus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,14 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.mobstat.StatService;
-import com.opens.asyncokhttpclient.AsyncHttpResponse;
-import com.opens.asyncokhttpclient.AsyncOkHttpClient;
-import com.opens.asyncokhttpclient.RequestParams;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-//import com.yidejia.app.mall.datamanage.TaskSaveComm;
 import com.yidejia.app.mall.jni.JNICallBack;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 
 /**用户评论商品**/
 public class PersonEvaluationActivity extends BaseActivity {
@@ -84,10 +81,36 @@ public class PersonEvaluationActivity extends BaseActivity {
 		
 		String url = new JNICallBack().HTTPURL;
 		
-		RequestParams requestParams = new RequestParams();
-		requestParams.put(param);
+		HttpClientUtil httpClientUtil = new HttpClientUtil(this);
+		httpClientUtil.setIsShowLoading(true);
+		httpClientUtil.setShowErrMessage(true);
+		httpClientUtil.getHttpResp(url, param, new IHttpResp(){
+
+			@Override
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+				try {
+					JSONObject httpObject = new JSONObject(content);
+					int code = httpObject.getInt("code");
+					if (code == 1) {
+						Toast.makeText(PersonEvaluationActivity.this, "提交评论成功！", Toast.LENGTH_LONG).show();
+						int resultCode = 4002;
+						PersonEvaluationActivity.this.setResult(resultCode);//通知更新界面
+						PersonEvaluationActivity.this.finish();
+					} else {
+						Toast.makeText(PersonEvaluationActivity.this, "提交评论失败！", Toast.LENGTH_LONG).show();	
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		});
 		
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
+//		RequestParams requestParams = new RequestParams();
+//		requestParams.put(param);
+		
+		/*AsyncOkHttpClient client = new AsyncOkHttpClient();
 		client.post(url, requestParams, new AsyncHttpResponse(){
 
 			@Override
@@ -131,7 +154,7 @@ public class PersonEvaluationActivity extends BaseActivity {
 				Toast.makeText(PersonEvaluationActivity.this, getResources().getString(R.string.bad_network), Toast.LENGTH_LONG).show();	
 			}
 			
-		});
+		});*/
 	}
 
 	@Override

@@ -35,6 +35,8 @@ import com.yidejia.app.mall.model.Cart;
 import com.yidejia.app.mall.model.MainProduct;
 import com.yidejia.app.mall.model.ProductBaseInfo;
 import com.yidejia.app.mall.util.DPIUtil;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.view.GoCartActivity;
 import com.yidejia.app.mall.widget.YLViewPager;
 
@@ -340,8 +342,37 @@ public class GoodsInfoViewUtil {
 		String param = new JNICallBack().getHttp4CheckFav(userid, productId,
 				token);
 		String url = new JNICallBack().HTTPURL;
+		
+		HttpClientUtil httpClientUtil = new HttpClientUtil(activity);
+		if(!isFavClick)httpClientUtil.setShowErrMessage(false);
+		else httpClientUtil.setShowErrMessage(true);
+		httpClientUtil.getHttpResp(url, param, new IHttpResp(){
 
-		RequestParams requestParams = new RequestParams();
+			@Override
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+				JSONObject httpResponseoObject;
+				try {
+					httpResponseoObject = new JSONObject(content);
+					int code = httpResponseoObject.optInt("code");
+					setFavBg(1 == code);
+					if (!isFavClick)
+						return;
+					if (-1 == code) {
+						saveFav();
+					} else if (1 == code) {
+						delFav();
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+		});
+
+		/*RequestParams requestParams = new RequestParams();
 		requestParams.put(param);
 
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
@@ -388,7 +419,7 @@ public class GoodsInfoViewUtil {
 				super.onError(error, content);
 			}
 
-		});
+		});*/
 	}
 
 	/** 加入收藏 **/
@@ -396,8 +427,48 @@ public class GoodsInfoViewUtil {
 		String param = new JNICallBack().getHttp4SaveFav(userid, productId,
 				token);
 		String url = new JNICallBack().HTTPURL;
+		
+		HttpClientUtil httpClientUtil = new HttpClientUtil();
+		httpClientUtil.setIsShowLoading(true);
+		httpClientUtil.getHttpResp(url, param, new IHttpResp(){
 
-		RequestParams requestParams = new RequestParams();
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				isFavClick = false;
+			}
+
+			@Override
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+				JSONObject httpResultObject;
+				try {
+					httpResultObject = new JSONObject(content);
+					int code = httpResultObject.optInt("code");
+					setFavBg(1 == code);
+					if (1 == code) {
+						Toast.makeText(
+								activity,
+								activity.getResources().getString(
+										R.string.add_fav_scs),
+								Toast.LENGTH_SHORT).show();
+					} else {
+						Toast.makeText(
+								activity,
+								activity.getResources().getString(
+										R.string.add_fav_fail),
+								Toast.LENGTH_SHORT).show();
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+		});
+
+		/*RequestParams requestParams = new RequestParams();
 		requestParams.put(param);
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
 		client.post(url, requestParams, new AsyncHttpResponse() {
@@ -456,7 +527,7 @@ public class GoodsInfoViewUtil {
 						Toast.LENGTH_SHORT).show();
 			}
 
-		});
+		});*/
 	}
 
 	/** 删除收藏 **/
@@ -464,8 +535,48 @@ public class GoodsInfoViewUtil {
 		String param = new JNICallBack().getHttp4DelFav(userid, productId,
 				token);
 		String url = new JNICallBack().HTTPURL;
+		
+		HttpClientUtil httpClientUtil = new HttpClientUtil(activity);
+		httpClientUtil.setIsShowLoading(true);
+		httpClientUtil.getHttpResp(url, param, new IHttpResp(){
 
-		RequestParams requestParams = new RequestParams();
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				isFavClick = false;
+			}
+			
+			@Override
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+
+				JSONObject httpResultObject;
+				try {
+					httpResultObject = new JSONObject(content);
+					int code = httpResultObject.optInt("code");
+					setFavBg(1 != code);
+					if (1 == code) {
+						Toast.makeText(
+								activity,
+								activity.getResources().getString(
+										R.string.del_fav_ok),
+								Toast.LENGTH_SHORT).show();
+					} else {
+						Toast.makeText(
+								activity,
+								activity.getResources().getString(
+										R.string.del_fav_fail),
+								Toast.LENGTH_SHORT).show();
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
+		/*RequestParams requestParams = new RequestParams();
 		requestParams.put(param);
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
 		client.post(url, requestParams, new AsyncHttpResponse() {
@@ -524,7 +635,7 @@ public class GoodsInfoViewUtil {
 						Toast.LENGTH_SHORT).show();
 			}
 
-		});
+		});*/
 	}
 
 	/** 设置收藏按钮背景 **/

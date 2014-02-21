@@ -23,6 +23,8 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.RetViewCtrl;
 import com.yidejia.app.mall.jni.JNICallBack;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 
 /**
  * 退换货
@@ -39,6 +41,7 @@ public class ExchangeActivity extends BaseActivity{
 	private String userId;
 	private String token;
 	private boolean isRefresh = false;
+	private boolean isFirstIn = true;
 //	private ArrayList<RetOrderInfo> retOrders;
 
 	@Override
@@ -73,75 +76,68 @@ public class ExchangeActivity extends BaseActivity{
 		public void onPullDownToRefresh(
 				PullToRefreshBase<ScrollView> refreshView) {
 			fromIndex = 0;// 刷新的index要改为0
+			isRefresh = true;
+			isFirstIn = false;
 			getData();
 		}
 
 		@Override
 		public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
 			fromIndex += amount;
+			isFirstIn = false;
 			getData();
 		}
 	};
 	
 	private void getData(){
 		String url = new JNICallBack().getHttp4GetReturnList(userId, fromIndex + "", amount + "", token);
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(url, new AsyncHttpResponse(){
+		HttpClientUtil client = new HttpClientUtil(this);
+		if(isFirstIn)client.setIsShowLoading(true);
+		else client.setIsShowLoading(false);
+		client.setPullToRefreshView(mPullToRefreshScrollView);
+		client.getHttpResp(url, new IHttpResp(){
 
 			@Override
-			public void onStart() {
-				// TODO Auto-generated method stub
-				super.onStart();
-			}
-
-			@Override
-			public void onFinish() {
-				// TODO Auto-generated method stub
-				super.onFinish();
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+				if(null == getResources()) return;
+				ParseReturnJson parseReturnJson = new ParseReturnJson();
+				boolean isSuccess = parseReturnJson.parseReturn(content);
+				ArrayList<RetOrderInfo> retOrdersTemp = parseReturnJson
+						.getRetOrderInfos();
+				if (isSuccess && null != retOrdersTemp) {
+					if (isRefresh) {
+						// retOrders.clear();
+						allOrderLayout.removeAllViews();
+					}
+					// retOrders.addAll(retOrdersTemp);
+					int length = retOrdersTemp.size();
+					for (int i = 0; i < length; i++) {
+						add2view(retOrdersTemp.get(i));
+					}
+				} else if (isSuccess) {
+					Toast.makeText(ExchangeActivity.this,
+							getResources().getString(R.string.nomore),
+							Toast.LENGTH_SHORT).show();
+				}
 				String label = getResources().getString(R.string.update_time)
 						+ DateUtils.formatDateTime(ExchangeActivity.this,
-								System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
+								System.currentTimeMillis(),
+								DateUtils.FORMAT_ABBREV_ALL
 										| DateUtils.FORMAT_SHOW_DATE
 										| DateUtils.FORMAT_SHOW_TIME);
-				mPullToRefreshScrollView.getLoadingLayoutProxy().setLastUpdatedLabel(
-						label);
+				mPullToRefreshScrollView.getLoadingLayoutProxy()
+						.setLastUpdatedLabel(label);
 				if (null != mPullToRefreshScrollView
 						&& mPullToRefreshScrollView.isRefreshing()) {
 					mPullToRefreshScrollView.onRefreshComplete();
 				}
-			}
-
-			@Override
-			public void onSuccess(int statusCode, String content) {
-				// TODO Auto-generated method stub
-				super.onSuccess(statusCode, content);
-				if(HttpStatus.SC_OK == statusCode) {
-					ParseReturnJson parseReturnJson = new ParseReturnJson();
-					boolean isSuccess = parseReturnJson.parseReturn(content);
-					ArrayList<RetOrderInfo> retOrdersTemp = parseReturnJson.getRetOrderInfos();
-					if(isSuccess && null != retOrdersTemp){
-						if(isRefresh) {
-//							retOrders.clear();
-							allOrderLayout.removeAllViews();
-						}
-//						retOrders.addAll(retOrdersTemp);
-						int length = retOrdersTemp.size();
-						for (int i = 0; i < length; i++) {
-							add2view(retOrdersTemp.get(i));
-						}
-					} else if(isSuccess) {
-						Toast.makeText(ExchangeActivity.this,
-								getResources().getString(R.string.nomore),
-								Toast.LENGTH_SHORT).show();
-					}
 					
-				}
 			}
 
 			@Override
-			public void onError(Throwable error, String content) {
-				// TODO Auto-generated method stub
-				super.onError(error, content);
+			public void onError() {
+				super.onError();
 				fromIndex -= amount;
 				if(fromIndex < 0) fromIndex = 0;
 			}

@@ -9,6 +9,8 @@ import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.user.Login;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DesUtils;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 
 import android.app.Service;
 import android.content.Intent;
@@ -24,10 +26,10 @@ public class LogService extends Service {
 	// private Login login;
 	private String baseName;
 	private String basepasswrod;
-	private AsyncOkHttpClient client;
-	private RequestParams params;
+//	private AsyncOkHttpClient client;
+//	private RequestParams params;
 	private String hosturl;
-	private String contentType;
+//	private String contentType;
 	private Boolean isCheck;
 
 	@Override
@@ -43,10 +45,10 @@ public class LogService extends Service {
 		sp = PreferenceManager
 				.getDefaultSharedPreferences(getApplicationContext());
 		ipAddress = new IpAddress();
-		params = new RequestParams();
+//		params = new RequestParams();
 		hosturl = new JNICallBack().HTTPURL;
-		contentType = "application/x-www-form-urlencoded;charset=UTF-8";
-		client = new AsyncOkHttpClient();
+//		contentType = "application/x-www-form-urlencoded;charset=UTF-8";
+//		client = new AsyncOkHttpClient();
 
 	}
 
@@ -64,8 +66,8 @@ public class LogService extends Service {
 		} else {
 			String url = new JNICallBack().getHttp4Login(baseName,
 					basepasswrod, ipAddress.getIpAddress());
-			params.put(url);
-			loginService();
+//			params.put(url);
+			loginService(url);
 		}
 		return super.onStartCommand(intent, flags, startId);
 	}
@@ -77,8 +79,37 @@ public class LogService extends Service {
 	}
 
 
-	private void loginService() {
-		client.post(hosturl, contentType, params, new AsyncHttpResponse() {
+	private void loginService(String url) {
+		
+		HttpClientUtil httpClientUtil = new HttpClientUtil();
+		httpClientUtil.getHttpResp(hosturl, url, new IHttpResp(){
+
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				stopSelf();
+			}
+			@Override
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+				if (null != content && !"".equals(content)) {
+					Login login = new Login();
+					login.parseLogin(content);
+					stopSelf();
+				} else {
+					stopSelf();
+				}
+
+			}
+
+			@Override
+			public void onError() {
+				super.onError();
+				stopSelf();
+			}
+		});
+		
+		/*client.post(hosturl, contentType, params, new AsyncHttpResponse() {
 			@Override
 			public void onStart() {
 				super.onStart();
@@ -108,6 +139,6 @@ public class LogService extends Service {
 				super.onError(error, content);
 				stopSelf();
 			}
-		});
+		});*/
 	}
 }

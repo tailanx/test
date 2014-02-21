@@ -903,35 +903,6 @@ com.squareup.okhttp.internal.spdy.SpdyStream:
 com.squareup.okhttp.internal.tls.OkHostnameVerifier:
     private static final int ALT_DNS_NAME
     private static final int ALT_IPA_NAME
-com.tenpay.android.service.DownloadDialog
-com.tenpay.android.service.DownloadDialog$1
-com.tenpay.android.service.DownloadDialog$2
-com.tenpay.android.service.DownloadDialog$3
-com.tenpay.android.service.DownloadDialog$ProgressThread
-com.tenpay.android.service.IRemoteServiceCallback
-com.tenpay.android.service.IRemoteServiceCallback$Stub
-com.tenpay.android.service.IRemoteServiceCallback$Stub$Proxy
-com.tenpay.android.service.ITenpayService
-com.tenpay.android.service.ITenpayService$Stub
-com.tenpay.android.service.ITenpayService$Stub$Proxy
-com.tenpay.android.service.TenpayServiceHelper
-com.tenpay.android.service.TenpayServiceHelper$1
-com.tenpay.android.service.TenpayServiceHelper$10
-com.tenpay.android.service.TenpayServiceHelper$11
-com.tenpay.android.service.TenpayServiceHelper$11$1
-com.tenpay.android.service.TenpayServiceHelper$12
-com.tenpay.android.service.TenpayServiceHelper$13
-com.tenpay.android.service.TenpayServiceHelper$13$1
-com.tenpay.android.service.TenpayServiceHelper$14
-com.tenpay.android.service.TenpayServiceHelper$2
-com.tenpay.android.service.TenpayServiceHelper$3
-com.tenpay.android.service.TenpayServiceHelper$4
-com.tenpay.android.service.TenpayServiceHelper$5
-com.tenpay.android.service.TenpayServiceHelper$6
-com.tenpay.android.service.TenpayServiceHelper$7
-com.tenpay.android.service.TenpayServiceHelper$8
-com.tenpay.android.service.TenpayServiceHelper$9
-com.tenpay.android.service.TenpayServiceHelper$9$1
 com.unionpay.UPPayAssistEx:
     public static final int PLUGIN_VALID
     public static final int PLUGIN_NOT_FOUND
@@ -1024,8 +995,6 @@ com.yidejia.app.mall.FeedBackActivity:
     private android.widget.EditText contactEditText
     57:64:private void commitListener()
     73:73:private void commitOpinion(java.lang.String,java.lang.String)
-com.yidejia.app.mall.FindPwActivity:
-    private java.lang.String reponse
 com.yidejia.app.mall.HomeBaseActivity:
     76:76:public int getCurrentActivityId()
 com.yidejia.app.mall.MyApplication:
@@ -1034,7 +1003,6 @@ com.yidejia.app.mall.MyApplication:
     132:132:public java.lang.String getAidou()
 com.yidejia.app.mall.RegistActivity:
     public android.widget.Button mback
-    private java.lang.String reponse
 com.yidejia.app.mall.adapter.AllOrderFragmentAdapter
 com.yidejia.app.mall.adapter.AlreadyComFragmentAdapter
 com.yidejia.app.mall.adapter.AlreadyOrderFragmentAdapter
@@ -1261,8 +1229,7 @@ com.yidejia.app.mall.net.address.GetUserAddressList:
 com.yidejia.app.mall.net.address.SaveUserAddress
 com.yidejia.app.mall.net.address.SetDefAddr
 com.yidejia.app.mall.net.commments.DeleteProductComment
-com.yidejia.app.mall.net.commments.GetProductCommentList:
-    31:34:public GetProductCommentList()
+com.yidejia.app.mall.net.commments.GetProductCommentList
 com.yidejia.app.mall.net.commments.SaveProductComment
 com.yidejia.app.mall.net.commments.WaitingComment
 com.yidejia.app.mall.net.express.GetDistributionList
@@ -1302,6 +1269,8 @@ com.yidejia.app.mall.net.voucher.Voucher:
     32:60:private void setKeysAndValues(java.lang.String)
     63:71:private java.lang.String getHttpAddress(java.lang.String)
     83:86:public java.lang.String getResponse(java.lang.String)
+com.yidejia.app.mall.order.AllOrderFragment:
+    private android.app.ProgressDialog bar
 com.yidejia.app.mall.order.Order:
     private int orderAmount
     private java.lang.String tn
@@ -1409,7 +1378,7 @@ com.yidejia.app.mall.search.TaskFilter$2
 com.yidejia.app.mall.search.TaskFilter$3
 com.yidejia.app.mall.search.TaskFilter$Task
 com.yidejia.app.mall.shark.ParseShark:
-    120:120:public java.lang.String getData()
+    116:116:public java.lang.String getData()
 com.yidejia.app.mall.shark.SharkActivity:
     private android.view.animation.Animation animation
     private android.widget.LinearLayout$LayoutParams params
@@ -1450,15 +1419,10 @@ com.yidejia.app.mall.util.Base64$Encoder
 com.yidejia.app.mall.util.BottomChange
 com.yidejia.app.mall.util.CartUtil1:
     private android.widget.TextView number
-com.yidejia.app.mall.util.CommentUtil:
-    47:56:public CommentUtil(android.content.Context,android.widget.LinearLayout)
-    59:61:public void setRefreshView(com.handmark.pulltorefresh.library.PullToRefreshScrollView,android.widget.RelativeLayout)
-    79:110:public void AllComment(java.lang.String,int,int)
-    244:258:private void setupShow(com.yidejia.app.mall.model.UserComment)
+com.yidejia.app.mall.util.CommentUtil
 com.yidejia.app.mall.util.CommentUtil$1
-com.yidejia.app.mall.util.CommentUtil$Task:
-    114:114:private CommentUtil$Task(com.yidejia.app.mall.util.CommentUtil)
-    114:114:synthetic CommentUtil$Task(com.yidejia.app.mall.util.CommentUtil,com.yidejia.app.mall.util.CommentUtil$Task)
+com.yidejia.app.mall.util.CommentUtil$Task
+com.yidejia.app.mall.util.CommentUtil$Task$1
 com.yidejia.app.mall.util.Consts:
     public static final java.lang.String EXIT_LOGIN
     public static final java.lang.String DELETE_CART
@@ -1516,8 +1480,7 @@ com.yidejia.app.mall.util.DesUtils:
 com.yidejia.app.mall.util.FreeGivingUtil
 com.yidejia.app.mall.util.Http
 com.yidejia.app.mall.util.HttpClientUtil:
-    91:92:public void setProgressDialog(android.app.ProgressDialog)
-    96:96:public android.app.ProgressDialog getProgressDialog()
+    101:101:public android.app.ProgressDialog getProgressDialog()
 com.yidejia.app.mall.util.IsPhone:
     8:8:public IsPhone()
 com.yidejia.app.mall.util.Md5

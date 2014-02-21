@@ -3537,6 +3537,47 @@ jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_J
 
 	return (*env)->NewStringUTF(env, urlString);
 }
+jstring __attribute__ ((visibility ("default"))) Java_com_yidejia_app_mall_jni_JNICallBack_getHttp4GetYRHHome(JNIEnv* env,
+		jobject thiz){//
+
+	char encrypt[LEN] , urlString[LEN];
+	encrypt[0] = 0;
+	urlString[0] = 0;
+
+	char *api="?api=active.yirihui.getYrhMain";
+	addString(urlString, url);
+	addString(urlString, api);
+
+	addString(urlString, pHead);
+
+	time_t currtime = time(NULL);
+	long ltime = currtime;
+	char chtime[20];
+
+	sprintf(chtime, "%ld", ltime);
+	addString(urlString, chtime);
+	addString(urlString, "&sign=");
+	addString(encrypt, strTemp);
+	addString(encrypt, "active.yirihui.getYrhMain");
+	addString(encrypt, chtime);
+
+	MD5_CTX md5;
+	MD5Init(&md5);
+
+	unsigned char decrypt[16];
+	MD5Update(&md5, encrypt, strlen((char *) encrypt));
+	MD5Final(&md5, decrypt);
+	char buf[32 + 1];
+	int i;
+	for (i = 0; i < 16; i++) {
+		sprintf(buf + i * 2, "%02x", decrypt[i]);
+	}
+	buf[32] = 0;
+
+	addString(urlString, buf);
+
+	return (*env)->NewStringUTF(env, urlString);
+}
 
 #ifdef __cplusplus
 }

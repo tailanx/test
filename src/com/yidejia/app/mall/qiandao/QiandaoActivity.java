@@ -7,13 +7,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
-import android.text.format.DateFormat;
-import android.util.Log;
+//import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -45,7 +43,7 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 	private JNICallBack jniCallBack;
 	private String url;
 
-	// private int lxSign = 0; // 已连续签到天数
+	private int lxSign = 0; // 已连续签到天数
 	private int signCount = 0; // 总签到天数
 	private String respMsg; // 签到返回信息
 	private SharedPreferencesUtil sp;// 保存日期
@@ -55,6 +53,8 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 	private String lastDate;// 保存的日期
 	private String lastId;// 保存的用户的Id
 	private Handler handler;// 用来更新界面
+	
+	private boolean isCanSign = true;	//是否可以点击签到
 
 	@SuppressLint("SimpleDateFormat")
 	@Override
@@ -91,8 +91,10 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 		lastId = sp.getData("TIME", "User", "");
 		if (nowDate.equals(lastDate) && lastId.equals(userId)) {
 			ivSignAdd.setImageResource(R.drawable.yiqiandao);
+			isCanSign = false;
 		} else {
 			ivSignAdd.setImageResource(R.drawable.qiandao_button);
+			isCanSign = true;
 		}
 
 	}
@@ -104,6 +106,7 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 			this.finish();
 			break;
 		case R.id.iv_qiandao_button:
+			if(!isCanSign) return;
 			signUp();
 			break;
 		default:
@@ -113,12 +116,13 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 
 	private void getSignCount() {
 		String param = jniCallBack.getHttp4SignCount(userId, token);
-		HttpClientUtil httpClientUtil = new HttpClientUtil();
+		HttpClientUtil httpClientUtil = new HttpClientUtil(this);
+		httpClientUtil.setIsShowLoading(true);
+		httpClientUtil.setShowErrMessage(true);
 		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
 
 			@Override
-			public void success(String content) {
-				// TODO Auto-generated method stub
+			public void onSuccess(String content) {
 				if (parseGetCount(content)) {
 					if (!"".equals(signCount)) {
 						int gewei = signCount % 10;
@@ -141,7 +145,7 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 			String strResp = httpObject.optString("response");
 			if (1 == code) {
 				JSONObject respObject = new JSONObject(strResp);
-				// lxSign = respObject.optInt("lxSign");
+				lxSign = respObject.optInt("lxSign");
 				signCount = respObject.optInt("countSign") ;
 				return true;
 			}
@@ -158,24 +162,26 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 		sp.saveData("TIME", "User", userId);
 		String param = new JNICallBack().getHttp4SignUp(userId, token);
 
-		HttpClientUtil httpClientUtil = new HttpClientUtil();
+		HttpClientUtil httpClientUtil = new HttpClientUtil(this);
+		httpClientUtil.setIsShowLoading(true);
+		httpClientUtil.setShowErrMessage(true);
 		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
 
 			@Override
-			public void success(String content) {
-				// TODO Auto-generated method stub
+			public void onSuccess(String content) {
 				String showMsg;
-				Log.e("info", content);
+//				Log.e("info", content);
 				if (parseSignAdd(content)) {
-					showMsg = "获得" + respMsg + "个爱豆";
+					showMsg = "您已连续签到"+ (lxSign + 1) + "天，本次签到获得" + respMsg + "个爱豆";
 					ivSignAdd.setImageResource(R.drawable.yiqiandao);
 					signCount++;
 					handler.sendEmptyMessage(Consts.QIANDAO);
+					isCanSign = false;
 				} else {
 					showMsg = respMsg;
 				}
 				Toast.makeText(QiandaoActivity.this, showMsg,
-						Toast.LENGTH_SHORT).show();
+						Toast.LENGTH_LONG).show();
 			}
 		});
 	}

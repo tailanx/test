@@ -17,6 +17,7 @@ public class YiRiHuiData {
 	private String goodsName;
 	private String goodsPrice;
 	private long startTime;
+	private long ts;
 	
 	public String getTheId() {
 		return theId;
@@ -108,6 +109,11 @@ public class YiRiHuiData {
 	public void setStartTime(long startTime) {
 		this.startTime = startTime;
 	}
-	
+	public long getTs() {
+		return ts;
+	}
+	public void setTs(long ts) {
+		this.ts = ts;
+	}
 	
 }

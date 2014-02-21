@@ -10,6 +10,8 @@ import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.jni.JNICallBack;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -62,25 +64,13 @@ public class CheckActivity extends BaseActivity {
 	private void getShipLog(){
 		String url = new JNICallBack().getHttp4GetShipLog(shipCode);
 		
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(url, new AsyncHttpResponse(){
+		HttpClientUtil client = new HttpClientUtil(this);
+		client.setIsShowLoading(true);
+		client.getHttpResp(url, new IHttpResp(){
 
 			@Override
-			public void onStart() {
-				// TODO Auto-generated method stub
-				super.onStart();
-			}
-
-			@Override
-			public void onFinish() {
-				// TODO Auto-generated method stub
-				super.onFinish();
-			}
-
-			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
-				if(HttpStatus.SC_OK == statusCode){
+			public void onSuccess(String content) {
+				super.onSuccess(content);
 					ParseLogJson parseLogJson = new ParseLogJson();
 					boolean isSuccess = parseLogJson.parseShipLog(content);
 					ArrayList<ShipLog> shipLogs = parseLogJson.getShipLogs();
@@ -100,14 +90,6 @@ public class CheckActivity extends BaseActivity {
 					} else {
 						Toast.makeText(CheckActivity.this, "暂无快递信息", Toast.LENGTH_SHORT).show();
 					}
-				}
-			}
-
-			@Override
-			public void onError(Throwable error, String content) {
-				// TODO Auto-generated method stub
-				super.onError(error, content);
-				Toast.makeText(CheckActivity.this, getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
 			}
 			
 		});

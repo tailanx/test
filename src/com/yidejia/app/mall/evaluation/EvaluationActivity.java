@@ -2,8 +2,6 @@ package com.yidejia.app.mall.evaluation;
 
 import java.util.ArrayList;
 
-import org.apache.http.HttpStatus;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,16 +15,13 @@ import android.widget.Toast;
 
 import com.baidu.mobstat.StatService;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.opens.asyncokhttpclient.AsyncHttpResponse;
-import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-import com.yidejia.app.mall.R.id;
-import com.yidejia.app.mall.R.layout;
-import com.yidejia.app.mall.R.string;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.Cart;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 
 public class EvaluationActivity extends BaseActivity {
 
@@ -52,8 +47,30 @@ public class EvaluationActivity extends BaseActivity {
 	/** 获取带评论数据 **/
 	private void getData() {
 		String url = new JNICallBack().getHttp4GetNoEvaluate(userid);
+		
+		HttpClientUtil httpClientUtil = new HttpClientUtil(this);
+		httpClientUtil.setIsShowLoading(true);
+		httpClientUtil.setShowErrMessage(true);
+		httpClientUtil.getHttpResp(url, new IHttpResp(){
 
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
+			@Override
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+				ParseEvaJson parseEvaJson = new ParseEvaJson();
+				boolean isSuccess = parseEvaJson.parseNoEvaJson(content);
+				ArrayList<Cart> noEvaCarts = parseEvaJson
+						.getWaitCommGoods();
+				if (isSuccess && null != noEvaCarts) {
+					showView(noEvaCarts);
+				} else {
+					Toast.makeText(EvaluationActivity.this, "暂无数据",
+							Toast.LENGTH_SHORT).show();
+				}
+			}
+			
+		});
+
+		/*AsyncOkHttpClient client = new AsyncOkHttpClient();
 		client.get(url, new AsyncHttpResponse() {
 
 			@Override
@@ -92,7 +109,7 @@ public class EvaluationActivity extends BaseActivity {
 				super.onError(error, content);
 			}
 
-		});
+		});*/
 	}
 
 	/** 显示到view **/

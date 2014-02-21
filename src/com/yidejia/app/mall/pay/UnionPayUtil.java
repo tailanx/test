@@ -10,6 +10,7 @@ import com.baidu.mobstat.StatService;
 import com.unionpay.UPPayAssistEx;
 import com.unionpay.uppay.PayActivity;
 import com.yidejia.app.mall.order.AllOrderActivity;
+import com.yidejia.app.mall.phone.PhoneOrderActivity;
 import com.yidejia.app.mall.util.ActivityIntentUtil;
 
 public class UnionPayUtil {
@@ -18,6 +19,8 @@ public class UnionPayUtil {
 	private String upayTn;
 	
 	private Activity activity;
+	
+	private boolean isPhoneOrder = false;
 	
 	public UnionPayUtil(Activity activity, String respCode, String upayTn){
 		this.activity = activity;
@@ -34,6 +37,10 @@ public class UnionPayUtil {
 		} else {
 			Toast.makeText(activity, "支付失败", Toast.LENGTH_LONG).show();
 		}
+	}
+	
+	public void setIsPhoneOrder(boolean isPhoneOrder){
+		this.isPhoneOrder = isPhoneOrder;
 	}
 	
 	public void onActivityResult(Intent data) {
@@ -63,8 +70,9 @@ public class UnionPayUtil {
             isSuccess = false;
         } else if (str.equalsIgnoreCase("cancel")) {
         	StatService.onEventDuration(activity, "unionpay cancel", "unionpay cancel", 100);
-            
-            ActivityIntentUtil.intentActivityAndFinish(activity, AllOrderActivity.class);
+            if(!isPhoneOrder)
+            	ActivityIntentUtil.intentActivityAndFinish(activity, AllOrderActivity.class);
+            else ActivityIntentUtil.intentActivityAndFinish(activity, PhoneOrderActivity.class);
             return;
         }
 
@@ -79,7 +87,9 @@ public class UnionPayUtil {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.dismiss();
-						ActivityIntentUtil.intentActivityAndFinish(activity, AllOrderActivity.class);
+						if(!isPhoneOrder)
+			            	ActivityIntentUtil.intentActivityAndFinish(activity, AllOrderActivity.class);
+			            else ActivityIntentUtil.intentActivityAndFinish(activity, PhoneOrderActivity.class);
 				}
 			});
 		} else {
@@ -96,7 +106,9 @@ public class UnionPayUtil {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
-                   ActivityIntentUtil.intentActivityAndFinish(activity, AllOrderActivity.class);
+                    if(!isPhoneOrder)
+                    	ActivityIntentUtil.intentActivityAndFinish(activity, AllOrderActivity.class);
+                    else ActivityIntentUtil.intentActivityAndFinish(activity, PhoneOrderActivity.class);
                 }
             });
         }

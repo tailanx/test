@@ -27,6 +27,8 @@ import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.net.ConnectionDetector;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class AllOrderFragment extends SherlockFragment {
@@ -118,7 +120,46 @@ public class AllOrderFragment extends SherlockFragment {
 		util.getOrderTpye(orderType), fromIndex + "", amount
 				+ "", myApplication.getToken());
 		
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
+		HttpClientUtil httpClientUtil = new HttpClientUtil(getActivity());
+		httpClientUtil.setPullToRefreshView(mPullToRefreshScrollView);
+		if(isFirstOpen)httpClientUtil.setIsShowLoading(true);
+		else httpClientUtil.setIsShowLoading(false);
+		httpClientUtil.getHttpResp(url, new IHttpResp(){
+
+			@Override
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+				if(!isAdded()) return;
+				ParseOrder parseOrder = new ParseOrder(getSherlockActivity());
+				boolean isSuccess = parseOrder.parseGetOrders(content);
+				
+				if(isSuccess) {
+					orders = parseOrder.getOrders();
+					dealOrder();
+				} else {
+					Toast.makeText(getSherlockActivity(),
+							getResources().getString(R.string.nomore),
+							Toast.LENGTH_LONG).show();
+				}
+				String label = getResources().getString(R.string.update_time)
+						+ DateUtils.formatDateTime(getSherlockActivity(),
+								System.currentTimeMillis(), DateUtils.FORMAT_ABBREV_ALL
+										| DateUtils.FORMAT_SHOW_DATE
+										| DateUtils.FORMAT_SHOW_DATE);
+				if (null != mPullToRefreshScrollView)
+					mPullToRefreshScrollView.getLoadingLayoutProxy()
+							.setLastUpdatedLabel(label);
+			}
+
+			@Override
+			public void onError() {
+				super.onError();
+				fromIndex -= amount;
+			}
+			
+		});
+		
+		/*AsyncOkHttpClient client = new AsyncOkHttpClient();
 		Log.e("system.out", url);
 		client.get(url, new AsyncHttpResponse(){
 
@@ -169,10 +210,10 @@ public class AllOrderFragment extends SherlockFragment {
 				dismissBar();
 			}
 			
-		});
+		});*/
 	}
 	
-	private void dismissBar() {
+	/*private void dismissBar() {
 		if (isFirstOpen) {
 			bar.dismiss();
 			isFirstOpen = false;
@@ -196,7 +237,7 @@ public class AllOrderFragment extends SherlockFragment {
 				}
 			});
 		}
-	}
+	}*/
 	
 	/**下拉刷新监听**/
 	private OnRefreshListener2<ScrollView> listener = new OnRefreshListener2<ScrollView>() {
@@ -213,6 +254,7 @@ public class AllOrderFragment extends SherlockFragment {
 				return;
 			}
 			fromIndex = 0;// 刷新的index要改为0
+			isFirstOpen = false;
 			getOrderData();
 		}
 
@@ -229,6 +271,7 @@ public class AllOrderFragment extends SherlockFragment {
 			}
 			
 			fromIndex += amount;
+			isFirstOpen = false;
 			getOrderData();
 		}
 	};

@@ -203,11 +203,13 @@ public class PhoneActivity extends BaseActivity implements OnClickListener {
 		isCanClick = false;
 		
 		String url = parseRecharge.getNeedPayUrl(handset, amount);
-		HttpClientUtil httpClientUtil = new HttpClientUtil();
+		HttpClientUtil httpClientUtil = new HttpClientUtil(this);
+		httpClientUtil.setIsShowLoading(true);
+		httpClientUtil.setShowErrMessage(true);
 		httpClientUtil.getHttpResp(url, new IHttpResp() {
 
 			@Override
-			public void success(String content) {
+			public void onSuccess(String content) {
 				if (parseRecharge.parseNeedPay(content)) {
 					inprice = parseRecharge.getInPrice();
 					cardid = parseRecharge.getCardid();

@@ -69,11 +69,13 @@ public class DeliveryActivity extends BaseActivity{
 	
 	private void getData(){
 		String url = new JNICallBack().getHttp4GetDistribute("flag%3D%27y%27", "0", "100", "", "", "%2A");
-		HttpClientUtil httpClientUtil = new HttpClientUtil();
+		HttpClientUtil httpClientUtil = new HttpClientUtil(this);
+		httpClientUtil.setIsShowLoading(true);
+		httpClientUtil.setShowErrMessage(true);
 		httpClientUtil.getHttpResp(url, new IHttpResp() {
 			
 			@Override
-			public void success(String content) {
+			public void onSuccess(String content) {
 				ParseExpressJson parseExpressJson = new ParseExpressJson();
 				boolean isSuccess = parseExpressJson.parseDist(content);
 				if (isSuccess) {

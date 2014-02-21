@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebStorage.QuotaUpdater;
@@ -35,8 +36,11 @@ public class GoodsDetailActivity extends BaseActivity{
 		
 		setContentView(R.layout.goods_webview);
 		
-		bar = new ProgressDialog(this);
+		bar = new ProgressDialog(this, R.style.StyleProgressDialog);
+		bar.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		bar.show();
+		bar.setContentView(R.layout.progress_dialog);
+		
 		showView();
 		
 	}
@@ -62,6 +66,7 @@ public class GoodsDetailActivity extends BaseActivity{
         loadWebView();
 	}
 	
+	@SuppressLint("NewApi")
 	private void loadWebView() {
 		if (android.os.Build.VERSION.SDK_INT >= 11) {
 			webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
