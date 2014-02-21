@@ -143,6 +143,7 @@ public class SharkActivity extends Activity implements OnClickListener,
 				// startAnimaton();
 				noProcue.setVisibility(View.GONE);
 				produce.setVisibility(View.GONE);
+				Log.e("info", "摇一摇页面");
 				getSharkData();
 			}
 

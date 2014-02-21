@@ -26,7 +26,7 @@ public class SharkUtil {
 	// 速度阈值，当摇晃速度达到这值后产生作用
 	private static final int SPEED_SHRESHOLD = 3000;
 	// 两次检测的时间间隔
-	private static final int UPTATE_INTERVAL_TIME = 70;
+	private static final int UPTATE_INTERVAL_TIME = 100;
 	private SensorManager sensorManager;
 	private Vibrator vibrator;
 	private IShark iShark;
@@ -130,6 +130,7 @@ public class SharkUtil {
 			// 达到速度阀值，发出提示
 			if (speed >= SPEED_SHRESHOLD) {
 				iShark.onStart();
+				Log.e("info", "speed");
 				vibrator.vibrate(new long[] { 500, 200, 500, 200 }, -1);//
 			}
 		}
