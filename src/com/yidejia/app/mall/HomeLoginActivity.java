@@ -230,7 +230,7 @@ public class HomeLoginActivity extends HomeBaseActivity implements
 		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
 
 			@Override
-			public void success(String content) {
+			public void onSuccess(String content) {
 				
 //				Log.e("system.out", content);
 				

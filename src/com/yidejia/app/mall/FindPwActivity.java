@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
-import android.text.format.Time;
-import android.util.Log;
+//import android.text.format.Time;
+//import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -44,7 +44,7 @@ public class FindPwActivity extends BaseActivity implements Callback {
 	private TaskReset taskReset;
 	private String url;
 	private HttpClientUtil client;
-	private String reponse;// 返回码信息
+//	private String reponse;// 返回码信息
 	private int code;
 	private TextView daojishi;// 倒计时
 	private Handler handler;
@@ -110,22 +110,26 @@ public class FindPwActivity extends BaseActivity implements Callback {
 		// getCodeTask.getCode(account);
 		String param = new JNICallBack().getHttp4GetCode(account);
 		url = new JNICallBack().HTTPURL;
-		client = new HttpClientUtil();
+		client = new HttpClientUtil(this);
+		client.setIsShowLoading(true);
+		client.setShowErrMessage(true);
 		client.getHttpResp(url, param, new IHttpResp() {
 
 			@Override
-			public void success(String content) {
+			public void onSuccess(String content) {
 				getCodeTask = new TaskGetCode(FindPwActivity.this);
 				if (getCodeTask.parse(content)) {
-					Log.e("info", content + "content");
+//					Log.e("info", content + "content");
 					code = getCodeTask.getCode();
 					String respParam = new JNICallBack().getHttp4SendMsg(
 							account, code + "");
+					HttpClientUtil client = new HttpClientUtil(FindPwActivity.this);
+					client.setShowErrMessage(true);
 					client.getHttpResp(url, respParam, new IHttpResp() {
 
 						@Override
-						public void success(String content) {
-							Log.e("info", content + "content");
+						public void onSuccess(String content) {
+//							Log.e("info", content + "content");
 							if (getCodeTask.parseResp(content)) {
 								daojishi.setVisibility(View.VISIBLE);
 								obtain_imageView.setClickable(false);

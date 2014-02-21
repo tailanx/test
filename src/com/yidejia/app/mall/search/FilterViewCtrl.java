@@ -65,6 +65,14 @@ public class FilterViewCtrl {
 		filterAdapter.notifyDataSetChanged();
 	}
 	
+	public FilterExListAdapter getAdapter(){
+		return filterAdapter;
+	}
+	
+	public void cleanAdapter(){
+		filterAdapter = null;
+	}
+	
 	private void initView(View view){
 		filterListView = (ExpandableListView) view.findViewById(R.id.filter_listview);
 		

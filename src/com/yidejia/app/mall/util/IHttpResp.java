@@ -1,6 +1,14 @@
 package com.yidejia.app.mall.util;
 
-public interface IHttpResp {
+public class IHttpResp {
 	
-	void success(String content);
+	public void onSuccess(String content){}
+	
+	public void onError(){}
+	
+	public void onStart(){}
+	
+	public void onFinish(){}
+	
+//	void error();
 }

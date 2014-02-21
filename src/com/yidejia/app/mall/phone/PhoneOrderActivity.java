@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.baidu.mobstat.StatService;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.yidejia.app.mall.BaseActivity;
@@ -28,6 +27,8 @@ public class PhoneOrderActivity extends BaseActivity {
 	private LinearLayout linearLayout;
 	private int fromIndex = 0;
 	private int amount = 10;
+	
+	private boolean isFirstIn = true;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -58,6 +59,7 @@ public class PhoneOrderActivity extends BaseActivity {
 								R.string.no_network), Toast.LENGTH_LONG).show();
 				return;
 			}
+			isFirstIn = false;
 			fromIndex = 0;// 刷新的index要改为0
 			getOrderData();
 		}
@@ -78,6 +80,7 @@ public class PhoneOrderActivity extends BaseActivity {
 								R.string.no_network), Toast.LENGTH_LONG).show();
 				return;
 			}
+			isFirstIn = false;
 			fromIndex += amount;
 			getOrderData();
 		}
@@ -91,18 +94,23 @@ public class PhoneOrderActivity extends BaseActivity {
 		String url = new JNICallBack().getHttp4GetCZOrder(MyApplication
 				.getInstance().getUserId(), fromIndex + "", amount + "",
 				MyApplication.getInstance().getToken());
-		HttpClientUtil client = new HttpClientUtil();
+//		Log.e("system.out", url);
+		HttpClientUtil client = new HttpClientUtil(this);
 		client.setPullToRefreshView(mPullToRefreshScrollView);
+		client.setShowErrMessage(true);
+		if(isFirstIn) client.setIsShowLoading(true);
+		else client.setIsShowLoading(false);
 		client.getHttpResp(url, new IHttpResp() {
 
 			@Override
-			public void success(String content) {
-				Log.e("info", content + "phoneOrder");
+			public void onSuccess(String content) {
+//				Log.e("info", content + "phoneOrder");
 				ParseContent parseContent = new ParseContent();
 				if (parseContent.parsePhone(content)) {
 					ArrayList<Order> mArrayList = parseContent
 							.getPhoneArrayList();
-					Log.e("info", mArrayList.size() + "size");
+//					Log.e("info", mArrayList.size() + "size");
+					if(null == mArrayList) return;
 					PhoneUtil util = new PhoneUtil(PhoneOrderActivity.this,
 							linearLayout, mArrayList);
 					util.addView();
@@ -120,6 +128,12 @@ public class PhoneOrderActivity extends BaseActivity {
 				mPullToRefreshScrollView.getLoadingLayoutProxy()
 						.setLastUpdatedLabel(label);
 			}
+
+			@Override
+			public void onError() {
+				fromIndex -= amount;
+			}
+			
 		});
 	}
 	@Override

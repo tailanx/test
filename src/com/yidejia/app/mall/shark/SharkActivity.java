@@ -152,7 +152,7 @@ public class SharkActivity extends Activity implements OnClickListener,
 		httpClientUtil.getHttpResp(url, new IHttpResp() {
 
 			@Override
-			public void success(String content) {
+			public void onSuccess(String content) {
 				ParseShark parseShark = new ParseShark();
 				boolean isSuccess = parseShark.parseShark(content);
 				count = parseShark.getCount();

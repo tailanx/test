@@ -48,6 +48,8 @@ import com.yidejia.app.mall.model.Specials;
 import com.yidejia.app.mall.order.ParseOrder;
 import com.yidejia.app.mall.util.ActivityIntentUtil;
 import com.yidejia.app.mall.util.Consts;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 //import com.yidejia.app.mall.util.HttpClientUtil;
 //import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.util.PayUtil;
@@ -539,16 +541,16 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 
 		// Log.e("system.out", url+params);
 
-		RequestParams requestParams = new RequestParams();
-		requestParams.put(params);
+//		RequestParams requestParams = new RequestParams();
+//		requestParams.put(params);
 
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.post(url, contentType, requestParams, new AsyncHttpResponse() {
+		HttpClientUtil client = new HttpClientUtil(this);
+		client.setIsShowLoading(true);
+		client.getHttpResp(url, params, new IHttpResp() {
 
 			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
-				if (statusCode == HttpStatus.SC_OK) {
+			public void onSuccess(String content) {
+				super.onSuccess(content);
 					// 清除购物车数据
 					cleanCart();
 
@@ -593,17 +595,15 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 						Toast.makeText(CstmPayActivity.this, errResult,
 								Toast.LENGTH_SHORT).show();
 					}
-				}
 			}
 
-			@Override
-			public void onError(Throwable error, String content) {
-				// TODO Auto-generated method stub
-				super.onError(error, content);
-				Toast.makeText(CstmPayActivity.this,
-						getString(R.string.bad_network), Toast.LENGTH_SHORT)
-						.show();
-			}
+//			@Override
+//			public void onError() {
+//				super.onError();
+//				Toast.makeText(CstmPayActivity.this,
+//						getString(R.string.bad_network), Toast.LENGTH_SHORT)
+//						.show();
+//			}
 
 		});
 	}
@@ -643,13 +643,14 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 	 */
 	private void getDefaultAddress() {
 		String url = getAddressUrl(true);
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(url, new AsyncHttpResponse() {
+		HttpClientUtil client = new HttpClientUtil(this);
+		client.setIsShowLoading(true);
+		client.getHttpResp(url, new IHttpResp() {
 
 			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
-				if (statusCode == HttpStatus.SC_OK) {
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+//				if (statusCode == HttpStatus.SC_OK) {
 					ParseAddressJson parseAddressJson = new ParseAddressJson();
 					boolean isSuccess = parseAddressJson
 							.parseAddressListJson(content);
@@ -664,17 +665,17 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 					} else {
 						getFirstAddress();
 					}
-				}
+//				}
 			}
-
-			@Override
-			public void onError(Throwable error, String content) {
-				super.onError(error, content);
-				// TODO Auto-generated method stub
-				Toast.makeText(CstmPayActivity.this,
-						getString(R.string.bad_network), Toast.LENGTH_SHORT)
-						.show();
-			}
+//
+//			@Override
+//			public void onError(Throwable error, String content) {
+//				super.onError(error, content);
+//				// TODO Auto-generated method stub
+//				Toast.makeText(CstmPayActivity.this,
+//						getString(R.string.bad_network), Toast.LENGTH_SHORT)
+//						.show();
+//			}
 
 		});
 	}
@@ -684,13 +685,13 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 	 */
 	private void getFirstAddress() {
 		String url = getAddressUrl(false);
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(url, new AsyncHttpResponse() {
+		HttpClientUtil client = new HttpClientUtil(this);
+		client.getHttpResp(url, new IHttpResp() {
 
 			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
-				if (statusCode == HttpStatus.SC_OK) {
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+//				if (statusCode == HttpStatus.SC_OK) {
 					ParseAddressJson parseAddressJson = new ParseAddressJson();
 					boolean isSuccess = parseAddressJson
 							.parseAddressListJson(content);
@@ -709,17 +710,17 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 								EditNewAddressActivity.class,
 								Consts.AddressRequestCode);
 					}
-				}
+//				}
 			}
-
-			@Override
-			public void onError(Throwable error, String content) {
-				super.onError(error, content);
-				// TODO Auto-generated method stub
-				Toast.makeText(CstmPayActivity.this,
-						getString(R.string.bad_network), Toast.LENGTH_SHORT)
-						.show();
-			}
+//
+//			@Override
+//			public void onError(Throwable error, String content) {
+//				super.onError(error, content);
+//				// TODO Auto-generated method stub
+//				Toast.makeText(CstmPayActivity.this,
+//						getString(R.string.bad_network), Toast.LENGTH_SHORT)
+//						.show();
+//			}
 
 		});
 	}
@@ -751,13 +752,13 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 		// JNICallBack().getHttp4GetDistribute("flag%3D%27y%27", "0", "20", "",
 		// "", "%2A");
 		String url = getDeliveryUrl(isDefault);
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(url, new AsyncHttpResponse() {
+		HttpClientUtil client = new HttpClientUtil();
+		client.getHttpResp(url, new IHttpResp() {
 
 			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
-				if (statusCode == HttpStatus.SC_OK) {
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+//				if (statusCode == HttpStatus.SC_OK) {
 					ParseExpressJson parseExpressJson = new ParseExpressJson();
 					boolean isSuccess = parseExpressJson.parseDist(content);
 					if (isSuccess) {
@@ -779,17 +780,17 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 								getString(R.string.bad_network),
 								Toast.LENGTH_LONG).show();
 					}
-				} else {
-					// TODO 返回失败
-					Toast.makeText(CstmPayActivity.this,
-							getString(R.string.bad_network), Toast.LENGTH_LONG)
-							.show();
-				}
+//				} else {
+//					// TODO 返回失败
+//					Toast.makeText(CstmPayActivity.this,
+//							getString(R.string.bad_network), Toast.LENGTH_LONG)
+//							.show();
+//				}
 			}
 
 			@Override
-			public void onError(Throwable error, String content) {
-				super.onError(error, content);
+			public void onError() {
+				super.onError();
 				// TODO
 				Toast.makeText(CstmPayActivity.this,
 						getString(R.string.bad_network), Toast.LENGTH_LONG)
@@ -842,13 +843,13 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 
 		String url = getExpressUrl(province, isDefault);
 
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(url, new AsyncHttpResponse() {
+		HttpClientUtil client = new HttpClientUtil();
+		client.getHttpResp(url, new IHttpResp() {
 
 			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
-				if (statusCode == HttpStatus.SC_OK) {
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+//				if (statusCode == HttpStatus.SC_OK) {
 					ParseExpressJson parseExpressJson = new ParseExpressJson();
 					boolean isSuccess = parseExpressJson.parseExpress(content);
 					if (isSuccess) {
@@ -881,17 +882,17 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 								getString(R.string.bad_network),
 								Toast.LENGTH_LONG).show();
 					}
-				} else {
-					// TODO 返回失败
-					Toast.makeText(CstmPayActivity.this,
-							getString(R.string.bad_network), Toast.LENGTH_LONG)
-							.show();
-				}
+//				} else {
+//					// TODO 返回失败
+//					Toast.makeText(CstmPayActivity.this,
+//							getString(R.string.bad_network), Toast.LENGTH_LONG)
+//							.show();
+//				}
 			}
 
 			@Override
-			public void onError(Throwable error, String content) {
-				super.onError(error, content);
+			public void onError() {
+				super.onError();
 				// TODO
 				Toast.makeText(CstmPayActivity.this,
 						getString(R.string.bad_network), Toast.LENGTH_LONG)
@@ -912,13 +913,13 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 		String where = "+startDate+%3C%3D+%27" + dateStr + "%27";
 		String url = new JNICallBack().getHttp4GetFree(where, "0", "20", "",
 				"", "%2A");
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(url, new AsyncHttpResponse() {
+		HttpClientUtil client = new HttpClientUtil();
+		client.getHttpResp(url, new IHttpResp() {
 
 			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
-				if (statusCode == HttpStatus.SC_OK) {
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+//				if (statusCode == HttpStatus.SC_OK) {
 					ParseExpressJson parseExpressJson = new ParseExpressJson();
 					boolean isSuccess = parseExpressJson.parseFree(content);
 					if (isSuccess) {
@@ -938,17 +939,17 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 								getString(R.string.bad_network),
 								Toast.LENGTH_LONG).show();
 					}
-				} else {
-					// TODO 返回失败
-					Toast.makeText(CstmPayActivity.this,
-							getString(R.string.bad_network), Toast.LENGTH_LONG)
-							.show();
-				}
+//				} else {
+//					// TODO 返回失败
+//					Toast.makeText(CstmPayActivity.this,
+//							getString(R.string.bad_network), Toast.LENGTH_LONG)
+//							.show();
+//				}
 			}
 
 			@Override
-			public void onError(Throwable error, String content) {
-				super.onError(error, content);
+			public void onError() {
+				super.onError();
 				// TODO 返回失败
 				Toast.makeText(CstmPayActivity.this,
 						getString(R.string.bad_network), Toast.LENGTH_LONG)
@@ -989,19 +990,19 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 		//
 		// Log.e("system.out", url);
 		// Toast.makeText(this, url, Toast.LENGTH_LONG).show();
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
+		HttpClientUtil client = new HttpClientUtil();
 		RequestParams params = new RequestParams();
 		params.put(jniCallBack.getHttp4GetVoucher(userId, token));
 
-		client.post(jniCallBack.HTTPURL, contentType, params,
-				new AsyncHttpResponse() {// );
+		client.getHttpResp(jniCallBack.HTTPURL, jniCallBack.getHttp4GetVoucher(userId, token),
+				new IHttpResp() {// );
 
 					// client.get(url, new AsyncHttpResponse(){
 
 					@Override
-					public void onSuccess(int statusCode, String content) {
-						super.onSuccess(statusCode, content);
-						if (statusCode == HttpStatus.SC_OK) {
+					public void onSuccess(String content) {
+						super.onSuccess(content);
+//						if (statusCode == HttpStatus.SC_OK) {
 							ParseCredit parseCredit = new ParseCredit();
 							boolean isSuccess = parseCredit
 									.parseCredit(content);
@@ -1022,18 +1023,18 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 										getString(R.string.bad_network),
 										Toast.LENGTH_LONG).show();
 							}
-						} else {
-							// TODO
-							Toast.makeText(CstmPayActivity.this,
-									getString(R.string.bad_network),
-									Toast.LENGTH_LONG).show();
-						}
+//						} else {
+//							// TODO
+//							Toast.makeText(CstmPayActivity.this,
+//									getString(R.string.bad_network),
+//									Toast.LENGTH_LONG).show();
+//						}
 					}
 
 					@Override
-					public void onError(Throwable error, String content) {
+					public void onError() {
 						// TODO Auto-generated method stub
-						super.onError(error, content);
+						super.onError();
 						Toast.makeText(CstmPayActivity.this,
 								getString(R.string.bad_network),
 								Toast.LENGTH_LONG).show();
@@ -1048,20 +1049,20 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 		String url = jniCallBack.HTTPURL;
 		String param = jniCallBack.getHttp4GetVerify(goods, userId);
 
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
+		HttpClientUtil client = new HttpClientUtil();
 
-		RequestParams requestParams = new RequestParams();
-		requestParams.put(param);
+//		RequestParams requestParams = new RequestParams();
+//		requestParams.put(param);
 
 //		Log.e("system.out", url + "?" + param);
 		// client.get(url, new AsyncHttpResponse(){
-		client.post(url, contentType, requestParams, new AsyncHttpResponse() {
+		client.getHttpResp(url, param, new IHttpResp() {
 			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
+			public void onSuccess(String content) {
+				super.onSuccess(content);
 				
 				
-				if (statusCode == HttpStatus.SC_OK) {
+//				if (statusCode == HttpStatus.SC_OK) {
 					ParseCredit parseCredit = new ParseCredit();
 					boolean isSuccess = parseCredit.parseVerify(content);
 					if (isSuccess) {
@@ -1083,18 +1084,18 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 								getString(R.string.bad_network),
 								Toast.LENGTH_LONG).show();
 					}
-				} else {
-					// TODO
-					Toast.makeText(CstmPayActivity.this,
-							getString(R.string.bad_network), Toast.LENGTH_LONG)
-							.show();
-				}
+//				} else {
+//					// TODO
+//					Toast.makeText(CstmPayActivity.this,
+//							getString(R.string.bad_network), Toast.LENGTH_LONG)
+//							.show();
+//				}
 			}
 
 			@Override
-			public void onError(Throwable error, String content) {
+			public void onError() {
 				// TODO Auto-generated method stub
-				super.onError(error, content);
+				super.onError();
 				Toast.makeText(CstmPayActivity.this,
 						getString(R.string.bad_network), Toast.LENGTH_LONG)
 						.show();

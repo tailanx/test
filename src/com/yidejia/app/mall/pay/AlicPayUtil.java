@@ -15,6 +15,7 @@ import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.order.AllOrderActivity;
+import com.yidejia.app.mall.phone.PhoneOrderActivity;
 import com.yidejia.app.mall.util.ActivityIntentUtil;
 import com.yidejia.app.mall.util.HttpClientUtil;
 import com.yidejia.app.mall.util.IHttpResp;
@@ -24,6 +25,7 @@ public class AlicPayUtil {
 	private ProgressDialog mProgress = null;
 	private String alicInfo; // 支付宝客户端支付需要的字符串
 	private String TAG = getClass().getName();
+	private boolean isMobile = false;	//手机充值订单
 
 	private Activity activity; // 上下文
 
@@ -32,7 +34,7 @@ public class AlicPayUtil {
 	}
 
 	public void getAlicPay(String userId, String token, String orderCode, boolean isMobile) {
-		
+		this.isMobile = isMobile;
 		// 检测安全支付服务是否被安装
 		MobileSecurePayHelper mspHelper = new MobileSecurePayHelper(activity);
 		boolean isAlicExsist = mspHelper.detectMobile_sp();
@@ -44,11 +46,13 @@ public class AlicPayUtil {
 		String param = new JNICallBack().getHttp4AlicSign(userId, token,
 				orderCode , isMobileStr);
 
-		HttpClientUtil httpClientUtil = new HttpClientUtil();
+		HttpClientUtil httpClientUtil = new HttpClientUtil(activity);
+//		httpClientUtil.setIsShowLoading(true);
+//		httpClientUtil.setShowErrMessage(true);
 		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
 
 			@Override
-			public void success(String content) {
+			public void onSuccess(String content) {
 				parseAlicPay(content);
 			}
 		});
@@ -130,12 +134,18 @@ public class AlicPayUtil {
 									R.drawable.ic_launcher,
 									android.R.string.ok, paySuccessListener,
 									-1, null);
-							ActivityIntentUtil.intentActivityAndFinish(
-									activity, AllOrderActivity.class);
+//							if(!isMobile)
+//							ActivityIntentUtil.intentActivityAndFinish(
+//									activity, AllOrderActivity.class);
+//							else ActivityIntentUtil.intentActivityAndFinish(
+//									activity, PhoneOrderActivity.class);
 							StatService.onEventDuration(activity, "alicpaysuccess", "alicpaysuccess", 100);
 						} else if (tradeStatus.equals("6001")) {
+							if(!isMobile)
 							ActivityIntentUtil.intentActivityAndFinish(
 									activity, AllOrderActivity.class);
+							else ActivityIntentUtil.intentActivityAndFinish(
+									activity, PhoneOrderActivity.class);
 							StatService.onEventDuration(activity, "alicpaycancel", "alicpaycancel", 100);
 							return;
 						} else if (tradeStatus.equals("6002")) {
@@ -190,8 +200,11 @@ public class AlicPayUtil {
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
 			// go2AllOrderActivity();
-			ActivityIntentUtil.intentActivityAndFinish(activity,
-					AllOrderActivity.class);
+			if(!isMobile)
+				ActivityIntentUtil.intentActivityAndFinish(activity,
+						AllOrderActivity.class);
+				else ActivityIntentUtil.intentActivityAndFinish(
+						activity, PhoneOrderActivity.class); 
 		}
 	};
 
@@ -201,8 +214,11 @@ public class AlicPayUtil {
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
 			// go2WaitPayOrder();
+			if(!isMobile)
 			ActivityIntentUtil.intentActivityAndFinish(activity,
 					AllOrderActivity.class);
+			else ActivityIntentUtil.intentActivityAndFinish(
+					activity, PhoneOrderActivity.class); 
 		}
 	};
 }

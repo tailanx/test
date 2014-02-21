@@ -14,6 +14,8 @@ import com.yidejia.app.mall.model.PriceLevel;
 import com.yidejia.app.mall.net.search.BrandDataUtil;
 import com.yidejia.app.mall.net.search.EffectDataUtil;
 import com.yidejia.app.mall.net.search.PriceDataUtil;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -50,12 +52,12 @@ public class TaskFilter {
 		String urlPrice = jniCallBack.getHttp4GetPrice();
 		String urlBrand = jniCallBack.getHttp4GetBrand();
 		String urlEffect = jniCallBack.getHttp4GetEffect("flag%3D%27y%27", "0", "20", "", "", "%2A");
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(urlBrand, new AsyncHttpResponse(){
+		HttpClientUtil client = new HttpClientUtil();
+		client.getHttpResp(urlBrand, new IHttpResp(){
 
 			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
+			public void onSuccess(String content) {
+				super.onSuccess(content);
 				ParseSearchJson parseSearchJson = new ParseSearchJson();
 				parseSearchJson.parseBrandJson(content);
 				brands = parseSearchJson.getBrands();
@@ -63,11 +65,11 @@ public class TaskFilter {
 			}
 			
 		});
-		client.get(urlPrice, new AsyncHttpResponse(){
+		client.getHttpResp(urlPrice, new IHttpResp(){
 			
 			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
+			public void onSuccess(String content) {
+				super.onSuccess(content);
 				ParseSearchJson parseSearchJson = new ParseSearchJson();
 				parseSearchJson.parsePriceJson(content);
 				pricesLevels = parseSearchJson.getPriceLevels();
@@ -75,11 +77,11 @@ public class TaskFilter {
 			}
 			
 		});
-		client.get(urlEffect, new AsyncHttpResponse(){
+		client.getHttpResp(urlEffect, new IHttpResp(){
 			
 			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
+			public void onSuccess(String content) {
+				super.onSuccess(content);
 				ParseSearchJson parseSearchJson = new ParseSearchJson();
 				parseSearchJson.parseFunJson(content);
 				effects = parseSearchJson.getFunctions();

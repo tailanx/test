@@ -518,11 +518,13 @@ public class SkinQuesActivity extends Activity {
 	
 	private void getData(){
 		String url = new JNICallBack().getHttp4SkinQuestion();
-		HttpClientUtil clientUtil = new HttpClientUtil();
+		HttpClientUtil clientUtil = new HttpClientUtil(this);
+		clientUtil.setShowErrMessage(true);
+		clientUtil.setIsShowLoading(true);
 		clientUtil.getHttpResp(url, new IHttpResp() {
 			
 			@Override
-			public void success(String content) {
+			public void onSuccess(String content) {
 				question = new Question();
 				question.analysis(content);
 				skinQuestions = question.getSkinQs();

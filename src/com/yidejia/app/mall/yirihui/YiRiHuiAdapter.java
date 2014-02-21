@@ -107,7 +107,9 @@ public class YiRiHuiAdapter extends BaseAdapter{
 		
 		if(null == yiRiHuiDatas) return convertView;
 		
-		final long overTime = yiRiHuiDatas.get(position).getStartTime();
+		final long overTime;
+		if(1 == type) overTime = (yiRiHuiDatas.get(position).getBeginTime() - yiRiHuiDatas.get(position).getTs());
+		else overTime = yiRiHuiDatas.get(position).getStartTime();
 		setTime(holder, overTime);
 		
 //		String count = yiRiHuiDatas.get(position).getQuantity();

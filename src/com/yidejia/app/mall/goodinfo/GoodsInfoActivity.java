@@ -24,6 +24,8 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.ProductBaseInfo;
 import com.yidejia.app.mall.util.DPIUtil;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.widget.YLViewPager;
 
 /**
@@ -84,7 +86,37 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 
 	private void getData() {
 		String url = new JNICallBack().getHttp4GetGoods(goodsId);
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
+		
+		HttpClientUtil httpClientUtil = new HttpClientUtil(this);
+		httpClientUtil.setIsShowLoading(true);
+		httpClientUtil.getHttpResp(url, new IHttpResp(){
+
+			@Override
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+				ParseGoodsJson parseGoodsJson = new ParseGoodsJson();
+				boolean issucess = parseGoodsJson.parseGoodsInfo(content);
+				if (issucess) {
+					productInfo = parseGoodsJson.getProductBaseInfo();
+					viewUtil = new GoodsInfoViewUtil(GoodsInfoActivity.this);
+					viewUtil.initGoodsView(productInfo);
+				} else {
+					Toast.makeText(GoodsInfoActivity.this,
+							getResources().getString(R.string.no_product),
+							Toast.LENGTH_SHORT).show();
+				}
+			}
+
+			@Override
+			public void onError() {
+				super.onError();
+//				if(GoodsInfoActivity.this.isDestroyed()) return;
+				GoodsInfoActivity.this.finish();
+			}
+			
+		});
+		
+		/*AsyncOkHttpClient client = new AsyncOkHttpClient();
 		client.get(url, new AsyncHttpResponse() {
 
 			@Override
@@ -123,7 +155,7 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 				}
 			}
 
-		});
+		});*/
 	}
 
 	@Override

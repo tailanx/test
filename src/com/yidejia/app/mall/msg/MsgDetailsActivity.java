@@ -47,12 +47,13 @@ public class MsgDetailsActivity extends BaseActivity{
 	
 	private void getMsgDetails(){
 		String url = new JNICallBack().getHttp4MsgDetails(id);
-		HttpClientUtil httpClientUtil = new HttpClientUtil();
+		HttpClientUtil httpClientUtil = new HttpClientUtil(this);
+		httpClientUtil.setIsShowLoading(true);
+		httpClientUtil.setShowErrMessage(true);
 		httpClientUtil.getHttpResp(url, new IHttpResp() {
 			
 			@Override
-			public void success(String content) {
-				//TODO
+			public void onSuccess(String content) {
 				ParseMsg parseMsg = new ParseMsg();
 				boolean isSuccess = parseMsg.parseMsgDetails(content);
 				MsgCenter msgCenter = parseMsg.getMsgCenter();

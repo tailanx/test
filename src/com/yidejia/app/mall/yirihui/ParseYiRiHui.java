@@ -47,6 +47,7 @@ public class ParseYiRiHui {
 					tempYRH.setShellFlag(yrhObject.optString("shell_flag"));
 					tempYRH.setGoodsName(yrhObject.optString("goods_name"));
 					tempYRH.setGoodsPrice(yrhObject.optString("goods_price"));
+					tempYRH.setTs(ts);
 					yiRiHuiDatas.add(tempYRH);
 				}
 				

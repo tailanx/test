@@ -186,46 +186,31 @@ public class OrderDetailActivity extends BaseActivity implements
 
 		String url = new JNICallBack().getHttp4GetOrderByCode(orderCode);
 
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(url, new AsyncHttpResponse() {
+		HttpClientUtil client = new HttpClientUtil(this);
+		client.setIsShowLoading(true);
+		
+		client.getHttpResp(url, new IHttpResp() {
 
 			@Override
-			public void onStart() {
-				// TODO Auto-generated method stub
-				super.onStart();
-			}
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+				ParseOrder parseOrder = new ParseOrder(OrderDetailActivity.this);
+				boolean isSuccess = parseOrder.parseOrderDetail(content);
+				if (isSuccess) {
+					Order order = parseOrder.getOrderDetail();
+					showDetailView(order);
 
-			@Override
-			public void onFinish() {
-				// TODO Auto-generated method stub
-				super.onFinish();
-			}
-
-			@Override
-			public void onSuccess(int statusCode, String content) {
-				// TODO Auto-generated method stub
-				super.onSuccess(statusCode, content);
-				if (HttpStatus.SC_OK == statusCode) {
-					ParseOrder parseOrder = new ParseOrder(
-							OrderDetailActivity.this);
-					boolean isSuccess = parseOrder.parseOrderDetail(content);
-					if (isSuccess) {
-						Order order = parseOrder.getOrderDetail();
-						showDetailView(order);
-
-						String recipient_id = parseOrder.getRecipient_id();
-						getAddressData(recipient_id);
-					}
+					String recipient_id = parseOrder.getRecipient_id();
+					getAddressData(recipient_id);
 				}
 			}
 
 			@Override
-			public void onError(Throwable error, String content) {
-				// TODO Auto-generated method stub
-				super.onError(error, content);
-				Toast.makeText(OrderDetailActivity.this, getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
+			public void onError() {
+				super.onError();
+				OrderDetailActivity.this.finish();
 			}
-
+			
 		});
 	}
 
@@ -298,11 +283,13 @@ public class OrderDetailActivity extends BaseActivity implements
 		String param = new JNICallBack().getHttp4GetTn(MyApplication.getInstance().getUserId(), orderCode, MyApplication.getInstance().getToken(), "");
 		String url = new JNICallBack().HTTPURL;
 		
-		HttpClientUtil httpClientUtil = new HttpClientUtil();
+		HttpClientUtil httpClientUtil = new HttpClientUtil(this);
+		httpClientUtil.setIsShowLoading(true);
+		httpClientUtil.setShowErrMessage(true);
 		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
 			
 			@Override
-			public void success(String content) {
+			public void onSuccess(String content) {
 				//
 				JSONObject httpJsonObject;
 				try {
@@ -361,45 +348,23 @@ public class OrderDetailActivity extends BaseActivity implements
 		String url = new JNICallBack().getHttp4GetAddress("recipient_id="
 				+ recipient_id, "0", "1", "", "", "");
 
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(url, new AsyncHttpResponse() {
+		HttpClientUtil client = new HttpClientUtil();
+		client.getHttpResp(url, new IHttpResp() {
 
 			@Override
-			public void onStart() {
-				// TODO Auto-generated method stub
-				super.onStart();
-			}
-
-			@Override
-			public void onFinish() {
-				// TODO Auto-generated method stub
-				super.onFinish();
-			}
-
-			@Override
-			public void onSuccess(int statusCode, String content) {
-				// TODO Auto-generated method stub
-				super.onSuccess(statusCode, content);
-				if (HttpStatus.SC_OK == statusCode) {
-					ParseAddressJson parseAddressJson = new ParseAddressJson();
-					boolean isSuccess = parseAddressJson
-							.parseAddressListJson(content);
-					ArrayList<ModelAddresses> addressList = parseAddressJson
-							.getAddresses();
-					if (isSuccess && null != addressList
-							&& !addressList.isEmpty()) {
-						ModelAddresses addresses = addressList.get(0);
-						setAddress(addresses);
-					} else {
-						toastAddressError();
-					}
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+				ParseAddressJson parseAddressJson = new ParseAddressJson();
+				boolean isSuccess = parseAddressJson
+						.parseAddressListJson(content);
+				ArrayList<ModelAddresses> addressList = parseAddressJson
+						.getAddresses();
+				if (isSuccess && null != addressList && !addressList.isEmpty()) {
+					ModelAddresses addresses = addressList.get(0);
+					setAddress(addresses);
+				} else {
+					toastAddressError();
 				}
-			}
-
-			@Override
-			public void onError(Throwable error, String content) {
-				// TODO Auto-generated method stub
-				super.onError(error, content);
 			}
 
 		});

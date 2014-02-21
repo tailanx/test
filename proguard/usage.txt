@@ -995,8 +995,6 @@ com.yidejia.app.mall.FeedBackActivity:
     private android.widget.EditText contactEditText
     57:64:private void commitListener()
     73:73:private void commitOpinion(java.lang.String,java.lang.String)
-com.yidejia.app.mall.FindPwActivity:
-    private java.lang.String reponse
 com.yidejia.app.mall.HomeBaseActivity:
     76:76:public int getCurrentActivityId()
 com.yidejia.app.mall.MyApplication:
@@ -1005,7 +1003,6 @@ com.yidejia.app.mall.MyApplication:
     132:132:public java.lang.String getAidou()
 com.yidejia.app.mall.RegistActivity:
     public android.widget.Button mback
-    private java.lang.String reponse
 com.yidejia.app.mall.adapter.AllOrderFragmentAdapter
 com.yidejia.app.mall.adapter.AlreadyComFragmentAdapter
 com.yidejia.app.mall.adapter.AlreadyOrderFragmentAdapter
@@ -1138,7 +1135,6 @@ com.yidejia.app.mall.jni.JNICallBack:
     public native java.lang.String getHttp4SignOrder(java.lang.String,java.lang.String,java.lang.String)
     public native java.lang.String getHttp4ChangeRead(java.lang.String,java.lang.String,java.lang.String)
     public native java.lang.String getHttp4UpdateYiRiHui(java.lang.String)
-    public native java.lang.String getHttp4GetCZOrder(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
 com.yidejia.app.mall.log.LoginTask
 com.yidejia.app.mall.log.LoginTask$Task
 com.yidejia.app.mall.model.Brand:
@@ -1233,8 +1229,7 @@ com.yidejia.app.mall.net.address.GetUserAddressList:
 com.yidejia.app.mall.net.address.SaveUserAddress
 com.yidejia.app.mall.net.address.SetDefAddr
 com.yidejia.app.mall.net.commments.DeleteProductComment
-com.yidejia.app.mall.net.commments.GetProductCommentList:
-    31:34:public GetProductCommentList()
+com.yidejia.app.mall.net.commments.GetProductCommentList
 com.yidejia.app.mall.net.commments.SaveProductComment
 com.yidejia.app.mall.net.commments.WaitingComment
 com.yidejia.app.mall.net.express.GetDistributionList
@@ -1274,15 +1269,17 @@ com.yidejia.app.mall.net.voucher.Voucher:
     32:60:private void setKeysAndValues(java.lang.String)
     63:71:private java.lang.String getHttpAddress(java.lang.String)
     83:86:public java.lang.String getResponse(java.lang.String)
+com.yidejia.app.mall.order.AllOrderFragment:
+    private android.app.ProgressDialog bar
 com.yidejia.app.mall.order.Order:
     private int orderAmount
     private java.lang.String tn
-    87:88:public void setOrderAmount(int)
-    94:94:public int getOrderAmount()
-    102:102:public java.lang.String getId()
-    118:118:public java.lang.String getCore()
-    134:134:public java.lang.String getTn()
-    142:143:public void setTn(java.lang.String)
+    120:121:public void setOrderAmount(int)
+    127:127:public int getOrderAmount()
+    135:135:public java.lang.String getId()
+    151:151:public java.lang.String getCore()
+    167:167:public java.lang.String getTn()
+    175:176:public void setTn(java.lang.String)
 com.yidejia.app.mall.order.RetOrderInfo:
     28:28:public java.lang.String getId()
 com.yidejia.app.mall.pay.AlixDefine
@@ -1422,15 +1419,10 @@ com.yidejia.app.mall.util.Base64$Encoder
 com.yidejia.app.mall.util.BottomChange
 com.yidejia.app.mall.util.CartUtil1:
     private android.widget.TextView number
-com.yidejia.app.mall.util.CommentUtil:
-    47:56:public CommentUtil(android.content.Context,android.widget.LinearLayout)
-    59:61:public void setRefreshView(com.handmark.pulltorefresh.library.PullToRefreshScrollView,android.widget.RelativeLayout)
-    79:110:public void AllComment(java.lang.String,int,int)
-    244:258:private void setupShow(com.yidejia.app.mall.model.UserComment)
+com.yidejia.app.mall.util.CommentUtil
 com.yidejia.app.mall.util.CommentUtil$1
-com.yidejia.app.mall.util.CommentUtil$Task:
-    114:114:private CommentUtil$Task(com.yidejia.app.mall.util.CommentUtil)
-    114:114:synthetic CommentUtil$Task(com.yidejia.app.mall.util.CommentUtil,com.yidejia.app.mall.util.CommentUtil$Task)
+com.yidejia.app.mall.util.CommentUtil$Task
+com.yidejia.app.mall.util.CommentUtil$Task$1
 com.yidejia.app.mall.util.Consts:
     public static final java.lang.String EXIT_LOGIN
     public static final java.lang.String DELETE_CART
@@ -1488,8 +1480,7 @@ com.yidejia.app.mall.util.DesUtils:
 com.yidejia.app.mall.util.FreeGivingUtil
 com.yidejia.app.mall.util.Http
 com.yidejia.app.mall.util.HttpClientUtil:
-    60:61:public void setPullToRefreshView(com.handmark.pulltorefresh.library.PullToRefreshScrollView)
-    64:65:public void setProgressDialog(android.app.ProgressDialog)
+    101:101:public android.app.ProgressDialog getProgressDialog()
 com.yidejia.app.mall.util.IsPhone:
     8:8:public IsPhone()
 com.yidejia.app.mall.util.Md5

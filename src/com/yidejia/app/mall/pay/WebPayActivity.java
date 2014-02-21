@@ -10,19 +10,26 @@ import com.baidu.mobstat.StatService;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.order.AllOrderActivity;
+import com.yidejia.app.mall.phone.PhoneOrderActivity;
 import com.yidejia.app.mall.util.ActivityIntentUtil;
 
 public class WebPayActivity extends BaseActivity {
 
 	private String title;
+	private boolean isPhoneOrder = false;	//是否为手机充值订单
+	private String payUrl ;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		
 		Intent intent = getIntent();
-		String payUrl = intent.getStringExtra("payurl");
-		title = intent.getStringExtra("title");
+		if(null != intent){
+			payUrl = intent.getStringExtra("payurl");
+			title = intent.getStringExtra("title");
+			isPhoneOrder = intent.getBooleanExtra("isPhoneOrder", false);
+		}
+		
 		
 		setActionbarConfig();
 		setTitle(title);
@@ -31,7 +38,9 @@ public class WebPayActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				ActivityIntentUtil.intentActivityAndFinish(WebPayActivity.this, AllOrderActivity.class);
+				if(!isPhoneOrder)
+					ActivityIntentUtil.intentActivityAndFinish(WebPayActivity.this, AllOrderActivity.class);
+				else ActivityIntentUtil.intentActivityAndFinish(WebPayActivity.this, PhoneOrderActivity.class);
 			}
 		});
 		
@@ -43,7 +52,9 @@ public class WebPayActivity extends BaseActivity {
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			ActivityIntentUtil.intentActivityAndFinish(WebPayActivity.this, AllOrderActivity.class);
+			if(!isPhoneOrder)
+				ActivityIntentUtil.intentActivityAndFinish(WebPayActivity.this, AllOrderActivity.class);
+			else ActivityIntentUtil.intentActivityAndFinish(WebPayActivity.this, PhoneOrderActivity.class);
 			return true;
 		}
 		return super.onKeyUp(keyCode, event);

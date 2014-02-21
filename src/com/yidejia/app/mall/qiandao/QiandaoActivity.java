@@ -7,12 +7,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -55,6 +53,8 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 	private String lastDate;// 保存的日期
 	private String lastId;// 保存的用户的Id
 	private Handler handler;// 用来更新界面
+	
+	private boolean isCanSign = true;	//是否可以点击签到
 
 	@SuppressLint("SimpleDateFormat")
 	@Override
@@ -91,8 +91,10 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 		lastId = sp.getData("TIME", "User", "");
 		if (nowDate.equals(lastDate) && lastId.equals(userId)) {
 			ivSignAdd.setImageResource(R.drawable.yiqiandao);
+			isCanSign = false;
 		} else {
 			ivSignAdd.setImageResource(R.drawable.qiandao_button);
+			isCanSign = true;
 		}
 
 	}
@@ -104,6 +106,7 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 			this.finish();
 			break;
 		case R.id.iv_qiandao_button:
+			if(!isCanSign) return;
 			signUp();
 			break;
 		default:
@@ -113,11 +116,13 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 
 	private void getSignCount() {
 		String param = jniCallBack.getHttp4SignCount(userId, token);
-		HttpClientUtil httpClientUtil = new HttpClientUtil();
+		HttpClientUtil httpClientUtil = new HttpClientUtil(this);
+		httpClientUtil.setIsShowLoading(true);
+		httpClientUtil.setShowErrMessage(true);
 		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
 
 			@Override
-			public void success(String content) {
+			public void onSuccess(String content) {
 				// TODO Auto-generated method stub
 				if (parseGetCount(content)) {
 					if (!"".equals(signCount)) {
@@ -158,11 +163,13 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 		sp.saveData("TIME", "User", userId);
 		String param = new JNICallBack().getHttp4SignUp(userId, token);
 
-		HttpClientUtil httpClientUtil = new HttpClientUtil();
+		HttpClientUtil httpClientUtil = new HttpClientUtil(this);
+		httpClientUtil.setIsShowLoading(true);
+		httpClientUtil.setShowErrMessage(true);
 		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
 
 			@Override
-			public void success(String content) {
+			public void onSuccess(String content) {
 				// TODO Auto-generated method stub
 				String showMsg;
 				Log.e("info", content);
@@ -171,6 +178,7 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 					ivSignAdd.setImageResource(R.drawable.yiqiandao);
 					signCount++;
 					handler.sendEmptyMessage(Consts.QIANDAO);
+					isCanSign = false;
 				} else {
 					showMsg = respMsg;
 				}

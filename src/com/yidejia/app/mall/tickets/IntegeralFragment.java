@@ -102,11 +102,13 @@ public class IntegeralFragment extends Fragment {
 
 		Log.e("system.out", url);
 		
-		HttpClientUtil httpClientUtil = new HttpClientUtil();
+		HttpClientUtil httpClientUtil = new HttpClientUtil(getActivity());
+		httpClientUtil.setIsShowLoading(true);
+		httpClientUtil.setShowErrMessage(true);
 		httpClientUtil.getHttpResp(url, new IHttpResp() {
 
 			@Override
-			public void success(String content) {
+			public void onSuccess(String content) {
 				ParseTickets parseTickets = new ParseTickets();
 				boolean isSuccess = parseTickets.parseTickets(content);
 				if (isSuccess) {
@@ -133,45 +135,14 @@ public class IntegeralFragment extends Fragment {
 				myApplication.getUserId(), myApplication.getToken());
 		String url = new JNICallBack().HTTPURL;
 
-		RequestParams requestParams = new RequestParams();
-		requestParams.put(param);
-
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.post(url, requestParams, new AsyncHttpResponse() {
+		HttpClientUtil client = new HttpClientUtil(getActivity());
+		client.setIsShowLoading(true);
+		client.getHttpResp(url, param, new IHttpResp() {
+			
 			@Override
-			public void onError(Throwable error, String content) {
-				super.onError(error, content);
-				Toast.makeText(getActivity(),
-						getResources().getString(R.string.bad_network),
-						Toast.LENGTH_SHORT).show();
-			}
-
-			@Override
-			public void onFinish() {
-				super.onFinish();
-			}
-
-			@SuppressWarnings("static-access")
-			@Override
-			public void onStart() {
-				super.onStart();
-				bar = new YLProgressDialog(getActivity()).createLoadingDialog(
-						getActivity(), null);
-				bar.setOnCancelListener(new OnCancelListener() {
-
-					@Override
-					public void onCancel(DialogInterface dialog) {
-						bar.cancel();
-					}
-				});
-			}
-
-			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
-				if (200 == statusCode) {
-					bar.cancel();
-				}
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+				
 				JSONObject httpObject;
 				try {
 					httpObject = new JSONObject(content);

@@ -46,6 +46,8 @@ import com.yidejia.app.mall.search.SearchResultActivity;
 import com.yidejia.app.mall.skintest.SkinHomeActivity;
 import com.yidejia.app.mall.tickets.IntegeralActivity;
 import com.yidejia.app.mall.util.DPIUtil;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.util.SharedPreferencesUtil;
 import com.yidejia.app.mall.widget.BannerView;
 import com.yidejia.app.mall.yirihui.YirihuiActivity;
@@ -126,7 +128,6 @@ public class HomeMallActivity extends HomeBaseActivity implements
 		}
 
 		homeYRHView = new HomeYRHView(this);
-		homeYRHView.getYRHData();
 	}
 
 	/** 获取首页数据 **/
@@ -143,57 +144,36 @@ public class HomeMallActivity extends HomeBaseActivity implements
 		String url = new JNICallBack().getHttp4GetHome();
 		Log.e("system.out", url);
 
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(url, new AsyncHttpResponse() {
+		HttpClientUtil client = new HttpClientUtil(this);
+		client.setPullToRefreshView(mPullToRefreshScrollView);
+		client.getHttpResp(url, new IHttpResp() {
 
 			@Override
-			public void onStart() {
-				// TODO Auto-generated method stub
-				super.onStart();
-			}
-
-			@Override
-			public void onFinish() {
-				// TODO Auto-generated method stub
-				super.onFinish();
-				mPullToRefreshScrollView.onRefreshComplete();
-			}
-
-			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
+			public void onSuccess(String content) {
+				super.onSuccess(content);
 				Log.e("system.out", content);
-				if (HttpStatus.SC_OK == statusCode) {
-					GetHomePage getHomePage = new GetHomePage();
-					if (getHomePage.parseGetHomeJson(content)) {
-						util.saveData("home", "data", content);
+				if (null == getResources())
+					return;
+				GetHomePage getHomePage = new GetHomePage();
+				if (getHomePage.parseGetHomeJson(content)) {
+					util.saveData("home", "data", content);
 
-						loadView(getHomePage);
-					} else {
-						Toast.makeText(HomeMallActivity.this,
-								getString(R.string.bad_network),
-								Toast.LENGTH_SHORT).show();
-					}
+					loadView(getHomePage);
+				} else {
+					Toast.makeText(HomeMallActivity.this,
+							getString(R.string.bad_network), Toast.LENGTH_SHORT)
+							.show();
+				}
 
-					String label = getResources().getString(
-							R.string.update_time)
-							+ DateUtils.formatDateTime(HomeMallActivity.this,
-									System.currentTimeMillis(),
-									DateUtils.FORMAT_SHOW_TIME
-											| DateUtils.FORMAT_SHOW_DATE
-											| DateUtils.FORMAT_ABBREV_ALL);
+				String label = getResources().getString(R.string.update_time)
+						+ DateUtils.formatDateTime(HomeMallActivity.this,
+								System.currentTimeMillis(),
+								DateUtils.FORMAT_SHOW_TIME
+										| DateUtils.FORMAT_SHOW_DATE
+										| DateUtils.FORMAT_ABBREV_ALL);
+				if (null != mPullToRefreshScrollView)
 					mPullToRefreshScrollView.getLoadingLayoutProxy()
 							.setLastUpdatedLabel(label);
-				}
-			}
-
-			@Override
-			public void onError(Throwable error, String content) {
-				// TODO Auto-generated method stub
-				super.onError(error, content);
-				Toast.makeText(HomeMallActivity.this,
-						getString(R.string.bad_network), Toast.LENGTH_SHORT)
-						.show();
 			}
 
 		});
@@ -514,6 +494,8 @@ public class HomeMallActivity extends HomeBaseActivity implements
 		super.onResume();
 		// StatService.onResume(this);
 		StatService.onPageStart(this, "首页");
+		if(null != homeYRHView)
+			homeYRHView.getYRHData();
 	}
 
 	@Override

@@ -20,6 +20,8 @@ import com.opens.asyncokhttpclient.AsyncHttpResponse;
 import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.net.ConnectionDetector;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.util.SharedPreferencesUtil;
 
 public class WelcomeActivity extends Activity {
@@ -86,19 +88,20 @@ public class WelcomeActivity extends Activity {
 
 	/**检查更新**/
 	private void checkUpdate() {
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(versionUrl, new AsyncHttpResponse() {
+		HttpClientUtil client = new HttpClientUtil(this);
+		client.setShowErrMessage(false);
+		client.getHttpResp(versionUrl, new IHttpResp() {
 
 			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
+			public void onSuccess(String content) {
+				super.onSuccess(content);
 				parseJson(content);
 
 			}
 
 			@Override
-			public void onError(Throwable error, String content) {
-				super.onError(error, content);
+			public void onError() {
+				super.onError();
 				go2MainAct();
 			}
 

@@ -3,36 +3,28 @@ package com.yidejia.app.mall.address;
 import java.util.ArrayList;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
-//import android.widget.Button;
-//import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-
 import com.baidu.mobstat.StatService;
-//import com.actionbarsherlock.app.SherlockActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
-//import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.opens.asyncokhttpclient.AsyncHttpResponse;
-import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
-//import com.yidejia.app.mall.datamanage.AddressDataManage;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.util.Consts;
 import com.yidejia.app.mall.util.DefinalDate;
-import com.yidejia.app.mall.widget.YLProgressDialog;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 
 public class AddressActivity extends BaseActivity {
 
@@ -46,7 +38,11 @@ public class AddressActivity extends BaseActivity {
 //	private String TAG = "AddressActivity";
 	private int requestCode = -1;
 
+	private ProgressDialog bar;
+//	private boolean isNomore = false;
+	private boolean isFirstIn = true;
 	// private String message;// 发生错误时候的报错信息
+	private HttpClientUtil httpClientUtil;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,22 +88,8 @@ public class AddressActivity extends BaseActivity {
 		
 		listView.setAdapter(adapter);
 
-		/*listView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				Toast.makeText(AddressActivity.this, "test click", Toast.LENGTH_SHORT).show();
-				ModelAddresses addresses = mAddresses.get(position - 1);
-				Intent intent = new Intent(AddressActivity.this,
-						CstmPayActivity.class);
-				Bundle bundle = new Bundle();
-				bundle.putSerializable("addresses1", addresses);
-				intent.putExtras(bundle);
-				AddressActivity.this.setResult(Consts.AddressResponseCode,
-						intent);
-				AddressActivity.this.finish();
-			}
-		});*/
+		
+		httpClientUtil = new HttpClientUtil(this);
 		// load data
 		getAddressData();
 	}
@@ -125,12 +107,14 @@ public class AddressActivity extends BaseActivity {
 		@Override
 		public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
 			fromIndex = 0;
+			isFirstIn = false;
 			getAddressData();
 		}
 
 		@Override
 		public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
 			fromIndex += acount;
+			isFirstIn = false;
 			getAddressData();
 		}
 	};
@@ -173,44 +157,22 @@ public class AddressActivity extends BaseActivity {
 		String url = new JNICallBack().getHttp4GetAddress("customer_id%3D"
 				+ userId + "+and+valid_flag%3D%27y%27", fromIndex + "", acount
 				+ "", "", "", "");
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(url, new AsyncHttpResponse() {
-
-			@SuppressWarnings("static-access")
+		
+		httpClientUtil.setShowErrMessage(true);
+		if(isFirstIn) {
+			bar = new ProgressDialog(this);
+			httpClientUtil.setProgressDialog(bar);
+			httpClientUtil.setIsShowLoading(true);
+		} else {
+			httpClientUtil.setIsShowLoading(false);
+			httpClientUtil.setPullToRefreshView(pullToRefreshListView);
+		}
+		
+		httpClientUtil.getHttpResp(url, new IHttpResp() {
+			
 			@Override
-			public void onStart() {
-				super.onStart();
-				// pullToRefreshListView.onRefreshComplete();
-				if (isFirstIn) {
-					bar = new YLProgressDialog(AddressActivity.this)
-							.createLoadingDialog(AddressActivity.this, null);
-					bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-						@Override
-						public void onCancel(DialogInterface dialog) {
-							bar.dismiss();
-						}
-					});
-				}
-			}
-
-			@Override
-			public void onFinish() {
-				super.onFinish();
-				if (!isFirstIn)
-					pullToRefreshListView.onRefreshComplete();
-				else
-					bar.dismiss();
-				isFirstIn = false;
-			}
-
-			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
-				// 如果返回成功，则停止dialogbar
-				if (statusCode == AsyncHttpResponse.SUCCESS) {
-					bar.cancel();
-				}
+			public void onSuccess(String content) {
+				super.onSuccess(content);
 				ParseAddressJson parseAddressJson = new ParseAddressJson();
 				boolean issuccess = parseAddressJson
 						.parseAddressListJson(content);
@@ -233,28 +195,20 @@ public class AddressActivity extends BaseActivity {
 					pullToRefreshListView.getLoadingLayoutProxy()
 							.setLastUpdatedLabel(label);
 				} else {
-//					isNomore = true;
 					Toast.makeText(AddressActivity.this, getResources().getString(R.string.nomore), Toast.LENGTH_SHORT).show();
 				}
-
 			}
 
 			@Override
-			public void onError(Throwable error, String content) {
-				super.onError(error, content);
-				Toast.makeText(
-						AddressActivity.this,
-						AddressActivity.this.getResources().getString(
-								R.string.bad_network), Toast.LENGTH_SHORT)
-						.show();
+			public void onError() {
+				super.onError();
+				fromIndex -= acount;
 			}
-
+			
 		});
+		
 	}
 
-	private ProgressDialog bar;
-//	private boolean isNomore = false;
-	private boolean isFirstIn = true;
 
 	@Override
 	protected void onResume() {

@@ -13,7 +13,7 @@ public class UnionActivity extends BaseActivity{
 	private String upayTn;
 	
 	private int payMode;
-	
+	private boolean isPhoneOrder = false;	//是否为手机充值订单
 	private UnionPayUtil payUtil;
 	
 	@Override
@@ -22,13 +22,16 @@ public class UnionActivity extends BaseActivity{
 		
 		Intent getIntent = getIntent();
 		Bundle getBundle = getIntent.getExtras();
+		if(null == getBundle) this.finish();
 		payMode = getBundle.getInt("mode");
 		if(payMode == 1){//银联支付
 			requestWindowFeature(Window.FEATURE_NO_TITLE);
 			respCode = getBundle.getString("resp_code");
 			upayTn = getBundle.getString("tn");
+			isPhoneOrder = getBundle.getBoolean("isPhoneOrder", false);
 			setContentView(R.layout.activity_userpay);
 			payUtil = new UnionPayUtil(this, respCode, upayTn);
+			payUtil.setIsPhoneOrder(isPhoneOrder);
 			payUtil.unionPayOrder();
 		} 
 		

@@ -6,8 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.graphics.Paint.Join;
-
 import com.yidejia.app.mall.order.Order;
 
 /**
@@ -58,7 +56,6 @@ public class ParseContent {
 
 			}
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

@@ -65,10 +65,12 @@ public class YouhuiActivity extends BaseActivity implements OnClickListener {
 				.getInstance().getUserId(), MyApplication.getInstance()
 				.getToken());
 		HttpClientUtil client = new HttpClientUtil();
+		client.setIsShowLoading(true);
+		client.setShowErrMessage(true);
 		client.getHttpResp(url, new IHttpResp() {
 
 			@Override
-			public void success(String content) {
+			public void onSuccess(String content) {
 				ParseTickets parseTickets = new ParseTickets();
 				boolean isSuccess = parseTickets.parseTickets(content);
 				if (isSuccess) {

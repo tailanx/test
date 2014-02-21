@@ -439,11 +439,13 @@ public class EditNewAddressActivity extends BaseActivity {
 					recipient_id, token);
 			String url = new JNICallBack().HTTPURL;
 			
-			HttpClientUtil httpClientUtil = new HttpClientUtil();
+			HttpClientUtil httpClientUtil = new HttpClientUtil(this);
+			httpClientUtil.setIsShowLoading(true);
+			httpClientUtil.setShowErrMessage(true);
 			httpClientUtil.getHttpResp(url, param, new IHttpResp() {
 				
 				@Override
-				public void success(String content) {
+				public void onSuccess(String content) {
 					ParseAddressJson parseAddressJson = new ParseAddressJson();
 					boolean isSuccess = parseAddressJson.parseSaveJson(content);
 					if(isSuccess){

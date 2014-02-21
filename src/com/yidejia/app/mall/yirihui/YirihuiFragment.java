@@ -29,7 +29,7 @@ public class YirihuiFragment extends Fragment {
 	private int offset = 0;	//offset 起始位置
 	private int limit = 10;	//limit 偏移量 必须
 	private String sort = "";	//sort 排序 默认按结束时间倒序(end_time desc)
-
+	private boolean isFirstIn = true;
 
 	public static YirihuiFragment newInstance(int num) {
 		YirihuiFragment now = new YirihuiFragment();
@@ -86,14 +86,16 @@ public class YirihuiFragment extends Fragment {
 		String param = new JNICallBack().getHttp4GetYiRiHui(type + "", offset + "", limit + "", sort);
 //		Log.e("system.out", url + "?" + param);
 		
-		HttpClientUtil httpClientUtil = new HttpClientUtil();
+		HttpClientUtil httpClientUtil = new HttpClientUtil(getActivity());
 		
 		httpClientUtil.setPullToRefreshView(refreshListView);
+		if(isFirstIn) httpClientUtil.setIsShowLoading(true);
+		else httpClientUtil.setIsShowLoading(false);
 		
 		httpClientUtil.getHttpResp(url, param, new IHttpResp() {
 			
 			@Override
-			public void success(String content) {
+			public void onSuccess(String content) {
 //				Log.e("system.out", content);
 //				content = "{\"code\":1,\"msg\":\"成功\",\"response\":[{\"the_id\":\"1\",\"rule_name\":\"伊日惠测试活动一\",\"begin_time\":\"2014-02-17 11:03:07\",\"end_time\":\"2014-02-18 00:00:00\",\"goods_id\":\"1590\",\"quantity\":\"1\",\"can_buy_quantity\":\"1\",\"overtime\":\"900\",\"img_1\":\"5/2014/02/17/a0acc98642b.jpg\",\"img_2\":\"8/2014/02/17/a0ac9bce227.jpg\",\"valid_flag\":\"y\",\"shell_flag\":\"y\",\"goods_name\":\"【马年活动】脱盐海泉精华\",\"goods_price\":\"50.00\"}],\"ts\":1392609753}";
 				if(!isAdded()) return;
@@ -136,12 +138,14 @@ public class YirihuiFragment extends Fragment {
 		@Override
 		public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
 			offset = 0;
+			isFirstIn = false;
 			getYiriHuiData();
 		}
 
 		@Override
 		public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
 			offset += limit;
+			isFirstIn = false;
 			getYiriHuiData();
 		}
 	}; 

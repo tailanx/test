@@ -26,6 +26,8 @@ import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.jni.JNICallBack;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.util.IsPhone;
 
 /**
@@ -187,53 +189,32 @@ public class ReturnActivity extends BaseActivity {
 		
 		String url = new JNICallBack().HTTPURL;
 		
-		RequestParams requestParams = new RequestParams();
-		requestParams.put(param);
-		
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.post(url, requestParams, new AsyncHttpResponse(){
+		HttpClientUtil client = new HttpClientUtil(this);
+		client.setIsShowLoading(true);
+		client.getHttpResp(url, param, new IHttpResp(){
 
 			@Override
-			public void onStart() {
-				// TODO Auto-generated method stub
-				super.onStart();
-			}
-
-			@Override
-			public void onFinish() {
-				// TODO Auto-generated method stub
-				super.onFinish();
-			}
-
-			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
-				if(HttpStatus.SC_OK == statusCode){
-					JSONObject jsonObject;
-					try {
-						jsonObject = new JSONObject(content);
-						int code = jsonObject.optInt("code");
-						if(code == 1){
-							String msg = jsonObject.optString("msg");
-							if("成功".equals(msg)) {
-								Toast.makeText(ReturnActivity.this, "提交成功!", Toast.LENGTH_LONG).show();
-								ReturnActivity.this.finish();
-								return;
-							} 
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+				JSONObject jsonObject;
+				try {
+					jsonObject = new JSONObject(content);
+					int code = jsonObject.optInt("code");
+					if (code == 1) {
+						String msg = jsonObject.optString("msg");
+						if ("成功".equals(msg)) {
+							Toast.makeText(ReturnActivity.this, "提交成功!",
+									Toast.LENGTH_LONG).show();
+							ReturnActivity.this.finish();
+							return;
 						}
-					} catch (JSONException e) {
-						e.printStackTrace();
 					}
+				} catch (JSONException e) {
+					e.printStackTrace();
 				}
-				Toast.makeText(ReturnActivity.this, "提交失败!", Toast.LENGTH_LONG).show();
+				Toast.makeText(ReturnActivity.this, "提交失败!", Toast.LENGTH_LONG)
+						.show();
 			}
-
-			@Override
-			public void onError(Throwable error, String content) {
-				super.onError(error, content);
-				Toast.makeText(ReturnActivity.this, getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
-			}
-			
 		});
 	}
 	

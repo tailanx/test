@@ -1,6 +1,5 @@
 package com.yidejia.app.mall.search;
 
-import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
@@ -12,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -27,14 +27,13 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
-import com.opens.asyncokhttpclient.AsyncHttpResponse;
-import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.initview.SRViewWithImage;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.SearchItem;
-import com.yidejia.app.mall.widget.YLProgressDialog;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 
 public class SelledResultFragment extends SherlockFragment {
 
@@ -186,6 +185,7 @@ public class SelledResultFragment extends SherlockFragment {
 		public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
 			fromIndex += amount;
 			searchItemsArray.clear();
+			isFirstIn = false;
 			getSearchListData();
 		}
 	};
@@ -194,12 +194,15 @@ public class SelledResultFragment extends SherlockFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		Log.d(TAG, "TestFragment-----onActivityCreated");
+		progressDialog = new ProgressDialog(getActivity());
+		progressDialog.setProgressStyle(R.style.StyleProgressDialog);
+		progressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getSearchListData();
 	}
 	
-	private ProgressDialog bar;
+	private ProgressDialog progressDialog;
 	
-	private AsyncOkHttpClient client;
+	private HttpClientUtil client;
 	
 	private void getSearchListData() {
 		String url = "";
@@ -219,51 +222,44 @@ public class SelledResultFragment extends SherlockFragment {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		client = new AsyncOkHttpClient();
-		client.get(url, new AsyncHttpResponse() {
+		client = new HttpClientUtil();
+		client.getHttpResp(url, new IHttpResp() {
 
 			@Override
 			public void onStart() {
 				super.onStart();
-				if (isFirstIn && isAdded()) {
-					bar = (ProgressDialog) new YLProgressDialog(
-							getActivity()).createLoadingDialog(
-							getActivity(), null);
+				if (isFirstIn && isAdded() && null != progressDialog) {
+//					bar = (ProgressDialog) new YLProgressDialog(
+//							getActivity()).createLoadingDialog(
+//							getActivity(), null);
+					progressDialog.show();
+					progressDialog.setContentView(R.layout.progress_dialog);
 				}
 			}
 
 			@Override
 			public void onFinish() {
 				super.onFinish();
-				if (null != bar) {
-					bar.dismiss();
-				}
+//				if (null != bar) {
+//					bar.dismiss();
+//				}
 				
 				if(!isAdded())return;
 				
-				String label = getResources().getString(R.string.update_time)
-						+ DateUtils.formatDateTime(getActivity()
-								.getApplicationContext(), System
-								.currentTimeMillis(),
-								DateUtils.FORMAT_SHOW_TIME
-										| DateUtils.FORMAT_SHOW_DATE
-										| DateUtils.FORMAT_ABBREV_ALL);
+				if(null != progressDialog && progressDialog.isShowing()) progressDialog.dismiss();
+				
 				if (null != mPullToRefreshListView) {
 					mPullToRefreshListView.onRefreshComplete();
-					mPullToRefreshListView.getLoadingLayoutProxy()
-					.setLastUpdatedLabel(label);
 				}
 				if (null != mPullToRefreshScrollView) {
 					mPullToRefreshScrollView.onRefreshComplete();
-					mPullToRefreshScrollView.getLoadingLayoutProxy()
-					.setLastUpdatedLabel(label);
 				}
 				isFirstIn = false;
 			}
 
 			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
+			public void onSuccess(String content) {
+				super.onSuccess(content);
 //				Log.e(TAG, content);
 				if(!isAdded()) return;
 				if(isShowWithList){
@@ -297,21 +293,36 @@ public class SelledResultFragment extends SherlockFragment {
 						initWithImageView();
 					}
 				}
+				//显示更新时间
+				String label = getResources().getString(R.string.update_time)
+						+ DateUtils.formatDateTime(getActivity()
+								.getApplicationContext(), System
+								.currentTimeMillis(),
+								DateUtils.FORMAT_SHOW_TIME
+										| DateUtils.FORMAT_SHOW_DATE
+										| DateUtils.FORMAT_ABBREV_ALL);
+				if (null != mPullToRefreshListView) {
+					mPullToRefreshListView.getLoadingLayoutProxy()
+					.setLastUpdatedLabel(label);
+				}
+				if (null != mPullToRefreshScrollView) {
+					mPullToRefreshScrollView.getLoadingLayoutProxy()
+					.setLastUpdatedLabel(label);
+				}
+
 			}
 
 			@Override
-			public void onError(Throwable error, String content) {
-				super.onError(error, content);
-//				Log.e(TAG, content);
+			public void onError() {
+				super.onError();
 				if(!isAdded()) return;
 				fromIndex -= amount;
 				if(fromIndex < 0) {
 					fromIndex = 0;
 				}
 				
-				if(error instanceof IOException) {
-					Toast.makeText(getActivity(), getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
-				}
+				Toast.makeText(getActivity(), getResources().getString(R.string.bad_network), Toast.LENGTH_SHORT).show();
+				
 				if(isFirstIn){
 					emptyLayout.setVisibility(View.VISIBLE);
 					if(isShowWithList){

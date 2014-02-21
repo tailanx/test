@@ -13574,6 +13574,7 @@ com.yidejia.app.mall.R$id: int all_order_item_main_refresh_scrollview11
 com.yidejia.app.mall.R$id: int all_order_item_main_relative2
 com.yidejia.app.mall.R$id: int all_order_item_main_scrollView_linearlayout1
 com.yidejia.app.mall.R$id: int all_order_item_main_sum
+com.yidejia.app.mall.R$id: int all_order_item_main_sum_add
 com.yidejia.app.mall.R$id: int all_order_item_main_sum_money
 com.yidejia.app.mall.R$id: int all_order_item_main_sum_money_deatil
 com.yidejia.app.mall.R$id: int all_order_item_sum
@@ -14612,6 +14613,7 @@ com.yidejia.app.mall.R$layout: int pay_address_item
 com.yidejia.app.mall.R$layout: int pay_free
 com.yidejia.app.mall.R$layout: int person_shopping_mall1
 com.yidejia.app.mall.R$layout: int phone_contact
+com.yidejia.app.mall.R$layout: int phone_item
 com.yidejia.app.mall.R$layout: int phone_number
 com.yidejia.app.mall.R$layout: int present_library
 com.yidejia.app.mall.R$layout: int produce
@@ -14915,6 +14917,8 @@ com.yidejia.app.mall.R$string: int phone_news
 com.yidejia.app.mall.R$string: int phone_number
 com.yidejia.app.mall.R$string: int phone_number1
 com.yidejia.app.mall.R$string: int phone_number_add
+com.yidejia.app.mall.R$string: int phone_order
+com.yidejia.app.mall.R$string: int phone_order_title
 com.yidejia.app.mall.R$string: int phone_pay
 com.yidejia.app.mall.R$string: int phone_sum
 com.yidejia.app.mall.R$string: int pinterest
@@ -15072,6 +15076,7 @@ com.yidejia.app.mall.R$string: int yirihui
 com.yidejia.app.mall.R$string: int yirihui_add
 com.yidejia.app.mall.R$string: int yirihui_complete
 com.yidejia.app.mall.R$string: int yirihui_delay
+com.yidejia.app.mall.R$string: int yirihui_guize
 com.yidejia.app.mall.R$string: int yirihui_hour_add
 com.yidejia.app.mall.R$string: int yirihui_later
 com.yidejia.app.mall.R$string: int yirihui_min_add
@@ -15490,6 +15495,7 @@ com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetYiRiHui(java.l
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4UpdateYiRiHui(java.lang.String)
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4SaveCZOrder(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
 com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetCZOrder(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+com.yidejia.app.mall.jni.JNICallBack: java.lang.String getHttp4GetYRHHome()
 com.yidejia.app.mall.log.LogService
 com.yidejia.app.mall.log.LogService: LogService()
 com.yidejia.app.mall.msg.MsgActivity
@@ -15524,6 +15530,8 @@ com.yidejia.app.mall.phone.ContactSureActivity
 com.yidejia.app.mall.phone.ContactSureActivity: ContactSureActivity()
 com.yidejia.app.mall.phone.PhoneActivity
 com.yidejia.app.mall.phone.PhoneActivity: PhoneActivity()
+com.yidejia.app.mall.phone.PhoneOrderActivity
+com.yidejia.app.mall.phone.PhoneOrderActivity: PhoneOrderActivity()
 com.yidejia.app.mall.photoview.PhotoView
 com.yidejia.app.mall.photoview.PhotoView: PhotoView(android.content.Context,android.util.AttributeSet)
 com.yidejia.app.mall.photoview.PhotoView: PhotoView(android.content.Context,android.util.AttributeSet,int)
@@ -15577,6 +15585,8 @@ com.yidejia.app.mall.widget.YLViewPager: YLViewPager(android.content.Context)
 com.yidejia.app.mall.widget.YLViewPager: YLViewPager(android.content.Context,android.util.AttributeSet)
 com.yidejia.app.mall.wxapi.WXEntryActivity
 com.yidejia.app.mall.wxapi.WXEntryActivity: WXEntryActivity()
+com.yidejia.app.mall.yirihui.YiGuiZeActivity
+com.yidejia.app.mall.yirihui.YiGuiZeActivity: YiGuiZeActivity()
 com.yidejia.app.mall.yirihui.YirihuiActivity
 com.yidejia.app.mall.yirihui.YirihuiActivity: YirihuiActivity()
 com.yidejia.app.mall.youhui.YouhuiActivity

@@ -16,19 +16,21 @@ import com.baidu.mobstat.StatService;
 import com.opens.asyncokhttpclient.AsyncHttpResponse;
 import com.opens.asyncokhttpclient.AsyncOkHttpClient;
 import com.yidejia.app.mall.jni.JNICallBack;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.widget.YLProgressDialog;
 
 public class AidouActivity extends BaseActivity {
-	private MyApplication myApplication;
+//	private MyApplication myApplication;
 	private WebView webView;
-	private ProgressDialog bar;
+//	private ProgressDialog bar;
 	private TextView sum;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.coupons);
-		myApplication = (MyApplication) getApplication();
+//		myApplication = (MyApplication) getApplication();
 		setActionbarConfig();
 		setTitle(getResources().getString(R.string.my_aidu));
 		TextView mtextview = (TextView) findViewById(R.id.coupons_text);
@@ -62,45 +64,13 @@ public class AidouActivity extends BaseActivity {
 		String url = new JNICallBack().getHttp4GetGold(MyApplication
 				.getInstance().getUserId(), MyApplication.getInstance()
 				.getToken());
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(url, new AsyncHttpResponse() {
-			@SuppressWarnings("static-access")
-			@Override
-			public void onStart() {
-				super.onStart();
-				bar = new YLProgressDialog(AidouActivity.this)
-						.createLoadingDialog(AidouActivity.this, null);
-				bar.setOnCancelListener(new OnCancelListener() {
-
-					@Override
-					public void onCancel(DialogInterface dialog) {
-						bar.dismiss();
-					}
-				});
-
-			}
+		HttpClientUtil client = new HttpClientUtil(this);
+		client.setIsShowLoading(true);
+		client.getHttpResp(url, new IHttpResp() {
 
 			@Override
-			public void onError(Throwable error, String content) {
-				super.onError(error, content);
-				Toast.makeText(
-						AidouActivity.this,
-						AidouActivity.this.getResources().getString(
-								R.string.no_network), Toast.LENGTH_SHORT)
-						.show();
-			}
-
-			@Override
-			public void onFinish() {
-				super.onFinish();
-			}
-
-			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
-				if (200 == statusCode) {
-					bar.cancel();
-				}
+			public void onSuccess(String content) {
+				super.onSuccess(content);
 				JSONObject object;
 				try {
 					object = new JSONObject(content);
@@ -111,11 +81,10 @@ public class AidouActivity extends BaseActivity {
 						Toast.makeText(
 								AidouActivity.this,
 								AidouActivity.this.getResources().getString(
-										R.string.no_network),
+										R.string.bad_network),
 								Toast.LENGTH_SHORT).show();
 					}
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

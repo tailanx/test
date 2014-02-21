@@ -2,7 +2,6 @@ package com.yidejia.app.mall.favorite;
 
 import java.util.ArrayList;
 
-import org.apache.http.HttpStatus;
 
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -11,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -24,9 +24,6 @@ import com.baidu.mobstat.StatService;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.opens.asyncokhttpclient.AsyncHttpResponse;
-import com.opens.asyncokhttpclient.AsyncOkHttpClient;
-import com.opens.asyncokhttpclient.RequestParams;
 import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
@@ -38,6 +35,8 @@ import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.SearchItem;
 import com.yidejia.app.mall.search.SearchResultActivity;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 
 /**
  * 我的收藏
@@ -55,6 +54,11 @@ public class MyCollectActivity extends BaseActivity {
 	private String userId;
 	private String token;
 	private TextView rightTextView;// 删除
+	
+	private boolean isFirstIn = true;
+	private String TAG = MyCollectActivity.class.getName();
+
+	private ArrayList<SearchItem> favList;
 
 	private void setupShow() {
 
@@ -179,6 +183,7 @@ public class MyCollectActivity extends BaseActivity {
 			// closeTask();
 			// task = new Task();
 			// task.execute();
+			isFirstIn = false;
 			getCollectsData();
 		}
 
@@ -189,6 +194,7 @@ public class MyCollectActivity extends BaseActivity {
 			// closeTask();
 			// task = new Task();
 			// task.execute();
+			isFirstIn = false;
 			getCollectsData();
 		}
 
@@ -197,7 +203,49 @@ public class MyCollectActivity extends BaseActivity {
 	private void getCollectsData() {
 		String url = new JNICallBack().getHttp4GetFav("userid=" + userId,
 				fromIndex + "", +amount + "", "", "created+desc", "%2A");
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
+		
+		HttpClientUtil httpClientUtil = new HttpClientUtil(this);
+		httpClientUtil.setPullToRefreshView(mPullRefreshListView);
+		httpClientUtil.setShowErrMessage(true);
+		if(isFirstIn) httpClientUtil.setIsShowLoading(true);
+		else httpClientUtil.setIsShowLoading(false);
+		
+		httpClientUtil.getHttpResp(url, new IHttpResp(){
+
+			@Override
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+				ParseFavJson parseFavJson = new ParseFavJson();
+				boolean isSuccess = parseFavJson.parseGetListJson(content);
+				if (isSuccess) {
+					ArrayList<SearchItem> tempList = parseFavJson
+							.getFavList();
+					if (null != tempList) {
+						if (isDownRefresh) {
+							favList.clear();
+						}
+						favList.addAll(tempList);
+						fAdapter.notifyDataSetChanged();
+					} else {
+						Toast.makeText(MyCollectActivity.this,
+								getResources().getString(R.string.nomore),
+								Toast.LENGTH_SHORT).show();
+					}
+				} else {
+					mPullRefreshListView.setVisibility(ViewGroup.GONE);
+					emptyLayout.setVisibility(ViewGroup.VISIBLE);
+				}
+			}
+
+			@Override
+			public void onError() {
+				super.onError();
+				fromIndex -= amount;
+			}
+			
+		});
+		
+		/*AsyncOkHttpClient client = new AsyncOkHttpClient();
 		client.get(url, new AsyncHttpResponse() {
 
 			@Override
@@ -234,6 +282,8 @@ public class MyCollectActivity extends BaseActivity {
 							favList.addAll(tempList);
 							fAdapter.notifyDataSetChanged();
 						} else {
+							mPullRefreshListView.setVisibility(ViewGroup.GONE);
+							emptyLayout.setVisibility(ViewGroup.VISIBLE);
 							Toast.makeText(MyCollectActivity.this,
 									getResources().getString(R.string.nomore),
 									Toast.LENGTH_SHORT).show();
@@ -254,14 +304,9 @@ public class MyCollectActivity extends BaseActivity {
 						Toast.LENGTH_SHORT).show();
 			}
 
-		});
+		});*/
 	}
 
-	private String TAG = MyCollectActivity.class.getName();
-
-	private boolean isFirstIn = true;
-	// private boolean isNoMore = false;
-	private ArrayList<SearchItem> favList;
 
 	// private ArrayList<SearchItem> mList;
 	// private ProgressDialog bar;
@@ -337,8 +382,32 @@ public class MyCollectActivity extends BaseActivity {
 		String url = new JNICallBack().HTTPURL;
 		String param = new JNICallBack().getHttp4DelFav(userId, productId,
 				token);
+		
+		HttpClientUtil httpClientUtil = new HttpClientUtil(this);
+		httpClientUtil.setIsShowLoading(true);
+		httpClientUtil.setShowErrMessage(true);
+		httpClientUtil.getHttpResp(url, param, new IHttpResp(){
 
-		RequestParams requestParams = new RequestParams();
+			@Override
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+				ParseFavJson parseFavJson = new ParseFavJson();
+				boolean issuccess = parseFavJson.parseDeleteJson(content);
+				if (issuccess) {
+					Toast.makeText(MyCollectActivity.this,
+							getResources().getString(R.string.del_fav_ok),
+							Toast.LENGTH_SHORT).show();
+					if (null != mPullRefreshListView) {
+						fromIndex = 0;
+						mPullRefreshListView.setRefreshing();
+					}
+				}
+
+			}
+
+		});
+
+		/*RequestParams requestParams = new RequestParams();
 		requestParams.put(param);
 		String contentType = "application/x-www-form-urlencoded;charset=UTF-8";
 		AsyncOkHttpClient client = new AsyncOkHttpClient();
@@ -381,7 +450,7 @@ public class MyCollectActivity extends BaseActivity {
 				super.onError(error, content);
 			}
 
-		});
+		});*/
 	}
 
 	@Override

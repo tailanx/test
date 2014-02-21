@@ -24,13 +24,16 @@ public class HttpClientUtil {
 	private PullToRefreshBase<?> mPullToRefreshBase;
 	
 	private boolean isShowLoading = false;
-	private boolean isShowErrMessage = false;
+	private boolean isShowErrMessage = true;
+	
+	private AsyncOkHttpClient client;
 	
 	private AsyncHttpResponse asyncHttpResponse = new AsyncHttpResponse(){
 
 		@Override
 		public void onStart() {
 			super.onStart();
+			if(null != iHttpResp) iHttpResp.onStart();
 			if (isShowLoading) {
 				if (null != progressDialog) {
 					showProgressDialog();
@@ -46,6 +49,7 @@ public class HttpClientUtil {
 		@Override
 		public void onFinish() {
 			super.onFinish();
+			if(null != iHttpResp) iHttpResp.onFinish();
 			if(null != mPullToRefreshBase)mPullToRefreshBase.onRefreshComplete();
 			if(null != progressDialog && progressDialog.isShowing()) progressDialog.dismiss();
 		}
@@ -54,13 +58,16 @@ public class HttpClientUtil {
 		public void onSuccess(int statusCode, String content) {
 			super.onSuccess(statusCode, content);
 			if(HttpStatus.SC_OK == statusCode){
-				iHttpResp.success(content);
+				if(null != iHttpResp)iHttpResp.onSuccess(content);
+			} else {
+				if(null != iHttpResp) iHttpResp.onError();
 			}
 		}
 
 		@Override
 		public void onError(Throwable error, String content) {
 			super.onError(error, content);
+			if(null != iHttpResp) iHttpResp.onError();
 			showErrMsg();
 		}
 		
@@ -68,10 +75,12 @@ public class HttpClientUtil {
 	
 	public HttpClientUtil(){
 		//默认构造函数
+		client = new AsyncOkHttpClient();
 	}
 	
 	public HttpClientUtil(Context context){
 		this.context = context;
+		client = new AsyncOkHttpClient();
 	}
 	
 	/**设置是否显示等待加载的ProgressDialog**/
@@ -127,7 +136,7 @@ public class HttpClientUtil {
 	 */
 	public void getHttpResp(String url, IHttpResp iHttpResp){
 		this.iHttpResp = iHttpResp;
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
+//		client = new AsyncOkHttpClient();
 		client.get(url, asyncHttpResponse);
 	}
 	
@@ -142,7 +151,11 @@ public class HttpClientUtil {
 		RequestParams requestParams = new RequestParams();
 		requestParams.put(param);
 		
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
+//		AsyncOkHttpClient client = new AsyncOkHttpClient();
 		client.post(url, requestParams, asyncHttpResponse);
+	}
+	
+	public void closeConn(){
+		if(null != client) client.closeConn();
 	}
 }

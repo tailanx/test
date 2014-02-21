@@ -18,6 +18,8 @@ import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.Brand;
 import com.yidejia.app.mall.model.Function;
 import com.yidejia.app.mall.model.PriceLevel;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.util.SharedPreferencesUtil;
 
 @SuppressLint("UseSparseArrays")
@@ -30,6 +32,8 @@ public class FilterFragment extends Fragment {
 	private FilterViewCtrl ctrl;
 	
 	private SharedPreferencesUtil spUtil;
+	
+	private HttpClientUtil client;
 	
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
@@ -74,12 +78,13 @@ public class FilterFragment extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		Log.e(FilterFragment.class.getName(), "===onActivityCreated");
 		
-		
-		
 		if(null == view){
 //			view = ((MyApplication)getActivity().getApplication()).getView();
 			return;
 		}
+		
+		client = new HttpClientUtil(getActivity());
+		
 		pricesLevels = new ArrayList<PriceLevel>();
 		brands = new ArrayList<Brand>();
 		effects = new ArrayList<Function>();
@@ -132,12 +137,12 @@ public class FilterFragment extends Fragment {
 		String urlPrice = jniCallBack.getHttp4GetPrice();
 		String urlBrand = jniCallBack.getHttp4GetBrand();
 		String urlEffect = jniCallBack.getHttp4GetEffect("flag%3D%27y%27", "0", "20", "", "", "%2A");
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(urlBrand, new AsyncHttpResponse(){
+		
+		client.getHttpResp(urlBrand, new IHttpResp(){
 
 			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
+			public void onSuccess(String content) {
+				super.onSuccess(content);
 				ParseSearchJson parseSearchJson = new ParseSearchJson();
 				if (parseSearchJson.parseBrandJson(content)) {
 					if(null != spUtil)
@@ -150,11 +155,11 @@ public class FilterFragment extends Fragment {
 			}
 			
 		});
-		client.get(urlPrice, new AsyncHttpResponse(){
+		client.getHttpResp(urlPrice, new IHttpResp(){
 			
 			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
+			public void onSuccess(String content) {
+				super.onSuccess(content);
 				ParseSearchJson parseSearchJson = new ParseSearchJson();
 				if (parseSearchJson.parsePriceJson(content)) {
 					if(null != spUtil)
@@ -167,11 +172,11 @@ public class FilterFragment extends Fragment {
 			}
 			
 		});
-		client.get(urlEffect, new AsyncHttpResponse(){
+		client.getHttpResp(urlEffect, new IHttpResp(){
 			
 			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
+			public void onSuccess(String content) {
+				super.onSuccess(content);
 				ParseSearchJson parseSearchJson = new ParseSearchJson();
 				if (parseSearchJson.parseFunJson(content)) {
 					if(null != spUtil)
@@ -185,6 +190,28 @@ public class FilterFragment extends Fragment {
 			
 		});
 	}
+	
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		if (null != brands) {
+			brands.clear();
+			brands = null;
+		}
+		if (null != pricesLevels) {
+			pricesLevels.clear();
+			pricesLevels = null;
+		}
+		if (null != effects) {
+			effects.clear();
+			effects = null;
+		}
+		if(null != ctrl.getAdapter()) ctrl.cleanAdapter();
+		
+		if(null != client)
+		client.closeConn();
+	}
+
 
 	@Override
 	public void onDestroy() {

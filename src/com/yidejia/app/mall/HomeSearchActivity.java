@@ -30,6 +30,8 @@ import com.yidejia.app.mall.net.ConnectionDetector;
 import com.yidejia.app.mall.search.ParseSearchJson;
 import com.yidejia.app.mall.search.SearchActivity;
 import com.yidejia.app.mall.search.SearchResultActivity;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.util.SharedPreferencesUtil;
 
 public class HomeSearchActivity extends HomeBaseActivity {
@@ -75,7 +77,7 @@ public class HomeSearchActivity extends HomeBaseActivity {
 		setActionBarConfig();
 
 
-		if (null != bar) {
+		/*if (null != bar) {
 			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
 				@Override
@@ -87,7 +89,7 @@ public class HomeSearchActivity extends HomeBaseActivity {
 					}
 				}
 			});
-		}
+		}*/
 		if (null != refresh_data_btn) {
 			refresh_data_btn.setOnClickListener(new View.OnClickListener() {
 
@@ -138,45 +140,35 @@ public class HomeSearchActivity extends HomeBaseActivity {
 		
 		String url = new JNICallBack().getHttp4GetEffect("flag%3D%27y%27", "0", "20", "", "", "%2A");
 		
-		AsyncOkHttpClient client = new AsyncOkHttpClient();
-		client.get(url, new AsyncHttpResponse(){
+		HttpClientUtil client = new HttpClientUtil(this);
+		client.setIsShowLoading(true);
+		client.getHttpResp(url, new IHttpResp(){
 
 			@Override
-			public void onStart() {
-				// TODO Auto-generated method stub
-				super.onStart();
-			}
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+				ParseSearchJson parseSearchJson = new ParseSearchJson();
+				boolean isSuccess = parseSearchJson.parseFunJson(content);
+				if (isSuccess) {
+					util.saveData("category", "data", content);
 
-			@Override
-			public void onFinish() {
-				// TODO Auto-generated method stub
-				super.onFinish();
-			}
-
-			@Override
-			public void onSuccess(int statusCode, String content) {
-				super.onSuccess(statusCode, content);
-				if(HttpStatus.SC_OK == statusCode){
-					ParseSearchJson parseSearchJson = new ParseSearchJson();
-					boolean isSuccess = parseSearchJson.parseFunJson(content);
-					if(isSuccess){
-						util.saveData("category", "data", content);
-						
-						loadView(parseSearchJson);
-					} else {
-						//TODO
-					}
+					loadView(parseSearchJson);
 				} else {
-					//TODO
+					if (functions.isEmpty()) {
+						searchListView.setVisibility(View.GONE);
+						search_item_refresh_view.setVisibility(View.VISIBLE);
+					}
 				}
 			}
 
 			@Override
-			public void onError(Throwable error, String content) {
-				// TODO Auto-generated method stub
-				super.onError(error, content);
+			public void onError() {
+				super.onError();
+				if (functions.isEmpty()) {
+					searchListView.setVisibility(View.GONE);
+					search_item_refresh_view.setVisibility(View.VISIBLE);
+				}
 			}
-			
 		});
 		
 	}
@@ -198,7 +190,7 @@ public class HomeSearchActivity extends HomeBaseActivity {
 		});
 	}
 	
-	private ProgressDialog bar;
+//	private ProgressDialog bar;
 
 
 	/**
