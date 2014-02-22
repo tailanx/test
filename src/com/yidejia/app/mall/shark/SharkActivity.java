@@ -44,7 +44,6 @@ public class SharkActivity extends Activity implements OnClickListener,
 		Callback {
 
 	private SharkUtil sharkUtil;
-
 	private RelativeLayout noProcue;// 无商品
 	private RelativeLayout produce;// 商品
 	private RelativeLayout youhuiquan;// 优惠券
@@ -193,6 +192,7 @@ public class SharkActivity extends Activity implements OnClickListener,
 				Log.e("info", content);
 
 				quanImageView.startAnimation(quanAnimation);
+
 				ParseShark parseShark = new ParseShark();
 				boolean isSuccess = parseShark.parseShark(content);
 				count = parseShark.getCount();

@@ -48,7 +48,7 @@
 			VKontakte     http://vk.com/dev
     -->
 
-    <ShareSDK AppKey="12bb19a9b51c" />
+    <ShareSDK AppKey="13b47f1a3555" />
     <!-- 修改成你在sharesdk后台注册的应用的appkey" -->
 
     <SinaWeibo
