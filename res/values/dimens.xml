@@ -53,6 +53,7 @@
     <dimen name="margin_left_add_add">3dp</dimen>
     <dimen name="actiobar_margin_left">2dp</dimen>
     <dimen name="width_add">1dp</dimen>
+    <dimen name="width_add_add">0.5dp</dimen>
     <dimen name="width">0dp</dimen>
     <dimen name="width_ad">-12dp</dimen>
     <dimen name="width_add_fun">-1dp</dimen>
