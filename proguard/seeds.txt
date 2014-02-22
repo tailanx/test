@@ -13090,6 +13090,7 @@ com.yidejia.app.mall.R$drawable: int bar
 com.yidejia.app.mall.R$drawable: int best_express
 com.yidejia.app.mall.R$drawable: int bg_abs_text
 com.yidejia.app.mall.R$drawable: int bg_common_btm
+com.yidejia.app.mall.R$drawable: int bg_common_top
 com.yidejia.app.mall.R$drawable: int bg_common_top_btm
 com.yidejia.app.mall.R$drawable: int bg_down_cart
 com.yidejia.app.mall.R$drawable: int bg_down_guang
@@ -13098,6 +13099,7 @@ com.yidejia.app.mall.R$drawable: int bg_down_mall
 com.yidejia.app.mall.R$drawable: int bg_down_search
 com.yidejia.app.mall.R$drawable: int bg_img
 com.yidejia.app.mall.R$drawable: int bg_pay_selector
+com.yidejia.app.mall.R$drawable: int bg_pay_selector_add
 com.yidejia.app.mall.R$drawable: int black
 com.yidejia.app.mall.R$drawable: int blue
 com.yidejia.app.mall.R$drawable: int boot_page1
@@ -14117,6 +14119,7 @@ com.yidejia.app.mall.R$id: int re_produce_comments
 com.yidejia.app.mall.R$id: int re_produce_image_detail
 com.yidejia.app.mall.R$id: int re_relative
 com.yidejia.app.mall.R$id: int re_shopping_cart_item_relative
+com.yidejia.app.mall.R$id: int re_show_data
 com.yidejia.app.mall.R$id: int re_time
 com.yidejia.app.mall.R$id: int re_top_relativelayout
 com.yidejia.app.mall.R$id: int re_wait_comment
@@ -14283,6 +14286,7 @@ com.yidejia.app.mall.R$id: int tv_already_compelte
 com.yidejia.app.mall.R$id: int tv_already_complete_number
 com.yidejia.app.mall.R$id: int tv_already_deliver
 com.yidejia.app.mall.R$id: int tv_already_deliver_number
+com.yidejia.app.mall.R$id: int tv_back
 com.yidejia.app.mall.R$id: int tv_brand_name_text
 com.yidejia.app.mall.R$id: int tv_brand_text
 com.yidejia.app.mall.R$id: int tv_buy_now
@@ -14374,8 +14378,8 @@ com.yidejia.app.mall.R$id: int tv_shared_produce_title
 com.yidejia.app.mall.R$id: int tv_shared_sum
 com.yidejia.app.mall.R$id: int tv_shared_sum_add
 com.yidejia.app.mall.R$id: int tv_shark_activity_guize
-com.yidejia.app.mall.R$id: int tv_shark_no_produce
 com.yidejia.app.mall.R$id: int tv_shark_no_produce_add
+com.yidejia.app.mall.R$id: int tv_shark_no_produce_add_add
 com.yidejia.app.mall.R$id: int tv_shark_no_produce_no
 com.yidejia.app.mall.R$id: int tv_shopping_cart_go_pay
 com.yidejia.app.mall.R$id: int tv_shopping_cart_gopay
@@ -14494,6 +14498,7 @@ com.yidejia.app.mall.R$layout: int abs__simple_dropdown_hint
 com.yidejia.app.mall.R$layout: int ac_image_pager
 com.yidejia.app.mall.R$layout: int act_guang
 com.yidejia.app.mall.R$layout: int act_search_history
+com.yidejia.app.mall.R$layout: int actionbar_back
 com.yidejia.app.mall.R$layout: int actionbar_cart
 com.yidejia.app.mall.R$layout: int actionbar_common
 com.yidejia.app.mall.R$layout: int actionbar_main_home_title
@@ -14989,6 +14994,7 @@ com.yidejia.app.mall.R$string: int select_pay_type
 com.yidejia.app.mall.R$string: int selled_num
 com.yidejia.app.mall.R$string: int service
 com.yidejia.app.mall.R$string: int share
+com.yidejia.app.mall.R$string: int share_add
 com.yidejia.app.mall.R$string: int share_canceled
 com.yidejia.app.mall.R$string: int share_completed
 com.yidejia.app.mall.R$string: int share_content

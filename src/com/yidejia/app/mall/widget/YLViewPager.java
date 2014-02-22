@@ -9,7 +9,6 @@ public class YLViewPager extends ViewPager {
 
 	public YLViewPager(Context context) {
 		super(context);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public YLViewPager(Context context, AttributeSet attrs) {

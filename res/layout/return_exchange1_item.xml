@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/ret_order_status"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/layout_selector2"
         android:gravity="center"
@@ -16,7 +16,7 @@
         android:textSize="15sp" />
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/layout_selector2" >
 

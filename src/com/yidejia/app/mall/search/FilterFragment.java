@@ -93,10 +93,10 @@ public class FilterFragment extends Fragment {
 		
 		loadCache();
 		
-		if(!MyApplication.getInstance().isFilterCreated()){
+//		if(!MyApplication.getInstance().isFilterCreated()){
 			getFilter();
-			MyApplication.getInstance().setFilterCreated(true);
-		}
+//			MyApplication.getInstance().setFilterCreated(true);
+//		}
 	}
 	
 	private void showFilterView() {

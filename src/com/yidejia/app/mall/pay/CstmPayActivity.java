@@ -111,7 +111,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 	// private RelativeLayout reLayout;
 	private String isCartActivity;
 //	private String sum;
-	private String contentType;
+//	private String contentType;
 
 	private float goodsPrice;
 	private float voucher;	//用户总积分
@@ -178,7 +178,7 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 
 				userId = MyApplication.getInstance().getUserId();
 				token = MyApplication.getInstance().getToken();
-				contentType = "application/x-www-form-urlencoded;charset=UTF-8";
+//				contentType = "application/x-www-form-urlencoded;charset=UTF-8";
 
 				show(carts, false);
 
@@ -217,6 +217,10 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 					.setNegativeButton(
 							getResources().getString(R.string.cancel), null)
 					.create();
+			
+			// 添加地址、快递费用、配送中心
+			getDefaultAddress();
+			
 			if(isCanHuanGou)
 				getCredit();
 
@@ -357,6 +361,12 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 		}
 
 	}
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		
+	}
 
 	@Override
 	protected void onDestroy() {
@@ -468,8 +478,6 @@ public class CstmPayActivity extends BaseActivity implements OnClickListener {
 			}
 		});
 
-		// 添加地址、快递费用、配送中心
-		getDefaultAddress();
 	}
 
 	String pay_type = "";

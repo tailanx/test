@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/main_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
+    <!-- <TextView
         android:id="@+id/tv_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -12,6 +13,12 @@
         android:layout_marginLeft="@dimen/mall_list_padding"
         android:text="&lt;-"
         android:textColor="@color/white_white"
-        android:textSize="@dimen/text_size" />
+        android:textSize="@dimen/text_size" /> -->
+        
+        <ImageView android:id="@+id/ab_iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/yao_back"
+            />
 
 </RelativeLayout>

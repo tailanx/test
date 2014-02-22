@@ -304,6 +304,11 @@
     <string name="yaoyao_guize">规则</string>
     <string name="yaoyao_text">囧 ！神马都木有</string>
     <string name="yaoyao_next">再摇一次</string>
+    
+    <string name="qiandao_rule">签到规则:\n\n
+        1.每日签到，马上获得5颗爱豆；\n\n
+        2.连续签到7天，在第7天当天将一次性送您50颗爱豆作为坚持的奖励；\n\n
+        3.签到7天为一个周期，前6天签到每天均可获得5颗爱豆，第7天50颗，7天签到满后，则从第一天开始结算：</string>
 
     <!-- 支付宝客户端 -->
     <string name="remote_call_failed">Failure calling remote service</string>

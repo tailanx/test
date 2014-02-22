@@ -1291,10 +1291,10 @@ com.yidejia.app.mall.pay.BaseHelper:
     203:217:public static org.json.JSONObject string2JSON(java.lang.String,java.lang.String)
 com.yidejia.app.mall.pay.CstmPayActivity:
     public static java.util.ArrayList cartList
-    129:129:public static java.util.ArrayList getArrayListFree()
-    133:134:public static void setArrayListFree(java.util.ArrayList)
-    137:137:public static java.util.ArrayList getArrayListExchange()
-    142:143:public static void setArrayListExchange(java.util.ArrayList)
+    131:131:public static java.util.ArrayList getArrayListFree()
+    135:136:public static void setArrayListFree(java.util.ArrayList)
+    139:139:public static java.util.ArrayList getArrayListExchange()
+    144:145:public static void setArrayListExchange(java.util.ArrayList)
 com.yidejia.app.mall.pay.FileDownloader:
     50:52:public FileDownloader(boolean)
     63:64:public final void setShowProgress(boolean)
@@ -1377,12 +1377,13 @@ com.yidejia.app.mall.search.TaskFilter$1
 com.yidejia.app.mall.search.TaskFilter$2
 com.yidejia.app.mall.search.TaskFilter$3
 com.yidejia.app.mall.search.TaskFilter$Task
-com.yidejia.app.mall.shark.ParseShark:
-    116:116:public java.lang.String getData()
 com.yidejia.app.mall.shark.SharkActivity:
     private android.view.animation.Animation animation
     private android.widget.LinearLayout$LayoutParams params
     private android.view.animation.Animation anim
+com.yidejia.app.mall.shark.SharkUtil:
+    private static final int SPEED_SHRESHOLD
+    private static final int UPTATE_INTERVAL_TIME
 com.yidejia.app.mall.skintest.SkinAnswerUtil:
     private android.widget.ImageView mButton
 com.yidejia.app.mall.skintest.SkinHomeActivity:
@@ -1403,6 +1404,8 @@ com.yidejia.app.mall.task.TaskRegister:
     103:106:public void closeTask()
 com.yidejia.app.mall.task.TaskSendCode
 com.yidejia.app.mall.task.TaskSendCode$Task
+com.yidejia.app.mall.tickets.IntegeralFragment:
+    private android.app.ProgressDialog bar
 com.yidejia.app.mall.tickets.Ticket:
     18:18:public java.lang.String getStatus()
     30:30:public java.lang.String getCode()
@@ -1480,7 +1483,7 @@ com.yidejia.app.mall.util.DesUtils:
 com.yidejia.app.mall.util.FreeGivingUtil
 com.yidejia.app.mall.util.Http
 com.yidejia.app.mall.util.HttpClientUtil:
-    101:101:public android.app.ProgressDialog getProgressDialog()
+    105:105:public android.app.ProgressDialog getProgressDialog()
 com.yidejia.app.mall.util.IsPhone:
     8:8:public IsPhone()
 com.yidejia.app.mall.util.Md5
@@ -1553,13 +1556,12 @@ com.yidejia.app.mall.widget.YLProgressDialog:
     41:46:public void show()
     96:98:public void setMessage(java.lang.String)
 com.yidejia.app.mall.yirihui.YiRiHuiData:
-    34:34:public long getBeginTime()
-    40:40:public long getEndTime()
-    52:52:public java.lang.String getQuantity()
-    64:64:public java.lang.String getOverTime()
-    82:82:public java.lang.String getValidFlag()
-    88:88:public java.lang.String getShellFlag()
-    94:94:public java.lang.String getGoodsName()
+    41:41:public long getEndTime()
+    53:53:public java.lang.String getQuantity()
+    65:65:public java.lang.String getOverTime()
+    83:83:public java.lang.String getValidFlag()
+    89:89:public java.lang.String getShellFlag()
+    95:95:public java.lang.String getGoodsName()
 com.yidejia.app.mall.youhui.YouhuiGuiZeActivity:
     private android.widget.TextView back
 m.framework.network.ByteArrayPart

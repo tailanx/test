@@ -13,7 +13,7 @@
         android:clickable="true"
         android:text="@string/back"
         android:textColor="@color/color_sort_text_color_press"
-        android:textSize="@dimen/textsize_small" />
+        android:textSize="@dimen/textsize_big" />
 
     <TextView
         android:id="@+id/ab_common_title"

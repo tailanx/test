@@ -109,17 +109,19 @@
         android:layout_toRightOf="@id/re_shopping_cart_item_relative"
         android:text="@string/cart_sum"
         android:textColor="@color/white_white"
-        android:textSize="@dimen/textsize_small_small_small_small" />
+        android:textSize="@dimen/d_cart_sum_size" />
 
     <TextView
         android:id="@+id/tv_shopping_cart_item_money_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="1"
         android:layout_alignBaseline="@id/re_shopping_cart_item_relative"
         android:layout_below="@id/tv_shopping_cart_item_money"
         android:layout_marginTop="@dimen/margin_left_add"
         android:layout_toRightOf="@id/tv_shopping_cart_item_money_price_add"
         android:textColor="@color/theme"
-        android:textSize="@dimen/textsize_small_small_small_small" />
+        android:textSize="@dimen/d_cart_sum_size" />
 
 </RelativeLayout>

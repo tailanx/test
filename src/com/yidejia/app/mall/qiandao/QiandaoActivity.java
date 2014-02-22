@@ -90,10 +90,12 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 		lastDate = sp.getData("TIME", "Date", "");
 		lastId = sp.getData("TIME", "User", "");
 		if (nowDate.equals(lastDate) && lastId.equals(userId)) {
-			ivSignAdd.setImageResource(R.drawable.yiqiandao);
+//			ivSignAdd.setImageResource(R.drawable.yiqiandao);
+			ivSignAdd.setSelected(true);
 			isCanSign = false;
 		} else {
-			ivSignAdd.setImageResource(R.drawable.qiandao_button);
+//			ivSignAdd.setImageResource(R.drawable.qiandao_button);
+			ivSignAdd.setSelected(false);
 			isCanSign = true;
 		}
 
@@ -157,11 +159,7 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 
 	private void signUp() {
 
-		cal.add(Calendar.DAY_OF_MONTH, 0);// 保存当天的数据
-		sp.saveData("TIME", "Date", sdf.format(cal.getTime()));
-		sp.saveData("TIME", "User", userId);
 		String param = new JNICallBack().getHttp4SignUp(userId, token);
-
 		HttpClientUtil httpClientUtil = new HttpClientUtil(this);
 		httpClientUtil.setIsShowLoading(true);
 		httpClientUtil.setShowErrMessage(true);
@@ -173,13 +171,20 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 //				Log.e("info", content);
 				if (parseSignAdd(content)) {
 					showMsg = "您已连续签到"+ (lxSign + 1) + "天，本次签到获得" + respMsg + "个爱豆";
-					ivSignAdd.setImageResource(R.drawable.yiqiandao);
+//					ivSignAdd.setImageResource(R.drawable.yiqiandao);
 					signCount++;
 					handler.sendEmptyMessage(Consts.QIANDAO);
 					isCanSign = false;
 				} else {
 					showMsg = respMsg;
 				}
+				
+				cal.add(Calendar.DAY_OF_MONTH, 0);// 保存当天的数据
+				sp.saveData("TIME", "Date", sdf.format(cal.getTime()));
+				sp.saveData("TIME", "User", userId);
+				
+				isCanSign = false;
+				ivSignAdd.setSelected(true);
 				Toast.makeText(QiandaoActivity.this, showMsg,
 						Toast.LENGTH_LONG).show();
 			}
@@ -221,6 +226,7 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 			tvSignCount3.setText(gewei + "");
 			tvSignCount2.setText(shiwei + "");
 			tvSignCount1.setText(baiwei + "");
+			
 		}
 		return false;
 	}
