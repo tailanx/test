@@ -72,7 +72,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/width_add"
+            android:layout_height="@dimen/width_add_add"
             android:background="@color/line_color"
             android:contentDescription="@string/yidejia" />
     </RelativeLayout>
@@ -114,11 +114,26 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center|right"
+            android:layout_marginBottom="-50dp"
+            android:layout_marginTop="-50dp"
             android:background="@drawable/main_cart_textview_bg"
+            android:gravity="right"
             android:paddingLeft="@dimen/head_padding"
             android:paddingRight="@dimen/head_padding"
-            android:gravity="right"
             android:textColor="@color/text_color_120" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/emulate_down"
+        android:background="@drawable/main_theme_textview_bg" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/width_add_add"
+            android:background="@color/line_color"
+            android:contentDescription="@string/yidejia" />
     </RelativeLayout>
 
 </RelativeLayout>
