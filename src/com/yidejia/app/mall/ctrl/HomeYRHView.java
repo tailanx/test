@@ -69,7 +69,17 @@ public class HomeYRHView {
 		ivGoodsBig = (ImageView) activity.findViewById(R.id.iv_yrh_img1);
 		ivGoodsSmall = (ImageView) activity.findViewById(R.id.iv_yrh_img2);
 		rlHomeYRH = (RelativeLayout) activity.findViewById(R.id.rl_home_yrh);
-		
+
+		rlHomeYRH.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+//				ActivityIntentUtil.intentActivity(activity, YirihuiActivity.class);
+				Intent intent = new Intent(activity, YirihuiActivity.class);
+				intent.putExtra("type", type);
+				activity.startActivity(intent);
+			}
+		});
 	}
 	
 	/**获取伊日惠数据**/
@@ -142,17 +152,6 @@ public class HomeYRHView {
 		
 //		final String goodsId = yiRiHuiDatas.getGoodsId();
 //		final String ruleId = yiRiHuiDatas.getTheId();
-		
-		rlHomeYRH.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-//				ActivityIntentUtil.intentActivity(activity, YirihuiActivity.class);
-				Intent intent = new Intent(activity, YirihuiActivity.class);
-				intent.putExtra("type", type);
-				activity.startActivity(intent);
-			}
-		});
 		
 		if(ruleId.equals(yiRiHuiDatas.getTheId())) return;
 		

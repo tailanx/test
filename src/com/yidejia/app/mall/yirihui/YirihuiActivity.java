@@ -33,7 +33,10 @@ public class YirihuiActivity extends SherlockFragmentActivity implements
 		super.onCreate(arg0);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-		lastIndex = getIntent().getIntExtra("type", 0);
+		int lastIndexTemp = getIntent().getIntExtra("type", 0);
+		
+		if(lastIndexTemp == -1) lastIndex = 2;
+		else lastIndex = lastIndexTemp;
 
 		setContentView(R.layout.activity_search_result_info_layout);
 		manager = getSupportFragmentManager();
@@ -83,6 +86,9 @@ public class YirihuiActivity extends SherlockFragmentActivity implements
 		nowText.setOnClickListener(new TextClick(0));
 		laterLinear.setOnClickListener(new TextClick(1));
 		completeText.setOnClickListener(new TextClick(2));
+		
+		initSelected();
+		
 	}
 
 	private class TextClick implements View.OnClickListener {
@@ -146,6 +152,32 @@ public class YirihuiActivity extends SherlockFragmentActivity implements
 
 			}
 
+		}
+	}
+	
+	/**初始化伊日惠的状态，0表示正在进行，1表示即将进行，2表示已经结束**/
+	private void initSelected(){
+		switch (lastIndex) {
+		case 0:
+			nowText.setSelected(true);
+			laterText.setSelected(false);
+			completeText.setSelected(false);
+			laterLinear.setSelected(false);
+			break;
+		case 1:
+			laterText.setSelected(true);
+			nowText.setSelected(false);
+			completeText.setSelected(false);
+			laterLinear.setSelected(true);
+			break;
+		case 2:
+			completeText.setSelected(true);
+			nowText.setSelected(false);
+			laterText.setSelected(false);
+			laterLinear.setSelected(false);
+			break;
+		default:
+			break;
 		}
 	}
 
