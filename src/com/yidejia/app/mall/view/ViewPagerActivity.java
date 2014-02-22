@@ -22,24 +22,26 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.baidu.mobstat.StatService;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.yidejia.app.mall.BaseActivity;
 import com.yidejia.app.mall.MyApplication;
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.model.BaseProduct;
 import com.yidejia.app.mall.photoview.PhotoView;
 import com.yidejia.app.mall.util.Consts;
 
-public class ViewPagerActivity extends SherlockFragmentActivity {
+public class ViewPagerActivity extends BaseActivity {
 
-	private ViewPager mViewPager;
+	private HackyViewPager mViewPager;
 	private static final String STATE_POSITION = "STATE_POSITION";
 	private ArrayList<BaseProduct> sDrawables;
 	private DisplayImageOptions options;
@@ -47,37 +49,81 @@ public class ViewPagerActivity extends SherlockFragmentActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getSupportActionBar().setCustomView(R.layout.actionbar_back);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayShowHomeEnabled(false);
-		findViewById(R.id.tv_back).setOnClickListener(
-				new View.OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						ViewPagerActivity.this.finish();
-					}
-				});
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+//		setActionbarConfig();
+//		getSupportActionBar().setCustomView(R.layout.actionbar_back);
+//		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//		getSupportActionBar().setDisplayShowCustomEnabled(true);
+//		getSupportActionBar().setDisplayShowTitleEnabled(false);
+//		getSupportActionBar().setDisplayShowHomeEnabled(false);
+		
 
 		options = MyApplication.getInstance().initGoodsImageOption();
 		
-		mViewPager = new HackyViewPager(this);
-		setContentView(mViewPager);
 		Bundle bundle = getIntent().getExtras();
 		sDrawables = (ArrayList<BaseProduct>) getIntent().getSerializableExtra(
 				Consts.IMAGES);
 		if (sDrawables.isEmpty()) {
 			sDrawables = new ArrayList<BaseProduct>();
 		}
-		int pagerPosition = bundle.getInt(Consts.IMAGE_POSITION, 0);
+		int pagerPosition = 0;
+		if(null != bundle)
+			pagerPosition = bundle.getInt(Consts.IMAGE_POSITION, 0);
 
 		if (savedInstanceState != null) {
 			pagerPosition = savedInstanceState.getInt(STATE_POSITION);
 		}
 
+		setContentView(R.layout.activity_pic_view);
+		
+		ImageView ivBack = (ImageView) findViewById(R.id.iv_pic_back);
+		ivBack.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				ViewPagerActivity.this.finish();
+			}
+		});
+		
+		mViewPager = (HackyViewPager) findViewById(R.id.vp_hack);
+		
+//		RelativeLayout layout = new RelativeLayout(this);
+//		layout.setBackgroundResource(R.color.main_bg);
+//		
+//		
+//		RelativeLayout.LayoutParams lpPicView = new RelativeLayout.LayoutParams(
+//				ViewGroup.LayoutParams.MATCH_PARENT,
+//				ViewGroup.LayoutParams.MATCH_PARENT);
+//		lpPicView.addRule(RelativeLayout., anchor);
+//		lpPicView.addRule(RelativeLayout.BELOW, ivBack.getId());  
+		
+		
+//		mViewPager = new HackyViewPager(this);
+		
+//		layout.addView(mViewPager, lpPicView);
+		
+		/*RelativeLayout.LayoutParams lpBack = new RelativeLayout.LayoutParams(
+				ViewGroup.LayoutParams.WRAP_CONTENT,
+				ViewGroup.LayoutParams.WRAP_CONTENT);
+		lpBack.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+		lpBack.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+
+		ImageView ivBack = new ImageView(this);
+		ivBack.setId(1);
+		ivBack.setImageResource(R.drawable.pic_back);
+
+		ivBack.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				ViewPagerActivity.this.finish();
+			}
+		});
+
+		layout.addView(ivBack, lpBack);*/
+		
+//		setContentView(layout);
+		
 		mViewPager.setAdapter(new SamplePagerAdapter());
 	}
 
@@ -100,8 +146,8 @@ public class ViewPagerActivity extends SherlockFragmentActivity {
 		@Override
 		public View instantiateItem(ViewGroup container, int position) {
 			PhotoView photoView = new PhotoView(container.getContext());
-			ImageLoader.getInstance().init(
-					new MyApplication().getInstance().initConfig());
+			
+			ImageLoader.getInstance().init(MyApplication.getInstance().initConfig());
 			ImageLoader.getInstance().displayImage(
 					sDrawables.get(position).getImgUrl(), photoView, options,
 					MyApplication.getInstance().getImageLoadingListener());
