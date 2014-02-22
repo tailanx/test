@@ -33,6 +33,7 @@ import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.goodinfo.GoodsInfoActivity;
 import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.ProductBaseInfo;
+import com.yidejia.app.mall.shark.SharkUtil.OnShakeListener;
 import com.yidejia.app.mall.tickets.Ticket;
 import com.yidejia.app.mall.util.HttpClientUtil;
 import com.yidejia.app.mall.util.IHttpResp;
@@ -91,7 +92,7 @@ public class SharkActivity extends Activity implements OnClickListener,
 		mediaPlayer = MediaPlayer.create(this, R.raw.yao);
 		quanAnimation = AnimationUtils.loadAnimation(this,
 				R.anim.my_translate_action);
-		quanImageView.startAnimation(quanAnimation);
+
 		// startAnimation();
 		guize = (TextView) findViewById(R.id.tv_shark_activity_guize);
 		guize.setOnClickListener(this);
@@ -130,11 +131,11 @@ public class SharkActivity extends Activity implements OnClickListener,
 		super.onResume();
 
 		StatService.onPageStart(this, "摇一摇页面");
-
-		sharkUtil.registerListener(new IShark() {
+		sharkUtil.setOnShakeListener(new OnShakeListener() {
 
 			@Override
-			public void onStart() {
+			public void onShake() {
+				sharkUtil.stop();
 				quanImageView.clearAnimation();
 				quanAnimation.setRepeatCount(0);
 				// relativeLayout.setVisibility(View.VISIBLE);
@@ -145,14 +146,38 @@ public class SharkActivity extends Activity implements OnClickListener,
 				produce.setVisibility(View.GONE);
 				Log.e("info", "摇一摇页面");
 				getSharkData();
+				new Handler().postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						sharkUtil.start();
+					}
+				}, 2000);
 			}
-
-			@Override
-			public void onFinish() {
-				// TODO Auto-generated method stub
-			}
-
 		});
+
+		// sharkUtil.registerListener(new IShark() {
+		//
+		// @Override
+		// public void onStart() {
+		// sharkUtil.unregisterListener();
+		// quanImageView.clearAnimation();
+		// quanAnimation.setRepeatCount(0);
+		// // relativeLayout.setVisibility(View.VISIBLE);
+		// quanImageView.setVisibility(View.GONE);
+		// mediaPlayer.start();
+		// // startAnimaton();
+		// noProcue.setVisibility(View.GONE);
+		// produce.setVisibility(View.GONE);
+		// Log.e("info", "摇一摇页面");
+		// getSharkData();
+		// }
+		//
+		// @Override
+		// public void onFinish() {
+		// // TODO Auto-generated method stub
+		// }
+		//
+		// });
 	}
 
 	private void getSharkData() {
@@ -166,6 +191,8 @@ public class SharkActivity extends Activity implements OnClickListener,
 			@Override
 			public void onSuccess(String content) {
 				Log.e("info", content);
+
+				quanImageView.startAnimation(quanAnimation);
 				ParseShark parseShark = new ParseShark();
 				boolean isSuccess = parseShark.parseShark(content);
 				count = parseShark.getCount();
@@ -246,7 +273,9 @@ public class SharkActivity extends Activity implements OnClickListener,
 	@Override
 	protected void onPause() {
 		super.onPause();
-		sharkUtil.unregisterListener();
+		if (sharkUtil != null) {
+			sharkUtil.stop();
+		}
 		StatService.onPageEnd(this, "摇一摇页面");
 
 	}
@@ -254,7 +283,9 @@ public class SharkActivity extends Activity implements OnClickListener,
 	@Override
 	protected void onStop() {
 		super.onStop();
-		sharkUtil.unregisterListener();
+		if (sharkUtil != null) {
+			sharkUtil.stop();
+		}
 	}
 
 	private void startAnimaton(final RelativeLayout rela) {
@@ -334,6 +365,7 @@ public class SharkActivity extends Activity implements OnClickListener,
 	@Override
 	public boolean handleMessage(Message msg) {
 		switch (msg.what) {
+
 		case 1:// 什么都没有摇到
 				// noProcue.startAnimation(anim);
 			yaocishu.setText(msg.arg1 + "");
@@ -354,5 +386,4 @@ public class SharkActivity extends Activity implements OnClickListener,
 		}
 		return false;
 	}
-
 }
