@@ -89,6 +89,7 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 		
 		HttpClientUtil httpClientUtil = new HttpClientUtil(this);
 		httpClientUtil.setIsShowLoading(true);
+		httpClientUtil.setShowErrMessage(false);
 		httpClientUtil.getHttpResp(url, new IHttpResp(){
 
 			@Override
@@ -112,6 +113,7 @@ public class GoodsInfoActivity extends BaseActivity implements OnClickListener {
 			public void onError() {
 				super.onError();
 //				if(GoodsInfoActivity.this.isDestroyed()) return;
+				Toast.makeText(GoodsInfoActivity.this, "网络不给力！请重试！", Toast.LENGTH_LONG).show();
 				GoodsInfoActivity.this.finish();
 			}
 			

@@ -62,5 +62,7 @@
     <dimen name="msg_div">10dp</dimen>
     
     <dimen name="vip_div">0dp</dimen>
+    
+    <dimen name="d_cart_sum_size">10sp</dimen>
 
 </resources>
