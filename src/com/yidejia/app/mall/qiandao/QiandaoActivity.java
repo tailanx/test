@@ -175,15 +175,16 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 					signCount++;
 					handler.sendEmptyMessage(Consts.QIANDAO);
 					isCanSign = false;
-					
-					cal.add(Calendar.DAY_OF_MONTH, 0);// 保存当天的数据
-					sp.saveData("TIME", "Date", sdf.format(cal.getTime()));
-					sp.saveData("TIME", "User", userId);
-					
 				} else {
 					showMsg = respMsg;
-					isCanSign = false;
 				}
+				
+				cal.add(Calendar.DAY_OF_MONTH, 0);// 保存当天的数据
+				sp.saveData("TIME", "Date", sdf.format(cal.getTime()));
+				sp.saveData("TIME", "User", userId);
+				
+				isCanSign = false;
+				ivSignAdd.setSelected(true);
 				Toast.makeText(QiandaoActivity.this, showMsg,
 						Toast.LENGTH_LONG).show();
 			}
@@ -225,17 +226,6 @@ public class QiandaoActivity extends BaseActivity implements OnClickListener,
 			tvSignCount3.setText(gewei + "");
 			tvSignCount2.setText(shiwei + "");
 			tvSignCount1.setText(baiwei + "");
-			
-//			lastDate = sp.getData("TIME", "Date", "");
-//			lastId = sp.getData("TIME", "User", "");
-//			if (nowDate.equals(lastDate) && lastId.equals(userId)) {
-//				ivSignAdd.setImageResource(R.drawable.yiqiandao);
-				ivSignAdd.setSelected(true);
-				isCanSign = false;
-//			} else {
-//				ivSignAdd.setImageResource(R.drawable.qiandao_button);
-//				isCanSign = true;
-//			}
 			
 		}
 		return false;

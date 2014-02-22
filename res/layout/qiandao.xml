@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/main_bg" >
+    android:background="@color/qdbg_color" >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -23,24 +23,46 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/qdbg2" >
+                android:background="@drawable/qdbgmiddle_down" >
 
+                <LinearLayout
+                    android:id="@+id/qdbg_mid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/mall_list_padding"
+                    android:layout_marginRight="@dimen/mall_list_padding"
+                    android:orientation="vertical"
+                    android:background="@drawable/qdbg_middle" >
+                </LinearLayout>
+                
                 <ImageView
                     android:id="@+id/iv_qiandao_button"
                     android:layout_width="@dimen/base_info_image"
                     android:layout_height="@dimen/all_buy_produce_right"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignRight="@id/qdbg_mid"
                     android:layout_marginRight="@dimen/margin_left"
                     android:layout_marginTop="@dimen/margin_top"
                     android:clickable="true"
                     android:contentDescription="@string/yidejia"
                     android:src="@drawable/qiandao_selector" />
+                
+                <TextView
+                    android:id="@+id/tv_sign_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/actiobar_margin_top"
+                    android:layout_marginLeft="@dimen/magin_left_add"
+                    android:layout_marginTop="@dimen/head_padding"
+                    android:text="@string/qiandao_leiji"
+                    android:textColor="@color/white_white"
+                    android:textSize="@dimen/textsize_big_big" />
 
                 <LinearLayout
                     android:id="@+id/iv_qiandao_button_day"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/mall_list_padding"
+                    android:gravity="center"
+                    android:layout_alignLeft="@id/tv_sign_text"
                     android:layout_marginRight="@dimen/margin_left"
                     android:layout_marginTop="@dimen/margin_top_add"
                     android:layout_toLeftOf="@id/iv_qiandao_button"
@@ -78,18 +100,21 @@
                         android:textSize="@dimen/textsize_big_big" />
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/actiobar_margin_top"
-                    android:layout_marginLeft="@dimen/magin_left_add"
-                    android:layout_marginTop="@dimen/head_padding"
-                    android:text="@string/qiandao_leiji"
-                    android:textColor="@color/white_white"
-                    android:textSize="@dimen/textsize_big_big" />
+                
             </RelativeLayout>
+            
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/mall_list_padding"
+                android:layout_marginRight="@dimen/mall_list_padding"
+                android:background="@drawable/qdbg_bottom"
+                android:paddingLeft="@dimen/margin_left_more"
+                android:text="@string/qiandao_rule"
+                android:textColor="@color/white_white"
+                android:textSize="@dimen/textsize_big" />
 
-            <LinearLayout
+            <!-- <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/qdbg3"
@@ -130,7 +155,7 @@
                     android:text="@string/qiandao_order_3"
                     android:textColor="@color/white_white"
                     android:textSize="@dimen/textsize_small" />
-            </LinearLayout>
+            </LinearLayout> -->
         </LinearLayout>
     </ScrollView>
 
