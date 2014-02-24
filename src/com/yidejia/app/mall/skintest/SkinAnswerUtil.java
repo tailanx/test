@@ -2,6 +2,9 @@ package com.yidejia.app.mall.skintest;
 
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -21,9 +24,12 @@ import android.widget.Toast;
 
 import com.yidejia.app.mall.R;
 import com.yidejia.app.mall.ctrl.IpAddress;
+import com.yidejia.app.mall.jni.JNICallBack;
 import com.yidejia.app.mall.model.Qq;
 import com.yidejia.app.mall.model.SkinAnswer;
 import com.yidejia.app.mall.net.skin.Answer;
+import com.yidejia.app.mall.util.HttpClientUtil;
+import com.yidejia.app.mall.util.IHttpResp;
 import com.yidejia.app.mall.util.IsPhone;
 import com.yidejia.app.mall.widget.DateTimePickerDialog;
 import com.yidejia.app.mall.widget.YLProgressDialog;
@@ -47,7 +53,8 @@ public class SkinAnswerUtil {
 	private String birth;
 	private String sex;
 	private String cps;
-	private  RelativeLayout layoutBirth;
+	private RelativeLayout layoutBirth;
+
 	private void setupShow() {
 		// mButton = (ImageView) view.findViewById(R.id.skin_test_answer_back);
 		nameEditText = (EditText) view.findViewById(R.id.skin_test_name1);
@@ -59,17 +66,19 @@ public class SkinAnswerUtil {
 		birTextView = (TextView) view.findViewById(R.id.skin_test_birthday1);
 		commitImageView = (ImageView) view
 				.findViewById(R.id.skin_test_answer_commit1);
-		layoutBirth = (RelativeLayout) view.findViewById(R.id.skin_test_answer1_bir_relative);
+		layoutBirth = (RelativeLayout) view
+				.findViewById(R.id.skin_test_answer1_bir_relative);
 
 	}
 
-	public SkinAnswerUtil(RelativeLayout view, final Activity activity,String cps) {
+	public SkinAnswerUtil(RelativeLayout view, final Activity activity,
+			String cps) {
 		// TODO Auto-generated method stub
 		// super.onCreate(savedInstanceState);
 		ip = new IpAddress();
 		this.activity = activity;
 		this.cps = cps;
-		
+
 		this.view = view;
 		// setContentView(R.layout.skin_test_answer);
 		setupShow();
@@ -98,25 +107,35 @@ public class SkinAnswerUtil {
 		// }
 		// });
 		//
-//		boolean istrue  = true;
+		// boolean istrue = true;
 		commitImageView.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-				boolean	istrue = judgeNull(activity);
+				boolean istrue = judgeNull(activity);
 				if(istrue){
-				
-				
-				Task task = new Task();
-				task.execute();
-			
-				}else{
-					
-//				Toast.makeText(activity, activity.getResources().getString(R.string.no_network), Toast.LENGTH_SHORT).show();
-					return;
-				}
+				commit();
+				}else {
+					//
+					  Toast.makeText(activity,
+					  activity.getResources().getString(R.string.no_network),
+					  Toast.LENGTH_SHORT).show();
+					 return;
+					 }
+				// if (istrue) {
+				//
+				// // Task task = new Task();
+				// // task.execute();
+				//
+				// } else {
+				//
+				// // Toast.makeText(activity,
+				// // activity.getResources().getString(R.string.no_network),
+				// // Toast.LENGTH_SHORT).show();
+				// return;
+				// }
 			}
 
 			private boolean judgeNull(final Activity activity) {
@@ -124,8 +143,8 @@ public class SkinAnswerUtil {
 				qqNumber = qqEditText.getText().toString();
 				phoneNumber = phoneEditText.getText().toString();
 				birth = birTextView.getText().toString().trim();
-//				Log.i("info", birth + "birth");
-//				Log.i("info", sex + "sex");
+				// Log.i("info", birth + "birth");
+				// Log.i("info", sex + "sex");
 				if (name == null || "".equals(name)) {
 					Toast.makeText(
 							activity,
@@ -135,7 +154,7 @@ public class SkinAnswerUtil {
 					return false;
 				}
 				if (birth == null || "".equals(birth)) {
-//					Log.i("info", birth + "birth");
+					// Log.i("info", birth + "birth");
 					Toast.makeText(
 							activity,
 							activity.getResources()
@@ -159,9 +178,11 @@ public class SkinAnswerUtil {
 				}
 				boolean phone = IsPhone.isMobileNO(phoneNumber);
 				if (phoneNumber == null || "".equals(phoneNumber)) {
-					Toast.makeText(activity,
-							activity.getResources().getString(R.string.skin_phone),
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(
+							activity,
+							activity.getResources().getString(
+									R.string.skin_phone), Toast.LENGTH_LONG)
+							.show();
 					return false;
 				}
 				if (!phone) {
@@ -211,6 +232,111 @@ public class SkinAnswerUtil {
 	private SkinAnswer skinAnswer;
 	private Qq qq;
 	private String skinName;
+
+	/**
+	 * 提交数据
+	 */
+	private void commit() {
+		List<String> keys = SkinQuesActivity.keys;
+		String a[] = new String[keys.size()];
+		for (int i = 0; i < keys.size(); i++) {
+			a[i] = keys.get(i);
+		}
+
+		answer = new Answer();
+		String sb = null;
+		sb = a[2].substring(1, a[2].length() - 1);
+		skinName = a[1];
+
+		String param = new JNICallBack().getHttp4SkinAnswer(phoneNumber,
+				phoneNumber, name, sex, birth, a[0], a[1], sb.toString(), a[3],
+				a[4], cps, ip.getIpAddress());
+		HttpClientUtil client = new HttpClientUtil();
+		//
+		// String param = answer.getHttpResp(phoneNumber, phoneNumber, name,
+		// sex,
+		// birth, a[0], a[1], sb.toString(), a[3], a[4], cps,
+		// ip.getIpAddress());
+
+		String url = new JNICallBack().HTTPURL;
+		client.getHttpResp(url, param, new IHttpResp() {
+			@Override
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+				Log.e("info", content + "");
+				if (parseContent(content)) {
+					Intent intent = new Intent(activity,
+							SkinResultAcitivity.class);
+					Bundle bunlder = new Bundle();
+					bunlder.putSerializable("qq", qqName);
+					bunlder.putSerializable("SkinAnswer", skinAnswer);
+					bunlder.putString("skinName", skinName);
+					intent.putExtras(bunlder);
+					activity.startActivity(intent);
+					activity.finish();
+				} else {
+					Toast.makeText(activity, message, Toast.LENGTH_SHORT)
+							.show();
+				}
+
+			}
+		});
+
+		// isSucess = answer.analysis(httpresp);
+		// skinAnswer = answer.getAnswer();
+		// qq = answer.getQqName();
+
+	}
+
+	/**
+	 * 解析获取的数据
+	 * 
+	 * @param content
+	 */
+	private boolean parseContent(String content) {
+		JSONObject object;
+		try {
+			object = new JSONObject(content);
+			int code = object.optInt("code");
+			if (code == 1) {
+				skinAnswer = new SkinAnswer();
+				String resp = object.getString("response");
+				JSONObject respJsonObject = new JSONObject(resp);
+				skinAnswer.setDesc(respJsonObject.getString("desc"));
+				skinAnswer.setSuggest(respJsonObject.getString("suggest"));
+				String qq = respJsonObject.optString("qq");
+				analysisQQ(qq);
+				return true;
+			} else if (code == -1) {
+				message = object.getString("response");
+			}
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	private Qq qqName;
+
+	private String message;
+
+	private void analysisQQ(String qq) {
+
+		try {
+			qqName = new Qq();
+			JSONObject jsonObject = new JSONObject(qq);
+
+			qqName.setQqName(jsonObject.getString("pifufenxi_qq_code"));
+			qqName.setQuenName(jsonObject.getString("pifufenxi_qun_code"));
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public class Task extends AsyncTask<Void, Void, Boolean> {
 		boolean isSucess = false;
 
@@ -219,30 +345,30 @@ public class SkinAnswerUtil {
 			try {
 				// TODO Auto-generated method stub
 
-					List<String> keys = SkinQuesActivity.keys;
-//					Log.i("info", keys.toString()+"  keys");
-//					Log.i("info", cps+"  cps");
-					String a[] = new String[keys.size()];
-					for(int i=0;i<keys.size();i++){
-						a[i] = keys.get(i);
-					}
-				
+				// Log.i("info", keys.toString()+"  keys");
+				// Log.i("info", cps+"  cps");
+				List<String> keys = SkinQuesActivity.keys;
+				String a[] = new String[keys.size()];
+				for (int i = 0; i < keys.size(); i++) {
+					a[i] = keys.get(i);
+				}
+
 				answer = new Answer();
 				String sb = null;
-				sb = a[2].substring(1, a[2].length()-1);
+				sb = a[2].substring(1, a[2].length() - 1);
 				skinName = a[1];
-				Log.i(SkinAnswer.class.getName(), sb+"    http");
-				 String httpresp = answer.getHttpResp(phoneNumber,
-						 phoneNumber ,name , sex, birth, a[0], a[1],
-				 sb.toString(), a[3], a[4], cps, ip.getIpAddress());
-				 Log.i(SkinAnswer.class.getName(), httpresp+"    http");
-				 isSucess = answer.analysis(httpresp);
-				 skinAnswer = answer.getAnswer();
-				 qq = answer.getQqName();
-					Log.i("info",qq.getQqName()+"qq.getQqName()1");
-				
+				Log.i(SkinAnswer.class.getName(), sb + "    http");
+				String httpresp = answer.getHttpResp(phoneNumber, phoneNumber,
+						name, sex, birth, a[0], a[1], sb.toString(), a[3],
+						a[4], cps, ip.getIpAddress());
+				Log.i(SkinAnswer.class.getName(), httpresp + "    http");
+				isSucess = answer.analysis(httpresp);
+				skinAnswer = answer.getAnswer();
+				qq = answer.getQqName();
+				Log.i("info", qq.getQqName() + "qq.getQqName()1");
+
 				// Log.i(SkinAnswer.class.getName(), skinAnswer.toString());
-				 return isSucess;
+				return isSucess;
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -255,16 +381,17 @@ public class SkinAnswerUtil {
 			super.onPostExecute(result);
 			bar.dismiss();
 			if (result) {
-				 if(isSucess){
-					 Intent  intent = new Intent(activity, SkinResultAcitivity.class);
-					 Bundle bunlder = new Bundle();
-					 bunlder.putSerializable("qq",qq);
-					 bunlder.putSerializable("SkinAnswer", skinAnswer);
-					 bunlder.putString("skinName", skinName);
-					 intent.putExtras(bunlder);
-					 activity.startActivity(intent);
-					 activity.finish();
-				 }
+				if (isSucess) {
+					Intent intent = new Intent(activity,
+							SkinResultAcitivity.class);
+					Bundle bunlder = new Bundle();
+					bunlder.putSerializable("qq", qq);
+					bunlder.putSerializable("SkinAnswer", skinAnswer);
+					bunlder.putString("skinName", skinName);
+					intent.putExtras(bunlder);
+					activity.startActivity(intent);
+					activity.finish();
+				}
 			}
 
 		}
@@ -273,11 +400,11 @@ public class SkinAnswerUtil {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-//			bar = new ProgressDialog(activity);
-//			bar.setCancelable(true);
-//			bar.setMessage(activity.getResources().getString(R.string.loading));
-//			bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//			bar.show();
+			// bar = new ProgressDialog(activity);
+			// bar.setCancelable(true);
+			// bar.setMessage(activity.getResources().getString(R.string.loading));
+			// bar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			// bar.show();
 			bar = (ProgressDialog) new YLProgressDialog(activity)
 					.createLoadingDialog(activity, null);
 			bar.setOnCancelListener(new DialogInterface.OnCancelListener() {
