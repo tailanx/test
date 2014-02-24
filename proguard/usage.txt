@@ -903,6 +903,35 @@ com.squareup.okhttp.internal.spdy.SpdyStream:
 com.squareup.okhttp.internal.tls.OkHostnameVerifier:
     private static final int ALT_DNS_NAME
     private static final int ALT_IPA_NAME
+com.tenpay.android.service.DownloadDialog
+com.tenpay.android.service.DownloadDialog$1
+com.tenpay.android.service.DownloadDialog$2
+com.tenpay.android.service.DownloadDialog$3
+com.tenpay.android.service.DownloadDialog$ProgressThread
+com.tenpay.android.service.IRemoteServiceCallback
+com.tenpay.android.service.IRemoteServiceCallback$Stub
+com.tenpay.android.service.IRemoteServiceCallback$Stub$Proxy
+com.tenpay.android.service.ITenpayService
+com.tenpay.android.service.ITenpayService$Stub
+com.tenpay.android.service.ITenpayService$Stub$Proxy
+com.tenpay.android.service.TenpayServiceHelper
+com.tenpay.android.service.TenpayServiceHelper$1
+com.tenpay.android.service.TenpayServiceHelper$10
+com.tenpay.android.service.TenpayServiceHelper$11
+com.tenpay.android.service.TenpayServiceHelper$11$1
+com.tenpay.android.service.TenpayServiceHelper$12
+com.tenpay.android.service.TenpayServiceHelper$13
+com.tenpay.android.service.TenpayServiceHelper$13$1
+com.tenpay.android.service.TenpayServiceHelper$14
+com.tenpay.android.service.TenpayServiceHelper$2
+com.tenpay.android.service.TenpayServiceHelper$3
+com.tenpay.android.service.TenpayServiceHelper$4
+com.tenpay.android.service.TenpayServiceHelper$5
+com.tenpay.android.service.TenpayServiceHelper$6
+com.tenpay.android.service.TenpayServiceHelper$7
+com.tenpay.android.service.TenpayServiceHelper$8
+com.tenpay.android.service.TenpayServiceHelper$9
+com.tenpay.android.service.TenpayServiceHelper$9$1
 com.unionpay.UPPayAssistEx:
     public static final int PLUGIN_VALID
     public static final int PLUGIN_NOT_FOUND
@@ -1001,8 +1030,14 @@ com.yidejia.app.mall.MyApplication:
     69:69:public int getSchHstryAmount()
     104:104:public java.lang.String getPassword()
     132:132:public java.lang.String getAidou()
+    158:158:public boolean isFilterCreated()
 com.yidejia.app.mall.RegistActivity:
     public android.widget.Button mback
+com.yidejia.app.mall.aaidl.DataUrla$Stub:
+    private static final java.lang.String DESCRIPTOR
+    static final int TRANSACTION_getData
+    23:30:public static com.yidejia.app.mall.aaidl.DataUrla asInterface(android.os.IBinder)
+com.yidejia.app.mall.aaidl.DataUrla$Stub$Proxy
 com.yidejia.app.mall.adapter.AllOrderFragmentAdapter
 com.yidejia.app.mall.adapter.AlreadyComFragmentAdapter
 com.yidejia.app.mall.adapter.AlreadyOrderFragmentAdapter
@@ -1125,6 +1160,8 @@ com.yidejia.app.mall.fragment.GuangFragment
 com.yidejia.app.mall.fragment.ShoppingCartFragment
 com.yidejia.app.mall.fragment.WaitPayFragment
 com.yidejia.app.mall.fragment.WaitPayFragment$1
+com.yidejia.app.mall.goodinfo.GoodService:
+    private java.lang.String urlData
 com.yidejia.app.mall.interfacecallback.CallBack
 com.yidejia.app.mall.jni.JNICallBack:
     20:20:public java.lang.String hostUrl()
@@ -1377,6 +1414,7 @@ com.yidejia.app.mall.search.TaskFilter$1
 com.yidejia.app.mall.search.TaskFilter$2
 com.yidejia.app.mall.search.TaskFilter$3
 com.yidejia.app.mall.search.TaskFilter$Task
+com.yidejia.app.mall.shark.IShark
 com.yidejia.app.mall.shark.SharkActivity:
     private android.view.animation.Animation animation
     private android.widget.LinearLayout$LayoutParams params

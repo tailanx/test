@@ -139,13 +139,13 @@ public class SharkActivity extends Activity implements OnClickListener,
 
 			@Override
 			public void onShake() {
-				startVibrato();
 				sharkUtil.stop();
 				quanImageView.clearAnimation();
 				quanAnimation.setRepeatCount(0);
 				// relativeLayout.setVisibility(View.VISIBLE);
 				quanImageView.setVisibility(View.GONE);
 				mediaPlayer.start();
+				startVibrato();
 				// startAnimaton();
 				noProcue.setVisibility(View.GONE);
 				produce.setVisibility(View.GONE);

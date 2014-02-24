@@ -5276,6 +5276,7 @@ cn.sharesdk.onekeyshare.R$string -> cn.sharesdk.onekeyshare.R$string:
     int renren -> renren
     int select_one_plat_at_least -> select_one_plat_at_least
     int share -> share
+    int share_add -> share_add
     int share_canceled -> share_canceled
     int share_completed -> share_completed
     int share_failed -> share_failed
@@ -5305,6 +5306,7 @@ cn.sharesdk.onekeyshare.ShareContentCustomizeCallback -> cn.sharesdk.onekeyshare
     void onShare(cn.sharesdk.framework.Platform,cn.sharesdk.framework.Platform$ShareParams) -> onShare
 cn.sharesdk.onekeyshare.ShareCore -> cn.sharesdk.onekeyshare.ShareCore:
     cn.sharesdk.onekeyshare.ShareContentCustomizeCallback customizeCallback -> customizeCallback
+    android.content.Context activity -> activity
     void setShareContentCustomizeCallback(cn.sharesdk.onekeyshare.ShareContentCustomizeCallback) -> setShareContentCustomizeCallback
     boolean share(cn.sharesdk.framework.Platform,java.util.HashMap) -> share
     cn.sharesdk.framework.Platform$ShareParams getShareParams(cn.sharesdk.framework.Platform,java.util.HashMap) -> getShareParams
@@ -16922,14 +16924,12 @@ com.yidejia.app.mall.MyApplication -> com.yidejia.app.mall.MyApplication:
     void setHomeCreated(boolean) -> b
     boolean isCategoryCreated() -> i
     void setCategoryCreated(boolean) -> c
-    boolean isFilterCreated() -> j
-    void setFilterCreated$1385ff() -> k
-    com.nostra13.universalimageloader.core.assist.ImageLoadingListener getImageLoadingListener() -> l
+    com.nostra13.universalimageloader.core.assist.ImageLoadingListener getImageLoadingListener() -> j
     void onLowMemory() -> onLowMemory
-    com.nostra13.universalimageloader.core.DisplayImageOptions initGoodsImageOption() -> m
-    com.nostra13.universalimageloader.core.DisplayImageOptions initSearchCategoryOption() -> n
-    com.nostra13.universalimageloader.core.DisplayImageOptions initBannerImageOption() -> o
-    com.nostra13.universalimageloader.core.ImageLoaderConfiguration initConfig() -> p
+    com.nostra13.universalimageloader.core.DisplayImageOptions initGoodsImageOption() -> k
+    com.nostra13.universalimageloader.core.DisplayImageOptions initSearchCategoryOption() -> l
+    com.nostra13.universalimageloader.core.DisplayImageOptions initBannerImageOption() -> m
+    com.nostra13.universalimageloader.core.ImageLoaderConfiguration initConfig() -> n
 com.yidejia.app.mall.MyApplication$AnimateFirstDisplayListener -> com.yidejia.app.mall.bh:
     void onLoadingComplete(java.lang.String,android.view.View,android.graphics.Bitmap) -> a
 com.yidejia.app.mall.R -> com.yidejia.app.mall.R:
@@ -17042,7 +17042,6 @@ com.yidejia.app.mall.R$attr -> com.yidejia.app.mall.R$attr:
     int ptrShowIndicator -> ptrShowIndicator
     int ptrSubHeaderTextAppearance -> ptrSubHeaderTextAppearance
     int queryHint -> queryHint
-    int refreshViewStyle -> refreshViewStyle
     int searchAutoCompleteTextView -> searchAutoCompleteTextView
     int searchDropdownBackground -> searchDropdownBackground
     int searchResultListItemHeight -> searchResultListItemHeight
@@ -17151,6 +17150,7 @@ com.yidejia.app.mall.R$color -> com.yidejia.app.mall.R$color:
     int order -> order
     int order_cor -> order_cor
     int price_color -> price_color
+    int qdbg_color -> qdbg_color
     int search_bar -> search_bar
     int search_result_top -> search_result_top
     int secondbtntextColor -> secondbtntextColor
@@ -17193,6 +17193,7 @@ com.yidejia.app.mall.R$dimen -> com.yidejia.app.mall.R$dimen:
     int base_info_image -> base_info_image
     int base_info_match -> base_info_match
     int base_info_match_add -> base_info_match_add
+    int d_cart_sum_size -> d_cart_sum_size
     int head_height -> head_height
     int head_height_add -> head_height_add
     int head_padding -> head_padding
@@ -17239,6 +17240,7 @@ com.yidejia.app.mall.R$dimen -> com.yidejia.app.mall.R$dimen:
     int width -> width
     int width_ad -> width_ad
     int width_add -> width_add
+    int width_add_add -> width_add_add
     int width_add_fun -> width_add_fun
     int width_fu -> width_fu
     int width_fu_add -> width_fu_add
@@ -17383,7 +17385,6 @@ com.yidejia.app.mall.R$drawable -> com.yidejia.app.mall.R$drawable:
     int b -> b
     int back1 -> back1
     int banner_bg -> banner_bg
-    int bar -> bar
     int best_express -> best_express
     int bg_abs_text -> bg_abs_text
     int bg_common_btm -> bg_common_btm
@@ -17610,6 +17611,7 @@ com.yidejia.app.mall.R$drawable -> com.yidejia.app.mall.R$drawable:
     int pause_sales -> pause_sales
     int payment_icon -> payment_icon
     int phone_iocn -> phone_iocn
+    int pic_back -> pic_back
     int pin -> pin
     int popup_bg -> popup_bg
     int preferential_icon -> preferential_icon
@@ -17628,6 +17630,9 @@ com.yidejia.app.mall.R$drawable -> com.yidejia.app.mall.R$drawable:
     int qdbg1 -> qdbg1
     int qdbg2 -> qdbg2
     int qdbg3 -> qdbg3
+    int qdbg_bottom -> qdbg_bottom
+    int qdbg_middle -> qdbg_middle
+    int qdbgmiddle_down -> qdbgmiddle_down
     int qfkd -> qfkd
     int qiandao_bg -> qiandao_bg
     int qiandao_button -> qiandao_button
@@ -17778,6 +17783,7 @@ com.yidejia.app.mall.R$id -> com.yidejia.app.mall.R$id:
     int ab_common_iv_share -> ab_common_iv_share
     int ab_common_title -> ab_common_title
     int ab_common_tv_right -> ab_common_tv_right
+    int ab_iv_back -> ab_iv_back
     int about_us_btn -> about_us_btn
     int about_us_image -> about_us_image
     int about_us_layout -> about_us_layout
@@ -18176,6 +18182,7 @@ com.yidejia.app.mall.R$id -> com.yidejia.app.mall.R$id:
     int iv_my_mall_find_password_validation_button -> iv_my_mall_find_password_validation_button
     int iv_my_mall_regist_password_validation_button -> iv_my_mall_regist_password_validation_button
     int iv_person_shopping_image_person -> iv_person_shopping_image_person
+    int iv_pic_back -> iv_pic_back
     int iv_produce_comments_arrow -> iv_produce_comments_arrow
     int iv_qiandao -> iv_qiandao
     int iv_qiandao_back -> iv_qiandao_back
@@ -18367,9 +18374,6 @@ com.yidejia.app.mall.R$id -> com.yidejia.app.mall.R$id:
     int produce_textview3 -> produce_textview3
     int produce_textview4 -> produce_textview4
     int produce_textview5 -> produce_textview5
-    int progress -> progress
-    int progress_number -> progress_number
-    int progress_percent -> progress_percent
     int pullDownFromTop -> pullDownFromTop
     int pullFromEnd -> pullFromEnd
     int pullFromStart -> pullFromStart
@@ -18380,6 +18384,7 @@ com.yidejia.app.mall.R$id -> com.yidejia.app.mall.R$id:
     int pull_to_refresh_progress -> pull_to_refresh_progress
     int pull_to_refresh_sub_text -> pull_to_refresh_sub_text
     int pull_to_refresh_text -> pull_to_refresh_text
+    int qdbg_mid -> qdbg_mid
     int ratingBar1 -> ratingBar1
     int re_activity_top -> re_activity_top
     int re_alreay_deliver -> re_alreay_deliver
@@ -18582,7 +18587,6 @@ com.yidejia.app.mall.R$id -> com.yidejia.app.mall.R$id:
     int tv_already_complete_number -> tv_already_complete_number
     int tv_already_deliver -> tv_already_deliver
     int tv_already_deliver_number -> tv_already_deliver_number
-    int tv_back -> tv_back
     int tv_brand_name_text -> tv_brand_name_text
     int tv_brand_text -> tv_brand_text
     int tv_buy_now -> tv_buy_now
@@ -18690,6 +18694,7 @@ com.yidejia.app.mall.R$id -> com.yidejia.app.mall.R$id:
     int tv_sign_count1 -> tv_sign_count1
     int tv_sign_count2 -> tv_sign_count2
     int tv_sign_count3 -> tv_sign_count3
+    int tv_sign_text -> tv_sign_text
     int tv_test -> tv_test
     int tv_ticket_name -> tv_ticket_name
     int tv_ticket_text -> tv_ticket_text
@@ -18722,6 +18727,7 @@ com.yidejia.app.mall.R$id -> com.yidejia.app.mall.R$id:
     int user_level -> user_level
     int user_name -> user_name
     int vPager -> vPager
+    int vp_hack -> vp_hack
     int vp_item_goods_detail -> vp_item_goods_detail
     int wait_deliver_item_count -> wait_deliver_item_count
     int wait_deliver_item_count_detail -> wait_deliver_item_count_detail
@@ -18809,6 +18815,7 @@ com.yidejia.app.mall.R$layout -> com.yidejia.app.mall.R$layout:
     int activity_main_fragment_layout -> activity_main_fragment_layout
     int activity_main_layout -> activity_main_layout
     int activity_msg_details -> activity_msg_details
+    int activity_pic_view -> activity_pic_view
     int activity_search_image_layout -> activity_search_image_layout
     int activity_search_item_list -> activity_search_item_list
     int activity_search_result_info_layout -> activity_search_result_info_layout
@@ -18818,7 +18825,6 @@ com.yidejia.app.mall.R$layout -> com.yidejia.app.mall.R$layout:
     int address_management -> address_management
     int address_management_item -> address_management_item
     int agreement_layout -> agreement_layout
-    int alert_dialog_progress -> alert_dialog_progress
     int alipay -> alipay
     int alipay_title -> alipay_title
     int all_order -> all_order
@@ -19253,6 +19259,7 @@ com.yidejia.app.mall.R$string -> com.yidejia.app.mall.R$string:
     int qiandao_order_1 -> qiandao_order_1
     int qiandao_order_2 -> qiandao_order_2
     int qiandao_order_3 -> qiandao_order_3
+    int qiandao_rule -> qiandao_rule
     int qq -> qq
     int qq_client_inavailable -> qq_client_inavailable
     int qq_hao -> qq_hao
@@ -19811,7 +19818,12 @@ com.yidejia.app.mall.WelcomeActivity$4 -> com.yidejia.app.mall.bt:
 com.yidejia.app.mall.WelcomeActivity$5 -> com.yidejia.app.mall.bu:
     com.yidejia.app.mall.WelcomeActivity this$0 -> a
     void run() -> run
-com.yidejia.app.mall.adapter.FavoriteAdapter -> com.yidejia.app.mall.a.a:
+com.yidejia.app.mall.aaidl.DataUrla -> com.yidejia.app.mall.a.a:
+    int getData(java.lang.String) -> a
+com.yidejia.app.mall.aaidl.DataUrla$Stub -> com.yidejia.app.mall.a.b:
+    android.os.IBinder asBinder() -> asBinder
+    boolean onTransact(int,android.os.Parcel,android.os.Parcel,int) -> onTransact
+com.yidejia.app.mall.adapter.FavoriteAdapter -> com.yidejia.app.mall.b.a:
     android.view.LayoutInflater inflater -> b
     java.util.ArrayList mArrayList -> c
     com.nostra13.universalimageloader.core.ImageLoader imageLoader -> a
@@ -19821,7 +19833,7 @@ com.yidejia.app.mall.adapter.FavoriteAdapter -> com.yidejia.app.mall.a.a:
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     java.lang.Object getItem(int) -> getItem
-com.yidejia.app.mall.adapter.FavoriteAdapter$ViewHolder -> com.yidejia.app.mall.a.b:
+com.yidejia.app.mall.adapter.FavoriteAdapter$ViewHolder -> com.yidejia.app.mall.b.b:
     android.widget.ImageView head -> b
     android.widget.TextView content -> c
     android.widget.TextView price -> d
@@ -19838,7 +19850,7 @@ com.yidejia.app.mall.adapter.FavoriteAdapter$ViewHolder -> com.yidejia.app.mall.
     android.widget.TextView access$7(com.yidejia.app.mall.adapter.FavoriteAdapter$ViewHolder) -> c
     android.widget.TextView access$8(com.yidejia.app.mall.adapter.FavoriteAdapter$ViewHolder) -> d
     android.widget.ImageView access$9(com.yidejia.app.mall.adapter.FavoriteAdapter$ViewHolder) -> e
-com.yidejia.app.mall.adapter.HistoryAdapter -> com.yidejia.app.mall.a.c:
+com.yidejia.app.mall.adapter.HistoryAdapter -> com.yidejia.app.mall.b.c:
     android.content.Context context -> b
     java.util.ArrayList mArrayList -> c
     android.view.LayoutInflater inflater -> d
@@ -19852,15 +19864,15 @@ com.yidejia.app.mall.adapter.HistoryAdapter -> com.yidejia.app.mall.a.c:
     java.lang.Object getItem(int) -> getItem
     com.yidejia.app.mall.datamanage.BrowseHistoryDataManage access$1(com.yidejia.app.mall.adapter.HistoryAdapter) -> a
     java.util.ArrayList access$2(com.yidejia.app.mall.adapter.HistoryAdapter) -> b
-com.yidejia.app.mall.adapter.HistoryAdapter$1 -> com.yidejia.app.mall.a.d:
+com.yidejia.app.mall.adapter.HistoryAdapter$1 -> com.yidejia.app.mall.b.d:
     com.yidejia.app.mall.adapter.HistoryAdapter this$0 -> a
     com.yidejia.app.mall.model.ProductBaseInfo val$ProductBaseInfo -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-com.yidejia.app.mall.adapter.HistoryAdapter$2 -> com.yidejia.app.mall.a.e:
+com.yidejia.app.mall.adapter.HistoryAdapter$2 -> com.yidejia.app.mall.b.e:
     com.yidejia.app.mall.adapter.HistoryAdapter this$0 -> a
     android.app.AlertDialog val$dialog -> b
     void onClick(android.view.View) -> onClick
-com.yidejia.app.mall.adapter.HistoryAdapter$ViewHolder -> com.yidejia.app.mall.a.f:
+com.yidejia.app.mall.adapter.HistoryAdapter$ViewHolder -> com.yidejia.app.mall.b.f:
     android.widget.ImageView head -> b
     android.widget.TextView content -> c
     android.widget.TextView price -> d
@@ -19880,7 +19892,7 @@ com.yidejia.app.mall.adapter.HistoryAdapter$ViewHolder -> com.yidejia.app.mall.a
     android.widget.TextView access$9(com.yidejia.app.mall.adapter.HistoryAdapter$ViewHolder) -> d
     android.widget.TextView access$10(com.yidejia.app.mall.adapter.HistoryAdapter$ViewHolder) -> e
     android.widget.ImageView access$11(com.yidejia.app.mall.adapter.HistoryAdapter$ViewHolder) -> f
-com.yidejia.app.mall.adapter.IntegerAdapter -> com.yidejia.app.mall.a.g:
+com.yidejia.app.mall.adapter.IntegerAdapter -> com.yidejia.app.mall.b.g:
     android.app.Activity context -> a
     java.util.ArrayList list -> b
     java.lang.String type -> c
@@ -19891,11 +19903,11 @@ com.yidejia.app.mall.adapter.IntegerAdapter -> com.yidejia.app.mall.a.g:
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     android.app.Activity access$0(com.yidejia.app.mall.adapter.IntegerAdapter) -> a
-com.yidejia.app.mall.adapter.IntegerAdapter$1 -> com.yidejia.app.mall.a.h:
+com.yidejia.app.mall.adapter.IntegerAdapter$1 -> com.yidejia.app.mall.b.h:
     com.yidejia.app.mall.adapter.IntegerAdapter this$0 -> a
     com.yidejia.app.mall.tickets.Ticket val$ticket -> b
     void onClick(android.view.View) -> onClick
-com.yidejia.app.mall.adapter.IntegerAdapter$ViewHolder -> com.yidejia.app.mall.a.i:
+com.yidejia.app.mall.adapter.IntegerAdapter$ViewHolder -> com.yidejia.app.mall.b.i:
     android.widget.TextView price -> b
     android.widget.TextView content -> c
     android.widget.TextView kind -> d
@@ -19918,11 +19930,11 @@ com.yidejia.app.mall.adapter.IntegerAdapter$ViewHolder -> com.yidejia.app.mall.a
     android.widget.TextView access$11(com.yidejia.app.mall.adapter.IntegerAdapter$ViewHolder) -> e
     android.widget.TextView access$12(com.yidejia.app.mall.adapter.IntegerAdapter$ViewHolder) -> f
     android.widget.TextView access$13(com.yidejia.app.mall.adapter.IntegerAdapter$ViewHolder) -> g
-com.yidejia.app.mall.adapter.IntegeralFragmentAdapter -> com.yidejia.app.mall.a.j:
+com.yidejia.app.mall.adapter.IntegeralFragmentAdapter -> com.yidejia.app.mall.b.j:
     java.util.ArrayList fragmentlist -> a
     android.support.v4.app.Fragment getItem(int) -> getItem
     int getCount() -> getCount
-com.yidejia.app.mall.adapter.SearchListAdapter -> com.yidejia.app.mall.a.k:
+com.yidejia.app.mall.adapter.SearchListAdapter -> com.yidejia.app.mall.b.k:
     android.content.Context mContext -> a
     java.util.ArrayList functions -> b
     int length -> c
@@ -19931,7 +19943,7 @@ com.yidejia.app.mall.adapter.SearchListAdapter -> com.yidejia.app.mall.a.k:
     java.lang.Object getItem(int) -> getItem
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-com.yidejia.app.mall.adapter.SearchListAdapter$Holder -> com.yidejia.app.mall.a.l:
+com.yidejia.app.mall.adapter.SearchListAdapter$Holder -> com.yidejia.app.mall.b.l:
     android.widget.TextView tv_title -> b
     android.widget.TextView tv_desc -> c
     android.widget.ImageView iv_icon -> d
@@ -20306,25 +20318,25 @@ com.yidejia.app.mall.address.PayAddressAdapter$ViewHolder -> com.yidejia.app.mal
     android.widget.TextView access$7(com.yidejia.app.mall.address.PayAddressAdapter$ViewHolder) -> c
     android.widget.ImageView access$8(com.yidejia.app.mall.address.PayAddressAdapter$ViewHolder) -> d
     android.widget.ImageView access$9(com.yidejia.app.mall.address.PayAddressAdapter$ViewHolder) -> e
-com.yidejia.app.mall.cache.CleanImageCache -> com.yidejia.app.mall.b.a:
+com.yidejia.app.mall.cache.CleanImageCache -> com.yidejia.app.mall.c.a:
     com.nostra13.universalimageloader.core.ImageLoader imageLoader -> a
     void clearMemoryCache() -> a
     void clearDiscCache() -> b
-com.yidejia.app.mall.ctrl.ActViewCtrl -> com.yidejia.app.mall.c.a:
+com.yidejia.app.mall.ctrl.ActViewCtrl -> com.yidejia.app.mall.d.a:
     android.app.Activity activity -> a
     android.widget.TextView tvTitle -> b
     void setTitleTextView(android.widget.TextView) -> a
     android.webkit.WebView getWebView(java.lang.String) -> a
     android.widget.TextView access$0(com.yidejia.app.mall.ctrl.ActViewCtrl) -> a
     android.app.Activity access$2(com.yidejia.app.mall.ctrl.ActViewCtrl) -> b
-com.yidejia.app.mall.ctrl.ActViewCtrl$1 -> com.yidejia.app.mall.c.b:
+com.yidejia.app.mall.ctrl.ActViewCtrl$1 -> com.yidejia.app.mall.d.b:
     com.yidejia.app.mall.ctrl.ActViewCtrl this$0 -> a
     void onReceivedTitle(android.webkit.WebView,java.lang.String) -> onReceivedTitle
-com.yidejia.app.mall.ctrl.ActViewCtrl$2 -> com.yidejia.app.mall.c.c:
+com.yidejia.app.mall.ctrl.ActViewCtrl$2 -> com.yidejia.app.mall.d.c:
     com.yidejia.app.mall.ctrl.ActViewCtrl this$0 -> a
     void onPageFinished(android.webkit.WebView,java.lang.String) -> onPageFinished
     boolean shouldOverrideUrlLoading(android.webkit.WebView,java.lang.String) -> shouldOverrideUrlLoading
-com.yidejia.app.mall.ctrl.Check4Update -> com.yidejia.app.mall.c.d:
+com.yidejia.app.mall.ctrl.Check4Update -> com.yidejia.app.mall.d.d:
     java.lang.String versionUrl -> a
     java.lang.String apkUrl -> b
     java.lang.String version -> c
@@ -20348,19 +20360,19 @@ com.yidejia.app.mall.ctrl.Check4Update -> com.yidejia.app.mall.c.d:
     void access$9(com.yidejia.app.mall.ctrl.Check4Update,java.lang.String,java.lang.String) -> a
     android.app.ProgressDialog access$10(com.yidejia.app.mall.ctrl.Check4Update) -> f
     java.lang.String access$11(com.yidejia.app.mall.ctrl.Check4Update) -> g
-com.yidejia.app.mall.ctrl.Check4Update$1 -> com.yidejia.app.mall.c.e:
+com.yidejia.app.mall.ctrl.Check4Update$1 -> com.yidejia.app.mall.d.e:
     com.yidejia.app.mall.ctrl.Check4Update this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.yidejia.app.mall.ctrl.Check4Update$2 -> com.yidejia.app.mall.c.f:
+com.yidejia.app.mall.ctrl.Check4Update$2 -> com.yidejia.app.mall.d.f:
     com.yidejia.app.mall.ctrl.Check4Update this$0 -> a
     void onCancel(android.content.DialogInterface) -> onCancel
-com.yidejia.app.mall.ctrl.Check4Update$GetVersionTask -> com.yidejia.app.mall.c.g:
+com.yidejia.app.mall.ctrl.Check4Update$GetVersionTask -> com.yidejia.app.mall.d.g:
     com.yidejia.app.mall.ctrl.Check4Update this$0 -> a
     void onPreExecute() -> onPreExecute
     java.lang.Boolean doInBackground$5f8445a4() -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-com.yidejia.app.mall.ctrl.HomeYRHView -> com.yidejia.app.mall.c.h:
+com.yidejia.app.mall.ctrl.HomeYRHView -> com.yidejia.app.mall.d.h:
     android.app.Activity activity -> a
     android.os.CountDownTimer timer -> b
     android.os.CountDownTimer updateTimer -> c
@@ -20381,31 +20393,31 @@ com.yidejia.app.mall.ctrl.HomeYRHView -> com.yidejia.app.mall.c.h:
     void setTime(long) -> a
     void setTextViewSelected(boolean) -> a
     void cancelUpdateYRH() -> b
-    void access$0(com.yidejia.app.mall.ctrl.HomeYRHView,com.yidejia.app.mall.yirihui.YiRiHuiData) -> a
-    void access$1(com.yidejia.app.mall.ctrl.HomeYRHView) -> a
-    android.app.Activity access$2(com.yidejia.app.mall.ctrl.HomeYRHView) -> b
-    int access$3(com.yidejia.app.mall.ctrl.HomeYRHView) -> c
+    android.app.Activity access$0(com.yidejia.app.mall.ctrl.HomeYRHView) -> a
+    int access$1(com.yidejia.app.mall.ctrl.HomeYRHView) -> b
+    void access$2(com.yidejia.app.mall.ctrl.HomeYRHView,com.yidejia.app.mall.yirihui.YiRiHuiData) -> a
+    void access$3(com.yidejia.app.mall.ctrl.HomeYRHView) -> c
     void access$4(com.yidejia.app.mall.ctrl.HomeYRHView,long) -> a
-com.yidejia.app.mall.ctrl.HomeYRHView$1 -> com.yidejia.app.mall.c.i:
+com.yidejia.app.mall.ctrl.HomeYRHView$1 -> com.yidejia.app.mall.d.i:
+    com.yidejia.app.mall.ctrl.HomeYRHView this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.yidejia.app.mall.ctrl.HomeYRHView$2 -> com.yidejia.app.mall.d.j:
     com.yidejia.app.mall.ctrl.HomeYRHView this$0 -> a
     void onSuccess(java.lang.String) -> a
     void onFinish() -> b
-com.yidejia.app.mall.ctrl.HomeYRHView$2 -> com.yidejia.app.mall.c.j:
-    com.yidejia.app.mall.ctrl.HomeYRHView this$0 -> a
-    void onClick(android.view.View) -> onClick
-com.yidejia.app.mall.ctrl.HomeYRHView$3 -> com.yidejia.app.mall.c.k:
+com.yidejia.app.mall.ctrl.HomeYRHView$3 -> com.yidejia.app.mall.d.k:
     com.yidejia.app.mall.ctrl.HomeYRHView this$0 -> a
     void onTick(long) -> onTick
     void onFinish() -> onFinish
-com.yidejia.app.mall.ctrl.HomeYRHView$4 -> com.yidejia.app.mall.c.l:
+com.yidejia.app.mall.ctrl.HomeYRHView$4 -> com.yidejia.app.mall.d.l:
     com.yidejia.app.mall.ctrl.HomeYRHView this$0 -> a
     void onTick(long) -> onTick
     void onFinish() -> onFinish
-com.yidejia.app.mall.ctrl.IpAddress -> com.yidejia.app.mall.c.m:
+com.yidejia.app.mall.ctrl.IpAddress -> com.yidejia.app.mall.d.m:
     java.lang.String getLocalIpAddress() -> b
     java.lang.String getLocalIPV4Address() -> c
     java.lang.String getIpAddress() -> a
-com.yidejia.app.mall.ctrl.RetViewCtrl -> com.yidejia.app.mall.c.n:
+com.yidejia.app.mall.ctrl.RetViewCtrl -> com.yidejia.app.mall.d.n:
     android.app.Activity activity -> a
     android.widget.TextView statusTextView -> b
     android.widget.TextView codeTextView -> c
@@ -20413,7 +20425,7 @@ com.yidejia.app.mall.ctrl.RetViewCtrl -> com.yidejia.app.mall.c.n:
     com.yidejia.app.mall.order.RetOrderInfo info -> e
     android.view.View getRetView() -> a
     void setText(java.lang.String,java.lang.String,java.lang.String) -> a
-com.yidejia.app.mall.datamanage.AddressDataManage -> com.yidejia.app.mall.d.a:
+com.yidejia.app.mall.datamanage.AddressDataManage -> com.yidejia.app.mall.e.a:
     java.util.ArrayList addressesArray -> a
     android.content.Context context -> b
     java.lang.String TAG -> c
@@ -20427,7 +20439,7 @@ com.yidejia.app.mall.datamanage.AddressDataManage -> com.yidejia.app.mall.d.a:
     android.content.Context access$0(com.yidejia.app.mall.datamanage.AddressDataManage) -> a
     java.lang.String access$1(com.yidejia.app.mall.datamanage.AddressDataManage) -> b
     boolean access$2(com.yidejia.app.mall.datamanage.AddressDataManage,java.lang.String) -> a
-com.yidejia.app.mall.datamanage.AddressDataManage$TaskDelete -> com.yidejia.app.mall.d.b:
+com.yidejia.app.mall.datamanage.AddressDataManage$TaskDelete -> com.yidejia.app.mall.e.b:
     java.lang.String userId -> a
     java.lang.String addressId -> b
     java.lang.String token -> c
@@ -20436,7 +20448,7 @@ com.yidejia.app.mall.datamanage.AddressDataManage$TaskDelete -> com.yidejia.app.
     java.lang.Boolean doInBackground$5f8445a4() -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-com.yidejia.app.mall.datamanage.BrowseHistoryDataManage -> com.yidejia.app.mall.d.c:
+com.yidejia.app.mall.datamanage.BrowseHistoryDataManage -> com.yidejia.app.mall.e.c:
     java.util.ArrayList historyArray -> a
     android.content.SharedPreferences sp -> b
     java.util.ArrayList keysList -> c
@@ -20446,7 +20458,7 @@ com.yidejia.app.mall.datamanage.BrowseHistoryDataManage -> com.yidejia.app.mall.
     java.util.ArrayList getHistoryArray() -> a
     boolean cleanHistory() -> b
     int getProductBaseInfoAmount() -> c
-com.yidejia.app.mall.datamanage.CartsDataManage -> com.yidejia.app.mall.d.d:
+com.yidejia.app.mall.datamanage.CartsDataManage -> com.yidejia.app.mall.e.d:
     android.content.SharedPreferences sp -> a
     java.lang.String TAG -> b
     boolean addCart(com.yidejia.app.mall.model.Cart) -> a
@@ -20455,7 +20467,7 @@ com.yidejia.app.mall.datamanage.CartsDataManage -> com.yidejia.app.mall.d.d:
     java.util.ArrayList getCartsArray() -> a
     int getGoodsCount(java.lang.String) -> b
     int getCartAmount() -> b
-com.yidejia.app.mall.datamanage.DataCleanManager -> com.yidejia.app.mall.d.e:
+com.yidejia.app.mall.datamanage.DataCleanManager -> com.yidejia.app.mall.e.e:
     void cleanInternalCache(android.content.Context) -> a
     void cleanDatabases(android.content.Context) -> b
     void cleanFiles(android.content.Context) -> c
@@ -20465,7 +20477,7 @@ com.yidejia.app.mall.datamanage.DataCleanManager -> com.yidejia.app.mall.d.e:
     long getPathLegth(java.io.File) -> b
     long getFileFolderTotalSize(java.io.File) -> c
     java.lang.String formatFileSizeToString(long) -> a
-com.yidejia.app.mall.datamanage.PreferentialDataManage -> com.yidejia.app.mall.d.f:
+com.yidejia.app.mall.datamanage.PreferentialDataManage -> com.yidejia.app.mall.e.f:
     java.util.ArrayList freeProductArray -> a
     java.util.ArrayList scoresProductArray -> b
     java.util.ArrayList activeProductArray -> c
@@ -20473,7 +20485,7 @@ com.yidejia.app.mall.datamanage.PreferentialDataManage -> com.yidejia.app.mall.d
     android.content.res.Resources res -> e
     boolean isNoMore -> f
     boolean isTimeout -> g
-com.yidejia.app.mall.datamanage.SchHistoryDataManage -> com.yidejia.app.mall.d.g:
+com.yidejia.app.mall.datamanage.SchHistoryDataManage -> com.yidejia.app.mall.e.g:
     java.util.ArrayList historyArray -> a
     android.content.SharedPreferences sp -> b
     com.yidejia.app.mall.MyApplication myApplication -> c
@@ -20483,7 +20495,7 @@ com.yidejia.app.mall.datamanage.SchHistoryDataManage -> com.yidejia.app.mall.d.g
     java.util.ArrayList getHistorysArray() -> a
     boolean cleanHistory() -> b
     int getHistoryAmount() -> c
-com.yidejia.app.mall.datamanage.VoucherDataManage -> com.yidejia.app.mall.d.h:
+com.yidejia.app.mall.datamanage.VoucherDataManage -> com.yidejia.app.mall.e.h:
     java.lang.String id -> a
     java.lang.String token -> b
     java.lang.String voucherNum -> c
@@ -20504,14 +20516,14 @@ com.yidejia.app.mall.datamanage.VoucherDataManage -> com.yidejia.app.mall.d.h:
     java.lang.String access$7(com.yidejia.app.mall.datamanage.VoucherDataManage) -> e
     android.widget.TextView access$8(com.yidejia.app.mall.datamanage.VoucherDataManage) -> f
     boolean access$9(com.yidejia.app.mall.datamanage.VoucherDataManage) -> g
-com.yidejia.app.mall.datamanage.VoucherDataManage$TaskVoucher -> com.yidejia.app.mall.d.i:
+com.yidejia.app.mall.datamanage.VoucherDataManage$TaskVoucher -> com.yidejia.app.mall.e.i:
     android.app.ProgressDialog bar -> b
     com.yidejia.app.mall.datamanage.VoucherDataManage this$0 -> a
     void onPreExecute() -> onPreExecute
     java.lang.Boolean doInBackground$5f8445a4() -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-com.yidejia.app.mall.datamanage.VoucherDataManage$TaskVoucher$1 -> com.yidejia.app.mall.d.j:
+com.yidejia.app.mall.datamanage.VoucherDataManage$TaskVoucher$1 -> com.yidejia.app.mall.e.j:
     com.yidejia.app.mall.datamanage.VoucherDataManage$TaskVoucher this$1 -> a
     void onCancel(android.content.DialogInterface) -> onCancel
 com.yidejia.app.mall.evaluation.EvaluationActivity -> com.yidejia.app.mall.evaluation.EvaluationActivity:
@@ -20554,10 +20566,10 @@ com.yidejia.app.mall.evaluation.PersonEvaluationActivity$1 -> com.yidejia.app.ma
 com.yidejia.app.mall.evaluation.PersonEvaluationActivity$2 -> com.yidejia.app.mall.evaluation.e:
     com.yidejia.app.mall.evaluation.PersonEvaluationActivity this$0 -> a
     void onSuccess(java.lang.String) -> a
-com.yidejia.app.mall.exception.TimeOutEx -> com.yidejia.app.mall.e.a:
+com.yidejia.app.mall.exception.TimeOutEx -> com.yidejia.app.mall.f.a:
     java.lang.String message -> a
     java.lang.String getMessage() -> getMessage
-com.yidejia.app.mall.express.ParseCredit -> com.yidejia.app.mall.f.a:
+com.yidejia.app.mall.express.ParseCredit -> com.yidejia.app.mall.g.a:
     java.lang.String voucherNum -> a
     java.util.ArrayList freeProductArray -> b
     java.util.ArrayList scoresProductArray -> c
@@ -20567,7 +20579,7 @@ com.yidejia.app.mall.express.ParseCredit -> com.yidejia.app.mall.f.a:
     void analysisActive(java.lang.String) -> c
     java.util.ArrayList getFreeGoods() -> b
     java.util.ArrayList getScoreGoods() -> c
-com.yidejia.app.mall.express.ParseExpressJson -> com.yidejia.app.mall.f.b:
+com.yidejia.app.mall.express.ParseExpressJson -> com.yidejia.app.mall.g.b:
     com.yidejia.app.mall.util.UnicodeToString unicode -> a
     java.util.ArrayList freePosts -> b
     java.util.ArrayList expresses -> c
@@ -20811,6 +20823,14 @@ com.yidejia.app.mall.goodinfo.CommentActivity$3 -> com.yidejia.app.mall.goodinfo
     com.yidejia.app.mall.goodinfo.CommentActivity this$0 -> a
     void onSuccess(java.lang.String) -> a
     void onError() -> a
+com.yidejia.app.mall.goodinfo.GoodService -> com.yidejia.app.mall.goodinfo.GoodService:
+    android.os.Binder binder -> a
+    android.os.IBinder onBind(android.content.Intent) -> onBind
+    void onCreate() -> onCreate
+    void onDestroy() -> onDestroy
+com.yidejia.app.mall.goodinfo.GoodService$1 -> com.yidejia.app.mall.goodinfo.d:
+    com.yidejia.app.mall.goodinfo.GoodService this$0 -> a
+    int getData(java.lang.String) -> a
 com.yidejia.app.mall.goodinfo.GoodsDetailActivity -> com.yidejia.app.mall.goodinfo.GoodsDetailActivity:
     java.lang.String url -> a
     android.webkit.WebView webView -> b
@@ -20819,11 +20839,11 @@ com.yidejia.app.mall.goodinfo.GoodsDetailActivity -> com.yidejia.app.mall.goodin
     void onResume() -> onResume
     void onPause() -> onPause
     android.app.ProgressDialog access$0(com.yidejia.app.mall.goodinfo.GoodsDetailActivity) -> a
-com.yidejia.app.mall.goodinfo.GoodsDetailActivity$1 -> com.yidejia.app.mall.goodinfo.d:
+com.yidejia.app.mall.goodinfo.GoodsDetailActivity$1 -> com.yidejia.app.mall.goodinfo.e:
     com.yidejia.app.mall.goodinfo.GoodsDetailActivity this$0 -> a
     void onPageFinished(android.webkit.WebView,java.lang.String) -> onPageFinished
     boolean shouldOverrideUrlLoading(android.webkit.WebView,java.lang.String) -> shouldOverrideUrlLoading
-com.yidejia.app.mall.goodinfo.GoodsDetailActivity$2 -> com.yidejia.app.mall.goodinfo.e:
+com.yidejia.app.mall.goodinfo.GoodsDetailActivity$2 -> com.yidejia.app.mall.goodinfo.f:
     com.yidejia.app.mall.goodinfo.GoodsDetailActivity this$0 -> a
     void onExceededDatabaseQuota(java.lang.String,java.lang.String,long,long,long,android.webkit.WebStorage$QuotaUpdater) -> onExceededDatabaseQuota
     void onReachedMaxAppCacheSize(long,long,android.webkit.WebStorage$QuotaUpdater) -> onReachedMaxAppCacheSize
@@ -20834,6 +20854,7 @@ com.yidejia.app.mall.goodinfo.GoodsInfoActivity -> com.yidejia.app.mall.goodinfo
     com.yidejia.app.mall.model.ProductBaseInfo productInfo -> d
     com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil viewUtil -> e
     android.widget.ImageView shareImageView -> f
+    android.content.SharedPreferences sp -> g
     void onCreate(android.os.Bundle) -> onCreate
     void onPause() -> onPause
     void onResume() -> onResume
@@ -20844,14 +20865,15 @@ com.yidejia.app.mall.goodinfo.GoodsInfoActivity -> com.yidejia.app.mall.goodinfo
     com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil access$2(com.yidejia.app.mall.goodinfo.GoodsInfoActivity) -> a
     com.yidejia.app.mall.model.ProductBaseInfo access$3(com.yidejia.app.mall.goodinfo.GoodsInfoActivity) -> b
     android.widget.ImageView access$4(com.yidejia.app.mall.goodinfo.GoodsInfoActivity) -> c
-com.yidejia.app.mall.goodinfo.GoodsInfoActivity$1 -> com.yidejia.app.mall.goodinfo.f:
+com.yidejia.app.mall.goodinfo.GoodsInfoActivity$1 -> com.yidejia.app.mall.goodinfo.g:
     com.yidejia.app.mall.goodinfo.GoodsInfoActivity this$0 -> a
     void onSuccess(java.lang.String) -> a
     void onError() -> a
-com.yidejia.app.mall.goodinfo.GoodsInfoActivity$2 -> com.yidejia.app.mall.goodinfo.g:
+com.yidejia.app.mall.goodinfo.GoodsInfoActivity$2 -> com.yidejia.app.mall.goodinfo.h:
     com.yidejia.app.mall.goodinfo.GoodsInfoActivity this$0 -> a
+    cn.sharesdk.onekeyshare.OnekeyShare val$oks -> b
     void onShare(cn.sharesdk.framework.Platform,cn.sharesdk.framework.Platform$ShareParams) -> onShare
-com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil -> com.yidejia.app.mall.goodinfo.h:
+com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil -> com.yidejia.app.mall.goodinfo.i:
     com.yidejia.app.mall.datamanage.CartsDataManage manage -> a
     com.yidejia.app.mall.datamanage.BrowseHistoryDataManage historyDataManage -> b
     int cart_num -> c
@@ -20885,41 +20907,41 @@ com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil -> com.yidejia.app.mall.goodinfo
     boolean access$9(com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil) -> g
     void access$10(com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil) -> h
     void access$11(com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil) -> i
-com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil$1 -> com.yidejia.app.mall.goodinfo.i:
+com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil$1 -> com.yidejia.app.mall.goodinfo.j:
     com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil this$0 -> a
     void onClick(android.view.View) -> onClick
-com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil$2 -> com.yidejia.app.mall.goodinfo.j:
+com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil$2 -> com.yidejia.app.mall.goodinfo.k:
     com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil this$0 -> a
     boolean val$isShowFlag -> b
     com.yidejia.app.mall.model.Cart val$cart -> c
     void onClick(android.view.View) -> onClick
-com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil$3 -> com.yidejia.app.mall.goodinfo.k:
+com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil$3 -> com.yidejia.app.mall.goodinfo.l:
     com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil this$0 -> a
     void onClick(android.view.View) -> onClick
-com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil$4 -> com.yidejia.app.mall.goodinfo.l:
+com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil$4 -> com.yidejia.app.mall.goodinfo.m:
     com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil this$0 -> a
     void onClick(android.view.View) -> onClick
-com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil$5 -> com.yidejia.app.mall.goodinfo.m:
+com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil$5 -> com.yidejia.app.mall.goodinfo.n:
     com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil this$0 -> a
     java.lang.String val$url -> b
     void onClick(android.view.View) -> onClick
-com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil$6 -> com.yidejia.app.mall.goodinfo.n:
+com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil$6 -> com.yidejia.app.mall.goodinfo.o:
     com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil this$0 -> a
     void onSuccess(java.lang.String) -> a
-com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil$7 -> com.yidejia.app.mall.goodinfo.o:
-    com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil this$0 -> a
-    void onFinish() -> b
-    void onSuccess(java.lang.String) -> a
-com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil$8 -> com.yidejia.app.mall.goodinfo.p:
+com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil$7 -> com.yidejia.app.mall.goodinfo.p:
     com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil this$0 -> a
     void onFinish() -> b
     void onSuccess(java.lang.String) -> a
-com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil$9 -> com.yidejia.app.mall.goodinfo.q:
+com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil$8 -> com.yidejia.app.mall.goodinfo.q:
+    com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil this$0 -> a
+    void onFinish() -> b
+    void onSuccess(java.lang.String) -> a
+com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil$9 -> com.yidejia.app.mall.goodinfo.r:
     com.yidejia.app.mall.goodinfo.GoodsInfoViewUtil this$0 -> a
     java.util.ArrayList val$bannerArray -> b
     int val$index -> c
     void onClick(android.view.View) -> onClick
-com.yidejia.app.mall.goodinfo.ParseGoodsJson -> com.yidejia.app.mall.goodinfo.r:
+com.yidejia.app.mall.goodinfo.ParseGoodsJson -> com.yidejia.app.mall.goodinfo.s:
     com.yidejia.app.mall.util.UnicodeToString unicode -> a
     java.lang.String TAG -> b
     com.yidejia.app.mall.model.ProductBaseInfo productBaseInfo -> c
@@ -20936,7 +20958,7 @@ com.yidejia.app.mall.goodinfo.ParseGoodsJson -> com.yidejia.app.mall.goodinfo.r:
     boolean parseCommentJson(java.lang.String) -> b
     java.util.ArrayList getComments() -> b
     boolean getIsNoMore() -> c
-com.yidejia.app.mall.goodinfo.PicImageAdapter -> com.yidejia.app.mall.goodinfo.s:
+com.yidejia.app.mall.goodinfo.PicImageAdapter -> com.yidejia.app.mall.goodinfo.t:
     java.util.ArrayList productPics -> a
     android.app.Activity activity -> b
     int width -> c
@@ -20948,10 +20970,10 @@ com.yidejia.app.mall.goodinfo.PicImageAdapter -> com.yidejia.app.mall.goodinfo.s
     java.lang.Object instantiateItem(android.view.ViewGroup,int) -> instantiateItem
     android.app.Activity access$0(com.yidejia.app.mall.goodinfo.PicImageAdapter) -> a
     java.util.ArrayList access$1(com.yidejia.app.mall.goodinfo.PicImageAdapter) -> b
-com.yidejia.app.mall.goodinfo.PicImageAdapter$1 -> com.yidejia.app.mall.goodinfo.t:
+com.yidejia.app.mall.goodinfo.PicImageAdapter$1 -> com.yidejia.app.mall.goodinfo.u:
     com.yidejia.app.mall.goodinfo.PicImageAdapter this$0 -> a
     void onClick(android.view.View) -> onClick
-com.yidejia.app.mall.initview.SRViewWithImage -> com.yidejia.app.mall.g.a:
+com.yidejia.app.mall.initview.SRViewWithImage -> com.yidejia.app.mall.h.a:
     android.app.Activity activity -> b
     android.view.View view -> c
     android.widget.ImageView search_result_lg_image_left -> d
@@ -20971,15 +20993,15 @@ com.yidejia.app.mall.initview.SRViewWithImage -> com.yidejia.app.mall.g.a:
     void initView(com.yidejia.app.mall.model.SearchItem) -> a
     void loadImage(java.lang.String,android.widget.ImageView) -> a
     void access$0(com.yidejia.app.mall.initview.SRViewWithImage,java.lang.String) -> a
-com.yidejia.app.mall.initview.SRViewWithImage$1 -> com.yidejia.app.mall.g.b:
+com.yidejia.app.mall.initview.SRViewWithImage$1 -> com.yidejia.app.mall.h.b:
     com.yidejia.app.mall.initview.SRViewWithImage this$0 -> a
     com.yidejia.app.mall.model.SearchItem val$leftItem -> b
     void onClick(android.view.View) -> onClick
-com.yidejia.app.mall.initview.SRViewWithImage$2 -> com.yidejia.app.mall.g.c:
+com.yidejia.app.mall.initview.SRViewWithImage$2 -> com.yidejia.app.mall.h.c:
     com.yidejia.app.mall.initview.SRViewWithImage this$0 -> a
     com.yidejia.app.mall.model.SearchItem val$rightItem -> b
     void onClick(android.view.View) -> onClick
-com.yidejia.app.mall.initview.SRViewWithImage$3 -> com.yidejia.app.mall.g.d:
+com.yidejia.app.mall.initview.SRViewWithImage$3 -> com.yidejia.app.mall.h.d:
     com.yidejia.app.mall.initview.SRViewWithImage this$0 -> a
     com.yidejia.app.mall.model.SearchItem val$item -> b
     void onClick(android.view.View) -> onClick
@@ -21056,7 +21078,7 @@ com.yidejia.app.mall.log.LogService$1 -> com.yidejia.app.mall.log.a:
     void onFinish() -> b
     void onSuccess(java.lang.String) -> a
     void onError() -> a
-com.yidejia.app.mall.model.BaseProduct -> com.yidejia.app.mall.h.a:
+com.yidejia.app.mall.model.BaseProduct -> com.yidejia.app.mall.i.a:
     java.lang.String uId -> a
     java.lang.String imgUrl -> b
     java.lang.String detailUrl -> c
@@ -21066,14 +21088,14 @@ com.yidejia.app.mall.model.BaseProduct -> com.yidejia.app.mall.h.a:
     java.lang.String getUId() -> c
     void setImgUrl(java.lang.String) -> b
     void setUId(java.lang.String) -> c
-com.yidejia.app.mall.model.Brand -> com.yidejia.app.mall.h.b:
+com.yidejia.app.mall.model.Brand -> com.yidejia.app.mall.i.b:
     java.lang.String brandName -> a
     java.lang.String desc -> b
     java.lang.String getBrandName() -> a
     void setBrandName(java.lang.String) -> a
     void setDesc(java.lang.String) -> b
     java.lang.String getDesc() -> b
-com.yidejia.app.mall.model.Cart -> com.yidejia.app.mall.h.c:
+com.yidejia.app.mall.model.Cart -> com.yidejia.app.mall.i.c:
     java.lang.String name -> a
     java.lang.String uId -> b
     int amount -> c
@@ -21094,7 +21116,7 @@ com.yidejia.app.mall.model.Cart -> com.yidejia.app.mall.h.c:
     void setImgUrl(java.lang.String) -> d
     void setProductText(java.lang.String) -> e
     java.lang.String getProductText() -> f
-com.yidejia.app.mall.model.Express -> com.yidejia.app.mall.h.d:
+com.yidejia.app.mall.model.Express -> com.yidejia.app.mall.i.d:
     java.lang.String ems -> a
     java.lang.String express -> b
     java.lang.String disName -> c
@@ -21111,7 +21133,7 @@ com.yidejia.app.mall.model.Express -> com.yidejia.app.mall.h.d:
     java.lang.String getPreId() -> d
     void setPreId(java.lang.String) -> e
     void setIsDefault(boolean) -> a
-com.yidejia.app.mall.model.FreePost -> com.yidejia.app.mall.h.e:
+com.yidejia.app.mall.model.FreePost -> com.yidejia.app.mall.i.e:
     java.lang.String id -> a
     java.lang.String name -> b
     java.lang.String startDate -> c
@@ -21125,7 +21147,7 @@ com.yidejia.app.mall.model.FreePost -> com.yidejia.app.mall.h.e:
     void setMax(java.lang.String) -> e
     java.lang.String getMax() -> a
     void setDesc(java.lang.String) -> f
-com.yidejia.app.mall.model.Function -> com.yidejia.app.mall.h.f:
+com.yidejia.app.mall.model.Function -> com.yidejia.app.mall.i.f:
     java.lang.String funId -> a
     java.lang.String funName -> b
     java.lang.String desc -> c
@@ -21138,7 +21160,7 @@ com.yidejia.app.mall.model.Function -> com.yidejia.app.mall.h.f:
     void setFunId(java.lang.String) -> c
     java.lang.String getDesc() -> d
     void setDesc(java.lang.String) -> d
-com.yidejia.app.mall.model.MainProduct -> com.yidejia.app.mall.h.g:
+com.yidejia.app.mall.model.MainProduct -> com.yidejia.app.mall.i.g:
     java.lang.String uId -> a
     java.lang.String imgUrl -> b
     java.lang.String title -> c
@@ -21152,7 +21174,7 @@ com.yidejia.app.mall.model.MainProduct -> com.yidejia.app.mall.h.g:
     void setImgUrl(java.lang.String) -> c
     void setTitle(java.lang.String) -> d
     void setPrice(java.lang.String) -> e
-com.yidejia.app.mall.model.MsgCenter -> com.yidejia.app.mall.h.h:
+com.yidejia.app.mall.model.MsgCenter -> com.yidejia.app.mall.i.h:
     java.lang.String msgid -> a
     java.lang.String msg -> b
     java.lang.String title -> c
@@ -21168,7 +21190,7 @@ com.yidejia.app.mall.model.MsgCenter -> com.yidejia.app.mall.h.h:
     java.lang.String getTime() -> d
     java.lang.String getSubject() -> e
     void setSubject(java.lang.String) -> e
-com.yidejia.app.mall.model.PriceLevel -> com.yidejia.app.mall.h.i:
+com.yidejia.app.mall.model.PriceLevel -> com.yidejia.app.mall.i.i:
     java.lang.String priceId -> a
     java.lang.String min -> b
     java.lang.String max -> c
@@ -21178,7 +21200,7 @@ com.yidejia.app.mall.model.PriceLevel -> com.yidejia.app.mall.h.i:
     java.lang.String getMinPrice() -> b
     void setMaxPrice(java.lang.String) -> c
     java.lang.String getMaxPrice() -> c
-com.yidejia.app.mall.model.ProductBaseInfo -> com.yidejia.app.mall.h.j:
+com.yidejia.app.mall.model.ProductBaseInfo -> com.yidejia.app.mall.i.j:
     java.lang.String uId -> a
     java.lang.String name -> b
     java.lang.String brief -> c
@@ -21224,14 +21246,14 @@ com.yidejia.app.mall.model.ProductBaseInfo -> com.yidejia.app.mall.h.j:
     java.lang.String getProductDetailUrl() -> n
     void setImgUrl(java.lang.String) -> l
     java.lang.String getImgUrl() -> o
-com.yidejia.app.mall.model.Qq -> com.yidejia.app.mall.h.k:
+com.yidejia.app.mall.model.Qq -> com.yidejia.app.mall.i.k:
     java.lang.String quenName -> a
     java.lang.String qqName -> b
     java.lang.String getQqName() -> a
     void setQqName(java.lang.String) -> a
     java.lang.String getQuenName() -> b
     void setQuenName(java.lang.String) -> b
-com.yidejia.app.mall.model.SearchItem -> com.yidejia.app.mall.h.l:
+com.yidejia.app.mall.model.SearchItem -> com.yidejia.app.mall.i.l:
     java.lang.String uId -> a
     java.lang.String name -> b
     java.lang.String price -> c
@@ -21264,7 +21286,7 @@ com.yidejia.app.mall.model.SearchItem -> com.yidejia.app.mall.h.l:
     void setBrand(java.lang.String) -> k
     void setSpec(java.lang.String) -> l
     void setDesc(java.lang.String) -> m
-com.yidejia.app.mall.model.Skin -> com.yidejia.app.mall.h.m:
+com.yidejia.app.mall.model.Skin -> com.yidejia.app.mall.i.m:
     java.lang.String name -> a
     java.lang.String question -> b
     java.util.ArrayList options -> c
@@ -21279,14 +21301,14 @@ com.yidejia.app.mall.model.Skin -> com.yidejia.app.mall.h.m:
     void setNeed(boolean) -> a
     boolean isIs_multiple() -> d
     void setIs_multiple(boolean) -> b
-com.yidejia.app.mall.model.SkinAnswer -> com.yidejia.app.mall.h.n:
+com.yidejia.app.mall.model.SkinAnswer -> com.yidejia.app.mall.i.n:
     java.lang.String desc -> a
     java.lang.String suggest -> b
     java.lang.String getDesc() -> a
     void setDesc(java.lang.String) -> a
     java.lang.String getSuggest() -> b
     void setSuggest(java.lang.String) -> b
-com.yidejia.app.mall.model.SkinQOption -> com.yidejia.app.mall.h.o:
+com.yidejia.app.mall.model.SkinQOption -> com.yidejia.app.mall.i.o:
     java.lang.String key -> a
     java.lang.String value -> b
     boolean isSelected -> c
@@ -21296,7 +21318,7 @@ com.yidejia.app.mall.model.SkinQOption -> com.yidejia.app.mall.h.o:
     void setValue(java.lang.String) -> b
     boolean isSelected() -> c
     void setSelected(boolean) -> a
-com.yidejia.app.mall.model.Specials -> com.yidejia.app.mall.h.p:
+com.yidejia.app.mall.model.Specials -> com.yidejia.app.mall.i.p:
     java.lang.String uId -> a
     java.lang.String brief -> b
     java.lang.String price -> c
@@ -21312,7 +21334,7 @@ com.yidejia.app.mall.model.Specials -> com.yidejia.app.mall.h.p:
     java.lang.String getBrief() -> d
     void setScores(java.lang.String) -> e
     java.lang.String getScores() -> e
-com.yidejia.app.mall.model.UserComment -> com.yidejia.app.mall.h.q:
+com.yidejia.app.mall.model.UserComment -> com.yidejia.app.mall.i.q:
     java.lang.String userId -> a
     java.lang.String userName -> b
     java.lang.String vipLevel -> c
@@ -21387,28 +21409,28 @@ com.yidejia.app.mall.msg.ParseMsg -> com.yidejia.app.mall.msg.e:
     com.yidejia.app.mall.model.MsgCenter getMsgCenter() -> a
     java.util.ArrayList getMsgs() -> b
     java.lang.String getErrMsg() -> c
-com.yidejia.app.mall.net.ConnectionDetector -> com.yidejia.app.mall.i.a:
+com.yidejia.app.mall.net.ConnectionDetector -> com.yidejia.app.mall.j.a:
     boolean isConnectingToInternet(android.content.Context) -> a
-com.yidejia.app.mall.net.HttpGetConn -> com.yidejia.app.mall.i.b:
+com.yidejia.app.mall.net.HttpGetConn -> com.yidejia.app.mall.j.b:
     java.lang.String urlString -> a
     java.lang.String TAG -> b
     int TIME_OUT_DELAY -> c
     java.lang.String urlHost -> d
     java.lang.String getJsonResult() -> a
-com.yidejia.app.mall.net.HttpGetVersionConn -> com.yidejia.app.mall.i.c:
+com.yidejia.app.mall.net.HttpGetVersionConn -> com.yidejia.app.mall.j.c:
     java.lang.String urlString -> a
     java.lang.String TAG -> b
     java.lang.String getVersionString() -> a
-com.yidejia.app.mall.net.HttpPostConn -> com.yidejia.app.mall.i.d:
+com.yidejia.app.mall.net.HttpPostConn -> com.yidejia.app.mall.j.d:
     java.lang.String urlString -> a
     java.lang.String TAG -> b
     int TIME_OUT_DELAY -> c
     java.lang.String param -> d
     java.lang.String getHttpResponse() -> a
-com.yidejia.app.mall.net.ImageUrl -> com.yidejia.app.mall.i.e:
+com.yidejia.app.mall.net.ImageUrl -> com.yidejia.app.mall.j.e:
     java.lang.String IMAGEURL -> a
     java.lang.String TAG -> b
-com.yidejia.app.mall.net.address.DeleteUserAddress -> com.yidejia.app.mall.i.a.a:
+com.yidejia.app.mall.net.address.DeleteUserAddress -> com.yidejia.app.mall.j.a.a:
     java.lang.String[] keys -> a
     java.lang.String[] values -> b
     java.lang.String TAG -> c
@@ -21417,7 +21439,7 @@ com.yidejia.app.mall.net.address.DeleteUserAddress -> com.yidejia.app.mall.i.a.a
     java.lang.String result -> f
     java.lang.String urlString -> g
     java.lang.String deleteAddress(java.lang.String,java.lang.String,java.lang.String) -> a
-com.yidejia.app.mall.net.address.GetUserAddressList -> com.yidejia.app.mall.i.a.b:
+com.yidejia.app.mall.net.address.GetUserAddressList -> com.yidejia.app.mall.j.a.b:
     java.lang.String[] keys -> a
     java.lang.String[] values -> b
     java.lang.String TAG -> c
@@ -21429,7 +21451,7 @@ com.yidejia.app.mall.net.address.GetUserAddressList -> com.yidejia.app.mall.i.a.
     boolean analysis(java.lang.String) -> a
     java.util.ArrayList getAddresses() -> a
     boolean getIsNoMore() -> b
-com.yidejia.app.mall.net.goodsinfo.GetProductAddress -> com.yidejia.app.mall.i.b.a:
+com.yidejia.app.mall.net.goodsinfo.GetProductAddress -> com.yidejia.app.mall.j.b.a:
     java.lang.String TAG -> a
     com.yidejia.app.mall.util.UnicodeToString unicode -> b
     com.yidejia.app.mall.model.ProductBaseInfo productBaseInfo -> c
@@ -21438,7 +21460,7 @@ com.yidejia.app.mall.net.goodsinfo.GetProductAddress -> com.yidejia.app.mall.i.b
     java.lang.String result -> f
     java.lang.String imageUrlString -> g
     java.lang.String getProductJsonString(java.lang.String) -> a
-com.yidejia.app.mall.net.homepage.GetHomePage -> com.yidejia.app.mall.i.c.a:
+com.yidejia.app.mall.net.homepage.GetHomePage -> com.yidejia.app.mall.j.c.a:
     java.util.ArrayList bannerArray -> a
     java.util.ArrayList sxgProducts -> b
     java.util.ArrayList djdzmProducts -> c
@@ -21450,7 +21472,7 @@ com.yidejia.app.mall.net.homepage.GetHomePage -> com.yidejia.app.mall.i.c.a:
     boolean parseGetHomeJson(java.lang.String) -> a
     void parseSxg(java.lang.String,int) -> a
     void analysisBannerJson(java.lang.String) -> b
-com.yidejia.app.mall.net.skin.Answer -> com.yidejia.app.mall.i.d.a:
+com.yidejia.app.mall.net.skin.Answer -> com.yidejia.app.mall.j.d.a:
     com.yidejia.app.mall.model.SkinAnswer answer -> a
     java.lang.String message -> b
     com.yidejia.app.mall.model.Qq qqName -> c
@@ -21458,32 +21480,32 @@ com.yidejia.app.mall.net.skin.Answer -> com.yidejia.app.mall.i.d.a:
     java.lang.String getHttpResp(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
     boolean analysis(java.lang.String) -> a
     com.yidejia.app.mall.model.SkinAnswer getAnswer() -> b
-com.yidejia.app.mall.net.skin.CheckCps -> com.yidejia.app.mall.i.d.b:
+com.yidejia.app.mall.net.skin.CheckCps -> com.yidejia.app.mall.j.d.b:
     java.lang.String getHttpResp(java.lang.String) -> a
     boolean isCpsTrue(java.lang.String) -> b
-com.yidejia.app.mall.net.skin.Question -> com.yidejia.app.mall.i.d.c:
+com.yidejia.app.mall.net.skin.Question -> com.yidejia.app.mall.j.d.c:
     java.lang.String message -> a
     java.util.ArrayList skinQs -> b
     boolean analysis(java.lang.String) -> a
     boolean analysisResp(java.lang.String) -> b
     boolean analysisAnswer(java.lang.String,com.yidejia.app.mall.model.Skin) -> a
     java.util.ArrayList getSkinQs() -> a
-com.yidejia.app.mall.net.user.CheckCode -> com.yidejia.app.mall.i.e.a:
+com.yidejia.app.mall.net.user.CheckCode -> com.yidejia.app.mall.j.e.a:
     boolean analysisResp(java.lang.String) -> a
-com.yidejia.app.mall.net.user.Login -> com.yidejia.app.mall.i.e.b:
+com.yidejia.app.mall.net.user.Login -> com.yidejia.app.mall.j.e.b:
     java.lang.String TAG -> a
     java.lang.String message -> b
     boolean parseLogin(java.lang.String) -> a
     java.lang.String getMsg() -> a
-com.yidejia.app.mall.net.user.Register -> com.yidejia.app.mall.i.e.c:
+com.yidejia.app.mall.net.user.Register -> com.yidejia.app.mall.j.e.c:
     java.lang.String message -> a
     boolean analysisHttpResp(java.lang.String) -> a
     java.lang.String getMsg() -> a
-com.yidejia.app.mall.net.user.ResetPsw -> com.yidejia.app.mall.i.e.d:
+com.yidejia.app.mall.net.user.ResetPsw -> com.yidejia.app.mall.j.e.d:
     java.lang.String msg -> a
     boolean analysisHttp(java.lang.String) -> a
     java.lang.String getMsg() -> a
-com.yidejia.app.mall.net.voucher.Voucher -> com.yidejia.app.mall.i.f.a:
+com.yidejia.app.mall.net.voucher.Voucher -> com.yidejia.app.mall.j.f.a:
     java.lang.String[] keys -> a
     java.lang.String[] values -> b
     java.lang.String TAG -> c
@@ -21948,21 +21970,21 @@ com.yidejia.app.mall.pay.CstmPayActivity -> com.yidejia.app.mall.pay.CstmPayActi
     java.lang.String token -> R
     java.util.ArrayList carts -> S
     java.lang.String isCartActivity -> T
-    java.lang.String contentType -> U
-    float goodsPrice -> V
-    float voucher -> W
-    boolean isCanPay -> X
-    java.lang.String tickId -> Y
-    java.lang.String tickMoney -> Z
-    boolean isCanHuanGou -> aa
-    boolean isCanTicket -> ab
-    java.lang.String ruleId -> ac
-    java.lang.String generalNum -> ad
-    java.lang.String emsNum -> ae
+    float goodsPrice -> U
+    float voucher -> V
+    boolean isCanPay -> W
+    java.lang.String tickId -> X
+    java.lang.String tickMoney -> Y
+    boolean isCanHuanGou -> Z
+    boolean isCanTicket -> aa
+    java.lang.String ruleId -> ab
+    java.lang.String generalNum -> ac
+    java.lang.String emsNum -> ad
     java.lang.String pay_type -> d
     int mode -> e
-    java.util.ArrayList expressArray -> af
+    java.util.ArrayList expressArray -> ae
     void onCreate(android.os.Bundle) -> onCreate
+    void onStart() -> onStart
     void onDestroy() -> onDestroy
     java.lang.String getAddressUrl(boolean) -> a
     java.lang.String getExpressUrl(java.lang.String,boolean) -> a
@@ -22597,13 +22619,14 @@ com.yidejia.app.mall.qiandao.QiandaoActivity -> com.yidejia.app.mall.qiandao.Qia
     com.yidejia.app.mall.util.SharedPreferencesUtil access$12(com.yidejia.app.mall.qiandao.QiandaoActivity) -> j
     java.text.SimpleDateFormat access$13(com.yidejia.app.mall.qiandao.QiandaoActivity) -> k
     java.lang.String access$14(com.yidejia.app.mall.qiandao.QiandaoActivity) -> l
+    android.widget.ImageView access$15(com.yidejia.app.mall.qiandao.QiandaoActivity) -> m
 com.yidejia.app.mall.qiandao.QiandaoActivity$1 -> com.yidejia.app.mall.qiandao.a:
     com.yidejia.app.mall.qiandao.QiandaoActivity this$0 -> a
     void onSuccess(java.lang.String) -> a
 com.yidejia.app.mall.qiandao.QiandaoActivity$2 -> com.yidejia.app.mall.qiandao.b:
     com.yidejia.app.mall.qiandao.QiandaoActivity this$0 -> a
     void onSuccess(java.lang.String) -> a
-com.yidejia.app.mall.recharge.ParseRecharge -> com.yidejia.app.mall.j.a:
+com.yidejia.app.mall.recharge.ParseRecharge -> com.yidejia.app.mall.k.a:
     com.yidejia.app.mall.util.UnicodeToString unicode -> a
     java.lang.String errMsg -> b
     java.lang.String cardid -> c
@@ -22910,9 +22933,7 @@ com.yidejia.app.mall.shark.GuizeActivity -> com.yidejia.app.mall.shark.GuizeActi
     void onCreate(android.os.Bundle) -> onCreate
     void onPause() -> onPause
     void onResume() -> onResume
-com.yidejia.app.mall.shark.IShark -> com.yidejia.app.mall.shark.a:
-    void onStart() -> a
-com.yidejia.app.mall.shark.ParseShark -> com.yidejia.app.mall.shark.b:
+com.yidejia.app.mall.shark.ParseShark -> com.yidejia.app.mall.shark.a:
     com.yidejia.app.mall.tickets.Ticket ticket -> a
     int theType -> b
     java.lang.String data -> c
@@ -22929,59 +22950,66 @@ com.yidejia.app.mall.shark.SharkActivity -> com.yidejia.app.mall.shark.SharkActi
     android.widget.RelativeLayout noProcue -> b
     android.widget.RelativeLayout produce -> c
     android.widget.RelativeLayout youhuiquan -> d
-    android.widget.ImageView quanImageView -> e
-    android.widget.ImageView backImageView -> f
-    android.view.animation.Animation quanAnimation -> g
-    android.media.MediaPlayer mediaPlayer -> h
-    com.yidejia.app.mall.model.ProductBaseInfo info -> i
-    com.yidejia.app.mall.tickets.Ticket ticket -> j
-    android.widget.TextView guize -> k
-    android.widget.TextView noProduce -> l
-    android.widget.TextView yaocishu -> m
-    android.widget.TextView youhuicount -> n
-    android.widget.TextView youhuixianzhi -> o
-    android.widget.TextView youhuiTime -> p
-    android.widget.TextView youhuichakan -> q
-    android.widget.ImageView produceImage -> r
-    android.widget.TextView produceTitle -> s
-    android.widget.TextView producePrice -> t
-    android.widget.TextView produceChakan -> u
-    int count -> v
-    com.nostra13.universalimageloader.core.DisplayImageOptions options -> w
-    android.os.Handler handler -> x
-    android.widget.RelativeLayout showData -> y
+    android.os.Vibrator mVibrator -> e
+    android.widget.ImageView quanImageView -> f
+    android.widget.ImageView backImageView -> g
+    android.view.animation.Animation quanAnimation -> h
+    android.media.MediaPlayer mediaPlayer -> i
+    com.yidejia.app.mall.model.ProductBaseInfo info -> j
+    com.yidejia.app.mall.tickets.Ticket ticket -> k
+    android.widget.TextView guize -> l
+    android.widget.TextView noProduce -> m
+    android.widget.TextView yaocishu -> n
+    android.widget.TextView youhuicount -> o
+    android.widget.TextView youhuixianzhi -> p
+    android.widget.TextView youhuiTime -> q
+    android.widget.TextView youhuichakan -> r
+    android.widget.ImageView produceImage -> s
+    android.widget.TextView produceTitle -> t
+    android.widget.TextView producePrice -> u
+    android.widget.TextView produceChakan -> v
+    int count -> w
+    com.nostra13.universalimageloader.core.DisplayImageOptions options -> x
+    android.os.Handler handler -> y
+    android.widget.RelativeLayout showData -> z
     void onCreate(android.os.Bundle) -> onCreate
+    void onStart() -> onStart
     void onResume() -> onResume
     void onPause() -> onPause
     void onStop() -> onStop
     void onClick(android.view.View) -> onClick
     boolean handleMessage(android.os.Message) -> handleMessage
-    android.widget.ImageView access$0(com.yidejia.app.mall.shark.SharkActivity) -> a
-    android.view.animation.Animation access$1(com.yidejia.app.mall.shark.SharkActivity) -> b
-    android.media.MediaPlayer access$2(com.yidejia.app.mall.shark.SharkActivity) -> c
-    android.widget.RelativeLayout access$3(com.yidejia.app.mall.shark.SharkActivity) -> d
+    void startVibrato() -> a
+    com.yidejia.app.mall.shark.SharkUtil access$0(com.yidejia.app.mall.shark.SharkActivity) -> a
+    android.widget.ImageView access$1(com.yidejia.app.mall.shark.SharkActivity) -> b
+    android.view.animation.Animation access$2(com.yidejia.app.mall.shark.SharkActivity) -> c
+    android.media.MediaPlayer access$3(com.yidejia.app.mall.shark.SharkActivity) -> d
     android.widget.RelativeLayout access$4(com.yidejia.app.mall.shark.SharkActivity) -> e
-    void access$5(com.yidejia.app.mall.shark.SharkActivity) -> f
-    void access$6(com.yidejia.app.mall.shark.SharkActivity,int) -> a
-    android.widget.RelativeLayout access$7(com.yidejia.app.mall.shark.SharkActivity) -> g
-    int access$8(com.yidejia.app.mall.shark.SharkActivity) -> h
-    void access$9(com.yidejia.app.mall.shark.SharkActivity,android.widget.RelativeLayout) -> a
-    void access$10(com.yidejia.app.mall.shark.SharkActivity,com.yidejia.app.mall.model.ProductBaseInfo) -> a
-    com.yidejia.app.mall.model.ProductBaseInfo access$11(com.yidejia.app.mall.shark.SharkActivity) -> i
-    android.widget.ImageView access$12(com.yidejia.app.mall.shark.SharkActivity) -> j
-    com.nostra13.universalimageloader.core.DisplayImageOptions access$13(com.yidejia.app.mall.shark.SharkActivity) -> k
-    android.widget.TextView access$14(com.yidejia.app.mall.shark.SharkActivity) -> l
+    android.widget.RelativeLayout access$5(com.yidejia.app.mall.shark.SharkActivity) -> f
+    void access$6(com.yidejia.app.mall.shark.SharkActivity) -> g
+    void access$7(com.yidejia.app.mall.shark.SharkActivity,int) -> a
+    android.widget.RelativeLayout access$8(com.yidejia.app.mall.shark.SharkActivity) -> h
+    int access$9(com.yidejia.app.mall.shark.SharkActivity) -> i
+    void access$10(com.yidejia.app.mall.shark.SharkActivity,android.widget.RelativeLayout) -> a
+    void access$11(com.yidejia.app.mall.shark.SharkActivity,com.yidejia.app.mall.model.ProductBaseInfo) -> a
+    com.yidejia.app.mall.model.ProductBaseInfo access$12(com.yidejia.app.mall.shark.SharkActivity) -> j
+    android.widget.ImageView access$13(com.yidejia.app.mall.shark.SharkActivity) -> k
+    com.nostra13.universalimageloader.core.DisplayImageOptions access$14(com.yidejia.app.mall.shark.SharkActivity) -> l
     android.widget.TextView access$15(com.yidejia.app.mall.shark.SharkActivity) -> m
-    android.widget.RelativeLayout access$16(com.yidejia.app.mall.shark.SharkActivity) -> n
-    void access$17(com.yidejia.app.mall.shark.SharkActivity,com.yidejia.app.mall.tickets.Ticket) -> a
-    com.yidejia.app.mall.tickets.Ticket access$18(com.yidejia.app.mall.shark.SharkActivity) -> o
-    android.widget.TextView access$19(com.yidejia.app.mall.shark.SharkActivity) -> p
+    android.widget.TextView access$16(com.yidejia.app.mall.shark.SharkActivity) -> n
+    android.widget.RelativeLayout access$17(com.yidejia.app.mall.shark.SharkActivity) -> o
+    void access$18(com.yidejia.app.mall.shark.SharkActivity,com.yidejia.app.mall.tickets.Ticket) -> a
+    com.yidejia.app.mall.tickets.Ticket access$19(com.yidejia.app.mall.shark.SharkActivity) -> p
     android.widget.TextView access$20(com.yidejia.app.mall.shark.SharkActivity) -> q
     android.widget.TextView access$21(com.yidejia.app.mall.shark.SharkActivity) -> r
-    android.os.Handler access$22(com.yidejia.app.mall.shark.SharkActivity) -> s
-com.yidejia.app.mall.shark.SharkActivity$1 -> com.yidejia.app.mall.shark.c:
+    android.widget.TextView access$22(com.yidejia.app.mall.shark.SharkActivity) -> s
+    android.os.Handler access$23(com.yidejia.app.mall.shark.SharkActivity) -> t
+com.yidejia.app.mall.shark.SharkActivity$1 -> com.yidejia.app.mall.shark.b:
     com.yidejia.app.mall.shark.SharkActivity this$0 -> a
-    void onStart() -> a
+    void onShake() -> a
+com.yidejia.app.mall.shark.SharkActivity$1$1 -> com.yidejia.app.mall.shark.c:
+    com.yidejia.app.mall.shark.SharkActivity$1 this$1 -> a
+    void run() -> run
 com.yidejia.app.mall.shark.SharkActivity$2 -> com.yidejia.app.mall.shark.d:
     com.yidejia.app.mall.shark.SharkActivity this$0 -> a
     void onSuccess(java.lang.String) -> a
@@ -22993,35 +23021,20 @@ com.yidejia.app.mall.shark.SharkActivity$3 -> com.yidejia.app.mall.shark.e:
     void onAnimationStart(android.view.animation.Animation) -> onAnimationStart
 com.yidejia.app.mall.shark.SharkUtil -> com.yidejia.app.mall.shark.f:
     android.hardware.SensorManager sensorManager -> a
-    android.os.Vibrator vibrator -> b
-    com.yidejia.app.mall.shark.IShark iShark -> c
-    java.lang.String TAG -> d
+    android.hardware.Sensor sensor -> b
+    com.yidejia.app.mall.shark.SharkUtil$OnShakeListener onShakeListener -> c
+    android.content.Context mContext -> d
     float lastX -> e
     float lastY -> f
     float lastZ -> g
     long lastUpdateTime -> h
-    android.hardware.SensorEventListener sensorEventListener -> i
-    android.os.Handler handler -> j
-    java.lang.Runnable runnable -> k
-    void registerListener(com.yidejia.app.mall.shark.IShark) -> a
-    void unregisterListener() -> a
-    long access$0(com.yidejia.app.mall.shark.SharkUtil) -> a
-    void access$1(com.yidejia.app.mall.shark.SharkUtil,long) -> a
-    float access$2(com.yidejia.app.mall.shark.SharkUtil) -> b
-    float access$3(com.yidejia.app.mall.shark.SharkUtil) -> c
-    float access$4(com.yidejia.app.mall.shark.SharkUtil) -> d
-    void access$5(com.yidejia.app.mall.shark.SharkUtil,float) -> a
-    void access$6(com.yidejia.app.mall.shark.SharkUtil,float) -> b
-    void access$7(com.yidejia.app.mall.shark.SharkUtil,float) -> c
-    com.yidejia.app.mall.shark.IShark access$8(com.yidejia.app.mall.shark.SharkUtil) -> e
-    android.os.Vibrator access$9(com.yidejia.app.mall.shark.SharkUtil) -> f
-com.yidejia.app.mall.shark.SharkUtil$1 -> com.yidejia.app.mall.shark.g:
-    com.yidejia.app.mall.shark.SharkUtil this$0 -> a
+    void start() -> a
+    void stop() -> b
+    void setOnShakeListener(com.yidejia.app.mall.shark.SharkUtil$OnShakeListener) -> a
     void onSensorChanged(android.hardware.SensorEvent) -> onSensorChanged
     void onAccuracyChanged(android.hardware.Sensor,int) -> onAccuracyChanged
-com.yidejia.app.mall.shark.SharkUtil$2 -> com.yidejia.app.mall.shark.h:
-    com.yidejia.app.mall.shark.SharkUtil this$0 -> a
-    void run() -> run
+com.yidejia.app.mall.shark.SharkUtil$OnShakeListener -> com.yidejia.app.mall.shark.g:
+    void onShake() -> a
 com.yidejia.app.mall.shiplog.CheckActivity -> com.yidejia.app.mall.shiplog.CheckActivity:
     java.lang.String shipCode -> a
     java.lang.String shipCompany -> b
@@ -23232,7 +23245,7 @@ com.yidejia.app.mall.skintest.SkinResultAcitivity -> com.yidejia.app.mall.skinte
 com.yidejia.app.mall.skintest.SkinResultAcitivity$1 -> com.yidejia.app.mall.skintest.o:
     com.yidejia.app.mall.skintest.SkinResultAcitivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.yidejia.app.mall.task.TaskCheckCode -> com.yidejia.app.mall.k.a:
+com.yidejia.app.mall.task.TaskCheckCode -> com.yidejia.app.mall.l.a:
     java.lang.String name -> a
     java.lang.String msgCode -> b
     java.lang.String password -> c
@@ -23253,24 +23266,24 @@ com.yidejia.app.mall.task.TaskCheckCode -> com.yidejia.app.mall.k.a:
     java.lang.String access$7(com.yidejia.app.mall.task.TaskCheckCode) -> f
     java.lang.String access$8(com.yidejia.app.mall.task.TaskCheckCode) -> g
     java.lang.String access$9(com.yidejia.app.mall.task.TaskCheckCode) -> h
-com.yidejia.app.mall.task.TaskCheckCode$Task -> com.yidejia.app.mall.k.b:
+com.yidejia.app.mall.task.TaskCheckCode$Task -> com.yidejia.app.mall.l.b:
     android.app.ProgressDialog bar -> b
     com.yidejia.app.mall.task.TaskCheckCode this$0 -> a
     void onPreExecute() -> onPreExecute
     java.lang.Boolean doInBackground$5f8445a4() -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-com.yidejia.app.mall.task.TaskCheckCode$Task$1 -> com.yidejia.app.mall.k.c:
+com.yidejia.app.mall.task.TaskCheckCode$Task$1 -> com.yidejia.app.mall.l.c:
     com.yidejia.app.mall.task.TaskCheckCode$Task this$1 -> a
     void onCancel(android.content.DialogInterface) -> onCancel
-com.yidejia.app.mall.task.TaskGetCode -> com.yidejia.app.mall.k.d:
+com.yidejia.app.mall.task.TaskGetCode -> com.yidejia.app.mall.l.d:
     java.lang.String reponse -> a
     int code -> b
     android.app.Activity activity -> c
     int getCode() -> a
     boolean parse(java.lang.String) -> a
     boolean parseResp(java.lang.String) -> b
-com.yidejia.app.mall.task.TaskRegister -> com.yidejia.app.mall.k.e:
+com.yidejia.app.mall.task.TaskRegister -> com.yidejia.app.mall.l.e:
     java.lang.String name -> a
     java.lang.String password -> b
     java.lang.String ip -> c
@@ -23291,12 +23304,12 @@ com.yidejia.app.mall.task.TaskRegister -> com.yidejia.app.mall.k.e:
     android.app.Activity access$7(com.yidejia.app.mall.task.TaskRegister) -> f
     boolean access$8(com.yidejia.app.mall.task.TaskRegister) -> g
     java.lang.String access$9(com.yidejia.app.mall.task.TaskRegister) -> h
-com.yidejia.app.mall.task.TaskRegister$Task -> com.yidejia.app.mall.k.f:
+com.yidejia.app.mall.task.TaskRegister$Task -> com.yidejia.app.mall.l.f:
     com.yidejia.app.mall.task.TaskRegister this$0 -> a
     java.lang.Boolean doInBackground$5f8445a4() -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-com.yidejia.app.mall.task.TaskReset -> com.yidejia.app.mall.k.g:
+com.yidejia.app.mall.task.TaskReset -> com.yidejia.app.mall.l.g:
     java.lang.String name -> a
     java.lang.String psw -> b
     java.lang.String code -> c
@@ -23312,14 +23325,14 @@ com.yidejia.app.mall.task.TaskReset -> com.yidejia.app.mall.k.g:
     java.lang.String access$4(com.yidejia.app.mall.task.TaskReset) -> d
     java.lang.String access$5(com.yidejia.app.mall.task.TaskReset) -> e
     void access$6(com.yidejia.app.mall.task.TaskReset,java.lang.String) -> a
-com.yidejia.app.mall.task.TaskReset$Task -> com.yidejia.app.mall.k.h:
+com.yidejia.app.mall.task.TaskReset$Task -> com.yidejia.app.mall.l.h:
     android.app.ProgressDialog bar -> b
     com.yidejia.app.mall.task.TaskReset this$0 -> a
     void onPreExecute() -> onPreExecute
     java.lang.Boolean doInBackground$5f8445a4() -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-com.yidejia.app.mall.task.TaskReset$Task$1 -> com.yidejia.app.mall.k.i:
+com.yidejia.app.mall.task.TaskReset$Task$1 -> com.yidejia.app.mall.l.i:
     com.yidejia.app.mall.task.TaskReset$Task this$1 -> a
     void onCancel(android.content.DialogInterface) -> onCancel
 com.yidejia.app.mall.tickets.IntegeralActivity -> com.yidejia.app.mall.tickets.IntegeralActivity:
@@ -23406,9 +23419,9 @@ com.yidejia.app.mall.tickets.Ticket -> com.yidejia.app.mall.tickets.f:
     void setGoodsId(java.lang.String) -> l
     java.lang.String getComments() -> g
     void setComments(java.lang.String) -> m
-com.yidejia.app.mall.util.ActivityIntentUtil -> com.yidejia.app.mall.l.a:
+com.yidejia.app.mall.util.ActivityIntentUtil -> com.yidejia.app.mall.m.a:
     void intentActivityAndFinish(android.app.Activity,java.lang.Class) -> a
-com.yidejia.app.mall.util.CartUtil1 -> com.yidejia.app.mall.l.b:
+com.yidejia.app.mall.util.CartUtil1 -> com.yidejia.app.mall.m.b:
     android.app.Activity activity -> d
     android.view.LayoutInflater inflater -> e
     android.widget.LinearLayout linearLayout -> f
@@ -23434,11 +23447,11 @@ com.yidejia.app.mall.util.CartUtil1 -> com.yidejia.app.mall.l.b:
     android.widget.LinearLayout access$6(com.yidejia.app.mall.util.CartUtil1) -> g
     void access$7(com.yidejia.app.mall.util.CartUtil1,com.yidejia.app.mall.datamanage.CartsDataManage) -> a
     java.util.List access$8(com.yidejia.app.mall.util.CartUtil1) -> h
-com.yidejia.app.mall.util.CartUtil1$1 -> com.yidejia.app.mall.l.c:
+com.yidejia.app.mall.util.CartUtil1$1 -> com.yidejia.app.mall.m.c:
     com.yidejia.app.mall.util.CartUtil1 this$0 -> a
     com.yidejia.app.mall.model.Cart val$cart -> b
     void onClick(android.view.View) -> onClick
-com.yidejia.app.mall.util.CartUtil1$2 -> com.yidejia.app.mall.l.d:
+com.yidejia.app.mall.util.CartUtil1$2 -> com.yidejia.app.mall.m.d:
     com.yidejia.app.mall.util.CartUtil1 this$0 -> a
     com.yidejia.app.mall.model.Cart val$cart -> b
     android.widget.TextView val$number -> c
@@ -23447,7 +23460,7 @@ com.yidejia.app.mall.util.CartUtil1$2 -> com.yidejia.app.mall.l.d:
     android.widget.RelativeLayout val$layout -> f
     android.view.View val$view -> g
     void handleMessage(android.os.Message) -> handleMessage
-com.yidejia.app.mall.util.CartUtil1$3 -> com.yidejia.app.mall.l.e:
+com.yidejia.app.mall.util.CartUtil1$3 -> com.yidejia.app.mall.m.e:
     com.yidejia.app.mall.util.CartUtil1 this$0 -> a
     java.util.HashMap val$map -> b
     com.yidejia.app.mall.model.Cart val$cart -> c
@@ -23455,13 +23468,13 @@ com.yidejia.app.mall.util.CartUtil1$3 -> com.yidejia.app.mall.l.e:
     android.widget.CheckBox val$checkBox -> e
     android.os.Handler val$handler -> f
     void onClick(android.content.DialogInterface,int) -> onClick
-com.yidejia.app.mall.util.CartUtil1$3$1 -> com.yidejia.app.mall.l.f:
+com.yidejia.app.mall.util.CartUtil1$3$1 -> com.yidejia.app.mall.m.f:
     com.yidejia.app.mall.util.CartUtil1$3 this$1 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.yidejia.app.mall.util.CartUtil1$3$2 -> com.yidejia.app.mall.l.g:
+com.yidejia.app.mall.util.CartUtil1$3$2 -> com.yidejia.app.mall.m.g:
     com.yidejia.app.mall.util.CartUtil1$3 this$1 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.yidejia.app.mall.util.CartUtil1$4 -> com.yidejia.app.mall.l.h:
+com.yidejia.app.mall.util.CartUtil1$4 -> com.yidejia.app.mall.m.h:
     com.yidejia.app.mall.util.CartUtil1 this$0 -> a
     android.widget.TextView val$number -> b
     com.yidejia.app.mall.model.Cart val$cart -> c
@@ -23469,7 +23482,7 @@ com.yidejia.app.mall.util.CartUtil1$4 -> com.yidejia.app.mall.l.h:
     android.widget.TextView val$priceTextView -> e
     android.os.Handler val$handler -> f
     void onClick(android.view.View) -> onClick
-com.yidejia.app.mall.util.CartUtil1$5 -> com.yidejia.app.mall.l.i:
+com.yidejia.app.mall.util.CartUtil1$5 -> com.yidejia.app.mall.m.i:
     com.yidejia.app.mall.util.CartUtil1 this$0 -> a
     android.widget.TextView val$number -> b
     com.yidejia.app.mall.model.Cart val$cart -> c
@@ -23477,41 +23490,41 @@ com.yidejia.app.mall.util.CartUtil1$5 -> com.yidejia.app.mall.l.i:
     android.widget.TextView val$priceTextView -> e
     android.os.Handler val$handler -> f
     void onClick(android.view.View) -> onClick
-com.yidejia.app.mall.util.CartUtil1$6 -> com.yidejia.app.mall.l.j:
+com.yidejia.app.mall.util.CartUtil1$6 -> com.yidejia.app.mall.m.j:
     com.yidejia.app.mall.util.CartUtil1 this$0 -> a
     android.app.AlertDialog val$dialog -> b
     boolean onLongClick(android.view.View) -> onLongClick
-com.yidejia.app.mall.util.CartUtil1$7 -> com.yidejia.app.mall.l.k:
+com.yidejia.app.mall.util.CartUtil1$7 -> com.yidejia.app.mall.m.k:
     com.yidejia.app.mall.util.CartUtil1 this$0 -> a
     android.widget.CheckBox val$checkBox -> b
     java.util.HashMap val$map -> c
     java.util.HashMap val$map1 -> d
     android.os.Handler val$handler -> e
     void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-com.yidejia.app.mall.util.CartUtil1$8 -> com.yidejia.app.mall.l.l:
+com.yidejia.app.mall.util.CartUtil1$8 -> com.yidejia.app.mall.m.l:
     com.yidejia.app.mall.util.CartUtil1 this$0 -> a
     android.os.Handler val$handler -> b
     void onClick(android.view.View) -> onClick
-com.yidejia.app.mall.util.CartUtil1$9 -> com.yidejia.app.mall.l.m:
+com.yidejia.app.mall.util.CartUtil1$9 -> com.yidejia.app.mall.m.m:
     com.yidejia.app.mall.util.CartUtil1 this$0 -> a
     java.util.HashMap val$map -> b
     com.yidejia.app.mall.model.Cart val$cart -> c
     android.widget.CheckBox val$checkBox -> d
     android.os.Handler val$handler -> e
     void onClick(android.content.DialogInterface,int) -> onClick
-com.yidejia.app.mall.util.Consts -> com.yidejia.app.mall.l.n:
+com.yidejia.app.mall.util.Consts -> com.yidejia.app.mall.m.n:
     java.lang.String miStr -> a
-com.yidejia.app.mall.util.DPIUtil -> com.yidejia.app.mall.l.o:
+com.yidejia.app.mall.util.DPIUtil -> com.yidejia.app.mall.m.o:
     android.view.Display defaultDisplay -> a
     float mDensity -> b
     int getWidth() -> a
     float dpToPixel(float,android.content.Context) -> a
-com.yidejia.app.mall.util.DesUtils -> com.yidejia.app.mall.l.p:
+com.yidejia.app.mall.util.DesUtils -> com.yidejia.app.mall.m.p:
     java.lang.String encode(java.lang.String,java.lang.String) -> a
     java.lang.String encode(java.lang.String,byte[]) -> a
     byte[] decode(java.lang.String,byte[]) -> b
     java.lang.String decode(java.lang.String,java.lang.String) -> b
-com.yidejia.app.mall.util.HttpClientUtil -> com.yidejia.app.mall.l.q:
+com.yidejia.app.mall.util.HttpClientUtil -> com.yidejia.app.mall.m.q:
     com.yidejia.app.mall.util.IHttpResp iHttpResp -> a
     android.content.Context context -> b
     android.app.ProgressDialog progressDialog -> c
@@ -23537,20 +23550,20 @@ com.yidejia.app.mall.util.HttpClientUtil -> com.yidejia.app.mall.l.q:
     void access$6(com.yidejia.app.mall.util.HttpClientUtil) -> f
     com.handmark.pulltorefresh.library.PullToRefreshBase access$7(com.yidejia.app.mall.util.HttpClientUtil) -> g
     void access$8(com.yidejia.app.mall.util.HttpClientUtil) -> h
-com.yidejia.app.mall.util.HttpClientUtil$1 -> com.yidejia.app.mall.l.r:
+com.yidejia.app.mall.util.HttpClientUtil$1 -> com.yidejia.app.mall.m.r:
     com.yidejia.app.mall.util.HttpClientUtil this$0 -> a
     void onStart() -> a
     void onFinish() -> b
     void onSuccess(int,java.lang.String) -> a
     void onError(java.lang.Throwable,java.lang.String) -> a
-com.yidejia.app.mall.util.IHttpResp -> com.yidejia.app.mall.l.s:
+com.yidejia.app.mall.util.IHttpResp -> com.yidejia.app.mall.m.s:
     void onSuccess(java.lang.String) -> a
     void onError() -> a
     void onStart() -> c
     void onFinish() -> b
-com.yidejia.app.mall.util.IsPhone -> com.yidejia.app.mall.l.t:
+com.yidejia.app.mall.util.IsPhone -> com.yidejia.app.mall.m.t:
     boolean isMobileNO(java.lang.String) -> a
-com.yidejia.app.mall.util.PayUtil -> com.yidejia.app.mall.l.u:
+com.yidejia.app.mall.util.PayUtil -> com.yidejia.app.mall.m.u:
     android.content.Context context -> a
     android.view.LayoutInflater inflater -> b
     android.view.View view -> c
@@ -23559,20 +23572,20 @@ com.yidejia.app.mall.util.PayUtil -> com.yidejia.app.mall.l.u:
     com.nostra13.universalimageloader.core.assist.ImageLoadingListener animateFirstListener -> f
     com.nostra13.universalimageloader.core.DisplayImageOptions options -> g
     java.lang.String loadView$47e62261(java.util.ArrayList) -> a
-com.yidejia.app.mall.util.SharedPreferencesUtil -> com.yidejia.app.mall.l.v:
+com.yidejia.app.mall.util.SharedPreferencesUtil -> com.yidejia.app.mall.m.v:
     android.app.Activity activity -> a
     android.content.SharedPreferences sp -> b
     void saveData(java.lang.String,java.lang.String,java.lang.String) -> a
     void saveData$3b99f9eb(java.lang.String,java.lang.String) -> a
     java.lang.String getData(java.lang.String,java.lang.String,java.lang.String) -> b
     boolean getData$3b99f9ef(java.lang.String,java.lang.String) -> b
-com.yidejia.app.mall.util.TimeUtil -> com.yidejia.app.mall.l.w:
+com.yidejia.app.mall.util.TimeUtil -> com.yidejia.app.mall.m.w:
     java.lang.String convert(long,java.lang.String) -> a
     java.lang.String converDate(long) -> a
     java.lang.String convertMill(long) -> b
-com.yidejia.app.mall.util.UnicodeToString -> com.yidejia.app.mall.l.x:
+com.yidejia.app.mall.util.UnicodeToString -> com.yidejia.app.mall.m.x:
     java.lang.String revert(java.lang.String) -> a
-com.yidejia.app.mall.util.VersonNameUtil -> com.yidejia.app.mall.l.y:
+com.yidejia.app.mall.util.VersonNameUtil -> com.yidejia.app.mall.m.y:
     java.lang.String getVersionName() -> a
 com.yidejia.app.mall.view.ChangePayActivity -> com.yidejia.app.mall.view.ChangePayActivity:
     android.widget.RelativeLayout zhifubao -> a
@@ -23642,7 +23655,7 @@ com.yidejia.app.mall.view.ExchangeFreeActivity$MyOnPageChangeListener -> com.yid
     void onPageScrolled(int,float,int) -> onPageScrolled
 com.yidejia.app.mall.view.GoCartActivity -> com.yidejia.app.mall.view.GoCartActivity:
     void onResume() -> onResume
-com.yidejia.app.mall.view.HackyViewPager -> com.yidejia.app.mall.view.e:
+com.yidejia.app.mall.view.HackyViewPager -> com.yidejia.app.mall.view.HackyViewPager:
     boolean onInterceptTouchEvent(android.view.MotionEvent) -> onInterceptTouchEvent
 com.yidejia.app.mall.view.ImagePagerActivity -> com.yidejia.app.mall.view.ImagePagerActivity:
     android.graphics.Matrix matrix -> d
@@ -23665,7 +23678,7 @@ com.yidejia.app.mall.view.ImagePagerActivity -> com.yidejia.app.mall.view.ImageP
     float access$5(com.yidejia.app.mall.view.ImagePagerActivity) -> d
     android.graphics.PointF access$6(com.yidejia.app.mall.view.ImagePagerActivity) -> e
     int access$7(com.yidejia.app.mall.view.ImagePagerActivity) -> f
-com.yidejia.app.mall.view.ImagePagerActivity$ImagePagerAdapter -> com.yidejia.app.mall.view.f:
+com.yidejia.app.mall.view.ImagePagerActivity$ImagePagerAdapter -> com.yidejia.app.mall.view.e:
     java.util.ArrayList images -> b
     android.view.LayoutInflater inflater -> c
     com.yidejia.app.mall.view.ImagePagerActivity this$0 -> a
@@ -23678,13 +23691,13 @@ com.yidejia.app.mall.view.ImagePagerActivity$ImagePagerAdapter -> com.yidejia.ap
     android.os.Parcelable saveState() -> saveState
     void startUpdate(android.view.View) -> startUpdate
     com.yidejia.app.mall.view.ImagePagerActivity access$0(com.yidejia.app.mall.view.ImagePagerActivity$ImagePagerAdapter) -> a
-com.yidejia.app.mall.view.ImagePagerActivity$ImagePagerAdapter$1 -> com.yidejia.app.mall.view.g:
+com.yidejia.app.mall.view.ImagePagerActivity$ImagePagerAdapter$1 -> com.yidejia.app.mall.view.f:
     com.yidejia.app.mall.view.ImagePagerActivity$ImagePagerAdapter this$1 -> a
     int[] $SWITCH_TABLE$com$nostra13$universalimageloader$core$assist$FailReason$FailType -> b
     void onLoadingFailed$55580a0c(com.nostra13.universalimageloader.core.assist.FailReason) -> a
     void onLoadingComplete(java.lang.String,android.view.View,android.graphics.Bitmap) -> a
     int[] $SWITCH_TABLE$com$nostra13$universalimageloader$core$assist$FailReason$FailType() -> a
-com.yidejia.app.mall.view.ImagePagerActivity$ImagePagerAdapter$2 -> com.yidejia.app.mall.view.h:
+com.yidejia.app.mall.view.ImagePagerActivity$ImagePagerAdapter$2 -> com.yidejia.app.mall.view.g:
     com.yidejia.app.mall.view.ImagePagerActivity$ImagePagerAdapter this$1 -> a
     boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
     float spacing(android.view.MotionEvent) -> a
@@ -23693,14 +23706,14 @@ com.yidejia.app.mall.view.LoginActivity -> com.yidejia.app.mall.view.LoginActivi
 com.yidejia.app.mall.view.NOProduceActivity -> com.yidejia.app.mall.view.NOProduceActivity:
     android.widget.Button mButton -> a
     void onCreate(android.os.Bundle) -> onCreate
-com.yidejia.app.mall.view.NOProduceActivity$1 -> com.yidejia.app.mall.view.i:
+com.yidejia.app.mall.view.NOProduceActivity$1 -> com.yidejia.app.mall.view.h:
     com.yidejia.app.mall.view.NOProduceActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.yidejia.app.mall.view.NOProduceActivity$2 -> com.yidejia.app.mall.view.j:
+com.yidejia.app.mall.view.NOProduceActivity$2 -> com.yidejia.app.mall.view.i:
     com.yidejia.app.mall.view.NOProduceActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 com.yidejia.app.mall.view.ViewPagerActivity -> com.yidejia.app.mall.view.ViewPagerActivity:
-    android.support.v4.view.ViewPager mViewPager -> a
+    com.yidejia.app.mall.view.HackyViewPager mViewPager -> a
     java.util.ArrayList sDrawables -> b
     com.nostra13.universalimageloader.core.DisplayImageOptions options -> c
     void onCreate(android.os.Bundle) -> onCreate
@@ -23709,10 +23722,10 @@ com.yidejia.app.mall.view.ViewPagerActivity -> com.yidejia.app.mall.view.ViewPag
     java.util.ArrayList access$0(com.yidejia.app.mall.view.ViewPagerActivity) -> a
     void access$1(com.yidejia.app.mall.view.ViewPagerActivity,java.util.ArrayList) -> a
     com.nostra13.universalimageloader.core.DisplayImageOptions access$2(com.yidejia.app.mall.view.ViewPagerActivity) -> b
-com.yidejia.app.mall.view.ViewPagerActivity$1 -> com.yidejia.app.mall.view.k:
+com.yidejia.app.mall.view.ViewPagerActivity$1 -> com.yidejia.app.mall.view.j:
     com.yidejia.app.mall.view.ViewPagerActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.yidejia.app.mall.view.ViewPagerActivity$SamplePagerAdapter -> com.yidejia.app.mall.view.l:
+com.yidejia.app.mall.view.ViewPagerActivity$SamplePagerAdapter -> com.yidejia.app.mall.view.k:
     com.yidejia.app.mall.view.ViewPagerActivity this$0 -> a
     int getCount() -> getCount
     void destroyItem(android.view.ViewGroup,int,java.lang.Object) -> destroyItem
