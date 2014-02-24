@@ -1403,6 +1403,8 @@ com.yidejia.app.mall.photoview.VersionedGestureDetector$EclairDetector:
 com.yidejia.app.mall.qiandao.ParseSignUp
 com.yidejia.app.mall.recharge.ParseRecharge:
     50:50:public java.lang.String getErrMsg()
+com.yidejia.app.mall.search.FilterFragment:
+    private com.yidejia.app.mall.util.HttpClientUtil client
 com.yidejia.app.mall.search.SearchFragment
 com.yidejia.app.mall.search.SearchFragment$1
 com.yidejia.app.mall.search.SearchFragment$2

@@ -50,7 +50,7 @@ public class FilterFragment extends Fragment {
 	public void onDestroyView() {
 		super.onDestroyView();
 		System.gc();
-		spUtil = null;
+//		spUtil = null;
 	}
 	
 	@Override
@@ -83,8 +83,6 @@ public class FilterFragment extends Fragment {
 			return;
 		}
 		
-		client = new HttpClientUtil(getActivity());
-		
 		pricesLevels = new ArrayList<PriceLevel>();
 		brands = new ArrayList<Brand>();
 		effects = new ArrayList<Function>();
@@ -113,6 +111,10 @@ public class FilterFragment extends Fragment {
 		String strPrice = spUtil.getData("filter", "price", "");
 		String strEffect = spUtil.getData("filter", "effect", "");
 		
+		Log.e("system.out", "filter/brand:"+strBrand);
+		Log.e("system.out", "filter/price:"+strPrice);
+		Log.e("system.out", "filter/effect:"+strEffect);
+		
 		ParseSearchJson parseSearchJson = new ParseSearchJson();
 		if(parseSearchJson.parseBrandJson(strBrand)){
 			brands = parseSearchJson.getBrands();
@@ -130,64 +132,90 @@ public class FilterFragment extends Fragment {
 	}
 	
 	private void getFilter(){
-//		closeTask();
-//		task = new Task();
-//		task.execute();
+		
+		Log.e("system.out", "begin");
+		
 		JNICallBack jniCallBack = new JNICallBack();
 		String urlPrice = jniCallBack.getHttp4GetPrice();
 		String urlBrand = jniCallBack.getHttp4GetBrand();
 		String urlEffect = jniCallBack.getHttp4GetEffect("flag%3D%27y%27", "0", "20", "", "", "%2A");
-		
-		client.getHttpResp(urlBrand, new IHttpResp(){
+
+		HttpClientUtil brclient = new HttpClientUtil(getActivity());
+		brclient.getHttpResp(urlBrand, new IHttpResp(){
 
 			@Override
 			public void onSuccess(String content) {
 				super.onSuccess(content);
+				Log.e("syste.out", "br:" + content);
 				ParseSearchJson parseSearchJson = new ParseSearchJson();
 				if (parseSearchJson.parseBrandJson(content)) {
 					if(null != spUtil)
 					spUtil.saveData("filter", "brand", content);
-					
+					Log.e("syste.out", "br:finish");
 					brands = parseSearchJson.getBrands();
 					ctrl.setBrands(brands);
 					ctrl.update();
 				}
 			}
+			@Override
+			public void onFinish() {
+				
+				super.onFinish();
+				Log.e("system.out", "b finish");
+			}
 			
 		});
-		client.getHttpResp(urlPrice, new IHttpResp(){
+		HttpClientUtil prclient = new HttpClientUtil(getActivity());
+		prclient.getHttpResp(urlPrice, new IHttpResp(){
 			
 			@Override
 			public void onSuccess(String content) {
 				super.onSuccess(content);
+				Log.e("syste.out", "pr:" + content);
 				ParseSearchJson parseSearchJson = new ParseSearchJson();
 				if (parseSearchJson.parsePriceJson(content)) {
 					if(null != spUtil)
 					spUtil.saveData("filter", "price", content);
-					
+					Log.e("syste.out", "pr:finish");
 					pricesLevels = parseSearchJson.getPriceLevels();
 					ctrl.setPrices(pricesLevels);
 					ctrl.update();
 				}
 			}
+
+			@Override
+			public void onFinish() {
+				
+				super.onFinish();
+				Log.e("system.out", "p finish");
+			}
+			
+			
 			
 		});
-		client.getHttpResp(urlEffect, new IHttpResp(){
+		HttpClientUtil efclient = new HttpClientUtil(getActivity());
+		efclient.getHttpResp(urlEffect, new IHttpResp(){
 			
 			@Override
 			public void onSuccess(String content) {
 				super.onSuccess(content);
+				Log.e("syste.out", "eff:" + content);
 				ParseSearchJson parseSearchJson = new ParseSearchJson();
 				if (parseSearchJson.parseFunJson(content)) {
 					if(null != spUtil)
 					spUtil.saveData("filter", "effect", content);
-
+					Log.e("syste.out", "eff:finish");
 					effects = parseSearchJson.getFunctions();
 					ctrl.setFuns(effects);
 					ctrl.update();
 				}
 			}
-			
+			@Override
+			public void onFinish() {
+				
+				super.onFinish();
+				Log.e("system.out", "e finish");
+			}
 		});
 	}
 	
@@ -208,8 +236,10 @@ public class FilterFragment extends Fragment {
 		}
 		if(null != ctrl.getAdapter()) ctrl.cleanAdapter();
 		
-		if(null != client)
-		client.closeConn();
+//		if(null != client)
+//		client.closeConn();
+		
+		spUtil = null;
 	}
 
 
