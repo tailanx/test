@@ -17387,6 +17387,7 @@ com.yidejia.app.mall.R$drawable -> com.yidejia.app.mall.R$drawable:
     int bar -> bar
     int best_express -> best_express
     int bg_abs_text -> bg_abs_text
+    int bg_bar_loading -> bg_bar_loading
     int bg_common_btm -> bg_common_btm
     int bg_common_top -> bg_common_top
     int bg_common_top_btm -> bg_common_top_btm
@@ -22664,7 +22665,6 @@ com.yidejia.app.mall.search.FilterFragment -> com.yidejia.app.mall.search.b:
     android.view.View view -> d
     com.yidejia.app.mall.search.FilterViewCtrl ctrl -> e
     com.yidejia.app.mall.util.SharedPreferencesUtil spUtil -> f
-    com.yidejia.app.mall.util.HttpClientUtil client -> g
     void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
     void onCreate(android.os.Bundle) -> onCreate
     void onDestroyView() -> onDestroyView
@@ -22684,12 +22684,15 @@ com.yidejia.app.mall.search.FilterFragment -> com.yidejia.app.mall.search.b:
 com.yidejia.app.mall.search.FilterFragment$1 -> com.yidejia.app.mall.search.c:
     com.yidejia.app.mall.search.FilterFragment this$0 -> a
     void onSuccess(java.lang.String) -> a
+    void onFinish() -> b
 com.yidejia.app.mall.search.FilterFragment$2 -> com.yidejia.app.mall.search.d:
     com.yidejia.app.mall.search.FilterFragment this$0 -> a
     void onSuccess(java.lang.String) -> a
+    void onFinish() -> b
 com.yidejia.app.mall.search.FilterFragment$3 -> com.yidejia.app.mall.search.e:
     com.yidejia.app.mall.search.FilterFragment this$0 -> a
     void onSuccess(java.lang.String) -> a
+    void onFinish() -> b
 com.yidejia.app.mall.search.FilterViewCtrl -> com.yidejia.app.mall.search.f:
     com.yidejia.app.mall.search.FilterExListAdapter filterAdapter -> a
     android.widget.ExpandableListView filterListView -> b
@@ -22939,33 +22942,36 @@ com.yidejia.app.mall.shark.SharkActivity -> com.yidejia.app.mall.shark.SharkActi
     android.widget.RelativeLayout noProcue -> b
     android.widget.RelativeLayout produce -> c
     android.widget.RelativeLayout youhuiquan -> d
-    android.widget.ImageView quanImageView -> e
-    android.widget.ImageView backImageView -> f
-    android.view.animation.Animation quanAnimation -> g
-    android.media.MediaPlayer mediaPlayer -> h
-    com.yidejia.app.mall.model.ProductBaseInfo info -> i
-    com.yidejia.app.mall.tickets.Ticket ticket -> j
-    android.widget.TextView guize -> k
-    android.widget.TextView noProduce -> l
-    android.widget.TextView yaocishu -> m
-    android.widget.TextView youhuicount -> n
-    android.widget.TextView youhuixianzhi -> o
-    android.widget.TextView youhuiTime -> p
-    android.widget.TextView youhuichakan -> q
-    android.widget.ImageView produceImage -> r
-    android.widget.TextView produceTitle -> s
-    android.widget.TextView producePrice -> t
-    android.widget.TextView produceChakan -> u
-    int count -> v
-    com.nostra13.universalimageloader.core.DisplayImageOptions options -> w
-    android.os.Handler handler -> x
-    android.widget.RelativeLayout showData -> y
+    android.os.Vibrator mVibrator -> e
+    android.widget.ImageView quanImageView -> f
+    android.widget.ImageView backImageView -> g
+    android.view.animation.Animation quanAnimation -> h
+    android.media.MediaPlayer mediaPlayer -> i
+    com.yidejia.app.mall.model.ProductBaseInfo info -> j
+    com.yidejia.app.mall.tickets.Ticket ticket -> k
+    android.widget.TextView guize -> l
+    android.widget.TextView noProduce -> m
+    android.widget.TextView yaocishu -> n
+    android.widget.TextView youhuicount -> o
+    android.widget.TextView youhuixianzhi -> p
+    android.widget.TextView youhuiTime -> q
+    android.widget.TextView youhuichakan -> r
+    android.widget.ImageView produceImage -> s
+    android.widget.TextView produceTitle -> t
+    android.widget.TextView producePrice -> u
+    android.widget.TextView produceChakan -> v
+    int count -> w
+    com.nostra13.universalimageloader.core.DisplayImageOptions options -> x
+    android.os.Handler handler -> y
+    android.widget.RelativeLayout showData -> z
     void onCreate(android.os.Bundle) -> onCreate
+    void onStart() -> onStart
     void onResume() -> onResume
     void onPause() -> onPause
     void onStop() -> onStop
     void onClick(android.view.View) -> onClick
     boolean handleMessage(android.os.Message) -> handleMessage
+    void startVibrato() -> a
     com.yidejia.app.mall.shark.SharkUtil access$0(com.yidejia.app.mall.shark.SharkActivity) -> a
     android.widget.ImageView access$1(com.yidejia.app.mall.shark.SharkActivity) -> b
     android.view.animation.Animation access$2(com.yidejia.app.mall.shark.SharkActivity) -> c

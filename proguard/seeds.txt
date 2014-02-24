@@ -13092,6 +13092,7 @@ com.yidejia.app.mall.R$drawable: int banner_bg
 com.yidejia.app.mall.R$drawable: int bar
 com.yidejia.app.mall.R$drawable: int best_express
 com.yidejia.app.mall.R$drawable: int bg_abs_text
+com.yidejia.app.mall.R$drawable: int bg_bar_loading
 com.yidejia.app.mall.R$drawable: int bg_common_btm
 com.yidejia.app.mall.R$drawable: int bg_common_top
 com.yidejia.app.mall.R$drawable: int bg_common_top_btm
