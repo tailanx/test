@@ -229,7 +229,7 @@ public class CartUtil1 {
 								HashMap<String, Float> map = list.get(i);
 								float ischeck = map.get("check");
 								j += ischeck;
-								// if (ischeck == 1) {
+								 if (ischeck == 1) {
 								float count1 = map.get("count");
 								count += map.get("count");
 								price = map.get("price");
@@ -237,11 +237,12 @@ public class CartUtil1 {
 								// sumSingle = count1 * price;
 								sum += count1 * price;
 								// singProduce.setText(sumSingle + "");
-								// } else {
+								 } else {
 								if (ischeck == 0) {
 									mBox.setChecked(false);
 								}
 
+							}
 							}
 							if (j == list.size()) {
 
@@ -249,7 +250,7 @@ public class CartUtil1 {
 							}
 							sumTextView.setText(sum + "");
 							mTextView.setText(count + "");
-						} else if (msg.what == 113) {
+						} else if (msg.what == 113) {//改变单个商品的选中状态
 
 							map.put("count", Float.parseFloat(number.getText()
 									.toString()));
@@ -264,14 +265,15 @@ public class CartUtil1 {
 							for (int i = 0; i < list.size(); i++) {
 								HashMap<String, Float> map = list.get(i);
 								float ischeck = map.get("check");
+								Log.e("info", ischeck + "ischeck");
 								j += ischeck;
 								if (ischeck == 1) {
 									dele++;
+
 									float count1 = map.get("count");
 									count += map.get("count");
 									price = map.get("price");
 									sum += count1 * price;
-
 								}
 
 							}
