@@ -1001,6 +1001,7 @@ com.yidejia.app.mall.MyApplication:
     69:69:public int getSchHstryAmount()
     104:104:public java.lang.String getPassword()
     132:132:public java.lang.String getAidou()
+    158:158:public boolean isFilterCreated()
 com.yidejia.app.mall.RegistActivity:
     public android.widget.Button mback
 com.yidejia.app.mall.adapter.AllOrderFragmentAdapter
@@ -1377,6 +1378,7 @@ com.yidejia.app.mall.search.TaskFilter$1
 com.yidejia.app.mall.search.TaskFilter$2
 com.yidejia.app.mall.search.TaskFilter$3
 com.yidejia.app.mall.search.TaskFilter$Task
+com.yidejia.app.mall.shark.IShark
 com.yidejia.app.mall.shark.SharkActivity:
     private android.view.animation.Animation animation
     private android.widget.LinearLayout$LayoutParams params

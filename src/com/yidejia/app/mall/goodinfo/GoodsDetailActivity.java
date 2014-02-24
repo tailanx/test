@@ -36,7 +36,8 @@ public class GoodsDetailActivity extends BaseActivity{
 		
 		setContentView(R.layout.goods_webview);
 		
-		bar = new ProgressDialog(this, R.style.StyleProgressDialog);
+		bar = new ProgressDialog(this);
+		bar.setProgressStyle(R.style.StyleProgressDialog);
 		bar.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		bar.show();
 		bar.setContentView(R.layout.progress_dialog);

@@ -214,6 +214,7 @@ public class ParseGoodsJson {
 						String commentDate = commentItem.optString("commentDate");
 						comments.setCommentTime(commentDate);
 						String level = commentItem.optString("customer_grade");
+						if(null == level || "null".equals(level)) level = "";
 						comments.setVipLevel(unicode.revert(level));
 //						String maddress = commentItem.getString("address");
 //						comments.setAddress(unicode.revert(maddress));

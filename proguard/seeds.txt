@@ -12852,6 +12852,7 @@ com.yidejia.app.mall.R$color: int main_bg
 com.yidejia.app.mall.R$color: int order
 com.yidejia.app.mall.R$color: int order_cor
 com.yidejia.app.mall.R$color: int price_color
+com.yidejia.app.mall.R$color: int qdbg_color
 com.yidejia.app.mall.R$color: int search_bar
 com.yidejia.app.mall.R$color: int search_result_top
 com.yidejia.app.mall.R$color: int secondbtntextColor
@@ -12895,6 +12896,7 @@ com.yidejia.app.mall.R$dimen: int all_buy_produce_right_half
 com.yidejia.app.mall.R$dimen: int base_info_image
 com.yidejia.app.mall.R$dimen: int base_info_match
 com.yidejia.app.mall.R$dimen: int base_info_match_add
+com.yidejia.app.mall.R$dimen: int d_cart_sum_size
 com.yidejia.app.mall.R$dimen: int head_height
 com.yidejia.app.mall.R$dimen: int head_height_add
 com.yidejia.app.mall.R$dimen: int head_padding
@@ -12941,6 +12943,7 @@ com.yidejia.app.mall.R$dimen: int white_bg_padding
 com.yidejia.app.mall.R$dimen: int width
 com.yidejia.app.mall.R$dimen: int width_ad
 com.yidejia.app.mall.R$dimen: int width_add
+com.yidejia.app.mall.R$dimen: int width_add_add
 com.yidejia.app.mall.R$dimen: int width_add_fun
 com.yidejia.app.mall.R$dimen: int width_fu
 com.yidejia.app.mall.R$dimen: int width_fu_add
@@ -13313,6 +13316,7 @@ com.yidejia.app.mall.R$drawable: int password_icon
 com.yidejia.app.mall.R$drawable: int pause_sales
 com.yidejia.app.mall.R$drawable: int payment_icon
 com.yidejia.app.mall.R$drawable: int phone_iocn
+com.yidejia.app.mall.R$drawable: int pic_back
 com.yidejia.app.mall.R$drawable: int pin
 com.yidejia.app.mall.R$drawable: int popup_bg
 com.yidejia.app.mall.R$drawable: int preferential_icon
@@ -13331,6 +13335,9 @@ com.yidejia.app.mall.R$drawable: int proposal
 com.yidejia.app.mall.R$drawable: int qdbg1
 com.yidejia.app.mall.R$drawable: int qdbg2
 com.yidejia.app.mall.R$drawable: int qdbg3
+com.yidejia.app.mall.R$drawable: int qdbg_bottom
+com.yidejia.app.mall.R$drawable: int qdbg_middle
+com.yidejia.app.mall.R$drawable: int qdbgmiddle_down
 com.yidejia.app.mall.R$drawable: int qfkd
 com.yidejia.app.mall.R$drawable: int qiandao_bg
 com.yidejia.app.mall.R$drawable: int qiandao_button
@@ -13482,6 +13489,7 @@ com.yidejia.app.mall.R$id: int ab_common_back
 com.yidejia.app.mall.R$id: int ab_common_iv_share
 com.yidejia.app.mall.R$id: int ab_common_title
 com.yidejia.app.mall.R$id: int ab_common_tv_right
+com.yidejia.app.mall.R$id: int ab_iv_back
 com.yidejia.app.mall.R$id: int about_us_btn
 com.yidejia.app.mall.R$id: int about_us_image
 com.yidejia.app.mall.R$id: int about_us_layout
@@ -13880,6 +13888,7 @@ com.yidejia.app.mall.R$id: int iv_main2_main2_linearlayout1_imageview2
 com.yidejia.app.mall.R$id: int iv_my_mall_find_password_validation_button
 com.yidejia.app.mall.R$id: int iv_my_mall_regist_password_validation_button
 com.yidejia.app.mall.R$id: int iv_person_shopping_image_person
+com.yidejia.app.mall.R$id: int iv_pic_back
 com.yidejia.app.mall.R$id: int iv_produce_comments_arrow
 com.yidejia.app.mall.R$id: int iv_qiandao
 com.yidejia.app.mall.R$id: int iv_qiandao_back
@@ -14084,6 +14093,7 @@ com.yidejia.app.mall.R$id: int pull_to_refresh_image
 com.yidejia.app.mall.R$id: int pull_to_refresh_progress
 com.yidejia.app.mall.R$id: int pull_to_refresh_sub_text
 com.yidejia.app.mall.R$id: int pull_to_refresh_text
+com.yidejia.app.mall.R$id: int qdbg_mid
 com.yidejia.app.mall.R$id: int ratingBar1
 com.yidejia.app.mall.R$id: int re_activity_top
 com.yidejia.app.mall.R$id: int re_alreay_deliver
@@ -14286,7 +14296,6 @@ com.yidejia.app.mall.R$id: int tv_already_compelte
 com.yidejia.app.mall.R$id: int tv_already_complete_number
 com.yidejia.app.mall.R$id: int tv_already_deliver
 com.yidejia.app.mall.R$id: int tv_already_deliver_number
-com.yidejia.app.mall.R$id: int tv_back
 com.yidejia.app.mall.R$id: int tv_brand_name_text
 com.yidejia.app.mall.R$id: int tv_brand_text
 com.yidejia.app.mall.R$id: int tv_buy_now
@@ -14394,6 +14403,7 @@ com.yidejia.app.mall.R$id: int tv_show_text
 com.yidejia.app.mall.R$id: int tv_sign_count1
 com.yidejia.app.mall.R$id: int tv_sign_count2
 com.yidejia.app.mall.R$id: int tv_sign_count3
+com.yidejia.app.mall.R$id: int tv_sign_text
 com.yidejia.app.mall.R$id: int tv_test
 com.yidejia.app.mall.R$id: int tv_ticket_name
 com.yidejia.app.mall.R$id: int tv_ticket_text
@@ -14426,6 +14436,7 @@ com.yidejia.app.mall.R$id: int user_icon_bg
 com.yidejia.app.mall.R$id: int user_level
 com.yidejia.app.mall.R$id: int user_name
 com.yidejia.app.mall.R$id: int vPager
+com.yidejia.app.mall.R$id: int vp_hack
 com.yidejia.app.mall.R$id: int vp_item_goods_detail
 com.yidejia.app.mall.R$id: int wait_deliver_item_count
 com.yidejia.app.mall.R$id: int wait_deliver_item_count_detail
@@ -14515,6 +14526,7 @@ com.yidejia.app.mall.R$layout: int activity_main
 com.yidejia.app.mall.R$layout: int activity_main_fragment_layout
 com.yidejia.app.mall.R$layout: int activity_main_layout
 com.yidejia.app.mall.R$layout: int activity_msg_details
+com.yidejia.app.mall.R$layout: int activity_pic_view
 com.yidejia.app.mall.R$layout: int activity_search_image_layout
 com.yidejia.app.mall.R$layout: int activity_search_item_list
 com.yidejia.app.mall.R$layout: int activity_search_result_info_layout
@@ -14961,6 +14973,7 @@ com.yidejia.app.mall.R$string: int qiandao_order
 com.yidejia.app.mall.R$string: int qiandao_order_1
 com.yidejia.app.mall.R$string: int qiandao_order_2
 com.yidejia.app.mall.R$string: int qiandao_order_3
+com.yidejia.app.mall.R$string: int qiandao_rule
 com.yidejia.app.mall.R$string: int qq
 com.yidejia.app.mall.R$string: int qq_client_inavailable
 com.yidejia.app.mall.R$string: int qq_hao
@@ -15567,6 +15580,9 @@ com.yidejia.app.mall.view.ExchangeFreeActivity
 com.yidejia.app.mall.view.ExchangeFreeActivity: ExchangeFreeActivity()
 com.yidejia.app.mall.view.GoCartActivity
 com.yidejia.app.mall.view.GoCartActivity: GoCartActivity()
+com.yidejia.app.mall.view.HackyViewPager
+com.yidejia.app.mall.view.HackyViewPager: HackyViewPager(android.content.Context)
+com.yidejia.app.mall.view.HackyViewPager: HackyViewPager(android.content.Context,android.util.AttributeSet)
 com.yidejia.app.mall.view.ImagePagerActivity
 com.yidejia.app.mall.view.ImagePagerActivity: ImagePagerActivity()
 com.yidejia.app.mall.view.LoginActivity
