@@ -7,8 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
-import android.support.v4.util.TimeUtils;
-import android.text.format.DateUtils;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,9 +16,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.OvershootInterpolator;
 import android.view.animation.TranslateAnimation;
-import android.webkit.WebView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -47,6 +44,7 @@ public class SharkActivity extends Activity implements OnClickListener,
 	private RelativeLayout noProcue;// 无商品
 	private RelativeLayout produce;// 商品
 	private RelativeLayout youhuiquan;// 优惠券
+	private Vibrator mVibrator;
 
 	private ImageView quanImageView;
 
@@ -82,11 +80,12 @@ public class SharkActivity extends Activity implements OnClickListener,
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		mVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 		options = MyApplication.getInstance().initGoodsImageOption();
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.shark_activity_main);
 		initView();
-		sharkUtil = new SharkUtil(this);
+
 		backImageView.setOnClickListener(this);
 		mediaPlayer = MediaPlayer.create(this, R.raw.yao);
 		quanAnimation = AnimationUtils.loadAnimation(this,
@@ -100,6 +99,13 @@ public class SharkActivity extends Activity implements OnClickListener,
 		youhuichakan.setOnClickListener(this);
 		produceChakan.setOnClickListener(this);
 		noProduce.setOnClickListener(this);
+		
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		sharkUtil = new SharkUtil(this);
 	}
 
 	private void initView() {
@@ -128,12 +134,12 @@ public class SharkActivity extends Activity implements OnClickListener,
 	@Override
 	protected void onResume() {
 		super.onResume();
-
 		StatService.onPageStart(this, "摇一摇页面");
 		sharkUtil.setOnShakeListener(new OnShakeListener() {
 
 			@Override
 			public void onShake() {
+				startVibrato();
 				sharkUtil.stop();
 				quanImageView.clearAnimation();
 				quanAnimation.setRepeatCount(0);
@@ -385,5 +391,13 @@ public class SharkActivity extends Activity implements OnClickListener,
 			break;
 		}
 		return false;
+	}
+
+	/**
+	 * 定义震动
+	 */
+	public void startVibrato() {
+		mVibrator.vibrate(new long[] { 500, 200, 500, 200 }, -1); // 第一个｛｝里面是节奏数组，
+																	// 第二个参数是重复次数，-1为不重复，非-1俄日从pattern的指定下标开始重复
 	}
 }
